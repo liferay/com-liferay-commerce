@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Method;
@@ -23,6 +24,7 @@ import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.Security;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
@@ -60,6 +62,15 @@ public class MethodImporter {
 					"operationId");
 
 				methodName = operationIdJSONNode.asText();
+			}
+
+			Security security = null;
+
+			if (httpMethodJSONNode.has("security")) {
+				SecurityImporter securityImporter = new SecurityImporter();
+
+				security = securityImporter.getSecurity(
+					(ArrayNode)httpMethodJSONNode.get("security"));
 			}
 
 			List<Parameter> parameters = new ArrayList<>();
@@ -127,8 +138,8 @@ public class MethodImporter {
 
 			methods.add(
 				new Method(
-					methodName, requestBodyContents, httpMethodName, path,
-					parameters, responses, openApiContextExtensions));
+					methodName, security, requestBodyContents, httpMethodName,
+					path, parameters, responses, openApiContextExtensions));
 		}
 
 		_logger.trace("Imported {} methods for path {}", methods.size(), path);
