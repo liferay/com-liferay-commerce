@@ -15,6 +15,7 @@
 package com.liferay.commerce.user.segment.service.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntrySystemException;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntryConstants;
@@ -94,18 +95,20 @@ public class CommerceUserSegmentEntryLocalServiceTest {
 		User guestUser = _userLocalService.getDefaultUser(
 			_group.getCompanyId());
 
-		long[] commerceUserSegmentEntryIDs =
+		long[] commerceUserSegmentEntryIds =
 			_commerceUserSegmentEntryLocalService.
 				getCommerceUserSegmentEntryIds(
-					_group.getGroupId(), 0, guestUser.getUserId());
+					_group.getGroupId(),
+					CommerceAccountConstants.GUEST_ACCOUNT_ID,
+					guestUser.getUserId());
 
 		Assert.assertEquals(
-			commerceUserSegmentEntryIDs.toString(), 1,
-			commerceUserSegmentEntryIDs.length);
+			commerceUserSegmentEntryIds.toString(), 1,
+			commerceUserSegmentEntryIds.length);
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
 			_commerceUserSegmentEntryLocalService.getCommerceUserSegmentEntry(
-				commerceUserSegmentEntryIDs[0]);
+				commerceUserSegmentEntryIds[0]);
 
 		Assert.assertEquals(
 			commerceUserSegmentEntry.toString(), true,
