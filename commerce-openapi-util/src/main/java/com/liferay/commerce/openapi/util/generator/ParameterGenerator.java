@@ -37,6 +37,10 @@ public class ParameterGenerator {
 		String location = parameter.getLocation();
 
 		if (location.equals("body")) {
+			if (_isMultipartFormData(parameter)) {
+				return "MultipartBody multipartBody";
+			}
+
 			Schema schema = parameter.getSchema();
 
 			return String.format(
@@ -76,6 +80,10 @@ public class ParameterGenerator {
 		String location = parameter.getLocation();
 
 		if (location.equals("body")) {
+			if (_isMultipartFormData(parameter)) {
+				return "MultipartBody multipartBody";
+			}
+
 			Schema schema = parameter.getSchema();
 
 			return String.format(
@@ -100,6 +108,12 @@ public class ParameterGenerator {
 		return String.format(
 			"%s %s", provider.getModelName(),
 			StringUtils.lowerCaseFirstChar(provider.getVariableName()));
+	}
+
+	private boolean _isMultipartFormData(Parameter parameter) {
+		String mimeType = parameter.getContentMimeType();
+
+		return mimeType.equals("multipart/form-data");
 	}
 
 }

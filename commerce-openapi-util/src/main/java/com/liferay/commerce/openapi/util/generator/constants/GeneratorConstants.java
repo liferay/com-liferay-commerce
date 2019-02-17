@@ -19,6 +19,9 @@ package com.liferay.commerce.openapi.util.generator.constants;
  */
 public class GeneratorConstants {
 
+	public static final String MULTIPART_BODY_FQCN =
+		"org.apache.cxf.jaxrs.ext.multipart.MultipartBody";
+
 	public static final String NULLABLE_ANNOTATION = "@Nullable";
 
 	public static final String NULLABLE_ANNOTATION_FQCN =
