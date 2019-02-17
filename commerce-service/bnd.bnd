@@ -1,9 +1,0 @@
-Bundle-Name: Liferay Commerce Service
-Bundle-SymbolicName: com.liferay.commerce.service
-Bundle-Version: 3.0.1
-Export-Package:\
-	com.liferay.commerce.configuration,\
-	com.liferay.commerce.configuration.definition,\
-	com.liferay.commerce.model.impl
-Liferay-Require-SchemaVersion: 2.2.0
-Liferay-Service: true

@@ -1,1 +1,0 @@
-"auth.verifier.auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/*"
