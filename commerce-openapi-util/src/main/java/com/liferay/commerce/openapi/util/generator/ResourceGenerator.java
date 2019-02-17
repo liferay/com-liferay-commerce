@@ -36,6 +36,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import javax.ws.rs.core.MediaType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -249,6 +251,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					String.format("import %s;%n", provider.getModelFQCN()));
 			}
 		}
+
+		importStatements.add(_getMultipartBodyImportStatement(methods));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -482,6 +486,21 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
+	private String _getMultipartBodyImportStatement(List<Method> methods) {
+		String multipartBodyImportStatement = "";
+
+		for (Method method : methods) {
+			String methodString = method.toString();
+
+			if (methodString.contains(MediaType.MULTIPART_FORM_DATA)) {
+				multipartBodyImportStatement =
+					"import " + GeneratorConstants.MULTIPART_BODY_FQCN + ";\n";
+			}
+		}
+
+		return multipartBodyImportStatement;
+	}
+
 	private String _getPagingContextParametersDeclaration(
 		boolean annotateParameter) {
 
@@ -618,6 +637,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		sb.append(".");
 		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
 		sb.append("Resource;");
+
+		sb.append(_getMultipartBodyImportStatement(path.getMethods()));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${IMPORT_STATEMENTS}", sb.toString());
