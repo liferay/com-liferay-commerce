@@ -101,7 +101,7 @@ public class OpenAPIImporter {
 			_openAPIDefinitionJSON = _jsonWebServiceClient.doGet(
 				_apiDefinitionURL, Collections.emptyList(), _headers);
 
-			_openApi = _getDefinition(_openAPIDefinitionJSON);
+			_openApi = _getOpenApi(_openAPIDefinitionJSON);
 
 			return _openApi;
 		}
@@ -115,7 +115,7 @@ public class OpenAPIImporter {
 		}
 	}
 
-	private OpenApi _getDefinition(String json) throws IOException {
+	private OpenApi _getOpenApi(String json) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
 		JsonNode rootJSONNode = mapper.readTree(json);
