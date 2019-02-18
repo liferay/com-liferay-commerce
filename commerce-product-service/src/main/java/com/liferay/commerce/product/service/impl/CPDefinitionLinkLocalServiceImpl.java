@@ -208,10 +208,10 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	@Override
-	public List<CPDefinitionLink> getReverseCProductLinks(
-		long cProductId, String type) {
+	public List<CPDefinitionLink> getReverseCPDefinitionLinks(
+		long cpDefinitionId, String type) {
 
-		return cpDefinitionLinkPersistence.findByCP_T(cProductId, type);
+		return cpDefinitionLinkPersistence.findByCPD_T(cpDefinitionId, type);
 	}
 
 	@Override
