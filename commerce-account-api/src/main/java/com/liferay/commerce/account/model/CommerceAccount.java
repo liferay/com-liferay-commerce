@@ -72,15 +72,15 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 			}
 		};
 
-	public java.util.List<CommerceAccountUserRel> getCommerceAccountUserRels();
-
-	public java.util.List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels();
-
 	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public long getCommerceAccountGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public java.util.List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels();
+
+	public java.util.List<CommerceAccountUserRel> getCommerceAccountUserRels();
 
 	public CommerceAccount getParentCommerceAccount()
 		throws com.liferay.portal.kernel.exception.PortalException;
