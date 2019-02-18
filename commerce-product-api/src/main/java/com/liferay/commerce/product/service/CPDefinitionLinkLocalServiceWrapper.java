@@ -390,8 +390,8 @@ public class CPDefinitionLinkLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getReverseCPDefinitionLinks(
-		long cpDefinitionId, String type) {
-		return _cpDefinitionLinkLocalService.getReverseCPDefinitionLinks(cpDefinitionId,
+		long cProductId, String type) {
+		return _cpDefinitionLinkLocalService.getReverseCPDefinitionLinks(cProductId,
 			type);
 	}
 
