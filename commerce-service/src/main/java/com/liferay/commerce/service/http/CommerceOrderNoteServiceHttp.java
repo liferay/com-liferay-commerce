@@ -158,7 +158,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"fetchCommerceOrderNote",
-					_fetchCommerceOrderNoteParameterTypes4);
+					_fetchCommerceOrderNoteParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderNoteId);
@@ -190,7 +190,7 @@ public class CommerceOrderNoteServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
-					"getCommerceOrderNote", _getCommerceOrderNoteParameterTypes5);
+					"getCommerceOrderNote", _getCommerceOrderNoteParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderNoteId);
@@ -223,7 +223,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"getCommerceOrderNotes",
-					_getCommerceOrderNotesParameterTypes6);
+					_getCommerceOrderNotesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderId, restricted);
@@ -256,7 +256,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"getCommerceOrderNotes",
-					_getCommerceOrderNotesParameterTypes7);
+					_getCommerceOrderNotesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderId, start, end);
@@ -289,7 +289,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"getCommerceOrderNotesCount",
-					_getCommerceOrderNotesCountParameterTypes8);
+					_getCommerceOrderNotesCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderId);
@@ -322,7 +322,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"getCommerceOrderNotesCount",
-					_getCommerceOrderNotesCountParameterTypes9);
+					_getCommerceOrderNotesCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderId, restricted);
@@ -356,7 +356,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"updateCommerceOrderNote",
-					_updateCommerceOrderNoteParameterTypes10);
+					_updateCommerceOrderNoteParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderNoteId, content, restricted);
@@ -392,7 +392,7 @@ public class CommerceOrderNoteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderNoteServiceUtil.class,
 					"upsertCommerceOrderNote",
-					_upsertCommerceOrderNoteParameterTypes11);
+					_upsertCommerceOrderNoteParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderNoteId, commerceOrderId, content, restricted,
@@ -430,28 +430,28 @@ public class CommerceOrderNoteServiceHttp {
 		};
 	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes2 =
 		new Class[] { long.class, String.class };
-	private static final Class<?>[] _fetchCommerceOrderNoteParameterTypes4 = new Class[] {
+	private static final Class<?>[] _fetchCommerceOrderNoteParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceOrderNoteParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getCommerceOrderNoteParameterTypes4 = new Class[] {
 			long.class
+		};
+	private static final Class<?>[] _getCommerceOrderNotesParameterTypes5 = new Class[] {
+			long.class, boolean.class
 		};
 	private static final Class<?>[] _getCommerceOrderNotesParameterTypes6 = new Class[] {
-			long.class, boolean.class
-		};
-	private static final Class<?>[] _getCommerceOrderNotesParameterTypes7 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCommerceOrderNotesCountParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getCommerceOrderNotesCountParameterTypes7 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceOrderNotesCountParameterTypes9 = new Class[] {
+	private static final Class<?>[] _getCommerceOrderNotesCountParameterTypes8 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updateCommerceOrderNoteParameterTypes10 = new Class[] {
+	private static final Class<?>[] _updateCommerceOrderNoteParameterTypes9 = new Class[] {
 			long.class, String.class, boolean.class
 		};
-	private static final Class<?>[] _upsertCommerceOrderNoteParameterTypes11 = new Class[] {
+	private static final Class<?>[] _upsertCommerceOrderNoteParameterTypes10 = new Class[] {
 			long.class, long.class, String.class, boolean.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
