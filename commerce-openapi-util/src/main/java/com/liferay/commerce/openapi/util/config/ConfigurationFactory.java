@@ -14,12 +14,17 @@
 
 package com.liferay.commerce.openapi.util.config;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,23 +39,35 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfigurationFactory {
 
-	public static Properties getPropertiesFor(Class clazz) throws IOException {
-		String configFileName = clazz.getName() + ".config";
+	public static List<Properties> getConfigurations(String[] externalProps)
+		throws IOException {
 
-		if (_classProperties.containsKey(configFileName)) {
-			return _classProperties.get(configFileName);
+		List<File> configFiles = _getConfigFiles(_getConfigRootPath());
+
+		List<Properties> configurations = new ArrayList<>();
+
+		for (File configFile : configFiles) {
+			Properties properties = getPropertiesFor(configFile);
+
+			if (externalProps != null) {
+				_mergeExternalProps(properties, externalProps);
+			}
+
+			configurations.add(properties);
 		}
 
-		String configFileNamePath = _getConfigPath(clazz) + configFileName;
+		return configurations;
+	}
 
-		InputStream resourceAsStream = new FileInputStream(configFileNamePath);
+	public static Properties getPropertiesFor(File file) throws IOException {
+		InputStream resourceAsStream = new FileInputStream(file);
 
 		try {
 			Properties properties = new Properties();
 
 			properties.load(resourceAsStream);
 
-			_classProperties.put(configFileName, properties);
+			_classProperties.put(file.getAbsolutePath(), properties);
 
 			return properties;
 		}
@@ -59,34 +76,44 @@ public class ConfigurationFactory {
 		}
 	}
 
-	public static Properties getPropertiesFor(
-			Class clazz, String[] externalProps)
-		throws IOException {
+	private static List<File> _getConfigFiles(String configRootPath) {
+		File configDirectory = new File(configRootPath);
 
-		Properties properties = getPropertiesFor(clazz);
-
-		if (externalProps != null) {
-			_mergeExternalProps(properties, externalProps);
+		if (!configDirectory.isDirectory()) {
+			return Collections.emptyList();
 		}
 
-		return properties;
+		String[] configFileNames = configDirectory.list(
+			new FilenameFilter() {
+
+				@Override
+				public boolean accept(File dir, String name) {
+					if (name.endsWith(".config") && name.startsWith("rest")) {
+						return true;
+					}
+
+					return false;
+				}
+
+			});
+
+		List<File> configFiles = new ArrayList<>();
+
+		for (String configFileName : configFileNames) {
+			configFiles.add(new File(configRootPath + configFileName));
+		}
+
+		return configFiles;
 	}
 
-	private static String _getConfigPath(Class clazz) {
+	private static String _getConfigRootPath() {
+		Class<?> clazz = ConfigurationFactory.class;
+
 		URL url = clazz.getResource(clazz.getSimpleName() + ".class");
 
 		String path = url.getPath();
 
-		String clazzName = clazz.getName();
-
-		String clazzRootPath = clazzName.substring(
-			0, clazzName.indexOf(clazz.getSimpleName()));
-
-		clazzRootPath = clazzRootPath.replace(".", "/");
-
-		if (path.contains(clazzRootPath)) {
-			path = path.substring(0, path.lastIndexOf(clazzRootPath));
-		}
+		path = path.substring(0, path.lastIndexOf(clazz.getSimpleName()));
 
 		return path;
 	}

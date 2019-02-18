@@ -20,15 +20,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
-import com.liferay.commerce.openapi.util.config.ConfigurationFactory;
-import com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.petra.json.web.service.client.JSONWebServiceClient;
 import com.liferay.petra.json.web.service.client.JSONWebServiceException;
 import com.liferay.petra.json.web.service.client.internal.JSONWebServiceClientImpl;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -67,22 +63,12 @@ public class OpenAPIImporter {
 		}
 	}
 
-	public OpenAPIImporter() throws IOException {
+	public OpenAPIImporter() {
 		this(null);
 	}
 
-	public OpenAPIImporter(String filePath) throws IOException {
-		Class<? extends OpenAPIImporter> clazz = getClass();
-
-		if (Validator.isNotNull(filePath)) {
-			ClassLoader classLoader = clazz.getClassLoader();
-
-			_properties = PropertiesUtil.load(
-				classLoader.getResourceAsStream(filePath), "UTF-8");
-		}
-		else {
-			_properties = ConfigurationFactory.getPropertiesFor(clazz);
-		}
+	public OpenAPIImporter(Properties configuration) {
+		_properties = configuration;
 
 		_apiDefinitionURL = _properties.getProperty("openapi.swagger.url");
 
@@ -124,21 +110,6 @@ public class OpenAPIImporter {
 		catch (IOException ioe) {
 			throw new ImporterException(
 				"Unable to get open API definition", ioe);
-		}
-	}
-
-	public Properties getOSGiRESTModuleGeneratorProperties() {
-		if (_properties != null) {
-			return _properties;
-		}
-
-		try {
-			return ConfigurationFactory.getPropertiesFor(
-				OSGiRESTModuleGenerator.class);
-		}
-		catch (IOException ioe) {
-			throw new ImporterException(
-				"Unable to get OSGi REST Module Generator Properties", ioe);
 		}
 	}
 
