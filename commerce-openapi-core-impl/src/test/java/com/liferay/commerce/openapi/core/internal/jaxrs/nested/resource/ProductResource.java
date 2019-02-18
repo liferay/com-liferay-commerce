@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.ProductOption
 import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.SkuDTO;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -39,6 +40,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	public List<ProductOptionDTO> getProductOptions(
 		@PathParam("id") Long id, @QueryParam("name") String name,
+		@QueryParam("createDate") Date createDate,
 		@Context Pagination pagination);
 
 	@GET

@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Nested("productOptions")
 	@Override
 	public List<ProductOptionDTO> getProductOptions(
-		Long id, String name, Pagination pagination) {
+		Long id, String name, Date createDate, Pagination pagination) {
 
 		if (id != 1) {
 			return Collections.emptyList();
