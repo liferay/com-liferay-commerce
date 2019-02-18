@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
-import com.liferay.commerce.openapi.util.PropertiesFactory;
+import com.liferay.commerce.openapi.util.config.ConfigurationFactory;
 import com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
@@ -81,7 +81,7 @@ public class OpenAPIImporter {
 				classLoader.getResourceAsStream(filePath), "UTF-8");
 		}
 		else {
-			_properties = PropertiesFactory.getPropertiesFor(clazz);
+			_properties = ConfigurationFactory.getPropertiesFor(clazz);
 		}
 
 		_apiDefinitionURL = _properties.getProperty("openapi.swagger.url");
@@ -133,7 +133,7 @@ public class OpenAPIImporter {
 		}
 
 		try {
-			return PropertiesFactory.getPropertiesFor(
+			return ConfigurationFactory.getPropertiesFor(
 				OSGiRESTModuleGenerator.class);
 		}
 		catch (IOException ioe) {

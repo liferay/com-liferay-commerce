@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.OpenApi;
-import com.liferay.commerce.openapi.util.PropertiesFactory;
+import com.liferay.commerce.openapi.util.config.ConfigurationFactory;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
@@ -60,7 +60,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			else {
 				OSGiRESTModuleGenerator osgiRESTModuleGenerator =
 					new OSGiRESTModuleGenerator(
-						PropertiesFactory.getPropertiesFor(
+						ConfigurationFactory.getPropertiesFor(
 							OSGiRESTModuleGenerator.class));
 
 				osgiRESTModuleGenerator.generate(null);
