@@ -12,15 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal.cart.model;
+package com.liferay.commerce.frontend.model;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Marco Leo
  */
-public class Settings {
-
-	public Settings() {
-	}
+public class ProductSettingsModel {
 
 	public int[] getAllowedQuantities() {
 		return _allowedQuantities;
@@ -50,7 +47,7 @@ public class Settings {
 		_minQuantity = minQuantity;
 	}
 
-	public void setMultipleQuantity(int multipleQuantity) {
+	public void setMultipleQuanty(int multipleQuantity) {
 		_multipleQuantity = multipleQuantity;
 	}
 
