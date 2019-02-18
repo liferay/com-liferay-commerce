@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
 
 import com.liferay.commerce.openapi.core.annotation.Nested;
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+import com.liferay.commerce.openapi.core.internal.param.converter.DateParameterConverter;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,10 +32,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import java.math.BigDecimal;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -197,14 +194,7 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 			return value.charAt(0);
 		}
 		else if (type == Date.class) {
-			DateFormat dateFormat = new SimpleDateFormat();
-
-			try {
-				return dateFormat.parse(value);
-			}
-			catch (ParseException pe) {
-				throw new IllegalArgumentException(pe);
-			}
+			return _dateParameterConverter.fromString(value);
 		}
 		else if (type == Double.class) {
 			return Double.valueOf(value);
@@ -464,5 +454,7 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 		NestedWriteInterceptor.class);
 
 	private BundleContext _bundleContext;
+	private final DateParameterConverter _dateParameterConverter =
+		new DateParameterConverter();
 
 }
