@@ -51,7 +51,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 		<div class="details-header__action">
 			<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
-				<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-user") %>' />
+				<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-user") %>' />
 			</c:if>
 		</div>
 	</section>
@@ -59,7 +59,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 <div class="minium-frame__cta is-visible">
 	<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasCommerceAccountModelPermissions(ActionKeys.UPDATE) %>">
-		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
+		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
 	</c:if>
 </div>
 
