@@ -21,11 +21,14 @@ import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
+import com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.petra.json.web.service.client.JSONWebServiceClient;
 import com.liferay.petra.json.web.service.client.JSONWebServiceException;
 import com.liferay.petra.json.web.service.client.internal.JSONWebServiceClientImpl;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -43,6 +46,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 public class OpenAPIImporter {
 
@@ -64,7 +68,21 @@ public class OpenAPIImporter {
 	}
 
 	public OpenAPIImporter() throws IOException {
-		_properties = PropertiesFactory.getPropertiesFor(getClass());
+		this(null);
+	}
+
+	public OpenAPIImporter(String filePath) throws IOException {
+		Class<? extends OpenAPIImporter> clazz = getClass();
+
+		if (Validator.isNotNull(filePath)) {
+			ClassLoader classLoader = clazz.getClassLoader();
+
+			_properties = PropertiesUtil.load(
+				classLoader.getResourceAsStream(filePath), "UTF-8");
+		}
+		else {
+			_properties = PropertiesFactory.getPropertiesFor(clazz);
+		}
 
 		_apiDefinitionURL = _properties.getProperty("openapi.swagger.url");
 
@@ -106,6 +124,21 @@ public class OpenAPIImporter {
 		catch (IOException ioe) {
 			throw new ImporterException(
 				"Unable to get open API definition", ioe);
+		}
+	}
+
+	public Properties getOSGiRESTModuleGeneratorProperties() {
+		if (_properties != null) {
+			return _properties;
+		}
+
+		try {
+			return PropertiesFactory.getPropertiesFor(
+				OSGiRESTModuleGenerator.class);
+		}
+		catch (IOException ioe) {
+			throw new ImporterException(
+				"Unable to get OSGi REST Module Generator Properties", ioe);
 		}
 	}
 

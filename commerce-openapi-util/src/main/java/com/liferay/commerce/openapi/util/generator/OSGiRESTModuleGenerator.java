@@ -19,8 +19,14 @@ import com.liferay.commerce.openapi.util.PropertiesFactory;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Properties;
 
@@ -29,17 +35,36 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 	public static void main(String[] args) {
 		try {
-			OSGiRESTModuleGenerator osgiRESTModuleGenerator =
-				new OSGiRESTModuleGenerator(
-					PropertiesFactory.getPropertiesFor(
-						OSGiRESTModuleGenerator.class, args));
+			if (_hasMultiplePaths()) {
+				String[] propertyPaths = _getPropertyPaths();
 
-			osgiRESTModuleGenerator.generate();
+				for (String propertyPath : propertyPaths) {
+					String fileName =
+						_DEPENDENCIES_PATH + propertyPath +
+							"/OSGiRESTModuleGenerator.config";
+
+					OSGiRESTModuleGenerator osgiRESTModuleGenerator =
+						new OSGiRESTModuleGenerator(
+							PropertiesUtil.load(
+								_getResourceAsStream(fileName), "UTF-8"));
+
+					osgiRESTModuleGenerator.generate(fileName);
+				}
+			}
+			else {
+				OSGiRESTModuleGenerator osgiRESTModuleGenerator =
+					new OSGiRESTModuleGenerator(
+						PropertiesFactory.getPropertiesFor(
+							OSGiRESTModuleGenerator.class));
+
+				osgiRESTModuleGenerator.generate(null);
+			}
 
 			System.exit(0);
 		}
@@ -50,10 +75,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			System.exit(-1);
 		}
-	}
-
-	public OSGiRESTModuleGenerator() throws IOException {
-		this(PropertiesFactory.getPropertiesFor(OSGiRESTModuleGenerator.class));
 	}
 
 	public OSGiRESTModuleGenerator(Properties properties) {
@@ -115,7 +136,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 		if ("true".equals(
 				properties.getProperty(
-					"osgi.module.generator.overwrite.bnd"))) {
+					"osgi.module.generator.overwrite.bnd")) &&
+			!_hasMultiplePaths()) {
 
 			_overwriteBND = true;
 		}
@@ -129,32 +151,62 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_moduleOutputPath);
 	}
 
-	public void generate() throws IOException {
-		_generateModule();
+	public void generate(String filePath) throws IOException {
+		_generateModule(filePath);
 
 		_logger.info("Module generated at location {}", _moduleOutputPath);
 	}
 
-	private void _generateModule() throws IOException {
-		OpenAPIImporter openAPIImporter = new OpenAPIImporter();
+	private static String[] _getPropertyPaths() throws IOException {
+		Properties properties = PropertiesUtil.load(
+			_getResourceAsStream(_PROPERTIES_FILE_PATH), "UTF-8");
+
+		String paths = properties.getProperty("property.paths");
+
+		return StringUtil.split(paths, StringPool.COMMA);
+	}
+
+	private static InputStream _getResourceAsStream(String name) {
+		ClassLoader classLoader =
+			OSGiRESTModuleGenerator.class.getClassLoader();
+
+		return classLoader.getResourceAsStream(name);
+	}
+
+	private static boolean _hasMultiplePaths() {
+		try {
+			String[] propertyPaths = _getPropertyPaths();
+
+			if ((propertyPaths != null) && !ArrayUtil.isEmpty(propertyPaths)) {
+				return true;
+			}
+		}
+		catch (IOException ioe) {
+			_logger.info("Unable to read property paths", ioe);
+		}
+
+		return false;
+	}
+
+	private void _generateModule(String filePath) throws IOException {
+		OpenAPIImporter openAPIImporter = new OpenAPIImporter(filePath);
 
 		OpenApi openApi = openAPIImporter.getOpenApi();
+		Properties properties =
+			openAPIImporter.getOSGiRESTModuleGeneratorProperties();
 
 		try {
 			checkModuleOutputPaths(_moduleOutputPath);
 
 			_writeBNDSource();
 
-			_writeGradleSource(openApi);
+			_writeGradleSource(openApi, properties, filePath);
 
-			_writeResourceSources(openApi);
+			_writeResourceSources(openApi, properties, filePath);
 
 			_writeDTOSources(openApi);
 
 			_writeApplicationSource();
-
-			Properties properties = PropertiesFactory.getPropertiesFor(
-				OSGiRESTModuleGenerator.class);
 
 			if ("true".equals(
 					properties.getProperty(
@@ -258,15 +310,16 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		dtoGenerator.writeClassSources();
 	}
 
-	private void _writeGradleSource(OpenApi openApi) throws IOException {
-		Properties properties = PropertiesFactory.getPropertiesFor(
-			OSGiRESTModuleGenerator.class);
+	private void _writeGradleSource(
+			OpenApi openApi, Properties properties, String filePath)
+		throws IOException {
 
 		boolean overwriteBuildGradle = false;
 
 		if ("true".equals(
 				properties.getProperty(
-					"osgi.module.generator.overwrite.gradle"))) {
+					"osgi.module.generator.overwrite.gradle")) &&
+			Validator.isNull(filePath)) {
 
 			overwriteBuildGradle = true;
 		}
@@ -278,15 +331,16 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		buildGradleGenerator.writeSource();
 	}
 
-	private void _writeResourceSources(OpenApi openApi) throws IOException {
-		Properties properties = PropertiesFactory.getPropertiesFor(
-			OSGiRESTModuleGenerator.class);
+	private void _writeResourceSources(
+			OpenApi openApi, Properties properties, String filePath)
+		throws IOException {
 
 		boolean overwriteImplementation = false;
 
 		if ("true".equals(
 				properties.getProperty(
-					"osgi.module.generator.overwrite.implementation"))) {
+					"osgi.module.generator.overwrite.implementation")) &&
+			Validator.isNull(filePath)) {
 
 			overwriteImplementation = true;
 		}
@@ -300,6 +354,12 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 		resourceGenerator.writeClassSources();
 	}
+
+	private static final String _DEPENDENCIES_PATH =
+		"com/liferay/commerce/openapi/util/generator/properties/";
+
+	private static final String _PROPERTIES_FILE_PATH =
+		_DEPENDENCIES_PATH + "PropertyPaths.config";
 
 	private static final String _TEMPLATE_FILE_APPLICATION =
 		"Application.java.tpl";
