@@ -22,8 +22,8 @@ class QuantitySelector extends Component {
 			return this.allowedQuantities.indexOf(quantity) >= 1;
 		}
 
-		let tempValue = this.multipleQuantities ?
-			quantity + this.multipleQuantities :
+		let tempValue = this.multipleQuantity ?
+			quantity + this.multipleQuantity :
 			quantity - 1;
 
 		return tempValue <= this.maxQuantity;
@@ -35,8 +35,8 @@ class QuantitySelector extends Component {
 			return !!this.allowedQuantities[nextOptionIndex];
 		}
 
-		let tempValue = this.multipleQuantities ?
-			quantity - this.multipleQuantities :
+		let tempValue = this.multipleQuantity ?
+			quantity - this.multipleQuantity :
 			quantity - 1;
 
 		return tempValue >= this.minQuantity;
@@ -50,8 +50,8 @@ class QuantitySelector extends Component {
 
 		let tempQuantity = this.quantity;
 
-		if (this.multipleQuantities) {
-			tempQuantity += this.multipleQuantities;
+		if (this.multipleQuantity) {
+			tempQuantity += this.multipleQuantity;
 		}
 
 		if (this.allowedQuantities && this.allowedQuantities.length) {
@@ -62,7 +62,7 @@ class QuantitySelector extends Component {
 			tempQuantity = this.allowedQuantities[index - 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedQuantities) {
+		if (!this.multipleQuantity && !this.allowedQuantities) {
 			--tempQuantity;
 		}
 
@@ -81,8 +81,8 @@ class QuantitySelector extends Component {
 
 		let tempQuantity = this.quantity;
 
-		if (this.multipleQuantities) {
-			tempQuantity -= this.multipleQuantities;
+		if (this.multipleQuantity) {
+			tempQuantity -= this.multipleQuantity;
 		}
 		if (this.allowedQuantities && this.allowedQuantities.length) {
 			const index = this.allowedQuantities.indexOf(tempQuantity);
@@ -92,7 +92,7 @@ class QuantitySelector extends Component {
 			tempQuantity = this.allowedQuantities[index + 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedQuantities) {
+		if (!this.multipleQuantity && !this.allowedQuantities) {
 			++tempQuantity;
 		}
 
@@ -119,8 +119,8 @@ class QuantitySelector extends Component {
 	}
 
 	_submitQuantity(quantity) {
-		if (this.multipleQuantities) {
-			if (quantity % this.multipleQuantities) {
+		if (this.multipleQuantity) {
+			if (quantity % this.multipleQuantity) {
 				return (this.inputError = 'NotMultipleThan');
 			}
 		}
@@ -148,7 +148,7 @@ QuantitySelector.STATE = {
 	inputError: Config.string(),
 	maxQuantity: Config.number().value(99999999),
 	minQuantity: Config.number().value(1),
-	multipleQuantities: Config.number(),
+	multipleQuantity: Config.number(),
 	quantity: Config.number(),
 	showError: Config.bool().value(false),
 	_nextAvailable: Config.bool().value(true),

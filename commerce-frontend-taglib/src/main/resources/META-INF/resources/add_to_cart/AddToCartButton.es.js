@@ -137,10 +137,10 @@ AddToCartButton.STATE = {
 	quantity: Config.number().value(0),
 	settings: Config.shapeOf(
 		{
-			allowedQuantities: Config.array(Config.number()),
+			allowedQuantity: Config.array(Config.number()),
 			maxQuantity: Config.number(),
 			minQuantity: Config.number(),
-			multipleQuantities: Config.number()
+			multipleQuantity: Config.number()
 		}
 	).value({})
 };
