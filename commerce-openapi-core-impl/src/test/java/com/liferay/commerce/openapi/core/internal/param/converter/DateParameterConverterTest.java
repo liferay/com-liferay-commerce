@@ -62,7 +62,7 @@ public class DateParameterConverterTest {
 		calendar.set(Calendar.YEAR, 2019);
 		calendar.set(Calendar.MONTH, 7);
 		calendar.set(Calendar.DATE, 12);
-		calendar.set(Calendar.HOUR, 15);
+		calendar.set(Calendar.HOUR_OF_DAY, 15);
 		calendar.set(Calendar.MINUTE, 1);
 		calendar.set(Calendar.SECOND, 58);
 		calendar.set(Calendar.MILLISECOND, 871);
