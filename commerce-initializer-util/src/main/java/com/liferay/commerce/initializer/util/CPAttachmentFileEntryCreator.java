@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.initializer.util.internal;
+package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
