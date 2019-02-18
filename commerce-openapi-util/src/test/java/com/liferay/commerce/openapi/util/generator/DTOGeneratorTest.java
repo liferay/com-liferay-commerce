@@ -263,15 +263,15 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		Assert.assertThat(
 			classSource,
 			containsString(
-				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss'Z'\", shape = " +
-					"JsonFormat.Shape.STRING)\n\t@Nullable\n\tpublic Date " +
-						"getModifyDateTime"));
+				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", " +
+					"shape = JsonFormat.Shape.STRING)\n\t@Nullable\n\t" +
+						"public Date getModifyDateTime"));
 
 		Assert.assertThat(
 			classSource,
 			containsString(
-				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss'Z'\", shape = " +
-					"JsonFormat.Shape.STRING)\n\tpublic void " +
+				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", " +
+					"shape = JsonFormat.Shape.STRING)\n\tpublic void " +
 						"setModifyDateTime"));
 	}
 
