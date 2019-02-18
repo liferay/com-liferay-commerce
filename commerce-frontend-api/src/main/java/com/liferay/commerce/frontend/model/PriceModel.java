@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal.cart.model;
+package com.liferay.commerce.frontend.model;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Marco Leo
  */
-public class Prices {
+public class PriceModel {
 
-	public Prices(String price) {
+	public PriceModel(String price) {
 		_price = price;
 	}
 
