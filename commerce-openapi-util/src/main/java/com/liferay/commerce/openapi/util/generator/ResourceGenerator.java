@@ -466,8 +466,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	private String _getMimeTypes(List<Content> contents) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("\"");
-
 		if (contents.size() > 1) {
 			sb.append("{");
 		}
@@ -475,18 +473,18 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		for (int i = 0; i < contents.size(); i++) {
 			Content content = contents.get(i);
 
+			sb.append("\"");
 			sb.append(content.getMimeType());
+			sb.append("\"");
 
 			if (i < (contents.size() - 1)) {
-				sb.append(",");
+				sb.append(", ");
 			}
 		}
 
 		if (contents.size() > 1) {
 			sb.append("}");
 		}
-
-		sb.append("\"");
 
 		return sb.toString();
 	}
