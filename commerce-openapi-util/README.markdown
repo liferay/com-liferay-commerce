@@ -57,9 +57,9 @@ overwrite existing implementation files
 # IDE Aid
 ### Code Analyse
 As an aid to developers, generator marks all non required request parameters and
-schema properties with ``@Nullable`` annotation. If code analyse tools are 
+schema properties with ``@Nullable`` annotation. If code analyse tools are
 enabled IDE will warn developer about possible NullPointerExceptions.
-Very useful as generator do not generaty primitive java types, but wrapper 
+Very useful as generator do not generaty primitive java types, but wrapper
 objects which may cause NPEs during autoboxing/unboxing process.
 
 ***How to perform code analyse in IntelliJ IDEA***
@@ -72,7 +72,7 @@ annotation, please do it by clicking ``+`` sign.
 Once annotations are configured and settings are applied one can run code inspection.
 
 Run inspection either via shortcut or by right click against module
-``Analyze / Run Inspection by Name``. In popup window start typing 
+``Analyze / Run Inspection by Name``. In popup window start typing
 ``Constant conditions & exceptions`` and choose it once you see it in the list.
 Click ``Run``.
 Inspections Results tab would appear and list all accesses of nullable fields.
@@ -81,10 +81,10 @@ Inspections Results tab would appear and list all accesses of nullable fields.
 
 ### Embedded Objects
 
-Any component property may use $ref in its definition to refer to another 
-component. Such property is considered as an object and generator will generate 
+Any component property may use $ref in its definition to refer to another
+component. Such property is considered as an object and generator will generate
 it as reference to DTO object.
-Here is example with two components where ``WishList`` component's property 
+Here is example with two components where ``WishList`` component's property
 defaultItem refers to ``Item`` component:
 ```
  Item:
@@ -211,7 +211,6 @@ satisfied:
 Each resource entity DTO that wants to have nested DTOs has to explicitly
 contain a field for each nested DTO/s, for example:
 
-
 	public class ProductDTO {
 		...
 
@@ -229,9 +228,9 @@ contain a field for each nested DTO/s, for example:
 
 	}
 
-Where “skus” can be a nested list of SkuDTOs.
+Where "skus" can be a nested list of SkuDTOs.
 
-A resource implementation method that will return nested DTOs has to be 
+A resource implementation method that will return nested DTOs has to be
 annotated with the @Nested annotation, for example:
 
 	public class ProductResourceImpl implements ProductResource {
@@ -247,29 +246,28 @@ annotated with the @Nested annotation, for example:
 		...
 	}
 
-where “skus” is the name of the skus field inside the ProductDTO class.
+where "skus" is the name of the skus field inside the ProductDTO class.
 
-The special query parameter “nested” has to be used in the request URL. It 
-defines a list of nested fields inside a resource entity DTO that should be 
+The special query parameter "nested" has to be used in the request URL. It
+defines a list of nested fields inside a resource entity DTO that should be
 included, for example:
 
 `{{baseUrl}}/product/1?groupId=36443&nested=skus`
 
-where “skus”  is the name of the skus field inside ProductDTO class.
+where "skus"  is the name of the skus field inside ProductDTO class.
 
 If a nested resource is a list of DTOs that can be paged then paging parameters
 for that list can be passed as query parameters, for example:
 
 `{{baseUrl}}/product/1?groupId=36443&nested=skus&skus.pageSize=1&skus.page=1`
 
-where “pageSize”  and “page” are page parameters used by the Product resource 
-method marked with the @Nested(“skus”) annotation.
+where "pageSize"  and "page" are page parameters used by the Product resource
+method marked with the @Nested("skus") annotation.
 
-Also, if a resource method that returns nested DTO/s accepts additional query 
+Also, if a resource method that returns nested DTO/s accepts additional query
 parameters, those parameters can also be passed as query parameters, for example:
 
 `{{baseUrl}}/product/:id?groupId=36443&nested=skus&skus.keyword=test`
 
-
-where “keyword” is the query parameter defined as an argument of the Product 
-resource method marked with the @Nested(“skus”) annotation.
+where "keyword" is the query parameter defined as an argument of the Product
+resource method marked with the @Nested("skus") annotation.
