@@ -321,8 +321,8 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getReverseCPDefinitionLinks(
-		long cpDefinitionId, String type);
+	public List<CPDefinitionLink> getReverseCProductLinks(long cProductId,
+		String type);
 
 	/**
 	* Updates the cp definition link in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
