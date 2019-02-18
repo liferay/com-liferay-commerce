@@ -172,6 +172,9 @@ public class NestedWriteInterceptorTest {
 		MultivaluedHashMap<String, String> queryParameters =
 			new MultivaluedHashMap<String, String>() {
 				{
+					putSingle(
+						"productOptions.createDate",
+						"2019-02-19T08:03:11.763Z");
 					putSingle("productOptions.name", "test2");
 				}
 			};
