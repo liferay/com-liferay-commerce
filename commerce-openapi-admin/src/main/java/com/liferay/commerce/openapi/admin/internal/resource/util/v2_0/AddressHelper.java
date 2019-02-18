@@ -16,11 +16,11 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.NoSuchAddressException;
 import com.liferay.portal.kernel.exception.PortalException;
