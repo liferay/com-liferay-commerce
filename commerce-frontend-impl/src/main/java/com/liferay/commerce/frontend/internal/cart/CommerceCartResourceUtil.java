@@ -14,32 +14,26 @@
 
 package com.liferay.commerce.frontend.internal.cart;
 
-import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.internal.cart.model.Cart;
-import com.liferay.commerce.frontend.internal.cart.model.Prices;
 import com.liferay.commerce.frontend.internal.cart.model.Product;
-import com.liferay.commerce.frontend.internal.cart.model.Settings;
 import com.liferay.commerce.frontend.internal.cart.model.Summary;
-import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.frontend.model.PriceModel;
+import com.liferay.commerce.frontend.model.ProductSettingsModel;
+import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
-import com.liferay.commerce.price.CommerceProductPrice;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ArrayUtil;
-
-import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,46 +81,6 @@ public class CommerceCartResourceUtil {
 		return errorMessages;
 	}
 
-	protected Prices getPrice(
-			CommerceOrderItem commerceOrderItem, Locale locale,
-			CommerceContext commerceContext)
-		throws PortalException {
-
-		CommerceProductPrice commerceProductPrice =
-			_commerceProductPriceCalculation.getCommerceProductPrice(
-				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), true, commerceContext);
-
-		if (commerceProductPrice == null) {
-			return null;
-		}
-
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-
-		Prices prices = new Prices(unitPrice.format(locale));
-
-		CommerceMoney unitPromoPrice = commerceProductPrice.getUnitPromoPrice();
-
-		BigDecimal promoPrice = unitPromoPrice.getPrice();
-
-		if ((promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
-			(promoPrice.compareTo(unitPrice.getPrice()) < 0)) {
-
-			prices.setPromoPrice(unitPromoPrice.format(locale));
-		}
-
-		CommerceDiscountValue discountValue =
-			commerceProductPrice.getDiscountValue();
-
-		if (discountValue != null) {
-			CommerceMoney discountAmount = discountValue.getDiscountAmount();
-
-			prices.setDiscount(discountAmount.format(locale));
-		}
-
-		return prices;
-	}
-
 	protected List<Product> getProducts(
 			CommerceOrder commerceOrder, Locale locale,
 			CommerceContext commerceContext)
@@ -138,10 +92,13 @@ public class CommerceCartResourceUtil {
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			Prices prices = getPrice(
-				commerceOrderItem, locale, commerceContext);
+			PriceModel prices = _productHelper.getPrice(
+				commerceOrderItem.getCPInstanceId(),
+				commerceOrderItem.getQuantity(), commerceContext, locale);
 
-			Settings settings = getSettings(commerceOrderItem);
+			ProductSettingsModel settings =
+				_productHelper.getProductSettingsModel(
+					commerceOrderItem.getCPInstanceId());
 
 			products.add(
 				new Product(
@@ -155,43 +112,6 @@ public class CommerceCartResourceUtil {
 		}
 
 		return products;
-	}
-
-	protected Settings getSettings(CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		Settings settings = new Settings();
-
-		CPDefinitionInventory cpDefinitionInventory =
-			_cpDefinitionInventoryLocalService.
-				fetchCPDefinitionInventoryByCPDefinitionId(
-					commerceOrderItem.getCPDefinitionId());
-
-		int maxQuantity =
-			CPDefinitionInventoryConstants.DEFAULT_MAX_ORDER_QUANTITY;
-		int minQuantity =
-			CPDefinitionInventoryConstants.DEFAULT_MIN_ORDER_QUANTITY;
-		int multipleQuantity =
-			CPDefinitionInventoryConstants.DEFAULT_MULTIPLE_ORDER_QUANTITY;
-
-		if (cpDefinitionInventory != null) {
-			maxQuantity = cpDefinitionInventory.getMaxOrderQuantity();
-			minQuantity = cpDefinitionInventory.getMinOrderQuantity();
-			multipleQuantity = cpDefinitionInventory.getMultipleOrderQuantity();
-
-			int[] allowedOrderQuantities =
-				cpDefinitionInventory.getAllowedOrderQuantitiesArray();
-
-			if (allowedOrderQuantities.length > 0) {
-				settings.setAllowedQuantities(allowedOrderQuantities);
-			}
-		}
-
-		settings.setMaxQuantity(maxQuantity);
-		settings.setMinQuantity(minQuantity);
-		settings.setMultipleQuantity(multipleQuantity);
-
-		return settings;
 	}
 
 	protected Summary getSummary(
@@ -243,13 +163,9 @@ public class CommerceCartResourceUtil {
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 
 	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
-
-	@Reference
-	private CPDefinitionInventoryLocalService
-		_cpDefinitionInventoryLocalService;
-
-	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
+
+	@Reference
+	private ProductHelper _productHelper;
 
 }
