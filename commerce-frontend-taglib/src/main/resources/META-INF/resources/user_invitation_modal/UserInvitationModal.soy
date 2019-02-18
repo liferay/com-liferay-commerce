@@ -119,9 +119,9 @@
 			</div>
 
 			{let $inviteButtonClasses kind="text"}
-				minium-button minium-button--big
+				commerce-button commerce-button--big
 				{if isNonnull($addedUsers) and length($addedUsers) == 0 and isNonnull($accountName) and $accountName == ''}
-					{sp}minium-button--disabled
+					{sp}commerce-button--disabled
 				{/if}
 			{/let}
 			<div class="commerce-modal__actions">

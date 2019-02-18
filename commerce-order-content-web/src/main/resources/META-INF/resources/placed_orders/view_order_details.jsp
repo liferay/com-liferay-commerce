@@ -164,7 +164,7 @@ if (commerceOrder != null) {
 		<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 	</aui:form>
 
-	<aui:button cssClass="minium-button minium-button--big minium-button--outline" onClick='<%= renderResponse.getNamespace() + "reorderCommerceOrder();" %>' value="reorder" />
+	<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" onClick='<%= renderResponse.getNamespace() + "reorderCommerceOrder();" %>' value="reorder" />
 </div>
 
 <div class="row">
