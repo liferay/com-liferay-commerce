@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.frontend.internal.cart.model;
 
+import com.liferay.commerce.frontend.model.PriceModel;
+import com.liferay.commerce.frontend.model.ProductSettingsModel;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -21,7 +24,8 @@ public class Product {
 
 	public Product(
 		long id, String name, String sku, int quantity, String thumbnail,
-		Prices prices, Settings settings, String[] errorMessages) {
+		PriceModel prices, ProductSettingsModel settings,
+		String[] errorMessages) {
 
 		_id = id;
 		_name = name;
@@ -45,7 +49,7 @@ public class Product {
 		return _name;
 	}
 
-	public Prices getPrices() {
+	public PriceModel getPrices() {
 		return _prices;
 	}
 
@@ -53,7 +57,7 @@ public class Product {
 		return _quantity;
 	}
 
-	public Settings getSettings() {
+	public ProductSettingsModel getSettings() {
 		return _settings;
 	}
 
@@ -77,7 +81,7 @@ public class Product {
 		_name = name;
 	}
 
-	public void setPrices(Prices prices) {
+	public void setPrices(PriceModel prices) {
 		_prices = prices;
 	}
 
@@ -85,7 +89,7 @@ public class Product {
 		_quantity = quantity;
 	}
 
-	public void setSettings(Settings settings) {
+	public void setSettings(ProductSettingsModel settings) {
 		_settings = settings;
 	}
 
@@ -100,9 +104,9 @@ public class Product {
 	private String[] _errorMessages;
 	private long _id;
 	private String _name;
-	private Prices _prices;
+	private PriceModel _prices;
 	private int _quantity;
-	private Settings _settings;
+	private ProductSettingsModel _settings;
 	private String _sku;
 	private String _thumbnail;
 

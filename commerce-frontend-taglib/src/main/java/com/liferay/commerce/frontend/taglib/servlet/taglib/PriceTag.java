@@ -14,20 +14,13 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.discount.CommerceDiscountValue;
+import com.liferay.commerce.frontend.model.PriceModel;
+import com.liferay.commerce.frontend.model.ProductSettingsModel;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.model.PriceModel;
-import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.price.CommerceProductPrice;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceServiceUtil;
-import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
+import com.liferay.commerce.frontend.taglib.internal.util.ProductHelperProvider;
+import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -37,9 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.math.BigDecimal;
-
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.jsp.PageContext;
@@ -61,28 +51,16 @@ public class PriceTag extends ComponentRendererTag {
 
 			long cpInstanceId = (Long)context.getOrDefault("CPInstanceId", 0L);
 
-			CPInstance cpInstance = CPInstanceServiceUtil.getCPInstance(
-				cpInstanceId);
-
 			int quantity = (Integer)context.getOrDefault("quantity", 1);
 
 			if (quantity <= 0) {
-				CPDefinitionInventory cpDefinitionInventory =
-					CPDefinitionInventoryLocalServiceUtil.
-						fetchCPDefinitionInventoryByCPDefinitionId(
-							cpInstance.getCPDefinitionId());
+				ProductSettingsModel productSettingsModel =
+					_productHelper.getProductSettingsModel(cpInstanceId);
 
-				if (cpDefinitionInventory != null) {
-					quantity = cpDefinitionInventory.getMinOrderQuantity();
-				}
-				else {
-					quantity =
-						CPDefinitionInventoryConstants.
-							DEFAULT_MIN_ORDER_QUANTITY;
-				}
+				quantity = productSettingsModel.getMinQuantity();
 			}
 
-			PriceModel priceModel = _getPrice(
+			PriceModel priceModel = _productHelper.getPrice(
 				cpInstanceId, quantity, commerceContext,
 				themeDisplay.getLocale());
 
@@ -135,55 +113,15 @@ public class PriceTag extends ComponentRendererTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
-		_commerceProductPriceCalculation =
-			ServletContextUtil.getCommerceProductPriceCalculation();
+		_productHelper = ProductHelperProvider.getProductHelper();
 	}
 
 	public void setQuantity(String quantity) {
 		putValue("quantity", quantity);
 	}
 
-	private PriceModel _getPrice(
-			long cpInstanceId, int quantity, CommerceContext commerceContext,
-			Locale locale)
-		throws PortalException {
-
-		CommerceProductPrice commerceProductPrice =
-			_commerceProductPriceCalculation.getCommerceProductPrice(
-				cpInstanceId, quantity, true, commerceContext);
-
-		if (commerceProductPrice == null) {
-			return null;
-		}
-
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-
-		PriceModel priceModel = new PriceModel(unitPrice.format(locale));
-
-		CommerceMoney unitPromoPrice = commerceProductPrice.getUnitPromoPrice();
-
-		BigDecimal promoPrice = unitPromoPrice.getPrice();
-
-		if ((promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
-			(promoPrice.compareTo(unitPrice.getPrice()) < 0)) {
-
-			priceModel.setPromoPrice(unitPromoPrice.format(locale));
-		}
-
-		CommerceDiscountValue discountValue =
-			commerceProductPrice.getDiscountValue();
-
-		if (discountValue != null) {
-			CommerceMoney discountAmount = discountValue.getDiscountAmount();
-
-			priceModel.setDiscount(discountAmount.format(locale));
-		}
-
-		return priceModel;
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
 
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+	private ProductHelper _productHelper;
 
 }
