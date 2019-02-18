@@ -74,9 +74,9 @@ public interface CommerceAccountUserRel extends CommerceAccountUserRelModel,
 			}
 		};
 
-	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole> getUserGroupRoles()
+	public com.liferay.portal.kernel.model.User getUser()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.portal.kernel.model.User getUser()
+	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole> getUserGroupRoles()
 		throws com.liferay.portal.kernel.exception.PortalException;
 }
