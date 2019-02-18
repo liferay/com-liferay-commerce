@@ -90,7 +90,7 @@ public class CommerceProductPriceCalculationImpl
 
 		BigDecimal promo = promoPrice.getPrice();
 
-		if ((promo.compareTo(BigDecimal.ZERO) > 0) &&
+		if ((promo != null) && (promo.compareTo(BigDecimal.ZERO) > 0) &&
 			(promo.compareTo(unitPrice.getPrice()) <= 0)) {
 
 			finalPrice = promoPrice.getPrice();

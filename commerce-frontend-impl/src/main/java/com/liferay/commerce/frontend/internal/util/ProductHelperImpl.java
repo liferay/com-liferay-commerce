@@ -63,7 +63,8 @@ public class ProductHelperImpl implements ProductHelper {
 
 		BigDecimal promoPrice = unitPromoPrice.getPrice();
 
-		if ((promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
+		if ((promoPrice != null) &&
+			(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
 			(promoPrice.compareTo(unitPrice.getPrice()) < 0)) {
 
 			priceModel.setPromoPrice(unitPromoPrice.format(locale));

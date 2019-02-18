@@ -130,6 +130,10 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 		CommerceAccount commerceAccount = getCommerceAccount();
 
+		if (commerceAccount == null) {
+			return Optional.empty();
+		}
+
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
 				groupId, commerceAccount.getCommerceAccountId(),
