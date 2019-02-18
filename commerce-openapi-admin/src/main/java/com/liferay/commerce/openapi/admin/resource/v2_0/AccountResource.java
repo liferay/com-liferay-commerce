@@ -35,6 +35,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
+
 /**
  * @author Igor Beslic
  */
@@ -92,6 +94,13 @@ public interface AccountResource {
 	@POST
 	@Produces("application/*")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception;
+
+	@Consumes("multipart/form-data")
+	@Path("/{id}/logo/")
+	@POST
+	public Response upsertAccountLogo(
+			@PathParam("id") String id, MultipartBody multipartBody)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}/order")
