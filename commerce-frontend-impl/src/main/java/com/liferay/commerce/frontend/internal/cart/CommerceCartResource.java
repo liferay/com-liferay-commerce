@@ -241,7 +241,7 @@ public class CommerceCartResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateOrderItem(
 		@FormParam("groupId") long groupId,
-		@FormParam("accountId") long commerceAccountId,
+		@FormParam("commerceAccountId") long commerceAccountId,
 		@FormParam("quantity") int quantity,
 		@FormParam("productId") long cpInstanceId,
 		@FormParam("options") String options,
