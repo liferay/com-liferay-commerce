@@ -34,6 +34,9 @@ public abstract class OpenApiPropsKeys {
 	public static final String NESTED_FILTER_ENABLED =
 		"liferay.jaxrs.nested.filter.enabled=true";
 
+	public static final String PARAMETER_CONVERTER_PROVIDERS_ENABLED =
+		"liferay.jaxrs.parameter.converter.providers.enabled=true";
+
 	public static final String SERVICE_EVENT_FILTER_ENABLED =
 		"liferay.jaxrs.service.event.filter.enabled=true";
 
