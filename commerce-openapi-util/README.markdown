@@ -64,7 +64,7 @@ objects which may cause NPEs during autoboxing/unboxing process.
 
 ***How to perform code analyse in IntelliJ IDEA***
 
-In IntelliJ IDEA ``Preferences`` go to ``Build, Execution, Deployment/Deployment``.
+In IntelliJ IDEA ``Preferences`` go to ``Build, Execution, Deployment/Deployment -> Compiler``.
 On the area on right locate option ``Add runtime assertions for notnull-annotated methods and parameters``
 and make sure that it is enabled. Now click ``Configure annotations`` button.
 If IntelliJ IDE hasn't already imported ``com.liferay.commerce.openapi.core.annotation.Nullable``
@@ -76,6 +76,8 @@ Run inspection either via shortcut or by right click against module
 ``Constant conditions & exceptions`` and choose it once you see it in the list.
 Click ``Run``.
 Inspections Results tab would appear and list all accesses of nullable fields.
+
+Reference: https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html
 
 # OpenAPI examples
 
