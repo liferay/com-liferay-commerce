@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import java.util.Map;
@@ -33,6 +35,7 @@ public class OrderItemDTO {
 		return _commerceOrderId;
 	}
 
+	@Nullable
 	public BigDecimal getDiscountAmount() {
 		return _discountAmount;
 	}
@@ -41,26 +44,32 @@ public class OrderItemDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public BigDecimal getFinalPrice() {
 		return _finalPrice;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Map<String, String> getName() {
 		return _name;
 	}
 
+	@Nullable
 	public Integer getQuantity() {
 		return _quantity;
 	}
 
+	@Nullable
 	public Integer getShippedQuantity() {
 		return _shippedQuantity;
 	}
 
+	@Nullable
 	public String getSku() {
 		return _sku;
 	}
@@ -69,10 +78,12 @@ public class OrderItemDTO {
 		return _skuId;
 	}
 
+	@Nullable
 	public BigDecimal getUnitPrice() {
 		return _unitPrice;
 	}
 
+	@Nullable
 	public Boolean isSubscription() {
 		return _subscription;
 	}
@@ -126,16 +137,36 @@ public class OrderItemDTO {
 	}
 
 	private Long _commerceOrderId;
+
+	@Nullable
 	private BigDecimal _discountAmount;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private BigDecimal _finalPrice;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Map<String, String> _name;
+
+	@Nullable
 	private Integer _quantity;
+
+	@Nullable
 	private Integer _shippedQuantity;
+
+	@Nullable
 	private String _sku;
+
 	private Long _skuId;
+
+	@Nullable
 	private Boolean _subscription;
+
+	@Nullable
 	private BigDecimal _unitPrice;
 
 }

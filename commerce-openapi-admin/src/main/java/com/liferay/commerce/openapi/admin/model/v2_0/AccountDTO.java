@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -25,10 +27,12 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Account")
 public class AccountDTO {
 
+	@Nullable
 	public AddressDTO[] getAddresses() {
 		return _addresses;
 	}
 
+	@Nullable
 	public String[] getEmailAddresses() {
 		return _emailAddresses;
 	}
@@ -37,10 +41,12 @@ public class AccountDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Long getLogoId() {
 		return _logoId;
 	}
@@ -49,22 +55,27 @@ public class AccountDTO {
 		return _name;
 	}
 
+	@Nullable
 	public AccountOrganizationDTO[] getOrganizations() {
 		return _organizations;
 	}
 
+	@Nullable
 	public String getTaxId() {
 		return _taxId;
 	}
 
+	@Nullable
 	public Integer getType() {
 		return _type;
 	}
 
+	@Nullable
 	public AccountMemberDTO[] getUsers() {
 		return _users;
 	}
 
+	@Nullable
 	public Boolean isRoot() {
 		return _root;
 	}
@@ -113,16 +124,35 @@ public class AccountDTO {
 		_users = users;
 	}
 
+	@Nullable
 	private AddressDTO[] _addresses;
+
+	@Nullable
 	private String[] _emailAddresses;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Long _logoId;
+
 	private String _name;
+
+	@Nullable
 	private AccountOrganizationDTO[] _organizations;
+
+	@Nullable
 	private Boolean _root;
+
+	@Nullable
 	private String _taxId;
+
+	@Nullable
 	private Integer _type;
+
+	@Nullable
 	private AccountMemberDTO[] _users;
 
 }
