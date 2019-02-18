@@ -67,7 +67,7 @@
 			{/call}
 		</button>
 
-		<div class="{$curtainClasses}">
+		<div id="account-manager-curtain" class="{$curtainClasses}" ref="curtain">
 			<div class="minium-dropdown__absolute-content">
 				{let $isOrdersTableVisible: $currentView == 'orders' /}
 				{call OrdersTable.render}
@@ -126,7 +126,7 @@
 	{else}
 		<div class="account-selector">
 			<div class="account-selector__title">
-				{msg desc="Select Account & Order"}select account and order{/msg}
+				{msg desc="Select Account & Order"}select-account-and-order{/msg}
 			</div>
 		</div>
 	{/if}

@@ -16,6 +16,12 @@ class SearchBar extends Component {
 				el.addEventListener('click', this._toggleClick.bind(this));
 			}
 		);
+		
+		this._handleClickOutside = this._handleClickOutside.bind(this);
+	}
+
+	_handleClickOutside(e){
+		this.toggle();
 	}
 
 	detached() {
@@ -67,10 +73,22 @@ class SearchBar extends Component {
 
 	toggle(status) {
 		if (status) {
-			setTimeout(() => this.refs.searchInput.focus(), 0);
+			setTimeout(
+				() => {
+					this.refs.searchInput.focus();
+					window.addEventListener('click', this._handleClickOutside);
+				},
+				0
+			);
 		}
 		else {
-			setTimeout(() => this.refs.searchInput.blur(), 0);
+			setTimeout(
+				() => {
+					this.refs.searchInput.blur();
+					window.removeEventListener('click', this._handleClickOutside);
+				},
+				0
+			);
 		}
 
 		this.active = status;
@@ -88,9 +106,7 @@ Soy.register(SearchBar, template);
 
 SearchBar.STATE = {
 	active: Config.bool(),
-	placeholder: {
-		value: ''
-	},
+	placeholder: Config.value(''),
 	query: Config.string()
 };
 
