@@ -59,12 +59,12 @@
 		{/if}
 		{let $submitModifiers kind="text"}
 			{if (isNonnull($loading) and $loading) or $productsQuantity == 0 }
-				{sp}minium-button--disabled
+				{sp}commerce-button--disabled
 			{/if}
 		{/let}
 
 		{if isNonnull($checkoutUrl)}
-			<a class="minium-button minium-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
+			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
 		{/if}
 	</div>
 {/template}

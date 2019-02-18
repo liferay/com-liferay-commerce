@@ -40,7 +40,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <c:if test="<%= commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 	<div class="minium-frame__cta is-visible">
-		<aui:button cssClass="js-add-address minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
+		<aui:button cssClass="js-add-address commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
 	</div>
 
 	<commerce-ui:add-address-modal

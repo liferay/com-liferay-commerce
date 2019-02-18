@@ -14,14 +14,14 @@
 	{@param? _submitQuantity: any }
 
 	{let $btnClass kind="text"}
-		minium-button
+		commerce-button
 		{sp}add-to-cart-button
 		{if $quantity > 0 and $editMode == false}
-			{sp}minium-button--good
+			{sp}commerce-button--good
 		{/if}
 
 		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
-			{sp}minium-button--disabled
+			{sp}commerce-button--disabled
 		{/if}
 	{/let}
 
