@@ -642,7 +642,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		long cProductId, String type) {
 
 		List<CPDefinitionLink> cpDefinitionLinks =
-			_cpDefinitionLinkLocalService.getReverseCProductLinks(
+			_cpDefinitionLinkLocalService.getReverseCPDefinitionLinks(
 				cProductId, type);
 
 		String[] reverseCPDefinitionIdsArray =
