@@ -11,6 +11,16 @@ import './AccountsTable.es';
 
 class AccountSelector extends Component {
 
+	created(){
+		this._handleClickOutside = this._handleClickOutside.bind(this);
+	}
+
+	_handleClickOutside(e){
+		if (!document.querySelector('#account-manager-curtain').contains(e.target)){
+			this._closeModal();
+		}
+	}
+
 	toggleAccountSelector() {
 		if (this.openingState === 'closed') {
 			this._openModal();
@@ -24,6 +34,7 @@ class AccountSelector extends Component {
 	}
 
 	_openModal() {
+
 		if (!this.currentAccount && !this.accounts) {
 			this.currentView = 'accounts';
 			this._fetchAccounts();
@@ -39,17 +50,20 @@ class AccountSelector extends Component {
 		return setTimeout(
 			() => {
 				this.openingState = 'open';
+				window.addEventListener('click', this._handleClickOutside);
 			},
 			200
 		);
 	}
 
 	_closeModal() {
+		
 		this.openingState = 'closing';
-
+		
 		return setTimeout(
 			() => {
 				this.openingState = 'closed';
+				window.removeEventListener('click', this._handleClickOutside);
 			},
 			200
 		);
