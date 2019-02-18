@@ -11,8 +11,36 @@ import './Summary.es';
 
 class Cart extends Component {
 
+	created(){
+		this._handleClickOutside = this._handleClickOutside.bind(this);
+	}
+
+	_handleClickOutside(e){
+		const topBar = document.querySelector('.minium-frame__topbar');
+		if (
+			topBar.contains(e.target) 
+		){
+			this._closeCart();
+		}
+	}
+
 	toggleCart() {
-		this._open = !this._open;
+		return this._open ? this._closeCart() : this._openCart();
+	}
+	
+	_openCart(){
+		this._open = true;
+		this.element.addEventListener('transitionend', () => {
+			window.addEventListener('click', this._handleClickOutside);
+		})
+		return this._open;
+	}
+	
+	_closeCart(){
+		this._open = false;
+		this.element.addEventListener('transitionend', () => {
+			window.removeEventListener('click', this._handleClickOutside);
+		});
 		return this._open;
 	}
 
