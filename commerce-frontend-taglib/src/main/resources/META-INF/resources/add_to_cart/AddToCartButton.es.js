@@ -6,12 +6,6 @@ import '../quantity_selector/QuantitySelector.es';
 
 class AddToCartButton extends Component {
 
-	created() {
-		if (!this.accountId) {
-			this.disabled = true;
-		}
-	}
-
 	rendered() {
 		if (this.element.querySelector('input')) {
 			this.element.querySelector('input').focus();
@@ -31,7 +25,12 @@ class AddToCartButton extends Component {
 	}
 
 	_handleBtnClick(e) {
-		if (!this.editMode && this.element === e.target && !this.disabled) {
+		if (
+			!this.editMode &&
+			this.element === e.target &&
+			!this.disabled &&
+			!!this.accountId
+		) {
 			this.editMode = true;
 		}
 	}
@@ -113,6 +112,7 @@ class AddToCartButton extends Component {
 Soy.register(AddToCartButton, template);
 
 AddToCartButton.STATE = {
+	disabled: Config.bool().value(false),
 	accountId: Config.oneOfType(
 		[
 			Config.number(),
