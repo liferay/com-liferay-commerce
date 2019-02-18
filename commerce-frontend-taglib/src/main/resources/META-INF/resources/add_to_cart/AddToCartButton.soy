@@ -3,6 +3,7 @@
 {template .render}
 
 	{@param? disabled: bool }
+	{@param? accountId: number|string }
 	{@param quantity: int }
 	{@param editMode: bool }
 	{@param settings: ? }
@@ -18,7 +19,8 @@
 		{if $quantity > 0 and $editMode == false}
 			{sp}minium-button--good
 		{/if}
-		{if isNonnull($disabled) and $disabled == true }
+
+		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
 			{sp}minium-button--disabled
 		{/if}
 	{/let}
