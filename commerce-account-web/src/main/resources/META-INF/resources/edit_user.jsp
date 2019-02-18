@@ -252,8 +252,8 @@ else {
 	</section>
 
 	<div class="minium-frame__cta is-visible">
-		<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= backURL %>" value="cancel" />
+		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
 
-		<aui:button cssClass="minium-button minium-button--big" type="submit" />
+		<aui:button cssClass="commerce-button commerce-button--big" type="submit" />
 	</div>
 </aui:form>
