@@ -71,6 +71,7 @@ public class ProductDTO {
 		return _shortDescription;
 	}
 
+	@Nullable
 	public SkuDTO[] getSkus() {
 		return _skus;
 	}
@@ -148,6 +149,7 @@ public class ProductDTO {
 	@Nullable
 	private Map<String, String> _shortDescription;
 
+	@Nullable
 	private SkuDTO[] _skus;
 
 }

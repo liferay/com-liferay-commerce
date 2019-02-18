@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -29,6 +31,7 @@ public class AccountOrganizationDTO {
 		return _commerceAccountId;
 	}
 
+	@Nullable
 	public String getName() {
 		return _name;
 	}
@@ -37,6 +40,7 @@ public class AccountOrganizationDTO {
 		return _organizationId;
 	}
 
+	@Nullable
 	public String getTreePath() {
 		return _treePath;
 	}
@@ -58,8 +62,13 @@ public class AccountOrganizationDTO {
 	}
 
 	private Long _commerceAccountId;
+
+	@Nullable
 	private String _name;
+
 	private Long _organizationId;
+
+	@Nullable
 	private String _treePath;
 
 }

@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import javax.annotation.Generated;
@@ -27,14 +29,17 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Order")
 public class OrderDTO {
 
+	@Nullable
 	public String getAdvanceStatus() {
 		return _advanceStatus;
 	}
 
+	@Nullable
 	public AddressDTO getBillingAddressDTO() {
 		return _billingAddressDTO;
 	}
 
+	@Nullable
 	public Long getBillingAddressId() {
 		return _billingAddressId;
 	}
@@ -51,50 +56,62 @@ public class OrderDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Integer getOrderStatus() {
 		return _orderStatus;
 	}
 
+	@Nullable
 	public String getPaymentMethod() {
 		return _paymentMethod;
 	}
 
+	@Nullable
 	public Integer getPaymentStatus() {
 		return _paymentStatus;
 	}
 
+	@Nullable
 	public String getPurchaseOrderNumber() {
 		return _purchaseOrderNumber;
 	}
 
+	@Nullable
 	public AddressDTO getShippingAddressDTO() {
 		return _shippingAddressDTO;
 	}
 
+	@Nullable
 	public Long getShippingAddressId() {
 		return _shippingAddressId;
 	}
 
+	@Nullable
 	public BigDecimal getShippingAmount() {
 		return _shippingAmount;
 	}
 
+	@Nullable
 	public String getShippingMethod() {
 		return _shippingMethod;
 	}
 
+	@Nullable
 	public String getShippingOption() {
 		return _shippingOption;
 	}
 
+	@Nullable
 	public BigDecimal getSubtotal() {
 		return _subtotal;
 	}
 
+	@Nullable
 	public BigDecimal getTotal() {
 		return _total;
 	}
@@ -171,23 +188,53 @@ public class OrderDTO {
 		_total = total;
 	}
 
+	@Nullable
 	private String _advanceStatus;
+
+	@Nullable
 	private AddressDTO _billingAddressDTO;
+
+	@Nullable
 	private Long _billingAddressId;
+
 	private Long _commerceAccountId;
 	private String _currency;
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Integer _orderStatus;
+
+	@Nullable
 	private String _paymentMethod;
+
+	@Nullable
 	private Integer _paymentStatus;
+
+	@Nullable
 	private String _purchaseOrderNumber;
+
+	@Nullable
 	private AddressDTO _shippingAddressDTO;
+
+	@Nullable
 	private Long _shippingAddressId;
+
+	@Nullable
 	private BigDecimal _shippingAmount;
+
+	@Nullable
 	private String _shippingMethod;
+
+	@Nullable
 	private String _shippingOption;
+
+	@Nullable
 	private BigDecimal _subtotal;
+
+	@Nullable
 	private BigDecimal _total;
 
 }
