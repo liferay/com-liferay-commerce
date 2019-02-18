@@ -63,6 +63,56 @@ Run inspection either via shortcut or by right click against module ``Analyze / 
 
 # OpenAPI examples
 
+**Embedded Objects**
+
+Any component property may use $ref in its definition to refer to another component. Such property is considered as an object and generator will generate it as reference to DTO object.
+Here is example with two components where ``WishList`` component's property defaultItem refers to ``Item`` component:
+```
+ Item:
+   required:
+     - itemCode
+   type: object
+   properties:
+     name:
+       type: string
+       example: 'Blue handle'
+     itemCode:
+       type: string
+       example: 'AB-34098-789-N'
+ WishList:
+   required:
+     - id
+     - name
+   type: object
+   properties:
+     id:
+       type: integer
+       example: 100023
+     name:
+       type: string
+     defaultItem:
+       $ref: '#/components/schema/Item'
+     items:
+       type: array
+       items:
+         $ref: '#/component/schema/Item'
+```
+WishList component generated as DTO will have this form:
+```
+public class WishListDTO {
+
+		// ...
+		// getters and setters  here
+		// ...
+
+		private Long _id;
+		private String _name;
+		private ItemDTO _defaultItem;
+		private ItemDTO[] _items;
+
+}
+```
+
 **Free Form Dictionary**
 
 Free form dictionary is special Open Api structure that supports mixed value types. As regular dictionaries, free form dictionaries only support string key values. Free form dictionary is advised way to store Liferay expando fields.
