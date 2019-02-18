@@ -21,7 +21,15 @@ class SearchBar extends Component {
 	}
 
 	_handleClickOutside(e){
-		this.toggle();
+		const suggestions = document.querySelector('.minium-suggestions')
+		if (
+			!(
+				this.element.contains(e.target) ||
+				(suggestions && suggestions.contains(e.target))
+			)
+		){
+			this.toggle();
+		}
 	}
 
 	detached() {
