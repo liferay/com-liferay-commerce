@@ -177,3 +177,74 @@ protected void updateExpando(
 		}
 	}
 ```
+
+### Nested support in generated applications
+
+In order to use nested resource support, the following requirements have to be
+satisfied:
+
+Each resource entity DTO that wants to have nested DTOs has to explicitly
+contain a field for each nested DTO/s, for example:
+
+
+	public class ProductDTO {
+		...
+
+		public List<SkuDTO> getSkus() {
+			return _skus;
+		}
+
+		public void setSkus(List<SkuDTO> skus) {
+			_skus = skus;
+		}
+
+		...
+
+		private List<SkuDTO> _skus = new ArrayList<>();
+
+	}
+
+Where “skus” can be a nested list of SkuDTOs.
+
+A resource implementation method that will return nested DTOs has to be 
+annotated with the @Nested annotation, for example:
+
+	public class ProductResourceImpl implements ProductResource {
+		...
+
+		@Nested("skus")
+		@Override
+		public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
+			throws Exception {
+			...
+		}
+
+		...
+	}
+
+where “skus” is the name of the skus field inside the ProductDTO class.
+
+The special query parameter “nested” has to be used in the request URL. It 
+defines a list of nested fields inside a resource entity DTO that should be 
+included, for example:
+
+`{{baseUrl}}/product/1?groupId=36443&nested=skus`
+
+where “skus”  is the name of the skus field inside ProductDTO class.
+
+If a nested resource is a list of DTOs that can be paged then paging parameters
+for that list can be passed as query parameters, for example:
+
+`{{baseUrl}}/product/1?groupId=36443&nested=skus&skus.pageSize=1&skus.page=1`
+
+where “pageSize”  and “page” are page parameters used by the Product resource 
+method marked with the @Nested(“skus”) annotation.
+
+Also, if a resource method that returns nested DTO/s accepts additional query 
+parameters, those parameters can also be passed as query parameters, for example:
+
+`{{baseUrl}}/product/:id?groupId=36443&nested=skus&skus.keyword=test`
+
+
+where “keyword” is the query parameter defined as an argument of the Product 
+resource method marked with the @Nested(“skus”) annotation.
