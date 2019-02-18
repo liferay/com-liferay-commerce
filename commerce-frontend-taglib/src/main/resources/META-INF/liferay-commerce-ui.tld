@@ -49,6 +49,16 @@
 		<name>add-to-cart</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<name>CPInstanceId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>compare-checkbox</name>
