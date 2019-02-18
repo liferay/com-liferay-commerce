@@ -16,7 +16,6 @@ package com.liferay.commerce.initializer.util;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
-import com.liferay.commerce.initializer.util.internal.CPAttachmentFileEntryCreator;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOptionRelException;
