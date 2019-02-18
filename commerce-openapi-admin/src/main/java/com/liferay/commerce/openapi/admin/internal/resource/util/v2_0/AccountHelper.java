@@ -29,14 +29,22 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.activation.DataHandler;
+
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.Response;
+
+import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -141,6 +149,23 @@ public class AccountHelper {
 				true, null, _getEmailAddress(accountDTO, commerceAccount),
 				accountDTO.getTaxId(), true,
 				_serviceContextHelper.getServiceContext()));
+	}
+
+	public void updateAccountLogo(String id, Attachment logo, Company company)
+		throws IOException, PortalException {
+
+		CommerceAccount account = getAccountById(id, company);
+
+		DataHandler dataHandler = logo.getDataHandler();
+
+		InputStream inputStream = dataHandler.getInputStream();
+
+		byte[] byteArray = FileUtil.getBytes(inputStream);
+
+		_commerceAccountService.updateCommerceAccount(
+			account.getCommerceAccountId(), account.getName(), true, byteArray,
+			account.getEmail(), account.getTaxId(), account.isActive(),
+			_serviceContextHelper.getServiceContext());
 	}
 
 	public AccountDTO upsertAccount(AccountDTO accountDTO)

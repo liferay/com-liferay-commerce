@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.model.User;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 
 import org.osgi.service.component.annotations.Component;
@@ -127,7 +128,13 @@ public class AccountResourceImpl implements AccountResource {
 	public Response upsertAccountLogo(String id, MultipartBody multipartBody)
 		throws Exception {
 
-		return null;
+		Attachment logo = multipartBody.getRootAttachment();
+
+		_accountHelper.updateAccountLogo(id, logo, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
 	}
 
 	@Override
