@@ -537,6 +537,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			FIELD_SPECIFICATION_IDS,
 			ArrayUtil.toLongArray(specificationOptionIds));
 
+		CProduct cProduct = cpDefinition.getCProduct();
+
 		List<String> types = _cpDefinitionLinkTypeRegistry.getTypes();
 
 		for (String type : types) {
@@ -544,8 +546,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				continue;
 			}
 
-			String[] linkedProductIds = getReverseCPDefinitionIds(
-				cpDefinition.getCPDefinitionId(), type);
+			String[] linkedProductIds = getReverseCPDefinitionIdsArray(
+				cProduct.getCProductId(), type);
 
 			document.addKeyword(type, linkedProductIds);
 		}
@@ -577,8 +579,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				_commerceMediaResolver.getUrl(
 					cpAttachmentFileEntryId, false, false, false));
 		}
-
-		CProduct cProduct = cpDefinition.getCProduct();
 
 		if ((cpDefinition.getStatus() != WorkflowConstants.STATUS_APPROVED) ||
 			(cpDefinition.getCPDefinitionId() ==
@@ -638,12 +638,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		reindexCPDefinitions(companyId);
 	}
 
-	protected String[] getReverseCPDefinitionIds(
-		long cpDefinitionId, String type) {
+	protected String[] getReverseCPDefinitionIdsArray(
+		long cProductId, String type) {
 
 		List<CPDefinitionLink> cpDefinitionLinks =
-			_cpDefinitionLinkLocalService.getReverseCPDefinitionLinks(
-				cpDefinitionId, type);
+			_cpDefinitionLinkLocalService.getReverseCProductLinks(
+				cProductId, type);
 
 		String[] reverseCPDefinitionIdsArray =
 			new String[cpDefinitionLinks.size()];
@@ -652,7 +652,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
 			reverseCPDefinitionIds.add(
-				String.valueOf(cpDefinitionLink.getCPDefinition()));
+				String.valueOf(cpDefinitionLink.getCPDefinitionId()));
 		}
 
 		reverseCPDefinitionIdsArray = reverseCPDefinitionIds.toArray(
