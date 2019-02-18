@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -25,6 +27,7 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "OrderNote")
 public class OrderNoteDTO {
 
+	@Nullable
 	public String getAuthor() {
 		return _author;
 	}
@@ -33,6 +36,7 @@ public class OrderNoteDTO {
 		return _commerceOrderId;
 	}
 
+	@Nullable
 	public String getContent() {
 		return _content;
 	}
@@ -41,10 +45,12 @@ public class OrderNoteDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Boolean isRestricted() {
 		return _restricted;
 	}
@@ -73,11 +79,20 @@ public class OrderNoteDTO {
 		_restricted = restricted;
 	}
 
+	@Nullable
 	private String _author;
+
 	private Long _commerceOrderId;
+
+	@Nullable
 	private String _content;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Boolean _restricted;
 
 }
