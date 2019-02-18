@@ -32,7 +32,10 @@ Configure generator output settings by changing default properties in
 | `osgi.module.generator.overwrite.gradle` | `false` | avoid overwriting gradle build file |
 | `osgi.module.generator.overwrite.implementation` | `false` | avoid overwriting resource implementation files |
 
-Any configuration property prefixed with ``osgi.module`` can be overridden by gradle project property. Pass `-Posgi.module.generator.overwrite.gradle=true` to `generateRestModule` task to override default from config file.  
+Any configuration property prefixed with ``osgi.module`` can be overridden by
+gradle project property. Pass `-Posgi.module.generator.overwrite.gradle=true` to
+ `generateRestModule` task to override default from config file.  
+
 ### Run OpenAPI Generator
 Example 1 - generate module based on configuration in config file
 
@@ -42,7 +45,8 @@ Example 2 - generate module at location other than defined in config file
 
 `../gradlew generateRestModule -Posgi.module.root.path=/Volumes/dev`
 
-Example 3 - generate module at location other than defined in config file and overwrite existing implementation files
+Example 3 - generate module at location other than defined in config file and
+overwrite existing implementation files
 
 `../gradlew generateRestModule -Posgi.module.root.path=/Volumes/dev -Posgi.module.generator.overwrite.implementation=true`
 
@@ -52,21 +56,36 @@ Example 3 - generate module at location other than defined in config file and ov
 
 # IDE Aid
 ### Code Analyse
-As an aid to developers, generator marks all non required request parameters and schema properties with ``@Nullable`` annotation. If code analyse tools are enabled IDE will warn developer about possible NullPointerExceptions. Very useful as generator do not generaty primitive java types, but wrapper objects which may cause NPEs during autoboxing/unboxing process.
+As an aid to developers, generator marks all non required request parameters and
+schema properties with ``@Nullable`` annotation. If code analyse tools are 
+enabled IDE will warn developer about possible NullPointerExceptions.
+Very useful as generator do not generaty primitive java types, but wrapper 
+objects which may cause NPEs during autoboxing/unboxing process.
 
 ***How to perform code analyse in IntelliJ IDEA***
 
-In IntelliJ IDEA ``Preferences`` go to ``Build, Execution, Deployment/Deployment``. On the area on right locate option ``Add runtime assertions for notnull-annotated methods and parameters`` and make sure that it is enabled. Now click ``Configure annotations`` button. If IntelliJ IDE hasn't already imported ``com.liferay.commerce.openapi.core.annotation.Nullable`` annotation, please do it by clicking ``+`` sign.
+In IntelliJ IDEA ``Preferences`` go to ``Build, Execution, Deployment/Deployment``.
+On the area on right locate option ``Add runtime assertions for notnull-annotated methods and parameters``
+and make sure that it is enabled. Now click ``Configure annotations`` button.
+If IntelliJ IDE hasn't already imported ``com.liferay.commerce.openapi.core.annotation.Nullable``
+annotation, please do it by clicking ``+`` sign.
 Once annotations are configured and settings are applied one can run code inspection.
 
-Run inspection either via shortcut or by right click against module ``Analyze / Run Inspection by Name``. In popup window start typing ``Constant conditions & exceptions`` and choose it once you see it in the list. Click ``Run``. Inspections Results tab would appear and list all accesses of nullable fields.     
+Run inspection either via shortcut or by right click against module
+``Analyze / Run Inspection by Name``. In popup window start typing 
+``Constant conditions & exceptions`` and choose it once you see it in the list.
+Click ``Run``.
+Inspections Results tab would appear and list all accesses of nullable fields.
 
 # OpenAPI examples
 
-**Embedded Objects**
+### Embedded Objects
 
-Any component property may use $ref in its definition to refer to another component. Such property is considered as an object and generator will generate it as reference to DTO object.
-Here is example with two components where ``WishList`` component's property defaultItem refers to ``Item`` component:
+Any component property may use $ref in its definition to refer to another 
+component. Such property is considered as an object and generator will generate 
+it as reference to DTO object.
+Here is example with two components where ``WishList`` component's property 
+defaultItem refers to ``Item`` component:
 ```
  Item:
    required:
@@ -113,7 +132,7 @@ public class WishListDTO {
 }
 ```
 
-**Free Form Dictionary**
+### Free Form Dictionary
 
 Free form dictionary is special Open Api structure that supports mixed value types. As regular dictionaries, free form dictionaries only support string key values. Free form dictionary is advised way to store Liferay expando fields.
 Here is `Item` object described by following schema:
@@ -136,7 +155,9 @@ Here is `Item` object described by following schema:
        type: object
        additionalProperties: true
 ```
-`itemParts` property is free form directory. It is optional and if has entries, entry type can be arbitrary open api type.
+`itemParts` property is free form directory. It is optional and if has entries,
+entry type can be arbitrary open api type.
+
 Content body of an submitted Item has form:
 ```
 {
@@ -153,7 +174,11 @@ Content body of an submitted Item has form:
         }
 }
 ```
-Generated REST module would convert free form directory structure into variable of type Map<String, ?>. Underlying deserializer would load map with submitted values.  Proper map handling is up to implementation developer. Here is suggested example how to persist received map as expando field values:
+Generated REST module would convert free form directory structure into variable
+of type Map<String, ?>. Underlying deserializer would load map with submitted
+values.  Proper map handling is up to implementation developer.
+
+Here is suggested example how to persist received map as expando field values:
 ```
 protected void updateExpando(
 		long companyId, Class<?> clazz, long classPK,
