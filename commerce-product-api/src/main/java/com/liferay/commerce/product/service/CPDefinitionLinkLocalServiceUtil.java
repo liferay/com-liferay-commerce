@@ -364,9 +364,9 @@ public class CPDefinitionLinkLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getReverseCProductLinks(
-		long cProductId, String type) {
-		return getService().getReverseCProductLinks(cProductId, type);
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getReverseCPDefinitionLinks(
+		long cpDefinitionId, String type) {
+		return getService().getReverseCPDefinitionLinks(cpDefinitionId, type);
 	}
 
 	/**
