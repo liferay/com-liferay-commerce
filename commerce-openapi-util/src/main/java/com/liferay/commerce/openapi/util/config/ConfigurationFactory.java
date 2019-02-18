@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.util;
+package com.liferay.commerce.openapi.util.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Igor Beslic
  */
-public class PropertiesFactory {
+public class ConfigurationFactory {
 
 	public static Properties getPropertiesFor(Class clazz) throws IOException {
 		String configFileName = clazz.getName() + ".config";
@@ -108,7 +108,7 @@ public class PropertiesFactory {
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		PropertiesFactory.class);
+		ConfigurationFactory.class);
 
 	private static final Map<String, Properties> _classProperties =
 		new ConcurrentHashMap<>();
