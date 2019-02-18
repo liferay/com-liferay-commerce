@@ -82,21 +82,6 @@ public class CommerceShippingMethodServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethodSoap fetchCommerceShippingMethod(
-		long groupId, String engineKey) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceShippingMethod returnValue = CommerceShippingMethodServiceUtil.fetchCommerceShippingMethod(groupId,
-					engineKey);
-
-			return com.liferay.commerce.model.CommerceShippingMethodSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.model.CommerceShippingMethodSoap createCommerceShippingMethod(
 		long commerceShippingMethodId) throws RemoteException {
 		try {
@@ -127,6 +112,21 @@ public class CommerceShippingMethodServiceSoap {
 		long commerceShippingMethodId) throws RemoteException {
 		try {
 			CommerceShippingMethodServiceUtil.deleteCommerceShippingMethod(commerceShippingMethodId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceShippingMethodSoap fetchCommerceShippingMethod(
+		long groupId, String engineKey) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceShippingMethod returnValue = CommerceShippingMethodServiceUtil.fetchCommerceShippingMethod(groupId,
+					engineKey);
+
+			return com.liferay.commerce.model.CommerceShippingMethodSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
