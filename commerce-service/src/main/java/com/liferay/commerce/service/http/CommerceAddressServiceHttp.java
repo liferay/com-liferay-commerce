@@ -221,15 +221,15 @@ public class CommerceAddressServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAddress> getCommerceAddresses(
-		HttpPrincipal httpPrincipal, String className, long classPK, int start,
-		int end,
+		HttpPrincipal httpPrincipal, long groupId, String className,
+		long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAddressServiceUtil.class,
 					"getCommerceAddresses", _getCommerceAddressesParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, start, end, orderByComparator);
 
 			Object returnObj = null;
@@ -255,15 +255,15 @@ public class CommerceAddressServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAddress> getCommerceAddresses(
-		HttpPrincipal httpPrincipal, long groupId, String className,
-		long classPK, int start, int end,
+		HttpPrincipal httpPrincipal, String className, long classPK, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAddressServiceUtil.class,
 					"getCommerceAddresses", _getCommerceAddressesParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, start, end, orderByComparator);
 
 			Object returnObj = null;
@@ -289,14 +289,14 @@ public class CommerceAddressServiceHttp {
 	}
 
 	public static int getCommerceAddressesCount(HttpPrincipal httpPrincipal,
-		String className, long classPK)
+		long groupId, String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAddressServiceUtil.class,
 					"getCommerceAddressesCount",
 					_getCommerceAddressesCountParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK);
 
 			Object returnObj = null;
@@ -322,14 +322,14 @@ public class CommerceAddressServiceHttp {
 	}
 
 	public static int getCommerceAddressesCount(HttpPrincipal httpPrincipal,
-		long groupId, String className, long classPK)
+		String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAddressServiceUtil.class,
 					"getCommerceAddressesCount",
 					_getCommerceAddressesCountParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
 			Object returnObj = null;
@@ -449,18 +449,18 @@ public class CommerceAddressServiceHttp {
 			long.class, String.class, long.class
 		};
 	private static final Class<?>[] _getCommerceAddressesParameterTypes5 = new Class[] {
-			String.class, long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
-		};
-	private static final Class<?>[] _getCommerceAddressesParameterTypes6 = new Class[] {
 			long.class, String.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
+	private static final Class<?>[] _getCommerceAddressesParameterTypes6 = new Class[] {
+			String.class, long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
 	private static final Class<?>[] _getCommerceAddressesCountParameterTypes7 = new Class[] {
-			String.class, long.class
+			long.class, String.class, long.class
 		};
 	private static final Class<?>[] _getCommerceAddressesCountParameterTypes8 = new Class[] {
-			long.class, String.class, long.class
+			String.class, long.class
 		};
 	private static final Class<?>[] _searchCommerceAddressesParameterTypes9 = new Class[] {
 			long.class, long.class, String.class, long.class, String.class,
