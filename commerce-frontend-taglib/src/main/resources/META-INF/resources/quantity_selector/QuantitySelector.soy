@@ -2,25 +2,28 @@
 
 {template .render}
 	{@param quantity: int}
+	{@param? minQuantity: int}
+	{@param? maxQuantity: int}
 	{@param? allowedQuantities: list<number>}
-	{@param? prevAvailable: bool}
-	{@param? nextAvailable: bool}
-	{@param? _handlePrevQuantity: any}
+	{@param? _prevAvailable: bool}
+	{@param? _nextAvailable: bool}
 	{@param? _handleFormSubmit: any}
 	{@param? _handleInputKeyUp: any}
-	{@param? _handleNextQuantity: any}
+	{@param? _handleArrowKeys: any}
+	{@param? _handlePrevQuantityButtonPressed: any}
+	{@param? _handleNextQuantityButtonPressed: any}
 	{@param? _handleSelectOption: any}
 
 	{let $prevClass kind="text"}
 		quantity-selector__btn
-		{if $prevAvailable == false}
+		{if $_prevAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
 	{let $nextClass kind="text"}
 		quantity-selector__btn
-		{if $nextAvailable == false}
+		{if $_nextAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
@@ -46,7 +49,7 @@
 		{else}
 			<button
 				class="{$prevClass}"
-				data-onclick="{$_handlePrevQuantity}"
+				data-onclick="{$_handlePrevQuantityButtonPressed}"
 			>
 				-
 			</button>
@@ -56,14 +59,17 @@
 					name="quantity"
 					type="number"
 					class="quantity-selector__input"
+					{if isNonnull($minQuantity)}min="{$minQuantity}"{/if}
+					{if isNonnull($maxQuantity)}max="{$maxQuantity}"{/if}
 					data-onkeyup="{$_handleInputKeyUp}"
+					data-onkeydown="{$_handleArrowKeys}"
 					value="{$quantity}"
 				>
 			</form>
 
 			<button
 				class="{$nextClass}"
-				data-onclick="{$_handleNextQuantity}"
+				data-onclick="{$_handleNextQuantityButtonPressed}"
 			>
 				+
 			</button>
