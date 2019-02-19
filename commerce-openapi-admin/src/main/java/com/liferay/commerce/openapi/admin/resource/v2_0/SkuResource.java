@@ -47,17 +47,17 @@ public interface SkuResource {
 
 	@GET
 	@Path("/{id}/inventory")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<InventoryDTO> getInventorys(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public SkuDTO getSku(@PathParam("id") String id) throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateSku(
@@ -65,10 +65,10 @@ public interface SkuResource {
 			SkuDTO skuDTO, @Context Language language)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}/inventory")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public InventoryDTO upsertInventory(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			InventoryDTO inventoryDTO)

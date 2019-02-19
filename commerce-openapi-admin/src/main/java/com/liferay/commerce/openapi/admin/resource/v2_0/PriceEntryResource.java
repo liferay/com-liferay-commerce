@@ -46,28 +46,28 @@ public interface PriceEntryResource {
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public PriceEntryDTO getPriceEntry(@PathParam("id") String id)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updatePriceEntry(
 			@PathParam("id") String id, PriceEntryDTO priceEntryDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public PriceEntryDTO upsertPriceEntry(
 			@QueryParam("groupId") Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception;
