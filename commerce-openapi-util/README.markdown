@@ -211,40 +211,44 @@ satisfied:
 Each resource entity DTO that wants to have nested DTOs has to explicitly
 contain a field for each nested DTO/s, for example:
 
-	public class ProductDTO {
-		...
+```
+public class ProductDTO {
+    ...	
 
-		public List<SkuDTO> getSkus() {
-			return _skus;
-		}
+    public List<SkuDTO> getSkus() {
+        return _skus;
+    }
 
-		public void setSkus(List<SkuDTO> skus) {
-			_skus = skus;
-		}
+    public void setSkus(List<SkuDTO> skus) {
+        _skus = skus;
+    }
 
-		...
+    ...
 
-		private List<SkuDTO> _skus = new ArrayList<>();
+    private List<SkuDTO> _skus = new ArrayList<>();
 
-	}
+}
+```
 
 Where "skus" can be a nested list of SkuDTOs.
 
 A resource implementation method that will return nested DTOs has to be
 annotated with the @Nested annotation, for example:
 
-	public class ProductResourceImpl implements ProductResource {
-		...
+```		
+public class ProductResourceImpl implements ProductResource {
+    ...
 
-		@Nested("skus")
-		@Override
-		public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
-			throws Exception {
-			...
-		}
+    @Nested("skus")
+    @Override
+    public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
+    throws Exception {
+        ...	
+    }
 
-		...
-	}
+    ...
+}
+```
 
 where "skus" is the name of the skus field inside the ProductDTO class.
 
@@ -261,7 +265,7 @@ for that list can be passed as query parameters, for example:
 
 `{{baseUrl}}/product/1?groupId=36443&nested=skus&skus.pageSize=1&skus.page=1`
 
-where "pageSize"  and "page" are page parameters used by the Product resource
+where "pageSize" and "page" are page parameters used by the Product resource
 method marked with the @Nested("skus") annotation.
 
 Also, if a resource method that returns nested DTO/s accepts additional query
