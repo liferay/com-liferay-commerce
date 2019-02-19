@@ -14,7 +14,8 @@
 
 package com.liferay.commerce.headless.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
+import com.liferay.commerce.headless.admin.site.setting.model.v1_0.MeasurementUnitDTO;
+import com.liferay.commerce.openapi.core.annotation.Nullable;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -36,43 +37,43 @@ import javax.ws.rs.core.Response;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/v1.0/availabilityEstimate")
-public interface AvailabilityEstimateResource {
+@Path("/v1.0/measurementUnit")
+public interface MeasurementUnitResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteAvailabilityEstimate(@PathParam("id") String id)
+	public Response deleteMeasurementUnit(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	public AvailabilityEstimateDTO getAvailabilityEstimate(
-			@PathParam("id") String id)
+	public MeasurementUnitDTO getMeasurementUnit(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
-			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
+	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
+			@QueryParam("groupId") Long groupId,
+			@Nullable@QueryParam("type") Integer type,
+			@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	public Response updateAvailabilityEstimate(
-			@PathParam("id") String id,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
+	public Response updateMeasurementUnit(
+			@PathParam("id") String id, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
+	public MeasurementUnitDTO upsertMeasurementUnit(
 			@QueryParam("groupId") Long groupId,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
+			MeasurementUnitDTO measurementUnitDTO)
 		throws Exception;
 
 }
