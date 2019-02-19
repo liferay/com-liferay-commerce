@@ -12,9 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.model.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.model.v1_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
+import java.util.Map;
 
 import javax.annotation.Generated;
 
@@ -22,44 +26,41 @@ import javax.annotation.Generated;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@JacksonXmlRootElement(localName = "Error")
-public class ErrorDTO {
+@JacksonXmlRootElement(localName = "TaxCategory")
+public class TaxCategoryDTO {
 
-	public Integer getErrorCode() {
-		return _errorCode;
+	@Nullable
+	public Map<String, String> getDescription() {
+		return _description;
 	}
 
-	public String getErrorDescription() {
-		return _errorDescription;
+	@Nullable
+	public Long getId() {
+		return _id;
 	}
 
-	public String getMessage() {
-		return _message;
+	public Map<String, String> getName() {
+		return _name;
 	}
 
-	public Integer getStatus() {
-		return _status;
+	public void setDescription(Map<String, String> description) {
+		_description = description;
 	}
 
-	public void setErrorCode(Integer errorCode) {
-		_errorCode = errorCode;
+	public void setId(Long id) {
+		_id = id;
 	}
 
-	public void setErrorDescription(String errorDescription) {
-		_errorDescription = errorDescription;
+	public void setName(Map<String, String> name) {
+		_name = name;
 	}
 
-	public void setMessage(String message) {
-		_message = message;
-	}
+	@Nullable
+	private Map<String, String> _description;
 
-	public void setStatus(Integer status) {
-		_status = status;
-	}
+	@Nullable
+	private Long _id;
 
-	private Integer _errorCode;
-	private String _errorDescription;
-	private String _message;
-	private Integer _status;
+	private Map<String, String> _name;
 
 }

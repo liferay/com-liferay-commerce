@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.model.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.model.v1_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -26,12 +26,20 @@ import javax.annotation.Generated;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@JacksonXmlRootElement(localName = "AvailabilityEstimate")
-public class AvailabilityEstimateDTO {
+@JacksonXmlRootElement(localName = "MeasurementUnit")
+public class MeasurementUnitDTO {
 
 	@Nullable
 	public Long getId() {
 		return _id;
+	}
+
+	public String getKey() {
+		return _key;
+	}
+
+	public Map<String, String> getName() {
+		return _name;
 	}
 
 	@Nullable
@@ -39,28 +47,65 @@ public class AvailabilityEstimateDTO {
 		return _priority;
 	}
 
-	public Map<String, String> getTitle() {
-		return _title;
+	@Nullable
+	public Double getRate() {
+		return _rate;
+	}
+
+	@Nullable
+	public Integer getType() {
+		return _type;
+	}
+
+	@Nullable
+	public Boolean isPrimary() {
+		return _primary;
 	}
 
 	public void setId(Long id) {
 		_id = id;
 	}
 
+	public void setKey(String key) {
+		_key = key;
+	}
+
+	public void setName(Map<String, String> name) {
+		_name = name;
+	}
+
+	public void setPrimary(Boolean primary) {
+		_primary = primary;
+	}
+
 	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 
-	public void setTitle(Map<String, String> title) {
-		_title = title;
+	public void setRate(Double rate) {
+		_rate = rate;
+	}
+
+	public void setType(Integer type) {
+		_type = type;
 	}
 
 	@Nullable
 	private Long _id;
 
+	private String _key;
+	private Map<String, String> _name;
+
+	@Nullable
+	private Boolean _primary;
+
 	@Nullable
 	private Double _priority;
 
-	private Map<String, String> _title;
+	@Nullable
+	private Double _rate;
+
+	@Nullable
+	private Integer _type;
 
 }

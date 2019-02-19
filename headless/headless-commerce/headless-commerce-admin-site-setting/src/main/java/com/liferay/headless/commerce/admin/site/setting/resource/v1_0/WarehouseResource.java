@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.resource.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
+import com.liferay.commerce.openapi.core.annotation.Nullable;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 
 import javax.annotation.Generated;
 
@@ -36,43 +37,41 @@ import javax.ws.rs.core.Response;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/v1.0/availabilityEstimate")
-public interface AvailabilityEstimateResource {
-
-	@Consumes("application/*")
-	@Path("/")
-	@POST
-	@Produces("application/*")
-	public AvailabilityEstimateDTO addAvailabilityEstimate(
-			@QueryParam("groupId") Long groupId,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
-		throws Exception;
+@Path("/v1.0/warehouse")
+public interface WarehouseResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteAvailabilityEstimate(@PathParam("id") String id)
+	public Response deleteWarehouse(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	public AvailabilityEstimateDTO getAvailabilityEstimate(
-			@PathParam("id") String id)
+	public WarehouseDTO getWarehouse(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
+	public CollectionDTO<WarehouseDTO> getWarehouses(
+			@Nullable@QueryParam("type") Boolean type,
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	public Response updateAvailabilityEstimate(
-			@PathParam("id") String id,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
+	public Response updateWarehouse(
+			@PathParam("id") String id, WarehouseDTO warehouseDTO)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/")
+	@POST
+	@Produces("application/*")
+	public WarehouseDTO upsertWarehouse(
+			@QueryParam("groupId") Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception;
 
 }
