@@ -45,17 +45,17 @@ public interface CurrencyResource {
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<CurrencyDTO> getCurrencies(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CurrencyDTO getCurrency(@PathParam("id") String id) throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateCurrency(
@@ -63,10 +63,10 @@ public interface CurrencyResource {
 			CurrencyDTO currencyDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CurrencyDTO upsertCurrency(
 			@QueryParam("groupId") Long groupId, CurrencyDTO currencyDTO)
 		throws Exception;

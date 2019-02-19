@@ -36,14 +36,14 @@ public interface WebSiteResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public WebSiteDTO getWebSite(
 			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<WebSiteDTO> getWebSites(
 			@Context Language language, @Context Pagination pagination)
 		throws Exception;

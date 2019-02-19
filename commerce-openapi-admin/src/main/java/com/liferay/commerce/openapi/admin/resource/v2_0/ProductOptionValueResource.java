@@ -45,12 +45,12 @@ public interface ProductOptionValueResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public ProductOptionValueDTO getProductOptionValue(
 			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateProductOptionValue(
