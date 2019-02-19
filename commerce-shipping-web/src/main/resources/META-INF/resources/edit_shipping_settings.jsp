@@ -44,7 +44,7 @@ Map<String, CommerceShippingOriginLocator> commerceShippingOriginLocators = comm
 			<aui:form action="<%= editCommerceShippingSettingsActionURL %>" method="post" name='<%= key + "Fm" %>'>
 				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
-				<liferay-ui:error exception="<%= CommerceWarehouseActiveException.class %>" message="please-geolocate-warehouse-to-activate" />
+				<liferay-ui:error exception="<%= CommerceWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
 				<liferay-ui:error exception="<%= CommerceWarehouseNameException.class %>" message="please-enter-a-valid-name" />
 
 				<div class="<%= checked ? StringPool.BLANK : "hide" %>" id="<portlet:namespace /><%= key %>OriginOptions">
