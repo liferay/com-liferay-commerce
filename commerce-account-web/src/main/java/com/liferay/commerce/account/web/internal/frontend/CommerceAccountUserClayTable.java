@@ -101,8 +101,10 @@ public class CommerceAccountUserClayTable
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "commerceAccountId");
 
+		PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+
 		if (_accountModelResourcePermission.contains(
-				themeDisplay.getPermissionChecker(), commerceAccountId,
+				permissionChecker, commerceAccountId,
 				CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 			String viewURL = _getAccountUserViewDetailURL(
@@ -114,7 +116,9 @@ public class CommerceAccountUserClayTable
 
 			clayTableActions.add(viewClayTableAction);
 
-			if (member.getMemberId() == themeDisplay.getUserId()) {
+			if (permissionChecker.isCompanyAdmin() ||
+				(member.getMemberId() != themeDisplay.getUserId())) {
+
 				String deleteURL = _getAccountUserDeleteURL(
 					member.getMemberId(), member.getAccountId(), themeDisplay);
 
