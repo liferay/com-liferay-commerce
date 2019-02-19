@@ -16,18 +16,18 @@ class SearchBar extends Component {
 				el.addEventListener('click', this._toggleClick.bind(this));
 			}
 		);
-		
+
 		this._handleClickOutside = this._handleClickOutside.bind(this);
 	}
 
-	_handleClickOutside(e){
-		const suggestions = document.querySelector('.minium-suggestions')
+	_handleClickOutside(e) {
+		const suggestions = document.querySelector('.minium-suggestions');
 		if (
 			!(
 				this.element.contains(e.target) ||
 				(suggestions && suggestions.contains(e.target))
 			)
-		){
+		) {
 			this.toggle();
 		}
 	}
