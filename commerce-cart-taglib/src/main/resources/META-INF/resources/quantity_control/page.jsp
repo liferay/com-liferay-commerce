@@ -72,7 +72,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 
 			var quantity = form.one('#<%= portletNamespace + randomNamespace %>Quantity');
 
-			form.one('#<%= portletNamespace %>'quantity).val(quantity.val());
+			form.one('#<%= portletNamespace %>quantity').val(quantity.val());
 
 			submitForm(document.<%= portletNamespace + randomNamespace %>Fm);
 		},
