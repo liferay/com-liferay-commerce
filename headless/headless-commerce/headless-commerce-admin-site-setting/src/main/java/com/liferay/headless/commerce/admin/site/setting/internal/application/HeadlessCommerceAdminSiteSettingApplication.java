@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.internal.application;
+package com.liferay.headless.commerce.admin.site.setting.internal.application;
 
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 
@@ -30,12 +30,13 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=/commerce-admin-site-setting",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
-		JaxrsWhiteboardConstants.JAX_RS_NAME + "=CommerceHeadlessAdminSiteSetting.Rest",
+		JaxrsWhiteboardConstants.JAX_RS_NAME + "=HeadlessCommerceAdminSiteSetting.Rest",
 		OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED,
 		OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED,
 		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
 		OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED,
 		OpenApiPropsKeys.NESTED_FILTER_ENABLED,
+		OpenApiPropsKeys.PARAMETER_CONVERTER_PROVIDERS_ENABLED,
 		OpenApiPropsKeys.SERVICE_EVENT_FILTER_ENABLED,
 		OpenApiPropsKeys.STATUS_FEATURE_ENABLED,
 		"auth.verifier.auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/*",
@@ -47,5 +48,5 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	service = Application.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
-public class CommerceHeadlessAdminSiteSettingApplication extends Application {
+public class HeadlessCommerceAdminSiteSettingApplication extends Application {
 }
