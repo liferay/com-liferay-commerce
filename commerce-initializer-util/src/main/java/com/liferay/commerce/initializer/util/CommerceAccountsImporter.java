@@ -18,12 +18,12 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
+import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
-import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.petra.string.StringPool;
@@ -39,16 +39,14 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -87,7 +85,9 @@ public class CommerceAccountsImporter {
 		return commerceAccounts;
 	}
 
-	protected CommerceCountry getCommerceCountryByISO(String twoLetterISOCode) {
+	protected CommerceCountry getCommerceCountry(String twoLetterISOCode)
+		throws PortalException {
+
 		DynamicQuery dynamicQuery = _commerceCountryLocalService.dynamicQuery();
 
 		Property nameProperty = PropertyFactoryUtil.forName(
@@ -95,16 +95,15 @@ public class CommerceAccountsImporter {
 
 		dynamicQuery.add(nameProperty.eq(twoLetterISOCode));
 
-		List<CommerceCountry> country =
-			_commerceCountryLocalService.dynamicQuery(dynamicQuery);
+		List<CommerceCountry> commerceCountries =
+			_commerceCountryLocalService.dynamicQuery(dynamicQuery, 0, 1);
 
-		return country.get(0);
-	}
+		if (commerceCountries.isEmpty()) {
+			throw new NoSuchCountryException(
+				"No country exists with two-letter ISO " + twoLetterISOCode);
+		}
 
-	protected Organization getOrganizationsByName(
-		Map<String, Organization> organizations, String organizationName) {
-
-		return organizations.get(organizationName);
+		return commerceCountries.get(0);
 	}
 
 	private CommerceAccount _importCommerceAccount(
@@ -126,12 +125,11 @@ public class CommerceAccountsImporter {
 
 		String twoLetterISOCode = jsonObject.getString("Country");
 
-		CommerceCountry commerceCountry = getCommerceCountryByISO(
-			twoLetterISOCode);
-
-		String regionCode = jsonObject.getString("Region");
+		CommerceCountry commerceCountry = getCommerceCountry(twoLetterISOCode);
 
 		long commerceRegionId = 0;
+
+		String regionCode = jsonObject.getString("Region");
 
 		try {
 			CommerceRegion commerceRegion =
@@ -157,34 +155,26 @@ public class CommerceAccountsImporter {
 			zip, commerceRegionId, commerceCountry.getCommerceCountryId(),
 			StringPool.BLANK, true, false, serviceContext);
 
-		//Add Company Logo
+		// Add Company Logo
 
 		String companyLogo = jsonObject.getString("CompanyLogo");
 
 		if (!Validator.isBlank(companyLogo)) {
 			String filePath = dependenciesPath + "images/" + companyLogo;
 
-			InputStream inputStream = classLoader.getResourceAsStream(filePath);
+			try (InputStream inputStream = classLoader.getResourceAsStream(
+					filePath)) {
 
-			if (inputStream != null) {
-				File file = FileUtil.createTempFile(inputStream);
-
-				String mimeType = MimeTypesUtil.getContentType(file.getName());
-
-				FileEntry fileEntry = _dlAppLocalService.addFileEntry(
-					commerceAccount.getUserId(),
-					serviceContext.getScopeGroupId(),
-					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, file.getName(),
-					mimeType, file.getName(), null, null, file, serviceContext);
-
-				commerceAccount.setLogoId(fileEntry.getFileEntryId());
+				if (inputStream == null) {
+					throw new FileNotFoundException(
+						"No file found at " + filePath);
+				}
 
 				_commerceAccountLocalService.updateCommerceAccount(
 					commerceAccount.getCommerceAccountId(),
 					commerceAccount.getName(), true,
-					FileUtil.getBytes(fileEntry.getContentStream()),
-					commerceAccount.getEmail(), commerceAccount.getTaxId(),
-					true, serviceContext);
+					FileUtil.getBytes(inputStream), commerceAccount.getEmail(),
+					commerceAccount.getTaxId(), true, serviceContext);
 			}
 		}
 
@@ -194,8 +184,7 @@ public class CommerceAccountsImporter {
 			"RelatedOrganization");
 
 		if (!Validator.isBlank(relatedOrganization)) {
-			Organization organization = getOrganizationsByName(
-				organizations, relatedOrganization);
+			Organization organization = organizations.get(relatedOrganization);
 
 			_commerceAccountOrganizationRelLocalService.
 				addCommerceAccountOrganizationRel(
