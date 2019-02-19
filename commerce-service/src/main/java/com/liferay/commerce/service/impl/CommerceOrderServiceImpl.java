@@ -276,7 +276,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			OrderByComparator<CommerceOrder> orderByComparator)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrders(
 			groupId, commerceAccountId, start, end, orderByComparator);
@@ -295,7 +297,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
 			groupId, commerceAccountId);
