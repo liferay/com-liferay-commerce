@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.media.internal.display.context;
 
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
