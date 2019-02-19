@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.AccountResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -81,6 +82,7 @@ public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception {
 		return _accountHelper.upsertAccount(accountDTO);
 	}

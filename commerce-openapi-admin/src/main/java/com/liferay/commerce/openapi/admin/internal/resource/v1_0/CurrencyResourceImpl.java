@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.CurrencyHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.CurrencyResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -85,6 +86,7 @@ public class CurrencyResourceImpl implements CurrencyResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public CurrencyDTO upsertCurrency(Long groupId, CurrencyDTO currencyDTO)
 		throws Exception {
 
