@@ -19,11 +19,9 @@ import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.internal.security.permission.CommerceOrderWorkflowPermissionChecker;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -32,8 +30,6 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowTask;
-import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.math.BigDecimal;
@@ -133,16 +129,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			String comment)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = getCommerceOrder(commerceOrderId);
-
-		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
-			commerceOrder.getCompanyId(), workflowTaskId);
-
-		if (!_commerceOrderWorkflowPermissionChecker.hasPermission(
-				commerceOrder, workflowTask, getPermissionChecker())) {
-
-			throw new PrincipalException();
-		}
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
 
 		return commerceOrderLocalService.executeWorkflowTransition(
 			getUserId(), commerceOrderId, workflowTaskId, transitionName,
@@ -570,12 +558,5 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@ServiceReference(type = CommerceAccountLocalService.class)
 	private CommerceAccountLocalService _commerceAccountLocalService;
-
-	@ServiceReference(type = CommerceOrderWorkflowPermissionChecker.class)
-	private CommerceOrderWorkflowPermissionChecker
-		_commerceOrderWorkflowPermissionChecker;
-
-	@ServiceReference(type = WorkflowTaskManager.class)
-	private WorkflowTaskManager _workflowTaskManager;
 
 }
