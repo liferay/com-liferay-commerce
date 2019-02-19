@@ -3,38 +3,30 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class QuantitySelector extends Component {
-	_handleSelectOption(evt) {
-		const quantity = parseInt(evt.target.value, 10);
+
+	attached() {
+		this.quantity = this.quantity || this.minQuantity;
+	}
+	
+	syncQuantity() {
+		this.checkButtonsAvailability(this.quantity);
+	}
+
+	prepareStateForRender(state) {
+		this.checkButtonsAvailability(state.quantity);
+	}
+
+	_handleSelectOption(e) {
+		const quantity = parseInt(e.target.value, 10);
 		return this.emit('updateQuantity', quantity);
 	}
 
-	prepareStateForRender(states) {
-		this._prevAvailable = this._isPrevButtonAvailable(
-			states.quantity
-		);
-		this._nextAvailable = this._isNextButtonAvailable(
-			states.quantity
-		);
+	checkButtonsAvailability(quantity) {
+		this._prevAvailable = this._isPrevButtonAvailable(quantity);
+		this._nextAvailable = this._isNextButtonAvailable(quantity);
 	}
 
 	_isPrevButtonAvailable(quantity) {
-		if (this.allowedQuantities && this.allowedQuantities.length) {
-			return this.allowedQuantities.indexOf(quantity) >= 1;
-		}
-
-		let tempValue = this.multipleQuantity ?
-			quantity + this.multipleQuantity :
-			quantity - 1;
-
-		return tempValue <= this.maxQuantity;
-	}
-
-	_isNextButtonAvailable(quantity) {
-		if (this.allowedQuantities && this.allowedQuantities.length) {
-			const nextOptionIndex = this.allowedQuantities.indexOf(quantity) + 1;
-			return !!this.allowedQuantities[nextOptionIndex];
-		}
-
 		let tempValue = this.multipleQuantity ?
 			quantity - this.multipleQuantity :
 			quantity - 1;
@@ -42,78 +34,83 @@ class QuantitySelector extends Component {
 		return tempValue >= this.minQuantity;
 	}
 
-	_handlePrevQuantity(e) {
+	_isNextButtonAvailable(quantity) {
+		let tempValue = this.multipleQuantity ?
+			quantity + this.multipleQuantity :
+			quantity + 1;
+
+		return tempValue <= this.maxQuantity;
+	}
+
+	_handlePrevQuantityButtonPressed(e) {
 		e.preventDefault();
 		if (!this._prevAvailable) {
-			return (this.showError = true);
+			this.showError = true;
+			return false;
 		}
 
-		let tempQuantity = this.quantity;
+		let quantity = this.quantity;
 
 		if (this.multipleQuantity) {
-			tempQuantity += this.multipleQuantity;
+			quantity = quantity - this.multipleQuantity;
+		} else {
+			quantity = quantity - 1;
 		}
 
-		if (this.allowedQuantities && this.allowedQuantities.length) {
-			const index = this.allowedQuantities.indexOf(tempQuantity);
-			if (!index) {
-				return (this.inputError = 'NoQuantitiesLessThanAvailable');
-			}
-			tempQuantity = this.allowedQuantities[index - 1];
+		if (quantity < this.minQuantity) {
+			this.inputError = 'MaxAvailableReached';
+			return false;
 		}
 
-		if (!this.multipleQuantity && !this.allowedQuantities) {
-			--tempQuantity;
-		}
-
-		if (tempQuantity > this.maxQuantity) {
-			return (this.inputError = 'MaxAvailableReached');
-		}
-
-		return this._updateQuantity(tempQuantity);
+		return this._updateQuantity(quantity);
 	}
 
-	_handleNextQuantity(e) {
+	_handleNextQuantityButtonPressed(e) {
 		e.preventDefault();
 		if (!this._nextAvailable) {
-			return (this.showError = true);
+			this.showError = true;
+			return false;
 		}
 
-		let tempQuantity = this.quantity;
+		let quantity = this.quantity;
 
 		if (this.multipleQuantity) {
-			tempQuantity -= this.multipleQuantity;
-		}
-		if (this.allowedQuantities && this.allowedQuantities.length) {
-			const index = this.allowedQuantities.indexOf(tempQuantity);
-			if (index + 1 >= this.allowedQuantities.length) {
-				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
-			}
-			tempQuantity = this.allowedQuantities[index + 1];
+			quantity = quantity + this.multipleQuantity;
+		} else {
+			quantity = quantity + 1;
 		}
 
-		if (!this.multipleQuantity && !this.allowedQuantities) {
-			++tempQuantity;
+		if (quantity > this.maxQuantity) {
+			this.inputError = 'MaxAvailableReached';
+			return false;
 		}
 
-		if (tempQuantity < this.minQuantity) {
-			return (this.inputError = 'MinAvailableReached');
-		}
-
-		return this._updateQuantity(tempQuantity);
+		return this._updateQuantity(quantity);
 	}
 
-	_handleInputKeyUp(evt) {
-		if (!evt.target.value) {
+	_handleArrowKeys(e) {
+		if (e.keyCode == 38) {
+			return this._handleNextQuantityButtonPressed(e);
+		}
+		if (e.keyCode == 40) {
+			return this._handlePrevQuantityButtonPressed(e);
+		}
+		return e;
+	}
+
+	_handleInputKeyUp(e) {
+		if (!e.target.value) {
 			return null;
 		}
-
-		const quantity = parseInt(evt.target.value, 10);
+		const quantity = parseInt(
+			e.target.value,
+			10
+		);
 		return this._submitQuantity(quantity);
 	}
 
-	_handleFormSubmit(evt) {
-		evt.preventDefault();
+	_handleFormSubmit(e) {
+		e.preventDefault();
 		this.showError = true;
 		return this.emit('submitQuantity', this.quantity);
 	}
@@ -129,7 +126,7 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MinAvailableReached');
 		}
 
-		if (quantity < this.minQuantity) {
+		if (quantity > this.maxQuantity) {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
