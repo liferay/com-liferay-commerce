@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.resource.util;
+package com.liferay.commerce.openapi.core.internal.util;
 
+import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.SecureRandomUtil;
@@ -21,17 +22,16 @@ import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.UserService;
-
-import java.util.UUID;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+
+import java.util.UUID;
 
 /**
  * @author Zoltán Takács
  */
 @Component(immediate = true, service = ServiceContextHelper.class)
-public class ServiceContextHelper {
+public class ServiceContextHelperImpl implements ServiceContextHelper {
 
 	public ServiceContext getServiceContext() throws PortalException {
 		return getServiceContext(0, new long[0], null, false);
