@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.PriceEntryHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.PriceEntryResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -82,6 +83,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public PriceEntryDTO upsertPriceEntry(
 			Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception {

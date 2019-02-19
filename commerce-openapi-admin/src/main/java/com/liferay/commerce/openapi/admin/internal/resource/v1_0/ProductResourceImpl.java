@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.ProductResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -94,6 +95,7 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public ProductDTO upsertProduct(
 			Long groupId, ProductDTO productDTO, Language language)
 		throws Exception {
@@ -103,6 +105,7 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public SkuDTO upsertSku(
 			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
