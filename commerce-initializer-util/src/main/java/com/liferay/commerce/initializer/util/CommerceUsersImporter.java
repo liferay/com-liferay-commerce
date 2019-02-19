@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -70,24 +71,6 @@ public class CommerceUsersImporter {
 		return users;
 	}
 
-	protected CommerceAccount getCommerceAccountByName(
-		String commerceAccountName,
-		Map<String, CommerceAccount> commerceAccounts) {
-
-		return commerceAccounts.get(commerceAccountName);
-	}
-
-	protected Role getRoleByName(String roleName, ServiceContext serviceContext)
-		throws PortalException {
-
-		if (Validator.isBlank(roleName)) {
-			return null;
-		}
-
-		return _roleLocalService.getRole(
-			serviceContext.getCompanyId(), roleName);
-	}
-
 	private User _importCommerceUser(
 			JSONObject jsonObject, ClassLoader classLoader,
 			Map<String, CommerceAccount> commerceAccounts,
@@ -95,27 +78,27 @@ public class CommerceUsersImporter {
 		throws IOException, PortalException {
 
 		String screenName = jsonObject.getString("ScreenName");
-		String emailAddress = jsonObject.getString("EmailAddress");
-		String firstName = jsonObject.getString("FirstName");
-		String lastName = jsonObject.getString("LastName");
-		String jobTitle = jsonObject.getString("JobTitle");
-		String gender = jsonObject.getString("Gender");
 
-		boolean male = true;
-
-		if (gender.equals("Female")) {
-			male = false;
-		}
-
-		Calendar calendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		User user = null;
-
-		user = _userLocalService.fetchUserByScreenName(
+		User user = _userLocalService.fetchUserByScreenName(
 			serviceContext.getCompanyId(), screenName);
 
 		if (user == null) {
+			String emailAddress = jsonObject.getString("EmailAddress");
+			String firstName = jsonObject.getString("FirstName");
+			String lastName = jsonObject.getString("LastName");
+			String jobTitle = jsonObject.getString("JobTitle");
+
+			boolean male = false;
+
+			String gender = jsonObject.getString("Gender");
+
+			if (Objects.equals(gender, "Male")) {
+				male = true;
+			}
+
+			Calendar calendar = CalendarFactoryUtil.getCalendar(
+				serviceContext.getTimeZone());
+
 			user = _userLocalService.addUser(
 				0, serviceContext.getCompanyId(), false, "test", "test", false,
 				screenName, emailAddress, 0, null, serviceContext.getLocale(),
@@ -137,34 +120,39 @@ public class CommerceUsersImporter {
 		if (!Validator.isBlank(profilePicture)) {
 			String filePath = dependenciesPath + "images/" + profilePicture;
 
-			InputStream inputStream = classLoader.getResourceAsStream(filePath);
+			try (InputStream inputStream = classLoader.getResourceAsStream(
+					filePath)) {
 
-			if (inputStream != null) {
-				File file = FileUtil.createTempFile(inputStream);
+				if (inputStream == null) {
+					throw new FileNotFoundException(
+						"No file found at " + filePath);
+				}
 
 				_userLocalService.updatePortrait(
-					user.getUserId(), FileUtil.getBytes(file));
+					user.getUserId(), FileUtil.getBytes(inputStream));
 			}
 		}
 
-		JSONArray accountJSONArray = jsonObject.getJSONArray("Accounts");
+		JSONArray accountsJSONArray = jsonObject.getJSONArray("Accounts");
 
-		if (accountJSONArray != null) {
-			for (int i = 0; i < accountJSONArray.length(); i++) {
-				JSONObject accountJSONObject = accountJSONArray.getJSONObject(
+		if (accountsJSONArray != null) {
+			for (int i = 0; i < accountsJSONArray.length(); i++) {
+				JSONObject accountJSONObject = accountsJSONArray.getJSONObject(
 					i);
 
-				CommerceAccount commerceAccount = getCommerceAccountByName(
-					accountJSONObject.getString("Name"), commerceAccounts);
+				CommerceAccount commerceAccount = commerceAccounts.get(
+					accountJSONObject.getString("Name"));
 
 				_commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 					commerceAccount.getCommerceAccountId(), user.getUserId(),
 					serviceContext);
 
-				Role role = getRoleByName(
-					accountJSONObject.getString("Role"), serviceContext);
+				String roleName = accountJSONObject.getString("Role");
 
-				if (role != null) {
+				if (!Validator.isBlank(roleName)) {
+					Role role = _roleLocalService.getRole(
+						serviceContext.getCompanyId(), roleName);
+
 					_userGroupRoleLocalService.addUserGroupRoles(
 						user.getUserId(),
 						commerceAccount.getCommerceAccountGroupId(),
@@ -180,13 +168,11 @@ public class CommerceUsersImporter {
 
 		if (regularRolesJSONArray != null) {
 			for (int i = 0; i < regularRolesJSONArray.length(); i++) {
-				Role role = _roleLocalService.fetchRole(
+				Role role = _roleLocalService.getRole(
 					serviceContext.getCompanyId(),
 					regularRolesJSONArray.getString(i));
 
-				if (role != null) {
-					_roleLocalService.addUserRole(user.getUserId(), role);
-				}
+				_roleLocalService.addUserRole(user.getUserId(), role);
 			}
 		}
 
@@ -196,19 +182,17 @@ public class CommerceUsersImporter {
 
 		if (siteRolesJSONArray != null) {
 			for (int i = 0; i < siteRolesJSONArray.length(); i++) {
-				Role role = _roleLocalService.fetchRole(
+				Role role = _roleLocalService.getRole(
 					serviceContext.getCompanyId(),
 					siteRolesJSONArray.getString(i));
 
-				if (role != null) {
-					_userGroupRoleLocalService.addUserGroupRoles(
-						user.getUserId(), serviceContext.getScopeGroupId(),
-						new long[] {role.getRoleId()});
-				}
+				_userGroupRoleLocalService.addUserGroupRoles(
+					user.getUserId(), serviceContext.getScopeGroupId(),
+					new long[] {role.getRoleId()});
 			}
 		}
 		else {
-			Role role = _roleLocalService.fetchRole(
+			Role role = _roleLocalService.getRole(
 				serviceContext.getCompanyId(), RoleConstants.SITE_MEMBER);
 
 			_userGroupRoleLocalService.addUserGroupRoles(
