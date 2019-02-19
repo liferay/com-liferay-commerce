@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.media.impl.configuration;
+package com.liferay.commerce.media.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
+import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 /**
@@ -26,8 +27,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 @Meta.OCD(
 	description = "commerce-default-images-configuration-description",
-	id = "com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration",
-	localization = "content/Language",
+	id = CommerceMediaConstants.SERVICE_NAME, localization = "content/Language",
 	name = "commerce-default-images-configuration-name"
 )
 public interface CommerceMediaDefaultImageConfiguration {

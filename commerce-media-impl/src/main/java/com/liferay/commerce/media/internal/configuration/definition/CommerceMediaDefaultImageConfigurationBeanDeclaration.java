@@ -12,29 +12,23 @@
  * details.
  */
 
-package com.liferay.commerce.media.impl.configuration.definition;
+package com.liferay.commerce.media.internal.configuration.definition;
 
-import com.liferay.commerce.media.constants.CommerceMediaConstants;
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
-import com.liferay.portal.kernel.settings.definition.ConfigurationPidMapping;
+import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Alec Sloan
  */
-@Component(service = ConfigurationPidMapping.class)
-public class CommerceMediaDefaultImageConfigurationPidMapping
-	implements ConfigurationPidMapping {
+@Component(service = ConfigurationBeanDeclaration.class)
+public class CommerceMediaDefaultImageConfigurationBeanDeclaration
+	implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
 		return CommerceMediaDefaultImageConfiguration.class;
-	}
-
-	@Override
-	public String getConfigurationPid() {
-		return CommerceMediaConstants.SERVICE_NAME;
 	}
 
 }
