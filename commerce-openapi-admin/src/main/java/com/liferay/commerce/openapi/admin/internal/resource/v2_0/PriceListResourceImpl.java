@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.PriceListHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.PriceListResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -92,6 +93,7 @@ public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public PriceListDTO upsertPriceList(
 			Long groupId, PriceListDTO priceListDTO, Language language)
 		throws Exception {
