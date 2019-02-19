@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.RegionHelp
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.CountryResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -93,6 +94,7 @@ public class CountryResourceImpl implements CountryResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public CountryDTO upsertCountry(Long groupId, CountryDTO countryDTO)
 		throws Exception {
 
@@ -101,6 +103,7 @@ public class CountryResourceImpl implements CountryResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public RegionDTO upsertRegion(String id, RegionDTO regionDTO)
 		throws Exception {
 

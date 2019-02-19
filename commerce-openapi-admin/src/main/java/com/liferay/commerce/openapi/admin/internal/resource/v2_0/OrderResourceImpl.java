@@ -27,6 +27,7 @@ import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.OrderResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -208,6 +209,7 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public OrderItemDTO upsertOrderItem(String id, OrderItemDTO orderItemDTO)
 		throws Exception {
 
@@ -217,6 +219,7 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public OrderNoteDTO upsertOrderNote(String id, OrderNoteDTO orderNoteDTO)
 		throws Exception {
 
