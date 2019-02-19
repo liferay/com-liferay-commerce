@@ -44,10 +44,10 @@ import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 @Path("/v2.0/account")
 public interface AccountResource {
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}/address")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public AddressDTO addAddress(
 			@PathParam("id") String id, AddressDTO addressDTO)
 		throws Exception;
@@ -58,41 +58,41 @@ public interface AccountResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public AccountDTO getAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/address")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<AddressDTO> getAddresses(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/order")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<OrderDTO> getOrders(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateAccount(
 			@PathParam("id") String id, AccountDTO accountDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception;
 
 	@Consumes("multipart/form-data")
@@ -102,10 +102,10 @@ public interface AccountResource {
 			@PathParam("id") String id, MultipartBody multipartBody)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}/order")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public OrderDTO upsertOrder(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			OrderDTO orderDTO, @Context Language language)

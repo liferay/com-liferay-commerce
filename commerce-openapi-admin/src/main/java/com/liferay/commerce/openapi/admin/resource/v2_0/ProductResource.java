@@ -47,24 +47,24 @@ public interface ProductResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public ProductDTO getProduct(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<ProductDTO> getProducts(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/sku")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<SkuDTO> getSkus(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateProduct(
@@ -72,19 +72,19 @@ public interface ProductResource {
 			ProductDTO productDTO, @Context Language language)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public ProductDTO upsertProduct(
 			@QueryParam("groupId") Long groupId, ProductDTO productDTO,
 			@Context Language language)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}/sku")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public SkuDTO upsertSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Language language)

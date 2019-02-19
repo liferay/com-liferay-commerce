@@ -46,24 +46,24 @@ public interface CountryResource {
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<CountryDTO> getCountries(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CountryDTO getCountry(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}/region")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<RegionDTO> getRegions(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateCountry(
@@ -71,18 +71,18 @@ public interface CountryResource {
 			CountryDTO countryDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CountryDTO upsertCountry(
 			@QueryParam("groupId") Long groupId, CountryDTO countryDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}/region")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public RegionDTO upsertRegion(
 			@PathParam("id") String id, RegionDTO regionDTO)
 		throws Exception;

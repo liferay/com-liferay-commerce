@@ -45,28 +45,28 @@ public interface UserResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public UserDTO getUser(
 			@PathParam("id") String id, @Context ThemeDisplay themeDisplay)
 		throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<UserDTO> getUsers(
 			@Context ThemeDisplay themeDisplay, @Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateUser(@PathParam("id") String id, UserDTO userDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public UserDTO upsertUser(
 			UserDTO userDTO, @Context ThemeDisplay themeDisplay)
 		throws Exception;
