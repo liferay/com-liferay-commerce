@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.ProductOpt
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.ProductOptionResource;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -102,6 +103,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public ProductOptionDTO upsertProductOption(
 			Long groupId, ProductOptionDTO productOptionDTO, Language language)
 		throws Exception {
@@ -112,6 +114,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	@Status(Response.Status.CREATED)
 	public ProductOptionValueDTO upsertProductOptionValue(
 			String id, Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, Language language)
