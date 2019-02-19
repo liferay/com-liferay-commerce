@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.headless.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
+import com.liferay.commerce.headless.admin.site.setting.model.v1_0.TaxCategoryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -36,43 +36,40 @@ import javax.ws.rs.core.Response;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/v1.0/availabilityEstimate")
-public interface AvailabilityEstimateResource {
+@Path("/v1.0/taxCategory")
+public interface TaxCategoryResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteAvailabilityEstimate(@PathParam("id") String id)
-		throws Exception;
-
-	@GET
-	@Path("/{id}")
-	@Produces("application/*")
-	public AvailabilityEstimateDTO getAvailabilityEstimate(
-			@PathParam("id") String id)
+	public Response deleteTaxCategory(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
+	public CollectionDTO<TaxCategoryDTO> getTaxCategories(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
+		throws Exception;
+
+	@GET
+	@Path("/{id}")
+	@Produces("application/*")
+	public TaxCategoryDTO getTaxCategory(@PathParam("id") String id)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	public Response updateAvailabilityEstimate(
-			@PathParam("id") String id,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
+	public Response updateTaxCategory(
+			@PathParam("id") String id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
-			@QueryParam("groupId") Long groupId,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
+	public TaxCategoryDTO upsertTaxCategory(
+			@QueryParam("groupId") Long groupId, TaxCategoryDTO taxCategoryDTO)
 		throws Exception;
 
 }
