@@ -297,7 +297,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			int end)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
@@ -310,7 +312,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long groupId, long commerceAccountId, String keywords)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
 			groupId, getUserId(), commerceAccountId,
@@ -323,7 +327,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			int end)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
@@ -336,7 +342,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long groupId, long commerceAccountId, String keywords)
 		throws PortalException {
 
-		_checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(
+			groupId, commerceAccountId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
 			groupId, getUserId(), commerceAccountId,
@@ -531,7 +539,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	private void _checkAccountOrderPermissions(
-			long groupId, long commerceAccountId)
+			long groupId, long commerceAccountId, String action)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
@@ -540,14 +548,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		if (commerceAccount == null) {
 			_portletResourcePermission.check(
-				getPermissionChecker(), groupId,
-				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
+				getPermissionChecker(), groupId, action);
 		}
 		else if (commerceAccount.isBusinessAccount()) {
 			_portletResourcePermission.check(
 				getPermissionChecker(),
-				commerceAccount.getCommerceAccountGroup(),
-				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
+				commerceAccount.getCommerceAccountGroup(), action);
 		}
 	}
 
