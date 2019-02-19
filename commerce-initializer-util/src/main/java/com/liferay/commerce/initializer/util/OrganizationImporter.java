@@ -60,26 +60,20 @@ public class OrganizationImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
-		String name = jsonObject.getString("Name");
+		long parentOrganizationId = 0;
 
 		String parentOrganizationName = jsonObject.getString(
 			"ParentOrganization", null);
 
-		long parentOrganizationId = 0;
-
 		if (parentOrganizationName != null) {
 			Organization parentOrganization =
-				_organizationLocalService.fetchOrganization(
+				_organizationLocalService.getOrganization(
 					serviceContext.getCompanyId(), parentOrganizationName);
 
 			parentOrganizationId = parentOrganization.getOrganizationId();
 		}
 
-		String[] types = _organizationTypesSettings.getTypes();
-
-		String twoLetterISOCode = jsonObject.getString("TwoLetterISOCode");
-
-		Country country = _countryService.getCountryByA2(twoLetterISOCode);
+		String name = jsonObject.getString("Name");
 
 		Organization organization = _organizationLocalService.fetchOrganization(
 			serviceContext.getCompanyId(), name);
@@ -88,13 +82,17 @@ public class OrganizationImporter {
 			return organization;
 		}
 
-		organization = _organizationLocalService.addOrganization(
+		String[] types = _organizationTypesSettings.getTypes();
+
+		String twoLetterISOCode = jsonObject.getString("TwoLetterISOCode");
+
+		Country country = _countryService.getCountryByA2(twoLetterISOCode);
+
+		return _organizationLocalService.addOrganization(
 			serviceContext.getUserId(), parentOrganizationId, name, types[0], 0,
 			country.getCountryId(),
 			ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
 			false, serviceContext);
-
-		return organization;
 	}
 
 	@Reference

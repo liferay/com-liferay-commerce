@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService;
+import com.liferay.commerce.product.exception.NoSuchCPRuleException;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
@@ -51,45 +53,55 @@ public class CommerceUserSegmentsImporter {
 			JSONArray jsonArray, ServiceContext serviceContext)
 		throws PortalException {
 
-		List<CommerceUserSegmentEntry> organizations = new ArrayList<>(
-			jsonArray.length());
+		List<CommerceUserSegmentEntry> commerceUserSegmentEntries =
+			new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			CommerceUserSegmentEntry organization = _importCommerceUserSegment(
-				jsonObject, serviceContext);
+			CommerceUserSegmentEntry commerceUserSegmentEntry =
+				_importCommerceUserSegment(jsonObject, serviceContext);
 
-			organizations.add(organization);
+			commerceUserSegmentEntries.add(commerceUserSegmentEntry);
 		}
 
-		return organizations;
+		return commerceUserSegmentEntries;
 	}
 
-	protected CommercePriceList getCommercePriceListByName(
-		String associatedPriceList) {
+	protected CommercePriceList getCommercePriceList(String name)
+		throws PortalException {
 
 		DynamicQuery dynamicQuery =
 			_commercePriceListLocalService.dynamicQuery();
 
 		Property nameProperty = PropertyFactoryUtil.forName("name");
 
-		dynamicQuery.add(nameProperty.eq(associatedPriceList));
+		dynamicQuery.add(nameProperty.eq(name));
 
 		List<CommercePriceList> commercePriceLists =
-			_commercePriceListLocalService.dynamicQuery(dynamicQuery);
+			_commercePriceListLocalService.dynamicQuery(dynamicQuery, 0, 1);
+
+		if (commercePriceLists.isEmpty()) {
+			throw new NoSuchPriceListException(
+				"No price list found with name " + name);
+		}
 
 		return commercePriceLists.get(0);
 	}
 
-	protected CPRule getCPRuleByName(String relatedCatalogRule) {
+	protected CPRule getCPRule(String name) throws PortalException {
 		DynamicQuery dynamicQuery = _cpRuleLocalService.dynamicQuery();
 
 		Property nameProperty = PropertyFactoryUtil.forName("name");
 
-		dynamicQuery.add(nameProperty.eq(relatedCatalogRule));
+		dynamicQuery.add(nameProperty.eq(name));
 
-		List<CPRule> cpRules = _cpRuleLocalService.dynamicQuery(dynamicQuery);
+		List<CPRule> cpRules = _cpRuleLocalService.dynamicQuery(
+			dynamicQuery, 0, 1);
+
+		if (cpRules.isEmpty()) {
+			throw new NoSuchCPRuleException("No rule found with name " + name);
+		}
 
 		return cpRules.get(0);
 	}
@@ -98,25 +110,26 @@ public class CommerceUserSegmentsImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
-		String name = jsonObject.getString("Name");
-
 		Map<Locale, String> nameMap = new HashMap<>();
+
+		String name = jsonObject.getString("Name");
 
 		nameMap.put(serviceContext.getLocale(), name);
 
-		// Add the user segment
+		// Add User Segment
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
 			_commerceUserSegmentEntryLocalService.addCommerceUserSegmentEntry(
 				nameMap, FriendlyURLNormalizerUtil.normalize(name), true, false,
 				0, serviceContext);
 
-		String relatedCatalogRule = jsonObject.getString("RelatedCatalogRule");
+		// Add User Segment Rels
 
-		// Add the user segment to respective CPRule
+		String relatedCatalogRuleName = jsonObject.getString(
+			"RelatedCatalogRule");
 
-		if (!Validator.isBlank(relatedCatalogRule)) {
-			CPRule cpRule = getCPRuleByName(relatedCatalogRule);
+		if (!Validator.isBlank(relatedCatalogRuleName)) {
+			CPRule cpRule = getCPRule(relatedCatalogRuleName);
 
 			_cpRuleUserSegmentRelLocalService.addCPRuleUserSegmentRel(
 				cpRule.getCPRuleId(),
@@ -124,14 +137,12 @@ public class CommerceUserSegmentsImporter {
 				serviceContext);
 		}
 
-		String associatedPriceList = jsonObject.getString(
+		String associatedPriceListName = jsonObject.getString(
 			"AssociatedPriceList");
 
-		//add the user segment to respective Price List
-
-		if (!Validator.isBlank(relatedCatalogRule)) {
-			CommercePriceList commercePriceList = getCommercePriceListByName(
-				associatedPriceList);
+		if (!Validator.isBlank(associatedPriceListName)) {
+			CommercePriceList commercePriceList = getCommercePriceList(
+				associatedPriceListName);
 
 			_commercePriceListUserSegmentEntryRelLocalService.
 				addCommercePriceListUserSegmentEntryRel(
