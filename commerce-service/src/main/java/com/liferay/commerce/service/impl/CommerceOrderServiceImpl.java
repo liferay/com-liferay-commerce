@@ -329,7 +329,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		_checkAccountOrderPermissions(
 			groupId, commerceAccountId,
-			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
+			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
@@ -344,7 +344,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		_checkAccountOrderPermissions(
 			groupId, commerceAccountId,
-			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
+			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
 			groupId, getUserId(), commerceAccountId,
