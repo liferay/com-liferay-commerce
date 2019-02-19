@@ -213,7 +213,7 @@ contain a field for each nested DTO/s, for example:
 
 ```
 public class ProductDTO {
-    ...	
+    ...
 
     public List<SkuDTO> getSkus() {
         return _skus;
@@ -235,7 +235,7 @@ Where "skus" can be a nested list of SkuDTOs.
 A resource implementation method that will return nested DTOs has to be
 annotated with the @Nested annotation, for example:
 
-```		
+```
 public class ProductResourceImpl implements ProductResource {
     ...
 
@@ -243,7 +243,7 @@ public class ProductResourceImpl implements ProductResource {
     @Override
     public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
     throws Exception {
-        ...	
+        ...
     }
 
     ...
