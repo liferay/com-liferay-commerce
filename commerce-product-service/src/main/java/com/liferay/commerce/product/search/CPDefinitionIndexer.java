@@ -546,7 +546,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				continue;
 			}
 
-			String[] linkedProductIds = getReverseCPDefinitionIdsArray(
+			String[] linkedProductIds = getReverseCPDefinitionIds(
 				cProduct.getCProductId(), type);
 
 			document.addKeyword(type, linkedProductIds);
@@ -638,9 +638,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		reindexCPDefinitions(companyId);
 	}
 
-	protected String[] getReverseCPDefinitionIdsArray(
-		long cProductId, String type) {
-
+	protected String[] getReverseCPDefinitionIds(long cProductId, String type) {
 		List<CPDefinitionLink> cpDefinitionLinks =
 			_cpDefinitionLinkLocalService.getReverseCPDefinitionLinks(
 				cProductId, type);
