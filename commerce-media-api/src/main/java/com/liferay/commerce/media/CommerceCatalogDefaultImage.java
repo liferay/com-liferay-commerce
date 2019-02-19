@@ -12,17 +12,22 @@
  * details.
  */
 
-package com.liferay.commerce.media.constants;
+package com.liferay.commerce.media;
+
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alec Sloan
  */
-public class CommerceMediaConstants {
+@ProviderType
+public interface CommerceCatalogDefaultImage {
 
-	public static final String SERVICE_NAME =
-		"com.liferay.commerce.media.internal.configuration." +
-			"CommerceMediaDefaultImageConfiguration";
+	public long getDefaultCatalogFileEntryId(long groupId)
+		throws PortalException;
 
-	public static final String SERVLET_PATH = "commerce-media";
+	public void updateDefaultCatalogFileEntryId(long groupId, long fileEntryId)
+		throws Exception;
 
 }

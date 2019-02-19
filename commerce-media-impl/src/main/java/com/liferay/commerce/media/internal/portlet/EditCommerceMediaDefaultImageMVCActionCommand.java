@@ -15,7 +15,7 @@
 package com.liferay.commerce.media.internal.portlet;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;

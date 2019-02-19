@@ -18,7 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;

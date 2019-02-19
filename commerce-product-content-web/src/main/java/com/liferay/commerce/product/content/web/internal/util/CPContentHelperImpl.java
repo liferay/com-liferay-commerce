@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.CommerceCatalogDefaultImage;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -44,11 +44,9 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Portal;
@@ -297,17 +295,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 		}
 
 		if (cpMedias.isEmpty()) {
-			CommerceMediaDefaultImageConfiguration
-				commerceMediaDefaultImageConfiguration =
-					ConfigurationProviderUtil.getConfiguration(
-						CommerceMediaDefaultImageConfiguration.class,
-						new GroupServiceSettingsLocator(
-							themeDisplay.getScopeGroupId(),
-							CommerceMediaDefaultImageConfiguration.class.
-								getName()));
-
 			FileEntry fileEntry = FileEntryUtil.fetchByPrimaryKey(
-				commerceMediaDefaultImageConfiguration.defaultFileEntryId());
+				_catalogCommerceMediaDefaultImage.getDefaultCatalogFileEntryId(
+					themeDisplay.getScopeGroupId()));
 
 			if (fileEntry != null) {
 				cpMedias.add(new CPMediaImpl(fileEntry, themeDisplay));
@@ -438,6 +428,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 			cpCatalogEntry.isIgnoreSKUCombinations(), false, renderRequest,
 			renderResponse);
 	}
+
+	@Reference
+	private CommerceCatalogDefaultImage _catalogCommerceMediaDefaultImage;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
