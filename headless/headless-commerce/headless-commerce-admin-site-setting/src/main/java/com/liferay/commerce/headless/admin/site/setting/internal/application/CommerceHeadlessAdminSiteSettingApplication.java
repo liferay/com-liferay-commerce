@@ -36,6 +36,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
 		OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED,
 		OpenApiPropsKeys.NESTED_FILTER_ENABLED,
+		OpenApiPropsKeys.PARAMETER_CONVERTER_PROVIDERS_ENABLED,
 		OpenApiPropsKeys.SERVICE_EVENT_FILTER_ENABLED,
 		OpenApiPropsKeys.STATUS_FEATURE_ENABLED,
 		"auth.verifier.auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/*",
