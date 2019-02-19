@@ -14,19 +14,21 @@
 
 package com.liferay.commerce.headless.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.commerce.headless.admin.site.setting.internal.resource.util.v1_0.AvailabilityEstimateHelper;
 import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 import com.liferay.commerce.headless.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -46,16 +48,9 @@ public class AvailabilityEstimateResourceImpl
 
 	@Override
 	@RequiresScope("CommerceHeadlessAdminSiteSetting.write")
-	public AvailabilityEstimateDTO addAvailabilityEstimate(
-			Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
-		throws Exception {
-
-		return new AvailabilityEstimateDTO();
-	}
-
-	@Override
-	@RequiresScope("CommerceHeadlessAdminSiteSetting.write")
 	public Response deleteAvailabilityEstimate(String id) throws Exception {
+		_availabilityEstimateHelper.deleteAvailabilityEstimate(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -66,7 +61,7 @@ public class AvailabilityEstimateResourceImpl
 	public AvailabilityEstimateDTO getAvailabilityEstimate(String id)
 		throws Exception {
 
-		return new AvailabilityEstimateDTO();
+		return _availabilityEstimateHelper.getAvailabilityEstimateDTO(id);
 	}
 
 	@Override
@@ -75,7 +70,8 @@ public class AvailabilityEstimateResourceImpl
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _availabilityEstimateHelper.getAvailabilityEstimateDTOs(
+			groupId, pagination);
 	}
 
 	@Override
@@ -84,9 +80,28 @@ public class AvailabilityEstimateResourceImpl
 			String id, AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception {
 
+		_availabilityEstimateHelper.updateAvailabilityEstimate(
+			id, availabilityEstimateDTO, _user);
+
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
+
+	@Override
+	@RequiresScope("CommerceHeadlessAdminSiteSetting.write")
+	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
+			Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
+		throws Exception {
+
+		return _availabilityEstimateHelper.upsertAvailabilityEstimate(
+			groupId, availabilityEstimateDTO, _user);
+	}
+
+	@Reference
+	private AvailabilityEstimateHelper _availabilityEstimateHelper;
+
+	@Context
+	private User _user;
 
 }
