@@ -17,7 +17,9 @@ package com.liferay.commerce.headless.admin.site.setting.internal.v1_0;
 import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 import com.liferay.commerce.headless.admin.site.setting.model.v1_0.MeasurementUnitDTO;
 import com.liferay.commerce.headless.admin.site.setting.model.v1_0.TaxCategoryDTO;
+import com.liferay.commerce.headless.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
+import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.openapi.core.util.LanguageUtils;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.model.CPTaxCategory;
@@ -46,6 +48,33 @@ public class DTOUtils {
 				commerceAvailabilityEstimate.getTitleMap()));
 
 		return availabilityEstimateDTO;
+	}
+
+	public static WarehouseDTO modelToDTO(CommerceWarehouse commerceWarehouse) {
+		WarehouseDTO warehouseDTO = new WarehouseDTO();
+
+		if (commerceWarehouse == null) {
+			return warehouseDTO;
+		}
+
+		warehouseDTO.setActive(commerceWarehouse.isActive());
+		warehouseDTO.setCity(commerceWarehouse.getCity());
+		warehouseDTO.setCommerceCountryId(
+			commerceWarehouse.getCommerceCountryId());
+		warehouseDTO.setCommerceRegionId(
+			commerceWarehouse.getCommerceRegionId());
+		warehouseDTO.setDescription(commerceWarehouse.getDescription());
+		warehouseDTO.setId(commerceWarehouse.getCommerceWarehouseId());
+		warehouseDTO.setLatitude(commerceWarehouse.getLatitude());
+		warehouseDTO.setLongitude(commerceWarehouse.getLongitude());
+		warehouseDTO.setName(commerceWarehouse.getName());
+		warehouseDTO.setPrimary(commerceWarehouse.isPrimary());
+		warehouseDTO.setStreet1(commerceWarehouse.getStreet1());
+		warehouseDTO.setStreet2(commerceWarehouse.getStreet2());
+		warehouseDTO.setStreet3(commerceWarehouse.getStreet3());
+		warehouseDTO.setZip(commerceWarehouse.getZip());
+
+		return warehouseDTO;
 	}
 
 	public static MeasurementUnitDTO modelToDTO(
