@@ -101,7 +101,12 @@ public enum RESTError {
 		Response.Status.BAD_REQUEST),
 	TWO_LETTERS_COUNTRY_ISO_CODE_ERROR(
 		978, "Invalid ISO 3166-1 two letter country code",
-		Response.Status.BAD_REQUEST);
+		Response.Status.BAD_REQUEST),
+	WAREHOUSE_ACTIVE_ERROR(
+		974, "Cannot activate warehouse without latitude and longitude",
+		Response.Status.BAD_REQUEST),
+	WAREHOUSE_NAME_ERROR(
+		973, "Invalid warehouse name", Response.Status.BAD_REQUEST);
 
 	public int getErrorCode() {
 		return _errorCode;
