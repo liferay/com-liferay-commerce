@@ -42,7 +42,8 @@ public class MethodImporter {
 
 	public List<Method> getMethods(
 		String path, JsonNode pathJSONNode,
-		List<OpenApiComponent> openApiComponents) {
+		List<OpenApiComponent> openApiComponents,
+		Map<String, Integer> methodNamesCount) {
 
 		List<Method> methods = new ArrayList<>();
 
@@ -61,7 +62,8 @@ public class MethodImporter {
 				JsonNode operationIdJSONNode = httpMethodJSONNode.get(
 					"operationId");
 
-				methodName = operationIdJSONNode.asText();
+				methodName = _getMethodName(
+					operationIdJSONNode.asText(), methodNamesCount);
 			}
 
 			Security security = null;
@@ -153,6 +155,22 @@ public class MethodImporter {
 		ExtensionImporter extensionImporter = new ExtensionImporter();
 
 		return extensionImporter.getExtensions(methodDefinitionJSONNode);
+	}
+
+	private String _getMethodName(
+		String methodName, Map<String, Integer> methodNamesCount) {
+
+		Integer count = methodNamesCount.get(methodName);
+
+		if (count == null) {
+			methodNamesCount.put(methodName, 1);
+
+			return methodName;
+		}
+
+		methodNamesCount.put(methodName, ++count);
+
+		return methodName + count;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
