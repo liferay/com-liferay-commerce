@@ -311,6 +311,22 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
+	protected String toModelImportStatements(
+		String modelPackage, Set<String> referencedModels) {
+
+		StringBuilder sb = new StringBuilder();
+
+		for (String referencedModel : referencedModels) {
+			sb.append("import ");
+			sb.append(modelPackage);
+			sb.append(".");
+			sb.append(StringUtils.upperCaseFirstChar(referencedModel));
+			sb.append("DTO;\n");
+		}
+
+		return sb.toString();
+	}
+
 	protected String toResourceImplementationFields(List<Method> methods) {
 		StringBuilder sb = new StringBuilder();
 
@@ -678,22 +694,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return "Response.ok();\n";
 	}
 
-	private String _toModelImportStatements(
-		String modelPackage, Set<String> referencedModels) {
-
-		StringBuilder sb = new StringBuilder();
-
-		for (String referencedModel : referencedModels) {
-			sb.append("import ");
-			sb.append(modelPackage);
-			sb.append(".");
-			sb.append(StringUtils.upperCaseFirstChar(referencedModel));
-			sb.append("DTO;\n");
-		}
-
-		return sb.toString();
-	}
-
 	private void _writeResourceImplementationSource(
 			String version, Path path, Set<OpenApiComponent> openApiComponents)
 		throws IOException {
@@ -721,6 +721,9 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			"${PACKAGE}", _resourcePackagePath);
 
 		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_IMPORT_STATEMENTS}",
+			toModelImportStatements(
+				_modelPackagePath, path.getReferencedModels()));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${JAVA_IMPORT_STATEMENTS}", toJavaImportStatements(path));
@@ -774,7 +777,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS}",
-			_toModelImportStatements(
+			toModelImportStatements(
 				_modelPackagePath, path.getReferencedModels()));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
