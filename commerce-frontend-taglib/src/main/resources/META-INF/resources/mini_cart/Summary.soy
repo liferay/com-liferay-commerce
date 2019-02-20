@@ -13,10 +13,10 @@
 	{@param? discount: string}
 	{@param? taxes: string}
 
-	<div class="minium-cart__footer">
+	<div class="commerce-cart__footer">
 
 		{if isNonnull($itemsQuantity) and $itemsQuantity != 0}
-			<dl class="minium-cart__totals">
+			<dl class="commerce-cart__totals">
 				<dt> {msg desc="Units"}units{/msg}</dt>
 				<dd>
 					{$itemsQuantity} {msg desc="Of"}of{/msg} {$productsQuantity} {msg desc="Items"}items{/msg}

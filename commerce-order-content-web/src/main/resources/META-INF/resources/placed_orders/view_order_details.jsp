@@ -41,24 +41,24 @@ if (commerceOrder != null) {
 }
 %>
 
-<div class="minium-card">
-	<div class="minium-card__content">
+<div class="commerce-panel">
+	<div class="commerce-panel__content">
 		<div class="align-items-center row">
 			<div class="col-md-3">
-				<div class="minium-order-title">
+				<div class="commerce-order-title">
 					<%= HtmlUtil.escape(commerceAccount.getName()) %>
 				</div>
 			</div>
 
 			<div class="col-md-3">
-				<dl class="minium-list">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="total" /></dt>
 					<dd><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
 				</dl>
 			</div>
 
 			<div class="col-md-3">
-				<dl class="minium-list">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="notes" /></dt>
 					<dd>
 
@@ -74,24 +74,24 @@ if (commerceOrder != null) {
 		</div>
 	</div>
 
-	<div class="minium-card__content">
+	<div class="commerce-panel__content">
 		<div class="align-items-center row">
 			<div class="col-md-3">
-				<dl class="minium-list">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="account-id" /></dt>
 					<dd><%= commerceAccount.getCommerceAccountId() %></dd>
 				</dl>
 			</div>
 
 			<div class="col-md-3">
-				<dl class="minium-list">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="order-id" /></dt>
 					<dd><%= commerceOrder.getCommerceOrderId() %></dd>
 				</dl>
 			</div>
 
 			<div class="col-md-3">
-				<dl class="minium-list">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="order-date" /></dt>
 					<dd>
 						<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
@@ -105,12 +105,12 @@ if (commerceOrder != null) {
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="minium-card">
-			<div class="minium-card__title"><liferay-ui:message key="purchase-order-number" /></div>
-			<div class="minium-card__content">
+		<div class="commerce-panel">
+			<div class="commerce-panel__title"><liferay-ui:message key="purchase-order-number" /></div>
+			<div class="commerce-panel__content">
 				<div class="row">
 					<div class="col-md-6">
-						<dl class="minium-list">
+						<dl class="commerce-list">
 							<%= commerceOrder.getPurchaseOrderNumber() %>
 						</dl>
 					</div>
@@ -122,9 +122,9 @@ if (commerceOrder != null) {
 
 <div class="row">
 	<div class="col-md-6">
-		<div class="minium-card">
-			<div class="minium-card__title"><liferay-ui:message key="billing-address" /></div>
-			<div class="minium-card__content">
+		<div class="commerce-panel">
+			<div class="commerce-panel__title"><liferay-ui:message key="billing-address" /></div>
+			<div class="commerce-panel__content">
 				<div class="row">
 					<div class="col-md-12">
 						<c:if test="<%= billingCommerceAddress != null %>">
@@ -138,9 +138,9 @@ if (commerceOrder != null) {
 	</div>
 
 	<div class="col-md-6">
-		<div class="minium-card">
-			<div class="minium-card__title"><liferay-ui:message key="shipping-address" /></div>
-			<div class="minium-card__content">
+		<div class="commerce-panel">
+			<div class="commerce-panel__title"><liferay-ui:message key="shipping-address" /></div>
+			<div class="commerce-panel__content">
 				<div class="row">
 					<div class="col-md-12">
 						<c:if test="<%= shippingCommerceAddress != null %>">
@@ -154,7 +154,7 @@ if (commerceOrder != null) {
 	</div>
 </div>
 
-<div class="minium-frame__cta is-visible">
+<div class="commerce-frame__cta is-visible">
 	<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL">
 		<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderDetails" />
 	</portlet:actionURL>
@@ -185,9 +185,9 @@ if (commerceOrder != null) {
 	</div>
 
 	<div class="col-md-3">
-		<div class="minium-card">
-			<div class="minium-card__content">
-				<dl class="minium-list">
+		<div class="commerce-panel">
+			<div class="commerce-panel__content">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="subtotal" /></dt>
 					<dd class="text-right"><%= HtmlUtil.escape(subtotal.format(locale)) %></dd>
 
@@ -235,8 +235,8 @@ if (commerceOrder != null) {
 				</dl>
 			</div>
 
-			<div class="minium-card__content">
-				<dl class="minium-list">
+			<div class="commerce-panel__content">
+				<dl class="commerce-list">
 					<dt><liferay-ui:message key="total" /></dt>
 					<dd class="text-right"><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
 				</dl>

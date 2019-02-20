@@ -38,14 +38,14 @@
 	{@param spritemap: string}
 
 	{let $dropdownClasses kind="text"}
-		minium-dropdown
+		commerce-dropdown
 		{if isNonnull($openingState)}
 			{sp}is-{$openingState}
 		{/if}
 	{/let}
 
 	{let $curtainClasses kind="text"}
-		minium-dropdown__curtain
+		commerce-dropdown__curtain
 		{if isNonnull($openingState)}
 			{sp}is-{$openingState}
 		{/if}
@@ -53,7 +53,7 @@
 
 	<div class="{$dropdownClasses}">
 		<button
-			class="minium-topbar__button"
+			class="commerce-topbar__button"
 			data-onclick="toggleAccountSelector"
 		>
 			{call .currentState}
@@ -68,7 +68,7 @@
 		</button>
 
 		<div class="{$curtainClasses}" id="account-manager-curtain" ref="curtain">
-			<div class="minium-dropdown__absolute-content">
+			<div class="commerce-dropdown__absolute-content">
 				{let $isOrdersTableVisible: $currentView == 'orders' /}
 				{call OrdersTable.render}
 					{param events: [
