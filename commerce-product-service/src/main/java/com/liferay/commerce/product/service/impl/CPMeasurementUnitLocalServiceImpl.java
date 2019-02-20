@@ -125,6 +125,15 @@ public class CPMeasurementUnitLocalServiceImpl
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
+		long groupId, int start, int end,
+		OrderByComparator<CPMeasurementUnit> orderByComparator) {
+
+		return cpMeasurementUnitPersistence.findByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPMeasurementUnit> getCPMeasurementUnits(
 		long groupId, String[] keys, int type) {
 
 		List<CPMeasurementUnit> cpMeasurementUnits = new ArrayList<>(

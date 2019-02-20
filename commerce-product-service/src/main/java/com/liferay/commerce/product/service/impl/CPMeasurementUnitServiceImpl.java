@@ -108,6 +108,30 @@ public class CPMeasurementUnitServiceImpl
 	}
 
 	@Override
+	public List<CPMeasurementUnit> getCPMeasurementUnits(
+			long groupId, int start, int end,
+			OrderByComparator<CPMeasurementUnit> orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
+
+		return cpMeasurementUnitLocalService.getCPMeasurementUnits(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPMeasurementUnitsCount(long groupId) throws PortalException {
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
+
+		return cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(
+			groupId);
+	}
+
+	@Override
 	public int getCPMeasurementUnitsCount(long groupId, int type)
 		throws PortalException {
 
