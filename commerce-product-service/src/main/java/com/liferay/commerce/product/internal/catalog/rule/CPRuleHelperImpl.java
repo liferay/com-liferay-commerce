@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 /**
@@ -81,6 +82,11 @@ public class CPRuleHelperImpl implements CPRuleHelper {
 		CPRulesThreadLocal.setCPRules(cpRules);
 
 		return cpRules;
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		CPRuleCacheUtil.clearCommerceAccountGroupCPRuleIds();
 	}
 
 	private List<CPRule> _getCPRules(long[] cpRuleIds) throws PortalException {

@@ -30,6 +30,11 @@ public class CPRuleCacheUtil {
 	public static final String CP_RULES_BAG_CACHE_NAME =
 		CPRuleCacheUtil.class.getName() + "_CP_RULES_BAG";
 
+	public static void clearCommerceAccountGroupCPRuleIds() {
+		PortalCacheHelperUtil.removeAllWithoutReplicator(
+			_accountGroupCPRuleIdsKeyPortalCache);
+	}
+
 	public static long[] getCommerceAccountGroupCPRuleIds(
 		long commerceAccountId, long groupId) {
 
