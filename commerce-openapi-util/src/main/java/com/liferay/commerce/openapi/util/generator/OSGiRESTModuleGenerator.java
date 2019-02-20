@@ -18,6 +18,8 @@ import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.config.ConfigurationFactory;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
+import com.liferay.commerce.openapi.util.importer.OpenApiReader;
+import com.liferay.commerce.openapi.util.importer.OpenApiReaderFactory;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -138,7 +140,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	}
 
 	private void _generateModule() throws IOException {
-		OpenAPIImporter openAPIImporter = new OpenAPIImporter(_configuration);
+		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
+			_configuration);
+
+		OpenAPIImporter openAPIImporter = new OpenAPIImporter(openApiReader);
 
 		OpenApi openApi = openAPIImporter.getOpenApi();
 
