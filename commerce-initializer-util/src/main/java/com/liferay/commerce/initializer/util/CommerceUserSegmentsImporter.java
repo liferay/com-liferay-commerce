@@ -14,27 +14,31 @@
 
 package com.liferay.commerce.initializer.util;
 
-import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
-import com.liferay.commerce.price.list.model.CommercePriceList;
-import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService;
-import com.liferay.commerce.product.exception.NoSuchCPRuleException;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterionConstants;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
+import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.NoSuchOrganizationException;
+import com.liferay.portal.kernel.exception.NoSuchRoleException;
+import com.liferay.portal.kernel.exception.NoSuchUserException;
+import com.liferay.portal.kernel.exception.NoSuchUserGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserGroup;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserGroupLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,64 +55,18 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceUserSegmentsImporter.class)
 public class CommerceUserSegmentsImporter {
 
-	public List<CommerceUserSegmentEntry> importCommerceUserSegments(
+	public void importCommerceUserSegments(
 			JSONArray jsonArray, ServiceContext serviceContext)
 		throws PortalException {
-
-		List<CommerceUserSegmentEntry> commerceUserSegmentEntries =
-			new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			CommerceUserSegmentEntry commerceUserSegmentEntry =
-				_importCommerceUserSegment(jsonObject, serviceContext);
-
-			commerceUserSegmentEntries.add(commerceUserSegmentEntry);
+			_importCommerceUserSegment(jsonObject, serviceContext);
 		}
-
-		return commerceUserSegmentEntries;
 	}
 
-	protected CommercePriceList getCommercePriceList(String name)
-		throws PortalException {
-
-		DynamicQuery dynamicQuery =
-			_commercePriceListLocalService.dynamicQuery();
-
-		Property nameProperty = PropertyFactoryUtil.forName("name");
-
-		dynamicQuery.add(nameProperty.eq(name));
-
-		List<CommercePriceList> commercePriceLists =
-			_commercePriceListLocalService.dynamicQuery(dynamicQuery, 0, 1);
-
-		if (commercePriceLists.isEmpty()) {
-			throw new NoSuchPriceListException(
-				"No price list found with name " + name);
-		}
-
-		return commercePriceLists.get(0);
-	}
-
-	protected CPRule getCPRule(String name) throws PortalException {
-		DynamicQuery dynamicQuery = _cpRuleLocalService.dynamicQuery();
-
-		Property nameProperty = PropertyFactoryUtil.forName("name");
-
-		dynamicQuery.add(nameProperty.eq(name));
-
-		List<CPRule> cpRules = _cpRuleLocalService.dynamicQuery(
-			dynamicQuery, 0, 1);
-
-		if (cpRules.isEmpty()) {
-			throw new NoSuchCPRuleException("No rule found with name " + name);
-		}
-
-		return cpRules.get(0);
-	}
-
-	private CommerceUserSegmentEntry _importCommerceUserSegment(
+	private void _importCommerceUserSegment(
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -125,60 +83,163 @@ public class CommerceUserSegmentsImporter {
 				nameMap, FriendlyURLNormalizerUtil.normalize(name), true, false,
 				0, serviceContext);
 
-		// Add User Segment Rels
+		// Add User Criterion
 
-		String relatedCatalogRuleName = jsonObject.getString(
-			"RelatedCatalogRule");
+		JSONArray usersJSONArray = jsonObject.getJSONArray("Users");
 
-		if (!Validator.isBlank(relatedCatalogRuleName)) {
-			CPRule cpRule = getCPRule(relatedCatalogRuleName);
+		if (usersJSONArray != null) {
+			List<Long> usersList = new ArrayList<>();
 
-			_cpRuleUserSegmentRelLocalService.addCPRuleUserSegmentRel(
-				cpRule.getCPRuleId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
-				serviceContext);
+			for (int i = 0; i < usersJSONArray.length(); i++) {
+				try {
+					User user = _userLocalService.getUserByScreenName(
+						serviceContext.getCompanyId(),
+						usersJSONArray.getString(i));
+
+					usersList.add(user.getUserId());
+				}
+				catch (NoSuchUserException nsue) {
+					_log.error(nsue, nsue);
+				}
+			}
+
+			if (!usersList.isEmpty()) {
+				_commerceUserSegmentCriterionLocalService.
+					addCommerceUserSegmentCriterion(
+						commerceUserSegmentEntry.
+							getCommerceUserSegmentEntryId(),
+						CommerceUserSegmentCriterionConstants.TYPE_USER,
+						ListUtil.toString(
+							usersList, StringPool.BLANK,
+							StringPool.COMMA_AND_SPACE),
+						0, serviceContext);
+			}
 		}
 
-		String associatedPriceListName = jsonObject.getString(
-			"AssociatedPriceList");
+		// Add Organization Criterion
 
-		if (!Validator.isBlank(associatedPriceListName)) {
-			try {
-				CommercePriceList commercePriceList = getCommercePriceList(
-					associatedPriceListName);
+		JSONArray organizationsJSONArray = jsonObject.getJSONArray(
+			"Organizations");
 
-				_commercePriceListUserSegmentEntryRelLocalService.
-					addCommercePriceListUserSegmentEntryRel(
-						commercePriceList.getCommercePriceListId(),
-						commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
-						0,	serviceContext);
+		if (organizationsJSONArray != null) {
+			List<Long> organizationsList = new ArrayList<>();
+
+			for (int i = 0; i < organizationsJSONArray.length(); i++) {
+				try {
+					Organization organization =
+						_organizationLocalService.getOrganization(
+							serviceContext.getCompanyId(),
+							organizationsJSONArray.getString(i));
+
+					organizationsList.add(organization.getOrganizationId());
+				}
+				catch (NoSuchOrganizationException nsoe) {
+					_log.error(nsoe, nsoe);
+				}
 			}
-			catch (NoSuchPriceListException nsple) {
-				_log.error(nsple, nsple);
+
+			if (!organizationsList.isEmpty()) {
+				_commerceUserSegmentCriterionLocalService.
+					addCommerceUserSegmentCriterion(
+						commerceUserSegmentEntry.
+							getCommerceUserSegmentEntryId(),
+						CommerceUserSegmentCriterionConstants.TYPE_ORGANIZATION,
+						ListUtil.toString(
+							organizationsList, StringPool.BLANK,
+							StringPool.COMMA_AND_SPACE),
+						0, serviceContext);
 			}
 		}
 
-		return commerceUserSegmentEntry;
+		// Add User Groups Criterion
+
+		JSONArray userGroupsJSONArray = jsonObject.getJSONArray("UserGroups");
+
+		if (userGroupsJSONArray != null) {
+			List<Long> userGroupsList = new ArrayList<>();
+
+			for (int i = 0; i < userGroupsJSONArray.length(); i++) {
+				try {
+					UserGroup userGroup = _userGroupLocalService.getUserGroup(
+						serviceContext.getCompanyId(),
+						userGroupsJSONArray.getString(i));
+
+					userGroupsList.add(userGroup.getUserGroupId());
+				}
+				catch (NoSuchUserGroupException nsuge) {
+					_log.error(nsuge, nsuge);
+				}
+			}
+
+			if (!userGroupsList.isEmpty()) {
+				_commerceUserSegmentCriterionLocalService.
+					addCommerceUserSegmentCriterion(
+						commerceUserSegmentEntry.
+							getCommerceUserSegmentEntryId(),
+						CommerceUserSegmentCriterionConstants.TYPE_USER_GROUP,
+						ListUtil.toString(
+							userGroupsList, StringPool.BLANK,
+							StringPool.COMMA_AND_SPACE),
+						0, serviceContext);
+			}
+		}
+
+		// Add Role Criterion
+
+		JSONArray rolesJSONArray = jsonObject.getJSONArray("Roles");
+
+		if (rolesJSONArray != null) {
+			List<Long> rolesList = new ArrayList<>();
+
+			for (int i = 0; i < rolesJSONArray.length(); i++) {
+				try {
+					Role role = _roleLocalService.getRole(
+						serviceContext.getCompanyId(),
+						rolesJSONArray.getString(i));
+
+					rolesList.add(role.getRoleId());
+				}
+				catch (NoSuchRoleException nsre) {
+					_log.error(nsre, nsre);
+				}
+			}
+
+			if (!rolesList.isEmpty()) {
+				_commerceUserSegmentCriterionLocalService.
+					addCommerceUserSegmentCriterion(
+						commerceUserSegmentEntry.
+							getCommerceUserSegmentEntryId(),
+						CommerceUserSegmentCriterionConstants.TYPE_ROLE,
+						ListUtil.toString(
+							rolesList, StringPool.BLANK,
+							StringPool.COMMA_AND_SPACE),
+						0, serviceContext);
+			}
+		}
+
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUserSegmentsImporter.class);
 
 	@Reference
-	private CommercePriceListLocalService _commercePriceListLocalService;
-
-	@Reference
-	private CommercePriceListUserSegmentEntryRelLocalService
-		_commercePriceListUserSegmentEntryRelLocalService;
+	private CommerceUserSegmentCriterionLocalService
+		_commerceUserSegmentCriterionLocalService;
 
 	@Reference
 	private CommerceUserSegmentEntryLocalService
 		_commerceUserSegmentEntryLocalService;
 
 	@Reference
-	private CPRuleLocalService _cpRuleLocalService;
+	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
-	private CPRuleUserSegmentRelLocalService _cpRuleUserSegmentRelLocalService;
+	private RoleLocalService _roleLocalService;
+
+	@Reference
+	private UserGroupLocalService _userGroupLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
