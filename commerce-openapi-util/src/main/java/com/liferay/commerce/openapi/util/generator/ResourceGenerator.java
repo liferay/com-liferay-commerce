@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -157,6 +158,22 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		}
 	}
 
+	protected String getAsyncBlock() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\t\tif (_async.isEnabled()) {\n");
+		sb.append("\t\t\tnew Thread() {\n");
+		sb.append("\t\t\t\tpublic void run() {\n");
+		sb.append("\t\t\t\t\t// TODO\n");
+		sb.append("\t\t\t\t}\n");
+		sb.append("\t\t\t}.start();\n");
+		sb.append("\t\t\t\n");
+		sb.append("\t\t\treturn null;\n");
+		sb.append("\t\t}\n");
+
+		return sb.toString();
+	}
+
 	protected String getReturnType(
 		Method method, Set<OpenApiComponent> openApiComponents) {
 
@@ -177,6 +194,37 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		}
 		else {
 			sb.append("Response ");
+		}
+
+		return sb.toString();
+	}
+
+	protected String toJavaImportStatements(Path path) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("import ");
+		sb.append(_resourceInterfacePackagePath);
+		sb.append(".");
+		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
+		sb.append("Resource;\n");
+
+		sb.append(_getMultipartBodyImportStatement(path.getMethods()));
+
+		for (Method method : path.getMethods()) {
+			String httpMethod = method.getHttpMethod();
+
+			if (Objects.equals(httpMethod, "POST") ||
+				Objects.equals(httpMethod, "PUT")) {
+
+				sb.append(
+					"import com.liferay.commerce.openapi.core.annotation." +
+						"AsyncSupported;\n");
+				sb.append(
+					"import com.liferay.commerce.openapi.core.context.Async;" +
+						"\n");
+
+				break;
+			}
 		}
 
 		return sb.toString();
@@ -263,6 +311,26 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
+	protected String toResourceImplementationFields(List<Method> methods) {
+		StringBuilder sb = new StringBuilder();
+
+		for (Method method : methods) {
+			String httpMethod = method.getHttpMethod();
+
+			if (Objects.equals(httpMethod, "POST") ||
+				Objects.equals(httpMethod, "PUT")) {
+
+				sb.append("\t\n");
+				sb.append("\t@Context\n");
+				sb.append("\tprivate Async _async;\n");
+
+				break;
+			}
+		}
+
+		return sb.toString();
+	}
+
 	protected String toResourceImplementationMethods(
 		List<Method> methods, Set<OpenApiComponent> openApiComponents) {
 
@@ -272,6 +340,14 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		while (iterator.hasNext()) {
 			Method method = iterator.next();
+
+			String httpMethod = method.getHttpMethod();
+
+			if (Objects.equals(httpMethod, "POST") ||
+				Objects.equals(httpMethod, "PUT")) {
+
+				sb.append("\t@AsyncSupported\n");
+			}
 
 			sb.append("\t@Override\n");
 
@@ -285,6 +361,12 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append(_getMethodDeclaration(method, false, openApiComponents));
 
 			sb.append(" {\n");
+
+			if (Objects.equals(httpMethod, "POST") ||
+				Objects.equals(httpMethod, "PUT")) {
+
+				sb.append(getAsyncBlock());
+			}
 
 			if (method.hasResponseContent()) {
 				if (method.hasCollectionReturnType(openApiComponents)) {
@@ -638,22 +720,10 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${PACKAGE}", _resourcePackagePath);
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(
-			_toModelImportStatements(
-				_modelPackagePath, path.getReferencedModels()));
-
-		sb.append("import ");
-		sb.append(_resourceInterfacePackagePath);
-		sb.append(".");
-		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
-		sb.append("Resource;");
-
-		sb.append(_getMultipartBodyImportStatement(path.getMethods()));
+		osgiResourceComponent = osgiResourceComponent.replace(
 
 		osgiResourceComponent = osgiResourceComponent.replace(
-			"${IMPORT_STATEMENTS}", sb.toString());
+			"${JAVA_IMPORT_STATEMENTS}", toJavaImportStatements(path));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${API_VERSION}", version);
@@ -685,6 +755,9 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			"${METHODS}",
 			toResourceImplementationMethods(
 				path.getMethods(), openApiComponents));
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${FIELDS}", toResourceImplementationFields(path.getMethods()));
 
 		writeSource(osgiResourceComponent, componentSourcePath);
 	}
