@@ -93,6 +93,9 @@ public enum RESTError {
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
 		Response.Status.INTERNAL_SERVER_ERROR),
+	TAX_CATEGORY_NAME_ERROR(
+		971, "Invalid tax category name for given language tag",
+		Response.Status.BAD_REQUEST),
 	THREE_LETTERS_COUNTRY_ISO_CODE_ERROR(
 		979, "Invalid ISO 3166-1 three letter country code",
 		Response.Status.BAD_REQUEST),
