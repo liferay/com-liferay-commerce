@@ -14,20 +14,21 @@
  */
 --%>
 
+<%@ include file="/init.jsp" %>
+
 <%
-String redirectUrl = request.getParameter("redirectUrl");
-String token = request.getParameter("token");
+String redirectUrlAttribute = (String)request.getAttribute("redirectUrl");
+String redirectUrl = URLCodec.decodeURL(redirectUrlAttribute);
+String tokenAttribute = (String)request.getAttribute("token");
+String token = URLDecoder.decode(tokenAttribute, "UTF-8");
 %>
 
-<form action="<%= redirectUrl %>" id="formAuthorizeNet" method="post" name="formAuthorizeNet">
+<form action="<%= redirectUrl %>" id="formAuthorizeNet" method="post" name="formAuthorizeNet" style="display: none">
 	<input name="token" type="hidden" value="<%= token %>" />
-
-	<liferay-ui:message key="continue-to-authorize-net-payment-page" />
-
 	<button id="btnContinue">Continue</button>
 </form>
 
-<script use="aui-base">
+<script>
 	window.onload = function() {
 		document.querySelector('form').submit();
 	}
