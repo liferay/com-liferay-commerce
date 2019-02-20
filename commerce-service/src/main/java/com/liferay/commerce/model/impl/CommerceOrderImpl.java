@@ -50,6 +50,16 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	public CommerceOrderImpl() {
 	}
 
+	public long getScopedGroupId() throws PortalException {
+		CommerceAccount commerceAccount = getCommerceAccount();
+
+		if(commerceAccount.isBusinessAccount()){
+			return commerceAccount.getCommerceAccountGroupId();
+		}
+
+		return getGroupId();
+	}
+
 	@Override
 	public CommerceAddress getBillingAddress() throws PortalException {
 		long billingAddressId = getBillingAddressId();
