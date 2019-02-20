@@ -30,6 +30,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=${APPLICATION_BASE}",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=${APPLICATION_NAME}.Rest",
+		OpenApiPropsKeys.ASYNC_SUPPORTED_FEATURE_ENABLED,
 		OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED,
 		OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED,
 		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
