@@ -5,8 +5,10 @@ import Soy, {Config} from 'metal-soy';
 class QuantitySelector extends Component {
 
 	attached() {
-		this.quantity = this.quantity || this.minQuantity;
-		return this._updateQuantity(this.quantity);
+		if(!this.quantity) {
+			this.quantity = this.allowedQuantities ? this.allowedQuantities[0] : this.minQuantity;
+			return this._updateQuantity(this.quantity);
+		}
 	}
 
 	syncQuantity() {
