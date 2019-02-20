@@ -87,19 +87,17 @@ public class ProductHelperImpl implements ProductHelper {
 
 		ProductSettingsModel productSettingsModel = new ProductSettingsModel();
 
-		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
-			cpInstanceId);
-
 		int minOrderQuantity =
 			CPDefinitionInventoryConstants.DEFAULT_MIN_ORDER_QUANTITY;
-
 		int maxOrderQuantity =
 			CPDefinitionInventoryConstants.DEFAULT_MAX_ORDER_QUANTITY;
-
 		int multipleQuantity =
 			CPDefinitionInventoryConstants.DEFAULT_MULTIPLE_ORDER_QUANTITY;
 
 		CPDefinitionInventory cpDefinitionInventory = null;
+
+		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
+			cpInstanceId);
 
 		if (cpInstance != null) {
 			cpDefinitionInventory =
@@ -126,7 +124,7 @@ public class ProductHelperImpl implements ProductHelper {
 
 		productSettingsModel.setMinQuantity(minOrderQuantity);
 		productSettingsModel.setMaxQuantity(maxOrderQuantity);
-		productSettingsModel.setMultipleQuanty(multipleQuantity);
+		productSettingsModel.setMultipleQuantity(multipleQuantity);
 
 		return productSettingsModel;
 	}

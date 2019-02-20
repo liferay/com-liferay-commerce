@@ -16,6 +16,7 @@ package com.liferay.commerce.frontend.taglib.internal.util;
 
 import com.liferay.commerce.frontend.util.ProductHelper;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -33,7 +34,8 @@ public class ProductHelperProvider {
 		return _productHelperProvider._productHelper;
 	}
 
-	public ProductHelperProvider() {
+	@Activate
+	protected void activate() {
 		_productHelperProvider = this;
 	}
 
