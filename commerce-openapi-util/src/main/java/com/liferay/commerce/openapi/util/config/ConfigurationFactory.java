@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util.config;
 
+import com.liferay.commerce.openapi.util.config.exception.ConfigurationException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
@@ -23,11 +25,10 @@ import java.io.InputStream;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,41 +40,95 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfigurationFactory {
 
+	public static Properties getConfigurationFor(String externalReference) {
+		try {
+			for (Properties properties : getConfigurations((String)null)) {
+				if (externalReference.contains(
+						properties.getProperty("openapi.swagger.url"))) {
+
+					return _clone(properties);
+				}
+			}
+		}
+		catch (IOException ioe) {
+			throw new ConfigurationException(
+				"Unable to get configuration for external reference " +
+					externalReference,
+				ioe);
+		}
+
+		throw new ConfigurationException(
+			"No configuration matches external reference " + externalReference);
+	}
+
+	public static List<Properties> getConfigurations(String configurationPath)
+		throws IOException {
+
+		if (!_configurations.isEmpty()) {
+			return _cloneAll(_configurations);
+		}
+
+		List<File> configFiles = _getConfigFiles(configurationPath);
+
+		for (File configFile : configFiles) {
+			_configurations.add(_getConfiguration(configFile));
+		}
+
+		return _cloneAll(_configurations);
+	}
+
 	public static List<Properties> getConfigurations(String[] externalProps)
 		throws IOException {
 
-		List<File> configFiles = _getConfigFiles(_getConfigRootPath());
-
-		List<Properties> configurations = new ArrayList<>();
-
-		for (File configFile : configFiles) {
-			Properties properties = getPropertiesFor(configFile);
-
-			if (externalProps != null) {
-				_mergeExternalProps(properties, externalProps);
-			}
-
-			configurations.add(properties);
+		if (!_configurations.isEmpty()) {
+			return _cloneAll(_configurations);
 		}
 
-		return configurations;
+		List<Properties> configurations = getConfigurations(getPath());
+
+		for (Properties configuration : configurations) {
+			if (externalProps != null) {
+				_mergeExternalProps(configuration, externalProps);
+			}
+		}
+
+		return _cloneAll(_configurations);
 	}
 
-	public static Properties getPropertiesFor(File file) throws IOException {
-		InputStream resourceAsStream = new FileInputStream(file);
+	public static String getPath() {
+		Class<?> clazz = ConfigurationFactory.class;
 
-		try {
-			Properties properties = new Properties();
+		return getPath(clazz);
+	}
 
-			properties.load(resourceAsStream);
+	public static String getPath(Class clazz) {
+		URL url = clazz.getResource(clazz.getSimpleName() + ".class");
 
-			_classProperties.put(file.getAbsolutePath(), properties);
+		String path = url.getPath();
 
-			return properties;
+		path = path.substring(0, path.lastIndexOf(clazz.getSimpleName()));
+
+		return path;
+	}
+
+	private static Properties _clone(Properties properties) {
+		Properties clonedProperties = new Properties();
+
+		clonedProperties.putAll(properties);
+
+		return clonedProperties;
+	}
+
+	private static List<Properties> _cloneAll(
+		Collection<? extends Properties> propertiesCollection) {
+
+		List<Properties> clonedProperties = new ArrayList<>();
+
+		for (Properties properties : propertiesCollection) {
+			clonedProperties.add(_clone(properties));
 		}
-		finally {
-			resourceAsStream.close();
-		}
+
+		return clonedProperties;
 	}
 
 	private static List<File> _getConfigFiles(String configRootPath) {
@@ -106,16 +161,19 @@ public class ConfigurationFactory {
 		return configFiles;
 	}
 
-	private static String _getConfigRootPath() {
-		Class<?> clazz = ConfigurationFactory.class;
+	private static Properties _getConfiguration(File file) throws IOException {
+		InputStream resourceAsStream = new FileInputStream(file);
 
-		URL url = clazz.getResource(clazz.getSimpleName() + ".class");
+		try {
+			Properties properties = new Properties();
 
-		String path = url.getPath();
+			properties.load(resourceAsStream);
 
-		path = path.substring(0, path.lastIndexOf(clazz.getSimpleName()));
-
-		return path;
+			return properties;
+		}
+		finally {
+			resourceAsStream.close();
+		}
 	}
 
 	private static void _mergeExternalProps(
@@ -137,8 +195,7 @@ public class ConfigurationFactory {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		ConfigurationFactory.class);
 
-	private static final Map<String, Properties> _classProperties =
-		new ConcurrentHashMap<>();
+	private static final List<Properties> _configurations = new ArrayList<>();
 	private static final Pattern _propertyPattern = Pattern.compile(
 		"^(.+)=(.+)$");
 
