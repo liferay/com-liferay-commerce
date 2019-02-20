@@ -34,24 +34,24 @@ import org.apache.http.message.BasicNameValuePair;
 public class URLOpenApiReader implements OpenApiReader {
 
 	public URLOpenApiReader(Properties properties) {
-		_apiDefinitionURL = properties.getProperty("openapi.swagger.url");
+		_apiDefinitionURL = properties.getProperty("openapi.url");
 
 		_headers.add(
 			new BasicNameValuePair(
 				"Authorization",
-				properties.getProperty("openapi.swagger.authorization.key")));
+				properties.getProperty("openapi.authorization.key")));
 
 		_jsonWebServiceClient = new JSONWebServiceClientImpl();
 
 		_jsonWebServiceClient.setHostName(
-			properties.getProperty("openapi.swagger.host.name"));
+			properties.getProperty("openapi.host.name"));
 
 		_jsonWebServiceClient.setHostPort(
 			GetterUtil.getInteger(
-				properties.getProperty("openapi.swagger.host.port")));
+				properties.getProperty("openapi.host.port")));
 
 		_jsonWebServiceClient.setProtocol(
-			properties.getProperty("openapi.swagger.protocol"));
+			properties.getProperty("openapi.protocol"));
 	}
 
 	@Override

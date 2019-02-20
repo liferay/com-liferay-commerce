@@ -29,13 +29,13 @@ public class OpenApiReaderFactory {
 
 	public static OpenApiReader getOpenApiReader(Properties configuration) {
 		String hostName = configuration.getProperty(
-			"openapi.swagger.host.name");
+			"openapi.host.name");
 
 		if ((hostName != null) && (hostName.length() != 0)) {
 			return new URLOpenApiReader(configuration);
 		}
 
-		String openApiUrl = configuration.getProperty("openapi.swagger.url");
+		String openApiUrl = configuration.getProperty("openapi.url");
 
 		return new FileOpenApiReader(openApiUrl);
 	}
@@ -52,7 +52,7 @@ public class OpenApiReaderFactory {
 		String componentReference = referenceParts[1];
 
 		_logger.info(
-			"External reference detected - location: {} reference: {}",
+			"External reference confirmed - location: {} reference: {}",
 			externalUrl, componentReference);
 
 		if (!externalUrl.startsWith("http")) {
