@@ -230,7 +230,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
-	protected String toJavaxImports(
+	protected String toJavaxImportStatements(
 		List<Method> methods, Set<OpenApiComponent> openApiComponents) {
 
 		Set<String> importStatements = new HashSet<>();
@@ -739,7 +739,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			toJavaxImports(path.getMethods(), openApiComponents));
+			toJavaxImportStatements(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
@@ -788,7 +788,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			toJavaxImports(path.getMethods(), openApiComponents));
+			toJavaxImportStatements(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${PATH}", path.getName());
