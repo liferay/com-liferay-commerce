@@ -256,6 +256,11 @@ public interface CPMeasurementUnitLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId,
+		int start, int end,
+		OrderByComparator<CPMeasurementUnit> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId,
 		String[] keys, int type);
 
 	/**

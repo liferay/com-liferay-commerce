@@ -78,6 +78,19 @@ public class CPMeasurementUnitServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCPMeasurementUnits(groupId, start, end, orderByComparator);
+	}
+
+	public static int getCPMeasurementUnitsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPMeasurementUnitsCount(groupId);
+	}
+
 	public static int getCPMeasurementUnitsCount(long groupId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPMeasurementUnitsCount(groupId, type);

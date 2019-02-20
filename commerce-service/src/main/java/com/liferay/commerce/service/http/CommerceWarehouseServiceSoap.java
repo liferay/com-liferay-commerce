@@ -142,6 +142,38 @@ public class CommerceWarehouseServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceWarehouseSoap[] getCommerceWarehouses(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceWarehouse> returnValue =
+				CommerceWarehouseServiceUtil.getCommerceWarehouses(groupId,
+					start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceWarehousesCount(long groupId)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceWarehouseServiceUtil.getCommerceWarehousesCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceWarehouseSoap[] getCommerceWarehouses(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
 		throws RemoteException {
@@ -201,6 +233,21 @@ public class CommerceWarehouseServiceSoap {
 		try {
 			int returnValue = CommerceWarehouseServiceUtil.getCommerceWarehousesCount(groupId,
 					active, commerceCountryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceWarehousesCount(long groupId, boolean active)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceWarehouseServiceUtil.getCommerceWarehousesCount(groupId,
+					active);
 
 			return returnValue;
 		}

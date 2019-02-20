@@ -80,6 +80,16 @@ public interface CPMeasurementUnitService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId,
+		int start, int end,
+		OrderByComparator<CPMeasurementUnit> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPMeasurementUnitsCount(long groupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPMeasurementUnitsCount(long groupId, int type)
 		throws PortalException;
 

@@ -290,6 +290,14 @@ public class CommerceWarehouseLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator) {
+		return _commerceWarehouseLocalService.getCommerceWarehouses(groupId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long groupId, long commerceCountryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator) {
 		return _commerceWarehouseLocalService.getCommerceWarehouses(groupId,
@@ -304,6 +312,17 @@ public class CommerceWarehouseLocalServiceWrapper
 	@Override
 	public int getCommerceWarehousesCount() {
 		return _commerceWarehouseLocalService.getCommerceWarehousesCount();
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId) {
+		return _commerceWarehouseLocalService.getCommerceWarehousesCount(groupId);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId, boolean active) {
+		return _commerceWarehouseLocalService.getCommerceWarehousesCount(groupId,
+			active);
 	}
 
 	@Override

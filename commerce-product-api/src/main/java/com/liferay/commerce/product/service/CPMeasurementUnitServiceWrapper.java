@@ -74,6 +74,21 @@ public class CPMeasurementUnitServiceWrapper implements CPMeasurementUnitService
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpMeasurementUnitService.getCPMeasurementUnits(groupId, start,
+			end, orderByComparator);
+	}
+
+	@Override
+	public int getCPMeasurementUnitsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpMeasurementUnitService.getCPMeasurementUnitsCount(groupId);
+	}
+
+	@Override
 	public int getCPMeasurementUnitsCount(long groupId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpMeasurementUnitService.getCPMeasurementUnitsCount(groupId,
