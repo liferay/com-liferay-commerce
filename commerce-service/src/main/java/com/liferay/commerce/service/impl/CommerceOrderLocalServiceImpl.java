@@ -1232,7 +1232,7 @@ public class CommerceOrderLocalServiceImpl
 		Map<String, Serializable> workflowContext = new HashMap<>();
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			commerceOrder.getCompanyId(), commerceOrder.getScopedGroupId(),
+			commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
 			userId, CommerceOrder.class.getName(),
 			commerceOrder.getCommerceOrderId(), commerceOrder, serviceContext,
 			workflowContext);

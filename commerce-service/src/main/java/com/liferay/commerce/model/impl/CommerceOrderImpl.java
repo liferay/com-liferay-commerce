@@ -119,7 +119,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		return null;
 	}
 
-	public long getScopedGroupId() throws PortalException {
+	public long getScopeGroupId() throws PortalException {
 		CommerceAccount commerceAccount = getCommerceAccount();
 
 		if (commerceAccount.isBusinessAccount()) {
