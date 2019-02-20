@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.internal.security.permission.resource;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -29,10 +28,10 @@ import java.util.function.ToLongFunction;
 /**
  * @author Marco Leo
  */
-public class CommerceWorkflowedModelPermissionLogic
+public class CommerceOrderWorkflowedModelPermissionLogic
 	implements ModelResourcePermissionLogic<CommerceOrder> {
 
-	public CommerceWorkflowedModelPermissionLogic(
+	public CommerceOrderWorkflowedModelPermissionLogic(
 		WorkflowPermission workflowPermission,
 		ModelResourcePermission<CommerceOrder> modelResourcePermission,
 		ToLongFunction<CommerceOrder> primKeyToLongFunction) {
@@ -49,10 +48,6 @@ public class CommerceWorkflowedModelPermissionLogic
 			CommerceOrder commerceOrder, String actionId)
 		throws PortalException {
 
-		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
-
-		long groupId = commerceAccount.getCommerceAccountGroupId();
-
 		if (commerceOrder.isDraft() || commerceOrder.isScheduled()) {
 			if (!actionId.equals(ActionKeys.VIEW) ||
 				_modelResourcePermission.contains(
@@ -65,7 +60,7 @@ public class CommerceWorkflowedModelPermissionLogic
 		}
 		else if (commerceOrder.isPending()) {
 			return _workflowPermission.hasPermission(
-				permissionChecker, groupId, name,
+				permissionChecker, commerceOrder.getScopedGroupId(), name,
 				_primKeyToLongFunction.applyAsLong(commerceOrder), actionId);
 		}
 
