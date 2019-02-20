@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiContextExtension;
+import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.Security;
@@ -56,6 +57,44 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			"Return type is entity DTO", "TestModel1DTO ",
 			resourceGenerator.getReturnType(
 				getMethod, _getRandomComponentDefinitions(4, "TestModel")));
+	}
+
+	@Test
+	public void testToJavaImportStatements() {
+		ResourceGenerator resourceGenerator = new ResourceGenerator(
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
+
+		Path path = new Path("TestModel", "TestModel");
+
+		Set<OpenApiComponent> openApiComponents =
+			_getRandomComponentDefinitions(4, "TestModel");
+
+		List<Method> methods = _getMethods(
+			true, "testModel", Collections.emptyList());
+
+		for (Method method : methods) {
+			path.addMethod(method, openApiComponents);
+		}
+
+		String imports = resourceGenerator.toJavaImportStatements(path);
+
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			containsOnlyOne(imports, "import test.v1_0.TestModelResource;"));
+
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			containsOnlyOne(
+				imports,
+				"import com.liferay.commerce.openapi.core.annotation." +
+					"AsyncSupported;"));
+
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			containsOnlyOne(
+				imports,
+				"import com.liferay.commerce.openapi.core.context.Async;"));
 	}
 
 	@Test
@@ -112,6 +151,15 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			resourceGenerator.toResourceImplementationMethods(
 				_getMethods(true, "testModel", Collections.emptyList()),
 				_getRandomComponentDefinitions(4, "TestModel"));
+
+		Assert.assertTrue(
+			"Exactly one @AsyncSupported expected",
+			containsOnlyOne(implementationMethods, "@AsyncSupported\n"));
+
+		Assert.assertTrue(
+			"Exactly one async block expected",
+			containsOnlyOne(
+				implementationMethods, resourceGenerator.getAsyncBlock()));
 
 		Assert.assertTrue(
 			"RequiresScope read expected",
