@@ -29,13 +29,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 
-// import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.jsp.PageContext;
-
-// import java.util.List;
-
-import java.util.Map;
 
 /**
  * @author Fabio Diego Mastrorilli

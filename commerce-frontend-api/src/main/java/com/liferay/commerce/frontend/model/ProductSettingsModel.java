@@ -47,7 +47,7 @@ public class ProductSettingsModel {
 		_minQuantity = minQuantity;
 	}
 
-	public void setMultipleQuanty(int multipleQuantity) {
+	public void setMultipleQuantity(int multipleQuantity) {
 		_multipleQuantity = multipleQuantity;
 	}
 
