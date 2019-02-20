@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -141,18 +143,26 @@ public class CommerceUserSegmentsImporter {
 			"AssociatedPriceList");
 
 		if (!Validator.isBlank(associatedPriceListName)) {
-			CommercePriceList commercePriceList = getCommercePriceList(
-				associatedPriceListName);
+			try {
+				CommercePriceList commercePriceList = getCommercePriceList(
+					associatedPriceListName);
 
-			_commercePriceListUserSegmentEntryRelLocalService.
-				addCommercePriceListUserSegmentEntryRel(
-					commercePriceList.getCommercePriceListId(),
-					commerceUserSegmentEntry.getCommerceUserSegmentEntryId(), 0,
-					serviceContext);
+				_commercePriceListUserSegmentEntryRelLocalService.
+					addCommercePriceListUserSegmentEntryRel(
+						commercePriceList.getCommercePriceListId(),
+						commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+						0,	serviceContext);
+			}
+			catch (NoSuchPriceListException nsple) {
+				_log.error(nsple, nsple);
+			}
 		}
 
 		return commerceUserSegmentEntry;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceUserSegmentsImporter.class);
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;
