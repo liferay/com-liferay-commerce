@@ -25,7 +25,7 @@ import java.util.Collections;
 
 import javax.annotation.Generated;
 
-${MODEL_IMPORT_STATEMENTS_JAVAX}
+${JAVAX_IMPORT_STATEMENTS}
 
 import javax.ws.rs.core.Response;
 
