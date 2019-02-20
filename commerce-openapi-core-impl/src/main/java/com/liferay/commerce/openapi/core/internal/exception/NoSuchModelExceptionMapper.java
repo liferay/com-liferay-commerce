@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.exception;
+package com.liferay.commerce.openapi.core.internal.exception;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 import com.liferay.commerce.openapi.core.exception.RESTError;
-import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
+import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -26,32 +27,32 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Matija Petanjek
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ExceptionMapper.class
 )
 @Provider
-public class NoSuchCPInstanceExceptionMapper
-	extends BaseExceptionMapper<NoSuchCPInstanceException> {
+public class NoSuchModelExceptionMapper
+	extends BaseExceptionMapper<NoSuchModelException> {
 
 	@Override
 	public int getErrorCode() {
-		return RESTError.NO_SUCH_CP_INSTANCE.getErrorCode();
+		return RESTError.NO_SUCH_MODEL.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return RESTError.NO_SUCH_CP_INSTANCE.getErrorDescription();
+		return RESTError.NO_SUCH_MODEL.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return RESTError.NO_SUCH_CP_INSTANCE.getStatus();
+		return RESTError.NO_SUCH_MODEL.getStatus();
 	}
 
 }
