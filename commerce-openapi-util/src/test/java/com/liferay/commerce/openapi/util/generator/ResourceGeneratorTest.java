@@ -98,12 +98,12 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	}
 
 	@Test
-	public void testToJavaxImports() {
+	public void testToJavaxImportStatements() {
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
 			"test", "test", "test", "test", "test", false, "test", "test",
 			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
-		String imports = resourceGenerator.toJavaxImports(
+		String imports = resourceGenerator.toJavaxImportStatements(
 			_getMethods(true, "testModel", Collections.emptyList()),
 			_getRandomComponentDefinitions(4, "TestModel"));
 
@@ -114,7 +114,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			"Exactly one import statement expected",
 			containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 
-		imports = resourceGenerator.toJavaxImports(
+		imports = resourceGenerator.toJavaxImportStatements(
 			_getMethods(
 				true, "testModel",
 				_getExtensions(
