@@ -30,8 +30,10 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.http.NameValuePair;
@@ -141,11 +143,14 @@ public class OpenAPIImporter {
 
 		MethodImporter methodImporter = new MethodImporter();
 
+		Map<String, Integer> methodNamesCount = new HashMap<>();
+
 		while (iterator.hasNext()) {
 			String path = iterator.next();
 
 			List<Method> methods = methodImporter.getMethods(
-				path, pathsJSONNode.get(path), openApiComponents);
+				path, pathsJSONNode.get(path), openApiComponents,
+				methodNamesCount);
 
 			for (Method method : methods) {
 				openApi.addMethod(method);
