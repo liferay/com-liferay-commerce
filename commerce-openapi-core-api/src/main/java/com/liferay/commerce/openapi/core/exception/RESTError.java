@@ -60,6 +60,8 @@ public enum RESTError {
 	INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE(
 		994, "Invalid commerce price list expiration date.",
 		Response.Status.BAD_REQUEST),
+	MEASUREMENT_UNIT_KEY_ERROR(
+		972, "Invalid measurement unit key", Response.Status.BAD_REQUEST),
 	NO_SUCH_CURRENCY(
 		996,
 		"Unable to find currency. Currency code should be expressed with " +
