@@ -664,7 +664,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			"${APPLICATION_NAME}", _applicationName);
 
 		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
+			"${JAVAX_IMPORT_STATEMENTS}",
 			toJavaxImportStatements(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -713,7 +713,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			"${AUTHOR}", _author);
 
 		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
+			"${JAVAX_IMPORT_STATEMENTS}",
 			toJavaxImportStatements(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
