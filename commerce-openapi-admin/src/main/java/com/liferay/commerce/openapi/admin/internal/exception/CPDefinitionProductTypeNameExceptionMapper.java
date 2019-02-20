@@ -41,17 +41,17 @@ public class CPDefinitionProductTypeNameExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return RESTError.NO_SUCH_PRODUCT_TYPE_NAME.getErrorCode();
+		return RESTError.PRODUCT_TYPE_NAME_ERROR.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return RESTError.NO_SUCH_PRODUCT_TYPE_NAME.getErrorDescription();
+		return RESTError.PRODUCT_TYPE_NAME_ERROR.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return RESTError.NO_SUCH_PRODUCT_TYPE_NAME.getStatus();
+		return RESTError.PRODUCT_TYPE_NAME_ERROR.getStatus();
 	}
 
 }
