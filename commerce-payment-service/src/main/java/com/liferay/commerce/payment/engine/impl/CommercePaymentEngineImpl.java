@@ -482,7 +482,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	@Override
 	public CommercePaymentResult startPayment(
-			long commerceOrderId, String checkoutStepUrl,
+			long commerceOrderId, String nextUrl,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
 
@@ -491,11 +491,10 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		if (commerceOrder.isSubscriptionOrder()) {
 			return processRecurringPayment(
-				commerceOrderId, checkoutStepUrl, httpServletRequest);
+				commerceOrderId, nextUrl, httpServletRequest);
 		}
 
-		return processPayment(
-			commerceOrderId, checkoutStepUrl, httpServletRequest);
+		return processPayment(commerceOrderId, nextUrl, httpServletRequest);
 	}
 
 	/**

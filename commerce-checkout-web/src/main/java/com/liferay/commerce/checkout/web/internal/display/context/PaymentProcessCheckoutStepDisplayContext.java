@@ -21,6 +21,7 @@ import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracke
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -49,16 +50,20 @@ public class PaymentProcessCheckoutStepDisplayContext {
 	}
 
 	public String getPaymentServletUrl() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append(_getPortalUrl());
 		sb.append(_getPathModule());
 		sb.append(CharPool.SLASH);
 		sb.append(_getPaymentServletPath());
 		sb.append(CharPool.QUESTION);
-		sb.append("commerceOrderId=");
-		sb.append(_commerceOrder.getCommerceOrderId());
-		sb.append("&confirmationStep=");
+		sb.append("groupId=");
+		sb.append(_commerceOrder.getGroupId());
+		sb.append(StringPool.AMPERSAND);
+		sb.append("uuid=");
+		sb.append(_commerceOrder.getUuid());
+		sb.append(StringPool.AMPERSAND);
+		sb.append("nextStep=");
 		sb.append(URLCodec.encodeURL(_getOrderConfirmationCheckoutStepUrl()));
 
 		return sb.toString();
