@@ -21,7 +21,7 @@ class SearchBar extends Component {
 	}
 
 	_handleClickOutside(e) {
-		const suggestions = document.querySelector('.minium-suggestions');
+		const suggestions = document.querySelector('.commerce-suggestions');
 		if (
 			!(
 				this.element.contains(e.target) ||

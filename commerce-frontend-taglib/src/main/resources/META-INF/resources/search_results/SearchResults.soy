@@ -10,8 +10,8 @@
 	{@param? _handleClick: ? }
 
 	{if $visible}
-		<div class="minium-suggestions {if $loading}is-loading{/if}">
-			<div class="minium-suggestions__wrapper">
+		<div class="commerce-suggestions {if $loading}is-loading{/if}">
+			<div class="commerce-suggestions__wrapper">
 
 				{foreach $item in $results}
 					{delcall MiniumSearchResults.Item variant="$item.type"}
@@ -23,7 +23,7 @@
 
 			</div>
 
-			<div class="minium-suggestions__hints">
+			<div class="commerce-suggestions__hints">
 				{call ClayIcon.render}
 					{param spritemap: $spritemap /}
 					{param symbol: 'to-navigate' /}
@@ -56,15 +56,15 @@
 	{@param? _handleClick: ? }
 
 	<div
-		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
+		class="commerce-suggestions__item {if $item.selected}is-selected{/if}"
 		onclick="{$_handleClick}"
 		data-onmouseenter="handleMouseEnter"
 		data-onmouseleave="handleMouseLeave"
 		data-pos="{$item.pos}"
 	>
-		<div class="minium-item minium-item--search">
-			<img alt="" class="minium-item__image" src="{$item.image}">
-			<div class="minium-item__content">
+		<div class="commerce-item commerce-item--search">
+			<img alt="" class="commerce-item__image" src="{$item.image}">
+			<div class="commerce-item__content">
 				{$item.title}<br>
 				{$item.subtitle}
 			</div>
@@ -78,7 +78,7 @@
 	{@param? _handleClick: ? }
 
 	<div
-		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
+		class="commerce-suggestions__item {if $item.selected}is-selected{/if}"
 		onclick="{$_handleClick}"
 		data-onmouseenter="handleMouseEnter"
 		data-onmouseleave="handleMouseLeave"
@@ -94,7 +94,7 @@
 	{@param? _handleClick: ? }
 
 	<div
-		class="minium-suggestions__label"
+		class="commerce-suggestions__label"
 		onclick="{$_handleClick}"
 		data-onmouseenter="handleMouseEnter"
 		data-onmouseleave="handleMouseLeave"
