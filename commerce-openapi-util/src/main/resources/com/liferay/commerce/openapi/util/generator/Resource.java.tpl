@@ -21,7 +21,7 @@ ${MODEL_IMPORT_STATEMENTS}
 
 import javax.annotation.Generated;
 
-${MODEL_IMPORT_STATEMENTS_JAVAX}
+${JAVAX_IMPORT_STATEMENTS}
 
 import javax.annotation.Generated;
 import javax.ws.rs.Path;
