@@ -61,7 +61,7 @@
 
 	<div class="mini-cart-wrapper" id="mini-cart-wrapper">
 		<button
-			class="minium-topbar__button{$openCartButtonModifiers}"
+			class="commerce-topbar__button{$openCartButtonModifiers}"
 			data-badge-count={$formattedProductsQuantity}
 			data-onclick="toggleCart"
 		>
@@ -71,9 +71,9 @@
 			{/call}
 		</button>
 
-		<div class="minium-cart{$cartModifiers}">
+		<div class="commerce-cart{$cartModifiers}">
 			<button
-				class="minium-topbar__button minium-cart__close"
+				class="commerce-topbar__button commerce-cart__close"
 				data-onclick="toggleCart"
 			>
 				{call ClayIcon.render}
@@ -82,15 +82,15 @@
 				{/call}
 			</button>
 
-			<div class="minium-cart__top">
-				<div class="minium-cart__products-quantity">
+			<div class="commerce-cart__top">
+				<div class="commerce-cart__products-quantity">
 					<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
 				</div>
 
-				<a class="minium-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+				<a class="commerce-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
 			</div>
 
-			<div class="minium-cart__content">
+			<div class="commerce-cart__content">
 				{if isNonnull($products)}
 					{foreach $product in $products}
 						{call CartProduct.render}

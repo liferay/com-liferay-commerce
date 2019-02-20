@@ -8,20 +8,20 @@
 	{@param? inverted: bool}
 
 	{let $loaderClasses kind="text"}
-		minium-loader__dots-wrapper
+		commerce-loader__dots-wrapper
 		{if isNonnull($direction)}
-			{sp}minium-loader__dots-wrapper--{$direction}
+			{sp}commerce-loader__dots-wrapper--{$direction}
 		{/if}
 		{if isNonnull($inverted) and $inverted}
-			{sp}minium-loader__dots-wrapper--inverted
+			{sp}commerce-loader__dots-wrapper--inverted
 		{/if}
 	{/let}
 
-	<span class="minium-loader">
+	<span class="commerce-loader">
 		<div class="{$loaderClasses}">
-			<div class="minium-loader__dot"></div>
-			<div class="minium-loader__dot"></div>
-			<div class="minium-loader__dot"></div>
+			<div class="commerce-loader__dot"></div>
+			<div class="commerce-loader__dot"></div>
+			<div class="commerce-loader__dot"></div>
 		</div>
 	</span>
 {/template}
