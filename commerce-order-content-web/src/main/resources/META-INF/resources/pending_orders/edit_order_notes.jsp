@@ -32,7 +32,7 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 <div class="b2b-portlet-content-header">
 	<div class="row">
 		<div class="col">
-			<div class="minium-typo__section-title">
+			<div class="commerce-typo__section-title">
 				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
 			</div>
 		</div>
@@ -50,8 +50,8 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 
 	<div class="taglib-discussion">
 		<c:if test="<%= manageNotesPermission || manageRestrictedNotesPermission %>">
-			<div class="minium-card">
-				<div class="minium-card__content">
+			<div class="commerce-panel">
+				<div class="commerce-panel__content">
 					<div class="lfr-discussion-details">
 						<liferay-ui:user-portrait
 							cssClass="user-icon-lg"
@@ -82,8 +82,8 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 		for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
 		%>
 
-			<article class="minium-card">
-				<div class="minium-card__content">
+			<article class="commerce-panel">
+				<div class="commerce-panel__content">
 					<div class="panel-body">
 						<div class="card-row">
 							<div class="card-col-content">

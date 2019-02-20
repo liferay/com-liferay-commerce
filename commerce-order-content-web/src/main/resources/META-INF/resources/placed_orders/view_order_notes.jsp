@@ -25,7 +25,7 @@ CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrde
 <div class="b2b-portlet-content-header">
 	<div class="row">
 		<div class="col">
-			<div class="minium-typo__section-title">
+			<div class="commerce-typo__section-title">
 				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
 			</div>
 		</div>
@@ -40,8 +40,8 @@ CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrde
 	for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
 	%>
 
-		<article class="minium-card">
-			<div class="minium-card__content">
+		<article class="commerce-panel">
+			<div class="commerce-panel__content">
 				<div class="panel-body">
 					<div class="card-row">
 						<div class="card-col-content">
