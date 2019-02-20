@@ -53,7 +53,7 @@ public class StatusFeature implements DynamicFeature {
 		StatusControlFilter statusControlFilter = new StatusControlFilter(
 			status.value());
 
-		context.register(statusControlFilter);
+		context.register(statusControlFilter, 2);
 	}
 
 }
