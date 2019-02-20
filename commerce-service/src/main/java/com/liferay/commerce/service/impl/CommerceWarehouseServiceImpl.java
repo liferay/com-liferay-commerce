@@ -155,6 +155,20 @@ public class CommerceWarehouseServiceImpl
 
 	@Override
 	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+
+		return commerceWarehouseLocalService.getCommerceWarehouses(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceWarehouse> getCommerceWarehouses(
 			long groupId, long commerceCountryId, int start, int end,
 			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException {
@@ -165,6 +179,28 @@ public class CommerceWarehouseServiceImpl
 
 		return commerceWarehouseLocalService.getCommerceWarehouses(
 			groupId, commerceCountryId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId) throws PortalException {
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+
+		return commerceWarehouseLocalService.getCommerceWarehousesCount(
+			groupId);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId, boolean active)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+
+		return commerceWarehouseLocalService.getCommerceWarehousesCount(
+			groupId, active);
 	}
 
 	@Override

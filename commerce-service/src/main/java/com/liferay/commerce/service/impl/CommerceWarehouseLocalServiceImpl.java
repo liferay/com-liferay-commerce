@@ -206,6 +206,15 @@ public class CommerceWarehouseLocalServiceImpl
 
 	@Override
 	public List<CommerceWarehouse> getCommerceWarehouses(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return commerceWarehousePersistence.findByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceWarehouse> getCommerceWarehouses(
 		long groupId, long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
 
@@ -217,6 +226,16 @@ public class CommerceWarehouseLocalServiceImpl
 
 		return commerceWarehousePersistence.findByG_P(
 			groupId, false, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId) {
+		return commerceWarehousePersistence.countByGroupId(groupId);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId, boolean active) {
+		return commerceWarehousePersistence.countByG_A(groupId, active);
 	}
 
 	@Override
