@@ -44,7 +44,7 @@ public class ConfigurationFactory {
 		try {
 			for (Properties properties : getConfigurations((String)null)) {
 				if (externalReference.contains(
-						properties.getProperty("openapi.swagger.url"))) {
+						properties.getProperty("openapi.url"))) {
 
 					return _clone(properties);
 				}
