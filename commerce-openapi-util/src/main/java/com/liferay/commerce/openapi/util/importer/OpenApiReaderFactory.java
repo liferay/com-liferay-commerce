@@ -28,8 +28,7 @@ import org.slf4j.LoggerFactory;
 public class OpenApiReaderFactory {
 
 	public static OpenApiReader getOpenApiReader(Properties configuration) {
-		String hostName = configuration.getProperty(
-			"openapi.host.name");
+		String hostName = configuration.getProperty("openapi.host.name");
 
 		if ((hostName != null) && (hostName.length() != 0)) {
 			return new URLOpenApiReader(configuration);
