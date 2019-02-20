@@ -630,6 +630,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
+	public long getScopedGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrder.getScopedGroupId();
+	}
+
+	@Override
 	public CommerceAddress getShippingAddress()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrder.getShippingAddress();
