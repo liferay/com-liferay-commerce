@@ -47,8 +47,7 @@ public class URLOpenApiReader implements OpenApiReader {
 			properties.getProperty("openapi.host.name"));
 
 		_jsonWebServiceClient.setHostPort(
-			GetterUtil.getInteger(
-				properties.getProperty("openapi.host.port")));
+			GetterUtil.getInteger(properties.getProperty("openapi.host.port")));
 
 		_jsonWebServiceClient.setProtocol(
 			properties.getProperty("openapi.protocol"));
