@@ -4,14 +4,24 @@ import Soy, {Config} from 'metal-soy';
 
 import '../quantity_selector/QuantitySelector.es';
 
+const selectInput = (element) => {
+	const inputBox = element.querySelector('input');
+	const selectBox = element.querySelector('select');
+	
+	if (inputBox) {
+		inputBox.focus();
+		inputBox.select();
+	}
+	else if (selectBox) {
+		selectBox.focus();
+	}
+}
+
 class AddToCartButton extends Component {
 
-	rendered() {
-		if (this.element.querySelector('input')) {
-			this.element.querySelector('input').focus();
-		}
-		else if (this.element.querySelector('select')) {
-			this.element.querySelector('select').focus();
+    willReceiveState(changes) {
+		if(changes.editMode) {
+			setTimeout(() => selectInput(this.element), 100);
 		}
 	}
 
