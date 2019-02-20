@@ -614,18 +614,18 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the impl app local service.
+	 * Returns the dl app local service.
 	 *
-	 * @return the impl app local service
+	 * @return the dl app local service
 	 */
 	public com.liferay.document.library.kernel.service.DLAppLocalService getDLAppLocalService() {
 		return dlAppLocalService;
 	}
 
 	/**
-	 * Sets the impl app local service.
+	 * Sets the dl app local service.
 	 *
-	 * @param dlAppLocalService the impl app local service
+	 * @param dlAppLocalService the dl app local service
 	 */
 	public void setDLAppLocalService(
 		com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService) {

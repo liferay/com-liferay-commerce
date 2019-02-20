@@ -55,9 +55,6 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 			}
 		};
 
-	public long getScopedGroupId()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
 	public CommerceAddress getBillingAddress()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -76,6 +73,9 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 		long cpInstanceId);
 
 	public CommerceShippingMethod getCommerceShippingMethod()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public long getScopeGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public CommerceAddress getShippingAddress()
