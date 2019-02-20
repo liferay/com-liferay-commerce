@@ -19,6 +19,9 @@ package com.liferay.commerce.openapi.core.constants;
  */
 public abstract class OpenApiPropsKeys {
 
+	public static final String ASYNC_SUPPORTED_FEATURE_ENABLED =
+		"liferay.jaxrs.async.supported.feature.enabled=true";
+
 	public static final String CONTEXT_PROVIDERS_ENABLED =
 		"liferay.jaxrs.context.providers.enabled=true";
 
