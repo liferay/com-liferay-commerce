@@ -15,8 +15,10 @@
 package com.liferay.commerce.headless.admin.site.setting.internal.v1_0;
 
 import com.liferay.commerce.headless.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
+import com.liferay.commerce.headless.admin.site.setting.model.v1_0.MeasurementUnitDTO;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.openapi.core.util.LanguageUtils;
+import com.liferay.commerce.product.model.CPMeasurementUnit;
 
 /**
  * @author Alessio Antonio Rendina
@@ -29,6 +31,10 @@ public class DTOUtils {
 		AvailabilityEstimateDTO availabilityEstimateDTO =
 			new AvailabilityEstimateDTO();
 
+		if (commerceAvailabilityEstimate == null) {
+			return availabilityEstimateDTO;
+		}
+
 		availabilityEstimateDTO.setId(
 			commerceAvailabilityEstimate.getCommerceAvailabilityEstimateId());
 		availabilityEstimateDTO.setPriority(
@@ -38,6 +44,27 @@ public class DTOUtils {
 				commerceAvailabilityEstimate.getTitleMap()));
 
 		return availabilityEstimateDTO;
+	}
+
+	public static MeasurementUnitDTO modelToDTO(
+		CPMeasurementUnit cpMeasurementUnit) {
+
+		MeasurementUnitDTO measurementUnitDTO = new MeasurementUnitDTO();
+
+		if (cpMeasurementUnit == null) {
+			return measurementUnitDTO;
+		}
+
+		measurementUnitDTO.setId(cpMeasurementUnit.getCPMeasurementUnitId());
+		measurementUnitDTO.setKey(cpMeasurementUnit.getKey());
+		measurementUnitDTO.setName(
+			LanguageUtils.getLanguageIdMap(cpMeasurementUnit.getNameMap()));
+		measurementUnitDTO.setPrimary(cpMeasurementUnit.isPrimary());
+		measurementUnitDTO.setPriority(cpMeasurementUnit.getPriority());
+		measurementUnitDTO.setRate(cpMeasurementUnit.getRate());
+		measurementUnitDTO.setType(cpMeasurementUnit.getType());
+
+		return measurementUnitDTO;
 	}
 
 	private DTOUtils() {
