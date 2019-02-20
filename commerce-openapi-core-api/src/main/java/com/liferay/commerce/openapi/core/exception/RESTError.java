@@ -57,6 +57,8 @@ public enum RESTError {
 	PRINCIPAL_ERROR(
 		983, Response.Status.NOT_FOUND.getReasonPhrase(),
 		Response.Status.NOT_FOUND),
+	PRODUCT_TYPE_NAME_ERROR(
+		980, "Unable to find product type.", Response.Status.BAD_REQUEST),
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
 		Response.Status.INTERNAL_SERVER_ERROR),
