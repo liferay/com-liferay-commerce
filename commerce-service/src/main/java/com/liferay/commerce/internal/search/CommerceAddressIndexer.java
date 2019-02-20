@@ -127,7 +127,7 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 
 		document.addText(FIELD_CITY, commerceAddress.getCity());
 		document.addText(Field.NAME, commerceAddress.getName());
-		document.addNumber(FIELD_ZIP, commerceAddress.getZip());
+		document.addText(FIELD_ZIP, commerceAddress.getZip());
 
 		CommerceCountry commerceCountry = commerceAddress.getCommerceCountry();
 
