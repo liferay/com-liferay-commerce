@@ -21,29 +21,27 @@ import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactory;
-
 import com.liferay.portal.kernel.util.GetterUtil;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alec Sloan
  */
-@Component(
-	immediate = true,
-	service = CommerceCatalogDefaultImage.class
-)
+@Component(immediate = true, service = CommerceCatalogDefaultImage.class)
 public class CommerceCatalogDefaultImageImpl
 	implements CommerceCatalogDefaultImage {
 
 	@Override
-	public long getDefaultCatalogFileEntryId(long groupId) throws PortalException {
+	public long getDefaultCatalogFileEntryId(long groupId)
+		throws PortalException {
+
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
 				groupId, CommerceMediaConstants.SERVICE_NAME));
 
-		return GetterUtil.getLong(
-			settings.getValue("defaultFileEntryId", "0"));
+		return GetterUtil.getLong(settings.getValue("defaultFileEntryId", "0"));
 	}
 
 	@Override
