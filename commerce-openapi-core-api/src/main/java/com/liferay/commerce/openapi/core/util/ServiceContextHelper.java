@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.core.util;
 
 import aQute.bnd.annotation.ConsumerType;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
