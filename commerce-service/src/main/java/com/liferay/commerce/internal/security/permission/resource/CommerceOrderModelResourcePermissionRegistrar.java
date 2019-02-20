@@ -57,7 +57,7 @@ public class CommerceOrderModelResourcePermissionRegistrar {
 				_portletResourcePermission,
 				(modelResourcePermission, consumer) -> {
 					consumer.accept(
-						new CommerceWorkflowedModelPermissionLogic(
+						new CommerceOrderWorkflowedModelPermissionLogic(
 							_workflowPermission, modelResourcePermission,
 							CommerceOrder::getCommerceOrderId));
 
