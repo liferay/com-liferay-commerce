@@ -16,16 +16,20 @@ package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
+import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
+import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
-import com.liferay.document.library.kernel.service.DLAppLocalService;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
@@ -35,14 +39,11 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.ListTypeConstants;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.model.RoleConstants;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.RoleLocalService;
+import com.liferay.portal.kernel.model.OrganizationConstants;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -50,9 +51,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -63,26 +62,17 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceAccountsImporter.class)
 public class CommerceAccountsImporter {
 
-	public List<CommerceAccount> importCommerceAccounts(
+	public void importCommerceAccounts(
 			JSONArray jsonArray, ClassLoader classLoader,
-			Map<String, Organization> organizations, String dependenciesPath,
-			ServiceContext serviceContext)
+			String dependenciesPath, ServiceContext serviceContext)
 		throws Exception {
-
-		List<CommerceAccount> commerceAccounts = new ArrayList<>(
-			jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			CommerceAccount commerceAccount = _importCommerceAccount(
-				jsonObject, classLoader, organizations, dependenciesPath,
-				serviceContext);
-
-			commerceAccounts.add(commerceAccount);
+			_importCommerceAccount(
+				jsonObject, classLoader, dependenciesPath, serviceContext);
 		}
-
-		return commerceAccounts;
 	}
 
 	protected CommerceCountry getCommerceCountry(String twoLetterISOCode)
@@ -106,22 +96,30 @@ public class CommerceAccountsImporter {
 		return commerceCountries.get(0);
 	}
 
-	private CommerceAccount _importCommerceAccount(
+	private void _importCommerceAccount(
 			JSONObject jsonObject, ClassLoader classLoader,
-			Map<String, Organization> organizations, String dependenciesPath,
-			ServiceContext serviceContext)
+			String dependenciesPath, ServiceContext serviceContext)
 		throws IOException, PortalException {
 
+		String accountType = jsonObject.getString("AccountType");
+		String email = jsonObject.getString("Email");
 		String name = jsonObject.getString("Name");
 		String taxId = jsonObject.getString("TaxId");
 
 		// Add Commerce Account
 
+		int commerceAccountType = 1;
+
+		if (accountType.equals("Business")) {
+			commerceAccountType =
+				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
+		}
+
 		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.addCommerceAccount(
-				name, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, null,
-				taxId, CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS, true,
-				null, serviceContext);
+			_commerceAccountLocalService.upsertCommerceAccount(
+				name, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, false,
+				null, email, taxId, commerceAccountType, true, name,
+				serviceContext);
 
 		String twoLetterISOCode = jsonObject.getString("Country");
 
@@ -131,15 +129,17 @@ public class CommerceAccountsImporter {
 
 		String regionCode = jsonObject.getString("Region");
 
-		try {
-			CommerceRegion commerceRegion =
-				_commerceRegionLocalService.getCommerceRegion(
-					commerceCountry.getCommerceCountryId(), regionCode);
+		if (!Validator.isBlank(regionCode)) {
+			try {
+				CommerceRegion commerceRegion =
+					_commerceRegionLocalService.getCommerceRegion(
+						commerceCountry.getCommerceCountryId(), regionCode);
 
-			commerceRegionId = commerceRegion.getCommerceRegionId();
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
+				commerceRegionId = commerceRegion.getCommerceRegionId();
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
 		}
 
 		String street1 = jsonObject.getString("Street1");
@@ -184,31 +184,60 @@ public class CommerceAccountsImporter {
 			"RelatedOrganization");
 
 		if (!Validator.isBlank(relatedOrganization)) {
-			Organization organization = organizations.get(relatedOrganization);
+			Organization organization =
+				_organizationLocalService.fetchOrganization(
+					serviceContext.getCompanyId(), relatedOrganization);
 
-			_commerceAccountOrganizationRelLocalService.
-				addCommerceAccountOrganizationRel(
+			if (organization == null) {
+				_organizationLocalService.addOrganization(
+					serviceContext.getUserId(), 0, name,
+					OrganizationConstants.TYPE_ORGANIZATION, 0, 0,
+					ListTypeConstants.ORGANIZATION_STATUS_DEFAULT,
+					StringPool.BLANK, false, serviceContext);
+			}
+
+			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK =
+				new CommerceAccountOrganizationRelPK(
 					commerceAccount.getCommerceAccountId(),
-					organization.getOrganizationId(), serviceContext);
+					organization.getOrganizationId());
+
+			CommerceAccountOrganizationRel commerceAccountOrganizationRel =
+				_commerceAccountOrganizationRelLocalService.
+					fetchCommerceAccountOrganizationRel(
+						commerceAccountOrganizationRelPK);
+
+			if (commerceAccountOrganizationRel == null) {
+				_commerceAccountOrganizationRelLocalService.
+					addCommerceAccountOrganizationRel(
+						commerceAccount.getCommerceAccountId(),
+						organization.getOrganizationId(), serviceContext);
+			}
 		}
 
-		// Add Account Administrator
+		// Add Price List Account Rel
 
-		String administrator = jsonObject.getString("Administrator");
+		JSONArray priceListsJSONArray = jsonObject.getJSONArray("PriceLists");
 
-		if (!Validator.isBlank(administrator)) {
-			User user = _userLocalService.getUserByScreenName(
-				serviceContext.getCompanyId(), administrator);
+		if (priceListsJSONArray != null) {
+			for (int i = 0; i < priceListsJSONArray.length(); i++) {
+				try {
+					CommercePriceList commercePriceList =
+						_commercePriceListLocalService.
+							fetchByExternalReferenceCode(
+								serviceContext.getCompanyId(),
+								priceListsJSONArray.getString(i));
 
-			Role role = _roleLocalService.getRole(
-				serviceContext.getCompanyId(), RoleConstants.ADMINISTRATOR);
-
-			_userGroupRoleLocalService.addUserGroupRoles(
-				user.getUserId(), commerceAccount.getCommerceAccountGroupId(),
-				new long[] {role.getRoleId()});
+					_commercePriceListAccountRelLocalService.
+						addCommercePriceListAccountRel(
+							commercePriceList.getCommercePriceListId(),
+							commerceAccount.getCommerceAccountId(), 0,
+							serviceContext);
+				}
+				catch (NoSuchPriceListException nsple) {
+					_log.error(nsple, nsple);
+				}
+			}
 		}
-
-		return commerceAccount;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -228,21 +257,16 @@ public class CommerceAccountsImporter {
 	private CommerceCountryLocalService _commerceCountryLocalService;
 
 	@Reference
+	private CommercePriceListAccountRelLocalService
+		_commercePriceListAccountRelLocalService;
+
+	@Reference
+	private CommercePriceListLocalService _commercePriceListLocalService;
+
+	@Reference
 	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
-	private DLAppLocalService _dlAppLocalService;
-
-	@Reference
-	private DLFileEntryLocalService _dlFileEntryLocalService;
-
-	@Reference
-	private RoleLocalService _roleLocalService;
-
-	@Reference
-	private UserGroupRoleLocalService _userGroupRoleLocalService;
-
-	@Reference
-	private UserLocalService _userLocalService;
+	private OrganizationLocalService _organizationLocalService;
 
 }

@@ -21,13 +21,10 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Country;
 import com.liferay.portal.kernel.model.ListTypeConstants;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.service.CountryService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.users.admin.kernel.organization.types.OrganizationTypesSettings;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -38,61 +35,49 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = OrganizationImporter.class)
 public class OrganizationImporter {
 
-	public List<Organization> importOrganizations(
+	public void importOrganizations(
 			JSONArray jsonArray, ServiceContext serviceContext)
 		throws PortalException {
 
-		List<Organization> organizations = new ArrayList<>(jsonArray.length());
-
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			Organization organization = _importOrganization(
-				jsonObject, serviceContext);
-
-			organizations.add(organization);
+			_importOrganization(jsonArray.getJSONObject(i), 0, serviceContext);
 		}
-
-		return organizations;
 	}
 
-	private Organization _importOrganization(
-			JSONObject jsonObject, ServiceContext serviceContext)
+	private void _importOrganization(
+			JSONObject jsonObject, long parentOrganizationId,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		long parentOrganizationId = 0;
-
-		String parentOrganizationName = jsonObject.getString(
-			"ParentOrganization", null);
-
-		if (parentOrganizationName != null) {
-			Organization parentOrganization =
-				_organizationLocalService.getOrganization(
-					serviceContext.getCompanyId(), parentOrganizationName);
-
-			parentOrganizationId = parentOrganization.getOrganizationId();
-		}
-
-		String name = jsonObject.getString("Name");
+		String name = jsonObject.getString("name");
 
 		Organization organization = _organizationLocalService.fetchOrganization(
 			serviceContext.getCompanyId(), name);
 
 		if (organization != null) {
-			return organization;
+			return;
 		}
 
-		String[] types = _organizationTypesSettings.getTypes();
-
-		String twoLetterISOCode = jsonObject.getString("TwoLetterISOCode");
+		String twoLetterISOCode = jsonObject.getString("twoLetterISOCode");
 
 		Country country = _countryService.getCountryByA2(twoLetterISOCode);
 
-		return _organizationLocalService.addOrganization(
-			serviceContext.getUserId(), parentOrganizationId, name, types[0], 0,
-			country.getCountryId(),
+		organization = _organizationLocalService.addOrganization(
+			serviceContext.getUserId(), parentOrganizationId, name,
+			OrganizationConstants.TYPE_ORGANIZATION, 0, country.getCountryId(),
 			ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
 			false, serviceContext);
+
+		JSONArray suborganizationsJSONArray = jsonObject.getJSONArray(
+			"suborganizations");
+
+		if (suborganizationsJSONArray != null) {
+			for (int i = 0; i < suborganizationsJSONArray.length(); i++) {
+				_importOrganization(
+					suborganizationsJSONArray.getJSONObject(i),
+					organization.getOrganizationId(), serviceContext);
+			}
+		}
 	}
 
 	@Reference
@@ -100,8 +85,5 @@ public class OrganizationImporter {
 
 	@Reference
 	private OrganizationLocalService _organizationLocalService;
-
-	@Reference
-	private OrganizationTypesSettings _organizationTypesSettings;
 
 }

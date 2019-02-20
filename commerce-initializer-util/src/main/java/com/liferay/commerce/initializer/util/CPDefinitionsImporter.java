@@ -339,6 +339,8 @@ public class CPDefinitionsImporter {
 
 				cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
 
+				cpInstance.setExternalReferenceCode(cpInstance.getSku());
+
 				_cpInstanceLocalService.updateCPInstance(cpInstance);
 
 				// Commerce warehouse items

@@ -15,20 +15,27 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
+import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.FileNotFoundException;
@@ -38,8 +45,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -50,75 +57,84 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceUsersImporter.class)
 public class CommerceUsersImporter {
 
-	public List<User> importCommerceUsers(
+	public void importCommerceUsers(
 			JSONArray jsonArray, ClassLoader classLoader,
-			Map<String, CommerceAccount> commerceAccounts,
 			String dependenciesPath, ServiceContext serviceContext)
 		throws IOException, PortalException {
-
-		List<User> users = new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			User user = _importCommerceUser(
-				jsonObject, classLoader, commerceAccounts, dependenciesPath,
-				serviceContext);
-
-			users.add(user);
+			_importCommerceUser(
+				jsonObject, classLoader, dependenciesPath, serviceContext);
 		}
-
-		return users;
 	}
 
-	private User _importCommerceUser(
-			JSONObject jsonObject, ClassLoader classLoader,
-			Map<String, CommerceAccount> commerceAccounts,
-			String dependenciesPath, ServiceContext serviceContext)
-		throws IOException, PortalException {
-
-		String screenName = jsonObject.getString("ScreenName");
+	protected User upsertUser(
+			String password, String userReminderQueryQuestion,
+			String userReminderQueryAnswer, String screenName,
+			String emailAddress, long facebookId, String openId,
+			boolean portrait, byte[] portraitBytes, Locale locale,
+			String timeZoneId, String greeting, String comments,
+			String firstName, String middleName, String lastName, long prefixId,
+			long suffixId, boolean male, int birthdayMonth, int birthdayDay,
+			int birthdayYear, String smsSn, String facebookSn, String jabberSn,
+			String skypeSn, String twitterSn, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds, long[] userGroupIds,
+			ServiceContext serviceContext)
+		throws PortalException {
 
 		User user = _userLocalService.fetchUserByScreenName(
 			serviceContext.getCompanyId(), screenName);
 
 		if (user == null) {
-			String emailAddress = jsonObject.getString("EmailAddress");
-			String firstName = jsonObject.getString("FirstName");
-			String lastName = jsonObject.getString("LastName");
-			String jobTitle = jsonObject.getString("JobTitle");
-
-			boolean male = false;
-
-			String gender = jsonObject.getString("Gender");
-
-			if (Objects.equals(gender, "Male")) {
-				male = true;
-			}
-
-			Calendar calendar = CalendarFactoryUtil.getCalendar(
-				serviceContext.getTimeZone());
-
 			user = _userLocalService.addUser(
-				0, serviceContext.getCompanyId(), false, "test", "test", false,
-				screenName, emailAddress, 0, null, serviceContext.getLocale(),
-				firstName, null, lastName, 0, 0, male,
-				calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), jobTitle, null, null, null, null,
-				false, serviceContext);
+				serviceContext.getUserId(), serviceContext.getCompanyId(),
+				Validator.isNotNull(password), password, password, false,
+				screenName, emailAddress, facebookId, openId, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle,
+				new long[] {serviceContext.getScopeGroupId()}, organizationIds,
+				roleIds, userGroupIds, false, serviceContext);
 		}
 
-		String comments = jsonObject.getString("Comments");
+		user = _userLocalService.updateUser(
+			user.getUserId(), StringPool.BLANK, StringPool.BLANK,
+			StringPool.BLANK, false, userReminderQueryQuestion,
+			userReminderQueryAnswer, screenName, emailAddress, facebookId,
+			openId, portrait, portraitBytes, LocaleUtil.toLanguageId(locale),
+			timeZoneId, greeting, comments, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			smsSn, facebookSn, jabberSn, skypeSn, twitterSn, jobTitle, groupIds,
+			organizationIds, roleIds, null, userGroupIds, serviceContext);
 
-		user.setComments(comments);
+		return user;
+	}
 
-		_userLocalService.updateUser(user);
+	private void _importCommerceUser(
+			JSONObject jsonObject, ClassLoader classLoader,
+			String dependenciesPath, ServiceContext serviceContext)
+		throws IOException, PortalException {
 
-		String profilePicture = jsonObject.getString("ProfilePicture");
+		String password = jsonObject.getString("password");
 
-		if (!Validator.isBlank(profilePicture)) {
-			String filePath = dependenciesPath + "images/" + profilePicture;
+		String userReminderQueryQuestion = jsonObject.getString(
+			"userReminderQueryQuestion");
+		String userReminderQueryAnswer = jsonObject.getString(
+			"userReminderQueryAnswer");
+		String screenName = jsonObject.getString("screenName");
+		long facebookId = jsonObject.getLong("facebookId");
+		String openId = jsonObject.getString("openId");
+
+		String emailAddress = jsonObject.getString("emailAddress");
+
+		boolean hasPortrait = false;
+		byte[] portraitBytes = null;
+
+		String portrait = jsonObject.getString("portrait");
+
+		if (!Validator.isBlank(portrait)) {
+			String filePath = dependenciesPath + "images/" + portrait;
 
 			try (InputStream inputStream = classLoader.getResourceAsStream(
 					filePath)) {
@@ -128,79 +144,172 @@ public class CommerceUsersImporter {
 						"No file found at " + filePath);
 				}
 
-				_userLocalService.updatePortrait(
-					user.getUserId(), FileUtil.getBytes(inputStream));
+				hasPortrait = true;
+
+				portraitBytes = FileUtil.getBytes(inputStream);
 			}
 		}
 
-		JSONArray accountsJSONArray = jsonObject.getJSONArray("Accounts");
+		Locale locale = serviceContext.getLocale();
 
-		if (accountsJSONArray != null) {
-			for (int i = 0; i < accountsJSONArray.length(); i++) {
-				JSONObject accountJSONObject = accountsJSONArray.getJSONObject(
-					i);
+		String importedLanguageCode = jsonObject.getString("languageCode");
 
-				CommerceAccount commerceAccount = commerceAccounts.get(
-					accountJSONObject.getString("Name"));
+		if (!Validator.isBlank(importedLanguageCode)) {
+			locale = LanguageUtil.getLocale(importedLanguageCode);
+		}
 
-				_commerceAccountUserRelLocalService.addCommerceAccountUserRel(
-					commerceAccount.getCommerceAccountId(), user.getUserId(),
-					serviceContext);
+		TimeZone timeZone = serviceContext.getTimeZone();
 
-				String roleName = accountJSONObject.getString("Role");
+		String timeZoneId = jsonObject.getString(
+			"timeZoneId", timeZone.getID());
 
-				if (!Validator.isBlank(roleName)) {
-					Role role = _roleLocalService.getRole(
-						serviceContext.getCompanyId(), roleName);
+		String greeting = jsonObject.getString("greeting");
+		String comments = jsonObject.getString("comments");
+		String firstName = jsonObject.getString("firstName");
+		String middleName = jsonObject.getString("middleName");
+		String lastName = jsonObject.getString("lastName");
+		long prefixId = jsonObject.getLong("prefixId");
+		long suffixId = jsonObject.getLong("suffixId");
+		boolean male = jsonObject.getBoolean("male");
 
-					_userGroupRoleLocalService.addUserGroupRoles(
-						user.getUserId(),
-						commerceAccount.getCommerceAccountGroupId(),
-						new long[] {role.getRoleId()});
+		Calendar calendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
+
+		int birthdayMonth = calendar.get(
+			jsonObject.getInt("birthdayMonth", Calendar.MONTH));
+		int birthdayDay = calendar.get(
+			jsonObject.getInt("birthdayDay", Calendar.DAY_OF_MONTH));
+		int birthdayYear = calendar.get(
+			jsonObject.getInt("birthdayYear", Calendar.YEAR));
+
+		String smsSn = jsonObject.getString("smsSn");
+		String facebookSn = jsonObject.getString("facebookSn");
+		String jabberSn = jsonObject.getString("jabberSn");
+		String skypeSn = jsonObject.getString("skypeSn");
+		String twitterSn = jsonObject.getString("twitterSn");
+		String jobTitle = jsonObject.getString("jobTitle");
+
+		// Collect Organization Role Ids
+
+		JSONArray organizationsJSONArray = jsonObject.getJSONArray(
+			"organizations");
+
+		List<Long> organizationIds = new ArrayList<>();
+
+		if (organizationsJSONArray != null) {
+			for (int i = 0; i < organizationsJSONArray.length(); i++) {
+				Organization organization =
+					_organizationLocalService.getOrganization(
+						serviceContext.getCompanyId(),
+						organizationsJSONArray.getString(i));
+
+				if (organization != null) {
+					organizationIds.add(organization.getOrganizationId());
 				}
 			}
 		}
 
-		// Add Regular Roles
+		// Collect Role Ids
 
-		JSONArray regularRolesJSONArray = jsonObject.getJSONArray(
-			"RegularRoles");
+		JSONArray rolesJSONArray = jsonObject.getJSONArray("roles");
 
-		if (regularRolesJSONArray != null) {
-			for (int i = 0; i < regularRolesJSONArray.length(); i++) {
+		List<Long> roleIds = new ArrayList<>();
+
+		if (rolesJSONArray != null) {
+			for (int i = 0; i < rolesJSONArray.length(); i++) {
 				Role role = _roleLocalService.getRole(
-					serviceContext.getCompanyId(),
-					regularRolesJSONArray.getString(i));
+					serviceContext.getCompanyId(), rolesJSONArray.getString(i));
 
-				_roleLocalService.addUserRole(user.getUserId(), role);
+				if (role != null) {
+					roleIds.add(role.getRoleId());
+				}
 			}
 		}
 
-		// Add Site Roles
+		long[] userGroupIds = null;
 
-		JSONArray siteRolesJSONArray = jsonObject.getJSONArray("SiteRoles");
+		User user = upsertUser(
+			password, userReminderQueryQuestion, userReminderQueryAnswer,
+			screenName, emailAddress, facebookId, openId, hasPortrait,
+			portraitBytes, locale, timeZoneId, greeting, comments, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, smsSn, facebookSn, jabberSn, skypeSn,
+			twitterSn, jobTitle, new long[] {serviceContext.getScopeGroupId()},
+			ArrayUtil.toLongArray(organizationIds),
+			ArrayUtil.toLongArray(roleIds), userGroupIds, serviceContext);
 
-		if (siteRolesJSONArray != null) {
-			for (int i = 0; i < siteRolesJSONArray.length(); i++) {
+		// Add User Group Roles
+
+		JSONArray groupRolesJSONArray = jsonObject.getJSONArray("groupRoles");
+
+		if (groupRolesJSONArray != null) {
+			for (int i = 0; i < groupRolesJSONArray.length(); i++) {
 				Role role = _roleLocalService.getRole(
 					serviceContext.getCompanyId(),
-					siteRolesJSONArray.getString(i));
+					groupRolesJSONArray.getString(i));
 
 				_userGroupRoleLocalService.addUserGroupRoles(
 					user.getUserId(), serviceContext.getScopeGroupId(),
 					new long[] {role.getRoleId()});
 			}
 		}
-		else {
-			Role role = _roleLocalService.getRole(
-				serviceContext.getCompanyId(), RoleConstants.SITE_MEMBER);
 
-			_userGroupRoleLocalService.addUserGroupRoles(
-				user.getUserId(), serviceContext.getScopeGroupId(),
-				new long[] {role.getRoleId()});
+		// Add User to Commerce Accounts and Account Roles
+
+		JSONArray accountsJSONArray = jsonObject.getJSONArray("accounts");
+
+		if (accountsJSONArray != null) {
+			for (int i = 0; i < accountsJSONArray.length(); i++) {
+				JSONObject accountJSONObject = accountsJSONArray.getJSONObject(
+					i);
+
+				JSONArray accountRolesJSONArray =
+					accountJSONObject.getJSONArray("roles");
+
+				if (accountRolesJSONArray != null) {
+					CommerceAccount commerceAccount =
+						_commerceAccountLocalService.
+							fetchByExternalReferenceCode(
+								serviceContext.getCompanyId(),
+								accountJSONObject.getString("name"));
+
+					CommerceAccountUserRelPK commerceAccountUserRelPK =
+						new CommerceAccountUserRelPK(
+							commerceAccount.getCommerceAccountId(),
+							user.getUserId());
+
+					CommerceAccountUserRel commerceAccountUserRel =
+						_commerceAccountUserRelLocalService.
+							fetchCommerceAccountUserRel(
+								commerceAccountUserRelPK);
+
+					if (commerceAccountUserRel == null) {
+						List<Long> accountRoleIds = new ArrayList<>();
+
+						for (int j =
+							0; j < accountRolesJSONArray.length(); j++) {
+
+							Role role = _roleLocalService.fetchRole(
+								serviceContext.getCompanyId(),
+								accountRolesJSONArray.getString(j));
+
+							if (role != null) {
+								accountRoleIds.add(role.getRoleId());
+							}
+						}
+
+						long[] userIds = {user.getUserId()};
+
+						_commerceAccountUserRelLocalService.
+							addCommerceAccountUserRels(
+								commerceAccount.getCommerceAccountId(), userIds,
+								null, ArrayUtil.toLongArray(accountRoleIds),
+								serviceContext);
+					}
+				}
+			}
 		}
 
-		return user;
 	}
 
 	@Reference
@@ -209,6 +318,9 @@ public class CommerceUsersImporter {
 	@Reference
 	private CommerceAccountUserRelLocalService
 		_commerceAccountUserRelLocalService;
+
+	@Reference
+	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
 	private RoleLocalService _roleLocalService;
