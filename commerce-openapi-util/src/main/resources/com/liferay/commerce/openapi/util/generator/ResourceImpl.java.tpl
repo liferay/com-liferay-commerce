@@ -16,9 +16,9 @@ package ${PACKAGE};
 
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
-${IMPORT_STATEMENTS}
 
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+${JAVA_IMPORT_STATEMENTS}
 
 import java.util.Collections;
 
@@ -46,4 +46,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ${MODEL_RESOURCE_IMPLEMENTATION_CLASS} implements ${MODEL_RESOURCE_INTERFACE_CLASS} {
 
 ${METHODS}
+
+${FIELDS}
 }
