@@ -8,7 +8,7 @@ class QuantitySelector extends Component {
 		this.quantity = this.quantity || this.minQuantity;
 		return this._updateQuantity(this.quantity);
 	}
-	
+
 	syncQuantity() {
 		this.checkButtonsAvailability(this.quantity);
 	}
@@ -53,9 +53,10 @@ class QuantitySelector extends Component {
 		let quantity = this.quantity;
 
 		if (this.multipleQuantity) {
-			quantity = quantity - this.multipleQuantity;
-		} else {
-			quantity = quantity - 1;
+			quantity -= this.multipleQuantity;
+		}
+		else {
+			quantity -= 1;
 		}
 
 		if (quantity < this.minQuantity) {
@@ -76,9 +77,10 @@ class QuantitySelector extends Component {
 		let quantity = this.quantity;
 
 		if (this.multipleQuantity) {
-			quantity = quantity + this.multipleQuantity;
-		} else {
-			quantity = quantity + 1;
+			quantity += this.multipleQuantity;
+		}
+		else {
+			quantity += 1;
 		}
 
 		if (quantity > this.maxQuantity) {
