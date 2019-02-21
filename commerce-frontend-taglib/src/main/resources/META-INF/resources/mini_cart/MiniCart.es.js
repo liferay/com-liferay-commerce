@@ -16,7 +16,7 @@ class Cart extends Component {
 	}
 
 	_handleClickOutside(e) {
-		const topBar = document.querySelector('.commerce-frame__topbar');
+		const topBar = document.querySelector('.commerce-topbar') || document.body;
 		if (
 			topBar.contains(e.target) && !this.element.contains(e.target)
 		) {
