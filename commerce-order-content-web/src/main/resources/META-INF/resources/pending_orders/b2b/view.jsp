@@ -36,7 +36,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 		tableName="commercePendingOrders"
 	/>
 
-	<div class="commerce-frame__cta is-visible">
+	<div class="commerce-cta is-visible">
 		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" type="submit" value="add-order" />
 	</div>
 </aui:form>
