@@ -170,7 +170,7 @@ public class MethodImporter {
 
 		methodNamesCount.put(methodName, ++count);
 
-		return methodName + count;
+		return String.format("%s%d", methodName, count);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
