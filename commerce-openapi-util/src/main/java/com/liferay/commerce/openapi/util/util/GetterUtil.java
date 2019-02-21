@@ -70,6 +70,14 @@ public class GetterUtil {
 		return jsonNode.asText();
 	}
 
+	public static boolean getBoolean(String value) {
+		if ("true".equals(value) || "TRUE".equals(value)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public static int getInteger(String value) {
 		if (value == null) {
 			return 0;
