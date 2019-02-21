@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.core.internal.filter.AsyncSupportedControlFi
 
 import java.lang.reflect.Method;
 
+import javax.ws.rs.Priorities;
 import javax.ws.rs.container.DynamicFeature;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.FeatureContext;
@@ -55,7 +56,7 @@ public class AsyncSupportedFeature implements DynamicFeature {
 		AsyncSupportedControlFilter asyncSupportedControlFilter =
 			new AsyncSupportedControlFilter();
 
-		context.register(asyncSupportedControlFilter, 1);
+		context.register(asyncSupportedControlFilter, Priorities.USER);
 	}
 
 }
