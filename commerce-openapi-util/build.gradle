@@ -2,9 +2,29 @@ import com.liferay.gradle.plugins.source.formatter.FormatSourceTask;
 import com.liferay.gradle.util.GradleUtil
 
 task deploy(overwrite: true)
-task formatSourceModule(type: FormatSourceTask)
 task generateRestModule(type: JavaExec)
 task runClass(type: JavaExec)
+
+task formatSourceModule(dependsOn: tasks.matching { Task task -> task.name.startsWith("formatSourceRestModule")})
+
+File[] configFiles = new File("src/main/resources/com/liferay/commerce/openapi/util/config").listFiles()
+
+configFiles.each { File file ->
+	Properties properties = new Properties()
+
+	file.withInputStream {
+		properties.load(it)
+	}
+
+	String osgiModuleName = properties.get("osgi.module.name")
+	String osgiModuleRootPath = properties.get("osgi.module.root.path")
+
+	task "formatSourceModule_${osgiModuleName}"(type: FormatSourceTask) {
+		baseDirName = osgiModuleRootPath + "/" + osgiModuleName
+	}
+
+	formatSourceModule.dependsOn "formatSourceModule_${osgiModuleName}"
+}
 
 defaultTasks "generateRestModule"
 
@@ -30,27 +50,6 @@ deploy {
 	doLast {
 		println('Use `generateRestModule` task for generating the OpenAPI module.')
 	}
-}
-
-formatSourceModule {
-	String osgiModuleName = GradleUtil.getProperty(project, "osgi.module.name", "")
-	String osgiModuleRootPath = GradleUtil.getProperty(project, "osgi.module.root.path", "")
-
-	def properties = new Properties()
-
-	file("src/main/resources/com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator.config").withInputStream {
-		properties.load(it)
-	}
-
-	if (osgiModuleName == "") {
-		osgiModuleName = properties.get("osgi.module.name")
-	}
-
-	if (osgiModuleRootPath == "") {
-		osgiModuleRootPath = properties.get("osgi.module.root.path")
-	}
-
-	baseDirName = osgiModuleRootPath + "/" + osgiModuleName
 }
 
 generateRestModule {
