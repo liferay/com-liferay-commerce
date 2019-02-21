@@ -32,7 +32,7 @@ public class Schema {
 		Matcher matcher = _schemaReferencedModelPattern.matcher(reference);
 
 		if (matcher.find()) {
-			return matcher.group(2);
+			return matcher.group(3);
 		}
 
 		throw new OpenApiException(
@@ -71,7 +71,7 @@ public class Schema {
 	}
 
 	private static final Pattern _schemaReferencedModelPattern =
-		Pattern.compile("^#/?(\\w+/)+(\\w+)$");
+		Pattern.compile("^(.+)?#/?(\\w+/)+(\\w+)$");
 
 	private final String _format;
 	private final String _reference;
