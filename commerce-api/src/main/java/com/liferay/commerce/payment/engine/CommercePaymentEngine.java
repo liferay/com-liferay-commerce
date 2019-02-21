@@ -38,6 +38,12 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
+	 */
+	@Deprecated
 	public CommercePaymentResult cancelRecurringPayment(long commerceOrderId);
 
 	public CommercePaymentResult capturePayment(
@@ -50,6 +56,15 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
+	/**
+	 * @param commerceOrderId
+	 * @param transactionId
+	 * @param httpServletRequest
+	 * @return
+	 * @throws Exception
+	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
+	 */
+	@Deprecated
 	public CommercePaymentResult completeRecurringPayment(
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
@@ -74,6 +89,13 @@ public interface CommercePaymentEngine {
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @throws Exception
+	 * @deprecated As of Mueller (7.2.x), this method will be removed
+	 */
+	@Deprecated
 	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
 			long commerceOrderId)
 		throws Exception;
@@ -84,12 +106,21 @@ public interface CommercePaymentEngine {
 		throws Exception;
 
 	public CommercePaymentResult processPayment(
-			long commerceOrderId, String checkoutStepUrl,
+			long commerceOrderId, String nextUrl,
 			HttpServletRequest httpServletRequest)
-		throws Throwable;
+		throws Exception;
 
+	/**
+	 * @param commerceOrderId
+	 * @param nextUrl
+	 * @param httpServletRequest
+	 * @return
+	 * @throws Exception
+	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
+	 */
+	@Deprecated
 	public CommercePaymentResult processRecurringPayment(
-			long commerceOrderId, String checkoutStepUrl,
+			long commerceOrderId, String nextUrl,
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
@@ -103,7 +134,15 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public boolean suspendSubscription(long commerceOrderId) throws Exception;
+	/**
+	 * @param commerceSubscriptionEntryId
+	 * @return
+	 * @throws Exception
+	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
+	 */
+	@Deprecated
+	public boolean suspendSubscription(long commerceSubscriptionEntryId)
+		throws Exception;
 
 	public CommercePaymentResult voidTransaction(
 			long commerceOrderId, String transactionId,
