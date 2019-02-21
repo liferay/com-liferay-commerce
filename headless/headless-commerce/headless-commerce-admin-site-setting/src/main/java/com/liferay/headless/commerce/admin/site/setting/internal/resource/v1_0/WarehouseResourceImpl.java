@@ -14,7 +14,9 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
 import com.liferay.commerce.openapi.core.annotation.Nullable;
+import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
@@ -25,6 +27,7 @@ import java.util.Collections;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -61,28 +64,61 @@ public class WarehouseResourceImpl implements WarehouseResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WarehouseDTO> getWarehouses(
-			@Nullable Boolean type, Long groupId, Pagination pagination)
+			Long groupId, @Nullable Boolean active, Pagination pagination)
 		throws Exception {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
+	@AsyncSupported
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateWarehouse(String id, WarehouseDTO warehouseDTO)
 		throws Exception {
+
+		if (_async.isEnabled()) {
+			new Thread() {
+
+				public void run() {
+
+					// TODO
+
+				}
+
+			}.start();
+
+			return null;
+		}
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
 
+	@AsyncSupported
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public WarehouseDTO upsertWarehouse(Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception {
 
+		if (_async.isEnabled()) {
+			new Thread() {
+
+				public void run() {
+
+					// TODO
+
+				}
+
+			}.start();
+
+			return null;
+		}
+
 		return new WarehouseDTO();
 	}
+
+	@Context
+	private Async _async;
 
 }
