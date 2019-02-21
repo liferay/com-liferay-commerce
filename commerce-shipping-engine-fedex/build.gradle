@@ -1,5 +1,5 @@
 dependencies {
-	compileInclude group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
+	compileInclude group: "com.liferay", name: "com.fedex.ws", version: "1.0.0"
 
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "1.0.0"
