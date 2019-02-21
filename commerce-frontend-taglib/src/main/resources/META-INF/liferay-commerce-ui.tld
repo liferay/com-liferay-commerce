@@ -62,8 +62,7 @@
 	</tag>
 	<tag>
 		<name>compare-checkbox</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.CompareCheckboxTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CompareCheckboxTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
