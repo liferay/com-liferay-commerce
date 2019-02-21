@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.importer.OpenApiReader;
 import com.liferay.commerce.openapi.util.importer.OpenApiReaderFactory;
+import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -41,9 +42,20 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			List<Properties> configurations =
 				ConfigurationFactory.getConfigurations(args);
 
-			for (Properties configuraation : configurations) {
+			for (Properties configuration : configurations) {
+				if (!GetterUtil.getBoolean(
+						configuration.getProperty(
+							"osgi.module.generator.enabled"))) {
+
+					_logger.info(
+						"Skip prototype specification " +
+							configuration.getProperty("openapi.url"));
+
+					continue;
+				}
+
 				OSGiRESTModuleGenerator osgiRESTModuleGenerator =
-					new OSGiRESTModuleGenerator(configuraation);
+					new OSGiRESTModuleGenerator(configuration);
 
 				osgiRESTModuleGenerator.generate();
 			}
