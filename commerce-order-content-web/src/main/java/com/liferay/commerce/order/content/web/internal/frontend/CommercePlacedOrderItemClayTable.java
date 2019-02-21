@@ -14,13 +14,9 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.discount.CommerceDiscountValue;
+import com.liferay.commerce.currency.model.CommerceMoneyFactory;
 import com.liferay.commerce.frontend.ClayTable;
-import com.liferay.commerce.frontend.ClayTableAction;
-import com.liferay.commerce.frontend.ClayTableActionProvider;
 import com.liferay.commerce.frontend.ClayTableSchema;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilder;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilderFactory;
@@ -28,16 +24,16 @@ import com.liferay.commerce.frontend.ClayTableSchemaField;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
-import com.liferay.commerce.order.content.web.internal.model.OrderItem;
-import com.liferay.commerce.price.CommerceProductPrice;
+import com.liferay.commerce.order.content.web.internal.model.PlacedOrderItem;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
@@ -61,49 +57,12 @@ import org.osgi.service.component.annotations.Reference;
 		"commerce.data.provider.key=" + CommercePlacedOrderItemClayTable.NAME,
 		"commerce.table.name=" + CommercePlacedOrderItemClayTable.NAME
 	},
-	service = {
-		ClayTable.class, ClayTableActionProvider.class,
-		CommerceDataSetDataProvider.class
-	}
+	service = {ClayTable.class, CommerceDataSetDataProvider.class}
 )
 public class CommercePlacedOrderItemClayTable
-	implements CommerceDataSetDataProvider<OrderItem>, ClayTable,
-			   ClayTableActionProvider {
+	implements CommerceDataSetDataProvider<PlacedOrderItem>, ClayTable {
 
 	public static final String NAME = "commercePlacedOrderItems";
-
-	@Override
-	public List<ClayTableAction> clayTableActions(
-			HttpServletRequest httpServletRequest, long groupId, Object model)
-		throws PortalException {
-
-		List<ClayTableAction> clayTableActions = new ArrayList<>();
-
-		OrderItem orderItem = (OrderItem)model;
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		String viewURL = StringPool.BLANK;
-
-		try {
-			viewURL = CommerceOrderClayTableUtil.getViewShipmentURL(
-				orderItem.getOrderItemId(), themeDisplay);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		ClayTableAction clayTableAction = new ClayTableAction(
-			viewURL, StringPool.BLANK,
-			LanguageUtil.get(httpServletRequest, "view-shipments"), false,
-			false);
-
-		clayTableActions.add(clayTableAction);
-
-		return clayTableActions;
-	}
 
 	@Override
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
@@ -135,6 +94,15 @@ public class CommercePlacedOrderItemClayTable
 
 		clayTableSchemaBuilder.addField("total", "total");
 
+		clayTableSchemaBuilder.addField("total", "total");
+
+		clayTableSchemaBuilder.addField("shippedQuantity", "shippedQuantity");
+
+		ClayTableSchemaField clayTableSchemaField =
+			clayTableSchemaBuilder.addField("shipmentUrl", "shipment");
+
+		clayTableSchemaField.setContentRenderer("modalLink");
+
 		return clayTableSchemaBuilder.build();
 	}
 
@@ -144,21 +112,21 @@ public class CommercePlacedOrderItemClayTable
 	}
 
 	@Override
-	public List<OrderItem> getItems(
+	public List<PlacedOrderItem> getItems(
 			HttpServletRequest httpServletRequest, Filter filter,
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		List<OrderItem> orderItems = new ArrayList<>();
+		List<PlacedOrderItem> placedOrderItems = new ArrayList<>();
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
+			orderFilter.getOrderId());
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemService.getCommerceOrderItems(
@@ -171,40 +139,37 @@ public class CommercePlacedOrderItemClayTable
 				String discount = StringPool.BLANK;
 				String total = StringPool.BLANK;
 
-				CommerceProductPrice commerceProductPrice =
-					_commerceProductPriceCalculation.getCommerceProductPrice(
-						commerceOrderItem.getCPInstanceId(),
-						commerceOrderItem.getQuantity(), commerceContext);
+				CommerceMoney unitPriceMoney =
+					commerceOrderItem.getUnitPriceMoney();
 
-				if (commerceProductPrice != null) {
-					CommerceMoney unitPrice =
-						commerceProductPrice.getUnitPrice();
-
-					if (unitPrice != null) {
-						price = unitPrice.format(themeDisplay.getLocale());
-					}
-
-					CommerceMoney finalPrice =
-						commerceProductPrice.getFinalPrice();
-
-					if (finalPrice != null) {
-						total = finalPrice.format(themeDisplay.getLocale());
-					}
-
-					CommerceDiscountValue discountValue =
-						commerceProductPrice.getDiscountValue();
-
-					if (discountValue != null) {
-						CommerceMoney discountAmount =
-							discountValue.getDiscountAmount();
-
-						discount = discountAmount.format(
-							themeDisplay.getLocale());
-					}
+				if (unitPriceMoney != null) {
+					price = unitPriceMoney.format(themeDisplay.getLocale());
 				}
 
-				orderItems.add(
-					new OrderItem(
+				CommerceMoney finalPrice =
+					commerceOrderItem.getFinalPriceMoney();
+
+				if (finalPrice != null) {
+					total = finalPrice.format(themeDisplay.getLocale());
+				}
+
+				CommerceMoney discountAmount = _commerceMoneyFactory.create(
+					commerceOrder.getCommerceCurrency(),
+					commerceOrderItem.getDiscountAmount());
+
+				discount = discountAmount.format(themeDisplay.getLocale());
+
+				String viewShipmentURL = null;
+
+				if (commerceOrderItem.getShippedQuantity() > 0) {
+					viewShipmentURL =
+						CommerceOrderClayTableUtil.getViewShipmentURL(
+							commerceOrderItem.getCommerceOrderItemId(),
+							themeDisplay);
+				}
+
+				placedOrderItems.add(
+					new PlacedOrderItem(
 						commerceOrderItem.getCommerceOrderItemId(),
 						commerceOrderItem.getCommerceOrderId(),
 						commerceOrderItem.getSku(),
@@ -212,21 +177,20 @@ public class CommercePlacedOrderItemClayTable
 						price, discount, commerceOrderItem.getQuantity(), total,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
-						CommerceOrderClayTableUtil.getViewShipmentURL(
-							commerceOrderItem.getCommerceOrderId(),
-							themeDisplay)));
+						viewShipmentURL,
+						commerceOrderItem.getShippedQuantity()));
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return orderItems;
+		return placedOrderItems;
 	}
 
 	@Override
 	public boolean isShowActionsMenu() {
-		return true;
+		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -236,7 +200,13 @@ public class CommercePlacedOrderItemClayTable
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
 
 	@Reference
+	private CommerceMoneyFactory _commerceMoneyFactory;
+
+	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

@@ -113,9 +113,9 @@ public class CommercePlacedOrderClayTable
 		ClayTableSchemaBuilder clayTableSchemaBuilder =
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
-		clayTableSchemaBuilder.addField("createDate", "create-date");
-
 		clayTableSchemaBuilder.addField("orderId", "order-id");
+
+		clayTableSchemaBuilder.addField("createDate", "create-date");
 
 		clayTableSchemaBuilder.addField("accountName", "account");
 
@@ -126,6 +126,11 @@ public class CommercePlacedOrderClayTable
 		clayTableSchemaBuilder.addField("amount", "amount");
 
 		return clayTableSchemaBuilder.build();
+	}
+
+	@Override
+	public String getElementClasses() {
+		return "table-nowrap";
 	}
 
 	@Override
