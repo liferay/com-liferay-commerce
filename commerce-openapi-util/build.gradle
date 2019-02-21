@@ -2,10 +2,13 @@ import com.liferay.gradle.plugins.source.formatter.FormatSourceTask;
 import com.liferay.gradle.util.GradleUtil
 
 task deploy(overwrite: true)
+task formatSourceModule
 task generateRestModule(type: JavaExec)
 task runClass(type: JavaExec)
 
-task formatSourceModule(dependsOn: tasks.matching { Task task -> task.name.startsWith("formatSourceRestModule")})
+formatSourceModule {
+	dependsOn tasks.matching { Task task -> task.name.startsWith("formatSourceRestModule")}
+}
 
 File[] configFiles = new File("src/main/resources/com/liferay/commerce/openapi/util/config").listFiles()
 
