@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.context;
 
 import java.util.List;
 

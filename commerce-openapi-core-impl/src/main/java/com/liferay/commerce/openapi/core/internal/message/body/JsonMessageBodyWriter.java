@@ -12,9 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.xml;
+package com.liferay.commerce.openapi.core.internal.message.body;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 
@@ -44,9 +46,9 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	service = MessageBodyWriter.class
 )
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_XHTML_XML})
+@Produces(MediaType.APPLICATION_JSON)
 @Provider
-public class XMLMessageBodyWriter implements MessageBodyWriter<Object> {
+public class JsonMessageBodyWriter implements MessageBodyWriter<Object> {
 
 	public long getSize(
 		Object data, Class<?> type, Type genericType, Annotation[] annotations,
@@ -63,7 +65,7 @@ public class XMLMessageBodyWriter implements MessageBodyWriter<Object> {
 			return false;
 		}
 
-		return _XML_MAPPER.canSerialize(type);
+		return _OBJECT_MAPPER.canSerialize(type);
 	}
 
 	public void writeTo(
@@ -72,11 +74,16 @@ public class XMLMessageBodyWriter implements MessageBodyWriter<Object> {
 			MultivaluedMap<String, Object> headers, OutputStream out)
 		throws IOException, WebApplicationException {
 
-		_XML_MAPPER.writeValue(out, data);
+		_OBJECT_MAPPER.writeValue(out, data);
 
 		out.flush();
 	}
 
-	private static final XmlMapper _XML_MAPPER = new XmlMapper();
+	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
+		{
+			configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+			enable(SerializationFeature.INDENT_OUTPUT);
+		}
+	};
 
 }
