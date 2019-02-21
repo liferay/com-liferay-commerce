@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -104,7 +105,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithArrayPattern());
 
 		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
@@ -153,7 +154,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfDictionaryPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsPattern());
 
 		OpenApiComponent dictionaryConsumerOpenApiComponent = null;
@@ -201,7 +202,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfFormatDatePresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithFormatDatePattern());
 
 		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
@@ -239,7 +240,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfFormatDateTimePresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithFormatDateTimePattern());
 
 		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
@@ -279,7 +280,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfFreeFormObjectPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithFreeFormObjectPattern());
 
 		OpenApiComponent hostOpenApiComponent = null;
@@ -339,7 +340,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfNestedObjectPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithNestedObjectPattern());
 
 		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
@@ -384,7 +385,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfSimpleDictionaryPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithSimpleDictionaryPattern());
 
 		OpenApiComponent childOpenApiComponent = null;
@@ -435,7 +436,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	}
 
 	private OpenApiComponent _getHostOpenApiComponent(
-		List<OpenApiComponent> components) {
+		Set<OpenApiComponent> components) {
 
 		OpenApiComponent hostOpenApiComponent = null;
 

@@ -22,9 +22,11 @@ import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import org.slf4j.Logger;
@@ -35,8 +37,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ComponentImporter {
 
-	public List<OpenApiComponent> getComponents(JsonNode componentsJSONNode) {
-		List<OpenApiComponent> components = new ArrayList<>();
+	public Set<OpenApiComponent> getComponents(JsonNode componentsJSONNode) {
+		Set<OpenApiComponent> components = new HashSet<>();
 
 		if (componentsJSONNode.has("schemas")) {
 			components.addAll(_getSchemas(componentsJSONNode));
@@ -238,10 +240,10 @@ public class ComponentImporter {
 		return components;
 	}
 
-	private List<OpenApiComponent> _resolveReferences(
-		List<OpenApiComponent> components) {
+	private Set<OpenApiComponent> _resolveReferences(
+		Set<OpenApiComponent> components) {
 
-		List<OpenApiComponent> resolvedComponents = new ArrayList<>();
+		Set<OpenApiComponent> resolvedComponents = new HashSet<>();
 
 		Iterator<OpenApiComponent> iterator = components.iterator();
 

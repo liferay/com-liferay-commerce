@@ -21,8 +21,6 @@ import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.importer.OpenApiReader;
 import com.liferay.commerce.openapi.util.importer.OpenApiReaderFactory;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -48,15 +46,14 @@ public class OpenApiComponentUtil {
 	}
 
 	public static OpenApiComponent getOpenApiComponent(
-		String reference, List<OpenApiComponent> components) {
+		String reference, Set<OpenApiComponent> components) {
 
 		if (reference == null) {
 			return null;
 		}
 
 		if (!OpenApiReaderFactory.isExternalReference(reference)) {
-			return _getByName(
-				getComponentName(reference), new HashSet<>(components));
+			return _getByName(getComponentName(reference), components);
 		}
 
 		OpenApi openApi = _getExternalOpenApi(reference);

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class MethodImporter {
 
 	public List<Method> getMethods(
 		String path, JsonNode pathJSONNode,
-		List<OpenApiComponent> openApiComponents,
+		Set<OpenApiComponent> openApiComponents,
 		Map<String, Integer> methodNamesCount) {
 
 		List<Method> methods = new ArrayList<>();
