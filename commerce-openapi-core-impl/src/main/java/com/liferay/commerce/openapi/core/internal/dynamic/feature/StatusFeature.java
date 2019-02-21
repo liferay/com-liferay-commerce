@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.core.internal.filter.StatusControlFilter;
 
 import java.lang.reflect.Method;
 
+import javax.ws.rs.Priorities;
 import javax.ws.rs.container.DynamicFeature;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.FeatureContext;
@@ -53,7 +54,7 @@ public class StatusFeature implements DynamicFeature {
 		StatusControlFilter statusControlFilter = new StatusControlFilter(
 			status.value());
 
-		context.register(statusControlFilter, 2);
+		context.register(statusControlFilter, Priorities.USER + 100);
 	}
 
 }
