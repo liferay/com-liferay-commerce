@@ -1,0 +1,16 @@
+{namespace CommerceTableExtensions}
+
+{deltemplate ClayTable.Cell variant="'modalLink'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	{call ModalLinkCellTemplate.render}
+		{param fieldSchema: $fieldSchema /}
+		{param value: $value /}
+		{param spritemap: $spritemap /}
+	{/call}
+
+{/deltemplate}
