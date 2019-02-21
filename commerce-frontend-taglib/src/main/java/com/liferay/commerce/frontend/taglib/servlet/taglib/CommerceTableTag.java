@@ -202,6 +202,17 @@ public class CommerceTableTag extends ComponentRendererTag {
 		return clayPaginationEntries;
 	}
 
+	protected int getMinPageSize() {
+		int[] searchContainerPageDeltaValues =
+			PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES;
+
+		if (searchContainerPageDeltaValues.length > 0) {
+			return searchContainerPageDeltaValues[0];
+		}
+
+		return 5;
+	}
+
 	private void _setItems(String dataProviderKey) throws Exception {
 		Map<String, Object> context = getContext();
 
@@ -243,6 +254,13 @@ public class CommerceTableTag extends ComponentRendererTag {
 			request, filter);
 
 		putValue("totalItems", totalItems);
+
+		if (totalItems > getMinPageSize()) {
+			putValue("showPagination", true);
+		}
+		else {
+			putValue("showPagination", false);
+		}
 	}
 
 	private void _setPagination() {
