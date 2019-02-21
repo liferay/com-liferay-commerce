@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.Schema;
@@ -96,6 +97,27 @@ public class ComponentImporter {
 			_getPropertyDefinitions(schemaEntryJSONNode));
 
 		return openApiComponentBuilder.build();
+	}
+
+	private OpenApiComponent _getOpenApiComponent(
+		String reference, List<OpenApiComponent> components) {
+
+		if (!OpenApiReaderFactory.isExternalReference(reference)) {
+			return OpenApiComponentUtil.getSchemaOpenApiComponent(
+				Schema.getReferencedModel(reference),
+				new HashSet<>(components));
+		}
+
+		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
+			reference);
+
+		OpenAPIImporter openAPIImporter = new OpenAPIImporter(openApiReader);
+
+		OpenApi openApi = openAPIImporter.getOpenApi();
+
+		return OpenApiComponentUtil.getSchemaOpenApiComponent(
+			Schema.getReferencedModel(reference),
+			openApi.getOpenApiComponents());
 	}
 
 	private List<OpenApiComponent> _getParameters(JsonNode componentsJSONNode) {
@@ -269,10 +291,8 @@ public class ComponentImporter {
 				}
 
 				OpenApiComponent referredOpenApiComponent =
-					OpenApiComponentUtil.getSchemaOpenApiComponent(
-						Schema.getReferencedModel(
-							openApiProperty.getReference()),
-						new HashSet<>(components));
+					_getOpenApiComponent(
+						openApiProperty.getReference(), components);
 
 				if (referredOpenApiComponent == null) {
 					resolvedOpenApiProperties.add(openApiProperty);
