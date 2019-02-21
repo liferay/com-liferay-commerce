@@ -22,6 +22,7 @@ import com.liferay.commerce.openapi.util.util.DateTimeProvider;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import com.liferay.commerce.openapi.util.util.Provider;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -81,9 +82,9 @@ public enum OpenApiFormat {
 		Set<OpenApiComponent> openApiComponents) {
 
 		OpenApiComponent openApiComponent =
-			OpenApiComponentUtil.getSchemaOpenApiComponent(
-				Schema.getReferencedModel(openApiProperty.getReference()),
-				openApiComponents);
+			OpenApiComponentUtil.getOpenApiComponent(
+				openApiProperty.getReference(),
+				new ArrayList<>(openApiComponents));
 
 		if (openApiProperty.isObject()) {
 			if (openApiComponent.isDictionary()) {
