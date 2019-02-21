@@ -137,8 +137,9 @@ public class Path {
 				}
 
 				OpenApiComponent openApiComponent =
-					OpenApiComponentUtil.getSchemaOpenApiComponent(
-						schema.getReferencedModel(), openApiComponents);
+					OpenApiComponentUtil.getOpenApiComponent(
+						schema.getReference(),
+						new ArrayList<>(openApiComponents));
 
 				if ((openApiComponent == null) ||
 					(openApiComponent.getItemsReferencedModel() == null)) {

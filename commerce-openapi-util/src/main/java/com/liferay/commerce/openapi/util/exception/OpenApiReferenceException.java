@@ -12,30 +12,15 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.util;
-
-import com.liferay.commerce.openapi.util.util.DTOProvider;
-import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
-import com.liferay.commerce.openapi.util.util.Provider;
+package com.liferay.commerce.openapi.util.exception;
 
 /**
  * @author Igor Beslic
  */
-public class ObjectOpenApiProperty extends OpenApiProperty {
+public class OpenApiReferenceException extends OpenApiException {
 
-	public Provider getJavaTypeProvider() {
-		return _provider;
+	public OpenApiReferenceException(String message) {
+		super(message);
 	}
-
-	protected ObjectOpenApiProperty(
-		OpenApiPropertyBuilder openApiPropertyBuilder) {
-
-		super(openApiPropertyBuilder);
-
-		_provider = new DTOProvider(
-			OpenApiComponentUtil.getComponentName(super.getReference()));
-	}
-
-	private final Provider _provider;
 
 }

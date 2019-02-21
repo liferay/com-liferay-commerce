@@ -14,37 +14,19 @@
 
 package com.liferay.commerce.openapi.util;
 
-import com.liferay.commerce.openapi.util.exception.OpenApiException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 /**
  * @author Igor Beslic
  */
 public class Schema {
 
-	public static String getReferencedModel(String reference) {
-		if (reference == null) {
-			return null;
-		}
-
-		Matcher matcher = _schemaReferencedModelPattern.matcher(reference);
-
-		if (matcher.find()) {
-			return matcher.group(3);
-		}
-
-		throw new OpenApiException(
-			"Unable to locate model pattern in " + reference);
-	}
-
 	public Schema(String type, String format, String reference) {
 		_type = type;
 		_format = format;
 		_reference = reference;
 
-		_referencedModel = getReferencedModel(reference);
+		_referencedModel = OpenApiComponentUtil.getComponentName(reference);
 	}
 
 	public String getFormat() {
@@ -69,9 +51,6 @@ public class Schema {
 			"{format=%s, reference=%s, referencedModel=%s, type=%s}", _format,
 			_reference, _referencedModel, _type);
 	}
-
-	private static final Pattern _schemaReferencedModelPattern =
-		Pattern.compile("^(.+)?#/?(\\w+/)+(\\w+)$");
 
 	private final String _format;
 	private final String _reference;

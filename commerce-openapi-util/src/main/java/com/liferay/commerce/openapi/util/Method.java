@@ -131,12 +131,10 @@ public class Method {
 		}
 
 		if (hasCollectionReturnType(openApiComponents)) {
-			String itemsReferenceModel =
-				schemaOpenApiComponent.getItemsReferencedModel();
+			String itemsReference = schemaOpenApiComponent.getItemsReference();
 
-			schemaOpenApiComponent =
-				OpenApiComponentUtil.getSchemaOpenApiComponent(
-					itemsReferenceModel, openApiComponents);
+			schemaOpenApiComponent = OpenApiComponentUtil.getOpenApiComponent(
+				itemsReference, new ArrayList(openApiComponents));
 		}
 
 		return schemaOpenApiComponent.getName();
@@ -279,8 +277,8 @@ public class Method {
 		Schema schema = content.getSchema();
 
 		OpenApiComponent schemaOpenApiComponent =
-			OpenApiComponentUtil.getSchemaOpenApiComponent(
-				schema.getReferencedModel(), openApiComponents);
+			OpenApiComponentUtil.getOpenApiComponent(
+				schema.getReference(), new ArrayList<>(openApiComponents));
 
 		if ("array".equals(schema.getType())) {
 			return OpenApiComponent.asComponentTypeArray(
