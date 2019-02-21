@@ -134,7 +134,7 @@ public class Method {
 			String itemsReference = schemaOpenApiComponent.getItemsReference();
 
 			schemaOpenApiComponent = OpenApiComponentUtil.getOpenApiComponent(
-				itemsReference, new ArrayList(openApiComponents));
+				itemsReference, openApiComponents);
 		}
 
 		return schemaOpenApiComponent.getName();
@@ -278,7 +278,7 @@ public class Method {
 
 		OpenApiComponent schemaOpenApiComponent =
 			OpenApiComponentUtil.getOpenApiComponent(
-				schema.getReference(), new ArrayList<>(openApiComponents));
+				schema.getReference(), openApiComponents);
 
 		if ("array".equals(schema.getType())) {
 			return OpenApiComponent.asComponentTypeArray(
