@@ -26,6 +26,7 @@ import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +94,7 @@ public class ParameterImporter {
 
 	public List<Parameter> getParameters(
 		JsonNode parametersParentJSONNode,
-		List<OpenApiComponent> openApiComponents) {
+		Set<OpenApiComponent> openApiComponents) {
 
 		if (parametersParentJSONNode == null) {
 			return Collections.emptyList();
@@ -119,7 +120,7 @@ public class ParameterImporter {
 	}
 
 	private static Parameter _findOpenApiComponent(
-			String reference, List<OpenApiComponent> openApiComponents)
+			String reference, Set<OpenApiComponent> openApiComponents)
 		throws ImporterException {
 
 		OpenApiComponent openApiComponent =

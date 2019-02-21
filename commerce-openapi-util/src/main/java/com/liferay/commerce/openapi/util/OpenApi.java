@@ -90,7 +90,7 @@ public class OpenApi {
 		return false;
 	}
 
-	public void setOpenApiComponents(List<OpenApiComponent> openApiComponents) {
+	public void setOpenApiComponents(Set<OpenApiComponent> openApiComponents) {
 		_openApiComponents.addAll(openApiComponents);
 	}
 

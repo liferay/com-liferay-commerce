@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.util.importer;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,10 +31,10 @@ public class ComponentImporterTest {
 	public void testGetComponents() throws Exception {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<OpenApiComponent> components = componentImporter.getComponents(
+		Set<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsPattern());
 
-		Assert.assertEquals("Two components expected", 3, components.size());
+		Assert.assertEquals("Three components expected", 3, components.size());
 
 		OpenApiComponent openApiComponent = _getDictionaryComponentDefinition(
 			components);
@@ -50,7 +50,7 @@ public class ComponentImporterTest {
 	}
 
 	private OpenApiComponent _getDictionaryComponentDefinition(
-		List<OpenApiComponent> openApiComponents) {
+		Set<OpenApiComponent> openApiComponents) {
 
 		for (OpenApiComponent openApiComponent : openApiComponents) {
 			if (openApiComponent.isDictionary()) {
