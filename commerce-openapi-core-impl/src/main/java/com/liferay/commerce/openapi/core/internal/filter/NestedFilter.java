@@ -15,8 +15,8 @@
 package com.liferay.commerce.openapi.core.internal.filter;
 
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.NestedContext;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.NestedContextThreadLocal;
+import com.liferay.commerce.openapi.core.internal.context.NestedContext;
+import com.liferay.commerce.openapi.core.internal.util.NestedContextThreadLocal;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
