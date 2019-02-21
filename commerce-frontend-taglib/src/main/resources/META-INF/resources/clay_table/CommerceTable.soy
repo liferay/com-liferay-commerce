@@ -21,6 +21,7 @@
 	{@param? tableVariant: string}
 	{@param? actionsMenuVariant: string}
 	{@param? emptyTableMessage: string}
+	{@param? showPagination: bool}
 
 	<div class="commerce-table-wrapper">
 		{if length($items) == 0}
@@ -43,16 +44,18 @@
 				{param actionsMenuVariant: $actionsMenuVariant /}
 			{/delcall}
 
-			{call ClayPaginationBar.render}
-				{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
-				{param currentPage: $currentPage /}
-				{param selectedEntry: $paginationSelectedEntry /}
-				{param entries: $paginationEntries /}
-				{param spritemap: $spritemap /}
-				{param totalEntries: $totalItems /}
-				{param baseHref: $paginationBaseHref /}
-				{param id: $id + 'Pagination' /}
-			{/call}
+			{if $showPagination}
+				{call ClayPaginationBar.render}
+					{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
+					{param currentPage: $currentPage /}
+					{param selectedEntry: $paginationSelectedEntry /}
+					{param entries: $paginationEntries /}
+					{param spritemap: $spritemap /}
+					{param totalEntries: $totalItems /}
+					{param baseHref: $paginationBaseHref /}
+					{param id: $id + 'Pagination' /}
+				{/call}
+			{/if}
 		{/if}
 	</div>
 {/template}
