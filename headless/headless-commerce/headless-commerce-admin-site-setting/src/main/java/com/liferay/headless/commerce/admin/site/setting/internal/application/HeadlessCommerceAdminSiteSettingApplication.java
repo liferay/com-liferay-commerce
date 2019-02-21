@@ -31,6 +31,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=/commerce-admin-site-setting",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=HeadlessCommerceAdminSiteSetting.Rest",
+		OpenApiPropsKeys.ASYNC_SUPPORTED_FEATURE_ENABLED,
 		OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED,
 		OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED,
 		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
