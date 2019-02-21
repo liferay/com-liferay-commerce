@@ -11,7 +11,7 @@ dependencies {
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
-	testIntegrationCompile group: "javax.ws.rs", name: "javax.ws.rs-api", version: "2.1.1"
+	testIntegrationCompile group: "javax.ws.rs", name: "javax.ws.rs-api", version: "2.1"
 	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
 	testIntegrationCompile project(":apps:commerce:commerce-api")
 	testIntegrationCompile project(":apps:commerce:commerce-currency-api")
