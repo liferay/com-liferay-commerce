@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.shipment.content.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
@@ -106,6 +107,21 @@ public class CommerceShipmentContentDisplayContext {
 		}
 
 		return _commerceShipment;
+	}
+
+	public long getCommerceShipmentAccountId(CommerceShipment commerceShipment)
+		throws PortalException {
+
+		return commerceShipment.getCommerceAccountId();
+	}
+
+	public String getCommerceShipmentAccountName(
+			CommerceShipment commerceShipment)
+		throws PortalException {
+
+		CommerceAccount commerceAccount = commerceShipment.getCommerceAccount();
+
+		return commerceAccount.getName();
 	}
 
 	public String getCommerceShipmentExpectedDate(

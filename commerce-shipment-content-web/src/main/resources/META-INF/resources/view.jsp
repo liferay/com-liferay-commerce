@@ -48,12 +48,12 @@ CommerceShipmentContentDisplayContext commerceShipmentContentDisplayContext = (C
 
 		<liferay-ui:search-container-column-text
 			name="customer-name"
-			property="customerName"
+			value="<%= commerceShipmentContentDisplayContext.getCommerceShipmentAccountName(commerceShipment) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			name="customer-id"
-			property="customerId"
+			value="<%= String.valueOf(commerceShipmentContentDisplayContext.getCommerceShipmentAccountId(commerceShipment)) %>"
 		/>
 
 		<liferay-ui:search-container-column-date
