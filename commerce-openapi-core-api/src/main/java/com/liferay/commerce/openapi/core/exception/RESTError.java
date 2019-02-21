@@ -24,6 +24,17 @@ import javax.ws.rs.core.Response;
  */
 public enum RESTError {
 
+	ACCOUNT_NAME_ERROR(
+		956, "Invalid account name", Response.Status.BAD_REQUEST),
+	ADDRESS_CITY_ERROR(
+		961, "Invalid address city", Response.Status.BAD_REQUEST),
+	ADDRESS_COUNTRY_ERROR(
+		960, "Invalid address country", Response.Status.BAD_REQUEST),
+	ADDRESS_NAME_ERROR(
+		959, "Invalid address name", Response.Status.BAD_REQUEST),
+	ADDRESS_STREET_ERROR(
+		958, "Invalid address street", Response.Status.BAD_REQUEST),
+	ADDRESS_ZIP_ERROR(957, "Invalid address zip", Response.Status.BAD_REQUEST),
 	COUNTRY_NAME_ERROR(
 		977, "Invalid country name for given language tag",
 		Response.Status.BAD_REQUEST),
