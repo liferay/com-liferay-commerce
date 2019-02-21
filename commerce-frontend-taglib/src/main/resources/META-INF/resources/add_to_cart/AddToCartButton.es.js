@@ -7,7 +7,7 @@ import '../quantity_selector/QuantitySelector.es';
 const selectInput = (element) => {
 	const inputBox = element.querySelector('input');
 	const selectBox = element.querySelector('select');
-	
+
 	if (inputBox) {
 		inputBox.focus();
 		inputBox.select();
@@ -15,12 +15,12 @@ const selectInput = (element) => {
 	else if (selectBox) {
 		selectBox.focus();
 	}
-}
+};
 
 class AddToCartButton extends Component {
 
-    willReceiveState(changes) {
-		if(changes.editMode) {
+	willReceiveState(changes) {
+		if (changes.editMode) {
 			setTimeout(() => selectInput(this.element), 100);
 		}
 	}
