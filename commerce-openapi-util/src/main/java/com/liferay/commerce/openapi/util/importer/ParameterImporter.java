@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,34 +34,6 @@ import org.slf4j.LoggerFactory;
  * @author Igor Beslic
  */
 public class ParameterImporter {
-
-	public static Parameter fromComponentDefinition(
-			JsonNode parameterReferenceJSONNode,
-			List<OpenApiComponent> openApiComponents)
-		throws ImporterException {
-
-		String parameterReference = Parameter.getParameterReference(
-			parameterReferenceJSONNode.asText());
-
-		_logger.debug("Parameter is reference to {}", parameterReference);
-
-		for (OpenApiComponent openApiComponent : openApiComponents) {
-			if (!openApiComponent.isParameter()) {
-				continue;
-			}
-
-			if (parameterReference.equals(openApiComponent.getName())) {
-				_logger.debug(
-					"Reference resolved to {}",
-					openApiComponent.getParameter());
-
-				return openApiComponent.getParameter();
-			}
-		}
-
-		throw new ImporterException(
-			"Unable to resolve parameter reference " + parameterReference);
-	}
 
 	public static Parameter fromJSONNode(JsonNode parameterJSONNode) {
 		Parameter.ParameterBuilder parameterBuilder =
@@ -130,10 +103,12 @@ public class ParameterImporter {
 
 		parametersParentJSONNode.forEach(
 			parameterJSONNode -> {
-				if (parameterJSONNode.has("$ref")) {
+				String reference = GetterUtil.getAsTextOrNullIfMisses(
+					"$ref", parameterJSONNode);
+
+				if (reference != null) {
 					parameters.add(
-						fromComponentDefinition(
-							parameterJSONNode.get("$ref"), openApiComponents));
+						_findOpenApiComponent(reference, openApiComponents));
 				}
 				else {
 					parameters.add(fromJSONNode(parameterJSONNode));
@@ -141,6 +116,22 @@ public class ParameterImporter {
 			});
 
 		return parameters;
+	}
+
+	private static Parameter _findOpenApiComponent(
+			String reference, List<OpenApiComponent> openApiComponents)
+		throws ImporterException {
+
+		OpenApiComponent openApiComponent =
+			OpenApiComponentUtil.getOpenApiComponent(
+				reference, openApiComponents);
+
+		if (openApiComponent == null) {
+			throw new ImporterException(
+				"Unable to resolve parameter reference " + reference);
+		}
+
+		return openApiComponent.getParameter();
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
