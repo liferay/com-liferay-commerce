@@ -12,23 +12,23 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.json;
+package com.liferay.commerce.openapi.core.internal.message.body;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
-import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.ext.MessageBodyReader;
+import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
 import org.osgi.service.component.annotations.Component;
@@ -39,33 +39,44 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED + ")",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
-	service = MessageBodyReader.class
+	service = MessageBodyWriter.class
 )
-@Consumes(MediaType.APPLICATION_JSON)
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_XHTML_XML})
 @Provider
-public class JsonMessageBodyReader implements MessageBodyReader<Object> {
+public class XMLMessageBodyWriter implements MessageBodyWriter<Object> {
 
-	@Override
-	public boolean isReadable(
+	public long getSize(
+		Object data, Class<?> type, Type genericType, Annotation[] annotations,
+		MediaType mediaType) {
+
+		return -1;
+	}
+
+	public boolean isWriteable(
 		Class<?> type, Type genericType, Annotation[] annotations,
 		MediaType mediaType) {
 
-		return _OBJECT_MAPPER.canSerialize(type);
+		if (type == String.class) {
+			return false;
+		}
+
+		return _XML_MAPPER.canSerialize(type);
 	}
 
-	@Override
-	public Object readFrom(
-			Class<Object> type, Type genericType, Annotation[] annotations,
-			MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
-			InputStream inputStream)
+	public void writeTo(
+			Object data, Class<?> type, Type genericType,
+			Annotation[] annotations, MediaType mediaType,
+			MultivaluedMap<String, Object> headers, OutputStream out)
 		throws IOException, WebApplicationException {
 
-		return _OBJECT_MAPPER.readValue(inputStream, type);
+		_XML_MAPPER.writeValue(out, data);
+
+		out.flush();
 	}
 
-	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper();
+	private static final XmlMapper _XML_MAPPER = new XmlMapper();
 
 }

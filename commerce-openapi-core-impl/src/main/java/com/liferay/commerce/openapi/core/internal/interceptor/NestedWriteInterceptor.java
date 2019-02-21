@@ -12,11 +12,14 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.interceptor;
 
 import com.liferay.commerce.openapi.core.annotation.Nested;
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+import com.liferay.commerce.openapi.core.internal.context.NestedContext;
 import com.liferay.commerce.openapi.core.internal.param.converter.DateParameterConverter;
+import com.liferay.commerce.openapi.core.internal.servlet.NestedHttpServletRequestWrapper;
+import com.liferay.commerce.openapi.core.internal.util.NestedContextThreadLocal;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
