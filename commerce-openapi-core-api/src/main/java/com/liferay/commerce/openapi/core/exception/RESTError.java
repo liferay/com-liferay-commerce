@@ -76,6 +76,7 @@ public enum RESTError {
 		980, "Unable to find product type.", Response.Status.BAD_REQUEST),
 	PURCHASE_ORDER_NUMBER_ERROR(
 		964, "Invalid purchase order number", Response.Status.BAD_REQUEST),
+	REGION_NAME_ERROR(962, "Invalid region name", Response.Status.BAD_REQUEST),
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
 		Response.Status.INTERNAL_SERVER_ERROR),
