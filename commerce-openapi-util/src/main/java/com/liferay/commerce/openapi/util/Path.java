@@ -106,8 +106,9 @@ public class Path {
 			return;
 		}
 
-		if (schema.getReferencedModel() != null) {
-			_referencedModels.add(schema.getReferencedModel());
+		if (schema.getReference() != null) {
+			_referencedModels.add(
+				OpenApiComponentUtil.getComponentName(schema.getReference()));
 		}
 	}
 
@@ -132,23 +133,25 @@ public class Path {
 
 				Schema schema = content.getSchema();
 
-				if (schema.getReferencedModel() == null) {
+				if (schema.getReference() == null) {
 					continue;
 				}
 
 				OpenApiComponent openApiComponent =
 					OpenApiComponentUtil.getOpenApiComponent(
-						schema.getReference(),
-						new ArrayList<>(openApiComponents));
+						schema.getReference(), openApiComponents);
 
 				if ((openApiComponent == null) ||
 					(openApiComponent.getItemsReferencedModel() == null)) {
 
-					_referencedModels.add(schema.getReferencedModel());
+					_referencedModels.add(
+						OpenApiComponentUtil.getComponentName(
+							schema.getReference()));
 				}
 				else {
 					_referencedModels.add(
-						openApiComponent.getItemsReferencedModel());
+						OpenApiComponentUtil.getComponentName(
+							openApiComponent.getItemsReferencedModel()));
 				}
 			}
 		}

@@ -26,6 +26,7 @@ import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.Security;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -102,7 +103,8 @@ public class MethodImporter {
 						new Parameter.ParameterBuilder();
 
 					parameterBuilder.name(
-						schema.getReferencedModel()
+						OpenApiComponentUtil.getComponentName(
+							schema.getReference())
 					).location(
 						"body"
 					).content(

@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.util.generator;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.generator.constants.GeneratorConstants;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -44,7 +45,8 @@ public class ParameterGenerator {
 			Schema schema = parameter.getSchema();
 
 			return String.format(
-				"%sDTO %sDTO", schema.getReferencedModel(),
+				"%sDTO %sDTO",
+				OpenApiComponentUtil.getComponentName(schema.getReference()),
 				StringUtils.lowerCaseFirstChar(parameter.getName()));
 		}
 		else if (location.equals("cookie")) {
@@ -87,7 +89,8 @@ public class ParameterGenerator {
 			Schema schema = parameter.getSchema();
 
 			return String.format(
-				"%sDTO %sDTO", schema.getReferencedModel(),
+				"%sDTO %sDTO",
+				OpenApiComponentUtil.getComponentName(schema.getReference()),
 				StringUtils.lowerCaseFirstChar(parameter.getName()));
 		}
 

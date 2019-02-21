@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.openapi.util;
 
-import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
-
 /**
  * @author Igor Beslic
  */
@@ -25,8 +23,6 @@ public class Schema {
 		_type = type;
 		_format = format;
 		_reference = reference;
-
-		_referencedModel = OpenApiComponentUtil.getComponentName(reference);
 	}
 
 	public String getFormat() {
@@ -37,10 +33,6 @@ public class Schema {
 		return _reference;
 	}
 
-	public String getReferencedModel() {
-		return _referencedModel;
-	}
-
 	public String getType() {
 		return _type;
 	}
@@ -48,13 +40,11 @@ public class Schema {
 	@Override
 	public String toString() {
 		return String.format(
-			"{format=%s, reference=%s, referencedModel=%s, type=%s}", _format,
-			_reference, _referencedModel, _type);
+			"{format=%s, reference=%s, type=%s}", _format, _reference, _type);
 	}
 
 	private final String _format;
 	private final String _reference;
-	private final String _referencedModel;
 	private final String _type;
 
 }
