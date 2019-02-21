@@ -2927,3 +2927,30 @@ a[type="button"] {
 		box-shadow: 0 0 0 1px $list-group-bg, 0 0 0 2px lighten(saturate($component-active-bg, 3.40), 21.18);
 	}
 }
+
+.table td img {
+	height: 60px;
+	object-fit: contain;
+	width: 60px;
+}
+
+.table .image-name-cell {
+	a {
+		text-decoration: none;
+	}
+}
+
+.image-name-cell-label {
+	align-items: center;
+	color: #5C5E5E;
+	display: flex;
+	font-weight: normal;
+
+	img {
+		margin-right: 10px;
+	}
+
+	span {
+		text-decoration: none;
+	}
+}
