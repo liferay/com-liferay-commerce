@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
  * @author Igor Beslic
  * @author Matija Petanjek
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 public enum RESTError {
 
@@ -54,11 +55,27 @@ public enum RESTError {
 			"3-letter ISO 4217 format.",
 		Response.Status.NOT_FOUND),
 	NO_SUCH_MODEL(982, "Unable to find entity", Response.Status.NOT_FOUND),
+	ORDER_BILLING_ADDRESS_ERROR(
+		970, "Invalid order billing address", Response.Status.BAD_REQUEST),
+	ORDER_NOTE_CONTENT_ERROR(
+		967, "Invalid order note content", Response.Status.BAD_REQUEST),
+	ORDER_PAYMENT_METHOD_ERROR(
+		966, "Invalid order payment method", Response.Status.BAD_REQUEST),
+	ORDER_PRICE_ERROR(965, "Invalid order price", Response.Status.BAD_REQUEST),
+	ORDER_SHIPPING_ADDRESS_ERROR(
+		969, "Invalid order shipping address", Response.Status.BAD_REQUEST),
+	ORDER_SHIPPING_METHOD_ERROR(
+		968, "Invalid order shipping method", Response.Status.BAD_REQUEST),
+	ORDER_STATUS_ERROR(
+		963, "Invalid order status", Response.Status.BAD_REQUEST),
+	ORDER_VALIDATOR_ERROR(955, "Invalid order", Response.Status.BAD_REQUEST),
 	PRINCIPAL_ERROR(
 		983, Response.Status.NOT_FOUND.getReasonPhrase(),
 		Response.Status.NOT_FOUND),
 	PRODUCT_TYPE_NAME_ERROR(
 		980, "Unable to find product type.", Response.Status.BAD_REQUEST),
+	PURCHASE_ORDER_NUMBER_ERROR(
+		964, "Invalid purchase order number", Response.Status.BAD_REQUEST),
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
 		Response.Status.INTERNAL_SERVER_ERROR),
