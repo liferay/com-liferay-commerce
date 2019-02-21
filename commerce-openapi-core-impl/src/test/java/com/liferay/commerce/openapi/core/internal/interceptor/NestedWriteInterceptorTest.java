@@ -12,14 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.interceptor;
 
+import com.liferay.commerce.openapi.core.internal.context.NestedContext;
 import com.liferay.commerce.openapi.core.internal.context.provider.PaginationContextProvider;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.ProductDTO;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.ProductOptionDTO;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.SkuDTO;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.resource.ProductResourceImpl;
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.util.MockHttpServletRequest;
+import com.liferay.commerce.openapi.core.internal.util.NestedContextThreadLocal;
+import com.liferay.commerce.openapi.core.internal.util.dto.ProductDTO;
+import com.liferay.commerce.openapi.core.internal.util.dto.ProductOptionDTO;
+import com.liferay.commerce.openapi.core.internal.util.dto.SkuDTO;
+import com.liferay.commerce.openapi.core.internal.util.request.MockHttpServletRequest;
+import com.liferay.commerce.openapi.core.internal.util.resource.ProductResourceImpl;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.io.IOException;

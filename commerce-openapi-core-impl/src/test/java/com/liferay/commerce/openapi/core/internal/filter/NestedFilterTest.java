@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.filter;
 
-import com.liferay.commerce.openapi.core.internal.filter.NestedFilter;
+import com.liferay.commerce.openapi.core.internal.context.NestedContext;
+import com.liferay.commerce.openapi.core.internal.util.NestedContextThreadLocal;
 
 import java.io.IOException;
 
