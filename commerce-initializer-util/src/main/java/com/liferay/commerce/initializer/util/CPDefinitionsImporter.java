@@ -611,20 +611,21 @@ public class CPDefinitionsImporter {
 			optionsJSON = jsonArray.toString();
 		}
 
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
 			cpDefinitionId, sku, null, manufacturerPartNumber, true,
-			optionsJSON, true, calendar.get(Calendar.MONTH),
+			optionsJSON, cpDefinition.getWidth(), cpDefinition.getHeight(),
+			cpDefinition.getDepth(), cpDefinition.getWeight(),
+			BigDecimal.valueOf(price), BigDecimal.valueOf(promoPrice),
+			BigDecimal.valueOf(0), true, sku, calendar.get(Calendar.MONTH),
 			calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.YEAR),
 			calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
 			0, 0, 0, 0, 0, true, serviceContext);
 
-		cpInstance.setPrice(new BigDecimal(price));
-		cpInstance.setPromoPrice(new BigDecimal(promoPrice));
-
 		_addWarehouseQuantities(
 			skuJSONObject, commerceWarehouseIds, serviceContext, cpInstance);
-
-		_cpInstanceLocalService.updateCPInstance(cpInstance);
 
 		return cpInstance;
 	}
