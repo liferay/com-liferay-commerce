@@ -71,14 +71,14 @@ public class CommerceOrderValidatorExceptionMapper
 		Response.Status status = getStatus();
 
 		responseBuilder.entity(
-			toJSON(getErrorDescriptionString(e), status.getStatusCode()));
+			toJSON(_getErrorMessage(e), status.getStatusCode()));
 
 		responseBuilder.type(MediaType.APPLICATION_JSON_TYPE);
 
 		return responseBuilder.build();
 	}
 
-	protected String getErrorDescriptionString(
+	private String _getErrorMessage(
 		CommerceOrderValidatorException commerceOrderValidatorException) {
 
 		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
