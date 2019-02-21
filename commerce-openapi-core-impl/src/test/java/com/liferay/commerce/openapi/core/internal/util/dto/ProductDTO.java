@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto;
+package com.liferay.commerce.openapi.core.internal.util.dto;
 
 import java.util.Collection;
 import java.util.Collections;

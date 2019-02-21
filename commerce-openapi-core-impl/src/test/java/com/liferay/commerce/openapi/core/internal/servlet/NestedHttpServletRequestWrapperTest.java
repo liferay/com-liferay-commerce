@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.servlet;
 
-import com.liferay.commerce.openapi.core.internal.jaxrs.nested.util.MockHttpServletRequest;
+import com.liferay.commerce.openapi.core.internal.util.request.MockHttpServletRequest;
 
 import org.junit.Assert;
 import org.junit.Test;
