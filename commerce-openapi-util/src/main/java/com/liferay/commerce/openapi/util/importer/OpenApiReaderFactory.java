@@ -43,7 +43,7 @@ public class OpenApiReaderFactory {
 	public static OpenApiReader getOpenApiReader(String externalReference) {
 		if (!isExternalReference(externalReference)) {
 			throw new ReaderException(
-				"No locator implementation for reference " + externalReference);
+				"No reader implementation for reference " + externalReference);
 		}
 
 		String[] referenceParts = externalReference.split("#");
@@ -70,7 +70,7 @@ public class OpenApiReaderFactory {
 	}
 
 	public static boolean isExternalReference(String reference) {
-		if (reference.startsWith("#")) {
+		if ((reference == null) || reference.startsWith("#")) {
 			return false;
 		}
 
