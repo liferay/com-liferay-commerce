@@ -37,7 +37,7 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 </div>
 
 <c:if test="<%= commerceAccountDisplayContext.hasAddAccountPermissions() %>">
-	<div class="commerce-frame__cta is-visible">
+	<div class="commerce-cta is-visible">
 		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAccountModal();" %>' value="add-account" />
 	</div>
 

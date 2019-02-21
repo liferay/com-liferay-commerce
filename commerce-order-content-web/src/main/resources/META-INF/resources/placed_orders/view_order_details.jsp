@@ -154,7 +154,7 @@ if (commerceOrder != null) {
 	</div>
 </div>
 
-<div class="commerce-frame__cta is-visible">
+<div class="commerce-cta is-visible">
 	<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL">
 		<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderDetails" />
 	</portlet:actionURL>

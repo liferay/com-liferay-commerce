@@ -145,7 +145,7 @@ if (commerceAddress != null) {
 		</div>
 	</section>
 
-	<div class="commerce-frame__cta is-visible">
+	<div class="commerce-cta is-visible">
 		<c:if test="<%= Validator.isNotNull(backURL) %>">
 			<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
 		</c:if>

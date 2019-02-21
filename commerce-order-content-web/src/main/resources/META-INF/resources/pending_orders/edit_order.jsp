@@ -275,7 +275,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		</div>
 	</div>
 
-	<div class="commerce-frame__cta is-visible">
+	<div class="commerce-cta is-visible">
 		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
 
 		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" type="submit" />
