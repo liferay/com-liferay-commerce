@@ -12,33 +12,26 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.util;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import com.liferay.commerce.openapi.core.internal.context.NestedContext;
+import com.liferay.petra.lang.CentralizedThreadLocal;
 
 /**
  * @author Ivica Cardic
  */
-public class NestedHttpServletRequestWrapper extends HttpServletRequestWrapper {
+public class NestedContextThreadLocal {
 
-	public NestedHttpServletRequestWrapper(
-		String fieldName, HttpServletRequest request) {
-
-		super(request);
-
-		_fieldName = fieldName;
+	public static NestedContext getNestedContext() {
+		return _nestedContextThreadLocal.get();
 	}
 
-	@Override
-	public String getParameter(String name) {
-		return super.getParameter(getNestedParameterName(name));
+	public static void setNestedContext(NestedContext nestedContext) {
+		_nestedContextThreadLocal.set(nestedContext);
 	}
 
-	protected String getNestedParameterName(String name) {
-		return _fieldName + "." + name;
-	}
-
-	private final String _fieldName;
+	private static final ThreadLocal<NestedContext> _nestedContextThreadLocal =
+		new CentralizedThreadLocal<>(
+			NestedContextThreadLocal.class + "._nestedContextThreadLocal");
 
 }

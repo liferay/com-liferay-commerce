@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.xml;
+package com.liferay.commerce.openapi.core.internal.message.body;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
