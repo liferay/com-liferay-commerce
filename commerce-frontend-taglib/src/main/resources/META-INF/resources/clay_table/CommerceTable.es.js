@@ -6,6 +6,9 @@ import Soy from 'metal-soy';
 
 import template from './CommerceTable.soy';
 
+import './CommerceTableExtensions.es';
+import './ModalLinkCellTemplate.es';
+
 class CommerceTable extends Component {
 
 	_getApiURL() {
