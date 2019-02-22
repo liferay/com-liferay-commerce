@@ -184,19 +184,23 @@ public class AccountHelper {
 	private String _getEmailAddress(
 		AccountDTO accountDTO, CommerceAccount commerceAccount) {
 
-		String[] emailAddresses = accountDTO.getEmailAddresses();
+		String[] emailAddresses = new String[0];
 
-		if ((emailAddresses.length == 0) && (commerceAccount == null)) {
+		if (accountDTO.getEmailAddresses() != null) {
+			emailAddresses = accountDTO.getEmailAddresses();
+		}
+
+		if (emailAddresses.length > 0) {
+			return emailAddresses[0];
+		}
+
+		if (commerceAccount == null) {
 			throw new ClientErrorException(
 				"Email address should be specified in the request body",
 				Response.Status.CONFLICT);
 		}
 
-		if (emailAddresses.length == 0) {
-			return commerceAccount.getEmail();
-		}
-
-		return emailAddresses[0];
+		return commerceAccount.getEmail();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(AccountHelper.class);
