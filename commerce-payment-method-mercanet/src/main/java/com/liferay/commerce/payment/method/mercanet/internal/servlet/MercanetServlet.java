@@ -147,17 +147,14 @@ public class MercanetServlet extends HttpServlet {
 					mercanetGroupServiceConfiguration = _getConfiguration(
 						commerceOrder.getGroupId());
 
-				String environment =
-					mercanetGroupServiceConfiguration.environment();
-
-				String upperCaseEnvironment = StringUtil.toUpperCase(
-					environment);
+				String environment = StringUtil.toUpperCase(
+					mercanetGroupServiceConfiguration.environment());
 
 				String keyVersion =
 					mercanetGroupServiceConfiguration.keyVersion();
 
 				PaypageClient paypageClient = new PaypageClient(
-					Environment.valueOf(upperCaseEnvironment),
+					Environment.valueOf(environment),
 					mercanetGroupServiceConfiguration.merchantId(),
 					Integer.valueOf(keyVersion),
 					mercanetGroupServiceConfiguration.secretKey());
@@ -217,16 +214,15 @@ public class MercanetServlet extends HttpServlet {
 	}
 
 	private Map<String, String> _getResponseParameters(String data) {
-		String[] params = data.split(StringPool.BACK_SLASH + StringPool.PIPE);
-
 		Map<String, String> map = new HashMap<>();
+
+		String[] params = data.split(StringPool.BACK_SLASH + StringPool.PIPE);
 
 		for (String param : params)
 		{
-			String name = param.split(StringPool.EQUAL)[0];
-			String value = param.split(StringPool.EQUAL)[1];
+			String[] kvp = StringUtil.split(param, CharPool.EQUAL);
 
-			map.put(name, value);
+			map.put(kvp[0], kvp[1]);
 		}
 
 		return map;

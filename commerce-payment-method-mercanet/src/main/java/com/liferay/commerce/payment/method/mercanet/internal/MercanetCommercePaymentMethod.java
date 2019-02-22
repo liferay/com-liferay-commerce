@@ -142,7 +142,7 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		PaymentRequest paymentRequest = new PaymentRequest();
 
 		int normalizedMultiplier = (int)Math.pow(
-			10.00, commerceCurrency.getMaxFractionDigits());
+			10, commerceCurrency.getMaxFractionDigits());
 
 		BigDecimal orderTotal = commerceOrder.getTotal();
 
@@ -204,14 +204,13 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		MercanetGroupServiceConfiguration mercanetGroupServiceConfiguration =
 			_getConfiguration(commerceOrder.getGroupId());
 
-		String environment = mercanetGroupServiceConfiguration.environment();
-
-		String upperCaseEnvironment = StringUtil.toUpperCase(environment);
+		String environment = StringUtil.toUpperCase(
+			mercanetGroupServiceConfiguration.environment());
 
 		String keyVersion = mercanetGroupServiceConfiguration.keyVersion();
 
 		PaypageClient paypageClient = new PaypageClient(
-			Environment.valueOf(upperCaseEnvironment),
+			Environment.valueOf(environment),
 			mercanetGroupServiceConfiguration.merchantId(),
 			Integer.valueOf(keyVersion),
 			mercanetGroupServiceConfiguration.secretKey());
@@ -238,7 +237,7 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			-1, true, url, null, resultMessage, true);
 	}
 
-	private MercanetGroupServiceConfiguration _getConfiguration(Long groupId)
+	private MercanetGroupServiceConfiguration _getConfiguration(long groupId)
 		throws ConfigurationException {
 
 		return _configurationProvider.getConfiguration(
