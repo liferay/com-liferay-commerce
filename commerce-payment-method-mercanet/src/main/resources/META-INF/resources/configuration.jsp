@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-MercanetGroupServiceConfiguration authorizeNetCommercePaymentEngineGroupServiceConfiguration = (MercanetGroupServiceConfiguration)request.getAttribute(MercanetGroupServiceConfiguration.class.getName());
+MercanetGroupServiceConfiguration mercanetCommercePaymentEngineGroupServiceConfiguration = (MercanetGroupServiceConfiguration)request.getAttribute(MercanetGroupServiceConfiguration.class.getName());
 %>
 
 <portlet:actionURL name="editMercanetCommercePaymentMethodConfiguration" var="editCommercePaymentMethodActionURL" />
@@ -32,11 +32,11 @@ MercanetGroupServiceConfiguration authorizeNetCommercePaymentEngineGroupServiceC
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset label="authentication">
-			<aui:input label="merchant-id" name="settings--merchantId--" value="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.merchantId() %>" />
+			<aui:input label="merchant-id" name="settings--merchantId--" value="<%= mercanetCommercePaymentEngineGroupServiceConfiguration.merchantId() %>" />
 
-			<aui:input label="secret-key" name="settings--secretKey--" value="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.secretKey() %>" />
+			<aui:input label="secret-key" name="settings--secretKey--" value="<%= mercanetCommercePaymentEngineGroupServiceConfiguration.secretKey() %>" />
 
-			<aui:input label="key-version" name="settings--keyVersion--" value="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.keyVersion() %>" />
+			<aui:input label="key-version" name="settings--keyVersion--" value="<%= mercanetCommercePaymentEngineGroupServiceConfiguration.keyVersion() %>" />
 
 			<aui:select name="settings--environment--">
 
@@ -44,7 +44,7 @@ MercanetGroupServiceConfiguration authorizeNetCommercePaymentEngineGroupServiceC
 				for (String environment : MercanetCommercePaymentMethodConstants.ENVIRONMENTS) {
 				%>
 
-					<aui:option label="<%= environment %>" selected="<%= environment.equals(authorizeNetCommercePaymentEngineGroupServiceConfiguration.environment()) %>" value="<%= environment %>" />
+					<aui:option label="<%= environment %>" selected="<%= environment.equals(mercanetCommercePaymentEngineGroupServiceConfiguration.environment()) %>" value="<%= environment %>" />
 
 				<%
 				}

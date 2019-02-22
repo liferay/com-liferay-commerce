@@ -136,7 +136,7 @@ public class MercanetServlet extends HttpServlet {
 
 				String data = httpServletRequest.getParameter("Data");
 
-				Map<String, String> parametersMap = _getResponseParameters(
+				Map<String, String> parameterMap = _getResponseParameters(
 					data);
 
 				CommerceOrder commerceOrder =
@@ -187,10 +187,10 @@ public class MercanetServlet extends HttpServlet {
 						responseData.getMerchantId(),
 						mercanetGroupServiceConfiguration.merchantId()) &&
 				   Objects.equals(
-						parametersMap.get("customerId"),
+						parameterMap.get("customerId"),
 						String.valueOf(commerceOrder.getUserId())) &&
 				   Objects.equals(
-						parametersMap.get("orderId"),
+						parameterMap.get("orderId"),
 						String.valueOf(commerceOrder.getCommerceOrderId())) &&
 					Objects.equals(
 						responseData.getTransactionReference(),
