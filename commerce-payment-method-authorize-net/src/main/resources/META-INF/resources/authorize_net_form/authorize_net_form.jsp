@@ -18,8 +18,11 @@
 
 <%
 String redirectUrlAttribute = (String)request.getAttribute("redirectUrl");
+
 String redirectUrl = URLCodec.decodeURL(redirectUrlAttribute);
+
 String tokenAttribute = (String)request.getAttribute("token");
+
 String token = URLDecoder.decode(tokenAttribute, "UTF-8");
 %>
 

@@ -138,7 +138,7 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		if (!Objects.equals(commerceCurrency.getCode(), "EUR")) {
-			throw new Exception("Mercanet acccept only EUR currency");
+			throw new Exception("Mercanet accepts only EUR currency");
 		}
 
 		PaymentRequest paymentRequest = new PaymentRequest();
@@ -162,13 +162,6 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			returnUrl.getProtocol(), returnUrl.getHost(), returnUrl.getPort(),
 			returnUrl.getPath());
 
-		StringBundler normalUrlSB = new StringBundler(4);
-
-		normalUrlSB.append(baseUrl.toString());
-		normalUrlSB.append("?redirect=");
-		normalUrlSB.append(parameters.get("redirect")[0]);
-		normalUrlSB.append("&type=normal");
-
 		StringBundler automaticUrlSB = new StringBundler(5);
 
 		automaticUrlSB.append(baseUrl.toString());
@@ -177,17 +170,25 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		automaticUrlSB.append("&type=automatic&uuid=");
 		automaticUrlSB.append(parameters.get("uuid")[0]);
 
-		URL normalURL = new URL(normalUrlSB.toString());
+		URL automaticUrl = new URL(automaticUrlSB.toString());
 
-		URL automaticURL = new URL(automaticUrlSB.toString());
-
-		paymentRequest.setAutomaticResponseUrl(automaticURL);
-
-		paymentRequest.setNormalReturnUrl(normalURL);
+		paymentRequest.setAutomaticResponseUrl(automaticUrl);
 
 		paymentRequest.setCaptureMode(CaptureMode.IMMEDIATE);
 		paymentRequest.setCurrencyCode(Currency.EUR);
 		paymentRequest.setCustomerId(String.valueOf(commerceOrder.getUserId()));
+
+		StringBundler normalUrlSB = new StringBundler(4);
+
+		normalUrlSB.append(baseUrl.toString());
+		normalUrlSB.append("?redirect=");
+		normalUrlSB.append(parameters.get("redirect")[0]);
+		normalUrlSB.append("&type=normal");
+
+		URL normalUrl = new URL(normalUrlSB.toString());
+
+		paymentRequest.setNormalReturnUrl(normalUrl);
+
 		paymentRequest.setOrderChannel(OrderChannel.INTERNET);
 		paymentRequest.setOrderId(
 			String.valueOf(commerceOrder.getCommerceOrderId()));
@@ -223,12 +224,11 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		URL redirectionUrl = initializationResponse.getRedirectionUrl();
 
 		String url = StringBundler.concat(
-			_getServletUrl(mercanetCommercePaymentRequest), StringPool.QUESTION,
-			"redirectUrl=", _http.encodeURL(redirectionUrl.toString()),
-			StringPool.AMPERSAND, "redirectionData=",
+			_getServletUrl(mercanetCommercePaymentRequest), "?redirectUrl=",
+			_http.encodeURL(redirectionUrl.toString()), "&redirectionData=",
 			URLEncoder.encode(
 				initializationResponse.getRedirectionData(), "UTF-8"),
-			StringPool.AMPERSAND, "seal=",
+			"&seal=",
 			URLEncoder.encode(initializationResponse.getSeal(), "UTF-8"));
 
 		List<String> resultMessage = Collections.singletonList(
