@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -48,7 +49,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -153,34 +153,31 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		URL returnUrl = new URL(mercanetCommercePaymentRequest.getReturnUrl());
 
-		Map<String, String> parameters = _getQueryMap(returnUrl.getQuery());
+		Map<String, String[]> parameters = _http.getParameterMap(
+			returnUrl.getQuery());
 
 		URL baseUrl = new URL(
 			returnUrl.getProtocol(), returnUrl.getHost(), returnUrl.getPort(),
 			returnUrl.getPath());
 
-		StringBuilder normalUrl = new StringBuilder(baseUrl.toString());
+		StringBundler normalUrlSB = new StringBundler(4);
 
-		normalUrl.append(StringPool.QUESTION);
-		normalUrl.append("type=normal");
-		normalUrl.append(StringPool.AMPERSAND);
-		normalUrl.append("redirect=");
-		normalUrl.append(parameters.get("redirect"));
+		normalUrlSB.append(baseUrl.toString());
+		normalUrlSB.append("?redirect=");
+		normalUrlSB.append(parameters.get("redirect")[0]);
+		normalUrlSB.append("&type=normal");
 
-		StringBuilder automaticUrl = new StringBuilder(baseUrl.toString());
+		StringBundler automaticUrlSB = new StringBundler(5);
 
-		automaticUrl.append(StringPool.QUESTION);
-		automaticUrl.append("type=automatic");
-		automaticUrl.append(StringPool.AMPERSAND);
-		automaticUrl.append("groupId=");
-		automaticUrl.append(parameters.get("groupId"));
-		automaticUrl.append(StringPool.AMPERSAND);
-		automaticUrl.append("uuid=");
-		automaticUrl.append(parameters.get("uuid"));
+		automaticUrlSB.append(baseUrl.toString());
+		automaticUrlSB.append("?groupId=");
+		automaticUrlSB.append(parameters.get("groupId")[0]);
+		automaticUrlSB.append("&type=automatic&uuid=");
+		automaticUrlSB.append(parameters.get("uuid")[0]);
 
-		URL normalURL = new URL(normalUrl.toString());
+		URL normalURL = new URL(normalUrlSB.toString());
 
-		URL automaticURL = new URL(automaticUrl.toString());
+		URL automaticURL = new URL(automaticUrlSB.toString());
 
 		paymentRequest.setAutomaticResponseUrl(automaticURL);
 
@@ -193,13 +190,14 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		paymentRequest.setOrderId(
 			String.valueOf(commerceOrder.getCommerceOrderId()));
 
-		StringBuilder transactionReference = new StringBuilder();
+		StringBundler transactionReferenceSB = new StringBundler(3);
 
-		transactionReference.append(commerceOrder.getCompanyId());
-		transactionReference.append(commerceOrder.getGroupId());
-		transactionReference.append(commerceOrder.getCommerceOrderId());
+		transactionReferenceSB.append(commerceOrder.getCompanyId());
+		transactionReferenceSB.append(commerceOrder.getGroupId());
+		transactionReferenceSB.append(commerceOrder.getCommerceOrderId());
 
-		paymentRequest.setTransactionReference(transactionReference.toString());
+		paymentRequest.setTransactionReference(
+			transactionReferenceSB.toString());
 
 		MercanetGroupServiceConfiguration mercanetGroupServiceConfiguration =
 			_getConfiguration(commerceOrder.getGroupId());
@@ -233,8 +231,9 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			initializationResponse.getRedirectionStatusMessage());
 
 		return new CommercePaymentResult(
-			transactionReference.toString(), commerceOrder.getCommerceOrderId(),
-			-1, true, url, null, resultMessage, true);
+			transactionReferenceSB.toString(),
+			commerceOrder.getCommerceOrderId(), -1, true, url, null,
+			resultMessage, true);
 	}
 
 	private MercanetGroupServiceConfiguration _getConfiguration(long groupId)
@@ -244,24 +243,6 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			MercanetGroupServiceConfiguration.class,
 			new GroupServiceSettingsLocator(
 				groupId, MercanetCommercePaymentMethodConstants.SERVICE_NAME));
-	}
-
-	private Map<String, String> _getQueryMap(String query)
-	{
-
-		String[] params = query.split(StringPool.AMPERSAND);
-
-		Map<String, String> map = new HashMap();
-
-		for (String param : params)
-		{
-			String name = param.split(StringPool.EQUAL)[0];
-			String value = param.split(StringPool.EQUAL)[1];
-
-			map.put(name, value);
-		}
-
-		return map;
 	}
 
 	private ResourceBundle _getResourceBundle(Locale locale) {
@@ -284,6 +265,9 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
+
+	@Reference
+	private Http _http;
 
 	@Reference
 	private Portal _portal;

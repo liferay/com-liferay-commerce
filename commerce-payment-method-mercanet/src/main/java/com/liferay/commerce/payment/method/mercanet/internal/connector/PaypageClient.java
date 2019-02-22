@@ -18,6 +18,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 import com.worldline.sips.model.InitializationResponse;
 import com.worldline.sips.model.PaymentRequest;
 import com.worldline.sips.model.PaypageResponse;
@@ -28,9 +32,8 @@ import java.io.IOException;
 import java.net.URI;
 
 import java.util.Map;
+import java.util.Objects;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -53,7 +56,7 @@ public class PaypageClient {
 			throw new Exception("Invalid environment specified!");
 		}
 
-		if (StringUtils.isBlank(merchantId)) {
+		if (Validator.isBlank(merchantId)) {
 			throw new Exception("Invalid merchant ID specified!");
 		}
 
@@ -61,7 +64,7 @@ public class PaypageClient {
 			throw new Exception("Invalid key version specified!");
 		}
 
-		if (StringUtils.isBlank(secretKey)) {
+		if (Validator.isBlank(secretKey)) {
 			throw new Exception("Invalid key specified!");
 		}
 
@@ -132,7 +135,7 @@ public class PaypageClient {
 				SealCalculator.getSealString(initializationResponse),
 				_secretKey);
 
-			if (!StringUtils.equals(
+			if (!Objects.equals(
 					correctSeal, initializationResponse.getSeal())) {
 
 				throw new Exception(
@@ -142,9 +145,10 @@ public class PaypageClient {
 	}
 
 	private void _verifySeal(String data, String seal) throws Exception {
-		String correctSeal = DigestUtils.sha256Hex(data + _secretKey);
+		String correctSeal = DigesterUtil.digest(
+			Digester.SHA_256, data + _secretKey);
 
-		if (!StringUtils.equals(correctSeal, seal)) {
+		if (!Objects.equals(correctSeal, seal)) {
 			throw new Exception(
 				"The payment page response has been tampered with!");
 		}
