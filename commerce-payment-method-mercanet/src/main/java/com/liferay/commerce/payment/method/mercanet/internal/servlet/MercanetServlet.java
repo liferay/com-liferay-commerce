@@ -21,6 +21,8 @@ import com.liferay.commerce.payment.method.mercanet.internal.connector.Environme
 import com.liferay.commerce.payment.method.mercanet.internal.connector.PaypageClient;
 import com.liferay.commerce.payment.method.mercanet.internal.constants.MercanetCommercePaymentMethodConstants;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
@@ -136,8 +138,7 @@ public class MercanetServlet extends HttpServlet {
 
 				String data = httpServletRequest.getParameter("Data");
 
-				Map<String, String> parameterMap = _getResponseParameters(
-					data);
+				Map<String, String> parameterMap = _getResponseParameters(data);
 
 				CommerceOrder commerceOrder =
 					_commerceOrderLocalService.getCommerceOrderByUuidAndGroupId(
@@ -171,11 +172,12 @@ public class MercanetServlet extends HttpServlet {
 
 				ResponseData responseData = paypageResponse.getData();
 
-				StringBuilder transactionReference = new StringBuilder();
+				StringBundler transactionReferenceSB = new StringBundler(3);
 
-				transactionReference.append(commerceOrder.getCompanyId());
-				transactionReference.append(commerceOrder.getGroupId());
-				transactionReference.append(commerceOrder.getCommerceOrderId());
+				transactionReferenceSB.append(commerceOrder.getCompanyId());
+				transactionReferenceSB.append(commerceOrder.getGroupId());
+				transactionReferenceSB.append(
+					commerceOrder.getCommerceOrderId());
 
 				ResponseCode responseCode = responseData.getResponseCode();
 
@@ -191,11 +193,11 @@ public class MercanetServlet extends HttpServlet {
 						String.valueOf(commerceOrder.getCommerceOrderId())) &&
 					Objects.equals(
 						responseData.getTransactionReference(),
-						transactionReference.toString())) {
+						transactionReferenceSB.toString())) {
 
 					_commercePaymentEngine.completePayment(
 						commerceOrder.getCommerceOrderId(),
-						transactionReference.toString(), httpServletRequest);
+						transactionReferenceSB.toString(), httpServletRequest);
 				}
 			}
 		}
