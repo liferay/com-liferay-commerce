@@ -218,7 +218,7 @@ class Cart extends Component {
 
 	_sendUpdateRequest(productId) {
 		return fetch(
-			this.cartAPI + '/cart-item/' + productId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
+			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
 			{
 				body: JSON.stringify(
 					{
@@ -234,55 +234,14 @@ class Cart extends Component {
 			.then(response => response.json())
 			.then(
 				(jsonresponse) => {
-
 					if (jsonresponse.success) {
-						const updatedPrice = jsonresponse.products.reduce(
-							(acc, el) => {
-								return el.id === productId ? el.price : acc;
-							},
-							null
-						);
-						this._removePendingOperation(productId);
-						this._setProductProperties(
-							productId,
-							{
-								deleteDisabled: false,
-								errorMessages: null,
-								price: updatedPrice,
-								updating: false
-							}
-						);
+						this._handleProductUpdate(productId, jsonresponse.products);
 						this.summary = jsonresponse.summary;
 						return this.summary;
 					}
 
-					if (jsonresponse.errorMessages && jsonresponse.errorMessages.length) {
-						this._setProductProperties(
-							productId,
-							{
-								deleteDisabled: false,
-								errorMessages: jsonresponse.errorMessages,
-								updating: false
-							}
-						);
-						return this._removePendingOperation(productId);
-					}
-
-					var validatorErrors = jsonresponse.validatorErrors;
-
-					this._setProductProperties(
-						productId,
-						{
-							deleteDisabled: false,
-							errorMessages: validatorErrors ?
-								validatorErrors.map(item => item.message) :
-								jsonresponse.error,
-							updating: false
-						}
-					);
-
+					this._handleResponseErrors(productId, jsonresponse);
 					return this._removePendingOperation(productId);
-
 				}
 			)
 			.catch(
@@ -299,77 +258,100 @@ class Cart extends Component {
 			);
 	}
 
+	_handleProductUpdate(productId, products) {
+		const updatedPrice = products.reduce(
+			(acc, el) => {
+				return el.id === productId ? el.price : acc;
+			},
+			null
+		);
+		this._removePendingOperation(productId);
+		return this._setProductProperties(
+			productId,
+			{
+				deleteDisabled: false,
+				errorMessages: null,
+				price: updatedPrice,
+				updating: false
+			}
+		);
+	}
+
+	_handleResponseErrors(productId, res) {
+		const errorMessages = !!res.errorMessages ? res.errorMessages : res.validatorErrors.map(item => item.message);
+		return this._setProductProperties(
+			productId,
+			{
+				deleteDisabled: false,
+				updating: false,
+				errorMessages
+			}
+		);
+	}
+
 	_getProducts() {
 		return fetch(
-			this.cartAPI + '/' + this.cartId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
+			`${this.cartAPI}/${this.cartId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
 			{
 				method: 'GET'
 			}
 		)
-			.then(response => response.json())
-			.then(
-				updatedCart => {
-					this.products = updatedCart.products;
-					this.summary = updatedCart.summary;
-					this.productsQuantity = this.products.length;
-					return !!(this.products && this.summary);
-				}
-			)
-			.catch(
-				err => {
-					return err;
-				}
-			);
+		.then(response => response.json())
+		.then(
+			updatedCart => {
+				this.products = updatedCart.products;
+				this.summary = updatedCart.summary;
+				this.productsQuantity = this.products.length;
+				return !!(this.products && this.summary);
+			}
+		)
+		.catch(
+			err => {
+				return err;
+			}
+		);
 	}
 
 	_sendDeleteRequest(productId) {
 		this._addPendingOperation(productId);
 
 		return fetch(
-			this.cartAPI + '/cart-item/' + productId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
+			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
 			{
 				method: 'DELETE'
 			}
 		)
-			.then(response => response.json())
-			.then(
-				(jsonresponse) => {
-					if (jsonresponse.success) {
-						this._removePendingOperation(productId);
-						this._setProductProperties(
-							productId,
-							{
-								deleteDisabled: false
-							}
-						);
-
-						this.summary = jsonresponse.summary;
-
-						const productsToBeRemoved = this._subtractProducts(this.products, jsonresponse.products);
-						productsToBeRemoved.forEach(
-							product => {
-								this._deleteProduct(product.id);
-							}
-						);
-					}
-
+		.then(response => response.json())
+		.then(
+			(jsonresponse) => {
+				if (jsonresponse.success) {
+					this._removePendingOperation(productId);
 					this._setProductProperties(
 						productId,
 						{
-							deleteDisabled: false,
-							errorMessages: jsonresponse.errorMessages || jsonresponse.error,
-							updating: false
+							deleteDisabled: false
 						}
 					);
 
-					this._removePendingOperation(productId);
+					this.summary = jsonresponse.summary;
+
+					const productsToBeRemoved = this._subtractProducts(this.products, jsonresponse.products);
+					productsToBeRemoved.forEach(
+						product => {
+							this._deleteProduct(product.id);
+						}
+					);
 				}
-			)
-			.catch(
-				err => {
-					this._removePendingOperation(productId);
-				}
-			);
+
+				this._handleResponseErrors(productId, jsonresponse);
+				return this._removePendingOperation(productId);
+			}
+		)
+		.catch(
+			err => {
+				this._removePendingOperation(productId);
+			}
+		);
 	}
 }
 
