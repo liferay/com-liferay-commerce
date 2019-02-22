@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
@@ -137,16 +138,7 @@ public class SKUHelper {
 			displayCalendar = _convertDateToCalendar(skuDTO.getDisplayDate());
 		}
 
-		int displayDateMonth = displayCalendar.get(Calendar.MONTH);
-		int displayDateDay = displayCalendar.get(Calendar.DAY_OF_MONTH);
-		int displayDateYear = displayCalendar.get(Calendar.YEAR);
-		int displayDateHour = displayCalendar.get(Calendar.HOUR);
-		int displayDateMinute = displayCalendar.get(Calendar.MINUTE);
-		int displayDateAmPm = displayCalendar.get(Calendar.AM_PM);
-
-		if (displayDateAmPm == Calendar.PM) {
-			displayDateHour += 12;
-		}
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -158,24 +150,17 @@ public class SKUHelper {
 				skuDTO.getExpirationDate());
 		}
 
-		int expirationDateMonth = expirationCalendar.get(Calendar.MONTH);
-		int expirationDateDay = expirationCalendar.get(Calendar.DAY_OF_MONTH);
-		int expirationDateYear = expirationCalendar.get(Calendar.YEAR);
-		int expirationDateHour = expirationCalendar.get(Calendar.HOUR);
-		int expirationDateMinute = expirationCalendar.get(Calendar.MINUTE);
-		int expirationDateAmPm = expirationCalendar.get(Calendar.AM_PM);
-
-		if (expirationDateAmPm == Calendar.PM) {
-			expirationDateHour += 12;
-		}
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		cpInstance = _cpInstanceService.updateCPInstance(
 			cpInstance.getCPInstanceId(), skuDTO.getSku(), skuDTO.getGtin(),
 			skuDTO.getManufacturerPartNumber(), skuDTO.isPurchasable(),
-			skuDTO.isPublished(), displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, skuDTO.isNeverExpire(),
+			skuDTO.isPublished(), displayDateConfig.getMonth(),
+			displayDateConfig.getDay(), displayDateConfig.getYear(),
+			displayDateConfig.getHour(), displayDateConfig.getMinute(),
+			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
+			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
+			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
 			serviceContext);
 
 		return DTOUtils.modelToDTO(cpInstance);
@@ -198,16 +183,7 @@ public class SKUHelper {
 			displayCalendar = _convertDateToCalendar(skuDTO.getDisplayDate());
 		}
 
-		int displayDateMonth = displayCalendar.get(Calendar.MONTH);
-		int displayDateDay = displayCalendar.get(Calendar.DAY_OF_MONTH);
-		int displayDateYear = displayCalendar.get(Calendar.YEAR);
-		int displayDateHour = displayCalendar.get(Calendar.HOUR);
-		int displayDateMinute = displayCalendar.get(Calendar.MINUTE);
-		int displayDateAmPm = displayCalendar.get(Calendar.AM_PM);
-
-		if (displayDateAmPm == Calendar.PM) {
-			displayDateHour += 12;
-		}
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -219,16 +195,7 @@ public class SKUHelper {
 				skuDTO.getExpirationDate());
 		}
 
-		int expirationDateMonth = expirationCalendar.get(Calendar.MONTH);
-		int expirationDateDay = expirationCalendar.get(Calendar.DAY_OF_MONTH);
-		int expirationDateYear = expirationCalendar.get(Calendar.YEAR);
-		int expirationDateHour = expirationCalendar.get(Calendar.HOUR);
-		int expirationDateMinute = expirationCalendar.get(Calendar.MINUTE);
-		int expirationDateAmPm = expirationCalendar.get(Calendar.AM_PM);
-
-		if (expirationDateAmPm == Calendar.PM) {
-			expirationDateHour += 12;
-		}
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		CPInstance cpInstance = _cpInstanceService.upsertCPInstance(
 			cpDefinition.getCPDefinitionId(), skuDTO.getSku(), skuDTO.getGtin(),
@@ -236,10 +203,12 @@ public class SKUHelper {
 			skuDTO.getWidth(), skuDTO.getHeight(), skuDTO.getDepth(),
 			skuDTO.getWeight(), skuDTO.getPrice(), skuDTO.getPromoPrice(),
 			skuDTO.getCost(), skuDTO.isPublished(),
-			skuDTO.getExternalReferenceCode(), displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, skuDTO.isNeverExpire(),
+			skuDTO.getExternalReferenceCode(), displayDateConfig.getMonth(),
+			displayDateConfig.getDay(), displayDateConfig.getYear(),
+			displayDateConfig.getHour(), displayDateConfig.getMinute(),
+			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
+			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
+			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
 			serviceContext);
 
 		return DTOUtils.modelToDTO(cpInstance);
