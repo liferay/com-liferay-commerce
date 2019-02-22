@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.io.Serializable;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,11 +137,17 @@ public class ProductHelper extends BaseHelper {
 			String id, ProductDTO productDTO, Company company)
 		throws PortalException {
 
+		Map<String, ?> expando = Collections.emptyMap();
+
+		if (productDTO.getExpando() != null) {
+			expando = productDTO.getExpando();
+		}
+
 		return DTOUtils.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
 				productDTO.getShortDescription(), productDTO.getName(),
-				productDTO.getExpando()));
+				expando));
 	}
 
 	public ProductDTO upsertProduct(
