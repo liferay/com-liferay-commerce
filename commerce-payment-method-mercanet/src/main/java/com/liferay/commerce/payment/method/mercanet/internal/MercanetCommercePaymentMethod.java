@@ -224,8 +224,8 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		String url = StringBundler.concat(
 			_getServletUrl(mercanetCommercePaymentRequest), StringPool.QUESTION,
-			"redirectUrl=", redirectionUrl.toString(), StringPool.AMPERSAND,
-			"redirectionData=",
+			"redirectUrl=", _http.encodeURL(redirectionUrl.toString()),
+			StringPool.AMPERSAND, "redirectionData=",
 			URLEncoder.encode(
 				initializationResponse.getRedirectionData(), "UTF-8"),
 			StringPool.AMPERSAND, "seal=",
