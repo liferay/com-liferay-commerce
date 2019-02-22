@@ -38,9 +38,12 @@ class Cart extends Component {
 
 	_closeCart() {
 		this._open = false;
-		this.element.addEventListener('transitionend', () => {
+		this.element.addEventListener(
+			'transitionend',
+			() => {
 			window.removeEventListener('click', this._handleClickOutside);
-		});
+		}
+		);
 		return this._open;
 	}
 
@@ -53,7 +56,6 @@ class Cart extends Component {
 				this.summary = updateCartData.summary;
 				this._loading = false;
 				this.pendingOperations = [];
-				this.productsQuantity = updateCartData.products.length;
 				return true;
 			}
 		);
@@ -110,7 +112,7 @@ class Cart extends Component {
 	}
 
 	_deleteProduct(productId) {
-		this._setProductProperties(
+		return this._setProductProperties(
 			productId,
 			{
 				collapsed: true,
@@ -119,8 +121,6 @@ class Cart extends Component {
 				updating: false
 			}
 		);
-		this.productsQuantity = this.productsQuantity - 1;
-		return this.productsQuantity;
 	}
 
 	_setProductProperties(productId, newProperties) {
@@ -301,7 +301,6 @@ class Cart extends Component {
 			updatedCart => {
 				this.products = updatedCart.products;
 				this.summary = updatedCart.summary;
-				this.productsQuantity = this.products.length;
 				return !!(this.products && this.summary);
 			}
 		)
@@ -309,6 +308,15 @@ class Cart extends Component {
 			err => {
 				return err;
 			}
+		);
+	}
+
+	syncProducts() {
+		this.productsQuantity = this.products.reduce(
+			(quantity, product) => {
+				return product.collapsed ? quantity : quantity + 1
+			},
+			0
 		);
 	}
 
@@ -389,7 +397,7 @@ Cart.STATE = {
 		setter: 'normalizeProducts',
 		value: null
 	},
-	productsQuantity: Config.number(),
+	productsQuantity: Config.number().value(0),
 	spritemap: Config.string().required(),
 	summary: Config.shapeOf(
 		{
