@@ -53,19 +53,19 @@ public class PaypageClient {
 		throws Exception {
 
 		if (environment == null) {
-			throw new Exception("Invalid environment specified!");
+			throw new Exception("Invalid environment specified");
 		}
 
 		if (Validator.isBlank(merchantId)) {
-			throw new Exception("Invalid merchant ID specified!");
+			throw new Exception("Invalid merchant ID specified");
 		}
 
 		if (keyVersion == null) {
-			throw new Exception("Invalid key version specified!");
+			throw new Exception("Invalid key version specified");
 		}
 
 		if (Validator.isBlank(secretKey)) {
-			throw new Exception("Invalid key specified!");
+			throw new Exception("Invalid key specified");
 		}
 
 		_environment = environment;
@@ -115,11 +115,11 @@ public class PaypageClient {
 			return initializationResponse;
 		}
 		catch (JsonMappingException | JsonParseException e) {
-			throw new Exception("Exception while parsing PaymentRequest!", e);
+			throw new Exception("Exception while parsing PaymentRequest", e);
 		}
 		catch (IOException ioe) {
 			throw new Exception(
-				"Exception while processing response from server!", ioe);
+				"Exception while processing response from server", ioe);
 		}
 	}
 
@@ -139,7 +139,7 @@ public class PaypageClient {
 					correctSeal, initializationResponse.getSeal())) {
 
 				throw new Exception(
-					"The initialization response has been tampered with!");
+					"The initialization response has been tampered with");
 			}
 		}
 	}
@@ -150,7 +150,7 @@ public class PaypageClient {
 
 		if (!Objects.equals(correctSeal, seal)) {
 			throw new Exception(
-				"The payment page response has been tampered with!");
+				"The payment page response has been tampered with");
 		}
 	}
 
