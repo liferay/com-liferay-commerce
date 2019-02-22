@@ -172,10 +172,12 @@ public class MercanetServlet extends HttpServlet {
 
 				ResponseData responseData = paypageResponse.getData();
 
-				StringBundler transactionReferenceSB = new StringBundler(3);
+				StringBundler transactionReferenceSB = new StringBundler(5);
 
 				transactionReferenceSB.append(commerceOrder.getCompanyId());
+				transactionReferenceSB.append(StringPool.POUND);
 				transactionReferenceSB.append(commerceOrder.getGroupId());
+				transactionReferenceSB.append(StringPool.POUND);
 				transactionReferenceSB.append(
 					commerceOrder.getCommerceOrderId());
 
