@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.Portal;
 import java.io.IOException;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -82,8 +83,9 @@ public class MercanetCommercePaymentMethodConfigurationScreenNavigationEntry
 	public boolean isVisible(
 		User user, CommercePaymentMethodGroupRel commercePaymentMethod) {
 
-		if (MercanetCommercePaymentMethod.KEY.equals(
-				commercePaymentMethod.getEngineKey())) {
+		if (Objects.equals(
+				commercePaymentMethod.getEngineKey(),
+				MercanetCommercePaymentMethod.KEY)) {
 
 			return true;
 		}
