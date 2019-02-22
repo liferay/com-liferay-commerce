@@ -160,11 +160,12 @@ public class MercanetServlet extends HttpServlet {
 					Integer.valueOf(keyVersion),
 					mercanetGroupServiceConfiguration.secretKey());
 
-				String seal = httpServletRequest.getParameter("Seal");
-
 				Map<String, String> verifyMap = new HashMap<>();
 
 				verifyMap.put("Data", data);
+
+				String seal = httpServletRequest.getParameter("Seal");
+
 				verifyMap.put("Seal", seal);
 
 				PaypageResponse paypageResponse = paypageClient.decodeResponse(
@@ -187,10 +188,10 @@ public class MercanetServlet extends HttpServlet {
 					Objects.equals(
 						responseData.getMerchantId(),
 						mercanetGroupServiceConfiguration.merchantId()) &&
-				   Objects.equals(
+					Objects.equals(
 						parameterMap.get("customerId"),
 						String.valueOf(commerceOrder.getUserId())) &&
-				   Objects.equals(
+					Objects.equals(
 						parameterMap.get("orderId"),
 						String.valueOf(commerceOrder.getCommerceOrderId())) &&
 					Objects.equals(
@@ -222,8 +223,7 @@ public class MercanetServlet extends HttpServlet {
 
 		String[] params = data.split(StringPool.BACK_SLASH + StringPool.PIPE);
 
-		for (String param : params)
-		{
+		for (String param : params) {
 			String[] kvp = StringUtil.split(param, CharPool.EQUAL);
 
 			map.put(kvp[0], kvp[1]);

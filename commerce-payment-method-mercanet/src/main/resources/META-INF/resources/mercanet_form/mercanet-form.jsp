@@ -17,10 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirectUrl = (String)request.getAttribute("redirectUrl");
 String redirectionDataAttribute = (String)request.getAttribute("redirectionData");
+
 String redirectionData = URLDecoder.decode(redirectionDataAttribute, "UTF-8");
+
+String redirectUrl = (String)request.getAttribute("redirectUrl");
+
 String sealAttribute = (String)request.getAttribute("seal");
+
 String seal = URLDecoder.decode(sealAttribute, "UTF-8");
 %>
 
