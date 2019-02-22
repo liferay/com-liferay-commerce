@@ -23,7 +23,7 @@ String tokenAttribute = (String)request.getAttribute("token");
 String token = URLDecoder.decode(tokenAttribute, "UTF-8");
 %>
 
-<form action="<%= redirectUrl %>" id="formAuthorizeNet" method="post" name="formAuthorizeNet" style="display: none">
+<form action="<%= redirectUrl %>" class="hide" id="formAuthorizeNet" method="post" name="formAuthorizeNet">
 	<input name="token" type="hidden" value="<%= token %>" />
 	<button id="btnContinue">Continue</button>
 </form>
