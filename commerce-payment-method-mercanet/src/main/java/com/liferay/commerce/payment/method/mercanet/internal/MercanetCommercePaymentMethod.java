@@ -98,7 +98,9 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 	@Override
 	public String getName(Locale locale) {
-		return LanguageUtil.get(locale, KEY);
+		ResourceBundle resourceBundle = _getResourceBundle(locale);
+
+		return LanguageUtil.get(resourceBundle, KEY);
 	}
 
 	@Override
