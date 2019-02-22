@@ -27,7 +27,7 @@ MercanetGroupServiceConfiguration mercanetCommercePaymentEngineGroupServiceConfi
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 	<div class="alert alert-info">
-		<%= LanguageUtil.format(resourceBundle, "mercanet-configuration-help", null) %>
+		<liferay-ui:message key="mercanet-configuration-help" />
 	</div>
 
 	<aui:fieldset-group markupView="lexicon">
