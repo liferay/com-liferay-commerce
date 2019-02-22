@@ -45,6 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ivica Cardic
+ * @author Igor Beslic
  */
 @Component(immediate = true, service = SKUHelper.class)
 public class SKUHelper {
@@ -154,14 +155,15 @@ public class SKUHelper {
 
 		cpInstance = _cpInstanceService.updateCPInstance(
 			cpInstance.getCPInstanceId(), skuDTO.getSku(), skuDTO.getGtin(),
-			skuDTO.getManufacturerPartNumber(), skuDTO.isPurchasable(),
-			skuDTO.isPublished(), displayDateConfig.getMonth(),
-			displayDateConfig.getDay(), displayDateConfig.getYear(),
-			displayDateConfig.getHour(), displayDateConfig.getMinute(),
-			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
-			serviceContext);
+			skuDTO.getManufacturerPartNumber(),
+			GetterUtil.get(skuDTO.isPurchasable(), false),
+			GetterUtil.get(skuDTO.isPublished(), false),
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
+			GetterUtil.get(skuDTO.isNeverExpire(), false), serviceContext);
 
 		return DTOUtils.modelToDTO(cpInstance);
 	}
@@ -199,17 +201,21 @@ public class SKUHelper {
 
 		CPInstance cpInstance = _cpInstanceService.upsertCPInstance(
 			cpDefinition.getCPDefinitionId(), skuDTO.getSku(), skuDTO.getGtin(),
-			skuDTO.getManufacturerPartNumber(), skuDTO.isPurchasable(), null,
-			skuDTO.getWidth(), skuDTO.getHeight(), skuDTO.getDepth(),
-			skuDTO.getWeight(), skuDTO.getPrice(), skuDTO.getPromoPrice(),
-			skuDTO.getCost(), skuDTO.isPublished(),
+			skuDTO.getManufacturerPartNumber(),
+			GetterUtil.get(skuDTO.isPurchasable(), false), null,
+			GetterUtil.get(skuDTO.getWidth(), 0.0),
+			GetterUtil.get(skuDTO.getHeight(), 0.0),
+			GetterUtil.get(skuDTO.getDepth(), 0.0),
+			GetterUtil.get(skuDTO.getWeight(), 0.0), skuDTO.getPrice(),
+			skuDTO.getPromoPrice(), skuDTO.getCost(),
+			GetterUtil.get(skuDTO.isPublished(), false),
 			skuDTO.getExternalReferenceCode(), displayDateConfig.getMonth(),
 			displayDateConfig.getDay(), displayDateConfig.getYear(),
 			displayDateConfig.getHour(), displayDateConfig.getMinute(),
 			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
 			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
-			serviceContext);
+			expirationDateConfig.getMinute(),
+			GetterUtil.get(skuDTO.isNeverExpire(), false), serviceContext);
 
 		return DTOUtils.modelToDTO(cpInstance);
 	}
