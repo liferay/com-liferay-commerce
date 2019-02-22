@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductDTO;
@@ -153,24 +154,6 @@ public class ProductHelper {
 				productDTO.getShortDescription(), productDTO.getName(), user));
 	}
 
-	private DateConfig _getDateConfig(Calendar calendar) {
-		DateConfig dateConfig = new DateConfig();
-
-		dateConfig._month = calendar.get(Calendar.MONTH);
-		dateConfig._day = calendar.get(Calendar.DAY_OF_MONTH);
-		dateConfig._year = calendar.get(Calendar.YEAR);
-		dateConfig._hour = calendar.get(Calendar.HOUR);
-		dateConfig._minute = calendar.get(Calendar.MINUTE);
-
-		int expirationDateAmPm = calendar.get(Calendar.AM_PM);
-
-		if (expirationDateAmPm == Calendar.PM) {
-			dateConfig._hour += 12;
-		}
-
-		return dateConfig;
-	}
-
 	private CPDefinition _updateProduct(
 			String id, Company company, Map<String, String> description,
 			Map<String, String> shortDescription, Map<String, String> name)
@@ -186,14 +169,14 @@ public class ProductHelper {
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
-		DateConfig displayDateConfig = _getDateConfig(displayCalendar);
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
-		DateConfig expirationDateConfig = _getDateConfig(expirationCalendar);
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		boolean neverExpire = Boolean.TRUE;
 
@@ -206,12 +189,13 @@ public class ProductHelper {
 			cpDefinition.getMetaDescriptionMap(),
 			cpDefinition.getMetaKeywordsMap(),
 			cpDefinition.isIgnoreSKUCombinations(),
-			cpDefinition.getDDMStructureKey(), true, displayDateConfig._month,
-			displayDateConfig._day, displayDateConfig._year,
-			displayDateConfig._hour, displayDateConfig._minute,
-			expirationDateConfig._month, expirationDateConfig._day,
-			expirationDateConfig._year, expirationDateConfig._hour,
-			expirationDateConfig._minute, neverExpire, serviceContext);
+			cpDefinition.getDDMStructureKey(), true,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
+			neverExpire, serviceContext);
 	}
 
 	private CPDefinition _upsertProduct(
@@ -229,14 +213,14 @@ public class ProductHelper {
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
-		DateConfig displayDateConfig = _getDateConfig(displayCalendar);
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
-		DateConfig expirationDateConfig = _getDateConfig(expirationCalendar);
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		String ddmStructureKey = null;
 
@@ -246,12 +230,12 @@ public class ProductHelper {
 			LanguageUtils.getLocalizedMap(description), null,
 			LanguageUtils.getLocalizedMap(name), null, null, productTypeName,
 			true, true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0L, false, false,
-			ddmStructureKey, true, displayDateConfig._month,
-			displayDateConfig._day, displayDateConfig._year,
-			displayDateConfig._hour, displayDateConfig._minute,
-			expirationDateConfig._month, expirationDateConfig._day,
-			expirationDateConfig._year, expirationDateConfig._hour,
-			expirationDateConfig._minute, neverExpire, defaultSku,
+			ddmStructureKey, true, displayDateConfig.getMonth(),
+			displayDateConfig.getDay(), displayDateConfig.getYear(),
+			displayDateConfig.getHour(), displayDateConfig.getMinute(),
+			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
+			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
+			expirationDateConfig.getMinute(), neverExpire, defaultSku,
 			externalReferenceCode, serviceContext);
 
 		if (!active) {
@@ -273,15 +257,5 @@ public class ProductHelper {
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
-
-	private static class DateConfig {
-
-		private int _day;
-		private int _hour;
-		private int _minute;
-		private int _month;
-		private int _year;
-
-	}
 
 }
