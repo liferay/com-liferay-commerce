@@ -6,18 +6,33 @@ import template from './SearchBar.soy';
 class SearchBar extends Component {
 
 	created() {
-		this.handleDocumentKeypress = this.handleDocumentKeypress.bind(this);
-
-		document.addEventListener('keydown', this.handleDocumentKeypress);
-
-		document.querySelectorAll('.js-toggle-search').forEach(
-			el => {
-				el.classList.toggle('is-active', status);
-				el.addEventListener('click', this._toggleClick.bind(this));
-			}
-		);
-
+		this._handleDocumentKeypress = this._handleDocumentKeypress.bind(this);
 		this._handleClickOutside = this._handleClickOutside.bind(this);
+		this.toggle = this.toggle.bind(this);
+		document.addEventListener('keydown', this._handleDocumentKeypress);
+		this._addOpenButtonListener();
+	}
+
+	detached() {
+		document.removeEventListener('keydown', this._handleDocumentKeypress);
+	}
+
+	_addOpenButtonListener() {
+		return Array.from(document.querySelectorAll('.js-toggle-search'))
+			.map(
+				el => {
+					return el.addEventListener('click', this.toggle)
+				}
+			);
+	}
+
+	_removeOpenButtonListener() {
+		return Array.from(document.querySelectorAll('.js-toggle-search'))
+			.map(
+				el => {
+					return el.removeEventListener('click', this.toggle)
+				}
+			);
 	}
 
 	_handleClickOutside(e) {
@@ -32,82 +47,81 @@ class SearchBar extends Component {
 		}
 	}
 
-	detached() {
-		document.removeEventListener('keydown', this.handleDocumentKeypress);
-	}
-
-	handleDocumentKeypress(evt) {
+	_handleDocumentKeypress(evt) {
 		if (this.active && evt.key === 'Escape') {
-			this.toggle(false);
+			this.close();
 		}
-		else if (!this.active && evt.key === '/') {
-			this.toggle(true);
+		if (!this.active && evt.key === '/') {
+			this.open();
 		}
 	}
 
-	handleEmpty(evt) {
-		this.updateQuery('');
+	_handleResetQuery(evt) {
+		this._updateQuery('');
 	}
 
-	handleKeyUp(evt) {
+	_handleKeyUp(evt) {
 		if (evt.key == 'ArrowDown' || evt.key === 'ArrowUp') {
 			evt.preventDefault();
 		}
 
-		this.updateQuery(evt.target.value);
+		this._updateQuery(evt.target.value);
 	}
 
-	handleSubmit(evt) {
+	_handleSubmit(evt) {
 		evt.preventDefault();
 
 		window.Liferay.fire(
 			'search-term-submit',
-			{term: this.query}
+			{
+				term: this.query
+			}
 		);
 	}
 
-	updateQuery(query) {
+	_updateQuery(query) {
 		if (query !== this.query) {
-			this.toggle(true);
+			this.open();
 
 			this.query = query;
 
 			window.Liferay.fire(
 				'search-term-update',
-				{term: query}
+				{
+					term: query
+				}
 			);
 		}
 	}
 
-	toggle(status) {
-		if (status) {
-			setTimeout(
-				() => {
-					this.refs.searchInput.focus();
-					window.addEventListener('click', this._handleClickOutside);
-				},
-				0
-			);
+	open() {
+		this.active = true;
+	}
+	
+	syncActive() {
+		if(this.active) {
+			window.addEventListener('click', this._handleClickOutside);
+			setTimeout(() => {
+				this._removeOpenButtonListener();
+				this.refs.searchInput.focus();
+			}, 0);
+		} else {
+			window.removeEventListener('click', this._handleClickOutside);
+			setTimeout(() => {
+				this._addOpenButtonListener();
+				this.refs.searchInput.blur();
+			}, 0);
 		}
-		else {
-			setTimeout(
-				() => {
-					this.refs.searchInput.blur();
-					window.removeEventListener('click', this._handleClickOutside);
-				},
-				0
-			);
-		}
-
-		this.active = status;
-
-		this.emit('toogled', status);
+		this.emit('toogled', this.active);
 	}
 
-	_toggleClick() {
-		this.toggle(!this.active);
+	close() {
+		this.active = false;
 	}
 
+	toggle() {
+		return this.active ? this.close() : this.open();
+	}
 }
 
 Soy.register(SearchBar, template);
