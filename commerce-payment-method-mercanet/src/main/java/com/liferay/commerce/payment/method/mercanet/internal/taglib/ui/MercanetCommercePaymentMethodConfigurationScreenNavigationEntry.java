@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = "screen.navigation.entry.order:Integer=20",
 	service = ScreenNavigationEntry.class
 )
-public class MecanetCommercePaymentMethodConfigurationScreenNavigationEntry
+public class MercanetCommercePaymentMethodConfigurationScreenNavigationEntry
 	implements ScreenNavigationEntry<CommercePaymentMethodGroupRel> {
 
 	public static final String
@@ -99,7 +99,7 @@ public class MecanetCommercePaymentMethodConfigurationScreenNavigationEntry
 
 		try {
 			MercanetGroupServiceConfiguration
-				authorizeNetGroupServiceConfiguration =
+				mercanetGroupServiceConfiguration =
 					_configurationProvider.getConfiguration(
 						MercanetGroupServiceConfiguration.class,
 						new ParameterMapSettingsLocator(
@@ -111,7 +111,7 @@ public class MecanetCommercePaymentMethodConfigurationScreenNavigationEntry
 
 			httpServletRequest.setAttribute(
 				MercanetGroupServiceConfiguration.class.getName(),
-				authorizeNetGroupServiceConfiguration);
+				mercanetGroupServiceConfiguration);
 		}
 		catch (Exception e) {
 			throw new IOException(e);

@@ -75,11 +75,11 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		MercanetCommercePaymentRequest authorizeNetCommercePaymentRequest =
+		MercanetCommercePaymentRequest mercanetCommercePaymentRequest =
 			(MercanetCommercePaymentRequest)commercePaymentRequest;
 
 		return new CommercePaymentResult(
-			null, authorizeNetCommercePaymentRequest.getCommerceOrderId(),
+			null, mercanetCommercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
 			Collections.emptyList(), true);
 	}
@@ -146,10 +146,10 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		BigDecimal orderTotal = commerceOrder.getTotal();
 
-		BigDecimal powOrderTotal = orderTotal.multiply(
+		BigDecimal normalizedOrderTotal = orderTotal.multiply(
 			new BigDecimal(normalizedMultiplier));
 
-		paymentRequest.setAmount(powOrderTotal.intValue());
+		paymentRequest.setAmount(normalizedOrderTotal.intValue());
 
 		URL returnUrl = new URL(mercanetCommercePaymentRequest.getReturnUrl());
 
@@ -271,11 +271,11 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	private String _getServletUrl(
-		MercanetCommercePaymentRequest authorizeNetCommercePaymentRequest) {
+		MercanetCommercePaymentRequest mercanetCommercePaymentRequest) {
 
 		return StringBundler.concat(
 			_portal.getPortalURL(
-				authorizeNetCommercePaymentRequest.getHttpServletRequest()),
+				mercanetCommercePaymentRequest.getHttpServletRequest()),
 			_portal.getPathModule(), StringPool.SLASH,
 			MercanetCommercePaymentMethodConstants.SERVLET_PATH);
 	}
