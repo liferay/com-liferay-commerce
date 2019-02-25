@@ -86,6 +86,16 @@ public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<OrderDTO> getAccountOrders(
+			String id, Long groupId, Language language, Pagination pagination)
+		throws Exception {
+
+		return _orderHelper.getOrders(
+			id, groupId, language, pagination, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(Pagination pagination)
 		throws Exception {
 
@@ -104,16 +114,6 @@ public class AccountResourceImpl implements AccountResource {
 		return _addressHelper.getAddresses(
 			commerceAccount.getModelClassName(),
 			commerceAccount.getCommerceAccountId(), pagination);
-	}
-
-	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<OrderDTO> getOrders(
-			String id, Long groupId, Language language, Pagination pagination)
-		throws Exception {
-
-		return _orderHelper.getOrders(
-			id, groupId, language, pagination, _company);
 	}
 
 	@Override

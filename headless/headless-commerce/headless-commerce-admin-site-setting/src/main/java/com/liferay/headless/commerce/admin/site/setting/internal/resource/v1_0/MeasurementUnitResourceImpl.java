@@ -17,17 +17,19 @@ package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 import com.liferay.commerce.openapi.core.annotation.Nullable;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.MeasurementUnitHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.MeasurementUnitDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -45,33 +47,39 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response deleteMeasurementUnit(String id) throws Exception {
+		_measurementUnitHelper.deleteMeasurementUnit(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public MeasurementUnitDTO getMeasurementUnit(String id) throws Exception {
-		return new MeasurementUnitDTO();
+		return _measurementUnitHelper.getMeasurementUnitDTO(id);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
 			Long groupId, @Nullable Integer type, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _measurementUnitHelper.getMeasurementUnitDTOs(
+			groupId, type, pagination);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateMeasurementUnit(
 			String id, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception {
+
+		_measurementUnitHelper.updateMeasurementUnit(
+			id, measurementUnitDTO, _user);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -79,12 +87,19 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public MeasurementUnitDTO upsertMeasurementUnit(
 			Long groupId, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception {
 
-		return new MeasurementUnitDTO();
+		return _measurementUnitHelper.upsertMeasurementUnit(
+			groupId, measurementUnitDTO, _user);
 	}
+
+	@Reference
+	private MeasurementUnitHelper _measurementUnitHelper;
+
+	@Context
+	private User _user;
 
 }

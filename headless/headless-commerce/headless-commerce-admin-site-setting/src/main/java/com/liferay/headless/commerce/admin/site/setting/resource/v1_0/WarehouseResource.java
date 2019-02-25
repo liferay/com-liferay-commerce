@@ -47,30 +47,30 @@ public interface WarehouseResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public WarehouseDTO getWarehouse(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<WarehouseDTO> getWarehouses(
 			@QueryParam("groupId") Long groupId,
 			@Nullable @QueryParam("active") Boolean active,
 			@Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateWarehouse(
 			@PathParam("id") String id, WarehouseDTO warehouseDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public WarehouseDTO upsertWarehouse(
 			@QueryParam("groupId") Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception;

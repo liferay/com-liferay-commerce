@@ -46,28 +46,28 @@ public interface TaxCategoryResource {
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<TaxCategoryDTO> getTaxCategories(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public TaxCategoryDTO getTaxCategory(@PathParam("id") String id)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateTaxCategory(
 			@PathParam("id") String id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public TaxCategoryDTO upsertTaxCategory(
 			@QueryParam("groupId") Long groupId, TaxCategoryDTO taxCategoryDTO)
 		throws Exception;

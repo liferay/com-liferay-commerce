@@ -16,17 +16,19 @@ package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.AvailabilityEstimateHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -45,35 +47,41 @@ public class AvailabilityEstimateResourceImpl
 	implements AvailabilityEstimateResource {
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response deleteAvailabilityEstimate(String id) throws Exception {
+		_availabilityEstimateHelper.deleteAvailabilityEstimate(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public AvailabilityEstimateDTO getAvailabilityEstimate(String id)
 		throws Exception {
 
-		return new AvailabilityEstimateDTO();
+		return _availabilityEstimateHelper.getAvailabilityEstimateDTO(id);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _availabilityEstimateHelper.getAvailabilityEstimateDTOs(
+			groupId, pagination);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateAvailabilityEstimate(
 			String id, AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception {
+
+		_availabilityEstimateHelper.updateAvailabilityEstimate(
+			id, availabilityEstimateDTO, _user);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -81,12 +89,19 @@ public class AvailabilityEstimateResourceImpl
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
 			Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception {
 
-		return new AvailabilityEstimateDTO();
+		return _availabilityEstimateHelper.upsertAvailabilityEstimate(
+			groupId, availabilityEstimateDTO, _user);
 	}
+
+	@Reference
+	private AvailabilityEstimateHelper _availabilityEstimateHelper;
+
+	@Context
+	private User _user;
 
 }
