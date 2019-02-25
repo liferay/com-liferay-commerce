@@ -222,7 +222,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_assetCategoriesImporter.importAssetCategories(
 			jsonArray, _COMMERCE_VOCABULARY, classLoader,
-			_DEPENDENCIES_PATH + "images/", serviceContext);
+			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Asset categories successfully imported");
@@ -238,13 +239,14 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 
 		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
-			serviceContext);
+			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		JSONArray jsonArray = _getJSONArray("warehouses.json");
 
 		List<CommerceWarehouse> commerceWarehouses =
 			_commerceWarehousesImporter.importCommerceWarehouses(
-				jsonArray, serviceContext);
+				jsonArray, serviceContext.getScopeGroupId(),
+				serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Commerce warehouses successfully imported");
@@ -271,7 +273,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_cpDefinitionsImporter.importCPDefinitions(
 			jsonArray, _COMMERCE_VOCABULARY, commerceWarehouseIds,
 			BrecciaSiteInitializer.class.getClassLoader(),
-			_DEPENDENCIES_PATH + "images/", serviceContext);
+			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Commerce product definitions successfully imported");
@@ -288,7 +291,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("option-categories.json");
 
 		_cpOptionCategoriesImporter.importCPOptionCategories(
-			jsonArray, serviceContext);
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -305,7 +309,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("options.json");
 
-		_cpOptionsImporter.importCPOptions(jsonArray, serviceContext);
+		_cpOptionsImporter.importCPOptions(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Commerce product options successfully imported");
@@ -321,7 +327,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("catalog-rules.json");
 
-		_cpRulesImporter.importCPRules(jsonArray, serviceContext);
+		_cpRulesImporter.importCPRules(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Catalog rules successfully imported");
@@ -338,7 +346,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("specification-options.json");
 
 		_cpSpecificationOptionsImporter.importCPSpecificationOptions(
-			jsonArray, serviceContext);
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -440,7 +449,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_portletSettingsImporter.importPortletSettings(
 			jsonArray, BrecciaSiteInitializer.class.getClassLoader(),
-			_DEPENDENCIES_PATH + "display_templates/", serviceContext);
+			_DEPENDENCIES_PATH + "display_templates/",
+			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portlet settings successfully imported");
