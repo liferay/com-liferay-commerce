@@ -85,4 +85,17 @@ public class CPRuleAssetCategoryRelLocalServiceImpl
 		return cpRuleAssetCategoryRelPersistence.findByCPRuleId(cpRuleId);
 	}
 
+	@Override
+	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end) {
+
+		return cpRuleAssetCategoryRelPersistence.findByCPRuleId(
+			cpRuleId, start, end);
+	}
+
+	@Override
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId) {
+		return cpRuleAssetCategoryRelPersistence.countByCPRuleId(cpRuleId);
+	}
+
 }
