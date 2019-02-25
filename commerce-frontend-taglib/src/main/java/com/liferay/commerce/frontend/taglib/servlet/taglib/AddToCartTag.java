@@ -68,7 +68,8 @@ public class AddToCartTag extends ComponentRendererTag {
 
 			putValue("editMode", false);
 			putValue("quantity", 0);
-
+			putValue("tmpQuantity", 0);
+			
 			putValue(
 				"settings",
 				_productHelper.getProductSettingsModel(cpInstanceId));
