@@ -62,6 +62,14 @@ public interface AccountResource {
 	public AccountDTO getAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
+	@Path("/{id}/order")
+	@Produces({"application/json", "application/xml"})
+	public CollectionDTO<OrderDTO> getAccountOrders(
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@Context Language language, @Context Pagination pagination)
+		throws Exception;
+
+	@GET
 	@Path("/")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
@@ -72,14 +80,6 @@ public interface AccountResource {
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<AddressDTO> getAddresses(
 			@PathParam("id") String id, @Context Pagination pagination)
-		throws Exception;
-
-	@GET
-	@Path("/{id}/order")
-	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<OrderDTO> getOrders(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})

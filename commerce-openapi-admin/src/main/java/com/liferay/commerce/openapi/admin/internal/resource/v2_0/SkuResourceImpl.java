@@ -58,7 +58,7 @@ public class SkuResourceImpl implements SkuResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<InventoryDTO> getInventorys(
+	public CollectionDTO<InventoryDTO> getInventories(
 			String id, Pagination pagination)
 		throws Exception {
 

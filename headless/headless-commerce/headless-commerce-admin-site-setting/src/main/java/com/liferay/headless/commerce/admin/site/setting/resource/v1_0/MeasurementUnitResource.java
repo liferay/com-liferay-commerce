@@ -47,30 +47,30 @@ public interface MeasurementUnitResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public MeasurementUnitDTO getMeasurementUnit(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
 			@QueryParam("groupId") Long groupId,
 			@Nullable @QueryParam("type") Integer type,
 			@Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateMeasurementUnit(
 			@PathParam("id") String id, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public MeasurementUnitDTO upsertMeasurementUnit(
 			@QueryParam("groupId") Long groupId,
 			MeasurementUnitDTO measurementUnitDTO)

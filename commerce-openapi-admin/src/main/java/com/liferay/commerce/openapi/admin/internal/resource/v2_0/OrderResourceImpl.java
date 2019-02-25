@@ -69,8 +69,10 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteOrderItem(String id, String id2) throws Exception {
-		_orderItemHelper.deleteOrderItem(id2, _company);
+	public Response deleteOrderItem(String id, String orderItemId)
+		throws Exception {
+
+		_orderItemHelper.deleteOrderItem(orderItemId, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -79,7 +81,9 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteOrderNote(String id, String id2) throws Exception {
+	public Response deleteOrderNote(String id, String orderItemId)
+		throws Exception {
+
 		_orderNoteHelper.deleteOrderNote(id, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -106,8 +110,10 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public OrderItemDTO getOrderItem(String id, String id2) throws Exception {
-		return _orderItemHelper.getOrderItem(id2, _company);
+	public OrderItemDTO getOrderItem(String id, String orderItemId)
+		throws Exception {
+
+		return _orderItemHelper.getOrderItem(orderItemId, _company);
 	}
 
 	@Override
@@ -121,8 +127,10 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public OrderNoteDTO getOrderNote(String id, String id2) throws Exception {
-		return _orderNoteHelper.getOrderNote(id2, _company);
+	public OrderNoteDTO getOrderNote(String id, String orderItemId)
+		throws Exception {
+
+		return _orderNoteHelper.getOrderNote(orderItemId, _company);
 	}
 
 	@Override
@@ -181,20 +189,21 @@ public class OrderResourceImpl implements OrderResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public OrderItemDTO updateOrderItem(
-			String id, String id2, OrderItemDTO orderItemDTO)
+			String id, String orderItemId, OrderItemDTO orderItemDTO)
 		throws Exception {
 
 		return _orderItemHelper.updateOrderItem(
-			id2, orderItemDTO, _company, _commerceContext);
+			orderItemId, orderItemDTO, _company, _commerceContext);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public OrderNoteDTO updateOrderNote(
-			String id, String id2, OrderNoteDTO orderNoteDTO)
+			String id, String orderItemId, OrderNoteDTO orderNoteDTO)
 		throws Exception {
 
-		return _orderNoteHelper.updateOrderNote(id2, orderNoteDTO, _company);
+		return _orderNoteHelper.updateOrderNote(
+			orderItemId, orderNoteDTO, _company);
 	}
 
 	@Override
@@ -213,7 +222,7 @@ public class OrderResourceImpl implements OrderResource {
 	public OrderItemDTO upsertOrderItem(String id, OrderItemDTO orderItemDTO)
 		throws Exception {
 
-		return _orderItemHelper.upsertOrder(
+		return _orderItemHelper.upsertOrderItem(
 			id, orderItemDTO, _company, _commerceContext);
 	}
 

@@ -19,11 +19,11 @@ import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.openapi.admin.internal.mapper.v2_0.DTOMapper;
-import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.IdUtils;
+import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -124,7 +124,7 @@ public class OrderItemHelper {
 				id, company, orderItemDTO.getQuantity(), commerceContext));
 	}
 
-	public OrderItemDTO upsertOrder(
+	public OrderItemDTO upsertOrderItem(
 			String orderId, OrderItemDTO orderItemDTO, Company company,
 			CommerceContext commerceContext)
 		throws PortalException {

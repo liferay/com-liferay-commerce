@@ -48,15 +48,17 @@ public interface OrderResource {
 	public Response deleteOrder(@PathParam("id") String id) throws Exception;
 
 	@DELETE
-	@Path("/{id}/orderItem/{id2}")
+	@Path("/{id}/orderItem/{orderItemId}")
 	public Response deleteOrderItem(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("orderItemId") String orderItemId)
 		throws Exception;
 
 	@DELETE
-	@Path("/{id}/orderNote/{id2}")
+	@Path("/{id}/orderNote/{orderNoteId}")
 	public Response deleteOrderNote(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("orderNoteId") String orderNoteId)
 		throws Exception;
 
 	@GET
@@ -73,10 +75,11 @@ public interface OrderResource {
 		throws Exception;
 
 	@GET
-	@Path("/{id}/orderItem/{id2}")
+	@Path("/{id}/orderItem/{orderItemId}")
 	@Produces({"application/json", "application/xml"})
 	public OrderItemDTO getOrderItem(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("orderItemId") String orderItemId)
 		throws Exception;
 
 	@GET
@@ -87,10 +90,11 @@ public interface OrderResource {
 		throws Exception;
 
 	@GET
-	@Path("/{id}/orderNote/{id2}")
+	@Path("/{id}/orderNote/{orderNoteId}")
 	@Produces({"application/json", "application/xml"})
 	public OrderNoteDTO getOrderNote(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("orderNoteId") String orderNoteId)
 		throws Exception;
 
 	@GET
@@ -131,20 +135,22 @@ public interface OrderResource {
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}/orderItem/{id2}")
+	@Path("/{id}/orderItem/{orderItemId}")
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public OrderItemDTO updateOrderItem(
-			@PathParam("id") String id, @PathParam("id2") String id2,
+			@PathParam("id") String id,
+			@PathParam("orderItemId") String orderItemId,
 			OrderItemDTO orderItemDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}/orderNote/{id2}")
+	@Path("/{id}/orderNote/{orderNoteId}")
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public OrderNoteDTO updateOrderNote(
-			@PathParam("id") String id, @PathParam("id2") String id2,
+			@PathParam("id") String id,
+			@PathParam("orderNoteId") String orderNoteId,
 			OrderNoteDTO orderNoteDTO)
 		throws Exception;
 

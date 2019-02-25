@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.resource.v2_0;
+package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
-import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
-import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.headless.commerce.admin.site.setting.model.v1_0.CatalogRuleDTO;
+import com.liferay.headless.commerce.admin.site.setting.model.v1_0.CategoryDTO;
+import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDTO;
 
 import javax.annotation.Generated;
 
@@ -35,43 +35,57 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 /**
- * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/v2.0/sku")
-public interface SkuResource {
+@Path("/v1.0/catalogRule")
+public interface CatalogRuleResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteSku(@PathParam("id") String id) throws Exception;
+	public Response deleteCatalogRule(@PathParam("id") String id)
+		throws Exception;
 
 	@GET
-	@Path("/{id}/inventory")
+	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<InventoryDTO> getInventories(
+	public CatalogRuleDTO getCatalogRule(@PathParam("id") String id)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/category")
+	@Produces({"application/json", "application/xml"})
+	public CollectionDTO<CategoryDTO> getCatalogRuleCategories(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
-	@Path("/{id}")
+	@Path("/")
 	@Produces({"application/json", "application/xml"})
-	public SkuDTO getSku(@PathParam("id") String id) throws Exception;
+	public CollectionDTO<CatalogRuleDTO> getCatalogRules(
+			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/userSegment")
+	@Produces({"application/json", "application/xml"})
+	public CollectionDTO<UserSegmentDTO> getCatalogRuleUserSegments(
+			@PathParam("id") String id, @Context Pagination pagination)
+		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
-	public Response updateSku(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			SkuDTO skuDTO, @Context Language language)
+	public Response updateCatalogRule(
+			@PathParam("id") String id, CatalogRuleDTO catalogRuleDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}/inventory")
+	@Path("/")
 	@POST
 	@Produces({"application/json", "application/xml"})
-	public InventoryDTO upsertInventory(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			InventoryDTO inventoryDTO)
+	public CatalogRuleDTO upsertCatalogRule(
+			@QueryParam("groupId") Long groupId, CatalogRuleDTO catalogRuleDTO)
 		throws Exception;
 
 }

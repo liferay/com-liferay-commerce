@@ -46,19 +46,19 @@ public interface AvailabilityEstimateResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public AvailabilityEstimateDTO getAvailabilityEstimate(
 			@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateAvailabilityEstimate(
@@ -66,10 +66,10 @@ public interface AvailabilityEstimateResource {
 			AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception;
 
-	@Consumes("application/*")
+	@Consumes({"application/json", "application/xml"})
 	@Path("/")
 	@POST
-	@Produces("application/*")
+	@Produces({"application/json", "application/xml"})
 	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
 			@QueryParam("groupId") Long groupId,
 			AvailabilityEstimateDTO availabilityEstimateDTO)
