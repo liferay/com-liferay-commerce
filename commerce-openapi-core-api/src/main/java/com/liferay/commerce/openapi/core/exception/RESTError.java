@@ -35,6 +35,8 @@ public enum RESTError {
 	ADDRESS_STREET_ERROR(
 		958, "Invalid address street", Response.Status.BAD_REQUEST),
 	ADDRESS_ZIP_ERROR(957, "Invalid address zip", Response.Status.BAD_REQUEST),
+	CATALOG_RULE_TYPE_ERROR(
+		970, "Invalid catalog rule type", Response.Status.BAD_REQUEST),
 	COUNTRY_NAME_ERROR(
 		977, "Invalid country name for given language tag",
 		Response.Status.BAD_REQUEST),
