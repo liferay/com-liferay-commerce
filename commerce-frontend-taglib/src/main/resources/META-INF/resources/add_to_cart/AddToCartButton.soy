@@ -10,14 +10,22 @@
 
 	{@param? _handleSubmitClick: any }
 	{@param? _handleBtnClick: any }
+	{@param? _handleBtnFocus: any }
+	{@param? _handleBtnFocusin: any }
+	{@param? _handleBtnFocusout: any }
+	{@param? _handleBtnBlur: any }
 	{@param? _updateQuantity: any }
 	{@param? _submitQuantity: any }
 
 	{let $btnClass kind="text"}
 		commerce-button
-		{sp}add-to-cart-button
 		{if $quantity > 0 and $editMode == false}
 			{sp}commerce-button--good
+		{/if}
+
+		{sp}add-to-cart-button
+		{if $editMode == true}
+			{sp}add-to-cart-button--edit
 		{/if}
 
 		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
@@ -25,7 +33,15 @@
 		{/if}
 	{/let}
 
-	<div class="{$btnClass}" data-onclick="{$_handleBtnClick}">
+	<div
+		class="{$btnClass}"
+		data-onclick="{$_handleBtnClick}"
+		data-onfocus="{$_handleBtnFocus}"
+		data-onfocusin="{$_handleBtnFocusin}"
+		data-onfocusout="{$_handleBtnFocusout}"
+		data-onblur="{$_handleBtnBlur}"
+		tabindex="0"
+	>
 
 		{if $editMode == false}
 			{if $quantity == 0}
@@ -47,7 +63,10 @@
 				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
 
-			<div class="add-to-cart-button__fwd" data-onclick="{$_handleSubmitClick}"></div>
+			<div
+				class="add-to-cart-button__fwd"
+				data-onclick="{$_handleSubmitClick}"
+			></div>
 		{/if}
 	</div>
 
