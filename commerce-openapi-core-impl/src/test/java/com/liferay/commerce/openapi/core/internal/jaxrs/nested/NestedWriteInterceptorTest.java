@@ -21,6 +21,8 @@ import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.SkuDTO;
 import com.liferay.commerce.openapi.core.internal.jaxrs.nested.resource.ProductResourceImpl;
 import com.liferay.commerce.openapi.core.internal.jaxrs.nested.util.MockHttpServletRequest;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Props;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import java.io.IOException;
 
@@ -52,6 +54,8 @@ public class NestedWriteInterceptorTest {
 	@Before
 	public void setUp() throws Exception {
 		BundleContext bundleContext = Mockito.mock(BundleContext.class);
+
+		PropsUtil.setProps(Mockito.mock(Props.class));
 
 		_context = Mockito.mock(WriterInterceptorContext.class);
 
