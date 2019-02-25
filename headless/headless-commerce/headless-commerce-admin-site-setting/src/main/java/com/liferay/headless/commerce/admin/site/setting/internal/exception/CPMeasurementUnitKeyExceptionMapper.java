@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.internal.exception;
+package com.liferay.headless.commerce.admin.site.setting.internal.exception;
 
-import com.liferay.commerce.exception.CommerceWarehouseActiveException;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 import com.liferay.commerce.openapi.core.exception.RESTError;
+import com.liferay.commerce.product.exception.CPMeasurementUnitKeyException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -30,28 +30,28 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceHeadlessAdminSiteSetting.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=HeadlessCommerceAdminSiteSetting.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ExceptionMapper.class
 )
 @Provider
-public class CommerceWarehouseActiveExceptionMapper
-	extends BaseExceptionMapper<CommerceWarehouseActiveException> {
+public class CPMeasurementUnitKeyExceptionMapper
+	extends BaseExceptionMapper<CPMeasurementUnitKeyException> {
 
 	@Override
 	public int getErrorCode() {
-		return RESTError.WAREHOUSE_ACTIVE_ERROR.getErrorCode();
+		return RESTError.MEASUREMENT_UNIT_KEY_ERROR.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return RESTError.WAREHOUSE_ACTIVE_ERROR.getErrorDescription();
+		return RESTError.MEASUREMENT_UNIT_KEY_ERROR.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return RESTError.WAREHOUSE_ACTIVE_ERROR.getStatus();
+		return RESTError.MEASUREMENT_UNIT_KEY_ERROR.getStatus();
 	}
 
 }
