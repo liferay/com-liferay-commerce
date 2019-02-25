@@ -26,7 +26,9 @@ import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
@@ -47,8 +49,10 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceWarehousesImporter {
 
 	public List<CommerceWarehouse> importCommerceWarehouses(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws Exception {
+
+		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
 
 		if ((jsonArray == null) || (jsonArray.length() <= 0)) {
 			return Collections.emptyList();
@@ -72,11 +76,27 @@ public class CommerceWarehousesImporter {
 	}
 
 	public CommerceWarehouse importDefaultCommerceWarehouse(
-			ServiceContext serviceContext)
+			long scopeGroupId, long userId)
 		throws PortalException {
+
+		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
 
 		return _commerceWarehouseLocalService.importDefaultCommerceWarehouse(
 			serviceContext);
+	}
+
+	protected ServiceContext getServiceContext(long scopeGroupId, long userId)
+		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
+
+		return serviceContext;
 	}
 
 	private CommerceWarehouse _importCommerceWarehouse(
@@ -154,5 +174,8 @@ public class CommerceWarehousesImporter {
 
 	@Reference
 	private SettingsFactory _settingsFactory;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

@@ -20,7 +20,9 @@ import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,8 +40,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CPOptionCategoriesImporter {
 
 	public List<CPOptionCategory> importCPOptionCategories(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		List<CPOptionCategory> cpOptionCategories = new ArrayList<>(
 			jsonArray.length());
@@ -79,5 +89,8 @@ public class CPOptionCategoriesImporter {
 
 	@Reference
 	private CPOptionCategoryLocalService _cpOptionCategoryLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

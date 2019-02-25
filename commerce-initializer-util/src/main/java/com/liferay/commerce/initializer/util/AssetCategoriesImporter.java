@@ -25,7 +25,9 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,8 +51,16 @@ public class AssetCategoriesImporter {
 	public List<AssetCategory> importAssetCategories(
 			JSONArray jsonArray, String assetVocabularyName,
 			ClassLoader classLoader, String imageDependenciesPath,
-			ServiceContext serviceContext)
+			long scopeGroupId, long userId)
 		throws Exception {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		List<AssetCategory> assetCategories = new ArrayList<>(
 			jsonArray.length());
@@ -130,7 +140,7 @@ public class AssetCategoriesImporter {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				assetCategory, classLoader, imageDependenciesPath,
 				imageFileName, 0, CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				serviceContext);
+				serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		}
 
 		return assetCategory;
@@ -190,5 +200,8 @@ public class AssetCategoriesImporter {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
