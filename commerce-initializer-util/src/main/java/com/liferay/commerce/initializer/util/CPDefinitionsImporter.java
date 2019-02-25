@@ -444,7 +444,7 @@ public class CPDefinitionsImporter {
 			for (int i = 0; i < attachmentsJSONArray.length(); i++) {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 					cpDefinition, classLoader, imageDependenciesPath,
-					imagesJSONArray.getString(i), i,
+					attachmentsJSONArray.getString(i), i,
 					CPAttachmentFileEntryConstants.TYPE_OTHER,
 					serviceContext.getScopeGroupId(),
 					serviceContext.getUserId());
