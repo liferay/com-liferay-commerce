@@ -82,6 +82,30 @@ public class CPRuleAssetCategoryRelServiceImpl
 			cpRuleId);
 	}
 
+	@Override
+	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+			long cpRuleId, int start, int end)
+		throws PortalException {
+
+		_cpRuleModelResourcePermission.check(
+			getPermissionChecker(), cpRuleId, ActionKeys.VIEW);
+
+		return cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRels(
+			cpRuleId, start, end);
+	}
+
+	@Override
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId)
+		throws PortalException {
+
+		_cpRuleModelResourcePermission.check(
+			getPermissionChecker(), cpRuleId, ActionKeys.VIEW);
+
+		return
+			cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRelsCount(
+				cpRuleId);
+	}
+
 	private static volatile ModelResourcePermission<CPRule>
 		_cpRuleModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
