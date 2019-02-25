@@ -20,10 +20,8 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionOptionRelImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl;
-import com.liferay.portal.configuration.ConfigurationFactoryImpl;
-import com.liferay.portal.json.JSONFactoryImpl;
+import com.liferay.portal.kernel.configuration.ConfigurationFactory;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 
 import java.util.Collections;
@@ -37,6 +35,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.mockito.Mockito;
+
 /**
  * @author Luca Pellizzon
  */
@@ -45,11 +45,7 @@ public class SKUCombinationsIteratorTest {
 	@Before
 	public void setUp() {
 		ConfigurationFactoryUtil.setConfigurationFactory(
-			new ConfigurationFactoryImpl());
-
-		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-
-		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
+			Mockito.mock(ConfigurationFactory.class, Mockito.RETURNS_MOCKS));
 	}
 
 	@Test
