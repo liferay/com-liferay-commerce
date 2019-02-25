@@ -16,14 +16,31 @@ package com.liferay.commerce.user.segment.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion;
+import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalServiceUtil;
+import com.liferay.commerce.user.segment.util.comparator.CommerceUserSegmentCriterionPriorityComparator;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
+import java.util.List;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceUserSegmentEntryImpl
 	extends CommerceUserSegmentEntryBaseImpl {
 
 	public CommerceUserSegmentEntryImpl() {
+	}
+
+	@Override
+	public List<CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria() {
+		return CommerceUserSegmentCriterionLocalServiceUtil.
+			getCommerceUserSegmentCriteria(
+				getCommerceUserSegmentEntryId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS,
+				new CommerceUserSegmentCriterionPriorityComparator());
 	}
 
 }
