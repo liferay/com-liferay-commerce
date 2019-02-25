@@ -225,6 +225,10 @@ public interface CPRuleAssetCategoryRelLocalService extends BaseLocalService,
 	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
 		long cpRuleId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end);
+
 	/**
 	* Returns the number of cp rule asset category rels.
 	*
@@ -232,6 +236,9 @@ public interface CPRuleAssetCategoryRelLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPRuleAssetCategoryRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

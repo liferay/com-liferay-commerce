@@ -181,6 +181,71 @@ public class CPRuleAssetCategoryRelServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		HttpPrincipal httpPrincipal, long cpRuleId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPRuleAssetCategoryRelServiceUtil.class,
+					"getCPRuleAssetCategoryRels",
+					_getCPRuleAssetCategoryRelsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpRuleId, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCPRuleAssetCategoryRelsCount(
+		HttpPrincipal httpPrincipal, long cpRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPRuleAssetCategoryRelServiceUtil.class,
+					"getCPRuleAssetCategoryRelsCount",
+					_getCPRuleAssetCategoryRelsCountParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, cpRuleId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPRuleAssetCategoryRelServiceHttp.class);
 	private static final Class<?>[] _addCPRuleAssetCategoryRelParameterTypes0 = new Class[] {
 			long.class, long.class,
@@ -194,4 +259,9 @@ public class CPRuleAssetCategoryRelServiceHttp {
 	private static final Class<?>[] _getCPRuleAssetCategoryRelsParameterTypes3 = new Class[] {
 			long.class
 		};
+	private static final Class<?>[] _getCPRuleAssetCategoryRelsParameterTypes4 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getCPRuleAssetCategoryRelsCountParameterTypes5 =
+		new Class[] { long.class };
 }

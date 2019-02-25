@@ -256,6 +256,13 @@ public class CPRuleAssetCategoryRelLocalServiceWrapper
 		return _cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRels(cpRuleId);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end) {
+		return _cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRels(cpRuleId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of cp rule asset category rels.
 	*
@@ -264,6 +271,11 @@ public class CPRuleAssetCategoryRelLocalServiceWrapper
 	@Override
 	public int getCPRuleAssetCategoryRelsCount() {
 		return _cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRelsCount();
+	}
+
+	@Override
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId) {
+		return _cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRelsCount(cpRuleId);
 	}
 
 	@Override

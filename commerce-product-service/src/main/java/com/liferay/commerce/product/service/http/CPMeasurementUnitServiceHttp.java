@@ -185,7 +185,8 @@ public class CPMeasurementUnitServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
+		HttpPrincipal httpPrincipal, long groupId, int type, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -194,7 +195,7 @@ public class CPMeasurementUnitServiceHttp {
 					_getCPMeasurementUnitsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+					type, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -219,8 +220,7 @@ public class CPMeasurementUnitServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		HttpPrincipal httpPrincipal, long groupId, int type, int start,
-		int end,
+		HttpPrincipal httpPrincipal, long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -229,7 +229,7 @@ public class CPMeasurementUnitServiceHttp {
 					_getCPMeasurementUnitsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					type, start, end, orderByComparator);
+					start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -402,11 +402,11 @@ public class CPMeasurementUnitServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getCPMeasurementUnitsParameterTypes4 = new Class[] {
-			long.class, int.class, int.class,
+			long.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCPMeasurementUnitsParameterTypes5 = new Class[] {
-			long.class, int.class, int.class, int.class,
+			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCPMeasurementUnitsCountParameterTypes6 = new Class[] {

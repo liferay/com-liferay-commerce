@@ -54,6 +54,10 @@ public interface CPRule extends CPRuleModel, PersistedModel {
 			}
 		};
 
+	public java.util.List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels();
+
+	public java.util.List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels();
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(

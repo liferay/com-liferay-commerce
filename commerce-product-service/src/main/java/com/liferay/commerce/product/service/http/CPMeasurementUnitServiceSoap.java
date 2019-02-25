@@ -132,13 +132,13 @@ public class CPMeasurementUnitServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnitSoap[] getCPMeasurementUnits(
-		long groupId, int start, int end,
+		long groupId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> returnValue =
 				CPMeasurementUnitServiceUtil.getCPMeasurementUnits(groupId,
-					start, end, orderByComparator);
+					type, start, end, orderByComparator);
 
 			return com.liferay.commerce.product.model.CPMeasurementUnitSoap.toSoapModels(returnValue);
 		}
@@ -150,13 +150,13 @@ public class CPMeasurementUnitServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnitSoap[] getCPMeasurementUnits(
-		long groupId, int type, int start, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> returnValue =
 				CPMeasurementUnitServiceUtil.getCPMeasurementUnits(groupId,
-					type, start, end, orderByComparator);
+					start, end, orderByComparator);
 
 			return com.liferay.commerce.product.model.CPMeasurementUnitSoap.toSoapModels(returnValue);
 		}

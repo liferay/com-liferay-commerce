@@ -69,6 +69,14 @@ public interface CPRuleAssetCategoryRelService extends BaseService {
 	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
 		long cpRuleId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId)
+		throws PortalException;
+
 	/**
 	* Returns the OSGi service identifier.
 	*

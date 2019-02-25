@@ -124,5 +124,35 @@ public class CPRuleAssetCategoryRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPRuleAssetCategoryRelSoap[] getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> returnValue =
+				CPRuleAssetCategoryRelServiceUtil.getCPRuleAssetCategoryRels(cpRuleId,
+					start, end);
+
+			return com.liferay.commerce.product.model.CPRuleAssetCategoryRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCPRuleAssetCategoryRelsCount(long cpRuleId)
+		throws RemoteException {
+		try {
+			int returnValue = CPRuleAssetCategoryRelServiceUtil.getCPRuleAssetCategoryRelsCount(cpRuleId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPRuleAssetCategoryRelServiceSoap.class);
 }

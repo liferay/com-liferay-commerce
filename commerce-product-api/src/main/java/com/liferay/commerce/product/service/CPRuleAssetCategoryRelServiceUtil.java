@@ -68,6 +68,17 @@ public class CPRuleAssetCategoryRelServiceUtil {
 		return getService().getCPRuleAssetCategoryRels(cpRuleId);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPRuleAssetCategoryRels(cpRuleId, start, end);
+	}
+
+	public static int getCPRuleAssetCategoryRelsCount(long cpRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPRuleAssetCategoryRelsCount(cpRuleId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
