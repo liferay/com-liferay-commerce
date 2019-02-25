@@ -19,6 +19,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-openapi-core-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
-	
+	compileOnly project(":apps:commerce:commerce-user-segment-api")
+
 	runtime project(":apps:commerce:commerce-openapi-core-impl")
 }
