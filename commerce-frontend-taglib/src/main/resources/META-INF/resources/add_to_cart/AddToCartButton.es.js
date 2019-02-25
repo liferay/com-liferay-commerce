@@ -26,11 +26,13 @@ class AddToCartButton extends Component {
 	}
 
 	_updateQuantity(quantity) {
-		this.tmpQuantity = quantity;
+		// console.log('update', quantity);
+		this.quantity = quantity;
 	}
-
+	
 	_submitQuantity(quantity) {
-		this.tmpQuantity = quantity;
+		// console.log('submit', quantity);
+		this.quantity = quantity;
 		this._handleSubmitClick();
 	}
 
@@ -41,6 +43,7 @@ class AddToCartButton extends Component {
 			!this.disabled &&
 			!!this.accountId
 		) {
+			this.tmpQuantity = this.quantity;
 			this.editMode = true;
 		}
 	}
@@ -61,9 +64,9 @@ class AddToCartButton extends Component {
 
 	_handleBtnFocusout(e) {
 		// console.log('_handleBtnFocusout', e);
-		if (e.target.nodeName === "INPUT") {
-			this.editMode = false;
-		}
+		// if (e.target.nodeName === "INPUT") {
+		// 	this.editMode = false;
+		// }
 	}
 
 	_handleSubmitClick() {
@@ -72,9 +75,9 @@ class AddToCartButton extends Component {
 		formData.append('commerceAccountId', this.accountId);
 		formData.append('groupId', themeDisplay.getScopeGroupId());
 		formData.append('productId', this.productId);
-		formData.append('quantity', this.tmpQuantity);
+		formData.append('quantity', this.quantity);
 		formData.append('options', this.options);
-
+		// console.log(this.tmpQuantity);
 		if (this.orderId) {
 			formData.append('orderId', this.orderId);
 		}
@@ -93,7 +96,7 @@ class AddToCartButton extends Component {
 						Liferay.fire('updateCart', jsonresponse);
 
 						this.editMode = false;
-						this.quantity = this.tmpQuantity;
+						// this.quantity = this.tmpQuantity;
 						this.emit('submitQuantity', this.productId, this.quantity);
 					}
 					else if (jsonresponse.errorMessages) {
@@ -174,7 +177,8 @@ AddToCartButton.STATE = {
 			minQuantity: Config.number(),
 			multipleQuantity: Config.number()
 		}
-	).value({})
+	).value({}),
+	tmpQuantity: Config.number().value(0)
 };
 
 export {AddToCartButton};
