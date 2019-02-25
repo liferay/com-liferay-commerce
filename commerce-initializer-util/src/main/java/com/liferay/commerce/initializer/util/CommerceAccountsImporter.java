@@ -42,8 +42,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.ListTypeConstants;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationConstants;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -64,8 +66,16 @@ public class CommerceAccountsImporter {
 
 	public void importCommerceAccounts(
 			JSONArray jsonArray, ClassLoader classLoader,
-			String dependenciesPath, ServiceContext serviceContext)
+			String dependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -268,5 +278,8 @@ public class CommerceAccountsImporter {
 
 	@Reference
 	private OrganizationLocalService _organizationLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

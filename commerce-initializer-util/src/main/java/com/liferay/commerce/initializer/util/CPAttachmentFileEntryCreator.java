@@ -21,8 +21,10 @@ import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.ClassedModel;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -49,8 +51,16 @@ public class CPAttachmentFileEntryCreator {
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 			ClassedModel classedModel, ClassLoader classLoader,
 			String dependenciesPath, String fileName, double priority, int type,
-			ServiceContext serviceContext)
+			long scopeGroupId, long userId)
 		throws Exception {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		long classNameId = _portal.getClassNameId(classedModel.getModelClass());
 		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
@@ -89,7 +99,7 @@ public class CPAttachmentFileEntryCreator {
 		}
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		displayCalendar.add(Calendar.YEAR, -1);
 
@@ -105,7 +115,7 @@ public class CPAttachmentFileEntryCreator {
 		}
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
@@ -140,5 +150,8 @@ public class CPAttachmentFileEntryCreator {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

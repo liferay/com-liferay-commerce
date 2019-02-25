@@ -22,7 +22,9 @@ import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.TextFormatter;
 
 import java.util.ArrayList;
@@ -41,8 +43,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CPOptionsImporter {
 
 	public List<CPOption> importCPOptions(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		List<CPOption> cpOptions = new ArrayList<>(jsonArray.length());
 
@@ -142,5 +152,8 @@ public class CPOptionsImporter {
 
 	@Reference
 	private CPOptionValueLocalService _cpOptionValueLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
