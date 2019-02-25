@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.internal.exception;
+package com.liferay.headless.commerce.admin.site.setting.internal.exception;
 
 import com.liferay.commerce.exception.CommerceWarehouseNameException;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
@@ -30,7 +30,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceHeadlessAdminSiteSetting.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=HeadlessCommerceAdminSiteSetting.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ExceptionMapper.class

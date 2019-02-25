@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.model.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.model.v1_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -26,12 +26,12 @@ import javax.annotation.Generated;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@JacksonXmlRootElement(localName = "TaxCategory")
-public class TaxCategoryDTO {
+@JacksonXmlRootElement(localName = "UserSegment")
+public class UserSegmentDTO {
 
 	@Nullable
-	public Map<String, String> getDescription() {
-		return _description;
+	public UserSegmentCriterionDTO[] getCriteria() {
+		return _criteria;
 	}
 
 	@Nullable
@@ -39,28 +39,73 @@ public class TaxCategoryDTO {
 		return _id;
 	}
 
+	public String getKey() {
+		return _key;
+	}
+
 	public Map<String, String> getName() {
 		return _name;
 	}
 
-	public void setDescription(Map<String, String> description) {
-		_description = description;
+	@Nullable
+	public Double getPriority() {
+		return _priority;
+	}
+
+	@Nullable
+	public Boolean isActive() {
+		return _active;
+	}
+
+	@Nullable
+	public Boolean isSystem() {
+		return _system;
+	}
+
+	public void setActive(Boolean active) {
+		_active = active;
+	}
+
+	public void setCriteria(UserSegmentCriterionDTO[] criteria) {
+		_criteria = criteria;
 	}
 
 	public void setId(Long id) {
 		_id = id;
 	}
 
+	public void setKey(String key) {
+		_key = key;
+	}
+
 	public void setName(Map<String, String> name) {
 		_name = name;
 	}
 
+	public void setPriority(Double priority) {
+		_priority = priority;
+	}
+
+	public void setSystem(Boolean system) {
+		_system = system;
+	}
+
 	@Nullable
-	private Map<String, String> _description;
+	private Boolean _active;
+
+	@Nullable
+	private UserSegmentCriterionDTO[] _criteria;
 
 	@Nullable
 	private Long _id;
 
+	private String _key;
 	private Map<String, String> _name;
+
+	@Nullable
+	private Double _priority;
+
+	@Nullable
+	private Boolean _system;
 
 }

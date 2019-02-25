@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.model.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.model.v1_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import com.liferay.commerce.openapi.core.annotation.Nullable;
-
-import java.util.Map;
 
 import javax.annotation.Generated;
 
@@ -26,41 +24,63 @@ import javax.annotation.Generated;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@JacksonXmlRootElement(localName = "AvailabilityEstimate")
-public class AvailabilityEstimateDTO {
+@JacksonXmlRootElement(localName = "Category")
+public class CategoryDTO {
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
 
 	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
-	@Nullable
-	public Double getPriority() {
-		return _priority;
+	public String getName() {
+		return _name;
 	}
 
-	public Map<String, String> getTitle() {
-		return _title;
+	@Nullable
+	public String getVocabulary() {
+		return _vocabulary;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
 	}
 
 	public void setId(Long id) {
 		_id = id;
 	}
 
-	public void setPriority(Double priority) {
-		_priority = priority;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public void setTitle(Map<String, String> title) {
-		_title = title;
+	public void setVocabulary(String vocabulary) {
+		_vocabulary = vocabulary;
 	}
+
+	private String _externalReferenceCode;
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;
 
-	@Nullable
-	private Double _priority;
+	private String _name;
 
-	private Map<String, String> _title;
+	@Nullable
+	private String _vocabulary;
 
 }
