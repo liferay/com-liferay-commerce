@@ -56,8 +56,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceUserSegmentsImporter {
 
 	public void importCommerceUserSegments(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);

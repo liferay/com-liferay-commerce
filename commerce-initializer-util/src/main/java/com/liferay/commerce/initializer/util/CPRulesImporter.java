@@ -22,7 +22,9 @@ import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalSe
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CPRulesImporter {
 
 	public List<CPRule> importCPRules(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		List<CPRule> cpRules = new ArrayList<>(jsonArray.length());
 
@@ -103,5 +113,8 @@ public class CPRulesImporter {
 
 	@Reference
 	private CPRuleUserSegmentRelLocalService _cpRuleUserSegmentRelLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

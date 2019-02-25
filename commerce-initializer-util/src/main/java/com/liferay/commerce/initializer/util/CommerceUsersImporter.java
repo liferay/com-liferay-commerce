@@ -59,8 +59,16 @@ public class CommerceUsersImporter {
 
 	public void importCommerceUsers(
 			JSONArray jsonArray, ClassLoader classLoader,
-			String dependenciesPath, ServiceContext serviceContext)
+			String dependenciesPath, long scopeGroupId, long userId)
 		throws IOException, PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -150,7 +158,9 @@ public class CommerceUsersImporter {
 			}
 		}
 
-		Locale locale = serviceContext.getLocale();
+		User user = _userLocalService.getUser(serviceContext.getUserId());
+
+		Locale locale = user.getLocale();
 
 		String importedLanguageCode = jsonObject.getString("languageCode");
 
@@ -158,7 +168,7 @@ public class CommerceUsersImporter {
 			locale = LanguageUtil.getLocale(importedLanguageCode);
 		}
 
-		TimeZone timeZone = serviceContext.getTimeZone();
+		TimeZone timeZone = user.getTimeZone();
 
 		String timeZoneId = jsonObject.getString(
 			"timeZoneId", timeZone.getID());
@@ -172,8 +182,7 @@ public class CommerceUsersImporter {
 		long suffixId = jsonObject.getLong("suffixId");
 		boolean male = jsonObject.getBoolean("male");
 
-		Calendar calendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+		Calendar calendar = CalendarFactoryUtil.getCalendar(timeZone);
 
 		int birthdayMonth = calendar.get(
 			jsonObject.getInt("birthdayMonth", Calendar.MONTH));
@@ -228,7 +237,7 @@ public class CommerceUsersImporter {
 
 		long[] userGroupIds = null;
 
-		User user = upsertUser(
+		user = upsertUser(
 			password, userReminderQueryQuestion, userReminderQueryAnswer,
 			screenName, emailAddress, facebookId, openId, hasPortrait,
 			portraitBytes, locale, timeZoneId, greeting, comments, firstName,

@@ -26,7 +26,9 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.math.BigDecimal;
 
@@ -40,8 +42,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CommercePriceEntriesImporter {
 
 	public void importCommercePriceEntries(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -101,5 +111,8 @@ public class CommercePriceEntriesImporter {
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

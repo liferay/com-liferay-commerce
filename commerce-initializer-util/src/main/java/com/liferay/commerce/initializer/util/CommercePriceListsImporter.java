@@ -21,7 +21,9 @@ import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -37,8 +39,16 @@ import org.osgi.service.component.annotations.Reference;
 public class CommercePriceListsImporter {
 
 	public void importCommercePriceLists(
-			JSONArray jsonArray, ServiceContext serviceContext)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws PortalException {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -84,10 +94,12 @@ public class CommercePriceListsImporter {
 			return;
 		}
 
+		User user = _userLocalService.getUser(serviceContext.getUserId());
+
 		int priority = jsonObject.getInt("Priority");
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		int displayDateMonth = displayCalendar.get(
 			jsonObject.getInt("DisplayDateMonth", Calendar.MONTH));
@@ -107,7 +119,7 @@ public class CommercePriceListsImporter {
 		}
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
@@ -147,5 +159,8 @@ public class CommercePriceListsImporter {
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

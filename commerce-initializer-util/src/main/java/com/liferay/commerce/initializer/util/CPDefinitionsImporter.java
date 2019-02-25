@@ -53,7 +53,9 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -85,8 +87,16 @@ public class CPDefinitionsImporter {
 	public List<CPDefinition> importCPDefinitions(
 			JSONArray jsonArray, String assetVocabularyName,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
-			String imageDependenciesPath, ServiceContext serviceContext)
+			String imageDependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
+
+		User user = _userLocalService.getUser(userId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(scopeGroupId);
+		serviceContext.setUserId(userId);
+		serviceContext.setCompanyId(user.getCompanyId());
 
 		List<CPDefinition> cpDefinitions = new ArrayList<>(jsonArray.length());
 
@@ -111,8 +121,10 @@ public class CPDefinitionsImporter {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 
+		User user = _userLocalService.getUser(serviceContext.getUserId());
+
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		displayCalendar.add(Calendar.YEAR, -1);
 
@@ -128,7 +140,7 @@ public class CPDefinitionsImporter {
 		}
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
+			user.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
@@ -226,7 +238,8 @@ public class CPDefinitionsImporter {
 		if (categoriesJSONArray != null) {
 			assetCategories = _assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
-				imageDependenciesPath, serviceContext);
+				imageDependenciesPath, serviceContext.getScopeGroupId(),
+				serviceContext.getUserId());
 		}
 
 		// Commerce product definition
@@ -397,7 +410,8 @@ public class CPDefinitionsImporter {
 		if (Validator.isNotNull(image)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				cpDefinition, classLoader, imageDependenciesPath, image, 0,
-				CPAttachmentFileEntryConstants.TYPE_IMAGE, serviceContext);
+				CPAttachmentFileEntryConstants.TYPE_IMAGE,
+				serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		}
 
 		JSONArray imagesJSONArray = jsonObject.getJSONArray("Images");
@@ -407,7 +421,9 @@ public class CPDefinitionsImporter {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 					cpDefinition, classLoader, imageDependenciesPath,
 					imagesJSONArray.getString(i), i,
-					CPAttachmentFileEntryConstants.TYPE_IMAGE, serviceContext);
+					CPAttachmentFileEntryConstants.TYPE_IMAGE,
+					serviceContext.getScopeGroupId(),
+					serviceContext.getUserId());
 			}
 		}
 
@@ -418,7 +434,8 @@ public class CPDefinitionsImporter {
 		if (Validator.isNotNull(attachment)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				cpDefinition, classLoader, imageDependenciesPath, attachment, 0,
-				CPAttachmentFileEntryConstants.TYPE_OTHER, serviceContext);
+				CPAttachmentFileEntryConstants.TYPE_OTHER,
+				serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		}
 
 		JSONArray attachmentsJSONArray = jsonObject.getJSONArray("Attachments");
@@ -428,7 +445,9 @@ public class CPDefinitionsImporter {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 					cpDefinition, classLoader, imageDependenciesPath,
 					imagesJSONArray.getString(i), i,
-					CPAttachmentFileEntryConstants.TYPE_OTHER, serviceContext);
+					CPAttachmentFileEntryConstants.TYPE_OTHER,
+					serviceContext.getScopeGroupId(),
+					serviceContext.getUserId());
 			}
 		}
 
@@ -733,5 +752,8 @@ public class CPDefinitionsImporter {
 
 	@Reference
 	private CPTaxCategoryLocalService _cpTaxCategoryLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
