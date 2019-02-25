@@ -16,17 +16,19 @@ package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.TaxCategoryHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.TaxCategoryDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -44,32 +46,36 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response deleteTaxCategory(String id) throws Exception {
+		_taxCategoryHelper.deleteTaxCategory(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<TaxCategoryDTO> getTaxCategories(
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _taxCategoryHelper.getTaxCategoryDTOs(groupId, pagination);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.read")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public TaxCategoryDTO getTaxCategory(String id) throws Exception {
-		return new TaxCategoryDTO();
+		return _taxCategoryHelper.getTaxCategoryDTO(id);
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateTaxCategory(String id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
+
+		_taxCategoryHelper.updateTaxCategory(id, taxCategoryDTO);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -77,12 +83,19 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 	}
 
 	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public TaxCategoryDTO upsertTaxCategory(
 			Long groupId, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
 
-		return new TaxCategoryDTO();
+		return _taxCategoryHelper.upsertTaxCategory(
+			groupId, taxCategoryDTO, _user);
 	}
+
+	@Reference
+	private TaxCategoryHelper _taxCategoryHelper;
+
+	@Context
+	private User _user;
 
 }
