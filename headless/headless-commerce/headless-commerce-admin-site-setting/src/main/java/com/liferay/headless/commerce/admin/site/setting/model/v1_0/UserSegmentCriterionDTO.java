@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.model.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.model.v1_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import com.liferay.commerce.openapi.core.annotation.Nullable;
-
-import java.util.Map;
 
 import javax.annotation.Generated;
 
@@ -26,20 +24,16 @@ import javax.annotation.Generated;
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@JacksonXmlRootElement(localName = "MeasurementUnit")
-public class MeasurementUnitDTO {
+@JacksonXmlRootElement(localName = "UserSegmentCriterion")
+public class UserSegmentCriterionDTO {
+
+	public Long getCommerceUserSegmentEntryId() {
+		return _commerceUserSegmentEntryId;
+	}
 
 	@Nullable
 	public Long getId() {
 		return _id;
-	}
-
-	public String getKey() {
-		return _key;
-	}
-
-	public Map<String, String> getName() {
-		return _name;
 	}
 
 	@Nullable
@@ -47,65 +41,46 @@ public class MeasurementUnitDTO {
 		return _priority;
 	}
 
-	@Nullable
-	public Double getRate() {
-		return _rate;
-	}
-
-	@Nullable
-	public Integer getType() {
+	public String getType() {
 		return _type;
 	}
 
 	@Nullable
-	public Boolean isPrimary() {
-		return _primary;
+	public String getTypeSettings() {
+		return _typeSettings;
+	}
+
+	public void setCommerceUserSegmentEntryId(Long commerceUserSegmentEntryId) {
+		_commerceUserSegmentEntryId = commerceUserSegmentEntryId;
 	}
 
 	public void setId(Long id) {
 		_id = id;
 	}
 
-	public void setKey(String key) {
-		_key = key;
-	}
-
-	public void setName(Map<String, String> name) {
-		_name = name;
-	}
-
-	public void setPrimary(Boolean primary) {
-		_primary = primary;
-	}
-
 	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 
-	public void setRate(Double rate) {
-		_rate = rate;
-	}
-
-	public void setType(Integer type) {
+	public void setType(String type) {
 		_type = type;
 	}
+
+	public void setTypeSettings(String typeSettings) {
+		_typeSettings = typeSettings;
+	}
+
+	private Long _commerceUserSegmentEntryId;
 
 	@Nullable
 	private Long _id;
 
-	private String _key;
-	private Map<String, String> _name;
-
-	@Nullable
-	private Boolean _primary;
-
 	@Nullable
 	private Double _priority;
 
-	@Nullable
-	private Double _rate;
+	private String _type;
 
 	@Nullable
-	private Integer _type;
+	private String _typeSettings;
 
 }

@@ -12,16 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.headless.admin.site.setting.internal.resource.util.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0;
 
 import com.liferay.commerce.exception.NoSuchWarehouseException;
-import com.liferay.commerce.headless.admin.site.setting.internal.v1_0.DTOUtils;
-import com.liferay.commerce.headless.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.service.CommerceWarehouseService;
+import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
