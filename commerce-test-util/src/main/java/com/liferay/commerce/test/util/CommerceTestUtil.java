@@ -326,13 +326,9 @@ public class CommerceTestUtil {
 			ServiceContextTestUtil.getServiceContext(
 				commerceOrder.getGroupId());
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(
-				commerceOrder.getGroupId());
-
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, null, serviceContext.getScopeGroup(), null,
-			commerceOrder, null);
+			commerceOrder.getCommerceCurrency(), null,
+			serviceContext.getScopeGroup(), null, commerceOrder, null);
 
 		return CommerceOrderLocalServiceUtil.checkoutCommerceOrder(
 			commerceOrder.getCommerceOrderId(), commerceContext,
