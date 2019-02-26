@@ -16,12 +16,20 @@ package com.liferay.commerce.media.internal;
 
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
+import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.portletfilerepository.PortletFileRepositoryUtil;
+import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -48,6 +56,31 @@ public class CommerceCatalogDefaultImageImpl
 	public void updateDefaultCatalogFileEntryId(long groupId, long fileEntryId)
 		throws Exception {
 
+		FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
+
+		boolean tempFile = fileEntry.isRepositoryCapabilityProvided(
+			TemporaryFileEntriesCapability.class);
+
+		if (tempFile) {
+			String uniqueFileName = PortletFileRepositoryUtil.getUniqueFileName(
+				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				fileEntry.getFileName());
+
+			FileEntry newFileEntry =
+				PortletFileRepositoryUtil.addPortletFileEntry(
+					groupId, PrincipalThreadLocal.getUserId(),
+					CommerceCatalogDefaultImageImpl.class.getName(), 0,
+					CPConstants.SERVICE_NAME,
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+					fileEntry.getContentStream(), uniqueFileName,
+					fileEntry.getMimeType(), true);
+
+			fileEntryId = newFileEntry.getFileEntryId();
+
+			TempFileEntryUtil.deleteTempFileEntry(fileEntry.getFileEntryId());
+
+		}
+
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
 				groupId, CommerceMediaConstants.SERVICE_NAME));
@@ -60,6 +93,9 @@ public class CommerceCatalogDefaultImageImpl
 
 		modifiableSettings.store();
 	}
+
+	@Reference
+	private DLAppLocalService _dlAppLocalService;
 
 	@Reference
 	private SettingsFactory _settingsFactory;
