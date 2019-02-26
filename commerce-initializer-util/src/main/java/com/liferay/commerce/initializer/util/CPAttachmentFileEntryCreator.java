@@ -19,7 +19,6 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.ClassedModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -30,6 +29,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -86,11 +86,10 @@ public class CPAttachmentFileEntryCreator {
 		catch (NoSuchFileEntryException nsfee) {
 			file = FileUtil.createTempFile(inputStream);
 
-			fileEntry = _dlAppService.addFileEntry(
-				serviceContext.getScopeGroupId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, fileName,
-				_mimeTypes.getContentType(file), fileName, StringPool.BLANK,
-				StringPool.BLANK, file, serviceContext);
+			fileEntry = TempFileEntryUtil.addTempFileEntry(
+				serviceContext.getScopeGroupId(), serviceContext.getUserId(),
+				_TEMP_FOLDER_NAME, fileName, file,
+				_mimeTypes.getContentType(file));
 		}
 		finally {
 			if (file != null) {
@@ -137,6 +136,9 @@ public class CPAttachmentFileEntryCreator {
 			expirationDateHour, expirationDateMinute, true, titleMap, null,
 			priority, type, serviceContext);
 	}
+
+	private static final String _TEMP_FOLDER_NAME =
+		CPAttachmentFileEntryCreator.class.getName();
 
 	@Reference
 	private CPAttachmentFileEntryLocalService
