@@ -6,38 +6,41 @@ import template from './SearchResults.soy';
 class SearchResults extends Component {
 
 	created() {
-		this.search = debounce(this.search.bind(this), 500);
+		this._search = debounce(this._search.bind(this), 500);
+		this._handleKeyDown = this._handleKeyDown.bind(this);
+		window.Liferay.on('search-term-update', this._updateQuery, this);
+		window.Liferay.on('search-term-submit', this._goToSelected, this);
+	}
 
-		this.handleKeyDown = this.handleKeyDown.bind(this);
-
-		window.Liferay.on('search-term-update', this.updateQuery, this);
-
-		window.Liferay.on('search-term-submit', this.goToSelected, this);
+	willUpdate({visible}) {
+		if (visible) {
+			if (visible.newVal) {
+				document.addEventListener('keydown', this._handleKeyDown);
+			}
+			else {
+				document.removeEventListener('keydown', this._handleKeyDown);
+			}
+		}
 	}
 
 	detached() {
-		window.Liferay.detach('search-term-update', this.updateQuery, this);
-
-		window.Liferay.detach('search-term-submit', this.goToSelected, this);
-
-		document.removeEventListener('keydown', this.handleKeyDown);
+		window.Liferay.detach('search-term-update', this._updateQuery, this);
+		window.Liferay.detach('search-term-submit', this._goToSelected, this);
+		document.removeEventListener('keydown', this._handleKeyDown);
 	}
 
-	getFirstSuggestion() {
+	_getFirstSuggestion() {
 		const selectables = this.results.filter(i => i.type !== 'label');
-
 		return selectables.length ? selectables[0].pos : -1;
 	}
 
-	getLastSuggestion() {
+	_getLastSuggestion() {
 		const selectables = this.results.filter(i => i.type !== 'label').reverse();
-
 		return selectables.length ? selectables[0].pos : -1;
 	}
 
-	goToSelected() {
+	_goToSelected() {
 		const selected = this.results.filter(i => i.selected);
-
 		if (selected.length && selected[0].url) {
 			if (Liferay.SPA) {
 				Liferay.SPA.app.navigate(selected[0].url);
@@ -48,24 +51,24 @@ class SearchResults extends Component {
 		}
 	}
 
-	handleKeyDown(e) {
+	_handleKeyDown(e) {
 		if (e.key === 'ArrowDown') {
-			this.selectNext();
+			this._selectNext();
 		}
 		else if (e.key === 'ArrowUp') {
-			this.selectPrevious();
+			this._selectPrevious();
 		}
 	}
 
-	handleMouseEnter(e) {
+	_handleMouseEnter(e) {
 		this.selectedIndex = parseInt(e.delegateTarget.dataset.pos, 10);
 	}
 
-	handleMouseLeave(e) {
-		this.selectedIndex = this.getFirstSuggestion();
+	_handleMouseLeave(e) {
+		this.selectedIndex = this._getFirstSuggestion();
 	}
 
-	search() {
+	_search() {
 		if (this.lock) {
 			return;
 		}
@@ -86,30 +89,30 @@ class SearchResults extends Component {
 					this.queryValue = this.queryString;
 					this.results = results;
 					this.selectedIndex = -1;
-					this.selectNext();
+					this._selectNext();
 				}
 			);
 	}
 
-	selectNext() {
+	_selectNext() {
 		const nexts = this.results.filter(
 			i => i.pos > this.selectedIndex && i.type !== 'label'
 		);
 
 		this.selectedIndex = nexts.length ?
 			nexts[0].pos :
-			this.getFirstSuggestion();
+			this._getFirstSuggestion();
 	}
 
-	selectPrevious() {
+	_selectPrevious() {
 		const prevs = this.results
 			.filter(i => i.pos < this.selectedIndex && i.type !== 'label')
 			.reverse();
 
-		this.selectedIndex = prevs.length ? prevs[0].pos : this.getLastSuggestion();
+		this.selectedIndex = prevs.length ? prevs[0].pos : this._getLastSuggestion();
 	}
 
-	setSelected(sel) {
+	_setSelected(sel) {
 		sel = ((sel + 1 + this.results.length + 1) % (this.results.length + 1)) - 1;
 
 		this.results = this.results.map(
@@ -126,27 +129,16 @@ class SearchResults extends Component {
 		return sel;
 	}
 
-	updateQuery(event) {
+	_updateQuery(event) {
 		this.loading = true;
 		this.queryString = event.term;
 		this.visible = event.term !== '';
 
-		this.search();
-	}
-
-	willUpdate({visible}) {
-		if (visible) {
-			if (visible.newVal) {
-				document.addEventListener('keydown', this.handleKeyDown);
-			}
-			else {
-				document.removeEventListener('keydown', this.handleKeyDown);
-			}
-		}
+		this._search();
 	}
 
 	_handleClick() {
-		this.goToSelected();
+		this._goToSelected();
 	}
 
 }
@@ -168,7 +160,7 @@ SearchResults.STATE = {
 	},
 	searchAPI: Config.string().required(),
 	selectedIndex: {
-		setter: 'setSelected',
+		setter: '_setSelected',
 		value: -1
 	},
 	spritemap: Config.string().required(),

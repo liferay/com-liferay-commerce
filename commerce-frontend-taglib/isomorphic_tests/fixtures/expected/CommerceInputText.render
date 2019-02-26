@@ -1,0 +1,1 @@
+<divclass="commerce-input-text"> <label for="add-new-address-address" class="commerce-modal__label" > Address </label><input type="text"id="add-new-address-address"name="address"class="commerce-modal__input commerce-modal__input--with-margin"value="Dumb value"data-onkeyup="{$_handleInputKeyUp}"pattern="dumbRegex"required /></div>

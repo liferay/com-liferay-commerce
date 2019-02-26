@@ -22,6 +22,20 @@ class AddAddressModal extends Component {
 		return this._validateForms();
 	}
 
+	toggle() {
+		return this._modalVisible ? this.close() : this.open();
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+
 	_handleFirstDotClick(e) {
 		e.preventDefault();
 		this._stage = 1;
@@ -87,6 +101,15 @@ class AddAddressModal extends Component {
 		return evt.target.value;
 	}
 
+	_handleFormSubmit(e) {
+		e.preventDefault();
+		const formValid = e.target.checkValidity();
+		if (formValid) {
+			this._addAddress(e);
+		}
+		return e;
+	}
+
 	_validateForms() {
 		const firstFormValid = !!(
 			this._formData.address && this._formData.address.length &&
@@ -116,15 +139,15 @@ class AddAddressModal extends Component {
 				method: 'GET'
 			}
 		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				countries => {
-					this._countries = countries;
-					return this._countries;
-				}
-			);
+		.then(
+			response => response.json()
+		)
+		.then(
+			countries => {
+				this._countries = countries;
+				return this._countries;
+			}
+		);
 	}
 
 	_fetchRegions() {
@@ -134,24 +157,15 @@ class AddAddressModal extends Component {
 				method: 'GET'
 			}
 		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				regions => {
-					this._regions = regions;
-					return this._regions;
-				}
-			);
-	}
-
-	_handleFormSubmit(e) {
-		e.preventDefault();
-		const formValid = e.target.checkValidity();
-		if (formValid) {
-			this._addAddress(e);
-		}
-		return e;
+		.then(
+			response => response.json()
+		)
+		.then(
+			regions => {
+				this._regions = regions;
+				return this._regions;
+			}
+		);
 	}
 
 	_addAddress(e) {
@@ -165,21 +179,6 @@ class AddAddressModal extends Component {
 				}
 			)
 		);
-	}
-
-	toggle() {
-		this._modalVisible = !this._modalVisible;
-		return this._modalVisible;
-	}
-
-	open() {
-		this._modalVisible = true;
-		return this._modalVisible;
-	}
-
-	close() {
-		this._modalVisible = false;
-		return this._modalVisible;
 	}
 }
 

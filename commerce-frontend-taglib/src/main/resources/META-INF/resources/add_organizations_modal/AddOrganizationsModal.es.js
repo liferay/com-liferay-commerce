@@ -27,14 +27,29 @@ class AddOrganizationModal extends Component {
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._modalVisible = false;
-	}
-
 	syncQuery() {
 		this._loading = true;
 		return this._debouncedFetchOrganizations();
+	}
+
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
 	}
 
 	_handleFormSubmit(e) {
@@ -87,13 +102,13 @@ class AddOrganizationModal extends Component {
 			.then(
 				response => {
 					this._loading = false;
-					this.organizations = this.addColorToOrganizations(response.organizations);
+					this.organizations = this._addColorToOrganizations(response.organizations);
 					return this.organizations;
 				}
 			);
 	}
 
-	addColorToOrganizations(organizations) {
+	_addColorToOrganizations(organizations) {
 		return organizations.map(
 			organization => Object.assign(
 				{
@@ -113,21 +128,6 @@ class AddOrganizationModal extends Component {
 			'addOrganization',
 			this.selectedOrganizations
 		);
-	}
-
-	toggle() {
-		this._modalVisible = !this._modalVisible;
-		return this._modalVisible;
-	}
-
-	open() {
-		this._modalVisible = true;
-		return this._modalVisible;
-	}
-
-	close() {
-		this._modalVisible = false;
-		return this._modalVisible;
 	}
 }
 

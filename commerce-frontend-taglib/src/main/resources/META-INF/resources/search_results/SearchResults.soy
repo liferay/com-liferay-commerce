@@ -1,5 +1,8 @@
 {namespace SearchResults}
 
+/**
+ * This renders a soy component
+ */
 {template .render}
 	{@param? queryValue: string }
 	{@param? results: ? }
@@ -53,13 +56,13 @@
 {deltemplate MiniumSearchResults.Item}
 	{@param? queryValue: string }
 	{@param item: ? }
-	{@param? _handleClick: ? }
+	{@param? _handleClick: any }
 
 	<div
 		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
 		onclick="{$_handleClick}"
-		data-onmouseenter="handleMouseEnter"
-		data-onmouseleave="handleMouseLeave"
+		data-onmouseenter="_handleMouseEnter"
+		data-onmouseleave="_handleMouseLeave"
 		data-pos="{$item.pos}"
 	>
 		<div class="minium-item minium-item--search">
@@ -80,8 +83,8 @@
 	<div
 		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
 		onclick="{$_handleClick}"
-		data-onmouseenter="handleMouseEnter"
-		data-onmouseleave="handleMouseLeave"
+		data-onmouseenter="_handleMouseEnter"
+		data-onmouseleave="_handleMouseLeave"
 		data-pos="{$item.pos}"
 	>
 		Search "{$queryValue}" in {$item.title}
@@ -96,8 +99,8 @@
 	<div
 		class="minium-suggestions__label"
 		onclick="{$_handleClick}"
-		data-onmouseenter="handleMouseEnter"
-		data-onmouseleave="handleMouseLeave"
+		data-onmouseenter="_handleMouseEnter"
+		data-onmouseleave="_handleMouseLeave"
 		data-pos="{$item.pos}"
 	>
 		{$item.title}

@@ -5,9 +5,9 @@
  */
 {template .render}
 	{@param? text: string | number}
-	{@param? firstGroup: string }
-	{@param? secondGroup: string }
-	{@param? thirdGroup: string }
+	{@param? firstGroup: string | number}
+	{@param? secondGroup: string | number}
+	{@param? thirdGroup: string | number}
 
 	{if isNonnull($text)}
 		<span

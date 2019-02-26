@@ -15,35 +15,6 @@ class Cart extends Component {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
 	}
 
-	_handleClickOutside(e) {
-		const topBar = document.querySelector('.minium-frame__topbar');
-		if (
-			topBar.contains(e.target) && !this.element.contains(e.target)
-		) {
-			this._closeCart();
-		}
-	}
-
-	toggleCart() {
-		return this._open ? this._closeCart() : this._openCart();
-	}
-
-	_openCart() {
-		this._open = true;
-		this.element.addEventListener('transitionend', () => {
-			window.addEventListener('click', this._handleClickOutside);
-		});
-		return this._open;
-	}
-
-	_closeCart() {
-		this._open = false;
-		this.element.addEventListener('transitionend', () => {
-			window.removeEventListener('click', this._handleClickOutside);
-		});
-		return this._open;
-	}
-
 	attached() {
 		window.Liferay.on(
 			'updateCart',
@@ -53,50 +24,52 @@ class Cart extends Component {
 				this.summary = updateCartData.summary;
 				this._loading = false;
 				this.pendingOperations = [];
-				this.productsQuantity = updateCartData.products.length;
 				return true;
 			}
 		);
 		return this.cartId && this._getProducts();
 	}
 
+	open() {
+		this._open = true;
+		this.element.addEventListener('transitionend', () => {
+			window.addEventListener('click', this._handleClickOutside);
+		});
+		return this._open;
+	}
+
+	close() {
+		this._open = false;
+		this.element.addEventListener('transitionend', () => {
+			window.removeEventListener('click', this._handleClickOutside);
+		});
+		return this._open;
+	}
+
+	toggle() {
+		return this._open ? this.close() : this.open();
+	}
+
 	syncPendingOperations(pendingOperations) {
 		this._loading = !!pendingOperations.length;
 	}
 
-	normalizeProducts(rawProducts) {
-		const normalizedProducts = rawProducts.map(
-			productData => {
-				return Object.assign(
-					{
-						sendDeleteRequest: debounce(
-							() => this._sendDeleteRequest(productData.id),
-							500
-						),
-						sendUpdateRequest: debounce(
-							() => this._sendUpdateRequest(productData.id),
-							500
-						)
-					},
-					productStateSchema,
-					productData
-				);
-			}
+	syncProducts() {
+		this.productsQuantity = this.products.reduce(
+			(quantity, product) => {
+				return product.collapsed ? quantity : quantity + 1
+			},
+			0
 		);
-		return normalizedProducts;
 	}
 
-	_updateProductQuantity(productId, quantity) {
-		this._addPendingOperation(productId);
-		this._setProductProperties(
-			productId,
-			{
-				deleteDisabled: true,
-				quantity: quantity,
-				updating: true
-			}
-		);
-		return this._getProductProperty(productId, 'sendUpdateRequest')();
+	_handleClickOutside(e) {
+		const topBar = document.querySelector('.minium-frame__topbar');
+		if (
+			topBar.contains(e.target) && !this.element.contains(e.target)
+		) {
+			this.close();
+		}
 	}
 
 	_handleSubmitQuantity(productId, quantity) {
@@ -107,53 +80,6 @@ class Cart extends Component {
 			}
 		);
 		return this._updateProductQuantity(productId, quantity);
-	}
-
-	_deleteProduct(productId) {
-		this._setProductProperties(
-			productId,
-			{
-				collapsed: true,
-				deleteDisabled: true,
-				inputChanged: false,
-				updating: false
-			}
-		);
-		this.productsQuantity = this.productsQuantity - 1;
-		return this.productsQuantity;
-	}
-
-	_setProductProperties(productId, newProperties) {
-		this.products = this.products.map(
-			product => {
-				return product.id === productId ? Object.assign(
-					{},
-					product,
-					newProperties
-				) :
-					product;
-			}
-		);
-		return this.products;
-	}
-
-	_getProductProperty(productId, key) {
-		return this.products.reduce(
-			(property, product) => {
-				return product.id === productId ? product[key] : property;
-			},
-			null
-		);
-	}
-
-	_subtractProducts(orArray, subArray) {
-		const result = subArray.reduce(
-			(arrayToBeFiltered, elToRemove) => {
-				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
-			},
-			orArray
-		);
-		return !subArray.length && result;
 	}
 
 	_handleDeleteItem(productId) {
@@ -200,6 +126,120 @@ class Cart extends Component {
 			}
 		);
 		return this._removePendingOperation();
+	}
+
+	_handleProductUpdate(productId, products) {
+		const updatedPrice = products.reduce(
+			(acc, el) => {
+				return el.id === productId ? el.price : acc;
+			},
+			null
+		);
+		this._removePendingOperation(productId);
+		return this._setProductProperties(
+			productId,
+			{
+				deleteDisabled: false,
+				errorMessages: null,
+				price: updatedPrice,
+				updating: false
+			}
+		);
+	}
+
+	_handleResponseErrors(productId, res) {
+		const errorMessages = !!res.errorMessages ? res.errorMessages : res.validatorErrors.map(item => item.message);
+		return this._setProductProperties(
+			productId,
+			{
+				deleteDisabled: false,
+				updating: false,
+				errorMessages
+			}
+		);
+	}
+
+	_normalizeProducts(rawProducts) {
+		const normalizedProducts = rawProducts.map(
+			productData => {
+				return productData.sendUpdateRequest 
+					? Object.assign(
+						{
+							sendDeleteRequest: debounce(
+								() => this._sendDeleteRequest(productData.id),
+								500
+							),
+							sendUpdateRequest: debounce(
+								() => this._sendUpdateRequest(productData.id),
+								500
+							)
+						},
+						productStateSchema,
+						productData
+					) 
+					: productData;
+			}
+		);
+		return normalizedProducts;
+	}
+
+	_updateProductQuantity(productId, quantity) {
+		this._addPendingOperation(productId);
+		this._setProductProperties(
+			productId,
+			{
+				deleteDisabled: true,
+				quantity: quantity,
+				updating: true
+			}
+		);
+		return this._getProductProperty(productId, 'sendUpdateRequest')();
+	}
+
+	_deleteProduct(productId) {
+		return this._setProductProperties(
+			productId,
+			{
+				collapsed: true,
+				deleteDisabled: true,
+				inputChanged: false,
+				updating: false
+			}
+		);
+	}
+
+	_setProductProperties(productId, newProperties) {
+		this.products = this.products.map(
+			product => {
+				return product.id === productId 
+					? Object.assign(
+						{},
+						product,
+						newProperties
+					)
+					: product;
+			}
+		);
+		return this.products;
+	}
+
+	_getProductProperty(productId, key) {
+		return this.products.reduce(
+			(property, product) => {
+				return product.id === productId ? product[key] : property;
+			},
+			null
+		);
+	}
+
+	_subtractProducts(orArray, subArray) {
+		const result = subArray.reduce(
+			(arrayToBeFiltered, elToRemove) => {
+				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
+			},
+			orArray
+		);
+		return !subArray.length && result;
 	}
 
 	_addPendingOperation(productId) {
@@ -306,20 +346,19 @@ class Cart extends Component {
 				method: 'GET'
 			}
 		)
-			.then(response => response.json())
-			.then(
-				updatedCart => {
-					this.products = updatedCart.products;
-					this.summary = updatedCart.summary;
-					this.productsQuantity = this.products.length;
-					return !!(this.products && this.summary);
-				}
-			)
-			.catch(
-				err => {
-					return err;
-				}
-			);
+		.then(response => response.json())
+		.then(
+			updatedCart => {
+				this.products = updatedCart.products;
+				this.summary = updatedCart.summary;
+				return !!(this.products && this.summary);
+			}
+		)
+		.catch(
+			err => {
+				return err;
+			}
+		);
 	}
 
 	_sendDeleteRequest(productId) {
@@ -404,7 +443,7 @@ Cart.STATE = {
 		[]
 	),
 	products: {
-		setter: 'normalizeProducts',
+		setter: '_normalizeProducts',
 		value: null
 	},
 	productsQuantity: Config.number(),

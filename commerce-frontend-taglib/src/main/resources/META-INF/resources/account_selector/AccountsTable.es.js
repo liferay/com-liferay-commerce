@@ -14,23 +14,21 @@ class AccountsTable extends Component {
 		this._handleFilterChange = debounce(this._handleFilterChange.bind(this), 500);
 	}
 
-	handleSelectAccount(accountData) {
-		this.emit('accountSelected', accountData);
-	}
-
 	_getAccounts() {
 		return this.emit('getAccounts', this.filterString);
 	}
 
 	_handleFilterChange(evt) {
 		this.filterString = evt.target.value;
-
 		return this._getAccounts();
+	}
+
+	_handleSelectAccount(accountData) {
+		this.emit('accountSelected', accountData);
 	}
 
 	_handleSubmitFilter(evt) {
 		evt.preventDefault();
-
 		return this._getAccounts();
 	}
 

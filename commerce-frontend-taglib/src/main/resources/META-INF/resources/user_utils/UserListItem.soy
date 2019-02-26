@@ -1,5 +1,8 @@
 {namespace UserListItem}
 
+/**
+ * This renders a soy component
+ */
 {template .render}
 	{@param email: string }
 	{@param? name: string }
@@ -7,7 +10,6 @@
 	{@param? thumbnail: string }
 	{@param? _invited: bool }
 	{@param? _status: string}
-
 	{@param? _handleToggleInvitation: ?}
 
 	<div class="user-item">

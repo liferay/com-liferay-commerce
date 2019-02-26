@@ -15,12 +15,6 @@ class AccountSelector extends Component {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
 	}
 
-	_handleClickOutside(e) {
-		if (!document.querySelector('#account-manager-curtain').contains(e.target)) {
-			this._closeModal();
-		}
-	}
-
 	toggleAccountSelector() {
 		if (this.openingState === 'closed') {
 			this._openModal();
@@ -31,6 +25,12 @@ class AccountSelector extends Component {
 		}
 
 		return this.openingState;
+	}
+
+	_handleClickOutside(e) {
+		if (!document.querySelector('#account-manager-curtain').contains(e.target)) {
+			this._closeModal();
+		}
 	}
 
 	_openModal() {
@@ -51,7 +51,7 @@ class AccountSelector extends Component {
 				this.openingState = 'open';
 				window.addEventListener('click', this._handleClickOutside);
 			},
-			200
+			50
 		);
 	}
 
@@ -63,7 +63,7 @@ class AccountSelector extends Component {
 				this.openingState = 'closed';
 				window.removeEventListener('click', this._handleClickOutside);
 			},
-			200
+			50
 		);
 	}
 
@@ -85,10 +85,9 @@ class AccountSelector extends Component {
 			}
 			this.orders = null;
 		}
+		
 		this.currentAccount = selectedAccount;
-
 		let formData = new FormData();
-
 		formData.append('accountId', this.currentAccount.accountId);
 
 		fetch(

@@ -63,7 +63,7 @@
 		<button
 			class="minium-topbar__button{$openCartButtonModifiers}"
 			data-badge-count={$formattedProductsQuantity}
-			data-onclick="toggleCart"
+			data-onclick="toggle"
 		>
 			{call ClayIcon.render}
 				{param spritemap: $spritemap /}
@@ -74,7 +74,7 @@
 		<div class="minium-cart{$cartModifiers}">
 			<button
 				class="minium-topbar__button minium-cart__close"
-				data-onclick="toggleCart"
+				data-onclick="toggle"
 			>
 				{call ClayIcon.render}
 					{param spritemap: $spritemap /}

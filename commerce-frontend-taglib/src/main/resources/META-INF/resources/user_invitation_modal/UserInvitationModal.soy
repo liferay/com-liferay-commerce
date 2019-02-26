@@ -1,5 +1,8 @@
 {namespace UserInvitationModal}
 
+/**
+ * This renders a soy component
+ */
 {template .render}
 
 	{@param? users: list<[
@@ -8,19 +11,68 @@
 		name: string,
 		email: string
 	]>}
-
 	{@param? addedUsers: list<[
 		userId: string | number,
 		thumbnail: string,
 		name: string,
 		email: string
 	]>}
-
 	{@param? query: string }
 	{@param spritemap: string }
 	{@param? accountName: string }
-
 	{@param? _modalVisible: bool }
+	{@param? _toggleInvitation: any }
+	{@param? _handleInputBox: any }
+	{@param? _handleFormSubmit: any }
+	{@param? _handleCloseModal: any }
+	{@param? _sendInvitations: any }
+
+	{let $body kind="html"}
+		{call .body}
+			{param users: $users /}
+			{param addedUsers: $addedUsers /}
+			{param query: $query /}
+			{param spritemap: $spritemap /}
+			{param accountName: $accountName /}
+			{param _modalVisible: $_modalVisible /}
+			{param _toggleInvitation: $_toggleInvitation /}
+			{param _handleInputBox: $_handleInputBox /}
+			{param _handleFormSubmit: $_handleFormSubmit /}
+			{param _handleCloseModal: $_handleCloseModal /}
+			{param _sendInvitations: $_sendInvitations /}
+		{/call}
+	{/let}
+
+	<div class="commerce-modal-wrapper">
+		{call ClayModal.render}
+			{param body: $body /}
+			{param visible: $_modalVisible /}
+			{param events: ['hide': $_handleCloseModal] /}
+			{param ref: 'modal' /}
+		{/call}
+	</div>
+
+{/template}
+
+/**
+ * This renders the modal body
+ */
+{template .body}
+	{@param? users: list<[
+		userId: string | number,
+		thumbnail: string,
+		name: string,
+		email: string
+	]>}
+	{@param? addedUsers: list<[
+		userId: string | number,
+		thumbnail: string,
+		name: string,
+		email: string
+	]>}
+	{@param? query: string }
+	{@param spritemap: string }
+	{@param? accountName: string }
 	{@param? _toggleInvitation: any }
 	{@param? _handleInputBox: any }
 	{@param? _handleFormSubmit: any }
@@ -40,7 +92,6 @@
 				<h3 class="commerce-modal__title">
 					Invite user to this account
 				</h3>
-
 				<button
 					class="commerce-modal__close"
 					data-onclick="{$_handleCloseModal}"
@@ -51,13 +102,10 @@
 					{/call}
 				</button>
 			</div>
-
 			<div class="commerce-modal__content">
-
 				<label class="commerce-modal__label">
 					Name or Email
 				</label>
-
 				<div class="user-invitation">
 					<div class="autocomplete-input user-invitation__input">
 						<div class="autocomplete-input__icon">
@@ -66,7 +114,6 @@
 								{param symbol: 'search' /}
 							{/call}
 						</div>
-
 						<div class="autocomplete-input__wrapper">
 							<div class="autocomplete-input__content">
 								{if isNonnull($addedUsers)}
@@ -92,7 +139,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="user-invitation__list">
 						{if isNonnull($users) and length($users) > 0 }
 							{foreach $user in $users}
@@ -117,7 +163,6 @@
 					</div>
 				</div>
 			</div>
-
 			{let $inviteButtonClasses kind="text"}
 				minium-button minium-button--big
 				{if isNonnull($addedUsers) and length($addedUsers) == 0 and isNonnull($accountName) and $accountName == ''}
@@ -134,14 +179,4 @@
 			</div>
 		</div>
 	{/let}
-
-	<div class="commerce-modal-wrapper">
-		{call ClayModal.render}
-			{param body: $body /}
-			{param visible: $_modalVisible /}
-			{param events: ['hide': $_handleCloseModal] /}
-			{param ref: 'modal' /}
-		{/call}
-	</div>
-
 {/template}

@@ -1,5 +1,8 @@
 {namespace CommerceInputText}
 
+/**
+ * This renders an input.
+ */
 {template .render}
 	{@param contextName: string }
 	{@param name: string }
@@ -13,7 +16,6 @@
 	<div
 		class="commerce-input-text"
 	>
-
 		{if isNonnull($label)}
 			<label
 				for="{$contextName}-{$name}"
@@ -57,7 +59,5 @@
 		{/let}
 
 		<input {$inputAttributes} />
-
 	</div>
-
 {/template}

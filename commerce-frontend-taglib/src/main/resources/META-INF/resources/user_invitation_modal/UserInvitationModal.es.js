@@ -29,14 +29,48 @@ class UserInvitationModal extends Component {
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._modalVisible = false;
-	}
-
 	syncQuery() {
 		this._loading = true;
 		return this._debouncedFetchUser();
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	_fetchUsers() {
+		return fetch(
+			this.usersAPI + '?q=' + this.query,
+			{
+				method: 'GET'
+			}
+		)
+		.then(
+			response => response.json()
+		)
+		.then(
+			response => {
+				this._loading = false;
+				this.users = response.users;
+				return this.users;
+			}
+		);
+	}
+
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
 	}
 
 	_handleFormSubmit(evt) {
@@ -85,25 +119,6 @@ class UserInvitationModal extends Component {
 		return this.addedUsers;
 	}
 
-	_fetchUsers() {
-		return fetch(
-			this.usersAPI + '?q=' + this.query,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					this._loading = false;
-					this.users = response.users;
-					return this.users;
-				}
-			);
-	}
-
 	_sendInvitations() {
 		if (this.addedUsers.length) {
 			this.emit(
@@ -112,21 +127,6 @@ class UserInvitationModal extends Component {
 			);
 		}
 		return this.addedUsers;
-	}
-
-	toggle() {
-		this._modalVisible = !this._modalVisible;
-		return this._modalVisible;
-	}
-
-	open() {
-		this._modalVisible = true;
-		return this._modalVisible;
-	}
-
-	close() {
-		this._modalVisible = false;
-		return this._modalVisible;
 	}
 }
 

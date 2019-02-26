@@ -1,0 +1,9 @@
+{
+    "contextName": "add-new-address",
+    "name": "address",
+    "label": "Address",
+    "value": "Dumb value",
+    "type": "text",
+    "pattern": "dumbRegex",
+    "required": true
+}

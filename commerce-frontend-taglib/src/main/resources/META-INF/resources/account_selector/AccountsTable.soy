@@ -13,7 +13,7 @@
 	{@param? isVisible: bool}
 	{@param? viewAllAccountsLink: string}
 	{@param? createNewAccountLink: string}
-	{@param? handleSelectAccount: ?}
+	{@param? _handleSelectAccount: ?}
 
 	{let $accountSwitcherClasses kind="text"}
 		account-manager-switcher account-manager-switcher--accounts
@@ -44,7 +44,7 @@
 					{foreach $account in $accounts}
 						{call AccountsTableItem.render}
 							{param events: [
-								'selectAccount' : $handleSelectAccount
+								'selectAccount' : $_handleSelectAccount
 							] /}
 							{param accountId: $account.accountId /}
 							{param thumbnail: $account.thumbnail /}

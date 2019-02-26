@@ -11,12 +11,12 @@ class QuantitySelector extends Component {
 		}
 	}
 
-	syncQuantity() {
-		this.checkButtonsAvailability(this.quantity);
+	prepareStateForRender(state) {
+		this._checkButtonsAvailability(state.quantity);
 	}
 
-	prepareStateForRender(state) {
-		this.checkButtonsAvailability(state.quantity);
+	syncQuantity() {
+		this._checkButtonsAvailability(this.quantity);
 	}
 
 	_handleSelectOption(e) {
@@ -24,7 +24,7 @@ class QuantitySelector extends Component {
 		return this.emit('updateQuantity', quantity);
 	}
 
-	checkButtonsAvailability(quantity) {
+	_checkButtonsAvailability(quantity) {
 		this._prevAvailable = this._isPrevButtonAvailable(quantity);
 		this._nextAvailable = this._isNextButtonAvailable(quantity);
 	}

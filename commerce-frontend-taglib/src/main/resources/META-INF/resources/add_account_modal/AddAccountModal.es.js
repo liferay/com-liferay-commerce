@@ -29,15 +29,65 @@ class AddAccountModal extends Component {
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	syncQuery() {
+		this._loading = true;
+		return this._debouncedFetchUser();
+	}
+
+	_fetchUsers() {
+		return fetch(
+			this.usersAPI + '?q=' + this.query,
+			{
+				method: 'GET'
+			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this._loading = false;
+					this.users = response.users;
+					return this.users;
+				}
+			);
+	}
+
 	_handleCloseModal(e) {
 		e.preventDefault();
 		this._modalVisible = false;
 		return e;
 	}
 
-	syncQuery() {
-		this._loading = true;
-		return this._debouncedFetchUser();
+	_handleCreateAccount() {
+		if (!this.addedUsers.length || !this.accountName) {
+			return false;
+		}
+
+		const data = {
+			accountName: this.accountName,
+			administratorsEmail: this.addedUsers
+		};
+
+		return this.emit(
+			'AddAccountModalSave',
+			data
+		);
 	}
 
 	_handleFormSubmit(evt) {
@@ -86,56 +136,6 @@ class AddAccountModal extends Component {
 			[...this.addedUsers, userToBeToggled];
 
 		return this.addedUsers;
-	}
-
-	_fetchUsers() {
-		return fetch(
-			this.usersAPI + '?q=' + this.query,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					this._loading = false;
-					this.users = response.users;
-					return this.users;
-				}
-			);
-	}
-
-	_handleCreateAccount() {
-		if (!this.addedUsers.length || !this.accountName) {
-			return false;
-		}
-
-		const data = {
-			accountName: this.accountName,
-			administratorsEmail: this.addedUsers
-		};
-
-		return this.emit(
-			'AddAccountModalSave',
-			data
-		);
-	}
-
-	toggle() {
-		this._modalVisible = !this._modalVisible;
-		return this._modalVisible;
-	}
-
-	open() {
-		this._modalVisible = true;
-		return this._modalVisible;
-	}
-
-	close() {
-		this._modalVisible = false;
-		return this._modalVisible;
 	}
 }
 

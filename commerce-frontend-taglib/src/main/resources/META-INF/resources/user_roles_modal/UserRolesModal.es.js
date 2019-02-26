@@ -11,19 +11,39 @@ import './RoleListItem.es';
 
 class UserRolesModal extends Component {
 
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	syncQuery() {
+		return this._filterRoles();
+	}
+
 	syncSelectedRoles() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
+	_filterRoles() {
+		this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+		return this.filteredRoles;
+	}
+
 	_handleCloseModal(e) {
 		e.preventDefault();
 		this._modalVisible = false;
-	}
-
-	syncQuery() {
-		return this._filterRoles();
 	}
 
 	_handleFormSubmit(evt) {
@@ -66,11 +86,6 @@ class UserRolesModal extends Component {
 		return this.selectedRoles;
 	}
 
-	_filterRoles() {
-		this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
-		return this.filteredRoles;
-	}
-
 	_updateRoles() {
 		if (this.selectedRoles.length) {
 			this.emit(
@@ -79,21 +94,6 @@ class UserRolesModal extends Component {
 			);
 		}
 		return this.selectedRoles;
-	}
-
-	toggle() {
-		this._modalVisible = !this._modalVisible;
-		return this._modalVisible;
-	}
-
-	open() {
-		this._modalVisible = true;
-		return this._modalVisible;
-	}
-
-	close() {
-		this._modalVisible = false;
-		return this._modalVisible;
 	}
 }
 

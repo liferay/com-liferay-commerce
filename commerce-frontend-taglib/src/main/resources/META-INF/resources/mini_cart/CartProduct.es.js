@@ -9,18 +9,17 @@ import '../price/Price.es';
 import '../quantity_selector/QuantitySelector.es';
 
 class CartProduct extends Component {
-	_handleUpdateQuantity(quantity) {
-		return this.emit('submitQuantity', this.id, quantity);
+	_handleCancelDeletion() {
+		return this.emit('cancelItemDeletion', this.id);
 	}
 
 	_handleDeleteItem() {
 		return this.emit('deleteItem', this.id);
 	}
 
-	_handleCancelDeletion() {
-		return this.emit('cancelItemDeletion', this.id);
+	_handleUpdateQuantity(quantity) {
+		return this.emit('submitQuantity', this.id, quantity);
 	}
-
 }
 
 Soy.register(CartProduct, template);
