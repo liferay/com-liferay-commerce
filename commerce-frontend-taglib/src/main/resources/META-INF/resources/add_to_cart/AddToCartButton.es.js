@@ -19,6 +19,10 @@ const selectInput = (element) => {
 
 class AddToCartButton extends Component {
 
+	created() {
+		this.initialQuantity = this.quantity;
+	}
+
 	willReceiveState(changes) {
 		if (changes.editMode) {
 			setTimeout(() => selectInput(this.element), 100);
@@ -26,14 +30,21 @@ class AddToCartButton extends Component {
 	}
 
 	_updateQuantity(quantity) {
-		// console.log('update', quantity);
 		this.quantity = quantity;
 	}
 	
 	_submitQuantity(quantity) {
-		// console.log('submit', quantity);
-		this.quantity = quantity;
+		this._updateQuantity(quantity);
 		this._handleSubmitClick();
+	}
+
+	_enableEditMode() {
+		this.editMode = true;
+	}
+
+	_disableEditMode() {
+		this.editMode = false;
+		this.quantity = this.initialQuantity;
 	}
 
 	_handleBtnClick(e) {
@@ -43,30 +54,22 @@ class AddToCartButton extends Component {
 			!this.disabled &&
 			!!this.accountId
 		) {
-			this.tmpQuantity = this.quantity;
-			this.editMode = true;
+			this._enableEditMode();
 		}
 	}
 
-	_handleBtnBlur(e) {
-		// console.log('blur', e);
-		// this.editMode = false;
-	}
-	
 	_handleBtnFocus(e) {
-		// console.log('_handleBtnFocus', e);
 		this._handleBtnClick(e);
 	}
 
-	_handleBtnFocusin(e) {
-		// console.log('_handleBtnFocusin', e);
+	_handleBtnFocusin() {
+		clearTimeout(this.closingTimeout);
 	}
 
 	_handleBtnFocusout(e) {
-		// console.log('_handleBtnFocusout', e);
-		// if (e.target.nodeName === "INPUT") {
-		// 	this.editMode = false;
-		// }
+		this.closingTimeout = setTimeout(() => {
+			this._disableEditMode();
+		}, 100);  // Timeout needed to avoid flickering when the focus change
 	}
 
 	_handleSubmitClick() {
@@ -77,7 +80,7 @@ class AddToCartButton extends Component {
 		formData.append('productId', this.productId);
 		formData.append('quantity', this.quantity);
 		formData.append('options', this.options);
-		// console.log(this.tmpQuantity);
+
 		if (this.orderId) {
 			formData.append('orderId', this.orderId);
 		}
@@ -96,7 +99,7 @@ class AddToCartButton extends Component {
 						Liferay.fire('updateCart', jsonresponse);
 
 						this.editMode = false;
-						// this.quantity = this.tmpQuantity;
+						this.initialQuantity = this.quantity;
 						this.emit('submitQuantity', this.productId, this.quantity);
 					}
 					else if (jsonresponse.errorMessages) {
@@ -177,8 +180,7 @@ AddToCartButton.STATE = {
 			minQuantity: Config.number(),
 			multipleQuantity: Config.number()
 		}
-	).value({}),
-	tmpQuantity: Config.number().value(0)
+	).value({})
 };
 
 export {AddToCartButton};
