@@ -100,6 +100,7 @@ class AddToCartButton extends Component {
 
 						this.editMode = false;
 						this.initialQuantity = this.quantity;
+						this.element.parentElement.closest('[tabindex="0"]').focus();
 						this.emit('submitQuantity', this.productId, this.quantity);
 					}
 					else if (jsonresponse.errorMessages) {
