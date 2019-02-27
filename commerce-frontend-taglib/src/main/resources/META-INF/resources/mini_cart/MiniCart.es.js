@@ -41,8 +41,8 @@ class Cart extends Component {
 		this.element.addEventListener(
 			'transitionend',
 			() => {
-			window.removeEventListener('click', this._handleClickOutside);
-		}
+				window.removeEventListener('click', this._handleClickOutside);
+			}
 		);
 		return this._open;
 	}
@@ -278,7 +278,7 @@ class Cart extends Component {
 	}
 
 	_handleResponseErrors(productId, res) {
-		const errorMessages = !!res.errorMessages ? res.errorMessages : res.validatorErrors.map(item => item.message);
+		const errorMessages = res.errorMessages ? res.errorMessages : res.validatorErrors.map(item => item.message);
 		return this._setProductProperties(
 			productId,
 			{
@@ -296,25 +296,25 @@ class Cart extends Component {
 				method: 'GET'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			updatedCart => {
-				this.products = updatedCart.products;
-				this.summary = updatedCart.summary;
-				return !!(this.products && this.summary);
-			}
-		)
-		.catch(
-			err => {
-				return err;
-			}
-		);
+			.then(response => response.json())
+			.then(
+				updatedCart => {
+					this.products = updatedCart.products;
+					this.summary = updatedCart.summary;
+					return !!(this.products && this.summary);
+				}
+			)
+			.catch(
+				err => {
+					return err;
+				}
+			);
 	}
 
 	syncProducts() {
 		this.productsQuantity = this.products.reduce(
 			(quantity, product) => {
-				return product.collapsed ? quantity : quantity + 1
+				return product.collapsed ? quantity : quantity + 1;
 			},
 			0
 		);
@@ -329,37 +329,37 @@ class Cart extends Component {
 				method: 'DELETE'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			(jsonresponse) => {
-				if (jsonresponse.success) {
-					this._removePendingOperation(productId);
-					this._setProductProperties(
-						productId,
-						{
-							deleteDisabled: false
-						}
-					);
+			.then(response => response.json())
+			.then(
+				(jsonresponse) => {
+					if (jsonresponse.success) {
+						this._removePendingOperation(productId);
+						this._setProductProperties(
+							productId,
+							{
+								deleteDisabled: false
+							}
+						);
 
-					this.summary = jsonresponse.summary;
+						this.summary = jsonresponse.summary;
 
-					const productsToBeRemoved = this._subtractProducts(this.products, jsonresponse.products);
-					productsToBeRemoved.forEach(
-						product => {
-							this._deleteProduct(product.id);
-						}
-					);
+						const productsToBeRemoved = this._subtractProducts(this.products, jsonresponse.products);
+						productsToBeRemoved.forEach(
+							product => {
+								this._deleteProduct(product.id);
+							}
+						);
+					}
+
+					this._handleResponseErrors(productId, jsonresponse);
+					return this._removePendingOperation(productId);
 				}
-
-				this._handleResponseErrors(productId, jsonresponse);
-				return this._removePendingOperation(productId);
-			}
-		)
-		.catch(
-			err => {
-				this._removePendingOperation(productId);
-			}
-		);
+			)
+			.catch(
+				err => {
+					this._removePendingOperation(productId);
+				}
+			);
 	}
 }
 

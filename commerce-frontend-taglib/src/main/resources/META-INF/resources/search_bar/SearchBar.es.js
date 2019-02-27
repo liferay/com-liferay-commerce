@@ -21,7 +21,7 @@ class SearchBar extends Component {
 		return Array.from(document.querySelectorAll('.js-toggle-search'))
 			.map(
 				el => {
-					return el.addEventListener('click', this.toggle)
+					return el.addEventListener('click', this.toggle);
 				}
 			);
 	}
@@ -30,7 +30,7 @@ class SearchBar extends Component {
 		return Array.from(document.querySelectorAll('.js-toggle-search'))
 			.map(
 				el => {
-					return el.removeEventListener('click', this.toggle)
+					return el.removeEventListener('click', this.toggle);
 				}
 			);
 	}
@@ -97,15 +97,16 @@ class SearchBar extends Component {
 	open() {
 		this.active = true;
 	}
-	
+
 	syncActive() {
-		if(this.active) {
+		if (this.active) {
 			window.addEventListener('click', this._handleClickOutside);
 			setTimeout(() => {
 				this._removeOpenButtonListener();
 				this.refs.searchInput.focus();
 			}, 0);
-		} else {
+		}
+ else {
 			window.removeEventListener('click', this._handleClickOutside);
 			setTimeout(() => {
 				this._addOpenButtonListener();
