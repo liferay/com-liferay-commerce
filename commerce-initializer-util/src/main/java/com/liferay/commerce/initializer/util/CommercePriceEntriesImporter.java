@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.math.BigDecimal;
 
@@ -77,13 +78,17 @@ public class CommercePriceEntriesImporter {
 
 		String sku = jsonObject.getString("Sku");
 
+		String externalReferenceCode = StringBundler.concat(
+			String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
+
 		CPInstance cpInstance =
 			_cpInstanceLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), sku);
+				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpInstance == null) {
 			throw new NoSuchCPInstanceException(
-				"No cpInstance found with sku " + sku);
+				"No cpInstance found with externalReferenceCode " +
+					externalReferenceCode);
 		}
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
