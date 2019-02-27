@@ -14,7 +14,13 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.model.AssetCategoryConstants;
+import com.liferay.asset.kernel.model.AssetVocabulary;
+import com.liferay.asset.kernel.service.AssetCategoryLocalService;
+import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.product.model.CPRule;
+import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
@@ -25,6 +31,8 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,10 +81,28 @@ public class CPRulesImporter {
 		boolean active = jsonObject.getBoolean("active", true);
 		String type = jsonObject.getString("type");
 
-		CPRule cpRule = _cpRuleLocalService.addCPRule(
-			name, active, type, serviceContext);
+		JSONArray typeSettingsJSONArray = jsonObject.getJSONArray(
+			"typeSettings");
 
-		// Commerce product rule user segment rels
+		UnicodeProperties typeSettings = null;
+
+		if (typeSettingsJSONArray != null) {
+			typeSettings = new UnicodeProperties(true);
+
+			for (int i = 0; i < typeSettingsJSONArray.length(); i++) {
+				JSONObject typeSettingJSONObject =
+					typeSettingsJSONArray.getJSONObject(i);
+
+				typeSettings.setProperty(
+					typeSettingJSONObject.getString("name"),
+					typeSettingJSONObject.getString("value"));
+			}
+		}
+
+		CPRule cpRule = _cpRuleLocalService.addCPRule(
+			name, active, type, typeSettings, serviceContext);
+
+		// Commerce Product Rule User Segment Rels
 
 		JSONArray userSegmentsJSONArray = jsonObject.getJSONArray(
 			"userSegments");
@@ -88,7 +114,9 @@ public class CPRulesImporter {
 				CommerceUserSegmentEntry commerceUserSegmentEntry =
 					_commerceUserSegmentEntryLocalService.
 						fetchCommerceUserSegmentEntry(
-							serviceContext.getScopeGroupId(), userSegmentName);
+							serviceContext.getScopeGroupId(),
+							FriendlyURLNormalizerUtil.normalize(
+								userSegmentName));
 
 				if (commerceUserSegmentEntry == null) {
 					continue;
@@ -101,12 +129,47 @@ public class CPRulesImporter {
 			}
 		}
 
+		// Commerce Product Rule Asset Category Rels
+
+		JSONArray assetCategoryJSONArray = jsonObject.getJSONArray(
+			"assetCategories");
+
+		if (assetCategoryJSONArray != null) {
+			for (int i = 0; i < assetCategoryJSONArray.length(); i++) {
+				String assetCategoryName = assetCategoryJSONArray.getString(i);
+
+				AssetVocabulary assetVocabulary =
+					_assetVocabularyLocalService.fetchGroupVocabulary(
+						serviceContext.getScopeGroupId(), "commerce");
+
+				AssetCategory assetCategory =
+					_assetCategoryLocalService.fetchCategory(
+						serviceContext.getScopeGroupId(),
+						AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
+						assetCategoryName, assetVocabulary.getVocabularyId());
+
+				_cpRuleAssetCategoryRelLocalService.addCPRuleAssetCategoryRel(
+					cpRule.getCPRuleId(), assetCategory.getCategoryId(),
+					serviceContext);
+			}
+		}
+
 		return cpRule;
 	}
 
 	@Reference
+	private AssetCategoryLocalService _assetCategoryLocalService;
+
+	@Reference
+	private AssetVocabularyLocalService _assetVocabularyLocalService;
+
+	@Reference
 	private CommerceUserSegmentEntryLocalService
 		_commerceUserSegmentEntryLocalService;
+
+	@Reference
+	private CPRuleAssetCategoryRelLocalService
+		_cpRuleAssetCategoryRelLocalService;
 
 	@Reference
 	private CPRuleLocalService _cpRuleLocalService;
