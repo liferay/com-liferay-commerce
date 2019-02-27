@@ -98,7 +98,7 @@ public class CommerceUsersImporter {
 		if (user == null) {
 			user = _userLocalService.addUser(
 				serviceContext.getUserId(), serviceContext.getCompanyId(),
-				Validator.isNotNull(password), password, password, false,
+				Validator.isNull(password), password, password, false,
 				screenName, emailAddress, facebookId, openId, locale, firstName,
 				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 				birthdayDay, birthdayYear, jobTitle,
