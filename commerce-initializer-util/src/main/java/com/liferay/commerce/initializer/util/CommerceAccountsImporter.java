@@ -47,6 +47,8 @@ import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.FileNotFoundException;
@@ -231,11 +233,16 @@ public class CommerceAccountsImporter {
 		if (priceListsJSONArray != null) {
 			for (int i = 0; i < priceListsJSONArray.length(); i++) {
 				try {
+					String externalReferenceCode = StringBundler.concat(
+						String.valueOf(serviceContext.getScopeGroupId()), "_",
+						FriendlyURLNormalizerUtil.normalize(
+							priceListsJSONArray.getString(i)));
+
 					CommercePriceList commercePriceList =
 						_commercePriceListLocalService.
 							fetchByExternalReferenceCode(
 								serviceContext.getCompanyId(),
-								priceListsJSONArray.getString(i));
+								externalReferenceCode);
 
 					_commercePriceListAccountRelLocalService.
 						addCommercePriceListAccountRel(

@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Calendar;
@@ -78,10 +80,14 @@ public class CommercePriceListsImporter {
 		String parentPriceListName = jsonObject.getString("ParentPriceList");
 
 		if (!Validator.isBlank(parentPriceListName)) {
+			String externalReferenceCode = StringBundler.concat(
+				String.valueOf(serviceContext.getScopeGroupId()), "_",
+				FriendlyURLNormalizerUtil.normalize(parentPriceListName));
+
 			CommercePriceList parentPriceList =
 				_commercePriceListLocalService.
 					fetchCommercePriceListByReferenceCode(
-						serviceContext.getCompanyId(), parentPriceListName);
+						serviceContext.getCompanyId(), externalReferenceCode);
 
 			parentPriceListId = parentPriceList.getParentCommercePriceListId();
 		}
@@ -145,12 +151,17 @@ public class CommercePriceListsImporter {
 
 		// Add Commerce Price List
 
+		String externalReferenceCode = StringBundler.concat(
+			String.valueOf(serviceContext.getScopeGroupId()), "_",
+            FriendlyURLNormalizerUtil.normalize(name));
+
 		_commercePriceListLocalService.upsertCommercePriceList(
 			0, commerceCurrency.getCommerceCurrencyId(), parentPriceListId,
 			name, priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, name, neverExpire, serviceContext);
+			expirationDateMinute, externalReferenceCode, neverExpire,
+			serviceContext);
 
 	}
 
