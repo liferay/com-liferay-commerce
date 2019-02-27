@@ -32,7 +32,7 @@ class AddToCartButton extends Component {
 	_updateQuantity(quantity) {
 		this.quantity = quantity;
 	}
-	
+
 	_submitQuantity(quantity) {
 		this._updateQuantity(quantity);
 		this._handleSubmitClick();
@@ -69,7 +69,7 @@ class AddToCartButton extends Component {
 	_handleBtnFocusout(e) {
 		this.closingTimeout = setTimeout(() => {
 			this._disableEditMode();
-		}, 100);  // Timeout needed to avoid flickering when the focus change
+		}, 100); // Timeout needed to avoid flickering when the focus change
 	}
 
 	_handleSubmitClick() {
