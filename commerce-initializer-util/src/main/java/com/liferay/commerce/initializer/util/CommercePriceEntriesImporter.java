@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.math.BigDecimal;
@@ -67,9 +68,13 @@ public class CommercePriceEntriesImporter {
 
 		String name = jsonObject.getString("PriceList");
 
+		String priceListExternalReferenceCode = StringBundler.concat(
+			String.valueOf(serviceContext.getScopeGroupId()), "_",
+            FriendlyURLNormalizerUtil.normalize(name));
+
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), name);
+                serviceContext.getCompanyId(), priceListExternalReferenceCode);
 
 		if (commercePriceList == null) {
 			throw new NoSuchPriceListException(
