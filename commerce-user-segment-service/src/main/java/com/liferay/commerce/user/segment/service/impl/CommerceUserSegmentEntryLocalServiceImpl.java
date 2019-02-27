@@ -25,6 +25,7 @@ import com.liferay.commerce.user.segment.service.base.CommerceUserSegmentEntryLo
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
@@ -494,7 +495,9 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		Map<Locale, String> nameMap = new HashMap<>();
 
-		nameMap.put(serviceContext.getLocale(), key);
+		nameMap.put(
+			serviceContext.getLocale(),
+			LanguageUtil.get(serviceContext.getLocale(), key));
 
 		commerceUserSegmentEntry =
 			commerceUserSegmentEntryLocalService.addCommerceUserSegmentEntry(
