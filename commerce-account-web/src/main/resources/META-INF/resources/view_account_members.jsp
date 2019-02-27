@@ -36,7 +36,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
 	<div class="commerce-cta is-visible">
-		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openUserInvitationModal();" %>' value="invite-user" />
+		<aui:button cssClass="commerce-button commerce-button--big js-invite-user" onClick='<%= renderResponse.getNamespace() + "openUserInvitationModal();" %>' value="invite-user" />
 	</div>
 
 	<commerce-ui:user-invitation-modal

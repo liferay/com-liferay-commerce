@@ -37,7 +37,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 	/>
 
 	<div class="commerce-cta is-visible">
-		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" type="submit" value="add-order" />
+		<aui:button cssClass="commerce-button commerce-button--big js-invite-user" type="submit" value="add-order" />
 	</div>
 </aui:form>
 

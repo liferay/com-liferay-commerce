@@ -34,7 +34,7 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 
 <c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_ORGANIZATIONS) %>">
 	<div class="commerce-cta is-visible">
-		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openAddOrganizationsModal();" %>' value="add-organizations" />
+		<aui:button cssClass="commerce-button commerce-button--big js-invite-user" onClick='<%= renderResponse.getNamespace() + "openAddOrganizationsModal();" %>' value="add-organizations" />
 	</div>
 
 	<commerce-ui:add-organizations-modal

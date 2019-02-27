@@ -59,7 +59,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 <div class="commerce-cta is-visible">
 	<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasCommerceAccountModelPermissions(ActionKeys.UPDATE) %>">
-		<aui:button cssClass="js-invite-user commerce-button commerce-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
+		<aui:button cssClass="commerce-button commerce-button--big js-invite-user" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
 	</c:if>
 </div>
 
