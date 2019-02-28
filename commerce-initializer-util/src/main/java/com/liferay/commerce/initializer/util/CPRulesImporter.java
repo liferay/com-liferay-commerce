@@ -140,7 +140,7 @@ public class CPRulesImporter {
 
 				AssetVocabulary assetVocabulary =
 					_assetVocabularyLocalService.fetchGroupVocabulary(
-						serviceContext.getScopeGroupId(), "commerce");
+						serviceContext.getScopeGroupId(), "Commerce");
 
 				AssetCategory assetCategory =
 					_assetCategoryLocalService.fetchCategory(
