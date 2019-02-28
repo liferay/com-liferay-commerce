@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.UserDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -97,7 +97,7 @@ public class UserHelper {
 		String profileURL = _getProfileURL(user, themeDisplay);
 		String[] roleNames = _getRoleNames(user);
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			user, user.getOrganizationIds(), dashboardURL, profileURL,
 			roleNames, themeDisplay);
 	}

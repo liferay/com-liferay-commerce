@@ -18,7 +18,7 @@ import com.liferay.commerce.exception.NoSuchRegionException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -51,7 +51,7 @@ public class RegionHelper {
 		CommerceRegion commerceRegion =
 			_commerceRegionService.getCommerceRegion(GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceRegion);
+		return DTOMapper.modelToDTO(commerceRegion);
 	}
 
 	public CollectionDTO<RegionDTO> getRegionDTOs(
@@ -70,7 +70,7 @@ public class RegionHelper {
 		List<RegionDTO> regionDTOs = new ArrayList<>();
 
 		for (CommerceRegion commerceRegion : commerceRegions) {
-			regionDTOs.add(DTOUtils.modelToDTO(commerceRegion));
+			regionDTOs.add(DTOMapper.modelToDTO(commerceRegion));
 		}
 
 		return new CollectionDTO<>(regionDTOs, count);
@@ -99,7 +99,7 @@ public class RegionHelper {
 			CommerceRegion commerceRegion = updateRegion(
 				String.valueOf(regionDTO.getId()), regionDTO, user);
 
-			return DTOUtils.modelToDTO(commerceRegion);
+			return DTOMapper.modelToDTO(commerceRegion);
 		}
 		catch (NoSuchRegionException nsre) {
 			if (_log.isDebugEnabled()) {
@@ -121,7 +121,7 @@ public class RegionHelper {
 				regionDTO.getCode(), regionDTO.getPriority(),
 				regionDTO.isActive(), serviceContext);
 
-		return DTOUtils.modelToDTO(commerceRegion);
+		return DTOMapper.modelToDTO(commerceRegion);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(RegionHelper.class);

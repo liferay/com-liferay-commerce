@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -63,7 +63,7 @@ public class InventoryHelper {
 		for (CommerceWarehouseItem commerceWarehouseItem :
 				commerceWarehouseItems) {
 
-			inventoryDTOs.add(DTOUtils.modelToDTO(commerceWarehouseItem));
+			inventoryDTOs.add(DTOMapper.modelToDTO(commerceWarehouseItem));
 		}
 
 		return new CollectionDTO<>(inventoryDTOs, totalItems);
@@ -74,7 +74,7 @@ public class InventoryHelper {
 			_commerceWarehouseItemService.getCommerceWarehouseItem(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceWarehouseItem);
+		return DTOMapper.modelToDTO(commerceWarehouseItem);
 	}
 
 	public InventoryDTO updateInventory(
@@ -86,7 +86,7 @@ public class InventoryHelper {
 				GetterUtil.getLong(id), inventoryDTO.getQuantity(),
 				_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(commerceWarehouseItem);
+		return DTOMapper.modelToDTO(commerceWarehouseItem);
 	}
 
 	public InventoryDTO upsertInventory(
@@ -115,7 +115,7 @@ public class InventoryHelper {
 					_serviceContextHelper.getServiceContext(groupId));
 		}
 
-		return DTOUtils.modelToDTO(commerceWarehouseItem);
+		return DTOMapper.modelToDTO(commerceWarehouseItem);
 	}
 
 	@Reference

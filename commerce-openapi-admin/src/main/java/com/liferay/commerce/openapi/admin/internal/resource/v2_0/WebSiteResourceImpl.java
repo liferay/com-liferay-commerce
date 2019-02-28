@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.WebSiteResource;
 import com.liferay.commerce.openapi.core.context.Language;
@@ -59,7 +59,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 	public WebSiteDTO getWebSite(String id, Language language) {
 		Group group = _getGroupById(id);
 
-		return DTOUtils.modelToDTO(group, language.getLanguageId());
+		return DTOMapper.modelToDTO(group, language.getLanguageId());
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOUtils.modelToDTO(group, language.getLanguageId())
+			group -> DTOMapper.modelToDTO(group, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),

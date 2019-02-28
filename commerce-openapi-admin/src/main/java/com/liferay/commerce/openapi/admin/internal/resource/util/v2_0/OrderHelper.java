@@ -22,7 +22,7 @@ import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.core.context.Language;
@@ -88,7 +88,7 @@ public class OrderHelper {
 	public OrderDTO getOrder(String id, Language language, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			getOrderById(id, company), language.getLanguageId());
 	}
 
@@ -148,7 +148,7 @@ public class OrderHelper {
 		Stream<CommerceOrder> stream = commerceOrders.stream();
 
 		return stream.map(
-			commerceOrder -> DTOUtils.modelToDTO(
+			commerceOrder -> DTOMapper.modelToDTO(
 				commerceOrder, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
@@ -163,7 +163,7 @@ public class OrderHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateOrder(
 				id, company, orderDTO.getBillingAddressId(),
 				orderDTO.getShippingAddressId(), orderDTO.getPaymentMethod(),
@@ -179,7 +179,7 @@ public class OrderHelper {
 			Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateOrderBillingAddress(
 				id, company, addressDTO.getName(), addressDTO.getDescription(),
 				addressDTO.getStreet1(), addressDTO.getStreet2(),
@@ -194,7 +194,7 @@ public class OrderHelper {
 			Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateOrderShippingAddress(
 				id, company, addressDTO.getName(), addressDTO.getDescription(),
 				addressDTO.getStreet1(), addressDTO.getStreet2(),
@@ -212,7 +212,7 @@ public class OrderHelper {
 		CommerceAccount commerceAccount = _accountHelper.getAccountById(
 			id, company);
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_upsertOrder(
 				groupId, commerceAccount.getCommerceAccountId(),
 				orderDTO.getCurrency(), orderDTO.getBillingAddressId(),
