@@ -19,6 +19,10 @@ configFiles.each { File file ->
 		properties.load(it)
 	}
 
+	if (!"true".equals(properties.get("osgi.module.generator.enabled"))) {
+		return
+	}
+
 	String osgiModuleName = properties.get("osgi.module.name")
 	String osgiModuleRootPath = properties.get("osgi.module.root.path")
 
