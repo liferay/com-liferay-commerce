@@ -57,11 +57,6 @@ public class Response {
 
 		sb.append("{content={");
 
-		for (Content content : _contents) {
-			sb.append(content);
-			sb.append(", ");
-		}
-
 		Iterator<Content> iterator = _contents.iterator();
 
 		while (iterator.hasNext()) {
