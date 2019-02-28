@@ -21,7 +21,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.AddressHel
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderHelper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderItemHelper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderNoteHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
@@ -95,7 +95,7 @@ public class OrderResourceImpl implements OrderResource {
 		CommerceAddress commerceAddress = _addressHelper.getAddressById(
 			String.valueOf(commerceOrder.getBillingAddressId()));
 
-		return DTOUtils.modelToDTO(commerceAddress);
+		return DTOMapper.modelToDTO(commerceAddress);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class OrderResourceImpl implements OrderResource {
 		CommerceAddress commerceAddress = _addressHelper.getAddressById(
 			String.valueOf(commerceOrder.getShippingAddressId()));
 
-		return DTOUtils.modelToDTO(commerceAddress);
+		return DTOMapper.modelToDTO(commerceAddress);
 	}
 
 	@Override

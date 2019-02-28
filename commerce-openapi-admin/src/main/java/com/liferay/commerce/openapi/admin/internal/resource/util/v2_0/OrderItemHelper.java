@@ -19,7 +19,7 @@ import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -70,7 +70,7 @@ public class OrderItemHelper {
 	public OrderItemDTO getOrderItem(String id, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getOrderItemById(id, company));
+		return DTOMapper.modelToDTO(getOrderItemById(id, company));
 	}
 
 	public CommerceOrderItem getOrderItemById(String id, Company company)
@@ -120,7 +120,7 @@ public class OrderItemHelper {
 		Stream<CommerceOrderItem> stream = commerceOrderItems.stream();
 
 		return stream.map(
-			commerceOrderItem -> DTOUtils.modelToDTO(commerceOrderItem)
+			commerceOrderItem -> DTOMapper.modelToDTO(commerceOrderItem)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -134,7 +134,7 @@ public class OrderItemHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateOrderItem(
 				id, company, orderItemDTO.getQuantity(), commerceContext));
 	}
@@ -144,7 +144,7 @@ public class OrderItemHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_upsertOrderItem(
 				orderId, company, orderItemDTO.getSkuId(),
 				orderItemDTO.getQuantity(), orderItemDTO.getShippedQuantity(),

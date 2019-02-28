@@ -18,7 +18,7 @@ import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -51,7 +51,7 @@ public class CurrencyHelper {
 			_commerceCurrencyService.getCommerceCurrency(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceCurrency);
+		return DTOMapper.modelToDTO(commerceCurrency);
 	}
 
 	public CollectionDTO<CurrencyDTO> getCurrencyDTOs(
@@ -69,7 +69,7 @@ public class CurrencyHelper {
 		List<CurrencyDTO> currencyDTOs = new ArrayList<>();
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-			currencyDTOs.add(DTOUtils.modelToDTO(commerceCurrency));
+			currencyDTOs.add(DTOMapper.modelToDTO(commerceCurrency));
 		}
 
 		return new CollectionDTO<>(currencyDTOs, count);
@@ -103,7 +103,7 @@ public class CurrencyHelper {
 				groupId, String.valueOf(currencyDTO.getId()), currencyDTO,
 				user);
 
-			return DTOUtils.modelToDTO(commerceCurrency);
+			return DTOMapper.modelToDTO(commerceCurrency);
 		}
 		catch (NoSuchCurrencyException nsce) {
 			if (_log.isDebugEnabled()) {
@@ -127,7 +127,7 @@ public class CurrencyHelper {
 				GetterUtil.get(currencyDTO.isPrimary(), false), 0D, true,
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceCurrency);
+		return DTOMapper.modelToDTO(commerceCurrency);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CurrencyHelper.class);

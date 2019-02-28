@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -93,7 +93,7 @@ public class ProductOptionHelper {
 			String id, Language language, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			getCPOptionById(id, company), language.getLanguageId());
 	}
 
@@ -110,7 +110,7 @@ public class ProductOptionHelper {
 		Stream<CPOption> stream = cpOptions.stream();
 
 		return stream.map(
-			cpOption -> DTOUtils.modelToDTO(cpOption, language.getLanguageId())
+			cpOption -> DTOMapper.modelToDTO(cpOption, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -143,7 +143,7 @@ public class ProductOptionHelper {
 			productOptionDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOption, language.getLanguageId());
+		return DTOMapper.modelToDTO(cpOption, language.getLanguageId());
 	}
 
 	public ProductOptionDTO upsertProductOption(
@@ -171,7 +171,7 @@ public class ProductOptionHelper {
 			productOptionDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOption, language.getLanguageId());
+		return DTOMapper.modelToDTO(cpOption, language.getLanguageId());
 	}
 
 	private boolean _isFacetable(ProductOptionDTO productOptionDTO) {

@@ -68,6 +68,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import org.osgi.service.component.annotations.Component;
 
 import java.io.Serializable;
 
@@ -80,9 +81,10 @@ import java.util.stream.Stream;
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
  */
-public class DTOUtils {
+@Component(immediate = true, service = DTOMapper.class)
+public class DTOMapper {
 
-	public static AccountMemberDTO[] modelsToAccountMemberDTOArray(
+	public AccountMemberDTO[] modelsToAccountMemberDTOArray(
 		List<CommerceAccountUserRel> commerceAccountUserRels) {
 
 		if (commerceAccountUserRels == null) {
@@ -102,7 +104,7 @@ public class DTOUtils {
 		return stream.toArray(AccountMemberDTO[]::new);
 	}
 
-	public static AccountOrganizationDTO[] modelsToAccountOrganizationDTOArray(
+	public AccountOrganizationDTO[] modelsToAccountOrganizationDTOArray(
 		List<CommerceAccountOrganizationRel> commerceAccountOrganizationRels) {
 
 		if (commerceAccountOrganizationRels == null) {
@@ -123,7 +125,7 @@ public class DTOUtils {
 		return stream.toArray(AccountOrganizationDTO[]::new);
 	}
 
-	public static AccountRoleDTO[] modelsToAccountRoleDTOArray(
+	public AccountRoleDTO[] modelsToAccountRoleDTOArray(
 		List<UserGroupRole> userGroupRoles) {
 
 		if (userGroupRoles == null) {
@@ -141,7 +143,7 @@ public class DTOUtils {
 		return stream.toArray(AccountRoleDTO[]::new);
 	}
 
-	public static RegionDTO[] modelsToRegionDTOArray(
+	public RegionDTO[] modelsToRegionDTOArray(
 		List<CommerceRegion> commerceRegions) {
 
 		if (commerceRegions == null) {
@@ -159,7 +161,7 @@ public class DTOUtils {
 		return stream.toArray(RegionDTO[]::new);
 	}
 
-	public static AccountDTO modelToDTO(CommerceAccount commerceAccount) {
+	public AccountDTO modelToDTO(CommerceAccount commerceAccount) {
 		AccountDTO accountDTO = new AccountDTO();
 
 		if (commerceAccount == null) {
@@ -193,7 +195,7 @@ public class DTOUtils {
 		return accountDTO;
 	}
 
-	public static AccountOrganizationDTO modelToDTO(
+	public AccountOrganizationDTO modelToDTO(
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
 
 		AccountOrganizationDTO accountOrganizationDTO =
@@ -224,7 +226,7 @@ public class DTOUtils {
 		return accountOrganizationDTO;
 	}
 
-	public static AccountMemberDTO modelToDTO(
+	public AccountMemberDTO modelToDTO(
 		CommerceAccountUserRel commerceAccountUserRel) {
 
 		AccountMemberDTO accountMemberDTO = new AccountMemberDTO();
@@ -255,7 +257,7 @@ public class DTOUtils {
 		return accountMemberDTO;
 	}
 
-	public static AddressDTO modelToDTO(CommerceAddress commerceAddress) {
+	public AddressDTO modelToDTO(CommerceAddress commerceAddress) {
 		AddressDTO addressDTO = new AddressDTO();
 
 		if (commerceAddress == null) {
@@ -281,7 +283,7 @@ public class DTOUtils {
 		return addressDTO;
 	}
 
-	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
+	public CountryDTO modelToDTO(CommerceCountry commerceCountry) {
 		CountryDTO countryDTO = new CountryDTO();
 
 		countryDTO.setBillingAllowed(commerceCountry.isBillingAllowed());
@@ -306,7 +308,7 @@ public class DTOUtils {
 		return countryDTO;
 	}
 
-	public static CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
+	public CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
 		CurrencyDTO currencyDTO = new CurrencyDTO();
 
 		if (commerceCurrency == null) {
@@ -332,7 +334,7 @@ public class DTOUtils {
 		return currencyDTO;
 	}
 
-	public static OrderDTO modelToDTO(
+	public OrderDTO modelToDTO(
 		CommerceOrder commerceOrder, String languageId) {
 
 		OrderDTO orderDTO = new OrderDTO();
@@ -388,7 +390,7 @@ public class DTOUtils {
 		return orderDTO;
 	}
 
-	public static OrderItemDTO modelToDTO(CommerceOrderItem commerceOrderItem) {
+	public OrderItemDTO modelToDTO(CommerceOrderItem commerceOrderItem) {
 		OrderItemDTO orderItemDTO = new OrderItemDTO();
 
 		if (commerceOrderItem == null) {
@@ -413,7 +415,7 @@ public class DTOUtils {
 		return orderItemDTO;
 	}
 
-	public static OrderNoteDTO modelToDTO(CommerceOrderNote commerceOrderNote) {
+	public OrderNoteDTO modelToDTO(CommerceOrderNote commerceOrderNote) {
 		OrderNoteDTO orderNoteDTO = new OrderNoteDTO();
 
 		if (commerceOrderNote == null) {
@@ -431,7 +433,7 @@ public class DTOUtils {
 		return orderNoteDTO;
 	}
 
-	public static PriceEntryDTO modelToDTO(
+	public PriceEntryDTO modelToDTO(
 			CommercePriceEntry commercePriceEntry)
 		throws PortalException {
 
@@ -459,7 +461,7 @@ public class DTOUtils {
 		return priceEntryDTO;
 	}
 
-	public static PriceListDTO modelToDTO(
+	public PriceListDTO modelToDTO(
 		CommercePriceList commercePriceList, String languageId) {
 
 		PriceListDTO priceListDTO = new PriceListDTO();
@@ -495,7 +497,7 @@ public class DTOUtils {
 		return priceListDTO;
 	}
 
-	public static RegionDTO modelToDTO(CommerceRegion commerceRegion) {
+	public RegionDTO modelToDTO(CommerceRegion commerceRegion) {
 		RegionDTO regionDTO = new RegionDTO();
 
 		if (commerceRegion == null) {
@@ -512,7 +514,7 @@ public class DTOUtils {
 		return regionDTO;
 	}
 
-	public static InventoryDTO modelToDTO(
+	public InventoryDTO modelToDTO(
 			CommerceWarehouseItem commerceWarehouseItem)
 		throws PortalException {
 
@@ -540,7 +542,7 @@ public class DTOUtils {
 		return inventoryDTO;
 	}
 
-	public static ProductDTO modelToDTO(CPDefinition cpDefinition) {
+	public ProductDTO modelToDTO(CPDefinition cpDefinition) {
 		ProductDTO productDTO = new ProductDTO();
 
 		if (cpDefinition == null) {
@@ -570,7 +572,7 @@ public class DTOUtils {
 		return productDTO;
 	}
 
-	public static SkuDTO modelToDTO(CPInstance cpInstance) {
+	public SkuDTO modelToDTO(CPInstance cpInstance) {
 		SkuDTO skuDTO = new SkuDTO();
 
 		if (cpInstance == null) {
@@ -599,7 +601,7 @@ public class DTOUtils {
 		return skuDTO;
 	}
 
-	public static ProductOptionDTO modelToDTO(
+	public ProductOptionDTO modelToDTO(
 		CPOption cpOption, String languageId) {
 
 		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
@@ -622,7 +624,7 @@ public class DTOUtils {
 		return productOptionDTO;
 	}
 
-	public static ProductOptionValueDTO modelToDTO(
+	public ProductOptionValueDTO modelToDTO(
 		CPOptionValue cpOptionValue, String languageId) {
 
 		ProductOptionValueDTO productOptionValueDTO =
@@ -642,7 +644,7 @@ public class DTOUtils {
 		return productOptionValueDTO;
 	}
 
-	public static WebSiteDTO modelToDTO(Group group, String languageId) {
+	public WebSiteDTO modelToDTO(Group group, String languageId) {
 		WebSiteDTO webSiteDTO = new WebSiteDTO();
 
 		if (group == null) {
@@ -656,7 +658,7 @@ public class DTOUtils {
 		return webSiteDTO;
 	}
 
-	public static UserDTO modelToDTO(
+	public UserDTO modelToDTO(
 			User user, long[] commerceAccountIds, String dashboardURL,
 			String profileURL, String[] roleNames, ThemeDisplay themeDisplay)
 		throws PortalException {
@@ -687,7 +689,7 @@ public class DTOUtils {
 		return userDTO;
 	}
 
-	public static AccountRoleDTO modelToDTO(UserGroupRole userGroupRole) {
+	public AccountRoleDTO modelToDTO(UserGroupRole userGroupRole) {
 		AccountRoleDTO accountRoleDTO = new AccountRoleDTO();
 
 		if (userGroupRole == null) {
@@ -713,9 +715,6 @@ public class DTOUtils {
 		return accountRoleDTO;
 	}
 
-	private DTOUtils() {
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(DTOUtils.class);
+	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
 
 }

@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -50,7 +50,7 @@ public class CountryHelper {
 		CommerceCountry commerceCountry =
 			_commerceCountryService.getCommerceCountry(GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceCountry);
+		return DTOMapper.modelToDTO(commerceCountry);
 	}
 
 	public CollectionDTO<CountryDTO> getCountryDTOs(
@@ -67,7 +67,7 @@ public class CountryHelper {
 		List<CountryDTO> countryDTOs = new ArrayList<>();
 
 		for (CommerceCountry commerceCountry : commerceCountries) {
-			countryDTOs.add(DTOUtils.modelToDTO(commerceCountry));
+			countryDTOs.add(DTOMapper.modelToDTO(commerceCountry));
 		}
 
 		return new CollectionDTO<>(countryDTOs, count);
@@ -99,7 +99,7 @@ public class CountryHelper {
 			CommerceCountry commerceCountry = updateCountry(
 				groupId, String.valueOf(countryDTO.getId()), countryDTO, user);
 
-			return DTOUtils.modelToDTO(commerceCountry);
+			return DTOMapper.modelToDTO(commerceCountry);
 		}
 		catch (NoSuchCountryException nsce) {
 			if (_log.isDebugEnabled()) {
@@ -122,7 +122,7 @@ public class CountryHelper {
 				GetterUtil.get(countryDTO.isSubjectToVAT(), false), 0D, true,
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceCountry);
+		return DTOMapper.modelToDTO(commerceCountry);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CountryHelper.class);
