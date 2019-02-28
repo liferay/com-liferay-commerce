@@ -33,7 +33,23 @@ import java.util.regex.Pattern;
  */
 public class OpenApiComponentUtil {
 
+	public static OpenApiComponent getByName(
+		String name, Set<OpenApiComponent> openApiComponents) {
+
+		for (OpenApiComponent openApiComponent : openApiComponents) {
+			if (Objects.equals(name, openApiComponent.getName())) {
+				return openApiComponent;
+			}
+		}
+
+		return null;
+	}
+
 	public static String getComponentName(String reference) {
+		if (reference == null) {
+			return null;
+		}
+
 		Matcher matcher = _referenceMatcher(reference);
 
 		return matcher.group(4);
@@ -53,25 +69,13 @@ public class OpenApiComponentUtil {
 		}
 
 		if (!OpenApiReaderFactory.isExternalReference(reference)) {
-			return _getByName(getComponentName(reference), components);
+			return getByName(getComponentName(reference), components);
 		}
 
 		OpenApi openApi = _getExternalOpenApi(reference);
 
-		return _getByName(
+		return getByName(
 			getComponentName(reference), openApi.getOpenApiComponents());
-	}
-
-	private static OpenApiComponent _getByName(
-		String name, Set<OpenApiComponent> openApiComponents) {
-
-		for (OpenApiComponent openApiComponent : openApiComponents) {
-			if (Objects.equals(name, openApiComponent.getName())) {
-				return openApiComponent;
-			}
-		}
-
-		return null;
 	}
 
 	private static OpenApi _getExternalOpenApi(String reference) {
