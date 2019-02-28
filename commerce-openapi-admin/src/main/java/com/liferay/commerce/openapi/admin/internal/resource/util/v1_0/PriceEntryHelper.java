@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v1_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -83,7 +83,7 @@ public class PriceEntryHelper {
 		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
 			id, companyId);
 
-		return DTOUtils.modelToDTO(commercePriceEntry);
+		return _dtoMapper.modelToDTO(commercePriceEntry);
 	}
 
 	public CollectionDTO<PriceEntryDTO> getPriceEntryDTOs(
@@ -102,7 +102,7 @@ public class PriceEntryHelper {
 		List<PriceEntryDTO> priceEntryDTOs = new ArrayList<>();
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			priceEntryDTOs.add(DTOUtils.modelToDTO(commercePriceEntry));
+			priceEntryDTOs.add(_dtoMapper.modelToDTO(commercePriceEntry));
 		}
 
 		return new CollectionDTO<>(priceEntryDTOs, count);
@@ -157,7 +157,7 @@ public class PriceEntryHelper {
 				serviceContext);
 		}
 
-		return DTOUtils.modelToDTO(commercePriceEntry);
+		return _dtoMapper.modelToDTO(commercePriceEntry);
 	}
 
 	@Reference
@@ -165,6 +165,9 @@ public class PriceEntryHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

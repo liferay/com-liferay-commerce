@@ -19,7 +19,7 @@ import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -70,7 +70,7 @@ public class AccountHelper {
 	public AccountDTO getAccount(String id, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getAccountById(id, company));
+		return _dtoMapper.modelToDTO(getAccountById(id, company));
 	}
 
 	public CommerceAccount getAccountById(String id, Company company)
@@ -120,7 +120,7 @@ public class AccountHelper {
 		Stream<CommerceAccount> stream = commerceAccounts.stream();
 
 		return stream.map(
-			DTOUtils::modelToDTO
+			_dtoMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -135,7 +135,7 @@ public class AccountHelper {
 
 		CommerceAccount commerceAccount = getAccountById(id, company);
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAccountService.updateCommerceAccount(
 				commerceAccount.getCommerceAccountId(), accountDTO.getName(),
 				true, null, _getEmailAddress(accountDTO, commerceAccount),
@@ -146,7 +146,7 @@ public class AccountHelper {
 	public AccountDTO upsertAccount(AccountDTO accountDTO)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAccountService.upsertCommerceAccount(
 				accountDTO.getName(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, true, null,
@@ -178,6 +178,9 @@ public class AccountHelper {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
