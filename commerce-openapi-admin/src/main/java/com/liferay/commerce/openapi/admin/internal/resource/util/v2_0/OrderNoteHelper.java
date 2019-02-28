@@ -18,7 +18,7 @@ import com.liferay.commerce.exception.NoSuchOrderNoteException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -67,7 +67,7 @@ public class OrderNoteHelper {
 	public OrderNoteDTO getOrderNote(String id, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getOrderNoteById(id, company));
+		return DTOMapper.modelToDTO(getOrderNoteById(id, company));
 	}
 
 	public CommerceOrderNote getOrderNoteById(String id, Company company)
@@ -117,7 +117,7 @@ public class OrderNoteHelper {
 		Stream<CommerceOrderNote> stream = commerceOrderNotes.stream();
 
 		return stream.map(
-			commerceOrderNote -> DTOUtils.modelToDTO(commerceOrderNote)
+			commerceOrderNote -> DTOMapper.modelToDTO(commerceOrderNote)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -130,7 +130,7 @@ public class OrderNoteHelper {
 			String id, OrderNoteDTO orderItemDTO, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateOrderNote(
 				id, company, orderItemDTO.getContent(),
 				orderItemDTO.isRestricted()));
@@ -140,7 +140,7 @@ public class OrderNoteHelper {
 			String orderId, OrderNoteDTO orderItemDTO, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_upsertOrderNote(
 				orderId, orderItemDTO.getId(), company,
 				orderItemDTO.getContent(), orderItemDTO.isRestricted(),

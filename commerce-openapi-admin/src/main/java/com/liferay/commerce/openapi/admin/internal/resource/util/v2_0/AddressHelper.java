@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -45,7 +45,7 @@ public class AddressHelper {
 			String className, long classPK, AddressDTO addressDTO)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_commerceAddressService.addCommerceAddress(
 				className, classPK, addressDTO.getName(),
 				addressDTO.getDescription(), addressDTO.getStreet1(),
@@ -106,7 +106,7 @@ public class AddressHelper {
 		Stream<CommerceAddress> stream = commerceAddresses.stream();
 
 		return stream.map(
-			DTOUtils::modelToDTO
+			DTOMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -120,7 +120,7 @@ public class AddressHelper {
 
 		CommerceAddress commerceAddress = getAddressById(id);
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_commerceAddressService.updateCommerceAddress(
 				commerceAddress.getCommerceAddressId(), addressDTO.getName(),
 				addressDTO.getDescription(), addressDTO.getStreet1(),

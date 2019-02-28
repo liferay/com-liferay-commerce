@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 import com.liferay.commerce.openapi.admin.internal.resource.util.BaseHelper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -78,7 +78,7 @@ public class ProductHelper extends BaseHelper {
 	public ProductDTO getProduct(String id, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getProductById(id, company));
+		return DTOMapper.modelToDTO(getProductById(id, company));
 	}
 
 	public CPDefinition getProductById(String id, Company company)
@@ -124,7 +124,7 @@ public class ProductHelper extends BaseHelper {
 		Stream<CPDefinition> stream = cpDefinitions.stream();
 
 		return stream.map(
-			DTOUtils::modelToDTO
+			DTOMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -143,7 +143,7 @@ public class ProductHelper extends BaseHelper {
 			expando = productDTO.getExpando();
 		}
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
 				productDTO.getShortDescription(), productDTO.getName(),
@@ -154,7 +154,7 @@ public class ProductHelper extends BaseHelper {
 			long groupId, ProductDTO productDTO, User user)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return DTOMapper.modelToDTO(
 			_upsertProduct(
 				groupId, productDTO.isActive(), productDTO.getDefaultSku(),
 				productDTO.getDescription(),
