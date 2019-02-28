@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
-import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOMapper;
+import com.liferay.commerce.openapi.admin.internal.mapper.v2_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v2_0.UserDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
