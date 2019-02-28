@@ -239,6 +239,11 @@ public class CommerceCountryWrapper implements CommerceCountry,
 		return _commerceCountry.getCommerceCountryId();
 	}
 
+	@Override
+	public java.util.List<CommerceRegion> getCommerceRegions() {
+		return _commerceCountry.getCommerceRegions();
+	}
+
 	/**
 	* Returns the company ID of this commerce country.
 	*

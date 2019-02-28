@@ -54,4 +54,6 @@ public interface CommerceCountry extends CommerceCountryModel, PersistedModel {
 				return CommerceCountry.class;
 			}
 		};
+
+	public java.util.List<CommerceRegion> getCommerceRegions();
 }
