@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -76,7 +76,7 @@ public class ProductHelper {
 	public ProductDTO getProduct(String id, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getProductById(id, company));
+		return _dtoMapper.modelToDTO(getProductById(id, company));
 	}
 
 	public CPDefinition getProductById(String id, Company company)
@@ -122,7 +122,7 @@ public class ProductHelper {
 		Stream<CPDefinition> stream = cpDefinitions.stream();
 
 		return stream.map(
-			DTOUtils::modelToDTO
+			_dtoMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -135,7 +135,7 @@ public class ProductHelper {
 			String id, ProductDTO productDTO, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
 				productDTO.getShortDescription(), productDTO.getName()));
@@ -145,7 +145,7 @@ public class ProductHelper {
 			long groupId, ProductDTO productDTO, User user)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertProduct(
 				groupId, productDTO.isActive(), productDTO.getDefaultSku(),
 				productDTO.getDescription(),
@@ -254,6 +254,9 @@ public class ProductHelper {
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

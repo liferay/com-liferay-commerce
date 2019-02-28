@@ -18,7 +18,7 @@ import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v1_0.CurrencyDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -51,7 +51,7 @@ public class CurrencyHelper {
 			_commerceCurrencyService.getCommerceCurrency(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceCurrency);
+		return _dtoMapper.modelToDTO(commerceCurrency);
 	}
 
 	public CollectionDTO<CurrencyDTO> getCurrencyDTOs(
@@ -69,7 +69,7 @@ public class CurrencyHelper {
 		List<CurrencyDTO> currencyDTOs = new ArrayList<>();
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-			currencyDTOs.add(DTOUtils.modelToDTO(commerceCurrency));
+			currencyDTOs.add(_dtoMapper.modelToDTO(commerceCurrency));
 		}
 
 		return new CollectionDTO<>(currencyDTOs, count);
@@ -101,7 +101,7 @@ public class CurrencyHelper {
 				groupId, String.valueOf(currencyDTO.getId()), currencyDTO,
 				user);
 
-			return DTOUtils.modelToDTO(commerceCurrency);
+			return _dtoMapper.modelToDTO(commerceCurrency);
 		}
 		catch (NoSuchCurrencyException nsce) {
 			if (_log.isDebugEnabled()) {
@@ -124,13 +124,16 @@ public class CurrencyHelper {
 				currencyDTO.getRoundingMode(), currencyDTO.isPrimary(), 0D,
 				true, serviceContext);
 
-		return DTOUtils.modelToDTO(commerceCurrency);
+		return _dtoMapper.modelToDTO(commerceCurrency);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CurrencyHelper.class);
 
 	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

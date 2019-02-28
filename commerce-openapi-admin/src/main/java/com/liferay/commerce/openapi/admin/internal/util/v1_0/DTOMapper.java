@@ -46,12 +46,15 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Zoltán Takács
  */
-public class DTOUtils {
+@Component(immediate = true, service = DTOMapper.class)
+public class DTOMapper {
 
-	public static AccountDTO modelToDTO(CommerceAccount commerceAccount) {
+	public AccountDTO modelToDTO(CommerceAccount commerceAccount) {
 		AccountDTO accountDTO = new AccountDTO();
 
 		try {
@@ -80,7 +83,7 @@ public class DTOUtils {
 		return accountDTO;
 	}
 
-	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
+	public CountryDTO modelToDTO(CommerceCountry commerceCountry) {
 		CountryDTO countryDTO = new CountryDTO();
 
 		countryDTO.setBillingAllowed(commerceCountry.isBillingAllowed());
@@ -97,7 +100,7 @@ public class DTOUtils {
 		return countryDTO;
 	}
 
-	public static CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
+	public CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
 		CurrencyDTO currencyDTO = new CurrencyDTO();
 
 		currencyDTO.setCode(commerceCurrency.getCode());
@@ -119,8 +122,7 @@ public class DTOUtils {
 		return currencyDTO;
 	}
 
-	public static PriceEntryDTO modelToDTO(
-			CommercePriceEntry commercePriceEntry)
+	public PriceEntryDTO modelToDTO(CommercePriceEntry commercePriceEntry)
 		throws PortalException {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
@@ -143,7 +145,7 @@ public class DTOUtils {
 		return priceEntryDTO;
 	}
 
-	public static PriceListDTO modelToDTO(
+	public PriceListDTO modelToDTO(
 		CommercePriceList commercePriceList, String languageId) {
 
 		PriceListDTO priceListDTO = new PriceListDTO();
@@ -175,8 +177,7 @@ public class DTOUtils {
 		return priceListDTO;
 	}
 
-	public static InventoryDTO modelToDTO(
-			CommerceWarehouseItem commerceWarehouseItem)
+	public InventoryDTO modelToDTO(CommerceWarehouseItem commerceWarehouseItem)
 		throws PortalException {
 
 		InventoryDTO inventoryDTO = new InventoryDTO();
@@ -199,7 +200,7 @@ public class DTOUtils {
 		return inventoryDTO;
 	}
 
-	public static ProductDTO modelToDTO(CPDefinition cpDefinition) {
+	public ProductDTO modelToDTO(CPDefinition cpDefinition) {
 		ProductDTO productDTO = new ProductDTO();
 
 		productDTO.setActive(!cpDefinition.isInactive());
@@ -219,7 +220,7 @@ public class DTOUtils {
 		return productDTO;
 	}
 
-	public static SkuDTO modelToDTO(CPInstance cpInstance) {
+	public SkuDTO modelToDTO(CPInstance cpInstance) {
 		SkuDTO skuDTO = new SkuDTO();
 
 		skuDTO.setCost(cpInstance.getCost());
@@ -244,9 +245,7 @@ public class DTOUtils {
 		return skuDTO;
 	}
 
-	public static ProductOptionDTO modelToDTO(
-		CPOption cpOption, String languageId) {
-
+	public ProductOptionDTO modelToDTO(CPOption cpOption, String languageId) {
 		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
 
 		productOptionDTO.setDescription(cpOption.getDescription(languageId));
@@ -263,7 +262,7 @@ public class DTOUtils {
 		return productOptionDTO;
 	}
 
-	public static ProductOptionValueDTO modelToDTO(
+	public ProductOptionValueDTO modelToDTO(
 		CPOptionValue cpOptionValue, String languageId) {
 
 		ProductOptionValueDTO productOptionValueDTO =
@@ -279,7 +278,7 @@ public class DTOUtils {
 		return productOptionValueDTO;
 	}
 
-	public static WebSiteDTO modelToDTO(Group group, String languageId) {
+	public WebSiteDTO modelToDTO(Group group, String languageId) {
 		WebSiteDTO webSiteDTO = new WebSiteDTO();
 
 		webSiteDTO.setDescription(group.getDescription(languageId));
@@ -289,7 +288,7 @@ public class DTOUtils {
 		return webSiteDTO;
 	}
 
-	public static UserDTO modelToDTO(
+	public UserDTO modelToDTO(
 			User user, long[] commerceAccountIds, String dashboardURL,
 			String profileURL, String[] roleNames, ThemeDisplay themeDisplay)
 		throws PortalException {
@@ -316,7 +315,7 @@ public class DTOUtils {
 		return userDTO;
 	}
 
-	private static String _getAccountType(int type) {
+	private String _getAccountType(int type) {
 		if (type == 1) {
 			return "Personal";
 		}
@@ -327,9 +326,6 @@ public class DTOUtils {
 		return "Guest";
 	}
 
-	private DTOUtils() {
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(DTOUtils.class);
+	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
 
 }

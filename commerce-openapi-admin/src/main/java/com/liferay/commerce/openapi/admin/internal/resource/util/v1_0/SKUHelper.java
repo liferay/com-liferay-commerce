@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.model.v1_0.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -90,7 +90,7 @@ public class SKUHelper {
 	}
 
 	public SkuDTO getSku(String id, Company company) throws PortalException {
-		return DTOUtils.modelToDTO(getCPInstanceById(id, company));
+		return _dtoMapper.modelToDTO(getCPInstanceById(id, company));
 	}
 
 	public CollectionDTO<SkuDTO> getSKUs(
@@ -114,7 +114,7 @@ public class SKUHelper {
 		Stream<CPInstance> stream = cpInstances.stream();
 
 		return stream.map(
-			cpInstance -> DTOUtils.modelToDTO(cpInstance)
+			cpInstance -> _dtoMapper.modelToDTO(cpInstance)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -163,7 +163,7 @@ public class SKUHelper {
 			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
 			serviceContext);
 
-		return DTOUtils.modelToDTO(cpInstance);
+		return _dtoMapper.modelToDTO(cpInstance);
 	}
 
 	public SkuDTO upsertSKU(
@@ -211,7 +211,7 @@ public class SKUHelper {
 			expirationDateConfig.getMinute(), skuDTO.isNeverExpire(),
 			serviceContext);
 
-		return DTOUtils.modelToDTO(cpInstance);
+		return _dtoMapper.modelToDTO(cpInstance);
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
@@ -226,6 +226,9 @@ public class SKUHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ProductHelper _productHelper;
