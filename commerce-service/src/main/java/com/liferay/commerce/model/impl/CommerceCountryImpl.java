@@ -16,6 +16,13 @@ package com.liferay.commerce.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
+import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
+import java.util.List;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -23,6 +30,13 @@ import aQute.bnd.annotation.ProviderType;
 public class CommerceCountryImpl extends CommerceCountryBaseImpl {
 
 	public CommerceCountryImpl() {
+	}
+
+	@Override
+	public List<CommerceRegion> getCommerceRegions() {
+		return CommerceRegionLocalServiceUtil.getCommerceRegions(
+			getCommerceCountryId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new CommerceRegionPriorityComparator());
 	}
 
 }
