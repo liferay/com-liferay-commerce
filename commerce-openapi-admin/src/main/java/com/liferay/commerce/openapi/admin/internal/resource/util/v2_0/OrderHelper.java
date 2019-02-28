@@ -88,7 +88,7 @@ public class OrderHelper {
 	public OrderDTO getOrder(String id, Language language, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			getOrderById(id, company), language.getLanguageId());
 	}
 
@@ -148,7 +148,7 @@ public class OrderHelper {
 		Stream<CommerceOrder> stream = commerceOrders.stream();
 
 		return stream.map(
-			commerceOrder -> DTOMapper.modelToDTO(
+			commerceOrder -> _dtoMapper.modelToDTO(
 				commerceOrder, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
@@ -163,7 +163,7 @@ public class OrderHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateOrder(
 				id, company, orderDTO.getBillingAddressId(),
 				orderDTO.getShippingAddressId(), orderDTO.getPaymentMethod(),
@@ -179,7 +179,7 @@ public class OrderHelper {
 			Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateOrderBillingAddress(
 				id, company, addressDTO.getName(), addressDTO.getDescription(),
 				addressDTO.getStreet1(), addressDTO.getStreet2(),
@@ -194,7 +194,7 @@ public class OrderHelper {
 			Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateOrderShippingAddress(
 				id, company, addressDTO.getName(), addressDTO.getDescription(),
 				addressDTO.getStreet1(), addressDTO.getStreet2(),
@@ -212,7 +212,7 @@ public class OrderHelper {
 		CommerceAccount commerceAccount = _accountHelper.getAccountById(
 			id, company);
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertOrder(
 				groupId, commerceAccount.getCommerceAccountId(),
 				orderDTO.getCurrency(), orderDTO.getBillingAddressId(),
@@ -341,6 +341,9 @@ public class OrderHelper {
 
 	@Reference
 	private CommerceShippingMethodService _commerceShippingMethodService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

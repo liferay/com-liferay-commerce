@@ -59,7 +59,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 	public WebSiteDTO getWebSite(String id, Language language) {
 		Group group = _getGroupById(id);
 
-		return DTOMapper.modelToDTO(group, language.getLanguageId());
+		return _dtoMapper.modelToDTO(group, language.getLanguageId());
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOMapper.modelToDTO(group, language.getLanguageId())
+			group -> _dtoMapper.modelToDTO(group, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -113,6 +113,9 @@ public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Context
 	private Company _company;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private GroupService _groupService;

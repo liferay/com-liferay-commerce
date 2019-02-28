@@ -51,7 +51,7 @@ public class RegionHelper {
 		CommerceRegion commerceRegion =
 			_commerceRegionService.getCommerceRegion(GetterUtil.getLong(id));
 
-		return DTOMapper.modelToDTO(commerceRegion);
+		return _dtoMapper.modelToDTO(commerceRegion);
 	}
 
 	public CollectionDTO<RegionDTO> getRegionDTOs(
@@ -70,7 +70,7 @@ public class RegionHelper {
 		List<RegionDTO> regionDTOs = new ArrayList<>();
 
 		for (CommerceRegion commerceRegion : commerceRegions) {
-			regionDTOs.add(DTOMapper.modelToDTO(commerceRegion));
+			regionDTOs.add(_dtoMapper.modelToDTO(commerceRegion));
 		}
 
 		return new CollectionDTO<>(regionDTOs, count);
@@ -99,7 +99,7 @@ public class RegionHelper {
 			CommerceRegion commerceRegion = updateRegion(
 				String.valueOf(regionDTO.getId()), regionDTO, user);
 
-			return DTOMapper.modelToDTO(commerceRegion);
+			return _dtoMapper.modelToDTO(commerceRegion);
 		}
 		catch (NoSuchRegionException nsre) {
 			if (_log.isDebugEnabled()) {
@@ -121,7 +121,7 @@ public class RegionHelper {
 				regionDTO.getCode(), regionDTO.getPriority(),
 				regionDTO.isActive(), serviceContext);
 
-		return DTOMapper.modelToDTO(commerceRegion);
+		return _dtoMapper.modelToDTO(commerceRegion);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(RegionHelper.class);
@@ -131,6 +131,9 @@ public class RegionHelper {
 
 	@Reference
 	private CommerceRegionService _commerceRegionService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

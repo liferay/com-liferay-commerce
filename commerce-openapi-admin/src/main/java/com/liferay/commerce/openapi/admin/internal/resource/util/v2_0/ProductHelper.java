@@ -78,7 +78,7 @@ public class ProductHelper extends BaseHelper {
 	public ProductDTO getProduct(String id, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(getProductById(id, company));
+		return _dtoMapper.modelToDTO(getProductById(id, company));
 	}
 
 	public CPDefinition getProductById(String id, Company company)
@@ -124,7 +124,7 @@ public class ProductHelper extends BaseHelper {
 		Stream<CPDefinition> stream = cpDefinitions.stream();
 
 		return stream.map(
-			DTOMapper::modelToDTO
+			_dtoMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -143,7 +143,7 @@ public class ProductHelper extends BaseHelper {
 			expando = productDTO.getExpando();
 		}
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
 				productDTO.getShortDescription(), productDTO.getName(),
@@ -154,7 +154,7 @@ public class ProductHelper extends BaseHelper {
 			long groupId, ProductDTO productDTO, User user)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertProduct(
 				groupId, productDTO.isActive(), productDTO.getDefaultSku(),
 				productDTO.getDescription(),
@@ -279,6 +279,9 @@ public class ProductHelper extends BaseHelper {
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

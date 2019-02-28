@@ -51,7 +51,7 @@ public class CurrencyHelper {
 			_commerceCurrencyService.getCommerceCurrency(
 				GetterUtil.getLong(id));
 
-		return DTOMapper.modelToDTO(commerceCurrency);
+		return _dtoMapper.modelToDTO(commerceCurrency);
 	}
 
 	public CollectionDTO<CurrencyDTO> getCurrencyDTOs(
@@ -69,7 +69,7 @@ public class CurrencyHelper {
 		List<CurrencyDTO> currencyDTOs = new ArrayList<>();
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-			currencyDTOs.add(DTOMapper.modelToDTO(commerceCurrency));
+			currencyDTOs.add(_dtoMapper.modelToDTO(commerceCurrency));
 		}
 
 		return new CollectionDTO<>(currencyDTOs, count);
@@ -103,7 +103,7 @@ public class CurrencyHelper {
 				groupId, String.valueOf(currencyDTO.getId()), currencyDTO,
 				user);
 
-			return DTOMapper.modelToDTO(commerceCurrency);
+			return _dtoMapper.modelToDTO(commerceCurrency);
 		}
 		catch (NoSuchCurrencyException nsce) {
 			if (_log.isDebugEnabled()) {
@@ -127,13 +127,16 @@ public class CurrencyHelper {
 				GetterUtil.get(currencyDTO.isPrimary(), false), 0D, true,
 				serviceContext);
 
-		return DTOMapper.modelToDTO(commerceCurrency);
+		return _dtoMapper.modelToDTO(commerceCurrency);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CurrencyHelper.class);
 
 	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
