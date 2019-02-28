@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.util.v2_0;
+package com.liferay.commerce.openapi.admin.internal.mapper.v2_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
