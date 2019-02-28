@@ -95,7 +95,7 @@ public class OrderResourceImpl implements OrderResource {
 		CommerceAddress commerceAddress = _addressHelper.getAddressById(
 			String.valueOf(commerceOrder.getBillingAddressId()));
 
-		return DTOMapper.modelToDTO(commerceAddress);
+		return _dtoMapper.modelToDTO(commerceAddress);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class OrderResourceImpl implements OrderResource {
 		CommerceAddress commerceAddress = _addressHelper.getAddressById(
 			String.valueOf(commerceOrder.getShippingAddressId()));
 
-		return DTOMapper.modelToDTO(commerceAddress);
+		return _dtoMapper.modelToDTO(commerceAddress);
 	}
 
 	@Override
@@ -234,6 +234,9 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Context
 	private Company _company;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private OrderHelper _orderHelper;

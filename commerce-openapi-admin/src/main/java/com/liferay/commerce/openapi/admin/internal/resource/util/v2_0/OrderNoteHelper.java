@@ -67,7 +67,7 @@ public class OrderNoteHelper {
 	public OrderNoteDTO getOrderNote(String id, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(getOrderNoteById(id, company));
+		return _dtoMapper.modelToDTO(getOrderNoteById(id, company));
 	}
 
 	public CommerceOrderNote getOrderNoteById(String id, Company company)
@@ -117,7 +117,7 @@ public class OrderNoteHelper {
 		Stream<CommerceOrderNote> stream = commerceOrderNotes.stream();
 
 		return stream.map(
-			commerceOrderNote -> DTOMapper.modelToDTO(commerceOrderNote)
+			commerceOrderNote -> _dtoMapper.modelToDTO(commerceOrderNote)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -130,7 +130,7 @@ public class OrderNoteHelper {
 			String id, OrderNoteDTO orderItemDTO, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateOrderNote(
 				id, company, orderItemDTO.getContent(),
 				orderItemDTO.isRestricted()));
@@ -140,7 +140,7 @@ public class OrderNoteHelper {
 			String orderId, OrderNoteDTO orderItemDTO, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertOrderNote(
 				orderId, orderItemDTO.getId(), company,
 				orderItemDTO.getContent(), orderItemDTO.isRestricted(),
@@ -178,6 +178,9 @@ public class OrderNoteHelper {
 
 	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private OrderHelper _orderHelper;

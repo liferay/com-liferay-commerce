@@ -97,7 +97,7 @@ public class ProductOptionValueHelper {
 			String id, Language language, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			getCPOptionValueById(id, company), language.getLanguageId());
 	}
 
@@ -119,7 +119,7 @@ public class ProductOptionValueHelper {
 		Stream<CPOptionValue> stream = cpOptions.stream();
 
 		return stream.map(
-			cpOptionValue -> DTOMapper.modelToDTO(
+			cpOptionValue -> _dtoMapper.modelToDTO(
 				cpOptionValue, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
@@ -148,7 +148,7 @@ public class ProductOptionValueHelper {
 			_getPriority(productOptionValueDTO), productOptionValueDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOMapper.modelToDTO(cpOptionValue, language.getLanguageId());
+		return _dtoMapper.modelToDTO(cpOptionValue, language.getLanguageId());
 	}
 
 	public ProductOptionValueDTO upsertProductOptionValue(
@@ -174,7 +174,7 @@ public class ProductOptionValueHelper {
 			productOptionValueDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOMapper.modelToDTO(cpOptionValue, language.getLanguageId());
+		return _dtoMapper.modelToDTO(cpOptionValue, language.getLanguageId());
 	}
 
 	private double _getPriority(ProductOptionValueDTO productOptionValueDTO) {
@@ -192,6 +192,9 @@ public class ProductOptionValueHelper {
 
 	@Reference
 	private CPOptionValueService _cpOptionValueService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ProductOptionHelper _productOptionHelper;

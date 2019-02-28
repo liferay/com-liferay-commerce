@@ -45,7 +45,7 @@ public class AddressHelper {
 			String className, long classPK, AddressDTO addressDTO)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAddressService.addCommerceAddress(
 				className, classPK, addressDTO.getName(),
 				addressDTO.getDescription(), addressDTO.getStreet1(),
@@ -106,7 +106,7 @@ public class AddressHelper {
 		Stream<CommerceAddress> stream = commerceAddresses.stream();
 
 		return stream.map(
-			DTOMapper::modelToDTO
+			_dtoMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -120,7 +120,7 @@ public class AddressHelper {
 
 		CommerceAddress commerceAddress = getAddressById(id);
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAddressService.updateCommerceAddress(
 				commerceAddress.getCommerceAddressId(), addressDTO.getName(),
 				addressDTO.getDescription(), addressDTO.getStreet1(),
@@ -136,6 +136,9 @@ public class AddressHelper {
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

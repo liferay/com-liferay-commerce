@@ -83,7 +83,7 @@ public class PriceEntryHelper {
 		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
 			id, companyId);
 
-		return DTOMapper.modelToDTO(commercePriceEntry);
+		return _dtoMapper.modelToDTO(commercePriceEntry);
 	}
 
 	public CollectionDTO<PriceEntryDTO> getPriceEntryDTOs(
@@ -102,7 +102,7 @@ public class PriceEntryHelper {
 		List<PriceEntryDTO> priceEntryDTOs = new ArrayList<>();
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			priceEntryDTOs.add(DTOMapper.modelToDTO(commercePriceEntry));
+			priceEntryDTOs.add(_dtoMapper.modelToDTO(commercePriceEntry));
 		}
 
 		return new CollectionDTO<>(priceEntryDTOs, count);
@@ -157,7 +157,7 @@ public class PriceEntryHelper {
 				serviceContext);
 		}
 
-		return DTOMapper.modelToDTO(commercePriceEntry);
+		return _dtoMapper.modelToDTO(commercePriceEntry);
 	}
 
 	@Reference
@@ -165,6 +165,9 @@ public class PriceEntryHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

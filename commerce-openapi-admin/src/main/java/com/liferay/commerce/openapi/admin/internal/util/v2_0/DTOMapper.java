@@ -68,7 +68,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import org.osgi.service.component.annotations.Component;
 
 import java.io.Serializable;
 
@@ -76,6 +75,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Zoltán Takács
@@ -334,9 +335,7 @@ public class DTOMapper {
 		return currencyDTO;
 	}
 
-	public OrderDTO modelToDTO(
-		CommerceOrder commerceOrder, String languageId) {
-
+	public OrderDTO modelToDTO(CommerceOrder commerceOrder, String languageId) {
 		OrderDTO orderDTO = new OrderDTO();
 
 		if (commerceOrder == null) {
@@ -433,8 +432,7 @@ public class DTOMapper {
 		return orderNoteDTO;
 	}
 
-	public PriceEntryDTO modelToDTO(
-			CommercePriceEntry commercePriceEntry)
+	public PriceEntryDTO modelToDTO(CommercePriceEntry commercePriceEntry)
 		throws PortalException {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
@@ -514,8 +512,7 @@ public class DTOMapper {
 		return regionDTO;
 	}
 
-	public InventoryDTO modelToDTO(
-			CommerceWarehouseItem commerceWarehouseItem)
+	public InventoryDTO modelToDTO(CommerceWarehouseItem commerceWarehouseItem)
 		throws PortalException {
 
 		InventoryDTO inventoryDTO = new InventoryDTO();
@@ -601,9 +598,7 @@ public class DTOMapper {
 		return skuDTO;
 	}
 
-	public ProductOptionDTO modelToDTO(
-		CPOption cpOption, String languageId) {
-
+	public ProductOptionDTO modelToDTO(CPOption cpOption, String languageId) {
 		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
 
 		if (cpOption == null) {

@@ -91,7 +91,7 @@ public class SKUHelper {
 	}
 
 	public SkuDTO getSku(String id, Company company) throws PortalException {
-		return DTOMapper.modelToDTO(getCPInstanceById(id, company));
+		return _dtoMapper.modelToDTO(getCPInstanceById(id, company));
 	}
 
 	public CollectionDTO<SkuDTO> getSKUs(
@@ -115,7 +115,7 @@ public class SKUHelper {
 		Stream<CPInstance> stream = cpInstances.stream();
 
 		return stream.map(
-			cpInstance -> DTOMapper.modelToDTO(cpInstance)
+			cpInstance -> _dtoMapper.modelToDTO(cpInstance)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -165,7 +165,7 @@ public class SKUHelper {
 			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
 			GetterUtil.get(skuDTO.isNeverExpire(), false), serviceContext);
 
-		return DTOMapper.modelToDTO(cpInstance);
+		return _dtoMapper.modelToDTO(cpInstance);
 	}
 
 	public SkuDTO upsertSKU(
@@ -217,7 +217,7 @@ public class SKUHelper {
 			expirationDateConfig.getMinute(),
 			GetterUtil.get(skuDTO.isNeverExpire(), false), serviceContext);
 
-		return DTOMapper.modelToDTO(cpInstance);
+		return _dtoMapper.modelToDTO(cpInstance);
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
@@ -232,6 +232,9 @@ public class SKUHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ProductHelper _productHelper;
