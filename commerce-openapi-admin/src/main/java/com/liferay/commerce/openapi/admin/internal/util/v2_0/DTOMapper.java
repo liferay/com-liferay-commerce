@@ -54,10 +54,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
-import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
-import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
 import com.liferay.expando.kernel.model.ExpandoBridge;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -293,12 +290,8 @@ public class DTOMapper {
 			LanguageUtils.getLanguageIdMap(commerceCountry.getNameMap()));
 		countryDTO.setNumericISOCode(commerceCountry.getNumericISOCode());
 
-		List<CommerceRegion> commerceRegions =
-			CommerceRegionLocalServiceUtil.getCommerceRegions(
-				commerceCountry.getCommerceCountryId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, new CommerceRegionPriorityComparator());
-
-		countryDTO.setRegions(modelsToRegionDTOArray(commerceRegions));
+		countryDTO.setRegions(
+			modelsToRegionDTOArray(commerceCountry.getCommerceRegions()));
 
 		countryDTO.setShippingAllowed(commerceCountry.isShippingAllowed());
 		countryDTO.setSubjectToVAT(commerceCountry.isSubjectToVAT());
