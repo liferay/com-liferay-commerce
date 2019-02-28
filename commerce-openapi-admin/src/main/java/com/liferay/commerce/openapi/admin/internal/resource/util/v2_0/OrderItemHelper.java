@@ -70,7 +70,7 @@ public class OrderItemHelper {
 	public OrderItemDTO getOrderItem(String id, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(getOrderItemById(id, company));
+		return _dtoMapper.modelToDTO(getOrderItemById(id, company));
 	}
 
 	public CommerceOrderItem getOrderItemById(String id, Company company)
@@ -120,7 +120,7 @@ public class OrderItemHelper {
 		Stream<CommerceOrderItem> stream = commerceOrderItems.stream();
 
 		return stream.map(
-			commerceOrderItem -> DTOMapper.modelToDTO(commerceOrderItem)
+			commerceOrderItem -> _dtoMapper.modelToDTO(commerceOrderItem)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -134,7 +134,7 @@ public class OrderItemHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateOrderItem(
 				id, company, orderItemDTO.getQuantity(), commerceContext));
 	}
@@ -144,7 +144,7 @@ public class OrderItemHelper {
 			CommerceContext commerceContext)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertOrderItem(
 				orderId, company, orderItemDTO.getSkuId(),
 				orderItemDTO.getQuantity(), orderItemDTO.getShippedQuantity(),
@@ -193,6 +193,9 @@ public class OrderItemHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private OrderHelper _orderHelper;

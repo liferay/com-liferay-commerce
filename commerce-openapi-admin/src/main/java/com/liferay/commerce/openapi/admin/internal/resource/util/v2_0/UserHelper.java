@@ -97,7 +97,7 @@ public class UserHelper {
 		String profileURL = _getProfileURL(user, themeDisplay);
 		String[] roleNames = _getRoleNames(user);
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			user, user.getOrganizationIds(), dashboardURL, profileURL,
 			roleNames, themeDisplay);
 	}
@@ -301,6 +301,9 @@ public class UserHelper {
 
 		return roleNames;
 	}
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ERUserLocalService _erUserLocalService;

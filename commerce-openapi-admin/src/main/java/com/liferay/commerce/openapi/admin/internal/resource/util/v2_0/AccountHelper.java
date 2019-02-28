@@ -78,7 +78,7 @@ public class AccountHelper {
 	public AccountDTO getAccount(String id, Company company)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(getAccountById(id, company));
+		return _dtoMapper.modelToDTO(getAccountById(id, company));
 	}
 
 	public CommerceAccount getAccountById(String id, Company company)
@@ -128,7 +128,7 @@ public class AccountHelper {
 		Stream<CommerceAccount> stream = commerceAccounts.stream();
 
 		return stream.map(
-			DTOMapper::modelToDTO
+			_dtoMapper::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -143,7 +143,7 @@ public class AccountHelper {
 
 		CommerceAccount commerceAccount = getAccountById(id, company);
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAccountService.updateCommerceAccount(
 				commerceAccount.getCommerceAccountId(), accountDTO.getName(),
 				true, null, _getEmailAddress(accountDTO, commerceAccount),
@@ -171,7 +171,7 @@ public class AccountHelper {
 	public AccountDTO upsertAccount(AccountDTO accountDTO)
 		throws PortalException {
 
-		return DTOMapper.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_commerceAccountService.upsertCommerceAccount(
 				accountDTO.getName(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, true, null,
@@ -207,6 +207,9 @@ public class AccountHelper {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
