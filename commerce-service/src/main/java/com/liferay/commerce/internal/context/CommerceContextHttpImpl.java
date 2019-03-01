@@ -21,7 +21,6 @@ import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
-import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -50,7 +49,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		HttpServletRequest httpServletRequest,
 		CommerceAccountHelper commerceAccountHelper,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
-		CommerceDiscountCouponCodeHelper commerceDiscountCouponCodeHelper,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
@@ -60,7 +58,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		_httpServletRequest = httpServletRequest;
 		_commerceAccountHelper = commerceAccountHelper;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
-		_commerceDiscountCouponCodeHelper = commerceDiscountCouponCodeHelper;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commercePriceListLocalService = commercePriceListLocalService;
 		_commerceUserSegmentHelper = commerceUserSegmentHelper;
@@ -165,12 +162,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	}
 
 	@Override
-	public String getCouponCode() throws PortalException {
-		return _commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-			_httpServletRequest);
-	}
-
-	@Override
 	public List<CPRule> getCPRules() throws PortalException {
 		if (_cpRules != null) {
 			return _cpRules;
@@ -203,8 +194,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	private final CommerceAccountHelper _commerceAccountHelper;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
-	private final CommerceDiscountCouponCodeHelper
-		_commerceDiscountCouponCodeHelper;
 	private CommerceOrder _commerceOrder;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private Optional<CommercePriceList> _commercePriceList;
