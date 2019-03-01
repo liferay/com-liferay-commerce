@@ -330,6 +330,10 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().getCommerceDiscountsCount(groupId);
 	}
 
+	public static int getCommerceDiscountsCount(long groupId, String couponCode) {
+		return getService().getCommerceDiscountsCount(groupId, couponCode);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);
