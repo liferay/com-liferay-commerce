@@ -309,8 +309,7 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
-	public CommerceAccount getPersonalCommerceAccount(
-			long companyId, long userId)
+	public CommerceAccount getPersonalCommerceAccount(long userId)
 		throws PortalException {
 
 		List<CommerceAccount> commerceAccounts =
