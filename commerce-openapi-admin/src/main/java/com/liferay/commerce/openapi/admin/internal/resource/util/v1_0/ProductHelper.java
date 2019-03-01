@@ -16,12 +16,12 @@ package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.mapper.v1_0.DTOMapper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.DateConfig;
-import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.openapi.core.util.LanguageUtils;
+import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;

@@ -76,7 +76,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<CategoryDTO> getCategories(
+	public CollectionDTO<CategoryDTO> getCatalogRuleCategories(
 			String id, Pagination pagination)
 		throws Exception {
 
@@ -85,7 +85,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<UserSegmentDTO> getUserSegments(
+	public CollectionDTO<UserSegmentDTO> getCatalogRuleUserSegments(
 			String id, Pagination pagination)
 		throws Exception {
 
