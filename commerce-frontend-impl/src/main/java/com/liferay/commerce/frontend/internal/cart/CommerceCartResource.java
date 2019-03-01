@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
-import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.frontend.internal.cart.model.Cart;
 import com.liferay.commerce.frontend.internal.cart.model.CartItemUpdate;
@@ -85,15 +84,11 @@ public class CommerceCartResource {
 
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
-			String couponCode =
-				_commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-					httpServletRequest);
-
 			CommerceContext commerceContext = _commerceContextFactory.create(
 				commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
-				commerceOrder.getCommerceAccountId(), couponCode);
+				commerceOrder.getCommerceAccountId());
 
 			httpServletRequest.setAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
@@ -141,15 +136,11 @@ public class CommerceCartResource {
 
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
-			String couponCode =
-				_commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-					httpServletRequest);
-
 			CommerceContext commerceContext = _commerceContextFactory.create(
 				commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
-				commerceOrder.getCommerceAccountId(), couponCode);
+				commerceOrder.getCommerceAccountId());
 
 			httpServletRequest.setAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
@@ -200,15 +191,11 @@ public class CommerceCartResource {
 			CommerceOrder commerceOrder =
 				_commerceOrderService.getCommerceOrder(commerceOrderId);
 
-			String couponCode =
-				_commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-					httpServletRequest);
-
 			CommerceContext commerceContext = _commerceContextFactory.create(
 				commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
-				commerceOrder.getCommerceAccountId(), couponCode);
+				commerceOrder.getCommerceAccountId());
 
 			httpServletRequest.setAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
@@ -251,13 +238,9 @@ public class CommerceCartResource {
 		Cart cart = null;
 
 		try {
-			String couponCode =
-				_commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-					httpServletRequest);
-
 			CommerceContext commerceContext = _commerceContextFactory.create(
 				groupId, _portal.getUserId(httpServletRequest), orderId,
-				commerceAccountId, couponCode);
+				commerceAccountId);
 
 			httpServletRequest.setAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
@@ -369,9 +352,6 @@ public class CommerceCartResource {
 
 	@Reference
 	private CommerceContextFactory _commerceContextFactory;
-
-	@Reference
-	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
