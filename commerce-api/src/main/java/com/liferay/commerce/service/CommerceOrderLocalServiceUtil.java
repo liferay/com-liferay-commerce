@@ -105,6 +105,15 @@ public class CommerceOrderLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder applayCouponCode(
+		long commerceOrderId, String couponCode,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .applayCouponCode(commerceOrderId, couponCode,
+			commerceContext);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder approveCommerceOrder(
 		long userId, long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {

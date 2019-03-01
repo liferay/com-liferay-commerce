@@ -127,6 +127,8 @@ create table CommerceOrder (
 	commerceShippingMethodId LONG,
 	shippingOptionName VARCHAR(255) null,
 	purchaseOrderNumber VARCHAR(75) null,
+	couponCode VARCHAR(75) null,
+	lastPriceUpdateDate DATE null,
 	subtotal DECIMAL(30, 16) null,
 	subtotalDiscountAmount DECIMAL(30, 16) null,
 	subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,

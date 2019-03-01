@@ -95,6 +95,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 			{ "commerceShippingMethodId", Types.BIGINT },
 			{ "shippingOptionName", Types.VARCHAR },
 			{ "purchaseOrderNumber", Types.VARCHAR },
+			{ "couponCode", Types.VARCHAR },
+			{ "lastPriceUpdateDate", Types.TIMESTAMP },
 			{ "subtotal", Types.DECIMAL },
 			{ "subtotalDiscountAmount", Types.DECIMAL },
 			{ "subtotalDiscountPercentLevel1", Types.DECIMAL },
@@ -143,6 +145,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		TABLE_COLUMNS_MAP.put("commerceShippingMethodId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("shippingOptionName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("purchaseOrderNumber", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("couponCode", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("lastPriceUpdateDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("subtotal", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("subtotalDiscountAmount", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("subtotalDiscountPercentLevel1", Types.DECIMAL);
@@ -171,7 +175,7 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrder.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrder.createDate ASC";
@@ -229,6 +233,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		model.setCommerceShippingMethodId(soapModel.getCommerceShippingMethodId());
 		model.setShippingOptionName(soapModel.getShippingOptionName());
 		model.setPurchaseOrderNumber(soapModel.getPurchaseOrderNumber());
+		model.setCouponCode(soapModel.getCouponCode());
+		model.setLastPriceUpdateDate(soapModel.getLastPriceUpdateDate());
 		model.setSubtotal(soapModel.getSubtotal());
 		model.setSubtotalDiscountAmount(soapModel.getSubtotalDiscountAmount());
 		model.setSubtotalDiscountPercentageLevel1(soapModel.getSubtotalDiscountPercentageLevel1());
@@ -337,6 +343,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
 		attributes.put("purchaseOrderNumber", getPurchaseOrderNumber());
+		attributes.put("couponCode", getCouponCode());
+		attributes.put("lastPriceUpdateDate", getLastPriceUpdateDate());
 		attributes.put("subtotal", getSubtotal());
 		attributes.put("subtotalDiscountAmount", getSubtotalDiscountAmount());
 		attributes.put("subtotalDiscountPercentageLevel1",
@@ -494,6 +502,18 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 		if (purchaseOrderNumber != null) {
 			setPurchaseOrderNumber(purchaseOrderNumber);
+		}
+
+		String couponCode = (String)attributes.get("couponCode");
+
+		if (couponCode != null) {
+			setCouponCode(couponCode);
+		}
+
+		Date lastPriceUpdateDate = (Date)attributes.get("lastPriceUpdateDate");
+
+		if (lastPriceUpdateDate != null) {
+			setLastPriceUpdateDate(lastPriceUpdateDate);
 		}
 
 		BigDecimal subtotal = (BigDecimal)attributes.get("subtotal");
@@ -1025,6 +1045,33 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@JSON
 	@Override
+	public String getCouponCode() {
+		if (_couponCode == null) {
+			return "";
+		}
+		else {
+			return _couponCode;
+		}
+	}
+
+	@Override
+	public void setCouponCode(String couponCode) {
+		_couponCode = couponCode;
+	}
+
+	@JSON
+	@Override
+	public Date getLastPriceUpdateDate() {
+		return _lastPriceUpdateDate;
+	}
+
+	@Override
+	public void setLastPriceUpdateDate(Date lastPriceUpdateDate) {
+		_lastPriceUpdateDate = lastPriceUpdateDate;
+	}
+
+	@JSON
+	@Override
 	public BigDecimal getSubtotal() {
 		return _subtotal;
 	}
@@ -1494,6 +1541,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		commerceOrderImpl.setCommerceShippingMethodId(getCommerceShippingMethodId());
 		commerceOrderImpl.setShippingOptionName(getShippingOptionName());
 		commerceOrderImpl.setPurchaseOrderNumber(getPurchaseOrderNumber());
+		commerceOrderImpl.setCouponCode(getCouponCode());
+		commerceOrderImpl.setLastPriceUpdateDate(getLastPriceUpdateDate());
 		commerceOrderImpl.setSubtotal(getSubtotal());
 		commerceOrderImpl.setSubtotalDiscountAmount(getSubtotalDiscountAmount());
 		commerceOrderImpl.setSubtotalDiscountPercentageLevel1(getSubtotalDiscountPercentageLevel1());
@@ -1719,6 +1768,23 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 			commerceOrderCacheModel.purchaseOrderNumber = null;
 		}
 
+		commerceOrderCacheModel.couponCode = getCouponCode();
+
+		String couponCode = commerceOrderCacheModel.couponCode;
+
+		if ((couponCode != null) && (couponCode.length() == 0)) {
+			commerceOrderCacheModel.couponCode = null;
+		}
+
+		Date lastPriceUpdateDate = getLastPriceUpdateDate();
+
+		if (lastPriceUpdateDate != null) {
+			commerceOrderCacheModel.lastPriceUpdateDate = lastPriceUpdateDate.getTime();
+		}
+		else {
+			commerceOrderCacheModel.lastPriceUpdateDate = Long.MIN_VALUE;
+		}
+
 		commerceOrderCacheModel.subtotal = getSubtotal();
 
 		commerceOrderCacheModel.subtotalDiscountAmount = getSubtotalDiscountAmount();
@@ -1795,7 +1861,7 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(89);
+		StringBundler sb = new StringBundler(93);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1833,6 +1899,10 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		sb.append(getShippingOptionName());
 		sb.append(", purchaseOrderNumber=");
 		sb.append(getPurchaseOrderNumber());
+		sb.append(", couponCode=");
+		sb.append(getCouponCode());
+		sb.append(", lastPriceUpdateDate=");
+		sb.append(getLastPriceUpdateDate());
 		sb.append(", subtotal=");
 		sb.append(getSubtotal());
 		sb.append(", subtotalDiscountAmount=");
@@ -1892,7 +1962,7 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(136);
+		StringBundler sb = new StringBundler(142);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrder");
@@ -1969,6 +2039,14 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		sb.append(
 			"<column><column-name>purchaseOrderNumber</column-name><column-value><![CDATA[");
 		sb.append(getPurchaseOrderNumber());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>couponCode</column-name><column-value><![CDATA[");
+		sb.append(getCouponCode());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPriceUpdateDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPriceUpdateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>subtotal</column-name><column-value><![CDATA[");
@@ -2118,6 +2196,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;
 	private String _purchaseOrderNumber;
+	private String _couponCode;
+	private Date _lastPriceUpdateDate;
 	private BigDecimal _subtotal;
 	private BigDecimal _subtotalDiscountAmount;
 	private BigDecimal _subtotalDiscountPercentageLevel1;

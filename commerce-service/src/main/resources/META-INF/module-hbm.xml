@@ -118,6 +118,8 @@
 		<property name="commerceShippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingOptionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="purchaseOrderNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="couponCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastPriceUpdateDate" type="org.hibernate.type.TimestampType" />
 		<property name="subtotal" type="org.hibernate.type.BigDecimalType" />
 		<property name="subtotalDiscountAmount" type="org.hibernate.type.BigDecimalType" />
 		<property column="subtotalDiscountPercentLevel1" name="subtotalDiscountPercentageLevel1" type="org.hibernate.type.BigDecimalType" />

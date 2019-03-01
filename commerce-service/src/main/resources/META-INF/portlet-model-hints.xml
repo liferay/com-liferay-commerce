@@ -112,6 +112,8 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="purchaseOrderNumber" type="String" />
+		<field name="couponCode" type="String" />
+		<field name="lastPriceUpdateDate" type="Date" />
 		<field name="subtotal" type="BigDecimal" />
 		<field name="subtotalDiscountAmount" type="BigDecimal" />
 		<field name="subtotalDiscountPercentageLevel1" type="BigDecimal" />
