@@ -253,6 +253,7 @@
 		<column name="shippingOptionName" type="String" />
 		<column name="purchaseOrderNumber" type="String" />
 		<column name="couponCode" type="String" />
+		<column name="lastPriceUpdateDate" type="Date" />
 		<column name="subtotal" type="BigDecimal" />
 		<column name="subtotalDiscountAmount" type="BigDecimal" />
 		<column db-name="subtotalDiscountPercentLevel1" name="subtotalDiscountPercentageLevel1" type="BigDecimal" />
