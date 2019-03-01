@@ -72,7 +72,7 @@ public class CommerceDiscountTest {
 
 		_commerceAccount =
 			_commerceAccountLocalService.getPersonalCommerceAccount(
-				_user.getCompanyId(), _user.getUserId());
+				_user.getUserId());
 	}
 
 	@Test
