@@ -966,6 +966,928 @@ public class CommerceAccountPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceAccount.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_T = new FinderPath(CommerceAccountModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByU_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T = new FinderPath(CommerceAccountModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByU_T",
+			new String[] { Long.class.getName(), Integer.class.getName() },
+			CommerceAccountModelImpl.USERID_COLUMN_BITMASK |
+			CommerceAccountModelImpl.TYPE_COLUMN_BITMASK |
+			CommerceAccountModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_T = new FinderPath(CommerceAccountModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+
+	/**
+	 * Returns all the commerce accounts where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @return the matching commerce accounts
+	 */
+	@Override
+	public List<CommerceAccount> findByU_T(long userId, int type) {
+		return findByU_T(userId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the commerce accounts where userId = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce accounts
+	 * @param end the upper bound of the range of commerce accounts (not inclusive)
+	 * @return the range of matching commerce accounts
+	 */
+	@Override
+	public List<CommerceAccount> findByU_T(long userId, int type, int start,
+		int end) {
+		return findByU_T(userId, type, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce accounts where userId = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce accounts
+	 * @param end the upper bound of the range of commerce accounts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce accounts
+	 */
+	@Override
+	public List<CommerceAccount> findByU_T(long userId, int type, int start,
+		int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		return findByU_T(userId, type, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce accounts where userId = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce accounts
+	 * @param end the upper bound of the range of commerce accounts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce accounts
+	 */
+	@Override
+	public List<CommerceAccount> findByU_T(long userId, int type, int start,
+		int end, OrderByComparator<CommerceAccount> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T;
+			finderArgs = new Object[] { userId, type };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_T;
+			finderArgs = new Object[] {
+					userId, type,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceAccount> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceAccount>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAccount commerceAccount : list) {
+					if ((userId != commerceAccount.getUserId()) ||
+							(type != commerceAccount.getType())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEACCOUNT_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_T_TYPE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(type);
+
+				if (!pagination) {
+					list = (List<CommerceAccount>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAccount>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce account in the ordered set where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account
+	 * @throws NoSuchAccountException if a matching commerce account could not be found
+	 */
+	@Override
+	public CommerceAccount findByU_T_First(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws NoSuchAccountException {
+		CommerceAccount commerceAccount = fetchByU_T_First(userId, type,
+				orderByComparator);
+
+		if (commerceAccount != null) {
+			return commerceAccount;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", type=");
+		msg.append(type);
+
+		msg.append("}");
+
+		throw new NoSuchAccountException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce account in the ordered set where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	 */
+	@Override
+	public CommerceAccount fetchByU_T_First(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		List<CommerceAccount> list = findByU_T(userId, type, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce account in the ordered set where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account
+	 * @throws NoSuchAccountException if a matching commerce account could not be found
+	 */
+	@Override
+	public CommerceAccount findByU_T_Last(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws NoSuchAccountException {
+		CommerceAccount commerceAccount = fetchByU_T_Last(userId, type,
+				orderByComparator);
+
+		if (commerceAccount != null) {
+			return commerceAccount;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", type=");
+		msg.append(type);
+
+		msg.append("}");
+
+		throw new NoSuchAccountException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce account in the ordered set where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	 */
+	@Override
+	public CommerceAccount fetchByU_T_Last(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		int count = countByU_T(userId, type);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceAccount> list = findByU_T(userId, type, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce accounts before and after the current commerce account in the ordered set where userId = &#63; and type = &#63;.
+	 *
+	 * @param commerceAccountId the primary key of the current commerce account
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce account
+	 * @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	 */
+	@Override
+	public CommerceAccount[] findByU_T_PrevAndNext(long commerceAccountId,
+		long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws NoSuchAccountException {
+		CommerceAccount commerceAccount = findByPrimaryKey(commerceAccountId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceAccount[] array = new CommerceAccountImpl[3];
+
+			array[0] = getByU_T_PrevAndNext(session, commerceAccount, userId,
+					type, orderByComparator, true);
+
+			array[1] = commerceAccount;
+
+			array[2] = getByU_T_PrevAndNext(session, commerceAccount, userId,
+					type, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceAccount getByU_T_PrevAndNext(Session session,
+		CommerceAccount commerceAccount, long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEACCOUNT_WHERE);
+
+		query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccount);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceAccount> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @return the matching commerce accounts that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccount> filterFindByU_T(long userId, int type) {
+		return filterFindByU_T(userId, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce accounts
+	 * @param end the upper bound of the range of commerce accounts (not inclusive)
+	 * @return the range of matching commerce accounts that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccount> filterFindByU_T(long userId, int type,
+		int start, int end) {
+		return filterFindByU_T(userId, type, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce accounts that the user has permissions to view where userId = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce accounts
+	 * @param end the upper bound of the range of commerce accounts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce accounts that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccount> filterFindByU_T(long userId, int type,
+		int start, int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByU_T(userId, type, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_T_TYPE_2_SQL);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceAccountModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccount.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CommerceAccountImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CommerceAccountImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+
+			qPos.add(type);
+
+			return (List<CommerceAccount>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the commerce accounts before and after the current commerce account in the ordered set of commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	 *
+	 * @param commerceAccountId the primary key of the current commerce account
+	 * @param userId the user ID
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce account
+	 * @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	 */
+	@Override
+	public CommerceAccount[] filterFindByU_T_PrevAndNext(
+		long commerceAccountId, long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws NoSuchAccountException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByU_T_PrevAndNext(commerceAccountId, userId, type,
+				orderByComparator);
+		}
+
+		CommerceAccount commerceAccount = findByPrimaryKey(commerceAccountId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceAccount[] array = new CommerceAccountImpl[3];
+
+			array[0] = filterGetByU_T_PrevAndNext(session, commerceAccount,
+					userId, type, orderByComparator, true);
+
+			array[1] = commerceAccount;
+
+			array[2] = filterGetByU_T_PrevAndNext(session, commerceAccount,
+					userId, type, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceAccount filterGetByU_T_PrevAndNext(Session session,
+		CommerceAccount commerceAccount, long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_T_TYPE_2_SQL);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceAccountModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccount.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CommerceAccountImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CommerceAccountImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccount);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceAccount> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce accounts where userId = &#63; and type = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 */
+	@Override
+	public void removeByU_T(long userId, int type) {
+		for (CommerceAccount commerceAccount : findByU_T(userId, type,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(commerceAccount);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce accounts where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @return the number of matching commerce accounts
+	 */
+	@Override
+	public int countByU_T(long userId, int type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_T;
+
+		Object[] finderArgs = new Object[] { userId, type };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEACCOUNT_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_T_TYPE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param type the type
+	 * @return the number of matching commerce accounts that the user has permission to view
+	 */
+	@Override
+	public int filterCountByU_T(long userId, int type) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByU_T(userId, type);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCEACCOUNT_WHERE);
+
+		query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_T_TYPE_2_SQL);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccount.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+
+			qPos.add(type);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_U_T_USERID_2 = "commerceAccount.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_T_TYPE_2 = "commerceAccount.type = ?";
+	private static final String _FINDER_COLUMN_U_T_TYPE_2_SQL = "commerceAccount.type_ = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceAccountModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -1558,6 +2480,15 @@ public class CommerceAccountPersistenceImpl extends BasePersistenceImpl<Commerce
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 				args);
 
+			args = new Object[] {
+					commerceAccountModelImpl.getUserId(),
+					commerceAccountModelImpl.getType()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -1578,6 +2509,27 @@ public class CommerceAccountPersistenceImpl extends BasePersistenceImpl<Commerce
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((commerceAccountModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceAccountModelImpl.getOriginalUserId(),
+						commerceAccountModelImpl.getOriginalType()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T,
+					args);
+
+				args = new Object[] {
+						commerceAccountModelImpl.getUserId(),
+						commerceAccountModelImpl.getType()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_T,
 					args);
 			}
 		}

@@ -344,10 +344,8 @@ public class CommerceAccountLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		long companyId, long userId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountLocalService.getPersonalCommerceAccount(companyId,
-			userId);
+		long userId) throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.getPersonalCommerceAccount(userId);
 	}
 
 	@Override

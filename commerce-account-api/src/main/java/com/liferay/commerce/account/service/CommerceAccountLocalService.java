@@ -282,8 +282,8 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceAccount getPersonalCommerceAccount(long companyId,
-		long userId) throws PortalException;
+	public CommerceAccount getPersonalCommerceAccount(long userId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
