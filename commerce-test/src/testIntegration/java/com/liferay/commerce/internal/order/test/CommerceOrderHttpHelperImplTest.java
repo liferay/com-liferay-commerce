@@ -95,7 +95,7 @@ public class CommerceOrderHttpHelperImplTest {
 
 		_commerceAccount =
 			_commerceAccountLocalService.getPersonalCommerceAccount(
-				_user.getCompanyId(), _user.getUserId());
+				_user.getUserId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, _user, _group, _commerceAccount, null, null);

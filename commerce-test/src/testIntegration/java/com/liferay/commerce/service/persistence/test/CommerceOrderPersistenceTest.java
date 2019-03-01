@@ -160,6 +160,10 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setPurchaseOrderNumber(RandomTestUtil.randomString());
 
+		newCommerceOrder.setCouponCode(RandomTestUtil.randomString());
+
+		newCommerceOrder.setLastPriceUpdateDate(RandomTestUtil.nextDate());
+
 		newCommerceOrder.setSubtotal(new BigDecimal(RandomTestUtil.nextDouble()));
 
 		newCommerceOrder.setSubtotalDiscountAmount(new BigDecimal(
@@ -271,6 +275,11 @@ public class CommerceOrderPersistenceTest {
 			newCommerceOrder.getShippingOptionName());
 		Assert.assertEquals(existingCommerceOrder.getPurchaseOrderNumber(),
 			newCommerceOrder.getPurchaseOrderNumber());
+		Assert.assertEquals(existingCommerceOrder.getCouponCode(),
+			newCommerceOrder.getCouponCode());
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceOrder.getLastPriceUpdateDate()),
+			Time.getShortTimestamp(newCommerceOrder.getLastPriceUpdateDate()));
 		Assert.assertEquals(existingCommerceOrder.getSubtotal(),
 			newCommerceOrder.getSubtotal());
 		Assert.assertEquals(existingCommerceOrder.getSubtotalDiscountAmount(),
@@ -453,9 +462,9 @@ public class CommerceOrderPersistenceTest {
 			"billingAddressId", true, "shippingAddressId", true,
 			"commercePaymentMethodKey", true, "commerceShippingMethodId", true,
 			"shippingOptionName", true, "purchaseOrderNumber", true,
-			"subtotal", true, "subtotalDiscountAmount", true,
-			"subtotalDiscountPercentageLevel1", true,
-			"subtotalDiscountPercentageLevel2", true,
+			"couponCode", true, "lastPriceUpdateDate", true, "subtotal", true,
+			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
+			true, "subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,
 			"subtotalDiscountPercentageLevel4", true, "shippingAmount", true,
 			"shippingDiscountAmount", true, "shippingDiscountPercentageLevel1",
@@ -727,6 +736,10 @@ public class CommerceOrderPersistenceTest {
 		commerceOrder.setShippingOptionName(RandomTestUtil.randomString());
 
 		commerceOrder.setPurchaseOrderNumber(RandomTestUtil.randomString());
+
+		commerceOrder.setCouponCode(RandomTestUtil.randomString());
+
+		commerceOrder.setLastPriceUpdateDate(RandomTestUtil.nextDate());
 
 		commerceOrder.setSubtotal(new BigDecimal(RandomTestUtil.nextDouble()));
 

@@ -359,6 +359,35 @@ public interface CommerceOrderModel extends BaseModel<CommerceOrder>,
 	public void setPurchaseOrderNumber(String purchaseOrderNumber);
 
 	/**
+	 * Returns the coupon code of this commerce order.
+	 *
+	 * @return the coupon code of this commerce order
+	 */
+	@AutoEscape
+	public String getCouponCode();
+
+	/**
+	 * Sets the coupon code of this commerce order.
+	 *
+	 * @param couponCode the coupon code of this commerce order
+	 */
+	public void setCouponCode(String couponCode);
+
+	/**
+	 * Returns the last price update date of this commerce order.
+	 *
+	 * @return the last price update date of this commerce order
+	 */
+	public Date getLastPriceUpdateDate();
+
+	/**
+	 * Sets the last price update date of this commerce order.
+	 *
+	 * @param lastPriceUpdateDate the last price update date of this commerce order
+	 */
+	public void setLastPriceUpdateDate(Date lastPriceUpdateDate);
+
+	/**
 	 * Returns the subtotal of this commerce order.
 	 *
 	 * @return the subtotal of this commerce order

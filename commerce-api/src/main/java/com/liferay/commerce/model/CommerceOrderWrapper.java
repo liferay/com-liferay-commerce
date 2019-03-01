@@ -80,6 +80,8 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
 		attributes.put("purchaseOrderNumber", getPurchaseOrderNumber());
+		attributes.put("couponCode", getCouponCode());
+		attributes.put("lastPriceUpdateDate", getLastPriceUpdateDate());
 		attributes.put("subtotal", getSubtotal());
 		attributes.put("subtotalDiscountAmount", getSubtotalDiscountAmount());
 		attributes.put("subtotalDiscountPercentageLevel1",
@@ -234,6 +236,18 @@ public class CommerceOrderWrapper implements CommerceOrder,
 
 		if (purchaseOrderNumber != null) {
 			setPurchaseOrderNumber(purchaseOrderNumber);
+		}
+
+		String couponCode = (String)attributes.get("couponCode");
+
+		if (couponCode != null) {
+			setCouponCode(couponCode);
+		}
+
+		Date lastPriceUpdateDate = (Date)attributes.get("lastPriceUpdateDate");
+
+		if (lastPriceUpdateDate != null) {
+			setLastPriceUpdateDate(lastPriceUpdateDate);
 		}
 
 		BigDecimal subtotal = (BigDecimal)attributes.get("subtotal");
@@ -540,6 +554,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Returns the coupon code of this commerce order.
+	*
+	* @return the coupon code of this commerce order
+	*/
+	@Override
+	public String getCouponCode() {
+		return _commerceOrder.getCouponCode();
+	}
+
+	/**
 	* Returns the create date of this commerce order.
 	*
 	* @return the create date of this commerce order
@@ -572,6 +596,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public long getGroupId() {
 		return _commerceOrder.getGroupId();
+	}
+
+	/**
+	* Returns the last price update date of this commerce order.
+	*
+	* @return the last price update date of this commerce order
+	*/
+	@Override
+	public Date getLastPriceUpdateDate() {
+		return _commerceOrder.getLastPriceUpdateDate();
 	}
 
 	/**
@@ -1192,6 +1226,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Sets the coupon code of this commerce order.
+	*
+	* @param couponCode the coupon code of this commerce order
+	*/
+	@Override
+	public void setCouponCode(String couponCode) {
+		_commerceOrder.setCouponCode(couponCode);
+	}
+
+	/**
 	* Sets the create date of this commerce order.
 	*
 	* @param createDate the create date of this commerce order
@@ -1235,6 +1279,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceOrder.setGroupId(groupId);
+	}
+
+	/**
+	* Sets the last price update date of this commerce order.
+	*
+	* @param lastPriceUpdateDate the last price update date of this commerce order
+	*/
+	@Override
+	public void setLastPriceUpdateDate(Date lastPriceUpdateDate) {
+		_commerceOrder.setLastPriceUpdateDate(lastPriceUpdateDate);
 	}
 
 	/**
