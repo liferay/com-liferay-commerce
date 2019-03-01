@@ -184,7 +184,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 				CommerceAccountConstants.SITE_TYPE_B2C) {
 
 			return _commerceAccountService.getPersonalCommerceAccount(
-				user.getCompanyId(), user.getUserId());
+				user.getUserId());
 		}
 
 		List<CommerceAccount> userCommerceAccounts =
