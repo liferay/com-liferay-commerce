@@ -123,12 +123,13 @@ public class CommerceAccountResource {
 	}
 
 	@GET
-	@Path("/search-accounts/{groupId}")
+	@Path("/search-accounts")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceAccounts(
-		@PathParam("groupId") long groupId, @QueryParam("q") String queryString,
-		@QueryParam("page") int page, @QueryParam("pageSize") int pageSize,
-		@Context UriInfo uriInfo, @Context ThemeDisplay themeDisplay) {
+		@QueryParam("groupId") long groupId,
+		@QueryParam("q") String queryString, @QueryParam("page") int page,
+		@QueryParam("pageSize") int pageSize, @Context UriInfo uriInfo,
+		@Context ThemeDisplay themeDisplay) {
 
 		AccountList accountList = null;
 
@@ -179,10 +180,10 @@ public class CommerceAccountResource {
 	}
 
 	@GET
-	@Path("/search-accounts/{groupId}/{accountId}/orders/")
+	@Path("/search-accounts/{accountId}/orders/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceOrders(
-		@PathParam("groupId") long groupId,
+		@QueryParam("groupId") long groupId,
 		@PathParam("accountId") long accountId,
 		@QueryParam("q") String queryString, @QueryParam("page") int page,
 		@QueryParam("pageSize") int pageSize,
