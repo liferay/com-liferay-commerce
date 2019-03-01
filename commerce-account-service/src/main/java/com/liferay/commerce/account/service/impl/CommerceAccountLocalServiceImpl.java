@@ -312,19 +312,19 @@ public class CommerceAccountLocalServiceImpl
 	public CommerceAccount getPersonalCommerceAccount(long userId)
 		throws PortalException {
 
-		List<CommerceAccount> commerceAccounts =
-			commerceAccountLocalService.getUserCommerceAccounts(
-				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				CommerceAccountConstants.SITE_TYPE_B2C, StringPool.BLANK,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.fetchByU_T_First(
+				userId, CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL, null);
 
-		if (!commerceAccounts.isEmpty()) {
-			return commerceAccounts.get(0);
+		if (commerceAccount != null) {
+			return commerceAccount;
 		}
+
+		User user = userLocalService.getUser(userId);
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setCompanyId(companyId);
+		serviceContext.setCompanyId(user.getCompanyId());
 		serviceContext.setUserId(userId);
 
 		return commerceAccountLocalService.addPersonalCommerceAccount(
