@@ -773,6 +773,10 @@
 			<finder-column name="active" />
 			<finder-column name="commerceCountryId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
 	<entity local-service="true" name="CommerceWarehouseItem" remote-service="true">
 
