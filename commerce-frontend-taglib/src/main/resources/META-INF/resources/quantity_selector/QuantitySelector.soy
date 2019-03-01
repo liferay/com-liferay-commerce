@@ -15,24 +15,24 @@
 	{@param? _handleSelectOption: any}
 
 	{let $prevClass kind="text"}
-		quantity-selector__btn
+		commerce-quantity-selector__btn
 		{if $_prevAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
 	{let $nextClass kind="text"}
-		quantity-selector__btn
+		commerce-quantity-selector__btn
 		{if $_nextAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
-	<div class="quantity-selector">
+	<div class="commerce-quantity-selector">
 		{if isNonnull($allowedQuantities)}
 			<form data-onsubmit="{$_handleFormSubmit}">
 				<select
-					class="quantity-selector__select"
+					class="commerce-quantity-selector__select"
 					data-onchange="{$_handleSelectOption}"
 				>
 					{foreach $option in $allowedQuantities}
@@ -59,7 +59,7 @@
 				<input
 					name="quantity"
 					type="number"
-					class="quantity-selector__input"
+					class="commerce-quantity-selector__input"
 					{if isNonnull($minQuantity)}min="{$minQuantity}"{/if}
 					{if isNonnull($maxQuantity)}max="{$maxQuantity}"{/if}
 					data-onkeyup="{$_handleInputKeyUp}"

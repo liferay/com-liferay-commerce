@@ -7,9 +7,9 @@
 	{@param? added: bool }
 
 	{let $svgClasses kind="text"}
-		add-to-tick
+		commerce-add-to-tick
 		{if $added}
-			{sp}add-to-tick--is-added
+			{sp}is-added
 		{/if}
 	{/let}
 
@@ -19,11 +19,11 @@
 		class="{$svgClasses}"
 	>
 		<path
-				class="add-to-tick__circle"
+				class="commerce-add-to-tick__circle"
 				d="M100,13a87,87,0,1,1-87,87,87.1,87.1,0,0,1,87-87m0-13A100,100,0,1,0,200,100,100,100,0,0,0,100,0Z"
 		/>
 
-		<g class="add-to-tick__add">
+		<g class="commerce-add-to-tick__add">
 			<line
 				x1="100" y1="69.87" x2="100" y2="130.13"
 			/>
@@ -34,7 +34,7 @@
 		</g>
 
 		<polyline
-			class="add-to-tick__tick"
+			class="commerce-add-to-tick__tick"
 			points="69.82 95.33 92.64 118.14 130.09 80.69"
 		/>
 	</svg>

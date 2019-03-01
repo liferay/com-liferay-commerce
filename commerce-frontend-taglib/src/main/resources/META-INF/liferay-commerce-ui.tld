@@ -111,12 +111,12 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>product-details-modal</name>
+		<name>commerce-product-details-modal</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
-		<name>quantity-selector</name>
+		<name>commerce-quantity-selector</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.QuantitySelectorTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>

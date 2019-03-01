@@ -61,7 +61,7 @@
 
 	<div class="mini-cart-wrapper" id="mini-cart-wrapper">
 		<button
-			class="commerce-topbar__button{$openCartButtonModifiers}"
+			class="commerce-topbar-button{$openCartButtonModifiers}"
 			data-badge-count={$formattedProductsQuantity}
 			data-onclick="toggleCart"
 		>
@@ -73,7 +73,7 @@
 
 		<div class="commerce-cart{$cartModifiers}">
 			<button
-				class="commerce-topbar__button commerce-cart__close"
+				class="commerce-topbar-button commerce-cart__close"
 				data-onclick="toggleCart"
 			>
 				{call ClayIcon.render}

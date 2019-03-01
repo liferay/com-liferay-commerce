@@ -23,7 +23,7 @@
 	{@param? _handleDeleteItem: any }
 	{@param? _handleUpdateQuantity: any }
 
-	{let $miniumCartItemClasses kind="text"}
+	{let $cartItemClasses kind="text"}
 		commerce-cart__item commerce-item u-hoverable
 		{if isNonnull($deleting) and $deleting}
 			{sp}is-deleting
@@ -43,7 +43,7 @@
 		{/if}
 	{/let}
 
-	<div class="{$miniumCartItemClasses}">
+	<div class="{$cartItemClasses}">
 		<img
 			src="{$thumbnail}"
 			alt="{$name}"

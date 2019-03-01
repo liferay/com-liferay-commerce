@@ -16,14 +16,14 @@
 	{@param? handleSelectAccount: ?}
 
 	{let $accountSwitcherClasses kind="text"}
-		account-manager-switcher account-manager-switcher--accounts
+		commerce-account-switcher commerce-account-switcher--accounts
 		{if $isVisible}
 			{sp}is-visible
 		{/if}
 	{/let}
 
 	<div class="{$accountSwitcherClasses}">
-		<div class="account-manager-switcher__section">
+		<div class="commerce-account-switcher__section">
 			<form class="commerce-search" data-onsubmit="_handleSubmitFilter">
 				<div class="commerce-search__input">
 					<input
@@ -35,10 +35,10 @@
 			</form>
 		</div>
 
-		<div class="account-manager-switcher__section account-manager-switcher__section--fill">
-			<div class="account-list">
+		<div class="commerce-account-switcher__section commerce-account-switcher__section--fill">
+			<div class="commerce-account-list">
 				{if isNonnull($accounts) and length($accounts) > 0}
-					<div class="account-list__title">
+					<div class="commerce-account-list__title">
 						{msg desc="Select Account..."}select-account{/msg}
 					</div>
 					{foreach $account in $accounts}
@@ -54,18 +54,18 @@
 					{/foreach}
 				{/if}
 				{if isNonnull($accounts) and length($accounts) == 0}
-					<div class="account-manager-switcher__empty-table">
+					<div class="commerce-account-switcher__empty-table">
 						{msg desc="No accounts were found."}no-accounts-were-found{/msg}
 					</div>
 				{/if}
 			</div>
 		</div>
 
-		<div class="account-manager-switcher__section">
+		<div class="commerce-account-switcher__section">
 			{if isNonnull($viewAllAccountsLink)}
 				<a
 					href="{$viewAllAccountsLink}"
-					class="account-manager-switcher__button commerce-button commerce-button--block commerce-button--link"
+					class="commerce-account-switcher__button commerce-button commerce-button--block commerce-button--link"
 				>
 					{msg desc="View all accounts"}view-all-accounts{/msg}
 				</a>
@@ -73,7 +73,7 @@
 			{if isNonnull($createNewAccountLink)}
 				<a
 					href="{$createNewAccountLink}"
-					class="account-manager-switcher__button commerce-button commerce-button--block"
+					class="commerce-account-switcher__button commerce-button commerce-button--block"
 				>
 					{msg desc="Create new account"}create-new-account{/msg}
 				</a>

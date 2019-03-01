@@ -62,28 +62,28 @@
 				</button>
 			</div>
 
-			<div class="product-details-modal__picture">
+			<div class="commerce-product-details-modal__picture">
 				<img alt="{$name}" src="{$pictureUrl}" />
 			</div>
 
-			<div class="product-details-modal__availability">
+			<div class="commerce-product-details-modal__availability">
 				<div class="{$availabilityDotClasses}"></div>
 			</div>
 
-			<p class="product-details-modal__sku">{$sku}</p>
+			<p class="commerce-product-details-modal__sku">{$sku}</p>
 			{if isNonnull($settings) and isNonnull($settings.minQuantity)}
-				<span class="product-details-modal__min-quantity">
+				<span class="commerce-product-details-modal__min-quantity">
 					Minimum quantity per order
-					<span class="product-details-modal__min-quantity__value">
+					<span class="commerce-product-details-modal__min-quantity__value">
 						{isNonnull($settings.minQuantity)}
 					</span>
 				</span>
 			{/if}
-			<h3 class="product-details-modal__name">
+			<h3 class="commerce-product-details-modal__name">
 				{$name}
 			</h3>
 			{if isNonnull($categories) and length($categories) > 0}
-				<p class="product-details-modal__categories">
+				<p class="commerce-product-details-modal__categories">
 					{foreach $category in $categories}
 						{if index($category) != 0}
 							,{sp}
@@ -95,18 +95,18 @@
 				</p>
 			{/if}
 			{if isNonnull($description)}
-				<p class="product-details-modal__description">
+				<p class="commerce-product-details-modal__description">
 					{$description}
 				</p>
 			{/if}
 			<a
-				class="product-details-modal__view-details"
+				class="commerce-product-details-modal__view-details"
 				href="{$detailsLink}"
 			>
 				View product details
 			</a>
 			{if isNonnull($addToOrderLink)}
-				<div class="product-details-modal__add-to-order">
+				<div class="commerce-product-details-modal__add-to-order">
 					<a class="commerce-button" href="{$addToOrderLink}">
 						Add to order
 					</a>
