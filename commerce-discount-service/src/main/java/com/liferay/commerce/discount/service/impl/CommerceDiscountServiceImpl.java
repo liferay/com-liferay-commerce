@@ -126,6 +126,18 @@ public class CommerceDiscountServiceImpl
 	}
 
 	@Override
+	public int getCommerceDiscountsCount(long groupId, String couponCode)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
+
+		return commerceDiscountLocalService.getCommerceDiscountsCount(
+			groupId, couponCode);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
 			long companyId, long groupId, String keywords, int status,
 			int start, int end, Sort sort)
