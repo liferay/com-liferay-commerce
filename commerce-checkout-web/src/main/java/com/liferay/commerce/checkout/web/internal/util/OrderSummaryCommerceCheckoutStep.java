@@ -20,7 +20,6 @@ import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
 import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
@@ -94,9 +93,6 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			actionRequest);
 
 		_checkoutCommerceOrder(httpServletRequest);
-
-		_commerceDiscountCouponCodeHelper.removeCommerceDiscountCouponCode(
-			_portal.getHttpServletRequest(actionRequest));
 	}
 
 	@Override
@@ -212,9 +208,6 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
-
-	@Reference
-	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;

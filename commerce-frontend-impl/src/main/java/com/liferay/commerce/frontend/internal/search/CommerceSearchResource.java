@@ -153,8 +153,7 @@ public class CommerceSearchResource {
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
-			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), 0, 0,
-			StringPool.BLANK);
+			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), 0, 0);
 
 		AccountList accountList = _commerceAccountResource.getAccountList(
 			themeDisplay.getUserId(),

@@ -31,7 +31,6 @@ page import="com.liferay.commerce.product.model.CPRule" %><%@
 page import="com.liferay.commerce.support.web.internal.display.context.CommerceContextDisplayContext" %><%@
 page import="com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%@ page import="java.util.List" %><%@
