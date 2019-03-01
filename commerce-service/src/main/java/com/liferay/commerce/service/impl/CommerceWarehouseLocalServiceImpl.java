@@ -76,6 +76,7 @@ public class CommerceWarehouseLocalServiceImpl
 		commerceWarehouse.setCommerceCountryId(commerceCountryId);
 		commerceWarehouse.setLatitude(latitude);
 		commerceWarehouse.setLongitude(longitude);
+		commerceWarehouse.setExpandoBridgeAttributes(serviceContext);
 
 		commerceWarehousePersistence.update(commerceWarehouse);
 
@@ -93,6 +94,11 @@ public class CommerceWarehouseLocalServiceImpl
 		// Commerce warehouse items
 
 		commerceWarehouseItemLocalService.deleteCommerceWarehouseItems(
+			commerceWarehouse.getCommerceWarehouseId());
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(
 			commerceWarehouse.getCommerceWarehouseId());
 
 		return commerceWarehouse;
@@ -316,6 +322,7 @@ public class CommerceWarehouseLocalServiceImpl
 		commerceWarehouse.setCommerceCountryId(commerceCountryId);
 		commerceWarehouse.setLatitude(latitude);
 		commerceWarehouse.setLongitude(longitude);
+		commerceWarehouse.setExpandoBridgeAttributes(serviceContext);
 
 		commerceWarehousePersistence.update(commerceWarehouse);
 
