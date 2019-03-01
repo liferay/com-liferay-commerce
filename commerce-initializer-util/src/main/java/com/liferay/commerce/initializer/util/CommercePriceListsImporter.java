@@ -153,7 +153,7 @@ public class CommercePriceListsImporter {
 
 		String externalReferenceCode = StringBundler.concat(
 			String.valueOf(serviceContext.getScopeGroupId()), "_",
-            FriendlyURLNormalizerUtil.normalize(name));
+			FriendlyURLNormalizerUtil.normalize(name));
 
 		_commercePriceListLocalService.upsertCommercePriceList(
 			0, commerceCurrency.getCommerceCurrencyId(), parentPriceListId,
