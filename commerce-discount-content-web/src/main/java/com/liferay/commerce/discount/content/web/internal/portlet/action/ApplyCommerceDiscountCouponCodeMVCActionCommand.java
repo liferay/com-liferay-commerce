@@ -14,11 +14,13 @@
 
 package com.liferay.commerce.discount.content.web.internal.portlet.action;
 
-import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException;
-import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -27,8 +29,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -62,6 +62,12 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
 		if (cmd.equals(Constants.ADD)) {
 			String couponCode = ParamUtil.getString(
 				actionRequest, "couponCode");
@@ -78,12 +84,13 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 				return;
 			}
 
-			_commerceDiscountCouponCodeHelper.addCommerceDiscountCouponCode(
-				httpServletRequest, couponCode);
+			_commerceOrderService.applayCouponCode(
+				commerceOrder.getCommerceOrderId(), couponCode,
+				commerceContext);
 		}
 		else if (cmd.equals(Constants.REMOVE)) {
-			_commerceDiscountCouponCodeHelper.removeCommerceDiscountCouponCode(
-				httpServletRequest);
+			_commerceOrderService.applayCouponCode(
+				commerceOrder.getCommerceOrderId(), null, commerceContext);
 		}
 
 		hideDefaultSuccessMessage(actionRequest);
@@ -97,24 +104,21 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 			return false;
 		}
 
-		List<CommerceDiscount> commerceDiscounts =
-			_commerceDiscountService.getCommerceDiscounts(
-				_portal.getScopeGroupId(actionRequest), couponCode);
+		int count = _commerceDiscountService.getCommerceDiscountsCount(
+			_portal.getScopeGroupId(actionRequest), couponCode);
 
-		for (CommerceDiscount commerceDiscount : commerceDiscounts) {
-			if (couponCode.equals(commerceDiscount.getCouponCode())) {
-				return true;
-			}
+		if (count > 0) {
+			return true;
 		}
 
 		return false;
 	}
 
 	@Reference
-	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
+	private CommerceDiscountService _commerceDiscountService;
 
 	@Reference
-	private CommerceDiscountService _commerceDiscountService;
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private Portal _portal;
