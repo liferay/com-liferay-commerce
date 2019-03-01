@@ -260,6 +260,11 @@ public class CommerceDiscountLocalServiceImpl
 		return commerceDiscountPersistence.countByGroupId(groupId);
 	}
 
+	@Override
+	public int getCommerceDiscountsCount(long groupId, String couponCode) {
+		return commerceDiscountPersistence.countByG_C(groupId, couponCode);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceDiscount incrementCommerceDiscountNumberOfUse(
