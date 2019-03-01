@@ -262,6 +262,23 @@ public class CommerceOrderLocalServiceImpl
 			user.getUserId(), commerceOrder, serviceContext);
 	}
 
+	@Override
+	public CommerceOrder applayCouponCode(
+			long commerceOrderId, String couponCode,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		commerceOrder.setCouponCode(couponCode);
+
+		commerceOrderPersistence.update(commerceOrder);
+
+		return commerceOrderLocalService.recalculatePrice(
+			commerceOrderId, commerceContext);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder approveCommerceOrder(long userId, long commerceOrderId)

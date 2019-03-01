@@ -88,6 +88,19 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceOrder applayCouponCode(
+			long commerceOrderId, String couponCode,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
+
+		return commerceOrderLocalService.applayCouponCode(
+			commerceOrderId, couponCode, commerceContext);
+	}
+
+	@Override
 	public CommerceOrder approveCommerceOrder(long commerceOrderId)
 		throws PortalException {
 
