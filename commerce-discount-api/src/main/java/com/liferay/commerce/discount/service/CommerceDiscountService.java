@@ -91,6 +91,10 @@ public interface CommerceDiscountService extends BaseService {
 	public int getCommerceDiscountsCount(long groupId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceDiscountsCount(long groupId, String couponCode)
+		throws PortalException;
+
 	/**
 	* Returns the OSGi service identifier.
 	*

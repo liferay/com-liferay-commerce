@@ -90,6 +90,13 @@ public class CommerceDiscountServiceWrapper implements CommerceDiscountService,
 		return _commerceDiscountService.getCommerceDiscountsCount(groupId);
 	}
 
+	@Override
+	public int getCommerceDiscountsCount(long groupId, String couponCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceDiscountService.getCommerceDiscountsCount(groupId,
+			couponCode);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

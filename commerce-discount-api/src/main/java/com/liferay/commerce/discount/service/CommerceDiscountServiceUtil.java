@@ -94,6 +94,11 @@ public class CommerceDiscountServiceUtil {
 		return getService().getCommerceDiscountsCount(groupId);
 	}
 
+	public static int getCommerceDiscountsCount(long groupId, String couponCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceDiscountsCount(groupId, couponCode);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

@@ -351,6 +351,12 @@ public class CommerceDiscountLocalServiceWrapper
 	}
 
 	@Override
+	public int getCommerceDiscountsCount(long groupId, String couponCode) {
+		return _commerceDiscountLocalService.getCommerceDiscountsCount(groupId,
+			couponCode);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return _commerceDiscountLocalService.getExportActionableDynamicQuery(portletDataContext);
