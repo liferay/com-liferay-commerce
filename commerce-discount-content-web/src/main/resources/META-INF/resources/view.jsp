@@ -17,9 +17,15 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceDiscountCouponCodeHelper commerceDiscountCouponCodeHelper = (CommerceDiscountCouponCodeHelper)request.getAttribute(CommerceDiscountWebKeys.COMMERCE_DISCOUNT_COUPON_CODE_HELPER);
+CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
 
-String couponCode = commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(request);
+String couponCode = null;
+
+CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
+if (commerceOrder != null) {
+	couponCode = commerceOrder.getCouponCode();
+}
 %>
 
 <portlet:actionURL name="applyCommerceDiscountCouponCode" var="applyCommerceDiscountCouponCodeActionURL" />
@@ -28,6 +34,8 @@ String couponCode = commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCo
 	<liferay-ui:error exception="<%= CommerceDiscountCouponCodeException.class %>" message="please-enter-a-valid-coupon-code" />
 
 	<c:choose>
+		<c:when test="<%= Validator.isNull(commerceOrder) %>">
+		</c:when>
 		<c:when test="<%= Validator.isNotNull(couponCode) %>">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.REMOVE %>" />
 

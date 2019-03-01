@@ -23,9 +23,10 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper" %><%@
-page import="com.liferay.commerce.discount.constants.CommerceDiscountWebKeys" %><%@
+<%@ page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
+page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException" %><%@
+page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
