@@ -151,7 +151,7 @@ public class Path {
 				else {
 					_referencedModels.add(
 						OpenApiComponentUtil.getComponentName(
-							openApiComponent.getItemsReferencedModel()));
+							openApiComponent.getItemsReference()));
 				}
 			}
 		}
