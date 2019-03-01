@@ -70,11 +70,11 @@ public class CommercePriceEntriesImporter {
 
 		String priceListExternalReferenceCode = StringBundler.concat(
 			String.valueOf(serviceContext.getScopeGroupId()), "_",
-            FriendlyURLNormalizerUtil.normalize(name));
+			FriendlyURLNormalizerUtil.normalize(name));
 
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.fetchByExternalReferenceCode(
-                serviceContext.getCompanyId(), priceListExternalReferenceCode);
+				serviceContext.getCompanyId(), priceListExternalReferenceCode);
 
 		if (commercePriceList == null) {
 			throw new NoSuchPriceListException(
