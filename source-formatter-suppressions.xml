@@ -42,10 +42,10 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-health-status-api/src/main/java/com/liferay/commerce/health/status/CommerceHealthStatus\.java" />>
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolver\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolverUtil\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v1_0/UserHelper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v2_0/UserHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/mapper/v1_0/DTOMapper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/mapper/v2_0/DTOMapper\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v1_0/UserHelper\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v2_0/UserHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/resource/v1_0/UserResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/resource/v2_0/UserResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-organization-api/src/main/java/com/liferay/commerce/organization/util/CommerceOrganizationHelper\.java" />
