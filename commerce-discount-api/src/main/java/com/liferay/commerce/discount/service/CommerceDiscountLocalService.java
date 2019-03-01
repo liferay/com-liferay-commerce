@@ -303,6 +303,9 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 	public int getCommerceDiscountsCount(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceDiscountsCount(long groupId, String couponCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 

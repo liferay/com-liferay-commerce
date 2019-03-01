@@ -156,6 +156,21 @@ public class CommerceDiscountServiceSoap {
 		}
 	}
 
+	public static int getCommerceDiscountsCount(long groupId, String couponCode)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId,
+					couponCode);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceDiscountsCount(long groupId)
 		throws RemoteException {
 		try {
