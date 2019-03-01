@@ -62,6 +62,15 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder applayCouponCode(
+		long commerceOrderId, String couponCode,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderService.applayCouponCode(commerceOrderId,
+			couponCode, commerceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder approveCommerceOrder(
 		long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {

@@ -67,7 +67,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(89);
+		StringBundler sb = new StringBundler(93);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -105,6 +105,10 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		sb.append(shippingOptionName);
 		sb.append(", purchaseOrderNumber=");
 		sb.append(purchaseOrderNumber);
+		sb.append(", couponCode=");
+		sb.append(couponCode);
+		sb.append(", lastPriceUpdateDate=");
+		sb.append(lastPriceUpdateDate);
 		sb.append(", subtotal=");
 		sb.append(subtotal);
 		sb.append(", subtotalDiscountAmount=");
@@ -241,6 +245,21 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			commerceOrderImpl.setPurchaseOrderNumber(purchaseOrderNumber);
 		}
 
+		if (couponCode == null) {
+			commerceOrderImpl.setCouponCode("");
+		}
+		else {
+			commerceOrderImpl.setCouponCode(couponCode);
+		}
+
+		if (lastPriceUpdateDate == Long.MIN_VALUE) {
+			commerceOrderImpl.setLastPriceUpdateDate(null);
+		}
+		else {
+			commerceOrderImpl.setLastPriceUpdateDate(new Date(
+					lastPriceUpdateDate));
+		}
+
 		commerceOrderImpl.setSubtotal(subtotal);
 		commerceOrderImpl.setSubtotalDiscountAmount(subtotalDiscountAmount);
 		commerceOrderImpl.setSubtotalDiscountPercentageLevel1(subtotalDiscountPercentageLevel1);
@@ -322,6 +341,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		commerceShippingMethodId = objectInput.readLong();
 		shippingOptionName = objectInput.readUTF();
 		purchaseOrderNumber = objectInput.readUTF();
+		couponCode = objectInput.readUTF();
+		lastPriceUpdateDate = objectInput.readLong();
 		subtotal = (BigDecimal)objectInput.readObject();
 		subtotalDiscountAmount = (BigDecimal)objectInput.readObject();
 		subtotalDiscountPercentageLevel1 = (BigDecimal)objectInput.readObject();
@@ -427,6 +448,14 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			objectOutput.writeUTF(purchaseOrderNumber);
 		}
 
+		if (couponCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(couponCode);
+		}
+
+		objectOutput.writeLong(lastPriceUpdateDate);
 		objectOutput.writeObject(subtotal);
 		objectOutput.writeObject(subtotalDiscountAmount);
 		objectOutput.writeObject(subtotalDiscountPercentageLevel1);
@@ -490,6 +519,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public long commerceShippingMethodId;
 	public String shippingOptionName;
 	public String purchaseOrderNumber;
+	public String couponCode;
+	public long lastPriceUpdateDate;
 	public BigDecimal subtotal;
 	public BigDecimal subtotalDiscountAmount;
 	public BigDecimal subtotalDiscountPercentageLevel1;

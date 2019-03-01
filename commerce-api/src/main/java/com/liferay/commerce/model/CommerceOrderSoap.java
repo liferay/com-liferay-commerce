@@ -54,6 +54,8 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
 		soapModel.setPurchaseOrderNumber(model.getPurchaseOrderNumber());
+		soapModel.setCouponCode(model.getCouponCode());
+		soapModel.setLastPriceUpdateDate(model.getLastPriceUpdateDate());
 		soapModel.setSubtotal(model.getSubtotal());
 		soapModel.setSubtotalDiscountAmount(model.getSubtotalDiscountAmount());
 		soapModel.setSubtotalDiscountPercentageLevel1(model.getSubtotalDiscountPercentageLevel1());
@@ -274,6 +276,22 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
 		_purchaseOrderNumber = purchaseOrderNumber;
+	}
+
+	public String getCouponCode() {
+		return _couponCode;
+	}
+
+	public void setCouponCode(String couponCode) {
+		_couponCode = couponCode;
+	}
+
+	public Date getLastPriceUpdateDate() {
+		return _lastPriceUpdateDate;
+	}
+
+	public void setLastPriceUpdateDate(Date lastPriceUpdateDate) {
+		_lastPriceUpdateDate = lastPriceUpdateDate;
 	}
 
 	public BigDecimal getSubtotal() {
@@ -514,6 +532,8 @@ public class CommerceOrderSoap implements Serializable {
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;
 	private String _purchaseOrderNumber;
+	private String _couponCode;
+	private Date _lastPriceUpdateDate;
 	private BigDecimal _subtotal;
 	private BigDecimal _subtotalDiscountAmount;
 	private BigDecimal _subtotalDiscountPercentageLevel1;

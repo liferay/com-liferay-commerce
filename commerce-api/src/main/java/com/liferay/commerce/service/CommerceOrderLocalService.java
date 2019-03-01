@@ -106,6 +106,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		int paymentStatus, int orderStatus, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceOrder applayCouponCode(long commerceOrderId,
+		String couponCode, CommerceContext commerceContext)
+		throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder approveCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;
