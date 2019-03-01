@@ -53,7 +53,7 @@
 
 	<div class="{$dropdownClasses}">
 		<button
-			class="commerce-topbar__button"
+			class="commerce-topbar-button"
 			data-onclick="toggleAccountSelector"
 		>
 			{call .currentState}
@@ -106,16 +106,16 @@
 	{@param currentOrder: ? }
 
 	{if isNonnull($currentAccount)}
-		<div class="account-selector">
-			<div class="account-selector__image">
+		<div class="commerce-account-selector">
+			<div class="commerce-account-selector__image">
 				<img alt="{$currentAccount.name}" src="{$currentAccount.thumbnail}">
 			</div>
 
-			<div class="account-selector__title">
+			<div class="commerce-account-selector__title">
 					{$currentAccount.name}
 			</div>
 
-			<div class="account-selector__info">
+			<div class="commerce-account-selector__info">
 				{if isNonnull($currentOrder)}
 					{$currentOrder.id} | {$currentOrder.status}
 				{else}
@@ -124,8 +124,8 @@
 			</div>
 		</div>
 	{else}
-		<div class="account-selector">
-			<div class="account-selector__title">
+		<div class="commerce-account-selector">
+			<div class="commerce-account-selector__title">
 				{msg desc="Select Account & Order"}select-account-and-order{/msg}
 			</div>
 		</div>

@@ -14,7 +14,7 @@
 			<div class="commerce-suggestions__wrapper">
 
 				{foreach $item in $results}
-					{delcall MiniumSearchResults.Item variant="$item.type"}
+					{delcall SearchResults.Item variant="$item.type"}
 						{param queryValue: $queryValue /}
 						{param item: $item /}
 						{param _handleClick: $_handleClick /}
@@ -50,7 +50,7 @@
 	{/if}
 {/template}
 
-{deltemplate MiniumSearchResults.Item}
+{deltemplate SearchResults.Item}
 	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }
@@ -72,7 +72,7 @@
 	</div>
 {/deltemplate}
 
-{deltemplate MiniumSearchResults.Item variant="'category'"}
+{deltemplate SearchResults.Item variant="'category'"}
 	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }
@@ -88,7 +88,7 @@
 	</div>
 {/deltemplate}
 
-{deltemplate MiniumSearchResults.Item variant="'label'"}
+{deltemplate SearchResults.Item variant="'label'"}
 	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }

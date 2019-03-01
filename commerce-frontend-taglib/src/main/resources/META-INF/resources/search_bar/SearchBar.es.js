@@ -52,6 +52,7 @@ class SearchBar extends Component {
 			this.close();
 		}
 		if (!this.active && evt.key === '/') {
+			evt.preventDefault();
 			this.open();
 		}
 	}
@@ -60,11 +61,13 @@ class SearchBar extends Component {
 		this._updateQuery('');
 	}
 
-	_handleKeyUp(evt) {
-		if (evt.key == 'ArrowDown' || evt.key === 'ArrowUp') {
+	_handleKeyDown(evt) {
+		if (evt.key === 'ArrowDown' || evt.key === 'ArrowUp') {
 			evt.preventDefault();
 		}
+	}
 
+	_handleKeyUp(evt) {
 		this._updateQuery(evt.target.value);
 	}
 
