@@ -137,7 +137,9 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
-	public static final long NAME_COLUMN_BITMASK = 4L;
+	public static final long TYPE_COLUMN_BITMASK = 4L;
+	public static final long USERID_COLUMN_BITMASK = 8L;
+	public static final long NAME_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -465,6 +467,14 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -482,6 +492,10 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -608,7 +622,19 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public void setType(int type) {
+		_columnBitmask |= TYPE_COLUMN_BITMASK;
+
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	@JSON
@@ -924,7 +950,15 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		commerceAccountModelImpl._setOriginalCompanyId = false;
 
+		commerceAccountModelImpl._originalUserId = commerceAccountModelImpl._userId;
+
+		commerceAccountModelImpl._setOriginalUserId = false;
+
 		commerceAccountModelImpl._setModifiedDate = false;
+
+		commerceAccountModelImpl._originalType = commerceAccountModelImpl._type;
+
+		commerceAccountModelImpl._setOriginalType = false;
 
 		commerceAccountModelImpl._columnBitmask = 0;
 	}
@@ -1217,6 +1251,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -1227,6 +1263,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	private String _email;
 	private String _taxId;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private boolean _active;
 	private Date _displayDate;
 	private Date _expirationDate;

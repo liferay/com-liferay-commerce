@@ -257,15 +257,14 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		HttpPrincipal httpPrincipal, long companyId, long userId)
+		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getPersonalCommerceAccount",
 					_getPersonalCommerceAccountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, userId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
 
@@ -455,7 +454,7 @@ public class CommerceAccountServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getPersonalCommerceAccountParameterTypes6 = new Class[] {
-			long.class, long.class
+			long.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
 			long.class, long.class, int.class, String.class, int.class,
