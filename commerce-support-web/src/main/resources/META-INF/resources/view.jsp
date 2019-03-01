@@ -23,7 +23,6 @@ CommerceContext commerceContext = commerceContextDisplayContext.getCommerceConte
 
 CommerceCurrency commerceCurrency = commerceContext.getCommerceCurrency();
 CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-String couponCode = commerceContext.getCouponCode();
 List<CommerceUserSegmentEntry> commerceUserSegmentEntries = commerceContextDisplayContext.getCommerceUserSegmentEntries();
 List<CPRule> cpRules = commerceContext.getCPRules();
 Optional<CommercePriceList> optionalCommercePriceList = commerceContext.getCommercePriceList();
@@ -70,10 +69,12 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 				<tr>
 					<th class="table-cell-content"><liferay-ui:message key="id" /></th>
 					<th class="table-cell-content"><liferay-ui:message key="create-date" /></th>
+					<th class="table-cell-content"><liferay-ui:message key="coupon-code" /></th>
 				</tr>
 				<tr>
 					<td class="table-cell-content"><%= commerceOrder.getCommerceOrderId() %></td>
 					<td class="table-cell-content"><%= commerceOrder.getCreateDate() %></td>
+					<td class="table-cell-content"><%= commerceOrder.getCouponCode() %></td>
 				</tr>
 			</table>
 		</c:otherwise>
@@ -214,28 +215,6 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 				}
 				%>
 
-			</table>
-		</c:otherwise>
-	</c:choose>
-</div>
-
-<div class="sheet-section">
-	<h3 class="sheet-subtitle"><liferay-ui:message key="coupon-code" /></h3>
-
-	<c:choose>
-		<c:when test="<%= Validator.isNull(couponCode) %>">
-			<div class="alert alert-info mx-auto">
-				<liferay-ui:message arguments="coupon-code" key="x-is-not-set" translateArguments="<%= true %>" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<table class="table table-sm">
-				<tr>
-					<th class="table-cell-content"><liferay-ui:message key="value" /></th>
-				</tr>
-				<tr>
-					<td class="table-cell-content"><%= couponCode %></td>
-				</tr>
 			</table>
 		</c:otherwise>
 	</c:choose>

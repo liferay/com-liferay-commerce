@@ -119,7 +119,7 @@ public class CommerceAccountClayTable
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			themeDisplay.getScopeGroupId(),
-			_portal.getUserId(httpServletRequest), 0, 0, StringPool.BLANK);
+			_portal.getUserId(httpServletRequest), 0, 0);
 
 		return _commerceAccountService.getUserCommerceAccountsCount(
 			_portal.getUserId(httpServletRequest),
@@ -167,7 +167,7 @@ public class CommerceAccountClayTable
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			themeDisplay.getScopeGroupId(),
-			_portal.getUserId(httpServletRequest), 0, 0, StringPool.BLANK);
+			_portal.getUserId(httpServletRequest), 0, 0);
 
 		List<CommerceAccount> commerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(

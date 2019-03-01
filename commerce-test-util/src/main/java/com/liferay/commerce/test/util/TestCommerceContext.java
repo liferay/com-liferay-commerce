@@ -95,11 +95,6 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
-	public String getCouponCode() {
-		return _couponCode;
-	}
-
-	@Override
 	public List<CPRule> getCPRules() {
 		return Collections.emptyList();
 	}

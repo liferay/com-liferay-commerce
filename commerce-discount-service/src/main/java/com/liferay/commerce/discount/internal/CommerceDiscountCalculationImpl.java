@@ -74,7 +74,7 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(),
+			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_SHIPPING);
 
 		return _getCommerceDiscountValue(
@@ -95,7 +95,7 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(),
+			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_SUBTOTAL);
 
 		return _getCommerceDiscountValue(
@@ -116,7 +116,7 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(),
+			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_TOTAL);
 
 		return _getCommerceDiscountValue(
@@ -132,11 +132,18 @@ public class CommerceDiscountCalculationImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
+		String couponCode = null;
+
+		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
+		if (commerceOrder != null) {
+			couponCode = commerceOrder.getCouponCode();
+		}
+
 		SearchContext searchContext = buildSearchContext(
 			cpInstance.getCompanyId(), cpInstance.getGroupId(),
 			cpInstance.getCPDefinitionId(), cpInstanceId, 0,
-			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(),
+			commerceContext.getCommerceUserSegmentEntryIds(), couponCode,
 			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
 
 		return _getCommerceDiscountValue(

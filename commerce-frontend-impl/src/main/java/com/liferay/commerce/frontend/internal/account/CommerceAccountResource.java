@@ -137,8 +137,7 @@ public class CommerceAccountResource {
 		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
-			groupId, _portal.getUserId(httpServletRequest), 0, 0,
-			StringPool.BLANK);
+			groupId, _portal.getUserId(httpServletRequest), 0, 0);
 
 		try {
 			accountList = getAccountList(
