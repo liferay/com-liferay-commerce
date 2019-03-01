@@ -350,6 +350,254 @@ public class CommerceAccountUtil {
 	}
 
 	/**
+	* Returns all the commerce accounts where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @return the matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByU_T(long userId, int type) {
+		return getPersistence().findByU_T(userId, type);
+	}
+
+	/**
+	* Returns a range of all the commerce accounts where userId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @return the range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByU_T(long userId, int type,
+		int start, int end) {
+		return getPersistence().findByU_T(userId, type, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts where userId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByU_T(long userId, int type,
+		int start, int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .findByU_T(userId, type, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts where userId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByU_T(long userId, int type,
+		int start, int end,
+		OrderByComparator<CommerceAccount> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByU_T(userId, type, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce account in the ordered set where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account
+	* @throws NoSuchAccountException if a matching commerce account could not be found
+	*/
+	public static CommerceAccount findByU_T_First(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence().findByU_T_First(userId, type, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce account in the ordered set where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	*/
+	public static CommerceAccount fetchByU_T_First(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence().fetchByU_T_First(userId, type, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account in the ordered set where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account
+	* @throws NoSuchAccountException if a matching commerce account could not be found
+	*/
+	public static CommerceAccount findByU_T_Last(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence().findByU_T_Last(userId, type, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account in the ordered set where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	*/
+	public static CommerceAccount fetchByU_T_Last(long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence().fetchByU_T_Last(userId, type, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce accounts before and after the current commerce account in the ordered set where userId = &#63; and type = &#63;.
+	*
+	* @param commerceAccountId the primary key of the current commerce account
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce account
+	* @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	*/
+	public static CommerceAccount[] findByU_T_PrevAndNext(
+		long commerceAccountId, long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .findByU_T_PrevAndNext(commerceAccountId, userId, type,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @return the matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByU_T(long userId, int type) {
+		return getPersistence().filterFindByU_T(userId, type);
+	}
+
+	/**
+	* Returns a range of all the commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @return the range of matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByU_T(long userId, int type,
+		int start, int end) {
+		return getPersistence().filterFindByU_T(userId, type, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts that the user has permissions to view where userId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByU_T(long userId, int type,
+		int start, int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .filterFindByU_T(userId, type, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce accounts before and after the current commerce account in the ordered set of commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	*
+	* @param commerceAccountId the primary key of the current commerce account
+	* @param userId the user ID
+	* @param type the type
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce account
+	* @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	*/
+	public static CommerceAccount[] filterFindByU_T_PrevAndNext(
+		long commerceAccountId, long userId, int type,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .filterFindByU_T_PrevAndNext(commerceAccountId, userId,
+			type, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce accounts where userId = &#63; and type = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param type the type
+	*/
+	public static void removeByU_T(long userId, int type) {
+		getPersistence().removeByU_T(userId, type);
+	}
+
+	/**
+	* Returns the number of commerce accounts where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @return the number of matching commerce accounts
+	*/
+	public static int countByU_T(long userId, int type) {
+		return getPersistence().countByU_T(userId, type);
+	}
+
+	/**
+	* Returns the number of commerce accounts that the user has permission to view where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user ID
+	* @param type the type
+	* @return the number of matching commerce accounts that the user has permission to view
+	*/
+	public static int filterCountByU_T(long userId, int type) {
+		return getPersistence().filterCountByU_T(userId, type);
+	}
+
+	/**
 	* Returns the commerce account where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param companyId the company ID

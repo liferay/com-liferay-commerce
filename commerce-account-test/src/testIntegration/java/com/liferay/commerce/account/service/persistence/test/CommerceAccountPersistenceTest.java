@@ -226,6 +226,14 @@ public class CommerceAccountPersistenceTest {
 	}
 
 	@Test
+	public void testCountByU_T() throws Exception {
+		_persistence.countByU_T(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByU_T(0L, 0);
+	}
+
+	@Test
 	public void testCountByC_ERC() throws Exception {
 		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
 
