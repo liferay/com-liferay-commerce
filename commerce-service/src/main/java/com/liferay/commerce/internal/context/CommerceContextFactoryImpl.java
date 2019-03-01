@@ -19,7 +19,6 @@ import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
-import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
@@ -43,19 +42,17 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 	public CommerceContext create(HttpServletRequest httpServletRequest) {
 		return new CommerceContextHttpImpl(
 			httpServletRequest, _commerceAccountHelper,
-			_commerceCurrencyLocalService, _commerceDiscountCouponCodeHelper,
-			_commerceOrderHttpHelper, _commercePriceListLocalService,
-			_commerceUserSegmentHelper, _configurationProvider,
-			_cpRuleLocalService, _portal);
+			_commerceCurrencyLocalService, _commerceOrderHttpHelper,
+			_commercePriceListLocalService, _commerceUserSegmentHelper,
+			_configurationProvider, _cpRuleLocalService, _portal);
 	}
 
 	@Override
 	public CommerceContext create(
-		long groupId, long userId, long orderId, long commerceAccountId,
-		String couponCode) {
+		long groupId, long userId, long orderId, long commerceAccountId) {
 
 		return new CommerceContextImpl(
-			groupId, userId, orderId, commerceAccountId, couponCode,
+			groupId, userId, orderId, commerceAccountId,
 			_commerceAccountService, _commerceCurrencyLocalService,
 			_commerceOrderService, _commercePriceListLocalService,
 			_commerceUserSegmentHelper, _configurationProvider,
@@ -70,9 +67,6 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
-
-	@Reference
-	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;

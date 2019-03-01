@@ -44,7 +44,7 @@ public class CommerceContextImpl implements CommerceContext {
 
 	public CommerceContextImpl(
 		long groupId, long userId, long orderId, long commerceAccountId,
-		String couponCode, CommerceAccountService commerceAccountService,
+		CommerceAccountService commerceAccountService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
 		CommercePriceListLocalService commercePriceListLocalService,
@@ -56,7 +56,6 @@ public class CommerceContextImpl implements CommerceContext {
 		_userId = userId;
 		_orderId = orderId;
 		_commerceAccountId = commerceAccountId;
-		_couponCode = couponCode;
 		_commerceAccountService = commerceAccountService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
@@ -153,11 +152,6 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
-	public String getCouponCode() throws PortalException {
-		return _couponCode;
-	}
-
-	@Override
 	public List<CPRule> getCPRules() throws PortalException {
 		if (_cpRules != null) {
 			return _cpRules;
@@ -195,7 +189,6 @@ public class CommerceContextImpl implements CommerceContext {
 	private final CommercePriceListLocalService _commercePriceListLocalService;
 	private long[] _commerceUserSegmentEntryIds;
 	private final CommerceUserSegmentHelper _commerceUserSegmentHelper;
-	private final String _couponCode;
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
 	private final long _groupId;
