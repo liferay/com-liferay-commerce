@@ -26,12 +26,15 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.test.util.CommerceDiscountTestUtil;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
+import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -108,7 +111,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -206,7 +209,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -360,7 +363,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -458,6 +461,18 @@ public class CommerceDiscountTest {
 				"calculating the final price"
 		);
 
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
+			_group.getGroupId(), _user.getUserId(),
+			commerceCurrency.getCommerceCurrencyId());
+
+		commerceOrder.setCommerceCurrencyId(
+			commerceCurrency.getCommerceCurrencyId());
+
+		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
+
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
@@ -474,12 +489,11 @@ public class CommerceDiscountTest {
 				CommerceDiscountConstants.TARGET_PRODUCT,
 				cpDefinition.getCPDefinitionId());
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null,
-			couponCode);
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
+
+		_commerceOrderLocalService.applayCouponCode(
+			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -550,7 +564,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -596,6 +610,9 @@ public class CommerceDiscountTest {
 
 	@Inject
 	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Inject
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Inject
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

@@ -178,7 +178,7 @@ public class CommerceTestUtil {
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceOrder.getCommerceCurrency(), null, null, null,
-			commerceOrder, null);
+			commerceOrder);
 
 		return addCommerceOrderItem(
 			commerceOrderId, cpInstanceId, quantity, commerceContext);
@@ -328,7 +328,7 @@ public class CommerceTestUtil {
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceOrder.getCommerceCurrency(), null,
-			serviceContext.getScopeGroup(), null, commerceOrder, null);
+			serviceContext.getScopeGroup(), null, commerceOrder);
 
 		return CommerceOrderLocalServiceUtil.checkoutCommerceOrder(
 			commerceOrder.getCommerceOrderId(), commerceContext,
