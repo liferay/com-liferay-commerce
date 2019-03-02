@@ -37,15 +37,13 @@ public class TestCommerceContext implements CommerceContext {
 
 	public TestCommerceContext(
 		CommerceCurrency commerceCurrency, User contextUser, Group contextGroup,
-		CommerceAccount commerceAccount, CommerceOrder commerceOrder,
-		String couponCode) {
+		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
 
 		_commerceCurrency = commerceCurrency;
 		_contextUser = contextUser;
 		_contextGroup = contextGroup;
 		_commerceAccount = commerceAccount;
 		_commerceOrder = commerceOrder;
-		_couponCode = couponCode;
 	}
 
 	@Override
@@ -114,6 +112,5 @@ public class TestCommerceContext implements CommerceContext {
 	private final CommerceOrder _commerceOrder;
 	private final Group _contextGroup;
 	private final User _contextUser;
-	private final String _couponCode;
 
 }

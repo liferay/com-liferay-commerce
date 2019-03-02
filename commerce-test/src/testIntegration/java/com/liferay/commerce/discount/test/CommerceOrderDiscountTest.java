@@ -134,8 +134,7 @@ public class CommerceOrderDiscountTest {
 			cpInstancePlain.getCPInstanceId(), orderedQuantity);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, commerceOrder,
-			null);
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
 
 		CommerceMoney total = _commerceOrderPriceCalculation.getTotal(
 			commerceOrder, commerceContext);
@@ -225,8 +224,10 @@ public class CommerceOrderDiscountTest {
 				CommerceDiscountConstants.TARGET_TOTAL, null);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, commerceOrder,
-			couponCode);
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
+
+		_commerceOrderLocalService.applayCouponCode(
+			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(),
