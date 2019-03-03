@@ -98,7 +98,7 @@ public class CommerceOrderHttpHelperImplTest {
 				_user.getUserId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null);
 
 		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 		_httpServletRequest.setAttribute(
