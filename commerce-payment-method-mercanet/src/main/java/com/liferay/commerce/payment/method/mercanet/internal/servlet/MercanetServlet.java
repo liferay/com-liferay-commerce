@@ -24,6 +24,8 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
@@ -99,7 +101,8 @@ public class MercanetServlet extends HttpServlet {
 			requestDispatcher.forward(httpServletRequest, httpServletResponse);
 		}
 		catch (Exception e) {
-			_portal.sendError(e, httpServletRequest, httpServletResponse);
+			_log.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -205,7 +208,8 @@ public class MercanetServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			_portal.sendError(e, httpServletRequest, httpServletResponse);
+			_log.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -231,6 +235,9 @@ public class MercanetServlet extends HttpServlet {
 
 		return map;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		MercanetServlet.class);
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
