@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.commerce.batch.model.CommerceBatchJobExecution">
+		<field name="commerceBatchJobExecutionId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="commerceBatchJobInstanceId" type="long" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="status" type="String" />
+		<field name="exitCode" type="String" />
+		<field name="exitMessage" type="String" />
+	</model>
+	<model name="com.liferay.commerce.batch.model.CommerceBatchJobInstance">
+		<field name="commerceBatchJobInstanceId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="batchJobName" type="String" />
+		<field name="key" type="String" />
+	</model>
+</model-hints>
