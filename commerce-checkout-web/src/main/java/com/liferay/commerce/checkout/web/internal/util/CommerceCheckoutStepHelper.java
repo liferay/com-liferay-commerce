@@ -72,6 +72,17 @@ public class CommerceCheckoutStepHelper {
 			return false;
 		}
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		commerceOrder = _commerceOrderLocalService.recalculatePrice(
+			commerceOrder.getCommerceOrderId(), commerceContext);
+
+		if (BigDecimal.ZERO.compareTo(commerceOrder.getTotal()) == 0) {
+			return false;
+		}
+
 		List<CommercePaymentMethod> commercePaymentMethods =
 			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
 				commerceOrder.getCommerceOrderId());
