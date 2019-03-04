@@ -39,8 +39,9 @@ public class OpenApiReaderFactoryTest {
 		ConfigurationFactory.getConfigurations(configurationPath);
 
 		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
-			"https://host.name.testb:8080/test_api_url_testb#/components" +
-				"/schema/Item");
+			"https://host.name.testb:8080/./rest-test-openapi-b.json#" +
+				"/components/schema/Item",
+			ConfigurationFactory.getPath(ConfigurationFactoryTest.class));
 
 		Assert.assertEquals(
 			"Correct open API locator implementation", URLOpenApiReader.class,

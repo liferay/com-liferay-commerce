@@ -81,7 +81,7 @@ public class FileOpenApiReaderTest {
 			ConfigurationFactory.getConfigurations(configurationPath);
 
 		for (Properties candidate : configurations) {
-			if ("testa".equals(candidate.getProperty("osgi.module.name"))) {
+			if ("a".equals(candidate.getProperty("osgi.module.name"))) {
 				return candidate;
 			}
 		}
