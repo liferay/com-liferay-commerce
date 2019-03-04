@@ -1,0 +1,3286 @@
+{
+	"openapi" : "3.0.0",
+	"info" : {
+		"description" : "Open API A",
+		"version" : "v2.0",
+		"title" : "Open API A",
+		"contact" : {
+			"name" : "Commerce Team",
+			"email" : "team-commerce@liferay.com"
+		},
+		"license" : {
+			"name" : "GNU Lesser General Public License 2.1",
+			"url" : "https://www.gnu.org/licenses/lgpl-2.1.html"
+		}
+	},
+	"paths" : {
+		"/inventory/{id}" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getInventory",
+				"summary" : "Gets a Inventory by ID.",
+				"tags" : [ "Inventory" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Inventory"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Inventory"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateInventory",
+				"summary" : "Updates a Inventory by ID.",
+				"tags" : [ "Inventory" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Inventory"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Inventory"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "deleteInventory",
+				"summary" : "Deletes a Inventory by ID.",
+				"tags" : [ "Inventory" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					}
+				}
+			}
+		},
+		"/sku/{id}/inventory" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getInventories",
+				"summary" : "Gets a list of Inventories.",
+				"tags" : [ "Sku" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Inventory"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Inventory"
+									}
+								}
+							}
+						}
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "upsertInventory",
+				"summary" : "Creates or updates a Inventory related to a Sku.",
+				"tags" : [ "Sku" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Inventory"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Inventory"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Inventory"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Inventory"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Accepted - Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/order/{id}" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrder",
+				"summary" : "Gets a Order by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateOrder",
+				"summary" : "Updates a Order by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Order"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Order"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "deleteOrder",
+				"summary" : "Deletes a Order by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					}
+				}
+			}
+		},
+		"/order/{id}/orderItem/{orderItemId}" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrderItem",
+				"summary" : "Gets an Order Item by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderItemId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order item Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateOrderItem",
+				"summary" : "Updates an Order Item by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderItemId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order item Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderItem"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderItem"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "deleteOrderItem",
+				"summary" : "Deletes an Order Item by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderItemId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order item Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					}
+				}
+			}
+		},
+		"/order/{id}/orderItem" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrderItems",
+				"summary" : "Gets a list of Order Items related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/OrderItem"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/OrderItem"
+									}
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "upsertOrderItem",
+				"summary" : "Creates or updates an Order Item.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderItem"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderItem"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderItem"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/order/{id}/orderNote/{orderNoteId}" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrderNote",
+				"summary" : "Gets an Order Note by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderNoteId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order note Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateOrderNote",
+				"summary" : "Updates an Order Note by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderNoteId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order note Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderNote"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderNote"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "deleteOrderNote",
+				"summary" : "Deletes an Order Note by ID.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"in" : "path",
+					"name" : "orderNoteId",
+					"required" : true,
+					"schema" : {
+						"type" : "string",
+						"minLength" : 1,
+						"description" : "The order note Id, or its external reference code Id if it's prefixed with ext-"
+					},
+					"examples" : {
+						"localId" : {
+							"value" : "23456",
+							"summary" : "Local identifier"
+						},
+						"externalId" : {
+							"value" : "ext-uniqueId",
+							"summary" : "External idenfitifer"
+						}
+					}
+				} ],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					}
+				}
+			}
+		},
+		"/order/{id}/orderNote" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrderNotes",
+				"summary" : "Gets a list of Order Notes related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/OrderNote"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/OrderNote"
+									}
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "upsertOrderNote",
+				"summary" : "Creates or updates an Order Note.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderNote"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/OrderNote"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/OrderNote"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/order/{id}/billingAddress" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getBillingAddress",
+				"summary" : "Gets a billing Address related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Address"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Address"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateBillingAddress",
+				"summary" : "Updates a billing Address related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Address"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Address"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/order/{id}/shippingAddress" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getShippingAddress",
+				"summary" : "Gets a shipping Address related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Address"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Address"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateShippingAddress",
+				"summary" : "Updates a shipping Address related to an Order.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Address"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Address"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/order" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getOrders",
+				"summary" : "Gets a List of Orders from a Site.",
+				"tags" : [ "Order" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Order"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Order"
+									}
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/product/" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getProducts",
+				"summary" : "Gets a list of Products.",
+				"tags" : [ "Product" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Product"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Product"
+									}
+								}
+							}
+						}
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "upsertProduct",
+				"summary" : "Creates or updates a Product.",
+				"tags" : [ "Product" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Product"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Product"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Product"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Product"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Accepted - Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/sku/{id}" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getSku",
+				"summary" : "Gets a Sku by ID.",
+				"tags" : [ "Sku" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Sku"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Sku"
+								}
+							}
+						}
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "updateSku",
+				"summary" : "Updates a Sku by ID.",
+				"tags" : [ "Sku" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Sku"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Sku"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "deleteSku",
+				"summary" : "Deletes a Sku by ID.",
+				"tags" : [ "Sku" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					}
+				}
+			}
+		},
+		"/product/{id}/sku" : {
+			"get" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.read" ]
+				} ],
+				"operationId" : "getSkus",
+				"summary" : "Gets a list of Skus related to a Product.",
+				"tags" : [ "Product" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				} ],
+				"responses" : {
+					"200" : {
+						"description" : "Successful operation",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Sku"
+									}
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"type" : "array",
+									"items" : {
+										"$ref" : "#/components/schemas/Sku"
+									}
+								}
+							}
+						}
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post" : {
+				"security" : [ {
+					"BasicAuth" : [ ]
+				}, {
+					"BearerAuth" : [ ]
+				}, {
+					"OAuth2" : [ "CommerceOpenApiAdmin.write" ]
+				} ],
+				"operationId" : "upsertSku",
+				"summary" : "Creates or updates a Sku related to a Product.",
+				"tags" : [ "Product" ],
+				"parameters" : [ {
+					"$ref" : "#/components/parameters/idPathParam"
+				}, {
+					"$ref" : "#/components/parameters/groupQueryParam"
+				} ],
+				"x-liferay-context" : [ "language" ],
+				"requestBody" : {
+					"required" : true,
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Sku"
+							}
+						},
+						"application/xml" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Sku"
+							}
+						}
+					}
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Sku"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Sku"
+								}
+							}
+						}
+					},
+					"202" : {
+						"description" : "Accepted - Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "Invalid input"
+					},
+					"401" : {
+						"$ref" : "#/components/responses/UnauthorizedError"
+					},
+					"404" : {
+						"$ref" : "#/components/responses/NotFound"
+					},
+					"500" : {
+						"description" : "Unexpected error",
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							},
+							"application/xml" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components" : {
+		"parameters" : {
+			"idPathParam" : {
+				"in" : "path",
+				"name" : "id",
+				"required" : true,
+				"schema" : {
+					"type" : "string",
+					"minLength" : 1,
+					"description" : "The resource Id, or external reference code Id if it's prefixed with ext-"
+				},
+				"examples" : {
+					"localId" : {
+						"value" : "23456",
+						"summary" : "Local identifier"
+					},
+					"externalId" : {
+						"value" : "ext-uniqueId",
+						"summary" : "External idenfitifer"
+					}
+				}
+			},
+			"id2PathParam" : {
+				"in" : "path",
+				"name" : "id2",
+				"required" : true,
+				"schema" : {
+					"type" : "string",
+					"minLength" : 1,
+					"description" : "The resource Id, or external reference code Id if it's prefixed with ext-"
+				},
+				"examples" : {
+					"localId" : {
+						"value" : "23456",
+						"summary" : "Local identifier"
+					},
+					"externalId" : {
+						"value" : "ext-uniqueId",
+						"summary" : "External idenfitifer"
+					}
+				}
+			},
+			"groupQueryParam" : {
+				"in" : "query",
+				"name" : "groupId",
+				"required" : true,
+				"schema" : {
+					"type" : "integer",
+					"format" : "int64",
+					"minimum" : 0,
+					"description" : "Group to filter (Liferay site)",
+					"example" : 30130
+				}
+			}
+		},
+		"schemas" : {
+			"Account" : {
+				"required" : [ "name", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"addresses" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/Address"
+						},
+						"example" : [ {
+							"id" : 31130,
+							"city" : "Diamond Bar",
+							"commerceCountryId" : 30130,
+							"commerceRegionId" : 30234,
+							"defaultBilling" : true,
+							"defaultShipping" : true,
+							"description" : "right stairs, first room on the left",
+							"latitude" : 33.9976884,
+							"longitude" : -117.8144595,
+							"name" : "Alessio Antonio Rendina",
+							"phoneNumber" : "(123) 456 7890",
+							"street1" : "1400 Montefino Ave",
+							"street2" : "1st floor",
+							"street3" : "suite 200",
+							"zip" : "91765"
+						} ]
+					},
+					"emailAddresses" : {
+						"type" : "array",
+						"items" : {
+							"type" : "string",
+							"format" : "email"
+						},
+						"example" : [ "joe.1@commerce.com", "joe.2@commerce.com", "joe.3@commerce.com" ]
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"logoId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 20078
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Account Name"
+					},
+					"organizations" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/AccountOrganization"
+						},
+						"example" : [ {
+							"id" : 20546,
+							"name" : "Liferay Italy",
+							"organizationId" : 20433,
+							"treePath" : "/Liferay/Liferay Italy"
+						} ]
+					},
+					"root" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"taxId" : {
+						"type" : "string",
+						"example" : "Abcd1234"
+					},
+					"type" : {
+						"type" : "integer",
+						"format" : "int32",
+						"minimum" : 0,
+						"maximum" : 2,
+						"example" : 1
+					},
+					"users" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/AccountMember"
+						},
+						"example" : [ {
+							"id" : 31256,
+							"name" : "Alessio Antonio Rendina",
+							"userId" : 30002,
+							"roles" : [ {
+								"description" : {
+									"hu_HU" : "Account Administrator Description HU",
+									"hr_HR" : "Account Administrator Description HR",
+									"en_US" : "Account Administrator Description US"
+								},
+								"id" : 30021,
+								"name" : "Account Administrator",
+								"title" : {
+									"hu_HU" : "Account Administrator HU",
+									"hr_HR" : "Account Administrator HR",
+									"en_US" : "Account Administrator US"
+								}
+							} ]
+						} ]
+					}
+				}
+			},
+			"AccountMember" : {
+				"required" : [ "commerceAccountId", "userId" ],
+				"type" : "object",
+				"properties" : {
+					"commerceAccountId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "User Name"
+					},
+					"userId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30002
+					},
+					"roles" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/AccountRole"
+						},
+						"example" : [ {
+							"description" : {
+								"hu_HU" : "Account Administrator Description HU",
+								"hr_HR" : "Account Administrator Description HR",
+								"en_US" : "Account Administrator Description US"
+							},
+							"id" : 30021,
+							"name" : "Account Administrator",
+							"title" : {
+								"hu_HU" : "Account Administrator HU",
+								"hr_HR" : "Account Administrator HR",
+								"en_US" : "Account Administrator US"
+							}
+						}, {
+							"description" : {
+								"hu_HU" : "Order Manager Description HU",
+								"hr_HR" : "Order Manager Description HR",
+								"en_US" : "Order Manager Description US"
+							},
+							"id" : 30023,
+							"name" : "Order Manager",
+							"title" : {
+								"hu_HU" : "Order Manager HU",
+								"hr_HR" : "Order Manager HR",
+								"en_US" : "Order Manager US"
+							}
+						} ]
+					}
+				}
+			},
+			"AccountOrganization" : {
+				"required" : [ "commerceAccountId", "organizationId" ],
+				"type" : "object",
+				"properties" : {
+					"commerceAccountId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Organization Name"
+					},
+					"organizationId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30002
+					},
+					"treePath" : {
+						"type" : "string",
+						"example" : "/Parent Organization/Organization Name"
+					}
+				}
+			},
+			"AccountRole" : {
+				"required" : [ "name" ],
+				"type" : "object",
+				"properties" : {
+					"description" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Role Description HU",
+							"hr_HR" : "Role Description HR",
+							"en_US" : "Role Description US"
+						}
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Role Name"
+					},
+					"roleId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"title" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Role Title HU",
+							"hr_HR" : "Role Title HR",
+							"en_US" : "Role Title US"
+						}
+					}
+				}
+			},
+			"Address" : {
+				"required" : [ "city", "commerceCountryId", "name", "street1" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 31130
+					},
+					"city" : {
+						"type" : "string",
+						"example" : "Diamond Bar"
+					},
+					"commerceCountryId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"commerceRegionId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30234
+					},
+					"defaultBilling" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"defaultShipping" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"description" : {
+						"type" : "string",
+						"example" : "right stairs, first room on the left"
+					},
+					"latitude" : {
+						"type" : "number",
+						"format" : "double",
+						"example" : 33.9976884
+					},
+					"longitude" : {
+						"type" : "number",
+						"format" : "double",
+						"example" : -117.8144595
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Alessio Antonio Rendina"
+					},
+					"phoneNumber" : {
+						"type" : "string",
+						"example" : "(123) 456 7890"
+					},
+					"street1" : {
+						"type" : "string",
+						"example" : "1400 Montefino Ave"
+					},
+					"street2" : {
+						"type" : "string",
+						"example" : "1st floor"
+					},
+					"street3" : {
+						"type" : "string",
+						"example" : "suite 200"
+					},
+					"zip" : {
+						"type" : "string",
+						"example" : "91765"
+					}
+				}
+			},
+			"Country" : {
+				"required" : [ "name", "numericISOCode", "threeLettersISOCode", "twoLettersISOCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"billingAllowed" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"name" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Horvatorszag",
+							"hr_HR" : "Hrvatska",
+							"en_US" : "Croatia"
+						}
+					},
+					"numericISOCode" : {
+						"type" : "integer",
+						"example" : 191
+					},
+					"regions" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/Region"
+						},
+						"example" : [ {
+							"commerceCountryId" : 30130,
+							"name" : "California",
+							"code" : "CA",
+							"priority" : 1.1,
+							"active" : true,
+							"id" : 30234
+						}, {
+							"commerceCountryId" : 30130,
+							"name" : "Texas",
+							"code" : "TX",
+							"priority" : 1.2,
+							"active" : true,
+							"id" : 30243
+						} ]
+					},
+					"shippingAllowed" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"subjectToVAT" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"threeLettersISOCode" : {
+						"type" : "string",
+						"example" : "HRV"
+					},
+					"twoLettersISOCode" : {
+						"type" : "string",
+						"example" : "HR"
+					}
+				}
+			},
+			"Currency" : {
+				"required" : [ "name", "code", "rate", "formatPattern", "roundingMode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"example" : 30130
+					},
+					"code" : {
+						"type" : "string",
+						"example" : "USD"
+					},
+					"name" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"en_US" : "US Dollar"
+						}
+					},
+					"rate" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 1.0
+					},
+					"formatPattern" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"en_US" : "$###,##0.00"
+						}
+					},
+					"maxFractionDigits" : {
+						"type" : "integer",
+						"example" : 2
+					},
+					"minFractionDigits" : {
+						"type" : "integer",
+						"example" : 2
+					},
+					"roundingMode" : {
+						"type" : "string",
+						"example" : "HALF_EVEN"
+					},
+					"primary" : {
+						"type" : "boolean",
+						"example" : true
+					}
+				}
+			},
+			"Error" : {
+				"required" : [ "message", "status", "errorCode", "errorDescription" ],
+				"type" : "object",
+				"properties" : {
+					"message" : {
+						"type" : "string",
+						"readOnly" : true,
+						"example" : "No CommerceCurrency exists with the key {groupId=41811, code=US Dollar}"
+					},
+					"errorDescription" : {
+						"type" : "string",
+						"readOnly" : true,
+						"example" : "Unable to find currency. Currency code should be expressed with 3-letter ISO 4217 format."
+					},
+					"status" : {
+						"type" : "integer",
+						"readOnly" : true,
+						"example" : 404,
+						"description" : "HTTP Status code"
+					},
+					"errorCode" : {
+						"type" : "integer",
+						"readOnly" : true,
+						"example" : 996,
+						"description" : "Internal error code mapping"
+					}
+				}
+			},
+			"Inventory" : {
+				"required" : [ "quantity", "skuExternalReferenceCode", "skuId", "warehouseId" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"quantity" : {
+						"type" : "integer",
+						"example" : 10
+					},
+					"skuExternalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"skuId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"warehouseId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"warehouseName" : {
+						"type" : "string",
+						"example" : "660 Park Ave"
+					}
+				}
+			},
+			"Order" : {
+				"required" : [ "commerceAccountId", "externalReferenceCode", "currency" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"advanceStatus" : {
+						"type" : "string",
+						"example" : "trasmitted"
+					},
+					"billingAddress" : {
+						"$ref" : "#/components/schemas/Address"
+					},
+					"billingAddressId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 31130
+					},
+					"commerceAccountId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"currency" : {
+						"type" : "string",
+						"example" : "USD"
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"orderStatus" : {
+						"type" : "integer",
+						"format" : "int32",
+						"minimum" : 0,
+						"example" : 0
+					},
+					"paymentMethod" : {
+						"type" : "string",
+						"example" : "paypal"
+					},
+					"paymentStatus" : {
+						"type" : "integer",
+						"format" : "int32",
+						"minimum" : 0,
+						"example" : 0
+					},
+					"purchaseOrderNumber" : {
+						"type" : "string",
+						"example" : "Abcd1234"
+					},
+					"shippingAddress" : {
+						"$ref" : "#/components/schemas/Address"
+					},
+					"shippingAddressId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 31130
+					},
+					"shippingAmount" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 12
+					},
+					"shippingMethod" : {
+						"type" : "string",
+						"example" : "fixed"
+					},
+					"shippingOption" : {
+						"type" : "string",
+						"example" : "by Air"
+					},
+					"subtotal" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 101
+					},
+					"total" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 113
+					}
+				}
+			},
+			"OrderItem" : {
+				"required" : [ "commerceOrderId", "skuId", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"commerceOrderId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30128
+					},
+					"discountAmount" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 2
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"finalPrice" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 200
+					},
+					"name" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Product Name HU",
+							"hr_HR" : "Product Name HR",
+							"en_US" : "Hand Saw"
+						}
+					},
+					"quantity" : {
+						"type" : "integer",
+						"format" : "int32",
+						"minimum" : 0,
+						"example" : 2
+					},
+					"shippedQuantity" : {
+						"type" : "integer",
+						"format" : "int32",
+						"minimum" : 0,
+						"example" : 1
+					},
+					"sku" : {
+						"type" : "string",
+						"example" : "12341234"
+					},
+					"skuId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30128
+					},
+					"subscription" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"unitPrice" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 101
+					}
+				}
+			},
+			"OrderNote" : {
+				"required" : [ "commerceOrderId", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"author" : {
+						"type" : "string",
+						"example" : "Alessio Antonio Rendina"
+					},
+					"commerceOrderId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30128
+					},
+					"content" : {
+						"type" : "string",
+						"example" : "This order will be shipped separately"
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"restricted" : {
+						"type" : "boolean",
+						"example" : true
+					}
+				}
+			},
+			"PriceEntry" : {
+				"required" : [ "commercePriceListId", "price", "promoPrice", "standardPrice", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"commercePriceListId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 20078
+					},
+					"commerceProductInstanceId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"hasTierPrice" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"standardPrice" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"price" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"promoPrice" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"skuExternalReferenceCode" : {
+						"type" : "string",
+						"example" : "CAB-34098-789-N"
+					},
+					"sku" : {
+						"type" : "string",
+						"example" : "Blue handle, 00001l, 70cm, lifetime warranty"
+					}
+				}
+			},
+			"PriceList" : {
+				"required" : [ "active", "externalReferenceCode", "neverExpire", "priority", "currency", "name" ],
+				"type" : "object",
+				"properties" : {
+					"displayDate" : {
+						"type" : "string",
+						"format" : "date",
+						"example" : "2017-07-21"
+					},
+					"expirationDate" : {
+						"type" : "string",
+						"format" : "date",
+						"example" : "2017-08-21"
+					},
+					"commercePriceListId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 20178
+					},
+					"neverExpire" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"priority" : {
+						"type" : "number",
+						"format" : "double",
+						"example" : 1.2
+					},
+					"active" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"currency" : {
+						"type" : "string",
+						"example" : "EUR"
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Laptops, Beverages"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			},
+			"Product" : {
+				"required" : [ "name", "active", "externalReferenceCode", "productTypeName" ],
+				"type" : "object",
+				"properties" : {
+					"name" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Product Name HU",
+							"hr_HR" : "Product Name HR",
+							"en_US" : "Hand Saw"
+						}
+					},
+					"description" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Product Description HU",
+							"hr_HR" : "Product Description HR",
+							"en_US" : "Professional hand stainless steel saw for wood. Made to last and saw forever. Made of best steel"
+						}
+					},
+					"assetCategoryIds" : {
+						"type" : "array",
+						"items" : {
+							"type" : "integer"
+						},
+						"example" : [ 20001237, 20210282, 50441007 ]
+					},
+					"defaultSku" : {
+						"type" : "string",
+						"example" : "Blue handle, 00001l, 70cm, lifetime warranty"
+					},
+					"shortDescription" : {
+						"type" : "object",
+						"additionalProperties" : {
+							"type" : "string"
+						},
+						"example" : {
+							"hu_HU" : "Product Short Description HU",
+							"hr_HR" : "Product Short Description HR",
+							"en_US" : "Hand stainless steel saw for wood"
+						}
+					},
+					"active" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"productTypeName" : {
+						"type" : "string",
+						"example" : "simple"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"expando" : {
+						"type" : "object",
+						"additionalProperties" : true
+					},
+					"skus" : {
+						"type" : "array",
+						"items" : {
+							"$ref" : "#/components/schemas/Sku"
+						},
+						"example" : [ {
+							"id" : 37168,
+							"cost" : 2.0,
+							"depth" : 5.0,
+							"displayDate" : "2018-01-25",
+							"expirationDate" : "2019-03-14",
+							"externalReferenceCode" : "12345",
+							"gtin" : null,
+							"height" : 10.0,
+							"manufacturerPartNumber" : "56789",
+							"neverExpire" : false,
+							"price" : 3.83,
+							"promoPrice" : 16.0,
+							"published" : true,
+							"purchasable" : true,
+							"sku" : "31187390",
+							"weight" : 30.0,
+							"width" : 20.0
+						} ]
+					}
+				}
+			},
+			"ProductOption" : {
+				"required" : [ "name", "key", "fieldType", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"name" : {
+						"type" : "string",
+						"example" : "Color"
+					},
+					"key" : {
+						"type" : "string",
+						"example" : "color"
+					},
+					"description" : {
+						"type" : "string",
+						"example" : "Description"
+					},
+					"facetable" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"required" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"skuContributor" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"fieldType" : {
+						"type" : "string",
+						"enum" : [ "select", "radio", "date", "checkbox", "checkbox_multiple", "numeric" ],
+						"example" : "select"
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			},
+			"ProductOptionValue" : {
+				"required" : [ "name", "key", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"name" : {
+						"type" : "string",
+						"example" : "Black"
+					},
+					"key" : {
+						"type" : "string",
+						"example" : "black"
+					},
+					"priority" : {
+						"type" : "number",
+						"format" : "double",
+						"example" : 1.2
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			},
+			"Region" : {
+				"required" : [ "commerceCountryId", "name" ],
+				"type" : "object",
+				"properties" : {
+					"commerceCountryId" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "California"
+					},
+					"code" : {
+						"type" : "string",
+						"example" : "CA"
+					},
+					"priority" : {
+						"type" : "number",
+						"format" : "double",
+						"minimum" : 0,
+						"example" : 1.1
+					},
+					"active" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			},
+			"Sku" : {
+				"required" : [ "sku", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"neverExpire" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"published" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"purchasable" : {
+						"type" : "boolean",
+						"example" : true
+					},
+					"cost" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 101
+					},
+					"depth" : {
+						"type" : "number",
+						"format" : "double",
+						"minimum" : 0,
+						"example" : 1.1
+					},
+					"height" : {
+						"type" : "number",
+						"format" : "double",
+						"minimum" : 0,
+						"example" : 20.2
+					},
+					"price" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 101
+					},
+					"promoPrice" : {
+						"type" : "number",
+						"format" : "bigdecimal",
+						"minimum" : 0,
+						"example" : 202
+					},
+					"weight" : {
+						"type" : "number",
+						"format" : "double",
+						"minimum" : 0,
+						"example" : 1.1
+					},
+					"width" : {
+						"type" : "number",
+						"format" : "double",
+						"minimum" : 0,
+						"example" : 20.2
+					},
+					"displayDate" : {
+						"type" : "string",
+						"format" : "date",
+						"example" : "2017-07-21"
+					},
+					"expirationDate" : {
+						"type" : "string",
+						"format" : "date",
+						"example" : "2017-08-21"
+					},
+					"gtin" : {
+						"type" : "string",
+						"example" : "12341234"
+					},
+					"manufacturerPartNumber" : {
+						"type" : "string",
+						"example" : "12341234"
+					},
+					"sku" : {
+						"type" : "string",
+						"example" : "12341234"
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			},
+			"User" : {
+				"required" : [ "email", "givenName", "familyName", "externalReferenceCode" ],
+				"type" : "object",
+				"properties" : {
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					},
+					"birthDate" : {
+						"type" : "string",
+						"format" : "date",
+						"example" : "1996-07-21"
+					},
+					"commerceAccountIds" : {
+						"type" : "array",
+						"items" : {
+							"type" : "integer",
+							"format" : "int64"
+						},
+						"example" : [ 20001237, 20210282, 50441007 ]
+					},
+					"image" : {
+						"type" : "string",
+						"format" : "uri",
+						"example" : "https://commerce.com/userPortrait.jpg"
+					},
+					"additionalName" : {
+						"type" : "string",
+						"example" : "G.I."
+					},
+					"alternateName" : {
+						"type" : "string",
+						"example" : "Joe"
+					},
+					"dashboardURL" : {
+						"type" : "string",
+						"format" : "uri",
+						"example" : "https://commerce.com/dashboardURL"
+					},
+					"email" : {
+						"type" : "string",
+						"format" : "email",
+						"example" : "joe@commerce.com"
+					},
+					"externalReferenceCode" : {
+						"type" : "string",
+						"example" : "AB-34098-789-N"
+					},
+					"familyName" : {
+						"type" : "string",
+						"example" : "Smith"
+					},
+					"gender" : {
+						"type" : "string",
+						"example" : "male"
+					},
+					"givenName" : {
+						"type" : "string",
+						"example" : "Joe"
+					},
+					"jobTitle" : {
+						"type" : "string",
+						"example" : "Engineer"
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "G.I. Joe"
+					},
+					"profileURL" : {
+						"type" : "string",
+						"format" : "uri",
+						"example" : "https://commerce.com/profileURL"
+					},
+					"roleNames" : {
+						"type" : "array",
+						"items" : {
+							"type" : "string"
+						},
+						"example" : [ "Admin", "User", "Power User" ]
+					}
+				}
+			},
+			"WebSite" : {
+				"required" : [ "name", "description" ],
+				"type" : "object",
+				"properties" : {
+					"description" : {
+						"type" : "string",
+						"example" : "Site for merchandise"
+					},
+					"name" : {
+						"type" : "string",
+						"example" : "Breccia"
+					},
+					"id" : {
+						"type" : "integer",
+						"format" : "int64",
+						"minimum" : 0,
+						"example" : 30130
+					}
+				}
+			}
+		},
+		"responses" : {
+			"NotFound" : {
+				"description" : "The specified resource was not found",
+				"content" : {
+					"application/json" : {
+						"schema" : {
+							"$ref" : "#/components/schemas/Error"
+						}
+					},
+					"application/xml" : {
+						"schema" : {
+							"$ref" : "#/components/schemas/Error"
+						}
+					}
+				}
+			},
+			"UnauthorizedError" : {
+				"description" : "Authentication information is missing or invalid",
+				"content" : {
+					"application/json" : {
+						"schema" : {
+							"$ref" : "#/components/schemas/Error"
+						}
+					},
+					"application/xml" : {
+						"schema" : {
+							"$ref" : "#/components/schemas/Error"
+						}
+					}
+				}
+			}
+		},
+		"securitySchemes" : {
+			"BasicAuth" : {
+				"type" : "http",
+				"scheme" : "basic"
+			},
+			"OAuth2" : {
+				"type" : "oauth2",
+				"flows" : {
+					"authorizationCode" : {
+						"authorizationUrl" : "/oauth/authorize",
+						"tokenUrl" : "/oauth/token",
+						"scopes" : {
+							"CommerceOpenApiAdmin.read" : "Grants read access",
+							"CommerceOpenApiAdmin.write" : "Grants write access",
+							"CommerceOpenApiAdmin.admin" : "Grants access to admin operations"
+						}
+					}
+				}
+			},
+			"BearerAuth" : {
+				"type" : "http",
+				"scheme" : "bearer"
+			}
+		}
+	},
+	"tags" : [ {
+		"name" : "Account",
+		"description" : "Operations on Account"
+	}, {
+		"name" : "Country",
+		"description" : "Operations on Countries"
+	}, {
+		"name" : "Currency",
+		"description" : "Operations on Currencies"
+	}, {
+		"name" : "Inventory",
+		"description" : "Operations on Inventories"
+	}, {
+		"name" : "Order",
+		"description" : "Operations on Orders"
+	}, {
+		"name" : "PriceEntry",
+		"description" : "Operations on Price Entry"
+	}, {
+		"name" : "PriceList",
+		"description" : "Operations on Price Lists"
+	}, {
+		"name" : "Product",
+		"description" : "Operations on Products"
+	}, {
+		"name" : "ProductOption",
+		"description" : "Operations on Product Options"
+	}, {
+		"name" : "ProductOptionValue",
+		"description" : "Operations on Product Option Values"
+	}, {
+		"name" : "Region",
+		"description" : "Operations on Regions"
+	}, {
+		"name" : "Sku",
+		"description" : "Operations on Skus"
+	}, {
+		"name" : "User",
+		"description" : "Operations on Users"
+	}, {
+		"name" : "WebSite",
+		"description" : "Operations on Web Sites"
+	} ]
+}
