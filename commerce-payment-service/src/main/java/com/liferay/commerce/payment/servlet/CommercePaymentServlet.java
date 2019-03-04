@@ -20,6 +20,8 @@ import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
@@ -29,6 +31,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.io.IOException;
+
+import java.math.BigDecimal;
 
 import java.net.URL;
 
@@ -89,9 +93,17 @@ public class CommercePaymentServlet extends HttpServlet {
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
 					uuid, groupId);
 
-			_commerceOrderId = commerceOrder.getCommerceOrderId();
-
 			_nextUrl = ParamUtil.getString(httpServletRequest, "nextStep");
+
+			BigDecimal orderTotal = commerceOrder.getTotal();
+
+			if (orderTotal.compareTo(BigDecimal.ZERO) == 0) {
+				httpServletResponse.sendRedirect(_nextUrl);
+
+				return;
+			}
+
+			_commerceOrderId = commerceOrder.getCommerceOrderId();
 
 			CommercePaymentResult commercePaymentResult = _startPayment(
 				httpServletRequest);
@@ -154,7 +166,8 @@ public class CommercePaymentServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			_portal.sendError(e, httpServletRequest, httpServletResponse);
+			_log.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -163,7 +176,7 @@ public class CommercePaymentServlet extends HttpServlet {
 
 		String[] params = query.split(StringPool.AMPERSAND);
 
-		Map<String, String> map = new HashMap();
+		Map<String, String> map = new HashMap<>();
 
 		for (String param : params)
 		{
@@ -183,6 +196,9 @@ public class CommercePaymentServlet extends HttpServlet {
 		return _commercePaymentEngine.startPayment(
 			_commerceOrderId, _nextUrl, httpServletRequest);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePaymentServlet.class);
 
 	private long _commerceOrderId;
 
