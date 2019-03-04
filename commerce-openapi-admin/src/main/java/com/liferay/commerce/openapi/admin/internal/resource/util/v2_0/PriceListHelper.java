@@ -44,7 +44,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -60,13 +59,10 @@ public class PriceListHelper {
 	public static String getCurrencyCode(CommercePriceList commercePriceList)
 		throws PortalException {
 
-		return Optional.of(
-			commercePriceList.getCommerceCurrency()
-		).map(
-			CommerceCurrency::getCode
-		).orElse(
-			null
-		);
+		CommerceCurrency commerceCurrency =
+			commercePriceList.getCommerceCurrency();
+
+		return commerceCurrency.getCode();
 	}
 
 	public void deletePriceList(String id, User user, Company company)
