@@ -20,9 +20,15 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.method.CommercePaymentMethod;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
+
+import java.math.BigDecimal;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,12 +67,36 @@ public class CommerceCheckoutStepHelper {
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
 		if (_commercePaymentEngine.getCommercePaymentMethodGroupRelsCount(
-				commerceOrder.getGroupId()) > 0) {
+				commerceOrder.getGroupId()) < 1) {
 
-			return true;
+			return false;
 		}
 
-		return false;
+		List<CommercePaymentMethod> commercePaymentMethods =
+			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
+				commerceOrder.getCommerceOrderId());
+
+		if (commercePaymentMethods.isEmpty()) {
+			return false;
+		}
+
+		if (commercePaymentMethods.size() == 1) {
+			CommercePaymentMethod commercePaymentMethod =
+				commercePaymentMethods.get(0);
+
+			commerceOrder.setCommercePaymentMethodKey(
+				commercePaymentMethod.getKey());
+
+			CommerceOrder updatedCommerceOrder =
+				_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
+
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER, updatedCommerceOrder);
+
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean isActiveShippingMethodCommerceCheckoutStep(
@@ -91,6 +121,9 @@ public class CommerceCheckoutStepHelper {
 
 		return false;
 	}
+
+	@Reference
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
 	private CommercePaymentEngine _commercePaymentEngine;
