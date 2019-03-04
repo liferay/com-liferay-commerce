@@ -45,6 +45,16 @@ public enum RESTError {
 	CURRENCY_NAME_ERROR(
 		975, "Invalid currency name for given language tag",
 		Response.Status.BAD_REQUEST),
+	DISCOUNT_COUPON_CODE_ERROR(
+		972, "Invalid discount coupon code", Response.Status.BAD_REQUEST),
+	DISCOUNT_LIMITATION_TYPE_ERROR(
+		971, "Invalid discount limitation type", Response.Status.BAD_REQUEST),
+	DISCOUNT_RULE_TYPE_ERROR(
+		970, "Invalid discount rule type", Response.Status.BAD_REQUEST),
+	DISCOUNT_TARGET_ERROR(
+		969, "Invalid discount target", Response.Status.BAD_REQUEST),
+	DISCOUNT_TITLE_ERROR(
+		968, "Invalid discount title", Response.Status.BAD_REQUEST),
 	DUPLICATE_ACCOUNT(981, "Duplicate account", Response.Status.CONFLICT),
 	DUPLICATE_PRICE_ENTRY(
 		988, "Duplicated price entry", Response.Status.CONFLICT),
@@ -56,6 +66,12 @@ public enum RESTError {
 	INTERNAL_ERROR(
 		998, "Internal error. Please try again later.",
 		Response.Status.INTERNAL_SERVER_ERROR),
+	INVALID_COMMERCE_DISCOUNT_DISPLAY_DATE(
+		974, "Invalid commerce discount display date.",
+		Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_DISCOUNT_EXPIRATION_DATE(
+		973, "Invalid commerce discount expiration date.",
+		Response.Status.BAD_REQUEST),
 	INVALID_COMMERCE_PRICE_LIST_DISPLAY_DATE(
 		995, "Invalid commerce price list display date.",
 		Response.Status.BAD_REQUEST),
@@ -105,10 +121,10 @@ public enum RESTError {
 		978, "Invalid ISO 3166-1 two letter country code",
 		Response.Status.BAD_REQUEST),
 	WAREHOUSE_ACTIVE_ERROR(
-		974, "Cannot activate warehouse without latitude and longitude",
+		954, "Cannot activate warehouse without latitude and longitude",
 		Response.Status.BAD_REQUEST),
 	WAREHOUSE_NAME_ERROR(
-		973, "Invalid warehouse name", Response.Status.BAD_REQUEST);
+		953, "Invalid warehouse name", Response.Status.BAD_REQUEST);
 
 	public int getErrorCode() {
 		return _errorCode;
