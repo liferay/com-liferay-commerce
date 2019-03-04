@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -122,6 +123,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
+	@Status(Response.Status.CREATED)
 	public CatalogRuleDTO upsertCatalogRule(
 			Long groupId, CatalogRuleDTO catalogRuleDTO)
 		throws Exception {

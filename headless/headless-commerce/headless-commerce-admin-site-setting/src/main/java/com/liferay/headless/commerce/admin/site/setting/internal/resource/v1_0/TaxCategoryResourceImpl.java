@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.TaxCategoryHelper;
@@ -84,6 +85,7 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
+	@Status(Response.Status.CREATED)
 	public TaxCategoryDTO upsertTaxCategory(
 			Long groupId, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
