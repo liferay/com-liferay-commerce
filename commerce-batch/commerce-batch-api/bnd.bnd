@@ -1,3 +1,8 @@
 Bundle-Name: Liferay Commerce Batch API
 Bundle-SymbolicName: com.liferay.commerce.batch.api
 Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.commerce.batch.exception,\
+	com.liferay.commerce.batch.model,\
+	com.liferay.commerce.batch.service,\
+	com.liferay.commerce.batch.service.persistence
