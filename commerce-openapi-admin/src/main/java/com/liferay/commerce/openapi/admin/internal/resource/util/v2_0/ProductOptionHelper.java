@@ -25,8 +25,6 @@ import com.liferay.commerce.product.exception.NoSuchCPOptionException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -50,19 +48,7 @@ public class ProductOptionHelper {
 	public void deleteProductOption(String id, Company company)
 		throws PortalException {
 
-		CPOption cpOption = null;
-
-		try {
-			cpOption = getCPOptionById(id, company);
-		}
-		catch (NoSuchCPOptionException nscpoe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Product Option does not exist with ID: " + id, nscpoe);
-			}
-
-			return;
-		}
+		CPOption cpOption = getCPOptionById(id, company);
 
 		_cpOptionService.deleteCPOption(cpOption.getCPOptionId());
 	}
@@ -73,7 +59,7 @@ public class ProductOptionHelper {
 		CPOption cpOption = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			cpOption = _cpOptionService.fetchCPOption(GetterUtil.getLong(id));
+			cpOption = _cpOptionService.getCPOption(GetterUtil.getLong(id));
 		}
 		else {
 			cpOption = _cpOptionService.fetchByExternalReferenceCode(
@@ -204,9 +190,6 @@ public class ProductOptionHelper {
 
 		return skuContributor;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ProductOptionHelper.class);
 
 	@Reference
 	private CPOptionService _cpOptionService;
