@@ -95,9 +95,7 @@ public class CommercePaymentServlet extends HttpServlet {
 
 			_nextUrl = ParamUtil.getString(httpServletRequest, "nextStep");
 
-			BigDecimal orderTotal = commerceOrder.getTotal();
-
-			if (orderTotal.compareTo(BigDecimal.ZERO) == 0) {
+			if (BigDecimal.ZERO.compareTo(commerceOrder.getTotal()) == 0) {
 				httpServletResponse.sendRedirect(_nextUrl);
 
 				return;
