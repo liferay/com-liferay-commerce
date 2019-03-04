@@ -28,8 +28,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -50,18 +48,7 @@ public class OrderItemHelper {
 	public void deleteOrderItem(String id, Company company)
 		throws PortalException {
 
-		CommerceOrderItem commerceOrderItem = null;
-
-		try {
-			commerceOrderItem = getOrderItemById(id, company);
-		}
-		catch (NoSuchOrderItemException nsoie) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Order Item not exist with ID: " + id, nsoie);
-			}
-
-			return;
-		}
+		CommerceOrderItem commerceOrderItem = getOrderItemById(id, company);
 
 		_commerceOrderItemService.deleteCommerceOrderItem(
 			commerceOrderItem.getCommerceOrderId());
@@ -79,9 +66,8 @@ public class OrderItemHelper {
 		CommerceOrderItem commerceOrderItem = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			commerceOrderItem =
-				_commerceOrderItemService.fetchCommerceOrderItem(
-					GetterUtil.getLong(id));
+			commerceOrderItem = _commerceOrderItemService.getCommerceOrderItem(
+				GetterUtil.getLong(id));
 		}
 		else {
 
@@ -183,9 +169,6 @@ public class OrderItemHelper {
 			quantity, shippedQuantity, cpInstance.getJson(), commerceContext,
 			serviceContext);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		OrderItemHelper.class);
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;

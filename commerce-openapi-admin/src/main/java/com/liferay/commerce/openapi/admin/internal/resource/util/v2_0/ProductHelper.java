@@ -27,8 +27,6 @@ import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -58,18 +56,7 @@ public class ProductHelper extends BaseHelper {
 	public void deleteProduct(String id, Company company)
 		throws PortalException {
 
-		CPDefinition cpDefinition = null;
-
-		try {
-			cpDefinition = getProductById(id, company);
-		}
-		catch (NoSuchCPDefinitionException nscpde) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Product not exist with ID: " + id, nscpde);
-			}
-
-			return;
-		}
+		CPDefinition cpDefinition = getProductById(id, company);
 
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
@@ -87,7 +74,7 @@ public class ProductHelper extends BaseHelper {
 		CPDefinition cpDefinition = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			cpDefinition = _cpDefinitionService.fetchCPDefinition(
+			cpDefinition = _cpDefinitionService.getCPDefinition(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -273,8 +260,6 @@ public class ProductHelper extends BaseHelper {
 
 		return cpDefinition;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(ProductHelper.class);
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
