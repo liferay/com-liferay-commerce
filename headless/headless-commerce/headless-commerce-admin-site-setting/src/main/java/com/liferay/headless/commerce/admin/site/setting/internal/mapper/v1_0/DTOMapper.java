@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.site.setting.internal.v1_0;
+package com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetVocabulary;
@@ -42,12 +42,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Alessio Antonio Rendina
  */
-public class DTOUtils {
+@Component(immediate = true, service = DTOMapper.class)
+public class DTOMapper {
 
-	public static CategoryDTO[] modelsToCategoryDTOArray(
+	public CategoryDTO[] modelsToCategoryDTOArray(
 		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels) {
 
 		if (cpRuleAssetCategoryRels == null) {
@@ -67,9 +70,8 @@ public class DTOUtils {
 		return stream.toArray(CategoryDTO[]::new);
 	}
 
-	public static UserSegmentCriterionDTO[]
-		modelsToUserSegmentCriterionDTOArray(
-			List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria) {
+	public UserSegmentCriterionDTO[] modelsToUserSegmentCriterionDTOArray(
+		List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria) {
 
 		if (commerceUserSegmentCriteria == null) {
 			return null;
@@ -88,7 +90,7 @@ public class DTOUtils {
 		return stream.toArray(UserSegmentCriterionDTO[]::new);
 	}
 
-	public static UserSegmentDTO[] modelsToUserSegmentDTOArray(
+	public UserSegmentDTO[] modelsToUserSegmentDTOArray(
 		List<CPRuleUserSegmentRel> cpRuleUserSegmentRels) {
 
 		if (cpRuleUserSegmentRels == null) {
@@ -108,7 +110,7 @@ public class DTOUtils {
 		return stream.toArray(UserSegmentDTO[]::new);
 	}
 
-	public static AvailabilityEstimateDTO modelToDTO(
+	public AvailabilityEstimateDTO modelToDTO(
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
 
 		AvailabilityEstimateDTO availabilityEstimateDTO =
@@ -129,7 +131,7 @@ public class DTOUtils {
 		return availabilityEstimateDTO;
 	}
 
-	public static UserSegmentCriterionDTO modelToDTO(
+	public UserSegmentCriterionDTO modelToDTO(
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
 
 		UserSegmentCriterionDTO userSegmentCriterionDTO =
@@ -152,7 +154,7 @@ public class DTOUtils {
 		return userSegmentCriterionDTO;
 	}
 
-	public static UserSegmentDTO modelToDTO(
+	public UserSegmentDTO modelToDTO(
 		CommerceUserSegmentEntry commerceUserSegmentEntry) {
 
 		UserSegmentDTO userSegmentDTO = new UserSegmentDTO();
@@ -177,7 +179,7 @@ public class DTOUtils {
 		return userSegmentDTO;
 	}
 
-	public static WarehouseDTO modelToDTO(CommerceWarehouse commerceWarehouse) {
+	public WarehouseDTO modelToDTO(CommerceWarehouse commerceWarehouse) {
 		WarehouseDTO warehouseDTO = new WarehouseDTO();
 
 		if (commerceWarehouse == null) {
@@ -204,9 +206,7 @@ public class DTOUtils {
 		return warehouseDTO;
 	}
 
-	public static MeasurementUnitDTO modelToDTO(
-		CPMeasurementUnit cpMeasurementUnit) {
-
+	public MeasurementUnitDTO modelToDTO(CPMeasurementUnit cpMeasurementUnit) {
 		MeasurementUnitDTO measurementUnitDTO = new MeasurementUnitDTO();
 
 		if (cpMeasurementUnit == null) {
@@ -225,7 +225,7 @@ public class DTOUtils {
 		return measurementUnitDTO;
 	}
 
-	public static CatalogRuleDTO modelToDTO(CPRule cpRule) {
+	public CatalogRuleDTO modelToDTO(CPRule cpRule) {
 		CatalogRuleDTO catalogRuleDTO = new CatalogRuleDTO();
 
 		if (cpRule == null) {
@@ -245,7 +245,7 @@ public class DTOUtils {
 		return catalogRuleDTO;
 	}
 
-	public static CategoryDTO modelToDTO(
+	public CategoryDTO modelToDTO(
 		CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
 
 		CategoryDTO categoryDTO = new CategoryDTO();
@@ -279,7 +279,7 @@ public class DTOUtils {
 		return categoryDTO;
 	}
 
-	public static UserSegmentDTO modelToDTO(
+	public UserSegmentDTO modelToDTO(
 		CPRuleUserSegmentRel cpRuleUserSegmentRel) {
 
 		try {
@@ -293,7 +293,7 @@ public class DTOUtils {
 		}
 	}
 
-	public static TaxCategoryDTO modelToDTO(CPTaxCategory cpTaxCategory) {
+	public TaxCategoryDTO modelToDTO(CPTaxCategory cpTaxCategory) {
 		TaxCategoryDTO taxCategoryDTO = new TaxCategoryDTO();
 
 		if (cpTaxCategory == null) {
@@ -309,9 +309,6 @@ public class DTOUtils {
 		return taxCategoryDTO;
 	}
 
-	private DTOUtils() {
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(DTOUtils.class);
+	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
 
 }
