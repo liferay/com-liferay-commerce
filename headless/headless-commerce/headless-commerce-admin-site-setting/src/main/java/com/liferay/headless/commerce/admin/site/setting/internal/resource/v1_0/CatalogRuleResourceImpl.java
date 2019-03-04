@@ -68,20 +68,20 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<CatalogRuleDTO> getCatalogRules(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _catalogRuleHelper.getCatalogRuleDTOs(groupId, pagination);
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<CategoryDTO> getCatalogRuleCategories(
 			String id, Pagination pagination)
 		throws Exception {
 
 		return _catalogRuleHelper.getCategoryDTOs(id, pagination);
+	}
+
+	@Override
+	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
+	public CollectionDTO<CatalogRuleDTO> getCatalogRules(
+			Long groupId, Pagination pagination)
+		throws Exception {
+
+		return _catalogRuleHelper.getCatalogRuleDTOs(groupId, pagination);
 	}
 
 	@Override

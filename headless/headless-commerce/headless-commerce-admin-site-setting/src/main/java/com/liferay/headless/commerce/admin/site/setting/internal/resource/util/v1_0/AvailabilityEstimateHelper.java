@@ -21,7 +21,7 @@ import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.LanguageUtils;
 import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -54,7 +54,7 @@ public class AvailabilityEstimateHelper {
 			_commerceAvailabilityEstimateService.
 				getCommerceAvailabilityEstimate(GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceAvailabilityEstimate);
+		return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
 	}
 
 	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimateDTOs(
@@ -78,7 +78,7 @@ public class AvailabilityEstimateHelper {
 				commerceAvailabilityEstimates) {
 
 			availabilityEstimateDTOs.add(
-				DTOUtils.modelToDTO(commerceAvailabilityEstimate));
+				_dtoMapper.modelToDTO(commerceAvailabilityEstimate));
 		}
 
 		return new CollectionDTO<>(availabilityEstimateDTOs, count);
@@ -119,7 +119,7 @@ public class AvailabilityEstimateHelper {
 					String.valueOf(availabilityEstimateDTO.getId()),
 					availabilityEstimateDTO, user);
 
-			return DTOUtils.modelToDTO(commerceAvailabilityEstimate);
+			return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
 		}
 		catch (NoSuchAvailabilityEstimateException nsaee) {
 			if (_log.isDebugEnabled()) {
@@ -140,7 +140,7 @@ public class AvailabilityEstimateHelper {
 					GetterUtil.get(availabilityEstimateDTO.getPriority(), 0D),
 					serviceContext);
 
-		return DTOUtils.modelToDTO(commerceAvailabilityEstimate);
+		return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -149,6 +149,9 @@ public class AvailabilityEstimateHelper {
 	@Reference
 	private CommerceAvailabilityEstimateService
 		_commerceAvailabilityEstimateService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

@@ -21,7 +21,7 @@ import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.product.exception.NoSuchCPTaxCategoryException;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.service.CPTaxCategoryService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.TaxCategoryDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -50,7 +50,7 @@ public class TaxCategoryHelper {
 		CPTaxCategory cpTaxCategory = _cpTaxCategoryService.getCPTaxCategory(
 			GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(cpTaxCategory);
+		return _dtoMapper.modelToDTO(cpTaxCategory);
 	}
 
 	public CollectionDTO<TaxCategoryDTO> getTaxCategoryDTOs(
@@ -67,7 +67,7 @@ public class TaxCategoryHelper {
 		List<TaxCategoryDTO> taxCategoryDTOs = new ArrayList<>();
 
 		for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
-			taxCategoryDTOs.add(DTOUtils.modelToDTO(cpTaxCategory));
+			taxCategoryDTOs.add(_dtoMapper.modelToDTO(cpTaxCategory));
 		}
 
 		return new CollectionDTO<>(taxCategoryDTOs, count);
@@ -94,7 +94,7 @@ public class TaxCategoryHelper {
 			CPTaxCategory cpTaxCategory = updateTaxCategory(
 				String.valueOf(taxCategoryDTO.getId()), taxCategoryDTO);
 
-			return DTOUtils.modelToDTO(cpTaxCategory);
+			return _dtoMapper.modelToDTO(cpTaxCategory);
 		}
 		catch (NoSuchCPTaxCategoryException nscptce) {
 			if (_log.isDebugEnabled()) {
@@ -112,7 +112,7 @@ public class TaxCategoryHelper {
 			LanguageUtils.getLocalizedMap(taxCategoryDTO.getDescription()),
 			serviceContext);
 
-		return DTOUtils.modelToDTO(cpTaxCategory);
+		return _dtoMapper.modelToDTO(cpTaxCategory);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -120,6 +120,9 @@ public class TaxCategoryHelper {
 
 	@Reference
 	private CPTaxCategoryService _cpTaxCategoryService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

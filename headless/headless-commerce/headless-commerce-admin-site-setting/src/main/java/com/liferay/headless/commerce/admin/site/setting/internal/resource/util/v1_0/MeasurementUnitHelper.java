@@ -21,7 +21,7 @@ import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.product.exception.NoSuchCPMeasurementUnitException;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPMeasurementUnitService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.MeasurementUnitDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -54,7 +54,7 @@ public class MeasurementUnitHelper {
 			_cpMeasurementUnitService.getCPMeasurementUnit(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(cpMeasurementUnit);
+		return _dtoMapper.modelToDTO(cpMeasurementUnit);
 	}
 
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnitDTOs(
@@ -86,7 +86,7 @@ public class MeasurementUnitHelper {
 		List<MeasurementUnitDTO> measurementUnitDTOs = new ArrayList<>();
 
 		for (CPMeasurementUnit cpMeasurementUnit : cpMeasurementUnits) {
-			measurementUnitDTOs.add(DTOUtils.modelToDTO(cpMeasurementUnit));
+			measurementUnitDTOs.add(_dtoMapper.modelToDTO(cpMeasurementUnit));
 		}
 
 		return new CollectionDTO<>(measurementUnitDTOs, count);
@@ -128,7 +128,7 @@ public class MeasurementUnitHelper {
 				String.valueOf(measurementUnitDTO.getId()), measurementUnitDTO,
 				user);
 
-			return DTOUtils.modelToDTO(cpMeasurementUnit);
+			return _dtoMapper.modelToDTO(cpMeasurementUnit);
 		}
 		catch (NoSuchCPMeasurementUnitException nscpmue) {
 			if (_log.isDebugEnabled()) {
@@ -151,7 +151,7 @@ public class MeasurementUnitHelper {
 				GetterUtil.get(measurementUnitDTO.getType(), 0),
 				serviceContext);
 
-		return DTOUtils.modelToDTO(cpMeasurementUnit);
+		return _dtoMapper.modelToDTO(cpMeasurementUnit);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -159,6 +159,9 @@ public class MeasurementUnitHelper {
 
 	@Reference
 	private CPMeasurementUnitService _cpMeasurementUnitService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

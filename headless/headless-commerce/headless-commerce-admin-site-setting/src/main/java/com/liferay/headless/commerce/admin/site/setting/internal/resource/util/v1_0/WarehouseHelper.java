@@ -20,7 +20,7 @@ import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.service.CommerceWarehouseService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -51,7 +51,7 @@ public class WarehouseHelper {
 			_commerceWarehouseService.getCommerceWarehouse(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceWarehouse);
+		return _dtoMapper.modelToDTO(commerceWarehouse);
 	}
 
 	public CollectionDTO<WarehouseDTO> getWarehouseDTOs(
@@ -84,7 +84,7 @@ public class WarehouseHelper {
 
 		for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
 			availabilityEstimateDTOs.add(
-				DTOUtils.modelToDTO(commerceWarehouse));
+				_dtoMapper.modelToDTO(commerceWarehouse));
 		}
 
 		return new CollectionDTO<>(availabilityEstimateDTOs, count);
@@ -135,7 +135,7 @@ public class WarehouseHelper {
 			CommerceWarehouse commerceWarehouse = updateWarehouse(
 				String.valueOf(warehouseDTO.getId()), warehouseDTO, user);
 
-			return DTOUtils.modelToDTO(commerceWarehouse);
+			return _dtoMapper.modelToDTO(commerceWarehouse);
 		}
 		catch (NoSuchWarehouseException nswe) {
 			if (_log.isDebugEnabled()) {
@@ -161,7 +161,7 @@ public class WarehouseHelper {
 				GetterUtil.get(warehouseDTO.getLongitude(), 0D),
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceWarehouse);
+		return _dtoMapper.modelToDTO(commerceWarehouse);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -169,6 +169,9 @@ public class WarehouseHelper {
 
 	@Reference
 	private CommerceWarehouseService _commerceWarehouseService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
