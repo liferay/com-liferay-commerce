@@ -56,7 +56,7 @@ public class ParameterImporter {
 
 		parameterBuilder.schema(getSchema(parameterJSONNode.get("schema")));
 
-		_logger.debug(
+		_logger.trace(
 			"Create {} parameter {}", inJSONNode.asText(),
 			nameJSONNode.asText());
 
