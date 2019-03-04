@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -65,6 +66,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 			String id, Pagination pagination)
 		throws Exception {
@@ -118,10 +120,27 @@ public class PriceListResourceImpl implements PriceListResource {
 		return responseBuilder.build();
 	}
 
+	@AsyncSupported
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.write")
+	@Status(Response.Status.CREATED)
 	public PriceEntryDTO upsertPriceEntry(
 			String id, PriceEntryDTO priceEntryDTO)
 		throws Exception {
+
+		if (_async.isEnabled()) {
+			new Thread() {
+
+				public void run() {
+
+					// TODO
+
+				}
+
+			}.start();
+
+			return null;
+		}
 
 		return _priceEntryHelper.upsertCommercePriceEntry(
 			id, priceEntryDTO, _company);
@@ -130,6 +149,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
+	@Status(Response.Status.CREATED)
 	public PriceListDTO upsertPriceList(
 			Long groupId, PriceListDTO priceListDTO, Language language)
 		throws Exception {
