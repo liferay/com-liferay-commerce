@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.Nullable;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.WarehouseHelper;
@@ -85,6 +86,7 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
+	@Status(Response.Status.CREATED)
 	public WarehouseDTO upsertWarehouse(Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception {
 
