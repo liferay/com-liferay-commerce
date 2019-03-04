@@ -4,8 +4,6 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param? _handleInputBox: any}
-	{@param? _handleTabChange: any}
 	{@param? stage: string}
 	{@param? dataChanged: bool}
 	{@param? adminPrivileges: bool}
@@ -24,54 +22,61 @@
 		giftQuantity: string|int,
 		quantity: string|int
 	]}
-	{@param? handleSaveClick: any}
-	{@param? handleCancelClick: any}
+	{@param? _handleTabChange: any}
+	{@param? _handleFormSubmit: any}
+	{@param? _handleFormUpdate: any}
+	{@param? _handleCancelClick: any}
 
-	<div class="item-recap">
+	<div class="item-recap panel-body">
 		<div class="commerce-tabs item-recap__tabs">
 			<button data-onclick="{$_handleTabChange}" data-element="overview">
 				{msg desc="overview"}overview{/msg}
 			</button>
-			<button data-onclick="{$_handleTabChange}" data-element="edit">
-				{msg desc="edit"}edit{/msg}
-			</button>
-		</div>
-		{if $stage == 'overview' or $stage == 'edit'}
-			{if $stage == 'overview' and isNonnull($formData) and isNonnull($itemData)}
-				{call .overview}
-					{param _handleInputBox: $_handleInputBox /}
-					{param thumbnail: $itemData.thumbnail /}
-					{param sku: $itemData.sku /}
-					{param name: $itemData.name /}
-					{param tierPricing: $itemData.tierPricing /}
-					{param description: $itemData.description /}
-					{param deliveryDate: $formData.deliveryDate /}
-					{param note: $formData.note /}
-				{/call}			
-			{elseif $stage == 'edit' and isNonnull($formData) and $adminPrivileges}
-				{call .edit}
-					{param _handleInputBox: $_handleInputBox /}
-					{param price: $formData.price /}
-					{param discount: $formData.discount /}
-					{param quantity: $formData.quantity /}
-					{param giftQuantity: $formData.giftQuantity /}
-				{/call}
+			{if $adminPrivileges}
+				<button data-onclick="{$_handleTabChange}" data-element="edit">
+					{msg desc="edit"}edit{/msg}
+				</button>
 			{/if}
-			{let $cancelClasses kind="text"}
-				commerce-button commerce-button--outline
-				{if $dataChanged == false}
-					{sp}commerce-button--disabled
+		</div>
+		{if isNonnull($formData) and isNonnull($itemData)}
+			<form data-onsubmit="{$_handleFormSubmit}">
+				{if $stage == 'edit' and isNonnull($formData) and $adminPrivileges}
+					{call .edit}
+						{param _handleFormUpdate: $_handleFormUpdate /}
+						{param price: $formData.price /}
+						{param discount: $formData.discount /}
+						{param quantity: $formData.quantity /}
+						{param giftQuantity: $formData.giftQuantity /}
+					{/call}
+				{else}
+					{call .overview}
+						{param _handleFormUpdate: $_handleFormUpdate /}
+						{param thumbnail: $itemData.thumbnail /}
+						{param sku: $itemData.sku /}
+						{param name: $itemData.name /}
+						{param tierPricing: $itemData.tierPricing /}
+						{param description: $itemData.description /}
+						{param deliveryDate: $formData.deliveryDate /}
+						{param note: $formData.note /}
+					{/call}			
 				{/if}
-			{/let}
-			{let $saveClasses kind="text"}
-				commerce-button
-				{if $dataChanged == false}
-					{sp}commerce-button--disabled
-				{/if}
-			{/let}
 
-			<button class="{$cancelClasses}" data-onclick="{$handleCancelClick}">{msg desc="cancel"}cancel{/msg}</button>
-			<button class="{$saveClasses}" data-onclick="{$handleSaveClick}">{msg desc="save"}save{/msg}</button>
+				{let $cancelClasses kind="text"}
+					commerce-button commerce-button--outline
+					{if $dataChanged == false}
+						{sp}commerce-button--disabled
+					{/if}
+				{/let}
+				{let $saveClasses kind="text"}
+					commerce-button
+					{if $dataChanged == false}
+						{sp}commerce-button--disabled
+					{/if}
+				{/let}
+
+				<button type="reset" class="{$cancelClasses}" data-onclick="{$_handleCancelClick}">{msg desc="cancel"}cancel{/msg}</button>
+				<button type="submit" class="{$saveClasses}">{msg desc="save"}save{/msg}</button>
+			</form>
 		{else}
 			{call .empty /}
 		{/if}
@@ -85,43 +90,49 @@
 {/template}
 
 {template .overview}
-	{@param _handleInputBox: any}
-	{@param thumbnail: string}
-	{@param sku: string}
+	{@param _handleFormUpdate: any}
+	{@param deliveryDate: string}
+	{@param? description: string}
 	{@param name: string}
+	{@param? note: string}
+	{@param sku: string}
 	{@param tierPricing: list<[
 		quantity: string|int,
 		price: string
 	]>}
-	{@param? description: string}
-	{@param deliveryDate: string}
-	{@param? note: string}
+	{@param thumbnail: string}
 
 	<div class="item-recap__overview">
 		<p>{$thumbnail}</p>
 		<p>{$sku}</p>
 		<p>{$name}</p>
+
+		{let $requestDeliveryDateLabel kind="html"}{msg desc="Request delivery date"}request-delivery-date{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'deliveryDate' /}
-			{param label: 'request-delivery-date' /}
+			{param label: $requestDeliveryDateLabel /}
 			{param value: $deliveryDate /}
 			{param type: 'date' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
+
+		{let $noteLabel kind="html"}{msg desc="Note"}note{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'note' /}
-			{param label: 'note' /}
+			{param label: $noteLabel /}
 			{param value: $note /}
 			{param type: 'text' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
+
 		{if isNonnull($description)}
 			<p>{$description}</p>
 		{/if}
+		
 		<dl>
 			{foreach $tierDefinition in $tierPricing}
 				<dt>
@@ -136,48 +147,56 @@
 {/template}
 
 {template .edit}
-	{@param _handleInputBox: any}
-	{@param price: string}
+	{@param _handleFormUpdate: any}
 	{@param discount: string}
-	{@param quantity: string|int}
 	{@param giftQuantity: string|int}
+	{@param price: string}
+	{@param quantity: string|int}
 
 	<div class="item-recap__edit">
+
+		{let $priceLabel kind="html"}{msg desc="Price"}price{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'price' /}
-			{param label: 'price' /}
+			{param label: $priceLabel /}
 			{param value: $price /}
 			{param type: 'text' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
+
+		{let $discountLabel kind="html"}{msg desc="Discount"}discount{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'discount' /}
-			{param label: 'discount' /}
+			{param label: $discountLabel /}
 			{param value: $discount /}
 			{param type: 'text' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
+
+		{let $quantityLabel kind="html"}{msg desc="Quantity"}quantity{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'quantity' /}
-			{param label: 'quantity' /}
+			{param label: $quantityLabel /}
 			{param value: $quantity /}
 			{param type: 'number' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
+
+		{let $giftLabel kind="html"}{msg desc="Gift quantity"}gift-quantity{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'item-recap' /}
 			{param name: 'giftQuantity' /}
-			{param label: 'gift-quantity' /}
+			{param label: $giftLabel /}
 			{param value: $giftQuantity /}
 			{param type: 'number' /}
 			{param required: true /}
-			{param _handleInputKeyUp: $_handleInputBox /}
+			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
 	</div>
 {/template}

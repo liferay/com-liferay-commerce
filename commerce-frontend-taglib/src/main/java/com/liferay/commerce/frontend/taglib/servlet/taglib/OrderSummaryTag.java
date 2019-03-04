@@ -110,6 +110,7 @@ public class OrderSummaryTag extends ComponentRendererTag {
 			
 			// TODO: addSummaryData
 			putValue("summaryData", null);
+			// TODO: this will affect the "edit" tab
 			putValue("adminPrivileges", true);
 			putValue("dataSetAPI", sb.toString());
 

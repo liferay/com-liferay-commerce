@@ -4,14 +4,18 @@ import template from './CommerceInputText.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class CommerceInputText extends Component {
-}
+class CommerceInputText extends Component {}
 
 Soy.register(CommerceInputText, template);
 
 CommerceInputText.STATE = {
 	contextName: Config.string(),
-	label: Config.string(),
+	label: Config.oneOfType(
+		[
+			Config.string(),
+			Config.func()
+		]
+	),
 	name: Config.string(),
 	pattern: Config.any(),
 	required: Config.bool(),
@@ -22,7 +26,8 @@ CommerceInputText.STATE = {
 			Config.number()
 		]
 	),
-	_handleInputKeyUp: Config.func()
+	keyUpHandler: Config.func(),
+	changeHandler: Config.func(),
 };
 
 export {CommerceInputText};

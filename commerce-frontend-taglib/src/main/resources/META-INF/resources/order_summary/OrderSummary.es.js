@@ -26,6 +26,7 @@ const fakeSummaryData = [
 ];
 
 const fakeItemData = {
+	id: 'ORDER123',
 	thumbnail: '//via.placeholder.com/70',
 	sku: 'SKU0123',
 	name: 'Test Product',
@@ -54,10 +55,11 @@ const fakeItemData = {
 		}
 	],
 	deliveryDate: '11/02/2020',
-	price: '$ 200.00',
+	price: '200.00',
 	discount: '10 %',
 	giftQuantity: 4,
-	quantity: 10
+	quantity: 10,
+	priceCurrency: '$'
 };
 
 class OrderSummary extends Component {
@@ -67,13 +69,16 @@ class OrderSummary extends Component {
 		this.itemData = fakeItemData;
 	}
 
-	_handleProductClick(e){
+	_handleItemClick(e){
 		console.log(e);
 	}
 
-	getItemData(orderItemId){
+	getItemData(itemId){
+		if(!this.tableItemsAPI){
+			throw new Error('Items API endpoint not defined');
+		}
 		return fetch(
-			this.uri + '/' + orderItemId
+			this.tableItemsAPI + '/' + itemId
 		).then(
 			response => response.json()
 		).then(this.updateItemData);
@@ -82,23 +87,34 @@ class OrderSummary extends Component {
 	updateItemData(itemData){
 		this.itemData = itemData;
 	}
+	
+	_handleItemUpdate(itemData){
+		this._updadeItemChanges(itemData)
+	}
 
-	updadeProductChanges(orderItemData){
-		const {orderItemId, data} = orderItemData;
+	_updadeItemChanges(itemData){
+		if(!this.tableItemsAPI){
+			throw new Error('Items API endpoint not defined');
+		}
 		return fetch(
-			this.uri + '/' + orderItemId,
+			this.tableItemsAPI + '/' + itemData.id,
 			{
-				body: JSON.stringify(data),
+				body: JSON.stringify(itemData),
 				headers: new Headers({'Content-Type': 'application/json'}),
 				method: 'PUT'
 			}
 		).then(
 			response => response.json()
-		).then(this.updateData);
+		).then(
+			this.updateItemData
+		).catch(e => {
+			console.log(e)
+		})
 	}
 }
 
 OrderSummary.STATE = {
+	adminPrivileges: Config.bool().value(false),
 	currentPage: Config.number().required(),
 	dataProviderKey: Config.string().required(),
 	dataSetAPI: Config.string().required(),
@@ -149,6 +165,12 @@ OrderSummary.STATE = {
 	),
 	itemData: Config.shapeOf(
 		{
+			id: Config.oneOfType(
+				[
+					Config.number(),
+					Config.string()
+				]
+			),
 			thumbnail: Config.string(),
 			sku: Config.string().required(),
 			name: Config.string().required(),
@@ -161,7 +183,7 @@ OrderSummary.STATE = {
 			quantity: Config.number()
 		}
 	),
-	adminPrivileges: Config.bool().value(false)
+	tableItemsAPI: Config.string()
 };
 
 Soy.register(OrderSummary, template);
