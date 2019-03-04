@@ -11,8 +11,8 @@
 		size: string
 	]>}
 
-	<div class="commerce-table-summary">
-		<dl>
+	<div class="commerce-table-summary panel-body">
+		<dl class="mb-0">
 			{foreach $dataItem in $data}
 				{let $dtClasses kind="text"}
 					commerce-table-summary__title
@@ -34,7 +34,7 @@
 					{/if}
 				{/let}
 
-				<dt class="{$ddClasses}">{$dataItem.title}</dt>
+				<dt class="{$dtClasses}">{$dataItem.title}</dt>
 				<dd class="{$ddClasses}">{$dataItem.value}</dd>
 			{/foreach}
 		</dl>

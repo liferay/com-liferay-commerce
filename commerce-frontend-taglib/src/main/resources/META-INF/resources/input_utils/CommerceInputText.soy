@@ -3,12 +3,13 @@
 {template .render}
 	{@param contextName: string }
 	{@param name: string }
-	{@param? label: string }
+	{@param? label: string|html }
 	{@param? value: string|int }
 	{@param? type: string}
 	{@param? pattern: html|string }
 	{@param? required: bool }
-	{@param? _handleInputKeyUp: any }
+	{@param? keyUpHandler: any }
+	{@param? changeHandler: any }
 
 	<div
 		class="commerce-input-text"
@@ -45,7 +46,11 @@
 			name="{$name}"
 			class="commerce-modal__input commerce-modal__input--with-margin"
 			value="{$inputValue}"
-			data-onkeyup="{$_handleInputKeyUp}"
+			data-onkeyup="{$keyUpHandler}"
+
+			{if isNonnull($type) and ($type == 'number' or $type == 'date')}
+				data-onchange="{$changeHandler or $keyUpHandler}"
+			{/if}
 
 			{if isNonnull($pattern) and $required != ''}
 				pattern="{$pattern}"

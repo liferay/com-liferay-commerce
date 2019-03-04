@@ -8,7 +8,6 @@ const checkObjectEquality = (firstObj, secondObj) => {
 	const properties = Object.keys(firstObj);
 	const comparisonResult = properties.reduce(
 		(changed, key) => {
-			console.log(firstObj[key], secondObj[key], firstObj[key] == secondObj[key])
 			return changed && firstObj[key] == secondObj[key]
 		}, true
 	)
@@ -18,6 +17,37 @@ const checkObjectEquality = (firstObj, secondObj) => {
 class ItemRecap extends Component {
 
 	syncItemData(){
+		this._setInitialData();
+	}
+
+	_handleFormSubmit(e){
+		console.log('submit', e);
+		e.preventDefault();
+		this._sendUpdates();
+	}
+
+	_handleSaveClick(e){
+		e.preventDefault();
+		this._sendUpdates();
+	}
+
+	_sendUpdates(){
+		if(!this.dataChanged){
+			return null
+		}
+		const updatedData = Object.assign(
+			{},
+			this.itemData,
+			this.formData
+		);
+		return this.emit('productDataUpdated', updatedData);
+	}
+	
+	_handleCancelClick(e){
+		this._setInitialData()
+	}
+
+	_setInitialData(){
 		this.formData = {
 			deliveryDate: this.itemData.deliveryDate,
 			note: this.itemData.note,
@@ -25,27 +55,15 @@ class ItemRecap extends Component {
 			discount: this.itemData.discount,
 			giftQuantity: this.itemData.giftQuantity,
 			quantity: this.itemData.quantity
-		}
-	}
-
-	_handleSaveClick(e){
-		console.log(e)
-	}
-	
-	_handleCancelClick(e){
-		console.log(e)
-	}
-
-	_handleProductClick(e){
-		console.log('_handleProductClick', e);
+		};
 	}
 	
     _handleTabChange(e){
         this.stage = e.target.dataset.element;
-        console.log('_handleTabChange', e);
 	}
 	
-    _handleInputBox(e){
+    _handleFormUpdate(e){
+		console.log(e);
 		const key = e.target.name;
 		this.formData = Object.assign(
 			{},
@@ -62,19 +80,20 @@ class ItemRecap extends Component {
 
 ItemRecap.STATE = {
 	_confirmModalVisible: Config.bool().value(false),
+	adminPrivileges: Config.bool().value(false),
 	dataChanged: Config.bool().value(false),
 	formData: Config.shapeOf(
 		{
+			discount: Config.string(),
 			deliveryDate: Config.string(),
+				giftQuantity: Config.oneOfType(
+					[
+						Config.number(),
+						Config.string()
+					]
+				),
 			note: Config.string(),
 			price: Config.string(),
-			discount: Config.string(),
-			giftQuantity: Config.oneOfType(
-				[
-					Config.number(),
-					Config.string()
-				]
-			),
 			quantity: Config.oneOfType(
 				[
 					Config.number(),
@@ -83,7 +102,6 @@ ItemRecap.STATE = {
 			)
 		}
 	),
-	adminPrivileges: Config.bool().value(false),
     itemData: Config.shapeOf(
         {
             thumbnail: Config.string(),

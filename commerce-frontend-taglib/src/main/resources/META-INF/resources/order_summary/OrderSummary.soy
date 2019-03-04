@@ -27,14 +27,15 @@
 	{@param? tableVariant: string}
 	{@param? showPagination: bool}
 	{@param? adminPrivileges: bool}
-	{@param? _handleProductClick: any}
+	{@param? _handleItemClick: any}
+	{@param? _handleItemUpdate: any}
 	{@param? _itemRecapStage: string}
 	{@param? itemData: ?}
 
 	<div class="row">
 		<div class="col-8">
 			{call CommerceTable.render}
-				{param events: ['itemToggled' : $_handleProductClick] /}
+				{param events: ['itemToggled' : $_handleItemClick] /}
 				{param actionsMenuVariant: $actionsMenuVariant /}
 				{param currentPage: $currentPage /}
 				{param id: $id /}
@@ -62,6 +63,7 @@
 		<div class="col-4">
 			{if isNonnull($itemData)}
 				{call ItemRecap.render}
+					{param events: [ 'productDataUpdated' : $_handleItemUpdate] /}
 					{param itemData: $itemData /}
 					{param stage: $_itemRecapStage /}
 					{param adminPrivileges: $adminPrivileges /}
