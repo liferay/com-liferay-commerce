@@ -6,6 +6,7 @@ import Soy from 'metal-soy';
 
 import template from './CommerceTable.soy';
 
+import './TableSummary.es';
 import './CommerceTableExtensions.es';
 import './ModalLinkCellTemplate.es';
 
@@ -32,17 +33,12 @@ class CommerceTable extends Component {
 		if (this.disableAJAX) {
 			return;
 		}
-
 		event.preventDefault();
-
 		if (this.pageSize == event.data.item.label) {
 			return;
 		}
-
 		this.pageSize = event.data.item.label;
-
 		this.paginationSelectedEntry = this.paginationEntries.map((x) => x.label).indexOf(this.pageSize);
-
 		this._loadData();
 	}
 
@@ -53,21 +49,18 @@ class CommerceTable extends Component {
 	 * @private
 	 */
 	_handleItemToggled(event) {
+		this.emit('itemToggled', event);
 	}
 
 	_handlePageClicked(event) {
 		if (this.disableAJAX) {
 			return;
 		}
-
 		let newPage = parseInt(event.data.page, 10);
-
 		if (this.currentPage == newPage) {
 			return;
 		}
-
 		this.currentPage = newPage;
-
 		this._loadData();
 	}
 
@@ -78,15 +71,15 @@ class CommerceTable extends Component {
 				method: 'GET'
 			}
 		)
-			.then(response => response.json())
-			.then(
-				updatedItems => {
-					this.items = updatedItems;
-				}
-			)
-			.catch(
-				err => {}
-			);
+		.then(response => response.json())
+		.then(
+			updatedItems => {
+				this.items = updatedItems;
+			}
+		)
+		.catch(
+			err => {}
+		);
 	}
 
 }
@@ -106,6 +99,7 @@ CommerceTable.STATE = {
 	paginationEntries: Config.array().required(),
 	paginationSelectedEntry: Config.number().required(),
 	schema: Config.object().required(),
+	summaryData: Config.array(),
 	selectable: Config.bool(),
 	spritemap: Config.string().required(),
 	tableName: Config.string().required(),

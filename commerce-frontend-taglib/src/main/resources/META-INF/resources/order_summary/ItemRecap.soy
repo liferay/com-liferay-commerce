@@ -1,0 +1,183 @@
+{namespace ItemRecap}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param? _handleInputBox: any}
+	{@param? _handleTabChange: any}
+	{@param? stage: string}
+	{@param? dataChanged: bool}
+	{@param? adminPrivileges: bool}
+	{@param? itemData: [
+		thumbnail: string,
+		sku: string,
+		name: string,
+		tierPricing: ?,
+		description: string
+	]}
+	{@param? formData: [
+		deliveryDate: string,
+		note: string,
+		price: string,
+		discount: string,
+		giftQuantity: string|int,
+		quantity: string|int
+	]}
+	{@param? handleSaveClick: any}
+	{@param? handleCancelClick: any}
+
+	<div class="item-recap">
+		<div class="commerce-tabs item-recap__tabs">
+			<button data-onclick="{$_handleTabChange}" data-element="overview">
+				{msg desc="overview"}overview{/msg}
+			</button>
+			<button data-onclick="{$_handleTabChange}" data-element="edit">
+				{msg desc="edit"}edit{/msg}
+			</button>
+		</div>
+		{if $stage == 'overview' or $stage == 'edit'}
+			{if $stage == 'overview' and isNonnull($formData) and isNonnull($itemData)}
+				{call .overview}
+					{param _handleInputBox: $_handleInputBox /}
+					{param thumbnail: $itemData.thumbnail /}
+					{param sku: $itemData.sku /}
+					{param name: $itemData.name /}
+					{param tierPricing: $itemData.tierPricing /}
+					{param description: $itemData.description /}
+					{param deliveryDate: $formData.deliveryDate /}
+					{param note: $formData.note /}
+				{/call}			
+			{elseif $stage == 'edit' and isNonnull($formData) and $adminPrivileges}
+				{call .edit}
+					{param _handleInputBox: $_handleInputBox /}
+					{param price: $formData.price /}
+					{param discount: $formData.discount /}
+					{param quantity: $formData.quantity /}
+					{param giftQuantity: $formData.giftQuantity /}
+				{/call}
+			{/if}
+			{let $cancelClasses kind="text"}
+				commerce-button commerce-button--outline
+				{if $dataChanged == false}
+					{sp}commerce-button--disabled
+				{/if}
+			{/let}
+			{let $saveClasses kind="text"}
+				commerce-button
+				{if $dataChanged == false}
+					{sp}commerce-button--disabled
+				{/if}
+			{/let}
+
+			<button class="{$cancelClasses}" data-onclick="{$handleCancelClick}">{msg desc="cancel"}cancel{/msg}</button>
+			<button class="{$saveClasses}" data-onclick="{$handleSaveClick}">{msg desc="save"}save{/msg}</button>
+		{else}
+			{call .empty /}
+		{/if}
+	</div>
+{/template}
+
+{template .empty}
+	<div class="item-recap__empty">
+		{msg desc="Please select a product"}please-select-a-product{/msg}
+	</div>
+{/template}
+
+{template .overview}
+	{@param _handleInputBox: any}
+	{@param thumbnail: string}
+	{@param sku: string}
+	{@param name: string}
+	{@param tierPricing: list<[
+		quantity: string|int,
+		price: string
+	]>}
+	{@param? description: string}
+	{@param deliveryDate: string}
+	{@param? note: string}
+
+	<div class="item-recap__overview">
+		<p>{$thumbnail}</p>
+		<p>{$sku}</p>
+		<p>{$name}</p>
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'deliveryDate' /}
+			{param label: 'request-delivery-date' /}
+			{param value: $deliveryDate /}
+			{param type: 'date' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'note' /}
+			{param label: 'note' /}
+			{param value: $note /}
+			{param type: 'text' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+		{if isNonnull($description)}
+			<p>{$description}</p>
+		{/if}
+		<dl>
+			{foreach $tierDefinition in $tierPricing}
+				<dt>
+					{$tierDefinition.quantity} {msg desc="units"}units{/msg}
+				</dt>
+				<dd>
+					{$tierDefinition.price}
+				</dd>
+			{/foreach}
+		</dl>
+	</div>
+{/template}
+
+{template .edit}
+	{@param _handleInputBox: any}
+	{@param price: string}
+	{@param discount: string}
+	{@param quantity: string|int}
+	{@param giftQuantity: string|int}
+
+	<div class="item-recap__edit">
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'price' /}
+			{param label: 'price' /}
+			{param value: $price /}
+			{param type: 'text' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'discount' /}
+			{param label: 'discount' /}
+			{param value: $discount /}
+			{param type: 'text' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'quantity' /}
+			{param label: 'quantity' /}
+			{param value: $quantity /}
+			{param type: 'number' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+		{call CommerceInputText.render}
+			{param contextName: 'item-recap' /}
+			{param name: 'giftQuantity' /}
+			{param label: 'gift-quantity' /}
+			{param value: $giftQuantity /}
+			{param type: 'number' /}
+			{param required: true /}
+			{param _handleInputKeyUp: $_handleInputBox /}
+		{/call}
+	</div>
+{/template}

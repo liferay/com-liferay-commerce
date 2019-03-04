@@ -4,9 +4,9 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param _handlePageClicked: any}
-	{@param _handleItemToggled: any}
-	{@param _handleItemsPerPageClicked: any}
+	{@param? _handlePageClicked: any}
+	{@param? _handleItemToggled: any}
+	{@param? _handleItemsPerPageClicked: any}
 	{@param currentPage: int}
 	{@param? id: string}
 	{@param items: ?}
@@ -22,6 +22,8 @@
 	{@param? actionsMenuVariant: string}
 	{@param? emptyTableMessage: string}
 	{@param? showPagination: bool}
+	{@param? summaryData: ?}
+	{@param? showTableSummary: bool}
 
 	<div class="commerce-table-wrapper">
 		{if length($items) == 0}
@@ -43,6 +45,12 @@
 				{param spritemap: $spritemap /}
 				{param actionsMenuVariant: $actionsMenuVariant /}
 			{/delcall}
+
+			{if $showTableSummary and isNonnull($summaryData)}
+				{call TableSummary.render}
+					{param data: $summaryData /}
+				{/call}
+			{/if}
 
 			{if $showPagination}
 				{call ClayPaginationBar.render}
