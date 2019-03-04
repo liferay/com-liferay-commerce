@@ -62,6 +62,8 @@ public enum RESTError {
 		993, "Duplicate product option key.", Response.Status.CONFLICT),
 	DUPLICATE_PRODUCT_OPTION_VALUE_KEY(
 		991, "Duplicate product option value key.", Response.Status.CONFLICT),
+	DUPLICATE_TIER_PRICE(
+		952, "Duplicated tier price", Response.Status.CONFLICT),
 	GENERAL_ERROR(999, "General error.", Response.Status.BAD_REQUEST),
 	INTERNAL_ERROR(
 		998, "Internal error. Please try again later.",
