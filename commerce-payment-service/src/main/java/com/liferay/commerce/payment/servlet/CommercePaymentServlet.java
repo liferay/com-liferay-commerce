@@ -158,15 +158,12 @@ public class CommercePaymentServlet extends HttpServlet {
 		}
 	}
 
-	private Map<String, String> _getQueryMap(String query)
-	{
-
+	private Map<String, String> _getQueryMap(String query) {
 		String[] params = query.split(StringPool.AMPERSAND);
 
 		Map<String, String> map = new HashMap();
 
-		for (String param : params)
-		{
+		for (String param : params) {
 			String name = param.split(StringPool.EQUAL)[0];
 			String value = param.split(StringPool.EQUAL)[1];
 

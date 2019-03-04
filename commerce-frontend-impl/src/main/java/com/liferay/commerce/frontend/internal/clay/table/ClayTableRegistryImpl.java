@@ -67,7 +67,7 @@ public class ClayTableRegistryImpl implements ClayTableRegistry {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ClayTableRegistryImpl.class);
 
-	private ServiceTrackerMap
-		<String, ServiceWrapper<ClayTable>> _serviceTrackerMap;
+	private ServiceTrackerMap<String, ServiceWrapper<ClayTable>>
+		_serviceTrackerMap;
 
 }

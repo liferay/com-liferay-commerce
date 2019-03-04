@@ -75,8 +75,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			Provider javaTypeProvider = openApiProperty.getJavaTypeProvider();
 
 			Assert.assertTrue(
-				"DTO class has private variable _" +
-					openApiProperty.getName(),
+				"DTO class has private variable _" + openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
@@ -187,8 +186,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				openApiProperty, new HashSet<>(components));
 
 			Assert.assertTrue(
-				"DTO class has private variable _" +
-					openApiProperty.getName(),
+				"DTO class has private variable _" + openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
@@ -417,8 +415,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				openApiProperty, new HashSet<>(components));
 
 			Assert.assertTrue(
-				"DTO class has private variable _" +
-					openApiProperty.getName(),
+				"DTO class has private variable _" + openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(

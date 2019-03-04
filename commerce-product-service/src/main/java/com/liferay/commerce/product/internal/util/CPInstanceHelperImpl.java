@@ -201,7 +201,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Override
 	public Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
-		getCPDefinitionOptionRelsMap(String json) throws PortalException {
+			getCPDefinitionOptionRelsMap(String json)
+		throws PortalException {
 
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 			cpDefinitionOptionRelListMap = new HashMap<>();

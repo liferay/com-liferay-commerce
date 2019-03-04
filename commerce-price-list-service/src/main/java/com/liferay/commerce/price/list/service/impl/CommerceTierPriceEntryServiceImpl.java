@@ -179,9 +179,8 @@ public class CommerceTierPriceEntryServiceImpl
 			getPermissionChecker(), commercePriceEntry.getGroupId(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
-		return
-			commerceTierPriceEntryLocalService.getCommerceTierPriceEntriesCount(
-				commercePriceEntryId);
+		return commerceTierPriceEntryLocalService.
+			getCommerceTierPriceEntriesCount(commercePriceEntryId);
 	}
 
 	@Override
@@ -207,8 +206,8 @@ public class CommerceTierPriceEntryServiceImpl
 			getPermissionChecker(), groupId,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
-		return
-			commerceTierPriceEntryLocalService.searchCommerceTierPriceEntries(
+		return commerceTierPriceEntryLocalService.
+			searchCommerceTierPriceEntries(
 				companyId, groupId, commercePriceEntryId, keywords, start, end,
 				sort);
 	}

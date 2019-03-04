@@ -63,9 +63,8 @@ public class CPDefinitionGroupedEntryServiceImpl
 			getPermissionChecker(),
 			cpDefinitionGroupedEntry.getCPDefinitionId(), ActionKeys.UPDATE);
 
-		return
-			cpDefinitionGroupedEntryLocalService.deleteCPDefinitionGroupedEntry(
-				cpDefinitionGroupedEntry);
+		return cpDefinitionGroupedEntryLocalService.
+			deleteCPDefinitionGroupedEntry(cpDefinitionGroupedEntry);
 	}
 
 	@Override
@@ -77,8 +76,8 @@ public class CPDefinitionGroupedEntryServiceImpl
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
-		return
-			cpDefinitionGroupedEntryLocalService.getCPDefinitionGroupedEntries(
+		return cpDefinitionGroupedEntryLocalService.
+			getCPDefinitionGroupedEntries(
 				cpDefinitionId, start, end, orderByComparator);
 	}
 
@@ -131,8 +130,8 @@ public class CPDefinitionGroupedEntryServiceImpl
 			getPermissionChecker(),
 			cpDefinitionGroupedEntry.getEntryCPDefinition(), ActionKeys.VIEW);
 
-		return
-			cpDefinitionGroupedEntryLocalService.updateCPDefinitionGroupedEntry(
+		return cpDefinitionGroupedEntryLocalService.
+			updateCPDefinitionGroupedEntry(
 				cpDefinitionGroupedEntryId, priority, quantity);
 	}
 

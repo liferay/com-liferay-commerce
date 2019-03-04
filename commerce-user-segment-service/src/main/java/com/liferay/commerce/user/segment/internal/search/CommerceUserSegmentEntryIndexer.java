@@ -188,7 +188,7 @@ public class CommerceUserSegmentEntryIndexer
 						getCommerceUserSegmentCriterionTypes();
 
 			for (CommerceUserSegmentCriterionType
-					 commerceUserSegmentCriterionType :
+					commerceUserSegmentCriterionType :
 						commerceUserSegmentCriterionTypes) {
 
 				commerceUserSegmentCriterionType.contributeToDocument(document);

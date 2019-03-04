@@ -56,7 +56,7 @@ public interface MeasurementUnitResource {
 	@Produces("application/*")
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
 			@QueryParam("groupId") Long groupId,
-			@Nullable@QueryParam("type") Integer type,
+			@Nullable @QueryParam("type") Integer type,
 			@Context Pagination pagination)
 		throws Exception;
 

@@ -46,8 +46,8 @@ public class CommerceCountryTwoLettersISOCodeExceptionMapper
 
 	@Override
 	public String getErrorDescription() {
-		return
-			RESTError.TWO_LETTERS_COUNTRY_ISO_CODE_ERROR.getErrorDescription();
+		return RESTError.TWO_LETTERS_COUNTRY_ISO_CODE_ERROR.
+			getErrorDescription();
 	}
 
 	@Override

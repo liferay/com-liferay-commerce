@@ -28,8 +28,8 @@ import org.osgi.service.component.annotations.Deactivate;
  */
 @Component(service = ItemSelectorCriterionHandler.class)
 public class CPDefinitionSelectorCriterionHandler
-	extends
-		BaseItemSelectorCriterionHandler<CPDefinitionItemSelectorCriterion> {
+	extends BaseItemSelectorCriterionHandler
+		<CPDefinitionItemSelectorCriterion> {
 
 	@Override
 	public Class<CPDefinitionItemSelectorCriterion>

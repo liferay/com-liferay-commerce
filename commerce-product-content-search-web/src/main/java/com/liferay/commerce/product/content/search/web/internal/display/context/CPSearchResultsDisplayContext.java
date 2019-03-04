@@ -100,8 +100,8 @@ public class CPSearchResultsDisplayContext {
 	public List<CPContentListEntryRenderer> getCPContentListEntryRenderers(
 		String cpType) {
 
-		return
-			_cpContentListEntryRendererRegistry.getCPContentListEntryRenderers(
+		return _cpContentListEntryRendererRegistry.
+			getCPContentListEntryRenderers(
 				CPPortletKeys.CP_SEARCH_RESULTS, cpType);
 	}
 
