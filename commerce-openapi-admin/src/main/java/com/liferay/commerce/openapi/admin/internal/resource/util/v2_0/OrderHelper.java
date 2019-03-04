@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,13 +57,9 @@ public class OrderHelper {
 	public static String getCurrencyCode(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		return Optional.of(
-			commerceOrder.getCommerceCurrency()
-		).map(
-			CommerceCurrency::getCode
-		).orElse(
-			null
-		);
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		return commerceCurrency.getCode();
 	}
 
 	public void deleteOrder(String id, Company company) throws PortalException {
