@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -67,6 +68,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.read")
 	public CollectionDTO<TierPriceDTO> getTierPrices(
 			String id, Pagination pagination)
 		throws Exception {
@@ -103,9 +105,26 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 		return responseBuilder.build();
 	}
 
+	@AsyncSupported
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.write")
+	@Status(Response.Status.CREATED)
 	public TierPriceDTO upsertTierPrice(String id, TierPriceDTO tierPriceDTO)
 		throws Exception {
+
+		if (_async.isEnabled()) {
+			new Thread() {
+
+				public void run() {
+
+					// TODO
+
+				}
+
+			}.start();
+
+			return null;
+		}
 
 		return _tierPriceHelper.upsertCommerceTierPriceEntry(
 			id, tierPriceDTO, _company);

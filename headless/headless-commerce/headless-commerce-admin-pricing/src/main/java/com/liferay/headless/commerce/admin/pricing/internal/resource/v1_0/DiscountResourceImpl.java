@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -67,6 +68,7 @@ public class DiscountResourceImpl implements DiscountResource {
 	}
 
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.read")
 	public CollectionDTO<DiscountRuleDTO> getDiscountRules(
 			String id, Pagination pagination)
 		throws Exception {
@@ -114,6 +116,7 @@ public class DiscountResourceImpl implements DiscountResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
+	@Status(Response.Status.CREATED)
 	public DiscountDTO upsertDiscount(Long groupId, DiscountDTO discountDTO)
 		throws Exception {
 
@@ -134,10 +137,27 @@ public class DiscountResourceImpl implements DiscountResource {
 		return _discountHelper.upsertDiscount(groupId, discountDTO, _user);
 	}
 
+	@AsyncSupported
 	@Override
+	@RequiresScope("HeadlessCommerceAdminPricing.write")
+	@Status(Response.Status.CREATED)
 	public DiscountRuleDTO upsertDiscountRule(
 			String id, DiscountRuleDTO discountRuleDTO)
 		throws Exception {
+
+		if (_async.isEnabled()) {
+			new Thread() {
+
+				public void run() {
+
+					// TODO
+
+				}
+
+			}.start();
+
+			return null;
+		}
 
 		return _discountRuleHelper.upsertDiscountRule(
 			GetterUtil.getLong(id), discountRuleDTO, _user);
