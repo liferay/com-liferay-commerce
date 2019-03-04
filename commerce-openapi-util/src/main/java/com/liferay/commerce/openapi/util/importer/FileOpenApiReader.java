@@ -25,20 +25,20 @@ import java.io.FileReader;
  */
 public class FileOpenApiReader implements OpenApiReader {
 
-	public FileOpenApiReader(String path) {
-		_path = path;
+	public FileOpenApiReader(String openApiFileName, String restConfigDirName) {
+		_openApiFile = new File(restConfigDirName, openApiFileName);
 	}
 
 	@Override
 	public String read() {
 		try {
-			File file = new File(_path);
-
-			if (!file.exists() || !file.isFile()) {
-				throw new ReaderException("Invalid input file " + _path);
+			if (!_openApiFile.exists() || !_openApiFile.isFile()) {
+				throw new ReaderException(
+					"Invalid input file " + _openApiFile.getAbsolutePath());
 			}
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(
+				new FileReader(_openApiFile));
 
 			StringBuilder sb = new StringBuilder();
 
@@ -57,6 +57,6 @@ public class FileOpenApiReader implements OpenApiReader {
 		}
 	}
 
-	private final String _path;
+	private final File _openApiFile;
 
 }

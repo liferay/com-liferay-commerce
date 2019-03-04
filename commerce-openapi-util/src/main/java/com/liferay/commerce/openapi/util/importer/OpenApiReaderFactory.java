@@ -36,26 +36,38 @@ public class OpenApiReaderFactory {
 
 		String openApiUrl = configuration.getProperty("openapi.url");
 
-		return new FileOpenApiReader(openApiUrl);
+		return new FileOpenApiReader(
+			openApiUrl, ConfigurationFactory.getPath());
 	}
 
 	public static OpenApiReader getOpenApiReader(String externalReference) {
+		return getOpenApiReader(externalReference, null);
+	}
+
+	public static OpenApiReader getOpenApiReader(
+		String externalReference, String restConfigDirName) {
+
 		if (!isExternalReference(externalReference)) {
 			throw new ReaderException(
 				"No reader implementation for reference " + externalReference);
 		}
 
-		String[] referenceParts = externalReference.split("#");
+		String externalUrl = externalReference;
 
-		String externalUrl = referenceParts[0];
-		String componentReference = referenceParts[1];
+		if (externalReference.indexOf("#") > 0) {
+			externalUrl = externalReference.substring(
+				0, externalReference.indexOf("#"));
+		}
 
-		_logger.info(
-			"External reference confirmed - location: {} reference: {}",
-			externalUrl, componentReference);
+		_logger.info("Valid external reference at {}", externalUrl);
 
 		if (!externalUrl.startsWith("http")) {
-			return new FileOpenApiReader(externalUrl);
+			if (restConfigDirName != null) {
+				return new FileOpenApiReader(externalUrl, restConfigDirName);
+			}
+
+			return new FileOpenApiReader(
+				externalUrl, ConfigurationFactory.getPath());
 		}
 
 		Properties configuration = ConfigurationFactory.getConfigurationFor(
