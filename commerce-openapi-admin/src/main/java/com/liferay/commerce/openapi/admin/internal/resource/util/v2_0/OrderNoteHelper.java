@@ -25,8 +25,6 @@ import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -47,18 +45,7 @@ public class OrderNoteHelper {
 	public void deleteOrderNote(String id, Company company)
 		throws PortalException {
 
-		CommerceOrderNote commerceOrderNote = null;
-
-		try {
-			commerceOrderNote = getOrderNoteById(id, company);
-		}
-		catch (NoSuchOrderNoteException nsone) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Order Item not exist with ID: " + id, nsone);
-			}
-
-			return;
-		}
+		CommerceOrderNote commerceOrderNote = getOrderNoteById(id, company);
 
 		_commerceOrderNoteService.deleteCommerceOrderNote(
 			commerceOrderNote.getCommerceOrderId());
@@ -76,9 +63,8 @@ public class OrderNoteHelper {
 		CommerceOrderNote commerceOrderNote = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			commerceOrderNote =
-				_commerceOrderNoteService.fetchCommerceOrderNote(
-					GetterUtil.getLong(id));
+			commerceOrderNote = _commerceOrderNoteService.getCommerceOrderNote(
+				GetterUtil.getLong(id));
 		}
 		else {
 
@@ -172,9 +158,6 @@ public class OrderNoteHelper {
 			commerceOrderNoteId, commerceOrder.getCommerceOrderId(), content,
 			restricted, externalReferenceCode, serviceContext);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		OrderNoteHelper.class);
 
 	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;

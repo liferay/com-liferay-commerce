@@ -32,8 +32,6 @@ import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -63,18 +61,7 @@ public class OrderHelper {
 	}
 
 	public void deleteOrder(String id, Company company) throws PortalException {
-		CommerceOrder commerceOrder = null;
-
-		try {
-			commerceOrder = getOrderById(id, company);
-		}
-		catch (NoSuchOrderException nsoe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Order not exist with ID: " + id, nsoe);
-			}
-
-			return;
-		}
+		CommerceOrder commerceOrder = getOrderById(id, company);
 
 		_commerceOrderService.deleteCommerceOrder(
 			commerceOrder.getCommerceOrderId());
@@ -93,7 +80,7 @@ public class OrderHelper {
 		CommerceOrder commerceOrder = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			commerceOrder = _commerceOrderService.fetchCommerceOrder(
+			commerceOrder = _commerceOrderService.getCommerceOrder(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -322,8 +309,6 @@ public class OrderHelper {
 
 		return commerceOrder;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(OrderHelper.class);
 
 	@Reference
 	private AccountHelper _accountHelper;

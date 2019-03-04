@@ -26,8 +26,6 @@ import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionValueService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -51,20 +49,7 @@ public class ProductOptionValueHelper {
 	public void deleteProductOptionValue(String id, Company company)
 		throws PortalException {
 
-		CPOptionValue cpOptionValue = null;
-
-		try {
-			cpOptionValue = getCPOptionValueById(id, company);
-		}
-		catch (NoSuchCPOptionValueException nscpove) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Product Option Value does not exist with ID: " + id,
-					nscpove);
-			}
-
-			return;
-		}
+		CPOptionValue cpOptionValue = getCPOptionValueById(id, company);
 
 		_cpOptionValueService.deleteCPOptionValue(
 			cpOptionValue.getCPOptionValueId());
@@ -76,7 +61,7 @@ public class ProductOptionValueHelper {
 		CPOptionValue cpOptionValue = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			cpOptionValue = _cpOptionValueService.fetchCPOptionValue(
+			cpOptionValue = _cpOptionValueService.getCPOptionValue(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -186,9 +171,6 @@ public class ProductOptionValueHelper {
 
 		return priority;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ProductOptionValueHelper.class);
 
 	@Reference
 	private CPOptionValueService _cpOptionValueService;

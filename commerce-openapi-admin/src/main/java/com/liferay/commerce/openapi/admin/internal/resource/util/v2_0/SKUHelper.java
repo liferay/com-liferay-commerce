@@ -26,8 +26,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -51,18 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 public class SKUHelper {
 
 	public void deleteSKU(String id, Company company) throws PortalException {
-		CPInstance cpInstance = null;
-
-		try {
-			cpInstance = getCPInstanceById(id, company);
-		}
-		catch (NoSuchCPInstanceException nscpie) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("SKU does not exist with ID: " + id, nscpie);
-			}
-
-			return;
-		}
+		CPInstance cpInstance = getCPInstanceById(id, company);
 
 		_cpInstanceService.deleteCPInstance(cpInstance.getCPInstanceId());
 	}
@@ -73,7 +60,7 @@ public class SKUHelper {
 		CPInstance cpInstance = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			cpInstance = _cpInstanceService.fetchCPInstance(
+			cpInstance = _cpInstanceService.getCPInstance(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -227,8 +214,6 @@ public class SKUHelper {
 
 		return calendar;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(SKUHelper.class);
 
 	@Reference
 	private CPInstanceService _cpInstanceService;

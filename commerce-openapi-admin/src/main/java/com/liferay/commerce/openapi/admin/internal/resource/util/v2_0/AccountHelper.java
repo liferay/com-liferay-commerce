@@ -25,8 +25,6 @@ import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -58,18 +56,7 @@ public class AccountHelper {
 	public void deleteAccount(String id, Company company)
 		throws PortalException {
 
-		CommerceAccount commerceAccount = null;
-
-		try {
-			commerceAccount = getAccountById(id, company);
-		}
-		catch (NoSuchAccountException nsae) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Account does not exist with ID: " + id, nsae);
-			}
-
-			return;
-		}
+		CommerceAccount commerceAccount = getAccountById(id, company);
 
 		_commerceAccountService.deleteCommerceAccount(
 			commerceAccount.getCommerceAccountId());
@@ -87,7 +74,7 @@ public class AccountHelper {
 		CommerceAccount commerceAccount = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			commerceAccount = _commerceAccountService.fetchCommerceAccount(
+			commerceAccount = _commerceAccountService.getCommerceAccount(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -202,8 +189,6 @@ public class AccountHelper {
 
 		return commerceAccount.getEmail();
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(AccountHelper.class);
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;

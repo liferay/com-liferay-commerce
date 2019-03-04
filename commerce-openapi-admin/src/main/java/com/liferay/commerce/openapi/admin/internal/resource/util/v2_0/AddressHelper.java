@@ -24,8 +24,6 @@ import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.NoSuchAddressException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.List;
@@ -58,18 +56,7 @@ public class AddressHelper {
 	}
 
 	public void deleteAddress(String id) throws PortalException {
-		CommerceAddress commerceAddress = null;
-
-		try {
-			commerceAddress = getAddressById(id);
-		}
-		catch (NoSuchAddressException nsae) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Address does not exist with ID: " + id, nsae);
-			}
-
-			return;
-		}
+		CommerceAddress commerceAddress = getAddressById(id);
 
 		_commerceAddressService.deleteCommerceAddress(
 			commerceAddress.getCommerceAddressId());
@@ -79,7 +66,7 @@ public class AddressHelper {
 		CommerceAddress commerceAddress = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			commerceAddress = _commerceAddressService.fetchCommerceAddress(
+			commerceAddress = _commerceAddressService.getCommerceAddress(
 				GetterUtil.getLong(id));
 		}
 
@@ -131,8 +118,6 @@ public class AddressHelper {
 				addressDTO.isDefaultBilling(), addressDTO.isDefaultShipping(),
 				_serviceContextHelper.getServiceContext()));
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(AddressHelper.class);
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;

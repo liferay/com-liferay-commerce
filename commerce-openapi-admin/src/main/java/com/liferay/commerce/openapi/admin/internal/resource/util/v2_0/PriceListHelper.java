@@ -28,8 +28,6 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -68,18 +66,7 @@ public class PriceListHelper {
 	public void deletePriceList(String id, User user, Company company)
 		throws PortalException {
 
-		CommercePriceList commercePriceList = null;
-
-		try {
-			commercePriceList = getPriceListById(id, company);
-		}
-		catch (NoSuchPriceListException nsple) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Price List not exist with ID: " + id, nsple);
-			}
-
-			return;
-		}
+		CommercePriceList commercePriceList = getPriceListById(id, company);
 
 		_commercePriceListService.deleteCommercePriceList(
 			commercePriceList.getCommercePriceListId());
@@ -349,9 +336,6 @@ public class PriceListHelper {
 
 		return commercePriceList;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		PriceListHelper.class);
 
 	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
