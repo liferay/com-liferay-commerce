@@ -23,6 +23,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.util.Portal;
 
+import java.math.BigDecimal;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -51,6 +53,23 @@ public class PaymentProcessCommerceCheckoutStep
 	@Override
 	public String getName() {
 		return NAME;
+	}
+
+	@Override
+	public boolean isActive(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
+		throws Exception {
+
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (BigDecimal.ZERO.compareTo(commerceOrder.getTotal()) == 0) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
