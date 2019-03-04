@@ -23,4 +23,7 @@ public interface Job {
 
 	public String getName();
 
+	public void registerJobExecutionListener(
+		JobExecutionListener jobExecutionListener);
+
 }

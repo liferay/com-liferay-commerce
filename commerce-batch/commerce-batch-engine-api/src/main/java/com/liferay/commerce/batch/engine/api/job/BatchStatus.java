@@ -17,10 +17,8 @@ package com.liferay.commerce.batch.engine.api.job;
 /**
  * @author Ivica Cardic
  */
-public interface JobLauncher {
+public enum BatchStatus {
 
-	public boolean isJobActive(String jobId);
-
-	public JobExecution run(Job job, JobParameters jobParameters);
+	COMPLETED, FAILED, STARTED, UNKNOWN
 
 }

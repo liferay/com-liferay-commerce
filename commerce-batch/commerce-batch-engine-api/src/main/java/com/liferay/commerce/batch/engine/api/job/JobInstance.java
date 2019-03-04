@@ -22,8 +22,8 @@ import java.util.Objects;
 public class JobInstance {
 
 	public JobInstance(String id, String jobName) {
-		_id = id;
-		_jobName = jobName;
+		_id = Objects.requireNonNull(id);
+		_jobName = Objects.requireNonNull(jobName);
 	}
 
 	@Override
@@ -41,6 +41,10 @@ public class JobInstance {
 		return _id.equals(that._id);
 	}
 
+	public BatchStatus getBatchStatus() {
+		return _batchStatus;
+	}
+
 	public String getId() {
 		return _id;
 	}
@@ -54,11 +58,17 @@ public class JobInstance {
 		return Objects.hash(_id);
 	}
 
+	public void setBatchStatus(BatchStatus batchStatus) {
+		_batchStatus = batchStatus;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("JobInstance{id=");
+		sb.append("JobInstance{batchStatus=");
+		sb.append(_batchStatus);
+		sb.append(", id=");
 		sb.append(_id);
 		sb.append(", jobName=");
 		sb.append(_jobName);
@@ -67,6 +77,7 @@ public class JobInstance {
 		return sb.toString();
 	}
 
+	private BatchStatus _batchStatus = BatchStatus.UNKNOWN;
 	private final String _id;
 	private final String _jobName;
 

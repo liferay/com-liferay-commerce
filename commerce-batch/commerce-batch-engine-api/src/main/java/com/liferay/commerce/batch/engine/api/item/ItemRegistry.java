@@ -23,4 +23,6 @@ public interface ItemRegistry {
 			String type, String version, Operation operation, Class<T> clazz)
 		throws Exception;
 
+	public void unget(Object service);
+
 }

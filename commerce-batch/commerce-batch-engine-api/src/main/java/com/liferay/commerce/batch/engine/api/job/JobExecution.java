@@ -14,13 +14,15 @@
 
 package com.liferay.commerce.batch.engine.api.job;
 
+import java.util.Objects;
+
 /**
  * @author Ivica Cardic
  */
 public class JobExecution {
 
 	public JobExecution(JobInstance jobInstance, JobParameters jobParameters) {
-		_jobInstance = jobInstance;
+		_jobInstance = Objects.requireNonNull(jobInstance);
 		_jobParameters = jobParameters;
 	}
 

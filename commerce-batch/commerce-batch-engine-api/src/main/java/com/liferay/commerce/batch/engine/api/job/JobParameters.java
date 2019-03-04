@@ -17,6 +17,7 @@ package com.liferay.commerce.batch.engine.api.job;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Ivica Cardic
@@ -28,7 +29,7 @@ public class JobParameters {
 	}
 
 	public JobParameters(Map<String, Object> parameters) {
-		_parameters = new LinkedHashMap<>(parameters);
+		_parameters = new LinkedHashMap<>(Objects.requireNonNull(parameters));
 	}
 
 	public <T> T get(String key) {

@@ -17,10 +17,10 @@ package com.liferay.commerce.batch.engine.api.job;
 /**
  * @author Ivica Cardic
  */
-public interface JobLauncher {
+public interface JobExecutionListener {
 
-	public boolean isJobActive(String jobId);
+	public void afterJob(JobExecution jobExecution);
 
-	public JobExecution run(Job job, JobParameters jobParameters);
+	public void beforeJob(JobExecution jobExecution);
 
 }
