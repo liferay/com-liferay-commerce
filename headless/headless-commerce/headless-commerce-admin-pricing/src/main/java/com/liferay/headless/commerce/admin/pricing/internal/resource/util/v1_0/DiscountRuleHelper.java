@@ -22,7 +22,7 @@ import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountRuleDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -55,7 +55,7 @@ public class DiscountRuleHelper {
 			_commerceDiscountRuleService.getCommerceDiscountRule(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceDiscountRule);
+		return _dtoMapper.modelToDTO(commerceDiscountRule);
 	}
 
 	public CollectionDTO<DiscountRuleDTO> getDiscountRuleDTOs(
@@ -75,7 +75,7 @@ public class DiscountRuleHelper {
 		for (CommerceDiscountRule commerceDiscountRule :
 				commerceDiscountRules) {
 
-			discountRuleDTOs.add(DTOUtils.modelToDTO(commerceDiscountRule));
+			discountRuleDTOs.add(_dtoMapper.modelToDTO(commerceDiscountRule));
 		}
 
 		return new CollectionDTO<>(discountRuleDTOs, count);
@@ -85,7 +85,7 @@ public class DiscountRuleHelper {
 			String id, DiscountRuleDTO discountRuleDTO)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(_updateDiscountRule(id, discountRuleDTO));
+		return _dtoMapper.modelToDTO(_updateDiscountRule(id, discountRuleDTO));
 	}
 
 	public DiscountRuleDTO upsertDiscountRule(
@@ -96,7 +96,7 @@ public class DiscountRuleHelper {
 			CommerceDiscountRule commerceDiscountRule = _updateDiscountRule(
 				String.valueOf(discountRuleDTO.getId()), discountRuleDTO);
 
-			return DTOUtils.modelToDTO(commerceDiscountRule);
+			return _dtoMapper.modelToDTO(commerceDiscountRule);
 		}
 		catch (NoSuchDiscountRuleException nsdre) {
 			if (_log.isDebugEnabled()) {
@@ -118,7 +118,7 @@ public class DiscountRuleHelper {
 				discountRuleDTO.getType(), discountRuleDTO.getTypeSettings(),
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceDiscountRule);
+		return _dtoMapper.modelToDTO(commerceDiscountRule);
 	}
 
 	private CommerceDiscountRule _updateDiscountRule(
@@ -138,6 +138,9 @@ public class DiscountRuleHelper {
 
 	@Reference
 	private CommerceDiscountService _commerceDiscountService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
