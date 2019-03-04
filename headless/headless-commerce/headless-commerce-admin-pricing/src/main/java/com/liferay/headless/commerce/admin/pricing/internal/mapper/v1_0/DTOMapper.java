@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.pricing.internal.util.v1_0;
+package com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.discount.model.CommerceDiscount;
@@ -40,14 +40,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Alessio Antonio Rendina
  */
-public class DTOUtils {
+@Component(immediate = true, service = DTOMapper.class)
+public class DTOMapper {
 
-	public static UserSegmentCriterionDTO[]
-		modelsToUserSegmentCriterionDTOArray(
-			List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria) {
+	public UserSegmentCriterionDTO[] modelsToUserSegmentCriterionDTOArray(
+		List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria) {
 
 		if (commerceUserSegmentCriteria == null) {
 			return null;
@@ -66,7 +68,7 @@ public class DTOUtils {
 		return stream.toArray(UserSegmentCriterionDTO[]::new);
 	}
 
-	public static UserSegmentDTO[] modelsToUserSegmentDTOArray(
+	public UserSegmentDTO[] modelsToUserSegmentDTOArray(
 		List<CommerceDiscountUserSegmentRel> commerceDiscountUserSegmentRels) {
 
 		if (commerceDiscountUserSegmentRels == null) {
@@ -86,7 +88,7 @@ public class DTOUtils {
 		return stream.toArray(UserSegmentDTO[]::new);
 	}
 
-	public static DiscountDTO modelToDTO(CommerceDiscount commerceDiscount) {
+	public DiscountDTO modelToDTO(CommerceDiscount commerceDiscount) {
 		DiscountDTO discountDTO = new DiscountDTO();
 
 		discountDTO.setActive(commerceDiscount.isActive());
@@ -114,7 +116,7 @@ public class DTOUtils {
 		return discountDTO;
 	}
 
-	public static DiscountRuleDTO modelToDTO(
+	public DiscountRuleDTO modelToDTO(
 		CommerceDiscountRule commerceDiscountRule) {
 
 		DiscountRuleDTO discountRuleDTO = new DiscountRuleDTO();
@@ -128,7 +130,7 @@ public class DTOUtils {
 		return discountRuleDTO;
 	}
 
-	public static UserSegmentDTO modelToDTO(
+	public UserSegmentDTO modelToDTO(
 		CommerceDiscountUserSegmentRel commerceDiscountUserSegmentRel) {
 
 		try {
@@ -142,8 +144,7 @@ public class DTOUtils {
 		}
 	}
 
-	public static PriceEntryDTO modelToDTO(
-			CommercePriceEntry commercePriceEntry)
+	public PriceEntryDTO modelToDTO(CommercePriceEntry commercePriceEntry)
 		throws PortalException {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
@@ -166,7 +167,7 @@ public class DTOUtils {
 		return priceEntryDTO;
 	}
 
-	public static PriceListDTO modelToDTO(
+	public PriceListDTO modelToDTO(
 		CommercePriceList commercePriceList, String languageId) {
 
 		PriceListDTO priceListDTO = new PriceListDTO();
@@ -198,7 +199,7 @@ public class DTOUtils {
 		return priceListDTO;
 	}
 
-	public static TierPriceDTO modelToDTO(
+	public TierPriceDTO modelToDTO(
 			CommerceTierPriceEntry commerceTierPriceEntry)
 		throws PortalException {
 
@@ -223,7 +224,7 @@ public class DTOUtils {
 		return tierPriceDTO;
 	}
 
-	public static UserSegmentCriterionDTO modelToDTO(
+	public UserSegmentCriterionDTO modelToDTO(
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
 
 		UserSegmentCriterionDTO userSegmentCriterionDTO =
@@ -246,7 +247,7 @@ public class DTOUtils {
 		return userSegmentCriterionDTO;
 	}
 
-	public static UserSegmentDTO modelToDTO(
+	public UserSegmentDTO modelToDTO(
 		CommerceUserSegmentEntry commerceUserSegmentEntry) {
 
 		UserSegmentDTO userSegmentDTO = new UserSegmentDTO();
@@ -271,6 +272,6 @@ public class DTOUtils {
 		return userSegmentDTO;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(DTOUtils.class);
+	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
 
 }
