@@ -492,8 +492,11 @@ public class CommerceDiscountTest {
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
 
-		_commerceOrderLocalService.applayCouponCode(
+		commerceOrder = _commerceOrderLocalService.applayCouponCode(
 			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
+
+		commerceContext = new TestCommerceContext(
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
