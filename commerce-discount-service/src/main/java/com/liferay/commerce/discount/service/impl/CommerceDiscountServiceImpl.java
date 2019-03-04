@@ -79,6 +79,22 @@ public class CommerceDiscountServiceImpl
 	}
 
 	@Override
+	public CommerceDiscount fetchCommerceDiscount(long commerceDiscountId)
+		throws PortalException {
+
+		CommerceDiscount commerceDiscount =
+			commerceDiscountLocalService.fetchCommerceDiscount(
+				commerceDiscountId);
+
+		if (commerceDiscount != null) {
+			_commerceDiscountResourcePermission.check(
+				getPermissionChecker(), commerceDiscountId, ActionKeys.VIEW);
+		}
+
+		return commerceDiscount;
+	}
+
+	@Override
 	public CommerceDiscount getCommerceDiscount(long commerceDiscountId)
 		throws PortalException {
 
