@@ -1,0 +1,10 @@
+buildService {
+	apiDir = "../commerce-batch-api/src/main/java"
+}
+
+dependencies {
+	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
+	compileOnly group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "2.0.0"
+	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
+	compileOnly project(":apps:commerce:commerce-batch:commerce-batch-api")
+}
