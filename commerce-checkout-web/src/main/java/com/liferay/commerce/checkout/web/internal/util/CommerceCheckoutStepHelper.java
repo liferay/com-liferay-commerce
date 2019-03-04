@@ -98,11 +98,11 @@ public class CommerceCheckoutStepHelper {
 			commerceOrder.setCommercePaymentMethodKey(
 				commercePaymentMethod.getKey());
 
-			CommerceOrder updatedCommerceOrder =
-				_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
+			commerceOrder = _commerceOrderLocalService.updateCommerceOrder(
+				commerceOrder);
 
 			httpServletRequest.setAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER, updatedCommerceOrder);
+				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 
 			return false;
 		}
