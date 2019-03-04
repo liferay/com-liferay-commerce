@@ -24,7 +24,7 @@ import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
 import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CPRuleUserSegmentRelService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.CatalogRuleDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.CategoryDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDTO;
@@ -56,7 +56,7 @@ public class CatalogRuleHelper {
 	public CatalogRuleDTO getCatalogRuleDTO(String id) throws PortalException {
 		CPRule cpRule = _cpRuleService.getCPRule(GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(cpRule);
+		return _dtoMapper.modelToDTO(cpRule);
 	}
 
 	public CollectionDTO<CatalogRuleDTO> getCatalogRuleDTOs(
@@ -72,7 +72,7 @@ public class CatalogRuleHelper {
 		List<CatalogRuleDTO> catalogRuleDTOs = new ArrayList<>();
 
 		for (CPRule cpRule : cpRules) {
-			catalogRuleDTOs.add(DTOUtils.modelToDTO(cpRule));
+			catalogRuleDTOs.add(_dtoMapper.modelToDTO(cpRule));
 		}
 
 		return new CollectionDTO<>(catalogRuleDTOs, count);
@@ -96,7 +96,7 @@ public class CatalogRuleHelper {
 		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
 				ruleAssetCategoryRels) {
 
-			categoryDTOs.add(DTOUtils.modelToDTO(cpRuleAssetCategoryRel));
+			categoryDTOs.add(_dtoMapper.modelToDTO(cpRuleAssetCategoryRel));
 		}
 
 		return new CollectionDTO<>(categoryDTOs, count);
@@ -119,7 +119,7 @@ public class CatalogRuleHelper {
 		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
 				cpRuleUserSegmentRels) {
 
-			userSegmentDTOs.add(DTOUtils.modelToDTO(cpRuleUserSegmentRel));
+			userSegmentDTOs.add(_dtoMapper.modelToDTO(cpRuleUserSegmentRel));
 		}
 
 		return new CollectionDTO<>(userSegmentDTOs, count);
@@ -149,7 +149,7 @@ public class CatalogRuleHelper {
 			CPRule cpRule = updateCatalogRule(
 				String.valueOf(catalogRuleDTO.getId()), catalogRuleDTO, user);
 
-			return DTOUtils.modelToDTO(cpRule);
+			return _dtoMapper.modelToDTO(cpRule);
 		}
 		catch (NoSuchCPRuleException nscpre) {
 			if (_log.isDebugEnabled()) {
@@ -168,7 +168,7 @@ public class CatalogRuleHelper {
 			catalogRuleDTO.getType(),
 			_getTypeSettingsProperties(catalogRuleDTO, null), serviceContext);
 
-		return DTOUtils.modelToDTO(cpRule);
+		return _dtoMapper.modelToDTO(cpRule);
 	}
 
 	private UnicodeProperties _getTypeSettingsProperties(
@@ -206,6 +206,9 @@ public class CatalogRuleHelper {
 
 	@Reference
 	private CPRuleUserSegmentRelService _cpRuleUserSegmentRelService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

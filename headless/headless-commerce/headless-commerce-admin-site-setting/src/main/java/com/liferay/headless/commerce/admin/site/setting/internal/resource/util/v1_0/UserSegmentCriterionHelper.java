@@ -22,7 +22,7 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentCriterionDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -55,7 +55,7 @@ public class UserSegmentCriterionHelper {
 			_commerceUserSegmentCriterionService.
 				getCommerceUserSegmentCriterion(GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceUserSegmentCriterion);
+		return _dtoMapper.modelToDTO(commerceUserSegmentCriterion);
 	}
 
 	public CollectionDTO<UserSegmentCriterionDTO> getUserSegmentCriterionDTOs(
@@ -78,7 +78,7 @@ public class UserSegmentCriterionHelper {
 				commerceUserSegmentCriteria) {
 
 			userSegmentCriterionDTOs.add(
-				DTOUtils.modelToDTO(commerceUserSegmentCriterion));
+				_dtoMapper.modelToDTO(commerceUserSegmentCriterion));
 		}
 
 		return new CollectionDTO<>(userSegmentCriterionDTOs, count);
@@ -89,7 +89,7 @@ public class UserSegmentCriterionHelper {
 			User user)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updateUserSegmentCriterion(id, userSegmentCriterionDTO, user));
 	}
 
@@ -104,7 +104,7 @@ public class UserSegmentCriterionHelper {
 					String.valueOf(userSegmentCriterionDTO.getId()),
 					userSegmentCriterionDTO, user);
 
-			return DTOUtils.modelToDTO(commerceUserSegmentCriterion);
+			return _dtoMapper.modelToDTO(commerceUserSegmentCriterion);
 		}
 		catch (NoSuchUserSegmentCriterionException nsusce) {
 			if (_log.isDebugEnabled()) {
@@ -130,7 +130,7 @@ public class UserSegmentCriterionHelper {
 					GetterUtil.get(userSegmentCriterionDTO.getPriority(), 0D),
 					serviceContext);
 
-		return DTOUtils.modelToDTO(commerceUserSegmentCriterion);
+		return _dtoMapper.modelToDTO(commerceUserSegmentCriterion);
 	}
 
 	private CommerceUserSegmentCriterion _updateUserSegmentCriterion(
@@ -168,6 +168,9 @@ public class UserSegmentCriterionHelper {
 
 	@Reference
 	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
