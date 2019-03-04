@@ -23,9 +23,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Marco Leo
  */
 @Component(service = ConfigurationBeanDeclaration.class)
-public class
-	CPSearchResultsPortletInstanceConfigurationBeanDeclaration
-		implements ConfigurationBeanDeclaration {
+public class CPSearchResultsPortletInstanceConfigurationBeanDeclaration
+	implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {

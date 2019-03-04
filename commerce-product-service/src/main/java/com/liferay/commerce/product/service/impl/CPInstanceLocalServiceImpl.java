@@ -278,8 +278,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
 			CPDefinitionOptionValueRel[] cpDefinitionOptionValueRelArray =
-				new CPDefinitionOptionValueRel[
-					cpDefinitionOptionValueRels.size()];
+				new CPDefinitionOptionValueRel
+					[cpDefinitionOptionValueRels.size()];
 
 			cpDefinitionOptionValueRelArray =
 				cpDefinitionOptionValueRels.toArray(
@@ -293,8 +293,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			combinationGeneratorMap);
 
 		while (iterator.hasNext()) {
-			CPDefinitionOptionValueRel[]
-				cpDefinitionOptionValueRels = iterator.next();
+			CPDefinitionOptionValueRel[] cpDefinitionOptionValueRels =
+				iterator.next();
 
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -313,8 +313,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 				JSONArray valueJSONArray = JSONFactoryUtil.createJSONArray();
 
-				valueJSONArray.put(String.valueOf(cpDefinitionOptionValueRel.
-					getCPDefinitionOptionValueRelId()));
+				valueJSONArray.put(
+					String.valueOf(
+						cpDefinitionOptionValueRel.
+							getCPDefinitionOptionValueRelId()));
 
 				jsonObject.put(
 					"key",
@@ -1271,8 +1273,9 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		}
 	}
 
-	private static final String[] _SELECTED_FIELD_NAMES =
-		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+	private static final String[] _SELECTED_FIELD_NAMES = {
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
+	};
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPInstanceLocalServiceImpl.class);

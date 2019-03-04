@@ -61,8 +61,9 @@ public class EditCommerceSubscriptionEntryMVCActionCommand
 		long[] deleteCommerceSubscriptionEntryIds = null;
 
 		if (commerceSubscriptionEntryId > 0) {
-			deleteCommerceSubscriptionEntryIds =
-				new long[] {commerceSubscriptionEntryId};
+			deleteCommerceSubscriptionEntryIds = new long[] {
+				commerceSubscriptionEntryId
+			};
 		}
 		else {
 			deleteCommerceSubscriptionEntryIds = StringUtil.split(
@@ -187,8 +188,8 @@ public class EditCommerceSubscriptionEntryMVCActionCommand
 			_commerceSubscriptionEntryService.fetchCommerceSubscriptionEntry(
 				commerceSubscriptionEntryId);
 
-		return
-			_commerceSubscriptionEntryService.updateCommerceSubscriptionEntry(
+		return _commerceSubscriptionEntryService.
+			updateCommerceSubscriptionEntry(
 				commerceSubscriptionEntryId, subscriptionLength,
 				subscriptionType, subscriptionTypeSettingsProperties,
 				maxSubscriptionCycles,

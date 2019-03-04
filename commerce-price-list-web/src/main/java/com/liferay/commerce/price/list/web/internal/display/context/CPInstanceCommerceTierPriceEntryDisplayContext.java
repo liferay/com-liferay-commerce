@@ -49,8 +49,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alessio Antonio Rendina
  */
 public class CPInstanceCommerceTierPriceEntryDisplayContext
-	extends
-		BaseCPDefinitionsSearchContainerDisplayContext<CommerceTierPriceEntry> {
+	extends BaseCPDefinitionsSearchContainerDisplayContext
+		<CommerceTierPriceEntry> {
 
 	public CPInstanceCommerceTierPriceEntryDisplayContext(
 		ActionHelper actionHelper,

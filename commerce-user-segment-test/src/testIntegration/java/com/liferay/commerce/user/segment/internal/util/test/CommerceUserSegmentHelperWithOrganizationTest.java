@@ -335,7 +335,11 @@ public class CommerceUserSegmentHelperWithOrganizationTest {
 				_user.getUserId(), _organization.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
 			CommerceUserSegmentTestUtil.addRoleCommerceUserSegmentEntry(

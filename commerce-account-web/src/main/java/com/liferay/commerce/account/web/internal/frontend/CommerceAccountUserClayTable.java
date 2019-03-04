@@ -101,7 +101,8 @@ public class CommerceAccountUserClayTable
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "commerceAccountId");
 
-		PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
 
 		if (_accountModelResourcePermission.contains(
 				permissionChecker, commerceAccountId,
@@ -124,7 +125,8 @@ public class CommerceAccountUserClayTable
 
 				ClayTableAction deleteClayTableAction = new ClayTableAction(
 					deleteURL, StringPool.BLANK,
-					LanguageUtil.get(httpServletRequest, "delete"), false, false);
+					LanguageUtil.get(httpServletRequest, "delete"), false,
+					false);
 
 				clayTableActions.add(deleteClayTableAction);
 			}

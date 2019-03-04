@@ -189,7 +189,8 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 	@Override
 	public SearchContainer<CPDefinitionSpecificationOptionValue>
-		getSearchContainer() throws PortalException {
+			getSearchContainer()
+		throws PortalException {
 
 		if (searchContainer != null) {
 			return searchContainer;

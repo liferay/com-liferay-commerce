@@ -55,8 +55,8 @@ public class ProductResourceImpl implements ProductResource {
 				productOptionDTOs.stream();
 
 			productOptionDTOs = productOptionDTOStream.filter(
-				productOptionDTO ->
-					Objects.equals(productOptionDTO.getName(), name)
+				productOptionDTO -> Objects.equals(
+					productOptionDTO.getName(), name)
 			).collect(
 				Collectors.toList()
 			);

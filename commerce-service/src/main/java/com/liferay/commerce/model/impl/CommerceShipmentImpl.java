@@ -41,9 +41,8 @@ public class CommerceShipmentImpl extends CommerceShipmentBaseImpl {
 
 	@Override
 	public CommerceShippingMethod fetchCommerceShippingMethod() {
-		return
-			CommerceShippingMethodLocalServiceUtil.fetchCommerceShippingMethod(
-				getCommerceShippingMethodId());
+		return CommerceShippingMethodLocalServiceUtil.
+			fetchCommerceShippingMethod(getCommerceShippingMethodId());
 	}
 
 	@Override
