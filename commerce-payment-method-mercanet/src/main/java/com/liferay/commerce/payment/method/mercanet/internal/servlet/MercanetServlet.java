@@ -101,8 +101,7 @@ public class MercanetServlet extends HttpServlet {
 			requestDispatcher.forward(httpServletRequest, httpServletResponse);
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
 
@@ -208,8 +207,7 @@ public class MercanetServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
 

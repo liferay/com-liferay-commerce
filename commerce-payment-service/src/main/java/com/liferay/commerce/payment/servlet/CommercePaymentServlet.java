@@ -164,8 +164,7 @@ public class CommercePaymentServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
 
