@@ -22,7 +22,7 @@ import com.liferay.commerce.price.list.exception.NoSuchTierPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.TierPriceDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
@@ -84,7 +84,7 @@ public class TierPriceHelper {
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			getCommerceTierPriceEntry(id, companyId);
 
-		return DTOUtils.modelToDTO(commerceTierPriceEntry);
+		return _dtoMapper.modelToDTO(commerceTierPriceEntry);
 	}
 
 	public CollectionDTO<TierPriceDTO> getTierPriceDTOs(
@@ -105,7 +105,7 @@ public class TierPriceHelper {
 		for (CommerceTierPriceEntry commerceTierPriceEntry :
 				commerceTierPriceEntries) {
 
-			tierPriceDTOs.add(DTOUtils.modelToDTO(commerceTierPriceEntry));
+			tierPriceDTOs.add(_dtoMapper.modelToDTO(commerceTierPriceEntry));
 		}
 
 		return new CollectionDTO<>(tierPriceDTOs, count);
@@ -156,11 +156,14 @@ public class TierPriceHelper {
 				tierPriceDTO.getPriceEntryExternalReferenceCode(),
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceTierPriceEntry);
+		return _dtoMapper.modelToDTO(commerceTierPriceEntry);
 	}
 
 	@Reference
 	private CommerceTierPriceEntryService _commerceTierPriceEntryService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private PriceEntryHelper _priceEntryHelper;

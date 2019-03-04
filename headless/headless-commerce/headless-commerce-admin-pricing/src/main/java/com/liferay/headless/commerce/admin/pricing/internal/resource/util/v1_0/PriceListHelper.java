@@ -25,7 +25,7 @@ import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceListDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -81,7 +81,7 @@ public class PriceListHelper {
 			String id, Language language, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			getPriceListById(id, company), language.getLanguageId());
 	}
 
@@ -130,7 +130,7 @@ public class PriceListHelper {
 		Stream<CommercePriceList> stream = commercePriceLists.stream();
 
 		return stream.map(
-			commercePriceList -> DTOUtils.modelToDTO(
+			commercePriceList -> _dtoMapper.modelToDTO(
 				commercePriceList, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
@@ -145,7 +145,7 @@ public class PriceListHelper {
 			Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_updatePriceList(
 				id, company, priceListDTO.getCurrency(), priceListDTO.getName(),
 				priceListDTO.getPriority(), priceListDTO.isNeverExpire(),
@@ -159,7 +159,7 @@ public class PriceListHelper {
 			Language language)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(
+		return _dtoMapper.modelToDTO(
 			_upsertPriceList(
 				groupId, priceListDTO.getCommercePriceListId(),
 				priceListDTO.getCurrency(), priceListDTO.getName(),
@@ -351,6 +351,9 @@ public class PriceListHelper {
 
 	@Reference
 	private CommercePriceListService _commercePriceListService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

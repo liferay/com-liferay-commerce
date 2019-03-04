@@ -20,7 +20,7 @@ import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -53,7 +53,7 @@ public class DiscountHelper {
 			_commerceDiscountService.getCommerceDiscount(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceDiscount);
+		return _dtoMapper.modelToDTO(commerceDiscount);
 	}
 
 	public CollectionDTO<DiscountDTO> getDiscountDTOs(
@@ -70,7 +70,7 @@ public class DiscountHelper {
 		List<DiscountDTO> discountDTOs = new ArrayList<>();
 
 		for (CommerceDiscount commerceDiscount : commerceDiscounts) {
-			discountDTOs.add(DTOUtils.modelToDTO(commerceDiscount));
+			discountDTOs.add(_dtoMapper.modelToDTO(commerceDiscount));
 		}
 
 		return new CollectionDTO<>(discountDTOs, count);
@@ -166,7 +166,7 @@ public class DiscountHelper {
 			CommerceDiscount commerceDiscount = updateDiscount(
 				String.valueOf(discountDTO.getId()), discountDTO, user);
 
-			return DTOUtils.modelToDTO(commerceDiscount);
+			return _dtoMapper.modelToDTO(commerceDiscount);
 		}
 		catch (NoSuchDiscountException nsde) {
 			if (_log.isDebugEnabled()) {
@@ -243,7 +243,7 @@ public class DiscountHelper {
 				expirationDateYear, expirationDateHour, expirationDateMinute,
 				neverExpire, serviceContext);
 
-		return DTOUtils.modelToDTO(commerceDiscount);
+		return _dtoMapper.modelToDTO(commerceDiscount);
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
@@ -258,6 +258,9 @@ public class DiscountHelper {
 
 	@Reference
 	private CommerceDiscountService _commerceDiscountService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
