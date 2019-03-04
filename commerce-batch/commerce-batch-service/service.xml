@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_1_0.dtd">
+
+<service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.batch">
+	<author>Matija Petanjek</author>
+	<namespace>Commerce</namespace>
+	<entity local-service="true" name="CommerceBatchJobExecution" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceBatchJobExecutionId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceBatchJobInstanceId" type="long" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="status" type="String" />
+		<column name="exitCode" type="String" />
+		<column name="exitMessage" type="String" />
+
+		<!-- Finder methods -->
+
+	</entity>
+	<entity local-service="true" name="CommerceBatchJobInstance" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceBatchJobInstanceId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="batchJobName" type="String" />
+		<column name="key" type="String" />
+
+		<!-- Finder methods -->
+
+	</entity>
+</service-builder>
