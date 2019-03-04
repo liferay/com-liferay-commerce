@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -163,6 +164,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
+	@Status(Response.Status.CREATED)
 	public UserSegmentDTO upsertUserSegment(
 			Long groupId, UserSegmentDTO userSegmentDTO)
 		throws Exception {
@@ -188,6 +190,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
+	@Status(Response.Status.CREATED)
 	public UserSegmentCriterionDTO upsertUserSegmentCriterion(
 			String id, UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception {
