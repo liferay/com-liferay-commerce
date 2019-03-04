@@ -118,7 +118,7 @@ public class ComponentImporter {
 
 			components.add(openApiComponentBuilder.build());
 
-			_logger.debug(
+			_logger.trace(
 				"Resolved parameter {}", components.get(components.size() - 1));
 		}
 
@@ -234,7 +234,7 @@ public class ComponentImporter {
 
 			components.add(openApiComponent);
 
-			_logger.debug("Resolved schema {}", openApiComponent);
+			_logger.trace("Resolved schema {}", openApiComponent);
 		}
 
 		return components;
