@@ -34,22 +34,18 @@ public class ConfigurationFactoryTest {
 		Assert.assertEquals(
 			"detect all configurations", 2, configurations.size());
 
-		String hostName = "host.name.";
 		String authorizationKey = "KEY-";
-		String url = "/test_api_url_";
+		String url = "./rest-test-openapi-%s.json";
 
 		for (Properties properties : configurations) {
 			String moduleName = properties.getProperty("osgi.module.name");
 
 			Assert.assertNotNull("osgi.module.name key expected", moduleName);
 			Assert.assertEquals(
-				"key openapi.host.name", hostName + moduleName,
-				properties.getProperty("openapi.host.name"));
-			Assert.assertEquals(
 				"key openapi.authorization.key", authorizationKey + moduleName,
 				properties.getProperty("openapi.authorization.key"));
 			Assert.assertEquals(
-				"key openapi.url", url + moduleName,
+				"key openapi.url", String.format(url, moduleName),
 				properties.getProperty("openapi.url"));
 		}
 	}
