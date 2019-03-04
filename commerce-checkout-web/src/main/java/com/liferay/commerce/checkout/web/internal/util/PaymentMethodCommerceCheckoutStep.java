@@ -25,7 +25,6 @@ import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
-import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -34,8 +33,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -77,18 +74,6 @@ public class PaymentMethodCommerceCheckoutStep
 		if (!_commerceCheckoutStepHelper.
 				isActivePaymentMethodCommerceCheckoutStep(httpServletRequest)) {
 
-			return false;
-		}
-
-		CommerceOrder commerceOrder =
-			(CommerceOrder)httpServletRequest.getAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER);
-
-		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
-				commerceOrder.getCommerceOrderId());
-
-		if (commercePaymentMethods.isEmpty()) {
 			return false;
 		}
 
