@@ -16,7 +16,12 @@ CommerceInputText.STATE = {
 	pattern: Config.any(),
 	required: Config.bool(),
 	type: Config.string(),
-	value: Config.string(),
+	value: Config.oneOfType(
+		[
+			Config.string(),
+			Config.number()
+		]
+	),
 	_handleInputKeyUp: Config.func()
 };
 

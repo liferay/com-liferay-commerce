@@ -58,9 +58,9 @@ import javax.portlet.PortletURL;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author Marco Leo
+ * @author Fabio Diego Mastrorilli
  */
-public class CommerceTableTag extends ComponentRendererTag {
+public class OrderSummaryTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -68,6 +68,9 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		String dataProviderKey = GetterUtil.getString(
 			context.get("dataProviderKey"));
+
+		boolean showItemRecap = GetterUtil.getBoolean(
+			context.get("showItemRecap"));
 
 		boolean showTableSummary = GetterUtil.getBoolean(
 			context.get("showTableSummary"));
@@ -86,7 +89,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_setItems(dataProviderKey);
 			_setPagination();
 
-			setComponentId(tableName + "CommerceTable");
+			setComponentId(tableName + "OrderSummary");
 
 			StringBundler sb = new StringBundler(11);
 
@@ -102,11 +105,12 @@ public class CommerceTableTag extends ComponentRendererTag {
 			sb.append("&portletId=");
 			sb.append(portletDisplay.getId());
 
+			putValue("showItemRecap", showItemRecap);
 			putValue("showTableSummary", showTableSummary);
-
+			
 			// TODO: addSummaryData
 			putValue("summaryData", null);
-
+			putValue("adminPrivileges", true);
 			putValue("dataSetAPI", sb.toString());
 
 			putValue(
@@ -117,7 +121,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_log.error(e, e);
 		}
 
-		setTemplateNamespace("CommerceTable.render");
+		setTemplateNamespace("OrderSummary.render");
 
 		return super.doStartTag();
 	}
@@ -131,7 +135,11 @@ public class CommerceTableTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/clay_table/CommerceTable.es");
+			"commerce-frontend-taglib/order_summary/OrderSummary.es");
+	}
+
+	public void setShowItemRecap(boolean showItemRecap) {
+		putValue("showItemRecap", showItemRecap);
 	}
 
 	public void setShowTableSummary(boolean showTableSummary) {
@@ -341,7 +349,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceTableTag.class);
+		OrderSummaryTag.class);
 
 	private ClayTableContextContributorRegistry
 		_clayTableContextContributorRegistry;

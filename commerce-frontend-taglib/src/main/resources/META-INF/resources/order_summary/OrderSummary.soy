@@ -1,0 +1,73 @@
+{namespace OrderSummary}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param tableName: string}
+	{@param pageSize: number}
+	{@param dataProviderKey: string}
+	{@param dataSetAPI: string}
+	{@param? disableAJAX: bool}
+	{@param? actionsMenuVariant: string}
+	{@param currentPage: int}
+	{@param? id: string}
+	{@param items: ?}
+	{@param? emptyTableMessage: string}
+	{@param? paginationBaseHref: string}
+	{@param paginationEntries: ?}
+	{@param paginationSelectedEntry: int}
+	{@param showTableSummary: bool}
+	{@param schema: ?}
+	{@param summaryData: ?}
+	{@param spritemap: string}
+	{@param? selectable: bool}
+	{@param showActionsMenu: bool}
+	{@param totalItems: int}
+	{@param? tableVariant: string}
+	{@param? showPagination: bool}
+	{@param? adminPrivileges: bool}
+	{@param? _handleProductClick: any}
+	{@param? _itemRecapStage: string}
+	{@param? itemData: ?}
+
+	<div class="row">
+		<div class="col-8">
+			{call CommerceTable.render}
+				{param events: ['itemToggled' : $_handleProductClick] /}
+				{param actionsMenuVariant: $actionsMenuVariant /}
+				{param currentPage: $currentPage /}
+				{param id: $id /}
+				{param items: $items /}
+				{param emptyTableMessage: $emptyTableMessage /}
+				{param paginationBaseHref: $paginationBaseHref /}
+				{param paginationEntries: $paginationEntries /}
+				{param paginationSelectedEntry: $paginationSelectedEntry /}
+				{param schema: $schema /}
+				{param selectable: $selectable /}
+				{param showActionsMenu: $showActionsMenu /}
+				{param showPagination: $showPagination /}
+				{param spritemap: $spritemap /}
+				{param tableVariant: $tableVariant /}
+				{param totalItems: $totalItems /}
+				{param dataProviderKey: $dataProviderKey /}
+				{param dataSetAPI: $dataSetAPI /}
+				{param disableAJAX: $disableAJAX /}
+				{param pageSize: $pageSize /}
+				{param tableName: $tableName /}
+				{param showTableSummary: $showTableSummary /}
+				{param summaryData: $summaryData /}
+			{/call}
+		</div>
+		<div class="col-4">
+			{if isNonnull($itemData)}
+				{call ItemRecap.render}
+					{param itemData: $itemData /}
+					{param stage: $_itemRecapStage /}
+					{param adminPrivileges: $adminPrivileges /}
+				{/call}
+			{/if}
+		</div>
+	</div>
+{/template}
+

@@ -1,0 +1,42 @@
+{namespace TableSummary}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param data: list<[
+		title: string,
+		value: string|int,
+		modifier: string,
+		size: string
+	]>}
+
+	<div class="commerce-table-summary">
+		<dl>
+			{foreach $dataItem in $data}
+				{let $dtClasses kind="text"}
+					commerce-table-summary__title
+					{if isNonnull($dataItem.modifier)}
+						{sp}commerce-table-summary__title--{$dataItem.modifier}
+					{/if}
+					{if $dataItem.size == 'big'}
+						{sp}commerce-table-summary__title--big
+					{/if}
+				{/let}
+
+				{let $ddClasses kind="text"}
+					commerce-table-summary__value
+					{if isNonnull($dataItem.modifier)}
+						{sp}commerce-table-summary__value--{$dataItem.modifier}
+					{/if}
+					{if $dataItem.size == 'big'}
+						{sp}commerce-table-summary__value--big
+					{/if}
+				{/let}
+
+				<dt class="{$ddClasses}">{$dataItem.title}</dt>
+				<dd class="{$ddClasses}">{$dataItem.value}</dd>
+			{/foreach}
+		</dl>
+	</div>
+{/template}
