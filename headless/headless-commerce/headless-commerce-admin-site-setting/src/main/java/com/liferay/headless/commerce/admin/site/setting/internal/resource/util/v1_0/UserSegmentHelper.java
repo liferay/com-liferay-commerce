@@ -21,7 +21,7 @@ import com.liferay.commerce.openapi.core.util.ServiceContextHelper;
 import com.liferay.commerce.user.segment.exception.NoSuchUserSegmentEntryException;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
-import com.liferay.headless.commerce.admin.site.setting.internal.v1_0.DTOUtils;
+import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -52,7 +52,7 @@ public class UserSegmentHelper {
 			_commerceUserSegmentService.getCommerceUserSegmentEntry(
 				GetterUtil.getLong(id));
 
-		return DTOUtils.modelToDTO(commerceUserSegmentEntry);
+		return _dtoMapper.modelToDTO(commerceUserSegmentEntry);
 	}
 
 	public CollectionDTO<UserSegmentDTO> getUserSegmentDTOs(
@@ -73,7 +73,8 @@ public class UserSegmentHelper {
 		for (CommerceUserSegmentEntry commerceUserSegmentEntry :
 				commerceUserSegmentEntries) {
 
-			userSegmentDTOs.add(DTOUtils.modelToDTO(commerceUserSegmentEntry));
+			userSegmentDTOs.add(
+				_dtoMapper.modelToDTO(commerceUserSegmentEntry));
 		}
 
 		return new CollectionDTO<>(userSegmentDTOs, count);
@@ -112,7 +113,7 @@ public class UserSegmentHelper {
 					String.valueOf(userSegmentDTO.getId()), userSegmentDTO,
 					user);
 
-			return DTOUtils.modelToDTO(commerceUserSegmentEntry);
+			return _dtoMapper.modelToDTO(commerceUserSegmentEntry);
 		}
 		catch (NoSuchUserSegmentEntryException nsusee) {
 			if (_log.isDebugEnabled()) {
@@ -134,7 +135,7 @@ public class UserSegmentHelper {
 				GetterUtil.get(userSegmentDTO.getPriority(), 0D),
 				serviceContext);
 
-		return DTOUtils.modelToDTO(commerceUserSegmentEntry);
+		return _dtoMapper.modelToDTO(commerceUserSegmentEntry);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -142,6 +143,9 @@ public class UserSegmentHelper {
 
 	@Reference
 	private CommerceUserSegmentEntryService _commerceUserSegmentService;
+
+	@Reference
+	private DTOMapper _dtoMapper;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
