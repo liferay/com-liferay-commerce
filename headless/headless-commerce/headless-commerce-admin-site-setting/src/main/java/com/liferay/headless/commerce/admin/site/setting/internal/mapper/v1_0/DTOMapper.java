@@ -16,7 +16,7 @@ package com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetVocabulary;
-import com.liferay.asset.kernel.service.AssetVocabularyLocalServiceUtil;
+import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.openapi.core.util.LanguageUtils;
@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -265,7 +266,7 @@ public class DTOMapper {
 			categoryDTO.setName(assetCategory.getName());
 
 			AssetVocabulary assetVocabulary =
-				AssetVocabularyLocalServiceUtil.getAssetVocabulary(
+				_assetVocabularyLocalService.getAssetVocabulary(
 					assetCategory.getVocabularyId());
 
 			categoryDTO.setVocabulary(assetVocabulary.getName());
@@ -310,5 +311,8 @@ public class DTOMapper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
+
+	@Reference
+	private AssetVocabularyLocalService _assetVocabularyLocalService;
 
 }
