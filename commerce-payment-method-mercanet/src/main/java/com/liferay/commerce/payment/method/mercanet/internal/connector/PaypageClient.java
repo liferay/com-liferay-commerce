@@ -18,8 +18,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.liferay.portal.kernel.util.Digester;
-import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import com.worldline.sips.model.InitializationResponse;
@@ -34,6 +32,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -145,8 +144,7 @@ public class PaypageClient {
 	}
 
 	private void _verifySeal(String data, String seal) throws Exception {
-		String correctSeal = DigesterUtil.digest(
-			Digester.SHA_256, data + _secretKey);
+		String correctSeal = DigestUtils.sha256Hex(data + _secretKey);
 
 		if (!Objects.equals(correctSeal, seal)) {
 			throw new Exception(
