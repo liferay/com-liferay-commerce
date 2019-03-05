@@ -65,23 +65,6 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class CommerceOrderServiceSoap {
-	public static com.liferay.commerce.model.CommerceOrderSoap applayCouponCode(
-		long commerceOrderId, String couponCode,
-		com.liferay.commerce.context.CommerceContext commerceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.applayCouponCode(commerceOrderId,
-					couponCode, commerceContext);
-
-			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.model.CommerceOrderSoap addCommerceOrder(
 		long groupId, long userId, long commerceAccountId,
 		long commerceCurrencyId) throws RemoteException {
@@ -122,6 +105,23 @@ public class CommerceOrderServiceSoap {
 		try {
 			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.addCommerceOrder(groupId,
 					commerceAccountId, shippingAddressId, purchaseOrderNumber);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap applyCouponCode(
+		long commerceOrderId, String couponCode,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.applyCouponCode(commerceOrderId,
+					couponCode, commerceContext);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
 		}
