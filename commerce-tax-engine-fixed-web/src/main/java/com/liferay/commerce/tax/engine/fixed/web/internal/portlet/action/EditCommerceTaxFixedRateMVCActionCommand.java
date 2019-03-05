@@ -63,8 +63,7 @@ public class EditCommerceTaxFixedRateMVCActionCommand
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof
-					DuplicateCommerceTaxFixedRateException ||
+			if (e instanceof DuplicateCommerceTaxFixedRateException ||
 				e instanceof NoSuchCPTaxCategoryException ||
 				e instanceof NoSuchTaxFixedRateException ||
 				e instanceof PrincipalException) {

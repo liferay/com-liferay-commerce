@@ -79,9 +79,8 @@ public class CommerceShipmentDisplayContext
 			return Collections.emptyList();
 		}
 
-		return
-			_commerceOrderItemService.getAvailableForShipmentCommerceOrderItems(
-				commerceOrderId);
+		return _commerceOrderItemService.
+			getAvailableForShipmentCommerceOrderItems(commerceOrderId);
 	}
 
 	public List<CommerceOrder> getCommerceOrders() throws PortalException {

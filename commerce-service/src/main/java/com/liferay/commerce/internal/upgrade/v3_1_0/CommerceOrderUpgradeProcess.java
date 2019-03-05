@@ -47,7 +47,6 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 				String.format(
 					sql, CommerceOrderModelImpl.TABLE_NAME,
 					CommerceOrderConstants.ORDER_STATUS_OPEN));
-
 		}
 	}
 

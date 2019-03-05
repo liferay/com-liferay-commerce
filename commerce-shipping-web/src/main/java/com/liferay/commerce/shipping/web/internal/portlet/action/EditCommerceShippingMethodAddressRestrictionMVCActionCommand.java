@@ -87,8 +87,9 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 			actionRequest, "commerceAddressRestrictionId");
 
 		if (commerceAddressRestrictionId > 0) {
-			deleteCommerceAddressRestrictionIds =
-				new long[] {commerceAddressRestrictionId};
+			deleteCommerceAddressRestrictionIds = new long[] {
+				commerceAddressRestrictionId
+			};
 		}
 		else {
 			deleteCommerceAddressRestrictionIds = StringUtil.split(

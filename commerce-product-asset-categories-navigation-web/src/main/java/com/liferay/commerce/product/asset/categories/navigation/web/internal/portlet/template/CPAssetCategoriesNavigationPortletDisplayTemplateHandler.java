@@ -61,8 +61,11 @@ public class CPAssetCategoriesNavigationPortletDisplayTemplateHandler
 		String portletTitle = _portal.getPortletTitle(
 			CPPortletKeys.CP_ASSET_CATEGORIES_NAVIGATION, resourceBundle);
 
-		return portletTitle.concat(StringPool.SPACE).concat(
-			LanguageUtil.get(locale, "template"));
+		return portletTitle.concat(
+			StringPool.SPACE
+		).concat(
+			LanguageUtil.get(locale, "template")
+		);
 	}
 
 	@Override

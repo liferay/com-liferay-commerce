@@ -277,8 +277,9 @@ public class CPDefinitionVirtualSettingDisplayContext
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long[] selectedGroupIds =
-			{getScopeGroupId(), themeDisplay.getCompanyGroupId()};
+		long[] selectedGroupIds = {
+			getScopeGroupId(), themeDisplay.getCompanyGroupId()
+		};
 
 		return selectedGroupIds;
 	}

@@ -69,8 +69,9 @@ public class EditCPDefinitionGroupedEntryMVCActionCommand
 			actionRequest, "cpDefinitionGroupedEntryId");
 
 		if (cpDefinitionGroupedEntryId > 0) {
-			deleteCPDefinitionGroupedEntryIds =
-				new long[] {cpDefinitionGroupedEntryId};
+			deleteCPDefinitionGroupedEntryIds = new long[] {
+				cpDefinitionGroupedEntryId
+			};
 		}
 		else {
 			deleteCPDefinitionGroupedEntryIds = StringUtil.split(

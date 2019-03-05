@@ -68,8 +68,8 @@ public class SKUCombinationsIteratorTest {
 		int count = 0;
 
 		while (iterator.hasNext()) {
-			CPDefinitionOptionValueRel[]
-				cpDefinitionOptionValueRels = iterator.next();
+			CPDefinitionOptionValueRel[] cpDefinitionOptionValueRels =
+				iterator.next();
 
 			count += cpDefinitionOptionValueRels.length;
 		}

@@ -61,8 +61,9 @@ public class EditCommerceShippingFixedOptionRelMVCActionCommand
 			actionRequest, "commerceShippingFixedOptionRelId");
 
 		if (commerceShippingFixedOptionRelId > 0) {
-			deleteCommerceShippingFixedOptionRelIds =
-				new long[] {commerceShippingFixedOptionRelId};
+			deleteCommerceShippingFixedOptionRelIds = new long[] {
+				commerceShippingFixedOptionRelId
+			};
 		}
 		else {
 			deleteCommerceShippingFixedOptionRelIds = StringUtil.split(

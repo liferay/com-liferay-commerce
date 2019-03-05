@@ -124,8 +124,7 @@ public class OrderItemHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				orderItemDTOs ->
-					new CollectionDTO<>(orderItemDTOs, totalItems))
+				orderItemDTOs -> new CollectionDTO<>(orderItemDTOs, totalItems))
 		);
 	}
 

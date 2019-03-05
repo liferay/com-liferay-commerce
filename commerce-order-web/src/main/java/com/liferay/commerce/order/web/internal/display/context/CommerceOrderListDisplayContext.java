@@ -276,8 +276,9 @@ public class CommerceOrderListDisplayContext {
 			};
 		}
 		else if (tabs1.equals("pending")) {
-			orderStatuses =
-				new int[] {CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT};
+			orderStatuses = new int[] {
+				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT
+			};
 		}
 		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_ANY) {
 			negated = true;

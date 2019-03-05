@@ -319,7 +319,7 @@ public class CPDefinitionsImporter {
 					cpDefinition.getCPDefinitionId(), serviceContext);
 			}
 			catch (NoSuchSkuContributorCPDefinitionOptionRelException
-				nssccpdore) {
+						nssccpdore) {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -693,8 +693,8 @@ public class CPDefinitionsImporter {
 			_commerceAvailabilityEstimateLocalService.
 				addCommerceAvailabilityEstimate(titleMap, 0, serviceContext);
 
-		return
-			_cpdAvailabilityEstimateLocalService.updateCPDAvailabilityEstimate(
+		return _cpdAvailabilityEstimateLocalService.
+			updateCPDAvailabilityEstimate(
 				0, cpDefinition.getCPDefinitionId(),
 				commerceAvailabilityEstimate.
 					getCommerceAvailabilityEstimateId(),

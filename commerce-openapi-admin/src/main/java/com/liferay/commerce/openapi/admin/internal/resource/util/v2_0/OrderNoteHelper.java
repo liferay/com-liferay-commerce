@@ -121,8 +121,7 @@ public class OrderNoteHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				orderItemDTOs ->
-					new CollectionDTO<>(orderItemDTOs, totalItems))
+				orderItemDTOs -> new CollectionDTO<>(orderItemDTOs, totalItems))
 		);
 	}
 

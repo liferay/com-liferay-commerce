@@ -66,8 +66,9 @@ public class EditCommerceUserSegmentCriterionMVCActionCommand
 			actionRequest, "commerceUserSegmentCriterionId");
 
 		if (commerceUserSegmentCriterionId > 0) {
-			deleteCommerceUserSegmentCriterionIds =
-				new long[] {commerceUserSegmentCriterionId};
+			deleteCommerceUserSegmentCriterionIds = new long[] {
+				commerceUserSegmentCriterionId
+			};
 		}
 		else {
 			deleteCommerceUserSegmentCriterionIds = StringUtil.split(

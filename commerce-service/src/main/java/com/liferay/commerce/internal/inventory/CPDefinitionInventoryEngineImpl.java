@@ -160,8 +160,8 @@ public class CPDefinitionInventoryEngineImpl
 					cpInstance.getCPDefinitionId());
 
 		if (cpDefinitionInventory == null) {
-			return
-				CPDefinitionInventoryConstants.DEFAULT_MULTIPLE_ORDER_QUANTITY;
+			return CPDefinitionInventoryConstants.
+				DEFAULT_MULTIPLE_ORDER_QUANTITY;
 		}
 
 		return cpDefinitionInventory.getMultipleOrderQuantity();

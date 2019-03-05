@@ -67,8 +67,8 @@ public class CommerceAccountInfoScreenNavigationEntry
 
 	@Override
 	public String getCategoryKey() {
-		return
-			CommerceAccountScreenNavigationConstants.CATEGORY_KEY_ACCOUNT_INFO;
+		return CommerceAccountScreenNavigationConstants.
+			CATEGORY_KEY_ACCOUNT_INFO;
 	}
 
 	@Override

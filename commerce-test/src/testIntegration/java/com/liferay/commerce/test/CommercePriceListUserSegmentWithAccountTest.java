@@ -418,7 +418,11 @@ public class CommercePriceListUserSegmentWithAccountTest {
 				_user.getUserId(), _organization1.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
@@ -476,9 +480,15 @@ public class CommercePriceListUserSegmentWithAccountTest {
 				new long[] {_role2.getRoleId()});
 
 		_userLocalService.addRoleUser(
-			userGroupRoles1.get(0).getRoleId(), _user);
+			userGroupRoles1.get(
+				0
+			).getRoleId(),
+			_user);
 		_userLocalService.addRoleUser(
-			userGroupRoles2.get(0).getRoleId(), _user);
+			userGroupRoles2.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
@@ -536,7 +546,10 @@ public class CommercePriceListUserSegmentWithAccountTest {
 				new long[] {_role1.getRoleId()});
 
 		_userLocalService.addRoleUser(
-			userGroupRoles1.get(0).getRoleId(), _user);
+			userGroupRoles1.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
@@ -586,7 +599,11 @@ public class CommercePriceListUserSegmentWithAccountTest {
 				_user.getUserId(), _organization1.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
@@ -637,7 +654,11 @@ public class CommercePriceListUserSegmentWithAccountTest {
 				_user.getUserId(), _organization1.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(

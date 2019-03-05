@@ -295,8 +295,8 @@ public class CommerceUsersImporter {
 					if (commerceAccountUserRel == null) {
 						List<Long> accountRoleIds = new ArrayList<>();
 
-						for (int j =
-							0; j < accountRolesJSONArray.length(); j++) {
+						for (int j = 0; j < accountRolesJSONArray.length();
+							 j++) {
 
 							Role role = _roleLocalService.fetchRole(
 								serviceContext.getCompanyId(),
@@ -318,7 +318,6 @@ public class CommerceUsersImporter {
 				}
 			}
 		}
-
 	}
 
 	@Reference

@@ -143,8 +143,8 @@ public class CPCategoryContentDisplayContext {
 	}
 
 	public boolean useAssetCategory() {
-		return
-			_cpCategoryContentPortletInstanceConfiguration.useAssetCategory();
+		return _cpCategoryContentPortletInstanceConfiguration.
+			useAssetCategory();
 	}
 
 	private AssetCategory _assetCategory;

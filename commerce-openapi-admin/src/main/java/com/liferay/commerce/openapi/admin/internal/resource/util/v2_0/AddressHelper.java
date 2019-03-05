@@ -110,8 +110,7 @@ public class AddressHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				addressDTOs ->
-					new CollectionDTO<>(addressDTOs, totalItems))
+				addressDTOs -> new CollectionDTO<>(addressDTOs, totalItems))
 		);
 	}
 

@@ -102,10 +102,7 @@ public class PriceListResourceTest extends PortalContextProvider {
 		ValidatableResponse resourceValidatableResponse =
 			_getValidatedResourceCollection();
 
-		resourceValidatableResponse.assertThat(
-		).body(
-			"totalItems", equalTo(1)
-		);
+		resourceValidatableResponse.assertThat().body("totalItems", equalTo(1));
 
 		JsonPath jsonPath = resourceValidatableResponse.extract().jsonPath();
 
@@ -129,10 +126,7 @@ public class PriceListResourceTest extends PortalContextProvider {
 
 		resourceValidatableResponse = _getValidatedResourceCollection();
 
-		resourceValidatableResponse.assertThat(
-		).body(
-			"totalItems", equalTo(0)
-		);
+		resourceValidatableResponse.assertThat().body("totalItems", equalTo(0));
 	}
 
 	@Test

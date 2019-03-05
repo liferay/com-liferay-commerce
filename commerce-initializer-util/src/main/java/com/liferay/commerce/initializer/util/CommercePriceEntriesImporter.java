@@ -107,7 +107,6 @@ public class CommercePriceEntriesImporter {
 			commercePriceList.getCommercePriceListId(),
 			BigDecimal.valueOf(price), BigDecimal.valueOf(promoPrice),
 			serviceContext);
-
 	}
 
 	@Reference

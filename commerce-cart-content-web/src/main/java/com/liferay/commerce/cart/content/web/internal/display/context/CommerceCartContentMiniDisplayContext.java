@@ -90,8 +90,8 @@ public class CommerceCartContentMiniDisplayContext
 
 	@Override
 	public String getDisplayStyle() {
-		return
-			_commerceCartContentMiniPortletInstanceConfiguration.displayStyle();
+		return _commerceCartContentMiniPortletInstanceConfiguration.
+			displayStyle();
 	}
 
 	@Override
