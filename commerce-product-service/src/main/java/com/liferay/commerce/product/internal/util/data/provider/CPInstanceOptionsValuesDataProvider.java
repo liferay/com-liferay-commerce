@@ -79,6 +79,7 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		}
 
 		try {
+
 			/**
 			 * Extract the filters and the outputs based on fields that were
 			 * filled or not in the data provider request
@@ -167,8 +168,8 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			}
 
 			DDMDataProviderResponseOutput[] ddmDataProviderResponseOutputArray =
-				new DDMDataProviderResponseOutput[
-					ddmDataProviderResponseOutputs.size()];
+				new DDMDataProviderResponseOutput
+					[ddmDataProviderResponseOutputs.size()];
 
 			ddmDataProviderResponseOutputArray =
 				ddmDataProviderResponseOutputs.toArray(

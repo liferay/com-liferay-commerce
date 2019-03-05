@@ -59,8 +59,11 @@ public class CPCategoryContentPortletDisplayTemplateHandler
 		String portletTitle = _portal.getPortletTitle(
 			CPPortletKeys.CP_CATEGORY_CONTENT_WEB, resourceBundle);
 
-		return portletTitle.concat(StringPool.SPACE).concat(
-			LanguageUtil.get(locale, "template"));
+		return portletTitle.concat(
+			StringPool.SPACE
+		).concat(
+			LanguageUtil.get(locale, "template")
+		);
 	}
 
 	@Override

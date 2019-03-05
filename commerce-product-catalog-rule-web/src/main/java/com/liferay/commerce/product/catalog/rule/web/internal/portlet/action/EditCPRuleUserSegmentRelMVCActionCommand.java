@@ -61,8 +61,9 @@ public class EditCPRuleUserSegmentRelMVCActionCommand
 			actionRequest, "commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId > 0) {
-			addCommerceUserSegmentEntryIds =
-				new long[] {commerceUserSegmentEntryId};
+			addCommerceUserSegmentEntryIds = new long[] {
+				commerceUserSegmentEntryId
+			};
 		}
 		else {
 			addCommerceUserSegmentEntryIds = StringUtil.split(

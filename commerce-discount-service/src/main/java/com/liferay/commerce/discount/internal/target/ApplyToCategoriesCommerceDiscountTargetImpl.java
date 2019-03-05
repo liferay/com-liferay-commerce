@@ -59,8 +59,9 @@ import org.osgi.service.component.annotations.Reference;
 		"commerce.discount.target.key=" + CommerceDiscountConstants.TARGET_CATEGORIES,
 		"commerce.discount.target.order:Integer=10"
 	},
-	service =
-		{CommerceDiscountProductTarget.class, CommerceDiscountTarget.class}
+	service = {
+		CommerceDiscountProductTarget.class, CommerceDiscountTarget.class
+	}
 )
 public class ApplyToCategoriesCommerceDiscountTargetImpl
 	implements CommerceDiscountTarget, CommerceDiscountProductTarget {

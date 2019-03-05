@@ -29,8 +29,8 @@ public class
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
-		return
-			CommerceVirtualOrderItemContentPortletInstanceConfiguration.class;
+		return CommerceVirtualOrderItemContentPortletInstanceConfiguration.
+			class;
 	}
 
 }

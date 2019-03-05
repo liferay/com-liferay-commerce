@@ -226,9 +226,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Capture responseCapture = authorization.capture(apiContext, capture);
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_COMPLETED.equals(
-					responseCapture.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_COMPLETED.
+				equals(responseCapture.getState())) {
 
 			success = true;
 		}
@@ -500,9 +499,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		DetailedRefund detailedRefund = sale.refund(apiContext, refundRequest);
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_COMPLETED.equals(
-					detailedRefund.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_COMPLETED.
+				equals(detailedRefund.getState())) {
 
 			success = true;
 		}
@@ -547,8 +545,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		url = _http.addParameter(url, "useraction", "commit");
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_CREATED.equals(payment.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_CREATED.
+				equals(payment.getState())) {
 
 			success = true;
 		}
@@ -593,8 +591,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			}
 		}
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_CREATED.equals(agreement.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_CREATED.
+				equals(agreement.getState())) {
 
 			success = true;
 		}
@@ -634,9 +632,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		DetailedRefund detailedRefund = sale.refund(apiContext, refundRequest);
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_COMPLETED.equals(
-					detailedRefund.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_COMPLETED.
+				equals(detailedRefund.getState())) {
 
 			success = true;
 		}
@@ -701,8 +698,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		authorization.doVoid(apiContext);
 
-		if (PayPalCommercePaymentMethodConstants.
-				AUTHORIZATION_STATE_VOIDED.equals(authorization.getState())) {
+		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_VOIDED.
+				equals(authorization.getState())) {
 
 			success = true;
 		}

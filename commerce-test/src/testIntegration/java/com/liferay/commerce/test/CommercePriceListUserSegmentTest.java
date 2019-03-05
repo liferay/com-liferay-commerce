@@ -172,7 +172,11 @@ public class CommercePriceListUserSegmentTest {
 				_user.getUserId(), _organization.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
@@ -218,7 +222,11 @@ public class CommercePriceListUserSegmentTest {
 				_user.getUserId(), _organization.getGroupId(),
 				new long[] {_role1.getRoleId()});
 
-		_userLocalService.addRoleUser(userGroupRoles.get(0).getRoleId(), _user);
+		_userLocalService.addRoleUser(
+			userGroupRoles.get(
+				0
+			).getRoleId(),
+			_user);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(

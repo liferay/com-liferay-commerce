@@ -56,7 +56,7 @@ public interface WarehouseResource {
 	@Produces("application/*")
 	public CollectionDTO<WarehouseDTO> getWarehouses(
 			@QueryParam("groupId") Long groupId,
-			@Nullable@QueryParam("active") Boolean active,
+			@Nullable @QueryParam("active") Boolean active,
 			@Context Pagination pagination)
 		throws Exception;
 

@@ -61,14 +61,17 @@ public class CommerceVirtualOrderItemContentPortletDisplayTemplateHandler
 			CommerceVirtualOrderPortletKeys.COMMERCE_VIRTUAL_ORDER_ITEM_CONTENT,
 			resourceBundle);
 
-		return portletTitle.concat(StringPool.SPACE).concat(
-			LanguageUtil.get(locale, "template"));
+		return portletTitle.concat(
+			StringPool.SPACE
+		).concat(
+			LanguageUtil.get(locale, "template")
+		);
 	}
 
 	@Override
 	public String getResourceName() {
-		return
-			CommerceVirtualOrderPortletKeys.COMMERCE_VIRTUAL_ORDER_ITEM_CONTENT;
+		return CommerceVirtualOrderPortletKeys.
+			COMMERCE_VIRTUAL_ORDER_ITEM_CONTENT;
 	}
 
 	@Override

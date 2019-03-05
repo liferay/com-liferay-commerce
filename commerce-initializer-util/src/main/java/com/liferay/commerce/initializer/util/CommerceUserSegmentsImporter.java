@@ -224,7 +224,6 @@ public class CommerceUserSegmentsImporter {
 						0, serviceContext);
 			}
 		}
-
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

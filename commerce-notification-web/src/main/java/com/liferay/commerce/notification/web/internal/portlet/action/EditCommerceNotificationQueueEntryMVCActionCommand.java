@@ -55,8 +55,9 @@ public class EditCommerceNotificationQueueEntryMVCActionCommand
 			actionRequest, "commerceNotificationQueueEntryId");
 
 		if (commerceNotificationQueueEntryId > 0) {
-			deleteCommerceNotificationQueueEntryIds =
-				new long[] {commerceNotificationQueueEntryId};
+			deleteCommerceNotificationQueueEntryIds = new long[] {
+				commerceNotificationQueueEntryId
+			};
 		}
 		else {
 			deleteCommerceNotificationQueueEntryIds = StringUtil.split(

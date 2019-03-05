@@ -78,7 +78,6 @@ public class CommerceCatalogDefaultImageImpl
 			fileEntryId = newFileEntry.getFileEntryId();
 
 			TempFileEntryUtil.deleteTempFileEntry(fileEntry.getFileEntryId());
-
 		}
 
 		Settings settings = _settingsFactory.getSettings(

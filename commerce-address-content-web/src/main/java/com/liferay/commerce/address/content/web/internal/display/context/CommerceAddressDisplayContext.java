@@ -169,8 +169,8 @@ public class CommerceAddressDisplayContext {
 	}
 
 	public String getDisplayStyle() {
-		return
-			_commerceAddressContentPortletInstanceConfiguration.displayStyle();
+		return _commerceAddressContentPortletInstanceConfiguration.
+			displayStyle();
 	}
 
 	public long getDisplayStyleGroupId() {

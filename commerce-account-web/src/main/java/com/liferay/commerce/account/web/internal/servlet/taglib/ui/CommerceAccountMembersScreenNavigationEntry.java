@@ -88,8 +88,8 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 		try {
 			if (_modelResourcePermission.contains(
-				permissionChecker, commerceAccount,
-				CommerceAccountActionKeys.VIEW_MEMBERS) ||
+					permissionChecker, commerceAccount,
+					CommerceAccountActionKeys.VIEW_MEMBERS) ||
 				_modelResourcePermission.contains(
 					permissionChecker, commerceAccount,
 					CommerceAccountActionKeys.MANAGE_MEMBERS)) {
