@@ -428,6 +428,10 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			commercePaymentResult.getNewPaymentStatus(),
 			commercePaymentResult.getAuthTransactionId());
 
+		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
+			StringPool.BLANK);
+
 		return commercePaymentResult;
 	}
 
