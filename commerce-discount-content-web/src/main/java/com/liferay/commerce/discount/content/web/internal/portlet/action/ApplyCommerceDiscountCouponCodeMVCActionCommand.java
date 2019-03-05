@@ -84,12 +84,12 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 				return;
 			}
 
-			_commerceOrderService.applayCouponCode(
+			_commerceOrderService.applyCouponCode(
 				commerceOrder.getCommerceOrderId(), couponCode,
 				commerceContext);
 		}
 		else if (cmd.equals(Constants.REMOVE)) {
-			_commerceOrderService.applayCouponCode(
+			_commerceOrderService.applyCouponCode(
 				commerceOrder.getCommerceOrderId(), null, commerceContext);
 		}
 

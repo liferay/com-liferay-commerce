@@ -88,7 +88,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
-	public CommerceOrder applayCouponCode(
+	public CommerceOrder applyCouponCode(
 			long commerceOrderId, String couponCode,
 			CommerceContext commerceContext)
 		throws PortalException {
@@ -96,7 +96,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		_commerceOrderModelResourcePermission.check(
 			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
 
-		return commerceOrderLocalService.applayCouponCode(
+		return commerceOrderLocalService.applyCouponCode(
 			commerceOrderId, couponCode, commerceContext);
 	}
 
