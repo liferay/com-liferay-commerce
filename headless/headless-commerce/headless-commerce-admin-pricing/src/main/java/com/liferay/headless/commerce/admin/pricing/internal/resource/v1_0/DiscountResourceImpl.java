@@ -77,15 +77,6 @@ public class DiscountResourceImpl implements DiscountResource {
 			GetterUtil.getLong(id), pagination);
 	}
 
-	@Override
-	@RequiresScope("HeadlessCommerceAdminPricing.read")
-	public CollectionDTO<DiscountDTO> getDiscounts(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _discountHelper.getDiscountDTOs(groupId, pagination);
-	}
-
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
@@ -111,30 +102,6 @@ public class DiscountResourceImpl implements DiscountResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@AsyncSupported
-	@Override
-	@RequiresScope("HeadlessCommerceAdminPricing.write")
-	@Status(Response.Status.CREATED)
-	public DiscountDTO upsertDiscount(Long groupId, DiscountDTO discountDTO)
-		throws Exception {
-
-		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
-				}
-
-			}.start();
-
-			return null;
-		}
-
-		return _discountHelper.upsertDiscount(groupId, discountDTO, _user);
 	}
 
 	@AsyncSupported
