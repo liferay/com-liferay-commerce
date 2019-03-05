@@ -50,23 +50,24 @@ public interface PriceListResource {
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
 	public PriceListDTO getPriceList(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Language language)
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId, @Context Language language)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@QueryParam("groupId") Long groupId, @Context Language language,
-			@Context Pagination pagination)
+			@QueryParam("groupId") Long groupId,
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updatePriceList(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			PriceListDTO priceListDTO, @Context Language language)
 		throws Exception;
 
@@ -75,8 +76,8 @@ public interface PriceListResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public PriceListDTO upsertPriceList(
-			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO,
-			@Context Language language)
+			@QueryParam("groupId") Long groupId,
+			PriceListDTO priceListDTO, @Context Language language)
 		throws Exception;
 
 }

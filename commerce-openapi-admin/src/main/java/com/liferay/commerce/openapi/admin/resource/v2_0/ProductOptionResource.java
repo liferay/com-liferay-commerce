@@ -58,23 +58,24 @@ public interface ProductOptionResource {
 	@Path("/")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			@QueryParam("groupId") Long groupId, @Context Language language,
-			@Context Pagination pagination)
+			@QueryParam("groupId") Long groupId,
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/productOptionValue")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			@PathParam("id") String id, @Context Language language,
-			@Context Pagination pagination)
+			@PathParam("id") String id,
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateProductOption(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			ProductOptionDTO productOptionDTO, @Context Language language)
 		throws Exception;
 
@@ -92,7 +93,8 @@ public interface ProductOptionResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public ProductOptionValueDTO upsertProductOptionValue(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO,
 			@Context Language language)
 		throws Exception;

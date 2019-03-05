@@ -35,6 +35,11 @@ public class UserSegmentDTO {
 	}
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -70,6 +75,10 @@ public class UserSegmentDTO {
 		_criteria = criteria;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -95,6 +104,9 @@ public class UserSegmentDTO {
 
 	@Nullable
 	private UserSegmentCriterionDTO[] _criteria;
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;

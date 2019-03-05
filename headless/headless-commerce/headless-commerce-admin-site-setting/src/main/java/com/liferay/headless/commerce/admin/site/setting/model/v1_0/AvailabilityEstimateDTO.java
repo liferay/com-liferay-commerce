@@ -30,6 +30,11 @@ import javax.annotation.Generated;
 public class AvailabilityEstimateDTO {
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -43,6 +48,10 @@ public class AvailabilityEstimateDTO {
 		return _title;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -54,6 +63,9 @@ public class AvailabilityEstimateDTO {
 	public void setTitle(Map<String, String> title) {
 		_title = title;
 	}
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;

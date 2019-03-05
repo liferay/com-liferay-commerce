@@ -14,8 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 
 import javax.annotation.Generated;
@@ -23,13 +21,10 @@ import javax.annotation.Generated;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 /**
@@ -51,27 +46,11 @@ public interface AvailabilityEstimateResource {
 			@PathParam("id") String id)
 		throws Exception;
 
-	@GET
-	@Path("/")
-	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
-			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
-		throws Exception;
-
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateAvailabilityEstimate(
 			@PathParam("id") String id,
-			AvailabilityEstimateDTO availabilityEstimateDTO)
-		throws Exception;
-
-	@Consumes({"application/json", "application/xml"})
-	@Path("/")
-	@POST
-	@Produces({"application/json", "application/xml"})
-	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
-			@QueryParam("groupId") Long groupId,
 			AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception;
 

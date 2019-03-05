@@ -54,7 +54,8 @@ public interface ProductOptionValueResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateProductOptionValue(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO,
 			@Context Language language)
 		throws Exception;

@@ -29,7 +29,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -71,13 +70,6 @@ public interface UserSegmentResource {
 			@PathParam("id") String id, @PathParam("id2") String id2)
 		throws Exception;
 
-	@GET
-	@Path("/")
-	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<UserSegmentDTO> getUserSegments(
-			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
-		throws Exception;
-
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
@@ -90,16 +82,9 @@ public interface UserSegmentResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			@PathParam("id") String id, @PathParam("id2") String id2,
+			@PathParam("id") String id,
+			@PathParam("id2") String id2,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
-		throws Exception;
-
-	@Consumes({"application/json", "application/xml"})
-	@Path("/")
-	@POST
-	@Produces({"application/json", "application/xml"})
-	public UserSegmentDTO upsertUserSegment(
-			@QueryParam("groupId") Long groupId, UserSegmentDTO userSegmentDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})

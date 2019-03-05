@@ -30,6 +30,11 @@ import javax.annotation.Generated;
 public class MeasurementUnitDTO {
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -62,6 +67,10 @@ public class MeasurementUnitDTO {
 		return _primary;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -89,6 +98,9 @@ public class MeasurementUnitDTO {
 	public void setType(Integer type) {
 		_type = type;
 	}
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;

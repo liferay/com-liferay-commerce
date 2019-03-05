@@ -67,8 +67,8 @@ public interface CountryResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateCountry(
-			@QueryParam("groupId") Long groupId, @PathParam("id") String id,
-			CountryDTO countryDTO)
+			@QueryParam("groupId") Long groupId,
+			@PathParam("id") String id, CountryDTO countryDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})

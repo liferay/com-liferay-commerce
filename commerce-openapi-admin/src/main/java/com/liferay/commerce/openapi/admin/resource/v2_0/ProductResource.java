@@ -68,7 +68,8 @@ public interface ProductResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateProduct(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			ProductDTO productDTO, @Context Language language)
 		throws Exception;
 
@@ -77,8 +78,8 @@ public interface ProductResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public ProductDTO upsertProduct(
-			@QueryParam("groupId") Long groupId, ProductDTO productDTO,
-			@Context Language language)
+			@QueryParam("groupId") Long groupId,
+			ProductDTO productDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -86,7 +87,8 @@ public interface ProductResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public SkuDTO upsertSku(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Language language)
 		throws Exception;
 
