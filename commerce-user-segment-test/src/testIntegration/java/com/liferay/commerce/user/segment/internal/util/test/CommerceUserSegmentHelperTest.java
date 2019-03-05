@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
-import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserGroupLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -486,9 +485,6 @@ public class CommerceUserSegmentHelperTest {
 
 	@DeleteAfterTestRun
 	private Role _role2;
-
-	@Inject
-	private RoleLocalService _roleLocalService;
 
 	@DeleteAfterTestRun
 	private User _user;
