@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.batch.engine.impl.internal.job;
 
+import com.liferay.commerce.batch.engine.api.item.ItemReader;
+import com.liferay.commerce.batch.engine.api.item.ItemWriter;
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
 import com.liferay.commerce.batch.engine.api.job.JobInstance;
@@ -37,7 +39,9 @@ public class JobLauncherImplTest {
 
 		JobLauncherImpl jobLauncherImpl = new JobLauncherImpl(blockingExecutor);
 
-		Job job = Mockito.mock(Job.class);
+		Job job = new JobImpl(
+			"name",
+			Mockito.mock(ItemReader.class), Mockito.mock(ItemWriter.class));
 
 		JobExecution jobExecution = jobLauncherImpl.run(
 			job, new JobParameters());
