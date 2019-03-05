@@ -275,7 +275,7 @@
 </tr>
 <tr>
 	<td>FRONT_STORE_PRODUCT_LINK</td>
-	<td>//span//span[contains (.,'Go to page')]//a</td>
+	<td>//span//span[contains (.,'Go to Page')]//a</td>
 	<td></td>
 </tr>
 <tr>
