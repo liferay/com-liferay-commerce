@@ -76,7 +76,7 @@ class AddOrganizationModal extends Component {
 
 	_fetchOrganizations() {
 		return fetch(
-			this.organizationsAPI + '?q=' + this.query,
+			this.organizationsAPI + '?groupId=' + themeDisplay.getScopeGroupId() + '&q=' + this.query,
 			{
 				method: 'GET'
 			}

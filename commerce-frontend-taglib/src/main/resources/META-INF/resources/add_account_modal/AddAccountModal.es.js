@@ -90,7 +90,7 @@ class AddAccountModal extends Component {
 
 	_fetchUsers() {
 		return fetch(
-			this.usersAPI + '?q=' + this.query,
+			this.usersAPI + '?groupId=' + themeDisplay.getScopeGroupId() + '&q=' + this.query,
 			{
 				method: 'GET'
 			}
