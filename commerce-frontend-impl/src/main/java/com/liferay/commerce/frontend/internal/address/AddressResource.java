@@ -37,6 +37,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -51,10 +52,10 @@ import org.osgi.service.component.annotations.Reference;
 public class AddressResource {
 
 	@GET
-	@Path("/address/billing-countries/{groupId}")
+	@Path("/address/billing-countries")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBillingCommerceCountries(
-		@PathParam("groupId") long groupId,
+		@QueryParam("groupId") long groupId,
 		@Context ThemeDisplay themeDisplay) {
 
 		List<CommerceCountry> commerceCountries =
@@ -101,10 +102,10 @@ public class AddressResource {
 	}
 
 	@GET
-	@Path("/address/shipping-countries/{groupId}")
+	@Path("/address/shipping-countries")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getShippingCommerceCountries(
-		@PathParam("groupId") long groupId,
+		@QueryParam("groupId") long groupId,
 		@Context ThemeDisplay themeDisplay) {
 
 		List<CommerceCountry> commerceCountries =

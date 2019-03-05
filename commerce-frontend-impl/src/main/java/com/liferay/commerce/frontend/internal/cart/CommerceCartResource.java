@@ -265,6 +265,13 @@ public class CommerceCartResource {
 					httpServletRequest);
 			}
 
+			commerceContext = _commerceContextFactory.create(
+				groupId, _portal.getUserId(httpServletRequest),
+				commerceOrder.getCommerceOrderId(), commerceAccountId);
+
+			httpServletRequest.setAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
+
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceOrderItem.class.getName(), httpServletRequest);
 

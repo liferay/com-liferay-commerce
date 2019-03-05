@@ -106,7 +106,7 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commerceOrder;
 		}
 
-		_commerceOrder = _commerceOrderService.getCommerceOrder(_orderId);
+		_commerceOrder = _commerceOrderService.fetchCommerceOrder(_orderId);
 
 		return _commerceOrder;
 	}

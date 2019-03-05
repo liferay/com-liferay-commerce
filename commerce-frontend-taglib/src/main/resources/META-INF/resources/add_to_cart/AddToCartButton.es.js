@@ -21,6 +21,12 @@ class AddToCartButton extends Component {
 
 	created() {
 		this.initialQuantity = this.quantity;
+
+		window.Liferay.on('accountSelected', this._handleAccountChange, this);
+	}
+
+	detached() {
+		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
 	}
 
 	willReceiveState(changes) {
@@ -60,6 +66,10 @@ class AddToCartButton extends Component {
 
 	_handleBtnFocus(e) {
 		this._handleBtnClick(e);
+	}
+
+	_handleAccountChange(e) {
+		this.accountId = e.accountId;
 	}
 
 	_handleBtnFocusin() {
