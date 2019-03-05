@@ -50,12 +50,19 @@ if (commerceOrderPayment != null) {
 				</aui:button-row>
 			</div>
 		</c:when>
-		<c:otherwise>
+		<c:when test="<%= paymentStatus == CommerceOrderPaymentConstants.STATUS_COMPLETED %>">
 			<div class="success-message">
 				<liferay-ui:message key="success-your-order-has-been-processed" />
 			</div>
 
-			<liferay-ui:message key="you-will-be-redirected-in-a-few-seconds" />
+			<aui:button-row>
+				<aui:button href="<%= orderConfirmationCheckoutStepDisplayContext.getOrderDetailURL() %>" primary="<%= true %>" type="submit" value="go-to-order-details" />
+			</aui:button-row>
+		</c:when>
+		<c:otherwise>
+			<div class="success-message">
+				<liferay-ui:message key="your-order-has-been-processed-but-not-completed-yet" />
+			</div>
 
 			<aui:button-row>
 				<aui:button href="<%= orderConfirmationCheckoutStepDisplayContext.getOrderDetailURL() %>" primary="<%= true %>" type="submit" value="go-to-order-details" />
