@@ -123,6 +123,8 @@ public class DTOMapper {
 
 		availabilityEstimateDTO.setId(
 			commerceAvailabilityEstimate.getCommerceAvailabilityEstimateId());
+		availabilityEstimateDTO.setGroupId(
+			commerceAvailabilityEstimate.getGroupId());
 		availabilityEstimateDTO.setPriority(
 			commerceAvailabilityEstimate.getPriority());
 		availabilityEstimateDTO.setTitle(
@@ -168,6 +170,7 @@ public class DTOMapper {
 		userSegmentDTO.setCriteria(
 			modelsToUserSegmentCriterionDTOArray(
 				commerceUserSegmentEntry.getCommerceUserSegmentCriteria()));
+		userSegmentDTO.setGroupId(commerceUserSegmentEntry.getGroupId());
 		userSegmentDTO.setId(
 			commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
 		userSegmentDTO.setKey(commerceUserSegmentEntry.getKey());
@@ -194,6 +197,7 @@ public class DTOMapper {
 		warehouseDTO.setCommerceRegionId(
 			commerceWarehouse.getCommerceRegionId());
 		warehouseDTO.setDescription(commerceWarehouse.getDescription());
+		warehouseDTO.setGroupId(commerceWarehouse.getGroupId());
 		warehouseDTO.setId(commerceWarehouse.getCommerceWarehouseId());
 		warehouseDTO.setLatitude(commerceWarehouse.getLatitude());
 		warehouseDTO.setLongitude(commerceWarehouse.getLongitude());
@@ -214,6 +218,7 @@ public class DTOMapper {
 			return measurementUnitDTO;
 		}
 
+		measurementUnitDTO.setGroupId(cpMeasurementUnit.getGroupId());
 		measurementUnitDTO.setId(cpMeasurementUnit.getCPMeasurementUnitId());
 		measurementUnitDTO.setKey(cpMeasurementUnit.getKey());
 		measurementUnitDTO.setName(
@@ -236,6 +241,7 @@ public class DTOMapper {
 		catalogRuleDTO.setActive(cpRule.isActive());
 		catalogRuleDTO.setCategories(
 			modelsToCategoryDTOArray(cpRule.getCPRuleAssetCategoryRels()));
+		catalogRuleDTO.setGroupId(catalogRuleDTO.getGroupId());
 		catalogRuleDTO.setId(cpRule.getCPRuleId());
 		catalogRuleDTO.setName(cpRule.getName());
 		catalogRuleDTO.setType(cpRule.getType());
@@ -303,6 +309,7 @@ public class DTOMapper {
 
 		taxCategoryDTO.setDescription(
 			LanguageUtils.getLanguageIdMap(cpTaxCategory.getDescriptionMap()));
+		taxCategoryDTO.setGroupId(cpTaxCategory.getGroupId());
 		taxCategoryDTO.setId(cpTaxCategory.getCPTaxCategoryId());
 		taxCategoryDTO.setName(
 			LanguageUtils.getLanguageIdMap(cpTaxCategory.getNameMap()));
