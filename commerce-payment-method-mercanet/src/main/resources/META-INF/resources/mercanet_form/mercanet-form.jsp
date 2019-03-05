@@ -21,7 +21,9 @@ String redirectionDataAttribute = (String)request.getAttribute("redirectionData"
 
 String redirectionData = URLDecoder.decode(redirectionDataAttribute, "UTF-8");
 
-String redirectUrl = (String)request.getAttribute("redirectUrl");
+String redirectUrlAttribute = (String)request.getAttribute("redirectUrl");
+
+String redirectUrl = URLCodec.decodeURL(redirectUrlAttribute);
 
 String sealAttribute = (String)request.getAttribute("seal");
 
