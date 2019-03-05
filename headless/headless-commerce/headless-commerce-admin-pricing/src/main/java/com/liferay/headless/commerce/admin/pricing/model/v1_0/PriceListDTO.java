@@ -56,6 +56,11 @@ public class PriceListDTO {
 	}
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -102,6 +107,10 @@ public class PriceListDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -132,6 +141,9 @@ public class PriceListDTO {
 	private Date _expirationDate;
 
 	private String _externalReferenceCode;
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;

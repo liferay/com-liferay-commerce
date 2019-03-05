@@ -50,6 +50,11 @@ public class DiscountDTO {
 	}
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -144,6 +149,10 @@ public class DiscountDTO {
 		_expirationDate = expirationDate;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -215,6 +224,9 @@ public class DiscountDTO {
 
 	@Nullable
 	private Date _expirationDate;
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;
