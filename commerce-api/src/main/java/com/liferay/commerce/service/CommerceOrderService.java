@@ -71,7 +71,7 @@ public interface CommerceOrderService extends BaseService {
 		long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException;
 
-	public CommerceOrder applayCouponCode(long commerceOrderId,
+	public CommerceOrder applyCouponCode(long commerceOrderId,
 		String couponCode, CommerceContext commerceContext)
 		throws PortalException;
 

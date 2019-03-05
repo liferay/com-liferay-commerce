@@ -55,46 +55,13 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 @ProviderType
 public class CommerceOrderServiceHttp {
-	public static com.liferay.commerce.model.CommerceOrder applayCouponCode(
-		HttpPrincipal httpPrincipal, long commerceOrderId, String couponCode,
-		com.liferay.commerce.context.CommerceContext commerceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
-					"applayCouponCode", _applayCouponCodeParameterTypes0);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceOrderId, couponCode, commerceContext);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.commerce.model.CommerceOrder)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 		HttpPrincipal httpPrincipal, long groupId, long userId,
 		long commerceAccountId, long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
-					"addCommerceOrder", _addCommerceOrderParameterTypes1);
+					"addCommerceOrder", _addCommerceOrderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, commerceAccountId, commerceCurrencyId);
@@ -128,7 +95,7 @@ public class CommerceOrderServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
-					"addCommerceOrder", _addCommerceOrderParameterTypes2);
+					"addCommerceOrder", _addCommerceOrderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					commerceAccountId, commerceCurrencyId, shippingAddressId,
@@ -162,10 +129,43 @@ public class CommerceOrderServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
-					"addCommerceOrder", _addCommerceOrderParameterTypes3);
+					"addCommerceOrder", _addCommerceOrderParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					commerceAccountId, shippingAddressId, purchaseOrderNumber);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.model.CommerceOrder)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder applyCouponCode(
+		HttpPrincipal httpPrincipal, long commerceOrderId, String couponCode,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
+					"applyCouponCode", _applyCouponCodeParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceOrderId, couponCode, commerceContext);
 
 			Object returnObj = null;
 
@@ -1349,18 +1349,18 @@ public class CommerceOrderServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceOrderServiceHttp.class);
-	private static final Class<?>[] _applayCouponCodeParameterTypes0 = new Class[] {
-			long.class, String.class,
-			com.liferay.commerce.context.CommerceContext.class
-		};
-	private static final Class<?>[] _addCommerceOrderParameterTypes1 = new Class[] {
+	private static final Class<?>[] _addCommerceOrderParameterTypes0 = new Class[] {
 			long.class, long.class, long.class, long.class
 		};
-	private static final Class<?>[] _addCommerceOrderParameterTypes2 = new Class[] {
+	private static final Class<?>[] _addCommerceOrderParameterTypes1 = new Class[] {
 			long.class, long.class, long.class, long.class, String.class
 		};
-	private static final Class<?>[] _addCommerceOrderParameterTypes3 = new Class[] {
+	private static final Class<?>[] _addCommerceOrderParameterTypes2 = new Class[] {
 			long.class, long.class, long.class, String.class
+		};
+	private static final Class<?>[] _applyCouponCodeParameterTypes3 = new Class[] {
+			long.class, String.class,
+			com.liferay.commerce.context.CommerceContext.class
 		};
 	private static final Class<?>[] _approveCommerceOrderParameterTypes4 = new Class[] {
 			long.class

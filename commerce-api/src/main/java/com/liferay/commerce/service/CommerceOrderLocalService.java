@@ -106,7 +106,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		int paymentStatus, int orderStatus, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceOrder applayCouponCode(long commerceOrderId,
+	public CommerceOrder applyCouponCode(long commerceOrderId,
 		String couponCode, CommerceContext commerceContext)
 		throws PortalException;
 
