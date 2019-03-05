@@ -17,21 +17,3 @@ dependencies {
 	compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 }
-
-if (System.getenv("JENKINS_HOME")) {
-	task deployConfigs(type: Copy)
-
-	deploy {
-		finalizedBy deployConfigs
-	}
-
-	deployConfigs {
-		ext {
-			autoClean = false
-		}
-
-		from "configs"
-		into GradleUtil.getProperty(project, "forced.configs.deploy.dir", new File(liferay.liferayHome, "osgi/configs"))
-	}
-
-}
