@@ -43,7 +43,7 @@ public class OpenAPIImporter {
 
 	public static void main(String[] args) throws Exception {
 		List<Properties> configurations =
-			ConfigurationFactory.getConfigurations((String)null);
+			ConfigurationFactory.getConfigurations();
 
 		try {
 			for (Properties configuration : configurations) {

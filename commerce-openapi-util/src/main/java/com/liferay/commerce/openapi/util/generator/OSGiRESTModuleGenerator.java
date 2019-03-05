@@ -39,6 +39,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 	public static void main(String[] args) {
 		try {
+			ConfigurationFactory.initialize();
+
 			List<Properties> configurations =
 				ConfigurationFactory.getConfigurations(args);
 
