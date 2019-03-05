@@ -17,63 +17,56 @@ package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
-import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceEntryDTO;
+import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountDTO;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceListDTO;
 
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
 /**
  * @author Alessio Antonio Rendina
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/v1.0/priceList")
-public interface PriceListResource {
+@Path("/v1.0/commerceAdminPricing")
+public interface CommerceAdminPricingResource {
 
-	@DELETE
-	@Path("/{id}")
-	public Response deletePriceList(
-			@PathParam("id") String id, @Context Language language)
+	@GET
+	@Path("/{groupId}/discount/")
+	@Produces({"application/json", "application/xml"})
+	public CollectionDTO<DiscountDTO> getDiscounts(
+			@PathParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
-	@Path("/{id}/priceEntry/")
+	@Path("/{groupId}/priceList/")
 	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			@PathParam("id") String id, @Context Pagination pagination)
-		throws Exception;
-
-	@GET
-	@Path("/{id}")
-	@Produces({"application/json", "application/xml"})
-	public PriceListDTO getPriceList(
-			@PathParam("id") String id, @Context Language language)
+	public CollectionDTO<PriceListDTO> getPriceLists(
+			@PathParam("groupId") Long groupId,
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}")
-	@PUT
-	public Response updatePriceList(
-			@PathParam("id") String id,
-			PriceListDTO priceListDTO, @Context Language language)
-		throws Exception;
-
-	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}/priceEntry/")
+	@Path("/{groupId}/discount/")
 	@POST
 	@Produces({"application/json", "application/xml"})
-	public PriceEntryDTO upsertPriceEntry(
-			@PathParam("id") String id, PriceEntryDTO priceEntryDTO)
+	public DiscountDTO upsertDiscount(
+			@PathParam("groupId") Long groupId, DiscountDTO discountDTO)
+		throws Exception;
+
+	@Consumes({"application/json", "application/xml"})
+	@Path("/{groupId}/priceList/")
+	@POST
+	@Produces({"application/json", "application/xml"})
+	public PriceListDTO upsertPriceList(
+			@PathParam("groupId") Long groupId,
+			PriceListDTO priceListDTO, @Context Language language)
 		throws Exception;
 
 }

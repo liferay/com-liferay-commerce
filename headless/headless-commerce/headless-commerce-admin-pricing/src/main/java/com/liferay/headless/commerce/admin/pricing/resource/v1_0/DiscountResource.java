@@ -29,7 +29,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -56,26 +55,11 @@ public interface DiscountResource {
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
-	@GET
-	@Path("/")
-	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<DiscountDTO> getDiscounts(
-			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
-		throws Exception;
-
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateDiscount(
 			@PathParam("id") String id, DiscountDTO discountDTO)
-		throws Exception;
-
-	@Consumes({"application/json", "application/xml"})
-	@Path("/")
-	@POST
-	@Produces({"application/json", "application/xml"})
-	public DiscountDTO upsertDiscount(
-			@QueryParam("groupId") Long groupId, DiscountDTO discountDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
