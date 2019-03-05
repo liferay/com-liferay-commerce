@@ -15,6 +15,7 @@
 package com.liferay.commerce.payment.method.mercanet.internal;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
@@ -36,12 +37,14 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 
 import com.worldline.sips.model.CaptureMode;
 import com.worldline.sips.model.Currency;
 import com.worldline.sips.model.InitializationResponse;
 import com.worldline.sips.model.OrderChannel;
 import com.worldline.sips.model.PaymentRequest;
+import com.worldline.sips.model.RedirectionStatusCode;
 
 import java.math.BigDecimal;
 
@@ -71,6 +74,21 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 	public static final String KEY = "mercanet";
 
 	@Override
+	public CommercePaymentResult cancelPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		MercanetCommercePaymentRequest mercanetCommercePaymentRequest =
+			(MercanetCommercePaymentRequest)commercePaymentRequest;
+
+		return new CommercePaymentResult(
+			mercanetCommercePaymentRequest.getTransactionId(),
+			mercanetCommercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderPaymentConstants.STATUS_CANCELLED, false, null, null,
+			Collections.emptyList(), true);
+	}
+
+	@Override
 	public CommercePaymentResult completePayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
@@ -79,8 +97,9 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			(MercanetCommercePaymentRequest)commercePaymentRequest;
 
 		return new CommercePaymentResult(
-			null, mercanetCommercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
+			mercanetCommercePaymentRequest.getTransactionId(),
+			mercanetCommercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderPaymentConstants.STATUS_COMPLETED, false, null, null,
 			Collections.emptyList(), true);
 	}
 
@@ -112,6 +131,11 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 	@Override
 	public String getServletPath() {
 		return MercanetCommercePaymentMethodConstants.SERVLET_PATH;
+	}
+
+	@Override
+	public boolean isCancelEnabled() {
+		return true;
 	}
 
 	@Override
@@ -182,7 +206,11 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		normalUrlSB.append(baseUrl.toString());
 		normalUrlSB.append("?redirect=");
-		normalUrlSB.append(parameters.get("redirect")[0]);
+
+		String encodeURL = URLCodec.encodeURL(parameters.get("redirect")[0]);
+
+		normalUrlSB.append(encodeURL);
+
 		normalUrlSB.append("&type=normal");
 
 		URL normalUrl = new URL(normalUrlSB.toString());
@@ -193,12 +221,10 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		paymentRequest.setOrderId(
 			String.valueOf(commerceOrder.getCommerceOrderId()));
 
-		StringBundler transactionReferenceSB = new StringBundler(5);
+		StringBundler transactionReferenceSB = new StringBundler(3);
 
 		transactionReferenceSB.append(commerceOrder.getCompanyId());
-		transactionReferenceSB.append(StringPool.POUND);
 		transactionReferenceSB.append(commerceOrder.getGroupId());
-		transactionReferenceSB.append(StringPool.POUND);
 		transactionReferenceSB.append(commerceOrder.getCommerceOrderId());
 
 		paymentRequest.setTransactionReference(
@@ -221,22 +247,34 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		InitializationResponse initializationResponse =
 			paypageClient.initialize(paymentRequest);
 
+		List<String> resultMessage = Collections.singletonList(
+			initializationResponse.getRedirectionStatusMessage());
+
+		RedirectionStatusCode responseCode =
+			initializationResponse.getRedirectionStatusCode();
+
+		if (!Objects.equals(responseCode.getCode(), "00")) {
+			return new CommercePaymentResult(
+				transactionReferenceSB.toString(),
+				commerceOrder.getCommerceOrderId(),
+				CommerceOrderPaymentConstants.STATUS_FAILED, true, null, null,
+				resultMessage, false);
+		}
+
 		URL redirectionUrl = initializationResponse.getRedirectionUrl();
 
 		String url = StringBundler.concat(
 			_getServletUrl(mercanetCommercePaymentRequest), "?redirectUrl=",
-			_http.encodeURL(redirectionUrl.toString()), "&redirectionData=",
+			URLCodec.encodeURL(redirectionUrl.toString()), "&redirectionData=",
 			URLEncoder.encode(
 				initializationResponse.getRedirectionData(), "UTF-8"),
 			"&seal=",
 			URLEncoder.encode(initializationResponse.getSeal(), "UTF-8"));
 
-		List<String> resultMessage = Collections.singletonList(
-			initializationResponse.getRedirectionStatusMessage());
-
 		return new CommercePaymentResult(
 			transactionReferenceSB.toString(),
-			commerceOrder.getCommerceOrderId(), -1, true, url, null,
+			commerceOrder.getCommerceOrderId(),
+			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
 			resultMessage, true);
 	}
 

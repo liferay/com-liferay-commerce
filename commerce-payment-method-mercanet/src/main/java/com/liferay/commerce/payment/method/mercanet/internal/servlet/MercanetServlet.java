@@ -114,6 +114,10 @@ public class MercanetServlet extends HttpServlet {
 		try {
 			String type = ParamUtil.getString(httpServletRequest, "type");
 
+			String data = ParamUtil.getString(httpServletRequest, "Data");
+
+			Map<String, String> parameterMap = _getResponseParameters(data);
+
 			if (Objects.equals("normal", type)) {
 				HttpSession httpSession = httpServletRequest.getSession();
 
@@ -131,16 +135,27 @@ public class MercanetServlet extends HttpServlet {
 				String redirect = ParamUtil.getString(
 					httpServletRequest, "redirect");
 
+				if (!Objects.equals(
+						parameterMap.get("responseCode"), "00")) {
+
+					String orderId = parameterMap.get("orderId");
+
+					Long commerceOrderId = Long.parseLong(orderId);
+					
+					String transactionReference = parameterMap.get(
+						"transactionReference");
+
+					_commercePaymentEngine.cancelPayment(
+						commerceOrderId, transactionReference,
+						httpServletRequest);
+				}
+
 				httpServletResponse.sendRedirect(redirect);
 			}
 
 			if (Objects.equals("automatic", type)) {
 				long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 				String uuid = ParamUtil.getString(httpServletRequest, "uuid");
-
-				String data = httpServletRequest.getParameter("Data");
-
-				Map<String, String> parameterMap = _getResponseParameters(data);
 
 				CommerceOrder commerceOrder =
 					_commerceOrderLocalService.getCommerceOrderByUuidAndGroupId(
@@ -166,25 +181,23 @@ public class MercanetServlet extends HttpServlet {
 
 				verifyMap.put("Data", data);
 
-				String seal = httpServletRequest.getParameter("Seal");
+				String seal = ParamUtil.getString(httpServletRequest, "Seal");
 
 				verifyMap.put("Seal", seal);
 
-				PaypageResponse paypageResponse = paypageClient.decodeResponse(
-					verifyMap);
+				PaypageResponse paypageResponse =
+					paypageClient.decodeResponse(verifyMap);
 
 				ResponseData responseData = paypageResponse.getData();
 
-				StringBundler transactionReferenceSB = new StringBundler(5);
+				ResponseCode responseCode = responseData.getResponseCode();
+
+				StringBundler transactionReferenceSB = new StringBundler(3);
 
 				transactionReferenceSB.append(commerceOrder.getCompanyId());
-				transactionReferenceSB.append(StringPool.POUND);
 				transactionReferenceSB.append(commerceOrder.getGroupId());
-				transactionReferenceSB.append(StringPool.POUND);
 				transactionReferenceSB.append(
 					commerceOrder.getCommerceOrderId());
-
-				ResponseCode responseCode = responseData.getResponseCode();
 
 				if (Objects.equals(responseCode.getCode(), "00") &&
 					Objects.equals(
