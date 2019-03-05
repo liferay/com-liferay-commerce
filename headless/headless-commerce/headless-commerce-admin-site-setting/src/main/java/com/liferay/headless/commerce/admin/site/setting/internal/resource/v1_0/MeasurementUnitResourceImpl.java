@@ -14,10 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-import com.liferay.commerce.openapi.core.annotation.Status;
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.MeasurementUnitHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.MeasurementUnitDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
@@ -64,16 +60,6 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 	}
 
 	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
-			Long groupId, @Nullable Integer type, Pagination pagination)
-		throws Exception {
-
-		return _measurementUnitHelper.getMeasurementUnitDTOs(
-			groupId, type, pagination);
-	}
-
-	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateMeasurementUnit(
 			String id, MeasurementUnitDTO measurementUnitDTO)
@@ -85,17 +71,6 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public MeasurementUnitDTO upsertMeasurementUnit(
-			Long groupId, MeasurementUnitDTO measurementUnitDTO)
-		throws Exception {
-
-		return _measurementUnitHelper.upsertMeasurementUnit(
-			groupId, measurementUnitDTO, _user);
 	}
 
 	@Reference

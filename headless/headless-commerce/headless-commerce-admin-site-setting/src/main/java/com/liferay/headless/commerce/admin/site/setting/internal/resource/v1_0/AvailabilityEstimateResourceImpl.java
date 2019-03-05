@@ -14,9 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.annotation.Status;
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.AvailabilityEstimateHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.AvailabilityEstimateDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
@@ -66,16 +63,6 @@ public class AvailabilityEstimateResourceImpl
 	}
 
 	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _availabilityEstimateHelper.getAvailabilityEstimateDTOs(
-			groupId, pagination);
-	}
-
-	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateAvailabilityEstimate(
 			String id, AvailabilityEstimateDTO availabilityEstimateDTO)
@@ -87,17 +74,6 @@ public class AvailabilityEstimateResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
-			Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
-		throws Exception {
-
-		return _availabilityEstimateHelper.upsertAvailabilityEstimate(
-			groupId, availabilityEstimateDTO, _user);
 	}
 
 	@Reference

@@ -99,15 +99,6 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 			criterionId);
 	}
 
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<UserSegmentDTO> getUserSegments(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _userSegmentHelper.getUserSegmentDTOs(groupId, pagination);
-	}
-
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
@@ -159,32 +150,6 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 		return _userSegmentCriterionHelper.updateUserSegmentCriterion(
 			criterionId, userSegmentCriterionDTO, _user);
-	}
-
-	@AsyncSupported
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public UserSegmentDTO upsertUserSegment(
-			Long groupId, UserSegmentDTO userSegmentDTO)
-		throws Exception {
-
-		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
-				}
-
-			}.start();
-
-			return null;
-		}
-
-		return _userSegmentHelper.upsertUserSegment(
-			groupId, userSegmentDTO, _user);
 	}
 
 	@AsyncSupported
