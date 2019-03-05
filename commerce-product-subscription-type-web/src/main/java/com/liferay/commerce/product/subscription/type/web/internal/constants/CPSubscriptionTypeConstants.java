@@ -27,11 +27,13 @@ public class CPSubscriptionTypeConstants {
 
 	public static final int MODE_ORDER_DATE = 0;
 
-	public static final int[] MONTHLY_MODES =
-		{MODE_ORDER_DATE, MODE_EXACT_DAY_OF_MONTH, MODE_LAST_DAY_OF_MONTH};
+	public static final int[] MONTHLY_MODES = {
+		MODE_ORDER_DATE, MODE_EXACT_DAY_OF_MONTH, MODE_LAST_DAY_OF_MONTH
+	};
 
-	public static final int[] YEARLY_MODES =
-		{MODE_ORDER_DATE, MODE_EXACT_DAY_OF_YEAR};
+	public static final int[] YEARLY_MODES = {
+		MODE_ORDER_DATE, MODE_EXACT_DAY_OF_YEAR
+	};
 
 	public static String getMonthlyCPSubscriptionTypeModeLabel(int mode) {
 		if (mode == MODE_ORDER_DATE) {

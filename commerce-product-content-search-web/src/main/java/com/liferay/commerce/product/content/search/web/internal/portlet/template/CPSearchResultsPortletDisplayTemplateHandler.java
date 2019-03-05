@@ -61,8 +61,11 @@ public class CPSearchResultsPortletDisplayTemplateHandler
 		String portletTitle = _portal.getPortletTitle(
 			CPPortletKeys.CP_SEARCH_RESULTS, resourceBundle);
 
-		return portletTitle.concat(StringPool.SPACE).concat(
-			LanguageUtil.get(locale, "template"));
+		return portletTitle.concat(
+			StringPool.SPACE
+		).concat(
+			LanguageUtil.get(locale, "template")
+		);
 	}
 
 	@Override

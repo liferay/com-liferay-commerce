@@ -68,8 +68,9 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 			actionRequest, "commerceNotificationTemplateId");
 
 		if (commerceNotificationTemplateId > 0) {
-			deleteCommerceNotificationTemplateIds =
-				new long[] {commerceNotificationTemplateId};
+			deleteCommerceNotificationTemplateIds = new long[] {
+				commerceNotificationTemplateId
+			};
 		}
 		else {
 			deleteCommerceNotificationTemplateIds = StringUtil.split(

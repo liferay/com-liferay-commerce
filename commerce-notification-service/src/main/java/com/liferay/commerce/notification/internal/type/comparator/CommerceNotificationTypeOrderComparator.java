@@ -26,7 +26,7 @@ import java.util.Comparator;
  * @author Alessio Antonio Rendina
  */
 public class CommerceNotificationTypeOrderComparator
-	implements Comparator <ServiceWrapper<CommerceNotificationType>>,
+	implements Comparator<ServiceWrapper<CommerceNotificationType>>,
 			   Serializable {
 
 	public CommerceNotificationTypeOrderComparator() {

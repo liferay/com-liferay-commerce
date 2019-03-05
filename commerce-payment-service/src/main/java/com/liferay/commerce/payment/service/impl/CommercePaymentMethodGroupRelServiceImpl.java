@@ -197,7 +197,8 @@ public class CommercePaymentMethodGroupRelServiceImpl
 
 	@Override
 	public List<CommercePaymentMethodGroupRel>
-		getCommercePaymentMethodGroupRels(long groupId) throws PortalException {
+			getCommercePaymentMethodGroupRels(long groupId)
+		throws PortalException {
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,

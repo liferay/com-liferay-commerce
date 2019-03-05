@@ -62,9 +62,8 @@ public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 
 	@Override
 	public List<CommerceAccountUserRel> getCommerceAccountUserRels() {
-		return
-			CommerceAccountUserRelLocalServiceUtil.getCommerceAccountUserRels(
-				getCommerceAccountId());
+		return CommerceAccountUserRelLocalServiceUtil.
+			getCommerceAccountUserRels(getCommerceAccountId());
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class ComponentImporter {
 
 		_setIfHas(
 			schemaEntryJSONNode, "$ref",
-			openApiComponentBuilder :: itemsReference);
+			openApiComponentBuilder::itemsReference);
 
 		String type = GetterUtil.getAsText(
 			"type", schemaEntryJSONNode, "object");
@@ -72,8 +72,7 @@ public class ComponentImporter {
 			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
 
 			_setIfHas(
-				itemsJSONNode, "$ref",
-				openApiComponentBuilder :: itemsReference);
+				itemsJSONNode, "$ref", openApiComponentBuilder::itemsReference);
 		}
 		else if (schemaEntryJSONNode.has("additionalProperties")) {
 			JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
@@ -81,13 +80,13 @@ public class ComponentImporter {
 
 			_setIfHas(
 				additionalPropertiesJSONNode, "$ref",
-				openApiComponentBuilder :: itemsReference);
+				openApiComponentBuilder::itemsReference);
 			_setIfHas(
 				additionalPropertiesJSONNode, "format",
-				openApiComponentBuilder :: itemsOpenApiFormatDefinition);
+				openApiComponentBuilder::itemsOpenApiFormatDefinition);
 			_setIfHas(
 				additionalPropertiesJSONNode, "type",
-				openApiComponentBuilder :: itemsOpenApiTypeDefinition);
+				openApiComponentBuilder::itemsOpenApiTypeDefinition);
 
 			openApiComponentBuilder.type("dictionary");
 		}
@@ -162,28 +161,28 @@ public class ComponentImporter {
 
 				_setIfHas(
 					propertyJSONNode, "example",
-					openApiPropertyBuilder :: example);
+					openApiPropertyBuilder::example);
 				_setIfHas(
 					propertyJSONNode, "format",
-					openApiPropertyBuilder ::openApiFormatDefinition);
+					openApiPropertyBuilder::openApiFormatDefinition);
 
 				if (propertyJSONNode.has("items")) {
 					JsonNode itemsJSONNode = propertyJSONNode.get("items");
 
 					_setIfHas(
 						itemsJSONNode, "type",
-						openApiPropertyBuilder :: itemsOpenApiTypeDefinition);
+						openApiPropertyBuilder::itemsOpenApiTypeDefinition);
 					_setIfHas(
 						itemsJSONNode, "format",
-						openApiPropertyBuilder :: itemsOpenApiFormatDefinition);
+						openApiPropertyBuilder::itemsOpenApiFormatDefinition);
 					_setIfHas(
 						itemsJSONNode, "$ref",
-						openApiPropertyBuilder :: componentReference);
+						openApiPropertyBuilder::componentReference);
 				}
 
 				_setIfHas(
 					propertyJSONNode, "$ref",
-					openApiPropertyBuilder :: componentReference);
+					openApiPropertyBuilder::componentReference);
 
 				if (requiredProperties.contains(propertyNameValue)) {
 					openApiPropertyBuilder.required(true);
@@ -199,15 +198,14 @@ public class ComponentImporter {
 
 						_setIfHas(
 							additionalPropertiesJSONNode, "$ref",
-							openApiPropertyBuilder :: itemsReference);
+							openApiPropertyBuilder::itemsReference);
 						_setIfHas(
 							additionalPropertiesJSONNode, "format",
-							openApiPropertyBuilder ::
+							openApiPropertyBuilder::
 								itemsOpenApiFormatDefinition);
 						_setIfHas(
 							additionalPropertiesJSONNode, "type",
-							openApiPropertyBuilder ::
-								itemsOpenApiTypeDefinition);
+							openApiPropertyBuilder::itemsOpenApiTypeDefinition);
 					}
 				}
 

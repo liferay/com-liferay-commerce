@@ -73,8 +73,8 @@ public class CommerceStockQuantityMessageListener extends BaseMessageListener {
 			_commerceWarehouseItemLocalService.getCPInstanceQuantity(
 				cpInstance.getCPInstanceId());
 
-		if (stockQuantity <=
-				cpDefinitionInventoryEngine.getMinStockQuantity(cpInstance)) {
+		if (stockQuantity <= cpDefinitionInventoryEngine.getMinStockQuantity(
+				cpInstance)) {
 
 			commerceLowStockActivity.execute(commerceWarehouseItem);
 		}

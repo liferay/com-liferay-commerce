@@ -255,7 +255,7 @@ public class CommerceCartContentDisplayContext {
 		return _searchContainer;
 	}
 
-	public boolean hasPermission(String actionId)throws PortalException {
+	public boolean hasPermission(String actionId) throws PortalException {
 		if (_commerceOrder == null) {
 			return false;
 		}
@@ -265,7 +265,7 @@ public class CommerceCartContentDisplayContext {
 			_commerceOrder, actionId);
 	}
 
-	public boolean hasViewPricePermission()throws PortalException {
+	public boolean hasViewPricePermission() throws PortalException {
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if ((commerceAccount != null) &&

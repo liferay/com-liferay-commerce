@@ -111,8 +111,8 @@ public class CommerceNotificationTemplateUserSegmentRelServiceImpl
 				commerceNotificationTemplateId, start, end, orderByComparator);
 	}
 
-	private static volatile
-		ModelResourcePermission<CommerceNotificationTemplate>
+	private static volatile ModelResourcePermission
+		<CommerceNotificationTemplate>
 			_commerceNotificationTemplateResourcePermission =
 				ModelResourcePermissionFactory.getInstance(
 					CommerceNotificationTemplateUserSegmentRelServiceImpl.class,
