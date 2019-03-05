@@ -14,9 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.annotation.Status;
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.TaxCategoryHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.TaxCategoryDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
@@ -58,15 +55,6 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<TaxCategoryDTO> getTaxCategories(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _taxCategoryHelper.getTaxCategoryDTOs(groupId, pagination);
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public TaxCategoryDTO getTaxCategory(String id) throws Exception {
 		return _taxCategoryHelper.getTaxCategoryDTO(id);
 	}
@@ -81,17 +69,6 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public TaxCategoryDTO upsertTaxCategory(
-			Long groupId, TaxCategoryDTO taxCategoryDTO)
-		throws Exception {
-
-		return _taxCategoryHelper.upsertTaxCategory(
-			groupId, taxCategoryDTO, _user);
 	}
 
 	@Reference

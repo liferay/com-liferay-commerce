@@ -14,10 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-import com.liferay.commerce.openapi.core.annotation.Status;
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.WarehouseHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.WarehouseResource;
@@ -64,15 +60,6 @@ public class WarehouseResourceImpl implements WarehouseResource {
 	}
 
 	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<WarehouseDTO> getWarehouses(
-			Long groupId, @Nullable Boolean active, Pagination pagination)
-		throws Exception {
-
-		return _warehouseHelper.getWarehouseDTOs(groupId, active, pagination);
-	}
-
-	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateWarehouse(String id, WarehouseDTO warehouseDTO)
 		throws Exception {
@@ -82,30 +69,6 @@ public class WarehouseResourceImpl implements WarehouseResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public WarehouseDTO upsertWarehouse(Long groupId, WarehouseDTO warehouseDTO)
-		throws Exception {
-
-		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					_warehouseHelper.upsertWarehouse(
-						groupId, warehouseDTO, _user);
-
-				}
-
-			}.start();
-
-			return null;
-		}
-
-		return _warehouseHelper.upsertWarehouse(groupId, warehouseDTO, _user);
 	}
 
 	@Context
