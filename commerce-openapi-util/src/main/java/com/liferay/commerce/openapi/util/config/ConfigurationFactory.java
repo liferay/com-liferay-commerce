@@ -42,7 +42,7 @@ public class ConfigurationFactory {
 
 	public static Properties getConfigurationFor(String externalReference) {
 		try {
-			for (Properties properties : getConfigurations((String)null)) {
+			for (Properties properties : getConfigurations()) {
 				if (externalReference.contains(
 						properties.getProperty("openapi.url"))) {
 
@@ -61,14 +61,18 @@ public class ConfigurationFactory {
 			"No configuration matches external reference " + externalReference);
 	}
 
-	public static List<Properties> getConfigurations(String configurationPath)
+	public static List<Properties> getConfigurations()
 		throws IOException {
+
+		if (_configRootPath == null) {
+			throw new IllegalStateException("Factory is not initialized");
+		}
 
 		if (!_configurations.isEmpty()) {
 			return _cloneAll(_configurations);
 		}
 
-		List<File> configFiles = _getConfigFiles(configurationPath);
+		List<File> configFiles = _getConfigFiles();
 
 		for (File configFile : configFiles) {
 			_configurations.add(_getConfiguration(configFile));
@@ -84,7 +88,7 @@ public class ConfigurationFactory {
 			return _cloneAll(_configurations);
 		}
 
-		List<Properties> configurations = getConfigurations(getPath());
+		List<Properties> configurations = getConfigurations();
 
 		for (Properties configuration : configurations) {
 			if (externalProps != null) {
@@ -96,19 +100,31 @@ public class ConfigurationFactory {
 	}
 
 	public static String getPath() {
-		Class<?> clazz = ConfigurationFactory.class;
-
-		return getPath(clazz);
+		return _configRootPath;
 	}
 
-	public static String getPath(Class clazz) {
+	public static synchronized void initialize() {
+		if (_configRootPath != null) {
+			throw new IllegalStateException("Factory is already initialized");
+		}
+
+		Class<?> clazz = ConfigurationFactory.class;
+
+		initialize(clazz);
+	}
+
+	public static synchronized void initialize(Class clazz) {
+		if (_configRootPath != null) {
+			throw new IllegalStateException("Factory is already intialized");
+		}
+
 		URL url = clazz.getResource(clazz.getSimpleName() + ".class");
 
 		String path = url.getPath();
 
 		path = path.substring(0, path.lastIndexOf(clazz.getSimpleName()));
 
-		return path;
+		_configRootPath = path;
 	}
 
 	private static Properties _clone(Properties properties) {
@@ -131,8 +147,8 @@ public class ConfigurationFactory {
 		return clonedProperties;
 	}
 
-	private static List<File> _getConfigFiles(String configRootPath) {
-		File configDirectory = new File(configRootPath);
+	private static List<File> _getConfigFiles() {
+		File configDirectory = new File(_configRootPath);
 
 		if (!configDirectory.isDirectory()) {
 			return Collections.emptyList();
@@ -155,7 +171,7 @@ public class ConfigurationFactory {
 		List<File> configFiles = new ArrayList<>();
 
 		for (String configFileName : configFileNames) {
-			configFiles.add(new File(configRootPath + configFileName));
+			configFiles.add(new File(_configRootPath + configFileName));
 		}
 
 		return configFiles;
@@ -195,6 +211,7 @@ public class ConfigurationFactory {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		ConfigurationFactory.class);
 
+	private static String _configRootPath;
 	private static final List<Properties> _configurations = new ArrayList<>();
 	private static final Pattern _propertyPattern = Pattern.compile(
 		"^(.+)=(.+)$");
