@@ -59,7 +59,7 @@ public class OpenApiReaderFactory {
 				0, externalReference.indexOf("#"));
 		}
 
-		_logger.info("Valid external reference at {}", externalUrl);
+		_logger.info("Valid external reference to {}", externalUrl);
 
 		if (!externalUrl.startsWith("http")) {
 			if (restConfigDirName != null) {
