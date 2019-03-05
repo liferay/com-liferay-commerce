@@ -101,11 +101,11 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceOrder applayCouponCode(
+	public com.liferay.commerce.model.CommerceOrder applyCouponCode(
 		long commerceOrderId, String couponCode,
 		com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderLocalService.applayCouponCode(commerceOrderId,
+		return _commerceOrderLocalService.applyCouponCode(commerceOrderId,
 			couponCode, commerceContext);
 	}
 
