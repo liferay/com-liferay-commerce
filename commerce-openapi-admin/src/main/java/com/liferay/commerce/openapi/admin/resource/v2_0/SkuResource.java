@@ -61,7 +61,8 @@ public interface SkuResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateSku(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Language language)
 		throws Exception;
 
@@ -70,8 +71,8 @@ public interface SkuResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public InventoryDTO upsertInventory(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			InventoryDTO inventoryDTO)
+			@PathParam("id") String id,
+			@QueryParam("groupId") Long groupId, InventoryDTO inventoryDTO)
 		throws Exception;
 
 }
