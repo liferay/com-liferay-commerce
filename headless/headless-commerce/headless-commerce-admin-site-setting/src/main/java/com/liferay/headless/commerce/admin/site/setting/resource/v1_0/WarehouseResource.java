@@ -14,9 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 
 import javax.annotation.Generated;
@@ -24,13 +21,10 @@ import javax.annotation.Generated;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 /**
@@ -51,28 +45,11 @@ public interface WarehouseResource {
 	public WarehouseDTO getWarehouse(@PathParam("id") String id)
 		throws Exception;
 
-	@GET
-	@Path("/")
-	@Produces({"application/json", "application/xml"})
-	public CollectionDTO<WarehouseDTO> getWarehouses(
-			@QueryParam("groupId") Long groupId,
-			@Nullable @QueryParam("active") Boolean active,
-			@Context Pagination pagination)
-		throws Exception;
-
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateWarehouse(
 			@PathParam("id") String id, WarehouseDTO warehouseDTO)
-		throws Exception;
-
-	@Consumes({"application/json", "application/xml"})
-	@Path("/")
-	@POST
-	@Produces({"application/json", "application/xml"})
-	public WarehouseDTO upsertWarehouse(
-			@QueryParam("groupId") Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception;
 
 }

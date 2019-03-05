@@ -107,8 +107,8 @@ public interface OrderResource {
 	@GET
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<OrderDTO> getOrders(
-			@QueryParam("groupId") Long groupId, @Context Language language,
-			@Context Pagination pagination)
+			@QueryParam("groupId") Long groupId,
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
@@ -122,16 +122,16 @@ public interface OrderResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public OrderDTO updateBillingAddress(
-			@PathParam("id") String id, AddressDTO addressDTO,
-			@Context Language language)
+			@PathParam("id") String id,
+			AddressDTO addressDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateOrder(
-			@PathParam("id") String id, OrderDTO orderDTO,
-			@Context Language language)
+			@PathParam("id") String id,
+			OrderDTO orderDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -159,8 +159,8 @@ public interface OrderResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public OrderDTO updateShippingAddress(
-			@PathParam("id") String id, AddressDTO addressDTO,
-			@Context Language language)
+			@PathParam("id") String id,
+			AddressDTO addressDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
