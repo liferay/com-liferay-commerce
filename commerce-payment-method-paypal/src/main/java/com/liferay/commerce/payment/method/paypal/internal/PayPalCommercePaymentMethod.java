@@ -522,9 +522,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		boolean success = false;
-		String url = null;
-
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.getCommerceOrder(
 				commercePaymentRequest.getCommerceOrderId());
@@ -532,6 +529,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		Payment payment = _getPayment(
 			commercePaymentRequest, commerceOrder,
 			PayPalCommercePaymentMethodConstants.INTENT_SALE);
+
+		String url = null;
 
 		for (Links links : payment.getLinks()) {
 			if ("approval_url".equals(links.getRel())) {
@@ -547,10 +546,14 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		url = _http.addParameter(url, "useraction", "commit");
 
+		boolean success = false;
+		int status = CommerceOrderPaymentConstants.STATUS_FAILED;
+
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_CREATED.equals(payment.getState())) {
 
 			success = true;
+			status = CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED;
 		}
 
 		List<String> messages = new ArrayList<>();
@@ -559,7 +562,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommercePaymentResult(
 			payment.getId(), commercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
+			status, true, url, null,
 			messages, success);
 	}
 
@@ -580,7 +583,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			return null;
 		}
 
-		boolean success = false;
 		String url = null;
 
 		Agreement agreement = _getAgreement(commerceOrder, apiContext, plan);
@@ -593,10 +595,14 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			}
 		}
 
+		boolean success = false;
+		int status = CommerceOrderPaymentConstants.STATUS_FAILED;
+
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_CREATED.equals(agreement.getState())) {
 
 			success = true;
+			status = CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED;
 		}
 
 		List<String> messages = new ArrayList<>();
@@ -605,7 +611,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommercePaymentResult(
 			agreement.getToken(), commercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
+			status, true, url, null,
 			messages, success);
 	}
 
