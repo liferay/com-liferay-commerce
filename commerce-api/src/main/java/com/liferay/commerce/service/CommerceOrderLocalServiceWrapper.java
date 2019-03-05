@@ -636,6 +636,14 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updateCommercePaymentMethodKey(
+		long commerceOrderId, String commercePaymentMethodKey)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.updateCommercePaymentMethodKey(commerceOrderId,
+			commercePaymentMethodKey);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 		long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
