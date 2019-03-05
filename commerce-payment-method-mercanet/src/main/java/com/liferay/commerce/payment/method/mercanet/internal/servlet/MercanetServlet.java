@@ -186,10 +186,10 @@ public class MercanetServlet extends HttpServlet {
 					Objects.equals(
 						responseData.getMerchantId(),
 						mercanetGroupServiceConfiguration.merchantId()) &&
-					Objects.equals(
+				   Objects.equals(
 						parametersMap.get("customerId"),
 						String.valueOf(commerceOrder.getUserId())) &&
-					Objects.equals(
+				   Objects.equals(
 						parametersMap.get("orderId"),
 						String.valueOf(commerceOrder.getCommerceOrderId())) &&
 					Objects.equals(
@@ -221,7 +221,8 @@ public class MercanetServlet extends HttpServlet {
 
 		Map<String, String> map = new HashMap<>();
 
-		for (String param : params) {
+		for (String param : params)
+		{
 			String name = param.split(StringPool.EQUAL)[0];
 			String value = param.split(StringPool.EQUAL)[1];
 

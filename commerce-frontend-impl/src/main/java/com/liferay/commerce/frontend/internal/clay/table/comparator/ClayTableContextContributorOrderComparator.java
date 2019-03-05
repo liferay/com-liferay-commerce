@@ -26,7 +26,7 @@ import java.util.Comparator;
  * @author Marco Leo
  */
 public class ClayTableContextContributorOrderComparator
-	implements Comparator<ServiceWrapper<ClayTableContextContributor>>,
+	implements Comparator <ServiceWrapper<ClayTableContextContributor>>,
 			   Serializable {
 
 	public ClayTableContextContributorOrderComparator() {

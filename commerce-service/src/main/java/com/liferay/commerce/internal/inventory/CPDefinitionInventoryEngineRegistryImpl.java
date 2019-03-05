@@ -50,8 +50,8 @@ public class CPDefinitionInventoryEngineRegistryImpl
 		CPDefinitionInventory cpDefinitionInventory) {
 
 		if ((cpDefinitionInventory == null) ||
-			Validator.isNull(
-				cpDefinitionInventory.getCPDefinitionInventoryEngine())) {
+			Validator.isNull(cpDefinitionInventory.
+				getCPDefinitionInventoryEngine())) {
 
 			return getCPDefinitionInventoryEngine(
 				CPDefinitionInventoryEngineImpl.KEY);
@@ -69,8 +69,8 @@ public class CPDefinitionInventoryEngineRegistryImpl
 			return null;
 		}
 
-		ServiceTrackerCustomizerFactory.ServiceWrapper
-			<CPDefinitionInventoryEngine>
+		ServiceTrackerCustomizerFactory.
+			ServiceWrapper<CPDefinitionInventoryEngine>
 				cpDefinitionInventoryEngineServiceWrapper =
 					_serviceTrackerMap.getService(key);
 
@@ -93,8 +93,8 @@ public class CPDefinitionInventoryEngineRegistryImpl
 			new ArrayList<>();
 
 		List
-			<ServiceTrackerCustomizerFactory.ServiceWrapper
-				<CPDefinitionInventoryEngine>>
+			<ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CPDefinitionInventoryEngine>>
 					cpDefinitionInventoryEngineServiceWrappers =
 						ListUtil.fromCollection(_serviceTrackerMap.values());
 
@@ -102,8 +102,8 @@ public class CPDefinitionInventoryEngineRegistryImpl
 			cpDefinitionInventoryEngineServiceWrappers,
 			_cpDefinitionInventoryEngineServiceWrapperPriorityComparator);
 
-		for (ServiceTrackerCustomizerFactory.ServiceWrapper
-				<CPDefinitionInventoryEngine>
+		for (ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CPDefinitionInventoryEngine>
 					cpDefinitionInventoryEngineServiceWrapper :
 						cpDefinitionInventoryEngineServiceWrappers) {
 
@@ -132,14 +132,14 @@ public class CPDefinitionInventoryEngineRegistryImpl
 		CPDefinitionInventoryEngineRegistryImpl.class);
 
 	private static final Comparator
-		<ServiceTrackerCustomizerFactory.ServiceWrapper
-			<CPDefinitionInventoryEngine>>
+		<ServiceTrackerCustomizerFactory.
+			ServiceWrapper<CPDefinitionInventoryEngine>>
 				_cpDefinitionInventoryEngineServiceWrapperPriorityComparator =
 					new CPDefinitionInventoryEngineServiceWrapperPriorityComparator();
 
 	private ServiceTrackerMap
 		<String,
-		 ServiceTrackerCustomizerFactory.ServiceWrapper
-			 <CPDefinitionInventoryEngine>> _serviceTrackerMap;
+		 ServiceTrackerCustomizerFactory.
+			ServiceWrapper<CPDefinitionInventoryEngine>> _serviceTrackerMap;
 
 }

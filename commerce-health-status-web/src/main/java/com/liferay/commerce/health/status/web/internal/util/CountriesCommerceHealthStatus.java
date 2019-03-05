@@ -77,8 +77,8 @@ public class CountriesCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Override
 	public String getKey() {
-		return CommerceHealthStatusConstants.
-			COUNTRIES_COMMERCE_HEALTH_STATUS_KEY;
+		return
+			CommerceHealthStatusConstants.COUNTRIES_COMMERCE_HEALTH_STATUS_KEY;
 	}
 
 	@Override

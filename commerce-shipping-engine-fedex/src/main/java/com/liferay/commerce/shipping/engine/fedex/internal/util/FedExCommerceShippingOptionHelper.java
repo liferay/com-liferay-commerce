@@ -176,8 +176,9 @@ public class FedExCommerceShippingOptionHelper {
 					commerceShippingOriginLocatorKey);
 
 		if (_commerceShippingOriginLocator == null) {
-			throw new CommerceShippingEngineException.
-				MustSetShippingOriginLocator(commerceShippingOriginLocatorKey);
+			throw new
+				CommerceShippingEngineException.MustSetShippingOriginLocator(
+					commerceShippingOriginLocatorKey);
 		}
 
 		_fedExCommerceShippingEngineGroupServiceConfiguration =
@@ -278,10 +279,10 @@ public class FedExCommerceShippingOptionHelper {
 
 		if (ArrayUtil.isEmpty(rateReplyDetails) ||
 			(!notificationSeverityType.equals(NotificationSeverityType.NOTE) &&
-			 !notificationSeverityType.equals(
-				 NotificationSeverityType.SUCCESS) &&
-			 !notificationSeverityType.equals(
-				 NotificationSeverityType.WARNING))) {
+				!notificationSeverityType.equals(
+					NotificationSeverityType.SUCCESS) &&
+				!notificationSeverityType.equals(
+					NotificationSeverityType.WARNING))) {
 
 			throw new CommerceShippingEngineException.ServerError(
 				_getErrorKVPs(rateReply.getNotifications()));
@@ -314,8 +315,8 @@ public class FedExCommerceShippingOptionHelper {
 				if ((useDiscountedRates &&
 					 (returnedRateType.equals(
 						 ReturnedRateType.PAYOR_ACCOUNT_PACKAGE) ||
-					  returnedRateType.equals(
-						  ReturnedRateType.PAYOR_ACCOUNT_SHIPMENT))) ||
+					returnedRateType.equals(
+						ReturnedRateType.PAYOR_ACCOUNT_SHIPMENT))) ||
 					returnedRateType.equals(
 						ReturnedRateType.PAYOR_LIST_PACKAGE) ||
 					returnedRateType.equals(

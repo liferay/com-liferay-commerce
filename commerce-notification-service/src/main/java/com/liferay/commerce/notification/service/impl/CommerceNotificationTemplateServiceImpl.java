@@ -160,8 +160,8 @@ public class CommerceNotificationTemplateServiceImpl
 				serviceContext);
 	}
 
-	private static volatile ModelResourcePermission
-		<CommerceNotificationTemplate>
+	private static volatile
+		ModelResourcePermission<CommerceNotificationTemplate>
 			_commerceNotificationTemplateResourcePermission =
 				ModelResourcePermissionFactory.getInstance(
 					CommerceNotificationTemplateServiceImpl.class,

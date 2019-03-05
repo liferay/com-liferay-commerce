@@ -34,10 +34,8 @@ import org.osgi.service.component.annotations.Component;
 	property = "form.navigator.entry.order:Integer=10",
 	service = FormNavigatorEntry.class
 )
-public class
-	CPDefinitionSpecificationOptionValueDetailsCustomFieldsFormNavigatorEntry
-		extends BaseJSPFormNavigatorEntry
-			<CPDefinitionSpecificationOptionValue> {
+public class CPDefinitionSpecificationOptionValueDetailsCustomFieldsFormNavigatorEntry
+	extends BaseJSPFormNavigatorEntry<CPDefinitionSpecificationOptionValue> {
 
 	@Override
 	public String getCategoryKey() {

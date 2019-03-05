@@ -108,8 +108,8 @@ public class CPContentCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Override
 	public String getKey() {
-		return CommerceHealthStatusConstants.
-			CP_CONTENT_COMMERCE_HEALTH_STATUS_KEY;
+		return
+			CommerceHealthStatusConstants.CP_CONTENT_COMMERCE_HEALTH_STATUS_KEY;
 	}
 
 	@Override

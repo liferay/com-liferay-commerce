@@ -76,8 +76,8 @@ public class TempAssetCategoryAttachmentsUploadFileEntryHandler
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
 
-		try (InputStream inputStream = uploadPortletRequest.getFileAsStream(
-				_PARAMETER_NAME)) {
+		try (InputStream inputStream =
+				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
 			return addFileEntry(
 				assetCategory.getCategoryId(), fileName, contentType,

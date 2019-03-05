@@ -25,9 +25,8 @@ import com.liferay.portal.kernel.search.Indexer;
  */
 public class CommerceSearcher extends BaseSearcher {
 
-	public static final String[] CLASS_NAMES = {
-		CommerceAddress.class.getName(), CommerceCountry.class.getName()
-	};
+	public static final String[] CLASS_NAMES =
+		{CommerceAddress.class.getName(), CommerceCountry.class.getName()};
 
 	public static Indexer<?> getInstance() {
 		return new CommerceSearcher();

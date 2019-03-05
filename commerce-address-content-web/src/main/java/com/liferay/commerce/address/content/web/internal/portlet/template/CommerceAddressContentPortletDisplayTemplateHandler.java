@@ -61,11 +61,8 @@ public class CommerceAddressContentPortletDisplayTemplateHandler
 		String portletTitle = _portal.getPortletTitle(
 			CommercePortletKeys.COMMERCE_ADDRESS_CONTENT, resourceBundle);
 
-		return portletTitle.concat(
-			StringPool.SPACE
-		).concat(
-			LanguageUtil.get(locale, "template")
-		);
+		return portletTitle.concat(StringPool.SPACE).concat(
+			LanguageUtil.get(locale, "template"));
 	}
 
 	@Override

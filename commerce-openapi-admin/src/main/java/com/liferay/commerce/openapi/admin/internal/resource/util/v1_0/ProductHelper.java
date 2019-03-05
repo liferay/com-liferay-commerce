@@ -125,7 +125,8 @@ public class ProductHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				productDTOs -> new CollectionDTO<>(productDTOs, totalItems))
+				productDTOs ->
+					new CollectionDTO<>(productDTOs, totalItems))
 		);
 	}
 

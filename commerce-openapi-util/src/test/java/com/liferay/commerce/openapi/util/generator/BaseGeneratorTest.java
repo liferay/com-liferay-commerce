@@ -29,8 +29,7 @@ public class BaseGeneratorTest {
 			if (indexOf >= 0) {
 				count++;
 			}
-		}
-		while (indexOf != -1);
+		} while (indexOf != -1);
 
 		if (count == 1) {
 			return true;

@@ -181,8 +181,9 @@ public class CPAttachmentFileEntryServiceImpl
 		checkCPAttachmentFileEntryPermissions(
 			classNameId, classPK, ActionKeys.VIEW);
 
-		return cpAttachmentFileEntryLocalService.
-			getCPAttachmentFileEntriesCount(classNameId, classPK, type, status);
+		return
+			cpAttachmentFileEntryLocalService.getCPAttachmentFileEntriesCount(
+				classNameId, classPK, type, status);
 	}
 
 	@Override

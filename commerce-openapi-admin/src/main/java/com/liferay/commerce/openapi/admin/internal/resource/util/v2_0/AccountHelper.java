@@ -132,7 +132,8 @@ public class AccountHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				accountDTOs -> new CollectionDTO<>(accountDTOs, totalItems))
+				accountDTOs ->
+					new CollectionDTO<>(accountDTOs, totalItems))
 		);
 	}
 

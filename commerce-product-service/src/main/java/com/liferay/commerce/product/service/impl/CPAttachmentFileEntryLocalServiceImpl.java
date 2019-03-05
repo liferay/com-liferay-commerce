@@ -108,8 +108,8 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntryPersistence.create(cpAttachmentFileEntryId);
 
-		if ((classNameId == classNameLocalService.getClassNameId(
-				CPDefinition.class)) &&
+		if ((classNameId ==
+				classNameLocalService.getClassNameId(CPDefinition.class)) &&
 			cpDefinitionLocalService.isVersionable(classPK)) {
 
 			CPDefinition newCPDefinition =

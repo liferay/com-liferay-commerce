@@ -451,8 +451,9 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 					dlAppLocalService.getFileEntry(sampleFileEntryId);
 				}
 				catch (NoSuchFileEntryException nsfee) {
-					throw new CPDefinitionVirtualSettingSampleFileEntryIdException(
-						nsfee);
+					throw new
+						CPDefinitionVirtualSettingSampleFileEntryIdException(
+							nsfee);
 				}
 			}
 			else if ((sampleFileEntryId <= 0) && Validator.isNull(sampleUrl)) {
@@ -490,7 +491,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				}
 
 				if (empty) {
-					throw new CPDefinitionVirtualSettingTermsOfUseContentException();
+					throw new
+						CPDefinitionVirtualSettingTermsOfUseContentException();
 				}
 			}
 		}

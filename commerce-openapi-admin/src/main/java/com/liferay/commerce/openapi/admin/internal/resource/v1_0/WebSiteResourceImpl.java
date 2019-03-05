@@ -91,7 +91,8 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				webSiteDTOs -> new CollectionDTO<>(webSiteDTOs, totalItems))
+				webSiteDTOs ->
+					new CollectionDTO<>(webSiteDTOs, totalItems))
 		);
 	}
 

@@ -90,8 +90,8 @@ public class FedExCommerceShippingEngine implements CommerceShippingEngine {
 						_cpMeasurementUnitLocalService, _configurationProvider,
 						_getResourceBundle(locale));
 
-			return fedExCommerceShippingOptionHelper.
-				getCommerceShippingOptions();
+			return
+				fedExCommerceShippingOptionHelper.getCommerceShippingOptions();
 		}
 		catch (CommerceShippingEngineException csee) {
 			throw csee;

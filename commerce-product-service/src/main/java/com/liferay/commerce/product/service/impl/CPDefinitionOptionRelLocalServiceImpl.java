@@ -577,8 +577,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			"Unable to fix the search index after 10 attempts");
 	}
 
-	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
-	};
+	private static final String[] _SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 }

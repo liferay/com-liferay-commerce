@@ -241,9 +241,9 @@ public class CommercePriceEntryServiceImpl
 		_portletResourcePermission.check(
 			getPermissionChecker(), cpInstance.getGroupId(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
-
-		return commercePriceEntryLocalService.
-			getInstanceCommercePriceEntriesCount(cpInstanceId);
+		return
+			commercePriceEntryLocalService.getInstanceCommercePriceEntriesCount(
+				cpInstanceId);
 	}
 
 	@Override

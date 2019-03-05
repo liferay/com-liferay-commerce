@@ -61,9 +61,8 @@ public class EditCPInstanceCommerceTierPriceEntryMVCActionCommand
 		long[] deleteCommerceTierPriceEntryIds = null;
 
 		if (commerceTierPriceEntryId > 0) {
-			deleteCommerceTierPriceEntryIds = new long[] {
-				commerceTierPriceEntryId
-			};
+			deleteCommerceTierPriceEntryIds =
+				new long[] {commerceTierPriceEntryId};
 		}
 		else {
 			deleteCommerceTierPriceEntryIds = StringUtil.split(

@@ -75,8 +75,8 @@ public class CPDefinitionInventoryDisplayContext
 	}
 
 	public List<CommerceLowStockActivity> getCommerceLowStockActivities() {
-		return _commerceLowStockActivityRegistry.
-			getCommerceLowStockActivities();
+		return
+			_commerceLowStockActivityRegistry.getCommerceLowStockActivities();
 	}
 
 	public CPDAvailabilityEstimate getCPDAvailabilityEstimate()

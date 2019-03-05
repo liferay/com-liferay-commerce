@@ -27,7 +27,6 @@ import javax.ws.rs.core.Response;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Status {
-
 	Response.Status value() default Response.Status.OK;
 
 }

@@ -91,9 +91,8 @@ public class EditCPDefinitionOptionRelMVCActionCommand
 		long[] deleteCPDefinitionOptionRelIds = null;
 
 		if (cpDefinitionOptionRelId > 0) {
-			deleteCPDefinitionOptionRelIds = new long[] {
-				cpDefinitionOptionRelId
-			};
+			deleteCPDefinitionOptionRelIds =
+				new long[] {cpDefinitionOptionRelId};
 		}
 		else {
 			deleteCPDefinitionOptionRelIds = StringUtil.split(
