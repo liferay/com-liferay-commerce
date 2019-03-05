@@ -130,6 +130,7 @@
 	<div class="commerce-modal-wrapper">
 		{call ClayModal.render}
 			{param body: $body /}
+			{param elementClasses: 'modal-hidden' /}
 			{param visible: $_modalVisible /}
 			{param events: ['hide': $_handleCloseModal] /}
 		{/call}
