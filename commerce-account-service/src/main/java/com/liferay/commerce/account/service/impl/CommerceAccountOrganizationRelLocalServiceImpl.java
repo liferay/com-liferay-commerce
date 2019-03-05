@@ -110,8 +110,9 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 	public List<CommerceAccountOrganizationRel>
 		getCommerceAccountOrganizationRels(long commerceAccountId) {
 
-		return commerceAccountOrganizationRelPersistence.
-			findByCommerceAccountId(commerceAccountId);
+		return
+			commerceAccountOrganizationRelPersistence.findByCommerceAccountId(
+				commerceAccountId);
 	}
 
 	@Override
@@ -119,14 +120,16 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 		getCommerceAccountOrganizationRels(
 			long commerceAccountId, int start, int end) {
 
-		return commerceAccountOrganizationRelPersistence.
-			findByCommerceAccountId(commerceAccountId, start, end);
+		return
+			commerceAccountOrganizationRelPersistence.findByCommerceAccountId(
+				commerceAccountId, start, end);
 	}
 
 	@Override
 	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId) {
-		return commerceAccountOrganizationRelPersistence.
-			countByCommerceAccountId(commerceAccountId);
+		return
+			commerceAccountOrganizationRelPersistence.countByCommerceAccountId(
+				commerceAccountId);
 	}
 
 }

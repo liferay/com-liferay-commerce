@@ -126,7 +126,8 @@ public class ProductHelper extends BaseHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				productDTOs -> new CollectionDTO<>(productDTOs, totalItems))
+				productDTOs ->
+					new CollectionDTO<>(productDTOs, totalItems))
 		);
 	}
 

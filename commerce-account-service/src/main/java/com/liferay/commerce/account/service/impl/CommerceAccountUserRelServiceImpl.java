@@ -110,8 +110,9 @@ public class CommerceAccountUserRelServiceImpl
 			getPermissionChecker(), commerceAccountId,
 			CommerceAccountActionKeys.VIEW_MEMBERS);
 
-		return commerceAccountUserRelLocalService.
-			getCommerceAccountUserRelsCount(commerceAccountId);
+		return
+			commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(
+				commerceAccountId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceAccount>

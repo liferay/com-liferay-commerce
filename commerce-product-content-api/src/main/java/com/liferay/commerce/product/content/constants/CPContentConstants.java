@@ -19,8 +19,7 @@ package com.liferay.commerce.product.content.constants;
  */
 public class CPContentConstants {
 
-	public static final String[] PAGINATION_TYPES = {
-		"approximate", "article", "more", "regular"
-	};
+	public static final String[] PAGINATION_TYPES =
+		{"approximate", "article", "more", "regular"};
 
 }

@@ -119,8 +119,9 @@ public class CommerceTaxFixedRateAddressRelLocalServiceImpl
 		getCommerceTaxMethodFixedRateAddressRels(
 			long commerceTaxMethodId, int start, int end) {
 
-		return commerceTaxFixedRateAddressRelPersistence.
-			findByCommerceTaxMethodId(commerceTaxMethodId, start, end);
+		return
+			commerceTaxFixedRateAddressRelPersistence.findByCommerceTaxMethodId(
+				commerceTaxMethodId, start, end);
 	}
 
 	@Override
@@ -130,8 +131,8 @@ public class CommerceTaxFixedRateAddressRelLocalServiceImpl
 			OrderByComparator<CommerceTaxFixedRateAddressRel>
 				orderByComparator) {
 
-		return commerceTaxFixedRateAddressRelPersistence.
-			findByCommerceTaxMethodId(
+		return
+			commerceTaxFixedRateAddressRelPersistence.findByCommerceTaxMethodId(
 				commerceTaxMethodId, start, end, orderByComparator);
 	}
 

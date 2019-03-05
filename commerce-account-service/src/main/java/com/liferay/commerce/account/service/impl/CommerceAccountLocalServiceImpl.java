@@ -679,9 +679,8 @@ public class CommerceAccountLocalServiceImpl
 		return queryDefinition;
 	}
 
-	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
-	};
+	private static final String[] _SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID};
 
 	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
 		ServiceProxyFactory.newServiceTrackedInstance(

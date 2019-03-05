@@ -77,8 +77,8 @@ public class CurrenciesCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Override
 	public String getKey() {
-		return CommerceHealthStatusConstants.
-			CURRENCIES_COMMERCE_HEALTH_STATUS_KEY;
+		return
+			CommerceHealthStatusConstants.CURRENCIES_COMMERCE_HEALTH_STATUS_KEY;
 	}
 
 	@Override

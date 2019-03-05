@@ -228,16 +228,16 @@ public class CommerceDiscountTest {
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstance5.getCPInstanceId(), 1, commerceContext);
 
-		BigDecimal expectedPrice1 = cpInstance1.getPrice().subtract(
-			commerceDiscount2.getLevel1());
-		BigDecimal expectedPrice2 = cpInstance2.getPrice().subtract(
-			commerceDiscount2.getLevel1());
-		BigDecimal expectedPrice3 = cpInstance3.getPrice().subtract(
-			commerceDiscount3.getLevel1());
-		BigDecimal expectedPrice4 = cpInstance4.getPrice().subtract(
-			commerceDiscount3.getLevel1());
-		BigDecimal expectedPrice5 = cpInstance5.getPrice().subtract(
-			commerceDiscount3.getLevel1());
+		BigDecimal expectedPrice1 =
+			cpInstance1.getPrice().subtract(commerceDiscount2.getLevel1());
+		BigDecimal expectedPrice2 =
+			cpInstance2.getPrice().subtract(commerceDiscount2.getLevel1());
+		BigDecimal expectedPrice3 =
+			cpInstance3.getPrice().subtract(commerceDiscount3.getLevel1());
+		BigDecimal expectedPrice4 =
+			cpInstance4.getPrice().subtract(commerceDiscount3.getLevel1());
+		BigDecimal expectedPrice5 =
+			cpInstance5.getPrice().subtract(commerceDiscount3.getLevel1());
 
 		BigDecimal actualPrice1 = BigDecimal.ZERO;
 		BigDecimal actualPrice2 = BigDecimal.ZERO;

@@ -305,7 +305,9 @@ public class CPDefinitionsImporter {
 				_cpInstanceLocalService.buildCPInstances(
 					cpDefinition.getCPDefinitionId(), serviceContext);
 			}
-			catch (NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
+			catch (NoSuchSkuContributorCPDefinitionOptionRelException
+				nssccpdore) {
+
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"No options defined as sku contributor for " +
@@ -663,8 +665,8 @@ public class CPDefinitionsImporter {
 			_commerceAvailabilityEstimateLocalService.
 				addCommerceAvailabilityEstimate(titleMap, 0, serviceContext);
 
-		return _cpdAvailabilityEstimateLocalService.
-			updateCPDAvailabilityEstimate(
+		return
+			_cpdAvailabilityEstimateLocalService.updateCPDAvailabilityEstimate(
 				0, cpDefinition.getCPDefinitionId(),
 				commerceAvailabilityEstimate.
 					getCommerceAvailabilityEstimateId(),

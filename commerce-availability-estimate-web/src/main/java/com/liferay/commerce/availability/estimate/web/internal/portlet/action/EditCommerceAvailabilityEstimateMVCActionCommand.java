@@ -63,9 +63,8 @@ public class EditCommerceAvailabilityEstimateMVCActionCommand
 			actionRequest, "commerceAvailabilityEstimateId");
 
 		if (commerceAvailabilityEstimateId > 0) {
-			deleteCommerceAvailabilityEstimateIds = new long[] {
-				commerceAvailabilityEstimateId
-			};
+			deleteCommerceAvailabilityEstimateIds =
+				new long[] {commerceAvailabilityEstimateId};
 		}
 		else {
 			deleteCommerceAvailabilityEstimateIds = StringUtil.split(

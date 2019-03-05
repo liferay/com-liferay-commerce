@@ -93,8 +93,8 @@ public class CPCompareContentMiniDisplayContext {
 	public List<CPContentListEntryRenderer> getCPContentListEntryRenderers(
 		String cpType) {
 
-		return _cpContentListEntryRendererRegistry.
-			getCPContentListEntryRenderers(
+		return
+			_cpContentListEntryRendererRegistry.getCPContentListEntryRenderers(
 				CPPortletKeys.CP_COMPARE_CONTENT_MINI_WEB, cpType);
 	}
 
@@ -192,13 +192,13 @@ public class CPCompareContentMiniDisplayContext {
 	}
 
 	public int getProductsLimit() {
-		return _cpCompareContentMiniPortletInstanceConfiguration.
-			productsLimit();
+		return
+			_cpCompareContentMiniPortletInstanceConfiguration.productsLimit();
 	}
 
 	public String getSelectionStyle() {
-		return _cpCompareContentMiniPortletInstanceConfiguration.
-			selectionStyle();
+		return
+			_cpCompareContentMiniPortletInstanceConfiguration.selectionStyle();
 	}
 
 	public boolean isSelectionStyleADT() {

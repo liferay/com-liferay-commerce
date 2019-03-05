@@ -57,8 +57,9 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "product-relations") +
-			StringPool.SPACE + _cpDefinitionLinkTypeConfiguration.type();
+		return
+			LanguageUtil.get(locale, "product-relations") + StringPool.SPACE +
+				_cpDefinitionLinkTypeConfiguration.type();
 	}
 
 	@Override

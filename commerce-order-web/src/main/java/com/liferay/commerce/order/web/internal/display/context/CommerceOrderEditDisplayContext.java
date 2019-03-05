@@ -174,8 +174,7 @@ public class CommerceOrderEditDisplayContext {
 	}
 
 	public SearchContainer<CommerceOrderItem>
-			getCommerceOrderItemsSearchContainer()
-		throws PortalException {
+		getCommerceOrderItemsSearchContainer() throws PortalException {
 
 		if (_itemSearchContainer != null) {
 			return _itemSearchContainer;

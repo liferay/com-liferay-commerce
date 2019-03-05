@@ -266,9 +266,8 @@ public class CommerceOrderPriceCalculationImpl
 				});
 		}
 
-		BigDecimal[] discountPercentageValues = {
-			level1, level2, level3, level4
-		};
+		BigDecimal[] discountPercentageValues =
+			{level1, level2, level3, level4};
 
 		BigDecimal discountPercentage = discountAmount.divide(
 			amount.add(discountAmount),

@@ -73,9 +73,8 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 			actionRequest, "cpAttachmentFileEntryId");
 
 		if (cpAttachmentFileEntryId > 0) {
-			deleteCPAttachmentFileEntryIds = new long[] {
-				cpAttachmentFileEntryId
-			};
+			deleteCPAttachmentFileEntryIds =
+				new long[] {cpAttachmentFileEntryId};
 		}
 		else {
 			deleteCPAttachmentFileEntryIds = StringUtil.split(

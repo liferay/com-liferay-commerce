@@ -104,9 +104,8 @@ public class EditCPDefinitionSpecificationOptionValueMVCActionCommand
 			actionRequest, "cpDefinitionSpecificationOptionValueId");
 
 		if (cpDefinitionSpecificationOptionValueId > 0) {
-			deleteCPDefinitionSpecificationOptionValueIds = new long[] {
-				cpDefinitionSpecificationOptionValueId
-			};
+			deleteCPDefinitionSpecificationOptionValueIds =
+				new long[] {cpDefinitionSpecificationOptionValueId};
 		}
 		else {
 			deleteCPDefinitionSpecificationOptionValueIds = StringUtil.split(

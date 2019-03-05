@@ -384,8 +384,7 @@ public class CPOptionValueLocalServiceImpl
 
 	private static final String _FIELD_KEY = "key";
 
-	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
-	};
+	private static final String[] _SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 }

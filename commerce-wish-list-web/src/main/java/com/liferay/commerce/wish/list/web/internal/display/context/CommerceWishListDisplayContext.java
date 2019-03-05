@@ -177,8 +177,7 @@ public class CommerceWishListDisplayContext {
 	}
 
 	public SearchContainer<CommerceWishListItem>
-			getCommerceWishListItemsSearchContainer()
-		throws PortalException {
+		getCommerceWishListItemsSearchContainer() throws PortalException {
 
 		if (_commerceWishListItemsSearchContainer != null) {
 			return _commerceWishListItemsSearchContainer;

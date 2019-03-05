@@ -608,8 +608,8 @@ public class CPDefinitionLocalServiceImpl
 					cpDefinitionOptionValueRels) {
 
 				CPDefinitionOptionValueRel newCPDefinitionOptionValueRel =
-					(CPDefinitionOptionValueRel)
-						cpDefinitionOptionValueRel.clone();
+					(CPDefinitionOptionValueRel)cpDefinitionOptionValueRel.
+						clone();
 
 				newCPDefinitionOptionValueRel.setUuid(
 					PortalUUIDUtil.generate());
@@ -2490,9 +2490,8 @@ public class CPDefinitionLocalServiceImpl
 		return newCPDefinitionLocalizations;
 	}
 
-	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
-	};
+	private static final String[] _SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionLocalServiceImpl.class);

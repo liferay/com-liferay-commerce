@@ -26,7 +26,7 @@ import java.util.Comparator;
  * @author Alessio Antonio Rendina
  */
 public class CommerceDiscountTargetOrderComparator
-	implements Comparator<ServiceWrapper<CommerceDiscountTarget>>,
+	implements Comparator <ServiceWrapper<CommerceDiscountTarget>>,
 			   Serializable {
 
 	public CommerceDiscountTargetOrderComparator() {

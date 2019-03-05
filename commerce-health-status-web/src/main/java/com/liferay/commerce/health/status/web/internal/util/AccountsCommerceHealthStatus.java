@@ -87,8 +87,8 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Override
 	public String getKey() {
-		return CommerceHealthStatusConstants.
-			ACCOUNTS_COMMERCE_HEALTH_STATUS_KEY;
+		return
+			CommerceHealthStatusConstants.ACCOUNTS_COMMERCE_HEALTH_STATUS_KEY;
 	}
 
 	@Override

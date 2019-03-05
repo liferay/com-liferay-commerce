@@ -84,8 +84,8 @@ public class CommerceDiscountUserSegmentRelLocalServiceImpl
 			OrderByComparator<CommerceDiscountUserSegmentRel>
 				orderByComparator) {
 
-		return commerceDiscountUserSegmentRelPersistence.
-			findByCommerceDiscountId(
+		return
+			commerceDiscountUserSegmentRelPersistence.findByCommerceDiscountId(
 				commerceDiscountId, start, end, orderByComparator);
 	}
 

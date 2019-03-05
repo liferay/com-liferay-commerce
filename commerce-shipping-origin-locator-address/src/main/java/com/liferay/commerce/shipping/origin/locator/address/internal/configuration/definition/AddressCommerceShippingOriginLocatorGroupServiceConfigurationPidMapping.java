@@ -30,8 +30,8 @@ public class
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
-		return AddressCommerceShippingOriginLocatorGroupServiceConfiguration.
-			class;
+		return
+			AddressCommerceShippingOriginLocatorGroupServiceConfiguration.class;
 	}
 
 	@Override

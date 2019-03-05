@@ -23,8 +23,9 @@ import org.osgi.service.component.annotations.Component;
  * @author Andrea Di Giorgi
  */
 @Component(service = ConfigurationBeanDeclaration.class)
-public class FedExCommerceShippingEngineGroupServiceConfigurationBeanDeclaration
-	implements ConfigurationBeanDeclaration {
+public class
+	FedExCommerceShippingEngineGroupServiceConfigurationBeanDeclaration
+		implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {

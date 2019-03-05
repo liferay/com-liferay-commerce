@@ -444,9 +444,8 @@ public class CommerceCountryLocalServiceImpl
 
 	private static final String _COMMERCE_SAP_ENTRY_NAME = "COMMERCE_DEFAULT";
 
-	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
-	};
+	private static final String[] _SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 	@ServiceReference(type = CommerceRegionsStarterRegistry.class)
 	private CommerceRegionsStarterRegistry _commerceRegionsStarterRegistry;

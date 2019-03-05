@@ -137,9 +137,8 @@ public class EditCommerceUserSegmentEntryMVCActionCommand
 			actionRequest, "commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId > 0) {
-			deleteCommerceUserSegmentEntryIds = new long[] {
-				commerceUserSegmentEntryId
-			};
+			deleteCommerceUserSegmentEntryIds =
+				new long[] {commerceUserSegmentEntryId};
 		}
 		else {
 			deleteCommerceUserSegmentEntryIds = StringUtil.split(

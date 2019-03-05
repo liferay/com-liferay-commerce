@@ -415,10 +415,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			}
 
 			document.addText(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_NAMES",
+				"ATTRIBUTE_" + cpOption.getKey() +
+					"_VALUES_NAMES",
 				ArrayUtil.toStringArray(optionValueNames));
 			document.addNumber(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_IDS",
+				"ATTRIBUTE_" + cpOption.getKey() +
+					"_VALUES_IDS",
 				ArrayUtil.toLongArray(optionValueIds));
 
 			document.addText(
@@ -515,7 +517,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 					cpDefinitionDefaultLanguageId));
 
 			document.addNumber(
-				"SPECIFICATION_" + cpSpecificationOption.getKey() + "_VALUE_ID",
+				"SPECIFICATION_" + cpSpecificationOption.getKey() +
+					"_VALUE_ID",
 				cpDefinitionSpecificationOptionValue.
 					getCPDefinitionSpecificationOptionValueId());
 

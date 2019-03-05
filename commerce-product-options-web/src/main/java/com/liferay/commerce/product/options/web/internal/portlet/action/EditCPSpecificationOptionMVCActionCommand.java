@@ -62,9 +62,8 @@ public class EditCPSpecificationOptionMVCActionCommand
 			actionRequest, "cpSpecificationOptionId");
 
 		if (cpSpecificationOptionId > 0) {
-			deleteCPSpecificationOptionIds = new long[] {
-				cpSpecificationOptionId
-			};
+			deleteCPSpecificationOptionIds =
+				new long[] {cpSpecificationOptionId};
 		}
 		else {
 			deleteCPSpecificationOptionIds = StringUtil.split(

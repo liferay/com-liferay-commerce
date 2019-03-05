@@ -60,11 +60,8 @@ public class CommerceCartContentTotalPortletDisplayTemplateHandler
 		String portletTitle = _portal.getPortletTitle(
 			CommercePortletKeys.COMMERCE_CART_CONTENT_TOTAL, resourceBundle);
 
-		return portletTitle.concat(
-			StringPool.SPACE
-		).concat(
-			LanguageUtil.get(locale, "template")
-		);
+		return portletTitle.concat(StringPool.SPACE).concat(
+			LanguageUtil.get(locale, "template"));
 	}
 
 	@Override

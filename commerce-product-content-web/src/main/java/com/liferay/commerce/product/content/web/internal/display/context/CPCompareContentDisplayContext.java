@@ -92,8 +92,8 @@ public class CPCompareContentDisplayContext {
 	public List<CPContentListEntryRenderer> getCPContentListEntryRenderers(
 		String cpType) {
 
-		return _cpContentListEntryRendererRegistry.
-			getCPContentListEntryRenderers(
+		return
+			_cpContentListEntryRendererRegistry.getCPContentListEntryRenderers(
 				CPPortletKeys.CP_COMPARE_CONTENT_WEB, cpType);
 	}
 
@@ -186,8 +186,8 @@ public class CPCompareContentDisplayContext {
 	}
 
 	public long getDisplayStyleGroupId() {
-		return _cpCompareContentPortletInstanceConfiguration.
-			displayStyleGroupId();
+		return
+			_cpCompareContentPortletInstanceConfiguration.displayStyleGroupId();
 	}
 
 	public int getProductsLimit() {

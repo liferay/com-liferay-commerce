@@ -59,9 +59,8 @@ public class EditCommerceTaxFixedRateAddressRelMVCActionCommand
 			actionRequest, "commerceTaxFixedRateAddressRelId");
 
 		if (commerceTaxFixedRateAddressRelId > 0) {
-			deleteCommerceTaxFixedRateAddressRelIds = new long[] {
-				commerceTaxFixedRateAddressRelId
-			};
+			deleteCommerceTaxFixedRateAddressRelIds =
+				new long[] {commerceTaxFixedRateAddressRelId};
 		}
 		else {
 			deleteCommerceTaxFixedRateAddressRelIds = StringUtil.split(

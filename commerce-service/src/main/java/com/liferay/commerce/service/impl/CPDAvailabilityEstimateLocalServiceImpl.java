@@ -52,8 +52,9 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 			cpdAvailabilityEstimatePersistence.findByPrimaryKey(
 				cpdAvailabilityEstimateId);
 
-		return cpdAvailabilityEstimateLocalService.
-			deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
+		return
+			cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimate(
+				cpdAvailabilityEstimate);
 	}
 
 	/**

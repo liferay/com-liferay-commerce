@@ -209,9 +209,8 @@ public class EditCommerceCurrencyMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "commerceCurrencyId");
 
 		if (commerceCurrencyId > 0) {
-			updateCommerceCurrencyExchangeRateIds = new long[] {
-				commerceCurrencyId
-			};
+			updateCommerceCurrencyExchangeRateIds =
+				new long[] {commerceCurrencyId};
 		}
 		else {
 			updateCommerceCurrencyExchangeRateIds = StringUtil.split(

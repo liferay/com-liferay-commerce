@@ -70,8 +70,8 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 
 	@Override
 	public String getEntryKey() {
-		return CPInstanceScreenNavigationConstants.
-			ENTRY_KEY_SUBSCRIPTION_OVERRIDE;
+		return
+			CPInstanceScreenNavigationConstants.ENTRY_KEY_SUBSCRIPTION_OVERRIDE;
 	}
 
 	@Override

@@ -205,8 +205,9 @@ public class CommerceShippingMethodServiceImpl
 			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
 
-		return commerceShippingMethodLocalService.
-			getCommerceShippingMethodsCount(groupId, active);
+		return
+			commerceShippingMethodLocalService.getCommerceShippingMethodsCount(
+				groupId, active);
 	}
 
 	@Override

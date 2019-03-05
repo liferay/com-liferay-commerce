@@ -80,8 +80,7 @@ public class CommerceUserSegmentDisplayContext {
 	}
 
 	public SearchContainer<CommerceUserSegmentCriterion>
-			getCommerceUserSegmentCriteriaSearchContainer()
-		throws PortalException {
+		getCommerceUserSegmentCriteriaSearchContainer() throws PortalException {
 
 		if (_commerceUserSegmentCriteriaSearchContainer != null) {
 			return _commerceUserSegmentCriteriaSearchContainer;

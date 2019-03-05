@@ -79,8 +79,8 @@ public class CommerceVirtualOrderItemServiceImpl
 			getPermissionChecker(), commerceOrderItem.getCommerceOrderId(),
 			ActionKeys.UPDATE);
 
-		return commerceVirtualOrderItemLocalService.
-			updateCommerceVirtualOrderItem(
+		return
+			commerceVirtualOrderItemLocalService.updateCommerceVirtualOrderItem(
 				commerceVirtualOrderItemId, fileEntryId, url, activationStatus,
 				duration, usages, maxUsages, active);
 	}

@@ -251,10 +251,12 @@ public class CPAttachmentFileEntryIndexer
 			}
 
 			document.addText(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_NAMES",
+				"ATTRIBUTE_" + cpOption.getKey() +
+					"_VALUES_NAMES",
 				ArrayUtil.toStringArray(optionValueNames));
 			document.addNumber(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_IDS",
+				"ATTRIBUTE_" + cpOption.getKey() +
+					"_VALUES_IDS",
 				ArrayUtil.toLongArray(optionValueIds));
 
 			document.addText(

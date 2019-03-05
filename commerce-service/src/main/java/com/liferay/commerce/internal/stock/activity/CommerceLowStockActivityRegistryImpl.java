@@ -49,8 +49,8 @@ public class CommerceLowStockActivityRegistryImpl
 			new ArrayList<>();
 
 		List
-			<ServiceTrackerCustomizerFactory.ServiceWrapper
-				<CommerceLowStockActivity>>
+			<ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CommerceLowStockActivity>>
 					commerceLowStockActivityServiceWrappers =
 						ListUtil.fromCollection(_serviceTrackerMap.values());
 
@@ -58,8 +58,8 @@ public class CommerceLowStockActivityRegistryImpl
 			commerceLowStockActivityServiceWrappers,
 			_commerceLowStockActivityServiceWrapperPriorityComparator);
 
-		for (ServiceTrackerCustomizerFactory.ServiceWrapper
-				<CommerceLowStockActivity>
+		for (ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CommerceLowStockActivity>
 					commerceLowStockActivityServiceWrapper :
 						commerceLowStockActivityServiceWrappers) {
 
@@ -123,14 +123,14 @@ public class CommerceLowStockActivityRegistryImpl
 		CommerceLowStockActivityRegistryImpl.class);
 
 	private static final Comparator
-		<ServiceTrackerCustomizerFactory.ServiceWrapper
-			<CommerceLowStockActivity>>
+		<ServiceTrackerCustomizerFactory.
+			ServiceWrapper<CommerceLowStockActivity>>
 				_commerceLowStockActivityServiceWrapperPriorityComparator =
 					new CommerceLowStockActivityServiceWrapperPriorityComparator();
 
 	private ServiceTrackerMap
 		<String,
-		 ServiceTrackerCustomizerFactory.ServiceWrapper
-			 <CommerceLowStockActivity>> _serviceTrackerMap;
+		 ServiceTrackerCustomizerFactory.
+			ServiceWrapper<CommerceLowStockActivity>> _serviceTrackerMap;
 
 }
