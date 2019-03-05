@@ -156,11 +156,11 @@ public class CommerceAccountResource {
 		return getResponse(accountList);
 	}
 
-	@Path("/set-current-account/{groupId}")
+	@Path("/set-current-account")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceOrders(
-		@PathParam("groupId") long groupId,
+		@QueryParam("groupId") long groupId,
 		@FormParam("accountId") long accountId,
 		@Context HttpServletRequest httpServletRequest) {
 
