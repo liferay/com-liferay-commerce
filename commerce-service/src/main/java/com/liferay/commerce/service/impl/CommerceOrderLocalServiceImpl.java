@@ -886,6 +886,19 @@ public class CommerceOrderLocalServiceImpl
 		return commerceOrderPersistence.update(commerceOrder);
 	}
 
+	@Override
+	public CommerceOrder updateCommercePaymentMethodKey(
+			long commerceOrderId, String commercePaymentMethodKey)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		commerceOrder.setCommercePaymentMethodKey(commercePaymentMethodKey);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder updateOrderStatus(
