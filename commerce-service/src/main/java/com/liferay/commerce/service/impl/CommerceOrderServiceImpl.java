@@ -474,6 +474,19 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceOrder updateCommercePaymentMethodKey(
+			long commerceOrderId, String commercePaymentMethodKey)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId,
+			CommerceOrderActionKeys.CHECKOUT_COMMERCE_ORDER);
+
+		return commerceOrderLocalService.updateCommercePaymentMethodKey(
+			commerceOrderId, commercePaymentMethodKey);
+	}
+
+	@Override
 	public CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws PortalException {
