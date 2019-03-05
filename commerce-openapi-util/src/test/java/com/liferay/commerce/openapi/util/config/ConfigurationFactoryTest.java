@@ -27,12 +27,13 @@ public class ConfigurationFactoryTest {
 
 	@Test
 	public void testGetConfigurations() throws Exception {
+		ConfigurationFactory.initialize(getClass());
+
 		List<Properties> configurations =
-			ConfigurationFactory.getConfigurations(
-				ConfigurationFactory.getPath(getClass()));
+			ConfigurationFactory.getConfigurations();
 
 		Assert.assertEquals(
-			"detect all configurations", 2, configurations.size());
+			"detect all configurations", 4, configurations.size());
 
 		String authorizationKey = "KEY-";
 		String url = "./rest-test-openapi-%s.json";
