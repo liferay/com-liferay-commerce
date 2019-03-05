@@ -35,6 +35,11 @@ public class TaxCategoryDTO {
 	}
 
 	@Nullable
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -47,6 +52,10 @@ public class TaxCategoryDTO {
 		_description = description;
 	}
 
+	public void setGroupId(Long groupId) {
+		_groupId = groupId;
+	}
+
 	public void setId(Long id) {
 		_id = id;
 	}
@@ -57,6 +66,9 @@ public class TaxCategoryDTO {
 
 	@Nullable
 	private Map<String, String> _description;
+
+	@Nullable
+	private Long _groupId;
 
 	@Nullable
 	private Long _id;
