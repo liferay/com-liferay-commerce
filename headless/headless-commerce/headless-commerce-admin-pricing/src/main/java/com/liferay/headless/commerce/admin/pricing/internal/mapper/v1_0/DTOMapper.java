@@ -95,6 +95,7 @@ public class DTOMapper {
 		discountDTO.setCouponCode(commerceDiscount.getCouponCode());
 		discountDTO.setDisplayDate(commerceDiscount.getDisplayDate());
 		discountDTO.setExpirationDate(commerceDiscount.getExpirationDate());
+		discountDTO.setGroupId(commerceDiscount.getGroupId());
 		discountDTO.setId(commerceDiscount.getCommerceDiscountId());
 		discountDTO.setLimitationTimes(commerceDiscount.getLimitationTimes());
 		discountDTO.setLimitationType(commerceDiscount.getLimitationType());
@@ -186,6 +187,7 @@ public class DTOMapper {
 				commercePriceList.getExpirationDate());
 			priceListDTO.setExternalReferenceCode(
 				commercePriceList.getExternalReferenceCode());
+			priceListDTO.setGroupId(commercePriceList.getGroupId());
 			priceListDTO.setId(commercePriceList.getCommercePriceListId());
 			priceListDTO.setName(commercePriceList.getName());
 			priceListDTO.setPriority(commercePriceList.getPriority());
