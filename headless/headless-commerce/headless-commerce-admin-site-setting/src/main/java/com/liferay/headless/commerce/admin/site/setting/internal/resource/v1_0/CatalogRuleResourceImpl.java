@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
-import com.liferay.commerce.openapi.core.annotation.Status;
 import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -77,15 +76,6 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CollectionDTO<CatalogRuleDTO> getCatalogRules(
-			Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _catalogRuleHelper.getCatalogRuleDTOs(groupId, pagination);
-	}
-
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<UserSegmentDTO> getCatalogRuleUserSegments(
 			String id, Pagination pagination)
 		throws Exception {
@@ -118,32 +108,6 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
-	}
-
-	@AsyncSupported
-	@Override
-	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	@Status(Response.Status.CREATED)
-	public CatalogRuleDTO upsertCatalogRule(
-			Long groupId, CatalogRuleDTO catalogRuleDTO)
-		throws Exception {
-
-		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
-				}
-
-			}.start();
-
-			return null;
-		}
-
-		return _catalogRuleHelper.upsertCatalogRule(
-			groupId, catalogRuleDTO, _user);
 	}
 
 	@Context
