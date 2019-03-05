@@ -18,10 +18,13 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
-import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.price.CommerceOrderPrice;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -76,10 +79,13 @@ public class CommerceCheckoutStepHelper {
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		commerceOrder = _commerceOrderLocalService.recalculatePrice(
-			commerceOrder.getCommerceOrderId(), commerceContext);
+		CommerceOrderPrice commerceOrderPrice =
+			_commerceOrderPriceCalculation.getCommerceOrderPrice(
+				commerceOrder, commerceContext);
 
-		if (BigDecimal.ZERO.compareTo(commerceOrder.getTotal()) == 0) {
+		CommerceMoney orderPriceTotal = commerceOrderPrice.getTotal();
+
+		if (BigDecimal.ZERO.compareTo(orderPriceTotal.getPrice()) == 0) {
 			return false;
 		}
 
@@ -95,11 +101,10 @@ public class CommerceCheckoutStepHelper {
 			CommercePaymentMethod commercePaymentMethod =
 				commercePaymentMethods.get(0);
 
-			commerceOrder.setCommercePaymentMethodKey(
-				commercePaymentMethod.getKey());
-
-			commerceOrder = _commerceOrderLocalService.updateCommerceOrder(
-				commerceOrder);
+			commerceOrder =
+				_commerceOrderService.updateCommercePaymentMethodKey(
+					commerceOrder.getCommerceOrderId(),
+					commercePaymentMethod.getKey());
 
 			httpServletRequest.setAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
@@ -134,7 +139,10 @@ public class CommerceCheckoutStepHelper {
 	}
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
+	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private CommercePaymentEngine _commercePaymentEngine;
