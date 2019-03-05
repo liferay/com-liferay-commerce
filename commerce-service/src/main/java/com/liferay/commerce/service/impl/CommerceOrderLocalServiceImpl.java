@@ -263,7 +263,7 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
-	public CommerceOrder applayCouponCode(
+	public CommerceOrder applyCouponCode(
 			long commerceOrderId, String couponCode,
 			CommerceContext commerceContext)
 		throws PortalException {
