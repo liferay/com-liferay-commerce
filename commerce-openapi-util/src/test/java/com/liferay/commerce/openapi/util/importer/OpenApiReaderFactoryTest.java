@@ -32,26 +32,23 @@ public class OpenApiReaderFactoryTest {
 	}
 
 	@Test
-	public void testGetOpenApiReader() throws Exception {
-		String configurationPath = ConfigurationFactory.getPath(
-			ConfigurationFactoryTest.class);
-
-		ConfigurationFactory.getConfigurations(configurationPath);
+	public void testGetOpenApiReader() {
+		ConfigurationFactory.initialize(ConfigurationFactoryTest.class);
 
 		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
 			"https://host.name.testb:8080/./rest-test-openapi-b.json#" +
 				"/components/schema/Item",
-			ConfigurationFactory.getPath(ConfigurationFactoryTest.class));
+			ConfigurationFactory.getPath());
 
 		Assert.assertEquals(
-			"Correct open API locator implementation", URLOpenApiReader.class,
+			"Correct open API reader implementation", URLOpenApiReader.class,
 			openApiReader.getClass());
 
 		openApiReader = OpenApiReaderFactory.getOpenApiReader(
 			"/Volumes/dev/openapi.yaml#/components/schema/Item");
 
 		Assert.assertEquals(
-			"Correct open API locator implementation", FileOpenApiReader.class,
+			"Correct open API reader implementation", FileOpenApiReader.class,
 			openApiReader.getClass());
 	}
 

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -32,13 +33,18 @@ import org.junit.Test;
  */
 public class FileOpenApiReaderTest {
 
+	@BeforeClass
+	public static void setUpClass() {
+		ConfigurationFactory.initialize(ConfigurationFactoryTest.class);
+	}
+
 	@Test
 	public void testGetOpenApiReaderFromConfiguration() throws Exception {
 		Properties configuration = _getTestAConfiguration();
 
 		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
 			configuration.getProperty("openapi.url"),
-			ConfigurationFactory.getPath(ConfigurationFactoryTest.class));
+			ConfigurationFactory.getPath());
 
 		Assert.assertEquals(
 			"Correct open API locator implementation", FileOpenApiReader.class,
@@ -53,13 +59,12 @@ public class FileOpenApiReaderTest {
 	}
 
 	@Test
-	public void testGetOpenApiReaderFromExternalReference() throws Exception {
+	public void testGetOpenApiReaderFromExternalReference() {
 		String externalReference =
 			"./rest-test-openapi-b.json#/components/responses/NotFound";
 
 		OpenApiReader openApiReader = OpenApiReaderFactory.getOpenApiReader(
-			externalReference,
-			ConfigurationFactory.getPath(ConfigurationFactoryTest.class));
+			externalReference, ConfigurationFactory.getPath());
 
 		Assert.assertEquals(
 			"Correct open API locator implementation", FileOpenApiReader.class,
@@ -74,11 +79,8 @@ public class FileOpenApiReaderTest {
 	}
 
 	private Properties _getTestAConfiguration() throws IOException {
-		String configurationPath = ConfigurationFactory.getPath(
-			ConfigurationFactoryTest.class);
-
 		List<Properties> configurations =
-			ConfigurationFactory.getConfigurations(configurationPath);
+			ConfigurationFactory.getConfigurations();
 
 		for (Properties candidate : configurations) {
 			if ("a".equals(candidate.getProperty("osgi.module.name"))) {
