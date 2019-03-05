@@ -591,6 +591,14 @@ public class CommerceOrderLocalServiceUtil {
 			externalReferenceCode, commerceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder updateCommercePaymentMethodKey(
+		long commerceOrderId, String commercePaymentMethodKey)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommercePaymentMethodKey(commerceOrderId,
+			commercePaymentMethodKey);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 		long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {

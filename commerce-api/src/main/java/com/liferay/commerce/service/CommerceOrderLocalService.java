@@ -459,6 +459,9 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		String advanceStatus, String externalReferenceCode,
 		CommerceContext commerceContext) throws PortalException;
 
+	public CommerceOrder updateCommercePaymentMethodKey(long commerceOrderId,
+		String commercePaymentMethodKey) throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException;
