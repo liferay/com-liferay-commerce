@@ -83,15 +83,6 @@ public class PriceListResourceImpl implements PriceListResource {
 		return _priceListHelper.getPriceList(id, language, _company);
 	}
 
-	@Override
-	@RequiresScope("HeadlessCommerceAdminPricing.read")
-	public CollectionDTO<PriceListDTO> getPriceLists(
-			Long groupId, Language language, Pagination pagination)
-		throws Exception {
-
-		return _priceListHelper.getPriceLists(groupId, language, pagination);
-	}
-
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
@@ -144,32 +135,6 @@ public class PriceListResourceImpl implements PriceListResource {
 
 		return _priceEntryHelper.upsertCommercePriceEntry(
 			id, priceEntryDTO, _company);
-	}
-
-	@AsyncSupported
-	@Override
-	@RequiresScope("HeadlessCommerceAdminPricing.write")
-	@Status(Response.Status.CREATED)
-	public PriceListDTO upsertPriceList(
-			Long groupId, PriceListDTO priceListDTO, Language language)
-		throws Exception {
-
-		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
-				}
-
-			}.start();
-
-			return null;
-		}
-
-		return _priceListHelper.upsertPriceList(
-			groupId, priceListDTO, _user, language);
 	}
 
 	@Context
