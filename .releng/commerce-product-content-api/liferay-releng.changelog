@@ -32,3 +32,8 @@ beb1b1ec461215cc1c90a64e89310d616d5b0b52^..cecc874147dcb9dac3a28bc4043b20eae7ea4
 # Bundle Version 2.0.3
 #
 cecc874147dcb9dac3a28bc4043b20eae7ea470d^..59d9eb30ec0e8bc9bef4ad18262ea1179f1657ba=COMMERCE-0
+
+#
+# Bundle Version 2.0.4
+#
+59d9eb30ec0e8bc9bef4ad18262ea1179f1657ba^..8188221d2892ada16c56d71bb133b99e694b7ac9=COMMERCE-698 LPS-91420
