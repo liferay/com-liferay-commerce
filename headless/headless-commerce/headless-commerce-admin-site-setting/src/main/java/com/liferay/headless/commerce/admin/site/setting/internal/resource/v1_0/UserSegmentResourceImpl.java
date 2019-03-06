@@ -25,10 +25,11 @@ import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentCr
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.UserSegmentResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
-
-import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -40,6 +41,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
@@ -48,7 +50,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = UserSegmentResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class UserSegmentResourceImpl implements UserSegmentResource {
 
 	@Override
@@ -106,15 +107,17 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_userSegmentHelper.updateUserSegment(
+							id, userSegmentDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -135,14 +138,17 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_userSegmentCriterionHelper.updateUserSegmentCriterion(
+							criterionId, userSegmentCriterionDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -160,14 +166,18 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_userSegmentCriterionHelper.upsertUserSegmentCriterion(
+							GetterUtil.getLong(id), userSegmentCriterionDTO,
+							_user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -175,6 +185,9 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		return _userSegmentCriterionHelper.upsertUserSegmentCriterion(
 			GetterUtil.getLong(id), userSegmentCriterionDTO, _user);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		UserSegmentResourceImpl.class);
 
 	@Context
 	private Async _async;

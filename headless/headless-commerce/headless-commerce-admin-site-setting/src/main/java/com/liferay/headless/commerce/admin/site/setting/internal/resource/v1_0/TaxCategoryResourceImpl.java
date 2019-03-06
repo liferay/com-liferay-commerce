@@ -14,13 +14,16 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.commerce.openapi.core.annotation.AsyncSupported;
+import com.liferay.commerce.openapi.core.context.Async;
 import com.liferay.headless.commerce.admin.site.setting.internal.resource.util.v1_0.TaxCategoryHelper;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.TaxCategoryDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-
-import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -32,6 +35,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
@@ -40,7 +44,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = TaxCategoryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
@@ -59,10 +62,27 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 		return _taxCategoryHelper.getTaxCategoryDTO(id);
 	}
 
+	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateTaxCategory(String id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
+
+		if (_async.isEnabled()) {
+			new Thread(
+				() -> {
+					try {
+						_taxCategoryHelper.updateTaxCategory(
+							id, taxCategoryDTO);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
+				}
+			).start();
+
+			return null;
+		}
 
 		_taxCategoryHelper.updateTaxCategory(id, taxCategoryDTO);
 
@@ -70,6 +90,12 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 		return responseBuilder.build();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		TaxCategoryResourceImpl.class);
+
+	@Context
+	private Async _async;
 
 	@Reference
 	private TaxCategoryHelper _taxCategoryHelper;

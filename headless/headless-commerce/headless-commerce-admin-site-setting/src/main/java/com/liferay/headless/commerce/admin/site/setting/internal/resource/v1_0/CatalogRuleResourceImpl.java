@@ -24,9 +24,10 @@ import com.liferay.headless.commerce.admin.site.setting.model.v1_0.CategoryDTO;
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.CatalogRuleResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-
-import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -38,6 +39,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
@@ -46,7 +48,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = CatalogRuleResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
@@ -89,26 +90,31 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 	public Response updateCatalogRule(String id, CatalogRuleDTO catalogRuleDTO)
 		throws Exception {
 
-		_catalogRuleHelper.updateCatalogRule(id, catalogRuleDTO, _user);
-
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_catalogRuleHelper.updateCatalogRule(
+							id, catalogRuleDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
+
+		_catalogRuleHelper.updateCatalogRule(id, catalogRuleDTO, _user);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CatalogRuleResourceImpl.class);
 
 	@Context
 	private Async _async;
