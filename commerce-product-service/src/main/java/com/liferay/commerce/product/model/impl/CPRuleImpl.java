@@ -36,9 +36,8 @@ public class CPRuleImpl extends CPRuleBaseImpl {
 
 	@Override
 	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels() {
-		return
-			CPRuleAssetCategoryRelLocalServiceUtil.getCPRuleAssetCategoryRels(
-				getCPRuleId());
+		return CPRuleAssetCategoryRelLocalServiceUtil.
+			getCPRuleAssetCategoryRels(getCPRuleId());
 	}
 
 	@Override
