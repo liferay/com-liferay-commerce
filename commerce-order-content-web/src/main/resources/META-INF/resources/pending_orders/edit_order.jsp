@@ -256,21 +256,18 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					url='<%= "javascript:window.print();" %>'
 				/>
 
-				<liferay-ui:icon
-					message="edit"
-					url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
-				/>
+				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.DELETE) %>">
+					<portlet:actionURL name="editCommerceOrder" var="deleteURL">
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+					</portlet:actionURL>
 
-				<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-				</portlet:actionURL>
-
-				<liferay-ui:icon-delete
-					message="delete-all"
-					url="<%= deleteURL %>"
-				/>
+					<liferay-ui:icon-delete
+						message="delete"
+						url="<%= deleteURL %>"
+					/>
+				</c:if>
 			</liferay-ui:icon-menu>
 		</div>
 	</div>
@@ -360,75 +357,9 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	</div>
 </div>
 
-<liferay-portlet:renderURL var="editCommerceOrderDetailsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-	<liferay-portlet:param name="mvcRenderCommandName" value="editCommerceOrderDetails" />
-	<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-	<liferay-portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-</liferay-portlet:renderURL>
-
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
 <%@ include file="/pending_orders/transition.jspf" %>
-
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />editCommerceOrder',
-		function(A) {
-			var A = AUI();
-
-			var dialog = Liferay.Util.Window.getWindow(
-				{
-					dialog: {
-						destroyOnClose: true,
-						toolbars: {
-							footer: [
-								{
-									cssClass: 'btn-cancel mr-2',
-									label: '<liferay-ui:message key="cancel" />',
-									on: {
-										click: function() {
-											dialog.hide();
-										}
-									}
-								},
-								{
-									cssClass: 'btn-primary',
-									label: '<liferay-ui:message key="edit-order" />',
-									on: {
-										click: function() {
-											submitForm(document.<portlet:namespace />editFm);
-										}
-									}
-								}
-							],
-							header: [
-								{
-									cssClass: 'close',
-									discardDefaultButtonCssClasses: true,
-									labelHTML: '<clay:icon symbol="times" />',
-									on: {
-										click: function(event) {
-											dialog.hide();
-										}
-									}
-								}
-							]
-						},
-						width: 600
-					},
-					title: '<liferay-ui:message key="edit-order" />'
-				}
-			).plug(
-				A.Plugin.IO,
-				{
-					uri: '<%= editCommerceOrderDetailsURL %>'
-				}
-			).render();
-		},
-		['aui-io-deprecated', 'liferay-util-window']
-	);
-</aui:script>
 
 <aui:script use="aui-base">
 	var orderTransition = A.one('#<portlet:namespace />orderTransition');
