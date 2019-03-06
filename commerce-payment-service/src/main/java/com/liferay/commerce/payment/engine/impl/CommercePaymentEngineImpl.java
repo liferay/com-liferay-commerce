@@ -302,6 +302,10 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceAddress commerceAddress = commerceOrder.getBillingAddress();
 
+		if (commerceAddress == null) {
+			commerceAddress = commerceOrder.getShippingAddress();
+		}
+
 		if (commerceAddress != null) {
 			return _getCommercePaymentMethodsList(
 				_commercePaymentMethodGroupRelLocalService.
