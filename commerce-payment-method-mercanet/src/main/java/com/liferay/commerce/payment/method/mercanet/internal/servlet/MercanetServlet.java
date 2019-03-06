@@ -135,13 +135,11 @@ public class MercanetServlet extends HttpServlet {
 				String redirect = ParamUtil.getString(
 					httpServletRequest, "redirect");
 
-				if (!Objects.equals(
-						parameterMap.get("responseCode"), "00")) {
-
+				if (!Objects.equals(parameterMap.get("responseCode"), "00")) {
 					String orderId = parameterMap.get("orderId");
 
 					Long commerceOrderId = Long.parseLong(orderId);
-					
+
 					String transactionReference = parameterMap.get(
 						"transactionReference");
 
@@ -185,8 +183,8 @@ public class MercanetServlet extends HttpServlet {
 
 				verifyMap.put("Seal", seal);
 
-				PaypageResponse paypageResponse =
-					paypageClient.decodeResponse(verifyMap);
+				PaypageResponse paypageResponse = paypageClient.decodeResponse(
+					verifyMap);
 
 				ResponseData responseData = paypageResponse.getData();
 

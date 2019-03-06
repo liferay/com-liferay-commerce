@@ -560,8 +560,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommercePaymentResult(
 			payment.getId(), commercePaymentRequest.getCommerceOrderId(),
-			status, true, url, null,
-			messages, success);
+			status, true, url, null, messages, success);
 	}
 
 	@Override
@@ -609,8 +608,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommercePaymentResult(
 			agreement.getToken(), commercePaymentRequest.getCommerceOrderId(),
-			status, true, url, null,
-			messages, success);
+			status, true, url, null, messages, success);
 	}
 
 	@Override
