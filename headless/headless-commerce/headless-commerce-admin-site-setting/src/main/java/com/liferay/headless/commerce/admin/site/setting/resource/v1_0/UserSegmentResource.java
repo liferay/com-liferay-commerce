@@ -45,9 +45,10 @@ public interface UserSegmentResource {
 		throws Exception;
 
 	@DELETE
-	@Path("/{id}/userSegmentCriterion/{id2}")
+	@Path("/{id}/userSegmentCriterion/{criterionId}")
 	public Response deleteUserSegmentCriterion(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("criterionId") String criterionId)
 		throws Exception;
 
 	@GET
@@ -64,10 +65,11 @@ public interface UserSegmentResource {
 		throws Exception;
 
 	@GET
-	@Path("/{id}/userSegmentCriterion/{id2}")
+	@Path("/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO getUserSegmentCriterion(
-			@PathParam("id") String id, @PathParam("id2") String id2)
+			@PathParam("id") String id,
+			@PathParam("criterionId") String criterionId)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -78,11 +80,12 @@ public interface UserSegmentResource {
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
-	@Path("/{id}/userSegmentCriterion/{id2}")
+	@Path("/{id}/userSegmentCriterion/{criterionId}")
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			@PathParam("id") String id, @PathParam("id2") String id2,
+			@PathParam("id") String id,
+			@PathParam("criterionId") String criterionId,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception;
 
