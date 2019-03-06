@@ -105,7 +105,7 @@ String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request
 
 						</aui:select>
 
-						<aui:select label="payment-method" name="paymentMethodId">
+						<aui:select label="payment-method" name="commercePaymentMethodKey">
 
 							<%
 							for (CommercePaymentMethodGroupRel commercePaymentMethod : commercePaymentMethods) {
