@@ -33,6 +33,7 @@ import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.Portal;
@@ -325,6 +326,19 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			_commercePaymentUtils.getCommercePaymentMethod(commerceOrderId);
 
 		return commercePaymentMethod.getOrderStatusUpdateMaxIntervalMinutes();
+	}
+
+	@Override
+	public String getPaymentMethodImageURL(
+			ThemeDisplay themeDisplay, String paymentMethodKey)
+		throws PortalException {
+
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			_commercePaymentMethodGroupRelLocalService.
+				getCommercePaymentMethodGroupRel(
+					themeDisplay.getSiteGroupId(), paymentMethodKey);
+
+		return commercePaymentMethodGroupRel.getImageURL(themeDisplay);
 	}
 
 	@Override
