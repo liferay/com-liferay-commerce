@@ -117,6 +117,9 @@ public class OrderSummaryTag extends ComponentRendererTag {
 			putValue(
 				"spritemap",
 				themeDisplay.getPathThemeImages() + "/lexicon/icons.svg");
+			putValue(
+				"commerceSpritemap",
+				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 		}
 		catch (Exception e) {
 			_log.error(e, e);

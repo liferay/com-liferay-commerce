@@ -1,0 +1,44 @@
+{namespace AccordionPanel}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param? status: string}
+	{@param? title: string|html}
+	{@param? content: string|html}
+	{@param? spritemap: string}
+	{@param? _handleTogglerClick: any}
+
+	<div class="commerce-accordion">
+		{let $titleClasses kind="text"}
+			commerce-accordion__title
+			{if isNonnull($status)}
+				{sp}{$status}
+			{/if}
+		{/let}
+		<button 
+			type="button"
+			class="{$titleClasses}" 
+			data-onclick="{$_handleTogglerClick}"
+		>
+			{$title}
+			{if isNonnull($spritemap)}
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'chevron' /}
+				{/call}
+			{/if}
+		</button>
+
+		{let $contentClasses kind="text"}
+			commerce-accordion__content
+			{if isNonnull($status)}
+				{sp}{$status}
+			{/if}
+		{/let}
+		<div class="{$contentClasses}" ref="content">
+			{$content}
+		</div>
+	</div>
+{/template}

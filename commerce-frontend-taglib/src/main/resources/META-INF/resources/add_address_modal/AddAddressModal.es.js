@@ -6,7 +6,7 @@ import Soy, {Config} from 'metal-soy';
 
 import 'clay-modal';
 
-import '../input_utils/CommerceInputText';
+import '../input_utils/CommerceInputText.es';
 
 class AddAddressModal extends Component {
 

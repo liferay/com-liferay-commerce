@@ -2,7 +2,8 @@ import template from './ItemRecap.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import '../input_utils/CommerceInputText';
+import '../input_utils/CommerceInputText.es';
+import '../accordion_panel/AccordionPanel.es';
 
 const checkObjectEquality = (firstObj, secondObj) => {
 	const properties = Object.keys(firstObj);
@@ -46,6 +47,14 @@ class ItemRecap extends Component {
 	_handleCancelClick(e){
 		this._setInitialData()
 	}
+	
+	_handleDescriptionStatusChange(newState){
+		this._descriptionVisibilityStatus = newState;
+	}
+	
+	_handleTierPricingStatusChange(newState){
+		this._tierPricingVisibilityStatus = newState;
+	}
 
 	_setInitialData(){
 		this.formData = {
@@ -63,7 +72,6 @@ class ItemRecap extends Component {
 	}
 	
     _handleFormUpdate(e){
-		console.log(e);
 		const key = e.target.name;
 		this.formData = Object.assign(
 			{},
@@ -134,6 +142,26 @@ ItemRecap.STATE = {
 			)
         }
 	),
+	_descriptionVisibilityStatus: Config.oneOf(
+		[
+			'closed',
+			'closing',
+			'opened',
+			'opening'
+		]
+	)
+		.value('closed')
+		.internal(),
+	_tierPricingVisibilityStatus: Config.oneOf(
+		[
+			'closed',
+			'closing',
+			'opened',
+			'opening'
+		]
+	)
+		.value('closed')
+		.internal(),
 	stage: Config.string().oneOf(
 		[
 			'empty',

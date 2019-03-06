@@ -5,6 +5,7 @@
  */
 {template .render}
 	{@param? stage: string}
+	{@param? spritemap: string}
 	{@param? dataChanged: bool}
 	{@param? adminPrivileges: bool}
 	{@param? itemData: [
@@ -22,6 +23,10 @@
 		giftQuantity: string|int,
 		quantity: string|int
 	]}
+	{@param? _handleDescriptionStatusChange: any}
+	{@param? _handleTierPricingStatusChange: any}
+	{@param? _descriptionVisibilityStatus: string}
+	{@param? _tierPricingVisibilityStatus: string}
 	{@param? _handleTabChange: any}
 	{@param? _handleFormSubmit: any}
 	{@param? _handleFormUpdate: any}
@@ -43,6 +48,7 @@
 				{if $stage == 'edit' and isNonnull($formData) and $adminPrivileges}
 					{call .edit}
 						{param _handleFormUpdate: $_handleFormUpdate /}
+						{param visibility: $formData.price /}
 						{param price: $formData.price /}
 						{param discount: $formData.discount /}
 						{param quantity: $formData.quantity /}
@@ -50,6 +56,10 @@
 					{/call}
 				{else}
 					{call .overview}
+						{param _handleDescriptionStatusChange: $_handleDescriptionStatusChange /}
+						{param _handleTierPricingStatusChange: $_handleTierPricingStatusChange /}
+						{param _descriptionVisibilityStatus: $_descriptionVisibilityStatus /}
+						{param _tierPricingVisibilityStatus: $_tierPricingVisibilityStatus /}
 						{param _handleFormUpdate: $_handleFormUpdate /}
 						{param thumbnail: $itemData.thumbnail /}
 						{param sku: $itemData.sku /}
@@ -58,6 +68,7 @@
 						{param description: $itemData.description /}
 						{param deliveryDate: $formData.deliveryDate /}
 						{param note: $formData.note /}
+						{param spritemap: $spritemap /}
 					{/call}			
 				{/if}
 
@@ -67,6 +78,7 @@
 						{sp}commerce-button--disabled
 					{/if}
 				{/let}
+
 				{let $saveClasses kind="text"}
 					commerce-button
 					{if $dataChanged == false}
@@ -96,12 +108,17 @@
 	{@param name: string}
 	{@param? note: string}
 	{@param sku: string}
-	{@param tierPricing: list<[
+	{@param? tierPricing: list<[
 		quantity: string|int,
 		price: string
 	]>}
 	{@param thumbnail: string}
-
+	{@param? spritemap: string}
+	{@param? _handleDescriptionStatusChange: any}
+	{@param? _handleTierPricingStatusChange: any}
+	{@param? _descriptionVisibilityStatus: string}
+	{@param? _tierPricingVisibilityStatus: string}
+	
 	<div class="item-recap__overview">
 		<p>{$thumbnail}</p>
 		<p>{$sku}</p>
@@ -130,19 +147,40 @@
 		{/call}
 
 		{if isNonnull($description)}
-			<p>{$description}</p>
+			{let $descriptionLabel kind="html"}{msg desc="Description"}description{/msg}{/let}
+			{call AccordionPanel.render}
+				{param events: ['updateStatus' : $_handleDescriptionStatusChange] /}
+				{param status: $_descriptionVisibilityStatus /}
+				{param title: $descriptionLabel /}
+				{param content: $description /}
+				{param spritemap: $spritemap /}
+			{/call}
 		{/if}
-		
-		<dl>
-			{foreach $tierDefinition in $tierPricing}
-				<dt>
-					{$tierDefinition.quantity} {msg desc="units"}units{/msg}
-				</dt>
-				<dd>
-					{$tierDefinition.price}
-				</dd>
-			{/foreach}
-		</dl>
+
+		{if isNonnull($tierPricing)}
+			{let $tierLabel kind="html"}{msg desc="Tier Pricing"}tier-pricing{/msg}{/let}
+			{let $tierContent kind="html"}
+				<dl class="commerce-tier-pricing">
+					{foreach $tierDefinition in $tierPricing}
+						<dt class="commerce-tier-pricing__title">
+							{$tierDefinition.quantity} {msg desc="units"}units{/msg}
+						</dt>
+						<dd class="commerce-tier-pricing__value">
+							{$tierDefinition.price}
+						</dd>
+					{/foreach}
+				</dl>
+			{/let}
+			{call AccordionPanel.render}
+				{param events: ['updateStatus' : $_handleTierPricingStatusChange] /}
+				{param status: $_tierPricingVisibilityStatus /}
+				{param title: $tierLabel /}
+				{param content: $tierContent /}
+				{param spritemap: $spritemap /}
+			{/call}
+
+		{/if}
+
 	</div>
 {/template}
 

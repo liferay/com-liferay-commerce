@@ -3,32 +3,27 @@
 {template .render}
 	{@param? openingState: string}
 	{@param? currentView: string}
-
 	{@param? accounts: list<[
 		name: string,
 		accountId: string,
 		thumbnail: string
 	]>}
-
 	{@param? orders: list<[
 		id: string|number,
 		status: string,
 		lastEdit: string,
 		addOrderLink: string
 	]>}
-
 	{@param? viewAllAccountsLink: string}
 	{@param? createNewAccountLink: string}
 	{@param? viewAllOrdersLink: string}
 	{@param? createNewOrderLink: string}
-
 	{@param? currentAccount: [
 		accountId: string,
 		name: string,
 		thumbnail: string
 	]}
 	{@param? currentOrder: ?}
-
 	{@param? _handleChangeSelectedView: any}
 	{@param? _handleAccountSelected: any}
 	{@param? _handleOrderSelected: any}

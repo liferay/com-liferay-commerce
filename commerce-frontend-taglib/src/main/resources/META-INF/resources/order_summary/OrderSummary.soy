@@ -21,6 +21,7 @@
 	{@param schema: ?}
 	{@param summaryData: ?}
 	{@param spritemap: string}
+	{@param commerceSpritemap: string}
 	{@param? selectable: bool}
 	{@param showActionsMenu: bool}
 	{@param totalItems: int}
@@ -65,6 +66,7 @@
 				{call ItemRecap.render}
 					{param events: [ 'productDataUpdated' : $_handleItemUpdate] /}
 					{param itemData: $itemData /}
+					{param spritemap: $commerceSpritemap /}
 					{param stage: $_itemRecapStage /}
 					{param adminPrivileges: $adminPrivileges /}
 				{/call}

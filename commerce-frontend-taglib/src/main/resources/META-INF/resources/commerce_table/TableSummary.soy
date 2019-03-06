@@ -11,11 +11,11 @@
 		size: string
 	]>}
 
-	<div class="commerce-table-summary panel-body">
-		<dl class="mb-0">
+	<div class="commerce-table-summary">
+		<dl class="commerce-table-summary__content mb-0">
 			{foreach $dataItem in $data}
 				{let $dtClasses kind="text"}
-					commerce-table-summary__title
+					commerce-label commerce-table-summary__title
 					{if isNonnull($dataItem.modifier)}
 						{sp}commerce-table-summary__title--{$dataItem.modifier}
 					{/if}

@@ -284,78 +284,16 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	</div>
 </aui:form>
 
-<div class="row">
-	<div class="col-md-9">
-		<commerce-ui:table
-			dataProviderKey="commercePendingOrderItems"
-			itemPerPage="<%= 5 %>"
-			namespace="<%= renderResponse.getNamespace() %>"
-			pageNumber="1"
-			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-			tableName="commercePendingOrderItems"
-		/>
-	</div>
-
-	<div class="col-md-3">
-		<div class="commerce-panel">
-			<div class="commerce-panel__content">
-				<dl class="commerce-list">
-					<dt><liferay-ui:message key="subtotal" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(subtotal.format(locale)) %></dd>
-
-					<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="subtotal-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-
-					<dt><liferay-ui:message key="delivery" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(shippingValue.format(locale)) %></dd>
-
-					<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="delivery-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-
-					<dt><liferay-ui:message key="tax" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(taxValue.format(locale)) %></dd>
-
-					<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="delivery-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-				</dl>
-			</div>
-
-			<div class="commerce-panel__content">
-				<dl class="commerce-list">
-					<dt><liferay-ui:message key="total" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
-				</dl>
-			</div>
-		</div>
-	</div>
-</div>
+<commerce-ui:order-summary
+	dataProviderKey="commercePendingOrderItems"
+	itemPerPage="<%= 5 %>"
+	namespace="<%= renderResponse.getNamespace() %>"
+	pageNumber="1"
+	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+	tableName="commercePendingOrderItems"
+	showItemRecap="<%= true %>"
+	showTableSummary="<%= true %>"
+/>
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 

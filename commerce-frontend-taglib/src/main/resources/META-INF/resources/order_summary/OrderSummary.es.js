@@ -2,7 +2,7 @@ import template from './OrderSummary.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import '../clay_table/CommerceTable.es';
+import '../commerce_table/CommerceTable.es';
 import './ItemRecap.es';
 
 const fakeSummaryData = [
@@ -54,7 +54,7 @@ const fakeItemData = {
 			price: '$ 100.00'
 		}
 	],
-	deliveryDate: '11/02/2020',
+	deliveryDate: '2019-03-07',
 	price: '200.00',
 	discount: '10 %',
 	giftQuantity: 4,
@@ -151,6 +151,7 @@ OrderSummary.STATE = {
 	schema: Config.object().required(),
 	selectable: Config.bool(),
 	spritemap: Config.string().required(),
+	commerceSpritemap: Config.string().required(),
 	tableName: Config.string().required(),
 	totalItems: Config.number().required(),
 	showItemRecap: Config.bool(),
