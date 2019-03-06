@@ -32,3 +32,8 @@
 # Bundle Version 1.0.8
 #
 1c737593206619c5f407c151b29a6e89c5f2d72f^..926a47016a2e1abcebb1fa6ae5859a6b6f701eec=COMMERCE-0
+
+#
+# Bundle Version 1.0.9
+#
+926a47016a2e1abcebb1fa6ae5859a6b6f701eec^..c6bc7bbc823cfd2c2ba19e0449c840a7e43fa603=COMMERCE-698 LPS-91420
