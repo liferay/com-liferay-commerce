@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.commerce.batch.model.CommerceBatchEntry">
+		<field name="commerceBatchEntryId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="key" type="String" />
+		<field name="name" type="String" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="status" type="String" />
+	</model>
+</model-hints>
