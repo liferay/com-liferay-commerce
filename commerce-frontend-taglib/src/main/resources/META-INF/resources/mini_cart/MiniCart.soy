@@ -96,13 +96,11 @@
 				{if isNonnull($products)}
 					{foreach $product in $products}
 						{call CommerceCartItem.render}
-
 							{param events: [
 								'submitQuantity' : $_handleSubmitQuantity,
 								'deleteItem' : $_handleDeleteItem,
 								'cancelItemDeletion' : $_handleCancelItemDeletion,
 							] /}
-
 							{param id: $product.id /}
 							{param name: $product.name /}
 							{param prices: $product.prices /}
@@ -112,11 +110,11 @@
 							{param settings: $product.settings /}
 							{param options: $product.options /}
 							{param errorMessages: $product.errorMessages /}
-
 							{param deleting: $product.deleting /}
 							{param collapsed: $product.collapsed /}
 							{param updating: $product.updating /}
 							{param deleteDisabled: $product.deleteDisabled /}
+							{param spritemap: $spritemap /}
 						{/call}
 					{/foreach}
 				{/if}
