@@ -58,6 +58,16 @@ String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request
 						<div class="autofit-col autofit-col-expand">
 							<aui:input checked="<%= commercePaymentMethod.getKey() == commercePaymentMethodKey %>" label="<%= commercePaymentMethod.getName(locale) %>" name="commercePaymentMethodKey" type="radio" value="<%= commercePaymentMethod.getKey() %>" />
 						</div>
+
+						<%
+						String thumbnailSrc = paymentMethodCheckoutStepDisplayContext.getImageURL(themeDisplay, commercePaymentMethod.getKey());
+						%>
+
+						<c:if test="<%= Validator.isNotNull(thumbnailSrc) %>">
+							<div class="autofit-col">
+								<img alt="<%= commercePaymentMethod.getName(locale) %>" class="payment-icon" src="<%= thumbnailSrc %>" style="height: 45px; width: auto" />
+							</div>
+						</c:if>
 					</li>
 
 				<%
