@@ -40,8 +40,8 @@ public class JobLauncherImplTest {
 		JobLauncherImpl jobLauncherImpl = new JobLauncherImpl(blockingExecutor);
 
 		Job job = new JobImpl(
-			"name",
-			Mockito.mock(ItemReader.class), Mockito.mock(ItemWriter.class));
+			"name", Mockito.mock(ItemReader.class),
+			Mockito.mock(ItemWriter.class));
 
 		JobExecution jobExecution = jobLauncherImpl.run(
 			job, new JobParameters());
