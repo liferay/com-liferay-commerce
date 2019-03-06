@@ -4,6 +4,7 @@ import template from './CommerceCartItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
+import 'clay-icon';
 import './Loader.es';
 import '../price/Price.es';
 import '../quantity_selector/QuantitySelector.es';
@@ -55,6 +56,7 @@ CommerceCartItem.STATE = {
 	settings: Config.object().value(
 		{}
 	),
+	spritemap: Config.string().required(),
 	updating: Config.bool().value(false)
 };
 

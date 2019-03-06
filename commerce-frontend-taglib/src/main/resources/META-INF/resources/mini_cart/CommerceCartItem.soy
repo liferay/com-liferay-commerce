@@ -8,6 +8,7 @@
 	{@param thumbnail: string }
 	{@param name: string }
 	{@param sku: string }
+	{@param spritemap: string }
 	{@param quantity: int }
 
 	{@param? errorMessages: ? }
@@ -77,7 +78,13 @@
 				{param multipleQuantity: $settings.multipleQuantity /}
 				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
-			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}"></button>
+
+			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}">
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'delete' /}
+				{/call}
+			</button>
 		</div>
 
 		<div class="commerce-cart-item__price">
