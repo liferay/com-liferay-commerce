@@ -82,8 +82,7 @@ public interface UserSegmentResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			@PathParam("id") String id,
-			@PathParam("id2") String id2,
+			@PathParam("id") String id, @PathParam("id2") String id2,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception;
 

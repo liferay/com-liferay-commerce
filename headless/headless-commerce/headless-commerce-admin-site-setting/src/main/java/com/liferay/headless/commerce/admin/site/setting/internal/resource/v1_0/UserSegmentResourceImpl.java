@@ -136,7 +136,6 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -162,7 +161,6 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO

@@ -61,7 +61,7 @@ public interface CommerceAdminSiteSettingResource {
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
 			@PathParam("groupId") Long groupId,
-			@Nullable@QueryParam("type") Integer type,
+			@Nullable @QueryParam("type") Integer type,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -84,7 +84,7 @@ public interface CommerceAdminSiteSettingResource {
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<WarehouseDTO> getWarehouses(
 			@PathParam("groupId") Long groupId,
-			@Nullable@QueryParam("active") Boolean active,
+			@Nullable @QueryParam("active") Boolean active,
 			@Context Pagination pagination)
 		throws Exception;
 

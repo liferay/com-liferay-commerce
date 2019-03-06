@@ -64,7 +64,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<AvailabilityEstimateDTO> getAvailabilityEstimates(
-			 Long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _availabilityEstimateHelper.getAvailabilityEstimateDTOs(
@@ -74,7 +74,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<CatalogRuleDTO> getCatalogRules(
-			 Long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _catalogRuleHelper.getCatalogRuleDTOs(groupId, pagination);
@@ -83,7 +83,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<MeasurementUnitDTO> getMeasurementUnits(
-			 Long groupId, @Nullable Integer type, Pagination pagination)
+			Long groupId, @Nullable Integer type, Pagination pagination)
 		throws Exception {
 
 		return _measurementUnitHelper.getMeasurementUnitDTOs(
@@ -93,7 +93,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<TaxCategoryDTO> getTaxCategories(
-			 Long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _taxCategoryHelper.getTaxCategoryDTOs(groupId, pagination);
@@ -102,7 +102,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<UserSegmentDTO> getUserSegments(
-			 Long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _userSegmentHelper.getUserSegmentDTOs(groupId, pagination);
@@ -111,7 +111,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<WarehouseDTO> getWarehouses(
-			 Long groupId, @Nullable Boolean active, Pagination pagination)
+			Long groupId, @Nullable Boolean active, Pagination pagination)
 		throws Exception {
 
 		return _warehouseHelper.getWarehouseDTOs(groupId, active, pagination);
@@ -122,7 +122,7 @@ public class CommerceAdminSiteSettingResourceImpl
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public AvailabilityEstimateDTO upsertAvailabilityEstimate(
-			 Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
+			Long groupId, AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
@@ -135,7 +135,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -148,12 +148,11 @@ public class CommerceAdminSiteSettingResourceImpl
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public CatalogRuleDTO upsertCatalogRule(
-			 Long groupId, CatalogRuleDTO catalogRuleDTO)
+			Long groupId, CatalogRuleDTO catalogRuleDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -161,7 +160,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -174,12 +173,11 @@ public class CommerceAdminSiteSettingResourceImpl
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public MeasurementUnitDTO upsertMeasurementUnit(
-			 Long groupId, MeasurementUnitDTO measurementUnitDTO)
+			Long groupId, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -187,7 +185,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -200,12 +198,11 @@ public class CommerceAdminSiteSettingResourceImpl
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public TaxCategoryDTO upsertTaxCategory(
-			 Long groupId, TaxCategoryDTO taxCategoryDTO)
+			Long groupId, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -213,7 +210,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -226,12 +223,11 @@ public class CommerceAdminSiteSettingResourceImpl
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public UserSegmentDTO upsertUserSegment(
-			 Long groupId, UserSegmentDTO userSegmentDTO)
+			Long groupId, UserSegmentDTO userSegmentDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -239,7 +235,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -251,13 +247,11 @@ public class CommerceAdminSiteSettingResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
-	public WarehouseDTO upsertWarehouse(
-			 Long groupId, WarehouseDTO warehouseDTO)
+	public WarehouseDTO upsertWarehouse(Long groupId, WarehouseDTO warehouseDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
 			new Thread() {
-
 				public void run() {
 
 					// TODO
@@ -265,7 +259,7 @@ public class CommerceAdminSiteSettingResourceImpl
 				}
 
 			}.start();
-			
+
 			return null;
 		}
 
@@ -283,7 +277,6 @@ public class CommerceAdminSiteSettingResourceImpl
 
 	@Reference
 	private MeasurementUnitHelper _measurementUnitHelper;
-
 
 	@Reference
 	private TaxCategoryHelper _taxCategoryHelper;

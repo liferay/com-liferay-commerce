@@ -101,9 +101,8 @@ public class CPRuleAssetCategoryRelServiceImpl
 		_cpRuleModelResourcePermission.check(
 			getPermissionChecker(), cpRuleId, ActionKeys.VIEW);
 
-		return
-			cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRelsCount(
-				cpRuleId);
+		return cpRuleAssetCategoryRelLocalService.
+			getCPRuleAssetCategoryRelsCount(cpRuleId);
 	}
 
 	private static volatile ModelResourcePermission<CPRule>
