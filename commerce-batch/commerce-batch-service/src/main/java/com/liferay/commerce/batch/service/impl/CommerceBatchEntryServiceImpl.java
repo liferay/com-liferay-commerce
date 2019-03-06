@@ -32,6 +32,7 @@ import com.liferay.commerce.batch.service.base.CommerceBatchEntryServiceBaseImpl
  */
 public class CommerceBatchEntryServiceImpl
 	extends CommerceBatchEntryServiceBaseImpl {
+
 	/**
 	 * NOTE FOR DEVELOPERS:
 	 *

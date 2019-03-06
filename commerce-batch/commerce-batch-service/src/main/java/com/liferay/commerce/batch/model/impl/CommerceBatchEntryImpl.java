@@ -27,6 +27,7 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class CommerceBatchEntryImpl extends CommerceBatchEntryBaseImpl {
+
 	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
