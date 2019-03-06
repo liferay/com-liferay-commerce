@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN,
-		"mvc.command.name=editCommercePaymentMethodGroupRelAddressRestriction"
+		"mvc.command.name=editCommercePaymentMethodAddressRestriction"
 	},
 	service = MVCActionCommand.class
 )
