@@ -34,9 +34,10 @@ import com.liferay.headless.commerce.admin.site.setting.model.v1_0.UserSegmentDT
 import com.liferay.headless.commerce.admin.site.setting.model.v1_0.WarehouseDTO;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.CommerceAdminSiteSettingResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-
-import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -48,6 +49,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
@@ -57,7 +59,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	scope = ServiceScope.PROTOTYPE,
 	service = CommerceAdminSiteSettingResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class CommerceAdminSiteSettingResourceImpl
 	implements CommerceAdminSiteSettingResource {
 
@@ -126,15 +127,17 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_availabilityEstimateHelper.upsertAvailabilityEstimate(
+							groupId, availabilityEstimateDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -152,14 +155,17 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_catalogRuleHelper.upsertCatalogRule(
+							groupId, catalogRuleDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -177,14 +183,17 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_measurementUnitHelper.upsertMeasurementUnit(
+							groupId, measurementUnitDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -202,14 +211,17 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_taxCategoryHelper.upsertTaxCategory(
+							groupId, taxCategoryDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -227,14 +239,17 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_userSegmentHelper.upsertUserSegment(
+							groupId, userSegmentDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -251,20 +266,26 @@ public class CommerceAdminSiteSettingResourceImpl
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_warehouseHelper.upsertWarehouse(
+							groupId, warehouseDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
 
 		return _warehouseHelper.upsertWarehouse(groupId, warehouseDTO, _user);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAdminSiteSettingResourceImpl.class);
 
 	@Context
 	private Async _async;
