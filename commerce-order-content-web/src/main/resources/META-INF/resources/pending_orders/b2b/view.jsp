@@ -22,34 +22,22 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-<aui:form action="<%= editCommerceOrderURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="deleteCommerceOrderIds" type="hidden" />
+<commerce-ui:table
+	dataProviderKey="commercePendingOrders"
+	itemPerPage="<%= 5 %>"
+	namespace="<%= renderResponse.getNamespace() %>"
+	pageNumber="1"
+	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+	tableName="commercePendingOrders"
+/>
 
-	<commerce-ui:table
-		dataProviderKey="commercePendingOrders"
-		itemPerPage="<%= 5 %>"
-		namespace="<%= renderResponse.getNamespace() %>"
-		pageNumber="1"
-		portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-		tableName="commercePendingOrders"
-	/>
-
-	<div class="commerce-cta is-visible">
-		<aui:button cssClass="commerce-button commerce-button--big js-invite-user" type="submit" value="add-order" />
-	</div>
-</aui:form>
-
-<aui:script>
-	function <portlet:namespace />deleteCommerceOrders() {
-		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-orders" />')) {
-			var form = AUI.$(document.<portlet:namespace />fm);
-
-			form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
-			form.fm('deleteCommerceOrderIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-			submitForm(form);
-		}
-	}
-</aui:script>
+<div class="commerce-cta is-visible">
+	<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) %>">
+		<aui:form action="<%= editCommerceOrderURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="deleteCommerceOrderIds" type="hidden" />
+			<aui:button cssClass="commerce-button commerce-button--big" type="submit" value="add-order" />
+		</aui:form>
+	</c:if>
+</div>
