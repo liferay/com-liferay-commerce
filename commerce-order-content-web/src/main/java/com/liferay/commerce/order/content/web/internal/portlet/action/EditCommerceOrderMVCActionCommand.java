@@ -187,6 +187,15 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteCommerceOrders(actionRequest);
+
+				PortletURL openOrdersPortletURL =
+					PortletProviderUtil.getPortletURL(
+						actionRequest, CommerceOrder.class.getName(),
+						PortletProvider.Action.EDIT);
+
+				sendRedirect(
+					actionRequest, actionResponse,
+					openOrdersPortletURL.toString());
 			}
 			else if (cmd.equals("reorder")) {
 				reorderCommerceOrder(actionRequest);
