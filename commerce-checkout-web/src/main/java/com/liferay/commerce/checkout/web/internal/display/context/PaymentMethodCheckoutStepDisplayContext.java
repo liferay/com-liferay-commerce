@@ -19,6 +19,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.util.comparator.CommercePaymentMethodNameComparator;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -61,6 +62,14 @@ public class PaymentMethodCheckoutStepDisplayContext {
 		return ListUtil.sort(
 			commercePaymentMethods,
 			new CommercePaymentMethodNameComparator(themeDisplay.getLocale()));
+	}
+
+	public String getImageURL(
+			ThemeDisplay themeDisplay, String paymentMethodKey)
+		throws PortalException {
+
+		return _commercePaymentEngine.getPaymentMethodImageURL(
+			themeDisplay, paymentMethodKey);
 	}
 
 	private final CommerceOrder _commerceOrder;
