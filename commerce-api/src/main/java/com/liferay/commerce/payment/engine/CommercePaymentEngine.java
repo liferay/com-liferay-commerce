@@ -21,6 +21,7 @@ import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +86,10 @@ public interface CommercePaymentEngine {
 		throws PortalException;
 
 	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
+		throws PortalException;
+
+	public String getPaymentMethodImageURL(
+			ThemeDisplay themeDisplay, String paymentMethodKey)
 		throws PortalException;
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
