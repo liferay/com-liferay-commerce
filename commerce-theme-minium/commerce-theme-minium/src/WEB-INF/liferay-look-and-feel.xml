@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 7.1.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_7_1_0.dtd">
+
+<look-and-feel>
+	<compatibility>
+		<version>7.1.0+</version>
+	</compatibility>
+	<theme id="minium" name="Minium">
+		<template-extension>ftl</template-extension>
+		<settings>
+			<setting configurable="true" key="copyright" type="textarea" />
+			<setting configurable="true" key="show-top-menu" type="checkbox" value="false" />
+		</settings>
+		<layout-templates>
+			<custom>
+				<layout-template id="minium_sidebar" name="Minium sidebar">
+					<template-path>/layouttpl/commerce/minium_sidebar.tpl</template-path>
+					<thumbnail-path>/layouttpl/commerce/minium_sidebar.png</thumbnail-path>
+				</layout-template>
+			</custom>
+		</layout-templates>
+		<portlet-decorator id="barebone" name="Barebone">
+			<default-portlet-decorator>true</default-portlet-decorator>
+			<portlet-decorator-css-class>portlet-barebone</portlet-decorator-css-class>
+		</portlet-decorator>
+		<portlet-decorator id="borderless" name="Borderless">
+			<portlet-decorator-css-class>portlet-borderless</portlet-decorator-css-class>
+		</portlet-decorator>
+		<portlet-decorator id="decorate" name="Decorate">
+			<portlet-decorator-css-class>portlet-decorate</portlet-decorator-css-class>
+		</portlet-decorator>
+	</theme>
+</look-and-feel>

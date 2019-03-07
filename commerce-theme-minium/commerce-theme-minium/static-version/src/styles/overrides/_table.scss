@@ -1,0 +1,96 @@
+.table {
+	background-color: transparent;
+	border-collapse: initial;
+	border-spacing: 0 5px;
+	color: #5C5E5E;
+	margin-top: -5px;
+
+	th,
+	th button {
+		color: #9D9E9E;
+		font-size: 11px;
+		font-weight: normal;
+		line-height: 1;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	tbody tr {
+		height: 80px;
+	}
+
+	tr {
+		--translate-space: 340px;
+
+		transition: all ease 400ms;
+
+		html:not(.ie):not(.edge) &.is-active {
+			transform: translateX(calc(-1 * var(--translate-space)));
+		}
+	}
+
+	th,
+	td {
+		box-shadow: none !important;
+
+		&:first-child {
+			border-radius: 8px 0 0 8px;
+		}
+
+		&:last-child {
+			border-radius: 0 8px 8px 0;
+		}
+
+		small {
+			color: #9D9E9E;
+			display: block;
+			font-size: 11px;
+		}
+	}
+
+	td {
+		a {
+			color: currentColor;
+			text-decoration: underline;
+		}
+
+		img {
+			height: 60px;
+			object-fit: contain;
+			width: 60px;
+		}
+	}
+
+	.cell {
+		height: 100%;
+		position: relative;
+		white-space: nowrap;
+	}
+
+	.image-name-cell a {
+		text-decoration: none;
+	}
+}
+
+.table-responsive {
+	margin-bottom: 20px;
+}
+
+.image-name-cell-label {
+	align-items: center;
+	color: #5C5E5E;
+	display: flex;
+	font-weight: normal;
+
+	img {
+		margin-right: $minium-small-gutter;
+	}
+
+	span {
+		text-decoration: none;
+	}
+}
+
+.table-list.table-hover tbody tr:hover td {
+	background-color: #FFF;
+}

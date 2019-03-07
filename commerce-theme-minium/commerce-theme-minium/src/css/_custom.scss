@@ -1,0 +1,17 @@
+@import "./static-version/src/styles/minium";
+
+/* inject:imports */
+
+/* ---------- endinject ---------- */
+
+#minium {
+	transition: padding ease 500ms;
+
+	body.signed-in & {
+		padding-top: $liferay-topbar-size;
+	}
+
+	body.open & {
+		padding-left: 320px;
+	}
+}

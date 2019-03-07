@@ -1,0 +1,36 @@
+#minium {
+	.panel {
+		background-color: transparent;
+		border: 0;
+	}
+
+	.panel-group .panel:last-child {
+		margin-bottom: 0;
+	}
+
+	.panel-group + .panel-group {
+		margin-top: $minium-big-gutter;
+	}
+
+	.panel-heading .panel-title {
+		@include minium-panel-title;
+
+		.collapse-icon {
+			padding: 0;
+		}
+	}
+
+	.panel-body {
+		@include minium-panel-body;
+	}
+
+	.facet-checkbox-label {
+		color: #7F848D;
+		font-size: 13px;
+		line-height: 1.6;
+	}
+
+	.term-name {
+		margin-left: 10px;
+	}
+}

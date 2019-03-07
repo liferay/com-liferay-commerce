@@ -1,0 +1,16 @@
+.minium-product-header {
+	margin: $minium-big-gutter 0 $minium-gutter;
+
+	&__tagline,
+	&__subtitle {
+		font-size: 14px;
+		font-weight: normal;
+		margin: 10px 0;
+	}
+
+	&__title {
+		font-size: 26px;
+		font-weight: normal;
+		margin: 10px 0;
+	}
+}
