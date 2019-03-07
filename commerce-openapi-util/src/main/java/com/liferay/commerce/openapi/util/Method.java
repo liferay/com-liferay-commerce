@@ -130,7 +130,7 @@ public class Method {
 			return null;
 		}
 
-		if (hasCollectionReturnType(openApiComponents)) {
+		if (schemaOpenApiComponent.isArray()) {
 			String itemsReference = schemaOpenApiComponent.getItemsReference();
 
 			schemaOpenApiComponent = OpenApiComponentUtil.getOpenApiComponent(
