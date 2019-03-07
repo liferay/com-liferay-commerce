@@ -43,21 +43,19 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = UserSegmentCriterionHelper.class)
 public class UserSegmentCriterionHelper {
 
-	public void deleteUserSegmentCriterion(String criterionId)
+	public void deleteUserSegmentCriterion(Long criterionId)
 		throws PortalException {
 
 		_commerceUserSegmentCriterionService.deleteCommerceUserSegmentCriterion(
-			GetterUtil.getLong(criterionId));
+			criterionId);
 	}
 
-	public UserSegmentCriterionDTO getUserSegmentCriterionDTO(
-			String criterionId)
+	public UserSegmentCriterionDTO getUserSegmentCriterionDTO(Long criterionId)
 		throws PortalException {
 
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion =
 			_commerceUserSegmentCriterionService.
-				getCommerceUserSegmentCriterion(
-					GetterUtil.getLong(criterionId));
+				getCommerceUserSegmentCriterion(criterionId);
 
 		return _dtoMapper.modelToDTO(commerceUserSegmentCriterion);
 	}
@@ -89,7 +87,7 @@ public class UserSegmentCriterionHelper {
 	}
 
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			String criterionId, UserSegmentCriterionDTO userSegmentCriterionDTO,
+			Long criterionId, UserSegmentCriterionDTO userSegmentCriterionDTO,
 			User user)
 		throws PortalException {
 
@@ -106,8 +104,8 @@ public class UserSegmentCriterionHelper {
 		try {
 			CommerceUserSegmentCriterion commerceUserSegmentCriterion =
 				_updateUserSegmentCriterion(
-					String.valueOf(userSegmentCriterionDTO.getId()),
-					userSegmentCriterionDTO, user);
+					userSegmentCriterionDTO.getId(), userSegmentCriterionDTO,
+					user);
 
 			return _dtoMapper.modelToDTO(commerceUserSegmentCriterion);
 		}
@@ -139,14 +137,13 @@ public class UserSegmentCriterionHelper {
 	}
 
 	private CommerceUserSegmentCriterion _updateUserSegmentCriterion(
-			String criterionId, UserSegmentCriterionDTO userSegmentCriterionDTO,
+			Long criterionId, UserSegmentCriterionDTO userSegmentCriterionDTO,
 			User user)
 		throws PortalException {
 
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion =
 			_commerceUserSegmentCriterionService.
-				getCommerceUserSegmentCriterion(
-					GetterUtil.getLong(criterionId));
+				getCommerceUserSegmentCriterion(criterionId);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceUserSegmentCriterion.getGroupId(), new long[0], user, true);

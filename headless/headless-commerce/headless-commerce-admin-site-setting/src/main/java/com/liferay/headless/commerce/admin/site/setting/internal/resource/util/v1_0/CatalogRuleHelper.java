@@ -49,12 +49,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = CatalogRuleHelper.class)
 public class CatalogRuleHelper {
 
-	public void deleteCatalogRule(String id) throws PortalException {
-		_cpRuleService.deleteCPRule(GetterUtil.getLong(id));
+	public void deleteCatalogRule(Long id) throws PortalException {
+		_cpRuleService.deleteCPRule(id);
 	}
 
-	public CatalogRuleDTO getCatalogRuleDTO(String id) throws PortalException {
-		CPRule cpRule = _cpRuleService.getCPRule(GetterUtil.getLong(id));
+	public CatalogRuleDTO getCatalogRuleDTO(Long id) throws PortalException {
+		CPRule cpRule = _cpRuleService.getCPRule(id);
 
 		return _dtoMapper.modelToDTO(cpRule);
 	}
@@ -79,17 +79,15 @@ public class CatalogRuleHelper {
 	}
 
 	public CollectionDTO<CategoryDTO> getCategoryDTOs(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws PortalException {
 
 		List<CPRuleAssetCategoryRel> ruleAssetCategoryRels =
 			_cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(
-				GetterUtil.getLong(id), pagination.getStartPosition(),
-				pagination.getEndPosition());
+				id, pagination.getStartPosition(), pagination.getEndPosition());
 
 		int count =
-			_cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRelsCount(
-				GetterUtil.getLong(id));
+			_cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRelsCount(id);
 
 		List<CategoryDTO> categoryDTOs = new ArrayList<>();
 
@@ -103,16 +101,16 @@ public class CatalogRuleHelper {
 	}
 
 	public CollectionDTO<UserSegmentDTO> getUserSegmentDTOs(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws PortalException {
 
 		List<CPRuleUserSegmentRel> cpRuleUserSegmentRels =
 			_cpRuleUserSegmentRelService.getCPRuleUserSegmentRels(
-				GetterUtil.getLong(id), pagination.getStartPosition(),
-				pagination.getEndPosition(), null);
+				id, pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
 
 		int count = _cpRuleUserSegmentRelService.getCPRuleUserSegmentRelsCount(
-			GetterUtil.getLong(id));
+			id);
 
 		List<UserSegmentDTO> userSegmentDTOs = new ArrayList<>();
 
@@ -126,10 +124,10 @@ public class CatalogRuleHelper {
 	}
 
 	public CPRule updateCatalogRule(
-			String id, CatalogRuleDTO catalogRuleDTO, User user)
+			Long id, CatalogRuleDTO catalogRuleDTO, User user)
 		throws PortalException {
 
-		CPRule cpRule = _cpRuleService.getCPRule(GetterUtil.getLong(id));
+		CPRule cpRule = _cpRuleService.getCPRule(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			cpRule.getGroupId(), new long[0], user, true);
@@ -147,7 +145,7 @@ public class CatalogRuleHelper {
 
 		try {
 			CPRule cpRule = updateCatalogRule(
-				String.valueOf(catalogRuleDTO.getId()), catalogRuleDTO, user);
+				catalogRuleDTO.getId(), catalogRuleDTO, user);
 
 			return _dtoMapper.modelToDTO(cpRule);
 		}

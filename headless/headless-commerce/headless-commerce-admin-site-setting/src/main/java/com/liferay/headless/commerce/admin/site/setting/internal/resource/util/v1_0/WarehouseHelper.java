@@ -41,15 +41,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = WarehouseHelper.class)
 public class WarehouseHelper {
 
-	public void deleteWarehouse(String id) throws PortalException {
-		_commerceWarehouseService.deleteCommerceWarehouse(
-			GetterUtil.getLong(id));
+	public void deleteWarehouse(Long id) throws PortalException {
+		_commerceWarehouseService.deleteCommerceWarehouse(id);
 	}
 
-	public WarehouseDTO getWarehouseDTO(String id) throws PortalException {
+	public WarehouseDTO getWarehouseDTO(Long id) throws PortalException {
 		CommerceWarehouse commerceWarehouse =
-			_commerceWarehouseService.getCommerceWarehouse(
-				GetterUtil.getLong(id));
+			_commerceWarehouseService.getCommerceWarehouse(id);
 
 		return _dtoMapper.modelToDTO(commerceWarehouse);
 	}
@@ -91,12 +89,11 @@ public class WarehouseHelper {
 	}
 
 	public CommerceWarehouse updateWarehouse(
-			String id, WarehouseDTO warehouseDTO, User user)
+			Long id, WarehouseDTO warehouseDTO, User user)
 		throws PortalException {
 
 		CommerceWarehouse commerceWarehouse =
-			_commerceWarehouseService.getCommerceWarehouse(
-				GetterUtil.getLong(id));
+			_commerceWarehouseService.getCommerceWarehouse(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceWarehouse.getGroupId(), new long[0], user, true);
@@ -133,7 +130,7 @@ public class WarehouseHelper {
 
 		try {
 			CommerceWarehouse commerceWarehouse = updateWarehouse(
-				String.valueOf(warehouseDTO.getId()), warehouseDTO, user);
+				warehouseDTO.getId(), warehouseDTO, user);
 
 			return _dtoMapper.modelToDTO(commerceWarehouse);
 		}
