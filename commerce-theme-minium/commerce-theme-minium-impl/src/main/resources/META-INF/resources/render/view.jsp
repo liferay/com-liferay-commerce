@@ -41,7 +41,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 			<soy:template-renderer
 				componentId="<%= galleryId %>"
 				context="<%= context %>"
-				module="commerce-theme-minium-impl@1.0.8/product_gallery/MiniumProductGallery.es"
+				module="commerce-theme-minium-impl@1.0.9/product_gallery/MiniumProductGallery.es"
 				templateNamespace="MiniumProductGallery.render"
 			/>
 		</div>

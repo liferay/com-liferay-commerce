@@ -134,7 +134,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 
 		ComponentDescriptor testDescriptor = new ComponentDescriptor(
 			"ProductsCompare.render",
-			"commerce-theme-minium-impl@1.0.8/products_compare" +
+			"commerce-theme-minium-impl@1.0.9/products_compare" +
 				"/ProductsCompare.es",
 			null, null);
 
