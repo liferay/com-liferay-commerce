@@ -98,9 +98,9 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 			importableJavaTypes.addAll(
 				javaTypeProvider.getAdditionalImportableJavaTypes());
-			importableJavaTypes.add(javaTypeProvider.getModelFQCN());
+			importableJavaTypes.add(javaTypeProvider.getFQCN());
 
-			String javaType = javaTypeProvider.getModelName();
+			String javaType = javaTypeProvider.getClassName();
 			methodsSb.append(javaTypeProvider.getGetterMethodAnnotation());
 
 			if (!openApiProperty.isRequired()) {
