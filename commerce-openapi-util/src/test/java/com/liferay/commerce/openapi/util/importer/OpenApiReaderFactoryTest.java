@@ -26,11 +26,6 @@ import org.junit.Test;
  */
 public class OpenApiReaderFactoryTest {
 
-	@Test(expected = ReaderException.class)
-	public void testGetOpenApiLocatorIfInternalReferenceProvided() {
-		OpenApiReaderFactory.getOpenApiReader("#/components/schema/Item");
-	}
-
 	@Test
 	public void testGetOpenApiReader() throws Exception {
 		String configurationPath = ConfigurationFactory.getPath(
@@ -53,6 +48,11 @@ public class OpenApiReaderFactoryTest {
 		Assert.assertEquals(
 			"Correct open API locator implementation", FileOpenApiReader.class,
 			openApiReader.getClass());
+	}
+
+	@Test(expected = ReaderException.class)
+	public void testGetOpenApiReaderIfInternalReferenceProvided() {
+		OpenApiReaderFactory.getOpenApiReader("#/components/schema/Item");
 	}
 
 }
