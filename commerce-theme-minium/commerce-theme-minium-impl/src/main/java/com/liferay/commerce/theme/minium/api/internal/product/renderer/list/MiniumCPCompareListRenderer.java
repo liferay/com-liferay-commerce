@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.product.renderer.list;
+package com.liferay.commerce.theme.minium.internal.product.renderer.list;
 
 import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
 import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
@@ -23,7 +23,7 @@ import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
 import com.liferay.commerce.product.content.util.CPCompareContentHelper;
 import com.liferay.commerce.product.util.CPCompareUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
-import com.liferay.commerce.theme.minium.api.internal.product.model.ProductCompareModel;
+import com.liferay.commerce.theme.minium.internal.product.model.ProductCompareModel;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;

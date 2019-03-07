@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.product.renderer.list.entry;
+package com.liferay.commerce.theme.minium.internal.product.renderer.list.entry;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;

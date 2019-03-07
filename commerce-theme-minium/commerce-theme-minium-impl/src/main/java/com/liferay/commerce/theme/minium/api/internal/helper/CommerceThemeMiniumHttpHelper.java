@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.helper;
+package com.liferay.commerce.theme.minium.internal.helper;
 
 import com.liferay.application.list.PanelAppRegistry;
 import com.liferay.application.list.PanelCategoryRegistry;

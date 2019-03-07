@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.theme.minium.site.initializer.internal;
 
-import com.liferay.commerce.theme.minium.api.SiteInitializerDependencyResolver;
+import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;

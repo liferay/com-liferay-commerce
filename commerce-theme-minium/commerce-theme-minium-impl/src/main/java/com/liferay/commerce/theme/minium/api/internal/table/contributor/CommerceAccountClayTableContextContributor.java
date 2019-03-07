@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.table.contributor;
+package com.liferay.commerce.theme.minium.internal.table.contributor;
 
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableContextContributor;
