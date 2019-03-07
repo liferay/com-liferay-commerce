@@ -20,6 +20,9 @@ import com.liferay.headless.commerce.admin.pricing.internal.resource.util.v1_0.D
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountRuleDTO;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.annotation.Generated;
 
@@ -46,7 +49,7 @@ public class DiscountRuleResourceImpl implements DiscountRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
-	public Response deleteDiscountRule(String id) throws Exception {
+	public Response deleteDiscountRule(Long id) throws Exception {
 		_discountRuleHelper.deleteDiscountRule(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -56,7 +59,7 @@ public class DiscountRuleResourceImpl implements DiscountRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.read")
-	public DiscountRuleDTO getDiscountRule(String id) throws Exception {
+	public DiscountRuleDTO getDiscountRule(Long id) throws Exception {
 		return _discountRuleHelper.getDiscountRuleDTO(id);
 	}
 
@@ -64,25 +67,30 @@ public class DiscountRuleResourceImpl implements DiscountRuleResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
 	public DiscountRuleDTO updateDiscountRule(
-			String id, DiscountRuleDTO discountRuleDTO)
+			Long id, DiscountRuleDTO discountRuleDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_discountRuleHelper.updateDiscountRule(
+							id, discountRuleDTO);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
 
 		return _discountRuleHelper.updateDiscountRule(id, discountRuleDTO);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DiscountRuleResourceImpl.class);
 
 	@Context
 	private Async _async;

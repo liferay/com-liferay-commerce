@@ -20,6 +20,9 @@ import com.liferay.headless.commerce.admin.pricing.internal.resource.util.v1_0.T
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.TierPriceDTO;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.TierPriceResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
@@ -69,15 +72,17 @@ public class TierPriceResourceImpl implements TierPriceResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_tierPriceHelper.updateCommerceTierPriceEntry(
+							id, _company.getCompanyId(), tierPriceDTO);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -89,6 +94,9 @@ public class TierPriceResourceImpl implements TierPriceResource {
 
 		return responseBuilder.build();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		TierPriceResourceImpl.class);
 
 	@Context
 	private Async _async;

@@ -26,6 +26,9 @@ import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceEntryDTO;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceListDTO;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -91,15 +94,17 @@ public class PriceListResourceImpl implements PriceListResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_priceListHelper.updatePriceList(
+							id, priceListDTO, language, _company);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -120,15 +125,17 @@ public class PriceListResourceImpl implements PriceListResource {
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_priceEntryHelper.upsertCommercePriceEntry(
+							id, priceEntryDTO, _company);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -136,6 +143,9 @@ public class PriceListResourceImpl implements PriceListResource {
 		return _priceEntryHelper.upsertCommercePriceEntry(
 			id, priceEntryDTO, _company);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		PriceListResourceImpl.class);
 
 	@Context
 	private Async _async;

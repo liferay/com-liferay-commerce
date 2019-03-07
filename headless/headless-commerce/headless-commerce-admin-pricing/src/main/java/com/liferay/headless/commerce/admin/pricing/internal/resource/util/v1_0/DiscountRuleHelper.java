@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,17 +42,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = DiscountRuleHelper.class)
 public class DiscountRuleHelper {
 
-	public void deleteDiscountRule(String id) throws PortalException {
-		_commerceDiscountRuleService.deleteCommerceDiscountRule(
-			GetterUtil.getLong(id));
+	public void deleteDiscountRule(Long id) throws PortalException {
+		_commerceDiscountRuleService.deleteCommerceDiscountRule(id);
 	}
 
-	public DiscountRuleDTO getDiscountRuleDTO(String id)
-		throws PortalException {
-
+	public DiscountRuleDTO getDiscountRuleDTO(Long id) throws PortalException {
 		CommerceDiscountRule commerceDiscountRule =
-			_commerceDiscountRuleService.getCommerceDiscountRule(
-				GetterUtil.getLong(id));
+			_commerceDiscountRuleService.getCommerceDiscountRule(id);
 
 		return _dtoMapper.modelToDTO(commerceDiscountRule);
 	}
@@ -82,7 +77,7 @@ public class DiscountRuleHelper {
 	}
 
 	public DiscountRuleDTO updateDiscountRule(
-			String id, DiscountRuleDTO discountRuleDTO)
+			Long id, DiscountRuleDTO discountRuleDTO)
 		throws PortalException {
 
 		return _dtoMapper.modelToDTO(_updateDiscountRule(id, discountRuleDTO));
@@ -94,7 +89,7 @@ public class DiscountRuleHelper {
 
 		try {
 			CommerceDiscountRule commerceDiscountRule = _updateDiscountRule(
-				String.valueOf(discountRuleDTO.getId()), discountRuleDTO);
+				discountRuleDTO.getId(), discountRuleDTO);
 
 			return _dtoMapper.modelToDTO(commerceDiscountRule);
 		}
@@ -122,12 +117,11 @@ public class DiscountRuleHelper {
 	}
 
 	private CommerceDiscountRule _updateDiscountRule(
-			String id, DiscountRuleDTO discountRuleDTO)
+			Long id, DiscountRuleDTO discountRuleDTO)
 		throws PortalException {
 
 		return _commerceDiscountRuleService.updateCommerceDiscountRule(
-			GetterUtil.getLong(id), discountRuleDTO.getType(),
-			discountRuleDTO.getTypeSettings());
+			id, discountRuleDTO.getType(), discountRuleDTO.getTypeSettings());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

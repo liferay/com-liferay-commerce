@@ -25,8 +25,10 @@ import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountDTO;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.DiscountRuleDTO;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import javax.annotation.Generated;
 
@@ -53,7 +55,7 @@ public class DiscountResourceImpl implements DiscountResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
-	public Response deleteDiscount(String id) throws Exception {
+	public Response deleteDiscount(Long id) throws Exception {
 		_discountHelper.deleteDiscount(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -63,36 +65,36 @@ public class DiscountResourceImpl implements DiscountResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.read")
-	public DiscountDTO getDiscount(String id) throws Exception {
+	public DiscountDTO getDiscount(Long id) throws Exception {
 		return _discountHelper.getDiscountDTO(id);
 	}
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.read")
 	public CollectionDTO<DiscountRuleDTO> getDiscountRules(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws Exception {
 
-		return _discountRuleHelper.getDiscountRuleDTOs(
-			GetterUtil.getLong(id), pagination);
+		return _discountRuleHelper.getDiscountRuleDTOs(id, pagination);
 	}
 
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
-	public Response updateDiscount(String id, DiscountDTO discountDTO)
+	public Response updateDiscount(Long id, DiscountDTO discountDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_discountHelper.updateDiscount(id, discountDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
@@ -109,26 +111,31 @@ public class DiscountResourceImpl implements DiscountResource {
 	@RequiresScope("HeadlessCommerceAdminPricing.write")
 	@Status(Response.Status.CREATED)
 	public DiscountRuleDTO upsertDiscountRule(
-			String id, DiscountRuleDTO discountRuleDTO)
+			Long id, DiscountRuleDTO discountRuleDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
-			new Thread() {
-
-				public void run() {
-
-					// TODO
-
+			new Thread(
+				() -> {
+					try {
+						_discountRuleHelper.upsertDiscountRule(
+							id, discountRuleDTO, _user);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
 				}
-
-			}.start();
+			).start();
 
 			return null;
 		}
 
 		return _discountRuleHelper.upsertDiscountRule(
-			GetterUtil.getLong(id), discountRuleDTO, _user);
+			id, discountRuleDTO, _user);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DiscountResourceImpl.class);
 
 	@Context
 	private Async _async;
