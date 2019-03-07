@@ -49,7 +49,7 @@ public class AvailabilityEstimateResourceImpl
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteAvailabilityEstimate(String id) throws Exception {
+	public Response deleteAvailabilityEstimate(Long id) throws Exception {
 		_availabilityEstimateHelper.deleteAvailabilityEstimate(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -59,7 +59,7 @@ public class AvailabilityEstimateResourceImpl
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public AvailabilityEstimateDTO getAvailabilityEstimate(String id)
+	public AvailabilityEstimateDTO getAvailabilityEstimate(Long id)
 		throws Exception {
 
 		return _availabilityEstimateHelper.getAvailabilityEstimateDTO(id);
@@ -69,7 +69,7 @@ public class AvailabilityEstimateResourceImpl
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateAvailabilityEstimate(
-			String id, AvailabilityEstimateDTO availabilityEstimateDTO)
+			Long id, AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {

@@ -48,7 +48,7 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteTaxCategory(String id) throws Exception {
+	public Response deleteTaxCategory(Long id) throws Exception {
 		_taxCategoryHelper.deleteTaxCategory(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -58,14 +58,14 @@ public class TaxCategoryResourceImpl implements TaxCategoryResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public TaxCategoryDTO getTaxCategory(String id) throws Exception {
+	public TaxCategoryDTO getTaxCategory(Long id) throws Exception {
 		return _taxCategoryHelper.getTaxCategoryDTO(id);
 	}
 
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response updateTaxCategory(String id, TaxCategoryDTO taxCategoryDTO)
+	public Response updateTaxCategory(Long id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {

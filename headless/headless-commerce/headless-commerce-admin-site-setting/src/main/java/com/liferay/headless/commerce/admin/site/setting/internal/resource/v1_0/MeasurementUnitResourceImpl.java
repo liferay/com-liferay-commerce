@@ -48,7 +48,7 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteMeasurementUnit(String id) throws Exception {
+	public Response deleteMeasurementUnit(Long id) throws Exception {
 		_measurementUnitHelper.deleteMeasurementUnit(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -58,7 +58,7 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public MeasurementUnitDTO getMeasurementUnit(String id) throws Exception {
+	public MeasurementUnitDTO getMeasurementUnit(Long id) throws Exception {
 		return _measurementUnitHelper.getMeasurementUnitDTO(id);
 	}
 
@@ -66,7 +66,7 @@ public class MeasurementUnitResourceImpl implements MeasurementUnitResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public Response updateMeasurementUnit(
-			String id, MeasurementUnitDTO measurementUnitDTO)
+			Long id, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {

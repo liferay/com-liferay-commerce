@@ -42,17 +42,17 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = AvailabilityEstimateHelper.class)
 public class AvailabilityEstimateHelper {
 
-	public void deleteAvailabilityEstimate(String id) throws PortalException {
+	public void deleteAvailabilityEstimate(Long id) throws PortalException {
 		_commerceAvailabilityEstimateService.deleteCommerceAvailabilityEstimate(
-			GetterUtil.getLong(id));
+			id);
 	}
 
-	public AvailabilityEstimateDTO getAvailabilityEstimateDTO(String id)
+	public AvailabilityEstimateDTO getAvailabilityEstimateDTO(Long id)
 		throws PortalException {
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			_commerceAvailabilityEstimateService.
-				getCommerceAvailabilityEstimate(GetterUtil.getLong(id));
+				getCommerceAvailabilityEstimate(id);
 
 		return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
 	}
@@ -85,13 +85,12 @@ public class AvailabilityEstimateHelper {
 	}
 
 	public CommerceAvailabilityEstimate updateAvailabilityEstimate(
-			String id, AvailabilityEstimateDTO availabilityEstimateDTO,
-			User user)
+			Long id, AvailabilityEstimateDTO availabilityEstimateDTO, User user)
 		throws PortalException {
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			_commerceAvailabilityEstimateService.
-				getCommerceAvailabilityEstimate(GetterUtil.getLong(id));
+				getCommerceAvailabilityEstimate(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceAvailabilityEstimate.getGroupId(), new long[0], user, true);
@@ -116,8 +115,8 @@ public class AvailabilityEstimateHelper {
 		try {
 			CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 				updateAvailabilityEstimate(
-					String.valueOf(availabilityEstimateDTO.getId()),
-					availabilityEstimateDTO, user);
+					availabilityEstimateDTO.getId(), availabilityEstimateDTO,
+					user);
 
 			return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
 		}

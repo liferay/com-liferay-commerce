@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +41,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = TaxCategoryHelper.class)
 public class TaxCategoryHelper {
 
-	public void deleteTaxCategory(String id) throws PortalException {
-		_cpTaxCategoryService.deleteCPTaxCategory(GetterUtil.getLong(id));
+	public void deleteTaxCategory(Long id) throws PortalException {
+		_cpTaxCategoryService.deleteCPTaxCategory(id);
 	}
 
-	public TaxCategoryDTO getTaxCategoryDTO(String id) throws PortalException {
+	public TaxCategoryDTO getTaxCategoryDTO(Long id) throws PortalException {
 		CPTaxCategory cpTaxCategory = _cpTaxCategoryService.getCPTaxCategory(
-			GetterUtil.getLong(id));
+			id);
 
 		return _dtoMapper.modelToDTO(cpTaxCategory);
 	}
@@ -74,11 +73,11 @@ public class TaxCategoryHelper {
 	}
 
 	public CPTaxCategory updateTaxCategory(
-			String id, TaxCategoryDTO taxCategoryDTO)
+			Long id, TaxCategoryDTO taxCategoryDTO)
 		throws PortalException {
 
 		CPTaxCategory cpTaxCategory = _cpTaxCategoryService.getCPTaxCategory(
-			GetterUtil.getLong(id));
+			id);
 
 		return _cpTaxCategoryService.updateCPTaxCategory(
 			cpTaxCategory.getCPTaxCategoryId(),
@@ -92,7 +91,7 @@ public class TaxCategoryHelper {
 
 		try {
 			CPTaxCategory cpTaxCategory = updateTaxCategory(
-				String.valueOf(taxCategoryDTO.getId()), taxCategoryDTO);
+				taxCategoryDTO.getId(), taxCategoryDTO);
 
 			return _dtoMapper.modelToDTO(cpTaxCategory);
 		}

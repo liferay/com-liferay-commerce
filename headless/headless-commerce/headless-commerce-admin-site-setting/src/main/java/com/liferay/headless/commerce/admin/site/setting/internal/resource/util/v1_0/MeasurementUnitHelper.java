@@ -42,17 +42,15 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = MeasurementUnitHelper.class)
 public class MeasurementUnitHelper {
 
-	public void deleteMeasurementUnit(String id) throws PortalException {
-		_cpMeasurementUnitService.deleteCPMeasurementUnit(
-			GetterUtil.getLong(id));
+	public void deleteMeasurementUnit(Long id) throws PortalException {
+		_cpMeasurementUnitService.deleteCPMeasurementUnit(id);
 	}
 
-	public MeasurementUnitDTO getMeasurementUnitDTO(String id)
+	public MeasurementUnitDTO getMeasurementUnitDTO(Long id)
 		throws PortalException {
 
 		CPMeasurementUnit cpMeasurementUnit =
-			_cpMeasurementUnitService.getCPMeasurementUnit(
-				GetterUtil.getLong(id));
+			_cpMeasurementUnitService.getCPMeasurementUnit(id);
 
 		return _dtoMapper.modelToDTO(cpMeasurementUnit);
 	}
@@ -93,12 +91,11 @@ public class MeasurementUnitHelper {
 	}
 
 	public CPMeasurementUnit updateMeasurementUnit(
-			String id, MeasurementUnitDTO measurementUnitDTO, User user)
+			Long id, MeasurementUnitDTO measurementUnitDTO, User user)
 		throws PortalException {
 
 		CPMeasurementUnit cpMeasurementUnit =
-			_cpMeasurementUnitService.getCPMeasurementUnit(
-				GetterUtil.getLong(id));
+			_cpMeasurementUnitService.getCPMeasurementUnit(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			cpMeasurementUnit.getGroupId(), new long[0], user, true);
@@ -125,8 +122,7 @@ public class MeasurementUnitHelper {
 
 		try {
 			CPMeasurementUnit cpMeasurementUnit = updateMeasurementUnit(
-				String.valueOf(measurementUnitDTO.getId()), measurementUnitDTO,
-				user);
+				measurementUnitDTO.getId(), measurementUnitDTO, user);
 
 			return _dtoMapper.modelToDTO(cpMeasurementUnit);
 		}
