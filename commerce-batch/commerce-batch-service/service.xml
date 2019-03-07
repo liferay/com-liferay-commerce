@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_1_0.dtd">
+
+<service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.batch">
+	<author>Matija Petanjek</author>
+	<namespace>Commerce</namespace>
+	<entity local-service="true" name="CommerceBatchEntry" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceBatchEntryId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="key" type="String" />
+		<column name="name" type="String" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="status" type="String" />
+		<column name="callbackURL" type="String" />
+
+		<!-- Finder methods -->
+
+	</entity>
+</service-builder>
