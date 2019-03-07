@@ -61,9 +61,7 @@ public class ConfigurationFactory {
 			"No configuration matches external reference " + externalReference);
 	}
 
-	public static List<Properties> getConfigurations()
-		throws IOException {
-
+	public static List<Properties> getConfigurations() throws IOException {
 		if (_configRootPath == null) {
 			throw new IllegalStateException("Factory is not initialized");
 		}
