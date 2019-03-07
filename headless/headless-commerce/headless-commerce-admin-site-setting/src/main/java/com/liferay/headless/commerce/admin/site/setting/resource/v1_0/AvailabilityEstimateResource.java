@@ -36,21 +36,21 @@ public interface AvailabilityEstimateResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteAvailabilityEstimate(@PathParam("id") String id)
+	public Response deleteAvailabilityEstimate(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
 	public AvailabilityEstimateDTO getAvailabilityEstimate(
-			@PathParam("id") String id)
+			@PathParam("id") Long id)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateAvailabilityEstimate(
-			@PathParam("id") String id,
+			@PathParam("id") Long id,
 			AvailabilityEstimateDTO availabilityEstimateDTO)
 		throws Exception;
 
