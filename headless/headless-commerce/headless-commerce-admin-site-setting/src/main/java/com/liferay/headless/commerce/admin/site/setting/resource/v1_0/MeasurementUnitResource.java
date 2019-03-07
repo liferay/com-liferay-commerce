@@ -36,20 +36,20 @@ public interface MeasurementUnitResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteMeasurementUnit(@PathParam("id") String id)
+	public Response deleteMeasurementUnit(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public MeasurementUnitDTO getMeasurementUnit(@PathParam("id") String id)
+	public MeasurementUnitDTO getMeasurementUnit(@PathParam("id") Long id)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateMeasurementUnit(
-			@PathParam("id") String id, MeasurementUnitDTO measurementUnitDTO)
+			@PathParam("id") Long id, MeasurementUnitDTO measurementUnitDTO)
 		throws Exception;
 
 }

@@ -36,20 +36,20 @@ public interface TaxCategoryResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteTaxCategory(@PathParam("id") String id)
+	public Response deleteTaxCategory(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public TaxCategoryDTO getTaxCategory(@PathParam("id") String id)
+	public TaxCategoryDTO getTaxCategory(@PathParam("id") Long id)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateTaxCategory(
-			@PathParam("id") String id, TaxCategoryDTO taxCategoryDTO)
+			@PathParam("id") Long id, TaxCategoryDTO taxCategoryDTO)
 		throws Exception;
 
 }
