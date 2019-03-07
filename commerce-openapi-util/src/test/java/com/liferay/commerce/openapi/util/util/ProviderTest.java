@@ -27,10 +27,10 @@ public class ProviderTest {
 		Provider provider = new Provider(
 			"String", "java.lang.String", "localeId");
 
-		Assert.assertEquals("Model name", "String", provider.getModelName());
+		Assert.assertEquals("Model name", "String", provider.getClassName());
 		Assert.assertEquals(
 			"Fully qualified class name", "java.lang.String",
-			provider.getModelFQCN());
+			provider.getFQCN());
 		Assert.assertEquals(
 			"Variable name", "localeId", provider.getVariableName());
 	}
@@ -40,10 +40,10 @@ public class ProviderTest {
 		Provider provider = new Provider(
 			"TestDTO", "com.liferay.test.dto.TestDTO");
 
-		Assert.assertEquals("Model name", "TestDTO", provider.getModelName());
+		Assert.assertEquals("Model name", "TestDTO", provider.getClassName());
 		Assert.assertEquals(
 			"Fully qualified class name", "com.liferay.test.dto.TestDTO",
-			provider.getModelFQCN());
+			provider.getFQCN());
 		Assert.assertEquals(
 			"Variable name", "TestDTO", provider.getVariableName());
 	}

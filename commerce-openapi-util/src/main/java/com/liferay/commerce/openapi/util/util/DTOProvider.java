@@ -29,8 +29,8 @@ public class DTOProvider extends Provider {
 	}
 
 	@Override
-	public String getModelName() {
-		return super.getModelName() + "DTO";
+	public String getClassName() {
+		return super.getClassName() + "DTO";
 	}
 
 }
