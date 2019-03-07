@@ -54,7 +54,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteUserSegment(String id) throws Exception {
+	public Response deleteUserSegment(Long id) throws Exception {
 		_userSegmentHelper.deleteUserSegment(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -64,7 +64,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteUserSegmentCriterion(String id, String criterionId)
+	public Response deleteUserSegmentCriterion(Long id, String criterionId)
 		throws Exception {
 
 		_userSegmentCriterionHelper.deleteUserSegmentCriterion(criterionId);
@@ -76,14 +76,14 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public UserSegmentDTO getUserSegment(String id) throws Exception {
+	public UserSegmentDTO getUserSegment(Long id) throws Exception {
 		return _userSegmentHelper.getUserSegmentDTO(id);
 	}
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<UserSegmentCriterionDTO> getUserSegmentCriteria(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws Exception {
 
 		return _userSegmentCriterionHelper.getUserSegmentCriterionDTOs(
@@ -93,7 +93,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public UserSegmentCriterionDTO getUserSegmentCriterion(
-			String id, String criterionId)
+			Long id, String criterionId)
 		throws Exception {
 
 		return _userSegmentCriterionHelper.getUserSegmentCriterionDTO(
@@ -103,7 +103,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response updateUserSegment(String id, UserSegmentDTO userSegmentDTO)
+	public Response updateUserSegment(Long id, UserSegmentDTO userSegmentDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
@@ -133,7 +133,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			String id, String criterionId,
+			Long id, String criterionId,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception {
 
@@ -162,7 +162,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	@Status(Response.Status.CREATED)
 	public UserSegmentCriterionDTO upsertUserSegmentCriterion(
-			String id, UserSegmentCriterionDTO userSegmentCriterionDTO)
+			Long id, UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {

@@ -42,15 +42,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = UserSegmentHelper.class)
 public class UserSegmentHelper {
 
-	public void deleteUserSegment(String id) throws PortalException {
-		_commerceUserSegmentService.deleteCommerceUserSegmentEntry(
-			GetterUtil.getLong(id));
+	public void deleteUserSegment(Long id) throws PortalException {
+		_commerceUserSegmentService.deleteCommerceUserSegmentEntry(id);
 	}
 
-	public UserSegmentDTO getUserSegmentDTO(String id) throws PortalException {
+	public UserSegmentDTO getUserSegmentDTO(Long id) throws PortalException {
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			_commerceUserSegmentService.getCommerceUserSegmentEntry(
-				GetterUtil.getLong(id));
+			_commerceUserSegmentService.getCommerceUserSegmentEntry(id);
 
 		return _dtoMapper.modelToDTO(commerceUserSegmentEntry);
 	}
@@ -81,12 +79,11 @@ public class UserSegmentHelper {
 	}
 
 	public CommerceUserSegmentEntry updateUserSegment(
-			String id, UserSegmentDTO userSegmentDTO, User user)
+			Long id, UserSegmentDTO userSegmentDTO, User user)
 		throws PortalException {
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			_commerceUserSegmentService.getCommerceUserSegmentEntry(
-				GetterUtil.getLong(id));
+			_commerceUserSegmentService.getCommerceUserSegmentEntry(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceUserSegmentEntry.getGroupId(), new long[0], user, true);
@@ -109,9 +106,7 @@ public class UserSegmentHelper {
 
 		try {
 			CommerceUserSegmentEntry commerceUserSegmentEntry =
-				updateUserSegment(
-					String.valueOf(userSegmentDTO.getId()), userSegmentDTO,
-					user);
+				updateUserSegment(userSegmentDTO.getId(), userSegmentDTO, user);
 
 			return _dtoMapper.modelToDTO(commerceUserSegmentEntry);
 		}

@@ -48,7 +48,7 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteWarehouse(String id) throws Exception {
+	public Response deleteWarehouse(Long id) throws Exception {
 		_warehouseHelper.deleteWarehouse(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -58,14 +58,14 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public WarehouseDTO getWarehouse(String id) throws Exception {
+	public WarehouseDTO getWarehouse(Long id) throws Exception {
 		return _warehouseHelper.getWarehouseDTO(id);
 	}
 
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response updateWarehouse(String id, WarehouseDTO warehouseDTO)
+	public Response updateWarehouse(Long id, WarehouseDTO warehouseDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {

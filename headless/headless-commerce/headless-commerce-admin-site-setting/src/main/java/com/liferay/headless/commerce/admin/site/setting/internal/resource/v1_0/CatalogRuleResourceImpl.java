@@ -52,7 +52,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteCatalogRule(String id) throws Exception {
+	public Response deleteCatalogRule(Long id) throws Exception {
 		_catalogRuleHelper.deleteCatalogRule(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -62,14 +62,14 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
-	public CatalogRuleDTO getCatalogRule(String id) throws Exception {
+	public CatalogRuleDTO getCatalogRule(Long id) throws Exception {
 		return _catalogRuleHelper.getCatalogRuleDTO(id);
 	}
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<CategoryDTO> getCatalogRuleCategories(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws Exception {
 
 		return _catalogRuleHelper.getCategoryDTOs(id, pagination);
@@ -78,7 +78,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public CollectionDTO<UserSegmentDTO> getCatalogRuleUserSegments(
-			String id, Pagination pagination)
+			Long id, Pagination pagination)
 		throws Exception {
 
 		return _catalogRuleHelper.getUserSegmentDTOs(id, pagination);
@@ -87,7 +87,7 @@ public class CatalogRuleResourceImpl implements CatalogRuleResource {
 	@AsyncSupported
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response updateCatalogRule(String id, CatalogRuleDTO catalogRuleDTO)
+	public Response updateCatalogRule(Long id, CatalogRuleDTO catalogRuleDTO)
 		throws Exception {
 
 		if (_async.isEnabled()) {
