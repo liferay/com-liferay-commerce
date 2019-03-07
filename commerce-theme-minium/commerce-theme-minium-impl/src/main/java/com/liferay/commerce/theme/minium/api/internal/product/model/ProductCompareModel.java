@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.product.model;
+package com.liferay.commerce.theme.minium.internal.product.model;
 
 /**
  * @author Marco Leo

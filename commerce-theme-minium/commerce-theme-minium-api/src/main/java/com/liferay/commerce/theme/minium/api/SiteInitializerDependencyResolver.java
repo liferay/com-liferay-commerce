@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api;
+package com.liferay.commerce.theme.minium;
 
 import aQute.bnd.annotation.ProviderType;
 

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.theme.minium.api.internal.theme.contributor;
+package com.liferay.commerce.theme.minium.internal.theme.contributor;
 
-import com.liferay.commerce.theme.minium.api.internal.helper.CommerceThemeMiniumHttpHelper;
+import com.liferay.commerce.theme.minium.internal.helper.CommerceThemeMiniumHttpHelper;
 import com.liferay.portal.kernel.template.TemplateContextContributor;
 
 import java.util.Map;
