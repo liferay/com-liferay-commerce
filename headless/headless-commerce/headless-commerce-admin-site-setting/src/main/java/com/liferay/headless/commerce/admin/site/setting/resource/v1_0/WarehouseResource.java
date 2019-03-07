@@ -36,20 +36,18 @@ public interface WarehouseResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteWarehouse(@PathParam("id") String id)
-		throws Exception;
+	public Response deleteWarehouse(@PathParam("id") Long id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public WarehouseDTO getWarehouse(@PathParam("id") String id)
-		throws Exception;
+	public WarehouseDTO getWarehouse(@PathParam("id") Long id) throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateWarehouse(
-			@PathParam("id") String id, WarehouseDTO warehouseDTO)
+			@PathParam("id") Long id, WarehouseDTO warehouseDTO)
 		throws Exception;
 
 }

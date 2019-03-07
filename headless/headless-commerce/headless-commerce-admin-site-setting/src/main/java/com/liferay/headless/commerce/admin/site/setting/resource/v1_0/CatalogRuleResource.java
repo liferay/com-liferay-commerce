@@ -41,34 +41,34 @@ public interface CatalogRuleResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteCatalogRule(@PathParam("id") String id)
+	public Response deleteCatalogRule(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public CatalogRuleDTO getCatalogRule(@PathParam("id") String id)
+	public CatalogRuleDTO getCatalogRule(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/category")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<CategoryDTO> getCatalogRuleCategories(
-			@PathParam("id") String id, @Context Pagination pagination)
+			@PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/userSegment")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<UserSegmentDTO> getCatalogRuleUserSegments(
-			@PathParam("id") String id, @Context Pagination pagination)
+			@PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateCatalogRule(
-			@PathParam("id") String id, CatalogRuleDTO catalogRuleDTO)
+			@PathParam("id") Long id, CatalogRuleDTO catalogRuleDTO)
 		throws Exception;
 
 }

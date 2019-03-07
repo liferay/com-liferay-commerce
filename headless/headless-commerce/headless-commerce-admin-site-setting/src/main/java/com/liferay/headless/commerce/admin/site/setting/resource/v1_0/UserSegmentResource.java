@@ -41,42 +41,42 @@ public interface UserSegmentResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteUserSegment(@PathParam("id") String id)
+	public Response deleteUserSegment(@PathParam("id") Long id)
 		throws Exception;
 
 	@DELETE
 	@Path("/{id}/userSegmentCriterion/{criterionId}")
 	public Response deleteUserSegmentCriterion(
-			@PathParam("id") String id,
-			@PathParam("criterionId") String criterionId)
+			@PathParam("id") Long id,
+			@PathParam("criterionId") Long criterionId)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public UserSegmentDTO getUserSegment(@PathParam("id") String id)
+	public UserSegmentDTO getUserSegment(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/userSegmentCriterion")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<UserSegmentCriterionDTO> getUserSegmentCriteria(
-			@PathParam("id") String id, @Context Pagination pagination)
+			@PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO getUserSegmentCriterion(
-			@PathParam("id") String id,
-			@PathParam("criterionId") String criterionId)
+			@PathParam("id") Long id,
+			@PathParam("criterionId") Long criterionId)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateUserSegment(
-			@PathParam("id") String id, UserSegmentDTO userSegmentDTO)
+			@PathParam("id") Long id, UserSegmentDTO userSegmentDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -84,8 +84,8 @@ public interface UserSegmentResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			@PathParam("id") String id,
-			@PathParam("criterionId") String criterionId,
+			@PathParam("id") Long id,
+			@PathParam("criterionId") Long criterionId,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception;
 
@@ -94,7 +94,7 @@ public interface UserSegmentResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public UserSegmentCriterionDTO upsertUserSegmentCriterion(
-			@PathParam("id") String id,
+			@PathParam("id") Long id,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception;
 
