@@ -209,7 +209,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					Provider provider = openApiContextExtension.getProvider();
 
 					importStatements.add(
-						String.format("import %s;%n", provider.getModelFQCN()));
+						String.format("import %s;%n", provider.getFQCN()));
 				}
 			}
 
@@ -222,7 +222,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				Provider provider = paginationContext.getProvider();
 
 				importStatements.add(
-					String.format("import %s;%n", provider.getModelFQCN()));
+					String.format("import %s;%n", provider.getFQCN()));
 			}
 		}
 
