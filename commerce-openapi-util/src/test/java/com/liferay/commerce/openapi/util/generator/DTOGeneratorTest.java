@@ -80,10 +80,10 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						openApiProperty.getName())));
 
-			if (!"Boolean".equals(javaTypeProvider.getModelName())) {
+			if (!"Boolean".equals(javaTypeProvider.getClassName())) {
 				continue;
 			}
 
@@ -92,7 +92,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"public %s is%s", javaTypeProvider.getModelName(),
+						"public %s is%s", javaTypeProvider.getClassName(),
 						StringUtils.upperCaseFirstChar(
 							openApiProperty.getName()))));
 		}
@@ -144,7 +144,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						expectedVariableName)));
 		}
 	}
@@ -191,7 +191,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						openApiProperty.getName())));
 		}
 	}
@@ -329,7 +329,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						expectedVariableName)));
 		}
 	}
@@ -374,7 +374,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						expectedVariableName)));
 		}
 	}
@@ -420,7 +420,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", javaTypeProvider.getModelName(),
+						"private %s _%s", javaTypeProvider.getClassName(),
 						openApiProperty.getName())));
 
 			if (openApiProperty.isDictionary()) {

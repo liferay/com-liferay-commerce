@@ -20,12 +20,12 @@ package com.liferay.commerce.openapi.util.util;
 public class ArrayProvider extends Provider {
 
 	public ArrayProvider(Provider provider) {
-		super(provider.getModelName(), provider.getModelFQCN());
+		super(provider.getClassName(), provider.getFQCN());
 	}
 
 	@Override
-	public String getModelName() {
-		return super.getModelName() + "[]";
+	public String getClassName() {
+		return super.getClassName() + "[]";
 	}
 
 }

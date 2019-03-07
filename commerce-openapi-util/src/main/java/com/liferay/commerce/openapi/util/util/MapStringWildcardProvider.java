@@ -20,12 +20,12 @@ package com.liferay.commerce.openapi.util.util;
 public class MapStringWildcardProvider extends Provider {
 
 	public MapStringWildcardProvider(Provider provider) {
-		super(provider.getModelName(), provider.getModelFQCN());
+		super(provider.getClassName(), provider.getFQCN());
 	}
 
 	@Override
-	public String getModelName() {
-		return super.getModelName() + "<String, ?>";
+	public String getClassName() {
+		return super.getClassName() + "<String, ?>";
 	}
 
 }

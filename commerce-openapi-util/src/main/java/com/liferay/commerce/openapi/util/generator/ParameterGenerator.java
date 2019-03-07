@@ -28,7 +28,7 @@ public class ParameterGenerator {
 
 	public String toAnnotatedMethodContextParameter(Provider provider) {
 		return String.format(
-			"@Context %s %s", provider.getModelName(),
+			"@Context %s %s", provider.getClassName(),
 			StringUtils.lowerCaseFirstChar(provider.getVariableName()));
 	}
 
@@ -74,7 +74,7 @@ public class ParameterGenerator {
 
 		return String.format(
 			"%s(\"%s\") %s %s", parameterAnnotation, parameter.getName(),
-			javaTypeProvider.getModelName(),
+			javaTypeProvider.getClassName(),
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
@@ -103,13 +103,13 @@ public class ParameterGenerator {
 		}
 
 		return String.format(
-			"%s %s %s", nullableAnnotation, javaTypeProvider.getModelName(),
+			"%s %s %s", nullableAnnotation, javaTypeProvider.getClassName(),
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
 	public String toMethodParameter(Provider provider) {
 		return String.format(
-			"%s %s", provider.getModelName(),
+			"%s %s", provider.getClassName(),
 			StringUtils.lowerCaseFirstChar(provider.getVariableName()));
 	}
 

@@ -74,8 +74,7 @@ public class OpenApiImporterTest {
 			javaTypeProvider.getClass());
 
 		Assert.assertEquals(
-			"parameter java type", "Long",
-			javaTypeProvider.getModelName());
+			"parameter java type", "Long", javaTypeProvider.getClassName());
 	}
 
 }

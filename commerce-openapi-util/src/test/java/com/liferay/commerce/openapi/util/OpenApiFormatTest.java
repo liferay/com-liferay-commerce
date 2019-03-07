@@ -38,7 +38,7 @@ public class OpenApiFormatTest {
 			}
 
 			Assert.assertEquals(
-				provider.getModelName() + " syntax for getter", "get",
+				provider.getClassName() + " syntax for getter", "get",
 				openApiFormat.getGetterSyntax());
 		}
 	}

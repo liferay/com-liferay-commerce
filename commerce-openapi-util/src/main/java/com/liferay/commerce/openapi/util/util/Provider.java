@@ -23,12 +23,12 @@ import java.util.List;
  */
 public class Provider {
 
-	public Provider(String modelName, String fqcn) {
-		this(modelName, fqcn, modelName);
+	public Provider(String className, String fqcn) {
+		this(className, fqcn, className);
 	}
 
-	public Provider(String modelName, String fqcn, String variableName) {
-		_modelName = modelName;
+	public Provider(String className, String fqcn, String variableName) {
+		_className = className;
 		_fqcn = fqcn;
 		_variableName = variableName;
 	}
@@ -41,16 +41,16 @@ public class Provider {
 		return Collections.emptyList();
 	}
 
-	public String getGetterMethodAnnotation() {
-		return "";
+	public String getClassName() {
+		return _className;
 	}
 
-	public String getModelFQCN() {
+	public String getFQCN() {
 		return _fqcn;
 	}
 
-	public String getModelName() {
-		return _modelName;
+	public String getGetterMethodAnnotation() {
+		return "";
 	}
 
 	public String getSetterMethodAnnotation() {
@@ -61,8 +61,8 @@ public class Provider {
 		return _variableName;
 	}
 
+	private final String _className;
 	private final String _fqcn;
-	private final String _modelName;
 	private final String _variableName;
 
 }
