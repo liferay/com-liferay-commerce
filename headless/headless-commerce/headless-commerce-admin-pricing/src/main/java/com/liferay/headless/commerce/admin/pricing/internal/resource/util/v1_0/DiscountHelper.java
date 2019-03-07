@@ -44,14 +44,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = DiscountHelper.class)
 public class DiscountHelper {
 
-	public void deleteDiscount(String id) throws PortalException {
-		_commerceDiscountService.deleteCommerceDiscount(GetterUtil.getLong(id));
+	public void deleteDiscount(Long id) throws PortalException {
+		_commerceDiscountService.deleteCommerceDiscount(id);
 	}
 
-	public DiscountDTO getDiscountDTO(String id) throws PortalException {
+	public DiscountDTO getDiscountDTO(Long id) throws PortalException {
 		CommerceDiscount commerceDiscount =
-			_commerceDiscountService.getCommerceDiscount(
-				GetterUtil.getLong(id));
+			_commerceDiscountService.getCommerceDiscount(id);
 
 		return _dtoMapper.modelToDTO(commerceDiscount);
 	}
@@ -77,12 +76,11 @@ public class DiscountHelper {
 	}
 
 	public CommerceDiscount updateDiscount(
-			String id, DiscountDTO discountDTO, User user)
+			Long id, DiscountDTO discountDTO, User user)
 		throws PortalException {
 
 		CommerceDiscount commerceDiscount =
-			_commerceDiscountService.getCommerceDiscount(
-				GetterUtil.getLong(id));
+			_commerceDiscountService.getCommerceDiscount(id);
 
 		Boolean neverExpire = discountDTO.isNeverExpire();
 
@@ -134,8 +132,7 @@ public class DiscountHelper {
 		}
 
 		return _commerceDiscountService.updateCommerceDiscount(
-			GetterUtil.getLong(id), discountDTO.getTitle(),
-			discountDTO.getTarget(),
+			id, discountDTO.getTitle(), discountDTO.getTarget(),
 			GetterUtil.get(
 				discountDTO.isUseCouponCode(),
 				commerceDiscount.isUseCouponCode()),
@@ -164,7 +161,7 @@ public class DiscountHelper {
 
 		try {
 			CommerceDiscount commerceDiscount = updateDiscount(
-				String.valueOf(discountDTO.getId()), discountDTO, user);
+				discountDTO.getId(), discountDTO, user);
 
 			return _dtoMapper.modelToDTO(commerceDiscount);
 		}
