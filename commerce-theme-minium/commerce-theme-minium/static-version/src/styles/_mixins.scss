@@ -1,0 +1,34 @@
+@mixin minium-typo-title {
+	color: $color-fg;
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 3px;
+	line-height: 19px;
+	margin: $minium-big-gutter 0;
+	text-transform: uppercase;
+}
+
+@mixin minium-typo-text {
+	font-size: 14px;
+	line-height: 32px;
+}
+
+@mixin minium-panel-title {
+	background-color: $color-bg;
+	border-radius: 8px;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 1.2px;
+	line-height: 16px;
+	margin-bottom: 5px;
+	padding: 12px 30px;
+	text-transform: uppercase;
+}
+
+@mixin minium-panel-body {
+	@include minium-typo-text;
+
+	background-color: $color-bg;
+	border-radius: 8px;
+	padding: 10px 25px;
+}

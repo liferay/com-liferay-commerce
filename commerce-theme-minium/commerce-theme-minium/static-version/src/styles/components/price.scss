@@ -1,0 +1,19 @@
+.price {
+	font-weight: 600;
+
+	&--big {
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	&--old {
+		color: $color-fg-alt;
+		font-weight: normal;
+		margin-left: 10px;
+		text-decoration: line-through;
+	}
+
+	&--discounted {
+		color: $color-mood-bad
+	}
+}

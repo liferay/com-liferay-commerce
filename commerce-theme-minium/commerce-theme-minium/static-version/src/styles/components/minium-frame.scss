@@ -1,0 +1,142 @@
+.minium-frame {
+	background-color: $color-bg-alt;
+	display: grid;
+	grid-template-areas:
+		"sidebar topbar"
+		"sidebar content";
+	grid-template-columns: $frame-size 1fr;
+	grid-template-rows: auto 1fr;
+	height: 100vh;
+	overflow: hidden;
+
+	&__topbar {
+		display: grid;
+		grid-area: topbar;
+		z-index: 1105;
+	}
+
+	&__sidebar {
+		display: grid;
+		grid-area: sidebar;
+		z-index: 1120;
+	}
+
+	&__content {
+		grid-area: content;
+		overflow: auto;
+	}
+
+	&__overlay {
+		background-color: $color-modal-mask;
+		grid-area: content;
+		overflow: auto;
+		padding-bottom: 10%;
+		position: relative;
+		z-index: 100;
+
+		.minium-frame:not(.has-search) & {
+			display: none;
+		}
+	}
+
+	&__toolbar {
+		align-self: flex-start;
+		background-color: $color-bg;
+		box-shadow: 0 0 0 transparent;
+		grid-area: content;
+		height: $frame-size;
+		position: relative;
+		transition:
+		box-shadow $transition,
+		transform $transition;
+		width: 100%;
+
+		.minium-frame:not(.is-scrolled) &,
+		&:not(.is-visible) {
+			transform: translateY(-100%);
+		}
+
+		.minium-frame.is-scrolled &,
+		.minium-frame.has-search & {
+			box-shadow: $minium-shadow;
+		}
+	}
+
+	&__cta,
+	&__dock {
+		&:empty {
+			display: none;
+		}
+
+		&:not(.is-visible) {
+			transform: translateY(200%);
+		}
+	}
+
+	&__dock {
+		align-self: flex-end;
+		grid-area: content;
+		justify-self: center;
+		padding: $minium-gutter;
+		position: relative;
+		transition: transform $transition;
+	}
+
+	&__cta {
+		bottom: 0;
+		display: flex;
+		filter: drop-shadow($color-shadow);
+		justify-content: center;
+		left: $frame-size;
+		padding: 20px;
+		pointer-events: none;
+		position: fixed;
+		right: 0;
+		transition: transform ease 200ms, left ease 500ms;
+		z-index: 100;
+
+		& > * {
+			pointer-events: auto;
+		}
+
+		body.open & {
+			left: calc(320px + #{$frame-size});
+		}
+	}
+
+	&__dock {
+		background: $color-bg;
+		border-radius: 8px 8px 0 0;
+		box-shadow: 0 -20px 40px 0 $color-shadow;
+	}
+
+	&__tray {
+		align-self: flex-start;
+		grid-area: content;
+		justify-self: end;
+		margin-right: 20px;
+		margin-top: 20px;
+		z-index: 1190;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	&__modal {
+		align-items: center;
+		background: $color-modal-mask;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 1180;
+
+		&:not(.is-visible) {
+			display: none;
+		}
+	}
+}

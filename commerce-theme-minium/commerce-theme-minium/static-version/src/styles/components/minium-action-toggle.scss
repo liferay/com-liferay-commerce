@@ -1,0 +1,13 @@
+.minium-action-toggle {
+	align-items: center;
+	color: #9D9E9E;
+	display: flex;
+	font-size: 21px;
+	justify-content: flex-end;
+	opacity: 0.3;
+
+	.table tr.is-active &__open,
+	.table tr:not(.is-active) &__close {
+		display: none;
+	}
+}

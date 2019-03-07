@@ -1,0 +1,9 @@
+[
+	{
+		"name": "All Products",
+		"type": "all-products",
+		"userSegments": [
+			"user"
+		]
+	}
+]

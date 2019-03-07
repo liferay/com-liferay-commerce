@@ -1,0 +1,45 @@
+$color-fg: #5C5E5E;
+$color-fg-alt: #7F848D;
+$color-bg: #FFF;
+$color-bg-medium: #FCFCFC;
+$color-bg-alt: #F7F7F8;
+$color-bg-dark: #34373E;
+$color-border: #ECEEF1;
+$color-shadow: rgba(92, 94, 94, 0.14);
+$color-disabled: #C9DAFF;
+
+$color-theme: #4C84FF;
+$color-theme-transparent: rgba($color-theme, 0.067);
+
+$color-modal-mask: rgba(52,55,62,0.6);
+
+$color-mood-good: #4BC286;
+$color-mood-neutral: #FEE4B8;
+$color-mood-bad: #EC676A;
+$color-mood-bad-bg: #FEF7F7;
+
+$placeholder-colors: (
+	#9BE2BD,
+	#B3EFF5,
+	#FEE4B8,
+	#FFB78C,
+	#FF83A3,
+	#F5B3EF,
+	#B48FF7,
+	#639DFF
+);
+
+$minium-shadow: 0 10px 20px $color-shadow;
+$minium-shadow-focus: 0 3px 20px 0 rgba($color-theme, .5);
+
+$minium-gutter: 20px;
+$minium-small-gutter: $minium-gutter / 2;
+$minium-big-gutter: $minium-gutter * 2;
+
+$liferay-topbar-size: 56px;
+$frame-size: 70px;
+$sidebar-width: 300px;
+$content-max-width: 1440px;
+
+$transition: ease 200ms;
+$micro-transition: ease 100ms;

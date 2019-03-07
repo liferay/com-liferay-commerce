@@ -1,0 +1,171 @@
+.minium-card {
+	$cover-image-height: 200px;
+
+	align-items: center;
+	background: white;
+	border-radius: 5px;
+	box-shadow: 0 17px 56px 0 rgba(52, 55, 62, 0);
+	color: $color-fg-alt;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 384px;
+	overflow: hidden;
+	padding: 20px;
+	position: relative;
+	text-align: center;
+	transition: box-shadow .2s ease-in-out;
+
+	&:hover {
+		box-shadow: 0 17px 56px 0 rgba(52, 55, 62, 0.08);
+	}
+
+	&:focus {
+		box-shadow: $minium-shadow-focus;
+		outline: none;
+	}
+
+	&__close {
+		position: absolute;
+	}
+
+	&__compare {
+		left: $minium-gutter;
+		position: absolute;
+		top: $minium-gutter;
+	}
+
+	&__availability {
+		left: $minium-gutter;
+		position: absolute;
+		top: $cover-image-height;
+
+		.commerce-dot {
+			left: 0;
+			line-height: 0;
+			position: absolute;
+			top: 0;
+			transform: translateY(-50%);
+
+			&::before {
+				height: 20px;
+				width: 20px;
+			}
+		}
+	}
+
+	&__delete {
+		background: #F1676A;
+		border-radius: 50%;
+		color: white;
+		cursor: pointer;
+		font-size: 11px;
+		height: 18px;
+		line-height: 1.1;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		width: 18px;
+		z-index: 10;
+
+		svg {
+			height: 22px;
+			left: -3px;
+			position: relative;
+			top: 0;
+			width: 22px;
+		}
+
+		path {
+			fill: rgba(255,255,255, 0.9);
+		}
+	}
+
+	&__picture {
+		background-color: #EBEBEB;
+		background-position: 50%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: $cover-image-height;
+		margin-top: -20px;
+		overflow: hidden;
+		position: relative;
+		width: calc(100% + 40px);
+
+		&::before {
+			background: inherit;
+			bottom: 0;
+			content: "";
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			transition: all ease 200ms;
+
+			.minium-card:hover & {
+				transform: scale(1.1);
+			}
+		}
+	}
+
+	&__sku {
+		display: inline-block;
+		font-size: 12px;
+		line-height: 1;
+		margin-bottom: 0;
+		margin-top: 24px;
+	}
+
+	&__empty_sku {
+		display: inline-block;
+		font-size: 12px;
+		line-height: 1;
+		margin-bottom: 0;
+		margin-top: 24px;
+		min-height: 12px;
+	}
+
+	&__name {
+		color: inherit;
+		font-size: 17px;
+		font-weight: 600;
+		line-height: 1;
+		margin-bottom: 0;
+		margin-top: 8px;
+
+		&:hover {
+		 color: inherit;
+		 text-decoration: underline;
+		}
+	}
+
+	&__categories {
+		font-size: 13px;
+		margin-bottom: 0;
+		margin-top: 5px;
+	}
+
+	&__compare-checkbox {
+		border-radius: 4px;
+		left: 20px;
+		position: absolute;
+		top: 20px;
+		z-index: 10;
+	}
+
+	&__description {
+		flex: 1;
+		line-height: 28px;
+		margin: 0;
+	}
+
+	&__price {
+		margin: 8px 0;
+	}
+
+	.product-compare-checkbox {
+		line-height: 1;
+		position: absolute;
+		z-index: 1;
+	}
+}

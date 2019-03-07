@@ -1,0 +1,74 @@
+.commerce-add-to-tick {
+	cursor: pointer;
+	height: 40px;
+	width: 40px;
+
+	&__circle {
+		fill: #C9DAFF;
+		opacity: 1;
+		stroke-dasharray: 130;
+		stroke-dashoffset: 130;
+		transition: all .5s;
+	}
+
+	&__tick {
+		fill:none;
+		stroke:#A7E5BE;
+		stroke-linecap:round;
+		stroke-linejoin:round;
+		stroke-width:11px;
+		stroke-dasharray: 100;
+		stroke-dashoffset: 100;
+		transition: stroke-dashoffset .2s ease-out;
+	}
+
+	&__add {
+		opacity: 1;
+		stroke-dasharray: 100;
+		stroke-dashoffset: 0;
+		transform-origin: 50%;
+		transition: all .2s ease-out;
+
+		line {
+			fill:none;
+			stroke:#C9DAFF;
+			stroke-miterlimit:10;
+			stroke-width:11px
+		}
+	}
+
+	&:hover {
+		.commerce-add-to-tick__add line {
+			stroke: #4C83FF
+		}
+	}
+
+	&.is-added {
+		.commerce-add-to-tick__circle,
+		.commerce-add-to-tick__tick {
+			opacity: 1;
+			stroke-dashoffset: 0;
+		}
+
+		.commerce-add-to-tick__circle {
+			fill: #A7E5BE;
+
+			.user-item:hover & {
+				fill: #A7E5BE;
+			}
+		}
+
+		&:hover .commerce-add-to-tick__tick {
+			stroke:#4BC287;
+		}
+
+		.commerce-add-to-tick__add {
+			opacity: 0;
+			transform: scale(.2);
+
+			.user-item:hover & line {
+				stroke: #4C83FF;
+			}
+		}
+	}
+}

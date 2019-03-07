@@ -1,0 +1,18 @@
+#minium {
+	font-family: 'Roboto', sans-serif;
+
+	button{
+		&:focus {
+			outline: none;
+		}
+	}
+
+	svg {
+		vertical-align: middle
+	}
+}
+
+button {
+	background: none;
+	border: none;
+}

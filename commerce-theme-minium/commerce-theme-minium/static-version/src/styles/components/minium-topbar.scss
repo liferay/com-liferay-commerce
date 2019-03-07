@@ -1,0 +1,25 @@
+.minium-topbar {
+	background-color: $color-bg;
+	color: $color-fg-alt;
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	justify-content: space-between;
+	position: relative;
+
+	&__start,
+	&__end {
+		display: flex;
+	}
+
+	&__search {
+		background-color: $color-bg-alt;
+		grid-column: span 3;
+		max-height: $frame-size;
+		overflow: hidden;
+		transition: max-height $transition;
+
+		.minium-frame:not(.has-search) & {
+			max-height: 0;
+		}
+	}
+}

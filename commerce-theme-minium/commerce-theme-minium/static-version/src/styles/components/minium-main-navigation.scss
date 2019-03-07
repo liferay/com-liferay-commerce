@@ -1,0 +1,5 @@
+.minium-main-navigation {
+	&__submenu:not(.is-open) {
+		display: none;
+	}
+}

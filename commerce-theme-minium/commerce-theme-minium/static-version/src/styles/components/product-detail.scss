@@ -1,0 +1,9 @@
+.product-detail {
+	p {
+		margin-bottom: 20px;
+	}
+
+	&__actions {
+		margin: $minium-gutter 0 $minium-big-gutter;
+	}
+}

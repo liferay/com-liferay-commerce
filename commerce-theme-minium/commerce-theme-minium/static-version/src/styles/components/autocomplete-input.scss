@@ -1,0 +1,49 @@
+.autocomplete-input {
+	border: 2px solid $color-shadow;
+	border-radius: 10px;
+	color: $color-fg;
+	display: grid;
+	grid-template-columns: 30px auto;
+	overflow: hidden;
+	padding: 10px;
+	width: 100%;
+
+	form {
+		display: inline;
+		flex-grow: 1;
+	}
+
+	input:focus {
+		outline: none;
+	}
+
+	&__icon {
+		align-self: start;
+		text-align: center;
+	}
+
+	&__wrapper {
+		overflow: auto;
+	}
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: -3px;
+		max-height: 76px;
+		overflow: auto;
+	}
+
+	&__box {
+		background: transparent;
+		border: none;
+		margin-bottom: 4px;
+		margin-left: 15px;
+		width: calc(100% - 18px);
+	}
+
+	&__delete {
+		display: inline-block;
+		margin-left: 10px;
+	}
+}
