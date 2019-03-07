@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -64,7 +63,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
-	public Response deleteUserSegmentCriterion(Long id, String criterionId)
+	public Response deleteUserSegmentCriterion(Long id, Long criterionId)
 		throws Exception {
 
 		_userSegmentCriterionHelper.deleteUserSegmentCriterion(criterionId);
@@ -87,13 +86,13 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		throws Exception {
 
 		return _userSegmentCriterionHelper.getUserSegmentCriterionDTOs(
-			GetterUtil.getLong(id), pagination);
+			id, pagination);
 	}
 
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.read")
 	public UserSegmentCriterionDTO getUserSegmentCriterion(
-			Long id, String criterionId)
+			Long id, Long criterionId)
 		throws Exception {
 
 		return _userSegmentCriterionHelper.getUserSegmentCriterionDTO(
@@ -133,7 +132,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 	@Override
 	@RequiresScope("HeadlessCommerceAdminSiteSetting.write")
 	public UserSegmentCriterionDTO updateUserSegmentCriterion(
-			Long id, String criterionId,
+			Long id, Long criterionId,
 			UserSegmentCriterionDTO userSegmentCriterionDTO)
 		throws Exception {
 
@@ -170,8 +169,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 				() -> {
 					try {
 						_userSegmentCriterionHelper.upsertUserSegmentCriterion(
-							GetterUtil.getLong(id), userSegmentCriterionDTO,
-							_user);
+							id, userSegmentCriterionDTO, _user);
 					}
 					catch (PortalException pe) {
 						_log.error(pe, pe);
@@ -183,7 +181,7 @@ public class UserSegmentResourceImpl implements UserSegmentResource {
 		}
 
 		return _userSegmentCriterionHelper.upsertUserSegmentCriterion(
-			GetterUtil.getLong(id), userSegmentCriterionDTO, _user);
+			id, userSegmentCriterionDTO, _user);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

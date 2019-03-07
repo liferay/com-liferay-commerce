@@ -61,7 +61,7 @@ public class UserSegmentCriterionHelper {
 	}
 
 	public CollectionDTO<UserSegmentCriterionDTO> getUserSegmentCriterionDTOs(
-			long commerceUserSegmentEntryId, Pagination pagination)
+			Long commerceUserSegmentEntryId, Pagination pagination)
 		throws PortalException {
 
 		List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria =
@@ -97,7 +97,7 @@ public class UserSegmentCriterionHelper {
 	}
 
 	public UserSegmentCriterionDTO upsertUserSegmentCriterion(
-			long userSegmentId, UserSegmentCriterionDTO userSegmentCriterionDTO,
+			Long userSegmentId, UserSegmentCriterionDTO userSegmentCriterionDTO,
 			User user)
 		throws PortalException {
 
