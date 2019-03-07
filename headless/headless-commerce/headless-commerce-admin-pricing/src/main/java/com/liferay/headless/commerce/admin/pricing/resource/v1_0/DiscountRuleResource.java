@@ -36,13 +36,13 @@ public interface DiscountRuleResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteDiscountRule(@PathParam("id") String id)
+	public Response deleteDiscountRule(@PathParam("id") Long id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public DiscountRuleDTO getDiscountRule(@PathParam("id") String id)
+	public DiscountRuleDTO getDiscountRule(@PathParam("id") Long id)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -50,7 +50,7 @@ public interface DiscountRuleResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public DiscountRuleDTO updateDiscountRule(
-			@PathParam("id") String id, DiscountRuleDTO discountRuleDTO)
+			@PathParam("id") Long id, DiscountRuleDTO discountRuleDTO)
 		throws Exception;
 
 }

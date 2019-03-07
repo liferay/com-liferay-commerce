@@ -41,25 +41,25 @@ public interface DiscountResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteDiscount(@PathParam("id") String id) throws Exception;
+	public Response deleteDiscount(@PathParam("id") Long id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
-	public DiscountDTO getDiscount(@PathParam("id") String id) throws Exception;
+	public DiscountDTO getDiscount(@PathParam("id") Long id) throws Exception;
 
 	@GET
 	@Path("/{id}/discountRule")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<DiscountRuleDTO> getDiscountRules(
-			@PathParam("id") String id, @Context Pagination pagination)
+			@PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
 	@Path("/{id}")
 	@PUT
 	public Response updateDiscount(
-			@PathParam("id") String id, DiscountDTO discountDTO)
+			@PathParam("id") Long id, DiscountDTO discountDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -67,7 +67,7 @@ public interface DiscountResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public DiscountRuleDTO upsertDiscountRule(
-			@PathParam("id") String id, DiscountRuleDTO discountRuleDTO)
+			@PathParam("id") Long id, DiscountRuleDTO discountRuleDTO)
 		throws Exception;
 
 }
