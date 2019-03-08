@@ -26,5 +26,8 @@
 
 		<!-- Finder methods -->
 
+		<finder name="Key" return-type="CommerceBatchJob" unique="true">
+			<finder-column name="key" />
+		</finder>
 	</entity>
 </service-builder>
