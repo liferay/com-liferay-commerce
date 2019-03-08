@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=true",
-		"javax.portlet.display-name=My Downloads",
+		"javax.portlet.display-name=Product Downloads",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + CommerceVirtualOrderPortletKeys.COMMERCE_VIRTUAL_ORDER_ITEM_CONTENT,
