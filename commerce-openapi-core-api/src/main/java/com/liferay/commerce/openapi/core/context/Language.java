@@ -14,58 +14,11 @@
 
 package com.liferay.commerce.openapi.core.context;
 
-import java.util.Locale;
-import java.util.Objects;
-
 /**
  * @author Zoltán Takács
  */
-public class Language {
+public interface Language {
 
-	public Language(Locale locale) {
-		this(locale.toString());
-	}
-
-	public Language(String languageId) {
-		Objects.requireNonNull(languageId);
-
-		if (!languageId.matches("^[a-z]{2}_[A-Z]{2}$")) {
-			throw new IllegalArgumentException(
-				"Not a valid Language ID. Expected format: \"en_US\".");
-		}
-
-		_languageId = languageId;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-
-		if ((o == null) || (getClass() != o.getClass())) {
-			return false;
-		}
-
-		Language language = (Language)o;
-
-		return _languageId.equals(language._languageId);
-	}
-
-	public String getLanguageId() {
-		return _languageId;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(_languageId);
-	}
-
-	@Override
-	public String toString() {
-		return _languageId;
-	}
-
-	private String _languageId;
+	public String getLanguageId();
 
 }

@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.core.internal.context.provider;
 
 import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.context.Language;
+import com.liferay.commerce.openapi.core.internal.context.LanguageImpl;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Locale;
@@ -57,7 +58,7 @@ public class LanguageContextProvider implements ContextProvider<Language> {
 					"HTTP.REQUEST"));
 		}
 
-		return new Language(locale);
+		return new LanguageImpl(locale);
 	}
 
 	@Reference
