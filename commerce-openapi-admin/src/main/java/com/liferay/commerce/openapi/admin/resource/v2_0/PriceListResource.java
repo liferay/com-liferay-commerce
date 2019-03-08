@@ -15,7 +15,6 @@
 package com.liferay.commerce.openapi.admin.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
-import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -42,24 +41,21 @@ public interface PriceListResource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deletePriceList(
-			@PathParam("id") String id, @Context Language language)
+	public Response deletePriceList(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json", "application/xml"})
 	public PriceListDTO getPriceList(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Language language)
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@QueryParam("groupId") Long groupId, @Context Language language,
-			@Context Pagination pagination)
+			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -67,7 +63,7 @@ public interface PriceListResource {
 	@PUT
 	public Response updatePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			PriceListDTO priceListDTO, @Context Language language)
+			PriceListDTO priceListDTO)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -75,8 +71,7 @@ public interface PriceListResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public PriceListDTO upsertPriceList(
-			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO,
-			@Context Language language)
+			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO)
 		throws Exception;
 
 }
