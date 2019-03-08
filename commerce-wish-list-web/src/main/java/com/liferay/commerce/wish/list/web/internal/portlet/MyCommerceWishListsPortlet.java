@@ -56,7 +56,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=true",
-		"javax.portlet.display-name=My Commerce Wish Lists",
+		"javax.portlet.display-name=Wish Lists",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/my_wish_lists/view.jsp",
 		"javax.portlet.name=" + CommerceWishListPortletKeys.MY_COMMERCE_WISH_LISTS,

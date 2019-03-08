@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=false",
-		"javax.portlet.display-name=Commerce Cart Content Total",
+		"javax.portlet.display-name=Cart Summary",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/cart_total/view.jsp",
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_CART_CONTENT_TOTAL,
