@@ -106,7 +106,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
 				false,
-				_getLocalizedMessage(locale, "that-quantity-unavailable"));
+				_getLocalizedMessage(locale, "that-quantity-is-unavailable"));
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -154,7 +154,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				_getLocalizedMessage(locale, "that-quantity-unavailable"));
+				_getLocalizedMessage(locale, "that-quantity-is-unavailable"));
 		}
 
 		return new CommerceOrderValidatorResult(true);
