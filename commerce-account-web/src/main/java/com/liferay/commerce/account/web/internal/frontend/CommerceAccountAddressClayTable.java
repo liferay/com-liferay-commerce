@@ -138,7 +138,7 @@ public class CommerceAccountAddressClayTable
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
 		clayTableSchemaBuilder.addField("address", "address");
-		clayTableSchemaBuilder.addField("referent", "referent");
+		clayTableSchemaBuilder.addField("referent", "name");
 		clayTableSchemaBuilder.addField("phoneNumber", "phone");
 
 		return clayTableSchemaBuilder.build();
