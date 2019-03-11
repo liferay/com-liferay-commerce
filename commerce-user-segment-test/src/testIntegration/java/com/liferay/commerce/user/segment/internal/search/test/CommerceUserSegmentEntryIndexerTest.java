@@ -94,11 +94,7 @@ public class CommerceUserSegmentEntryIndexerTest {
 
 		String name = document.get(Field.NAME);
 
-		String cleanName = name.replace(
-			"[", ""
-		).replace(
-			"]", ""
-		);
+		String cleanName = name.replaceAll("[\\[\\]]", "");
 
 		Assert.assertEquals(
 			commerceUserSegmentEntry.getName(Locale.ENGLISH), cleanName);
