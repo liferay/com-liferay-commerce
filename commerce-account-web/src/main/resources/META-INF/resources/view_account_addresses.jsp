@@ -78,9 +78,11 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 		Liferay.provide(
 			window,
 			'editCommerceAddress',
-			function(evt) {
+			function(id) {
 				const addAddressModal = Liferay.component('addAddressModal');
-				addAddressModal.initAddress()
+
+				addAddressModal._fetchExistingAddress(id);
+
 				addAddressModal.open();
 			}
 		);
@@ -111,6 +113,11 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 						document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
 
 						document.querySelector('#<portlet:namespace />addressType').value = formData.addressType;
+
+						if (formData.id) {
+							document.querySelector('#<portlet:namespace />commerceAddressId').value = formData.id;
+							document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.UPDATE %>';
+						}
 
 						addAddressModal.close();
 
