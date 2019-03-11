@@ -42,10 +42,11 @@ public class AccountFilterFactoryImpl implements FilterFactory {
 	public Filter create(HttpServletRequest httpServletRequest) {
 		AccountFilterImpl accountFilter = new AccountFilterImpl();
 
-		long commerceAccountId = ParamUtil.getLong(
-			httpServletRequest, "commerceAccountId");
+		long accountId = ParamUtil.getLong(httpServletRequest, "accountId");
+		long userId = ParamUtil.getLong(httpServletRequest, "userId");
 
-		accountFilter.setAccountId(commerceAccountId);
+		accountFilter.setAccountId(accountId);
+		accountFilter.setUserId(userId);
 
 		String keywords = ParamUtil.getString(httpServletRequest, "q");
 

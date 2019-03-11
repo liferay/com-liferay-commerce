@@ -238,6 +238,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 			filter = filterFactory.create(request);
 		}
 
+		putValue("filters", filter);
+
 		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
 
 		List<Object> items = commerceDataSetDataProvider.getItems(
