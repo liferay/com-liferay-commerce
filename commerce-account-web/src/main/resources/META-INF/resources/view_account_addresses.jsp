@@ -40,11 +40,11 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <c:if test="<%= commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 	<div class="commerce-cta is-visible">
-		<aui:button cssClass="commerce-button commerce-button--big js-add-address" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
+		<aui:button cssClass="commerce-button commerce-button--big js-add-address" onClick='<%= renderResponse.getNamespace() + "openAddressModal();" %>' value="add-address" />
 	</div>
 
 	<commerce-ui:add-address-modal
-		componentId="addAddressModal"
+		componentId="addressModal"
 	/>
 
 	<portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
@@ -68,10 +68,10 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 	<aui:script>
 		Liferay.provide(
 			window,
-			'<portlet:namespace />openAddAddressModal',
+			'<portlet:namespace />openAddressModal',
 			function(evt) {
-				const addAddressModal = Liferay.component('addAddressModal');
-				addAddressModal.open();
+				const addressModal = Liferay.component('addressModal');
+				addressModal.open();
 			}
 		);
 
@@ -79,11 +79,11 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 			window,
 			'editCommerceAddress',
 			function(id) {
-				const addAddressModal = Liferay.component('addAddressModal');
+				const addressModal = Liferay.component('addressModal');
 
-				addAddressModal._fetchExistingAddress(id);
+				addressModal._fetchExistingAddress(id);
 
-				addAddressModal.open();
+				addressModal.open();
 			}
 		);
 
@@ -98,10 +98,10 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 			}
 		);
 
-		Liferay.componentReady('addAddressModal').then(
-			function(addAddressModal) {
-				addAddressModal.on(
-					'addAddressModalSave',
+		Liferay.componentReady('addressModal').then(
+			function(addressModal) {
+				addressModal.on(
+					'addressModalSave',
 					function(formData) {
 
 						document.querySelector('#<portlet:namespace />name').value = formData.referent;
@@ -119,7 +119,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 							document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.UPDATE %>';
 						}
 
-						addAddressModal.close();
+						addressModal.close();
 
 						submitForm(document.<portlet:namespace />addressFm);
 					}
