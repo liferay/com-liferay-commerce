@@ -117,15 +117,9 @@ public class CommerceDiscountTest {
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstance.getCPInstanceId(), 1, commerceContext);
 
-<<<<<<< HEAD
-		BigDecimal expectedPrice = cpInstance.getPrice();
-
-		expectedPrice = expectedPrice.subtract(commerceDiscount.getLevel1());
-=======
 		BigDecimal price = cpInstance.getPrice();
 
 		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
->>>>>>> COMMERCE-0 SF
 
 		BigDecimal actualPrice = BigDecimal.ZERO;
 
@@ -238,27 +232,6 @@ public class CommerceDiscountTest {
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstance5.getCPInstanceId(), 1, commerceContext);
 
-<<<<<<< HEAD
-		BigDecimal expectedPrice1 = cpInstance1.getPrice();
-
-		expectedPrice1 = expectedPrice1.subtract(commerceDiscount2.getLevel1());
-
-		BigDecimal expectedPrice2 = cpInstance2.getPrice();
-
-		expectedPrice2 = expectedPrice2.subtract(commerceDiscount2.getLevel1());
-
-		BigDecimal expectedPrice3 = cpInstance3.getPrice();
-
-		expectedPrice3 = expectedPrice3.subtract(commerceDiscount3.getLevel1());
-
-		BigDecimal expectedPrice4 = cpInstance4.getPrice();
-
-		expectedPrice4 = expectedPrice4.subtract(commerceDiscount3.getLevel1());
-
-		BigDecimal expectedPrice5 = cpInstance5.getPrice();
-
-		expectedPrice5 = expectedPrice5.subtract(commerceDiscount3.getLevel1());
-=======
 		BigDecimal price1 = cpInstance1.getPrice();
 
 		BigDecimal expectedPrice1 = price1.subtract(
@@ -283,7 +256,6 @@ public class CommerceDiscountTest {
 
 		BigDecimal expectedPrice5 = price5.subtract(
 			commerceDiscount3.getLevel1());
->>>>>>> COMMERCE-0 SF
 
 		BigDecimal actualPrice1 = BigDecimal.ZERO;
 		BigDecimal actualPrice2 = BigDecimal.ZERO;
@@ -583,15 +555,9 @@ public class CommerceDiscountTest {
 
 		Assert.assertEquals(commerceDiscount.getLevel1(), discountPrice);
 
-<<<<<<< HEAD
-		BigDecimal expectedPrice = cpInstance.getPrice();
-
-		expectedPrice = expectedPrice.subtract(commerceDiscount.getLevel1());
-=======
 		BigDecimal price = cpInstance.getPrice();
 
 		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
->>>>>>> COMMERCE-0 SF
 
 		Assert.assertEquals(
 			expectedPrice.stripTrailingZeros(),
@@ -651,15 +617,9 @@ public class CommerceDiscountTest {
 		Assert.assertEquals(
 			commerceDiscount.getLevel1(), discountAmount.getPrice());
 
-<<<<<<< HEAD
-		BigDecimal expectedPrice = cpInstance.getPrice();
-
-		expectedPrice = expectedPrice.subtract(commerceDiscount.getLevel1());
-=======
 		BigDecimal price = cpInstance.getPrice();
 
 		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
->>>>>>> COMMERCE-0 SF
 
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
