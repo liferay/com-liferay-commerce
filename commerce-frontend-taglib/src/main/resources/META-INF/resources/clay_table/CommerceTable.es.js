@@ -18,6 +18,13 @@ class CommerceTable extends Component {
 
 		url = url + '&page=' + this.currentPage;
 
+		url = url + '&p_auth=' + Liferay.authToken;
+
+		url = url + '&' + Object.keys(this.filters).map(
+			el => {
+				return encodeURIComponent(el) + '=' + encodeURIComponent(this.filters[el]);
+			}).join('&');
+
 		return url;
 	}
 
@@ -91,6 +98,7 @@ CommerceTable.STATE = {
 	dataProviderKey: Config.string().required(),
 	dataSetAPI: Config.string().required(),
 	disableAJAX: Config.bool(),
+	filters: Config.object(),
 	id: Config.string(),
 	items: Config.array().required(),
 	pageSize: Config.number().required(),
