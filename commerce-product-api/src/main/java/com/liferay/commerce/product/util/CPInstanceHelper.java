@@ -80,7 +80,8 @@ public interface CPInstanceHelper {
 		throws PortalException;
 
 	public DDMForm getPublicStoreDDMForm(
-			long cpDefinitionId, Locale locale, boolean ignoreSKUCombinations,
+			long groupId, long commerceAccountId, long cpDefinitionId,
+			Locale locale, boolean ignoreSKUCombinations,
 			boolean skuContributor)
 		throws PortalException;
 
