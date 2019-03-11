@@ -102,9 +102,10 @@ public class CommercePlacedOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+
 		return _commerceOrderService.getPlacedCommerceOrdersCount(
-			themeDisplay.getScopeGroupId(),
-			CommerceOrderClayTableUtil.getCommerceAccountId(httpServletRequest),
+			themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
 			filter.getKeywords());
 	}
 
@@ -148,11 +149,11 @@ public class CommercePlacedOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPlacedCommerceOrders(
-				themeDisplay.getScopeGroupId(),
-				CommerceOrderClayTableUtil.getCommerceAccountId(
-					httpServletRequest),
+				themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 

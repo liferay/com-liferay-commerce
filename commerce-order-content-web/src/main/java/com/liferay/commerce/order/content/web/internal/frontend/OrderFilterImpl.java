@@ -21,14 +21,23 @@ import com.liferay.commerce.frontend.DefaultFilterImpl;
  */
 public class OrderFilterImpl extends DefaultFilterImpl {
 
+	public long getAccountId() {
+		return _accountId;
+	}
+
 	public long getOrderId() {
 		return _orderId;
+	}
+
+	public void setAccountId(long accountId) {
+		_accountId = accountId;
 	}
 
 	public void setOrderId(long accountId) {
 		_orderId = accountId;
 	}
 
+	private long _accountId;
 	private long _orderId;
 
 }

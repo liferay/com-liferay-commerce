@@ -28,6 +28,7 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceShipmentItem;
+import com.liferay.commerce.order.content.web.internal.frontend.OrderFilterImpl;
 import com.liferay.commerce.order.content.web.internal.portlet.configuration.CommerceOrderContentPortletInstanceConfiguration;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
@@ -368,6 +369,16 @@ public class CommerceOrderContentDisplayContext {
 		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
 
 		return decimalFormat.format(percentage);
+	}
+
+	public OrderFilterImpl getOrderFilter() {
+		OrderFilterImpl orderFilter = new OrderFilterImpl();
+
+		if (_commerceAccount != null) {
+			orderFilter.setAccountId(_commerceAccount.getCommerceAccountId());
+		}
+
+		return orderFilter;
 	}
 
 	public PortletURL getPortletURL() throws PortalException {

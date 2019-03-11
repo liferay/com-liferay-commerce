@@ -102,9 +102,10 @@ public class CommercePendingOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+
 		return _commerceOrderService.getPendingCommerceOrdersCount(
-			themeDisplay.getScopeGroupId(),
-			CommerceOrderClayTableUtil.getCommerceAccountId(httpServletRequest),
+			themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
 			filter.getKeywords());
 	}
 
@@ -143,11 +144,11 @@ public class CommercePendingOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				themeDisplay.getScopeGroupId(),
-				CommerceOrderClayTableUtil.getCommerceAccountId(
-					httpServletRequest),
+				themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 
