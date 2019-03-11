@@ -86,7 +86,7 @@ cpAttachmentFileEntrySearchContainer.setResults(cpAttachmentFileEntries);
 				<%
 				FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
-				String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
+				String thumbnailSrc = CommerceMediaResolverUtil.getThumbnailUrl(cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 				%>
 
 				<c:choose>

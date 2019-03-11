@@ -16,15 +16,13 @@ package com.liferay.commerce.product.content.category.web.internal.display.conte
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryService;
+import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.content.category.web.internal.configuration.CPCategoryContentPortletInstanceConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
-import com.liferay.document.library.kernel.util.DLUtil;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
@@ -44,12 +42,14 @@ public class CPCategoryContentDisplayContext {
 	public CPCategoryContentDisplayContext(
 			HttpServletRequest httpServletRequest,
 			AssetCategoryService assetCategoryService,
+			CommerceMediaResolver commerceMediaResolver,
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
 			Portal portal)
 		throws ConfigurationException {
 
 		_httpServletRequest = httpServletRequest;
 		_assetCategoryService = assetCategoryService;
+		_commerceMediaResolver = commerceMediaResolver;
 		_cpAttachmentFileEntryService = cpAttachmentFileEntryService;
 		_portal = portal;
 
@@ -107,15 +107,8 @@ public class CPCategoryContentDisplayContext {
 			return null;
 		}
 
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getFileVersion(), themeDisplay,
-			StringPool.BLANK);
+		return _commerceMediaResolver.getUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	public String getDisplayStyle() {
@@ -149,6 +142,7 @@ public class CPCategoryContentDisplayContext {
 
 	private AssetCategory _assetCategory;
 	private final AssetCategoryService _assetCategoryService;
+	private final CommerceMediaResolver _commerceMediaResolver;
 	private final CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 	private final CPCategoryContentPortletInstanceConfiguration
 		_cpCategoryContentPortletInstanceConfiguration;
