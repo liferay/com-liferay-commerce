@@ -114,6 +114,14 @@ public class CommerceAccountAddressClayTable
 
 		clayTableActions.add(deleteClayTableAction);
 
+		sb.setStringAt("javascript:editCommerceAddress", 0);
+
+		ClayTableAction editClayTableAction = new ClayTableAction(
+			sb.toString(), StringPool.BLANK,
+			LanguageUtil.get(httpServletRequest, "edit"), false, false);
+
+		clayTableActions.add(editClayTableAction);
+
 		return clayTableActions;
 	}
 
