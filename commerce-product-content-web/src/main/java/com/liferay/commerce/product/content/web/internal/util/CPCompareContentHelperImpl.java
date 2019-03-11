@@ -191,7 +191,9 @@ public class CPCompareContentHelperImpl implements CPCompareContentHelper {
 			sb.append(StringPool.COMMA_AND_SPACE);
 		}
 
-		sb.setIndex(sb.index() - 1);
+		if (cpDefinitionSpecificationOptionValues.size() > 0) {
+			sb.setIndex(sb.index() - 1);
+		}
 
 		return sb.toString();
 	}
