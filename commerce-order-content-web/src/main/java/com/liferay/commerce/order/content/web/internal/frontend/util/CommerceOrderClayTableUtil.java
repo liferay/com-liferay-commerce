@@ -14,10 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend.util;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.model.Order;
@@ -40,31 +37,10 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Alessio Antonio Rendina
  */
 public class CommerceOrderClayTableUtil {
-
-	public static long getCommerceAccountId(
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		long commerceAccountId = 0;
-
-		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
-
-		if (commerceAccount != null) {
-			commerceAccountId = commerceAccount.getCommerceAccountId();
-		}
-
-		return commerceAccountId;
-	}
 
 	public static String getEditOrderURL(
 			long commerceOrderId, ThemeDisplay themeDisplay)

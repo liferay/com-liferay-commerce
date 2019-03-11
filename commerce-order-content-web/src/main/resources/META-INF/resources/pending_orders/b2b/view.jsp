@@ -24,6 +24,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 <commerce-ui:table
 	dataProviderKey="commercePendingOrders"
+	filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 	itemPerPage="<%= 5 %>"
 	namespace="<%= renderResponse.getNamespace() %>"
 	pageNumber="1"

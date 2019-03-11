@@ -28,7 +28,9 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
+		"commerce.data.provider.key=" + CommercePendingOrderClayTable.NAME,
 		"commerce.data.provider.key=" + CommercePendingOrderItemClayTable.NAME,
+		"commerce.data.provider.key=" + CommercePlacedOrderClayTable.NAME,
 		"commerce.data.provider.key=" + CommercePlacedOrderItemClayTable.NAME
 	},
 	service = FilterFactory.class
@@ -41,6 +43,11 @@ public class OrderFilterFactoryImpl implements FilterFactory {
 
 		long commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
+
+		long commerceAccountId = ParamUtil.getLong(
+			httpServletRequest, "accountId");
+
+		orderFilter.setAccountId(commerceAccountId);
 
 		orderFilter.setOrderId(commerceOrderId);
 
