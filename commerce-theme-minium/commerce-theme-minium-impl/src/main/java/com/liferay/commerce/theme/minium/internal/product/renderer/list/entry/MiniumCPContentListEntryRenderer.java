@@ -29,6 +29,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -194,8 +195,8 @@ public class MiniumCPContentListEntryRenderer
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-		String module =
-			"commerce-theme-minium-impl@1.0.9/product_card/ProductCard.es";
+		String moduleName = _npmResolver.resolveModuleName(
+			"commerce-theme-minium-impl/product_card/ProductCard.es");
 
 		Set<String> dependencies = new HashSet<>();
 
@@ -207,12 +208,15 @@ public class MiniumCPContentListEntryRenderer
 		dependencies.add("commerce-frontend-taglib@1.1.2/price/Price.es");
 
 		ComponentDescriptor componentDescriptor = new ComponentDescriptor(
-			"ProductCard.render", module, null, dependencies);
+			"ProductCard.render", moduleName, null, dependencies);
 
 		_soyComponentRenderer.renderSoyComponent(
 			httpServletRequest, httpServletResponse, componentDescriptor,
 			context);
 	}
+
+	@Reference
+	private NPMResolver _npmResolver;
 
 	@Reference
 	private Portal _portal;

@@ -26,6 +26,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 String galleryId = PortalUtil.generateRandomKey(request, "gallery");
+NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 %>
 
 <div class="container-fluid product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
@@ -41,7 +42,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 			<soy:template-renderer
 				componentId="<%= galleryId %>"
 				context="<%= context %>"
-				module="commerce-theme-minium-impl@1.0.9/product_gallery/MiniumProductGallery.es"
+				module='<%= npmResolver.resolveModuleName("commerce-theme-minium-impl/product_gallery/MiniumProductGallery.es") %>'
 				templateNamespace="MiniumProductGallery.render"
 			/>
 		</div>
