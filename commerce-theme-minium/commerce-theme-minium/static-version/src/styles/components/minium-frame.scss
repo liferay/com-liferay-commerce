@@ -9,6 +9,15 @@
 	height: 100vh;
 	overflow: hidden;
 
+	@media screen and (hover: none) {
+		grid-template-areas:
+			"topbar"
+			"content"
+			"sidebar";
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr auto;
+	}
+
 	&__topbar {
 		display: grid;
 		grid-area: topbar;

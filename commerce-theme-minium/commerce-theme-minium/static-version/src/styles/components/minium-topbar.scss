@@ -11,6 +11,10 @@
 		display: flex;
 	}
 
+	&__end {
+		justify-content: flex-end;
+	}
+
 	&__search {
 		background-color: $color-bg-alt;
 		grid-column: span 3;

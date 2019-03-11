@@ -9,6 +9,10 @@
 
 	body.signed-in & {
 		padding-top: $liferay-topbar-size;
+
+		@media screen and (max-width: 767px) {
+			padding-top: $liferay-topbar-size-small;
+		}
 	}
 
 	body.open & {
