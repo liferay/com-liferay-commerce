@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="com.liferay.commerce.batch.service.impl.CommerceBatchJobLocalServiceImpl" id="com.liferay.commerce.batch.service.CommerceBatchJobLocalService" />
+	<bean class="com.liferay.commerce.batch.service.impl.CommerceBatchJobServiceImpl" id="com.liferay.commerce.batch.service.CommerceBatchJobService" />
+	<bean class="com.liferay.commerce.batch.service.persistence.impl.CommerceBatchJobPersistenceImpl" id="com.liferay.commerce.batch.service.persistence.CommerceBatchJobPersistence" parent="basePersistence" />
+</beans>
