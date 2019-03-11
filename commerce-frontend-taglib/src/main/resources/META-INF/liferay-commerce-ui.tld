@@ -27,7 +27,7 @@
 	</tag>
 	<tag>
 		<name>add-address-modal</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddAddressModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddressModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
