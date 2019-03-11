@@ -106,6 +106,38 @@ class AddAddressModal extends Component {
 		return this._firstFormValid && this._secondFormValid;
 	}
 
+	_fetchExistingAddress(id) {
+		fetch(
+			'/o/commerce-ui/address/' + id,
+			{
+				method: 'GET'
+			}
+		).then(
+			response => response.json()
+		).then(
+			(jsonResponse) => {
+				jsonResponse = JSON.parse(jsonResponse);
+
+				this._formData = Object.assign(
+					{},
+					this._formData,
+					{
+						address: jsonResponse.street1,
+						city: jsonResponse.city,
+						zipCode: jsonResponse.zip,
+						country: jsonResponse.commerceCountryId,
+						region: jsonResponse.commerceRegionId,
+						referent: jsonResponse.name,
+						telephone: jsonResponse.phoneNumber,
+						id: id
+					}
+				);
+
+				this._fetchRegions();
+			}
+		);
+	}
+
 	_fetchCountries() {
 		return fetch(
 			(this.addressType === 'shipping' ?
@@ -223,7 +255,13 @@ AddAddressModal.STATE = {
 				]
 			),
 			telephone: Config.string(),
-			zipCode: Config.string()
+			zipCode: Config.string(),
+			id: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			)
 		}
 	).value(
 		{
@@ -233,7 +271,8 @@ AddAddressModal.STATE = {
 			referent: null,
 			region: null,
 			telephone: null,
-			zipCode: null
+			zipCode: null,
+			id: null
 		}
 	),
 	_modalVisible: Config.bool().internal().value(false),

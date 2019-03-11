@@ -11,7 +11,8 @@
 		region: string,
 		country: string,
 		referent: string,
-		telephone: string
+		telephone: string,
+		id: string
 	]}
 	{@param? _countries: list<[
 		id: number,
@@ -38,7 +39,11 @@
 		<div class="add-new-address-address-modal commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					{msg desc="Add new address to this account"}add-new-address-to-this-account{/msg}
+					{if isNonnull($_formData.id)}
+						{msg desc="Update address"}update-address{/msg}
+					{else}
+						{msg desc="Add new address to this account"}add-new-address-to-this-account{/msg}
+					{/if}
 				</h3>
 
 				<button
@@ -255,7 +260,11 @@
 									class="{$addButtonClasses}"
 									data-onclick="{$_handleFormSubmit}"
 								>
+								{if isNonnull($_formData.id)}
+									{msg desc="Update"}update{/msg}
+								{else}
 									{msg desc="Create"}create{/msg}
+								{/if}
 								</button>
 							</div>
 						</div>
