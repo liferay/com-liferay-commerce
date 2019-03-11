@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -525,7 +527,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Override
 	public DDMForm getPublicStoreDDMForm(
-			long cpDefinitionId, Locale locale, boolean ignoreSKUCombinations,
+			long groupId, long commerceAccountId, long cpDefinitionId,
+			Locale locale, boolean ignoreSKUCombinations,
 			boolean skuContributor)
 		throws PortalException {
 
@@ -534,7 +537,9 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			false, true);
 
 		if (!ignoreSKUCombinations) {
-			ddmForm.addDDMFormRule(createDDMFormRule(ddmForm, cpDefinitionId));
+			ddmForm.addDDMFormRule(
+				createDDMFormRule(
+					ddmForm, groupId, commerceAccountId, cpDefinitionId));
 		}
 
 		return ddmForm;
@@ -582,7 +587,21 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		Locale locale = _portal.getLocale(renderRequest);
 
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			renderRequest);
+
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
+				httpServletRequest);
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		DDMForm ddmForm = getPublicStoreDDMForm(
+			_portal.getScopeGroupId(renderRequest), commerceAccountId,
 			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor);
 
 		return _render(
@@ -591,9 +610,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	protected DDMFormRule createDDMFormRule(
-		DDMForm ddmForm, long cpDefinitionId) {
+		DDMForm ddmForm, long groupId, long commerceAccountId,
+		long cpDefinitionId) {
 
-		String action = createDDMFormRuleAction(ddmForm, cpDefinitionId);
+		String action = createDDMFormRuleAction(
+			ddmForm, groupId, commerceAccountId, cpDefinitionId);
 		String condition = createDDMFormRuleCondition(ddmForm);
 
 		return new DDMFormRule(condition, action);
@@ -611,14 +632,16 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	 * </pre>
 	 */
 	protected String createDDMFormRuleAction(
-		DDMForm ddmForm, long cpDefinitionId) {
+		DDMForm ddmForm, long groupId, long commerceAccountId,
+		long cpDefinitionId) {
 
 		String callFunctionStatement =
 			"call('getCPInstanceOptionsValues', concat(%s), '%s')";
 
 		return String.format(
 			callFunctionStatement,
-			createDDMFormRuleInputMapping(ddmForm, cpDefinitionId),
+			createDDMFormRuleInputMapping(
+				ddmForm, groupId, commerceAccountId, cpDefinitionId),
 			createDDMFormRuleOutputMapping(ddmForm));
 	}
 
@@ -647,7 +670,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	protected String createDDMFormRuleInputMapping(
-		DDMForm ddmForm, long cpDefinitionId) {
+		DDMForm ddmForm, long groupId, long commerceAccountId,
+		long cpDefinitionId) {
 
 		// The input information will be transformed in parameter request of
 		// DDMDataProviderRequest class and it'll be accessible in the data
@@ -670,6 +694,17 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			Stream.of(
 				String.format(
 					"'cpDefinitionId=%s'", String.valueOf(cpDefinitionId))),
+			inputMappingStatementStream);
+
+		inputMappingStatementStream = Stream.concat(
+			Stream.of(String.format("'groupId=%s'", String.valueOf(groupId))),
+			inputMappingStatementStream);
+
+		inputMappingStatementStream = Stream.concat(
+			Stream.of(
+				String.format(
+					"'commerceAccountId=%s'",
+					String.valueOf(commerceAccountId))),
 			inputMappingStatementStream);
 
 		return inputMappingStatementStream.collect(
@@ -837,6 +872,9 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		return _ddmFormRenderer.render(ddmForm, ddmFormRenderingContext);
 	}
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceMediaResolver _commerceMediaResolver;

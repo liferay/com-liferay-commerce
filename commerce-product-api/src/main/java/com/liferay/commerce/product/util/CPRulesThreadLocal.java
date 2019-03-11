@@ -30,7 +30,13 @@ public class CPRulesThreadLocal {
 	}
 
 	public static void setCPRules(List<CPRule> cpRules) {
-		_cpRules.set(Collections.unmodifiableList(cpRules));
+		if (cpRules != null) {
+			_cpRules.set(Collections.unmodifiableList(cpRules));
+
+			return;
+		}
+
+		_cpRules.set(null);
 	}
 
 	private static final ThreadLocal<List<CPRule>> _cpRules =

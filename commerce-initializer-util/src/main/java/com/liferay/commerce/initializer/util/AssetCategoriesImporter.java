@@ -54,6 +54,17 @@ public class AssetCategoriesImporter {
 			long scopeGroupId, long userId)
 		throws Exception {
 
+		return importAssetCategories(
+			jsonArray, assetVocabularyName, classLoader, imageDependenciesPath,
+			scopeGroupId, userId, false);
+	}
+
+	public List<AssetCategory> importAssetCategories(
+			JSONArray jsonArray, String assetVocabularyName,
+			ClassLoader classLoader, String imageDependenciesPath,
+			long scopeGroupId, long userId, boolean addGuestPermissions)
+		throws Exception {
+
 		User user = _userLocalService.getUser(userId);
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -61,6 +72,7 @@ public class AssetCategoriesImporter {
 		serviceContext.setScopeGroupId(scopeGroupId);
 		serviceContext.setUserId(userId);
 		serviceContext.setCompanyId(user.getCompanyId());
+		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		List<AssetCategory> assetCategories = new ArrayList<>(
 			jsonArray.length());

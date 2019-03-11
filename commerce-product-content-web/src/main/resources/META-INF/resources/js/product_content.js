@@ -58,6 +58,7 @@ AUI.add(
 						var data = {};
 
 						data['_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues'] = ddmFormValues;
+						data['groupId'] = themeDisplay.getScopeGroupId();
 
 						A.io.request(
 							portletURL.toString(),
@@ -190,6 +191,7 @@ AUI.add(
 						var data = {};
 
 						data[instance.get('namespace') + 'ddmFormValues'] = ddmFormValues;
+						data['groupId'] = themeDisplay.getScopeGroupId();
 
 						A.io.request(
 							instance.get('viewAttachmentURL'),

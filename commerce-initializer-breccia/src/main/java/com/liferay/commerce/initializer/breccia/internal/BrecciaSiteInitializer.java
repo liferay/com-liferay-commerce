@@ -223,7 +223,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_assetCategoriesImporter.importAssetCategories(
 			jsonArray, _COMMERCE_VOCABULARY, classLoader,
 			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
+			serviceContext.getUserId(), true);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Asset categories successfully imported");

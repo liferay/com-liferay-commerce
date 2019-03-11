@@ -116,6 +116,7 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 									portletURL.setPortletId(CP_CONTENT_WEB_PORTLET_KEY);
 									portletURL.setName('checkCPInstance');
 									portletURL.setParameter('cpDefinitionId', cpDefinitionId);
+									portletURL.setParameter('groupId', themeDisplay.getScopeGroupId());
 									portletURL.setParameter('p_auth', Liferay.authToken);
 
 									const formData = new FormData();
@@ -155,6 +156,8 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 
 											const formData = new FormData();
 											formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormValues()));
+											formData.append('groupId', themeDisplay.getScopeGroupId());
+
 											fetch(
 												'<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
 												{
