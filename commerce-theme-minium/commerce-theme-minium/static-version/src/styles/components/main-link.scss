@@ -5,9 +5,24 @@
 	font-size: 14px;
 	grid-template-areas: "icon label";
 	grid-template-columns: $frame-size 1fr;
-	grid-template-rows: 70px;
+	grid-template-rows: $frame-size;
 	position: relative;
 	text-decoration: none;
+
+	@media screen and (max-width: 767px) {
+		grid-template-columns: $frame-size-small 1fr;
+		grid-template-rows: $frame-size-small;
+	}
+
+	@media screen and (hover: none) {
+		.minium-main-navigation & {
+			grid-template-columns: $frame-size 0;
+
+			@media screen and (max-width: 767px) {
+				grid-template-columns: $frame-size-small 0;
+			}
+		}
+	}
 
 	&:hover {
 		background-color: $color-theme-transparent;
@@ -23,17 +38,28 @@
 			background-color: $color-theme;
 			content: '';
 			display: block;
-			height: 70%;
-			left: 0;
 			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 4px;
+
+			@media screen and (hover: hover) {
+				height: 70%;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 4px;
+			}
+
+			@media screen and (hover: none) {
+				height: 4px;
+				left: 50%;
+				top: 0;
+				transform: translateX(-50%);
+				width: 70%;
+			}
 		}
 	}
 
 	&--sub {
-		grid-template-columns: calc(10px + $frame-size) 1fr;
+		grid-template-columns: calc(10px + #{$frame-size}) 1fr;
 		grid-template-rows: 36px;
 
 		&.is-active::before {
@@ -79,9 +105,17 @@
 		transform: translateX(-15px);
 		white-space: nowrap;
 
-		.minium-sidebar:not(:hover) & {
-			opacity: 0;
-			transform: translateX(20px);
+		@media screen and (hover: hover) {
+			.minium-sidebar:not(:hover) & {
+				opacity: 0;
+				transform: translateX(20px);
+			}
+		}
+
+		@media screen and (hover: none) {
+			.minium-main-navigation & {
+				display: none;
+			}
 		}
 	}
 }

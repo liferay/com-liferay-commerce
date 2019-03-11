@@ -11,13 +11,39 @@
 		background-color $transition;
 	width: 100%;
 
+	@media screen and (hover: none) {
+		border-radius: 8px 25px 25px 8px;
+		flex-direction: row-reverse;
+		position: absolute;
+	}
+
+	&:focus,
 	&:hover {
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
+
+		@media screen and (hover: none) {
+			filter: drop-shadow($minium-shadow);
+		}
 	}
 
-	.minium-sidebar:not(:hover) & {
-		background-color: transparent;
+	@media screen and (hover: hover) {
+		.minium-sidebar:not(:hover) & {
+			background-color: transparent;
+		}
+	}
+
+	@media screen and (hover: none) {
+		&:not(:focus) {
+			background-color: transparent;
+			overflow: hidden;
+			right: 0;
+			width: 40px;
+		}
+
+		&:focus {
+			width: 240px;
+		}
 	}
 
 	&__avatar {
@@ -53,10 +79,19 @@
 			transform $transition;
 		white-space: nowrap;
 
-		.minium-sidebar:not(:hover) & {
-			opacity: 0;
-			transform: translateX(20px);
+		@media screen and (hover: hover) {
+			.minium-sidebar:not(:hover) & {
+				opacity: 0;
+				transform: translateX(20px);
+			}
 		}
+
+		// @media screen and (hover: none) {
+		// 	.minium-user-nav:not(:focus) & {
+		// 		opacity: 0;
+		// 		transform: translateX(20px);
+		// 	}
+		// }
 	}
 
 	&__menu {
@@ -70,10 +105,13 @@
 			transform $transition;
 		width: 100%;
 
-		.minium-user-nav:not(:hover) & {
+		.minium-user-nav:not(:hover):not(:focus) & {
 			opacity: 0;
 			pointer-events: none;
-			transform: translateY(20px);
+			
+			@media screen and (hover: hover) {
+				transform: translateY(20px);
+			}
 		}
 	}
 }

@@ -5,6 +5,10 @@
 	overflow: hidden;
 	padding-left: 22px;
 
+	@media screen and (hover: none) {
+		display: none;
+	}
+
 	svg {
 		min-width: 95px;
 	}
@@ -14,7 +18,7 @@
 			opacity $transition,
 			transform $transition;
 
-		.minium-sidebar:not(:hover) & {
+		.minium-sidebar:not(:hover):not(:focus) & {
 			opacity: 0;
 			transform: translateX(20px);
 		}

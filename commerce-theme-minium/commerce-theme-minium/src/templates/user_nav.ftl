@@ -1,4 +1,4 @@
-<div class="minium-user-nav">
+<div class="minium-user-nav" tabindex="0">
 	<#if is_signed_in>
 		<div class="minium-user-nav__menu">
 			<a class="main-link main-link--sub" href="${userManagementUrl}">
