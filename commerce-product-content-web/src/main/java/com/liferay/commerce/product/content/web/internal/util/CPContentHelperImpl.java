@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.util;
 
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
+import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -39,7 +40,6 @@ import com.liferay.commerce.product.util.CPContentContributor;
 import com.liferay.commerce.product.util.CPContentContributorRegistry;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -256,11 +256,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 			FileEntry fileEntry, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		String downloadUrl = DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-			StringPool.BLANK, true, true);
+		CPMedia cpMedia = new CPMediaImpl(fileEntry, themeDisplay);
 
-		return downloadUrl;
+		return cpMedia.getDownloadUrl();
 	}
 
 	@Override
@@ -311,9 +309,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 	public String getImageURL(FileEntry fileEntry, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		return DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getFileVersion(), themeDisplay,
-			StringPool.BLANK);
+		CPMedia cpMedia = new CPMediaImpl(fileEntry, themeDisplay);
+
+		return cpMedia.getUrl();
 	}
 
 	@Override
@@ -431,6 +429,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 	@Reference
 	private CommerceCatalogDefaultImage _catalogCommerceMediaDefaultImage;
+
+	@Reference
+	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;

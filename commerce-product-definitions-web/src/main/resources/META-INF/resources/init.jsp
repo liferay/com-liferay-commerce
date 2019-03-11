@@ -32,6 +32,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.asset.kernel.model.AssetRenderer" %><%@
+page import="com.liferay.commerce.media.CommerceMediaResolverUtil" %><%@
 page import="com.liferay.commerce.product.constants.CPActionKeys" %><%@
 page import="com.liferay.commerce.product.constants.CPConstants" %><%@
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
@@ -89,7 +90,6 @@ page import="com.liferay.commerce.product.util.CPNavigationItemRegistryUtil" %><
 page import="com.liferay.commerce.product.util.CPSubscriptionType" %><%@
 page import="com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor" %><%@
 page import="com.liferay.document.library.kernel.exception.NoSuchFileEntryException" %><%@
-page import="com.liferay.document.library.kernel.util.DLUtil" %><%@
 page import="com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldType" %><%@
 page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
