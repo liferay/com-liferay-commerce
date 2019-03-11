@@ -16,7 +16,6 @@ package com.liferay.commerce.batch.engine.impl.internal.job;
 
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
-import com.liferay.commerce.batch.engine.api.job.JobInstance;
 import com.liferay.commerce.batch.engine.api.job.JobLauncher;
 import com.liferay.commerce.batch.engine.api.job.JobParameters;
 import com.liferay.commerce.batch.engine.impl.internal.concurrent.BlockingExecutor;
@@ -25,8 +24,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.liferay.commerce.batch.model.CommerceBatchJob;
+import com.liferay.commerce.batch.service.CommerceBatchJobLocalService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ivica Cardic
@@ -51,8 +53,12 @@ public class JobLauncherImpl implements JobLauncher {
 	public JobExecution run(Job job, JobParameters jobParameters) {
 		Objects.requireNonNull(job);
 
+		CommerceBatchJob commerceBatchJob =
+			_commerceBatchJobLocalService.addCommerceBatchJob(
+				job.getKey(), job.getName());
+
 		JobExecution jobExecution = new JobExecution(
-			new JobInstance(job.getKey(), job.getName()), jobParameters);
+			commerceBatchJob, jobParameters);
 
 		_blockingExecutor.execute(
 			new JobRunnable(job, jobExecution, _jobExecutionMap));
@@ -66,6 +72,9 @@ public class JobLauncherImpl implements JobLauncher {
 	protected void deactivate() {
 		_blockingExecutor.destroy();
 	}
+
+	@Reference
+	private CommerceBatchJobLocalService _commerceBatchJobLocalService;
 
 	private final BlockingExecutor _blockingExecutor;
 	private final Map<String, JobExecution> _jobExecutionMap =

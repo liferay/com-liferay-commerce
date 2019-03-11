@@ -16,11 +16,9 @@ package com.liferay.commerce.batch.engine.impl.internal.job;
 
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
-import com.liferay.commerce.batch.engine.api.job.JobInstance;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -43,7 +41,8 @@ public class JobRunnable implements Runnable {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					String.format(
-						"Job %s launched", _jobExecution.getJobInstance()));
+						"Job %s launched",
+						_jobExecution.getCommerceBatchJob()));
 			}
 
 			_job.execute(_jobExecution);
@@ -51,19 +50,22 @@ public class JobRunnable implements Runnable {
 		catch (Exception e) {
 			_log.error(
 				String.format(
-					"Job %s failed to execute", _jobExecution.getJobInstance()),
+					"Job %s failed to execute",
+					_jobExecution.getCommerceBatchJob()),
 				e);
 		}
 		finally {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					String.format(
-						"Job %s completed", _jobExecution.getJobInstance()));
+						"Job %s completed",
+						_jobExecution.getCommerceBatchJob()));
 			}
 
-			JobInstance jobInstance = _jobExecution.getJobInstance();
+			CommerceBatchJob commerceBatchJob =
+				_jobExecution.getCommerceBatchJob();
 
-			_jobExecutionMap.remove(jobInstance.getJobKey());
+			_jobExecutionMap.remove(commerceBatchJob.getKey());
 		}
 	}
 

@@ -25,9 +25,9 @@ import com.liferay.commerce.batch.engine.api.item.Operation;
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
 import com.liferay.commerce.batch.engine.api.job.JobFactory;
-import com.liferay.commerce.batch.engine.api.job.JobInstance;
 import com.liferay.commerce.batch.engine.api.job.JobLauncher;
 import com.liferay.commerce.batch.engine.impl.internal.job.JobExecutionListenerImpl;
+import com.liferay.commerce.batch.model.CommerceBatchJob;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
@@ -79,10 +79,11 @@ public class BatchFileProcessorImpl implements BatchFileProcessor {
 		for (Job job : jobs) {
 			JobExecution jobExecution = _jobLauncher.run(job, null);
 
-			JobInstance jobInstance = jobExecution.getJobInstance();
+			CommerceBatchJob commerceBatchJob =
+				jobExecution.getCommerceBatchJob();
 
 			jobKeyNameMap.put(
-				jobInstance.getJobKey(), jobInstance.getJobName());
+				commerceBatchJob.getKey(), commerceBatchJob.getName());
 		}
 
 		return jobKeyNameMap;

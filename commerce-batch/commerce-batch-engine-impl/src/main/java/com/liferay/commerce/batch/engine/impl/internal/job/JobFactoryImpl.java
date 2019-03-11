@@ -15,13 +15,22 @@
 package com.liferay.commerce.batch.engine.impl.internal.job;
 
 import com.liferay.commerce.batch.engine.api.item.ItemReader;
+import com.liferay.commerce.batch.engine.api.item.ItemRegistry;
 import com.liferay.commerce.batch.engine.api.item.ItemWriter;
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobFactory;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
+import org.osgi.service.component.ComponentFactory;
+import org.osgi.service.component.ComponentInstance;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ivica Cardic
@@ -33,14 +42,51 @@ public class JobFactoryImpl implements JobFactory {
 	public Job create(
 		String name, ItemReader itemReader, ItemWriter itemWriter) {
 
-		return new JobImpl(_generateJobKey(), name, itemReader, itemWriter);
+		return _createJob(
+			_generateJobKey(), Objects.requireNonNull(name),
+			Objects.requireNonNull(itemReader),
+			Objects.requireNonNull(itemWriter));
 	}
 
 	@Override
 	public Job create(
-		String id, String name, ItemReader itemReader, ItemWriter itemWriter) {
+		String key, String name, ItemReader itemReader, ItemWriter itemWriter) {
 
-		return new JobImpl(id, name, itemReader, itemWriter);
+		return _createJob(
+			Objects.requireNonNull(key), Objects.requireNonNull(name),
+			Objects.requireNonNull(itemReader),
+			Objects.requireNonNull(itemWriter));
+	}
+
+	@Override
+	public void dispose(Job job) {
+		job.dispose();
+
+		ComponentInstance componentInstance = _componentInstanceMap.get(job);
+
+		if (componentInstance != null) {
+			componentInstance.dispose();
+		}
+	}
+
+	private JobImpl _createJob(
+		String key, String name, ItemReader itemReader, ItemWriter itemWriter) {
+
+		Dictionary<String, String> properties = new Hashtable<>();
+
+		ComponentInstance componentInstance = _jobComponentFactory.newInstance(
+			properties);
+
+		JobImpl jobImpl = (JobImpl)componentInstance.getInstance();
+
+		_componentInstanceMap.put(jobImpl, componentInstance);
+
+		jobImpl.setItemReader(itemReader);
+		jobImpl.setItemWriter(itemWriter);
+		jobImpl.setKey(key);
+		jobImpl.setName(name);
+
+		return jobImpl;
 	}
 
 	private String _generateJobKey() {
@@ -48,5 +94,14 @@ public class JobFactoryImpl implements JobFactory {
 
 		return uuid.toString();
 	}
+
+	private final Map<Job, ComponentInstance> _componentInstanceMap =
+		new ConcurrentHashMap<>();
+
+	@Reference
+	private ItemRegistry _itemRegistry;
+
+	@Reference(target = "(component.factory=JobImpl)")
+	private ComponentFactory _jobComponentFactory;
 
 }

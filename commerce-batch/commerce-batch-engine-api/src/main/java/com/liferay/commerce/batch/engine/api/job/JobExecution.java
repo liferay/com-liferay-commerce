@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.batch.engine.api.job;
 
+import com.liferay.commerce.batch.model.CommerceBatchJob;
+
 import java.util.Objects;
 
 /**
@@ -21,13 +23,15 @@ import java.util.Objects;
  */
 public class JobExecution {
 
-	public JobExecution(JobInstance jobInstance, JobParameters jobParameters) {
-		_jobInstance = Objects.requireNonNull(jobInstance);
+	public JobExecution(
+		CommerceBatchJob commerceBatchJob, JobParameters jobParameters) {
+
+		_commerceBatchJob = Objects.requireNonNull(commerceBatchJob);
 		_jobParameters = jobParameters;
 	}
 
-	public JobInstance getJobInstance() {
-		return _jobInstance;
+	public CommerceBatchJob getCommerceBatchJob() {
+		return _commerceBatchJob;
 	}
 
 	public JobParameters getJobParameters() {
@@ -38,8 +42,8 @@ public class JobExecution {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("JobExecution{jobInstance=");
-		sb.append(_jobInstance);
+		sb.append("JobExecution{commerceBatchJob=");
+		sb.append(_commerceBatchJob);
 		sb.append(", jobParameters=");
 		sb.append(_jobParameters);
 		sb.append("}");
@@ -47,7 +51,7 @@ public class JobExecution {
 		return sb.toString();
 	}
 
-	private final JobInstance _jobInstance;
+	private final CommerceBatchJob _commerceBatchJob;
 	private final JobParameters _jobParameters;
 
 }

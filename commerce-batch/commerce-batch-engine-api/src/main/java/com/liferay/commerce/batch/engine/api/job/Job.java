@@ -19,6 +19,8 @@ package com.liferay.commerce.batch.engine.api.job;
  */
 public interface Job {
 
+	public void dispose();
+
 	public void execute(JobExecution jobExecution) throws Exception;
 
 	public String getKey();

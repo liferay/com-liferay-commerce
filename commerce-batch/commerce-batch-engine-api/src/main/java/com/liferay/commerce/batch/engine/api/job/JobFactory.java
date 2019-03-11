@@ -28,4 +28,6 @@ public interface JobFactory {
 	public Job create(
 		String key, String name, ItemReader itemReader, ItemWriter itemWriter);
 
+	public void dispose(Job job);
+
 }
