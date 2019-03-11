@@ -24,6 +24,7 @@ import com.liferay.commerce.product.content.util.CPCompareContentHelper;
 import com.liferay.commerce.product.util.CPCompareUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.theme.minium.internal.product.model.ProductCompareModel;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -132,11 +133,11 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 		editCompareProductActionURL.setParameter(
 			ActionRequest.ACTION_NAME, "editCompareProduct");
 
+		String moduleName = _npmResolver.resolveModuleName(
+			"commerce-theme-minium-impl/products_compare/ProductsCompare.es");
+
 		ComponentDescriptor testDescriptor = new ComponentDescriptor(
-			"ProductsCompare.render",
-			"commerce-theme-minium-impl@1.0.9/products_compare" +
-				"/ProductsCompare.es",
-			null, null);
+			"ProductsCompare.render", moduleName, null, null);
 
 		Map<String, Object> context = new HashMap<>();
 
@@ -169,6 +170,9 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private NPMResolver _npmResolver;
 
 	@Reference
 	private Portal _portal;
