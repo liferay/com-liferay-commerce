@@ -22,10 +22,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.address.model.CountryModel;
 import com.liferay.commerce.frontend.internal.address.model.RegionModel;
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -64,6 +67,34 @@ public class AddressResource {
 
 		return _getCommerceCountries(
 			commerceCountries, themeDisplay.getLanguageId());
+	}
+
+	@GET
+	@Path("/address/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommerceAddress(
+		@PathParam("id") long commerceAddressId) {
+
+		try {
+			CommerceAddress commerceAddress =
+				_commerceAddressService.fetchCommerceAddress(commerceAddressId);
+
+			if (commerceAddress != null) {
+				String json = _OBJECT_MAPPER.writeValueAsString(
+					JSONFactoryUtil.looseSerialize(commerceAddress));
+
+				return Response.ok(
+					json, MediaType.APPLICATION_JSON
+				).build();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return Response.status(
+			Response.Status.INTERNAL_SERVER_ERROR
+		).build();
 	}
 
 	@GET
@@ -153,6 +184,9 @@ public class AddressResource {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AddressResource.class);
+
+	@Reference
+	private CommerceAddressService _commerceAddressService;
 
 	@Reference
 	private CommerceContextFactory _commerceContextFactory;
