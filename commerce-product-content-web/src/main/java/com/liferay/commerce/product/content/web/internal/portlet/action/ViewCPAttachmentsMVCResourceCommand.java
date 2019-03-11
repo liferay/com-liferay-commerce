@@ -14,12 +14,11 @@
 
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
+import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.document.library.kernel.util.DLUtil;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -28,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -89,11 +87,8 @@ public class ViewCPAttachmentsMVCResourceCommand
 					"cpAttachmentFileEntryId",
 					cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 
-				FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-				String attachmentURL = DLUtil.getDownloadURL(
-					fileEntry, fileEntry.getFileVersion(), themeDisplay,
-					StringPool.BLANK);
+				String attachmentURL = _commerceMediaResolver.getDownloadUrl(
+					cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 
 				jsonObject.put("url", attachmentURL);
 
@@ -110,6 +105,9 @@ public class ViewCPAttachmentsMVCResourceCommand
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ViewCPAttachmentsMVCResourceCommand.class);
+
+	@Reference
+	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
