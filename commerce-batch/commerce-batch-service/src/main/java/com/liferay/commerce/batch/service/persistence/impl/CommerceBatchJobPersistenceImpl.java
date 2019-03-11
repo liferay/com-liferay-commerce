@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
@@ -51,6 +52,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -89,6 +91,233 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceBatchJobModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_KEY = new FinderPath(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceBatchJobModelImpl.FINDER_CACHE_ENABLED,
+			CommerceBatchJobImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByKey",
+			new String[] { String.class.getName() },
+			CommerceBatchJobModelImpl.KEY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_KEY = new FinderPath(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceBatchJobModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByKey",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns the commerce batch job where key = &#63; or throws a {@link NoSuchBatchJobException} if it could not be found.
+	 *
+	 * @param key the key
+	 * @return the matching commerce batch job
+	 * @throws NoSuchBatchJobException if a matching commerce batch job could not be found
+	 */
+	@Override
+	public CommerceBatchJob findByKey(String key)
+		throws NoSuchBatchJobException {
+		CommerceBatchJob commerceBatchJob = fetchByKey(key);
+
+		if (commerceBatchJob == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("key=");
+			msg.append(key);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchBatchJobException(msg.toString());
+		}
+
+		return commerceBatchJob;
+	}
+
+	/**
+	 * Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param key the key
+	 * @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	 */
+	@Override
+	public CommerceBatchJob fetchByKey(String key) {
+		return fetchByKey(key, true);
+	}
+
+	/**
+	 * Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param key the key
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	 */
+	@Override
+	public CommerceBatchJob fetchByKey(String key, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { key };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_KEY,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceBatchJob) {
+			CommerceBatchJob commerceBatchJob = (CommerceBatchJob)result;
+
+			if (!Objects.equals(key, commerceBatchJob.getKey())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_COMMERCEBATCHJOB_WHERE);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_KEY_KEY_1);
+			}
+			else if (key.equals("")) {
+				query.append(_FINDER_COLUMN_KEY_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_KEY_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				List<CommerceBatchJob> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_KEY, finderArgs,
+						list);
+				}
+				else {
+					CommerceBatchJob commerceBatchJob = list.get(0);
+
+					result = commerceBatchJob;
+
+					cacheResult(commerceBatchJob);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_KEY, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceBatchJob)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce batch job where key = &#63; from the database.
+	 *
+	 * @param key the key
+	 * @return the commerce batch job that was removed
+	 */
+	@Override
+	public CommerceBatchJob removeByKey(String key)
+		throws NoSuchBatchJobException {
+		CommerceBatchJob commerceBatchJob = findByKey(key);
+
+		return remove(commerceBatchJob);
+	}
+
+	/**
+	 * Returns the number of commerce batch jobs where key = &#63;.
+	 *
+	 * @param key the key
+	 * @return the number of matching commerce batch jobs
+	 */
+	@Override
+	public int countByKey(String key) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_KEY;
+
+		Object[] finderArgs = new Object[] { key };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEBATCHJOB_WHERE);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_KEY_KEY_1);
+			}
+			else if (key.equals("")) {
+				query.append(_FINDER_COLUMN_KEY_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_KEY_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_KEY_KEY_1 = "commerceBatchJob.key IS NULL";
+	private static final String _FINDER_COLUMN_KEY_KEY_2 = "commerceBatchJob.key = ?";
+	private static final String _FINDER_COLUMN_KEY_KEY_3 = "(commerceBatchJob.key IS NULL OR commerceBatchJob.key = '')";
 
 	public CommerceBatchJobPersistenceImpl() {
 		setModelClass(CommerceBatchJob.class);
@@ -122,6 +351,9 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 		entityCache.putResult(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceBatchJobImpl.class, commerceBatchJob.getPrimaryKey(),
 			commerceBatchJob);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_KEY,
+			new Object[] { commerceBatchJob.getKey() }, commerceBatchJob);
 
 		commerceBatchJob.resetOriginalValues();
 	}
@@ -176,6 +408,9 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((CommerceBatchJobModelImpl)commerceBatchJob,
+			true);
 	}
 
 	@Override
@@ -186,6 +421,40 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 		for (CommerceBatchJob commerceBatchJob : commerceBatchJobs) {
 			entityCache.removeResult(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceBatchJobImpl.class, commerceBatchJob.getPrimaryKey());
+
+			clearUniqueFindersCache((CommerceBatchJobModelImpl)commerceBatchJob,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceBatchJobModelImpl commerceBatchJobModelImpl) {
+		Object[] args = new Object[] { commerceBatchJobModelImpl.getKey() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_KEY, args, Long.valueOf(1),
+			false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_KEY, args,
+			commerceBatchJobModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceBatchJobModelImpl commerceBatchJobModelImpl,
+		boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] { commerceBatchJobModelImpl.getKey() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
+		}
+
+		if ((commerceBatchJobModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_KEY.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceBatchJobModelImpl.getOriginalKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
 		}
 	}
 
@@ -356,7 +625,11 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (!CommerceBatchJobModelImpl.COLUMN_BITMASK_ENABLED) {
+			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -365,6 +638,9 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 		entityCache.putResult(CommerceBatchJobModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceBatchJobImpl.class, commerceBatchJob.getPrimaryKey(),
 			commerceBatchJob, false);
+
+		clearUniqueFindersCache(commerceBatchJobModelImpl, false);
+		cacheUniqueFindersCache(commerceBatchJobModelImpl);
 
 		commerceBatchJob.resetOriginalValues();
 
@@ -781,9 +1057,12 @@ public class CommerceBatchJobPersistenceImpl extends BasePersistenceImpl<Commerc
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_COMMERCEBATCHJOB = "SELECT commerceBatchJob FROM CommerceBatchJob commerceBatchJob";
 	private static final String _SQL_SELECT_COMMERCEBATCHJOB_WHERE_PKS_IN = "SELECT commerceBatchJob FROM CommerceBatchJob commerceBatchJob WHERE commerceBatchJobId IN (";
+	private static final String _SQL_SELECT_COMMERCEBATCHJOB_WHERE = "SELECT commerceBatchJob FROM CommerceBatchJob commerceBatchJob WHERE ";
 	private static final String _SQL_COUNT_COMMERCEBATCHJOB = "SELECT COUNT(commerceBatchJob) FROM CommerceBatchJob commerceBatchJob";
+	private static final String _SQL_COUNT_COMMERCEBATCHJOB_WHERE = "SELECT COUNT(commerceBatchJob) FROM CommerceBatchJob commerceBatchJob WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceBatchJob.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceBatchJob exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceBatchJob exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CommerceBatchJobPersistenceImpl.class);
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
 				"key"

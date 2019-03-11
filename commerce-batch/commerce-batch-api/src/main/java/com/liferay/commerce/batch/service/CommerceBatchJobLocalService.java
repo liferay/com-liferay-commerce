@@ -16,6 +16,7 @@ package com.liferay.commerce.batch.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.batch.exception.NoSuchBatchJobException;
 import com.liferay.commerce.batch.model.CommerceBatchJob;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -70,6 +71,8 @@ public interface CommerceBatchJobLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceBatchJob addCommerceBatchJob(
 		CommerceBatchJob commerceBatchJob);
+
+	public CommerceBatchJob addCommerceBatchJob(String key, String name);
 
 	/**
 	* Creates a new commerce batch job with the primary key. Does not add the commerce batch job to the database.
@@ -226,6 +229,9 @@ public interface CommerceBatchJobLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getStatus(String key) throws NoSuchBatchJobException;
 
 	/**
 	* Updates the commerce batch job in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

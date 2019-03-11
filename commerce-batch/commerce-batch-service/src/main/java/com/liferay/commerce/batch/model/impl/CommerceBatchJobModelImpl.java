@@ -104,7 +104,11 @@ public class CommerceBatchJobModelImpl extends BaseModelImpl<CommerceBatchJob>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.batch.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.commerce.batch.model.CommerceBatchJob"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.batch.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.commerce.batch.model.CommerceBatchJob"),
+			true);
+	public static final long KEY_COLUMN_BITMASK = 1L;
+	public static final long COMMERCEBATCHJOBID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -318,7 +322,17 @@ public class CommerceBatchJobModelImpl extends BaseModelImpl<CommerceBatchJob>
 
 	@Override
 	public void setKey(String key) {
+		_columnBitmask |= KEY_COLUMN_BITMASK;
+
+		if (_originalKey == null) {
+			_originalKey = _key;
+		}
+
 		_key = key;
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
 	}
 
 	@JSON
@@ -389,6 +403,10 @@ public class CommerceBatchJobModelImpl extends BaseModelImpl<CommerceBatchJob>
 	@Override
 	public void setCallbackURL(String callbackURL) {
 		_callbackURL = callbackURL;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -490,6 +508,10 @@ public class CommerceBatchJobModelImpl extends BaseModelImpl<CommerceBatchJob>
 		CommerceBatchJobModelImpl commerceBatchJobModelImpl = this;
 
 		commerceBatchJobModelImpl._setModifiedDate = false;
+
+		commerceBatchJobModelImpl._originalKey = commerceBatchJobModelImpl._key;
+
+		commerceBatchJobModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -655,10 +677,12 @@ public class CommerceBatchJobModelImpl extends BaseModelImpl<CommerceBatchJob>
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private String _key;
+	private String _originalKey;
 	private String _name;
 	private Date _startTime;
 	private Date _endTime;
 	private String _status;
 	private String _callbackURL;
+	private long _columnBitmask;
 	private CommerceBatchJob _escapedModel;
 }

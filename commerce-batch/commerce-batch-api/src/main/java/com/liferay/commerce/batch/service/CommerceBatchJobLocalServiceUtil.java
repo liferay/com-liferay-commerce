@@ -54,6 +54,11 @@ public class CommerceBatchJobLocalServiceUtil {
 		return getService().addCommerceBatchJob(commerceBatchJob);
 	}
 
+	public static com.liferay.commerce.batch.model.CommerceBatchJob addCommerceBatchJob(
+		String key, String name) {
+		return getService().addCommerceBatchJob(key, name);
+	}
+
 	/**
 	* Creates a new commerce batch job with the primary key. Does not add the commerce batch job to the database.
 	*
@@ -240,6 +245,11 @@ public class CommerceBatchJobLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static String getStatus(String key)
+		throws com.liferay.commerce.batch.exception.NoSuchBatchJobException {
+		return getService().getStatus(key);
 	}
 
 	/**

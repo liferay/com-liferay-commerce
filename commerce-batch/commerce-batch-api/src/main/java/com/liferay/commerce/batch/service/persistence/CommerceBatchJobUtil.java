@@ -113,6 +113,61 @@ public class CommerceBatchJobUtil {
 	}
 
 	/**
+	* Returns the commerce batch job where key = &#63; or throws a {@link NoSuchBatchJobException} if it could not be found.
+	*
+	* @param key the key
+	* @return the matching commerce batch job
+	* @throws NoSuchBatchJobException if a matching commerce batch job could not be found
+	*/
+	public static CommerceBatchJob findByKey(String key)
+		throws com.liferay.commerce.batch.exception.NoSuchBatchJobException {
+		return getPersistence().findByKey(key);
+	}
+
+	/**
+	* Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param key the key
+	* @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	*/
+	public static CommerceBatchJob fetchByKey(String key) {
+		return getPersistence().fetchByKey(key);
+	}
+
+	/**
+	* Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param key the key
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	*/
+	public static CommerceBatchJob fetchByKey(String key,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByKey(key, retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce batch job where key = &#63; from the database.
+	*
+	* @param key the key
+	* @return the commerce batch job that was removed
+	*/
+	public static CommerceBatchJob removeByKey(String key)
+		throws com.liferay.commerce.batch.exception.NoSuchBatchJobException {
+		return getPersistence().removeByKey(key);
+	}
+
+	/**
+	* Returns the number of commerce batch jobs where key = &#63;.
+	*
+	* @param key the key
+	* @return the number of matching commerce batch jobs
+	*/
+	public static int countByKey(String key) {
+		return getPersistence().countByKey(key);
+	}
+
+	/**
 	* Caches the commerce batch job in the entity cache if it is enabled.
 	*
 	* @param commerceBatchJob the commerce batch job

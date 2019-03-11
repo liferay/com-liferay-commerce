@@ -42,6 +42,50 @@ public interface CommerceBatchJobPersistence extends BasePersistence<CommerceBat
 	 */
 
 	/**
+	* Returns the commerce batch job where key = &#63; or throws a {@link NoSuchBatchJobException} if it could not be found.
+	*
+	* @param key the key
+	* @return the matching commerce batch job
+	* @throws NoSuchBatchJobException if a matching commerce batch job could not be found
+	*/
+	public CommerceBatchJob findByKey(String key)
+		throws NoSuchBatchJobException;
+
+	/**
+	* Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param key the key
+	* @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	*/
+	public CommerceBatchJob fetchByKey(String key);
+
+	/**
+	* Returns the commerce batch job where key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param key the key
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce batch job, or <code>null</code> if a matching commerce batch job could not be found
+	*/
+	public CommerceBatchJob fetchByKey(String key, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce batch job where key = &#63; from the database.
+	*
+	* @param key the key
+	* @return the commerce batch job that was removed
+	*/
+	public CommerceBatchJob removeByKey(String key)
+		throws NoSuchBatchJobException;
+
+	/**
+	* Returns the number of commerce batch jobs where key = &#63;.
+	*
+	* @param key the key
+	* @return the number of matching commerce batch jobs
+	*/
+	public int countByKey(String key);
+
+	/**
 	* Caches the commerce batch job in the entity cache if it is enabled.
 	*
 	* @param commerceBatchJob the commerce batch job
