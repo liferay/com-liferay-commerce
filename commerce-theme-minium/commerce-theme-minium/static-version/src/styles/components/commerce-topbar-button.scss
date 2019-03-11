@@ -10,13 +10,26 @@
 	min-width: $frame-size;
 	padding: 14px;
 	text-align: left;
+	
+	@media screen and (max-width: 767px) {
+		height: $frame-size-small;
+		min-width: $frame-size-small;
+		padding: 0;
+	}
 
 	&:hover {
 		color: currentColor;
 		text-decoration: none;
 	}
 
-	svg {
+	&__label {
+		@media screen and (max-width: 767px) {
+			display: none;
+		}
+	}
+
+	svg,
+	&__icon {
 		display: inline-block;
 		font-size: 21px;
 		margin: 10px;

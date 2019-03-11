@@ -6,8 +6,8 @@
 		border-radius: 8px;
 		box-shadow: $minium-shadow;
 		display: none;
-		display: none;
-		height: 530px;
+		height: calc(100vh - #{$frame-size * 2 + $liferay-topbar-size + $minium-gutter});
+		max-height: 530px;
 		opacity: 0;
 		position: absolute;
 		right: 0;
@@ -17,6 +17,14 @@
 		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		width: 450px;
 		z-index: 1160;
+
+		@media screen and (max-width: 767px) {
+			position: fixed;
+			top: 120px;
+			right: $minium-small-gutter;
+			left: $minium-small-gutter;
+			width: calc(100% - #{$minium-small-gutter * 2});
+		}
 
 		&::before {
 			border: 10px solid transparent;
@@ -28,6 +36,10 @@
 			right: 24px;
 			transition: max-height .2s ease-in, opacity .2s ease-in;
 			z-index: 1160;
+
+			@media screen and (max-width: 767px) {
+				right: 64px;
+			}
 		}
 
 		&.is-closing {

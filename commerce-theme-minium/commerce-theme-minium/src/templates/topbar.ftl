@@ -2,10 +2,12 @@
 	<div class="minium-topbar__start">
 		<#if back_url?has_content>
 			<a class="commerce-topbar-button" href="${back_url}">
-				<svg class="commerce-icon">
+				<svg class="commerce-icon commerce-topbar-button__icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#back" />
 				</svg>
-				${languageUtil.get(locale, "back")}
+				<span class="commerce-topbar-button__label">
+					${languageUtil.get(locale, "back")}
+				</span>
 			</a>
 		</#if>
 		<label class="commerce-topbar-button (is-active) js-toggle-search" for="commerce-search-input">

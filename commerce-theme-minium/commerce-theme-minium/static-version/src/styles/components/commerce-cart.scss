@@ -4,17 +4,34 @@
 	box-shadow: -20px 0 40px $color-shadow;
 	display: flex;
 	flex-direction: column;
+	max-width: 390px;
 	position: fixed;
 	right: 0;
 	top: $frame-size;
 	transition:
 		box-shadow $transition,
 		transform $transition;
-	width: 390px;
+	width: 100vw;
 	z-index: 1140;
+
+	@media screen and (max-width: 767px) {
+		top: $frame-size-small;
+	}
+
+	@media screen and (hover: none) {
+		bottom: $frame-size;
+	}
+
+	@media screen and (hover: none) and (max-width: 767px) {
+		bottom: $frame-size-small;
+	}
 
 	body.signed-in & {
 		top: $frame-size + $liferay-topbar-size;
+		
+		@media screen and (max-width: 767px) {
+			top: $frame-size-small + $liferay-topbar-size-small;
+		}
 	}
 
 	&:not(.is-open) {
