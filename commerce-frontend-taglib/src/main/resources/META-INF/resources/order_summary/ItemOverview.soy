@@ -1,4 +1,4 @@
-{namespace ItemRecap}
+{namespace ItemOverview}
 
 /**
  * This renders the component's whole content.
@@ -32,71 +32,126 @@
 	{@param? _handleFormUpdate: any}
 	{@param? _handleCancelClick: any}
 
-	<div class="item-recap panel-body">
-		<div class="commerce-tabs item-recap__tabs">
-			<button data-onclick="{$_handleTabChange}" data-element="overview">
-				{msg desc="overview"}overview{/msg}
-			</button>
-			{if $adminPrivileges}
-				<button data-onclick="{$_handleTabChange}" data-element="edit">
-					{msg desc="edit"}edit{/msg}
-				</button>
+	{let $showTabs: $adminPrivileges /}
+
+	{let $contentClasses kind="text"}
+		commerce-order-item-overview__content
+		{if $showTabs}
+			{sp}commerce-order-item-overview__content--separated
+		{/if}
+	{/let}
+
+	<div class="commerce-order-item-overview sticky">
+		{call .header}
+			{param showTabs: $showTabs /}
+			{param stage: $stage /}
+			{param _handleTabChange: $_handleTabChange /}
+		{/call}
+
+		<div class="{$contentClasses}">
+			{if isNonnull($formData) and isNonnull($itemData)}
+				<form data-onsubmit="{$_handleFormSubmit}">
+					{if $stage == 'overview'}
+						{call .overview}
+							{param _handleDescriptionStatusChange: $_handleDescriptionStatusChange /}
+							{param _handleTierPricingStatusChange: $_handleTierPricingStatusChange /}
+							{param _descriptionVisibilityStatus: $_descriptionVisibilityStatus /}
+							{param _tierPricingVisibilityStatus: $_tierPricingVisibilityStatus /}
+							{param _handleFormUpdate: $_handleFormUpdate /}
+							{param thumbnail: $itemData.thumbnail /}
+							{param sku: $itemData.sku /}
+							{param name: $itemData.name /}
+							{param tierPricing: $itemData.tierPricing /}
+							{param description: $itemData.description /}
+							{param deliveryDate: $formData.deliveryDate /}
+							{param note: $formData.note /}
+							{param spritemap: $spritemap /}
+						{/call}			
+					{/if}
+					{if $stage == 'edit'}
+						{call .edit}
+							{param _handleFormUpdate: $_handleFormUpdate /}
+							{param visibility: $formData.price /}
+							{param price: $formData.price /}
+							{param discount: $formData.discount /}
+							{param quantity: $formData.quantity /}
+							{param giftQuantity: $formData.giftQuantity /}
+						{/call}
+					{/if}
+
+					<div class="commerce-order-item-overview__actions">
+						{let $cancelClasses kind="text"}
+							commerce-button commerce-button--outline
+							{if $dataChanged == false}
+								{sp}commerce-button--disabled
+							{/if}
+						{/let}
+						{let $saveClasses kind="text"}
+							commerce-button
+							{if $dataChanged == false}
+								{sp}commerce-button--disabled
+							{/if}
+						{/let}
+						<button type="reset" class="{$cancelClasses}" data-onclick="{$_handleCancelClick}">{msg desc="cancel"}cancel{/msg}</button>
+						<button type="submit" class="{$saveClasses}">{msg desc="save"}save{/msg}</button>
+					</div>
+				</form>
+			{else}
+				{call .empty /}
 			{/if}
 		</div>
-		{if isNonnull($formData) and isNonnull($itemData)}
-			<form data-onsubmit="{$_handleFormSubmit}">
-				{if $stage == 'edit' and isNonnull($formData) and $adminPrivileges}
-					{call .edit}
-						{param _handleFormUpdate: $_handleFormUpdate /}
-						{param visibility: $formData.price /}
-						{param price: $formData.price /}
-						{param discount: $formData.discount /}
-						{param quantity: $formData.quantity /}
-						{param giftQuantity: $formData.giftQuantity /}
-					{/call}
-				{else}
-					{call .overview}
-						{param _handleDescriptionStatusChange: $_handleDescriptionStatusChange /}
-						{param _handleTierPricingStatusChange: $_handleTierPricingStatusChange /}
-						{param _descriptionVisibilityStatus: $_descriptionVisibilityStatus /}
-						{param _tierPricingVisibilityStatus: $_tierPricingVisibilityStatus /}
-						{param _handleFormUpdate: $_handleFormUpdate /}
-						{param thumbnail: $itemData.thumbnail /}
-						{param sku: $itemData.sku /}
-						{param name: $itemData.name /}
-						{param tierPricing: $itemData.tierPricing /}
-						{param description: $itemData.description /}
-						{param deliveryDate: $formData.deliveryDate /}
-						{param note: $formData.note /}
-						{param spritemap: $spritemap /}
-					{/call}			
-				{/if}
+	</div>
+{/template}
 
-				{let $cancelClasses kind="text"}
-					commerce-button commerce-button--outline
-					{if $dataChanged == false}
-						{sp}commerce-button--disabled
-					{/if}
-				{/let}
+{template .header}
+	{@param? showTabs: bool}
+	{@param? stage: string}
+	{@param? _handleTabChange: any}
 
-				{let $saveClasses kind="text"}
-					commerce-button
-					{if $dataChanged == false}
-						{sp}commerce-button--disabled
-					{/if}
-				{/let}
-
-				<button type="reset" class="{$cancelClasses}" data-onclick="{$_handleCancelClick}">{msg desc="cancel"}cancel{/msg}</button>
-				<button type="submit" class="{$saveClasses}">{msg desc="save"}save{/msg}</button>
-			</form>
+	{let $headerClasses kind="text"}
+		commerce-order-item-overview__header
+		{if $showTabs}
+			{sp}commerce-order-item-overview__header--with-tabs
 		{else}
-			{call .empty /}
+			{sp}commerce-order-item-overview__header--with-title
+		{/if}
+	{/let}
+	<div class="{$headerClasses}">
+		{if $showTabs}
+			{let $overviewButtonClasses kind="text"}
+				commerce-order-item-overview__tab-item
+				{if $stage == 'overview'}
+					{sp}commerce-order-item-overview__tab-item--active
+				{/if}
+			{/let}
+			{let $editButtonClasses kind="text"}
+				commerce-order-item-overview__tab-item
+				{if $stage == 'edit'}
+					{sp}commerce-order-item-overview__tab-item--active
+				{/if}
+			{/let}
+			<button 
+				class="{$overviewButtonClasses}" 
+				data-onclick="{$_handleTabChange}" 
+				data-element="overview"
+			>
+				{msg desc="overview"}overview{/msg}
+			</button>
+			<button 
+				class="{$editButtonClasses}" 
+				data-onclick="{$_handleTabChange}" 
+				data-element="edit"
+			>
+				{msg desc="edit"}edit{/msg}
+			</button>
+		{else}
+			{msg desc="overview"}overview{/msg}
 		{/if}
 	</div>
 {/template}
 
 {template .empty}
-	<div class="item-recap__empty">
+	<div class="commerce-order-item-overview__empty">
 		{msg desc="Please select a product"}please-select-a-product{/msg}
 	</div>
 {/template}
@@ -119,14 +174,19 @@
 	{@param? _descriptionVisibilityStatus: string}
 	{@param? _tierPricingVisibilityStatus: string}
 	
-	<div class="item-recap__overview">
-		<p>{$thumbnail}</p>
-		<p>{$sku}</p>
-		<p>{$name}</p>
+	<div class="commerce-order-item-overview__overview">
+
+		<div class="commerce-order-item-info">
+			<div class="commerce-order-item-info__thumbnail" style="background-image: url('{$thumbnail}')"></div>
+			<div class="commerce-order-item-info__data-wrapper">
+				<div class="commerce-order-item-info__sku">{$sku}</div>
+				<div class="commerce-order-item-info__name">{$name}</div>
+			</div>
+		</div>
 
 		{let $requestDeliveryDateLabel kind="html"}{msg desc="Request delivery date"}request-delivery-date{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'deliveryDate' /}
 			{param label: $requestDeliveryDateLabel /}
 			{param value: $deliveryDate /}
@@ -137,7 +197,7 @@
 
 		{let $noteLabel kind="html"}{msg desc="Note"}note{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'note' /}
 			{param label: $noteLabel /}
 			{param value: $note /}
@@ -148,11 +208,16 @@
 
 		{if isNonnull($description)}
 			{let $descriptionLabel kind="html"}{msg desc="Description"}description{/msg}{/let}
+			{let $descriptionContent kind="html"}
+				<div class="commerce-order-item-overview__description">
+					{$description}
+				</div>
+			{/let}
 			{call AccordionPanel.render}
 				{param events: ['updateStatus' : $_handleDescriptionStatusChange] /}
 				{param status: $_descriptionVisibilityStatus /}
 				{param title: $descriptionLabel /}
-				{param content: $description /}
+				{param content: $descriptionContent /}
 				{param spritemap: $spritemap /}
 			{/call}
 		{/if}
@@ -191,11 +256,12 @@
 	{@param price: string}
 	{@param quantity: string|int}
 
-	<div class="item-recap__edit">
+	<div class="commerce-order-item-overview__edit">
 
 		{let $priceLabel kind="html"}{msg desc="Price"}price{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
+			{param additionalClasses: 'mt-0' /}
 			{param name: 'price' /}
 			{param label: $priceLabel /}
 			{param value: $price /}
@@ -206,7 +272,7 @@
 
 		{let $discountLabel kind="html"}{msg desc="Discount"}discount{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'discount' /}
 			{param label: $discountLabel /}
 			{param value: $discount /}
@@ -217,7 +283,7 @@
 
 		{let $quantityLabel kind="html"}{msg desc="Quantity"}quantity{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'quantity' /}
 			{param label: $quantityLabel /}
 			{param value: $quantity /}
@@ -228,7 +294,7 @@
 
 		{let $giftLabel kind="html"}{msg desc="Gift quantity"}gift-quantity{/msg}{/let}
 		{call CommerceInputText.render}
-			{param contextName: 'item-recap' /}
+			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'giftQuantity' /}
 			{param label: $giftLabel /}
 			{param value: $giftQuantity /}

@@ -1,4 +1,4 @@
-import template from './ItemRecap.soy';
+import template from './ItemOverview.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
@@ -15,24 +15,32 @@ const checkObjectEquality = (firstObj, secondObj) => {
 	return comparisonResult;
 }
 
-class ItemRecap extends Component {
+class ItemOverview extends Component {
+
+	syncDataChanged(){
+		this.emit('handleChanges', this.dataChanged);
+	}
 
 	syncItemData(){
-		this._setInitialData();
+		return this.itemData && this._setInitialData();
+	}
+
+	_handleCloseModal(){
+		console.log('close modal');
 	}
 
 	_handleFormSubmit(e){
 		console.log('submit', e);
 		e.preventDefault();
-		this._sendUpdates();
+		this._submitUpdates();
 	}
 
 	_handleSaveClick(e){
 		e.preventDefault();
-		this._sendUpdates();
+		this._submitUpdates();
 	}
 
-	_sendUpdates(){
+	_submitUpdates(){
 		if(!this.dataChanged){
 			return null
 		}
@@ -41,7 +49,7 @@ class ItemRecap extends Component {
 			this.itemData,
 			this.formData
 		);
-		return this.emit('productDataUpdated', updatedData);
+		return this.emit('submitChanges', updatedData);
 	}
 	
 	_handleCancelClick(e){
@@ -86,7 +94,7 @@ class ItemRecap extends Component {
 
 }
 
-ItemRecap.STATE = {
+ItemOverview.STATE = {
 	_confirmModalVisible: Config.bool().value(false),
 	adminPrivileges: Config.bool().value(false),
 	dataChanged: Config.bool().value(false),
@@ -164,14 +172,13 @@ ItemRecap.STATE = {
 		.internal(),
 	stage: Config.string().oneOf(
 		[
-			'empty',
 			'overview',
 			'edit'
 		]
-	)
+	).value('overview')
 };
 
-Soy.register(ItemRecap, template);
+Soy.register(ItemOverview, template);
 
-export {ItemRecap};
-export default ItemRecap;
+export {ItemOverview};
+export default ItemOverview;

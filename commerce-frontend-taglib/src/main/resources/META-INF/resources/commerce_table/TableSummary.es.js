@@ -4,7 +4,21 @@ import Soy from 'metal-soy';
 
 import template from './TableSummary.soy';
 
-class TableSummary extends Component {}
+import {translate} from '../js_utils/localization.es';
+
+class TableSummary extends Component {
+	attached() {
+		this.data = this.data.map(
+			(item) => Object.assign(
+				{},
+				item,
+				{
+					title: translate(item.title)
+				}
+			)
+		)
+	}
+}
 
 Soy.register(TableSummary, template);
 

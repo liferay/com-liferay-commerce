@@ -20,7 +20,6 @@ class CartProduct extends Component {
 	_handleCancelDeletion() {
 		return this.emit('cancelItemDeletion', this.id);
 	}
-
 }
 
 Soy.register(CartProduct, template);

@@ -69,8 +69,8 @@ public class OrderSummaryTag extends ComponentRendererTag {
 		String dataProviderKey = GetterUtil.getString(
 			context.get("dataProviderKey"));
 
-		boolean showItemRecap = GetterUtil.getBoolean(
-			context.get("showItemRecap"));
+		boolean showItemOverview = GetterUtil.getBoolean(
+			context.get("showItemOverview"));
 
 		boolean showTableSummary = GetterUtil.getBoolean(
 			context.get("showTableSummary"));
@@ -105,7 +105,7 @@ public class OrderSummaryTag extends ComponentRendererTag {
 			sb.append("&portletId=");
 			sb.append(portletDisplay.getId());
 
-			putValue("showItemRecap", showItemRecap);
+			putValue("showItemOverview", showItemOverview);
 			putValue("showTableSummary", showTableSummary);
 			
 			// TODO: addSummaryData
@@ -142,8 +142,8 @@ public class OrderSummaryTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/order_summary/OrderSummary.es");
 	}
 
-	public void setShowItemRecap(boolean showItemRecap) {
-		putValue("showItemRecap", showItemRecap);
+	public void setShowItemOverview(boolean showItemOverview) {
+		putValue("showItemOverview", showItemOverview);
 	}
 
 	public void setShowTableSummary(boolean showTableSummary) {

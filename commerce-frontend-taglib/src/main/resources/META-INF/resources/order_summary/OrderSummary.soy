@@ -12,7 +12,7 @@
 	{@param? actionsMenuVariant: string}
 	{@param currentPage: int}
 	{@param? id: string}
-	{@param items: ?}
+	{@param items: list<?>}
 	{@param? emptyTableMessage: string}
 	{@param? paginationBaseHref: string}
 	{@param paginationEntries: ?}
@@ -29,49 +29,95 @@
 	{@param? showPagination: bool}
 	{@param? adminPrivileges: bool}
 	{@param? _handleItemClick: any}
-	{@param? _handleItemUpdate: any}
-	{@param? _itemRecapStage: string}
+	{@param? _handleSubmitItemChanges: any}
+	{@param? _handleItemModifications: any}
+	{@param? _handleModalDiscardClick: any}
+	{@param? _handleModalCancelClick: any}
+	{@param? _handleCloseModal: any}
+	{@param? _itemOverviewStage: string}
 	{@param? itemData: ?}
+	{@param? _showModal: bool}
 
-	<div class="row">
-		<div class="col-8">
-			{call CommerceTable.render}
-				{param events: ['itemToggled' : $_handleItemClick] /}
-				{param actionsMenuVariant: $actionsMenuVariant /}
-				{param currentPage: $currentPage /}
-				{param id: $id /}
-				{param items: $items /}
-				{param emptyTableMessage: $emptyTableMessage /}
-				{param paginationBaseHref: $paginationBaseHref /}
-				{param paginationEntries: $paginationEntries /}
-				{param paginationSelectedEntry: $paginationSelectedEntry /}
-				{param schema: $schema /}
-				{param selectable: $selectable /}
-				{param showActionsMenu: $showActionsMenu /}
-				{param showPagination: $showPagination /}
-				{param spritemap: $spritemap /}
-				{param tableVariant: $tableVariant /}
-				{param totalItems: $totalItems /}
-				{param dataProviderKey: $dataProviderKey /}
-				{param dataSetAPI: $dataSetAPI /}
-				{param disableAJAX: $disableAJAX /}
-				{param pageSize: $pageSize /}
-				{param tableName: $tableName /}
-				{param showTableSummary: $showTableSummary /}
-				{param summaryData: $summaryData /}
-			{/call}
-		</div>
-		<div class="col-4">
-			{if isNonnull($itemData)}
-				{call ItemRecap.render}
-					{param events: [ 'productDataUpdated' : $_handleItemUpdate] /}
-					{param itemData: $itemData /}
-					{param spritemap: $commerceSpritemap /}
-					{param stage: $_itemRecapStage /}
-					{param adminPrivileges: $adminPrivileges /}
+	<div class="order-summary">
+		<div class="row">
+			<div class="col">
+				{call CommerceTable.render}
+					{param events: ['itemToggled' : $_handleItemClick] /}
+					{param actionsMenuVariant: $actionsMenuVariant /}
+					{param currentPage: $currentPage /}
+					{param id: $id /}
+					{param items: $items /}
+					{param emptyTableMessage: $emptyTableMessage /}
+					{param paginationBaseHref: $paginationBaseHref /}
+					{param paginationEntries: $paginationEntries /}
+					{param paginationSelectedEntry: $paginationSelectedEntry /}
+					{param schema: $schema /}
+					{param selectable: $selectable /}
+					{param showActionsMenu: $showActionsMenu /}
+					{param showPagination: $showPagination /}
+					{param spritemap: $spritemap /}
+					{param tableVariant: $tableVariant /}
+					{param totalItems: $totalItems /}
+					{param dataProviderKey: $dataProviderKey /}
+					{param dataSetAPI: $dataSetAPI /}
+					{param disableAJAX: $disableAJAX /}
+					{param pageSize: $pageSize /}
+					{param tableName: $tableName /}
+					{param showTableSummary: $showTableSummary /}
+					{param summaryData: $summaryData /}
 				{/call}
+			</div>
+			{if length($items) > 0}
+				<div class="col-4 position-relative">
+					{call ItemOverview.render}
+						{param events: [ 
+							'submitChanges' : $_handleSubmitItemChanges,
+							'handleChanges' : $_handleItemModifications
+						] /}
+						{param itemData: $itemData /}
+						{param spritemap: $commerceSpritemap /}
+						{param stage: $_itemOverviewStage /}
+						{param adminPrivileges: $adminPrivileges /}
+					{/call}
+				</div>
 			{/if}
 		</div>
+
+		{if $_showModal and $_showModal == true}
+			{let $modalBody kind="html"}
+				<div class="wrapper">
+					<div class="commerce-modal__content">
+						{msg desc="Changing the item you will discard all the changes you've made to the current one"}
+							changing-the-item-you-will-discard-all-the-changes-youve-made-the-current-one
+						{/msg}
+					</div>
+					<div class="commerce-modal__actions">
+						<button 
+							class="commerce-button commerce-button--outline"
+							type="button"
+							data-onclick="{$_handleModalCancelClick}"
+						>
+							{msg desc="Cancel"}cancel{/msg}
+						</button>
+						<button 
+							class="commerce-button"
+							type="button"
+							data-onclick="{$_handleModalDiscardClick}"
+						>
+							{msg desc="Discard"}discard{/msg}
+						</button>
+					</div>
+				</div>
+			{/let}
+
+			{call ClayModal.render}
+				{param body: $modalBody /}
+				{param elementClasses: 'commerce-modal commerce-modal--confirmation' /}
+				{param visible: $_showModal /}
+				{param events: ['hide': $_handleCloseModal] /}
+				{param ref: 'modal' /}
+			{/call}
+		{/if}
 	</div>
 {/template}
 

@@ -17,6 +17,11 @@ CommerceInputText.STATE = {
 		]
 	),
 	name: Config.string(),
+	margin: Config.oneOf([
+		'top',
+		'bottom'
+	]),
+	additionalClasses: Config.string(),
 	pattern: Config.any(),
 	required: Config.bool(),
 	type: Config.string(),

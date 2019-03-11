@@ -200,7 +200,7 @@
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.OrderSummaryTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>showItemRecap</name>
+			<name>showItemOverview</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>

@@ -8,6 +8,7 @@ import template from './MiniCart.soy';
 
 import './CartProduct.es';
 import './Summary.es';
+import { translate } from '../js_utils/localization.es';
 
 class Cart extends Component {
 
@@ -279,12 +280,13 @@ class Cart extends Component {
 
 	_handleResponseErrors(productId, res) {
 		const errorMessages = res.errorMessages ? res.errorMessages : res.validatorErrors.map(item => item.message);
+		const localizedErrors = errorMessages.map(translate);
 		return this._setProductProperties(
 			productId,
 			{
 				deleteDisabled: false,
 				updating: false,
-				errorMessages
+				errorMessages: localizedErrors
 			}
 		);
 	}
@@ -356,9 +358,7 @@ class Cart extends Component {
 				}
 			)
 			.catch(
-				err => {
-					this._removePendingOperation(productId);
-				}
+				__ => this._removePendingOperation(productId)
 			);
 	}
 }

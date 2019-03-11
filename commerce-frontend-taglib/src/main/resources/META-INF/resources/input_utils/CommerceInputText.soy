@@ -1,8 +1,10 @@
 {namespace CommerceInputText}
 
 {template .render}
+	{@param? additionalClasses: string }
 	{@param contextName: string }
 	{@param name: string }
+	{@param? margin: string }
 	{@param? label: string|html }
 	{@param? value: string|int }
 	{@param? type: string}
@@ -11,10 +13,19 @@
 	{@param? keyUpHandler: any }
 	{@param? changeHandler: any }
 
-	<div
-		class="commerce-input-text"
-	>
 
+	{let $inputClasses kind="text"}
+		commerce-input-text
+		{if $margin}
+			{sp}commerce-input-text--with-margin-{$margin}
+		{/if}
+		{if $additionalClasses}
+			{sp}{$additionalClasses}
+		{/if}
+	{/let}
+	<div
+		class="{$inputClasses}"
+	>
 		{if isNonnull($label)}
 			<label
 				for="{$contextName}-{$name}"
@@ -44,7 +55,7 @@
 			type="{$inputType}"
 			id="{$contextName}-{$name}"
 			name="{$name}"
-			class="commerce-modal__input commerce-modal__input--with-margin"
+			class="commerce-modal__input"
 			value="{$inputValue}"
 			data-onkeyup="{$keyUpHandler}"
 

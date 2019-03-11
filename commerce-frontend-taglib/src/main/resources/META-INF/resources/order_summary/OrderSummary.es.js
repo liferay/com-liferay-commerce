@@ -1,9 +1,11 @@
 import template from './OrderSummary.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
+import dom from 'metal-dom';
 
+import 'clay-modal';
 import '../commerce_table/CommerceTable.es';
-import './ItemRecap.es';
+import './ItemOverview.es';
 
 const fakeSummaryData = [
 	{
@@ -69,11 +71,31 @@ class OrderSummary extends Component {
 		this.itemData = fakeItemData;
 	}
 
-	_handleItemClick(e){
-		console.log(e);
+	_handleCloseModal(e) {
+		e.preventDefault();
 	}
 
-	getItemData(itemId){
+	_handleItemClick(itemId){
+		if (this.itemData && this.itemData.id !== itemId && this.itemDataModified){
+			this._showModal = true;
+		} else {
+			this._getItemData();
+		}
+	}
+
+	_handleModalCancelClick(){
+		dom.exitDocument(this.refs.modal._overlayElement);
+		this._showModal = false;
+	}
+	
+	_handleModalDiscardClick() {
+		console.log('discard');
+		dom.exitDocument(this.refs.modal._overlayElement);
+		this._showModal = false;
+		this._getItemData();
+	}
+
+	_getItemData(itemId){
 		if(!this.tableItemsAPI){
 			throw new Error('Items API endpoint not defined');
 		}
@@ -81,18 +103,22 @@ class OrderSummary extends Component {
 			this.tableItemsAPI + '/' + itemId
 		).then(
 			response => response.json()
-		).then(this.updateItemData);
+		).then(this._updateItemData);
 	}
 
-	updateItemData(itemData){
+	_updateItemData(itemData){
 		this.itemData = itemData;
 	}
+
+	_handleItemModifications(itemDataModified){
+		this.itemDataModified = itemDataModified;
+	}
 	
-	_handleItemUpdate(itemData){
-		this._updadeItemChanges(itemData)
+	_handleSubmitItemChanges(itemData){
+		this._saveItemChanges(itemData)
 	}
 
-	_updadeItemChanges(itemData){
+	_saveItemChanges(itemData){
 		if(!this.tableItemsAPI){
 			throw new Error('Items API endpoint not defined');
 		}
@@ -106,7 +132,7 @@ class OrderSummary extends Component {
 		).then(
 			response => response.json()
 		).then(
-			this.updateItemData
+			this._updateItemData
 		).catch(e => {
 			console.log(e)
 		})
@@ -154,10 +180,10 @@ OrderSummary.STATE = {
 	commerceSpritemap: Config.string().required(),
 	tableName: Config.string().required(),
 	totalItems: Config.number().required(),
-	showItemRecap: Config.bool(),
+	showItemOverview: Config.bool(),
 	showTableSummary: Config.bool(),
 	summaryData: Config.array(),
-	_itemRecapStage: Config.string().oneOf(
+	_itemOverviewStage: Config.string().oneOf(
 		[
 			'empty',
 			'overview',
@@ -177,6 +203,7 @@ OrderSummary.STATE = {
 			name: Config.string().required(),
 			note: Config.string().required(),
 			description: Config.string(),
+			deliveryDate: Config.string(),
 			tierPricing: Config.array(),
 			price: Config.string(),
 			discount: Config.string(),
@@ -184,7 +211,9 @@ OrderSummary.STATE = {
 			quantity: Config.number()
 		}
 	),
-	tableItemsAPI: Config.string()
+	itemDataModified: Config.bool().value(false),
+	tableItemsAPI: Config.string(),
+	_showModal: Config.bool().value(false)
 };
 
 Soy.register(OrderSummary, template);

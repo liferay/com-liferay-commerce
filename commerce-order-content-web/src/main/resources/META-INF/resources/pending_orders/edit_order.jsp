@@ -291,7 +291,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	pageNumber="1"
 	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
 	tableName="commercePendingOrderItems"
-	showItemRecap="<%= true %>"
+	showItemOverview="<%= true %>"
 	showTableSummary="<%= true %>"
 />
 
