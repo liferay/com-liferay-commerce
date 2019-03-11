@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.batch.service.impl;
 
+import com.liferay.commerce.batch.engine.api.job.BatchStatus;
+import com.liferay.commerce.batch.exception.NoSuchBatchJobException;
+import com.liferay.commerce.batch.model.CommerceBatchJob;
 import com.liferay.commerce.batch.service.base.CommerceBatchJobLocalServiceBaseImpl;
 
 /**
@@ -32,9 +35,25 @@ import com.liferay.commerce.batch.service.base.CommerceBatchJobLocalServiceBaseI
  */
 public class CommerceBatchJobLocalServiceImpl
 	extends CommerceBatchJobLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.batch.service.CommerceBatchJobLocalServiceUtil} to access the commerce batch job local service.
-	 */
+
+	@Override
+	public CommerceBatchJob addCommerceBatchJob(String key, String name) {
+		CommerceBatchJob commerceBatchJob = commerceBatchJobPersistence.create(
+			counterLocalService.increment(
+				CommerceBatchJob.class.getName()));
+
+		commerceBatchJob.setKey(key);
+		commerceBatchJob.setName(name);
+		commerceBatchJob.setStatus(BatchStatus.UNKNOWN.toString());
+
+		return commerceBatchJobPersistence.update(commerceBatchJob);
+	}
+
+	@Override
+	public String getStatus(String key) throws NoSuchBatchJobException {
+		CommerceBatchJob commerceBatchJob =
+			commerceBatchJobPersistence.findByKey(key);
+
+		return commerceBatchJob.getStatus();
+	}
 }
