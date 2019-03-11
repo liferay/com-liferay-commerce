@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 /**
  * @author Fabio Diego Mastrorilli
  */
-public class AddAddressModalTag extends ComponentRendererTag {
+public class AddressModalTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -48,7 +48,7 @@ public class AddAddressModalTag extends ComponentRendererTag {
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-		setTemplateNamespace("AddAddressModal.render");
+		setTemplateNamespace("AddressModal.render");
 
 		return super.doStartTag();
 	}
@@ -62,7 +62,7 @@ public class AddAddressModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_address_modal/AddAddressModal.es");
+			"commerce-frontend-taglib/address_modal/AddressModal.es");
 	}
 
 }

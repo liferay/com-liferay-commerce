@@ -1,6 +1,6 @@
 'use strict';
 
-import template from './AddAddressModal.soy';
+import template from './AddressModal.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
@@ -8,7 +8,7 @@ import 'clay-modal';
 
 import '../input_utils/CommerceInputText';
 
-class AddAddressModal extends Component {
+class AddressModal extends Component {
 
 	attached() {
 		return this._fetchCountries();
@@ -124,12 +124,12 @@ class AddAddressModal extends Component {
 					{
 						address: jsonResponse.street1,
 						city: jsonResponse.city,
-						zipCode: jsonResponse.zip,
 						country: jsonResponse.commerceCountryId,
+						id: id,
 						region: jsonResponse.commerceRegionId,
 						referent: jsonResponse.name,
 						telephone: jsonResponse.phoneNumber,
-						id: id
+						zipCode: jsonResponse.zip
 					}
 				);
 
@@ -188,7 +188,7 @@ class AddAddressModal extends Component {
 
 	_addAddress(e) {
 		return this.emit(
-			'addAddressModalSave',
+			'addressModalSave',
 			Object.assign(
 				{},
 				this._formData,
@@ -215,9 +215,9 @@ class AddAddressModal extends Component {
 	}
 }
 
-Soy.register(AddAddressModal, template);
+Soy.register(AddressModal, template);
 
-AddAddressModal.STATE = {
+AddressModal.STATE = {
 	billingCountriesAPI: Config.string().required(),
 	regionsAPI: Config.string().required(),
 	shippingCountriesAPI: Config.string().required(),
@@ -247,6 +247,12 @@ AddAddressModal.STATE = {
 					Config.number()
 				]
 			),
+			id: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			),
 			referent: Config.string(),
 			region: Config.oneOfType(
 				[
@@ -255,24 +261,18 @@ AddAddressModal.STATE = {
 				]
 			),
 			telephone: Config.string(),
-			zipCode: Config.string(),
-			id: Config.oneOfType(
-				[
-					Config.string(),
-					Config.number()
-				]
-			)
+			zipCode: Config.string()
 		}
 	).value(
 		{
 			address: null,
 			city: null,
 			country: null,
+			id: null,
 			referent: null,
 			region: null,
 			telephone: null,
-			zipCode: null,
-			id: null
+			zipCode: null
 		}
 	),
 	_modalVisible: Config.bool().internal().value(false),
@@ -295,5 +295,5 @@ AddAddressModal.STATE = {
 	).value(1)
 };
 
-export {AddAddressModal};
-export default AddAddressModal;
+export {AddressModal};
+export default AddressModal;
