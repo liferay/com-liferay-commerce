@@ -108,7 +108,7 @@
 		.minium-user-nav:not(:hover):not(:focus) & {
 			opacity: 0;
 			pointer-events: none;
-			
+
 			@media screen and (hover: hover) {
 				transform: translateY(20px);
 			}

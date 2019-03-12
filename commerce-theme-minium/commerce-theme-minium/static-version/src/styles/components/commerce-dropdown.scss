@@ -19,10 +19,10 @@
 		z-index: 1160;
 
 		@media screen and (max-width: 767px) {
-			position: fixed;
-			top: 120px;
-			right: $minium-small-gutter;
 			left: $minium-small-gutter;
+			position: fixed;
+			right: $minium-small-gutter;
+			top: 120px;
 			width: calc(100% - #{$minium-small-gutter * 2});
 		}
 

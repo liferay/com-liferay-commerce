@@ -5,6 +5,7 @@
 				<svg class="commerce-icon commerce-topbar-button__icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#back" />
 				</svg>
+
 				<span class="commerce-topbar-button__label">
 					${languageUtil.get(locale, "back")}
 				</span>

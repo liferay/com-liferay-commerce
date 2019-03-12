@@ -28,7 +28,7 @@
 
 	body.signed-in & {
 		top: $frame-size + $liferay-topbar-size;
-		
+
 		@media screen and (max-width: 767px) {
 			top: $frame-size-small + $liferay-topbar-size-small;
 		}
