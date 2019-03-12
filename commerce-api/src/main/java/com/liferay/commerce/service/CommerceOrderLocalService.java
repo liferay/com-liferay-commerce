@@ -425,6 +425,9 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder submitCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;
 
+	public CommerceOrder updateAccount(long commerceOrderId, long userId,
+		long commerceAccountId) throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateBillingAddress(long commerceOrderId,
 		String name, String description, String street1, String street2,

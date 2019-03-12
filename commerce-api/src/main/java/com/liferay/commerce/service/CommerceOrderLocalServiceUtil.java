@@ -536,6 +536,13 @@ public class CommerceOrderLocalServiceUtil {
 		return getService().submitCommerceOrder(userId, commerceOrderId);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder updateAccount(
+		long commerceOrderId, long userId, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateAccount(commerceOrderId, userId, commerceAccountId);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 		long commerceOrderId, String name, String description, String street1,
 		String street2, String street3, String city, String zip,

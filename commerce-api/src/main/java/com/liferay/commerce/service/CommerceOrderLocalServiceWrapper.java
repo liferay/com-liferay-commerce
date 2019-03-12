@@ -580,6 +580,14 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updateAccount(
+		long commerceOrderId, long userId, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.updateAccount(commerceOrderId,
+			userId, commerceAccountId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 		long commerceOrderId, String name, String description, String street1,
 		String street2, String street3, String city, String zip,
