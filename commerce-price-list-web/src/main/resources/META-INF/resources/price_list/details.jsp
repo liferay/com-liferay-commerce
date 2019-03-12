@@ -181,7 +181,7 @@ if (parentCommercePriceList != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="remove-rel-link" data-rowId="<%= commercePriceListAccountRel.getCommercePriceListAccountRelId() %>" href="javascript:;"><%= removeItemIcon %></a>
+			<a class="remove-account-rel-link" data-rowId="<%= commercePriceListAccountRel.getCommercePriceListAccountRelId() %>" href="javascript:;"><%= removeItemIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -302,7 +302,7 @@ if (parentCommercePriceList != null) {
 		var rowColumns = [];
 
 		rowColumns.push(item.name);
-		rowColumns.push('<a class="remove-rel-link" data-rowId="' + item.commerceAccountId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeItemIcon) %></a>');
+		rowColumns.push('<a class="remove-account-rel-link" data-rowId="' + item.commerceAccountId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeItemIcon) %></a>');
 
 		A.Array.removeItem(<portlet:namespace />deleteCommercePriceListAccountRelIds, item.commerceAccountId);
 
@@ -425,5 +425,24 @@ if (parentCommercePriceList != null) {
 			<portlet:namespace />deleteCommercePriceListUserSegmentEntryRel(rowId);
 		},
 		'.remove-rel-link'
+	);
+
+	var accountRelSearchContainer = Liferay.SearchContainer.get('<portlet:namespace />commercePriceListAccountRelSearchContainer');
+
+	var accountRelSearchContainerContentBox = accountRelSearchContainer.get('contentBox');
+
+	accountRelSearchContainerContentBox.delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+
+			var tr = link.ancestor('tr');
+			var rowId = link.attr('data-rowId');
+
+			accountRelSearchContainer.deleteRow(tr, rowId);
+
+			<portlet:namespace />deleteCommercePriceListAccountRel(rowId);
+		},
+		'.remove-account-rel-link'
 	);
 </aui:script>
