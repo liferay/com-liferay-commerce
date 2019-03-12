@@ -21,4 +21,6 @@ public interface JobLauncher {
 
 	public JobExecution run(Job job, JobParameters jobParameters);
 
+	public JobExecution runAsync(Job job, JobParameters jobParameters);
+
 }
