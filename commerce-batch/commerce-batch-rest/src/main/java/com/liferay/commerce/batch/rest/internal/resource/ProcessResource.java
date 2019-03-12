@@ -92,7 +92,7 @@ public class ProcessResource {
 	private Response _process(Attachment attachment) throws Exception {
 		DataHandler dataHandler = attachment.getDataHandler();
 
-		Map<String, String> jobIdNameMap = _batchFileProcessor.process(
+		Map<String, String> jobIdNameMap = _batchFileProcessor.processAsync(
 			dataHandler.getName(), dataHandler.getInputStream());
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
