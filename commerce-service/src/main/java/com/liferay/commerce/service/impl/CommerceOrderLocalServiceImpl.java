@@ -809,6 +809,23 @@ public class CommerceOrderLocalServiceImpl
 			serviceContext.getUserId(), commerceOrder, serviceContext);
 	}
 
+	@Override
+	public CommerceOrder updateAccount(
+			long commerceOrderId, long userId, long commerceAccountId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		User user = userLocalService.getUser(userId);
+
+		commerceOrder.setUserId(user.getUserId());
+		commerceOrder.setUserName(user.getFullName());
+		commerceOrder.setCommerceAccountId(commerceAccountId);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder updateBillingAddress(
