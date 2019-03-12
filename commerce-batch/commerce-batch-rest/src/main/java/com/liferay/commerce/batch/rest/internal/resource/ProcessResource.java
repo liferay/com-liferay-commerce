@@ -17,6 +17,7 @@ package com.liferay.commerce.batch.rest.internal.resource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.liferay.commerce.batch.engine.api.batch.BatchFileProcessor;
+import com.liferay.commerce.batch.exception.NoSuchBatchJobException;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Map;
@@ -62,12 +63,14 @@ public class ProcessResource {
 	@GET
 	@Path("/{key}")
 	@RequiresScope("CommerceBatch.read")
-	public Response getBatchExecutionStatus(@PathParam("key") String key) {
+	public Response getBatchExecutionStatus(@PathParam("key") String key)
+		throws NoSuchBatchJobException {
+
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
-		boolean active = _batchFileProcessor.getBatchExecutionStatus(key);
+		String status = _batchFileProcessor.getBatchExecutionStatus(key);
 
-		responseBuilder.entity(active);
+		responseBuilder.entity(status);
 
 		return responseBuilder.build();
 	}

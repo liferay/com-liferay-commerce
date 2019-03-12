@@ -16,18 +16,19 @@ package com.liferay.commerce.batch.engine.impl.internal.job;
 
 import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
+import com.liferay.commerce.batch.engine.api.job.JobFactory;
 import com.liferay.commerce.batch.engine.api.job.JobLauncher;
 import com.liferay.commerce.batch.engine.api.job.JobParameters;
-import com.liferay.commerce.batch.engine.impl.internal.concurrent.BlockingExecutor;
-
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.liferay.commerce.batch.model.CommerceBatchJob;
 import com.liferay.commerce.batch.service.CommerceBatchJobLocalService;
+import com.liferay.petra.concurrent.NoticeableExecutorService;
+import com.liferay.petra.executor.PortalExecutorManager;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.Objects;
+
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 /**
@@ -36,48 +37,86 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = JobLauncher.class)
 public class JobLauncherImpl implements JobLauncher {
 
-	public JobLauncherImpl() {
-		_blockingExecutor = new BlockingExecutor(2, 10);
-	}
-
-	public JobLauncherImpl(BlockingExecutor blockingExecutor) {
-		_blockingExecutor = Objects.requireNonNull(blockingExecutor);
-	}
-
-	@Override
-	public boolean isJobActive(String key) {
-		return _jobExecutionMap.containsKey(Objects.requireNonNull(key));
-	}
-
 	@Override
 	public JobExecution run(Job job, JobParameters jobParameters) {
 		Objects.requireNonNull(job);
 
-		CommerceBatchJob commerceBatchJob =
-			_commerceBatchJobLocalService.addCommerceBatchJob(
-				job.getKey(), job.getName());
+		CommerceBatchJob commerceBatchJob = _addCommerceBatchJob(
+			job.getKey(), job.getName());
 
 		JobExecution jobExecution = new JobExecution(
 			commerceBatchJob, jobParameters);
 
-		_blockingExecutor.execute(
-			new JobRunnable(job, jobExecution, _jobExecutionMap));
-
-		_jobExecutionMap.put(job.getKey(), jobExecution);
+		_submit(job, jobExecution);
 
 		return jobExecution;
 	}
 
-	@Deactivate
-	protected void deactivate() {
-		_blockingExecutor.destroy();
+	private CommerceBatchJob _addCommerceBatchJob(String key, String name) {
+		return _commerceBatchJobLocalService.addCommerceBatchJob(key, name);
 	}
+
+	private void _submit(Job job, JobExecution jobExecution) {
+		NoticeableExecutorService noticeableExecutorService =
+			_portalExecutorManager.getPortalExecutor(
+				JobLauncherImpl.class.getName());
+
+		noticeableExecutorService.submit(new JobRunnable(job, jobExecution));
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		JobLauncherImpl.class);
 
 	@Reference
 	private CommerceBatchJobLocalService _commerceBatchJobLocalService;
 
-	private final BlockingExecutor _blockingExecutor;
-	private final Map<String, JobExecution> _jobExecutionMap =
-		new ConcurrentHashMap<>();
+	@Reference
+	private JobFactory _jobFactory;
+
+	@Reference
+	private PortalExecutorManager _portalExecutorManager;
+
+	private class JobRunnable implements Runnable {
+
+		@Override
+		public void run() {
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						String.format(
+							"Job %s launched",
+							_jobExecution.getCommerceBatchJob()));
+				}
+
+				_job.execute(_jobExecution);
+			}
+			catch (Exception e) {
+				_log.error(
+					String.format(
+						"Job %s failed to execute",
+						_jobExecution.getCommerceBatchJob()),
+					e);
+			}
+			finally {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						String.format(
+							"Job %s completed",
+							_jobExecution.getCommerceBatchJob()));
+				}
+
+				_jobFactory.dispose(_job);
+			}
+		}
+
+		private JobRunnable(Job job, JobExecution jobExecution) {
+			_job = job;
+			_jobExecution = jobExecution;
+		}
+
+		private final Job _job;
+		private final JobExecution _jobExecution;
+
+	}
 
 }

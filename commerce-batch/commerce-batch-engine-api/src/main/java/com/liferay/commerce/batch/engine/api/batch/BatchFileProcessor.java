@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.batch.engine.api.batch;
 
+import com.liferay.commerce.batch.exception.NoSuchBatchJobException;
+
 import java.io.InputStream;
 
 import java.util.Map;
@@ -23,7 +25,8 @@ import java.util.Map;
  */
 public interface BatchFileProcessor {
 
-	public boolean getBatchExecutionStatus(String key);
+	public String getBatchExecutionStatus(String key)
+		throws NoSuchBatchJobException;
 
 	public Map<String, String> process(String fileName, InputStream inputStream)
 		throws Exception;

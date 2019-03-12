@@ -19,8 +19,6 @@ package com.liferay.commerce.batch.engine.api.job;
  */
 public interface JobLauncher {
 
-	public boolean isJobActive(String key);
-
 	public JobExecution run(Job job, JobParameters jobParameters);
 
 }
