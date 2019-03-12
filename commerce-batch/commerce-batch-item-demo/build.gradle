@@ -1,0 +1,6 @@
+dependencies {
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.6"
+	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
+	compileOnly project(":apps:commerce:commerce-batch:commerce-batch-engine-api")
+	compileOnly project(":apps:commerce:commerce-openapi-core-api")
+}
