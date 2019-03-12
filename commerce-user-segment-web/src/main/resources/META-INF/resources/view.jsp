@@ -118,6 +118,7 @@ SearchContainer<CommerceUserSegmentEntry> commerceUserSegmentEntrySearchContaine
 
 		<liferay-ui:search-container
 			id="commerceUserSegmentEntries"
+			rowChecker="<%= commerceUserSegmentEntrySearchContainer.getRowChecker() %>"
 			searchContainer="<%= commerceUserSegmentEntrySearchContainer %>"
 		>
 			<liferay-ui:search-container-row
