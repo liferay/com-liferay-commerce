@@ -9,8 +9,8 @@
 		"image info" min-content / 40px 201px;
 
 	@media screen and (max-width: 767px) {
-		grid-template-columns: 40px 0;
 		grid-gap: 0;
+		grid-template-columns: 40px 0;
 	}
 
 	&__image {

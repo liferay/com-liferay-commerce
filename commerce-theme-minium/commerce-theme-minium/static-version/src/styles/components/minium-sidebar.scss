@@ -4,7 +4,7 @@
 	color: $color-fg-alt;
 	display: flex;
 	justify-content: space-between;
-		
+
 	@media screen and (hover: hover) {
 		flex-direction: column;
 		overflow: hidden;
@@ -18,7 +18,7 @@
 			width: $sidebar-width;
 		}
 	}
-	
+
 	@media screen and (hover: none) {
 		flex-direction: row;
 		height: $frame-size;
@@ -35,7 +35,7 @@
 	&__middle {
 		overflow-x: hidden;
 		overflow-y: auto;
-		
+
 		@media screen and (hover: hover) {
 			padding: 40px 0;
 		}
