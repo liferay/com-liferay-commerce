@@ -46,6 +46,8 @@ import com.liferay.portal.kernel.util.Portal;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -72,6 +74,14 @@ public class BatchFileProcessorImpl implements BatchFileProcessor {
 		return _commerceBatchJobLocalService.getStatus(key);
 	}
 
+	@Override
+	public Map<String, String> process(File file) throws Exception {
+		try (InputStream inputStream = new FileInputStream(file)) {
+			return process(file.getName(), inputStream);
+		}
+	}
+
+	@Override
 	public Map<String, String> process(String fileName, InputStream inputStream)
 		throws Exception {
 
@@ -81,6 +91,34 @@ public class BatchFileProcessorImpl implements BatchFileProcessor {
 
 		for (Job job : jobs) {
 			JobExecution jobExecution = _jobLauncher.run(job, null);
+
+			CommerceBatchJob commerceBatchJob =
+				jobExecution.getCommerceBatchJob();
+
+			jobKeyNameMap.put(
+				commerceBatchJob.getKey(), commerceBatchJob.getName());
+		}
+
+		return jobKeyNameMap;
+	}
+
+	@Override
+	public Map<String, String> processAsync(File file) throws Exception {
+		try (InputStream inputStream = new FileInputStream(file)) {
+			return processAsync(file.getName(), inputStream);
+		}
+	}
+
+	public Map<String, String> processAsync(
+			String fileName, InputStream inputStream)
+		throws Exception {
+
+		Map<String, String> jobKeyNameMap = new HashMap<>();
+
+		List<Job> jobs = _createJobs(fileName, inputStream);
+
+		for (Job job : jobs) {
+			JobExecution jobExecution = _jobLauncher.runAsync(job, null);
 
 			CommerceBatchJob commerceBatchJob =
 				jobExecution.getCommerceBatchJob();

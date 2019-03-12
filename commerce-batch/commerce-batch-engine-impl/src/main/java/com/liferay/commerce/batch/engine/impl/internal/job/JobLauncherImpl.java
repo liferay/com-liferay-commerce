@@ -47,6 +47,23 @@ public class JobLauncherImpl implements JobLauncher {
 		JobExecution jobExecution = new JobExecution(
 			commerceBatchJob, jobParameters);
 
+		JobRunnable jobRunnable = new JobRunnable(job, jobExecution);
+
+		jobRunnable.run();
+
+		return jobExecution;
+	}
+
+	@Override
+	public JobExecution runAsync(Job job, JobParameters jobParameters) {
+		Objects.requireNonNull(job);
+
+		CommerceBatchJob commerceBatchJob = _addCommerceBatchJob(
+			job.getKey(), job.getName());
+
+		JobExecution jobExecution = new JobExecution(
+			commerceBatchJob, jobParameters);
+
 		_submit(job, jobExecution);
 
 		return jobExecution;
