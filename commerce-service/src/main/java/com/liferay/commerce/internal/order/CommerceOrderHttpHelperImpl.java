@@ -222,7 +222,8 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			commerceAccount.getCommerceAccountId(), themeDisplay);
 
 		if ((commerceOrder != null) && commerceOrder.isGuestOrder()) {
-			commerceOrder = _checkGuestOrder(themeDisplay, commerceOrder);
+			commerceOrder = _checkGuestOrder(
+				themeDisplay, commerceContext, commerceOrder);
 		}
 
 		if (((commerceOrder != null) && !commerceOrder.isOpen()) ||
@@ -277,10 +278,17 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 	}
 
 	private CommerceOrder _checkGuestOrder(
-			ThemeDisplay themeDisplay, CommerceOrder commerceOrder)
+			ThemeDisplay themeDisplay, CommerceContext commerceContext,
+			CommerceOrder commerceOrder)
 		throws PortalException {
 
 		if (commerceOrder == null) {
+			return null;
+		}
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount == null) {
 			return null;
 		}
 
@@ -302,8 +310,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				themeDisplay.getRequest(), themeDisplay.getResponse(), domain,
 				commerceOrderUuidWebKey);
 
-			return _commerceOrderLocalService.updateUser(
-				commerceOrder.getCommerceOrderId(), user.getUserId());
+			return _commerceOrderLocalService.updateAccount(
+				commerceOrder.getCommerceOrderId(), user.getUserId(),
+				commerceAccount.getCommerceAccountId());
 		}
 
 		String commerceOrderUuid = CookieKeys.getCookie(
