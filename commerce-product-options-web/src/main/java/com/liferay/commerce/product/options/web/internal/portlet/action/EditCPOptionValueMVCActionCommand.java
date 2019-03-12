@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -113,17 +114,17 @@ public class EditCPOptionValueMVCActionCommand extends BaseMVCActionCommand {
 			jsonObject.put("success", true);
 		}
 		catch (Exception e) {
-			String key = "your-request-failed-to-complete";
+			String message = LanguageUtil.get(
+				actionRequest.getLocale(), "your-request-failed-to-complete");
 
-			if (e instanceof CPOptionValueKeyException) {
-				key = "that-key-is-already-being-used";
+			if (!Validator.isBlank(e.getMessage())) {
+				message = e.getMessage();
 			}
 			else {
 				_log.error(e, e);
 			}
 
-			jsonObject.put(
-				"message", LanguageUtil.get(actionRequest.getLocale(), key));
+			jsonObject.put("message", message);
 			jsonObject.put("success", false);
 		}
 
@@ -151,19 +152,28 @@ public class EditCPOptionValueMVCActionCommand extends BaseMVCActionCommand {
 
 		CPOptionValue cpOptionValue = null;
 
-		if (cpOptionValueId <= 0) {
+		try {
+			if (cpOptionValueId <= 0) {
 
-			// Add commerce product option value
+				// Add commerce product option value
 
-			cpOptionValue = _cpOptionValueService.addCPOptionValue(
-				cpOptionId, nameMap, priority, key, serviceContext);
+				cpOptionValue = _cpOptionValueService.addCPOptionValue(
+					cpOptionId, nameMap, priority, key, serviceContext);
+			}
+			else {
+
+				// Update commerce product option value
+
+				cpOptionValue = _cpOptionValueService.updateCPOptionValue(
+					cpOptionValueId, nameMap, priority, key, serviceContext);
+			}
 		}
-		else {
-
-			// Update commerce product option value
-
-			cpOptionValue = _cpOptionValueService.updateCPOptionValue(
-				cpOptionValueId, nameMap, priority, key, serviceContext);
+		catch (CPOptionValueKeyException cpovke) {
+			throw new CPOptionValueKeyException(
+				LanguageUtil.format(
+					_portal.getHttpServletRequest(actionRequest),
+					"the-key-x-is-already-being-used", key),
+				cpovke);
 		}
 
 		return cpOptionValue;

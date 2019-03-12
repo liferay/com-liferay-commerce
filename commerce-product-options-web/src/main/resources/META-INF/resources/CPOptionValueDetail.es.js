@@ -105,7 +105,7 @@ class CPOptionValueDetail extends Component {
 	}
 
 	_handleDeleteOptionValue() {
-		if (confirm('Are you sure to delete?')) {
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this'))) {
 			this._deleteOptionValue();
 		}
 	}
