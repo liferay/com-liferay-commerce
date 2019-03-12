@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
 
 @import "./variables.scss";
-
 @import "./mixins.scss";
 @import "./utilities.scss";
 
+@import "./components/commerce-accordion.scss";
 @import "./components/commerce-account-list.scss";
 @import "./components/commerce-account-selector.scss";
 @import "./components/commerce-account-switcher.scss";
@@ -27,6 +27,7 @@
 @import "./components/commerce-order-title.scss";
 @import "./components/commerce-panel.scss";
 @import "./components/commerce-product-details-modal.scss";
+@import "./components/commerce-order-item-overview.scss";
 @import "./components/commerce-quantity-selector.scss";
 @import "./components/commerce-search.scss";
 @import "./components/commerce-small-table.scss";
@@ -34,6 +35,8 @@
 @import "./components/commerce-thumb-menu.scss";
 @import "./components/commerce-topbar-button.scss";
 @import "./components/commerce-typo.scss";
+@import "./components/commerce-table.scss";
+@import "./components/commerce-tier-pricing.scss";
 
 @import "./components/minium-action-toggle.scss";
 @import "./components/minium-actions-toggle-wrapper.scss";

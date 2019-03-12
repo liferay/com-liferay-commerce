@@ -24,7 +24,7 @@
 		}
 
 		&--disabled {
-			border: 2px solid #9D9E9E;
+			border: 2px solid $color-fg-lighter;
 
 			&:hover {
 				background: transparent

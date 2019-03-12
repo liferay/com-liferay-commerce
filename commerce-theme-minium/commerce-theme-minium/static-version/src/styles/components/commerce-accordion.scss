@@ -1,0 +1,51 @@
+.commerce-accordion {
+	&__title {
+		@extend .commerce-mini-title;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 12px;
+		cursor: pointer;
+
+		[class*="icon"] {
+			height: 25px;
+			width: 25px;
+			transition: transform .1s ease-in;
+			transform: rotate(0deg);
+		}
+		
+		&.opened,
+		&.opening {
+			[class*="icon"] {
+				transform: rotate(-180deg);
+			}
+		}
+	}
+
+	&__content {
+		overflow: hidden;
+		transition: max-height .2s ease-in, margin-top .2s ease-in;
+
+		&.closed {
+			max-height: 0;
+			margin-top: 0;
+		}
+
+		&.opening {
+			display: block;
+			margin-top: 10px
+		}
+
+		&.closing {
+			margin-top: 0;
+			display: block;
+		}
+
+		&.opened {
+			display: block;
+			max-height: none;
+			margin-top: 10px
+		}
+	}
+}	

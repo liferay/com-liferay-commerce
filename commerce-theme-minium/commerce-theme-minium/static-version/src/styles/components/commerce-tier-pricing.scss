@@ -1,0 +1,25 @@
+.commerce-tier-pricing {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 2px;
+
+	&__title,
+	&__value {
+		color: $color-fg-alt;
+		background: $color-bg-alt;
+		font-size: 11px;
+		padding: 8px 20px;
+		margin: 0px;
+		line-height: 1.3;
+	}
+
+	&__title {
+		text-align: left;
+		border-radius: 8px 0 0 8px;
+	}
+	
+	&__value {
+		text-align: right;
+		border-radius: 0 8px 8px 0;
+	}
+}

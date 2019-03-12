@@ -1,4 +1,18 @@
 .commerce-modal {
+
+	&--confirmation {
+		.modal-dialog {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -75%);
+		}
+
+		&.show .modal-dialog {
+			 transform: translate(-50%, -50%);
+		}
+	}
+
 	&__header {
 		display: flex;
 		flex-shrink: 0;
@@ -29,14 +43,14 @@
 	}
 
 	&__label {
-		color: #9D9E9E;
+		color: $color-fg-lighter;
 		display: block;
 		font-size: 11px;
 		font-weight: normal;
 		letter-spacing: 1px;
 		line-height: 1;
 		margin-bottom: 5px;
-		margin-left: 14px;
+		margin-left: 12px;
 		text-transform: uppercase;
 		white-space: nowrap;
 
@@ -69,15 +83,10 @@
 		border: 2px solid $color-shadow;
 		border-radius: 8px;
 		color: $color-fg;
-		margin-bottom: 15px;
 		min-height: 56px;
 		outline: none;
 		padding: 10px;
 		width: 100%;
-
-		&--with-margin {
-			margin-bottom: 30px;
-		}
 	}
 
 	&__actions {

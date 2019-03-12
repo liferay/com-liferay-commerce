@@ -1,0 +1,43 @@
+.commerce-table-summary {
+    font-size: 14px;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 25px;
+	margin-bottom: 20px;
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__title,
+	&__value {
+		margin: 0;
+		line-height: 1;
+		margin-bottom: 10px;
+
+		&:last-of-type {
+			margin-bottom: 0
+		}
+	}
+
+	&__title {
+		display: block;
+		flex: 1 0 calc(100% - 200px);
+		text-align: right;
+		color: $color-fg-alt;
+		align-self: flex-end;
+	}
+
+	&__value {
+		display: block;
+		flex: 0 0 150px;
+		text-align: right;
+		color: $color-fg;
+
+		&--big {
+		    font-size: 18px;
+		}
+	}
+
+}

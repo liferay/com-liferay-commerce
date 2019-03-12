@@ -14,18 +14,13 @@ class CommerceTable extends Component {
 
 	_getApiURL() {
 		let url = this.dataSetAPI;
-
 		url = url + '&pageSize=' + this.pageSize;
-
 		url = url + '&page=' + this.currentPage;
-
 		url = url + '&p_auth=' + Liferay.authToken;
-
 		url = url + '&' + Object.keys(this.filters).map(
 			el => {
 				return encodeURIComponent(el) + '=' + encodeURIComponent(this.filters[el]);
 			}).join('&');
-
 		return url;
 	}
 

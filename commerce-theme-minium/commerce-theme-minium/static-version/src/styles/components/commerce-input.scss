@@ -31,8 +31,11 @@
 		outline: none;
 		width: 100%;
 
-		&--with-margin {
+		&--with-margin-bottom {
 			margin-bottom: 30px;
+		}
+		&--with-margin-top {
+			margin-top: 30px;
 		}
 	}
 
@@ -52,4 +55,13 @@
 			margin-bottom: 30px;
 		}
 	}
+}
+
+.commerce-mini-title {
+	color: $color-fg-lighter;
+	font-size: 11px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	line-height: 1;
+	text-transform: uppercase;
 }

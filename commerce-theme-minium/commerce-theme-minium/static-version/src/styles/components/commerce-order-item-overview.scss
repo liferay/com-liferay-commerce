@@ -1,0 +1,131 @@
+.commerce-order-item-overview {
+    position: relative;
+
+    &.sticky {
+        position: sticky;
+        top: 40px;
+    }
+
+    &__header {
+        background-color: #FFF;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        
+        &--with-title {
+            line-height: 16px;
+            margin-bottom: 5px;
+            padding: 12px 30px;
+            border-radius: 8px;
+        }
+        
+        &--with-tabs {
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            overflow: hidden;
+        }
+    }
+
+    &__tab-item {
+        @extend .commerce-mini-title;
+        padding: 15px;
+        color: $color-fg-disabled;
+        background-color: $color-bg-disabled;
+        flex-grow: 1;
+        flex-basis: 50%;
+        position: relative;
+        transition: all .1s ease-in;
+        cursor: pointer;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            margin-left: -15px;
+            transform: scaleX(0);
+            transition: transform .05s ease-in;
+            background: $color-theme;
+            z-index: 1;
+        }
+        
+        &:hover {
+            color: $color-fg;
+        }
+        
+        &--active {
+            background-color: #FFF;
+            color: $color-fg;
+            &::before {
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    &__content {
+        font-size: 14px;
+        background-color: #FFF;
+        padding: 25px;
+        border-radius: 8px;
+
+        &--separated {
+            border-radius: 0 0 8px 8px;
+        }
+    }
+
+    &__description {
+        line-height: 1.6;
+    }
+
+    &__actions {
+        display: flex;
+        margin-top: 20px;
+
+        & > * {
+            flex-grow: 1;
+            flex-basis: 50%;
+        }
+    }
+
+    .commerce-accordion,
+    .commerce-input-text {
+        margin-top: 20px;
+    }
+    
+}
+
+.commerce-order-item-info {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto 1fr;
+
+    &__thumbnail {
+        height: 60px;
+        width: 60px;
+        background-size: cover;
+        background-position: 50%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    &__data-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__sku {
+        @extend .commerce-mini-title;
+    }
+
+    &__name {
+        font-size: 14px;
+        color: $color-fg;
+        line-height: 1;
+        margin-top: 8px
+    }
+}
+
