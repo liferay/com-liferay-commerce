@@ -108,9 +108,16 @@ public class ParameterGenerator {
 
 		Schema schema = parameter.getSchema();
 
+		String arrayExpression = "";
+
+		if ("array".equals(schema.getType())) {
+			arrayExpression = "[]";
+		}
+
 		return String.format(
-			"%sDTO %sDTO",
+			"%sDTO%s %sDTO",
 			OpenApiComponentUtil.getComponentName(schema.getReference()),
+			arrayExpression,
 			StringUtils.lowerCaseFirstChar(parameter.getName()));
 	}
 
