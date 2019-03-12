@@ -38,16 +38,7 @@ public class ParameterGenerator {
 		String location = parameter.getLocation();
 
 		if (location.equals("body")) {
-			if (_isMultipartFormData(parameter)) {
-				return "MultipartBody multipartBody";
-			}
-
-			Schema schema = parameter.getSchema();
-
-			return String.format(
-				"%sDTO %sDTO",
-				OpenApiComponentUtil.getComponentName(schema.getReference()),
-				StringUtils.lowerCaseFirstChar(parameter.getName()));
+			return _toBodyContentParameter(parameter);
 		}
 		else if (location.equals("cookie")) {
 			parameterAnnotation = "@CookieParam";
@@ -82,16 +73,7 @@ public class ParameterGenerator {
 		String location = parameter.getLocation();
 
 		if (location.equals("body")) {
-			if (_isMultipartFormData(parameter)) {
-				return "MultipartBody multipartBody";
-			}
-
-			Schema schema = parameter.getSchema();
-
-			return String.format(
-				"%sDTO %sDTO",
-				OpenApiComponentUtil.getComponentName(schema.getReference()),
-				StringUtils.lowerCaseFirstChar(parameter.getName()));
+			return _toBodyContentParameter(parameter);
 		}
 
 		Provider javaTypeProvider = parameter.getJavaTypeProvider();
@@ -117,6 +99,19 @@ public class ParameterGenerator {
 		String mimeType = parameter.getContentMimeType();
 
 		return mimeType.equals("multipart/form-data");
+	}
+
+	private String _toBodyContentParameter(Parameter parameter) {
+		if (_isMultipartFormData(parameter)) {
+			return "MultipartBody multipartBody";
+		}
+
+		Schema schema = parameter.getSchema();
+
+		return String.format(
+			"%sDTO %sDTO",
+			OpenApiComponentUtil.getComponentName(schema.getReference()),
+			StringUtils.lowerCaseFirstChar(parameter.getName()));
 	}
 
 }
