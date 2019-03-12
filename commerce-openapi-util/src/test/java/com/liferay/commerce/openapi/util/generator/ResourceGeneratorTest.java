@@ -19,10 +19,12 @@ import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiContextExtension;
+import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.Security;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -191,6 +193,50 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			"Context parameters with proper syntax expected",
 			implementationMethods.contains(
 				"Language language, Pagination pagination"));
+	}
+
+	@Test
+	public void testToResourceImplementationMethodsIfArrayParameter() {
+		ResourceGenerator resourceGenerator = new ResourceGenerator(
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
+
+		Schema schema = new Schema(
+			"array", null, "#/components/schemas/TestModel2");
+
+		Content content = new Content("application/json", schema);
+
+		Parameter.ParameterBuilder parameterBuilder =
+			new Parameter.ParameterBuilder();
+
+		parameterBuilder.name(
+			OpenApiComponentUtil.getComponentName(schema.getReference()));
+		parameterBuilder.location("body");
+		parameterBuilder.required(true);
+		parameterBuilder.content(content);
+		parameterBuilder.schema(schema);
+
+		List<Parameter> parameters = new ArrayList<>();
+
+		parameters.add(parameterBuilder.build());
+
+		List<Method> methods = new ArrayList<>();
+
+		methods.add(
+			new Method(
+				"update", _getSecurity("CommerceOpenApiAdmin.write"),
+				_getRequestContents(), "PUT", "/testModel/", parameters,
+				_getResponses(false, 201, 202, 400, 401, 404, 500),
+				Collections.emptyList()));
+
+		String implementationMethods =
+			resourceGenerator.toResourceImplementationMethods(
+				methods, _getRandomComponentDefinitions(4, "TestModel"));
+
+		Assert.assertTrue(
+			"Has array parameter",
+			containsOnlyOne(
+				implementationMethods, "TestModel2DTO[] testModel2DTO"));
 	}
 
 	@Test
