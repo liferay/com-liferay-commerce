@@ -27,11 +27,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class CommerceBatchJobImpl extends CommerceBatchJobBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a commerce batch job model instance should use the {@link com.liferay.commerce.batch.model.CommerceBatchJob} interface instead.
 	 */
 	public CommerceBatchJobImpl() {
 	}
+
 }

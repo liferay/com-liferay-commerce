@@ -17,23 +17,8 @@ package com.liferay.commerce.batch.service.impl;
 import com.liferay.commerce.batch.service.base.CommerceBatchJobServiceBaseImpl;
 
 /**
- * The implementation of the commerce batch job remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.batch.service.CommerceBatchJobService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Matija Petanjek
- * @see CommerceBatchJobServiceBaseImpl
- * @see com.liferay.commerce.batch.service.CommerceBatchJobServiceUtil
  */
-public class CommerceBatchJobServiceImpl extends CommerceBatchJobServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.batch.service.CommerceBatchJobServiceUtil} to access the commerce batch job remote service.
-	 */
+public class CommerceBatchJobServiceImpl
+	extends CommerceBatchJobServiceBaseImpl {
 }

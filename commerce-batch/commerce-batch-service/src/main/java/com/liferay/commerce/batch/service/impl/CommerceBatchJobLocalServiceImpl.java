@@ -20,18 +20,7 @@ import com.liferay.commerce.batch.model.CommerceBatchJob;
 import com.liferay.commerce.batch.service.base.CommerceBatchJobLocalServiceBaseImpl;
 
 /**
- * The implementation of the commerce batch job local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.batch.service.CommerceBatchJobLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Matija Petanjek
- * @see CommerceBatchJobLocalServiceBaseImpl
- * @see com.liferay.commerce.batch.service.CommerceBatchJobLocalServiceUtil
  */
 public class CommerceBatchJobLocalServiceImpl
 	extends CommerceBatchJobLocalServiceBaseImpl {
@@ -39,8 +28,7 @@ public class CommerceBatchJobLocalServiceImpl
 	@Override
 	public CommerceBatchJob addCommerceBatchJob(String key, String name) {
 		CommerceBatchJob commerceBatchJob = commerceBatchJobPersistence.create(
-			counterLocalService.increment(
-				CommerceBatchJob.class.getName()));
+			counterLocalService.increment(CommerceBatchJob.class.getName()));
 
 		commerceBatchJob.setKey(key);
 		commerceBatchJob.setName(name);
@@ -56,4 +44,5 @@ public class CommerceBatchJobLocalServiceImpl
 
 		return commerceBatchJob.getStatus();
 	}
+
 }
