@@ -16,7 +16,7 @@
 	z-index: -1;
 
 	&__close {
-		color: #9D9E9E;
+		color: $color-fg-lighter;
 		font-size: 21px;
 		margin-right: 20px;
 		opacity: 0.3;
@@ -54,7 +54,3 @@
 		transform: translateX(0);
 	}
 }
-
-// html:not(.ie):not(.edge) .close {
-// 	display: none;
-// }
