@@ -53,12 +53,7 @@ public class CompareCheckboxTag extends ComponentRendererTag {
 			List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
 				request);
 
-			if (cpDefinitionIds.contains(cpDefinitionId)) {
-				putValue("inCompare", true);
-			}
-			else {
-				putValue("inCompare", true);
-			}
+			putValue("inCompare", cpDefinitionIds.contains(cpDefinitionId));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
