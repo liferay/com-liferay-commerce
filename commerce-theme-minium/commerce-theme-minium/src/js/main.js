@@ -68,30 +68,29 @@ Liferay.on(
 			}
 		}
 
-		let lastScrollTop = 0;
-		let lastDirectionChange = 0;
-		let lastScrollDirection = 'down';  // || 'up'
-		let scrollDirection = 'down';  // || 'up'
 		let scrollThreshold = 100;
+		let lastKnownScrollPosition = 0;
+		let lastKnownScrollOffset = 0;
+		let ticking = false;
+		const miniumWrapper = document.getElementById("minium");
 		window.addEventListener("scroll", function() {
-			let st = window.pageYOffset || document.documentElement.scrollTop;
-			if (lastScrollDirection === 'up' && st > lastScrollTop){
-				lastDirectionChange = st <= 0 ? 0 : st;
-				lastScrollDirection = 'down';
-			} else if (lastScrollDirection === 'down' && st < lastScrollTop) {
-				lastDirectionChange = st <= 0 ? 0 : st;
-				lastScrollDirection = 'up';
+			const offset = window.scrollY - lastKnownScrollPosition;
+			lastKnownScrollPosition = window.scrollY;
+			lastKnownScrollOffset =
+				Math.sign(offset) === Math.sign(lastKnownScrollOffset)
+					? lastKnownScrollOffset + offset
+					: offset;
+	
+			if (!ticking) {
+				window.requestAnimationFrame(() => {
+					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
+						miniumWrapper.classList.add(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "down" : "up"}`);
+						miniumWrapper.classList.remove(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "up" : "down"}`);
+					}
+					ticking = false;
+				});
+				ticking = true;
 			}
-			lastScrollTop = st;
-
-			if (st > lastDirectionChange + scrollThreshold){
-				scrollDirection = 'down';
-			} else if (st < lastDirectionChange - scrollThreshold) {
-				scrollDirection = 'up';
-			}
-
-			document.getElementById("minium").classList.toggle("is-scrolling-down", scrollDirection === 'down');
-			document.getElementById("minium").classList.toggle("is-scrolling-up", scrollDirection === 'up');
 		}, false);
 	}
 );
