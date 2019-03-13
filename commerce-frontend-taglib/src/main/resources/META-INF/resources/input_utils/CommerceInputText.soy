@@ -8,28 +8,29 @@
 	{@param? label: string|html }
 	{@param? value: string|int }
 	{@param? type: string}
+	{@param? prepend: html|string}
 	{@param? pattern: html|string }
 	{@param? required: bool }
 	{@param? keyUpHandler: any }
 	{@param? changeHandler: any }
 
-
-	{let $inputClasses kind="text"}
-		commerce-input-text
-		{if $margin}
-			{sp}commerce-input-text--with-margin-{$margin}
-		{/if}
+	{let $wrapperClasses kind="text"}
+		commerce-input-wrapper
 		{if $additionalClasses}
 			{sp}{$additionalClasses}
 		{/if}
+		{if $margin}
+			{sp}commerce-input-wrapper--with-margin-{$margin}
+		{/if}
 	{/let}
+
 	<div
-		class="{$inputClasses}"
+		class="{$wrapperClasses}"
 	>
 		{if isNonnull($label)}
 			<label
 				for="{$contextName}-{$name}"
-				class="commerce-modal__label"
+				class="commerce-label"
 			>
 				{$label}
 			</label>
@@ -51,28 +52,41 @@
 			{/if}
 		{/let}
 
-		{let $inputAttributes kind="attributes"}
-			type="{$inputType}"
-			id="{$contextName}-{$name}"
-			name="{$name}"
-			class="commerce-modal__input"
-			value="{$inputValue}"
-			data-onkeyup="{$keyUpHandler}"
+		{let $input kind="html"}
+			{let $inputClasses kind="text"}
+				commerce-input commerce-input--text
+			{/let}
 
-			{if isNonnull($type) and ($type == 'number' or $type == 'date')}
-				data-onchange="{$changeHandler or $keyUpHandler}"
-			{/if}
+			<input 
+				type="{$inputType}"
+				id="{$contextName}-{$name}"
+				name="{$name}"
+				class="{$inputClasses}"
+				value="{$inputValue}"
+				data-onkeyup="{$keyUpHandler}"
 
-			{if isNonnull($pattern) and $required != ''}
-				pattern="{$pattern}"
-			{/if}
+				{if isNonnull($type) and ($type == 'number' or $type == 'date')}
+					data-onchange="{$changeHandler or $keyUpHandler}"
+				{/if}
 
-			{if isNonnull($required) and $required == true}
-				required
-			{/if}
+				{if isNonnull($pattern) and $required != ''}
+					pattern="{$pattern}"
+				{/if}
+
+				{if isNonnull($required) and $required == true}
+					required
+				{/if}
+			/>
 		{/let}
 
-		<input {$inputAttributes} />
+		{if $prepend and $prepend != ''}
+			<span class="d-flex">
+				<span class="commerce-input-prepend">{$prepend}</span>
+				{$input}
+			</span>
+		{else}
+			{$input}
+		{/if}
 
 	</div>
 

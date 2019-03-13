@@ -13,7 +13,8 @@
 		sku: string,
 		name: string,
 		tierPricing: ?,
-		description: string
+		description: string,
+		priceCurrency: string | html
 	]}
 	{@param? formData: [
 		deliveryDate: string,
@@ -71,7 +72,7 @@
 					{if $stage == 'edit'}
 						{call .edit}
 							{param _handleFormUpdate: $_handleFormUpdate /}
-							{param visibility: $formData.price /}
+							{param priceCurrency: $itemData.priceCurrency /}
 							{param price: $formData.price /}
 							{param discount: $formData.discount /}
 							{param quantity: $formData.quantity /}
@@ -189,6 +190,7 @@
 			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'deliveryDate' /}
 			{param label: $requestDeliveryDateLabel /}
+			{param margin: 'top' /}
 			{param value: $deliveryDate /}
 			{param type: 'date' /}
 			{param required: true /}
@@ -200,6 +202,7 @@
 			{param contextName: 'commerce-order-item-overview' /}
 			{param name: 'note' /}
 			{param label: $noteLabel /}
+			{param margin: 'top' /}
 			{param value: $note /}
 			{param type: 'text' /}
 			{param required: true /}
@@ -254,6 +257,7 @@
 	{@param discount: string}
 	{@param giftQuantity: string|int}
 	{@param price: string}
+	{@param priceCurrency: string|html}
 	{@param quantity: string|int}
 
 	<div class="commerce-order-item-overview__edit">
@@ -261,11 +265,11 @@
 		{let $priceLabel kind="html"}{msg desc="Price"}price{/msg}{/let}
 		{call CommerceInputText.render}
 			{param contextName: 'commerce-order-item-overview' /}
-			{param additionalClasses: 'mt-0' /}
 			{param name: 'price' /}
 			{param label: $priceLabel /}
 			{param value: $price /}
 			{param type: 'text' /}
+			{param prepend: $priceCurrency /}
 			{param required: true /}
 			{param keyUpHandler: $_handleFormUpdate /}
 		{/call}
@@ -276,6 +280,7 @@
 			{param name: 'discount' /}
 			{param label: $discountLabel /}
 			{param value: $discount /}
+			{param margin: 'top' /}
 			{param type: 'text' /}
 			{param required: true /}
 			{param keyUpHandler: $_handleFormUpdate /}
@@ -287,6 +292,7 @@
 			{param name: 'quantity' /}
 			{param label: $quantityLabel /}
 			{param value: $quantity /}
+			{param margin: 'top' /}
 			{param type: 'number' /}
 			{param required: true /}
 			{param keyUpHandler: $_handleFormUpdate /}
@@ -298,6 +304,7 @@
 			{param name: 'giftQuantity' /}
 			{param label: $giftLabel /}
 			{param value: $giftQuantity /}
+			{param margin: 'top' /}
 			{param type: 'number' /}
 			{param required: true /}
 			{param keyUpHandler: $_handleFormUpdate /}

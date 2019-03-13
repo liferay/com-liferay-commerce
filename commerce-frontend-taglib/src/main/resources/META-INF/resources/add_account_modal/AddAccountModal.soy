@@ -55,13 +55,17 @@
 
 			<div class="commerce-modal__content">
 
-				<label class="commerce-modal__label">
+				<label class="commerce-label">
 					{msg desc="Account name"}account-name{/msg}
 				</label>
 
-				<input class="commerce-modal__input commerce-modal__input--with-margin-bottom" data-onkeyup="{$_handleInputName}" type="text" />
+				<input 
+					class="commerce-input commerce-input--text commerce-input--with-margin-bottom" 
+					data-onkeyup="{$_handleInputName}" 
+					type="text"
+				/>
 
-				<label class="commerce-modal__label">
+				<label class="commerce-label">
 					{msg desc="Administrators email"}administrators-email{/msg}
 				</label>
 

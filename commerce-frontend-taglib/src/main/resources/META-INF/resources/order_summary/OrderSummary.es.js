@@ -208,7 +208,13 @@ OrderSummary.STATE = {
 			price: Config.string(),
 			discount: Config.string(),
 			giftQuantity: Config.number(),
-			quantity: Config.number()
+			quantity: Config.number(),
+			priceCurrency: Config.oneOfType(
+				[
+					Config.string(),
+					Config.func(),
+				]
+			)
 		}
 	),
 	itemDataModified: Config.bool().value(false),

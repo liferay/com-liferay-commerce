@@ -21,6 +21,7 @@ CommerceInputText.STATE = {
 		'top',
 		'bottom'
 	]),
+	prepend: Config.string(),
 	additionalClasses: Config.string(),
 	pattern: Config.any(),
 	required: Config.bool(),

@@ -36,59 +36,6 @@
 		flex-grow: 1;
 	}
 
-	&__radio {
-		&--with-margin {
-			margin-bottom: 30px;
-		}
-	}
-
-	&__label {
-		color: $color-fg-lighter;
-		display: block;
-		font-size: 11px;
-		font-weight: normal;
-		letter-spacing: 1px;
-		line-height: 1;
-		margin-bottom: 5px;
-		margin-left: 12px;
-		text-transform: uppercase;
-		white-space: nowrap;
-
-		&--radio {
-			display: inline-block;
-			font-size: 14px;
-			font-weight: bold;
-			margin-left: 15px;
-			text-transform: none;
-		}
-	}
-
-	&__select {
-		background: transparent;
-		border: 2px solid $color-shadow;
-		border-radius: 8px;
-		color: $color-fg;
-		height: 56px;
-		margin-bottom: 15px;
-		min-height: 56px;
-		outline: none;
-		width: 100%;
-
-		&--with-margin {
-			margin-bottom: 30px;
-		}
-	}
-
-	&__input {
-		border: 2px solid $color-shadow;
-		border-radius: 8px;
-		color: $color-fg;
-		min-height: 56px;
-		outline: none;
-		padding: 10px;
-		width: 100%;
-	}
-
 	&__actions {
 		display: flex;
 		justify-content: center;

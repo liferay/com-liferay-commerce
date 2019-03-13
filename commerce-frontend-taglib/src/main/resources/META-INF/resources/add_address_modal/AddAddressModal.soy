@@ -60,7 +60,7 @@
 								<div class="col-6">
 									<input
 										id="add-address-type-shipping"
-										class="commerce-modal__radio commerce-modal__radio--with-margin"
+										class="commerce-input commerce-input--radio commerce-input--with-margin-bottom"
 										type="radio"
 										name="add-address-type"
 										value="shipping"
@@ -71,7 +71,7 @@
 									/>
 
 									<label
-										class="commerce-modal__label commerce-modal__label--radio"
+										class="commerce-label commerce-label--radio"
 										for="add-address-type-shipping"
 									>
 										{msg desc="Shipping"}shipping{/msg}
@@ -81,7 +81,7 @@
 								<div class="col-6">
 									<input
 										id="add-address-type-billing"
-										class="commerce-modal__radio commerce-modal__radio--with-margin"
+										class="commerce-input commerce-input--radio commerce-input--with-margin-bottom"
 										type="radio"
 										name="add-address-type"
 										value="billing"
@@ -92,7 +92,7 @@
 									/>
 
 									<label
-										class="commerce-modal__label commerce-modal__label--radio"
+										class="commerce-label commerce-label--radio"
 										for="add-address-type-billing"
 									>
 										{msg desc="Billing"}billing{/msg}
@@ -130,7 +130,7 @@
 						<div class="col-6">
 							<label
 								for="add-new-address-country"
-								class="commerce-modal__label"
+								class="commerce-label"
 							>
 								{msg desc="Country"}country{/msg}
 							</label>
@@ -138,7 +138,7 @@
 							<select
 								id="commerceCountry"
 								name="commerceCountry"
-								class="commerce-modal__select commerce-modal__select--with-margin"
+								class="commerce-input commerce-input commerce-input--select commerce-input--with-margin-bottom"
 								required
 								data-onchange="{$_handleSelectBox}"
 							>
@@ -159,7 +159,7 @@
 						<div class="col-6">
 							<label
 								for="add-new-address-country"
-								class="commerce-modal__label"
+								class="commerce-label"
 							>
 								{msg desc="Region"}region{/msg}
 							</label>
@@ -167,7 +167,7 @@
 							<select
 								id="commerceRegion"
 								name="commerceRegion"
-								class="commerce-modal__select commerce-modal__select--with-margin"
+								class="commerce-input commerce-input--select commerce-input--with-margin-bottom"
 								required
 								data-onchange="{$_handleSelectBox}"
 							>

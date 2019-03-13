@@ -1,24 +1,4 @@
 .commerce-input.commerce-input {
-	&--checkbox {
-		display: flex;
-
-		&__input {
-			margin-right: 10px;
-		}
-
-		&__label {
-			color: $color-fg-alt;
-			font-weight: normal;
-			margin-bottom: 0;
-		}
-
-		&--checked {
-			.commerce-input--checkbox__label {
-				color: $color-fg
-			}
-		}
-	}
-
 	&--select {
 		background: white;
 		border: 2px solid $color-shadow;
@@ -30,13 +10,6 @@
 		min-height: 56px;
 		outline: none;
 		width: 100%;
-
-		&--with-margin-bottom {
-			margin-bottom: 30px;
-		}
-		&--with-margin-top {
-			margin-top: 30px;
-		}
 	}
 
 	&--text {
@@ -45,15 +18,74 @@
 		border-radius: 8px;
 		color: $color-fg;
 		font-size: inherit;
-		margin-bottom: 15px;
 		min-height: 56px;
 		outline: none;
 		padding: 10px;
 		width: 100%;
+	}
 
-		&--with-margin {
-			margin-bottom: 30px;
+	&--select {
+		background: transparent;
+		border: 2px solid $color-shadow;
+		border-radius: 8px;
+		color: $color-fg;
+		height: 56px;
+		margin-bottom: 15px;
+		min-height: 56px;
+		outline: none;
+		width: 100%;
+	}
+
+	&--with-margin-bottom {
+		margin-bottom: 30px;
+	}
+
+	&--with-margin-top {
+		margin-top: 30px;
+	}
+}
+
+.commerce-checkbox {
+	display: flex;
+
+	&__input {
+		margin-right: 10px;
+	}
+
+	&__label {
+		color: $color-fg-alt;
+		font-weight: normal;
+		margin-bottom: 0;
+	}
+
+	&--checked {
+		.commerce-input-checkbox__label {
+			color: $color-fg
 		}
+	}
+}
+
+.commerce-input-prepend {
+	height: auto;
+	padding: 0 15px;
+	background: $color-bg-disabled;
+	display: flex;
+	border-radius: 8px 0 0 8px;
+    align-items: center;
+
+	& + .commerce-input {
+		border-radius: 0 8px 8px 0;
+		border-width: 2px 2px 2px 0;
+	} 
+}
+
+.commerce-input-wrapper {
+	&--with-margin-bottom {
+		margin-bottom: 30px;
+	}
+
+	&--with-margin-top {
+		margin-top: 30px;
 	}
 }
 
@@ -64,4 +96,20 @@
 	letter-spacing: 1px;
 	line-height: 1;
 	text-transform: uppercase;
+}
+
+.commerce-label {
+	@extend .commerce-mini-title;
+	display: block;
+	margin-bottom: 5px;
+	margin-left: 12px;
+	white-space: nowrap;
+
+	&--radio {
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		margin-left: 15px;
+		text-transform: none;
+	}
 }

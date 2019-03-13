@@ -134,6 +134,12 @@ ItemOverview.STATE = {
 					}
 				)
 			),
+			priceCurrency: Config.oneOfType(
+				[
+					Config.string(),
+					Config.func(),
+				]
+			),
 			price: Config.string(),
 			discount: Config.string(),
 			giftQuantity: Config.oneOfType(
