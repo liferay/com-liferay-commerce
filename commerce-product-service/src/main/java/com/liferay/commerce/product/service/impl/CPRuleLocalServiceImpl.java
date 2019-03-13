@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.exception.CPRuleTypeException;
+import com.liferay.commerce.product.internal.catalog.rule.CPRuleCacheUtil;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.base.CPRuleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
@@ -120,6 +121,8 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 	@Override
 	public void cleanCPRulesCache(long groupId) {
 		MultiVMPoolUtil.removePortalCache("CP_RULES_" + groupId);
+
+		CPRuleCacheUtil.clearCommerceAccountGroupCPRuleIds();
 	}
 
 	@Indexable(type = IndexableType.DELETE)
