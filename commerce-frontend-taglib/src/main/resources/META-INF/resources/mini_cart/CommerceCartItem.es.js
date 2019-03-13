@@ -1,6 +1,6 @@
 'use strict';
 
-import template from './CartProduct.soy';
+import template from './CommerceCartItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
@@ -8,7 +8,7 @@ import './Loader.es';
 import '../price/Price.es';
 import '../quantity_selector/QuantitySelector.es';
 
-class CartProduct extends Component {
+class CommerceCartItem extends Component {
 	_handleUpdateQuantity(quantity) {
 		return this.emit('submitQuantity', this.id, quantity);
 	}
@@ -20,12 +20,11 @@ class CartProduct extends Component {
 	_handleCancelDeletion() {
 		return this.emit('cancelItemDeletion', this.id);
 	}
-
 }
 
-Soy.register(CartProduct, template);
+Soy.register(CommerceCartItem, template);
 
-CartProduct.STATE = {
+CommerceCartItem.STATE = {
 	collapsed: Config.bool().value(false),
 	deleteDisabled: Config.bool().value(false),
 	deleting: Config.bool().value(false),
@@ -46,5 +45,5 @@ CartProduct.STATE = {
 	updating: Config.bool().value(false)
 };
 
-export {CartProduct};
-export default CartProduct;
+export {CommerceCartItem};
+export default CommerceCartItem;

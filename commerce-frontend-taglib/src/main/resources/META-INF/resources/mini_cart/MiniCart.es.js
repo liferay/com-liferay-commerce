@@ -6,7 +6,7 @@ import Soy, {Config} from 'metal-soy';
 
 import template from './MiniCart.soy';
 
-import './CartProduct.es';
+import './CommerceCartItem.es';
 import './Summary.es';
 
 class Cart extends Component {
@@ -283,8 +283,8 @@ class Cart extends Component {
 			productId,
 			{
 				deleteDisabled: false,
-				updating: false,
-				errorMessages
+				errorMessages,
+				updating: false
 			}
 		);
 	}

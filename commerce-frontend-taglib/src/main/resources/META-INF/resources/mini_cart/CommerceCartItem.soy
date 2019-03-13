@@ -1,4 +1,4 @@
-{namespace CartProduct}
+{namespace CommerceCartItem}
 
 /**
  * This renders the component's whole content.
@@ -24,7 +24,7 @@
 	{@param? _handleUpdateQuantity: any }
 
 	{let $cartItemClasses kind="text"}
-		commerce-cart__item commerce-item u-hoverable
+		commerce-cart-item u-hoverable
 		{if isNonnull($deleting) and $deleting}
 			{sp}is-deleting
 		{/if}
@@ -37,34 +37,22 @@
 	{/let}
 
 	{let $deleteButtonClasses kind="text"}
-		commerce-item__delete
+		commerce-cart-item__delete
 		{if isNonnull($deleteDisabled) and $deleteDisabled}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
 	<div class="{$cartItemClasses}">
-		<img
-			src="{$thumbnail}"
-			alt="{$name}"
-			class="commerce-item__image"
-		>
-		<div class="commerce-item__content">
-			{$sku}<br>
-			{$name}<br>
-			{if $updating}
-				{call Loader.render}
-					{param direction: 'right' /}
-					{param inverted: false /}
-				{/call}
-			{else}
-				{call Price.render}
-					{param prices: $prices /}
-				{/call}
-			{/if}
+		<div
+			style="background-image: url({$thumbnail})"
+			class="commerce-cart-item__image"
+		></div>
+		<div class="commerce-cart-item__content">
+			<span class="commerce-cart-item__sku">{$sku}</span>
+			<span class="commerce-cart-item__name">{$name}</span>
 		</div>
-
-		<div class="commerce-item__actions">
+		<div class="commerce-cart-item__actions">
 			{call QuantitySelector.render}
 				{param events: [
 					'updateQuantity' : $_handleUpdateQuantity
@@ -78,19 +66,32 @@
 
 			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}"></button>
 		</div>
-
-		<div class="commerce-item__cancel-delete">
+		<div class="commerce-cart-item__price">
+			{if $updating}
+				{call Loader.render}
+					{param direction: 'right' /}
+					{param inverted: false /}
+				{/call}
+			{else}
+				{call Price.render}
+					{param prices: $prices /}
+				{/call}
+			{/if}
+		</div>
+		<div class="commerce-cart-item__cancel-delete">
 			{msg desc="The Element Has Been Removed"}the-element-has-been-removed{/msg}
 			<button class="commerce-button commerce-button--inline" data-onclick="{$_handleCancelDeletion}">
 				{msg desc="Cancel"}cancel{/msg}
 			</button>
 		</div>
 		{if isNonnull($errorMessages) and length($errorMessages) > 0}
-			{foreach $error in $errorMessages}
-				<div class="commerce-item__error">
-					{msg meaning="error" desc="error description"}{$error}{/msg}
-				</div>
-			{/foreach}
+			<div class="commerce-cart-item__errors">
+				{foreach $error in $errorMessages}
+					<div class="commerce-cart-item__error">
+						- {$error}
+					</div>
+				{/foreach}
+			</div>
 		{/if}
 	</div>
 {/template}

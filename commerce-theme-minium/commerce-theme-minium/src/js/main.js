@@ -10,7 +10,7 @@ AUI().ready(
 		const searchBar = Liferay.component('search-bar');
 
 		if (searchBar) {
-			searchBar.on('toogled', function(status) {
+			searchBar.on('toggled', function(status) {
 				document.querySelectorAll(".js-toggle-search").forEach(el => {
 					el.classList.toggle("is-active", status);
 				});

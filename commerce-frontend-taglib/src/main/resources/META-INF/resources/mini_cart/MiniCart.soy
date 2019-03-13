@@ -93,7 +93,7 @@
 			<div class="commerce-cart__content">
 				{if isNonnull($products)}
 					{foreach $product in $products}
-						{call CartProduct.render}
+						{call CommerceCartItem.render}
 
 							{param events: [
 								'submitQuantity' : $_handleSubmitQuantity,
