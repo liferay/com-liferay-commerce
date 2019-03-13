@@ -5,4 +5,3 @@ application:
     className: "HeadlessCommerceAdminSiteSettingApplication"
     name: "Liferay.Headless.Commerce.Admin.Site.Setting"
 author: "Zoltán Takács"
-testDir: "../headless-commerce-admin-site-setting-test/src/testIntegration/java"
