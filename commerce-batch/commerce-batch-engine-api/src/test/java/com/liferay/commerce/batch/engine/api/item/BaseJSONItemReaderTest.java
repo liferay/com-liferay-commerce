@@ -41,9 +41,15 @@ public class BaseJSONItemReaderTest {
 
 		Assert.assertEquals(1, product.getId());
 
+		Assert.assertArrayEquals(
+			new long[] {11, 22, 33}, product.getStatusIds());
+
 		product = _productItemReader.read();
 
 		Assert.assertEquals(2, product.getId());
+
+		Assert.assertArrayEquals(
+			new long[] {44, 55, 66}, product.getStatusIds());
 
 		product = _productItemReader.read();
 

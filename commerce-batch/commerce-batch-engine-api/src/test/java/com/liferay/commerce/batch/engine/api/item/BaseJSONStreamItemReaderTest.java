@@ -25,6 +25,10 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -79,6 +83,23 @@ public class BaseJSONStreamItemReaderTest {
 					jsonParser.nextToken();
 
 					productDTO.setName(jsonParser.getText());
+				}
+
+				if ("statusIds".equals(currentName)) {
+					List<Long> statusIds = new ArrayList<>();
+
+					jsonParser.nextToken();
+
+					while (jsonParser.nextToken() != JsonToken.END_ARRAY) {
+						statusIds.add(jsonParser.getLongValue());
+					}
+
+					Stream<Long> statusIdsStream = statusIds.stream();
+
+					productDTO.setStatusIds(
+						statusIdsStream.mapToLong(
+							Long::longValue
+						).toArray());
 				}
 			}
 

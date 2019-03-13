@@ -27,6 +27,10 @@ public class ProductDTO {
 		return _name;
 	}
 
+	public long[] getStatusIds() {
+		return _statusIds;
+	}
+
 	public void setId(long id) {
 		_id = id;
 	}
@@ -35,7 +39,12 @@ public class ProductDTO {
 		_name = name;
 	}
 
+	public void setStatusIds(long[] statusIds) {
+		_statusIds = statusIds;
+	}
+
 	private long _id;
 	private String _name;
+	private long[] _statusIds;
 
 }
