@@ -1,26 +1,8 @@
 .minium-frame {
 	background-color: $color-bg-alt;
-	// display: grid;
-	// grid-template-areas:
-	// 	"sidebar topbar"
-	// 	"sidebar content";
-	// grid-template-columns: $frame-size 1fr;
-	// grid-template-rows: auto 1fr;
-	// height: 100vh;
-	// overflow: hidden;
-
-	// @media screen and (hover: none) {
-	// 	grid-template-areas:
-	// 		"topbar"
-	// 		"content"
-	// 		"sidebar";
-	// 	grid-template-columns: 1fr;
-	// 	grid-template-rows: auto 1fr auto;
-	// }
 
 	&__topbar {
 		display: grid;
-		// grid-area: topbar;
 		left: 0;
 		margin-left: $frame-size;
 		position: fixed;
@@ -36,7 +18,6 @@
 
 	&__sidebar {
 		display: grid;
-		// grid-area: sidebar;
 		bottom: 0;
 		left: 0;
 		position: fixed;
@@ -58,8 +39,6 @@
 	}
 
 	&__content {
-		// grid-area: content;
-		// overflow: auto;
 		padding: #{$frame-size + $liferay-topbar-size} 0 0 $frame-size;
 		
 		@media screen and (hover: none) {
@@ -69,7 +48,6 @@
 
 	&__overlay {
 		background-color: $color-modal-mask;
-		// grid-area: content;
 		bottom: 0;
 		left: 0;
 		overflow: auto;
@@ -89,10 +67,8 @@
 	}
 
 	&__toolbar {
-		// align-self: flex-start;
 		background-color: $color-bg;
 		box-shadow: 0 0 0 transparent;
-		// grid-area: content;
 		height: $frame-size;
 		left: 0;
 		margin-left: $frame-size;
