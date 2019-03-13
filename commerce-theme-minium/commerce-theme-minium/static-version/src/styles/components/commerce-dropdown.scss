@@ -6,8 +6,8 @@
 		border-radius: 8px;
 		box-shadow: $minium-shadow;
 		display: none;
-		height: calc(100vh - #{$frame-size * 2 + $liferay-topbar-size + $minium-gutter});
-		max-height: 530px;
+		height: 530px;
+		max-height: calc(100vh - #{$frame-size * 2 + $liferay-topbar-size + 60px});
 		opacity: 0;
 		position: absolute;
 		right: 0;

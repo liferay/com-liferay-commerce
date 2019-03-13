@@ -60,12 +60,38 @@ Liferay.on(
 						}
 					},
 					{
-						root: jsScrollArea,
-						rootMargin: "10px",
+						// root: jsScrollArea,
+						rootMargin: "0px",
 						threshold: 1.0
 					}
 				).observe(miniumTop);
 			}
 		}
+
+		let lastScrollTop = 0;
+		let lastDirectionChange = 0;
+		let lastScrollDirection = 'down';  // || 'up'
+		let scrollDirection = 'down';  // || 'up'
+		let scrollThreshold = 100;
+		window.addEventListener("scroll", function() {
+			let st = window.pageYOffset || document.documentElement.scrollTop;
+			if (lastScrollDirection === 'up' && st > lastScrollTop){
+				lastDirectionChange = st <= 0 ? 0 : st;
+				lastScrollDirection = 'down';
+			} else if (lastScrollDirection === 'down' && st < lastScrollTop) {
+				lastDirectionChange = st <= 0 ? 0 : st;
+				lastScrollDirection = 'up';
+			}
+			lastScrollTop = st;
+
+			if (st > lastDirectionChange + scrollThreshold){
+				scrollDirection = 'down';
+			} else if (st < lastDirectionChange - scrollThreshold) {
+				scrollDirection = 'up';
+			}
+
+			document.getElementById("minium").classList.toggle("is-scrolling-down", scrollDirection === 'down');
+			document.getElementById("minium").classList.toggle("is-scrolling-up", scrollDirection === 'up');
+		}, false);
 	}
 );

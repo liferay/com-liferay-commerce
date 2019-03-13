@@ -34,10 +34,11 @@
 	}
 
 	@media screen and (hover: none) {
+		right: 0;
+
 		&:not(:focus) {
 			background-color: transparent;
 			overflow: hidden;
-			right: 0;
 			width: 40px;
 		}
 

@@ -6,6 +6,10 @@
 	overflow: hidden auto;
 	position: relative;
 
+	@media screen and (hover: none) {
+		max-height: calc(90vh - #{$frame-size * 3});
+	}
+
 	&.is-loading::before {
 		animation: shift-rightwards-suggestions 1s ease-in-out infinite;
 		animation-delay: 0.4s;
@@ -71,6 +75,10 @@
 				margin-left: 30px;
 			}
 		}
+
+		@media screen and (hover: none) {
+			display: none;
+		}	
 	}
 }
 

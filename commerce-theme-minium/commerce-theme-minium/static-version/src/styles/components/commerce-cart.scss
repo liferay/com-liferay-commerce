@@ -9,6 +9,7 @@
 	right: 0;
 	top: $frame-size;
 	transition:
+		bottom $transition,
 		box-shadow $transition,
 		transform $transition;
 	width: 100vw;
@@ -24,6 +25,10 @@
 
 	@media screen and (hover: none) and (max-width: 767px) {
 		bottom: $frame-size-small;
+	}
+
+	.minium-frame.is-scrolling-down.is-scrolled & {
+		bottom: 0;
 	}
 
 	body.signed-in & {

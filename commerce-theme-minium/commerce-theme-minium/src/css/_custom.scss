@@ -4,18 +4,46 @@
 
 /* ---------- endinject ---------- */
 
+html {
+	background-color: $color-bg-alt;
+}
+
 #minium {
 	transition: padding ease 500ms;
 
-	body.signed-in & {
-		padding-top: $liferay-topbar-size;
+	body.signed-in & .minium-frame__topbar {
+		top: $liferay-topbar-size;
 
 		@media screen and (max-width: 767px) {
-			padding-top: $liferay-topbar-size-small;
+			top: $liferay-topbar-size-small;
 		}
 	}
 
-	body.open & {
-		padding-left: 320px;
+	body.signed-in & .minium-frame__toolbar {
+		margin-top: $liferay-topbar-size;
+		
+		@media screen and (max-width: 767px) {
+			margin-top: $liferay-topbar-size-small;
+		}
+	}
+
+	@media screen and (hover: hover) {
+		body.signed-in & .minium-frame__sidebar {
+			top: $liferay-topbar-size;
+
+			@media screen and (max-width: 767px) {
+				top: $liferay-topbar-size-small;
+			}
+		}
+	}
+
+	body.open & .minium-frame__topbar,
+	body.open & .minium-frame__toolbar,
+	body.open & .minium-frame__sidebar {
+		left: 320px;
+	}
+
+	body.open & .minium-frame__content {
+		margin-left: 320px;
 	}
 }
