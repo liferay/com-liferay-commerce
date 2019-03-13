@@ -82,7 +82,7 @@
 
     &__actions {
         display: flex;
-        margin-top: 20px;
+        margin-top: 30px;
 
         & > * {
             flex-grow: 1;
@@ -90,11 +90,9 @@
         }
     }
 
-    .commerce-accordion,
-    .commerce-input-text {
-        margin-top: 20px;
+    .commerce-accordion {
+        margin-top: 30px;
     }
-    
 }
 
 .commerce-order-item-info {
