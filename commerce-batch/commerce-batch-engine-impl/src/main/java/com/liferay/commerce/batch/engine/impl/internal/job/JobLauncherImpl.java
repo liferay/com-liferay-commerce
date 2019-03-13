@@ -18,7 +18,6 @@ import com.liferay.commerce.batch.engine.api.job.Job;
 import com.liferay.commerce.batch.engine.api.job.JobExecution;
 import com.liferay.commerce.batch.engine.api.job.JobFactory;
 import com.liferay.commerce.batch.engine.api.job.JobLauncher;
-import com.liferay.commerce.batch.engine.api.job.JobParameters;
 import com.liferay.commerce.batch.model.CommerceBatchJob;
 import com.liferay.commerce.batch.service.CommerceBatchJobLocalService;
 import com.liferay.petra.concurrent.NoticeableExecutorService;
@@ -38,14 +37,13 @@ import org.osgi.service.component.annotations.Reference;
 public class JobLauncherImpl implements JobLauncher {
 
 	@Override
-	public JobExecution run(Job job, JobParameters jobParameters) {
+	public JobExecution run(Job job) {
 		Objects.requireNonNull(job);
 
 		CommerceBatchJob commerceBatchJob = _addCommerceBatchJob(
 			job.getKey(), job.getName());
 
-		JobExecution jobExecution = new JobExecution(
-			commerceBatchJob, jobParameters);
+		JobExecution jobExecution = new JobExecution(commerceBatchJob);
 
 		JobRunnable jobRunnable = new JobRunnable(job, jobExecution);
 
@@ -55,14 +53,13 @@ public class JobLauncherImpl implements JobLauncher {
 	}
 
 	@Override
-	public JobExecution runAsync(Job job, JobParameters jobParameters) {
+	public JobExecution runAsync(Job job) {
 		Objects.requireNonNull(job);
 
 		CommerceBatchJob commerceBatchJob = _addCommerceBatchJob(
 			job.getKey(), job.getName());
 
-		JobExecution jobExecution = new JobExecution(
-			commerceBatchJob, jobParameters);
+		JobExecution jobExecution = new JobExecution(commerceBatchJob);
 
 		_submit(job, jobExecution);
 

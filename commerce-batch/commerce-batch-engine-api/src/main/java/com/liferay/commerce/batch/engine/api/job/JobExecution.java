@@ -23,19 +23,12 @@ import java.util.Objects;
  */
 public class JobExecution {
 
-	public JobExecution(
-		CommerceBatchJob commerceBatchJob, JobParameters jobParameters) {
-
+	public JobExecution(CommerceBatchJob commerceBatchJob) {
 		_commerceBatchJob = Objects.requireNonNull(commerceBatchJob);
-		_jobParameters = jobParameters;
 	}
 
 	public CommerceBatchJob getCommerceBatchJob() {
 		return _commerceBatchJob;
-	}
-
-	public JobParameters getJobParameters() {
-		return _jobParameters;
 	}
 
 	@Override
@@ -44,14 +37,11 @@ public class JobExecution {
 
 		sb.append("JobExecution{commerceBatchJob=");
 		sb.append(_commerceBatchJob);
-		sb.append(", jobParameters=");
-		sb.append(_jobParameters);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	private final CommerceBatchJob _commerceBatchJob;
-	private final JobParameters _jobParameters;
 
 }

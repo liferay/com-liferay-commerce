@@ -90,7 +90,7 @@ public class BatchFileProcessorImpl implements BatchFileProcessor {
 		List<Job> jobs = _createJobs(fileName, inputStream);
 
 		for (Job job : jobs) {
-			JobExecution jobExecution = _jobLauncher.run(job, null);
+			JobExecution jobExecution = _jobLauncher.run(job);
 
 			CommerceBatchJob commerceBatchJob =
 				jobExecution.getCommerceBatchJob();
@@ -118,7 +118,7 @@ public class BatchFileProcessorImpl implements BatchFileProcessor {
 		List<Job> jobs = _createJobs(fileName, inputStream);
 
 		for (Job job : jobs) {
-			JobExecution jobExecution = _jobLauncher.runAsync(job, null);
+			JobExecution jobExecution = _jobLauncher.runAsync(job);
 
 			CommerceBatchJob commerceBatchJob =
 				jobExecution.getCommerceBatchJob();

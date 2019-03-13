@@ -19,8 +19,8 @@ package com.liferay.commerce.batch.engine.api.job;
  */
 public interface JobLauncher {
 
-	public JobExecution run(Job job, JobParameters jobParameters);
+	public JobExecution run(Job job);
 
-	public JobExecution runAsync(Job job, JobParameters jobParameters);
+	public JobExecution runAsync(Job job);
 
 }
