@@ -11,6 +11,11 @@
 	transition: transform ease 200ms, left ease 500ms;
 	z-index: 100;
 
+	@media screen and (hover: none) {
+		bottom: $frame-size;
+		left: 0;
+	}
+
 	&:empty {
 		display: none;
 	}

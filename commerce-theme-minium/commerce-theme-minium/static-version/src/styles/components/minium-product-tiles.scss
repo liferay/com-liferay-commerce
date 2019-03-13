@@ -3,4 +3,8 @@
 	grid-gap: $minium-gutter;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	margin-bottom: $minium-gutter;
+	
+	@media (max-width: 1024px) {
+		grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+	}
 }

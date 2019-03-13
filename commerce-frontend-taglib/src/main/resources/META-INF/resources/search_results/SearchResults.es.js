@@ -65,6 +65,12 @@ class SearchResults extends Component {
 		this.selectedIndex = this.getFirstSuggestion();
 	}
 
+	rendered() {
+		if (this.refs && this.refs.selected) {
+			this.refs.selected.scrollIntoView({behavior: "smooth", block: "nearest"});
+		}
+	}
+
 	search() {
 		if (this.lock) {
 			return;

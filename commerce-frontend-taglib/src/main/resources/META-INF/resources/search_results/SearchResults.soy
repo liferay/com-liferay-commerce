@@ -61,6 +61,7 @@
 		data-onmouseenter="handleMouseEnter"
 		data-onmouseleave="handleMouseLeave"
 		data-pos="{$item.pos}"
+		{if $item.selected}ref="selected"{/if}
 	>
 		<div class="commerce-item commerce-item--search">
 			<img alt="" class="commerce-item__image" src="{$item.image}">
@@ -83,6 +84,7 @@
 		data-onmouseenter="handleMouseEnter"
 		data-onmouseleave="handleMouseLeave"
 		data-pos="{$item.pos}"
+		{if $item.selected}ref="selected"{/if}
 	>
 		Search "{$queryValue}" in {$item.title}
 	</div>

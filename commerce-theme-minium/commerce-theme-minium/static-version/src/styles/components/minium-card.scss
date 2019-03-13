@@ -1,6 +1,4 @@
 .minium-card {
-	$cover-image-height: 200px;
-
 	align-items: center;
 	background: white;
 	border-radius: 5px;
@@ -9,7 +7,6 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	min-height: 384px;
 	overflow: hidden;
 	padding: 20px;
 	position: relative;
@@ -36,12 +33,14 @@
 	}
 
 	&__availability {
-		left: $minium-gutter;
+		left: 0;
+		margin-top: calc(75% - 30px);
 		position: absolute;
-		top: $cover-image-height;
+		top: 0;
+		width: 100%;
 
 		.commerce-dot {
-			left: 0;
+			left: $minium-gutter;
 			line-height: 0;
 			position: absolute;
 			top: 0;
@@ -86,9 +85,10 @@
 		background-position: 50%;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height: $cover-image-height;
+		height: 0;
 		margin-top: -20px;
 		overflow: hidden;
+		padding-bottom: 75%;
 		position: relative;
 		width: calc(100% + 40px);
 
@@ -161,6 +161,7 @@
 
 	&__price {
 		margin: 8px 0;
+		min-height: 33px;
 	}
 
 	.product-compare-checkbox {

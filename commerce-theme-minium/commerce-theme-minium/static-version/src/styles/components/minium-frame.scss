@@ -1,64 +1,112 @@
 .minium-frame {
 	background-color: $color-bg-alt;
-	display: grid;
-	grid-template-areas:
-		"sidebar topbar"
-		"sidebar content";
-	grid-template-columns: $frame-size 1fr;
-	grid-template-rows: auto 1fr;
-	height: 100vh;
-	overflow: hidden;
+	// display: grid;
+	// grid-template-areas:
+	// 	"sidebar topbar"
+	// 	"sidebar content";
+	// grid-template-columns: $frame-size 1fr;
+	// grid-template-rows: auto 1fr;
+	// height: 100vh;
+	// overflow: hidden;
 
-	@media screen and (hover: none) {
-		grid-template-areas:
-			"topbar"
-			"content"
-			"sidebar";
-		grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr auto;
-	}
+	// @media screen and (hover: none) {
+	// 	grid-template-areas:
+	// 		"topbar"
+	// 		"content"
+	// 		"sidebar";
+	// 	grid-template-columns: 1fr;
+	// 	grid-template-rows: auto 1fr auto;
+	// }
 
 	&__topbar {
 		display: grid;
-		grid-area: topbar;
+		// grid-area: topbar;
+		left: 0;
+		margin-left: $frame-size;
+		position: fixed;
+		right: 0;
+		top: 0;
+		transition: all ease 500ms;
 		z-index: 1105;
+
+		@media screen and (hover: none) {
+			margin-left: 0;
+		}
 	}
 
 	&__sidebar {
 		display: grid;
-		grid-area: sidebar;
+		// grid-area: sidebar;
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		top: 0;
+		transition: all ease 500ms;
 		z-index: 1120;
+
+		@media screen and (hover: none) {
+			box-shadow: $minium-shadow;
+			right: 0;
+			top: auto;
+			transition: all $transition;
+			
+			.minium-frame.is-scrolling-down.is-scrolled & {
+				box-shadow: 0 0 0 transparent;
+				transform: translateY(100%);
+			}
+		}
 	}
 
 	&__content {
-		grid-area: content;
-		overflow: auto;
+		// grid-area: content;
+		// overflow: auto;
+		padding: #{$frame-size + $liferay-topbar-size} 0 0 $frame-size;
+		
+		@media screen and (hover: none) {
+			padding: #{$frame-size + $liferay-topbar-size} 0 $frame-size 0;
+		}
 	}
 
 	&__overlay {
 		background-color: $color-modal-mask;
-		grid-area: content;
+		// grid-area: content;
+		bottom: 0;
+		left: 0;
 		overflow: auto;
-		padding-bottom: 10%;
-		position: relative;
+		padding: $frame-size 0 10% $frame-size;
+		position: fixed;
+		right: 0;
+		top: $frame-size + $liferay-topbar-size;
 		z-index: 100;
 
 		.minium-frame:not(.has-search) & {
 			display: none;
 		}
+
+		@media screen and (hover: none) {
+			padding-left: 0;
+		}
 	}
 
 	&__toolbar {
-		align-self: flex-start;
+		// align-self: flex-start;
 		background-color: $color-bg;
 		box-shadow: 0 0 0 transparent;
-		grid-area: content;
+		// grid-area: content;
 		height: $frame-size;
-		position: relative;
+		left: 0;
+		margin-left: $frame-size;
+		position: fixed;
+		right: 0;
+		top: $frame-size;
 		transition:
-		box-shadow $transition,
-		transform $transition;
+			box-shadow $transition,
+			transform $transition;
 		width: 100%;
+
+		@media screen and (hover: none) {
+			margin-left: 0;
+		}
 
 		.minium-frame:not(.is-scrolled) &,
 		&:not(.is-visible) {
