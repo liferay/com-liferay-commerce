@@ -97,26 +97,31 @@ class SearchBar extends Component {
 		}
 	}
 
-	open() {
-		this.active = true;
-	}
-
 	syncActive() {
 		if (this.active) {
 			window.addEventListener('click', this._handleClickOutside);
-			setTimeout(() => {
-				this._removeOpenButtonListener();
-				this.refs.searchInput.focus();
-			}, 0);
+			setTimeout(
+				() => {
+					this._removeOpenButtonListener();
+					this.refs.searchInput.focus();
+				},
+			0);
 		}
 		else {
 			window.removeEventListener('click', this._handleClickOutside);
-			setTimeout(() => {
-				this._addOpenButtonListener();
-				this.refs.searchInput.blur();
-			}, 0);
+			setTimeout(
+				() => {
+					this._addOpenButtonListener();
+					this.refs.searchInput.blur();
+				},
+				0
+			);
 		}
-		this.emit('toogled', this.active);
+		this.emit('toggled', this.active);
+	}
+
+	open() {
+		this.active = true;
 	}
 
 	close() {

@@ -7,8 +7,9 @@ class QuantitySelector extends Component {
 	attached() {
 		if (!this.quantity) {
 			this.quantity = this.allowedQuantities ? this.allowedQuantities[0] : this.minQuantity;
-			return this._updateQuantity(this.quantity);
+			this._updateQuantity(this.quantity);
 		}
+		return !!this.quantity
 	}
 
 	syncQuantity() {

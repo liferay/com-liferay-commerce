@@ -4,7 +4,7 @@
 	box-shadow: -20px 0 40px $color-shadow;
 	display: flex;
 	flex-direction: column;
-	max-width: 390px;
+	max-width: 420px;
 	position: fixed;
 	right: 0;
 	top: $frame-size;
@@ -100,12 +100,6 @@
 				font-weight: bold;
 			}
 		}
-	}
-
-	&__item {
-		border-bottom: 1px solid rgba(180,187,201,0.2);
-		padding: 10px;
-		position: relative;
 	}
 
 	&__close {

@@ -77,9 +77,11 @@ class AddToCartButton extends Component {
 	}
 
 	_handleBtnFocusout(e) {
-		this.closingTimeout = setTimeout(() => {
-			this._disableEditMode();
-		}, 100); // Timeout needed to avoid flickering when the focus change
+		// Timeout needed to avoid flickering when the focus change
+		this.closingTimeout = setTimeout(
+			() => this._disableEditMode(),
+			100
+		);
 	}
 
 	_handleSubmitClick() {
@@ -160,7 +162,6 @@ class AddToCartButton extends Component {
 Soy.register(AddToCartButton, template);
 
 AddToCartButton.STATE = {
-	disabled: Config.bool().value(false),
 	accountId: Config.oneOfType(
 		[
 			Config.number(),

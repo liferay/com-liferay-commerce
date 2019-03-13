@@ -19,8 +19,8 @@ class ModalLinkCellTemplate extends Component {
 }
 
 ModalLinkCellTemplate.STATE = {
-	_modalVisible: Config.bool().value(false),
-	_lazyLoad: Config.bool().value(false)
+	_lazyLoad: Config.bool().value(false),
+	_modalVisible: Config.bool().value(false)
 };
 
 Soy.register(ModalLinkCellTemplate, template);
