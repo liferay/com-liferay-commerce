@@ -89,7 +89,10 @@ public class CommerceAccountUserRelLocalServiceImpl
 					StringPool.BLANK, emailAddress, 0, StringPool.BLANK,
 					serviceContext.getLocale(), emailAddress, StringPool.BLANK,
 					emailAddress, 0, 0, true, 1, 1, 1970, StringPool.BLANK,
-					null, null, null, null, true, serviceContext);
+					new long[] {
+						group.getGroupId(), serviceContext.getScopeGroupId()
+					},
+					null, null, null, true, serviceContext);
 
 				commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 					commerceAccountId, user.getUserId(), serviceContext);
