@@ -1,10 +1,20 @@
 [
 	{
 		"id": 1,
-		"name": "product1"
+		"name": "product1",
+		"statusIds" : [
+			11,
+			22,
+			33
+		]
 	},
 	{
 		"id": 2,
-		"name": "product2"
+		"name": "product2",
+		"statusIds" : [
+			44,
+			55,
+			66
+		]
 	}
 ]
