@@ -88,17 +88,21 @@ public class TierPriceHelper {
 	}
 
 	public CollectionDTO<TierPriceDTO> getTierPriceDTOs(
-			long commercePriceEntryId, Pagination pagination)
+			String priceEntryId, Company company, Pagination pagination)
 		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry =
+			_priceEntryHelper.getCommercePriceEntry(
+				priceEntryId, company.getCompanyId());
 
 		List<CommerceTierPriceEntry> commerceTierPriceEntries =
 			_commerceTierPriceEntryService.getCommerceTierPriceEntries(
-				commercePriceEntryId, pagination.getStartPosition(),
-				pagination.getEndPosition());
+				commercePriceEntry.getCommercePriceEntryId(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		int count =
 			_commerceTierPriceEntryService.getCommerceTierPriceEntriesCount(
-				commercePriceEntryId);
+				commercePriceEntry.getCommercePriceEntryId());
 
 		List<TierPriceDTO> tierPriceDTOs = new ArrayList<>();
 
