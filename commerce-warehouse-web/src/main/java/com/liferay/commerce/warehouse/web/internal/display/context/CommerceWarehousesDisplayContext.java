@@ -199,13 +199,9 @@ public class CommerceWarehousesDisplayContext {
 		_searchContainer.setOrderByType(orderByType);
 		_searchContainer.setSearch(search);
 
-		int total;
 		List<CommerceWarehouse> results;
 
 		if (_searchContainer.isSearch()) {
-			total = _commerceWarehouseService.searchCount(
-				_cpRequestHelper.getScopeGroupId(), getKeywords(), active,
-				commerceCountryId);
 			results = _commerceWarehouseService.search(
 				_cpRequestHelper.getScopeGroupId(), getKeywords(), active,
 				commerceCountryId, _searchContainer.getStart(),
@@ -213,25 +209,20 @@ public class CommerceWarehousesDisplayContext {
 		}
 		else {
 			if (active == null) {
-				total = _commerceWarehouseService.getCommerceWarehousesCount(
-					_cpRequestHelper.getScopeGroupId(), commerceCountryId);
 				results = _commerceWarehouseService.getCommerceWarehouses(
 					_cpRequestHelper.getScopeGroupId(), commerceCountryId,
 					_searchContainer.getStart(), _searchContainer.getEnd(),
 					orderByComparator);
 			}
 			else {
-				total = _commerceWarehouseService.getCommerceWarehousesCount(
-					_cpRequestHelper.getScopeGroupId(), active,
-					commerceCountryId);
 				results = _commerceWarehouseService.getCommerceWarehouses(
 					_cpRequestHelper.getScopeGroupId(), active,
-					commerceCountryId, _searchContainer.getStart(),
+					commerceCountryId, false, _searchContainer.getStart(),
 					_searchContainer.getEnd(), orderByComparator);
 			}
 		}
 
-		_searchContainer.setTotal(total);
+		_searchContainer.setTotal(results.size());
 		_searchContainer.setResults(results);
 
 		return _searchContainer;

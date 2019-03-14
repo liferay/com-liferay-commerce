@@ -775,6 +775,22 @@
 			<finder-column name="active" />
 			<finder-column name="commerceCountryId" />
 		</finder>
+		<finder name="G_A_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="active" />
+			<finder-column name="primary" />
+		</finder>
+		<finder name="G_C_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="commerceCountryId" />
+			<finder-column name="primary" />
+		</finder>
+		<finder name="G_A_C_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="active" />
+			<finder-column name="commerceCountryId" />
+			<finder-column name="primary" />
+		</finder>
 
 		<!-- References -->
 
