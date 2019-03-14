@@ -247,6 +247,23 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 	}
 
 	@Override
+	public List<CPDefinitionSpecificationOptionValue>
+		getCPSpecificationOptionDefinitionValues(
+			long cpSpecificationOptionId, int start, int end) {
+
+		return cpDefinitionSpecificationOptionValuePersistence.
+			findByCPSpecificationOptionId(cpSpecificationOptionId, start, end);
+	}
+
+	@Override
+	public int getCPSpecificationOptionDefinitionValuesCount(
+		long cpSpecificationOptionId) {
+
+		return cpDefinitionSpecificationOptionValuePersistence.
+			countByCPSpecificationOptionId(cpSpecificationOptionId);
+	}
+
+	@Override
 	public CPDefinitionSpecificationOptionValue
 			updateCPDefinitionSpecificationOptionValue(
 				long cpDefinitionSpecificationOptionValueId,
