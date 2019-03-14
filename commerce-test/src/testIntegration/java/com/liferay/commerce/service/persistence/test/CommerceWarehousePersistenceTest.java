@@ -249,6 +249,33 @@ public class CommerceWarehousePersistenceTest {
 	}
 
 	@Test
+	public void testCountByG_A_P() throws Exception {
+		_persistence.countByG_A_P(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_A_P(0L, RandomTestUtil.randomBoolean(),
+			RandomTestUtil.randomBoolean());
+	}
+
+	@Test
+	public void testCountByG_C_P() throws Exception {
+		_persistence.countByG_C_P(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_C_P(0L, 0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
+	public void testCountByG_A_C_P() throws Exception {
+		_persistence.countByG_A_C_P(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_A_C_P(0L, RandomTestUtil.randomBoolean(), 0L,
+			RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceWarehouse newCommerceWarehouse = addCommerceWarehouse();
 

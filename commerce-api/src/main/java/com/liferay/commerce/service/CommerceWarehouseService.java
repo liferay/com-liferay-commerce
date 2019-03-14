@@ -84,6 +84,12 @@ public interface CommerceWarehouseService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
+		boolean active, long commerceCountryId, boolean primary, int start,
+		int end, OrderByComparator<CommerceWarehouse> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
 		boolean active, long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;

@@ -160,6 +160,26 @@ public class CommerceWarehouseServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceWarehouseSoap[] getCommerceWarehouses(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceWarehouse> returnValue =
+				CommerceWarehouseServiceUtil.getCommerceWarehouses(groupId,
+					active, commerceCountryId, primary, start, end,
+					orderByComparator);
+
+			return com.liferay.commerce.model.CommerceWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceWarehouseSoap[] getCommerceWarehouses(
 		long groupId, boolean active, long commerceCountryId, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
