@@ -14,13 +14,18 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
+import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.base.CPDefinitionSpecificationOptionValueServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -117,6 +122,25 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 	@Override
 	public List<CPDefinitionSpecificationOptionValue>
 			getCPDefinitionSpecificationOptionValues(
+				long cpSpecificationOptionId, int start, int end)
+		throws PortalException {
+
+		CPSpecificationOption cpSpecificationOption =
+			cpSpecificationOptionLocalService.getCPSpecificationOption(
+				cpSpecificationOptionId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), cpSpecificationOption.getGroupId(),
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
+
+		return cpDefinitionSpecificationOptionValueLocalService.
+			getCPSpecificationOptionDefinitionValues(
+				cpSpecificationOptionId, start, end);
+	}
+
+	@Override
+	public List<CPDefinitionSpecificationOptionValue>
+			getCPDefinitionSpecificationOptionValues(
 				long cpDefinitionId, int start, int end,
 				OrderByComparator<CPDefinitionSpecificationOptionValue>
 					orderByComparator)
@@ -142,6 +166,24 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 		return cpDefinitionSpecificationOptionValueLocalService.
 			getCPDefinitionSpecificationOptionValues(
 				cpDefinitionId, cpOptionCategoryId);
+	}
+
+	@Override
+	public int getCPDefinitionSpecificationOptionValuesCount(
+			long cpSpecificationOptionId)
+		throws PortalException {
+
+		CPSpecificationOption cpSpecificationOption =
+			cpSpecificationOptionLocalService.getCPSpecificationOption(
+				cpSpecificationOptionId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), cpSpecificationOption.getGroupId(),
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
+
+		return cpDefinitionSpecificationOptionValueLocalService.
+			getCPSpecificationOptionDefinitionValuesCount(
+				cpSpecificationOptionId);
 	}
 
 	@Override
@@ -174,5 +216,10 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionSpecificationOptionValueServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
+	private static volatile PortletResourcePermission
+		_portletResourcePermission =
+			PortletResourcePermissionFactory.getInstance(
+				CPDefinitionSpecificationOptionValueServiceImpl.class,
+				"_portletResourcePermission", CPConstants.RESOURCE_NAME);
 
 }
