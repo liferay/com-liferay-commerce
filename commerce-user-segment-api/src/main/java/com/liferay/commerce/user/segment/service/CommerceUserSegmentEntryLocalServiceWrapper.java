@@ -57,8 +57,8 @@ public class CommerceUserSegmentEntryLocalServiceWrapper
 	}
 
 	@Override
-	public void cleanUserSegmentsChache(long groupId) {
-		_commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(groupId);
+	public void cleanUserSegmentsCache(long groupId) {
+		_commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(groupId);
 	}
 
 	/**

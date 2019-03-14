@@ -447,7 +447,7 @@ public class CommerceUserSegmentHelperTest {
 		_userLocalService.unsetOrganizationUsers(
 			_organization.getOrganizationId(), new long[] {_user.getUserId()});
 
-		_commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		_commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			_group1.getGroupId());
 
 		long[] commerceUserSegmentIDs =
