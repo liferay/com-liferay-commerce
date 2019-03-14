@@ -26,6 +26,7 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
+import com.liferay.headless.commerce.admin.pricing.internal.resource.util.DateConfig;
 import com.liferay.headless.commerce.admin.pricing.model.v1_0.PriceListDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -213,47 +214,23 @@ public class PriceListHelper {
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
-		if (displayDate != null) {
-			displayCalendar = _convertDateToCalendar(displayDate);
-		}
-
-		int displayDateMonth = displayCalendar.get(Calendar.MONTH);
-		int displayDateDay = displayCalendar.get(Calendar.DAY_OF_MONTH);
-		int displayDateYear = displayCalendar.get(Calendar.YEAR);
-		int displayDateHour = displayCalendar.get(Calendar.HOUR);
-		int displayDateMinute = displayCalendar.get(Calendar.MINUTE);
-		int displayDateAmPm = displayCalendar.get(Calendar.AM_PM);
-
-		if (displayDateAmPm == Calendar.PM) {
-			displayDateHour += 12;
-		}
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
 
-		if (expirationDate != null) {
-			expirationCalendar = _convertDateToCalendar(expirationDate);
-		}
-
-		int expirationDateMonth = expirationCalendar.get(Calendar.MONTH);
-		int expirationDateDay = expirationCalendar.get(Calendar.DAY_OF_MONTH);
-		int expirationDateYear = expirationCalendar.get(Calendar.YEAR);
-		int expirationDateHour = expirationCalendar.get(Calendar.HOUR);
-		int expirationDateMinute = expirationCalendar.get(Calendar.MINUTE);
-		int expirationDateAmPm = expirationCalendar.get(Calendar.AM_PM);
-
-		if (expirationDateAmPm == Calendar.PM) {
-			expirationDateHour += 12;
-		}
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		return _commercePriceListService.updateCommercePriceList(
 			commercePriceList.getCommercePriceListId(), commerceCurrencyId,
-			name, priority, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, serviceContext);
+			name, priority, displayDateConfig.getMonth(),
+			displayDateConfig.getDay(), displayDateConfig.getYear(),
+			displayDateConfig.getHour(), displayDateConfig.getMinute(),
+			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
+			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
+			expirationDateConfig.getMinute(), neverExpire, serviceContext);
 	}
 
 	private CommercePriceList _upsertPriceList(
