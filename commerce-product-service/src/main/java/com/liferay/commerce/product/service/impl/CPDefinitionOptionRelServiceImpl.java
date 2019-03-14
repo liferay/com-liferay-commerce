@@ -38,6 +38,24 @@ public class CPDefinitionOptionRelServiceImpl
 
 	@Override
 	public CPDefinitionOptionRel addCPDefinitionOptionRel(
+			long cpDefinitionId, long cpOptionId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			double priority, boolean facetable, boolean required,
+			boolean skuContributor, boolean importOptionValue,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
+
+		return cpDefinitionOptionRelLocalService.addCPDefinitionOptionRel(
+			cpDefinitionId, cpOptionId, nameMap, descriptionMap,
+			ddmFormFieldTypeName, priority, facetable, required, skuContributor,
+			importOptionValue, serviceContext);
+	}
+
+	@Override
+	public CPDefinitionOptionRel addCPDefinitionOptionRel(
 			long cpDefinitionId, long cpOptionId, ServiceContext serviceContext)
 		throws PortalException {
 
