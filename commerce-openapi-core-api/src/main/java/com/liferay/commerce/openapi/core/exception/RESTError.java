@@ -35,6 +35,10 @@ public enum RESTError {
 	ADDRESS_STREET_ERROR(
 		958, "Invalid address street", Response.Status.BAD_REQUEST),
 	ADDRESS_ZIP_ERROR(957, "Invalid address zip", Response.Status.BAD_REQUEST),
+	ATTACHMENT_NAME_ERROR(
+		945, "Invalid attachment name", Response.Status.BAD_REQUEST),
+	ATTACHMENT_SIZE_ERROR(
+		944, "Invalid attachment size", Response.Status.BAD_REQUEST),
 	CATALOG_RULE_TYPE_ERROR(
 		970, "Invalid catalog rule type", Response.Status.BAD_REQUEST),
 	COUNTRY_NAME_ERROR(
@@ -56,6 +60,8 @@ public enum RESTError {
 	DISCOUNT_TITLE_ERROR(
 		968, "Invalid discount title", Response.Status.BAD_REQUEST),
 	DUPLICATE_ACCOUNT(981, "Duplicate account", Response.Status.CONFLICT),
+	DUPLICATE_FRIENDLY_URL(
+		936, "Duplicate friendly URL", Response.Status.CONFLICT),
 	DUPLICATE_PRICE_ENTRY(
 		988, "Duplicated price entry", Response.Status.CONFLICT),
 	DUPLICATE_PRODUCT_OPTION_KEY(
@@ -64,10 +70,19 @@ public enum RESTError {
 		991, "Duplicate product option value key.", Response.Status.CONFLICT),
 	DUPLICATE_TIER_PRICE(
 		952, "Duplicated tier price", Response.Status.CONFLICT),
+	FRIENDLY_URL_ERROR(
+		937, "Invalid friendly URL.", Response.Status.BAD_REQUEST),
 	GENERAL_ERROR(999, "General error.", Response.Status.BAD_REQUEST),
+	IGNORE_SKU_COMBINATIONS_ERROR(
+		943, "Invalid SKU combinations.", Response.Status.BAD_REQUEST),
 	INTERNAL_ERROR(
 		998, "Internal error. Please try again later.",
 		Response.Status.INTERNAL_SERVER_ERROR),
+	INVALID_COMMERCE_ATTACHMENT_DISPLAY_DATE(
+		947, "Invalid commerce SKU display date.", Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_ATTACHMENT_EXPIRATION_DATE(
+		946, "Invalid commerce SKU expiration date.",
+		Response.Status.BAD_REQUEST),
 	INVALID_COMMERCE_DISCOUNT_DISPLAY_DATE(
 		974, "Invalid commerce discount display date.",
 		Response.Status.BAD_REQUEST),
@@ -80,6 +95,17 @@ public enum RESTError {
 	INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE(
 		994, "Invalid commerce price list expiration date.",
 		Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_PRODUCT_DISPLAY_DATE(
+		951, "Invalid commerce product display date.",
+		Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_PRODUCT_EXPIRATION_DATE(
+		950, "Invalid commerce product expiration date.",
+		Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_SKU_DISPLAY_DATE(
+		949, "Invalid commerce SKU display date.", Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_SKU_EXPIRATION_DATE(
+		948, "Invalid commerce SKU expiration date.",
+		Response.Status.BAD_REQUEST),
 	MEASUREMENT_UNIT_KEY_ERROR(
 		972, "Invalid measurement unit key", Response.Status.BAD_REQUEST),
 	NO_SUCH_CURRENCY(
@@ -88,6 +114,11 @@ public enum RESTError {
 			"3-letter ISO 4217 format.",
 		Response.Status.NOT_FOUND),
 	NO_SUCH_MODEL(982, "Unable to find entity", Response.Status.NOT_FOUND),
+	NO_SUCH_SKU_CONTRIBUTOR_OPTION(
+		932, "Unable to find SKU contributor option",
+		Response.Status.NOT_FOUND),
+	OPTION_CATEGORY_KEY_ERROR(
+		935, "Invalid option category key", Response.Status.BAD_REQUEST),
 	ORDER_BILLING_ADDRESS_ERROR(
 		970, "Invalid order billing address", Response.Status.BAD_REQUEST),
 	ORDER_NOTE_CONTENT_ERROR(
@@ -105,6 +136,14 @@ public enum RESTError {
 	PRINCIPAL_ERROR(
 		983, Response.Status.NOT_FOUND.getReasonPhrase(),
 		Response.Status.NOT_FOUND),
+	PRODUCT_META_DESCRIPTION_ERROR(
+		942, "Invalid product meta description.", Response.Status.BAD_REQUEST),
+	PRODUCT_META_KEYWORDS_ERROR(
+		941, "Invalid product meta keywords.", Response.Status.BAD_REQUEST),
+	PRODUCT_META_TITLE_ERROR(
+		940, "Invalid product meta title.", Response.Status.BAD_REQUEST),
+	PRODUCT_SKU_ERROR(
+		939, "Invalid SKU for the product.", Response.Status.BAD_REQUEST),
 	PRODUCT_TYPE_NAME_ERROR(
 		980, "Unable to find product type.", Response.Status.BAD_REQUEST),
 	PURCHASE_ORDER_NUMBER_ERROR(
@@ -113,6 +152,12 @@ public enum RESTError {
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
 		Response.Status.INTERNAL_SERVER_ERROR),
+	SKU_JSON_ERROR(
+		938, "Invalid options for the SKU.", Response.Status.BAD_REQUEST),
+	SPECIFICATION_KEY_ERROR(
+		934, "Invalid specification option key", Response.Status.BAD_REQUEST),
+	SPECIFICATION_TITLE_ERROR(
+		933, "Invalid specification option title", Response.Status.BAD_REQUEST),
 	TAX_CATEGORY_NAME_ERROR(
 		971, "Invalid tax category name for given language tag",
 		Response.Status.BAD_REQUEST),
