@@ -21,20 +21,25 @@ import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionExcepti
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalServiceUtil;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CPTaxCategoryLocalServiceUtil;
 import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ModelHintsUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -158,6 +163,17 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 	}
 
 	@Override
+	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+			int type, int status)
+		throws PortalException {
+
+		return CPAttachmentFileEntryLocalServiceUtil.getCPAttachmentFileEntries(
+			ClassNameLocalServiceUtil.getClassNameId(CPDefinition.class),
+			getCPDefinitionId(), type, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+	}
+
+	@Override
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels() {
 		return CPDefinitionOptionRelLocalServiceUtil.getCPDefinitionOptionRels(
 			getCPDefinitionId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -182,6 +198,16 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 	@Override
 	public CProduct getCProduct() throws PortalException {
 		return CProductLocalServiceUtil.getCProduct(getCProductId());
+	}
+
+	@Override
+	public CPTaxCategory getCPTaxCategory() throws PortalException {
+		if (getCPTaxCategoryId() > 0) {
+			return CPTaxCategoryLocalServiceUtil.getCPTaxCategory(
+				getCPTaxCategoryId());
+		}
+
+		return null;
 	}
 
 	@Override
