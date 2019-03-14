@@ -821,6 +821,7 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setUserId(user.getUserId());
 		commerceOrder.setUserName(user.getFullName());
+
 		commerceOrder.setCommerceAccountId(commerceAccountId);
 
 		return commerceOrderPersistence.update(commerceOrder);
