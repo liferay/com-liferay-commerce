@@ -85,7 +85,7 @@ public interface CommerceUserSegmentEntryLocalService extends BaseLocalService,
 		boolean system, double priority, ServiceContext serviceContext)
 		throws PortalException;
 
-	public void cleanUserSegmentsChache(long groupId);
+	public void cleanUserSegmentsCache(long groupId);
 
 	/**
 	* Creates a new commerce user segment entry with the primary key. Does not add the commerce user segment entry to the database.

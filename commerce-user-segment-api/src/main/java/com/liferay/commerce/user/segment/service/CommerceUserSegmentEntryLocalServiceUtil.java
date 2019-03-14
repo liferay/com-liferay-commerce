@@ -64,8 +64,8 @@ public class CommerceUserSegmentEntryLocalServiceUtil {
 			priority, serviceContext);
 	}
 
-	public static void cleanUserSegmentsChache(long groupId) {
-		getService().cleanUserSegmentsChache(groupId);
+	public static void cleanUserSegmentsCache(long groupId) {
+		getService().cleanUserSegmentsCache(groupId);
 	}
 
 	/**
