@@ -161,8 +161,8 @@ public class CommerceWarehouseLocalServiceImpl
 		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
 
-		return commerceWarehousePersistence.findByG_A(
-			groupId, active, start, end, orderByComparator);
+		return commerceWarehousePersistence.findByG_A_P(
+			groupId, active, false, start, end, orderByComparator);
 	}
 
 	@Override
@@ -171,13 +171,13 @@ public class CommerceWarehouseLocalServiceImpl
 		int end, OrderByComparator<CommerceWarehouse> orderByComparator) {
 
 		if (commerceCountryId >= 0) {
-			return commerceWarehousePersistence.findByG_A_C(
-				groupId, active, commerceCountryId, start, end,
+			return commerceWarehousePersistence.findByG_A_C_P(
+				groupId, active, commerceCountryId, false, start, end,
 				orderByComparator);
 		}
 
-		return commerceWarehousePersistence.findByG_A(
-			groupId, active, start, end, orderByComparator);
+		return commerceWarehousePersistence.findByG_A_P(
+			groupId, active, false, start, end, orderByComparator);
 	}
 
 	/**
@@ -210,12 +210,13 @@ public class CommerceWarehouseLocalServiceImpl
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
 
 		if (commerceCountryId >= 0) {
-			return commerceWarehousePersistence.findByG_C(
-				groupId, commerceCountryId, start, end, orderByComparator);
+			return commerceWarehousePersistence.findByG_C_P(
+				groupId, commerceCountryId, false, start, end,
+				orderByComparator);
 		}
 
-		return commerceWarehousePersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceWarehousePersistence.findByG_P(
+			groupId, false, start, end, orderByComparator);
 	}
 
 	@Override

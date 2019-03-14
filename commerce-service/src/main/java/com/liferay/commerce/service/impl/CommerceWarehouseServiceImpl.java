@@ -126,6 +126,21 @@ public class CommerceWarehouseServiceImpl
 
 	@Override
 	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, boolean active, long commerceCountryId,
+			boolean primary, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+
+		return commerceWarehouseLocalService.getCommerceWarehouses(
+			groupId, active, commerceCountryId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceWarehouse> getCommerceWarehouses(
 			long groupId, boolean active, long commerceCountryId, int start,
 			int end, OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException {
