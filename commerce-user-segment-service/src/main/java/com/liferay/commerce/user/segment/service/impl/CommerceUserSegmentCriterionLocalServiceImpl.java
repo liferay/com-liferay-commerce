@@ -76,7 +76,7 @@ public class CommerceUserSegmentCriterionLocalServiceImpl
 
 		//Cache
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			serviceContext.getScopeGroupId());
 
 		return commerceUserSegmentCriterion;
@@ -113,7 +113,7 @@ public class CommerceUserSegmentCriterionLocalServiceImpl
 
 		//Cache
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			commerceUserSegmentCriterion.getGroupId());
 
 		return commerceUserSegmentCriterion;
@@ -176,7 +176,7 @@ public class CommerceUserSegmentCriterionLocalServiceImpl
 
 		//Cache
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			commerceUserSegmentCriterion.getGroupId());
 
 		return commerceUserSegmentCriterion;
