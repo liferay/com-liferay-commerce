@@ -81,6 +81,34 @@ public class CPAttachmentFileEntryServiceImpl
 	}
 
 	@Override
+	public CPAttachmentFileEntry fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntryLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (cpAttachmentFileEntry != null) {
+			long cpDefinitionClassNameId = _portal.getClassNameId(
+				CPDefinition.class);
+
+			if (cpDefinitionClassNameId ==
+					cpAttachmentFileEntry.getClassNameId()) {
+
+				_cpDefinitionModelResourcePermission.check(
+					getPermissionChecker(), cpAttachmentFileEntry.getClassPK(),
+					ActionKeys.VIEW);
+			}
+			else {
+				checkCPAttachmentFileEntryPermissions(cpAttachmentFileEntry);
+			}
+		}
+
+		return cpAttachmentFileEntry;
+	}
+
+	@Override
 	public CPAttachmentFileEntry fetchCPAttachmentFileEntry(
 			long cpAttachmentFileEntryId)
 		throws PortalException {
@@ -255,6 +283,38 @@ public class CPAttachmentFileEntryServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
 			json, priority, type, serviceContext);
+	}
+
+	@Override
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntryLocalService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpAttachmentFileEntry == null) {
+			checkCPAttachmentFileEntryPermissions(
+				serviceContext.getScopeGroupId(), classNameId, classPK, type);
+		}
+		else {
+			checkCPAttachmentFileEntryPermissions(cpAttachmentFileEntry);
+		}
+
+		return cpAttachmentFileEntryLocalService.upsertCPAttachmentFileEntry(
+			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
+			json, priority, type, externalReferenceCode, serviceContext);
 	}
 
 	protected void checkCPAttachmentFileEntryPermissions(
