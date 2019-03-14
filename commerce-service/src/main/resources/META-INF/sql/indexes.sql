@@ -69,8 +69,9 @@ create index IX_B496E103 on CommerceSubscriptionEntry (subscriptionStatus);
 create index IX_4363DED4 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_943E0A56 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
 
-create index IX_81487FD9 on CommerceWarehouse (groupId, active_, commerceCountryId);
-create index IX_4500A0CA on CommerceWarehouse (groupId, commerceCountryId);
+create index IX_48C9DEEA on CommerceWarehouse (groupId, active_, commerceCountryId, primary_);
+create index IX_751EAFFE on CommerceWarehouse (groupId, active_, primary_);
+create index IX_8826469B on CommerceWarehouse (groupId, commerceCountryId, primary_);
 create index IX_5F7D8BED on CommerceWarehouse (groupId, primary_);
 
 create index IX_BAE6B80D on CommerceWarehouseItem (CProductId, CPInstanceUuid[$COLUMN_LENGTH:75$]);
