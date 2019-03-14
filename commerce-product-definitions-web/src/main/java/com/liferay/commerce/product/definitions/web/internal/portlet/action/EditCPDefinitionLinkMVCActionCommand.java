@@ -15,28 +15,21 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -122,7 +115,7 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 				updateCPDefinitionLink(actionRequest);
 			}
 
-			String redirect = getSaveAndContinueRedirect(actionRequest);
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
@@ -138,47 +131,6 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
-	}
-
-	protected String getSaveAndContinueRedirect(ActionRequest actionRequest)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletURL portletURL = PortletProviderUtil.getPortletURL(
-			actionRequest, themeDisplay.getScopeGroup(),
-			CPDefinition.class.getName(), PortletProvider.Action.EDIT);
-
-		long cpDefinitionLinkId = ParamUtil.getLong(
-			actionRequest, "cpDefinitionLinkId");
-
-		if (cpDefinitionLinkId > 0) {
-			portletURL.setParameter(
-				"cpDefinitionLinkId", String.valueOf(cpDefinitionLinkId));
-		}
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "editProductDefinition");
-
-		long cpDefinitionId = ParamUtil.getLong(
-			actionRequest, "cpDefinitionId");
-
-		portletURL.setParameter(
-			"cpDefinitionId", String.valueOf(cpDefinitionId));
-
-		String toolbarItem = ParamUtil.getString(actionRequest, "toolbarItem");
-
-		portletURL.setParameter("toolbarItem", toolbarItem);
-
-		portletURL.setParameter(
-			"screenNavigationCategoryKey",
-			CPDefinitionScreenNavigationConstants.
-				CATEGORY_KEY_PRODUCT_RELATIONS);
-
-		portletURL.setWindowState(actionRequest.getWindowState());
-
-		return portletURL.toString();
 	}
 
 	protected CPDefinitionLink updateCPDefinitionLink(
