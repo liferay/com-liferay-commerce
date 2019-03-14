@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.media.internal;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
@@ -55,6 +57,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
 import java.io.IOException;
 
@@ -128,7 +131,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 			boolean secure)
 		throws PortalException {
 
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append(_portal.getPathModule());
 		sb.append(StringPool.SLASH);
@@ -165,24 +168,10 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 		String className = cpAttachmentFileEntry.getClassName();
 
-		if (className.equals(CPDefinition.class.getName())) {
-			sb.append("/products/");
-
-			CPDefinition cpDefinition =
-				_cpDefinitionLocalService.getCPDefinition(
-					cpAttachmentFileEntry.getClassPK());
-
-			sb.append(cpDefinition.getCProductId());
-
-			sb.append(StringPool.SLASH);
-
-			Map<Locale, String> titleMap = cpDefinition.getUrlTitleMap();
-
-			sb.append(titleMap.get(siteDefaultLocale));
-		}
-		else {
-			throw new UnsupportedOperationException();
-		}
+		sb.append(
+			setUrl(
+				className, cpAttachmentFileEntry.getClassPK(),
+				siteDefaultLocale));
 
 		sb.append(StringPool.SLASH);
 		sb.append(cpAttachmentFileEntry.getFileEntryId());
@@ -232,34 +221,22 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 			return;
 		}
 
-		long cProductId = GetterUtil.getLong(pathArray[1]);
+		long groupId = getGroupId(
+			pathArray[0], GetterUtil.getLong(pathArray[1]), httpServletRequest);
 
-		CProduct cProduct = _cProductLocalService.fetchCProduct(cProductId);
-
-		if (cProduct == null) {
+		if (groupId == 0) {
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 
 			return;
 		}
 
 		try {
-			setCPRules(httpServletRequest, cProduct.getGroupId());
-
-			if (!_cpDefinitionModelResourcePermission.contains(
-					PermissionThreadLocal.getPermissionChecker(),
-					cProduct.getPublishedCPDefinitionId(), ActionKeys.VIEW)) {
-
-				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-
-				return;
-			}
-
 			FileEntry fileEntry = getFileEntry(httpServletRequest);
 
 			if (fileEntry == null) {
 				sendDefaultMediaBytes(
 					httpServletRequest, httpServletResponse, contentDisposition,
-					cProduct.getGroupId());
+					groupId);
 
 				return;
 			}
@@ -309,6 +286,48 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 			return null;
 		}
+	}
+
+	protected long getGroupId(
+		String mediaType, long primaryKey,
+		HttpServletRequest httpServletRequest) {
+
+		if (mediaType.equals("asset-categories")) {
+			AssetCategory assetCategory =
+				_assetCategoryLocalService.fetchCategory(primaryKey);
+
+			try {
+				if (AssetCategoryPermission.contains(
+						PermissionThreadLocal.getPermissionChecker(),
+						assetCategory, ActionKeys.VIEW)) {
+
+					return assetCategory.getGroupId();
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+		else if (mediaType.equals("products")) {
+			CProduct cProduct = _cProductLocalService.fetchCProduct(primaryKey);
+
+			try {
+				setCPRules(httpServletRequest, cProduct.getGroupId());
+
+				if (_cpDefinitionModelResourcePermission.contains(
+						PermissionThreadLocal.getPermissionChecker(),
+						cProduct.getPublishedCPDefinitionId(),
+						ActionKeys.VIEW)) {
+
+					return cProduct.getGroupId();
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return 0;
 	}
 
 	protected void sendDefaultMediaBytes(
@@ -379,8 +398,51 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		CPRulesThreadLocal.setCPRules(cpRules);
 	}
 
+	protected String setUrl(String className, long classPK, Locale locale)
+		throws PortalException {
+
+		StringBundler sb = new StringBundler(4);
+
+		if (className.equals(CPDefinition.class.getName())) {
+			sb.append("/products/");
+
+			CPDefinition cpDefinition =
+				_cpDefinitionLocalService.getCPDefinition(classPK);
+
+			sb.append(cpDefinition.getCProductId());
+
+			sb.append(StringPool.SLASH);
+
+			Map<Locale, String> titleMap = cpDefinition.getUrlTitleMap();
+
+			sb.append(titleMap.get(locale));
+		}
+		else if (className.equals(AssetCategory.class.getName())) {
+			sb.append("/asset-categories/");
+
+			AssetCategory assetCategory =
+				_assetCategoryLocalService.getAssetCategory(classPK);
+
+			sb.append(assetCategory.getCategoryId());
+
+			sb.append(StringPool.SLASH);
+
+			Map<Locale, String> titleMap = assetCategory.getTitleMap();
+
+			sb.append(titleMap.get(locale));
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
+
+		return sb.toString();
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		DefaultCommerceMediaResolver.class);
+
+	@Reference
+	private AssetCategoryLocalService _assetCategoryLocalService;
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
