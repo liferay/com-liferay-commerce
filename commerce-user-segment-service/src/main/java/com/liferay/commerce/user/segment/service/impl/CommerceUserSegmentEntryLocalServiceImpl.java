@@ -111,14 +111,13 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 		resourceLocalService.addModelResources(
 			commerceUserSegmentEntry, serviceContext);
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			commerceUserSegmentEntry.getGroupId());
 
 		return commerceUserSegmentEntry;
 	}
 
-	@Override
-	public void cleanUserSegmentsChache(long groupId) {
+	public void cleanUserSegmentsCache(long groupId) {
 		MultiVMPoolUtil.removePortalCache("USER_SEGMENTS_" + groupId);
 	}
 
@@ -136,7 +135,7 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 				commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
 		}
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(groupId);
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(groupId);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
@@ -172,7 +171,7 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		//Cache
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			commerceUserSegmentEntry.getGroupId());
 
 		return commerceUserSegmentEntry;
@@ -344,7 +343,7 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 		commerceUserSegmentEntry.setPriority(priority);
 		commerceUserSegmentEntry.setExpandoBridgeAttributes(serviceContext);
 
-		commerceUserSegmentEntryLocalService.cleanUserSegmentsChache(
+		commerceUserSegmentEntryLocalService.cleanUserSegmentsCache(
 			commerceUserSegmentEntry.getGroupId());
 
 		return commerceUserSegmentEntryPersistence.update(
