@@ -90,16 +90,19 @@ public class PriceEntryHelper {
 	}
 
 	public CollectionDTO<PriceEntryDTO> getPriceEntryDTOs(
-			long commercePriceListId, Pagination pagination)
+			String priceListId, Company company, Pagination pagination)
 		throws PortalException {
+
+		CommercePriceList commercePriceList = _priceListHelper.getPriceListById(
+			priceListId, company);
 
 		List<CommercePriceEntry> commercePriceEntries =
 			_commercePriceEntryService.getCommercePriceEntries(
-				commercePriceListId, pagination.getStartPosition(),
-				pagination.getEndPosition());
+				commercePriceList.getCommercePriceListId(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		int count = _commercePriceEntryService.getCommercePriceEntriesCount(
-			commercePriceListId);
+			commercePriceList.getCommercePriceListId());
 
 		List<PriceEntryDTO> priceEntryDTOs = new ArrayList<>();
 

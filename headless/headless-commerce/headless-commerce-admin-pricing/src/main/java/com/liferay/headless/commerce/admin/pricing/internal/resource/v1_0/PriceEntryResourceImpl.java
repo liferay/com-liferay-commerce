@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import javax.annotation.Generated;
 
@@ -76,8 +75,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 			String id, Pagination pagination)
 		throws Exception {
 
-		return _tierPriceHelper.getTierPriceDTOs(
-			GetterUtil.getLong(id), pagination);
+		return _tierPriceHelper.getTierPriceDTOs(id, _company, pagination);
 	}
 
 	@AsyncSupported
