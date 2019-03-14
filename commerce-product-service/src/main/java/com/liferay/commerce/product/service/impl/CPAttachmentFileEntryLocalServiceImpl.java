@@ -276,6 +276,14 @@ public class CPAttachmentFileEntryLocalServiceImpl
 	}
 
 	@Override
+	public CPAttachmentFileEntry fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return cpAttachmentFileEntryPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public Folder getAttachmentsFolder(
 			long userId, long groupId, String className, long classPK)
 		throws PortalException {
@@ -485,6 +493,46 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		reindex(
 			cpAttachmentFileEntry.getClassNameId(),
 			cpAttachmentFileEntry.getClassPK());
+
+		return cpAttachmentFileEntry;
+	}
+
+	@Override
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntryPersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpAttachmentFileEntry == null) {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
+					classNameId, classPK, fileEntryId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, titleMap, json, priority,
+					type, serviceContext);
+		}
+		else {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryLocalService.updateCPAttachmentFileEntry(
+					cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+					fileEntryId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					titleMap, json, priority, type, serviceContext);
+		}
 
 		return cpAttachmentFileEntry;
 	}
