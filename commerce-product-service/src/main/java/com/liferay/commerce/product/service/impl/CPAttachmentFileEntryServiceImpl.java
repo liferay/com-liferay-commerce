@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -33,6 +34,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.spring.extender.service.ServiceReference;
+import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +93,20 @@ public class CPAttachmentFileEntryServiceImpl
 			long cpDefinitionClassNameId = _portal.getClassNameId(
 				CPDefinition.class);
 
+			long assetCategoryClassNameId = _portal.getClassNameId(
+				AssetCategory.class);
+
 			if (cpDefinitionClassNameId ==
 					cpAttachmentFileEntry.getClassNameId()) {
 
 				_cpDefinitionModelResourcePermission.check(
+					getPermissionChecker(), cpAttachmentFileEntry.getClassPK(),
+					ActionKeys.VIEW);
+			}
+			else if (assetCategoryClassNameId ==
+						cpAttachmentFileEntry.getClassNameId()) {
+
+				AssetCategoryPermission.check(
 					getPermissionChecker(), cpAttachmentFileEntry.getClassPK(),
 					ActionKeys.VIEW);
 			}
@@ -198,10 +210,20 @@ public class CPAttachmentFileEntryServiceImpl
 			long cpDefinitionClassNameId = _portal.getClassNameId(
 				CPDefinition.class);
 
+			long assetCategoryClassNameId = _portal.getClassNameId(
+				AssetCategory.class);
+
 			if (cpDefinitionClassNameId ==
 					cpAttachmentFileEntry.getClassNameId()) {
 
 				_cpDefinitionModelResourcePermission.check(
+					getPermissionChecker(), cpAttachmentFileEntry.getClassPK(),
+					ActionKeys.VIEW);
+			}
+			else if (assetCategoryClassNameId ==
+						cpAttachmentFileEntry.getClassNameId()) {
+
+				AssetCategoryPermission.check(
 					getPermissionChecker(), cpAttachmentFileEntry.getClassPK(),
 					ActionKeys.VIEW);
 			}
