@@ -15,19 +15,13 @@
 --%>
 
 <c:choose>
-	<c:when test="<%= Validator.isNotNull(thumbnailSrc) %>">
+	<c:when test="<%= Validator.isNotNull(thumbnailSrc) && (type == 0) %>">
 		<liferay-ui:search-container-column-image
 			name="image"
 			src="<%= thumbnailSrc %>"
 			toggleRowChecker="<%= true %>"
 		/>
 	</c:when>
-	<c:otherwise>
-		<liferay-ui:search-container-column-icon
-			icon="documents-and-media"
-			toggleRowChecker="<%= true %>"
-		/>
-	</c:otherwise>
 </c:choose>
 
 <liferay-ui:search-container-column-text

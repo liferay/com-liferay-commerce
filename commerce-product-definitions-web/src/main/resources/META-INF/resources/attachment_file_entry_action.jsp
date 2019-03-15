@@ -40,6 +40,7 @@ else {
 		<portlet:param name="mvcRenderCommandName" value="editCPAttachmentFileEntry" />
 		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpAttachmentFileEntry.getClassPK()) %>" />
 		<portlet:param name="cpAttachmentFileEntryId" value="<%= String.valueOf(cpAttachmentFileEntry.getCPAttachmentFileEntryId()) %>" />
+		<portlet:param name="type" value="<%= String.valueOf(cpAttachmentFileEntry.getType()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon

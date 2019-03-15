@@ -167,7 +167,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 
 										<liferay-ui:search-container-column-text>
 											<c:choose>
-												<c:when test="<%= Validator.isNull(thumbnailSrc) %>">
+												<c:when test="<%= Validator.isNull(thumbnailSrc) || (cpAttachmentFileEntry.getType() != 0) %>">
 													<liferay-frontend:icon-vertical-card
 														actionJsp="/attachment_file_entry_action.jsp"
 														actionJspServletContext="<%= application %>"
