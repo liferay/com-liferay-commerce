@@ -18,6 +18,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.paypal.internal.constants.PayPalCommercePaymentMethodConstants;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
@@ -109,9 +111,12 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 			httpServletResponse.sendRedirect(redirect);
 		}
 		catch (Exception e) {
-			_portal.sendError(e, httpServletRequest, httpServletResponse);
+			_log.error(e, e);
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePaymentMethodPayPalServlet.class);
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
