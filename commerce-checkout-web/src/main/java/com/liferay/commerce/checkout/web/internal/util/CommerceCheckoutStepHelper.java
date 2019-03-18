@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -41,6 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @Component(immediate = true, service = CommerceCheckoutStepHelper.class)
 public class CommerceCheckoutStepHelper {
@@ -49,14 +49,16 @@ public class CommerceCheckoutStepHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+		if ((commerceOrder.getBillingAddressId() > 0) &&
+			Objects.equals(
+				commerceOrder.getBillingAddressId(),
+				commerceOrder.getShippingAddressId())) {
 
-		if (commerceAccount != null) {
-			return commerceAccount.isBusinessAccount();
+			return false;
 		}
 
 		return true;
