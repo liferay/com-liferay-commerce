@@ -37,6 +37,19 @@ CommerceCartItem.STATE = {
 			Config.number()
 		]
 	),
+	options: Config.array(
+		Config.shapeOf(
+			{
+				key: Config.string(),
+				value: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				)
+			}
+		)
+	),
 	inputChanged: Config.bool().value(false),
 	quantity: Config.number().value(0),
 	settings: Config.object().value(

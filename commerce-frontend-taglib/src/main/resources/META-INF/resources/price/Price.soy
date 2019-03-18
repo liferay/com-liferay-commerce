@@ -4,39 +4,71 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param prices: ?}
-	{@param? additionalDiscountedClasses: string}
-	{@param? additionalOldPriceClasses: string}
+	{@param prices: [
+		price: string,
+		promoPrice: string|null,
+		discount: string|null
+	]}
+	{@param? additionalDiscountClasses: string}
 	{@param? additionalPriceClasses: string}
+	{@param? additionalPromoPriceClasses: string}
 
 	{if isNonnull($prices.promoPrice)}
-		{call .promoContent}
-			{param prices: $prices /}
-			{param additionalDiscountedClasses: $additionalDiscountedClasses /}
-			{param additionalOldPriceClasses: $additionalOldPriceClasses /}
+		{call .promoPrice}
+			{param price: $prices.price /}
+			{param promoPrice: $prices.promoPrice /}
+			{param additionalPromoPriceClasses: $additionalPromoPriceClasses /}
+			{param additionalPriceClasses: $additionalPriceClasses /}
+		{/call}
+	{elseif isNonnull($prices.discount)}
+		{call .discount}
+			{param price: $prices.price /}
+			{param discount: $prices.discount /}
+			{param additionalDiscountClasses: $additionalDiscountClasses /}
+			{param additionalPriceClasses: $additionalPriceClasses /}
 		{/call}
 	{else}
-		{call .content}
-			{param prices: $prices /}
+		{call .default}
+			{param price: $prices.price /}
 			{param additionalPriceClasses: $additionalPriceClasses /}
 		{/call}
 	{/if}
+{/template}
 
+/**
+ * This renders the price and the discounted price.
+ */
+{template .promoPrice}
+	{@param price: string}
+	{@param promoPrice: string}
+	{@param? additionalPromoPriceClasses: string}
+	{@param? additionalPriceClasses: string}
+
+	<span class="price">
+		<span class="price__value price__value--promo-price {$additionalPromoPriceClasses}">
+			{$promoPrice}
+		</span>
+		<span class="price__value price__value--inactive {$additionalPriceClasses}">
+			{$price}
+		</span>
+	</span>
 {/template}
 
 /**
  * This renders the price and the discount.
  */
-{template .promoContent}
-	{@param prices: ?}
-	{@param? additionalDiscountedClasses: string}
-	{@param? additionalOldPriceClasses: string}
-	<span>
-		<span class="price price--discounted {$additionalDiscountedClasses}">
-			{$prices.promoPrice}
+{template .discount}
+	{@param price: string}
+	{@param discount: string}
+	{@param? additionalDiscountClasses: string}
+	{@param? additionalPriceClasses: string}
+
+	<span class="price">
+		<span class="price__value {$additionalPriceClasses}">
+			{$price}
 		</span>
-		<span class="price price--old {$additionalOldPriceClasses}">
-			{$prices.price}
+		<span class="price__value price__value--discount {$additionalDiscountClasses}">
+			{$discount}
 		</span>
 	</span>
 {/template}
@@ -44,13 +76,13 @@
 /**
  * This renders the normal price
  */
-{template .content}
-	{@param prices: [
-		price: string
-	]}
+{template .default}
+	{@param price: string}
 	{@param? additionalPriceClasses: string}
 
-	<span class="price {$additionalPriceClasses}">
-		{$prices.price}
+	<span class="price">
+		<span class="price__value {$additionalPriceClasses}">
+			{$price}
+		</span>
 	</span>
 {/template}

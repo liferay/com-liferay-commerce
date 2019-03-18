@@ -47,6 +47,10 @@
 		grid-area: actions;
 	}
 
+	&__options {
+		font-weight: 600;
+	}
+
 	&__errors {
 		grid-column: 1/3;
 		font-weight: 600;

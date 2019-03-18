@@ -16,6 +16,9 @@ package com.liferay.commerce.frontend.internal.cart.model;
 
 import com.liferay.commerce.frontend.model.PriceModel;
 import com.liferay.commerce.frontend.model.ProductSettingsModel;
+import com.liferay.portal.kernel.util.KeyValuePair;
+
+import java.util.List;
 
 /**
  * @author Alessio Antonio Rendina
@@ -47,6 +50,10 @@ public class Product {
 
 	public String getName() {
 		return _name;
+	}
+
+	public List<KeyValuePair> getOptions() {
+		return _options;
 	}
 
 	public PriceModel getPrices() {
@@ -81,6 +88,10 @@ public class Product {
 		_name = name;
 	}
 
+	public void setOptions(List<KeyValuePair> options) {
+		_options = options;
+	}
+
 	public void setPrices(PriceModel prices) {
 		_prices = prices;
 	}
@@ -104,6 +115,7 @@ public class Product {
 	private String[] _errorMessages;
 	private long _id;
 	private String _name;
+	private List<KeyValuePair> _options;
 	private PriceModel _prices;
 	private int _quantity;
 	private ProductSettingsModel _settings;

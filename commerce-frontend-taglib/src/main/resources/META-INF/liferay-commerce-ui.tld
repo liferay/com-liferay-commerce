@@ -95,12 +95,12 @@
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PriceTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>additionalDiscountedClasses</name>
+			<name>additionalPromoPriceClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>additionalOldPriceClasses</name>
+			<name>additionalDiscountClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
