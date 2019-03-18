@@ -302,6 +302,13 @@ public class CommerceOrderServiceUtil {
 			commercePaymentMethodKey);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder updateCustomFields(
+		long commerceOrderId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().updateCustomFields(commerceOrderId, serviceContext);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 		long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {

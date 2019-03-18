@@ -199,6 +199,9 @@ public interface CommerceOrderService extends BaseService {
 	public CommerceOrder updateCommercePaymentMethodKey(long commerceOrderId,
 		String commercePaymentMethodKey) throws PortalException;
 
+	public CommerceOrder updateCustomFields(long commerceOrderId,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException;
 

@@ -312,6 +312,15 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updateCustomFields(
+		long commerceOrderId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderService.updateCustomFields(commerceOrderId,
+			serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 		long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
