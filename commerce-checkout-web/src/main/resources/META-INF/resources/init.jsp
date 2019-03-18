@@ -68,6 +68,7 @@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="java.util.Iterator" %><%@
 page import="java.util.List" %><%@
 page import="java.util.Map" %><%@
+page import="java.util.Objects" %><%@
 page import="java.util.StringJoiner" %>
 
 <liferay-frontend:defineObjects />

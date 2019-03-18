@@ -22,7 +22,9 @@ BaseAddressCheckoutStepDisplayContext baseAddressCheckoutStepDisplayContext = (B
 List<CommerceAddress> commerceAddresses = baseAddressCheckoutStepDisplayContext.getCommerceAddresses();
 long defaultCommerceAddressId = baseAddressCheckoutStepDisplayContext.getDefaultCommerceAddressId();
 
-long commerceAddressId = BeanParamUtil.getLong(baseAddressCheckoutStepDisplayContext.getCommerceOrder(), request, baseAddressCheckoutStepDisplayContext.getParamName());
+	String paramName = baseAddressCheckoutStepDisplayContext.getParamName();
+
+	long commerceAddressId = BeanParamUtil.getLong(baseAddressCheckoutStepDisplayContext.getCommerceOrder(), request, paramName);
 
 if (commerceAddressId == 0) {
 	commerceAddressId = defaultCommerceAddressId;
@@ -52,7 +54,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 
 	</aui:select>
 
-	<aui:input disabled="<%= commerceAddresses.isEmpty() ? true : false %>" name="<%= baseAddressCheckoutStepDisplayContext.getParamName() %>" type="hidden" value="<%= defaultCommerceAddressId %>" />
+	<aui:input disabled="<%= commerceAddresses.isEmpty() ? true : false %>" name="<%= paramName %>" type="hidden" value="<%= defaultCommerceAddressId %>" />
 
 	<aui:input name="newAddress" type="hidden" value='<%= (commerceAddressId > 0) ? "0" : "1" %>' />
 </div>
@@ -98,6 +100,12 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceRegionId" placeholder="region" wrapperCssClass="form-group-item" />
 	</div>
 </div>
+
+<c:if test="<%= Objects.equals(CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME, paramName) %>">
+	<div>
+		<aui:input checked="<%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() %>" label="use-shipping-address-as-billing-address" name="use-as-billing" type="checkbox" />
+	</div>
+</c:if>
 
 <aui:script>
 	Liferay.provide(
@@ -146,7 +154,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 
 			var newAddress = A.one('#<portlet:namespace />newAddress');
 			var commerceAddress = A.one('#<portlet:namespace />commerceAddress');
-			var commerceAddressParamName = A.one('#<%= renderResponse.getNamespace() + baseAddressCheckoutStepDisplayContext.getParamName() %>');
+			var commerceAddressParamName = A.one('#<%= renderResponse.getNamespace() + paramName %>');
 
 			var isNewAddress = 0;
 
