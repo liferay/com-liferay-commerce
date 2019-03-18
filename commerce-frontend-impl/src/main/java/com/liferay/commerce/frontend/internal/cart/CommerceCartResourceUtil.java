@@ -75,7 +75,9 @@ public class CommerceCartResourceUtil {
 
 			errorMessages = ArrayUtil.append(
 				errorMessages,
-				commerceOrderValidatorResult.getLocalizedMessage());
+				commerceOrderValidatorResult.getLocalizedMessage()
+			
+				);
 		}
 
 		return errorMessages;
@@ -84,7 +86,8 @@ public class CommerceCartResourceUtil {
 	protected List<Product> getProducts(
 			CommerceOrder commerceOrder, Locale locale,
 			CommerceContext commerceContext)
-		throws Exception {
+		throws Exception
+		{
 
 		List<Product> products = new ArrayList<>();
 
@@ -94,21 +97,28 @@ public class CommerceCartResourceUtil {
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			PriceModel prices = _productHelper.getPrice(
 				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), commerceContext, locale);
+				commerceOrderItem.getQuantity(), 
+				commerceContext, 
+				locale
+			);
 
 			ProductSettingsModel settings =
 				_productHelper.getProductSettingsModel(
 					commerceOrderItem.getCPInstanceId());
 
-			products.add(
-				new Product(
-					commerceOrderItem.getCommerceOrderItemId(),
-					commerceOrderItem.getName(locale),
-					commerceOrderItem.getSku(), commerceOrderItem.getQuantity(),
-					_cpInstanceHelper.getCPInstanceThumbnailSrc(
-						commerceOrderItem.getCPInstanceId()),
-					prices, settings,
-					getErrorMessages(locale, commerceOrderItem)));
+			Product product = new Product(
+				commerceOrderItem.getCommerceOrderItemId(),
+				commerceOrderItem.getName(locale), commerceOrderItem.getSku(),
+				commerceOrderItem.getQuantity(),
+				_cpInstanceHelper.getCPInstanceThumbnailSrc(
+					commerceOrderItem.getCPInstanceId()),
+				prices, settings, getErrorMessages(locale, commerceOrderItem));
+
+			product.setOptions(
+				_cpInstanceHelper.getKeyValuePairs(
+					commerceOrderItem.getJson(), locale));
+
+			products.add(product);
 		}
 
 		return products;

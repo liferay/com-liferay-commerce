@@ -1,19 +1,25 @@
 .price {
-	font-weight: 600;
-
-	&--big {
-		font-size: 18px;
+	&__value {
+		font-weight: 600;
+		margin-right: 10px;
 		font-weight: bold;
-	}
+		
+		&--big {
+			font-size: 18px;
+		}
 
-	&--old {
-		color: $color-fg-alt;
-		font-weight: normal;
-		margin-left: 10px;
-		text-decoration: line-through;
-	}
+		&--discount {
+			color: $color-mood-bad
+		}
 
-	&--discounted {
-		color: $color-mood-bad
+		&--promo-price {
+			color: $color-mood-bad
+		}
+
+		&--inactive {
+			text-decoration: line-through;
+			font-weight: normal;
+			color: $color-fg-alt;
+		}
 	}
 }

@@ -5,13 +5,14 @@ import Soy, {Config} from 'metal-soy';
 class Price extends Component {}
 
 Price.STATE = {
-	additionalDiscountedClasses: Config.string().value(''),
-	additionalOldPriceClasses: Config.string().value(''),
-	additionalPriceClasses: Config.string().value(''),
+	additionalDiscountClasses: Config.string(),
+	additionalPromoPriceClasses: Config.string(),
+	additionalPriceClasses: Config.string(),
 	prices: Config.shapeOf(
 		{
-			price: Config.string().value('').required(),
-			promoPrice: Config.string()
+			price: Config.string().required(),
+			promoPrice: Config.string(),
+			discount: Config.string()
 		}
 	)
 };

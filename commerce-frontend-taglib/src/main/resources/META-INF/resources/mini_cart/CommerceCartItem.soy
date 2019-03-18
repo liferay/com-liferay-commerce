@@ -12,6 +12,9 @@
 
 	{@param? errorMessages: ? }
 	{@param settings: ? }
+	{@param? options: list<[
+		value: string|number
+	]> }
 	{@param prices: ? }
 
 	{@param? deleting: bool }
@@ -51,6 +54,16 @@
 		<div class="commerce-cart-item__content">
 			<span class="commerce-cart-item__sku">{$sku}</span>
 			<span class="commerce-cart-item__name">{$name}</span>
+			{if isNonnull($options)}
+				<span class="commerce-cart-item__options">
+					{foreach $option in $options}
+						{$option.value}
+						{if isLast($option) == false}
+							,{sp}
+						{/if}
+					{/foreach}
+				</span>
+			{/if}
 		</div>
 		<div class="commerce-cart-item__actions">
 			{call QuantitySelector.render}
@@ -63,7 +76,6 @@
 				{param multipleQuantity: $settings.multipleQuantity /}
 				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
-
 			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}"></button>
 		</div>
 		<div class="commerce-cart-item__price">

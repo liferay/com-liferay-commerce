@@ -117,8 +117,9 @@
 			{if isNonnull($prices) and isNonnull($prices)}
 				{call Price.render}
 					{param prices: $prices /}
-					{param additionalPriceClasses: 'price--big' /}
-					{param additionalDiscountedClasses: 'price--big' /}
+					{param additionalPriceClasses: 'price__value--big' /}
+					{param additionalDiscountClasses: 'price__value--big' /}
+					{param additionalPromoPriceClasses: 'price__value--big' /}
 				{/call}
 			{/if}
 		</div>
