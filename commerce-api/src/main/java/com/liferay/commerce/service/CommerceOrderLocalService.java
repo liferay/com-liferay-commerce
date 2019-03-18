@@ -463,6 +463,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		String commercePaymentMethodKey) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateCustomFields(long commerceOrderId,
+		ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException;
 
