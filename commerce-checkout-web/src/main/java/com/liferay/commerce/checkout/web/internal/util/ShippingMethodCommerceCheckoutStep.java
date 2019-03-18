@@ -29,7 +29,7 @@ import com.liferay.commerce.model.CommerceShippingOption;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommerceShippingMethodLocalService;
+import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.CharPool;
@@ -67,7 +67,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.checkout.step.name=" + ShippingMethodCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=30"
+		"commerce.checkout.step.order:Integer=20"
 	},
 	service = CommerceCheckoutStep.class
 )
@@ -123,7 +123,7 @@ public class ShippingMethodCommerceCheckoutStep
 			shippingMethodCheckoutStepDisplayContext =
 				new ShippingMethodCheckoutStepDisplayContext(
 					_commercePriceFormatter, _commerceShippingEngineRegistry,
-					_commerceShippingMethodLocalService, httpServletRequest);
+					_commerceShippingMethodService, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
@@ -141,7 +141,7 @@ public class ShippingMethodCommerceCheckoutStep
 		throws PortalException {
 
 		CommerceShippingMethod commerceShippingMethod =
-			_commerceShippingMethodLocalService.getCommerceShippingMethod(
+			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
 		if (!commerceShippingMethod.isActive()) {
@@ -239,8 +239,7 @@ public class ShippingMethodCommerceCheckoutStep
 	private CommerceShippingEngineRegistry _commerceShippingEngineRegistry;
 
 	@Reference
-	private CommerceShippingMethodLocalService
-		_commerceShippingMethodLocalService;
+	private CommerceShippingMethodService _commerceShippingMethodService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
