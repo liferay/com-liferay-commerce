@@ -14,31 +14,47 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
-import com.liferay.commerce.checkout.web.internal.display.context.BaseAddressCheckoutStepDisplayContext;
+import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.ShippingAddressCheckoutStepDisplayContext;
+import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.exception.CommerceAddressCityException;
+import com.liferay.commerce.exception.CommerceAddressCountryException;
+import com.liferay.commerce.exception.CommerceAddressNameException;
+import com.liferay.commerce.exception.CommerceAddressStreetException;
+import com.liferay.commerce.exception.CommerceAddressZipException;
+import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
+import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.commerce.service.CommerceAddressService;
+import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
 	property = {
 		"commerce.checkout.step.name=" + ShippingAddressCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=20"
+		"commerce.checkout.step.order:Integer=10"
 	},
 	service = CommerceCheckoutStep.class
 )
 public class ShippingAddressCommerceCheckoutStep
-	extends BaseAddressCommerceCheckoutStep {
+	extends BaseCommerceCheckoutStep {
 
 	public static final String NAME = "shipping-address";
 
@@ -48,36 +64,67 @@ public class ShippingAddressCommerceCheckoutStep
 	}
 
 	@Override
-	protected BaseAddressCheckoutStepDisplayContext
-			getBaseAddressCheckoutStepDisplayContext(
-				HttpServletRequest httpServletRequest,
-				HttpServletResponse httpServletResponse)
-		throws PortalException {
-
-		return new ShippingAddressCheckoutStepDisplayContext(
-			commerceAddressService, httpServletRequest, httpServletResponse);
-	}
-
-	@Override
-	protected String getParamName() {
-		return "shippingAddressId";
-	}
-
-	@Override
-	protected void updateCommerceOrderAddress(
-			CommerceOrder commerceOrder, long commerceAddressId,
-			CommerceContext commerceContext)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		commerceOrderLocalService.updateCommerceOrder(
-			commerceOrder.getCommerceOrderId(),
-			commerceOrder.getBillingAddressId(), commerceAddressId,
-			commerceOrder.getCommercePaymentMethodKey(),
-			commerceOrder.getCommerceShippingMethodId(),
-			commerceOrder.getShippingOptionName(),
-			commerceOrder.getPurchaseOrderNumber(), commerceOrder.getSubtotal(),
-			commerceOrder.getShippingAmount(), commerceOrder.getTotal(),
-			commerceOrder.getAdvanceStatus(), commerceContext);
+		try {
+			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
+				new AddressCommerceCheckoutStepUtil(
+					commerceOrderService, commerceAddressService,
+					commerceOrderModelResourcePermission);
+
+			addressCommerceCheckoutStepUtil.updateCommerceOrderAddress(
+				actionRequest,
+				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME);
+		}
+		catch (Exception e) {
+			if (e instanceof CommerceAddressCityException ||
+				e instanceof CommerceAddressCountryException ||
+				e instanceof CommerceAddressNameException ||
+				e instanceof CommerceAddressStreetException ||
+				e instanceof CommerceAddressZipException ||
+				e instanceof CommerceOrderBillingAddressException ||
+				e instanceof CommerceOrderShippingAddressException) {
+
+				SessionErrors.add(actionRequest, e.getClass());
+
+				return;
+			}
+
+			throw e;
+		}
 	}
+
+	@Override
+	public void render(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
+		throws Exception {
+
+		httpServletRequest.setAttribute(
+			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+			new ShippingAddressCheckoutStepDisplayContext(
+				commerceAddressService, httpServletRequest));
+
+		jspRenderer.renderJSP(
+			httpServletRequest, httpServletResponse,
+			"/checkout_step/address.jsp");
+	}
+
+	@Reference
+	protected CommerceAddressService commerceAddressService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
+	)
+	protected ModelResourcePermission<CommerceOrder>
+		commerceOrderModelResourcePermission;
+
+	@Reference
+	protected CommerceOrderService commerceOrderService;
+
+	@Reference
+	protected JSPRenderer jspRenderer;
 
 }
