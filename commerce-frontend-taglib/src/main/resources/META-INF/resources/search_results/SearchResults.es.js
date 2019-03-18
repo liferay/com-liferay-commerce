@@ -67,7 +67,8 @@ class SearchResults extends Component {
 
 	rendered() {
 		if (this.refs && this.refs.selected) {
-			this.refs.selected.scrollIntoView({behavior: "smooth", block: "nearest"});
+			this.refs.selected.scrollIntoView({behavior: 'smooth',
+block: 'nearest'});
 		}
 	}
 

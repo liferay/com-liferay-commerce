@@ -1,18 +1,27 @@
 .minium-products-compare {
 	background: white;
-	border-radius: 20px 20px 0 0;
+	border-radius: $minium-gutter $minium-gutter 0 0;
 	box-shadow: 0 17px 84px 0 rgba(52, 55, 62, 0.2);
 	display: flex;
-	padding: 20px;
+	padding: $minium-gutter;
+
+	@media screen and (hover: none) {
+		border-radius: $minium-small-gutter $minium-small-gutter 0 0;
+		padding: $minium-small-gutter;
+	}
 
 	&__item {
 		border: 2px dotted #D8D8D8;
-		border-radius: 10px;
+		border-radius: $minium-small-gutter;
 		height: 54px;
-		margin-right: 20px;
+		margin-right: $minium-gutter;
 		position: relative;
 		transition: border .3s ease-in;
 		width: 54px;
+
+		@media screen and (hover: none) {
+			margin-right: $minium-small-gutter;
+		}
 
 		&--showing,
 		&--visible {
@@ -28,7 +37,7 @@
 	&__thumbnail {
 		background-position: 50%;
 		background-size: cover;
-		border-radius: 10px;
+		border-radius: $minium-small-gutter;
 		display: block;
 		height: 100%;
 		left: 0;

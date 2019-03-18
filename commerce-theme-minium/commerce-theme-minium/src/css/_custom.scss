@@ -21,7 +21,7 @@ html {
 
 	body.signed-in & .minium-frame__toolbar {
 		margin-top: $liferay-topbar-size;
-		
+
 		@media screen and (max-width: 767px) {
 			margin-top: $liferay-topbar-size-small;
 		}
