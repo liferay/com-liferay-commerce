@@ -20,14 +20,19 @@ class ProductCard extends Component {
 			liferayNavigation(this.element.dataset.href);
 		}
 
-		if (['A', 'a'].includes(e.key)) {
+		if (
+			['A', 'a'].includes(e.key)
+		) {
 			e.preventDefault();
 			let next = this.element.closest('.minium-product-tiles__item');
 			if (e.target !== this.element) {
 				next = e.shiftKey ? next.previousElementSibling : next.nextElementSibling;
 			}
 			if (next) {
-				setTimeout(() => next.querySelector('.commerce-button').focus(), 100);
+				setTimeout(
+					() => next.querySelector('.commerce-button').focus(),
+					100
+				);
 			}
 		}
 	}
@@ -51,13 +56,39 @@ class ProductCard extends Component {
 				method: 'post'
 			}
 		)
-			.then(
-				() => {
-					liferayNavigation(window.location.href);
-					return Liferay.SPA;
-				}
-			);
+		.then(
+			() => {
+				liferayNavigation(window.location.href);
+				return Liferay.SPA;
+			}
+		);
 	}
+
+	_handleWishListButtonClick(){
+		this._toggleFavorite();
+	}
+
+	_toggleFavorite(){
+		if(!this.wishlistAPI) {
+			throw new Error('No wishlist API defined.')
+		}
+		return fetch(
+			this.wishlistAPI + '/' + this.skuId,
+			{
+				credentials: 'include',
+				method: this.addedToWishlist ? 'delete' : 'post'
+			}
+		)
+		.then(response => response.json())
+		.then(
+			(formattedResponse) => {
+				console.log('behaviour goes here!', formattedResponse);
+				this.addedToWishlist = !this.addedToWishlist;
+				return this.addedToWishlist;
+			}
+		);
+	}
+
 }
 
 Soy.register(ProductCard, template);
@@ -69,6 +100,9 @@ ProductCard.STATE = {
 			Config.number()
 		]
 	).value(null),
+	addedToWishlist: Config.bool().value(false),
+	addToCartButtonVisible: Config.bool().value(true),
+	addToWishlistButtonVisible: Config.bool().value(true),
 	availability: Config.string()
 		.oneOf(
 			[
@@ -90,6 +124,7 @@ ProductCard.STATE = {
 	compareContentNamespace: Config.string(),
 	compareState: Config.shapeOf(
 		{
+			checkboxVisible: Config.bool(),
 			compareAvailable: Config.bool(),
 			inCompare: Config.bool()
 		}
@@ -140,8 +175,8 @@ ProductCard.STATE = {
 			Config.number()
 		]
 	),
-	spritemap: Config.string()
-
+	spritemap: Config.string(),
+	wishlistAPI: Config.string()
 };
 
 export {ProductCard};
