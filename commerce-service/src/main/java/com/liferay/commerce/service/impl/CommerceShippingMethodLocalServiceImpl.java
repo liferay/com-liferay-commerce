@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -203,6 +204,36 @@ public class CommerceShippingMethodLocalServiceImpl
 		long groupId, boolean active) {
 
 		return commerceShippingMethodPersistence.findByG_A(groupId, active);
+	}
+
+	@Override
+	public List<CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active) {
+
+		List<CommerceShippingMethod> filteredCommerceShippingMethods =
+			new ArrayList<>();
+
+		List<CommerceShippingMethod> commerceShippingMethods =
+			commerceShippingMethodPersistence.findByG_A(groupId, active);
+
+		for (CommerceShippingMethod commercePaymentMethodGroupRel :
+				commerceShippingMethods) {
+
+			boolean restricted =
+				commerceAddressRestrictionLocalService.
+					isCommerceAddressRestricted(
+						CommerceShippingMethod.class.getName(),
+						commercePaymentMethodGroupRel.
+							getCommerceShippingMethodId(),
+						commerceCountryId);
+
+			if (!restricted) {
+				filteredCommerceShippingMethods.add(
+					commercePaymentMethodGroupRel);
+			}
+		}
+
+		return filteredCommerceShippingMethods;
 	}
 
 	@Override
