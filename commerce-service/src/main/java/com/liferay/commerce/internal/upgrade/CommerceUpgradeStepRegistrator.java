@@ -24,7 +24,7 @@ import com.liferay.commerce.internal.upgrade.v2_0_0.CommercePaymentMethodUpgrade
 import com.liferay.commerce.internal.upgrade.v2_1_0.CPDAvailabilityEstimateUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceSubscriptionEntryUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceWarehouseItemUpgradeProcess;
-import com.liferay.commerce.internal.upgrade.v3_0_0.CommerceSubscriptionCycleEntryUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v3_2_0.WorkflowInstanceLinkUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.EmailAddressLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -98,6 +99,10 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new com.liferay.commerce.internal.upgrade.v3_1_0.
 				CommerceOrderUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_3_1_0, _SCHEMA_VERSION_3_2_0,
+			new WorkflowInstanceLinkUpgradeProcess(_portal));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -118,6 +123,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	private static final String _SCHEMA_VERSION_3_0_0 = "3.0.0";
 
 	private static final String _SCHEMA_VERSION_3_1_0 = "3.1.0";
+
+	private static final String _SCHEMA_VERSION_3_2_0 = "3.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
@@ -140,6 +147,9 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 	@Reference
 	private OrganizationLocalService _organizationLocalService;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private UserLocalService _userLocalService;
