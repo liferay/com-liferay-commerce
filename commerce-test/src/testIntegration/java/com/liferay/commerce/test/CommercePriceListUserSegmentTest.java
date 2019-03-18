@@ -102,7 +102,8 @@ public class CommercePriceListUserSegmentTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test(expected = NoSuchElementException.class)
@@ -192,7 +193,8 @@ public class CommercePriceListUserSegmentTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -237,7 +239,8 @@ public class CommercePriceListUserSegmentTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Rule

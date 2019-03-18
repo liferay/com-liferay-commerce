@@ -176,7 +176,8 @@ public class CommerceAccountResource {
 			return responseBuilder.build();
 		}
 
-		return Response.ok().build();
+		return Response.ok(
+		).build();
 	}
 
 	@GET

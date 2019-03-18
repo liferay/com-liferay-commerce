@@ -102,9 +102,13 @@ public class PriceListResourceTest extends PortalContextProvider {
 		ValidatableResponse resourceValidatableResponse =
 			_getValidatedResourceCollection();
 
-		resourceValidatableResponse.assertThat().body("totalItems", equalTo(1));
+		resourceValidatableResponse.assertThat(
+		).body(
+			"totalItems", equalTo(1)
+		);
 
-		JsonPath jsonPath = resourceValidatableResponse.extract().jsonPath();
+		JsonPath jsonPath = resourceValidatableResponse.extract(
+		).jsonPath();
 
 		long resourceId = _getIdByName(jsonPath, _PRICE_LIST_NAME);
 
@@ -126,7 +130,10 @@ public class PriceListResourceTest extends PortalContextProvider {
 
 		resourceValidatableResponse = _getValidatedResourceCollection();
 
-		resourceValidatableResponse.assertThat().body("totalItems", equalTo(0));
+		resourceValidatableResponse.assertThat(
+		).body(
+			"totalItems", equalTo(0)
+		);
 	}
 
 	@Test
@@ -222,7 +229,8 @@ public class PriceListResourceTest extends PortalContextProvider {
 		ValidatableResponse validatableResponse =
 			_getValidatedResourceCollection();
 
-		return validatableResponse.extract().jsonPath();
+		return validatableResponse.extract(
+		).jsonPath();
 	}
 
 	private JSONObject _getResourceDTO(String name) {

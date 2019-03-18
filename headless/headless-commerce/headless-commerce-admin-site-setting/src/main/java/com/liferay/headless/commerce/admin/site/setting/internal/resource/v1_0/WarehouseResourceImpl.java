@@ -103,6 +103,7 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
 		if (_async.isEnabled()) {
 			new Thread() {
+
 				public void run() {
 
 					// TODO

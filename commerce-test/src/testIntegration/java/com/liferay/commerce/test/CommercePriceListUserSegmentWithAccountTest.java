@@ -154,7 +154,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			commercePriceList3.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -211,7 +212,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			commercePriceList2.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -269,7 +271,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			commercePriceList2.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -341,7 +344,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			commercePriceList3.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -385,7 +389,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -502,7 +507,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Ignore
@@ -617,7 +623,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Test
@@ -667,7 +674,8 @@ public class CommercePriceListUserSegmentWithAccountTest {
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
-			actualCommercePriceList.get().getCommercePriceListId());
+			actualCommercePriceList.get(
+			).getCommercePriceListId());
 	}
 
 	@Rule
