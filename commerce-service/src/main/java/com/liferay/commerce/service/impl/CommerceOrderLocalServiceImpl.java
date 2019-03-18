@@ -1299,10 +1299,9 @@ public class CommerceOrderLocalServiceImpl
 		Map<String, Serializable> workflowContext = new HashMap<>();
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
-			userId, CommerceOrder.class.getName(),
-			commerceOrder.getCommerceOrderId(), commerceOrder, serviceContext,
-			workflowContext);
+			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), userId,
+			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId(),
+			commerceOrder, serviceContext, workflowContext);
 	}
 
 	protected CommerceOrder updateAddress(
