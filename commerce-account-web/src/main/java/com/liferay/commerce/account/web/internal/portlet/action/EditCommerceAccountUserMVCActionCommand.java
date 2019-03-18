@@ -17,6 +17,7 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.account.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.ContactBirthdayException;
 import com.liferay.portal.kernel.exception.ContactNameException;
@@ -33,6 +34,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.PasswordPolicy;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
+import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -63,6 +67,7 @@ import java.util.concurrent.Callable;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletSession;
+import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -100,6 +105,10 @@ public class EditCommerceAccountUserMVCActionCommand
 
 				TransactionInvokerUtil.invoke(_transactionConfig, userCallable);
 			}
+
+			String redirect = getSaveAndContinueRedirect(actionRequest);
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Throwable t) {
 			if (t instanceof NoSuchUserException ||
@@ -147,6 +156,37 @@ public class EditCommerceAccountUserMVCActionCommand
 		_userGroupRoleLocalService.addUserGroupRoles(
 			userId, commerceAccount.getCommerceAccountGroupId(),
 			selectedRoleIds);
+	}
+
+	protected String getSaveAndContinueRedirect(ActionRequest actionRequest)
+		throws Exception {
+
+		PortletURL portletURL = PortletProviderUtil.getPortletURL(
+			actionRequest, CommerceAccount.class.getName(),
+			PortletProvider.Action.VIEW);
+
+		PortletURL managePortletURL = PortletProviderUtil.getPortletURL(
+			actionRequest, CommerceAccount.class.getName(),
+			PortletProvider.Action.MANAGE);
+
+		managePortletURL.setParameter(
+			"mvcRenderCommandName", "viewCommerceAccount");
+
+		managePortletURL.setParameter(
+			"screenNavigationCategoryKey",
+			CommerceAccountScreenNavigationConstants.ENTRY_KEY_ACCOUNT_MEMBERS);
+
+		portletURL.setParameter(
+			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
+			managePortletURL.toString());
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "viewCommerceAccountUser");
+
+		portletURL.setParameter(
+			"userId", ParamUtil.getString(actionRequest, "userId"));
+
+		return portletURL.toString();
 	}
 
 	protected void updatePassword(User user, ActionRequest actionRequest)
