@@ -22,20 +22,19 @@ import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public abstract class BaseAddressCheckoutStepDisplayContext {
 
 	public BaseAddressCheckoutStepDisplayContext(
-			CommerceAddressService commerceAddressService,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse)
-		throws PortalException {
+		CommerceAddressService commerceAddressService,
+		HttpServletRequest httpServletRequest) {
 
 		_commerceAddressService = commerceAddressService;
 
@@ -68,6 +67,21 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 	public abstract String getParamName();
 
 	public abstract String getTitle();
+
+	public boolean isShippingUsedAsBilling() throws PortalException {
+		CommerceAddress shippingAddress = _commerceOrder.getShippingAddress();
+		CommerceAddress billingAddress = _commerceOrder.getBillingAddress();
+
+		if ((shippingAddress != null) && (billingAddress != null) &&
+			Objects.equals(
+				shippingAddress.getCommerceAddressId(),
+				billingAddress.getCommerceAddressId())) {
+
+			return true;
+		}
+
+		return false;
+	}
 
 	private final CommerceAddressService _commerceAddressService;
 	private final CommerceOrder _commerceOrder;

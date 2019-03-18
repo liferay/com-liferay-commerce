@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
+import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -21,7 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Andrea Di Giorgi
@@ -30,12 +30,10 @@ public class BillingAddressCheckoutStepDisplayContext
 	extends BaseAddressCheckoutStepDisplayContext {
 
 	public BillingAddressCheckoutStepDisplayContext(
-			CommerceAddressService commerceAddressService,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse)
-		throws PortalException {
+		CommerceAddressService commerceAddressService,
+		HttpServletRequest httpServletRequest) {
 
-		super(commerceAddressService, httpServletRequest, httpServletResponse);
+		super(commerceAddressService, httpServletRequest);
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class BillingAddressCheckoutStepDisplayContext
 
 	@Override
 	public String getParamName() {
-		return "billingAddressId";
+		return CommerceCheckoutWebKeys.BILLING_ADDRESS_PARAM_NAME;
 	}
 
 	@Override
