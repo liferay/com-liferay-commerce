@@ -16,12 +16,18 @@ package com.liferay.commerce.checkout.web.constants;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CommerceCheckoutWebKeys {
+
+	public static final String BILLING_ADDRESS_PARAM_NAME = "billingAddressId";
 
 	public static final String COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT =
 		"COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT";
 
 	public static final String COMMERCE_ORDER = "COMMERCE_ORDER";
+
+	public static final String SHIPPING_ADDRESS_PARAM_NAME =
+		"shippingAddressId";
 
 }
