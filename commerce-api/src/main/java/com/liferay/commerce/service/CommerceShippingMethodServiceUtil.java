@@ -123,6 +123,14 @@ public class CommerceShippingMethodServiceUtil {
 		return getService().getCommerceShippingMethods(groupId, active);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return getService()
+				   .getCommerceShippingMethods(groupId, commerceCountryId,
+			active);
+	}
+
 	public static int getCommerceShippingMethodsCount(long groupId,
 		boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {

@@ -123,6 +123,14 @@ public class CommerceShippingMethodServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return _commerceShippingMethodService.getCommerceShippingMethods(groupId,
+			commerceCountryId, active);
+	}
+
+	@Override
 	public int getCommerceShippingMethodsCount(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceShippingMethodService.getCommerceShippingMethodsCount(groupId,

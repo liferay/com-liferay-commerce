@@ -248,6 +248,10 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	public List<CommerceShippingMethod> getCommerceShippingMethods(
 		long groupId, boolean active);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active);
+
 	/**
 	* Returns the number of commerce shipping methods.
 	*

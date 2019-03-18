@@ -419,13 +419,47 @@ public class CommerceShippingMethodServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
+		HttpPrincipal httpPrincipal, long groupId, long commerceCountryId,
+		boolean active)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
+					"getCommerceShippingMethods",
+					_getCommerceShippingMethodsParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					commerceCountryId, active);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
+					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.model.CommerceShippingMethod>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getCommerceShippingMethodsCount(
 		HttpPrincipal httpPrincipal, long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
 					"getCommerceShippingMethodsCount",
-					_getCommerceShippingMethodsCountParameterTypes11);
+					_getCommerceShippingMethodsCountParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					active);
@@ -458,7 +492,7 @@ public class CommerceShippingMethodServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
-					"setActive", _setActiveParameterTypes12);
+					"setActive", _setActiveParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceShippingMethodId, active);
@@ -494,7 +528,7 @@ public class CommerceShippingMethodServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
 					"updateCommerceShippingMethod",
-					_updateCommerceShippingMethodParameterTypes13);
+					_updateCommerceShippingMethodParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceShippingMethodId, nameMap, descriptionMap,
@@ -558,12 +592,15 @@ public class CommerceShippingMethodServiceHttp {
 	private static final Class<?>[] _getCommerceShippingMethodsParameterTypes10 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _getCommerceShippingMethodsCountParameterTypes11 =
+	private static final Class<?>[] _getCommerceShippingMethodsParameterTypes11 = new Class[] {
+			long.class, long.class, boolean.class
+		};
+	private static final Class<?>[] _getCommerceShippingMethodsCountParameterTypes12 =
 		new Class[] { long.class, boolean.class };
-	private static final Class<?>[] _setActiveParameterTypes12 = new Class[] {
+	private static final Class<?>[] _setActiveParameterTypes13 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updateCommerceShippingMethodParameterTypes13 =
+	private static final Class<?>[] _updateCommerceShippingMethodParameterTypes14 =
 		new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class,
 			java.io.File.class, double.class, boolean.class

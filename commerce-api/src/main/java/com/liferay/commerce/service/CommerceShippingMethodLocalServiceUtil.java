@@ -279,6 +279,13 @@ public class CommerceShippingMethodLocalServiceUtil {
 		return getService().getCommerceShippingMethods(groupId, active);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active) {
+		return getService()
+				   .getCommerceShippingMethods(groupId, commerceCountryId,
+			active);
+	}
+
 	/**
 	* Returns the number of commerce shipping methods.
 	*

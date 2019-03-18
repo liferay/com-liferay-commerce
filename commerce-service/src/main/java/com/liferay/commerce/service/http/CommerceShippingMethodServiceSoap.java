@@ -212,6 +212,23 @@ public class CommerceShippingMethodServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceShippingMethodSoap[] getCommerceShippingMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceShippingMethod> returnValue =
+				CommerceShippingMethodServiceUtil.getCommerceShippingMethods(groupId,
+					commerceCountryId, active);
+
+			return com.liferay.commerce.model.CommerceShippingMethodSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceShippingMethodsCount(long groupId,
 		boolean active) throws RemoteException {
 		try {
