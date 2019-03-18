@@ -72,6 +72,10 @@ Liferay.on(
 		let lastKnownScrollPosition = 0;
 		let lastKnownScrollOffset = 0;
 		let ticking = false;
+		var myMap = new Map();
+		myMap.set(-1, 'up');
+		myMap.set(1, 'down');
+
 		const miniumWrapper = document.getElementById("minium");
 		window.addEventListener("scroll", function() {
 			const offset = window.scrollY - lastKnownScrollPosition;
@@ -80,12 +84,14 @@ Liferay.on(
 				Math.sign(offset) === Math.sign(lastKnownScrollOffset)
 					? lastKnownScrollOffset + offset
 					: offset;
-	
+
 			if (!ticking) {
 				window.requestAnimationFrame(() => {
 					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-						miniumWrapper.classList.add(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "down" : "up"}`);
-						miniumWrapper.classList.remove(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "up" : "down"}`);
+						miniumWrapper.classList.add(`is-scrolling-${myMap.get(Math.sign(lastKnownScrollOffset))}`);
+						miniumWrapper.classList.remove(`is-scrolling-${myMap.get(-1 * Math.sign(lastKnownScrollOffset))}`);
+						// miniumWrapper.classList.add(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "down" : "up"}`);
+						// miniumWrapper.classList.remove(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "up" : "down"}`);
 					}
 					ticking = false;
 				});
