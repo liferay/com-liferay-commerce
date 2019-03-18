@@ -3,6 +3,9 @@
 {template .render}
 
 	{@param? accountId: number|string}
+	{@param? addedToWishlist: bool}
+	{@param? addToCartButtonVisible: bool}
+	{@param? addToWishlistButtonVisible: bool}
 	{@param? productId: number|string}
 	{@param? orderId: number|string}
 	{@param? availability: string}
@@ -26,10 +29,10 @@
 	{@param prices: ? }
 	{@param? _handleRemoveProduct: any}
 	{@param? _handleCheckboxCompareUpdate: any}
+	{@param? _handleWishListButtonClick: any}
 
 	<div class="minium-card" data-href="{$detailsLink}" data-onkeypress="_handleCardKeypress" tabindex="0">
 		{let $availabilityDotClasses kind="text"}
-
 			{switch $availability}
 				{case 'inStock'}
 					good
@@ -40,23 +43,7 @@
 			{/switch}
 		{/let}
 
-		{if isNonnull($compareState) and isNonnull($productId) and isNonnull($pictureUrl)}
-			<div class="minium-card__compare">
-				{call CompareCheckbox.render}
-					{param events: [
-						'checkboxCompareUpdated': $_handleCheckboxCompareUpdate
-					]/}
-					{param productId: $productId /}
-					{param checkboxVisible: true /}
-					{param compareAvailable: $compareState.compareAvailable /}
-					{param inCompare: $compareState.inCompare /}
-					{param labelVisible: false /}
-					{param pictureUrl: $pictureUrl /}
-				{/call}
-			</div>
-		{/if}
-
-		{if isNonnull($deleteButtonVisible) and $deleteButtonVisible == true and isNonnull($spritemap)}
+		{if $deleteButtonVisible and isNonnull($spritemap)}
 			<span
 				class="minium-card__delete"
 				data-onclick={$_handleRemoveProduct}
@@ -66,6 +53,40 @@
 					{param symbol: 'close' /}
 				{/call}
 			</span>
+		{else}
+			{if isNonnull($compareState) and isNonnull($productId) and isNonnull($pictureUrl)}
+				<div class="minium-card__compare">
+					{call CompareCheckbox.render}
+						{param events: [
+							'checkboxCompareUpdated': $_handleCheckboxCompareUpdate
+						]/}
+						{param productId: $productId /}
+						{param checkboxVisible: true /}
+						{param compareAvailable: $compareState.compareAvailable /}
+						{param inCompare: $compareState.inCompare /}
+						{param labelVisible: false /}
+						{param pictureUrl: $pictureUrl /}
+					{/call}
+				</div>
+			{/if}
+		{/if}
+
+		{if $addToWishlistButtonVisible and $sku and $skuId }
+			{let $addToWishlistClasses kind="text"}
+				minium-card__add-to-wishlist-button
+				{if $addedToWishlist}
+					{sp}minium-card__add-to-wishlist-button--added
+				{/if}
+			{/let}
+			<button 
+				data-onclick="{$_handleWishListButtonClick}"
+				class="{$addToWishlistClasses}"
+			>
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'favorites' /}
+				{/call}
+			</button>
 		{/if}
 
 		{if isNonnull($pictureUrl)}
@@ -108,21 +129,21 @@
 		{/if}
 
 		<p class="minium-card__description">
-			{if isNonnull($description)}
+			{if isNonnull($description) and $description != ''}
 				{$description}
 			{/if}
 		</p>
 
-		<div class="minium-card__price">
-			{if isNonnull($prices) and isNonnull($prices)}
+		{if isNonnull($prices) and isNonnull($prices)}
+			<div class="minium-card__price">
 				{call Price.render}
 					{param prices: $prices /}
 					{param additionalPriceClasses: 'price__value--big' /}
 					{param additionalDiscountClasses: 'price__value--big' /}
 					{param additionalPromoPriceClasses: 'price__value--big' /}
 				{/call}
-			{/if}
-		</div>
+			</div>
+		{/if}
 
 		<div class="minium-card__actions">
 			{if isNonnull($sku) and  isNonnull($skuId)}
