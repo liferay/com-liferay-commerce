@@ -166,7 +166,6 @@ public class MiniumCPContentListEntryRenderer
 			"cartAPI",
 			_portal.getPortalURL(httpServletRequest) +
 				"/o/commerce-ui/cart-item");
-		context.put("categories", null);
 		context.put("description", cpCatalogEntry.getShortDescription());
 		context.put(
 			"detailsLink",
@@ -174,6 +173,11 @@ public class MiniumCPContentListEntryRenderer
 		context.put("name", cpCatalogEntry.getName());
 		context.put("pictureUrl", cpCatalogEntry.getDefaultImageFileUrl());
 		context.put("productId", cpCatalogEntry.getCPDefinitionId());
+		context.put("categories", null);
+		context.put("addedToWishlist", false);
+		context.put("addToCartButtonVisible", true);
+		context.put("addToWishlistButtonVisible", false);
+		context.put("wishlistAPI", null);
 
 		if (cpSku != null) {
 			context.put("sku", cpSku.getSku());
