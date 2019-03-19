@@ -55,6 +55,16 @@
 
 			<div class="commerce-modal__content">
 
+				{call CommerceSelectDropdown.render}
+					{param formId: 'filter' /}
+					{param selectName: 'brand' /}
+					{param data: null /}
+					{param label: 'Brand' /}
+					{param spritemap: $spritemap /}
+					{param multiSelect: true /}
+					{param value: null /}
+				{/call}
+
 				<label class="commerce-modal__label">
 					{msg desc="Account name"}account-name{/msg}
 				</label>

@@ -1,0 +1,164 @@
+{namespace CommerceSelectDropdown}
+
+{template .render}
+	{@param? formId: string}
+	{@param selectName: string}
+	{@param? data: ?}
+	{@param? label: string}
+	{@param spritemap: string}
+	{@param? multiSelect: bool}
+	{@param? value: ?}
+
+	{let $inputId kind="text"}
+		{if isNonnull($formId)}
+			{$formId}-{$selectName}
+		{else}
+			{$selectName}
+		{/if}
+	{/let}
+
+	<div
+		class="commerce-select"
+	>
+		{if isNonnull($label)}
+			<label
+				for="{$inputId}"
+				class="commerce-modal__label"
+			>
+				{$label}
+			</label>
+		{/if}
+
+		<div class="commerce-select__values-wrapper">
+			{if $multiSelect and isNonnull($value)}
+				{call .addedValues}
+					{param values: $value /}
+					{param spritemap: $spritemap /}
+				{/call}
+			{/if}
+			<input 
+				id="{$inputId}"
+				class="commerce-select__input-box"
+				type="text"
+				data-keyup="_handleInputKeyup"
+			/>
+			<div class="commerce-select__icon-wrapper">
+				<div class="commerce-select__icon commerce-select__icon--search">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'search' /}
+					{/call}
+				</div>
+				<div class="commerce-select__icon commerce-select__icon--chevron">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'chevron' /}
+					{/call}
+				</div>
+			</div>
+		</div>
+
+		{if isNonnull($data)}
+			{let $dropdownVariant: $multiSelect == true ? 'multiselect' : null /}
+
+			{delcall CommerceSelect.Dropdown variant="$dropdownVariant"}
+				{param data: $data /}
+				{param selectName: $selectName /}
+				{param selectedValue: $value /}
+			{/delcall}
+		{/if}
+	</div>
+{/template}
+
+{template .addedValues}
+	{@param values: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param spritemap: string}
+
+	<div class="container">
+		{foreach $selectedElement in $values}
+			<span>
+				{$selectedElement.label}
+				<button 
+					type="button" 
+					data-onclick="_handleDeleteElement"
+					data-value="{$selectedElement.value}"
+				>
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'close' /}
+					{/call}
+				</button>
+			</span>
+		{/foreach}
+	</div>
+{/template}
+
+{deltemplate CommerceSelect.Dropdown variant="'multiselect'"}
+	{@param data: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param? selectedValue: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param selectName: string}
+
+	<div class="commerce-select__dropdown">
+		{foreach $option in $data}
+			{let $inputId kind="text"}
+				{$selectName}-{$option.value}
+			{/let}
+			<label
+				class="commerce-select__option"
+				for="{$inputId}"
+			>
+				<input
+					id="{$inputId}"
+					type="checkbox"
+					data-onchange="_handleSelectData"
+					data-value="{$option.value}"
+					{if isNonnull($selectedValue)}
+						{foreach $currentSelected in $selectedValue}
+							{if $currentSelected.value == $option.value}
+								checked
+							{/if}
+						{/foreach}
+					{/if}
+				/>
+				{$option.label}
+			</label>
+		{/foreach}
+	</div>
+{/deltemplate}
+
+{deltemplate CommerceSelect.Dropdown}
+	{@param data: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param? selectedValue: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param selectName: string}
+
+	<ul class="commerce-select__dropdown">
+		{foreach $option in $data}
+			{let $inputId kind="text"}
+				{$selectName}-{$option.value}
+			{/let}
+			<li 
+				id="{$inputId}" 
+				class="commerce-select__option" 
+				data-value="{$option.value}" 
+				data-onclick="_handleSelectData"
+			>
+				{$option.label}
+			</li>
+		{/foreach}
+	</ul>
+{/deltemplate}
