@@ -98,14 +98,11 @@ public class CommerceAccountUserClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long commerceAccountId = ParamUtil.getLong(
-			httpServletRequest, "commerceAccountId");
-
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
 		if (_accountModelResourcePermission.contains(
-				permissionChecker, commerceAccountId,
+				permissionChecker, member.getAccountId(),
 				CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 			String viewURL = _getAccountUserViewDetailURL(
