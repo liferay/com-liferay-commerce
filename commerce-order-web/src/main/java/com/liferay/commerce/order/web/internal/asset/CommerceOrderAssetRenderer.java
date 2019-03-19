@@ -110,7 +110,7 @@ public class CommerceOrderAssetRenderer
 			PortletProvider.Action.VIEW);
 
 		portletURL.setParameter(
-			"mvcRenderCommandName", "viewCommerceOrderDetail");
+			"mvcRenderCommandName", "viewCommerceOrderDetails");
 		portletURL.setParameter(
 			"commerceOrderId",
 			String.valueOf(_commerceOrder.getCommerceOrderId()));
