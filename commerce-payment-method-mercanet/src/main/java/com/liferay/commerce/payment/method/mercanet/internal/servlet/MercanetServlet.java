@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUti
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -138,7 +139,7 @@ public class MercanetServlet extends HttpServlet {
 				if (!Objects.equals(parameterMap.get("responseCode"), "00")) {
 					String orderId = parameterMap.get("orderId");
 
-					Long commerceOrderId = Long.parseLong(orderId);
+					long commerceOrderId = GetterUtil.getLong(orderId);
 
 					String transactionReference = parameterMap.get(
 						"transactionReference");
@@ -186,16 +187,16 @@ public class MercanetServlet extends HttpServlet {
 				PaypageResponse paypageResponse = paypageClient.decodeResponse(
 					verifyMap);
 
-				ResponseData responseData = paypageResponse.getData();
-
-				ResponseCode responseCode = responseData.getResponseCode();
-
 				StringBundler transactionReferenceSB = new StringBundler(3);
 
 				transactionReferenceSB.append(commerceOrder.getCompanyId());
 				transactionReferenceSB.append(commerceOrder.getGroupId());
 				transactionReferenceSB.append(
 					commerceOrder.getCommerceOrderId());
+
+				ResponseData responseData = paypageResponse.getData();
+
+				ResponseCode responseCode = responseData.getResponseCode();
 
 				if (Objects.equals(responseCode.getCode(), "00") &&
 					Objects.equals(
