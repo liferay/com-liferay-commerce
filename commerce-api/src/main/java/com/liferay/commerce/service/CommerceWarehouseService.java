@@ -96,8 +96,22 @@ public interface CommerceWarehouseService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
+		int start, int end,
+		OrderByComparator<CommerceWarehouse> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWarehousesCount(long groupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWarehousesCount(long groupId, boolean active)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

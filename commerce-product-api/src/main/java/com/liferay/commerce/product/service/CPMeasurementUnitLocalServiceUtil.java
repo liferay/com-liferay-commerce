@@ -273,6 +273,13 @@ public class CPMeasurementUnitLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
+		return getService()
+				   .getCPMeasurementUnits(groupId, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
 		long groupId, String[] keys, int type) {
 		return getService().getCPMeasurementUnits(groupId, keys, type);
 	}

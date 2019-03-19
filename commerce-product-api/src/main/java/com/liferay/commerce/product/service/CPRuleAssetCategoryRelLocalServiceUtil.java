@@ -246,6 +246,11 @@ public class CPRuleAssetCategoryRelLocalServiceUtil {
 		return getService().getCPRuleAssetCategoryRels(cpRuleId);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end) {
+		return getService().getCPRuleAssetCategoryRels(cpRuleId, start, end);
+	}
+
 	/**
 	* Returns the number of cp rule asset category rels.
 	*
@@ -253,6 +258,10 @@ public class CPRuleAssetCategoryRelLocalServiceUtil {
 	*/
 	public static int getCPRuleAssetCategoryRelsCount() {
 		return getService().getCPRuleAssetCategoryRelsCount();
+	}
+
+	public static int getCPRuleAssetCategoryRelsCount(long cpRuleId) {
+		return getService().getCPRuleAssetCategoryRelsCount(cpRuleId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

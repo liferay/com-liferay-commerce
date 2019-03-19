@@ -55,4 +55,6 @@ public interface CommerceUserSegmentEntry extends CommerceUserSegmentEntryModel,
 				return CommerceUserSegmentEntry.class;
 			}
 		};
+
+	public java.util.List<CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria();
 }

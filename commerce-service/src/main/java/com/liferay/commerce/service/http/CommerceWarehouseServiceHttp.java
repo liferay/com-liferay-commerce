@@ -326,6 +326,40 @@ public class CommerceWarehouseServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
+		HttpPrincipal httpPrincipal, long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
+					"getCommerceWarehouses",
+					_getCommerceWarehousesParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.model.CommerceWarehouse>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		HttpPrincipal httpPrincipal, long groupId, long commerceCountryId,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
@@ -333,7 +367,7 @@ public class CommerceWarehouseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
 					"getCommerceWarehouses",
-					_getCommerceWarehousesParameterTypes8);
+					_getCommerceWarehousesParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					commerceCountryId, start, end, orderByComparator);
@@ -361,12 +395,77 @@ public class CommerceWarehouseServiceHttp {
 	}
 
 	public static int getCommerceWarehousesCount(HttpPrincipal httpPrincipal,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
+					"getCommerceWarehousesCount",
+					_getCommerceWarehousesCountParameterTypes10);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCommerceWarehousesCount(HttpPrincipal httpPrincipal,
+		long groupId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
+					"getCommerceWarehousesCount",
+					_getCommerceWarehousesCountParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					active);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCommerceWarehousesCount(HttpPrincipal httpPrincipal,
 		long groupId, boolean active, long commerceCountryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
 					"getCommerceWarehousesCount",
-					_getCommerceWarehousesCountParameterTypes9);
+					_getCommerceWarehousesCountParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					active, commerceCountryId);
@@ -399,7 +498,7 @@ public class CommerceWarehouseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
 					"getCommerceWarehousesCount",
-					_getCommerceWarehousesCountParameterTypes10);
+					_getCommerceWarehousesCountParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					commerceCountryId);
@@ -433,7 +532,7 @@ public class CommerceWarehouseServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
-					"search", _searchParameterTypes11);
+					"search", _searchParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					keywords, all, commerceCountryId, start, end,
@@ -466,7 +565,7 @@ public class CommerceWarehouseServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
-					"searchCount", _searchCountParameterTypes12);
+					"searchCount", _searchCountParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					keywords, active, commerceCountryId);
@@ -498,7 +597,7 @@ public class CommerceWarehouseServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
-					"setActive", _setActiveParameterTypes13);
+					"setActive", _setActiveParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceWarehouseId, active);
@@ -535,7 +634,7 @@ public class CommerceWarehouseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
 					"updateCommerceWarehouse",
-					_updateCommerceWarehouseParameterTypes14);
+					_updateCommerceWarehouseParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceWarehouseId, name, description, active, street1,
@@ -574,7 +673,7 @@ public class CommerceWarehouseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceWarehouseServiceUtil.class,
 					"updateDefaultCommerceWarehouse",
-					_updateDefaultCommerceWarehouseParameterTypes15);
+					_updateDefaultCommerceWarehouseParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					street1, street2, street3, city, zip, commerceRegionId,
@@ -633,32 +732,42 @@ public class CommerceWarehouseServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCommerceWarehousesParameterTypes8 = new Class[] {
+			long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCommerceWarehousesParameterTypes9 = new Class[] {
 			long.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes9 = new Class[] {
+	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes10 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes11 = new Class[] {
+			long.class, boolean.class
+		};
+	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes12 = new Class[] {
 			long.class, boolean.class, long.class
 		};
-	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes10 = new Class[] {
+	private static final Class<?>[] _getCommerceWarehousesCountParameterTypes13 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _searchParameterTypes11 = new Class[] {
+	private static final Class<?>[] _searchParameterTypes14 = new Class[] {
 			long.class, String.class, boolean.class, long.class, int.class,
 			int.class, com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _searchCountParameterTypes12 = new Class[] {
+	private static final Class<?>[] _searchCountParameterTypes15 = new Class[] {
 			long.class, String.class, Boolean.class, long.class
 		};
-	private static final Class<?>[] _setActiveParameterTypes13 = new Class[] {
+	private static final Class<?>[] _setActiveParameterTypes16 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updateCommerceWarehouseParameterTypes14 = new Class[] {
+	private static final Class<?>[] _updateCommerceWarehouseParameterTypes17 = new Class[] {
 			long.class, String.class, String.class, boolean.class, String.class,
 			String.class, String.class, String.class, String.class, long.class,
 			long.class, double.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateDefaultCommerceWarehouseParameterTypes15 =
+	private static final Class<?>[] _updateDefaultCommerceWarehouseParameterTypes18 =
 		new Class[] {
 			String.class, String.class, String.class, String.class, String.class,
 			String.class, long.class, long.class, double.class, double.class,

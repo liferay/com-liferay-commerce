@@ -219,13 +219,79 @@ public class CPMeasurementUnitServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
+		HttpPrincipal httpPrincipal, long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPMeasurementUnitServiceUtil.class,
+					"getCPMeasurementUnits",
+					_getCPMeasurementUnitsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCPMeasurementUnitsCount(HttpPrincipal httpPrincipal,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPMeasurementUnitServiceUtil.class,
+					"getCPMeasurementUnitsCount",
+					_getCPMeasurementUnitsCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getCPMeasurementUnitsCount(HttpPrincipal httpPrincipal,
 		long groupId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPMeasurementUnitServiceUtil.class,
 					"getCPMeasurementUnitsCount",
-					_getCPMeasurementUnitsCountParameterTypes5);
+					_getCPMeasurementUnitsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					type);
@@ -257,7 +323,7 @@ public class CPMeasurementUnitServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPMeasurementUnitServiceUtil.class,
-					"setPrimary", _setPrimaryParameterTypes6);
+					"setPrimary", _setPrimaryParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpMeasurementUnitId, primary);
@@ -293,7 +359,7 @@ public class CPMeasurementUnitServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPMeasurementUnitServiceUtil.class,
 					"updateCPMeasurementUnit",
-					_updateCPMeasurementUnitParameterTypes7);
+					_updateCPMeasurementUnitParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpMeasurementUnitId, nameMap, key, rate, primary, priority,
@@ -339,13 +405,20 @@ public class CPMeasurementUnitServiceHttp {
 			long.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCPMeasurementUnitsCountParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getCPMeasurementUnitsParameterTypes5 = new Class[] {
+			long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCPMeasurementUnitsCountParameterTypes6 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCPMeasurementUnitsCountParameterTypes7 = new Class[] {
 			long.class, int.class
 		};
-	private static final Class<?>[] _setPrimaryParameterTypes6 = new Class[] {
+	private static final Class<?>[] _setPrimaryParameterTypes8 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updateCPMeasurementUnitParameterTypes7 = new Class[] {
+	private static final Class<?>[] _updateCPMeasurementUnitParameterTypes9 = new Class[] {
 			long.class, java.util.Map.class, String.class, double.class,
 			boolean.class, double.class, int.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

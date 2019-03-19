@@ -177,6 +177,11 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 		return _commerceUserSegmentEntry.getAvailableLanguageIds();
 	}
 
+	@Override
+	public java.util.List<CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria() {
+		return _commerceUserSegmentEntry.getCommerceUserSegmentCriteria();
+	}
+
 	/**
 	* Returns the commerce user segment entry ID of this commerce user segment entry.
 	*

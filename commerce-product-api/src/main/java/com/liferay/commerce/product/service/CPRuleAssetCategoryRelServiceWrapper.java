@@ -62,6 +62,20 @@ public class CPRuleAssetCategoryRelServiceWrapper
 		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(cpRuleId);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
+		long cpRuleId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(cpRuleId,
+			start, end);
+	}
+
+	@Override
+	public int getCPRuleAssetCategoryRelsCount(long cpRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRelsCount(cpRuleId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

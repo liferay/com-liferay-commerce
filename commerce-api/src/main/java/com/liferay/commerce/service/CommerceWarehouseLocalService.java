@@ -242,6 +242,11 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
+		int start, int end,
+		OrderByComparator<CommerceWarehouse> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator);
 
@@ -252,6 +257,12 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehousesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWarehousesCount(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWarehousesCount(long groupId, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehousesCount(long groupId, boolean active,
