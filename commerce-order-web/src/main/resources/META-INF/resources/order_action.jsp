@@ -44,7 +44,7 @@ CommerceOrder commerceOrder = (CommerceOrder)row.getObject();
 		</c:when>
 		<c:otherwise>
 			<portlet:renderURL var="viewCommerceOrderDetailURL">
-				<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderDetail" />
+				<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderDetails" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 			</portlet:renderURL>
