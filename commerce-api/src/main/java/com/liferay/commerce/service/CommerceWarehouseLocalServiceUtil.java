@@ -274,6 +274,13 @@ public class CommerceWarehouseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator) {
+		return getService()
+				   .getCommerceWarehouses(groupId, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long groupId, long commerceCountryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator) {
 		return getService()
@@ -288,6 +295,14 @@ public class CommerceWarehouseLocalServiceUtil {
 	*/
 	public static int getCommerceWarehousesCount() {
 		return getService().getCommerceWarehousesCount();
+	}
+
+	public static int getCommerceWarehousesCount(long groupId) {
+		return getService().getCommerceWarehousesCount(groupId);
+	}
+
+	public static int getCommerceWarehousesCount(long groupId, boolean active) {
+		return getService().getCommerceWarehousesCount(groupId, active);
 	}
 
 	public static int getCommerceWarehousesCount(long groupId, boolean active,

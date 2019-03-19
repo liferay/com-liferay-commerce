@@ -105,11 +105,33 @@ public class CommerceWarehouseServiceWrapper implements CommerceWarehouseService
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseService.getCommerceWarehouses(groupId, start,
+			end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long groupId, long commerceCountryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseService.getCommerceWarehouses(groupId,
 			commerceCountryId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseService.getCommerceWarehousesCount(groupId);
+	}
+
+	@Override
+	public int getCommerceWarehousesCount(long groupId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseService.getCommerceWarehousesCount(groupId,
+			active);
 	}
 
 	@Override

@@ -55,4 +55,7 @@ public interface CPRuleAssetCategoryRel extends CPRuleAssetCategoryRelModel,
 				return CPRuleAssetCategoryRel.class;
 			}
 		};
+
+	public com.liferay.asset.kernel.model.AssetCategory getAssetCategory()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

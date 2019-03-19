@@ -140,6 +140,12 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 		return _cpRuleAssetCategoryRel.compareTo(cpRuleAssetCategoryRel);
 	}
 
+	@Override
+	public com.liferay.asset.kernel.model.AssetCategory getAssetCategory()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleAssetCategoryRel.getAssetCategory();
+	}
+
 	/**
 	* Returns the asset category ID of this cp rule asset category rel.
 	*

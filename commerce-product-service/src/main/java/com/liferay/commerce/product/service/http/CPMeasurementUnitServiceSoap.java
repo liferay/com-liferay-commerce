@@ -149,6 +149,38 @@ public class CPMeasurementUnitServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPMeasurementUnitSoap[] getCPMeasurementUnits(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> returnValue =
+				CPMeasurementUnitServiceUtil.getCPMeasurementUnits(groupId,
+					start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPMeasurementUnitSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCPMeasurementUnitsCount(long groupId)
+		throws RemoteException {
+		try {
+			int returnValue = CPMeasurementUnitServiceUtil.getCPMeasurementUnitsCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCPMeasurementUnitsCount(long groupId, int type)
 		throws RemoteException {
 		try {
