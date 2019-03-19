@@ -230,15 +230,14 @@ public class CommerceDiscountServiceHttp {
 	}
 
 	public static int getCommerceDiscountsCount(HttpPrincipal httpPrincipal,
-		long groupId, String couponCode)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceDiscountServiceUtil.class,
 					"getCommerceDiscountsCount",
 					_getCommerceDiscountsCountParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					couponCode);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
 
@@ -263,14 +262,15 @@ public class CommerceDiscountServiceHttp {
 	}
 
 	public static int getCommerceDiscountsCount(HttpPrincipal httpPrincipal,
-		long groupId)
+		long groupId, String couponCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceDiscountServiceUtil.class,
 					"getCommerceDiscountsCount",
 					_getCommerceDiscountsCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					couponCode);
 
 			Object returnObj = null;
 
@@ -403,10 +403,10 @@ public class CommerceDiscountServiceHttp {
 			long.class, String.class
 		};
 	private static final Class<?>[] _getCommerceDiscountsCountParameterTypes5 = new Class[] {
-			long.class, String.class
+			long.class
 		};
 	private static final Class<?>[] _getCommerceDiscountsCountParameterTypes6 = new Class[] {
-			long.class
+			long.class, String.class
 		};
 	private static final Class<?>[] _searchCommerceDiscountsParameterTypes7 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class,

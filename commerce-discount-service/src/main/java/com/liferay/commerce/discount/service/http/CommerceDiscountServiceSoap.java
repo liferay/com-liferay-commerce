@@ -156,11 +156,10 @@ public class CommerceDiscountServiceSoap {
 		}
 	}
 
-	public static int getCommerceDiscountsCount(long groupId, String couponCode)
+	public static int getCommerceDiscountsCount(long groupId)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId,
-					couponCode);
+			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId);
 
 			return returnValue;
 		}
@@ -171,10 +170,11 @@ public class CommerceDiscountServiceSoap {
 		}
 	}
 
-	public static int getCommerceDiscountsCount(long groupId)
+	public static int getCommerceDiscountsCount(long groupId, String couponCode)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId);
+			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId,
+					couponCode);
 
 			return returnValue;
 		}
