@@ -25,7 +25,13 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.ResourceConstants;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -155,6 +161,15 @@ public class AssetCategoriesImporter {
 				serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		}
 
+		Role siteMemberRole = _roleLocalService.getRole(
+			serviceContext.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+		_resourcePermissionLocalService.setResourcePermissions(
+			serviceContext.getCompanyId(), AssetCategory.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			String.valueOf(assetCategory.getCategoryId()),
+			siteMemberRole.getRoleId(), new String[] {ActionKeys.VIEW});
+
 		return assetCategory;
 	}
 
@@ -171,6 +186,15 @@ public class AssetCategoriesImporter {
 				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
 				name, serviceContext);
 		}
+
+		Role siteMemberRole = _roleLocalService.getRole(
+			serviceContext.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+		_resourcePermissionLocalService.setResourcePermissions(
+			serviceContext.getCompanyId(), AssetVocabulary.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			String.valueOf(assetVocabulary.getVocabularyId()),
+			siteMemberRole.getRoleId(), new String[] {ActionKeys.VIEW});
 
 		return assetVocabulary;
 	}
@@ -212,6 +236,12 @@ public class AssetCategoriesImporter {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private ResourcePermissionLocalService _resourcePermissionLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
