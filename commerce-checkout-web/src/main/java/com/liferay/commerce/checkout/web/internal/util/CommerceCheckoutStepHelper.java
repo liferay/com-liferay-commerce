@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -101,10 +102,15 @@ public class CommerceCheckoutStepHelper {
 			CommercePaymentMethod commercePaymentMethod =
 				commercePaymentMethods.get(0);
 
-			commerceOrder =
-				_commerceOrderService.updateCommercePaymentMethodKey(
-					commerceOrder.getCommerceOrderId(),
-					commercePaymentMethod.getKey());
+			if (!Objects.equals(
+					commerceOrder.getCommercePaymentMethodKey(),
+					commercePaymentMethod.getKey())) {
+
+				commerceOrder =
+					_commerceOrderService.updateCommercePaymentMethodKey(
+						commerceOrder.getCommerceOrderId(),
+						commercePaymentMethod.getKey());
+			}
 
 			httpServletRequest.setAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
