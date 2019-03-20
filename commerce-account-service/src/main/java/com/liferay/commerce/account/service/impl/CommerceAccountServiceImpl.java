@@ -197,6 +197,11 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
 				accountType = CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL;
 			}
+			else if (commerceSiteType ==
+						CommerceAccountConstants.SITE_TYPE_B2C_B2B) {
+
+				accountType = -1;
+			}
 
 			return commerceAccountLocalService.searchCommerceAccounts(
 				user.getCompanyId(), parentCommerceAccountId, keywords,
@@ -228,6 +233,11 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
 				accountType = CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL;
+			}
+			else if (commerceSiteType ==
+						CommerceAccountConstants.SITE_TYPE_B2C_B2B) {
+
+				accountType = -1;
 			}
 
 			return commerceAccountLocalService.searchCommerceAccountsCount(
