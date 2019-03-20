@@ -35,7 +35,7 @@
 	}
 
 	&__thumbnail {
-		background-position: 50%;
+		background-position: 50% 50%;
 		background-size: cover;
 		border-radius: $minium-small-gutter;
 		display: block;
@@ -90,11 +90,13 @@
 		}
 
 		svg {
-			height: 22px;
+			display: block;
+			height: 24px;
 			left: -3px;
-			position: relative;
-			top: 0;
-			width: 22px;
+			margin: 0;
+			position: absolute;
+			top: -3px;
+			width: 24px;
 		}
 
 		path {

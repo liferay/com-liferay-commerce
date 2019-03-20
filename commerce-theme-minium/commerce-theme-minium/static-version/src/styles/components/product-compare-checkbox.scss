@@ -1,11 +1,46 @@
 .product-compare-checkbox {
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: -10px;
+	margin-top: -10px;
+	min-height: 35px;
+	min-width: 35px;
+	padding: 10px;
+	position: relative;
+	transition: background $micro-transition;
+	
 	&__input {
-		margin-right: 10px
-	}
+		position: relative;
+	
+		.minium-card &::before {
+			background-color: rgba(157, 158, 158, 0.5);
+			content: '';
+			border-radius: 50%;
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			transition: all $micro-transition;
+			transform: scale(0);
+			z-index: -1;
+		}
 
+		.minium-card &:checked::before {
+			background-color: $color-theme;
+		}
+	
+		.minium-card &:hover {
+			&::before {
+				transform: scale(3);
+			}
+		}
+	}
+	
 	&__label {
 		color: inherit;
 		font-size: 14px;
 		font-weight: normal;
+		margin-left: 10px;
 	}
 }

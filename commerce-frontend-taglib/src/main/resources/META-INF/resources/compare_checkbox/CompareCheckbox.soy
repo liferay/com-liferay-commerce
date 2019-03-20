@@ -25,21 +25,18 @@
 		{/if}
 	{/let}
 
-	<div class="product-compare-checkbox">
+	<label class="product-compare-checkbox">
 		{if isNonnull($checkboxVisible) and $checkboxVisible == true }
 			<input
 				{$compareAttributes}
 				data-onchange="{$_handleCompareCheckbox}"
 			/>
 			{if isNonnull($labelVisible) and $labelVisible == true}
-				<label
-					class="product-compare-checkbox__label"
-					for="{$checkboxId}"
-				>
+				<span class="product-compare-checkbox__label">
 					{msg desc="Compare"}compare{/msg}
-				</label>
+				</span>
 			{/if}
 		{/if}
-	</div>
+	</label>
 
 {/template}
