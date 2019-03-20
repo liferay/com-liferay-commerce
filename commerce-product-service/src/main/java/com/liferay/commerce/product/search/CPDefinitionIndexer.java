@@ -17,8 +17,10 @@ package com.liferay.commerce.product.search;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
+import com.liferay.commerce.product.configuration.CPRuleGroupServiceConfiguration;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -41,6 +43,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -57,6 +60,7 @@ import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -275,13 +279,44 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				Field.ENTRY_CLASS_PK, "-1", BooleanClauseOccur.MUST);
 		}
 		else {
+			BooleanFilter cpRulesBooleanFilter = new BooleanFilter();
+
+			BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.MUST;
+
+			try {
+				CPRuleGroupServiceConfiguration
+					cpRuleGroupServiceConfiguration =
+						_configurationProvider.getConfiguration(
+							CPRuleGroupServiceConfiguration.class,
+							new GroupServiceSettingsLocator(
+								groupId, CPRuleConstants.SERVICE_NAME));
+
+				if ((cpRuleGroupServiceConfiguration != null) &&
+					(cpRuleGroupServiceConfiguration.
+						catalogRuleApplicationType() ==
+							CPRuleConstants.APPLICATION_TYPE_ANY)) {
+
+					booleanClauseOccur = BooleanClauseOccur.SHOULD;
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+
 			for (CPRule cpRule : cpRules) {
+				BooleanFilter cpRuleBooleanFilter = new BooleanFilter();
+
 				CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(
 					cpRule.getType());
 
 				cpRuleType.postProcessContextBooleanFilter(
-					booleanFilter, cpRule);
+					cpRuleBooleanFilter, cpRule);
+
+				cpRulesBooleanFilter.add(
+					cpRuleBooleanFilter, booleanClauseOccur);
 			}
+
+			booleanFilter.add(cpRulesBooleanFilter, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -690,6 +725,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private CommerceMediaResolver _commerceMediaResolver;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
