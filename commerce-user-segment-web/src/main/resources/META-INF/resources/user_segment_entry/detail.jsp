@@ -45,6 +45,20 @@ long commerceUserSegmentEntryId = commerceUserSegmentDisplayContext.getCommerceU
 
 				<aui:input checked="<%= (commerceUserSegmentEntry == null) ? false : commerceUserSegmentEntry.isActive() %>" disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="active" type="toggle-switch" />
 			</aui:fieldset>
+
+			<aui:fieldset>
+				<liferay-ui:error-marker
+					key="<%= WebKeys.ERROR_SECTION %>"
+					value="custom-fields"
+				/>
+
+				<liferay-expando:custom-attribute-list
+					className="<%= CommerceUserSegmentEntry.class.getName() %>"
+					classPK="<%= commerceUserSegmentEntryId %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</aui:fieldset>
 		</aui:fieldset-group>
 	</div>
 
