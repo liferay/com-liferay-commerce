@@ -9,20 +9,12 @@
 	transition: transform .1s ease-in;
 	width: 100%;
 
-	&--accounts {
+	&:not(.is-visible) {
 		transform: translateX(-100%);
-
-		&.is-visible {
-			transform: translateX(0);
-		}
 	}
 
-	&--orders {
+	&.is-visible + & {
 		transform: translateX(100%);
-
-		&.is-visible {
-			transform: translateX(0%);
-		}
 	}
 
 	&__empty-table {
@@ -76,6 +68,10 @@
 			height: 21px;
 			margin-right: 10px;
 			width: 25px;
+
+			.rtl & {
+				transform: scaleX(-1);
+			}
 		}
 	}
 

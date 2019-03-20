@@ -9,7 +9,7 @@
 	transition:
 		border-radius $transition,
 		background-color $transition;
-	width: 100%;
+	width: calc(100% - 20px);
 
 	@media screen and (hover: none) {
 		border-radius: 8px 25px 25px 8px;
@@ -48,6 +48,7 @@
 	}
 
 	&__avatar {
+		padding: 4px;
 		position: relative;
 
 		img {
