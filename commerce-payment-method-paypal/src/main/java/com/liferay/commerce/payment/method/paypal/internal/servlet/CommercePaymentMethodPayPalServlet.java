@@ -91,18 +91,19 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 					commerceOrder.getCommerceOrderId(), paymentId,
 					httpServletRequest);
 			}
-
-			String token = ParamUtil.getString(httpServletRequest, "token");
-
-			if (paymentId.isEmpty() && !token.isEmpty()) {
-				_commercePaymentEngine.completeRecurringPayment(
-					commerceOrder.getCommerceOrderId(), token,
-					httpServletRequest);
-			}
 			else {
-				_commercePaymentEngine.completePayment(
-					commerceOrder.getCommerceOrderId(), paymentId,
-					httpServletRequest);
+				String token = ParamUtil.getString(httpServletRequest, "token");
+
+				if (paymentId.isEmpty() && !token.isEmpty()) {
+					_commercePaymentEngine.completeRecurringPayment(
+						commerceOrder.getCommerceOrderId(), token,
+						httpServletRequest);
+				}
+				else {
+					_commercePaymentEngine.completePayment(
+						commerceOrder.getCommerceOrderId(), paymentId,
+						httpServletRequest);
+				}
 			}
 
 			String redirect = ParamUtil.getString(
