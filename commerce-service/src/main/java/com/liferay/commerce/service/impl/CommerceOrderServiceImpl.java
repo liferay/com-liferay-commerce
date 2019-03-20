@@ -487,6 +487,18 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceOrder updateCustomFields(
+			long commerceOrderId, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
+
+		return commerceOrderLocalService.updateCustomFields(
+			commerceOrderId, serviceContext);
+	}
+
+	@Override
 	public CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws PortalException {

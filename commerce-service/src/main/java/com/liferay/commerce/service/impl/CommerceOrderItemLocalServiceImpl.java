@@ -381,6 +381,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
+		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
 
 		_setCommerceOrderItemDiscountValue(
 			commerceOrderItem, commerceProductPrice.getDiscountValue());
