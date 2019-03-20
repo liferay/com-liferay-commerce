@@ -31,6 +31,8 @@ import java.util.Optional;
  */
 public interface CommerceContext extends Serializable {
 
+	public int getCatalogRuleApplicationType();
+
 	public CommerceAccount getCommerceAccount() throws PortalException;
 
 	public CommerceCurrency getCommerceCurrency() throws PortalException;

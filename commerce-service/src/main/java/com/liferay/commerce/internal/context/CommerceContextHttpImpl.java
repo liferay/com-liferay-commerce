@@ -25,6 +25,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
+import com.liferay.commerce.product.configuration.CPRuleGroupServiceConfiguration;
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
@@ -75,6 +77,27 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 		}
+
+		try {
+			_cpRuleGroupServiceConfiguration =
+				configurationProvider.getConfiguration(
+					CPRuleGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_portal.getScopeGroupId(httpServletRequest),
+						CPRuleConstants.SERVICE_NAME));
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+	}
+
+	@Override
+	public int getCatalogRuleApplicationType() {
+		if (_cpRuleGroupServiceConfiguration == null) {
+			return CPRuleConstants.APPLICATION_TYPE_ALL;
+		}
+
+		return _cpRuleGroupServiceConfiguration.catalogRuleApplicationType();
 	}
 
 	@Override
@@ -200,6 +223,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	private final CommercePriceListLocalService _commercePriceListLocalService;
 	private long[] _commerceUserSegmentEntryIds;
 	private final CommerceUserSegmentHelper _commerceUserSegmentHelper;
+	private CPRuleGroupServiceConfiguration _cpRuleGroupServiceConfiguration;
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
 	private final HttpServletRequest _httpServletRequest;
