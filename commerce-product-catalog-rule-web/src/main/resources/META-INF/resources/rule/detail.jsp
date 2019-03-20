@@ -72,6 +72,18 @@ String type = BeanParamUtil.getString(cpRule, request, "type");
 					%>
 
 				</c:if>
+
+				<liferay-ui:error-marker
+					key="<%= WebKeys.ERROR_SECTION %>"
+					value="custom-fields"
+				/>
+
+				<liferay-expando:custom-attribute-list
+					className="<%= CPRule.class.getName() %>"
+					classPK="<%= cpRuleId %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
 			</aui:fieldset>
 		</aui:fieldset-group>
 	</div>

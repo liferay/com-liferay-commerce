@@ -101,18 +101,18 @@ renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 
 				<aui:input bean="<%= commerceTierPriceEntry %>" model="<%= CommerceTierPriceEntry.class %>" name="minQuantity" />
 			</aui:fieldset>
-		</aui:fieldset-group>
 
-		<c:if test="<%= commerceTierPriceEntryDisplayContext.hasCustomAttributes() %>">
-			<aui:fieldset>
-				<liferay-expando:custom-attribute-list
-					className="<%= CommerceTierPriceEntry.class.getName() %>"
-					classPK="<%= (commerceTierPriceEntry != null) ? commerceTierPriceEntry.getCommerceTierPriceEntryId() : 0 %>"
-					editable="<%= true %>"
-					label="<%= true %>"
-				/>
-			</aui:fieldset>
-		</c:if>
+			<c:if test="<%= commerceTierPriceEntryDisplayContext.hasCustomAttributes() %>">
+				<aui:fieldset>
+					<liferay-expando:custom-attribute-list
+						className="<%= CommerceTierPriceEntry.class.getName() %>"
+						classPK="<%= (commerceTierPriceEntry != null) ? commerceTierPriceEntry.getCommerceTierPriceEntryId() : 0 %>"
+						editable="<%= true %>"
+						label="<%= true %>"
+					/>
+				</aui:fieldset>
+			</c:if>
+		</aui:fieldset-group>
 
 		<aui:button-row cssClass="tier-price-entry-button-row">
 			<aui:button cssClass="btn-lg" type="submit" />

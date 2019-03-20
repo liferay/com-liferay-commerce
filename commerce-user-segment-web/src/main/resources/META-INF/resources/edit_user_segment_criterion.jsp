@@ -90,6 +90,18 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data
 				</c:if>
 
 				<aui:input name="priority" />
+
+				<liferay-ui:error-marker
+					key="<%= WebKeys.ERROR_SECTION %>"
+					value="custom-fields"
+				/>
+
+				<liferay-expando:custom-attribute-list
+					className="<%= CommerceUserSegmentCriterion.class.getName() %>"
+					classPK="<%= commerceUserSegmentCriterionId %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
 			</aui:fieldset>
 		</aui:fieldset-group>
 	</div>
