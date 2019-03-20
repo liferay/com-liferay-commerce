@@ -20,8 +20,30 @@ package com.liferay.commerce.product.constants;
  */
 public class CPRuleConstants {
 
+	public static final int APPLICATION_TYPE_ALL = 0;
+
+	public static final int APPLICATION_TYPE_ANY = 1;
+
+	public static final int[] APPLICATION_TYPES = {
+		APPLICATION_TYPE_ALL, APPLICATION_TYPE_ANY
+	};
+
+	public static final String SERVICE_NAME =
+		"com.liferay.commerce.product.rule";
+
 	public static final String TYPE_ALL_PRODUCTS = "all-products";
 
 	public static final String TYPE_ASSET_CATEGORY = "category";
+
+	public static String getApplicationTypeLabel(int applicationType) {
+		if (applicationType == APPLICATION_TYPE_ALL) {
+			return "all-catalog-rules-must-be-satisfied";
+		}
+		else if (applicationType == APPLICATION_TYPE_ANY) {
+			return "one-or-more-catalog-rules-must-be-satisfied";
+		}
+
+		return null;
+	}
 
 }
