@@ -19,7 +19,12 @@ import com.liferay.commerce.checkout.web.internal.display.context.PaymentProcess
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.price.CommerceOrderPrice;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -65,7 +70,17 @@ public class PaymentProcessCommerceCheckoutStep
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		if (BigDecimal.ZERO.compareTo(commerceOrder.getTotal()) == 0) {
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceOrderPrice commerceOrderPrice =
+			_commerceOrderPriceCalculation.getCommerceOrderPrice(
+				commerceOrder, commerceContext);
+
+		CommerceMoney orderPriceTotal = commerceOrderPrice.getTotal();
+
+		if (BigDecimal.ZERO.compareTo(orderPriceTotal.getPrice()) == 0) {
 			return false;
 		}
 
@@ -123,6 +138,9 @@ public class PaymentProcessCommerceCheckoutStep
 	@Reference
 	private CommerceCheckoutStepServicesTracker
 		_commerceCheckoutStepServicesTracker;
+
+	@Reference
+	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
