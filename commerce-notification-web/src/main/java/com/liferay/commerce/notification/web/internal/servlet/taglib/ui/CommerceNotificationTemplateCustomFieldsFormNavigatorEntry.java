@@ -25,7 +25,10 @@ import com.liferay.taglib.util.CustomAttributesUtil;
 
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
+
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -87,6 +90,15 @@ public class CommerceNotificationTemplateCustomFieldsFormNavigatorEntry
 		}
 
 		return hasCustomAttributesAvailable;
+	}
+
+	@Override
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.commerce.notification.web)",
+		unbind = "-"
+	)
+	public void setServletContext(ServletContext servletContext) {
+		super.setServletContext(servletContext);
 	}
 
 	@Override

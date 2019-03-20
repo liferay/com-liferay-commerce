@@ -65,7 +65,7 @@ public class CommercePriceEntryDetailsCustomFieldsFormNavigatorEntry
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "custom-fields");
+		return LanguageUtil.get(locale, getKey());
 	}
 
 	@Override
