@@ -1,5 +1,7 @@
 import com.liferay.gradle.util.GradleUtil
 
+apply plugin: "com.liferay.lang.merger"
+
 dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
