@@ -46,9 +46,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
-import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
-import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
@@ -74,7 +71,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -89,7 +85,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.site.exception.InitializationException;
@@ -110,7 +105,6 @@ import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
 
-import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -988,9 +982,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private CommerceWarehousesImporter _commerceWarehousesImporter;
 
 	@Reference
-	private ConfigurationAdmin _configurationAdmin;
-
-	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
 
 	private Map<String, CPDefinition> _cpDefinitions;
@@ -1011,17 +1002,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private CPOptionsImporter _cpOptionsImporter;
 
 	@Reference
-	private CPRuleLocalService _cpRuleLocalService;
-
-	@Reference
 	private CPRulesImporter _cpRulesImporter;
-
-	@Reference
-	private CPRuleUserSegmentRelLocalService _cpRuleUserSegmentRelLocalService;
-
-	@Reference
-	private CPSpecificationOptionLocalService
-		_cpSpecificationOptionLocalService;
 
 	@Reference
 	private CPSpecificationOptionsImporter _cpSpecificationOptionsImporter;
@@ -1049,12 +1030,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private OrganizationImporter _organizationImporter;
-
-	@Reference
-	private OrganizationLocalService _organizationLocalService;
-
-	@Reference
-	private Portal _portal;
 
 	@Reference
 	private PortletSettingsImporter _portletSettingsImporter;
