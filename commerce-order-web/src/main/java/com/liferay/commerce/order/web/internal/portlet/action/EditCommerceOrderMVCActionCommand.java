@@ -98,6 +98,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		else if (cmd.equals("billingAddress")) {
 			updateBillingAddress(actionRequest);
 		}
+		else if (cmd.equals("customFields")) {
+			updateCustomFields(actionRequest);
+		}
 		else if (cmd.equals("orderStatus")) {
 			updateOrderStatus(actionRequest);
 		}
@@ -186,6 +189,19 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			commerceOrderId, name, description, street1, street2, street3, city,
 			zip, commerceRegionId, commerceCountryId, phoneNumber,
 			serviceContext);
+	}
+
+	protected void updateCustomFields(ActionRequest actionRequest)
+		throws Exception {
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceOrder.class.getName(), actionRequest);
+
+		_commerceOrderService.updateCustomFields(
+			commerceOrderId, serviceContext);
 	}
 
 	protected void updateOrderStatus(ActionRequest actionRequest)
