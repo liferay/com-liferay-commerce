@@ -57,6 +57,13 @@ renderResponse.setTitle(title);
 		</aui:fieldset>
 	</aui:fieldset-group>
 
+	<liferay-ui:form-navigator
+		formModelBean="<%= commerceOrderItem %>"
+		id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_ITEM_DETAILS %>"
+		markupView="lexicon"
+		showButtons="<%= false %>"
+	/>
+
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" />
 

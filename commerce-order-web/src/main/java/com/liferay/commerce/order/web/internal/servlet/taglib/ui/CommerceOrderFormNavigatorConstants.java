@@ -16,11 +16,23 @@ package com.liferay.commerce.order.web.internal.servlet.taglib.ui;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Ethan Bustad
  */
 public class CommerceOrderFormNavigatorConstants {
 
+	public static final String CATEGORY_KEY_COMMERCE_ORDER_DETAILS = "details";
+
+	public static final String CATEGORY_KEY_COMMERCE_ORDER_ITEM_DETAILS =
+		"details";
+
 	public static final String CATEGORY_KEY_COMMERCE_ORDER_SETTINGS_GENERAL =
 		"general";
+
+	public static final String FORM_NAVIGATOR_ID_COMMERCE_ORDER_DETAILS =
+		"commerce.order.details.form";
+
+	public static final String FORM_NAVIGATOR_ID_COMMERCE_ORDER_ITEM_DETAILS =
+		"commerce.order.item.details.form";
 
 	public static final String FORM_NAVIGATOR_ID_COMMERCE_ORDER_SETTINGS =
 		"commerce.order.settings.form";
