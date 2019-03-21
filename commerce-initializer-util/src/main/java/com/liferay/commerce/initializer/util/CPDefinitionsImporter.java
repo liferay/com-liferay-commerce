@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -156,7 +157,7 @@ public class CPDefinitionsImporter {
 			expirationDateHour += 12;
 		}
 
-		Locale locale = serviceContext.getLocale();
+		Locale locale = LocaleUtil.getSiteDefault();
 
 		Map<Locale, String> nameMap = Collections.singletonMap(locale, name);
 		Map<Locale, String> shortDescriptionMap = Collections.singletonMap(
@@ -208,14 +209,14 @@ public class CPDefinitionsImporter {
 
 		for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
 			if (taxCategory.equals(
-					cpTaxCategory.getName(serviceContext.getLocale()))) {
+					cpTaxCategory.getName(LocaleUtil.getSiteDefault()))) {
 
 				return cpTaxCategory.getCPTaxCategoryId();
 			}
 		}
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
-			serviceContext.getLocale(), taxCategory);
+			LocaleUtil.getSiteDefault(), taxCategory);
 
 		CPTaxCategory cpTaxCategory =
 			_cpTaxCategoryLocalService.addCPTaxCategory(
@@ -551,7 +552,7 @@ public class CPDefinitionsImporter {
 		}
 
 		Map<Locale, String> valueMap = Collections.singletonMap(
-			serviceContext.getLocale(), jsonObject.getString("Value"));
+			LocaleUtil.getSiteDefault(), jsonObject.getString("Value"));
 		double priority = jsonObject.getDouble("Priority", defaultPriority);
 
 		return _cpDefinitionSpecificationOptionValueLocalService.
@@ -615,7 +616,7 @@ public class CPDefinitionsImporter {
 						cpDefinitionOptionValueRels) {
 
 					String name = cpDefinitionOptionValueRel.getName(
-						serviceContext.getLocale());
+						LocaleUtil.getSiteDefault());
 
 					if (name.equals(optionsJSONObject.getString("value"))) {
 						JSONArray valueJSONArray =
@@ -675,7 +676,7 @@ public class CPDefinitionsImporter {
 
 			if (availabilityEstimate.equals(
 					commerceAvailabilityEstimate.getTitle(
-						serviceContext.getLocale()))) {
+						LocaleUtil.getSiteDefault()))) {
 
 				return _cpdAvailabilityEstimateLocalService.
 					updateCPDAvailabilityEstimate(
@@ -687,7 +688,7 @@ public class CPDefinitionsImporter {
 		}
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
-			serviceContext.getLocale(), availabilityEstimate);
+			LocaleUtil.getSiteDefault(), availabilityEstimate);
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			_commerceAvailabilityEstimateLocalService.

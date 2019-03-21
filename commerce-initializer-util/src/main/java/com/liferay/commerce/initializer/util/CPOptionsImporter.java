@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class CPOptionsImporter {
 		throws PortalException {
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
-			serviceContext.getLocale(),
+			LocaleUtil.getSiteDefault(),
 			TextFormatter.format(key, TextFormatter.J));
 
 		return _cpOptionValueLocalService.addCPOptionValue(
@@ -88,7 +89,7 @@ public class CPOptionsImporter {
 
 		String key = jsonObject.getString("Key");
 
-		Locale locale = serviceContext.getLocale();
+		Locale locale = LocaleUtil.getSiteDefault();
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
 			locale, CommerceInitializerUtil.getValue(jsonObject, "Name", key));
@@ -138,7 +139,7 @@ public class CPOptionsImporter {
 		String key = jsonObject.getString("Key");
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
-			serviceContext.getLocale(),
+			LocaleUtil.getSiteDefault(),
 			CommerceInitializerUtil.getValue(jsonObject, "Name", key));
 
 		double priority = jsonObject.getDouble("Priority", defaultPriority);

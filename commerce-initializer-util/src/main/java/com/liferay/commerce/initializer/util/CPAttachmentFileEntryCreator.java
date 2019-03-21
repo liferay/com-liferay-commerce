@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
@@ -66,7 +67,7 @@ public class CPAttachmentFileEntryCreator {
 		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
-			serviceContext.getLocale(), fileName);
+			LocaleUtil.getSiteDefault(), fileName);
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			dependenciesPath + fileName);
