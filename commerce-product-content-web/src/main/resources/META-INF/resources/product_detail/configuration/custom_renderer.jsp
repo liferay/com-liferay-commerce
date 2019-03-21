@@ -28,7 +28,7 @@ CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPConten
 		%>
 
 			<li>
-				<a href="#<%= cpType.getName() %>"><%= cpType.getLabel(locale) %></a>
+				<a href="#<%= HtmlUtil.escape(cpType.getName()) %>"><%= HtmlUtil.escape(cpType.getLabel(locale)) %></a>
 			</li>
 
 		<%
@@ -43,9 +43,9 @@ CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPConten
 		for (CPType cpType : cpContentHelper.getCPTypes()) {
 		%>
 
-			<div id="<%= cpType.getName() %>">
+			<div id="<%= HtmlUtil.escape(cpType.getName()) %>">
 				<aui:fieldset markupView="lexicon">
-					<aui:select label='<%= cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-renderer-key") %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeRendererKey--" %>'>
+					<aui:select label='<%= HtmlUtil.escape(cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-renderer-key")) %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeRendererKey--" %>'>
 
 						<%
 						List<CPContentRenderer> cpContentRenderers = cpContentHelper.getCPContentRenderers(cpType.getName());
@@ -54,7 +54,7 @@ CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPConten
 							String key = cpContentRenderer.getKey();
 						%>
 
-							<aui:option label="<%= cpContentRenderer.getLabel(locale) %>" selected="<%= key.equals(cpContentHelper.getCPContentRendererKey(cpType.getName(), renderRequest)) %>" value="<%= key %>" />
+							<aui:option label="<%= HtmlUtil.escape(cpContentRenderer.getLabel(locale)) %>" selected="<%= key.equals(cpContentHelper.getCPContentRendererKey(cpType.getName(), renderRequest)) %>" value="<%= key %>" />
 
 						<%
 						}

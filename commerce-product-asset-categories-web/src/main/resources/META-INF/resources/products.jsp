@@ -84,7 +84,7 @@ cpDefinitionSearchContainer.setResults(cpDefinitions);
 
 				<liferay-ui:search-container-column-text
 					name="type"
-					value="<%= cpType.getLabel(locale) %>"
+					value="<%= HtmlUtil.escape(cpType.getLabel(locale)) %>"
 				/>
 
 				<liferay-ui:search-container-column-text

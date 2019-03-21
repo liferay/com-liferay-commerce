@@ -110,7 +110,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
 				name="name"
-				value="<%= commerceOrderItem.getName(locale) %>"
+				value="<%= HtmlUtil.escape(commerceOrderItem.getName(locale)) %>"
 			/>
 
 			<liferay-ui:search-container-column-text

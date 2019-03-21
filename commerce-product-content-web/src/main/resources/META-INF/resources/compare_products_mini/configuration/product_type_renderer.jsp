@@ -28,7 +28,7 @@ CPCompareContentMiniDisplayContext cpCompareContentMiniDisplayContext = (CPCompa
 		%>
 
 			<li>
-				<a href="#<%= cpType.getName() %>"><%= cpType.getLabel(locale) %></a>
+				<a href="#<%= HtmlUtil.escape(cpType.getName()) %>"><%= HtmlUtil.escape(cpType.getLabel(locale)) %></a>
 			</li>
 
 		<%
@@ -43,9 +43,9 @@ CPCompareContentMiniDisplayContext cpCompareContentMiniDisplayContext = (CPCompa
 		for (CPType cpType : cpCompareContentMiniDisplayContext.getCPTypes()) {
 		%>
 
-			<div id="<%= cpType.getName() %>">
+			<div id="<%= HtmlUtil.escape(cpType.getName()) %>">
 				<aui:fieldset markupView="lexicon">
-					<aui:select label='<%= cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-list-entry-renderer-key") %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeListEntryRendererKey--" %>'>
+					<aui:select label='<%= HtmlUtil.escape(cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-list-entry-renderer-key")) %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeListEntryRendererKey--" %>'>
 
 						<%
 						List<CPContentListEntryRenderer> cpContentListEntryRenderers = cpCompareContentMiniDisplayContext.getCPContentListEntryRenderers(cpType.getName());
@@ -54,7 +54,7 @@ CPCompareContentMiniDisplayContext cpCompareContentMiniDisplayContext = (CPCompa
 							String key = cpContentListEntryRenderer.getKey();
 						%>
 
-							<aui:option label="<%= cpContentListEntryRenderer.getLabel(locale) %>" selected="<%= key.equals(cpCompareContentMiniDisplayContext.getCPTypeListEntryRendererKey(cpType.getName())) %>" value="<%= key %>" />
+							<aui:option label="<%= HtmlUtil.escape(cpContentListEntryRenderer.getLabel(locale)) %>" selected="<%= key.equals(cpCompareContentMiniDisplayContext.getCPTypeListEntryRendererKey(cpType.getName())) %>" value="<%= key %>" />
 
 						<%
 						}

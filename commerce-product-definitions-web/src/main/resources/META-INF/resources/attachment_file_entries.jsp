@@ -175,7 +175,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 														icon="documents-and-media"
 														resultRow="<%= row %>"
 														rowChecker="<%= cpAttachmentFileEntriesDisplayContext.getRowChecker() %>"
-														title="<%= cpAttachmentFileEntry.getTitle(languageId) %>"
+														title="<%= HtmlUtil.escape(cpAttachmentFileEntry.getTitle(languageId)) %>"
 														url="<%= (rowURL != null) ? rowURL.toString() : StringPool.BLANK %>"
 													>
 														<%@ include file="/attachment_file_entry_vertical_card.jspf" %>
@@ -189,7 +189,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 														imageUrl="<%= thumbnailSrc %>"
 														resultRow="<%= row %>"
 														rowChecker="<%= cpAttachmentFileEntriesDisplayContext.getRowChecker() %>"
-														title="<%= cpAttachmentFileEntry.getTitle(languageId) %>"
+														title="<%= HtmlUtil.escape(cpAttachmentFileEntry.getTitle(languageId)) %>"
 														url="<%= (rowURL != null) ? rowURL.toString() : StringPool.BLANK %>"
 													>
 														<%@ include file="/attachment_file_entry_vertical_card.jspf" %>

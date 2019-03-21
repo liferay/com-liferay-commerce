@@ -91,11 +91,11 @@ renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input name="price" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(price) %>">
+				<aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(price) %>">
 					<aui:validator name="number" />
 				</aui:input>
 
-				<aui:input name="promoPrice" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(promoPrice) %>">
+				<aui:input name="promoPrice" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(promoPrice) %>">
 					<aui:validator name="number" />
 				</aui:input>
 

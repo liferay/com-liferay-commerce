@@ -56,7 +56,7 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
 		%>
 
-			<aui:option label="<%= commerceCurrency.getCode() %>" selected="<%= (commercePriceList != null) && (commercePriceList.getCommerceCurrencyId() == commerceCurrency.getCommerceCurrencyId()) %>" value="<%= commerceCurrency.getCommerceCurrencyId() %>" />
+			<aui:option label="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" selected="<%= (commercePriceList != null) && (commercePriceList.getCommerceCurrencyId() == commerceCurrency.getCommerceCurrencyId()) %>" value="<%= commerceCurrency.getCommerceCurrencyId() %>" />
 
 		<%
 		}
