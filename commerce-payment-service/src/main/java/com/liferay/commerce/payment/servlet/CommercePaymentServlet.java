@@ -14,12 +14,15 @@
 
 package com.liferay.commerce.payment.servlet;
 
+import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
@@ -165,6 +168,20 @@ public class CommercePaymentServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			// Payment Failed
+
+			try {
+				_commercePaymentEngine.updateOrderPaymentStatus(
+					_commerceOrderId,
+					CommerceOrderPaymentConstants.STATUS_FAILED,
+					StringPool.BLANK);
+
+				httpServletResponse.sendRedirect(_nextUrl);
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
 		}
 	}
 
@@ -195,6 +212,9 @@ public class CommercePaymentServlet extends HttpServlet {
 		CommercePaymentServlet.class);
 
 	private long _commerceOrderId;
+
+	@Reference
+	private CommerceOrderPaymentLocalService _commerceOrderPaymentLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
