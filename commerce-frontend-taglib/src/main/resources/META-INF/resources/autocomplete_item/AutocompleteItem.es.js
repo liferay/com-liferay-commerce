@@ -8,11 +8,12 @@ class AutocompleteItem extends Component {
 
 	processQuery() {
 		const regex = new RegExp(`(.*?)(${this.query})(.*)`, 'gmi');
-
 		const results = regex.exec(this.text);
 
 		if (results) {
-			this.updateHighlightedText(results);
+			this.updateHighlightedText(
+				results.map(el => el.toString())
+			);
 		}
 		else {
 			this.reinitializeTextGroups();
@@ -22,7 +23,7 @@ class AutocompleteItem extends Component {
 	}
 
 	reinitializeTextGroups() {
-		this.firstGroup = this.text;
+		this.firstGroup = this.text.toString();
 		this.secondGroup = null;
 		this.thirdGroup = null;
 
@@ -44,7 +45,6 @@ class AutocompleteItem extends Component {
 
 		return true;
 	}
-
 }
 
 Soy.register(AutocompleteItem, template);

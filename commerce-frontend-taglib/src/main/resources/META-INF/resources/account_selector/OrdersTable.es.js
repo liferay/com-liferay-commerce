@@ -11,7 +11,10 @@ import '../autocomplete_item/AutocompleteItem.es';
 class OrdersTable extends Component {
 
 	created() {
-		this._getOrders = debounce(this._getOrders, 500);
+		this._getOrders = debounce(
+			this._getOrders.bind(this),
+			500
+		);
 	}
 
 	_getOrders() {
@@ -24,13 +27,11 @@ class OrdersTable extends Component {
 
 	_handleFilterChange(evt) {
 		this.filterString = evt.target.value;
-
 		return this._getOrders();
 	}
 
 	_handleSubmitFilter(evt) {
 		evt.preventDefault();
-
 		return this._getOrders();
 	}
 
