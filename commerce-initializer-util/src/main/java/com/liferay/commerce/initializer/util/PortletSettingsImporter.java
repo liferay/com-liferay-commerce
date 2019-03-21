@@ -17,10 +17,15 @@ package com.liferay.commerce.initializer.util;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.product.importer.CPFileImporter;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
+import com.liferay.dynamic.data.mapping.service.DDMFormInstanceLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Layout;
@@ -28,6 +33,7 @@ import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletIdCodec;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -42,6 +48,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
@@ -173,6 +180,12 @@ public class PortletSettingsImporter {
 
 				value = String.valueOf(assetVocabulary.getVocabularyId());
 			}
+			else if (key.equals("classNameId")) {
+				String className = portletPreferencesJSONObject.getString(key);
+
+				value = String.valueOf(
+					_classNameLocalService.getClassNameId(className));
+			}
 			else if (key.equals("displayStyle")) {
 				value = _importDisplayTemplate(
 					portletPreferencesJSONObject.getJSONObject(key),
@@ -180,6 +193,26 @@ public class PortletSettingsImporter {
 					serviceContext);
 			}
 			else if (key.equals("displayStyleGroupId")) {
+				value = String.valueOf(groupId);
+			}
+			else if (key.equals("formInstanceId")) {
+				DynamicQuery dynamicQuery =
+					_ddmFormInstanceLocalService.dynamicQuery();
+
+				Criterion criterion = RestrictionsFactoryUtil.eq(
+					"groupId", groupId);
+
+				List<DDMFormInstance> ddmFormInstances =
+					_ddmFormInstanceLocalService.dynamicQuery(
+						dynamicQuery.add(criterion));
+
+				if (!ddmFormInstances.isEmpty()) {
+					DDMFormInstance ddmFormInstance = ddmFormInstances.get(0);
+
+					value = String.valueOf(ddmFormInstance.getFormInstanceId());
+				}
+			}
+			else if (key.equals("groupId")) {
 				value = String.valueOf(groupId);
 			}
 			else if (key.equals("portletSetupTitle")) {
@@ -201,7 +234,13 @@ public class PortletSettingsImporter {
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
 
 	@Reference
+	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
 	private CPFileImporter _cpFileImporter;
+
+	@Reference
+	private DDMFormInstanceLocalService _ddmFormInstanceLocalService;
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
