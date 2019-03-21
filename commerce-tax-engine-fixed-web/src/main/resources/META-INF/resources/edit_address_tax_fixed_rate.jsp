@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -83,7 +83,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 							for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
 							%>
 
-								<aui:option label="<%= cpTaxCategory.getName(languageId) %>" value="<%= cpTaxCategory.getCPTaxCategoryId() %>" />
+								<aui:option label="<%= HtmlUtil.escape(cpTaxCategory.getName(languageId)) %>" value="<%= cpTaxCategory.getCPTaxCategoryId() %>" />
 
 							<%
 							}

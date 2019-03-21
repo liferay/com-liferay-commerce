@@ -40,15 +40,15 @@ int orderStatus = BeanParamUtil.getInteger(commerceOrder, request, "orderStatus"
 					<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderId %>" />
 
 					<aui:fieldset disabled="">
-						<aui:input name="subtotal" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getSubtotal()) %>">
+						<aui:input name="subtotal" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getSubtotal()) %>">
 							<aui:validator name="number" />
 						</aui:input>
 
-						<aui:input name="shippingPrice" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getShippingAmount()) %>">
+						<aui:input name="shippingPrice" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getShippingAmount()) %>">
 							<aui:validator name="number" />
 						</aui:input>
 
-						<aui:input name="total" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getTotal()) %>">
+						<aui:input name="total" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrder.getTotal()) %>">
 							<aui:validator name="number" />
 						</aui:input>
 

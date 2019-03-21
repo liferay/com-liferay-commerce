@@ -224,7 +224,7 @@ PortletURL portletURL = commercePriceEntryDisplayContext.getPortletURL();
 								}
 							}
 						},
-						title: '<liferay-ui:message arguments="<%= commercePriceList.getName() %>" key="add-new-entry-to-x" />',
+						title: '<liferay-ui:message arguments="<%= HtmlUtil.escape(commercePriceList.getName()) %>" key="add-new-entry-to-x" />',
 						url: '<%= commercePriceEntryDisplayContext.getItemSelectorUrl() %>'
 					}
 				);

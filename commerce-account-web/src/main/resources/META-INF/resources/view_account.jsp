@@ -41,11 +41,11 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 			</div>
 
 			<div class="details-header__name">
-				<%= commerceAccount.getName() %>
+				<%= HtmlUtil.escape(commerceAccount.getName()) %>
 			</div>
 
 			<div class="details-header__email">
-				<%= commerceAccount.getEmail() %>
+				<%= HtmlUtil.escape(commerceAccount.getEmail()) %>
 			</div>
 		</div>
 
@@ -56,8 +56,8 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 				</div>
 
 				<div class="details-header__value">
-					<%= commerceAddress.getStreet1() %><br />
-					<%= commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip() %>
+					<%= HtmlUtil.escape(commerceAddress.getStreet1()) %><br />
+					<%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip()) %>
 				</div>
 			</div>
 		</c:if>

@@ -41,11 +41,11 @@ CommerceCurrency commerceCurrency = commercePriceList.getCommerceCurrency();
 />
 
 <aui:fieldset>
-	<aui:input name="price" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(commercePriceEntry.getPrice()) %>">
+	<aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commercePriceEntry.getPrice()) %>">
 		<aui:validator name="number" />
 	</aui:input>
 
-	<aui:input name="promoPrice" suffix="<%= commerceCurrency.getCode() %>" type="text" value="<%= commerceCurrency.round(commercePriceEntry.getPromoPrice()) %>">
+	<aui:input name="promoPrice" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commercePriceEntry.getPromoPrice()) %>">
 		<aui:validator name="number" />
 	</aui:input>
 </aui:fieldset>

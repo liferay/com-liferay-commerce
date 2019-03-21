@@ -112,7 +112,7 @@ String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request
 								String curCommercePaymentMethodId = commercePaymentMethod.getEngineKey();
 							%>
 
-								<aui:option label="<%= commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId.equals(commercePaymentMethodKey) %>" value="<%= curCommercePaymentMethodId %>" />
+								<aui:option label="<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod)) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId.equals(commercePaymentMethodKey) %>" value="<%= curCommercePaymentMethodId %>" />
 
 							<%
 							}

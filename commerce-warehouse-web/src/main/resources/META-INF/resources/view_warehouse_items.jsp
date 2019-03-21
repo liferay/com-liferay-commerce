@@ -79,7 +79,7 @@ if (Validator.isNotNull(backURL)) {
 
 								<tr>
 									<td>
-										<%= commerceWarehouse.getName() %>
+										<%= HtmlUtil.escape(commerceWarehouse.getName()) %>
 									</td>
 									<td>
 										<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />

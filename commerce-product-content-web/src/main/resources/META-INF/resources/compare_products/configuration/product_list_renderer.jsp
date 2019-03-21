@@ -30,7 +30,7 @@ List<CPContentListRenderer> cpContentListRenderers = cpCompareContentDisplayCont
 			String key = cpContentListRenderer.getKey();
 		%>
 
-			<aui:option label="<%= cpContentListRenderer.getLabel(locale) %>" selected="<%= key.equals(cpCompareContentDisplayContext.getCPContentListRendererKey()) %>" value="<%= key %>" />
+			<aui:option label="<%= HtmlUtil.escape(cpContentListRenderer.getLabel(locale)) %>" selected="<%= key.equals(cpCompareContentDisplayContext.getCPContentListRendererKey()) %>" value="<%= key %>" />
 
 		<%
 		}
