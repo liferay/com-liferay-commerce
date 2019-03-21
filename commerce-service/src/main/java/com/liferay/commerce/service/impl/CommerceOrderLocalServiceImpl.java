@@ -357,6 +357,14 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder.setShippingAddressId(shippingAddressId);
 		}
 
+		if (hasWorkflowDefinition(
+				commerceOrder.getGroupId(),
+				CommerceOrderConstants.TYPE_PK_TRANSMISSION)) {
+
+			commerceOrder = setCommerceOrderToTransmit(
+				commerceContext.getUserId(), commerceOrder);
+		}
+
 		return commerceOrderPersistence.update(commerceOrder);
 	}
 
