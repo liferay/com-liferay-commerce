@@ -18,17 +18,23 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
+import com.liferay.commerce.initializer.util.BlogsImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
 import com.liferay.commerce.initializer.util.CPRulesImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceAccountsImporter;
+import com.liferay.commerce.initializer.util.CommerceDiscountsImporter;
 import com.liferay.commerce.initializer.util.CommercePriceEntriesImporter;
 import com.liferay.commerce.initializer.util.CommercePriceListsImporter;
 import com.liferay.commerce.initializer.util.CommerceUserSegmentsImporter;
 import com.liferay.commerce.initializer.util.CommerceUsersImporter;
 import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
+import com.liferay.commerce.initializer.util.DDMFormImporter;
+import com.liferay.commerce.initializer.util.DLImporter;
+import com.liferay.commerce.initializer.util.JournalArticleImporter;
+import com.liferay.commerce.initializer.util.KBArticleImporter;
 import com.liferay.commerce.initializer.util.OrganizationImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
@@ -50,7 +56,6 @@ import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
-import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -182,6 +187,10 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importAssetCategories(serviceContext);
 
+			_importBlogsEntries(serviceContext);
+
+			_importCommerceDiscounts(serviceContext);
+
 			_importCPOptionCategories(serviceContext);
 
 			_importCPSpecificationOptions(serviceContext);
@@ -209,6 +218,14 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_importCommerceUserSegments(serviceContext);
 
 			_importCPRules(serviceContext);
+
+			_importDDMForms(serviceContext);
+
+			_importDLFileEntries(serviceContext);
+
+			_importJournalArticles(serviceContext);
+
+			_importKBArticles(serviceContext);
 
 			_importThemePortletSettings(serviceContext);
 
@@ -512,6 +529,25 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
+	private void _importBlogsEntries(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing Blogs Entries...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("blogs.json");
+
+		_blogsImporter.importBlogsEntries(
+			jsonArray, _siteInitializerDependencyResolver.getImageClassLoader(),
+			_siteInitializerDependencyResolver.getImageDependencyPath(),
+			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Blogs Entries successfully imported");
+		}
+	}
+
 	private void _importCommerceAccounts(ServiceContext serviceContext)
 		throws Exception {
 
@@ -528,6 +564,24 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Commerce Accounts successfully imported");
+		}
+	}
+
+	private void _importCommerceDiscounts(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing Commerce Discounts...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("discounts.json");
+
+		_commerceDiscountsImporter.importCommerceDiscounts(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce Discounts successfully imported");
 		}
 	}
 
@@ -717,6 +771,80 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
+	private void _importDDMForms(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing DDM Forms...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("forms.json");
+
+		_ddmFormImporter.importDDMForms(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("DDM Forms successfully imported");
+		}
+	}
+
+	private void _importDLFileEntries(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing DL File Entries...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("dl-file-entries.json");
+
+		_dlImporter.importDocuments(
+			jsonArray,
+			_siteInitializerDependencyResolver.getDocumentsClassLoader(),
+			_siteInitializerDependencyResolver.getDocumentsDependencyPath(),
+			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("DL File Entries successfully imported");
+		}
+	}
+
+	private void _importJournalArticles(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing Journal Articles...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("journal-articles.json");
+
+		_journalArticleImporter.importJournalArticles(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Journal Articles successfully imported");
+		}
+	}
+
+	private void _importKBArticles(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing KB Articles...");
+		}
+
+		JSONArray jsonArray = _getJSONArray("kb-articles.json");
+
+		_kbArticleImporter.importKBArticles(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
+
+		if (_log.isInfoEnabled()) {
+			_log.info("KB Articles successfully imported");
+		}
+	}
+
 	private void _importPortletSettings(ServiceContext serviceContext)
 		throws Exception {
 
@@ -809,6 +937,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private AssetCategoriesImporter _assetCategoriesImporter;
 
 	@Reference
+	private BlogsImporter _blogsImporter;
+
+	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
 
 	@Reference
@@ -822,6 +953,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+
+	@Reference
+	private CommerceDiscountsImporter _commerceDiscountsImporter;
 
 	@Reference
 	private CommercePriceEntriesImporter _commercePriceEntriesImporter;
@@ -893,13 +1027,22 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private CPSpecificationOptionsImporter _cpSpecificationOptionsImporter;
 
 	@Reference
-	private DLAppLocalService _dlAppLocalService;
+	private DDMFormImporter _ddmFormImporter;
+
+	@Reference
+	private DLImporter _dlImporter;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
 
 	@Reference
+	private JournalArticleImporter _journalArticleImporter;
+
+	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private KBArticleImporter _kbArticleImporter;
 
 	@Reference
 	private MiniumLayoutsInitializer _miniumLayoutsInitializer;

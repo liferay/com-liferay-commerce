@@ -30,6 +30,10 @@ public interface SiteInitializerDependencyResolver {
 
 	public String getDisplayTemplatesDependencyPath();
 
+	public ClassLoader getDocumentsClassLoader();
+
+	public String getDocumentsDependencyPath();
+
 	public ClassLoader getImageClassLoader();
 
 	public String getImageDependencyPath();
