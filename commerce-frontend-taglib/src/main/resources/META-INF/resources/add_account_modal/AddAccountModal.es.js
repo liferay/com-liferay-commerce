@@ -10,7 +10,7 @@ import 'clay-modal';
 
 import '../user_utils/UserListItem.es';
 import '../user_utils/UserInputItem.es';
-import '../input_utils/CommerceSelectDropdown.es';
+import '../input_utils/CommerceDatalist.es';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
