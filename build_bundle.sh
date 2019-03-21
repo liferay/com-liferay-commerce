@@ -6,6 +6,9 @@ function date {
 		if [ "$(uname)" == "Darwin" ]
 		then
 			echo $(/bin/date)
+		elif [ -e /bin/date ]
+		then
+			echo $(/bin/date)
 		else
 			echo $(/usr/bin/date)
 		fi
@@ -13,6 +16,9 @@ function date {
 		if [ "$(uname)" == "Darwin" ]
 		then
 			echo $(/bin/date -jf "%a %b %e %H:%M:%S %Z %Y" "${1}" "${2}")
+		elif [ -e /bin/date ]
+		then
+			echo $(/bin/date -d "${1}" "${2}")
 		else
 			echo $(/usr/bin/date -d "${1}" "${2}")
 		fi
