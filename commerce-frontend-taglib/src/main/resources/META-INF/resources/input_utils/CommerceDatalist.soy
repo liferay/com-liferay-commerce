@@ -1,0 +1,259 @@
+{namespace CommerceDatalist}
+
+{template .render}
+	{@param? formId: string}
+	{@param selectName: string}
+	{@param? _filteredValues: ?}
+	{@param? data: ?}
+	{@param? label: string}
+	{@param spritemap: string}
+	{@param? multiSelect: bool}
+	{@param? value: ?}
+	{@param? query: ?}
+	{@param? dropdownVisibilityState: string}
+
+	{let $inputId kind="text"}
+		{if isNonnull($formId)}
+			{$formId}-{$selectName}
+		{else}
+			{$selectName}
+		{/if}
+	{/let}
+
+	{let $inputWrapperClasses kind="text"}
+		commerce-datalist__input-wrapper
+		{if $dropdownVisibilityState}
+			{sp}is-{$dropdownVisibilityState}
+		{/if}
+	{/let}
+
+	<div class="commerce-datalist">
+		{if isNonnull($label)}
+			<label
+				for="{$inputId}"
+				class="commerce-modal__label"
+			>
+				{$label}
+			</label>
+		{/if}
+
+		<div 
+			class="{$inputWrapperClasses}"
+			data-onclick="_handleInputWrapperClick"
+		>
+			<div class="commerce-datalist__mask">
+				<div 
+					class="commerce-datalist__query-wrapper"
+					ref="queryWrapper"
+				>
+					{if $multiSelect and isNonnull($value)}
+						{call .addedValues}
+							{param values: $value /}
+							{param spritemap: $spritemap /}
+						{/call}
+					{/if}
+					<input 
+						class="commerce-datalist__query-input"
+						data-onkeyup="_handleInputKeyup"
+						id="{$inputId}"
+						ref="inputText"
+						{if not $multiSelect and isNonnull($value)}
+							value="{$value.label}"
+						{/if}
+						type="text"
+					/>
+				</div>
+			</div>
+			<span 
+				class="commerce-datalist__icon-wrapper"
+				data-onclic="_handleIconClick"
+			>
+				<span class="commerce-datalist__icon commerce-datalist__icon--search">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'search' /}
+					{/call}
+				</span>
+				<span class="commerce-datalist__icon commerce-datalist__icon--chevron">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'chevron' /}
+					{/call}
+				</span>
+			</span>
+		</div>
+
+		{let $dropdownClasses kind="text"}
+			commerce-datalist__dropdown
+			{if $dropdownVisibilityState}
+				{sp}is-{$dropdownVisibilityState}
+			{/if}
+		{/let}
+
+		<div class="{$dropdownClasses}">
+			{call .dataTemplate}
+				{param data: $data /}
+				{param filteredValues: $_filteredValues /}
+				{param selectName: $selectName /}
+				{param selectedValue: $value /}
+				{param query: $query /}
+				{param multiSelect: $multiSelect /}
+			{/call}
+		</div>
+	</div>
+{/template}
+
+{template .addedValues}
+	{@param values: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param spritemap: string}
+
+	<div class="commerce-datalist__values">
+		{foreach $selectedElement in $values}
+			<span class="commerce-datalist__value">
+				{$selectedElement.label}
+				<button 
+					type="button" 
+					class="commerce-datalist__delete-value"
+					data-onclick="_handleDeleteElement"
+					data-value="{$selectedElement.value}"
+				>
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'close' /}
+					{/call}
+				</button>
+			</span>
+		{/foreach}
+	</div>
+{/template}
+
+{template .dataTemplate}
+	{@param? data: list<[
+		label: string|number,
+		value: string|number
+	]>}
+	{@param? filteredValues: list<string|number>}
+	{@param? selectedValue: ?}
+	{@param selectName: string}
+	{@param? query: string}
+	{@param? multiSelect: bool}
+
+	{let $dataElementVariant: $multiSelect ? 'multiSelect' : '' /}
+
+	<div class="commerce-datalist__data">
+		{if 
+			isNonnull($query) and $query != '' and 
+			isNonnull($data) and length($data) > 0 and 
+			isNonnull($filteredValues)
+		}
+			{if length($filteredValues) > 0 }
+				{foreach $filteredValue in $filteredValues}
+					{foreach $dataElement in $data}
+						{if $filteredValue == $dataElement.value}
+							{delcall CommerceDatalist.DataElement variant="$dataElementVariant"}
+								{param value: $dataElement.value /}
+								{param label: $dataElement.label /}
+								{param query: $query /}
+								{param selectName: $selectName /}
+								{param selectedValue: $selectedValue /}
+							{/delcall}
+						{/if}
+					{/foreach}
+				{/foreach}
+			{else}
+				{call .empty /}
+			{/if}
+		{else}
+			{if isNonnull($data) and length($data) > 0}
+				{foreach $dataElement in $data}
+					{delcall CommerceDatalist.DataElement variant="$dataElementVariant"}
+						{param value: $dataElement.value /}
+						{param label: $dataElement.label /}
+						{param query: $query /}
+						{param selectName: $selectName /}
+						{param selectedValue: $selectedValue /}
+					{/delcall}
+				{/foreach}
+			{else}
+				{call .empty /}
+			{/if}
+		{/if}
+	</div>
+{/template}
+
+{deltemplate CommerceDatalist.DataElement variant="'multiSelect'"}
+	{@param value: string|number}
+	{@param label: string|number}
+	{@param? query: string}
+	{@param selectName: string}
+	{@param? selectedValue: list<[
+		value: string|number
+	]>}
+
+	{let $inputId kind="text"}
+		{$selectName}-{$value}
+	{/let}
+
+	<label
+		class="commerce-datalist__option commerce-datalist__option--label"
+		for="{$inputId}"
+	>
+		<input
+			id="{$inputId}"
+			type="checkbox"
+			data-onchange="_handleSelectData"
+			data-value="{$value}"
+			{if isNonnull($selectedValue)}
+				{foreach $currentSelected in $selectedValue}
+					{if $currentSelected.value == $value}
+						checked
+					{/if}
+				{/foreach}
+			{/if}
+		/>
+		{call AutocompleteItem.render}
+			{param text: $label /}
+			{param query: $query /}
+		{/call}
+	</label>
+{/deltemplate}
+
+{deltemplate CommerceDatalist.DataElement}
+	{@param value: string|number}
+	{@param label: string|number}
+	{@param? query: string}
+	{@param selectName: string}
+	{@param? selectedValue: [
+		value: string|number
+	]}
+
+	{let $inputId kind="text"}
+		{$selectName}-{$value}
+	{/let}
+	{let $dataElementClasses kind="text"}
+		commerce-datalist__option commerce-datalist__option--select
+		{if isNonnull($selectedValue) and $selectedValue.value == $value}
+			{sp}commerce-datalist__option--active
+		{/if}
+	{/let}
+	<div 
+		id="{$inputId}" 
+		class="{$dataElementClasses}" 
+		data-value="{$value}" 
+		data-onclick="_handleSelectData"
+	>
+		{call AutocompleteItem.render}
+			{param text: $label /}
+			{param query: $query /}
+		{/call}
+	</div>
+{/deltemplate}
+
+{template .empty}
+	<div class="commerce-datalist__option commerce-datalist__option--empty">
+		{msg desc="No results found"}no-results-found{/msg}
+	</div>
+{/template}
