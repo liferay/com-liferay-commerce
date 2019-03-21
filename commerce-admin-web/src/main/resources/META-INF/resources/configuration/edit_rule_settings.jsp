@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+int catalogRuleApplicationType = (Integer)request.getAttribute("catalogRuleApplicationType");
 %>
 
 <div class="container-fluid-1280 mt-4 sheet">
@@ -33,7 +33,7 @@ CommerceContext commerceContext = (CommerceContext)request.getAttribute(Commerce
 				for (int applicationType : CPRuleConstants.APPLICATION_TYPES) {
 				%>
 
-					<aui:option label="<%= CPRuleConstants.getApplicationTypeLabel(applicationType) %>" selected="<%= applicationType == commerceContext.getCatalogRuleApplicationType() %>" value="<%= applicationType %>" />
+					<aui:option label="<%= CPRuleConstants.getApplicationTypeLabel(applicationType) %>" selected="<%= applicationType == catalogRuleApplicationType %>" value="<%= applicationType %>" />
 
 				<%
 				}

@@ -15,9 +15,15 @@
 package com.liferay.commerce.admin.web.internal.util;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.product.configuration.CPRuleGroupServiceConfiguration;
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
@@ -78,10 +84,39 @@ public class CPRuleSettingsCommerceAdminModule implements CommerceAdminModule {
 		HttpServletResponse httpServletResponse =
 			_portal.getHttpServletResponse(renderResponse);
 
+		int catalogRuleApplicationType = CPRuleConstants.APPLICATION_TYPE_ALL;
+
+		try {
+			CPRuleGroupServiceConfiguration cpRuleGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CPRuleGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_portal.getScopeGroupId(httpServletRequest),
+						CPRuleConstants.SERVICE_NAME));
+
+			if (cpRuleGroupServiceConfiguration != null) {
+				catalogRuleApplicationType =
+					cpRuleGroupServiceConfiguration.
+						catalogRuleApplicationType();
+			}
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		httpServletRequest.setAttribute(
+			"catalogRuleApplicationType", catalogRuleApplicationType);
+
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
 			"/configuration/edit_rule_settings.jsp");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPRuleSettingsCommerceAdminModule.class);
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
