@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.service.UserGroupLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class CommerceUserSegmentsImporter {
 
 		String name = jsonObject.getString("Name");
 
-		nameMap.put(serviceContext.getLocale(), name);
+		nameMap.put(LocaleUtil.getSiteDefault(), name);
 
 		// Add User Segment
 

@@ -511,7 +511,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 		Map<Locale, String> nameMap = new HashMap<>();
 
-		nameMap.put(serviceContext.getLocale(), name);
+		nameMap.put(LocaleUtil.getSiteDefault(), name);
 
 		DDMTemplate ddmTemplate = _ddmTemplateLocalService.fetchTemplate(
 			serviceContext.getScopeGroupId(), classNameId, getKey(name));

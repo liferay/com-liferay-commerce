@@ -119,7 +119,7 @@ public class AssetCategoriesImporter {
 
 		if (assetCategory == null) {
 			Map<Locale, String> titleMap = Collections.singletonMap(
-				serviceContext.getLocale(), title);
+				LocaleUtil.getSiteDefault(), title);
 
 			assetCategory = _assetCategoryLocalService.addCategory(
 				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
