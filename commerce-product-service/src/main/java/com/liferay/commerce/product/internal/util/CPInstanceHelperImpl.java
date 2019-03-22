@@ -661,9 +661,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Stream<DDMFormField> stream = ddmFormFields.stream();
 
 		return stream.map(
-			field -> {
-				return String.format(notEmptyStatement, field.getName());
-			}
+			field -> String.format(notEmptyStatement, field.getName())
 		).collect(
 			Collectors.joining(" OR ")
 		);
@@ -685,10 +683,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Stream<DDMFormField> stream = ddmFormFields.stream();
 
 		Stream<String> inputMappingStatementStream = stream.map(
-			field -> {
-				return String.format(
-					inputMappingStatement, field.getName(), field.getName());
-			});
+			field -> String.format(
+				inputMappingStatement, field.getName(), field.getName()));
 
 		inputMappingStatementStream = Stream.concat(
 			Stream.of(
@@ -719,10 +715,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Stream<DDMFormField> stream = ddmFormFields.stream();
 
 		Stream<String> stringStream = stream.map(
-			field -> {
-				return String.format(
-					outputMappingStatement, field.getName(), field.getName());
-			});
+			field -> String.format(
+				outputMappingStatement, field.getName(), field.getName()));
 
 		return stringStream.collect(Collectors.joining(StringPool.SEMICOLON));
 	}
