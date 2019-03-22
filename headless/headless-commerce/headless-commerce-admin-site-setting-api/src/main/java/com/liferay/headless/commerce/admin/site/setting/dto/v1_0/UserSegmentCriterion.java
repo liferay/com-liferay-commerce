@@ -40,28 +40,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "UserSegmentCriterion")
 public class UserSegmentCriterion {
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@JsonIgnore
-	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
-		try {
-			id = idUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long id;
-
 	public Long getCommerceUserSegmentEntryId() {
 		return commerceUserSegmentEntryId;
 	}
@@ -88,6 +66,28 @@ public class UserSegmentCriterion {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	@NotNull
 	protected Long commerceUserSegmentEntryId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
+		try {
+			id = idUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long id;
 
 	public Double getPriority() {
 		return priority;
@@ -165,14 +165,14 @@ public class UserSegmentCriterion {
 
 		sb.append("{");
 
-		sb.append("\"id\": ");
-
-		sb.append(id);
-		sb.append(", ");
-
 		sb.append("\"commerceUserSegmentEntryId\": ");
 
 		sb.append(commerceUserSegmentEntryId);
+		sb.append(", ");
+
+		sb.append("\"id\": ");
+
+		sb.append(id);
 		sb.append(", ");
 
 		sb.append("\"priority\": ");

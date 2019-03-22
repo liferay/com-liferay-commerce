@@ -42,28 +42,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "UserSegment")
 public class UserSegment {
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@JsonIgnore
-	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
-		try {
-			id = idUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long id;
-
 	public Boolean getActive() {
 		return active;
 	}
@@ -136,6 +114,28 @@ public class UserSegment {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long groupId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
+		try {
+			id = idUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long id;
 
 	public String getKey() {
 		return key;
@@ -238,11 +238,6 @@ public class UserSegment {
 
 		sb.append("{");
 
-		sb.append("\"id\": ");
-
-		sb.append(id);
-		sb.append(", ");
-
 		sb.append("\"active\": ");
 
 		sb.append(active);
@@ -272,6 +267,11 @@ public class UserSegment {
 		sb.append("\"groupId\": ");
 
 		sb.append(groupId);
+		sb.append(", ");
+
+		sb.append("\"id\": ");
+
+		sb.append(id);
 		sb.append(", ");
 
 		sb.append("\"key\": ");
