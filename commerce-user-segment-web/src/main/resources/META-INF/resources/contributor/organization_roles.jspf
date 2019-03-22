@@ -41,9 +41,11 @@ List<Role> organizationRoles = roleCommerceUserSegmentCriterionTypeDisplayContex
 			value="<%= HtmlUtil.escape(role.getName()) %>"
 		/>
 
-		<liferay-ui:search-container-column-text>
-			<a class="float-right modify-link" data-rowId="<%= role.getRoleId() %>" href="javascript:;"><%= removeCommerceUserSegmentCriterionRoleIcon %></a>
-		</liferay-ui:search-container-column-text>
+		<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+			<liferay-ui:search-container-column-text>
+				<a class="float-right modify-link" data-rowId="<%= role.getRoleId() %>" href="javascript:;"><%= removeCommerceUserSegmentCriterionRoleIcon %></a>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator
@@ -51,101 +53,103 @@ List<Role> organizationRoles = roleCommerceUserSegmentCriterionTypeDisplayContex
 	/>
 </liferay-ui:search-container>
 
-<aui:button name="selectCommerceUserSegmentCriterionTypeOrganizationRole" value="select" />
+<aui:button disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="selectCommerceUserSegmentCriterionTypeOrganizationRole" value="select" />
 
-<aui:script use="liferay-item-selector-dialog">
-	$('#<portlet:namespace />selectCommerceUserSegmentCriterionTypeOrganizationRole').on(
-		'click',
-		function(event) {
-			event.preventDefault();
+<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+	<aui:script use="liferay-item-selector-dialog">
+		$('#<portlet:namespace />selectCommerceUserSegmentCriterionTypeOrganizationRole').on(
+			'click',
+			function(event) {
+				event.preventDefault();
 
-			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-				{
-					eventName: 'rolesSelectItem',
-					on: {
-						selectedItemChange: function(event) {
-							var selectedItems = event.newVal;
+				var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+					{
+						eventName: 'rolesSelectItem',
+						on: {
+							selectedItemChange: function(event) {
+								var selectedItems = event.newVal;
 
-							if (selectedItems) {
-								var A = AUI();
+								if (selectedItems) {
+									var A = AUI();
 
-								A.Array.each(
-									selectedItems,
-									function(item, index, selectedItems) {
-										<portlet:namespace />addCommerceUserSegmentCriterionTypeOrganizationRole(item);
-									}
-								);
+									A.Array.each(
+										selectedItems,
+										function(item, index, selectedItems) {
+											<portlet:namespace />addCommerceUserSegmentCriterionTypeOrganizationRole(item);
+										}
+									);
+								}
 							}
-						}
-					},
-					title: '<liferay-ui:message arguments="organization-role" key="select-x" />',
-					url: '<%= roleCommerceUserSegmentCriterionTypeDisplayContext.getItemSelectorUrl(RoleConstants.TYPE_ORGANIZATION) %>'
-				}
-			);
+						},
+						title: '<liferay-ui:message arguments="organization-role" key="select-x" />',
+						url: '<%= roleCommerceUserSegmentCriterionTypeDisplayContext.getItemSelectorUrl(RoleConstants.TYPE_ORGANIZATION) %>'
+					}
+				);
 
-			itemSelectorDialog.open();
+				itemSelectorDialog.open();
+			}
+		);
+	</aui:script>
+
+	<aui:script>
+		var <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds = [];
+		var <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds = [];
+
+		function <portlet:namespace />addCommerceUserSegmentCriterionTypeOrganizationRole(item) {
+			var A = AUI();
+
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceUserSegmentCriterionOrganizationRoleSearchContainer');
+
+			var rowColumns = [];
+
+			rowColumns.push(item.name);
+			rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceUserSegmentCriterionRoleIcon) %></a>');
+
+			A.Array.removeItem(<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds, item.id);
+
+			<portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.push(item.id);
+
+			document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.join(',');
+			document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.join(',');
+
+			searchContainer.addRow(rowColumns, item.id);
+
+			searchContainer.updateDataStore();
 		}
-	);
-</aui:script>
 
-<aui:script>
-	var <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds = [];
-	var <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds = [];
+		function <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRole(roleId) {
+			var A = AUI();
 
-	function <portlet:namespace />addCommerceUserSegmentCriterionTypeOrganizationRole(item) {
-		var A = AUI();
+			A.Array.removeItem(<portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds, roleId);
+
+			<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.push(roleId);
+
+			document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.join(',');
+			document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.join(',');
+		}
+	</aui:script>
+
+	<aui:script use="liferay-search-container">
+		var Util = Liferay.Util;
 
 		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceUserSegmentCriterionOrganizationRoleSearchContainer');
 
-		var rowColumns = [];
+		var searchContainerContentBox = searchContainer.get('contentBox');
 
-		rowColumns.push(item.name);
-		rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceUserSegmentCriterionRoleIcon) %></a>');
+		searchContainerContentBox.delegate(
+			'click',
+			function(event) {
+				var link = event.currentTarget;
 
-		A.Array.removeItem(<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds, item.id);
+				var rowId = link.attr('data-rowId');
 
-		<portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.push(item.id);
+				var tr = link.ancestor('tr');
 
-		document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.join(',');
+				searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-		searchContainer.addRow(rowColumns, item.id);
-
-		searchContainer.updateDataStore();
-	}
-
-	function <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRole(roleId) {
-		var A = AUI();
-
-		A.Array.removeItem(<portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds, roleId);
-
-		<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.push(roleId);
-
-		document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceUserSegmentCriterionTypeRoleIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceUserSegmentCriterionTypeRoleIds.join(',');
-	}
-</aui:script>
-
-<aui:script use="liferay-search-container">
-	var Util = Liferay.Util;
-
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceUserSegmentCriterionOrganizationRoleSearchContainer');
-
-	var searchContainerContentBox = searchContainer.get('contentBox');
-
-	searchContainerContentBox.delegate(
-		'click',
-		function(event) {
-			var link = event.currentTarget;
-
-			var rowId = link.attr('data-rowId');
-
-			var tr = link.ancestor('tr');
-
-			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-			<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRole(rowId);
-		},
-		'.modify-link'
-	);
-</aui:script>
+				<portlet:namespace />deleteCommerceUserSegmentCriterionTypeRole(rowId);
+			},
+			'.modify-link'
+		);
+	</aui:script>
+</c:if>

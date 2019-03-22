@@ -22,6 +22,8 @@ CommerceUserSegmentDisplayContext commerceUserSegmentDisplayContext = (CommerceU
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceUserSegmentCriterion commerceUserSegmentCriterion = (CommerceUserSegmentCriterion)row.getObject();
+CommerceUserSegmentEntry commerceUserSegmentEntry = commerceUserSegmentDisplayContext.getCommerceUserSegmentEntry();
+String editMessage = "edit";
 %>
 
 <liferay-ui:icon-menu
@@ -39,13 +41,21 @@ CommerceUserSegmentCriterion commerceUserSegmentCriterion = (CommerceUserSegment
 			<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId()) %>" />
 		</portlet:renderURL>
 
+		<c:if test="<%= commerceUserSegmentEntry.isSystem() %>">
+
+			<%
+			editMessage = "view";
+			%>
+
+		</c:if>
+
 		<liferay-ui:icon
-			message="edit"
+			message="<%= editMessage %>"
 			url="<%= editURL %>"
 		/>
 	</c:if>
 
-	<c:if test="<%= commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId(), CommerceUserSegmentActionKeys.DELETE_COMMERCE_USER_SEGMENTATION_CRITERION) %>">
+	<c:if test="<%= !commerceUserSegmentEntry.isSystem() && commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId(), CommerceUserSegmentActionKeys.DELETE_COMMERCE_USER_SEGMENTATION_CRITERION) %>">
 		<portlet:actionURL name="editCommerceUserSegmentCriterion" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

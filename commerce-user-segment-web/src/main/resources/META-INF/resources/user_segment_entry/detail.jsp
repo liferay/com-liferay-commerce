@@ -37,11 +37,11 @@ long commerceUserSegmentEntryId = commerceUserSegmentDisplayContext.getCommerceU
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" name="name" />
+				<aui:input autoFocus="<%= true %>" disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="name" />
 
 				<aui:input disabled="<%= commerceUserSegmentEntry.isSystem() %>" helpMessage="key-help" name="key" />
 
-				<aui:input name="priority" />
+				<aui:input disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="priority" />
 
 				<aui:input checked="<%= (commerceUserSegmentEntry == null) ? false : commerceUserSegmentEntry.isActive() %>" disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="active" type="toggle-switch" />
 			</aui:fieldset>
@@ -62,11 +62,13 @@ long commerceUserSegmentEntryId = commerceUserSegmentDisplayContext.getCommerceU
 		</aui:fieldset-group>
 	</div>
 
-	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+	<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+		<aui:button-row>
+			<aui:button cssClass="btn-lg" type="submit" />
 
-		<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
-	</aui:button-row>
+			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+		</aui:button-row>
+	</c:if>
 </aui:form>
 
 <aui:script>

@@ -62,7 +62,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
+				<aui:select disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
 					<%
 					for (CommerceUserSegmentCriterionType commerceUserSegmentCriterionType : commerceUserSegmentCriterionTypes) {
@@ -89,7 +89,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data
 
 				</c:if>
 
-				<aui:input name="priority" />
+				<aui:input disabled="<%= commerceUserSegmentEntry.isSystem() %>" name="priority" />
 
 				<liferay-ui:error-marker
 					key="<%= WebKeys.ERROR_SECTION %>"
@@ -106,32 +106,36 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data
 		</aui:fieldset-group>
 	</div>
 
-	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+	<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+		<aui:button-row>
+			<aui:button cssClass="btn-lg" type="submit" />
 
-		<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
-	</aui:button-row>
+			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+		</aui:button-row>
+	</c:if>
 </aui:form>
 
-<aui:script>
-	function <portlet:namespace />saveCommerceUserSegmentCriterion() {
-		submitForm(document.<portlet:namespace />fm);
-	}
+<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+	<aui:script>
+		function <portlet:namespace />saveCommerceUserSegmentCriterion() {
+			submitForm(document.<portlet:namespace />fm);
+		}
 
-	Liferay.provide(
-		window,
-		'<portlet:namespace />selectType',
-		function() {
-			var A = AUI();
+		Liferay.provide(
+			window,
+			'<portlet:namespace />selectType',
+			function() {
+				var A = AUI();
 
-			var type = A.one('#<portlet:namespace />type').val();
+				var type = A.one('#<portlet:namespace />type').val();
 
-			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
+				var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
-			portletURL.setParameter('type', type);
+				portletURL.setParameter('type', type);
 
-			window.location.replace(portletURL.toString());
-		},
-		['liferay-portlet-url']
-	);
-</aui:script>
+				window.location.replace(portletURL.toString());
+			},
+			['liferay-portlet-url']
+		);
+	</aui:script>
+</c:if>
