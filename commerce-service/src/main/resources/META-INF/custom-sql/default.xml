@@ -21,6 +21,22 @@
 				CommerceCountry.priority
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_A_O">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT CommerceOrder.commerceOrderId) AS COUNT_VALUE
+			FROM
+				CommerceOrder
+			LEFT JOIN
+				CommerceAccount ON
+					CommerceAccount.commerceAccountId = CommerceOrder.commerceAccountId
+			WHERE
+				[$ORDER_STATUS$]
+				[$ACCOUNT_ID$]
+				(CommerceOrder.groupId = ?) AND
+				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
+		]]>
+	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_U_C_O">
 		<![CDATA[
 			SELECT
@@ -71,6 +87,22 @@
 				(CommerceOrder.groupId = ?) AND
 				(CommerceOrder.orderStatus IN ([$ORDER_STATUS$])) AND
 				(CommerceOrderItem.quantity > CommerceOrderItem.shippedQuantity)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_A_O">
+		<![CDATA[
+			SELECT
+				DISTINCT CommerceOrder.*
+			FROM
+				CommerceOrder
+			LEFT JOIN
+				CommerceAccount ON
+					CommerceAccount.commerceAccountId = CommerceOrder.commerceAccountId
+			WHERE
+				[$ORDER_STATUS$]
+				[$ACCOUNT_ID$]
+				(CommerceOrder.groupId = ?) AND
+				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_U_C_O">

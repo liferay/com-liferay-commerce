@@ -545,6 +545,29 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
+
+		QueryDefinition<CommerceOrder> queryDefinition =
+			new QueryDefinition<>();
+
+		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
+		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
+		queryDefinition.setAttribute("groupId", groupId);
+		queryDefinition.setAttribute("keywords", keywords);
+		queryDefinition.setAttribute("orderStatus", orderStatus);
+		queryDefinition.setStart(start);
+		queryDefinition.setEnd(end);
+
+		return commerceOrderFinder.findByG_A_O(queryDefinition);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 
@@ -562,6 +585,27 @@ public class CommerceOrderLocalServiceImpl
 		return commerceOrderFinder.findByG_U_C_O(userId, queryDefinition);
 	}
 
+	@Override
+	public int getUserCommerceOrdersCount(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords) {
+
+		QueryDefinition<CommerceOrder> queryDefinition =
+			new QueryDefinition<>();
+
+		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
+		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
+		queryDefinition.setAttribute("groupId", groupId);
+		queryDefinition.setAttribute("keywords", keywords);
+		queryDefinition.setAttribute("orderStatus", orderStatus);
+
+		return commerceOrderFinder.countByG_A_O(queryDefinition);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public int getUserCommerceOrdersCount(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,

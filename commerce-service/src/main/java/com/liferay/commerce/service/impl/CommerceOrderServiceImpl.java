@@ -329,7 +329,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), commerceAccountId,
+			groupId, commerceAccountId,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, false, keywords, start,
 			end);
 	}
@@ -344,7 +344,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), commerceAccountId,
+			groupId, commerceAccountId,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, false, keywords);
 	}
 
@@ -359,7 +359,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), commerceAccountId,
+			groupId, commerceAccountId,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords, start,
 			end);
 	}
@@ -374,7 +374,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), commerceAccountId,
+			groupId, commerceAccountId,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords);
 	}
 

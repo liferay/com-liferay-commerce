@@ -41,15 +41,123 @@ import java.util.List;
 public class CommerceOrderFinderImpl
 	extends CommerceOrderFinderBaseImpl implements CommerceOrderFinder {
 
+	public static final String COUNT_BY_G_A_O =
+		CommerceOrderFinder.class.getName() + ".countByG_A_O";
+
 	public static final String COUNT_BY_G_U_C_O =
 		CommerceOrderFinder.class.getName() + ".countByG_U_C_O";
 
 	public static final String FIND_BY_G_O =
 		CommerceOrderFinder.class.getName() + ".findByG_O";
 
+	public static final String FIND_BY_G_A_O =
+		CommerceOrderFinder.class.getName() + ".findByG_A_O";
+
 	public static final String FIND_BY_G_U_C_O =
 		CommerceOrderFinder.class.getName() + ".findByG_U_C_O";
 
+	@Override
+	public int countByG_A_O(QueryDefinition<CommerceOrder> queryDefinition) {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), COUNT_BY_G_A_O);
+
+			long commerceAccountId = (Long)queryDefinition.getAttribute(
+				"commerceAccountId");
+
+			if (commerceAccountId > 0) {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]",
+					_getAccountIdClause(commerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]", StringPool.BLANK);
+			}
+
+			Integer orderStatus = (Integer)queryDefinition.getAttribute(
+				"orderStatus");
+
+			if (orderStatus != null) {
+				boolean excludeOrderStatus =
+					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
+
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]",
+					_getOrderStatusClause(orderStatus, excludeOrderStatus));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
+			}
+
+			String[] names = new String[0];
+
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			if (Validator.isNotNull(keywords)) {
+				keywords = StringUtil.quote(
+					StringUtil.lowerCase(keywords), StringPool.PERCENT);
+
+				names = ArrayUtil.append(names, keywords);
+
+				sql = _customSQL.replaceKeywords(
+					sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+					names);
+
+				sql = _customSQL.replaceAndOperator(sql, true);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			long groupId = (Long)queryDefinition.getAttribute("groupId");
+
+			qPos.add(groupId);
+
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by countByG_A_O
+	 */
+	@Deprecated
 	@Override
 	public int countByG_U_C_O(
 		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
@@ -183,6 +291,100 @@ public class CommerceOrderFinderImpl
 		}
 	}
 
+	@Override
+	public List<CommerceOrder> findByG_A_O(
+		QueryDefinition<CommerceOrder> queryDefinition) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_G_A_O);
+
+			long commerceAccountId = (Long)queryDefinition.getAttribute(
+				"commerceAccountId");
+
+			if (commerceAccountId > 0) {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]",
+					_getAccountIdClause(commerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]", StringPool.BLANK);
+			}
+
+			Integer orderStatus = (Integer)queryDefinition.getAttribute(
+				"orderStatus");
+
+			if (orderStatus != null) {
+				boolean excludeOrderStatus =
+					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
+
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]",
+					_getOrderStatusClause(orderStatus, excludeOrderStatus));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
+			}
+
+			String[] names = new String[0];
+
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			if (Validator.isNotNull(keywords)) {
+				keywords = StringUtil.quote(
+					StringUtil.lowerCase(keywords), StringPool.PERCENT);
+
+				names = ArrayUtil.append(names, keywords);
+
+				sql = _customSQL.replaceKeywords(
+					sql, "lower(CommerceAccount.name)", StringPool.LIKE, true,
+					names);
+
+				sql = _customSQL.replaceAndOperator(sql, true);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(CommerceOrderImpl.TABLE_NAME, CommerceOrderImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			long groupId = (Long)queryDefinition.getAttribute("groupId");
+
+			qPos.add(groupId);
+
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
+
+			return (List<CommerceOrder>)QueryUtil.list(
+				q, getDialect(), queryDefinition.getStart(),
+				queryDefinition.getEnd());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by findByG_A_O
+	 */
+	@Deprecated
 	@Override
 	public List<CommerceOrder> findByG_U_C_O(
 		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
