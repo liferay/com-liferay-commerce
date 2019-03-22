@@ -321,6 +321,7 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put("active", true);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
@@ -357,6 +358,7 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put("active", true);
 		attributes.put(Field.NAME, keywords);
 		attributes.put("params", params);
 
