@@ -104,7 +104,7 @@ class CommerceDatalist extends Component {
     _handleSelectData(e) {
         const elementValue = this._getDatasetValue(e.target);
         const element = this._getDataElementFromValue(elementValue);
-        if (this.multiSelect) {
+        if (this.multiselect) {
             return element && e.target.checked ? this.addElement(element) : this.removeElement(element);
         } else {
             return element && this.addElement(element);
@@ -116,10 +116,17 @@ class CommerceDatalist extends Component {
     }
 
     _handleInputKeyup(e) {
-        if(e.keyCode === 13) {
+        if(e.keyCode === 13 && this.dropdownVisibilityState === 'collapsed') {
             return this.emit('submitForm');
         }
-        if (e.keyCode === 8 && !this.query.length && this.multiSelect && this.value.length) {
+        if(e.keyCode === 13 && this.dropdownVisibilityState !== 'collapsed') {
+            if(this._filteredValues.length) {
+                const firstElement = this._getDataElementFromValue(this._filteredValues[0])
+                const firstElementAlreadyAdded = this._filteredValues.reduce((added, el) => added || el.value === firstElement.value, false)
+                return firstElementAlreadyAdded ? this.removeElement(firstElement) : this.addElement(firstElement);
+            }
+        }
+        if (e.keyCode === 8 && !this.query.length && this.multiselect && this.value.length) {
 			this.value = this.value.slice(0, -1);
 		}
         if(e.target.value !== this.query) {
@@ -173,7 +180,7 @@ class CommerceDatalist extends Component {
         return this.emit(
             'valueUpdated',
             {
-                name: this.selectName,
+                name: this.name,
                 value
             }
         );
@@ -183,7 +190,7 @@ class CommerceDatalist extends Component {
         this.emit(
             'dataUpdated',
             {
-                name: this.selectName,
+                name: this.name,
                 data
             }
         )
@@ -198,7 +205,7 @@ class CommerceDatalist extends Component {
     }
 
     addElement(element) {
-        if(this.multiSelect) {
+        if(this.multiselect) {
             this.value = !!this.value 
                 ? [ ...this.value, element ] 
                 : [ element ];
@@ -212,7 +219,7 @@ class CommerceDatalist extends Component {
     }
 
     removeElement(element) {
-        this.value = this.multiSelect 
+        this.value = this.multiselect 
             ? this.value.filter(
                 (el) => el.value !== element.value
             )
@@ -258,7 +265,7 @@ CommerceDatalist.STATE = {
     formId: Config.string(),
     query: Config.string().value(''),
 	label: Config.string(),
-    multiSelect: Config.bool(),
+    multiselect: Config.bool(),
     value: Config.oneOfType(
         [
             elementMock,
@@ -267,7 +274,7 @@ CommerceDatalist.STATE = {
             )
         ]
     ),
-    selectName: Config.string().required(),
+    name: Config.string().required(),
     spritemap: Config.string().required(),
     queryUrl: Config.string()
 };

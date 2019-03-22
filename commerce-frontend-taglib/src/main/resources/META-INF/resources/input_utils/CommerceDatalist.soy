@@ -2,21 +2,21 @@
 
 {template .render}
 	{@param? formId: string}
-	{@param selectName: string}
+	{@param name: string}
 	{@param? _filteredValues: ?}
 	{@param? data: ?}
 	{@param? label: string}
 	{@param spritemap: string}
-	{@param? multiSelect: bool}
+	{@param? multiselect: bool}
 	{@param? value: ?}
 	{@param? query: ?}
 	{@param? dropdownVisibilityState: string}
 
 	{let $inputId kind="text"}
 		{if isNonnull($formId)}
-			{$formId}-{$selectName}
+			{$formId}-{$name}
 		{else}
-			{$selectName}
+			{$name}
 		{/if}
 	{/let}
 
@@ -46,7 +46,7 @@
 					class="commerce-datalist__query-wrapper"
 					ref="queryWrapper"
 				>
-					{if $multiSelect and isNonnull($value)}
+					{if $multiselect and isNonnull($value)}
 						{call .addedValues}
 							{param values: $value /}
 							{param spritemap: $spritemap /}
@@ -57,7 +57,7 @@
 						data-onkeyup="_handleInputKeyup"
 						id="{$inputId}"
 						ref="inputText"
-						{if not $multiSelect and isNonnull($value)}
+						{if not $multiselect and isNonnull($value)}
 							value="{$value.label}"
 						{/if}
 						type="text"
@@ -94,10 +94,10 @@
 			{call .dataTemplate}
 				{param data: $data /}
 				{param filteredValues: $_filteredValues /}
-				{param selectName: $selectName /}
+				{param name: $name /}
 				{param selectedValue: $value /}
 				{param query: $query /}
-				{param multiSelect: $multiSelect /}
+				{param multiselect: $multiselect /}
 			{/call}
 		</div>
 	</div>
@@ -137,11 +137,11 @@
 	]>}
 	{@param? filteredValues: list<string|number>}
 	{@param? selectedValue: ?}
-	{@param selectName: string}
+	{@param name: string}
 	{@param? query: string}
-	{@param? multiSelect: bool}
+	{@param? multiselect: bool}
 
-	{let $dataElementVariant: $multiSelect ? 'multiSelect' : '' /}
+	{let $dataElementVariant: $multiselect ? 'multiselect' : '' /}
 
 	<div class="commerce-datalist__data">
 		{if 
@@ -157,7 +157,7 @@
 								{param value: $dataElement.value /}
 								{param label: $dataElement.label /}
 								{param query: $query /}
-								{param selectName: $selectName /}
+								{param name: $name /}
 								{param selectedValue: $selectedValue /}
 							{/delcall}
 						{/if}
@@ -173,7 +173,7 @@
 						{param value: $dataElement.value /}
 						{param label: $dataElement.label /}
 						{param query: $query /}
-						{param selectName: $selectName /}
+						{param name: $name /}
 						{param selectedValue: $selectedValue /}
 					{/delcall}
 				{/foreach}
@@ -184,17 +184,17 @@
 	</div>
 {/template}
 
-{deltemplate CommerceDatalist.DataElement variant="'multiSelect'"}
+{deltemplate CommerceDatalist.DataElement variant="'multiselect'"}
 	{@param value: string|number}
 	{@param label: string|number}
 	{@param? query: string}
-	{@param selectName: string}
+	{@param name: string}
 	{@param? selectedValue: list<[
 		value: string|number
 	]>}
 
 	{let $inputId kind="text"}
-		{$selectName}-{$value}
+		{$name}-{$value}
 	{/let}
 
 	<label
@@ -225,13 +225,13 @@
 	{@param value: string|number}
 	{@param label: string|number}
 	{@param? query: string}
-	{@param selectName: string}
+	{@param name: string}
 	{@param? selectedValue: [
 		value: string|number
 	]}
 
 	{let $inputId kind="text"}
-		{$selectName}-{$value}
+		{$name}-{$value}
 	{/let}
 	{let $dataElementClasses kind="text"}
 		commerce-datalist__option commerce-datalist__option--select

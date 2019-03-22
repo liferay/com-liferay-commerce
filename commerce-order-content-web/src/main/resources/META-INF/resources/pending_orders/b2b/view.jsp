@@ -20,7 +20,13 @@
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
+
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
+
+<commerce-ui:commerce-datalist
+	name="accounts"
+	multiselect="<%= true %>"
+/>
 
 <commerce-ui:table
 	dataProviderKey="commercePendingOrders"

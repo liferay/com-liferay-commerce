@@ -101,6 +101,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>commerce-datalist</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceDatalistTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>multiselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>mini-cart</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.MiniCartTag</tag-class>
 		<body-content>empty</body-content>

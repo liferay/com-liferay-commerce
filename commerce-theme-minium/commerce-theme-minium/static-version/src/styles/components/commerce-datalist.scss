@@ -3,6 +3,7 @@
 	line-height: 1.6;
 	position: relative;
 	color: $color-fg;
+	position: relative;
 
 	&__input-wrapper {
 		transition: background-color .1s ease-in, border-radius .4s ease-in;
@@ -13,14 +14,17 @@
 		display: grid;
 		grid-template-columns: auto 24px;
 		grid-gap: 10px;
+		z-index: 2;
+		background-color: rgba(255, 255, 255, 0);
 
 		&:focus-within {
 			border-color: $color-disabled;
+			background-color: rgba(255, 255, 255, 1);
 		}
 
 		&.is-expanding, 
 		&.is-expanded {
-			background-color: rgba(255, 255, 255, 0);
+			background-color: rgba(255, 255, 255, 1);
 			border-radius: 8px 8px 0 0;
 
 			.commerce-datalist {
@@ -79,6 +83,10 @@
 		left: 0;
 		right: 0;
 		padding-bottom: 24px;
+		
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 
 	&__query-input {
@@ -87,6 +95,7 @@
 		margin: 0;
 		min-width: calc(100% - 24px);
 		flex-grow: 1;
+		background: transparent;
 
 		&:focus {
 			outline: none;
@@ -120,17 +129,15 @@
 		top: 100%;
 		display: none;
 		background: white;
-
 		border-width: 0 2px 2px 2px;
 		border-style: solid;
 		border-color: $color-border;
 		border-radius: 0 0 8px 8px;
-
 		opacity: 0;
-		
 		transform: translateY(-40px);
 		transform-origin: 50% 0%;
 		transition: all .1s ease-in;
+		z-index: 1;
 
 		&.is-collapsing {
 			display: block;
@@ -199,4 +206,9 @@
 			margin-right: 15px;
 		}
 	}
+
+	&[class*="-icon"]{
+		width: 24px;
+		height: 24px;
+	} 
 }
