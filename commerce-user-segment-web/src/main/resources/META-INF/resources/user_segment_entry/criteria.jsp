@@ -19,6 +19,7 @@
 <%
 CommerceUserSegmentDisplayContext commerceUserSegmentDisplayContext = (CommerceUserSegmentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CommerceUserSegmentEntry commerceUserSegmentEntry = commerceUserSegmentDisplayContext.getCommerceUserSegmentEntry();
 long commerceUserSegmentEntryId = commerceUserSegmentDisplayContext.getCommerceUserSegmentEntryId();
 SearchContainer<CommerceUserSegmentCriterion> commerceUserSegmentCriteriaSearchContainer = commerceUserSegmentDisplayContext.getCommerceUserSegmentCriteriaSearchContainer();
 PortletURL portletURL = commerceUserSegmentDisplayContext.getPortletURL();
@@ -30,22 +31,24 @@ portletURL.setParameter("mvcRenderCommandName", "editCommerceUserSegmentEntry");
 	includeCheckBox="<%= true %>"
 	searchContainerId="commerceUserSegmentCriteria"
 >
-	<liferay-frontend:management-bar-buttons>
-		<liferay-portlet:renderURL var="addCommerceUserSegmentCriterionURL">
-			<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentCriterion" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentEntryId) %>" />
-		</liferay-portlet:renderURL>
+	<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+		<liferay-frontend:management-bar-buttons>
+			<liferay-portlet:renderURL var="addCommerceUserSegmentCriterionURL">
+				<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentCriterion" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentEntryId) %>" />
+			</liferay-portlet:renderURL>
 
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-			<liferay-frontend:add-menu-item
-				title='<%= LanguageUtil.get(request, "add-criterion") %>'
-				url="<%= addCommerceUserSegmentCriterionURL.toString() %>"
-			/>
-		</liferay-frontend:add-menu>
-	</liferay-frontend:management-bar-buttons>
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+				<liferay-frontend:add-menu-item
+					title='<%= LanguageUtil.get(request, "add-criterion") %>'
+					url="<%= addCommerceUserSegmentCriterionURL.toString() %>"
+				/>
+			</liferay-frontend:add-menu>
+		</liferay-frontend:management-bar-buttons>
+	</c:if>
 
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-sort
@@ -74,6 +77,7 @@ portletURL.setParameter("mvcRenderCommandName", "editCommerceUserSegmentEntry");
 
 	<liferay-ui:search-container
 		id="commerceUserSegmentCriteria"
+		rowChecker="<%= commerceUserSegmentCriteriaSearchContainer.getRowChecker() %>"
 		searchContainer="<%= commerceUserSegmentCriteriaSearchContainer %>"
 	>
 		<liferay-ui:search-container-row

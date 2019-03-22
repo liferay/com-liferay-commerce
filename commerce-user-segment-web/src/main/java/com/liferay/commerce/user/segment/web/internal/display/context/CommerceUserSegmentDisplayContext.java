@@ -23,9 +23,9 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.commerce.user.segment.web.internal.display.context.util.CommerceUserSegmentRequestHelper;
+import com.liferay.commerce.user.segment.web.internal.search.CommerceUserSegmentCriterianChecker;
 import com.liferay.commerce.user.segment.web.internal.search.CommerceUserSegmentEntryChecker;
 import com.liferay.commerce.user.segment.web.internal.util.CommerceUserSegmentPortletUtil;
-import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -107,7 +107,7 @@ public class CommerceUserSegmentDisplayContext {
 			orderByComparator);
 
 		_commerceUserSegmentCriteriaSearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
+			new CommerceUserSegmentCriterianChecker(
 				commerceUserSegmentRequestHelper.getLiferayPortletResponse()));
 
 		int total =
