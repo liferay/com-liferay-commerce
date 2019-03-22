@@ -37,10 +37,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.filter.FilterBuilders;
 import com.liferay.portal.search.filter.TermsSetFilterBuilder;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -58,6 +61,8 @@ import org.osgi.service.component.annotations.Reference;
 public class CPRuleIndexer extends BaseIndexer<CPRule> {
 
 	public static final String CLASS_NAME = CPRule.class.getName();
+
+	public static final String FIELD_ACTIVE = "active";
 
 	public CPRuleIndexer() {
 		setDefaultSelectedFieldNames(
@@ -102,6 +107,15 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 			contextBooleanFilter.add(
 				termsSetFilterBuilder.build(), BooleanClauseOccur.MUST);
 		}
+
+		Map<String, Serializable> attributes = searchContext.getAttributes();
+
+		if (attributes.containsKey(FIELD_ACTIVE)) {
+			boolean active = GetterUtil.getBoolean(
+				attributes.get(FIELD_ACTIVE));
+
+			contextBooleanFilter.addRequiredTerm(FIELD_ACTIVE, active);
+		}
 	}
 
 	@Override
@@ -139,6 +153,7 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 
 		Document document = getBaseModelDocument(CLASS_NAME, cpRule);
 
+		document.addKeyword(FIELD_ACTIVE, cpRule.isActive());
 		document.addNumber(Field.ENTRY_CLASS_PK, cpRule.getCPRuleId());
 		document.addText(Field.NAME, cpRule.getName());
 		document.addText(Field.USER_NAME, cpRule.getUserName());
