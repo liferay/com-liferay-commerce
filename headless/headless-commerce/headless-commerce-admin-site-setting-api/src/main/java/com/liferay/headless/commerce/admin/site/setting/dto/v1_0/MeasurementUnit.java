@@ -42,28 +42,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "MeasurementUnit")
 public class MeasurementUnit {
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@JsonIgnore
-	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
-		try {
-			id = idUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long id;
-
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -87,6 +65,28 @@ public class MeasurementUnit {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long groupId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
+		try {
+			id = idUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long id;
 
 	public String getKey() {
 		return key;
@@ -233,14 +233,14 @@ public class MeasurementUnit {
 
 		sb.append("{");
 
-		sb.append("\"id\": ");
-
-		sb.append(id);
-		sb.append(", ");
-
 		sb.append("\"groupId\": ");
 
 		sb.append(groupId);
+		sb.append(", ");
+
+		sb.append("\"id\": ");
+
+		sb.append(id);
 		sb.append(", ");
 
 		sb.append("\"key\": ");

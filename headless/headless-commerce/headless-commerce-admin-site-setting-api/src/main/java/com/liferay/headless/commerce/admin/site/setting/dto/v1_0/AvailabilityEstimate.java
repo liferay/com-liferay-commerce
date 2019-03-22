@@ -42,28 +42,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AvailabilityEstimate")
 public class AvailabilityEstimate {
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@JsonIgnore
-	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
-		try {
-			id = idUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long id;
-
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -87,6 +65,52 @@ public class AvailabilityEstimate {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long groupId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
+		try {
+			id = idUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long id;
+
+	public Double getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Double priority) {
+		this.priority = priority;
+	}
+
+	@JsonIgnore
+	public void setPriority(
+		UnsafeSupplier<Double, Exception> priorityUnsafeSupplier) {
+
+		try {
+			priority = priorityUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Double priority;
 
 	public Map<String, String> getTitle() {
 		return title;
@@ -113,53 +137,29 @@ public class AvailabilityEstimate {
 	@NotNull
 	protected Map<String, String> title;
 
-	public Double getPriority() {
-		return priority;
-	}
-
-	public void setPriority(Double priority) {
-		this.priority = priority;
-	}
-
-	@JsonIgnore
-	public void setPriority(
-		UnsafeSupplier<Double, Exception> priorityUnsafeSupplier) {
-
-		try {
-			priority = priorityUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Double priority;
-
 	public String toString() {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
-
-		sb.append("\"id\": ");
-
-		sb.append(id);
-		sb.append(", ");
 
 		sb.append("\"groupId\": ");
 
 		sb.append(groupId);
 		sb.append(", ");
 
-		sb.append("\"title\": ");
+		sb.append("\"id\": ");
 
-		sb.append(title);
+		sb.append(id);
 		sb.append(", ");
 
 		sb.append("\"priority\": ");
 
 		sb.append(priority);
+		sb.append(", ");
+
+		sb.append("\"title\": ");
+
+		sb.append(title);
 
 		sb.append("}");
 

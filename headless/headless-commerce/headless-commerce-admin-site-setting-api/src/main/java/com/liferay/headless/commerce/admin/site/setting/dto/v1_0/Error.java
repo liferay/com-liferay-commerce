@@ -42,20 +42,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Error")
 public class Error {
 
-	public String getMessage() {
-		return message;
+	@Schema(description = "Internal error code mapping")
+	public Integer getErrorCode() {
+		return errorCode;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setErrorCode(Integer errorCode) {
+		this.errorCode = errorCode;
 	}
 
 	@JsonIgnore
-	public void setMessage(
-		UnsafeSupplier<String, Exception> messageUnsafeSupplier) {
+	public void setErrorCode(
+		UnsafeSupplier<Integer, Exception> errorCodeUnsafeSupplier) {
 
 		try {
-			message = messageUnsafeSupplier.get();
+			errorCode = errorCodeUnsafeSupplier.get();
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -65,7 +66,7 @@ public class Error {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@NotNull
-	protected String message;
+	protected Integer errorCode;
 
 	public String getErrorDescription() {
 		return errorDescription;
@@ -91,6 +92,31 @@ public class Error {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@NotNull
 	protected String errorDescription;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@JsonIgnore
+	public void setMessage(
+		UnsafeSupplier<String, Exception> messageUnsafeSupplier) {
+
+		try {
+			message = messageUnsafeSupplier.get();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@NotNull
+	protected String message;
 
 	@Schema(description = "HTTP Status code")
 	public Integer getStatus() {
@@ -118,42 +144,14 @@ public class Error {
 	@NotNull
 	protected Integer status;
 
-	@Schema(description = "Internal error code mapping")
-	public Integer getErrorCode() {
-		return errorCode;
-	}
-
-	public void setErrorCode(Integer errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	@JsonIgnore
-	public void setErrorCode(
-		UnsafeSupplier<Integer, Exception> errorCodeUnsafeSupplier) {
-
-		try {
-			errorCode = errorCodeUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
-	protected Integer errorCode;
-
 	public String toString() {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
 
-		sb.append("\"message\": ");
+		sb.append("\"errorCode\": ");
 
-		sb.append("\"");
-		sb.append(message);
-		sb.append("\"");
+		sb.append(errorCode);
 		sb.append(", ");
 
 		sb.append("\"errorDescription\": ");
@@ -163,14 +161,16 @@ public class Error {
 		sb.append("\"");
 		sb.append(", ");
 
+		sb.append("\"message\": ");
+
+		sb.append("\"");
+		sb.append(message);
+		sb.append("\"");
+		sb.append(", ");
+
 		sb.append("\"status\": ");
 
 		sb.append(status);
-		sb.append(", ");
-
-		sb.append("\"errorCode\": ");
-
-		sb.append(errorCode);
 
 		sb.append("}");
 
