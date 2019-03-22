@@ -1,9 +1,9 @@
 .price {
 	&__value {
 		font-weight: 600;
-		margin-right: 10px;
 		font-weight: bold;
-		
+		margin-right: 10px;
+
 		&--big {
 			font-size: 18px;
 		}
@@ -17,9 +17,9 @@
 		}
 
 		&--inactive {
-			text-decoration: line-through;
-			font-weight: normal;
 			color: $color-fg-alt;
+			font-weight: normal;
+			text-decoration: line-through;
 		}
 	}
 }

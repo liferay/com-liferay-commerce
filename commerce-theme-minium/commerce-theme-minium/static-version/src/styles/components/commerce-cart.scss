@@ -43,7 +43,7 @@
 		box-shadow: 0 0 0 $color-shadow;
 		transform: translateX(100%);
 	}
-	
+
 	.rtl &:not(.is-open) {
 		transform: translateX(-100%);
 	}

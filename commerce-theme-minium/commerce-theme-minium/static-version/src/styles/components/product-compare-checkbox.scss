@@ -8,35 +8,35 @@
 	padding: 10px;
 	position: relative;
 	transition: background $micro-transition;
-	
+
 	&__input {
 		position: relative;
-	
+
 		.minium-card &::before {
 			background-color: rgba(157, 158, 158, 0.5);
-			content: '';
 			border-radius: 50%;
-			position: absolute;
-			top: 0;
-			right: 0;
-			left: 0;
 			bottom: 0;
-			transition: all $micro-transition;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
 			transform: scale(0);
+			transition: all $micro-transition;
 			z-index: -1;
 		}
 
 		.minium-card &:checked::before {
 			background-color: $color-theme;
 		}
-	
+
 		.minium-card &:hover {
 			&::before {
 				transform: scale(3);
 			}
 		}
 	}
-	
+
 	&__label {
 		color: inherit;
 		font-size: 14px;

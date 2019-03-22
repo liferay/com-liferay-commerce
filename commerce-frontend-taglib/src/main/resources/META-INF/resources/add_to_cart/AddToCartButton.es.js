@@ -77,7 +77,9 @@ class AddToCartButton extends Component {
 	}
 
 	_handleBtnFocusout(e) {
+
 		// Timeout needed to avoid flickering when the focus change
+
 		this.closingTimeout = setTimeout(
 			() => this._disableEditMode(),
 			100

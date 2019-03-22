@@ -105,7 +105,7 @@ class SearchBar extends Component {
 					this._removeOpenButtonListener();
 					this.refs.searchInput.focus();
 				},
-			0);
+				0);
 		}
 		else {
 			window.removeEventListener('click', this._handleClickOutside);

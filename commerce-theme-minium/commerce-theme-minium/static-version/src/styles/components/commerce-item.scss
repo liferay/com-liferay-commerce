@@ -17,14 +17,14 @@
 	transition: max-height .2s ease-in, padding .1s ease-in;
 
 	&__image {
-		grid-area: image;
 		align-self: center;
+		background-position: 50%;
+		background-size: cover;
 		border-radius: 4px;
+		grid-area: image;
+		height: 80px;
 		margin: auto;
 		width: 80px;
-		height: 80px;
-		background-size: cover;
-		background-position: 50%;
 	}
 
 	&__content {
@@ -52,8 +52,8 @@
 	}
 
 	&__errors {
-		grid-column: 1/3;
 		font-weight: 600;
+		grid-column: 1/3;
 		color: $color-mood-bad
 	}
 
