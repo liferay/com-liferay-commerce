@@ -65,6 +65,7 @@
 				</span>
 			{/if}
 		</div>
+
 		<div class="commerce-cart-item__actions">
 			{call QuantitySelector.render}
 				{param events: [
@@ -78,6 +79,7 @@
 			{/call}
 			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}"></button>
 		</div>
+
 		<div class="commerce-cart-item__price">
 			{if $updating}
 				{call Loader.render}
@@ -90,6 +92,7 @@
 				{/call}
 			{/if}
 		</div>
+
 		<div class="commerce-cart-item__cancel-delete">
 			{msg desc="The Element Has Been Removed"}the-element-has-been-removed{/msg}
 			<button class="commerce-button commerce-button--inline" data-onclick="{$_handleCancelDeletion}">

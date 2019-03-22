@@ -9,7 +9,7 @@ class QuantitySelector extends Component {
 			this.quantity = this.allowedQuantities ? this.allowedQuantities[0] : this.minQuantity;
 			this._updateQuantity(this.quantity);
 		}
-		return !!this.quantity
+		return !!this.quantity;
 	}
 
 	syncQuantity() {

@@ -78,15 +78,15 @@ class CommerceTable extends Component {
 				method: 'GET'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			updatedItems => {
-				this.items = updatedItems;
-			}
-		)
-		.catch(
-			err => {}
-		);
+			.then(response => response.json())
+			.then(
+				updatedItems => {
+					this.items = updatedItems;
+				}
+			)
+			.catch(
+				err => {}
+			);
 	}
 
 }

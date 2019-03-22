@@ -75,9 +75,7 @@ public class CommerceCartResourceUtil {
 
 			errorMessages = ArrayUtil.append(
 				errorMessages,
-				commerceOrderValidatorResult.getLocalizedMessage()
-			
-				);
+				commerceOrderValidatorResult.getLocalizedMessage());
 		}
 
 		return errorMessages;
@@ -86,8 +84,7 @@ public class CommerceCartResourceUtil {
 	protected List<Product> getProducts(
 			CommerceOrder commerceOrder, Locale locale,
 			CommerceContext commerceContext)
-		throws Exception
-		{
+		throws Exception {
 
 		List<Product> products = new ArrayList<>();
 
@@ -97,10 +94,7 @@ public class CommerceCartResourceUtil {
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			PriceModel prices = _productHelper.getPrice(
 				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), 
-				commerceContext, 
-				locale
-			);
+				commerceOrderItem.getQuantity(), commerceContext, locale);
 
 			ProductSettingsModel settings =
 				_productHelper.getProductSettingsModel(
