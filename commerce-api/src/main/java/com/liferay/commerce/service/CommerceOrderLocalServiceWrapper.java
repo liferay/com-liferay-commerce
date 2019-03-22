@@ -507,6 +507,19 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
+		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
+			commerceAccountId, orderStatus, excludeOrderStatus, keywords,
+			start, end);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
@@ -514,6 +527,17 @@ public class CommerceOrderLocalServiceWrapper
 			keywords, start, end);
 	}
 
+	@Override
+	public int getUserCommerceOrdersCount(long groupId, long commerceAccountId,
+		Integer orderStatus, boolean excludeOrderStatus, String keywords) {
+		return _commerceOrderLocalService.getUserCommerceOrdersCount(groupId,
+			commerceAccountId, orderStatus, excludeOrderStatus, keywords);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public int getUserCommerceOrdersCount(long groupId, long userId,
 		long commerceAccountId, Integer orderStatus,

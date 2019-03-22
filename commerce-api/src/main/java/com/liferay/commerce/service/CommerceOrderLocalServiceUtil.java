@@ -471,6 +471,18 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
+		return getService()
+				   .getUserCommerceOrders(groupId, commerceAccountId,
+			orderStatus, excludeOrderStatus, keywords, start, end);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return getService()
@@ -478,6 +490,18 @@ public class CommerceOrderLocalServiceUtil {
 			orderStatus, excludeOrderStatus, keywords, start, end);
 	}
 
+	public static int getUserCommerceOrdersCount(long groupId,
+		long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords) {
+		return getService()
+				   .getUserCommerceOrdersCount(groupId, commerceAccountId,
+			orderStatus, excludeOrderStatus, keywords);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static int getUserCommerceOrdersCount(long groupId, long userId,
 		long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords) {

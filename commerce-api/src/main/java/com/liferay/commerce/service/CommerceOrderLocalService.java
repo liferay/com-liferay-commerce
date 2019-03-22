@@ -388,10 +388,27 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserCommerceOrders(long groupId,
+		long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end);
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
 		long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, long commerceAccountId,
+		Integer orderStatus, boolean excludeOrderStatus, String keywords);
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
 		long commerceAccountId, Integer orderStatus,
