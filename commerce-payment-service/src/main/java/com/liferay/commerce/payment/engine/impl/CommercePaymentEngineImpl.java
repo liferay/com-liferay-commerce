@@ -427,6 +427,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		if ((commercePaymentMethod == null) ||
 			!commercePaymentMethod.isProcessPaymentEnabled()) {
 
+			_completeOrderWithoutPaymentMethod(commerceOrderId);
+
 			return _commercePaymentUtils.emptyResult(commerceOrderId);
 		}
 
