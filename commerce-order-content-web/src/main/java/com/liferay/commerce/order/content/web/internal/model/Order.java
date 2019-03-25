@@ -31,6 +31,7 @@ public class Order {
 		_status = status;
 		_amount = amount;
 		_href = href;
+		_title = String.valueOf(orderId);
 	}
 
 	public String getAccountName() {
@@ -65,6 +66,10 @@ public class Order {
 		return _status;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
 	private final String _accountName;
 	private final String _amount;
 	private final String _author;
@@ -73,5 +78,6 @@ public class Order {
 	private final long _orderId;
 	private final String _orderStatus;
 	private final String _status;
+	private final String _title;
 
 }
