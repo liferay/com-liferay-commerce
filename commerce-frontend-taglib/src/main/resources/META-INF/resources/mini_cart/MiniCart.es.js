@@ -24,7 +24,7 @@ class Cart extends Component {
 		}
 	}
 
-	toggleCart() {
+	_handleToggleCart() {
 		return this._open ? this._closeCart() : this._openCart();
 	}
 

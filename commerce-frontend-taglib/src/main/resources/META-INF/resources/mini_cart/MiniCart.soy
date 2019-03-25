@@ -41,6 +41,7 @@
 	{@param? _handleSubmitQuantity: any}
 	{@param? _handleDeleteItem: any}
 	{@param? _handleCancelItemDeletion: any}
+	{@param? _handleToggleCart: any}
 
 	{let $formattedProductsQuantity : isNonnull($productsQuantity) ? $productsQuantity : 0 /}
 
@@ -63,8 +64,8 @@
 	<div class="mini-cart-wrapper" id="mini-cart-wrapper">
 		<button
 			class="commerce-topbar-button{$openCartButtonModifiers}"
-			data-badge-count={$formattedProductsQuantity}
-			data-onclick="toggleCart"
+			data-badge-count="{$formattedProductsQuantity}"
+			data-onclick="{$_handleToggleCart}"
 		>
 			{call ClayIcon.render}
 				{param spritemap: $spritemap /}
@@ -75,7 +76,7 @@
 		<div class="commerce-cart{$cartModifiers}">
 			<button
 				class="commerce-topbar-button commerce-cart__close"
-				data-onclick="toggleCart"
+				data-onclick="{$_handleToggleCart}"
 			>
 				{call ClayIcon.render}
 					{param spritemap: $spritemap /}
