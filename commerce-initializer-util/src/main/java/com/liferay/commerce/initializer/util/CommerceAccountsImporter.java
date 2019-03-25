@@ -201,7 +201,7 @@ public class CommerceAccountsImporter {
 					serviceContext.getCompanyId(), relatedOrganization);
 
 			if (organization == null) {
-				_organizationLocalService.addOrganization(
+				organization = _organizationLocalService.addOrganization(
 					serviceContext.getUserId(), 0, name,
 					OrganizationConstants.TYPE_ORGANIZATION, 0, 0,
 					ListTypeConstants.ORGANIZATION_STATUS_DEFAULT,
