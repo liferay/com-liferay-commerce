@@ -15,7 +15,11 @@
 package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Category;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -34,27 +38,25 @@ public interface CatalogRuleResource {
 
 	public Response deleteCatalogRule(Long id) throws Exception;
 
-	public Response getCatalogRule(Long id) throws Exception;
+	public CatalogRule getCatalogRule(Long id) throws Exception;
 
-	public Response updateMediaType1CatalogRule(
+	public Response updateCatalogRule(
 			Long id, CatalogRule catalogRule)
 		throws Exception;
 
-	public Response updateMediaType2CatalogRule(
-			Long id, CatalogRule catalogRule)
+	public Page<Category> getCatalogRuleCategories(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public Response getCatalogRuleCategories(Long id) throws Exception;
-
-	public Response getCatalogRuleUserSegments(Long id) throws Exception;
-
-	public Response getCatalogRules(Long groupId) throws Exception;
-
-	public Response upsertMediaType1CatalogRule(
-			Long groupId, CatalogRule catalogRule)
+	public Page<UserSegment> getCatalogRuleUserSegments(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public Response upsertMediaType2CatalogRule(
+	public Page<CatalogRule> getCatalogRules(
+			Long groupId, Pagination pagination)
+		throws Exception;
+
+	public CatalogRule upsertCatalogRule(
 			Long groupId, CatalogRule catalogRule)
 		throws Exception;
 

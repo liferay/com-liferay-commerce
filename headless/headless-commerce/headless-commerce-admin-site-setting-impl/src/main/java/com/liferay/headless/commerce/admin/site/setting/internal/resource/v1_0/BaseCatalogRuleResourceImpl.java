@@ -15,19 +15,27 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Category;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.CatalogRuleResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
 import java.net.URI;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -74,36 +82,19 @@ public abstract class BaseCatalogRuleResourceImpl
 	@Path("/catalogRule/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response getCatalogRule(@NotNull @PathParam("id") Long id)
+	public CatalogRule getCatalogRule(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new CatalogRule();
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@PUT
 	@Path("/catalogRule/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response updateMediaType1CatalogRule(
-			@NotNull @PathParam("id") Long id, CatalogRule catalogRule)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@PUT
-	@Path("/catalogRule/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response updateMediaType2CatalogRule(
+	public Response updateCatalogRule(
 			@NotNull @PathParam("id") Long id, CatalogRule catalogRule)
 		throws Exception {
 
@@ -114,74 +105,70 @@ public abstract class BaseCatalogRuleResourceImpl
 
 	@Override
 	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
 	@Path("/catalogRule/{id}/category")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response getCatalogRuleCategories(@NotNull @PathParam("id") Long id)
+	public Page<Category> getCatalogRuleCategories(@NotNull @PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
 	@Path("/catalogRule/{id}/userSegment")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response getCatalogRuleUserSegments(
-			@NotNull @PathParam("id") Long id)
+	public Page<UserSegment> getCatalogRuleUserSegments(
+			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
 	@Path("/commerceAdminSiteSetting/{groupId}/catalogRule/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response getCatalogRules(@NotNull @PathParam("groupId") Long groupId)
+	public Page<CatalogRule> getCatalogRules(@NotNull @PathParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/commerceAdminSiteSetting/{groupId}/catalogRule/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response upsertMediaType1CatalogRule(
+	public CatalogRule upsertCatalogRule(
 			@NotNull @PathParam("groupId") Long groupId,
 			CatalogRule catalogRule)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/catalogRule/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response upsertMediaType2CatalogRule(
-			@NotNull @PathParam("groupId") Long groupId,
-			CatalogRule catalogRule)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new CatalogRule();
 	}
 
 	public void setContextCompany(Company contextCompany) {
