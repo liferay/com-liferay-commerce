@@ -1,6 +1,5 @@
 {
 	"dependencies": {
-		"clay": "^2.4.1",
 		"clay-icon": "^2.2.0",
 		"clay-modal": "^2.5.0",
 		"clay-pagination-bar": "^2.4.1",
