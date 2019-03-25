@@ -19,6 +19,8 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.ClassedModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -27,13 +29,19 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+
+import java.net.URI;
+import java.net.URLEncoder;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -49,6 +57,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CPAttachmentFileEntryCreator.class)
 public class CPAttachmentFileEntryCreator {
 
+	@SuppressFBWarnings("PATH_TRAVERSAL_IN")
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 			ClassedModel classedModel, ClassLoader classLoader,
 			String dependenciesPath, String fileName, double priority, int type,
@@ -67,16 +76,39 @@ public class CPAttachmentFileEntryCreator {
 		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
-			LocaleUtil.getSiteDefault(), fileName);
+			serviceContext.getLocale(), fileName);
 
-		InputStream inputStream = classLoader.getResourceAsStream(
-			dependenciesPath + fileName);
+		InputStream inputStream = null;
+
+		String uriString =
+			dependenciesPath + URLEncoder.encode(fileName, "UTF-8");
+
+		URI uri = new URI(uriString);
+
+		String scheme = uri.getScheme();
+
+		if (StringUtil.equalsIgnoreCase(scheme, "file")) {
+			File file = new File(uri.getPath());
+
+			if (file.exists()) {
+				inputStream = new FileInputStream(file);
+			}
+		}
+		else {
+			inputStream = classLoader.getResourceAsStream(
+				dependenciesPath + fileName);
+		}
 
 		if (inputStream == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("resource not found: " + uri.toString());
+			}
+
 			return null;
 		}
 
 		File file = null;
+
 		FileEntry fileEntry = null;
 
 		try {
@@ -96,6 +128,8 @@ public class CPAttachmentFileEntryCreator {
 			if (file != null) {
 				FileUtil.delete(file);
 			}
+
+			inputStream.close();
 		}
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
@@ -140,6 +174,9 @@ public class CPAttachmentFileEntryCreator {
 
 	private static final String _TEMP_FOLDER_NAME =
 		CPAttachmentFileEntryCreator.class.getName();
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPAttachmentFileEntryCreator.class);
 
 	@Reference
 	private CPAttachmentFileEntryLocalService
