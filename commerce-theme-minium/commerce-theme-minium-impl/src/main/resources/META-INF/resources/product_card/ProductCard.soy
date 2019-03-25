@@ -145,23 +145,25 @@
 			</div>
 		{/if}
 
-		<div class="minium-card__actions">
-			{if isNonnull($sku) and  isNonnull($skuId)}
-				{call AddToCartButton.render}
-					{param accountId: $accountId /}
-					{param orderId: $orderId /}
-					{param cartAPI: $cartAPI /}
-					{param quantity: 0 /}
-					{param editMode: false /}
-					{param settings: $settings /}
-					{param productId: $skuId /}
-				{/call}
-			{else}
-				<a class="commerce-button commerce-button--outline" href="{$detailsLink}">
-					{msg desc="View all variants"}view-all-variants{/msg}
-				</a>
-			{/if}
-		</div>
+		{if $addToCartButtonVisible}
+			<div class="minium-card__actions">
+				{if isNonnull($sku) and  isNonnull($skuId)}
+					{call AddToCartButton.render}
+						{param accountId: $accountId /}
+						{param orderId: $orderId /}
+						{param cartAPI: $cartAPI /}
+						{param quantity: 0 /}
+						{param editMode: false /}
+						{param settings: $settings /}
+						{param productId: $skuId /}
+					{/call}
+				{else}
+					<a class="commerce-button commerce-button--outline" href="{$detailsLink}">
+						{msg desc="View all variants"}view-all-variants{/msg}
+					</a>
+				{/if}
+			</div>
+		{/if}
 	</div>
 
 {/template}
