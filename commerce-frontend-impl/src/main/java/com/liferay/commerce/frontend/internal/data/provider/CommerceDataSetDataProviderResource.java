@@ -78,9 +78,11 @@ public class CommerceDataSetDataProviderResource {
 				Layout layout = _layoutLocalService.fetchLayout(plid);
 
 				themeDisplay.setLayout(layout);
+				themeDisplay.setPlid(plid);
 			}
 
 			themeDisplay.setScopeGroupId(groupId);
+			themeDisplay.setSiteGroupId(groupId);
 
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
