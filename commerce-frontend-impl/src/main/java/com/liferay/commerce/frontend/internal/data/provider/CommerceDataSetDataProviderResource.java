@@ -78,6 +78,7 @@ public class CommerceDataSetDataProviderResource {
 				Layout layout = _layoutLocalService.fetchLayout(plid);
 
 				themeDisplay.setLayout(layout);
+
 				themeDisplay.setPlid(plid);
 			}
 
