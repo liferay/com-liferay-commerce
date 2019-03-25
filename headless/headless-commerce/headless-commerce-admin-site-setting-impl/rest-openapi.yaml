@@ -246,6 +246,20 @@ paths:
           description: Group to filter (Liferay site)
           format: int64
           example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         200:
           description: Successful operation
@@ -545,6 +559,20 @@ paths:
           description: The resource Id
           format: int64
           example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         200:
           description: Successful operation
@@ -611,6 +639,20 @@ paths:
           description: The resource Id
           format: int64
           example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         200:
           description: Successful operation
@@ -677,6 +719,20 @@ paths:
           description: Group to filter (Liferay site)
           format: int64
           example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         200:
           description: Successful operation
@@ -2783,6 +2839,22 @@ components:
         type: boolean
         description: Active to filter
         example: true
+    pageQueryParam:
+      name: page
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+    pageSizeQueryParam:
+      name: pageSize
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
     typeQueryParam:
       name: type
       in: query
