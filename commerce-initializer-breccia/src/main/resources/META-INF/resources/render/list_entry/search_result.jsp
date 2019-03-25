@@ -43,13 +43,13 @@ String quantityInputId = renderResponse.getNamespace() + cpDefinitionId + "Quant
 						<liferay-ui:message key="multiple" />
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:message arguments="<%= cpSku.getSku() %>" key="sku-x" translateArguments="<%= false %>" />
+						<liferay-ui:message arguments="<%= HtmlUtil.escape(cpSku.getSku()) %>" key="sku-x" translateArguments="<%= false %>" />
 					</c:otherwise>
 				</c:choose>
 			</p>
 
 			<div class="card-title">
-				<a href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>"><%= cpCatalogEntry.getName() %></a>
+				<a href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></a>
 			</div>
 		</div>
 

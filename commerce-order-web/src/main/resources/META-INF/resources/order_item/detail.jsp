@@ -32,7 +32,7 @@ if (Validator.isNull(redirect)) {
 
 portletDisplay.setURLBack(redirect);
 
-String title = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) + " - " + commerceOrderItem.getSku();
+String title = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) + " - " + HtmlUtil.escape(commerceOrderItem.getSku());
 
 renderResponse.setTitle(title);
 %>

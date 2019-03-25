@@ -57,7 +57,7 @@
 									<a href="${productURL}">${title}</a>
 								</div>
 
-								<div class="table-text">${languageUtil.get(request, "sku")} ${curCommerceOrderItem.getSku()}</div>
+								<div class="table-text">${languageUtil.get(request, "sku")} ${HtmlUtil.escape(curCommerceOrderItem.getSku())}</div>
 							</td>
 							<td class="quantity-column table-cell-expand">
 								<@liferay_commerce_cart["quantity-control"] commerceOrderItemId=curCommerceOrderItem.getCommerceOrderItemId() />

@@ -36,10 +36,10 @@
 			</div>
 
 			<div class="col-lg-6 col-md-5">
-				<h1>${cpDefinition.getName()}</h1>
+				<h1>${HtmlUtil.escape(cpDefinition.getName())}</h1>
 
 				<#if cpInstance??>
-					<h4 class="sku">${cpInstance.getSku()}</h4>
+					<h4 class="sku">${HtmlUtil.escape(cpInstance.getSku())}</h4>
 
 					<div class="price">
 						<@liferay_commerce["price"]

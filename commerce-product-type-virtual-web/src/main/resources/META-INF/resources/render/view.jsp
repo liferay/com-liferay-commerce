@@ -68,11 +68,11 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 			</div>
 
 			<div class="col-lg-6 col-md-5">
-				<h1><%= cpCatalogEntry.getName() %></h1>
+				<h1><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></h1>
 
 				<c:choose>
 					<c:when test="<%= cpSku != null %>">
-						<h4 class="sku"><%= cpSku.getSku() %></h4>
+						<h4 class="sku"><%= HtmlUtil.escape(cpSku.getSku()) %></h4>
 
 						<div class="price"><liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
 

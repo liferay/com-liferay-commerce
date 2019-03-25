@@ -50,7 +50,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 
 	<div class="autofit-col autofit-col-expand">
 		<a class="compare-link" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
-			<%= cpCatalogEntry.getName() %>
+			<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 		</a>
 	</div>
 </div>

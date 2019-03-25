@@ -17,7 +17,7 @@
 <liferay-ui:search-container-column-text
 	cssClass="important table-cell-content"
 	href="<%= rowURL %>"
-	property="sku"
+	value="<%= HtmlUtil.escape(cpInstance.getSku()) %>"
 />
 
 <%

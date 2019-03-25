@@ -89,7 +89,7 @@ List<CPCatalogEntry> catalogEntries = cpPublisherConfigurationDisplayContext.get
 		<liferay-ui:search-container-column-text
 			cssClass="table-cell-content"
 			name="sku"
-			value="<%= (cpSku == null) ? StringPool.BLANK : cpSku.getSku() %>"
+			value="<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getSku()) %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp
