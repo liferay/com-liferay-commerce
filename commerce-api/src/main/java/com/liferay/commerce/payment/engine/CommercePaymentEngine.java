@@ -149,6 +149,10 @@ public interface CommercePaymentEngine {
 	public boolean suspendSubscription(long commerceSubscriptionEntryId)
 		throws Exception;
 
+	public CommerceOrder updateOrderPaymentStatus(
+			long commerceOrderId, int paymentStatus, String transactionId)
+		throws PortalException;
+
 	public CommercePaymentResult voidTransaction(
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
