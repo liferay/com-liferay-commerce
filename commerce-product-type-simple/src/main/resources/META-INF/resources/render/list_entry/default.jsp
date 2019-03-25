@@ -38,7 +38,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 		<div class="card-row card-row-padded card-row-valign-top">
 			<div class="card-col-content">
 				<a class="truncate-text" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
-					<%= cpCatalogEntry.getName() %>
+					<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 				</a>
 			</div>
 		</div>

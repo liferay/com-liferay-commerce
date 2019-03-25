@@ -28,14 +28,14 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 <div class="container-fluid container-fluid-max-xl">
 	<div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 		<div class="commerce-component-header product-detail-header">
-			<h2 class="component-title"><%= cpCatalogEntry.getName() %></h2>
+			<h2 class="component-title"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></h2>
 
 			<div class="autofit-float autofit-padded-no-gutters autofit-row autofit-row-center product-detail-subheader">
 				<div class="autofit-col">
 					<div class="commerce-model-number">
 						<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-manufacturer-part-number-show><%= LanguageUtil.format(request, "manufacturer-part-number-x", StringPool.BLANK) %></span>
 
-						<span data-text-cp-instance-manufacturer-part-number><%= (cpSku == null) ? StringPool.BLANK : cpSku.getManufacturerPartNumber() %></span>
+						<span data-text-cp-instance-manufacturer-part-number><%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getManufacturerPartNumber()) %></span>
 					</div>
 				</div>
 
@@ -43,7 +43,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 					<div class="commerce-sku">
 						<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-sku-show><%= LanguageUtil.format(request, "sku-x", StringPool.BLANK) %></span>
 
-						<span data-text-cp-instance-sku><%= (cpSku == null) ? StringPool.BLANK : cpSku.getSku() %></span>
+						<span data-text-cp-instance-sku><%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getSku()) %></span>
 					</div>
 				</div>
 			</div>
@@ -179,7 +179,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 				<div class="modal-dialog modal-full-screen" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<div class="modal-title"><%= cpCatalogEntry.getName() %></div>
+							<div class="modal-title"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></div>
 
 							<button aria-label="Close" class="close" data-dismiss="modal" type="button">
 								<aui:icon image="times" markupView="lexicon" />

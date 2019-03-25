@@ -61,7 +61,7 @@ productSkusURL.setParameter("screenNavigationCategoryKey", "skus");
 			>
 				<liferay-frontend:add-menu-item
 					id="addCommercePriceEntry"
-					title='<%= LanguageUtil.format(request, "add-x-to-price-list", cpInstance.getSku(), false) %>'
+					title='<%= LanguageUtil.format(request, "add-x-to-price-list", HtmlUtil.escape(cpInstance.getSku()), false) %>'
 					url="javascript:;"
 				/>
 			</liferay-frontend:add-menu>
@@ -192,7 +192,7 @@ productSkusURL.setParameter("screenNavigationCategoryKey", "skus");
 								}
 							}
 						},
-						title: '<liferay-ui:message arguments="<%= cpInstance.getSku() %>" key="add-x-to-price-list" />',
+						title: '<liferay-ui:message arguments="<%= HtmlUtil.escape(cpInstance.getSku()) %>" key="add-x-to-price-list" />',
 						url: '<%= cpInstanceCommercePriceEntryDisplayContext.getItemSelectorUrl() %>'
 					}
 				);

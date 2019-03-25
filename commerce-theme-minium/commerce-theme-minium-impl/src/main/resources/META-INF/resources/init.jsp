@@ -41,6 +41,7 @@ page import="com.liferay.commerce.theme.minium.internal.js.loader.modules.extend
 page import="com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.PortalUtil" %>
 
 <%@ page import="java.util.HashMap" %><%@

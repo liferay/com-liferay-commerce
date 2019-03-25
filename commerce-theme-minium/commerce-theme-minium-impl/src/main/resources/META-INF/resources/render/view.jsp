@@ -55,17 +55,17 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 				/>
 
 				<h3 class="minium-product-header__tagline" data-text-cp-instance-sku>
-					<%= (cpSku == null) ? StringPool.BLANK : cpSku.getSku() %>
+					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getSku()) %>
 				</h3>
 
-				<h2 class="minium-product-header__title"><%= cpCatalogEntry.getName() %></h2>
+				<h2 class="minium-product-header__title"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></h2>
 
 				<h4 class="minium-product-header__subtitle" data-text-cp-instance-manufacturer-part-number>
-					<%= (cpSku == null) ? StringPool.BLANK : cpSku.getManufacturerPartNumber() %>
+					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getManufacturerPartNumber()) %>
 				</h4>
 
 				<h4 class="minium-product-header__subtitle" data-text-cp-instance-gtin>
-					<%= (cpSku == null) ? StringPool.BLANK : cpSku.getGtin() %>
+					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getGtin()) %>
 				</h4>
 
 				<c:choose>
@@ -328,7 +328,7 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 						%>
 
 							<dt class="specification-term">
-								<%= curCPAttachmentFileEntry.getTitle() %>
+								<%= HtmlUtil.escape(curCPAttachmentFileEntry.getTitle()) %>
 							</dt>
 							<dd class="specification-desc">
 								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= curCPAttachmentFileEntry.getDownloadUrl() %>" />

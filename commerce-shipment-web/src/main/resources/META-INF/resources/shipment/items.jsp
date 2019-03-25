@@ -86,7 +86,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="sku"
-						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : commerceOrderItem.getSku() %>"
+						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : HtmlUtil.escape(commerceOrderItem.getSku()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text

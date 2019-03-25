@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.internal.account.model;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -40,7 +42,7 @@ public class Account {
 	}
 
 	public String getName() {
-		return _name;
+		return HtmlUtil.escape(_name);
 	}
 
 	public boolean getSuccess() {
