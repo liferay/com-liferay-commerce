@@ -16,6 +16,7 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -44,7 +45,9 @@ public interface AvailabilityEstimateResource {
 			Long id, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 
-	public Response getAvailabilityEstimates(Long groupId) throws Exception;
+	public Response getAvailabilityEstimates(
+			Long groupId, Pagination pagination)
+		throws Exception;
 
 	public Response upsertMediaType1AvailabilityEstimate(
 			Long groupId, AvailabilityEstimate availabilityEstimate)

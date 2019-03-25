@@ -103,7 +103,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Response getAvailabilityEstimates(
-			@GraphQLName("groupId") Long groupId)
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -123,7 +125,9 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRuleCategories(@GraphQLName("id") Long id)
+	public Response getCatalogRuleCategories(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -133,7 +137,9 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRuleUserSegments(@GraphQLName("id") Long id)
+	public Response getCatalogRuleUserSegments(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -143,7 +149,10 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRules(@GraphQLName("groupId") Long groupId)
+	public Response getCatalogRules(
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
