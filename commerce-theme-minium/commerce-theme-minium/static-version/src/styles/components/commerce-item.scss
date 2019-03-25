@@ -59,7 +59,6 @@
 
 	&__delete {
 		align-items: center;
-		border: 2px solid currentColor;
 		border-radius: 50%;
 		color: $color-mood-bad;
 		cursor: pointer;
@@ -69,7 +68,7 @@
 		margin: 10px auto 0;
 		padding: 0;
 		position: relative;
-		width: 16px;
+		font-size: 20px;
 
 		&:hover {
 			color: $color-mood-bad;
@@ -79,26 +78,6 @@
 			.commerce-cart-item:not(:hover) &:not(:focus) {
 				opacity: 0;
 			}
-		}
-
-		&::after {
-			transform: translate(-50%, -50%) rotate(-45deg);
-		}
-
-		&::before {
-			transform: translate(-50%, -50%) rotate(45deg);
-		}
-
-		&::after,
-		&::before {
-			background-color: currentColor;
-			content: '';
-			display: block;
-			height: 8px;
-			left: 50%;
-			position: absolute;
-			top: 50%;
-			width: 2px;
 		}
 
 		&.is-disabled {
