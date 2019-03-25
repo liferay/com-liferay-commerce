@@ -86,13 +86,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.cancelPayment(commercePaymentRequest);
 
-		_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
-			commerceOrder.getUserId(), commerceOrderId,
-			CommerceOrderConstants.ORDER_STATUS_CANCELLED, transactionId);
-
-		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+		updateOrderPaymentStatus(
 			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
-			StringPool.BLANK);
+			commercePaymentResult.getAuthTransactionId());
 
 		return commercePaymentResult;
 	}
@@ -155,14 +151,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.capturePayment(commercePaymentRequest);
 
-		_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
-			commerceOrder.getUserId(), commerceOrderId,
-			commercePaymentResult.getNewPaymentStatus(),
-			commercePaymentResult.getAuthTransactionId());
-
-		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+		updateOrderPaymentStatus(
 			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
-			StringPool.BLANK);
+			commercePaymentResult.getAuthTransactionId());
 
 		return commercePaymentResult;
 	}
@@ -199,14 +190,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.completePayment(commercePaymentRequest);
 
-		_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
-			commerceOrder.getUserId(), commerceOrderId,
-			commercePaymentResult.getNewPaymentStatus(),
-			commercePaymentResult.getAuthTransactionId());
-
-		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+		updateOrderPaymentStatus(
 			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
-			StringPool.BLANK);
+			commercePaymentResult.getAuthTransactionId());
 
 		return commercePaymentResult;
 	}
@@ -443,14 +429,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.processPayment(commercePaymentRequest);
 
-		_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
-			commerceOrder.getUserId(), commerceOrderId,
-			commercePaymentResult.getNewPaymentStatus(),
-			commercePaymentResult.getAuthTransactionId());
-
-		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+		updateOrderPaymentStatus(
 			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
-			StringPool.BLANK);
+			commercePaymentResult.getAuthTransactionId());
 
 		return commercePaymentResult;
 	}
@@ -534,6 +515,25 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		return _commerceSubscriptionEngine.suspendRecurringPayment(
 			commerceSubscriptionEntryId);
+	}
+
+	@Override
+	public CommerceOrder updateOrderPaymentStatus(
+			long commerceOrderId, int paymentStatus, String transactionId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		commerceOrder =
+			_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
+				commerceOrder.getUserId(), commerceOrderId, paymentStatus,
+				transactionId);
+
+		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
+			commerceOrderId, paymentStatus, StringPool.BLANK);
+
+		return commerceOrder;
 	}
 
 	@Override
