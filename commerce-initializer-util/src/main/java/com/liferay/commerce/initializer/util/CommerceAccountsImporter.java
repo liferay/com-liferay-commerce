@@ -244,11 +244,13 @@ public class CommerceAccountsImporter {
 								serviceContext.getCompanyId(),
 								externalReferenceCode);
 
-					_commercePriceListAccountRelLocalService.
-						addCommercePriceListAccountRel(
-							commercePriceList.getCommercePriceListId(),
-							commerceAccount.getCommerceAccountId(), 0,
-							serviceContext);
+					if (commercePriceList != null) {
+						_commercePriceListAccountRelLocalService.
+							addCommercePriceListAccountRel(
+								commercePriceList.getCommercePriceListId(),
+								commerceAccount.getCommerceAccountId(), 0,
+								serviceContext);
+					}
 				}
 				catch (NoSuchPriceListException nsple) {
 					_log.error(nsple, nsple);
