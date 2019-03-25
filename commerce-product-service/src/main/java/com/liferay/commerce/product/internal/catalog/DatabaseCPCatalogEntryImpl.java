@@ -18,9 +18,12 @@ import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +31,16 @@ import java.util.Locale;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 
 	public DatabaseCPCatalogEntryImpl(
-		CPDefinition cpDefinition, Locale locale) {
+		CPDefinition cpDefinition,
+		CPInstanceLocalService cpInstanceLocalService, Locale locale) {
 
 		_cpDefinition = cpDefinition;
+		_cpInstanceLocalService = cpInstanceLocalService;
 
 		_languageId = LanguageUtil.getLanguageId(locale);
 	}
@@ -48,7 +54,11 @@ public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 	public List<CPSku> getCPSkus() {
 		List<CPSku> cpSkus = new ArrayList<>();
 
-		List<CPInstance> cpInstances = _cpDefinition.getCPInstances();
+		List<CPInstance> cpInstances =
+			_cpInstanceLocalService.getCPDefinitionInstances(
+				_cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		for (CPInstance cpInstance : cpInstances) {
 			cpSkus.add(new CPSkuImpl(cpInstance));
@@ -123,6 +133,7 @@ public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 	}
 
 	private final CPDefinition _cpDefinition;
+	private final CPInstanceLocalService _cpInstanceLocalService;
 	private final String _languageId;
 
 }

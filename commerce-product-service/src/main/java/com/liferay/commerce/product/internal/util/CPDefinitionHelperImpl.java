@@ -29,6 +29,7 @@ import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
@@ -67,7 +68,8 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 	@Override
 	public CPCatalogEntry getCPCatalogEntry(Document document, Locale locale) {
 		return new IndexCPCatalogEntryImpl(
-			document, _cpDefinitionLocalService, locale);
+			document, _cpDefinitionLocalService, _cpInstanceLocalService,
+			locale);
 	}
 
 	@Override
@@ -81,7 +83,8 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 			return null;
 		}
 
-		return new DatabaseCPCatalogEntryImpl(cpDefinition, locale);
+		return new DatabaseCPCatalogEntryImpl(
+			cpDefinition, _cpInstanceLocalService, locale);
 	}
 
 	@Override
@@ -279,6 +282,9 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 
 	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
 	private CProductLocalService _cProductLocalService;
