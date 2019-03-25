@@ -20,9 +20,12 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +33,17 @@ import java.util.Locale;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	public IndexCPCatalogEntryImpl(
 		Document document, CPDefinitionLocalService cpDefinitionLocalService,
-		Locale locale) {
+		CPInstanceLocalService cpInstanceLocalService, Locale locale) {
 
 		_document = document;
 		_cpDefinitionLocalService = cpDefinitionLocalService;
+		_cpInstanceLocalService = cpInstanceLocalService;
 		_locale = locale;
 	}
 
@@ -58,7 +63,11 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 			return cpSkus;
 		}
 
-		List<CPInstance> cpInstances = cpDefinition.getCPInstances();
+		List<CPInstance> cpInstances =
+			_cpInstanceLocalService.getCPDefinitionInstances(
+				cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		for (CPInstance cpInstance : cpInstances) {
 			cpSkus.add(new CPSkuImpl(cpInstance));
@@ -134,6 +143,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	}
 
 	private final CPDefinitionLocalService _cpDefinitionLocalService;
+	private final CPInstanceLocalService _cpInstanceLocalService;
 	private final Document _document;
 	private final Locale _locale;
 
