@@ -11,12 +11,20 @@
 	{@param? value: ?}
 	{@param? query: ?}
 	{@param? dropdownVisibilityState: string}
+	{@param? additionalClasses: string}
 
 	{let $inputId kind="text"}
 		{if isNonnull($formId)}
 			{$formId}-{$name}
 		{else}
 			{$name}
+		{/if}
+	{/let}
+
+	{let $containerClasses kind="text"}
+		commerce-datalist
+		{if isNonnull($additionalClasses)}
+			{sp}{$additionalClasses}
 		{/if}
 	{/let}
 
@@ -27,7 +35,7 @@
 		{/if}
 	{/let}
 
-	<div class="commerce-datalist">
+	<div class="{$containerClasses}">
 		{if isNonnull($label)}
 			<label
 				for="{$inputId}"

@@ -250,6 +250,7 @@ CommerceDatalist.STATE = {
     _filteredValues: Config.array(
         Config.string()
     ).internal(),
+    additionalClasses: Config.string(),
     apiDebounceTime: Config.number().value(200),
     data: Config.array(
         elementMock
@@ -263,9 +264,10 @@ CommerceDatalist.STATE = {
         ]
     ).value('collapsed'),
     formId: Config.string(),
-    query: Config.string().value(''),
 	label: Config.string(),
     multiselect: Config.bool(),
+    name: Config.string().required(),
+    query: Config.string().value(''),
     value: Config.oneOfType(
         [
             elementMock,
@@ -274,7 +276,6 @@ CommerceDatalist.STATE = {
             )
         ]
     ),
-    name: Config.string().required(),
     spritemap: Config.string().required(),
     queryUrl: Config.string()
 };

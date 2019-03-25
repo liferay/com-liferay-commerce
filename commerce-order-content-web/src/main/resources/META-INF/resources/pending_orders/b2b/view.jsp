@@ -24,9 +24,31 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
 <commerce-ui:commerce-datalist
+	componentId="accountsFilter"
+	additionalClasses="mb-3"
 	name="accounts"
 	multiselect="<%= true %>"
 />
+
+<aui:script>
+	Liferay.componentReady('accountsFilter').then(
+		function(accountsFilter) {
+			console.log(accountsFilter)
+			/*
+			new DataProvider()
+			accountsFilter.setDataProvider()
+
+			addAddressModal.on(
+				'addAddressModalSave',
+				function(formData) {
+					console.log('asd')
+				}
+			);
+			*/
+		}
+	);
+
+</aui:script>
 
 <commerce-ui:table
 	dataProviderKey="commercePendingOrders"

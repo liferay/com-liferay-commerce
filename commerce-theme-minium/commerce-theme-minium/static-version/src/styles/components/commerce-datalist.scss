@@ -45,6 +45,8 @@
 
 	&__icon-wrapper {
 		position: relative;
+		font-size: 20px;
+		line-height: 0;
 	}
 
 	&__icon {
@@ -54,7 +56,9 @@
 		height: 100%;
 		transition: transform .2s ease-in, opacity .2s ease-in;
 		margin-top: -50%;
-
+		align-items: center;
+		display: flex;
+		
 		&--search {
 			transform: translate(0, 130%) scale(.5);
 			opacity: 0;
@@ -120,6 +124,10 @@
 
 	&__delete-value {
 		padding: 0;
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 18px;
+		line-height: 0;
 	}
 
 	&__dropdown {

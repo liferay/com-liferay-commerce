@@ -50,9 +50,16 @@ public class CommerceDatalistTag extends ComponentRendererTag {
 		Map<String, Object> context = getContext();
 		String name = GetterUtil.getString(
 			context.get("name"));
+		String additionalClasses = GetterUtil.getString(
+			context.get("additionalClasses"));
 		boolean multiselect = GetterUtil.getBoolean(
 			context.get("multiselect"));
+		String componentId = GetterUtil.getString(context.get("componentId"));
+
+		setComponentId(componentId);
+
 		putValue( "name", name);
+		putValue( "additionalClasses", additionalClasses);
 		putValue( "multiselect", multiselect);
 		putValue( "spritemap", themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 		setTemplateNamespace("CommerceDatalist.render");
@@ -73,6 +80,14 @@ public class CommerceDatalistTag extends ComponentRendererTag {
 
 	public void setName(String name) {
 		putValue("name", name);
+	}
+
+	public void setComponentId(String componentId) {
+		putValue("componentId", componentId);
+	}
+
+	public void setAdditionalClasses(String additionalClasses) {
+		putValue("additionalClasses", additionalClasses);
 	}
 
 	public void setMultiselect(boolean multiselect) {
