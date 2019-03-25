@@ -85,6 +85,13 @@ public interface CommercePaymentEngine {
 			long commerceOrderId)
 		throws PortalException;
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), this method will be removed
+	 */
+	@Deprecated
 	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
 		throws PortalException;
 

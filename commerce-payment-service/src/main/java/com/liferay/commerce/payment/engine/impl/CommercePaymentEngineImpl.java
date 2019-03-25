@@ -308,14 +308,18 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			subscriptionOrder);
 	}
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), this method will be removed
+	 */
+	@Deprecated
 	@Override
 	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
 		throws PortalException {
 
-		CommercePaymentMethod commercePaymentMethod =
-			_commercePaymentUtils.getCommercePaymentMethod(commerceOrderId);
-
-		return commercePaymentMethod.getOrderStatusUpdateMaxIntervalMinutes();
+		return 0;
 	}
 
 	@Override

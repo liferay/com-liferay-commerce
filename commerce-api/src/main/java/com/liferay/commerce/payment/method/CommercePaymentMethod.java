@@ -83,6 +83,11 @@ public interface CommercePaymentMethod {
 
 	public String getName(Locale locale);
 
+	/**
+	 * @return
+	 * @deprecated As of Mueller (7.2.x), this method will be removed
+	 */
+	@Deprecated
 	public default int getOrderStatusUpdateMaxIntervalMinutes() {
 		return 0;
 	}
