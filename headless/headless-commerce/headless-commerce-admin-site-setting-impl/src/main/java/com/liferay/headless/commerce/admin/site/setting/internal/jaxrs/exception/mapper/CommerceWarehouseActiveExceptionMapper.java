@@ -15,7 +15,7 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.jaxrs.exception.mapper;
 
 import com.liferay.commerce.exception.CommerceWarehouseActiveException;
-import com.liferay.headless.commerce.core.util.exception.mapper.BaseExceptionMapper;
+import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

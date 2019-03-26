@@ -1,6 +1,0 @@
-Bundle-Name: Liferay Headless Commerce Core Utilities
-Bundle-SymbolicName: com.liferay.headless.commerce.core.util
-Bundle-Version: 1.0.0
-Export-Package:\
-	com.liferay.headless.commerce.core.util,\
-	com.liferay.headless.commerce.core.util.exception.mapper
