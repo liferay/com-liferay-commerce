@@ -27,10 +27,10 @@ import javax.portlet.PortletResponse;
 /**
  * @author Alec Sloan
  */
-public class CommerceUserSegmentCriterianChecker
+public class CommerceUserSegmentCriterionChecker
 	extends EmptyOnClickRowChecker {
 
-	public CommerceUserSegmentCriterianChecker(
+	public CommerceUserSegmentCriterionChecker(
 		PortletResponse portletResponse) {
 
 		super(portletResponse);
@@ -60,6 +60,6 @@ public class CommerceUserSegmentCriterianChecker
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceUserSegmentCriterianChecker.class);
+		CommerceUserSegmentCriterionChecker.class);
 
 }
