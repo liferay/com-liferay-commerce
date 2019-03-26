@@ -50,6 +50,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -67,10 +68,12 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public boolean deleteUserSegment(@NotNull @PathParam("id") Long id)
+	public Response deleteUserSegment(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -90,11 +93,13 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public boolean updateUserSegment(
+	public Response updateUserSegment(
 			@NotNull @PathParam("id") Long id, UserSegment userSegment)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -102,12 +107,14 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public boolean deleteUserSegmentCriterion(
+	public Response deleteUserSegmentCriterion(
 			@NotNull @PathParam("id") Long id,
 			@NotNull @PathParam("criterionId") Long criterionId)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override

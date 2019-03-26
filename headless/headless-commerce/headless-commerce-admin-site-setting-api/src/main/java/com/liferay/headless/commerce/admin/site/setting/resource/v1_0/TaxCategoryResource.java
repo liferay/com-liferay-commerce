@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,11 +33,11 @@ import javax.annotation.Generated;
 @Generated("")
 public interface TaxCategoryResource {
 
-	public boolean deleteTaxCategory(Long id) throws Exception;
+	public Response deleteTaxCategory(Long id) throws Exception;
 
 	public TaxCategory getTaxCategory(Long id) throws Exception;
 
-	public boolean updateTaxCategory(Long id, TaxCategory taxCategory)
+	public Response updateTaxCategory(Long id, TaxCategory taxCategory)
 		throws Exception;
 
 	public Page<TaxCategory> getTaxCategories(

@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,11 +33,11 @@ import javax.annotation.Generated;
 @Generated("")
 public interface WarehouseResource {
 
-	public boolean deleteWarehouse(Long id) throws Exception;
+	public Response deleteWarehouse(Long id) throws Exception;
 
 	public Warehouse getWarehouse(Long id) throws Exception;
 
-	public boolean updateWarehouse(Long id, Warehouse warehouse)
+	public Response updateWarehouse(Long id, Warehouse warehouse)
 		throws Exception;
 
 	public Page<Warehouse> getWarehouses(

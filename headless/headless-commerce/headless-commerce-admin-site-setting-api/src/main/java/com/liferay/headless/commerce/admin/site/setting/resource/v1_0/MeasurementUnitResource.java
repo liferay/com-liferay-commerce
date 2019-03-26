@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,11 +33,11 @@ import javax.annotation.Generated;
 @Generated("")
 public interface MeasurementUnitResource {
 
-	public boolean deleteMeasurementUnit(Long id) throws Exception;
+	public Response deleteMeasurementUnit(Long id) throws Exception;
 
 	public MeasurementUnit getMeasurementUnit(Long id) throws Exception;
 
-	public boolean updateMeasurementUnit(
+	public Response updateMeasurementUnit(
 			Long id, MeasurementUnit measurementUnit)
 		throws Exception;
 

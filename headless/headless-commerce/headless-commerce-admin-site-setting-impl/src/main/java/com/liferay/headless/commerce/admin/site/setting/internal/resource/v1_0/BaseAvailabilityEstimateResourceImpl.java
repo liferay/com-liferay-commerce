@@ -49,6 +49,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -66,10 +67,12 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public boolean deleteAvailabilityEstimate(@NotNull @PathParam("id") Long id)
+	public Response deleteAvailabilityEstimate(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -90,12 +93,14 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public boolean updateAvailabilityEstimate(
+	public Response updateAvailabilityEstimate(
 			@NotNull @PathParam("id") Long id,
 			AvailabilityEstimate availabilityEstimate)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
