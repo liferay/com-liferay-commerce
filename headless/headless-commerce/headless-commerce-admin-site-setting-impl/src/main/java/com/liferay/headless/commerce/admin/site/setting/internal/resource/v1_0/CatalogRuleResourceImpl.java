@@ -68,9 +68,7 @@ public class CatalogRuleResourceImpl extends BaseCatalogRuleResourceImpl {
 			@NotNull Long groupId, Pagination pagination)
 		throws Exception {
 
-		// TODO: Implement this
-
-		return super.getCatalogRules(groupId, pagination);
+		return _catalogRuleHelper.getCatalogRules(groupId, pagination);
 	}
 
 	@Override
@@ -97,9 +95,8 @@ public class CatalogRuleResourceImpl extends BaseCatalogRuleResourceImpl {
 			@NotNull Long groupId, CatalogRule catalogRule)
 		throws Exception {
 
-		// TODO: Implement this
-
-		return super.upsertCatalogRule(groupId, catalogRule);
+		return _catalogRuleHelper.upsertCatalogRule(
+			groupId, catalogRule, _user);
 	}
 
 	@Reference
