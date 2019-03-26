@@ -16,10 +16,9 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,23 +31,17 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseResource {
 
-	public Response deleteWarehouse(Long id) throws Exception;
+	public boolean deleteWarehouse(Long id) throws Exception;
 
-	public Response getWarehouse(Long id) throws Exception;
+	public Warehouse getWarehouse(Long id) throws Exception;
 
-	public Response updateMediaType1Warehouse(Long id, Warehouse warehouse)
+	public boolean updateWarehouse(Long id, Warehouse warehouse)
 		throws Exception;
 
-	public Response updateMediaType2Warehouse(Long id, Warehouse warehouse)
+	public Page<Warehouse> getWarehouses(Long groupId, Boolean active)
 		throws Exception;
 
-	public Response getWarehouses(Long groupId, Boolean active)
-		throws Exception;
-
-	public Response upsertMediaType1Warehouse(Long groupId, Warehouse warehouse)
-		throws Exception;
-
-	public Response upsertMediaType2Warehouse(Long groupId, Warehouse warehouse)
+	public Warehouse upsertWarehouse(Long groupId, Warehouse warehouse)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

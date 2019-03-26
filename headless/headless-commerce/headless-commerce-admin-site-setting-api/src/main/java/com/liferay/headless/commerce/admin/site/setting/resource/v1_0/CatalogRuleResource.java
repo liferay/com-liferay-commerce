@@ -23,8 +23,6 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
-import javax.ws.rs.core.Response;
-
 /**
  * To access this resource, run:
  *
@@ -36,12 +34,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface CatalogRuleResource {
 
-	public Response deleteCatalogRule(Long id) throws Exception;
+	public boolean deleteCatalogRule(Long id) throws Exception;
 
 	public CatalogRule getCatalogRule(Long id) throws Exception;
 
-	public Response updateCatalogRule(
-			Long id, CatalogRule catalogRule)
+	public boolean updateCatalogRule(Long id, CatalogRule catalogRule)
 		throws Exception;
 
 	public Page<Category> getCatalogRuleCategories(
@@ -56,8 +53,7 @@ public interface CatalogRuleResource {
 			Long groupId, Pagination pagination)
 		throws Exception;
 
-	public CatalogRule upsertCatalogRule(
-			Long groupId, CatalogRule catalogRule)
+	public CatalogRule upsertCatalogRule(Long groupId, CatalogRule catalogRule)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

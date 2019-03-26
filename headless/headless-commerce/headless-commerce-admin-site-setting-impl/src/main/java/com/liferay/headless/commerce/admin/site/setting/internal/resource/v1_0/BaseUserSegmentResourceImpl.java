@@ -21,6 +21,7 @@ import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
+import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import java.net.URI;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -44,7 +46,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -62,12 +63,10 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response deleteUserSegment(@NotNull @PathParam("id") Long id)
+	public boolean deleteUserSegment(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -75,42 +74,23 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response getUserSegment(@NotNull @PathParam("id") Long id)
+	public UserSegment getUserSegment(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegment();
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@PUT
 	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response updateMediaType1UserSegment(
+	public boolean updateUserSegment(
 			@NotNull @PathParam("id") Long id, UserSegment userSegment)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@PUT
-	@Path("/userSegment/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response updateMediaType2UserSegment(
-			@NotNull @PathParam("id") Long id, UserSegment userSegment)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -118,14 +98,12 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response deleteUserSegmentCriterion(
+	public boolean deleteUserSegmentCriterion(
 			@NotNull @PathParam("id") Long id,
 			@NotNull @PathParam("criterionId") Long criterionId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -133,48 +111,27 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response getUserSegmentCriterion(
+	public UserSegmentCriterion getUserSegmentCriterion(
 			@NotNull @PathParam("id") Long id,
 			@NotNull @PathParam("criterionId") Long criterionId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegmentCriterion();
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/userSegment/{id}/userSegmentCriterion/{criterionId}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response updateMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion updateUserSegmentCriterion(
 			@NotNull @PathParam("id") Long id,
 			@NotNull @PathParam("criterionId") Long criterionId,
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/userSegment/{id}/userSegmentCriterion/{criterionId}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response updateMediaType2UserSegmentCriterion(
-			@NotNull @PathParam("id") Long id,
-			@NotNull @PathParam("criterionId") Long criterionId,
-			UserSegmentCriterion userSegmentCriterion)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegmentCriterion();
 	}
 
 	@Override
@@ -182,44 +139,25 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/userSegment/{id}/userSegmentCriterion")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response getUserSegmentCriteria(@NotNull @PathParam("id") Long id)
+	public Page<UserSegmentCriterion> getUserSegmentCriteria(
+			@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/userSegment/{id}/userSegmentCriterion")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response upsertMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion upsertUserSegmentCriterion(
 			@NotNull @PathParam("id") Long id,
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/userSegment/{id}/userSegmentCriterion")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response upsertMediaType2UserSegmentCriterion(
-			@NotNull @PathParam("id") Long id,
-			UserSegmentCriterion userSegmentCriterion)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegmentCriterion();
 	}
 
 	@Override
@@ -227,44 +165,25 @@ public abstract class BaseUserSegmentResourceImpl
 	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response getUserSegments(@NotNull @PathParam("groupId") Long groupId)
+	public Page<UserSegment> getUserSegments(
+			@NotNull @PathParam("groupId") Long groupId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response upsertMediaType1UserSegment(
+	public UserSegment upsertUserSegment(
 			@NotNull @PathParam("groupId") Long groupId,
 			UserSegment userSegment)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response upsertMediaType2UserSegment(
-			@NotNull @PathParam("groupId") Long groupId,
-			UserSegment userSegment)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegment();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -16,11 +16,10 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -33,27 +32,20 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AvailabilityEstimateResource {
 
-	public Response deleteAvailabilityEstimate(Long id) throws Exception;
+	public boolean deleteAvailabilityEstimate(Long id) throws Exception;
 
-	public Response getAvailabilityEstimate(Long id) throws Exception;
+	public AvailabilityEstimate getAvailabilityEstimate(Long id)
+		throws Exception;
 
-	public Response updateMediaType1AvailabilityEstimate(
+	public boolean updateAvailabilityEstimate(
 			Long id, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 
-	public Response updateMediaType2AvailabilityEstimate(
-			Long id, AvailabilityEstimate availabilityEstimate)
-		throws Exception;
-
-	public Response getAvailabilityEstimates(
+	public Page<AvailabilityEstimate> getAvailabilityEstimates(
 			Long groupId, Pagination pagination)
 		throws Exception;
 
-	public Response upsertMediaType1AvailabilityEstimate(
-			Long groupId, AvailabilityEstimate availabilityEstimate)
-		throws Exception;
-
-	public Response upsertMediaType2AvailabilityEstimate(
+	public AvailabilityEstimate upsertAvailabilityEstimate(
 			Long groupId, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 

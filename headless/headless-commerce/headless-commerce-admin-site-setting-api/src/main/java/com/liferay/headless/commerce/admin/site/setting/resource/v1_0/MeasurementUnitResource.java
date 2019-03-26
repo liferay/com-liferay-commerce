@@ -16,10 +16,9 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,26 +31,18 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface MeasurementUnitResource {
 
-	public Response deleteMeasurementUnit(Long id) throws Exception;
+	public boolean deleteMeasurementUnit(Long id) throws Exception;
 
-	public Response getMeasurementUnit(Long id) throws Exception;
+	public MeasurementUnit getMeasurementUnit(Long id) throws Exception;
 
-	public Response updateMediaType1MeasurementUnit(
+	public boolean updateMeasurementUnit(
 			Long id, MeasurementUnit measurementUnit)
 		throws Exception;
 
-	public Response updateMediaType2MeasurementUnit(
-			Long id, MeasurementUnit measurementUnit)
+	public Page<MeasurementUnit> getMeasurementUnits(Long groupId, Integer type)
 		throws Exception;
 
-	public Response getMeasurementUnits(Long groupId, Integer type)
-		throws Exception;
-
-	public Response upsertMediaType1MeasurementUnit(
-			Long groupId, MeasurementUnit measurementUnit)
-		throws Exception;
-
-	public Response upsertMediaType2MeasurementUnit(
+	public MeasurementUnit upsertMeasurementUnit(
 			Long groupId, MeasurementUnit measurementUnit)
 		throws Exception;
 

@@ -16,10 +16,9 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,26 +31,16 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface TaxCategoryResource {
 
-	public Response deleteTaxCategory(Long id) throws Exception;
+	public boolean deleteTaxCategory(Long id) throws Exception;
 
-	public Response getTaxCategory(Long id) throws Exception;
+	public TaxCategory getTaxCategory(Long id) throws Exception;
 
-	public Response updateMediaType1TaxCategory(
-			Long id, TaxCategory taxCategory)
+	public boolean updateTaxCategory(Long id, TaxCategory taxCategory)
 		throws Exception;
 
-	public Response updateMediaType2TaxCategory(
-			Long id, TaxCategory taxCategory)
-		throws Exception;
+	public Page<TaxCategory> getTaxCategories(Long groupId) throws Exception;
 
-	public Response getTaxCategories(Long groupId) throws Exception;
-
-	public Response upsertMediaType1TaxCategory(
-			Long groupId, TaxCategory taxCategory)
-		throws Exception;
-
-	public Response upsertMediaType2TaxCategory(
-			Long groupId, TaxCategory taxCategory)
+	public TaxCategory upsertTaxCategory(Long groupId, TaxCategory taxCategory)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

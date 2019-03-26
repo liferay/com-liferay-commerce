@@ -38,8 +38,6 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import javax.annotation.Generated;
 
-import javax.ws.rs.core.Response;
-
 import org.osgi.service.component.ComponentServiceObjects;
 
 /**
@@ -98,402 +96,280 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteAvailabilityEstimate(@GraphQLName("id") Long id)
+	public boolean deleteAvailabilityEstimate(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_availabilityEstimateResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			availabilityEstimateResource ->
+				availabilityEstimateResource.deleteAvailabilityEstimate(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateMediaType1AvailabilityEstimate(
+	public boolean updateAvailabilityEstimate(
 			@GraphQLName("id") Long id,
 			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
 				availabilityEstimate)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType2AvailabilityEstimate(
-			@GraphQLName("id") Long id,
-			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
-				availabilityEstimate)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_availabilityEstimateResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			availabilityEstimateResource ->
+				availabilityEstimateResource.updateAvailabilityEstimate(
+					id, availabilityEstimate));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType1AvailabilityEstimate(
+	public AvailabilityEstimate upsertAvailabilityEstimate(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
 				availabilityEstimate)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_availabilityEstimateResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			availabilityEstimateResource ->
+				availabilityEstimateResource.upsertAvailabilityEstimate(
+					groupId, availabilityEstimate));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2AvailabilityEstimate(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
-				availabilityEstimate)
+	public boolean deleteCatalogRule(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> catalogRuleResource.deleteCatalogRule(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteCatalogRule(@GraphQLName("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType1CatalogRule(
+	public boolean updateCatalogRule(
 			@GraphQLName("id") Long id,
 			@GraphQLName("CatalogRule") CatalogRule catalogRule)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType2CatalogRule(
-			@GraphQLName("id") Long id,
-			@GraphQLName("CatalogRule") CatalogRule catalogRule)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> catalogRuleResource.updateCatalogRule(
+				id, catalogRule));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType1CatalogRule(
+	public CatalogRule upsertCatalogRule(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("CatalogRule") CatalogRule catalogRule)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> catalogRuleResource.upsertCatalogRule(
+				groupId, catalogRule));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2CatalogRule(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("CatalogRule") CatalogRule catalogRule)
+	public boolean deleteMeasurementUnit(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.deleteMeasurementUnit(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteMeasurementUnit(@GraphQLName("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType1MeasurementUnit(
+	public boolean updateMeasurementUnit(
 			@GraphQLName("id") Long id,
 			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType2MeasurementUnit(
-			@GraphQLName("id") Long id,
-			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.updateMeasurementUnit(
+					id, measurementUnit));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType1MeasurementUnit(
+	public MeasurementUnit upsertMeasurementUnit(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.upsertMeasurementUnit(
+					groupId, measurementUnit));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2MeasurementUnit(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
+	public boolean deleteUserSegment(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.deleteUserSegment(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteUserSegment(@GraphQLName("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType1UserSegment(
+	public boolean updateUserSegment(
 			@GraphQLName("id") Long id,
 			@GraphQLName("UserSegment") UserSegment userSegment)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.updateUserSegment(
+				id, userSegment));
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateMediaType2UserSegment(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegment") UserSegment userSegment)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteUserSegmentCriterion(
+	public boolean deleteUserSegmentCriterion(
 			@GraphQLName("id") Long id,
 			@GraphQLName("criterionId") Long criterionId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.deleteUserSegmentCriterion(
+					id, criterionId));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response updateMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion updateUserSegmentCriterion(
 			@GraphQLName("id") Long id,
 			@GraphQLName("criterionId") Long criterionId,
 			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
 				userSegmentCriterion)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.updateUserSegmentCriterion(
+					id, criterionId, userSegmentCriterion));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response updateMediaType2UserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Response upsertMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion upsertUserSegmentCriterion(
 			@GraphQLName("id") Long id,
 			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
 				userSegmentCriterion)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.upsertUserSegmentCriterion(
+					id, userSegmentCriterion));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2UserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Response upsertMediaType1UserSegment(
+	public UserSegment upsertUserSegment(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("UserSegment") UserSegment userSegment)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.upsertUserSegment(
+				groupId, userSegment));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2UserSegment(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("UserSegment") UserSegment userSegment)
+	public boolean deleteTaxCategory(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_taxCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			taxCategoryResource -> taxCategoryResource.deleteTaxCategory(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteTaxCategory(@GraphQLName("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType1TaxCategory(
+	public boolean updateTaxCategory(
 			@GraphQLName("id") Long id,
 			@GraphQLName("TaxCategory") TaxCategory taxCategory)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType2TaxCategory(
-			@GraphQLName("id") Long id,
-			@GraphQLName("TaxCategory") TaxCategory taxCategory)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_taxCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			taxCategoryResource -> taxCategoryResource.updateTaxCategory(
+				id, taxCategory));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType1TaxCategory(
+	public TaxCategory upsertTaxCategory(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("TaxCategory") TaxCategory taxCategory)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_taxCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			taxCategoryResource -> taxCategoryResource.upsertTaxCategory(
+				groupId, taxCategory));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType2TaxCategory(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("TaxCategory") TaxCategory taxCategory)
+	public boolean deleteWarehouse(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.deleteWarehouse(id));
 	}
 
 	@GraphQLInvokeDetached
-	public Response deleteWarehouse(@GraphQLName("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType1Warehouse(
+	public boolean updateWarehouse(
 			@GraphQLName("id") Long id,
 			@GraphQLName("Warehouse") Warehouse warehouse)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateMediaType2Warehouse(
-			@GraphQLName("id") Long id,
-			@GraphQLName("Warehouse") Warehouse warehouse)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.updateWarehouse(
+				id, warehouse));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response upsertMediaType1Warehouse(
+	public Warehouse upsertWarehouse(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("Warehouse") Warehouse warehouse)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Response upsertMediaType2Warehouse(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("Warehouse") Warehouse warehouse)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.upsertWarehouse(
+				groupId, warehouse));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -509,6 +385,25 @@ public class Mutation {
 			unsafeConsumer.accept(resource);
 
 			return unsafeFunction.apply(resource);
+		}
+		finally {
+			componentServiceObjects.ungetService(resource);
+		}
+	}
+
+	private <T, E1 extends Throwable, E2 extends Throwable> void
+			_applyVoidComponentServiceObjects(
+				ComponentServiceObjects<T> componentServiceObjects,
+				UnsafeConsumer<T, E1> unsafeConsumer,
+				UnsafeConsumer<T, E2> unsafeFunction)
+		throws E1, E2 {
+
+		T resource = componentServiceObjects.getService();
+
+		try {
+			unsafeConsumer.accept(resource);
+
+			unsafeFunction.accept(resource);
 		}
 		finally {
 			componentServiceObjects.ungetService(resource);
