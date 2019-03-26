@@ -155,32 +155,15 @@ public class CommerceOrderFinderImpl
 
 	@Override
 	public List<CommerceOrder> findByG_O(long groupId, int[] orderStatuses) {
-		Session session = null;
+		return doFindByG_O(
+			groupId, orderStatuses, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
 
-		try {
-			session = openSession();
+	@Override
+	public List<CommerceOrder> findByG_O(
+		long groupId, int[] orderStatuses, int start, int end) {
 
-			String sql = _customSQL.get(getClass(), FIND_BY_G_O);
-
-			sql = replaceOrderStatus(sql, orderStatuses);
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addEntity("CommerceOrder", CommerceOrderImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			return (List<CommerceOrder>)QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByG_O(groupId, orderStatuses, start, end);
 	}
 
 	@Override
@@ -267,6 +250,37 @@ public class CommerceOrderFinderImpl
 			return (List<CommerceOrder>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
 				queryDefinition.getEnd());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<CommerceOrder> doFindByG_O(
+		long groupId, int[] orderStatuses, int start, int end) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_G_O);
+
+			sql = replaceOrderStatus(sql, orderStatuses);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity("CommerceOrder", CommerceOrderImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<CommerceOrder>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
