@@ -14,9 +14,20 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
+import com.liferay.headless.commerce.admin.site.setting.internal.util.v1_0.TaxCategoryHelper;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
+
+import javax.validation.constraints.NotNull;
+
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
 /**
@@ -27,4 +38,53 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = TaxCategoryResource.class
 )
 public class TaxCategoryResourceImpl extends BaseTaxCategoryResourceImpl {
+
+	@Override
+	public Response deleteTaxCategory(@NotNull Long id) throws Exception {
+		_taxCategoryHelper.deleteTaxCategory(id);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public Page<TaxCategory> getTaxCategories(
+			@NotNull Long groupId, Pagination pagination)
+		throws Exception {
+
+		return _taxCategoryHelper.getTaxCategories(groupId, pagination);
+	}
+
+	@Override
+	public TaxCategory getTaxCategory(@NotNull Long id) throws Exception {
+		return _taxCategoryHelper.getTaxCategory(id);
+	}
+
+	@Override
+	public Response updateTaxCategory(@NotNull Long id, TaxCategory taxCategory)
+		throws Exception {
+
+		_taxCategoryHelper.updateTaxCategory(id, taxCategory);
+
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public TaxCategory upsertTaxCategory(
+			@NotNull Long groupId, TaxCategory taxCategory)
+		throws Exception {
+
+		return _taxCategoryHelper.upsertTaxCategory(
+			groupId, taxCategory, _user);
+	}
+
+	@Reference
+	private TaxCategoryHelper _taxCategoryHelper;
+
+	@Context
+	private User _user;
+
 }
