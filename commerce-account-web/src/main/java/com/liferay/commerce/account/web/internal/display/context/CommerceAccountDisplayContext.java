@@ -278,6 +278,10 @@ public class CommerceAccountDisplayContext {
 			CommerceAccount commerceAccount, String actionId)
 		throws PortalException {
 
+		if (commerceAccount == null) {
+			return false;
+		}
+
 		return _modelResourcePermission.contains(
 			_commerceAccountRequestHelper.getPermissionChecker(),
 			commerceAccount, actionId);
@@ -295,8 +299,7 @@ public class CommerceAccountDisplayContext {
 	public boolean hasCommerceAccountModelPermissions(String actionId)
 		throws PortalException {
 
-		return _modelResourcePermission.contains(
-			_commerceAccountRequestHelper.getPermissionChecker(),
+		return hasCommerceAccountModelPermissions(
 			getCurrentCommerceAccount(), actionId);
 	}
 
