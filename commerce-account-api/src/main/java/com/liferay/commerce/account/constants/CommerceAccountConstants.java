@@ -29,6 +29,10 @@ public class CommerceAccountConstants {
 
 	public static final int ACCOUNT_TYPE_PERSONAL = 1;
 
+	public static final int[] ACCOUNT_TYPES = {
+		ACCOUNT_TYPE_PERSONAL, ACCOUNT_TYPE_BUSINESS
+	};
+
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
 	public static final long GUEST_ACCOUNT_ID = -1;
@@ -44,6 +48,20 @@ public class CommerceAccountConstants {
 	public static final int[] SITE_TYPES = {
 		SITE_TYPE_B2C, SITE_TYPE_B2B, SITE_TYPE_B2C_B2B
 	};
+
+	public static String getAccountTypeLabel(int accountType) {
+		if (accountType == ACCOUNT_TYPE_BUSINESS) {
+			return "business";
+		}
+		else if (accountType == ACCOUNT_TYPE_GUEST) {
+			return "guest";
+		}
+		else if (accountType == ACCOUNT_TYPE_PERSONAL) {
+			return "personal";
+		}
+
+		return null;
+	}
 
 	public static String getSiteTypeLabel(int siteType) {
 		if (siteType == SITE_TYPE_B2C) {
