@@ -25,7 +25,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceShippingOption;
-import com.liferay.commerce.service.CommerceShippingMethodService;
+import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
 import com.liferay.commerce.util.comparator.CommerceShippingOptionLabelComparator;
 import com.liferay.petra.string.CharPool;
@@ -41,18 +41,20 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class ShippingMethodCheckoutStepDisplayContext {
 
 	public ShippingMethodCheckoutStepDisplayContext(
 		CommercePriceFormatter commercePriceFormatter,
 		CommerceShippingEngineRegistry commerceShippingEngineRegistry,
-		CommerceShippingMethodService commerceShippingMethodService,
+		CommerceShippingMethodLocalService commerceShippingMethodLocalService,
 		HttpServletRequest httpServletRequest) {
 
 		_commercePriceFormatter = commercePriceFormatter;
 		_commerceShippingEngineRegistry = commerceShippingEngineRegistry;
-		_commerceShippingMethodService = commerceShippingMethodService;
+		_commerceShippingMethodLocalService =
+			commerceShippingMethodLocalService;
 		_httpServletRequest = httpServletRequest;
 
 		_commerceOrder = (CommerceOrder)httpServletRequest.getAttribute(
@@ -68,7 +70,7 @@ public class ShippingMethodCheckoutStepDisplayContext {
 
 		CommerceAddress shippingAddress = _commerceOrder.getShippingAddress();
 
-		return _commerceShippingMethodService.getCommerceShippingMethods(
+		return _commerceShippingMethodLocalService.getCommerceShippingMethods(
 			_commerceOrder.getGroupId(), shippingAddress.getCommerceCountryId(),
 			true);
 	}
@@ -134,7 +136,8 @@ public class ShippingMethodCheckoutStepDisplayContext {
 	private final CommercePriceFormatter _commercePriceFormatter;
 	private final CommerceShippingEngineRegistry
 		_commerceShippingEngineRegistry;
-	private final CommerceShippingMethodService _commerceShippingMethodService;
+	private final CommerceShippingMethodLocalService
+		_commerceShippingMethodLocalService;
 	private final HttpServletRequest _httpServletRequest;
 
 }
