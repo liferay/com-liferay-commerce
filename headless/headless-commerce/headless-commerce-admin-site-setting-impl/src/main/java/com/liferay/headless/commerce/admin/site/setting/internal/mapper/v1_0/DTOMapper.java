@@ -19,7 +19,6 @@ import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.openapi.core.util.LanguageUtils;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
@@ -35,6 +34,7 @@ import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
+import com.liferay.headless.commerce.admin.site.setting.internal.util.LanguageUtils;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
