@@ -83,4 +83,19 @@ html {
 			}
 		}
 	}
+
+	.container-fluid-max-xl {
+    max-width: initial;
+	}
+
+	.page-header {
+		border-radius: 8px;
+	}
+}
+
+#commerceAccountOrganizationsCommerceTable,
+#commerceAccountUsersCommerceTable,
+#commerceAccountAddressesCommerceTable {
+	margin-left: -12px;
+	margin-right: -12px;
 }

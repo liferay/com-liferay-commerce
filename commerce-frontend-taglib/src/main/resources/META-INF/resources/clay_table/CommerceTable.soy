@@ -107,25 +107,23 @@
 
 	<td class="image-name-cell">
 		<h1 class="table-list-title">
-			<span class="text-truncate-inline">
-				{let $label kind="html"}
-					<div class="image-name-cell-label">
-						{if $item.thumbnail}
-							<img src={$item.thumbnail} />
-						{/if}
-						<span class="text-truncate">{$value}</span>
-					</div>
-				{/let}
-				{if $item.href}
-					{call ClayLink.render}
-						{param elementClasses: 'text-truncate' /}
-						{param href: $item.href /}
-						{param label: $label /}
-					{/call}
-				{else}
-					{$label}
-				{/if}
-			</span>
+			{let $label kind="html"}
+				<div class="image-name-cell-label">
+					{if $item.thumbnail}
+						<img src={$item.thumbnail} />
+					{/if}
+					<span class="text-truncate">{$value}</span>
+				</div>
+			{/let}
+			{if $item.href}
+				{call ClayLink.render}
+					{param elementClasses: 'text-truncate' /}
+					{param href: $item.href /}
+					{param label: $label /}
+				{/call}
+			{else}
+				{$label}
+			{/if}
 		</h1>
 	</td>
 {/deltemplate}

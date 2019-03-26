@@ -6,8 +6,15 @@
 	}
 
 	&__close {
+		align-items: center;
+		color: currentColor;
+		cursor: pointer;
 		display: flex;
+		height: 40px;
+		justify-content: center;
 		margin-left: auto;
+		padding: 0;
+		width: 40px;
 	}
 
 	&__title {
@@ -15,6 +22,7 @@
 		flex-grow: 1;
 		font-size: 28px;
 		font-weight: 100;
+		line-height: 40px;
 		margin-bottom: 0;
 	}
 

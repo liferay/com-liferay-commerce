@@ -94,16 +94,13 @@
 		}
 
 		&.is-active {
-			box-shadow: 0 0 0px 2px $color-theme;
+			box-shadow: 0 0 0px 2px $color-theme-light;
 		}
 
 		img {
-			left: 50%;
-			max-height: 100%;
-			max-width: 100%;
-			position: absolute;
-			top: 50%;
-			transform: translate(-50%, -50%);
+			height: 100%;
+			object-fit: cover;
+			width: 100%;
 		}
 	}
 
