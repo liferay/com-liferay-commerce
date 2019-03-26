@@ -102,6 +102,14 @@ public class CommerceAccountFinderImpl
 					StringPool.BLANK);
 			}
 
+			Boolean active = (Boolean)queryDefinition.getAttribute("active");
+
+			if (active != null) {
+				sql = StringUtil.add(
+					sql, " AND (CommerceAccount.active_ = " + active + ")",
+					StringPool.BLANK);
+			}
+
 			sql = _customSQL.replaceAndOperator(sql, true);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
@@ -188,6 +196,14 @@ public class CommerceAccountFinderImpl
 					sql,
 					" AND (CommerceAccount.type_ = " +
 						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")",
+					StringPool.BLANK);
+			}
+
+			Boolean active = (Boolean)queryDefinition.getAttribute("active");
+
+			if (active != null) {
+				sql = StringUtil.add(
+					sql, " AND (CommerceAccount.active_ = " + active + ")",
 					StringPool.BLANK);
 			}
 
