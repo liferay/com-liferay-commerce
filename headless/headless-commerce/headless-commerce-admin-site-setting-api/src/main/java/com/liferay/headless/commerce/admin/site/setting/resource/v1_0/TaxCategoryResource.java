@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -38,7 +39,9 @@ public interface TaxCategoryResource {
 	public boolean updateTaxCategory(Long id, TaxCategory taxCategory)
 		throws Exception;
 
-	public Page<TaxCategory> getTaxCategories(Long groupId) throws Exception;
+	public Page<TaxCategory> getTaxCategories(
+			Long groupId, Pagination pagination)
+		throws Exception;
 
 	public TaxCategory upsertTaxCategory(Long groupId, TaxCategory taxCategory)
 		throws Exception;

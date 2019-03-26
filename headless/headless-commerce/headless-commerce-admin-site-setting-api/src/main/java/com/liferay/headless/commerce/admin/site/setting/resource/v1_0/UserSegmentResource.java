@@ -18,6 +18,7 @@ import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -51,14 +52,17 @@ public interface UserSegmentResource {
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
-	public Page<UserSegmentCriterion> getUserSegmentCriteria(Long id)
+	public Page<UserSegmentCriterion> getUserSegmentCriteria(
+			Long id, Pagination pagination)
 		throws Exception;
 
 	public UserSegmentCriterion upsertUserSegmentCriterion(
 			Long id, UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
-	public Page<UserSegment> getUserSegments(Long groupId) throws Exception;
+	public Page<UserSegment> getUserSegments(
+			Long groupId, Pagination pagination)
+		throws Exception;
 
 	public UserSegment upsertUserSegment(Long groupId, UserSegment userSegment)
 		throws Exception;

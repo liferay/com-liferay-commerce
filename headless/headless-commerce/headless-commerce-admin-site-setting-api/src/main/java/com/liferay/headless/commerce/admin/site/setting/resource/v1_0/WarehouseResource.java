@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -38,7 +39,8 @@ public interface WarehouseResource {
 	public boolean updateWarehouse(Long id, Warehouse warehouse)
 		throws Exception;
 
-	public Page<Warehouse> getWarehouses(Long groupId, Boolean active)
+	public Page<Warehouse> getWarehouses(
+			Long groupId, Boolean active, Pagination pagination)
 		throws Exception;
 
 	public Warehouse upsertWarehouse(Long groupId, Warehouse warehouse)

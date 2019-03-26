@@ -217,7 +217,9 @@ public class Query {
 	@GraphQLInvokeDetached
 	public Collection<MeasurementUnit> getMeasurementUnits(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("type") Integer type)
+			@GraphQLName("type") Integer type,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -225,7 +227,8 @@ public class Query {
 			this::_populateResourceContext,
 			measurementUnitResource -> {
 				Page paginationPage =
-					measurementUnitResource.getMeasurementUnits(groupId, type);
+					measurementUnitResource.getMeasurementUnits(
+						groupId, type, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
@@ -259,7 +262,8 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<UserSegmentCriterion> getUserSegmentCriteria(
-			@GraphQLName("id") Long id)
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -267,7 +271,8 @@ public class Query {
 			this::_populateResourceContext,
 			userSegmentResource -> {
 				Page paginationPage =
-					userSegmentResource.getUserSegmentCriteria(id);
+					userSegmentResource.getUserSegmentCriteria(
+						id, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
@@ -276,7 +281,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<UserSegment> getUserSegments(
-			@GraphQLName("groupId") Long groupId)
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -284,7 +291,7 @@ public class Query {
 			this::_populateResourceContext,
 			userSegmentResource -> {
 				Page paginationPage = userSegmentResource.getUserSegments(
-					groupId);
+					groupId, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
@@ -304,7 +311,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<TaxCategory> getTaxCategories(
-			@GraphQLName("groupId") Long groupId)
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -312,7 +321,7 @@ public class Query {
 			this::_populateResourceContext,
 			taxCategoryResource -> {
 				Page paginationPage = taxCategoryResource.getTaxCategories(
-					groupId);
+					groupId, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
@@ -331,7 +340,9 @@ public class Query {
 	@GraphQLInvokeDetached
 	public Collection<Warehouse> getWarehouses(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("active") Boolean active)
+			@GraphQLName("active") Boolean active,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -339,7 +350,7 @@ public class Query {
 			this::_populateResourceContext,
 			warehouseResource -> {
 				Page paginationPage = warehouseResource.getWarehouses(
-					groupId, active);
+					groupId, active, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
