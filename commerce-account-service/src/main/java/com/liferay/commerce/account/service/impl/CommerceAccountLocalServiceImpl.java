@@ -334,11 +334,11 @@ public class CommerceAccountLocalServiceImpl
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
 		long userId, Long parentCommerceAccountId, int commerceSiteType,
-		String keywords, int start, int end) {
+		String keywords, Boolean active, int start, int end) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			_getCommerceAccountQueryDefinition(
-				parentCommerceAccountId, commerceSiteType, keywords);
+				parentCommerceAccountId, commerceSiteType, keywords, active);
 
 		queryDefinition.setStart(start);
 		queryDefinition.setEnd(end);
@@ -347,13 +347,32 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end) {
+
+		return commerceAccountLocalService.getUserCommerceAccounts(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, null,
+			start, end);
+	}
+
+	@Override
 	public int getUserCommerceAccountsCount(
 		long userId, Long parentCommerceAccountId, int commerceSiteType,
 		String keywords) {
 
+		return commerceAccountLocalService.getUserCommerceAccountsCount(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, null);
+	}
+
+	@Override
+	public int getUserCommerceAccountsCount(
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, Boolean active) {
+
 		QueryDefinition<CommerceAccount> queryDefinition =
 			_getCommerceAccountQueryDefinition(
-				parentCommerceAccountId, commerceSiteType, keywords);
+				parentCommerceAccountId, commerceSiteType, keywords, active);
 
 		return commerceAccountFinder.countByU_P(userId, queryDefinition);
 	}
@@ -385,6 +404,20 @@ public class CommerceAccountLocalServiceImpl
 		searchContext.setKeywords(keywords);
 
 		return searchCommerceAccountsCount(searchContext);
+	}
+
+	@Override
+	public CommerceAccount setActive(long commerceAccountId, boolean active)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		commerceAccount.setActive(active);
+
+		commerceAccountPersistence.update(commerceAccount);
+
+		return commerceAccount;
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -650,10 +683,15 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	private QueryDefinition<CommerceAccount> _getCommerceAccountQueryDefinition(
-		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		Boolean active) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			new QueryDefinition<>();
+
+		if (active != null) {
+			queryDefinition.setAttribute("active", active);
+		}
 
 		boolean b2b = false;
 
