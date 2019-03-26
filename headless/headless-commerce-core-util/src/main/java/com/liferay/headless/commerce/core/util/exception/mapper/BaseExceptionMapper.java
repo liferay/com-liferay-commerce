@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.site.setting.internal.util;
+package com.liferay.headless.commerce.core.util.exception.mapper;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

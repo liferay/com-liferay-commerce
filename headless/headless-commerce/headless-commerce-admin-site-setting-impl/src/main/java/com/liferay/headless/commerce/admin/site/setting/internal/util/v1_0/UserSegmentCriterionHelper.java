@@ -21,7 +21,7 @@ import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionSer
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0.DTOMapper;
-import com.liferay.headless.commerce.admin.site.setting.internal.util.ServiceContextHelper;
+import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

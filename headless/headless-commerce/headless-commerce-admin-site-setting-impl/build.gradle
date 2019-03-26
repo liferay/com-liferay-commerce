@@ -14,5 +14,6 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:commerce-user-segment-api")
+	compileOnly project(":apps:commerce:headless:headless-commerce-core-util")
 	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-site-setting-api")
 }
