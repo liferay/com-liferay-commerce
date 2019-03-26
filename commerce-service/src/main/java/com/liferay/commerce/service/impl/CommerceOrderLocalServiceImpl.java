@@ -513,6 +513,14 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
+		long groupId, int[] orderStatuses, int start, int end) {
+
+		return commerceOrderFinder.findByG_O(
+			groupId, orderStatuses, start, end);
+	}
+
+	@Override
+	public List<CommerceOrder> getCommerceOrders(
 		long groupId, long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 
