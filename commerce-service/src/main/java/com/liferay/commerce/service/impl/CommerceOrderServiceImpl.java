@@ -285,6 +285,19 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
+			long groupId, int[] orderStatuses, int start, int end)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
+
+		return commerceOrderLocalService.getCommerceOrders(
+			groupId, orderStatuses, start, end);
+	}
+
+	@Override
+	public List<CommerceOrder> getCommerceOrders(
 			long groupId, long commerceAccountId, int start, int end,
 			OrderByComparator<CommerceOrder> orderByComparator)
 		throws PortalException {
