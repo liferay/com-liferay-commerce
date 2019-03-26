@@ -23,4 +23,8 @@ public class CommerceAccountPortletKeys {
 		"com_liferay_commerce_account_web_internal_portlet_" +
 			"CommerceAccountPortlet";
 
+	public static final String COMMERCE_ACCOUNT_ADMIN =
+		"com_liferay_commerce_account_admin_web_internal_portlet_" +
+			"CommerceAccountAdminPortlet";
+
 }
