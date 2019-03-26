@@ -15,7 +15,9 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
+import com.liferay.asset.kernel.service.AssetTagLocalService;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
@@ -111,11 +113,15 @@ public class CommerceDiscountsImporter {
 				String category = jsonArray.getString(i);
 
 				for (AssetCategory assetCategory : assetCategories) {
-					if (category.contains(assetCategory.getTitle())) {
+					String name = assetCategory.getName();
+
+					if (name.contains(category)) {
 						_commerceDiscountRelLocalService.addCommerceDiscountRel(
 							commerceDiscount.getCommerceDiscountId(),
 							AssetCategory.class.getName(),
-							assetCategory.getCategoryId(), serviceContext);
+							assetCategory.getPrimaryKey(), serviceContext);
+
+						break;
 					}
 				}
 			}
