@@ -51,7 +51,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -69,12 +68,10 @@ public abstract class BaseCatalogRuleResourceImpl
 	@Path("/catalogRule/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response deleteCatalogRule(@NotNull @PathParam("id") Long id)
+	public boolean deleteCatalogRule(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -94,13 +91,11 @@ public abstract class BaseCatalogRuleResourceImpl
 	@Path("/catalogRule/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Response updateCatalogRule(
+	public boolean updateCatalogRule(
 			@NotNull @PathParam("id") Long id, CatalogRule catalogRule)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -114,7 +109,8 @@ public abstract class BaseCatalogRuleResourceImpl
 	@Path("/catalogRule/{id}/category")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Page<Category> getCatalogRuleCategories(@NotNull @PathParam("id") Long id, @Context Pagination pagination)
+	public Page<Category> getCatalogRuleCategories(
+			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -149,10 +145,10 @@ public abstract class BaseCatalogRuleResourceImpl
 	@Path("/commerceAdminSiteSetting/{groupId}/catalogRule/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Page<CatalogRule> getCatalogRules(@NotNull @PathParam("groupId") Long groupId, @Context Pagination pagination)
+	public Page<CatalogRule> getCatalogRules(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
 		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return Page.of(Collections.emptyList());
 	}

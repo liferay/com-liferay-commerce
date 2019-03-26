@@ -17,10 +17,9 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -33,52 +32,35 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface UserSegmentResource {
 
-	public Response deleteUserSegment(Long id) throws Exception;
+	public boolean deleteUserSegment(Long id) throws Exception;
 
-	public Response getUserSegment(Long id) throws Exception;
+	public UserSegment getUserSegment(Long id) throws Exception;
 
-	public Response updateMediaType1UserSegment(
-			Long id, UserSegment userSegment)
+	public boolean updateUserSegment(Long id, UserSegment userSegment)
 		throws Exception;
 
-	public Response updateMediaType2UserSegment(
-			Long id, UserSegment userSegment)
+	public boolean deleteUserSegmentCriterion(Long id, Long criterionId)
 		throws Exception;
 
-	public Response deleteUserSegmentCriterion(Long id, Long criterionId)
+	public UserSegmentCriterion getUserSegmentCriterion(
+			Long id, Long criterionId)
 		throws Exception;
 
-	public Response getUserSegmentCriterion(Long id, Long criterionId)
-		throws Exception;
-
-	public Response updateMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion updateUserSegmentCriterion(
 			Long id, Long criterionId,
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
-	public Response updateMediaType2UserSegmentCriterion(
-			Long id, Long criterionId,
-			UserSegmentCriterion userSegmentCriterion)
+	public Page<UserSegmentCriterion> getUserSegmentCriteria(Long id)
 		throws Exception;
 
-	public Response getUserSegmentCriteria(Long id) throws Exception;
-
-	public Response upsertMediaType1UserSegmentCriterion(
+	public UserSegmentCriterion upsertUserSegmentCriterion(
 			Long id, UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
-	public Response upsertMediaType2UserSegmentCriterion(
-			Long id, UserSegmentCriterion userSegmentCriterion)
-		throws Exception;
+	public Page<UserSegment> getUserSegments(Long groupId) throws Exception;
 
-	public Response getUserSegments(Long groupId) throws Exception;
-
-	public Response upsertMediaType1UserSegment(
-			Long groupId, UserSegment userSegment)
-		throws Exception;
-
-	public Response upsertMediaType2UserSegment(
-			Long groupId, UserSegment userSegment)
+	public UserSegment upsertUserSegment(Long groupId, UserSegment userSegment)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

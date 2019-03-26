@@ -20,6 +20,7 @@ import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
+import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +29,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import java.net.URI;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -44,7 +46,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -61,12 +62,10 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response deleteWarehouse(@NotNull @PathParam("id") Long id)
+	public boolean deleteWarehouse(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -74,42 +73,23 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response getWarehouse(@NotNull @PathParam("id") Long id)
+	public Warehouse getWarehouse(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new Warehouse();
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@PUT
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response updateMediaType1Warehouse(
+	public boolean updateWarehouse(
 			@NotNull @PathParam("id") Long id, Warehouse warehouse)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@PUT
-	@Path("/warehouse/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response updateMediaType2Warehouse(
-			@NotNull @PathParam("id") Long id, Warehouse warehouse)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -117,44 +97,25 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response getWarehouses(
+	public Page<Warehouse> getWarehouses(
 			@NotNull @PathParam("groupId") Long groupId,
 			@QueryParam("active") Boolean active)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response upsertMediaType1Warehouse(
+	public Warehouse upsertWarehouse(
 			@NotNull @PathParam("groupId") Long groupId, Warehouse warehouse)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response upsertMediaType2Warehouse(
-			@NotNull @PathParam("groupId") Long groupId, Warehouse warehouse)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new Warehouse();
 	}
 
 	public void setContextCompany(Company contextCompany) {

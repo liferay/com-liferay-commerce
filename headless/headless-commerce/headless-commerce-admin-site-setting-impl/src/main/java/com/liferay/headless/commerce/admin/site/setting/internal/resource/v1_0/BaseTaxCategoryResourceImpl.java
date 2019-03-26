@@ -20,6 +20,7 @@ import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
+import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +29,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import java.net.URI;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -43,7 +45,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -61,12 +62,10 @@ public abstract class BaseTaxCategoryResourceImpl
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response deleteTaxCategory(@NotNull @PathParam("id") Long id)
+	public boolean deleteTaxCategory(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -74,42 +73,23 @@ public abstract class BaseTaxCategoryResourceImpl
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response getTaxCategory(@NotNull @PathParam("id") Long id)
+	public TaxCategory getTaxCategory(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new TaxCategory();
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@PUT
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response updateMediaType1TaxCategory(
+	public boolean updateTaxCategory(
 			@NotNull @PathParam("id") Long id, TaxCategory taxCategory)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@PUT
-	@Path("/taxCategory/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response updateMediaType2TaxCategory(
-			@NotNull @PathParam("id") Long id, TaxCategory taxCategory)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return false;
 	}
 
 	@Override
@@ -117,45 +97,25 @@ public abstract class BaseTaxCategoryResourceImpl
 	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response getTaxCategories(
+	public Page<TaxCategory> getTaxCategories(
 			@NotNull @PathParam("groupId") Long groupId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@Consumes("application/json")
+	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response upsertMediaType1TaxCategory(
+	public TaxCategory upsertTaxCategory(
 			@NotNull @PathParam("groupId") Long groupId,
 			TaxCategory taxCategory)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes("application/xml")
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Response upsertMediaType2TaxCategory(
-			@NotNull @PathParam("groupId") Long groupId,
-			TaxCategory taxCategory)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new TaxCategory();
 	}
 
 	public void setContextCompany(Company contextCompany) {

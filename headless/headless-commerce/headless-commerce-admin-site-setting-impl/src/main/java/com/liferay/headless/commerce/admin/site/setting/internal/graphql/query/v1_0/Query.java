@@ -14,6 +14,14 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.graphql.query.v1_0;
 
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Category;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.CatalogRuleResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
@@ -24,14 +32,16 @@ import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
 
-import javax.annotation.Generated;
+import java.util.Collection;
 
-import javax.ws.rs.core.Response;
+import javax.annotation.Generated;
 
 import org.osgi.service.component.ComponentServiceObjects;
 
@@ -92,176 +102,247 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getAvailabilityEstimate(@GraphQLName("id") Long id)
+	public AvailabilityEstimate getAvailabilityEstimate(
+			@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_availabilityEstimateResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			availabilityEstimateResource ->
+				availabilityEstimateResource.getAvailabilityEstimate(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getAvailabilityEstimates(
+	public Collection<AvailabilityEstimate> getAvailabilityEstimates(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_availabilityEstimateResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			availabilityEstimateResource -> {
+				Page paginationPage =
+					availabilityEstimateResource.getAvailabilityEstimates(
+						groupId, Pagination.of(pageSize, page));
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRule(@GraphQLName("id") Long id)
+	public CatalogRule getCatalogRule(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> catalogRuleResource.getCatalogRule(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRuleCategories(
+	public Collection<Category> getCatalogRuleCategories(
 			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> {
+				Page paginationPage =
+					catalogRuleResource.getCatalogRuleCategories(
+						id, Pagination.of(pageSize, page));
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRuleUserSegments(
+	public Collection<UserSegment> getCatalogRuleUserSegments(
 			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> {
+				Page paginationPage =
+					catalogRuleResource.getCatalogRuleUserSegments(
+						id, Pagination.of(pageSize, page));
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getCatalogRules(
+	public Collection<CatalogRule> getCatalogRules(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_catalogRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogRuleResource -> {
+				Page paginationPage = catalogRuleResource.getCatalogRules(
+					groupId, Pagination.of(pageSize, page));
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getMeasurementUnit(@GraphQLName("id") Long id)
+	public MeasurementUnit getMeasurementUnit(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.getMeasurementUnit(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getMeasurementUnits(
+	public Collection<MeasurementUnit> getMeasurementUnits(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("type") Integer type)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource -> {
+				Page paginationPage =
+					measurementUnitResource.getMeasurementUnits(groupId, type);
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getUserSegment(@GraphQLName("id") Long id)
+	public UserSegment getUserSegment(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.getUserSegment(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getUserSegmentCriterion(
+	public UserSegmentCriterion getUserSegmentCriterion(
 			@GraphQLName("id") Long id,
 			@GraphQLName("criterionId") Long criterionId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.getUserSegmentCriterion(
+				id, criterionId));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getUserSegmentCriteria(@GraphQLName("id") Long id)
+	public Collection<UserSegmentCriterion> getUserSegmentCriteria(
+			@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> {
+				Page paginationPage =
+					userSegmentResource.getUserSegmentCriteria(id);
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getUserSegments(@GraphQLName("groupId") Long groupId)
+	public Collection<UserSegment> getUserSegments(
+			@GraphQLName("groupId") Long groupId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> {
+				Page paginationPage = userSegmentResource.getUserSegments(
+					groupId);
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getTaxCategory(@GraphQLName("id") Long id)
+	public TaxCategory getTaxCategory(@GraphQLName("id") Long id)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return _applyComponentServiceObjects(
+			_taxCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			taxCategoryResource -> taxCategoryResource.getTaxCategory(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getTaxCategories(@GraphQLName("groupId") Long groupId)
+	public Collection<TaxCategory> getTaxCategories(
+			@GraphQLName("groupId") Long groupId)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_taxCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			taxCategoryResource -> {
+				Page paginationPage = taxCategoryResource.getTaxCategories(
+					groupId);
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getWarehouse(@GraphQLName("id") Long id) throws Exception {
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public Warehouse getWarehouse(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.getWarehouse(id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response getWarehouses(
+	public Collection<Warehouse> getWarehouses(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("active") Boolean active)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> {
+				Page paginationPage = warehouseResource.getWarehouses(
+					groupId, active);
 
-		return responseBuilder.build();
+				return paginationPage.getItems();
+			});
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
