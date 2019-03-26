@@ -177,7 +177,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
 			long userId, long parentCommerceAccountId, int commerceSiteType,
-			String keywords, int start, int end)
+			String keywords, Boolean active, int start, int end)
 		throws PortalException {
 
 		User user = userLocalService.fetchUser(userId);
@@ -189,7 +189,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		if ((userId == getUserId()) && !_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.getUserCommerceAccounts(
 				userId, parentCommerceAccountId, commerceSiteType, keywords,
-				start, end);
+				active, start, end);
 		}
 		else if (_isAccountCompanyAdministrator()) {
 			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
@@ -205,7 +205,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 			return commerceAccountLocalService.searchCommerceAccounts(
 				user.getCompanyId(), parentCommerceAccountId, keywords,
-				accountType, true, start, end,
+				accountType, active, start, end,
 				SortFactoryUtil.create("name", false));
 		}
 
@@ -213,9 +213,30 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, int start, int end)
+		throws PortalException {
+
+		return commerceAccountService.getUserCommerceAccounts(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, true,
+			start, end);
+	}
+
+	@Override
 	public int getUserCommerceAccountsCount(
 			long userId, long parentCommerceAccountId, int commerceSiteType,
 			String keywords)
+		throws PortalException {
+
+		return commerceAccountService.getUserCommerceAccountsCount(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, true);
+	}
+
+	@Override
+	public int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, Boolean active)
 		throws PortalException {
 
 		User user = userLocalService.fetchUser(userId);
@@ -226,7 +247,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if ((userId == getUserId()) && !_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.getUserCommerceAccountsCount(
-				userId, parentCommerceAccountId, commerceSiteType, keywords);
+				userId, parentCommerceAccountId, commerceSiteType, keywords,
+				active);
 		}
 		else if (_isAccountCompanyAdministrator()) {
 			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
@@ -242,10 +264,20 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 			return commerceAccountLocalService.searchCommerceAccountsCount(
 				user.getCompanyId(), parentCommerceAccountId, keywords,
-				accountType, true);
+				accountType, active);
 		}
 
 		return 0;
+	}
+
+	@Override
+	public CommerceAccount setActive(long commerceAccountId, boolean active)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountLocalService.setActive(commerceAccountId, active);
 	}
 
 	public CommerceAccount updateCommerceAccount(
