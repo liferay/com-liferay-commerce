@@ -14,9 +14,20 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
 
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
+import com.liferay.headless.commerce.admin.site.setting.internal.util.v1_0.MeasurementUnitHelper;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
+
+import javax.validation.constraints.NotNull;
+
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
 /**
@@ -28,4 +39,58 @@ import org.osgi.service.component.annotations.ServiceScope;
 )
 public class MeasurementUnitResourceImpl
 	extends BaseMeasurementUnitResourceImpl {
+
+	@Override
+	public Response deleteMeasurementUnit(@NotNull Long id) throws Exception {
+		_measurementUnitHelper.deleteMeasurementUnit(id);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public MeasurementUnit getMeasurementUnit(@NotNull Long id)
+		throws Exception {
+
+		return _measurementUnitHelper.getMeasurementUnit(id);
+	}
+
+	@Override
+	public Page<MeasurementUnit> getMeasurementUnits(
+			@NotNull Long groupId, Integer type, Pagination pagination)
+		throws Exception {
+
+		return _measurementUnitHelper.getMeasurementUnits(
+			groupId, type, pagination);
+	}
+
+	@Override
+	public Response updateMeasurementUnit(
+			@NotNull Long id, MeasurementUnit measurementUnit)
+		throws Exception {
+
+		_measurementUnitHelper.updateMeasurementUnit(
+			id, measurementUnit, _user);
+
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public MeasurementUnit upsertMeasurementUnit(
+			@NotNull Long groupId, MeasurementUnit measurementUnit)
+		throws Exception {
+
+		return _measurementUnitHelper.upsertMeasurementUnit(
+			groupId, measurementUnit, _user);
+	}
+
+	@Reference
+	private MeasurementUnitHelper _measurementUnitHelper;
+
+	@Context
+	private User _user;
+
 }

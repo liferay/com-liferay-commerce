@@ -37,6 +37,7 @@ import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.ComponentServiceObjects;
 
@@ -96,7 +97,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteAvailabilityEstimate(@GraphQLName("id") Long id)
+	public Response deleteAvailabilityEstimate(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -107,7 +108,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateAvailabilityEstimate(
+	public Response updateAvailabilityEstimate(
 			@GraphQLName("id") Long id,
 			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
 				availabilityEstimate)
@@ -138,7 +139,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteCatalogRule(@GraphQLName("id") Long id)
+	public Response deleteCatalogRule(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -148,7 +149,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateCatalogRule(
+	public Response updateCatalogRule(
 			@GraphQLName("id") Long id,
 			@GraphQLName("CatalogRule") CatalogRule catalogRule)
 		throws Exception {
@@ -175,7 +176,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteMeasurementUnit(@GraphQLName("id") Long id)
+	public Response deleteMeasurementUnit(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -186,7 +187,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateMeasurementUnit(
+	public Response updateMeasurementUnit(
 			@GraphQLName("id") Long id,
 			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
@@ -215,7 +216,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteUserSegment(@GraphQLName("id") Long id)
+	public Response deleteUserSegment(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -225,7 +226,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateUserSegment(
+	public Response updateUserSegment(
 			@GraphQLName("id") Long id,
 			@GraphQLName("UserSegment") UserSegment userSegment)
 		throws Exception {
@@ -238,7 +239,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteUserSegmentCriterion(
+	public Response deleteUserSegmentCriterion(
 			@GraphQLName("id") Long id,
 			@GraphQLName("criterionId") Long criterionId)
 		throws Exception {
@@ -299,7 +300,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteTaxCategory(@GraphQLName("id") Long id)
+	public Response deleteTaxCategory(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -309,7 +310,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateTaxCategory(
+	public Response updateTaxCategory(
 			@GraphQLName("id") Long id,
 			@GraphQLName("TaxCategory") TaxCategory taxCategory)
 		throws Exception {
@@ -336,7 +337,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteWarehouse(@GraphQLName("id") Long id)
+	public Response deleteWarehouse(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -346,7 +347,7 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public boolean updateWarehouse(
+	public Response updateWarehouse(
 			@GraphQLName("id") Long id,
 			@GraphQLName("Warehouse") Warehouse warehouse)
 		throws Exception {
