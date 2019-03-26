@@ -288,11 +288,21 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
 		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		Boolean active, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccount> getUserCommerceAccounts(long userId,
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
 		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
 		Long parentCommerceAccountId, int commerceSiteType, String keywords);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		Boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> searchCommerceAccounts(long companyId,
@@ -303,6 +313,9 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCommerceAccountsCount(long companyId,
 		long parentCommerceAccountId, String keywords, int type, Boolean active)
+		throws PortalException;
+
+	public CommerceAccount setActive(long commerceAccountId, boolean active)
 		throws PortalException;
 
 	/**

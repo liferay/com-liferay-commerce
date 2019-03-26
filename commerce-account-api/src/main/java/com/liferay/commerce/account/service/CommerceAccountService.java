@@ -95,11 +95,24 @@ public interface CommerceAccountService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
 		long parentCommerceAccountId, int commerceSiteType, String keywords,
+		Boolean active, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccount> getUserCommerceAccounts(long userId,
+		long parentCommerceAccountId, int commerceSiteType, String keywords,
 		int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
 		long parentCommerceAccountId, int commerceSiteType, String keywords)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceAccountsCount(long userId,
+		long parentCommerceAccountId, int commerceSiteType, String keywords,
+		Boolean active) throws PortalException;
+
+	public CommerceAccount setActive(long commerceAccountId, boolean active)
 		throws PortalException;
 
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
