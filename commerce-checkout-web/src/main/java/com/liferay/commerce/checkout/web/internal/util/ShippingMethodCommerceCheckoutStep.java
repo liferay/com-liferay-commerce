@@ -29,7 +29,7 @@ import com.liferay.commerce.model.CommerceShippingOption;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommerceShippingMethodService;
+import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.CharPool;
@@ -62,6 +62,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
@@ -123,7 +124,7 @@ public class ShippingMethodCommerceCheckoutStep
 			shippingMethodCheckoutStepDisplayContext =
 				new ShippingMethodCheckoutStepDisplayContext(
 					_commercePriceFormatter, _commerceShippingEngineRegistry,
-					_commerceShippingMethodService, httpServletRequest);
+					_commerceShippingMethodLocalService, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
@@ -141,7 +142,7 @@ public class ShippingMethodCommerceCheckoutStep
 		throws PortalException {
 
 		CommerceShippingMethod commerceShippingMethod =
-			_commerceShippingMethodService.getCommerceShippingMethod(
+			_commerceShippingMethodLocalService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
 		if (!commerceShippingMethod.isActive()) {
@@ -239,7 +240,8 @@ public class ShippingMethodCommerceCheckoutStep
 	private CommerceShippingEngineRegistry _commerceShippingEngineRegistry;
 
 	@Reference
-	private CommerceShippingMethodService _commerceShippingMethodService;
+	private CommerceShippingMethodLocalService
+		_commerceShippingMethodLocalService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
