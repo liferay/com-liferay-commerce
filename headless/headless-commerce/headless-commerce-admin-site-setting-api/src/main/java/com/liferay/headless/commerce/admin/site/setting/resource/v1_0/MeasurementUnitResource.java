@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -39,7 +40,8 @@ public interface MeasurementUnitResource {
 			Long id, MeasurementUnit measurementUnit)
 		throws Exception;
 
-	public Page<MeasurementUnit> getMeasurementUnits(Long groupId, Integer type)
+	public Page<MeasurementUnit> getMeasurementUnits(
+			Long groupId, Integer type, Pagination pagination)
 		throws Exception;
 
 	public MeasurementUnit upsertMeasurementUnit(
