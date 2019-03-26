@@ -166,6 +166,12 @@ public class CommerceOrderServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
+		long groupId, int[] orderStatuses, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceOrders(groupId, orderStatuses, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
 		long groupId, long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {

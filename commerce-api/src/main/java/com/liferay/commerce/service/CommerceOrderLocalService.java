@@ -317,6 +317,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrders(long groupId,
+		int[] orderStatuses, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getCommerceOrders(long groupId,
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator);
 
