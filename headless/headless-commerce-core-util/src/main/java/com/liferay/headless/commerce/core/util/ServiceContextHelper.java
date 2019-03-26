@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.site.setting.internal.util;
+package com.liferay.headless.commerce.core.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;

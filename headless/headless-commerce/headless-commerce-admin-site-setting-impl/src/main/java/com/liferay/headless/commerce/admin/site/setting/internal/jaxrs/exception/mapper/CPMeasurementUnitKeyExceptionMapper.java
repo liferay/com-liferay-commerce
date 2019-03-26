@@ -15,7 +15,7 @@
 package com.liferay.headless.commerce.admin.site.setting.internal.jaxrs.exception.mapper;
 
 import com.liferay.commerce.product.exception.CPMeasurementUnitKeyException;
-import com.liferay.headless.commerce.admin.site.setting.internal.util.BaseExceptionMapper;
+import com.liferay.headless.commerce.core.util.exception.mapper.BaseExceptionMapper;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
