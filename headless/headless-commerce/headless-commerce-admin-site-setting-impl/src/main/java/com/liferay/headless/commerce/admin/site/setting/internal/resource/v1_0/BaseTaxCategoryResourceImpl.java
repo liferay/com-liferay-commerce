@@ -49,6 +49,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -66,10 +67,12 @@ public abstract class BaseTaxCategoryResourceImpl
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public boolean deleteTaxCategory(@NotNull @PathParam("id") Long id)
+	public Response deleteTaxCategory(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -89,11 +92,13 @@ public abstract class BaseTaxCategoryResourceImpl
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TaxCategory")})
-	public boolean updateTaxCategory(
+	public Response updateTaxCategory(
 			@NotNull @PathParam("id") Long id, TaxCategory taxCategory)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override

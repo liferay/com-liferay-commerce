@@ -50,6 +50,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -67,10 +68,12 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public boolean deleteMeasurementUnit(@NotNull @PathParam("id") Long id)
+	public Response deleteMeasurementUnit(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -90,11 +93,13 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public boolean updateMeasurementUnit(
+	public Response updateMeasurementUnit(
 			@NotNull @PathParam("id") Long id, MeasurementUnit measurementUnit)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override

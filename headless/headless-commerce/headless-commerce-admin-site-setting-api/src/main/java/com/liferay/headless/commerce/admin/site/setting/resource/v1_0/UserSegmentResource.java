@@ -21,6 +21,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -33,14 +34,14 @@ import javax.annotation.Generated;
 @Generated("")
 public interface UserSegmentResource {
 
-	public boolean deleteUserSegment(Long id) throws Exception;
+	public Response deleteUserSegment(Long id) throws Exception;
 
 	public UserSegment getUserSegment(Long id) throws Exception;
 
-	public boolean updateUserSegment(Long id, UserSegment userSegment)
+	public Response updateUserSegment(Long id, UserSegment userSegment)
 		throws Exception;
 
-	public boolean deleteUserSegmentCriterion(Long id, Long criterionId)
+	public Response deleteUserSegmentCriterion(Long id, Long criterionId)
 		throws Exception;
 
 	public UserSegmentCriterion getUserSegmentCriterion(

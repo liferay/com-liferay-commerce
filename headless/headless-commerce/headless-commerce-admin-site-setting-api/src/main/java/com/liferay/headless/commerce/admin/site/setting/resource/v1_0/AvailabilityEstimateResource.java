@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,12 +33,12 @@ import javax.annotation.Generated;
 @Generated("")
 public interface AvailabilityEstimateResource {
 
-	public boolean deleteAvailabilityEstimate(Long id) throws Exception;
+	public Response deleteAvailabilityEstimate(Long id) throws Exception;
 
 	public AvailabilityEstimate getAvailabilityEstimate(Long id)
 		throws Exception;
 
-	public boolean updateAvailabilityEstimate(
+	public Response updateAvailabilityEstimate(
 			Long id, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 

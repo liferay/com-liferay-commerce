@@ -50,6 +50,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -66,10 +67,12 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public boolean deleteWarehouse(@NotNull @PathParam("id") Long id)
+	public Response deleteWarehouse(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -89,11 +92,13 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public boolean updateWarehouse(
+	public Response updateWarehouse(
 			@NotNull @PathParam("id") Long id, Warehouse warehouse)
 		throws Exception {
 
-		return false;
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
