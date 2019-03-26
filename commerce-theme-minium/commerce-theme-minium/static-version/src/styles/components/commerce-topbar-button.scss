@@ -35,6 +35,14 @@
 		margin: 10px;
 	}
 
+	&:not(.is-active) &__icon--active {
+		display: none;
+	}
+
+	&.is-active &__icon--not-active {
+		display: none;
+	}
+
 	&[disabled],
 	&.is-disabled {
 		opacity: 0.5;
