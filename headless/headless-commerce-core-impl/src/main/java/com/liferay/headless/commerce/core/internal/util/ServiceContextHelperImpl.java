@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.headless.commerce.core.util;
+package com.liferay.headless.commerce.core.internal.util;
 
+import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.SecureRandomUtil;
@@ -31,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zoltán Takács
  */
 @Component(immediate = true, service = ServiceContextHelper.class)
-public class ServiceContextHelper {
+public class ServiceContextHelperImpl implements ServiceContextHelper {
 
 	public ServiceContext getServiceContext() throws PortalException {
 		return getServiceContext(0, new long[0], null, false);
