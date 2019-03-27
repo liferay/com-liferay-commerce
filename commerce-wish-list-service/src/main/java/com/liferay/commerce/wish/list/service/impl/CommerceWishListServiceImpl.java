@@ -130,6 +130,23 @@ public class CommerceWishListServiceImpl
 	}
 
 	@Override
+	public CommerceWishList getDefaultCommerceWishList(
+			long groupId, long userId)
+		throws PortalException {
+
+		CommerceWishList commerceWishList =
+			commerceWishListLocalService.getDefaultCommerceWishList(
+				groupId, userId, null);
+
+		if (commerceWishList != null) {
+			_commerceWishListModelResourcePermission.check(
+				getPermissionChecker(), commerceWishList, ActionKeys.VIEW);
+		}
+
+		return commerceWishList;
+	}
+
+	@Override
 	public CommerceWishList updateCommerceWishList(
 			long commerceWishListId, String name, boolean defaultWishList)
 		throws PortalException {

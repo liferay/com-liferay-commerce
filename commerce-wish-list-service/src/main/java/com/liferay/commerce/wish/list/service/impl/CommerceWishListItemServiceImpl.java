@@ -79,6 +79,30 @@ public class CommerceWishListItemServiceImpl
 	}
 
 	@Override
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+			long commerceWishListId, String cpInstanceUuid)
+		throws PortalException {
+
+		_commerceWishListModelResourcePermission.check(
+			getPermissionChecker(), commerceWishListId, ActionKeys.VIEW);
+
+		return commerceWishListItemPersistence.countByCW_CPI(
+			commerceWishListId, cpInstanceUuid);
+	}
+
+	@Override
+	public int getCommerceWishListItemByContainsCProductCount(
+			long commerceWishListId, long cProductId)
+		throws PortalException {
+
+		_commerceWishListModelResourcePermission.check(
+			getPermissionChecker(), commerceWishListId, ActionKeys.VIEW);
+
+		return commerceWishListItemPersistence.countByCW_CP(
+			commerceWishListId, cProductId);
+	}
+
+	@Override
 	public List<CommerceWishListItem> getCommerceWishListItems(
 			long commerceWishListId, int start, int end,
 			OrderByComparator<CommerceWishListItem> orderByComparator)

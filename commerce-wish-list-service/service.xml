@@ -97,6 +97,14 @@
 		<finder name="CProductId" return-type="Collection">
 			<finder-column name="CProductId" />
 		</finder>
+		<finder name="CW_CPI" return-type="Collection">
+			<finder-column name="commerceWishListId" />
+			<finder-column name="CPInstanceUuid" />
+		</finder>
+		<finder name="CW_CP" return-type="Collection">
+			<finder-column name="commerceWishListId" />
+			<finder-column name="CProductId" />
+		</finder>
 	</entity>
 	<exceptions>
 		<exception>CommerceWishListName</exception>
