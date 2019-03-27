@@ -14,9 +14,16 @@
 
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
+import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceHelper;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.TierPriceResource;
 
+import javax.validation.constraints.NotNull;
+
+import javax.ws.rs.core.Response;
+
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
 /**
@@ -27,4 +34,35 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = TierPriceResource.class
 )
 public class TierPriceResourceImpl extends BaseTierPriceResourceImpl {
+
+	@Override
+	public Response deleteTierPrice(@NotNull String id) throws Exception {
+		_tierPriceHelper.deleteCommerceTierPriceEntry(
+			id, contextCompany.getCompanyId());
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public TierPrice getTierPrice(@NotNull String id) throws Exception {
+		return _tierPriceHelper.getTierPrice(id, contextCompany.getCompanyId());
+	}
+
+	@Override
+	public Response updateTierPrice(@NotNull String id, TierPrice tierPrice)
+		throws Exception {
+
+		_tierPriceHelper.updateCommerceTierPriceEntry(
+			id, contextCompany.getCompanyId(), tierPrice);
+
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
+	}
+
+	@Reference
+	private TierPriceHelper _tierPriceHelper;
+
 }
