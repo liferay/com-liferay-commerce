@@ -55,12 +55,18 @@ public class CommerceWishListItemLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpDefinitionId);
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			cpInstanceId);
+		String cpInstanceUuid = null;
+
+		if (cpInstanceId > 0) {
+			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+				cpInstanceId);
+
+			cpInstanceUuid = cpInstance.getCPInstanceUuid();
+		}
 
 		return commerceWishListItemLocalService.addCommerceWishListItem(
-			commerceWishListId, cpDefinition.getCProductId(),
-			cpInstance.getCPInstanceUuid(), json, serviceContext);
+			commerceWishListId, cpDefinition.getCProductId(), cpInstanceUuid,
+			json, serviceContext);
 	}
 
 	@Override
@@ -132,6 +138,22 @@ public class CommerceWishListItemLocalServiceImpl
 			commerceWishListItemPersistence.removeByCPInstanceUuid(
 				cpInstance.getCPInstanceUuid());
 		}
+	}
+
+	@Override
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid) {
+
+		return commerceWishListItemPersistence.countByCW_CPI(
+			commerceWishListId, cpInstanceUuid);
+	}
+
+	@Override
+	public int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) {
+
+		return commerceWishListItemPersistence.countByCW_CP(
+			commerceWishListId, cProductId);
 	}
 
 	@Override
