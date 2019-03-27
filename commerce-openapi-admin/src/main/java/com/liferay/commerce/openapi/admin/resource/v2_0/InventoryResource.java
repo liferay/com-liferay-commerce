@@ -50,8 +50,8 @@ public interface InventoryResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateInventory(
-			@PathParam("id") String id,
-			@QueryParam("groupId") Long groupId, InventoryDTO inventoryDTO)
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			InventoryDTO inventoryDTO)
 		throws Exception;
 
 }
