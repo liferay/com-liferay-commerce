@@ -314,12 +314,11 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getCommerceOrders(
-		long groupId, int[] orderStatuses, int start, int end)
-		throws RemoteException {
+		long groupId, int[] orderStatuses) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
 				CommerceOrderServiceUtil.getCommerceOrders(groupId,
-					orderStatuses, start, end);
+					orderStatuses);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
 		}
@@ -331,11 +330,12 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getCommerceOrders(
-		long groupId, int[] orderStatuses) throws RemoteException {
+		long groupId, int[] orderStatuses, int start, int end)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
 				CommerceOrderServiceUtil.getCommerceOrders(groupId,
-					orderStatuses);
+					orderStatuses, start, end);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
 		}
