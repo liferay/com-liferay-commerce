@@ -75,6 +75,10 @@ public interface CommerceDiscountService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscount fetchCommerceDiscount(long commerceDiscountId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceDiscount getCommerceDiscount(long commerceDiscountId)
 		throws PortalException;
 

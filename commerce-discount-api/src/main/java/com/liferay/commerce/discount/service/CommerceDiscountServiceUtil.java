@@ -69,6 +69,12 @@ public class CommerceDiscountServiceUtil {
 		getService().deleteCommerceDiscount(commerceDiscountId);
 	}
 
+	public static com.liferay.commerce.discount.model.CommerceDiscount fetchCommerceDiscount(
+		long commerceDiscountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().fetchCommerceDiscount(commerceDiscountId);
+	}
+
 	public static com.liferay.commerce.discount.model.CommerceDiscount getCommerceDiscount(
 		long commerceDiscountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
