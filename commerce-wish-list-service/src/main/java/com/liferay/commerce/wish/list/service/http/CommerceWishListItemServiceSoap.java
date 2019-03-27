@@ -84,6 +84,37 @@ public class CommerceWishListItemServiceSoap {
 		}
 	}
 
+	public static int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) throws RemoteException {
+		try {
+			int returnValue = CommerceWishListItemServiceUtil.getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+					cProductId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceWishListItemServiceUtil.getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
+					cpInstanceUuid);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteCommerceWishListItem(long commerceWishListItemId)
 		throws RemoteException {
 		try {

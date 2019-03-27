@@ -63,6 +63,22 @@ public class CommerceWishListItemServiceUtil {
 		return getService().getCommerceWishListItem(commerceWishListItemId);
 	}
 
+	public static int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
+			cpInstanceUuid);
+	}
+
+	public static int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+			cProductId);
+	}
+
 	public static java.util.List<com.liferay.commerce.wish.list.model.CommerceWishListItem> getCommerceWishListItems(
 		long commerceWishListId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishListItem> orderByComparator)

@@ -196,6 +196,23 @@ public class CommerceWishListItemPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCW_CPI() throws Exception {
+		_persistence.countByCW_CPI(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByCW_CPI(0L, "null");
+
+		_persistence.countByCW_CPI(0L, (String)null);
+	}
+
+	@Test
+	public void testCountByCW_CP() throws Exception {
+		_persistence.countByCW_CP(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByCW_CP(0L, 0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
 

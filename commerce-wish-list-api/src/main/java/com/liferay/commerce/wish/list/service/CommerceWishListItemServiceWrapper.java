@@ -58,6 +58,22 @@ public class CommerceWishListItemServiceWrapper
 	}
 
 	@Override
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItemService.getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
+			cpInstanceUuid);
+	}
+
+	@Override
+	public int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItemService.getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+			cProductId);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.wish.list.model.CommerceWishListItem> getCommerceWishListItems(
 		long commerceWishListId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishListItem> orderByComparator)
