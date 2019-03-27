@@ -51,6 +51,11 @@ public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 	}
 
 	@Override
+	public long getCProductId() {
+		return _cpDefinition.getCProductId();
+	}
+
+	@Override
 	public List<CPSku> getCPSkus() {
 		List<CPSku> cpSkus = new ArrayList<>();
 

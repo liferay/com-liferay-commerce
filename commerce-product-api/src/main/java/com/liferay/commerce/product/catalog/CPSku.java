@@ -23,6 +23,8 @@ public interface CPSku {
 
 	public long getCPInstanceId();
 
+	public String getCPInstanceUuid();
+
 	public String getExternalReferenceCode();
 
 	public String getGtin();

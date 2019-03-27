@@ -23,6 +23,8 @@ public interface CPCatalogEntry {
 
 	public long getCPDefinitionId();
 
+	public long getCProductId();
+
 	public List<CPSku> getCPSkus();
 
 	public String getDefaultImageFileUrl();

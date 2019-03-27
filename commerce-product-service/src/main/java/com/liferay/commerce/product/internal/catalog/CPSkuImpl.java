@@ -34,6 +34,11 @@ public class CPSkuImpl implements CPSku {
 	}
 
 	@Override
+	public String getCPInstanceUuid() {
+		return _cpInstance.getCPInstanceUuid();
+	}
+
+	@Override
 	public String getExternalReferenceCode() {
 		return _cpInstance.getExternalReferenceCode();
 	}
