@@ -29,6 +29,7 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.math.BigDecimal;
 
 /**
  * @author Zoltán Takács
