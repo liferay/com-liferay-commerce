@@ -303,6 +303,11 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 		return _commerceDiscount.getCommerceDiscountId();
 	}
 
+	@Override
+	public java.util.List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels() {
+		return _commerceDiscount.getCommerceDiscountUserSegmentRels();
+	}
+
 	/**
 	* Returns the company ID of this commerce discount.
 	*

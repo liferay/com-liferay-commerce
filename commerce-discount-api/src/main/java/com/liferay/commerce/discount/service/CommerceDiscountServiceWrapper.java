@@ -62,6 +62,13 @@ public class CommerceDiscountServiceWrapper implements CommerceDiscountService,
 	}
 
 	@Override
+	public com.liferay.commerce.discount.model.CommerceDiscount fetchCommerceDiscount(
+		long commerceDiscountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceDiscountService.fetchCommerceDiscount(commerceDiscountId);
+	}
+
+	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscount getCommerceDiscount(
 		long commerceDiscountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
