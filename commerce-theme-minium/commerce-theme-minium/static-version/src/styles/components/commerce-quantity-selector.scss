@@ -45,10 +45,6 @@
 			text-decoration: none;
 		}
 
-		@media (hover: none) {
-			display: none;
-		}
-
 		&.is-disabled {
 			cursor: default;
 			opacity: .5;

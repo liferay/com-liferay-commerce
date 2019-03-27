@@ -1,7 +1,7 @@
 .commerce-cta {
 	bottom: 0;
 	display: flex;
-	filter: drop-shadow($color-shadow);
+	filter: drop-shadow($minium-shadow);
 	justify-content: center;
 	left: $frame-size;
 	padding: 20px;
@@ -14,6 +14,10 @@
 	@media screen and (hover: none) {
 		bottom: $frame-size;
 		left: 0;
+
+		.minium-frame.is-scrolling-down.is-scrolled & {
+			bottom: 0;
+		}
 	}
 
 	&:empty {
