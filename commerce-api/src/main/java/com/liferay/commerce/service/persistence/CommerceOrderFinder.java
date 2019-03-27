@@ -26,10 +26,10 @@ public interface CommerceOrderFinder {
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.model.CommerceOrder> queryDefinition);
 
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_O(
-		long groupId, int[] orderStatuses, int start, int end);
+		long groupId, int[] orderStatuses);
 
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_O(
-		long groupId, int[] orderStatuses);
+		long groupId, int[] orderStatuses, int start, int end);
 
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_U_C_O(
 		long userId,
