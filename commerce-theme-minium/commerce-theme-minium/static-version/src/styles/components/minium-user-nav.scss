@@ -39,7 +39,7 @@
 		&:not(:focus) {
 			background-color: transparent;
 			overflow: hidden;
-			width: 40px;
+			width: 42px;
 		}
 
 		&:focus {
@@ -64,8 +64,8 @@
 			content: '';
 			height: 6px;
 			position: absolute;
-			right: 0;
-			top: 0;
+			right: 2px;
+			top: 2px;
 			width: 6px;
 		}
 	}
