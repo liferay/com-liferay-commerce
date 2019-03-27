@@ -14,9 +14,16 @@
 
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
+import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DiscountRuleHelper;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
 
+import javax.validation.constraints.NotNull;
+
+import javax.ws.rs.core.Response;
+
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 
 /**
@@ -27,4 +34,30 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = DiscountRuleResource.class
 )
 public class DiscountRuleResourceImpl extends BaseDiscountRuleResourceImpl {
+
+	@Override
+	public Response deleteDiscountRule(@NotNull Long id) throws Exception {
+		_discountRuleHelper.deleteDiscountRule(id);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public DiscountRule getDiscountRule(@NotNull Long id) throws Exception {
+		return _discountRuleHelper.getDiscountRule(id);
+	}
+
+	@Override
+	public DiscountRule updateDiscountRule(
+			@NotNull Long id, DiscountRule discountRule)
+		throws Exception {
+
+		return _discountRuleHelper.updateDiscountRule(id, discountRule);
+	}
+
+	@Reference
+	private DiscountRuleHelper _discountRuleHelper;
+
 }
