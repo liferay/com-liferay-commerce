@@ -22,6 +22,7 @@ import com.liferay.commerce.frontend.internal.application.context.provider.Theme
 import com.liferay.commerce.frontend.internal.cart.CommerceCartResource;
 import com.liferay.commerce.frontend.internal.data.provider.CommerceDataSetDataProviderResource;
 import com.liferay.commerce.frontend.internal.search.CommerceSearchResource;
+import com.liferay.commerce.frontend.internal.wishlist.CommerceWishListResource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class CommerceFrontEndApplication extends Application {
 		singletons.add(_sortContextProvider);
 		singletons.add(_themeDisplayContextProvider);
 		singletons.add(_addressResource);
+		singletons.add(_commerceWishListResource);
 
 		return singletons;
 	}
@@ -76,6 +78,9 @@ public class CommerceFrontEndApplication extends Application {
 
 	@Reference
 	private CommerceSearchResource _commerceSearchResource;
+
+	@Reference
+	private CommerceWishListResource _commerceWishListResource;
 
 	@Reference
 	private PaginationContextProvider _paginationContextProvider;

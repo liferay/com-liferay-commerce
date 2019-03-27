@@ -29,6 +29,9 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.wish.list.model.CommerceWishList;
+import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
+import com.liferay.commerce.wish.list.service.CommerceWishListService;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
@@ -161,11 +164,13 @@ public class MiniumCPContentListEntryRenderer
 			context.put("orderId", commerceOrder.getCommerceOrderId());
 		}
 
+		context.put("addToCartButtonVisible", true);
 		context.put("availability", "available");
 		context.put(
 			"cartAPI",
 			_portal.getPortalURL(httpServletRequest) +
 				"/o/commerce-ui/cart-item");
+		context.put("categories", null);
 		context.put("description", cpCatalogEntry.getShortDescription());
 		context.put(
 			"detailsLink",
@@ -173,11 +178,6 @@ public class MiniumCPContentListEntryRenderer
 		context.put("name", cpCatalogEntry.getName());
 		context.put("pictureUrl", cpCatalogEntry.getDefaultImageFileUrl());
 		context.put("productId", cpCatalogEntry.getCPDefinitionId());
-		context.put("categories", null);
-		context.put("addedToWishlist", false);
-		context.put("addToCartButtonVisible", true);
-		context.put("addToWishlistButtonVisible", false);
-		context.put("wishlistAPI", null);
 
 		if (cpSku != null) {
 			context.put("sku", cpSku.getSku());
@@ -193,6 +193,44 @@ public class MiniumCPContentListEntryRenderer
 			context.put("prices", priceModel);
 
 			context.put("settings", productSettingsModel);
+		}
+
+		CommerceWishList commerceWishList =
+			_commerceWishListService.getDefaultCommerceWishList(
+				themeDisplay.getScopeGroupId(), themeDisplay.getUserId());
+
+		if (commerceWishList != null) {
+			boolean addedToWishlist = false;
+
+			if (cpSku != null) {
+				if (_commerceWishListItemService.
+						getCommerceWishListItemByContainsCPInstanceCount(
+							commerceWishList.getCommerceWishListId(),
+							cpSku.getCPInstanceUuid()) > 0) {
+
+					addedToWishlist = true;
+				}
+			}
+			else {
+				if (_commerceWishListItemService.
+						getCommerceWishListItemByContainsCProductCount(
+							commerceWishList.getCommerceWishListId(),
+							cpCatalogEntry.getCProductId()) > 0) {
+
+					addedToWishlist = true;
+				}
+			}
+
+			context.put("addedToWishlist", addedToWishlist);
+
+			context.put("addToWishlistButtonVisible", true);
+			context.put(
+				"wishlistAPI",
+				_portal.getPortalURL(httpServletRequest) +
+					"/o/commerce-ui/wish-list-item");
+		}
+		else {
+			context.put("addToWishlistButtonVisible", false);
 		}
 
 		context.put(
@@ -212,12 +250,19 @@ public class MiniumCPContentListEntryRenderer
 		dependencies.add("commerce-frontend-taglib@2.0.0/price/Price.es");
 
 		ComponentDescriptor componentDescriptor = new ComponentDescriptor(
-			"ProductCard.render", moduleName, null, dependencies);
+			"ProductCard.render", moduleName, null, dependencies, false, true,
+			false);
 
 		_soyComponentRenderer.renderSoyComponent(
 			httpServletRequest, httpServletResponse, componentDescriptor,
 			context);
 	}
+
+	@Reference
+	private CommerceWishListItemService _commerceWishListItemService;
+
+	@Reference
+	private CommerceWishListService _commerceWishListService;
 
 	@Reference
 	private NPMResolver _npmResolver;
