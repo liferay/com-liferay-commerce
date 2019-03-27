@@ -65,8 +65,7 @@ public interface AccountResource {
 	@Path("/{id}/order")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<OrderDTO> getAccountOrders(
-			@PathParam("id") String id,
-			@QueryParam("groupId") Long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
@@ -108,8 +107,7 @@ public interface AccountResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public OrderDTO upsertOrder(
-			@PathParam("id") String id,
-			@QueryParam("groupId") Long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			OrderDTO orderDTO, @Context Language language)
 		throws Exception;
 

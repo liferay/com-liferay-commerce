@@ -48,8 +48,8 @@ public interface CommerceAdminPricingResource {
 	@Path("/{groupId}/priceList/")
 	@Produces({"application/json", "application/xml"})
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@PathParam("groupId") Long groupId,
-			@Context Language language, @Context Pagination pagination)
+			@PathParam("groupId") Long groupId, @Context Language language,
+			@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})
@@ -65,8 +65,8 @@ public interface CommerceAdminPricingResource {
 	@POST
 	@Produces({"application/json", "application/xml"})
 	public PriceListDTO upsertPriceList(
-			@PathParam("groupId") Long groupId,
-			PriceListDTO priceListDTO, @Context Language language)
+			@PathParam("groupId") Long groupId, PriceListDTO priceListDTO,
+			@Context Language language)
 		throws Exception;
 
 }

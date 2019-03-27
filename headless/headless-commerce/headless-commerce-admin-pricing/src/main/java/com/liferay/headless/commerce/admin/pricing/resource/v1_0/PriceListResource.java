@@ -64,8 +64,8 @@ public interface PriceListResource {
 	@Path("/{id}")
 	@PUT
 	public Response updatePriceList(
-			@PathParam("id") String id,
-			PriceListDTO priceListDTO, @Context Language language)
+			@PathParam("id") String id, PriceListDTO priceListDTO,
+			@Context Language language)
 		throws Exception;
 
 	@Consumes({"application/json", "application/xml"})

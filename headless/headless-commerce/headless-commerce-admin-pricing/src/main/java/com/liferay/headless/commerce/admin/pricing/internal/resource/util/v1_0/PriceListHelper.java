@@ -136,8 +136,7 @@ public class PriceListHelper {
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
-				priceListDTOs ->
-					new CollectionDTO<>(priceListDTOs, totalItems))
+				priceListDTOs -> new CollectionDTO<>(priceListDTOs, totalItems))
 		);
 	}
 
@@ -214,12 +213,20 @@ public class PriceListHelper {
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
+		if (displayDate != null) {
+			displayCalendar = _convertDateToCalendar(displayDate);
+		}
+
 		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
 		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
 		expirationCalendar.add(Calendar.MONTH, 1);
+
+		if (expirationDate != null) {
+			expirationCalendar = _convertDateToCalendar(expirationDate);
+		}
 
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
