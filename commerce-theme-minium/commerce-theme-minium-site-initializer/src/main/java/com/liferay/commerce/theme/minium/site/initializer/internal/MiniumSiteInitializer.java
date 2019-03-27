@@ -596,7 +596,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		_commerceUsersImporter.importCommerceUsers(
 			jsonArray, _siteInitializerDependencyResolver.getImageClassLoader(),
-			_siteInitializerDependencyResolver.getDependenciesPath(),
+			_siteInitializerDependencyResolver.getImageDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
