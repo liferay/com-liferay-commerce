@@ -244,6 +244,20 @@ public class CommerceWishListItemLocalServiceUtil {
 		return getService().getCommerceWishListItem(commerceWishListItemId);
 	}
 
+	public static int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid) {
+		return getService()
+				   .getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
+			cpInstanceUuid);
+	}
+
+	public static int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) {
+		return getService()
+				   .getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+			cProductId);
+	}
+
 	/**
 	* Returns a range of all the commerce wish list items.
 	*

@@ -68,6 +68,15 @@ public interface CommerceWishListItemService extends BaseService {
 		long commerceWishListItemId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWishListItem> getCommerceWishListItems(
 		long commerceWishListId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator)

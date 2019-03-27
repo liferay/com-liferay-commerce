@@ -219,6 +219,14 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 	public CommerceWishListItem getCommerceWishListItem(
 		long commerceWishListItemId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId);
+
 	/**
 	* Returns a range of all the commerce wish list items.
 	*

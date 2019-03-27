@@ -252,6 +252,20 @@ public class CommerceWishListItemLocalServiceWrapper
 		return _commerceWishListItemLocalService.getCommerceWishListItem(commerceWishListItemId);
 	}
 
+	@Override
+	public int getCommerceWishListItemByContainsCPInstanceCount(
+		long commerceWishListId, String cpInstanceUuid) {
+		return _commerceWishListItemLocalService.getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
+			cpInstanceUuid);
+	}
+
+	@Override
+	public int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) {
+		return _commerceWishListItemLocalService.getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+			cProductId);
+	}
+
 	/**
 	* Returns a range of all the commerce wish list items.
 	*
