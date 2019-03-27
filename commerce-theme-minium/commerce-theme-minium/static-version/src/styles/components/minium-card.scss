@@ -59,12 +59,12 @@
 		color: white;
 		cursor: pointer;
 		font-size: 11px;
+		height: 17px;
+		left: 18px;
 		line-height: 1.1;
 		position: absolute;
-		left: 18px;
 		top: 18px;
 		width: 17px;
-		height: 17px;
 		z-index: 10;
 
 		[class*="-icon"] {
@@ -165,17 +165,17 @@
 	}
 
 	&__add-to-wishlist-button {
-		position: absolute;
-		width: 35px;
-		height: 35px;
-		top: 18px;
-		right: 18px;
-		z-index: 10;
-		border-radius: 50%;
 		background-color: white;
-		padding: 0;
+		border-radius: 50%;
 		color: $color-fg;
 		cursor: pointer;
+		height: 35px;
+		padding: 0;
+		position: absolute;
+		right: 18px;
+		top: 18px;
+		width: 35px;
+		z-index: 10;
 
 		&:focus {
 			box-shadow: $minium-shadow-focus;
@@ -183,17 +183,17 @@
 		}
 
 		[class*="-icon"] {
-			transition: all 0.1s ease-in;
-			width: 24px;
 			height: 24px;
+			opacity: .5;
 			position: relative;
 			top: 2px;
-			opacity: .5;
+			transition: all 0.1s ease-in;
+			width: 24px;
 		}
 
 		&:hover [class*="-icon"] {
-			transition: all .1s ease-in;
 			opacity: 1;
+			transition: all .1s ease-in;
 		}
 
 		.empty-shape {
@@ -201,11 +201,11 @@
 		}
 
 		.filled-shape {
-			transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-			transform-origin: 50% 40%;
-			transform: scale(0);
 			color: $color-theme;
 			opacity: 0;
+			transform: scale(0);
+			transform-origin: 50% 40%;
+			transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		}
 
 		&--added {
@@ -215,11 +215,11 @@
 
 			&:hover [class*="-icon"] {
 				transform: scale(1.2);
-			} 
+			}
 
 			.filled-shape {
-				transform: scale(1);
 				opacity: 1;
+				transform: scale(1);
 			}
 		}
 	}
