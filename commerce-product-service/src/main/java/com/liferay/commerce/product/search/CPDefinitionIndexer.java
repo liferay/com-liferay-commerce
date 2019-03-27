@@ -123,6 +123,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	public static final String FIELD_OPTION_NAMES = "optionsNames";
 
+	public static final String FIELD_PRODUCT_ID = "cpProductId";
+
 	public static final String FIELD_PRODUCT_TYPE_NAME = "productTypeName";
 
 	public static final String FIELD_PUBLISHED = "published";
@@ -482,6 +484,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addKeyword(
 			FIELD_IS_IGNORE_SKU_COMBINATIONS,
 			cpDefinition.isIgnoreSKUCombinations());
+
+		document.addKeyword(FIELD_PRODUCT_ID, cpDefinition.getCProductId());
 
 		document.addText(
 			FIELD_OPTION_NAMES, ArrayUtil.toStringArray(optionNames));
