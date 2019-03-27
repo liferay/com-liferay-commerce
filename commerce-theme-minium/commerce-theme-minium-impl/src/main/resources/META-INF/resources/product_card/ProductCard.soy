@@ -2,6 +2,7 @@
 
 {template .render}
 
+	{@param id: string}
 	{@param? accountId: number|string}
 	{@param? addedToWishlist: bool}
 	{@param? addToCartButtonVisible: bool}
@@ -31,7 +32,7 @@
 	{@param? _handleCheckboxCompareUpdate: any}
 	{@param? _handleWishListButtonClick: any}
 
-	<div class="minium-card" data-href="{$detailsLink}" data-onkeypress="_handleCardKeypress" tabindex="0">
+	<div class="minium-card" data-href="{$detailsLink}" data-onkeypress="_handleCardKeypress" id="{$id}" tabindex="0">
 		{let $availabilityDotClasses kind="text"}
 			{switch $availability}
 				{case 'inStock'}
@@ -71,14 +72,14 @@
 			{/if}
 		{/if}
 
-		{if $addToWishlistButtonVisible and $sku and $skuId }
+		{if $addToWishlistButtonVisible}
 			{let $addToWishlistClasses kind="text"}
 				minium-card__add-to-wishlist-button
 				{if $addedToWishlist}
 					{sp}minium-card__add-to-wishlist-button--added
 				{/if}
 			{/let}
-			<button 
+			<button
 				data-onclick="{$_handleWishListButtonClick}"
 				class="{$addToWishlistClasses}"
 			>

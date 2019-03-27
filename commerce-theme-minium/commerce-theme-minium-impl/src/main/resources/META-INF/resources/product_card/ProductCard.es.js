@@ -56,37 +56,47 @@ class ProductCard extends Component {
 				method: 'post'
 			}
 		)
-		.then(
-			() => {
-				liferayNavigation(window.location.href);
-				return Liferay.SPA;
-			}
-		);
+			.then(
+				() => {
+					liferayNavigation(window.location.href);
+					return Liferay.SPA;
+				}
+			);
 	}
 
-	_handleWishListButtonClick(){
+	_handleWishListButtonClick() {
 		this._toggleFavorite();
 	}
 
-	_toggleFavorite(){
-		if(!this.wishlistAPI) {
-			throw new Error('No wishlist API defined.')
+	_toggleFavorite() {
+		if (!this.wishlistAPI) {
+			throw new Error('No wishlist API defined.');
 		}
-		return fetch(
-			this.wishlistAPI + '/' + this.skuId,
+
+		const formData = new FormData();
+
+		formData.append('commerceAccountId', this.accountId);
+		formData.append('groupId', themeDisplay.getScopeGroupId());
+		formData.append('productId', this.productId);
+		formData.append('skuId', this.skuId ? this.skuId : 0);
+		formData.append('options', '[]');
+
+		fetch(
+			this.wishlistAPI,
 			{
-				credentials: 'include',
-				method: this.addedToWishlist ? 'delete' : 'post'
+				body: formData,
+				method: 'POST'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			(formattedResponse) => {
-				console.log('behaviour goes here!', formattedResponse);
-				this.addedToWishlist = !this.addedToWishlist;
-				return this.addedToWishlist;
-			}
-		);
+			.then(response => response.json())
+			.then(
+				(jsonresponse) => {
+					if (jsonresponse.success) {
+						this.addedToWishlist = jsonresponse.success;
+						return this.addedToWishlist;
+					}
+				}
+			);
 	}
 
 }
