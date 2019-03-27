@@ -24,6 +24,7 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.annotation.Generated;
