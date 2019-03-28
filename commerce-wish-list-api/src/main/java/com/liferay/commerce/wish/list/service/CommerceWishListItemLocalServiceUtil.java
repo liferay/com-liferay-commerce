@@ -244,6 +244,14 @@ public class CommerceWishListItemLocalServiceUtil {
 		return getService().getCommerceWishListItem(commerceWishListItemId);
 	}
 
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem getCommerceWishListItem(
+		long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceWishListItem(commerceWishListId, cpInstanceUuid,
+			cProductId);
+	}
+
 	public static int getCommerceWishListItemByContainsCPInstanceCount(
 		long commerceWishListId, String cpInstanceUuid) {
 		return getService()

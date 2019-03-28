@@ -220,6 +220,11 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 		long commerceWishListItemId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceWishListItem getCommerceWishListItem(
+		long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWishListItemByContainsCPInstanceCount(
 		long commerceWishListId, String cpInstanceUuid);
 
