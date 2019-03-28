@@ -57,6 +57,10 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 	@Override
 	public boolean equals(Object object);
 
+	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+		int type, int status)
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public java.util.List<CPDefinitionOptionRel> getCPDefinitionOptionRels();
 
 	public java.util.List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues();
@@ -64,6 +68,9 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 	public java.util.List<CPInstance> getCPInstances();
 
 	public CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public CPTaxCategory getCPTaxCategory()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public String getDefaultImageFileURL()

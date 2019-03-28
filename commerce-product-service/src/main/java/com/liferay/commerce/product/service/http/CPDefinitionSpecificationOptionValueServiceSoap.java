@@ -136,6 +136,23 @@ public class CPDefinitionSpecificationOptionValueServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap[] getCPDefinitionSpecificationOptionValues(
+		long cpSpecificationOptionId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> returnValue =
+				CPDefinitionSpecificationOptionValueServiceUtil.getCPDefinitionSpecificationOptionValues(cpSpecificationOptionId,
+					start, end);
+
+			return com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap[] getCPDefinitionSpecificationOptionValues(
 		long cpDefinitionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator)
 		throws RemoteException {
@@ -161,6 +178,20 @@ public class CPDefinitionSpecificationOptionValueServiceSoap {
 					cpOptionCategoryId);
 
 			return com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCPDefinitionSpecificationOptionValuesCount(
+		long cpSpecificationOptionId) throws RemoteException {
+		try {
+			int returnValue = CPDefinitionSpecificationOptionValueServiceUtil.getCPDefinitionSpecificationOptionValuesCount(cpSpecificationOptionId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -390,6 +390,13 @@ public class CPDefinitionWrapper implements CPDefinition,
 		return _cpDefinition.getCompanyId();
 	}
 
+	@Override
+	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+		int type, int status)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinition.getCPAttachmentFileEntries(type, status);
+	}
+
 	/**
 	* Returns the cp definition ID of this cp definition.
 	*
@@ -429,6 +436,12 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public long getCProductId() {
 		return _cpDefinition.getCProductId();
+	}
+
+	@Override
+	public CPTaxCategory getCPTaxCategory()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinition.getCPTaxCategory();
 	}
 
 	/**

@@ -204,6 +204,10 @@ public interface CPAttachmentFileEntryLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPAttachmentFileEntry fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPAttachmentFileEntry fetchCPAttachmentFileEntry(
 		long CPAttachmentFileEntryId);
 
@@ -366,5 +370,15 @@ public interface CPAttachmentFileEntryLocalService extends BaseLocalService,
 	public CPAttachmentFileEntry updateStatus(long userId,
 		long cpAttachmentFileEntryId, int status,
 		ServiceContext serviceContext, Map<String, Serializable> workflowContext)
+		throws PortalException;
+
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(long classNameId,
+		long classPK, long fileEntryId, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		Map<Locale, String> titleMap, String json, double priority, int type,
+		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 }
