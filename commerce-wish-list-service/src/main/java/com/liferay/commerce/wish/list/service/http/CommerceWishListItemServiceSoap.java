@@ -84,13 +84,25 @@ public class CommerceWishListItemServiceSoap {
 		}
 	}
 
-	public static int getCommerceWishListItemByContainsCProductCount(
-		long commerceWishListId, long cProductId) throws RemoteException {
+	public static void deleteCommerceWishListItem(long commerceWishListItemId)
+		throws RemoteException {
 		try {
-			int returnValue = CommerceWishListItemServiceUtil.getCommerceWishListItemByContainsCProductCount(commerceWishListId,
-					cProductId);
+			CommerceWishListItemServiceUtil.deleteCommerceWishListItem(commerceWishListItemId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 
-			return returnValue;
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItemSoap getCommerceWishListItem(
+		long commerceWishListItemId) throws RemoteException {
+		try {
+			com.liferay.commerce.wish.list.model.CommerceWishListItem returnValue =
+				CommerceWishListItemServiceUtil.getCommerceWishListItem(commerceWishListItemId);
+
+			return com.liferay.commerce.wish.list.model.CommerceWishListItemSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -115,25 +127,13 @@ public class CommerceWishListItemServiceSoap {
 		}
 	}
 
-	public static void deleteCommerceWishListItem(long commerceWishListItemId)
-		throws RemoteException {
+	public static int getCommerceWishListItemByContainsCProductCount(
+		long commerceWishListId, long cProductId) throws RemoteException {
 		try {
-			CommerceWishListItemServiceUtil.deleteCommerceWishListItem(commerceWishListItemId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			int returnValue = CommerceWishListItemServiceUtil.getCommerceWishListItemByContainsCProductCount(commerceWishListId,
+					cProductId);
 
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItemSoap getCommerceWishListItem(
-		long commerceWishListItemId) throws RemoteException {
-		try {
-			com.liferay.commerce.wish.list.model.CommerceWishListItem returnValue =
-				CommerceWishListItemServiceUtil.getCommerceWishListItem(commerceWishListItemId);
-
-			return com.liferay.commerce.wish.list.model.CommerceWishListItemSoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
