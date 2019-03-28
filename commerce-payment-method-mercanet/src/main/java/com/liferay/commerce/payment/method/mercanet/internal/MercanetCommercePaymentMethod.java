@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import com.worldline.sips.model.CaptureMode;
 import com.worldline.sips.model.Currency;
@@ -221,14 +222,12 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		paymentRequest.setOrderId(
 			String.valueOf(commerceOrder.getCommerceOrderId()));
 
-		StringBundler transactionReferenceSB = new StringBundler(3);
+		String transactionUuid = PortalUUIDUtil.generate();
 
-		transactionReferenceSB.append(commerceOrder.getCompanyId());
-		transactionReferenceSB.append(commerceOrder.getGroupId());
-		transactionReferenceSB.append(commerceOrder.getCommerceOrderId());
+		String transactionId = transactionUuid.replace(
+			StringPool.DASH, StringPool.BLANK);
 
-		paymentRequest.setTransactionReference(
-			transactionReferenceSB.toString());
+		paymentRequest.setTransactionReference(transactionId);
 
 		MercanetGroupServiceConfiguration mercanetGroupServiceConfiguration =
 			_getConfiguration(commerceOrder.getGroupId());
@@ -255,8 +254,7 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		if (!Objects.equals(responseCode.getCode(), "00")) {
 			return new CommercePaymentResult(
-				transactionReferenceSB.toString(),
-				commerceOrder.getCommerceOrderId(),
+				transactionId, commerceOrder.getCommerceOrderId(),
 				CommerceOrderPaymentConstants.STATUS_FAILED, true, null, null,
 				resultMessage, false);
 		}
@@ -272,8 +270,7 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			URLEncoder.encode(initializationResponse.getSeal(), "UTF-8"));
 
 		return new CommercePaymentResult(
-			transactionReferenceSB.toString(),
-			commerceOrder.getCommerceOrderId(),
+			transactionId, commerceOrder.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
 			resultMessage, true);
 	}

@@ -22,7 +22,6 @@ import com.liferay.commerce.payment.method.mercanet.internal.connector.PaypageCl
 import com.liferay.commerce.payment.method.mercanet.internal.constants.MercanetCommercePaymentMethodConstants;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.CharPool;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -187,13 +186,6 @@ public class MercanetServlet extends HttpServlet {
 				PaypageResponse paypageResponse = paypageClient.decodeResponse(
 					verifyMap);
 
-				StringBundler transactionReferenceSB = new StringBundler(3);
-
-				transactionReferenceSB.append(commerceOrder.getCompanyId());
-				transactionReferenceSB.append(commerceOrder.getGroupId());
-				transactionReferenceSB.append(
-					commerceOrder.getCommerceOrderId());
-
 				ResponseData responseData = paypageResponse.getData();
 
 				ResponseCode responseCode = responseData.getResponseCode();
@@ -210,11 +202,11 @@ public class MercanetServlet extends HttpServlet {
 						String.valueOf(commerceOrder.getCommerceOrderId())) &&
 					Objects.equals(
 						responseData.getTransactionReference(),
-						transactionReferenceSB.toString())) {
+						commerceOrder.getTransactionId())) {
 
 					_commercePaymentEngine.completePayment(
 						commerceOrder.getCommerceOrderId(),
-						transactionReferenceSB.toString(), httpServletRequest);
+						commerceOrder.getTransactionId(), httpServletRequest);
 				}
 			}
 		}
