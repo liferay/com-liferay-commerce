@@ -31,6 +31,10 @@
 	.btn:not(.btn-primary) {
 		@extend .commerce-button--outline
 	}
+
+	.address-as-billing > .form-inline.input-checkbox-wrapper {
+		grid-auto-columns: auto;
+	}
 }
 
 body .multi-step-item.active .multi-step-divider,
