@@ -1,0 +1,4099 @@
+openapi: 3.0.0
+info:
+  title: Liferay Commerce Admin Catalog API
+  description: Liferay Commerce Admin Catalog API
+  contact:
+    name: Commerce Team
+    email: team-commerce@liferay.com
+  license:
+    name: GNU Lesser General Public License 2.1
+    url: https://www.gnu.org/licenses/lgpl-2.1.html
+  version: v1.0
+servers:
+- url: https://virtserver.swaggerhub.com/liferay6/commerce-admin-catalog/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://commerce.{environment}.liferay.com/commerce-admin-catalog/{basePath}
+  description: Liferay Commerce Admin Catalog API server
+  variables:
+    basePath:
+      default: v1.0
+    environment:
+      default: api
+      enum:
+      - api
+      - api.dev
+      - api.uat
+- url: '{protocol}://{host}.ngrok.io/o/commerce-admin-catalog/{basePath}'
+  description: Liferay Commerce Local Development with Ngrok
+  variables:
+    host:
+      default: commerce
+    protocol:
+      default: http
+      enum:
+      - http
+      - https
+    basePath:
+      default: v1.0
+- url: '{protocol}://{host}:{port}/o/commerce-admin-catalog/{basePath}'
+  description: Liferay Commerce Local Development (Hosts file)
+  variables:
+    host:
+      default: test.dev
+    port:
+      default: "8080"
+      enum:
+      - "8080"
+      - "8443"
+      - "443"
+    protocol:
+      default: http
+      enum:
+      - http
+      - https
+    basePath:
+      default: v1.0
+tags:
+- name: Attachment
+  description: Operations on Attachments
+- name: OptionCategory
+  description: Operations on Option Categories
+- name: Product
+  description: Operations on Products
+- name: ProductOption
+  description: Operations on Product Options
+- name: ProductOptionValue
+  description: Operations on Product Option Values
+- name: Sku
+  description: Operations on Skus
+- name: Specification
+  description: Operations on Specification
+- name: SpecificationValue
+  description: Operations on Specification Values
+paths:
+  /product/{id}:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - Product
+      summary: Deletes a Product by ID.
+      operationId: deleteProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/productOption/:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProductOptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOption'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOption'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProductOptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductOption'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/configuration/:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProductConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductConfiguration'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProductConfiguraton
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfiguration'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/shippingConfiguration/:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProductShippingConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductShippingConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductShippingConfiguration'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProductShippingConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductShippingConfiguration'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/taxConfiguration:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProductTaxConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductTaxConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductTaxConfiguration'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProductTaxConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductTaxConfiguration'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/subscriptionConfiguration:
+    get:
+      tags:
+      - Product
+      summary: Gets a Product by ID.
+      operationId: getProductSubscriptionConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Product by ID.
+      operationId: updateProductSubscriptionConfiguration
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /commerceAdminCatalog/{groupId}/product/:
+    get:
+      tags:
+      - Product
+      summary: Gets a list of Products.
+      operationId: getProducts
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Product
+      summary: Creates or updates a Product.
+      operationId: upsertProduct
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /productOption/{id}:
+    get:
+      tags:
+      - ProductOption
+      summary: Gets a Product Option by ID.
+      operationId: getProductOption
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductOption'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductOption'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - ProductOption
+      summary: Updates a Product Option by ID.
+      operationId: updateProductOption
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductOption'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ProductOption'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - ProductOption
+      summary: Deletes a Product Option by ID.
+      operationId: deleteProductOption
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /optionCategory/{id}:
+    get:
+      tags:
+      - OptionCategory
+      summary: Gets a Option Category by ID.
+      operationId: getOptionCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionCategory'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OptionCategory'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - OptionCategory
+      summary: Updates a Option Category by ID.
+      operationId: updateOptionCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptionCategory'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OptionCategory'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - OptionCategory
+      summary: Deletes a Option Category by ID.
+      operationId: deleteOptionCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /specification/{id}:
+    get:
+      tags:
+      - Specification
+      summary: Gets a Specification by ID.
+      operationId: getSpecification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specification'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Specification'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Specification
+      summary: Updates a Specification by ID.
+      operationId: updateSpecification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specification'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Specification'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - Specification
+      summary: Deletes a Specification by ID.
+      operationId: deleteSpecification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /commerceAdminCatalog/{groupId}/productOption/:
+    get:
+      tags:
+      - ProductOption
+      summary: Gets a list of Product Option.
+      operationId: getOptions
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOption'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOption'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - ProductOption
+      summary: Creates or updates a Product Option.
+      operationId: upsertProductOption
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductOption'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ProductOption'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductOption'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductOption'
+        202:
+          description: Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /commerceAdminCatalog/{groupId}/specification/:
+    get:
+      tags:
+      - Specification
+      summary: Gets a list of Specifications.
+      operationId: getSpecifications
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Specification'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Specification'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Specification
+      summary: Creates or updates a Specification.
+      operationId: upsertSpecification
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specification'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Specification'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specification'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Specification'
+        202:
+          description: Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /commerceAdminCatalog/{groupId}/optionCategory/:
+    get:
+      tags:
+      - OptionCategory
+      summary: Gets a list of Option Categories.
+      operationId: getOptionCategories
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionCategory'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionCategory'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - OptionCategory
+      summary: Creates or updates a Option Category.
+      operationId: upsertOptionCategory
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: Group to filter (Liferay site)
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptionCategory'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/OptionCategory'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionCategory'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OptionCategory'
+        202:
+          description: Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /specification/{id}/specificationValue/:
+    get:
+      tags:
+      - Specification
+      summary: Gets a list of Values related to a Specification.
+      operationId: getSpecificationValues
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpecificationValue'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpecificationValue'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Specification
+      summary: Creates or updates a Value related to a Specification
+      operationId: upsertSpecificationValue
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: The resource Id
+          format: int64
+          example: 30130
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecificationValue'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SpecificationValue'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecificationValue'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SpecificationValue'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /productOption/{id}/productOptionValue/:
+    get:
+      tags:
+      - ProductOption
+      summary: Gets a list of Values related to a Product Option.
+      operationId: getProductOptionValues
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOptionValue'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOptionValue'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - ProductOption
+      summary: Creates or updates a Value related to a Product Option.
+      operationId: upsertProductOptionValue
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductOptionValue'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ProductOptionValue'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductOptionValue'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductOptionValue'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /attachment/{id}:
+    get:
+      tags:
+      - Attachment
+      summary: Gets a Attachment by ID.
+      operationId: getAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Attachment
+      summary: Updates a Attachment by ID.
+      operationId: updateAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - Attachment
+      summary: Deletes a Attachment by ID.
+      operationId: deleteAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/attachment/:
+    get:
+      tags:
+      - Product
+      summary: Gets a list of Attachments related to a Product.
+      operationId: getProductAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Product
+      summary: Creates or updates a Attachment related to a Product.
+      operationId: upsertProductAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/image/:
+    get:
+      tags:
+      - Product
+      summary: Gets a list of Images related to a Product.
+      operationId: getProductImages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Product
+      summary: Creates or updates a Image related to a Product.
+      operationId: upsertProductImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/category/:
+    get:
+      tags:
+      - Product
+      summary: Gets a list of Category related to a Product.
+      operationId: getProductCategories
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Product
+      summary: Updates a Productby ID.
+      operationId: updateProductCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Category'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /sku/{id}:
+    get:
+      tags:
+      - Sku
+      summary: Gets a Sku by ID.
+      operationId: getSku
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Sku'
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    put:
+      tags:
+      - Sku
+      summary: Updates a Sku by ID.
+      operationId: updateSku
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Sku'
+        required: true
+      responses:
+        201:
+          description: Created
+        202:
+          description: Async
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+    delete:
+      tags:
+      - Sku
+      summary: Deletes a Sku by ID.
+      operationId: deleteSku
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      responses:
+        204:
+          description: No content
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+  /product/{id}/sku/:
+    get:
+      tags:
+      - Product
+      summary: Gets a list of Skus related to a Product.
+      operationId: getProductSkus
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sku'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sku'
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.read
+    post:
+      tags:
+      - Product
+      summary: Creates or updates a Sku related to a Product.
+      operationId: upsertProductSku
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minLength: 1
+          type: string
+          description: The resource Id, or external reference code Id if it's prefixed with ext-
+        examples:
+          localId:
+            summary: Local identifier
+            value: "23456"
+          externalId:
+            summary: External idenfitifer
+            value: ext-uniqueId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Sku'
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Sku'
+        202:
+          description: Accepted - Async
+        204:
+          description: Updated
+        400:
+          description: Invalid input
+        401:
+          description: Authentication information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The specified resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BasicAuth: []
+      - BearerAuth: []
+      - OAuth2:
+        - HeadlessCommerceAdminCatalog.write
+components:
+  schemas:
+    Attachment:
+      required:
+      - externalReferenceCode
+      - sku
+      type: object
+      properties:
+        attachment:
+          type: string
+          description: Base64 enoded file
+        displayDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        src:
+          type: string
+          description: URL of the location
+        title:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Attachment Title HU
+            hr_HR: Attachment Title HR
+            en_US: Hand Saw
+        options:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            optionKey: optionValueKey
+            color: yellow
+            size: xs
+        priority:
+          type: number
+          format: double
+          example: 1.2
+        type:
+          type: integer
+          format: int32
+          readOnly: true
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        neverExpire:
+          type: boolean
+          example: true
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+    Category:
+      required:
+      - externalReferenceCode
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Category Name
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        vocabulary:
+          type: string
+          readOnly: true
+          example: Default Vocabulary
+        groupId:
+          type: integer
+          format: int64
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+    Error:
+      required:
+      - errorCode
+      - errorDescription
+      - message
+      - status
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: No CommerceCurrency exists with the key {groupId=41811, code=US Dollar}
+        errorDescription:
+          type: string
+          readOnly: true
+          example: Unable to find currency. Currency code should be expressed with 3-letter ISO 4217 format.
+        status:
+          type: integer
+          description: HTTP Status code
+          readOnly: true
+          example: 404
+        errorCode:
+          type: integer
+          description: Internal error code mapping
+          readOnly: true
+          example: 996
+    OptionCategory:
+      required:
+      - key
+      - title
+      type: object
+      properties:
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          example: 31130
+        title:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Horvatorszag
+            hr_HR: Hrvatska
+            en_US: Croatia
+        description:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Horvatorszag
+            hr_HR: Hrvatska
+            en_US: Croatia
+        key:
+          type: string
+          example: oprion-category-key
+        priority:
+          minimum: 0
+          type: number
+          format: double
+          example: 1.2
+    Product:
+      required:
+      - active
+      - externalReferenceCode
+      - name
+      - productTypeName
+      type: object
+      properties:
+        name:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Product Name HU
+            hr_HR: Product Name HR
+            en_US: Hand Saw
+        shortDescription:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Product Short Description HU
+            hr_HR: Product Short Description HR
+            en_US: Hand stainless steel saw for wood
+        description:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Product Description HU
+            hr_HR: Product Description HR
+            en_US: Professional hand stainless steel saw for wood. Made to last and saw forever. Made of best steel
+        expando:
+          type: object
+          additionalProperties: true
+        urls:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: product-url-hu
+            hr_HR: product-url-hr
+            en_US: product-url-us
+        metaTitle:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Meta title HU
+            hr_HR: Meta title HU
+            en_US: Meta title HU
+        metaDescription:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Meta description HU
+            hr_HR: Meta description HU
+            en_US: Meta description HU
+        metaKeyword:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Meta keyword HU
+            hr_HR: Meta keyword HU
+            en_US: Meta keyword HU
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sku'
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOption'
+        tags:
+          type: array
+          example:
+          - tag1
+          - tag2
+          - tag3
+          items:
+            type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        relatedProducts:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            cross-sell: productId
+        configuration:
+          type: object
+          items:
+            $ref: '#/components/schemas/ProductConfiguration'
+        shippingConfiguration:
+          type: object
+          items:
+            $ref: '#/components/schemas/ProductShippingConfiguration'
+        taxConfiguration:
+          type: object
+          items:
+            $ref: '#/components/schemas/ProductTaxConfiguration'
+        subscriptionConfiguration:
+          type: object
+          items:
+            $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+        defaultSku:
+          type: string
+          example: Blue handle, 00001l, 70cm, lifetime warranty
+        active:
+          type: boolean
+          example: true
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        productType:
+          type: string
+          example: simple
+        groupId:
+          type: integer
+          format: int64
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+    ProductConfiguration:
+      type: object
+      properties:
+        inventoryEngine:
+          type: string
+          description: The inventory engine that will be used to manage the product inventory
+        lowStockAction:
+          type: string
+          description: The low stock action that will be performed when a product is out of stock
+        allowBackOrder:
+          type: boolean
+          example: true
+        displayAvailability:
+          type: boolean
+          example: true
+        displayStockQuantity:
+          type: boolean
+          example: true
+        minStockQuantity:
+          type: integer
+          format: int32
+        minOrderQuantity:
+          type: integer
+          format: int32
+        maxOrderQuantity:
+          type: integer
+          format: int32
+        multipleOrderQuantity:
+          type: integer
+          format: int32
+        allowedOrderQuantities:
+          type: array
+          example:
+          - 10
+          - 20
+          - 30
+          - 40
+          items:
+            type: integer
+            format: int32
+    ProductOption:
+      required:
+      - externalReferenceCode
+      - fieldType
+      - key
+      - name
+      type: object
+      properties:
+        name:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Color HU
+            hr_HR: Color HR
+            en_US: Color
+        key:
+          type: string
+          example: color
+        description:
+          type: string
+          example: Description
+        facetable:
+          type: boolean
+          example: true
+        required:
+          type: boolean
+          example: true
+        skuContributor:
+          type: boolean
+          example: true
+        fieldType:
+          type: string
+          example: select
+          enum:
+          - select
+          - radio
+          - date
+          - checkbox
+          - checkbox_multiple
+          - numeric
+        priority:
+          type: number
+          format: double
+          example: 1.2
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOptionValue'
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        groupId:
+          type: integer
+          format: int64
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+    ProductOptionValue:
+      required:
+      - externalReferenceCode
+      - key
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: Black
+        key:
+          type: string
+          example: black
+        priority:
+          type: number
+          format: double
+          example: 1.2
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+    ProductShippingConfiguration:
+      type: object
+      properties:
+        shippable:
+          type: boolean
+          example: true
+        freeShipping:
+          type: boolean
+          example: true
+        shippingSeparately:
+          type: boolean
+          example: true
+        shippingExtraPrice:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+        width:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+        height:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+        depth:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+        weight:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+    ProductSubscriptionConfiguration:
+      type: object
+      properties:
+        enable:
+          type: boolean
+          example: true
+        subscriptionType:
+          type: string
+          example: month
+          enum:
+          - day
+          - week
+          - month
+          - year
+        subscriptionTypeSettings:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            monthDay: "1"
+            monthlyMode: "0"
+        length:
+          type: integer
+          format: int32
+          example: 2
+        numberOfLength:
+          type: integer
+          format: int64
+          example: 12
+    ProductTaxConfiguration:
+      type: object
+      properties:
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          example: 30130
+        taxable:
+          type: boolean
+          example: true
+        taxCategory:
+          type: string
+          example: taxCategoryName
+    Sku:
+      required:
+      - externalReferenceCode
+      - sku
+      type: object
+      properties:
+        options:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            optionKey: optionValueKey
+            color: yellow
+            size: xs
+        inventoryLevel:
+          type: integer
+          readOnly: true
+          example: 29
+        neverExpire:
+          type: boolean
+          example: true
+        published:
+          type: boolean
+          example: true
+        purchasable:
+          type: boolean
+          example: true
+        cost:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 101
+        depth:
+          minimum: 0
+          type: number
+          format: double
+          example: 1.1
+        height:
+          minimum: 0
+          type: number
+          format: double
+          example: 20.2
+        price:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 101
+        promoPrice:
+          minimum: 0
+          type: number
+          format: bigdecimal
+          example: 202
+        weight:
+          minimum: 0
+          type: number
+          format: double
+          example: 1.1
+        width:
+          minimum: 0
+          type: number
+          format: double
+          example: 20.2
+        displayDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        gtin:
+          type: string
+          example: "12341234"
+        manufacturerPartNumber:
+          type: string
+          example: "12341234"
+        sku:
+          type: string
+          example: "12341234"
+        externalReferenceCode:
+          type: string
+          example: AB-34098-789-N
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30130
+        productId:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 30129
+    Specification:
+      required:
+      - key
+      - title
+      type: object
+      properties:
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          readOnly: true
+          example: 31130
+        title:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Horvatorszag
+            hr_HR: Hrvatska
+            en_US: Croatia
+        description:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Horvatorszag
+            hr_HR: Hrvatska
+            en_US: Croatia
+        key:
+          type: string
+          example: specification-key
+        facetable:
+          type: boolean
+          example: true
+        optionCategory:
+          type: object
+          items:
+            $ref: '#/components/schemas/OptionCategory'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecificationValue'
+    SpecificationValue:
+      required:
+      - value
+      type: object
+      properties:
+        id:
+          minimum: 0
+          type: integer
+          format: int64
+          example: 31130
+        product:
+          type: object
+          items:
+            $ref: '#/components/schemas/Product'
+        specification:
+          type: object
+          items:
+            $ref: '#/components/schemas/Specification'
+        optionCategory:
+          type: object
+          items:
+            $ref: '#/components/schemas/OptionCategory'
+        value:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            hu_HU: Horvatorszag
+            hr_HR: Hrvatska
+            en_US: Croatia
+        priority:
+          minimum: 0
+          type: number
+          format: double
+          example: 1.2
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    idPathParam:
+      name: id
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        minLength: 1
+        type: string
+        description: The resource Id, or external reference code Id if it's prefixed with ext-
+      examples:
+        localId:
+          summary: Local identifier
+          value: "23456"
+        externalId:
+          summary: External idenfitifer
+          value: ext-uniqueId
+    idPathParamInt:
+      name: id
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+        description: The resource Id
+        format: int64
+        example: 30130
+    groupIdPathParam:
+      name: groupId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+        description: Group to filter (Liferay site)
+        format: int64
+        example: 30130
+    pageQueryParam:
+      name: page
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+    pageSizeQueryParam:
+      name: pageSize
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth/authorize
+          tokenUrl: /oauth/token
+          scopes:
+            HeadlessCommerceAdminCatalog.read: Grants read access
+            HeadlessCommerceAdminCatalog.write: Grants write access
+            HeadlessCommerceAdminCatalog.admin: Grants access to admin operations
+    BearerAuth:
+      type: http
+      scheme: bearer
