@@ -105,6 +105,11 @@
 			<finder-column name="commerceWishListId" />
 			<finder-column name="CProductId" />
 		</finder>
+		<finder name="CW_CPI_CP" return-type="CommerceWishListItem">
+			<finder-column name="commerceWishListId" />
+			<finder-column name="CPInstanceUuid" />
+			<finder-column name="CProductId" />
+		</finder>
 	</entity>
 	<exceptions>
 		<exception>CommerceWishListName</exception>

@@ -32,6 +32,10 @@ import java.util.List;
 public class CommerceWishListItemServiceImpl
 	extends CommerceWishListItemServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public CommerceWishListItem addCommerceWishListItem(
 			long commerceWishListId, long cpDefinitionId, long cpInstanceId,
@@ -43,6 +47,20 @@ public class CommerceWishListItemServiceImpl
 
 		return commerceWishListItemLocalService.addCommerceWishListItem(
 			commerceWishListId, cpDefinitionId, cpInstanceId, json,
+			serviceContext);
+	}
+
+	@Override
+	public CommerceWishListItem addCommerceWishListItem(
+			long commerceWishListId, long cProductId, String cpInstanceUuid,
+			String json, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceWishListModelResourcePermission.check(
+			getPermissionChecker(), commerceWishListId, ActionKeys.UPDATE);
+
+		return commerceWishListItemLocalService.addCommerceWishListItem(
+			commerceWishListId, cProductId, cpInstanceUuid, json,
 			serviceContext);
 	}
 
@@ -76,6 +94,18 @@ public class CommerceWishListItemServiceImpl
 			commerceWishListItem.getCommerceWishListId(), ActionKeys.VIEW);
 
 		return commerceWishListItem;
+	}
+
+	@Override
+	public CommerceWishListItem getCommerceWishListItem(
+			long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws PortalException {
+
+		_commerceWishListModelResourcePermission.check(
+			getPermissionChecker(), commerceWishListId, ActionKeys.VIEW);
+
+		return commerceWishListItemLocalService.getCommerceWishListItem(
+			commerceWishListId, cpInstanceUuid, cProductId);
 	}
 
 	@Override

@@ -91,10 +91,8 @@ class ProductCard extends Component {
 			.then(response => response.json())
 			.then(
 				(jsonresponse) => {
-					if (jsonresponse.success) {
-						this.addedToWishlist = jsonresponse.success;
-						return this.addedToWishlist;
-					}
+					this.addedToWishlist = jsonresponse.success;
+					return this.addedToWishlist;
 				}
 			);
 	}

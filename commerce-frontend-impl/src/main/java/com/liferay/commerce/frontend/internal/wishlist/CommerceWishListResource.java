@@ -20,6 +20,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.frontend.internal.wishlist.model.WishListItemUpdated;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
@@ -71,11 +75,36 @@ public class CommerceWishListResource {
 				_commerceWishListService.getDefaultCommerceWishList(
 					groupId, _portal.getUserId(httpServletRequest));
 
-			_commerceWishListItemService.addCommerceWishListItem(
-				commerceWishList.getCommerceWishListId(), cpDefinitionId,
-				cpInstanceId, options, serviceContext);
+			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+				cpDefinitionId);
 
-			wishListItemUpdated.setSuccess(true);
+			CPInstance cpInstance = _cpInstanceService.getCPInstance(
+				cpInstanceId);
+
+			if (_commerceWishListItemService.
+					getCommerceWishListItemByContainsCPInstanceCount(
+						commerceWishList.getCommerceWishListId(),
+						cpInstance.getCPInstanceUuid()) == 0) {
+
+				_commerceWishListItemService.addCommerceWishListItem(
+					commerceWishList.getCommerceWishListId(),
+					cpDefinition.getCProductId(),
+					cpInstance.getCPInstanceUuid(), options, serviceContext);
+
+				wishListItemUpdated.setSuccess(true);
+			}
+			else {
+				CommerceWishListItem commerceWishListItem =
+					_commerceWishListItemService.getCommerceWishListItem(
+						commerceWishList.getCommerceWishListId(),
+						cpInstance.getCPInstanceUuid(),
+						cpDefinition.getCProductId());
+
+				_commerceWishListItemService.deleteCommerceWishListItem(
+					commerceWishListItem.getCommerceWishListItemId());
+
+				wishListItemUpdated.setSuccess(false);
+			}
 		}
 		catch (Exception e) {
 			wishListItemUpdated.setSuccess(false);
@@ -124,6 +153,12 @@ public class CommerceWishListResource {
 
 	@Reference
 	private CommerceWishListService _commerceWishListService;
+
+	@Reference
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private CPInstanceService _cpInstanceService;
 
 	@Reference
 	private Portal _portal;
