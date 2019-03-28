@@ -746,6 +746,65 @@ public interface CommerceWishListItemPersistence extends BasePersistence<Commerc
 	public int countByCW_CP(long commerceWishListId, long CProductId);
 
 	/**
+	* Returns the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; or throws a {@link NoSuchWishListItemException} if it could not be found.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @return the matching commerce wish list item
+	* @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
+	*/
+	public CommerceWishListItem findByCW_CPI_CP(long commerceWishListId,
+		String CPInstanceUuid, long CProductId)
+		throws NoSuchWishListItemException;
+
+	/**
+	* Returns the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
+	*/
+	public CommerceWishListItem fetchByCW_CPI_CP(long commerceWishListId,
+		String CPInstanceUuid, long CProductId);
+
+	/**
+	* Returns the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
+	*/
+	public CommerceWishListItem fetchByCW_CPI_CP(long commerceWishListId,
+		String CPInstanceUuid, long CProductId, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; from the database.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @return the commerce wish list item that was removed
+	*/
+	public CommerceWishListItem removeByCW_CPI_CP(long commerceWishListId,
+		String CPInstanceUuid, long CProductId)
+		throws NoSuchWishListItemException;
+
+	/**
+	* Returns the number of commerce wish list items where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @return the number of matching commerce wish list items
+	*/
+	public int countByCW_CPI_CP(long commerceWishListId, String CPInstanceUuid,
+		long CProductId);
+
+	/**
 	* Caches the commerce wish list item in the entity cache if it is enabled.
 	*
 	* @param commerceWishListItem the commerce wish list item

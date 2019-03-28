@@ -56,8 +56,17 @@ public interface CommerceWishListItemService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceWishListItemServiceUtil} to access the commerce wish list item remote service. Add custom service methods to {@link com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public CommerceWishListItem addCommerceWishListItem(
 		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
+		String json, ServiceContext serviceContext) throws PortalException;
+
+	public CommerceWishListItem addCommerceWishListItem(
+		long commerceWishListId, long cProductId, String cpInstanceUuid,
 		String json, ServiceContext serviceContext) throws PortalException;
 
 	public void deleteCommerceWishListItem(long commerceWishListItemId)
@@ -66,6 +75,11 @@ public interface CommerceWishListItemService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWishListItem getCommerceWishListItem(
 		long commerceWishListItemId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceWishListItem getCommerceWishListItem(
+		long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWishListItemByContainsCPInstanceCount(

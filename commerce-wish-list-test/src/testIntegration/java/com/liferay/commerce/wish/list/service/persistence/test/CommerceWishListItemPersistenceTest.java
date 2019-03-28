@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -55,6 +56,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -210,6 +212,16 @@ public class CommerceWishListItemPersistenceTest {
 			RandomTestUtil.nextLong());
 
 		_persistence.countByCW_CP(0L, 0L);
+	}
+
+	@Test
+	public void testCountByCW_CPI_CP() throws Exception {
+		_persistence.countByCW_CPI_CP(RandomTestUtil.nextLong(), "",
+			RandomTestUtil.nextLong());
+
+		_persistence.countByCW_CPI_CP(0L, "null", 0L);
+
+		_persistence.countByCW_CPI_CP(0L, (String)null, 0L);
 	}
 
 	@Test
@@ -439,6 +451,28 @@ public class CommerceWishListItemPersistenceTest {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
+	}
+
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+
+		_persistence.clearCache();
+
+		CommerceWishListItem existingCommerceWishListItem = _persistence.findByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceWishListItem.getCommerceWishListId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceWishListItem,
+				"getOriginalCommerceWishListId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceWishListItem.getCPInstanceUuid(),
+				ReflectionTestUtil.invoke(existingCommerceWishListItem,
+					"getOriginalCPInstanceUuid", new Class<?>[0])));
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceWishListItem.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceWishListItem,
+				"getOriginalCProductId", new Class<?>[0]));
 	}
 
 	protected CommerceWishListItem addCommerceWishListItem()

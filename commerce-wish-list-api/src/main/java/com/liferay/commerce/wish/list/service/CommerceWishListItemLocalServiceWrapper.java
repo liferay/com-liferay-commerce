@@ -253,6 +253,14 @@ public class CommerceWishListItemLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.wish.list.model.CommerceWishListItem getCommerceWishListItem(
+		long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItemLocalService.getCommerceWishListItem(commerceWishListId,
+			cpInstanceUuid, cProductId);
+	}
+
+	@Override
 	public int getCommerceWishListItemByContainsCPInstanceCount(
 		long commerceWishListId, String cpInstanceUuid) {
 		return _commerceWishListItemLocalService.getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
