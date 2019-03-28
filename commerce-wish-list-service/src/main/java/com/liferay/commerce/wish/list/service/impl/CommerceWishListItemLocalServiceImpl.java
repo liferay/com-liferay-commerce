@@ -141,6 +141,15 @@ public class CommerceWishListItemLocalServiceImpl
 	}
 
 	@Override
+	public CommerceWishListItem getCommerceWishListItem(
+			long commerceWishListId, String cpInstanceUuid, long cProductId)
+		throws PortalException {
+
+		return commerceWishListItemPersistence.findByCW_CPI_CP(
+			commerceWishListId, cpInstanceUuid, cProductId);
+	}
+
+	@Override
 	public int getCommerceWishListItemByContainsCPInstanceCount(
 		long commerceWishListId, String cpInstanceUuid) {
 
