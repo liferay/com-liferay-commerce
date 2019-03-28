@@ -351,6 +351,19 @@ public class CPDefinitionSpecificationOptionValueLocalServiceUtil {
 				   .getCPSpecificationOptionDefinitionValues(cpSpecificationOptionId);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPSpecificationOptionDefinitionValues(
+		long cpSpecificationOptionId, int start, int end) {
+		return getService()
+				   .getCPSpecificationOptionDefinitionValues(cpSpecificationOptionId,
+			start, end);
+	}
+
+	public static int getCPSpecificationOptionDefinitionValuesCount(
+		long cpSpecificationOptionId) {
+		return getService()
+				   .getCPSpecificationOptionDefinitionValuesCount(cpSpecificationOptionId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);

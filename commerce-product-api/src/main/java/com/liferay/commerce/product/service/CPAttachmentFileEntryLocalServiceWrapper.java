@@ -223,6 +223,13 @@ public class CPAttachmentFileEntryLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPAttachmentFileEntry fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _cpAttachmentFileEntryLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPAttachmentFileEntry fetchCPAttachmentFileEntry(
 		long CPAttachmentFileEntryId) {
 		return _cpAttachmentFileEntryLocalService.fetchCPAttachmentFileEntry(CPAttachmentFileEntryId);
@@ -451,6 +458,25 @@ public class CPAttachmentFileEntryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpAttachmentFileEntryLocalService.updateStatus(userId,
 			cpAttachmentFileEntryId, status, serviceContext, workflowContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+		long classNameId, long classPK, long fileEntryId, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		java.util.Map<java.util.Locale, String> titleMap, String json,
+		double priority, int type, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpAttachmentFileEntryLocalService.upsertCPAttachmentFileEntry(classNameId,
+			classPK, fileEntryId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
+			json, priority, type, externalReferenceCode, serviceContext);
 	}
 
 	@Override

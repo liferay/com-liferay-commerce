@@ -73,6 +73,10 @@ public interface CPAttachmentFileEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPAttachmentFileEntry fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPAttachmentFileEntry fetchCPAttachmentFileEntry(
 		long cpAttachmentFileEntryId) throws PortalException;
 
@@ -111,4 +115,14 @@ public interface CPAttachmentFileEntryService extends BaseService {
 		int expirationDateMinute, boolean neverExpire,
 		Map<Locale, String> titleMap, String json, double priority, int type,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(long classNameId,
+		long classPK, long fileEntryId, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		Map<Locale, String> titleMap, String json, double priority, int type,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }
