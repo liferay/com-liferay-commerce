@@ -303,6 +303,14 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 		long cpSpecificationOptionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionSpecificationOptionValue> getCPSpecificationOptionDefinitionValues(
+		long cpSpecificationOptionId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSpecificationOptionDefinitionValuesCount(
+		long cpSpecificationOptionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 
