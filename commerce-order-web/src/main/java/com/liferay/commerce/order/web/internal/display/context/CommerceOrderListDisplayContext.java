@@ -109,7 +109,7 @@ public class CommerceOrderListDisplayContext {
 
 		_keywords = ParamUtil.getString(renderRequest, "keywords");
 		_showFilter = ParamUtil.getBoolean(renderRequest, "showFilter");
-		_tabs1 = ParamUtil.getString(renderRequest, "tabs1", "pending");
+		_tabs1 = ParamUtil.getString(renderRequest, "tabs1", "open");
 	}
 
 	public List<KeyValuePair> getAvailableAdvanceStatusKVPs()
