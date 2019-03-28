@@ -1,0 +1,7 @@
+apiDir: "../headless-commerce-admin-catalog-api/src/main/java"
+apiPackagePath: "com.liferay.headless.commerce.admin.catalog"
+application:
+    baseURI: "/headless-commerce-admin-catalog"
+    className: "HeadlessCommerceAdminCatalogApplication"
+    name: "Liferay.Headless.Commerce.Admin.Catalog"
+author: "Zoltán Takács"
