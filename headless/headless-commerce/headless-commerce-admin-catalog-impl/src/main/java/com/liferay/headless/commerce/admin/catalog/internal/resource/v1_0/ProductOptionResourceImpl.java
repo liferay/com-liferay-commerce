@@ -80,7 +80,7 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 		_productOptionHelper.updateProductOption(
 			id, productOption, contextAcceptLanguage, contextCompany);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

@@ -55,7 +55,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 		_attachmentHelper.updateAttachment(id, attachment, contextCompany);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

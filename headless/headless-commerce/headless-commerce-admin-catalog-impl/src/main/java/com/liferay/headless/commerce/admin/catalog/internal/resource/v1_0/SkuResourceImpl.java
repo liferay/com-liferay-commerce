@@ -53,7 +53,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 	public Response updateSku(@NotNull String id, Sku sku) throws Exception {
 		_skuHelper.updateSKU(id, sku, contextCompany);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
