@@ -66,7 +66,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 		_optionCategoryHelper.updateOptionCategory(id, optionCategory);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
