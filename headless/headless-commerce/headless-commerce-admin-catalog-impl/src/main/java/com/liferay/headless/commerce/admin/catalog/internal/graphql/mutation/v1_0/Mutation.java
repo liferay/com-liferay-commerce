@@ -191,14 +191,14 @@ public class Mutation {
 	@GraphQLInvokeDetached
 	public Response updateProductOptions(
 			@GraphQLName("id") String id,
-			@GraphQLName("ProductOption") ProductOption productOption)
+			@GraphQLName("ProductOption") ProductOption[] productOptions)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			productResource -> productResource.updateProductOptions(
-				id, productOption));
+				id, productOptions));
 	}
 
 	@GraphQLInvokeDetached
@@ -304,14 +304,14 @@ public class Mutation {
 	@GraphQLInvokeDetached
 	public Response updateProductCategory(
 			@GraphQLName("id") String id,
-			@GraphQLName("Category") Category category)
+			@GraphQLName("Category") Category[] categories)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			productResource -> productResource.updateProductCategory(
-				id, category));
+				id, categories));
 	}
 
 	@GraphQLField
