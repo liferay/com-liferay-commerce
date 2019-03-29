@@ -79,7 +79,10 @@ public class TierPriceTag extends IncludeTag {
 				CommerceCurrency commerceCurrency =
 					commerceContext.getCommerceCurrency();
 
-				_commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+				if (commerceCurrency != null) {
+					_commerceCurrencyId =
+						commerceCurrency.getCommerceCurrencyId();
+				}
 			}
 		}
 		catch (PortalException pe) {
