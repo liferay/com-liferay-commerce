@@ -337,7 +337,9 @@
 		<field name="commerceWarehouseId" type="long" />
 		<field name="CProductId" type="long" />
 		<field name="CPInstanceUuid" type="String" />
-		<field name="quantity" type="int" />
+		<field name="quantity" type="int">
+			<validator name="number" />
+		</field>
 	</model>
 	<model name="com.liferay.commerce.model.CPDAvailabilityEstimate">
 		<field name="uuid" type="String" />
