@@ -77,7 +77,7 @@ public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 
 		_discountHelper.updateDiscount(id, discount, _user);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
