@@ -162,12 +162,16 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Response updateProductCategory(@NotNull String id, Category category)
+	public Response updateProductCategory(
+			@NotNull String id, Category[] categories)
 		throws Exception {
 
-		// TODO Category should be array in this method signature
+		_productHelper.updateProductCategories(
+			id, contextCompany, categories, contextAcceptLanguage);
 
-		return super.updateProductCategory(id, category);
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -185,12 +189,15 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Override
 	public Response updateProductOptions(
-			@NotNull String id, ProductOption productOption)
+			@NotNull String id, ProductOption[] productOptions)
 		throws Exception {
 
-		// TODO Category should be array in this method signature
+		_productOptionHelper.updateProductOptions(
+			id, productOptions, contextAcceptLanguage, contextCompany);
 
-		return super.updateProductOptions(id, productOption);
+		Response.ResponseBuilder responseBuilder = Response.accepted();
+
+		return responseBuilder.build();
 	}
 
 	@Override
