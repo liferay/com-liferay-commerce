@@ -52,7 +52,8 @@ public interface ProductResource {
 			String id, Pagination pagination)
 		throws Exception;
 
-	public Response updateProductOptions(String id, ProductOption productOption)
+	public Response updateProductOptions(
+		String id, ProductOption[] productOptions)
 		throws Exception;
 
 	public ProductConfiguration getProductConfiguration(String id)
@@ -109,7 +110,7 @@ public interface ProductResource {
 	public Page<Category> getProductCategories(String id, Pagination pagination)
 		throws Exception;
 
-	public Response updateProductCategory(String id, Category category)
+	public Response updateProductCategory(String id, Category[] categories)
 		throws Exception;
 
 	public Page<Sku> getProductSkus(String id, Pagination pagination)

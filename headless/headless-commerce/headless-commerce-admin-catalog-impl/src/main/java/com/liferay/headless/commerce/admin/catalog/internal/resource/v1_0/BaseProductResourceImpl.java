@@ -133,7 +133,7 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
 	public Response updateProductOptions(
-			@NotNull @PathParam("id") String id, ProductOption productOption)
+			@NotNull @PathParam("id") String id, ProductOption[] productOptions)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -372,7 +372,7 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
 	public Response updateProductCategory(
-			@NotNull @PathParam("id") String id, Category category)
+			@NotNull @PathParam("id") String id, Category[] categories)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
