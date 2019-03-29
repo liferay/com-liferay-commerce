@@ -86,10 +86,10 @@ public class CPOptionsMVCResourceCommand extends BaseMVCResourceCommand {
 			String fieldTypeDataDomain = MapUtil.getString(
 				properties, "ddm.form.field.type.data.domain");
 
-			if (Validator.isNotNull(fieldTypeDataDomain)) {
-				if (fieldTypeDataDomain.equals("list")) {
-					jsonObject.put("hasValues", true);
-				}
+			if (Validator.isNotNull(fieldTypeDataDomain) &&
+				fieldTypeDataDomain.equals("list")) {
+
+				jsonObject.put("hasValues", true);
 			}
 
 			jsonArray.put(jsonObject);
