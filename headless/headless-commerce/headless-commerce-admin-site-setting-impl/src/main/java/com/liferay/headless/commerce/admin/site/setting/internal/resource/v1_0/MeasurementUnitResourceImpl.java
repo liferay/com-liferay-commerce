@@ -73,7 +73,7 @@ public class MeasurementUnitResourceImpl
 		_measurementUnitHelper.updateMeasurementUnit(
 			id, measurementUnit, _user);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

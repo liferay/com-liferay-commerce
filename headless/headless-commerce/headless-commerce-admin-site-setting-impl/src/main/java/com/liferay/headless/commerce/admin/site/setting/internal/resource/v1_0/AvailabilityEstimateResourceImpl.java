@@ -75,7 +75,7 @@ public class AvailabilityEstimateResourceImpl
 		_availabilityEstimateHelper.updateAvailabilityEstimate(
 			id, availabilityEstimate, _user);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
