@@ -156,7 +156,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProduct(
 			id, product, contextCompany, contextAcceptLanguage);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -169,7 +169,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProductCategories(
 			id, contextCompany, categories, contextAcceptLanguage);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -182,7 +182,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProductConfiguration(
 			id, contextCompany, productConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -195,7 +195,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productOptionHelper.updateProductOptions(
 			id, productOptions, contextAcceptLanguage, contextCompany);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -209,7 +209,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProductShippingConfiguration(
 			id, contextCompany, productShippingConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -223,7 +223,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProductSubscriptionConfiguration(
 			id, contextCompany, productSubscriptionConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -236,7 +236,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_productHelper.updateProductTaxConfiguration(
 			id, contextCompany, productTaxConfiguration, contextAcceptLanguage);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
