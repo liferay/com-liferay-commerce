@@ -67,7 +67,7 @@ public class TaxCategoryResourceImpl extends BaseTaxCategoryResourceImpl {
 
 		_taxCategoryHelper.updateTaxCategory(id, taxCategory);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

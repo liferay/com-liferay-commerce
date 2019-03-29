@@ -67,7 +67,7 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 
 		_warehouseHelper.updateWarehouse(id, warehouse, _user);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

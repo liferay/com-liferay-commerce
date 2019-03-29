@@ -85,7 +85,7 @@ public class CatalogRuleResourceImpl extends BaseCatalogRuleResourceImpl {
 
 		_catalogRuleHelper.updateCatalogRule(id, catalogRule, _user);
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
