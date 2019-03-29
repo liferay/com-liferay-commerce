@@ -35,6 +35,7 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
+import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderer;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderingContext;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -61,6 +62,7 @@ import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -811,6 +813,26 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			return false;
 		}
 
+		Map<String, Object> properties =
+			_ddmFormFieldTypeServicesTracker.getDDMFormFieldTypeProperties(
+				cpDefinitionOptionRel.getDDMFormFieldTypeName());
+
+		String fieldTypeDataDomain = MapUtil.getString(
+			properties, "ddm.form.field.type.data.domain");
+
+		if (Validator.isNotNull(fieldTypeDataDomain) &&
+			fieldTypeDataDomain.equals("list")) {
+
+			int cpDefinitionOptionValueRelsCount =
+				_cpDefinitionOptionValueRelLocalService.
+					getCPDefinitionOptionValueRelsCount(
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+
+			if (cpDefinitionOptionValueRelsCount == 0) {
+				return false;
+			}
+		}
+
 		if (ignoreSKUCombinations) {
 			return cpDefinitionOptionRel.isRequired();
 		}
@@ -889,6 +911,9 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private DDMFormFieldTypeServicesTracker _ddmFormFieldTypeServicesTracker;
 
 	@Reference
 	private DDMFormRenderer _ddmFormRenderer;
