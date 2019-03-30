@@ -56,9 +56,7 @@ public class CommerceOrderClayTableUtil {
 		portletURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
 
-		portletURL.setParameter(
-			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			themeDisplay.getURLCurrent());
+		portletURL.setParameter("backURL", themeDisplay.getURLCurrent());
 
 		return portletURL.toString();
 	}

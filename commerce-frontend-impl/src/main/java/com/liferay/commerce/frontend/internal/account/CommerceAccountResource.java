@@ -395,6 +395,9 @@ public class CommerceAccountResource {
 		editURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
 
+		editURL.setParameter(
+			"backURL", httpServletRequest.getHeader("Referer"));
+
 		return editURL.toString();
 	}
 
