@@ -15,6 +15,7 @@
 			<svg class="commerce-icon commerce-topbar-button__icon commerce-topbar-button__icon--not-active">
 				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#search" />
 			</svg>
+
 			<svg class="commerce-icon commerce-topbar-button__icon commerce-topbar-button__icon--active">
 				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
 			</svg>
