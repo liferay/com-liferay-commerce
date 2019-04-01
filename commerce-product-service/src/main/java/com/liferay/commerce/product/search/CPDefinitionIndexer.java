@@ -139,6 +139,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 	public static final String FIELD_SPECIFICATION_NAMES =
 		"specificationOptionsNames";
 
+	public static final String FIELD_SPECIFICATION_VALUES_NAMES =
+		"specificationOptionsValuesNames";
+
 	public CPDefinitionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
@@ -498,6 +501,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		List<String> specificationOptionNames = new ArrayList<>();
 		List<Long> specificationOptionIds = new ArrayList<>();
+		List<String> specificationOptionValuesNames = new ArrayList<>();
 
 		List<CPDefinitionSpecificationOptionValue>
 			cpDefinitionSpecificationOptionValues =
@@ -517,6 +521,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			specificationOptionNames.add(cpSpecificationOption.getKey());
 			specificationOptionIds.add(
 				cpSpecificationOption.getCPSpecificationOptionId());
+			specificationOptionValuesNames.add(
+				cpDefinitionSpecificationOptionValue.getValue(
+					cpDefinitionDefaultLanguageId));
 
 			Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
 				cpDefinitionSpecificationOptionValue.getGroupId());
@@ -572,6 +579,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addNumber(
 			FIELD_SPECIFICATION_IDS,
 			ArrayUtil.toLongArray(specificationOptionIds));
+		document.addText(
+			FIELD_SPECIFICATION_VALUES_NAMES,
+			ArrayUtil.toStringArray(specificationOptionValuesNames));
 
 		CProduct cProduct = cpDefinition.getCProduct();
 
