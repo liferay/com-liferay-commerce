@@ -27,6 +27,7 @@ import graphql.annotations.annotationTypes.GraphQLName;
 import java.math.BigDecimal;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.annotation.Generated;
 
@@ -525,6 +526,28 @@ public class Discount {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected UserSegment[] userSegments;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Discount)) {
+			return false;
+		}
+
+		Discount discount = (Discount)object;
+
+		return Objects.equals(toString(), discount.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

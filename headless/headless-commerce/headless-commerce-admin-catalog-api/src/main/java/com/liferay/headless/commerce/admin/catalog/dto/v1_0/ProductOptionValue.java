@@ -24,6 +24,8 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import java.util.Objects;
+
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
@@ -156,6 +158,28 @@ public class ProductOptionValue {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double priority;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof ProductOptionValue)) {
+			return false;
+		}
+
+		ProductOptionValue productOptionValue = (ProductOptionValue)object;
+
+		return Objects.equals(toString(), productOptionValue.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

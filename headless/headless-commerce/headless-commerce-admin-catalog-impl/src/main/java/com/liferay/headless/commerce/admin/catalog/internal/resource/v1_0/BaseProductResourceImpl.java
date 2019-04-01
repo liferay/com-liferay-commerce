@@ -25,7 +25,6 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfigurat
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductResource;
 import com.liferay.petra.function.UnsafeFunction;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.pagination.Page;
@@ -37,8 +36,6 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
-
-import java.net.URI;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -58,7 +55,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -157,7 +153,7 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
 	public Response updateProductCategory(
-			@NotNull @PathParam("id") String id, Category category)
+			@NotNull @PathParam("id") String id, Category[] categories)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -249,7 +245,7 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
 	public Response updateProductOptions(
-			@NotNull @PathParam("id") String id, ProductOption productOption)
+			@NotNull @PathParam("id") String id, ProductOption[] productOptions)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -412,27 +408,6 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
-	}
-
-	protected String getJAXRSLink(String methodName, Object... values) {
-		String baseURIString = String.valueOf(contextUriInfo.getBaseUri());
-
-		if (baseURIString.endsWith(StringPool.FORWARD_SLASH)) {
-			baseURIString = baseURIString.substring(
-				0, baseURIString.length() - 1);
-		}
-
-		URI resourceURI = UriBuilder.fromResource(
-			BaseProductResourceImpl.class
-		).build();
-
-		URI methodURI = UriBuilder.fromMethod(
-			BaseProductResourceImpl.class, methodName
-		).build(
-			values
-		);
-
-		return baseURIString + resourceURI.toString() + methodURI.toString();
 	}
 
 	protected void preparePatch(Product product) {

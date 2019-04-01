@@ -28,6 +28,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Generated;
 
@@ -305,6 +306,28 @@ public class Attachment {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Integer type;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Attachment)) {
+			return false;
+		}
+
+		Attachment attachment = (Attachment)object;
+
+		return Objects.equals(toString(), attachment.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

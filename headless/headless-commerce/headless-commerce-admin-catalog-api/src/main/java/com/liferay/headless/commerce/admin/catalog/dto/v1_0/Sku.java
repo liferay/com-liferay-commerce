@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Generated;
 
@@ -521,6 +522,28 @@ public class Sku {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double width;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Sku)) {
+			return false;
+		}
+
+		Sku sku = (Sku)object;
+
+		return Objects.equals(toString(), sku.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

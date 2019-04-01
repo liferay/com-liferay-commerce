@@ -26,6 +26,8 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Objects;
+
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
@@ -144,6 +146,28 @@ public class Error {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@NotNull
 	protected Integer status;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Error)) {
+			return false;
+		}
+
+		Error error = (Error)object;
+
+		return Objects.equals(toString(), error.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

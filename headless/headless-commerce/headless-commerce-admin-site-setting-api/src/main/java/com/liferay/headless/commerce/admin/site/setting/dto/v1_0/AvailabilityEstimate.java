@@ -25,6 +25,7 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Generated;
 
@@ -136,6 +137,29 @@ public class AvailabilityEstimate {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	@NotNull
 	protected Map<String, String> title;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof AvailabilityEstimate)) {
+			return false;
+		}
+
+		AvailabilityEstimate availabilityEstimate =
+			(AvailabilityEstimate)object;
+
+		return Objects.equals(toString(), availabilityEstimate.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();
