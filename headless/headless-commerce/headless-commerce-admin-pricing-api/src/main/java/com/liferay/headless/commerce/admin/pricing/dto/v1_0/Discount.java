@@ -25,11 +25,12 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import java.math.BigDecimal;
+
 import java.util.Date;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -231,7 +232,7 @@ public class Discount {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String limitationType;
 
 	public BigDecimal getMaximumDiscountAmount() {
@@ -425,7 +426,7 @@ public class Discount {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String target;
 
 	public String getTitle() {
@@ -450,7 +451,7 @@ public class Discount {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String title;
 
 	public Boolean getUseCouponCode() {

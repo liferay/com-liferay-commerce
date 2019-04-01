@@ -70,6 +70,38 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
+	@Path("/commerceAdminPricing/{groupId}/priceList/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public Page<PriceList> getPriceLists(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminPricing/{groupId}/priceList/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public PriceList upsertPriceList(
+			@NotNull @PathParam("groupId") Long groupId, PriceList priceList)
+		throws Exception {
+
+		return new PriceList();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
 	@Path("/priceList/{id}/priceEntry/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
@@ -130,38 +162,6 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminPricing/{groupId}/priceList/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public Page<PriceList> getPriceLists(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminPricing/{groupId}/priceList/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceList upsertPriceList(
-			@NotNull @PathParam("groupId") Long groupId, PriceList priceList)
-		throws Exception {
-
-		return new PriceList();
 	}
 
 	public void setContextCompany(Company contextCompany) {

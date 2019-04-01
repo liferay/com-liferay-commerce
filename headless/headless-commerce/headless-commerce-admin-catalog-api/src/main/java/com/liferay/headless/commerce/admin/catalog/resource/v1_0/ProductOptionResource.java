@@ -35,13 +35,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductOptionResource {
 
-	public Response deleteProductOption(String id) throws Exception;
-
-	public ProductOption getProductOption(String id) throws Exception;
-
-	public Response updateProductOption(String id, ProductOption productOption)
-		throws Exception;
-
 	public Page<ProductOption> getOptions(Long groupId, Pagination pagination)
 		throws Exception;
 
@@ -55,6 +48,13 @@ public interface ProductOptionResource {
 
 	public ProductOptionValue upsertProductOptionValue(
 			String id, ProductOptionValue productOptionValue)
+		throws Exception;
+
+	public Response deleteProductOption(String id) throws Exception;
+
+	public ProductOption getProductOption(String id) throws Exception;
+
+	public Response updateProductOption(String id, ProductOption productOption)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

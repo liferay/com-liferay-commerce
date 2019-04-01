@@ -118,18 +118,6 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public OptionCategory getOptionCategory(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_optionCategoryResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			optionCategoryResource -> optionCategoryResource.getOptionCategory(
-				id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
 	public Collection<OptionCategory> getOptionCategories(
 			@GraphQLName("groupId") Long groupId,
 			@GraphQLName("pageSize") int pageSize,
@@ -150,79 +138,14 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Product getProduct(@GraphQLName("id") String id) throws Exception {
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource -> productResource.getProduct(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<ProductOption> getProductOptions(
-			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+	public OptionCategory getOptionCategory(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
+			_optionCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productResource -> {
-				Page paginationPage = productResource.getProductOptions(
-					id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public ProductConfiguration getProductConfiguration(
-			@GraphQLName("id") String id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource -> productResource.getProductConfiguration(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public ProductShippingConfiguration getProductShippingConfiguration(
-			@GraphQLName("id") String id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource -> productResource.getProductShippingConfiguration(
+			optionCategoryResource -> optionCategoryResource.getOptionCategory(
 				id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public ProductTaxConfiguration getProductTaxConfiguration(
-			@GraphQLName("id") String id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource -> productResource.getProductTaxConfiguration(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
-			@GraphQLName("id") String id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource ->
-				productResource.getProductSubscriptionConfiguration(id));
 	}
 
 	@GraphQLField
@@ -264,6 +187,36 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public Collection<Category> getProductCategories(
+			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> {
+				Page paginationPage = productResource.getProductCategories(
+					id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public ProductConfiguration getProductConfiguration(
+			@GraphQLName("id") String id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> productResource.getProductConfiguration(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Collection<Attachment> getProductImages(
 			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
@@ -282,7 +235,7 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<Category> getProductCategories(
+	public Collection<ProductOption> getProductOptions(
 			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
@@ -291,11 +244,24 @@ public class Query {
 			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			productResource -> {
-				Page paginationPage = productResource.getProductCategories(
+				Page paginationPage = productResource.getProductOptions(
 					id, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public ProductShippingConfiguration getProductShippingConfiguration(
+			@GraphQLName("id") String id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> productResource.getProductShippingConfiguration(
+				id));
 	}
 
 	@GraphQLField
@@ -318,14 +284,36 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public ProductOption getProductOption(@GraphQLName("id") String id)
+	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
+			@GraphQLName("id") String id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productOptionResourceComponentServiceObjects,
+			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productOptionResource -> productOptionResource.getProductOption(
-				id));
+			productResource ->
+				productResource.getProductSubscriptionConfiguration(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public ProductTaxConfiguration getProductTaxConfiguration(
+			@GraphQLName("id") String id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> productResource.getProductTaxConfiguration(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Product getProduct(@GraphQLName("id") String id) throws Exception {
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> productResource.getProduct(id));
 	}
 
 	@GraphQLField
@@ -368,22 +356,22 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Sku getSku(@GraphQLName("id") String id) throws Exception {
+	public ProductOption getProductOption(@GraphQLName("id") String id)
+		throws Exception {
+
 		return _applyComponentServiceObjects(
-			_skuResourceComponentServiceObjects, this::_populateResourceContext,
-			skuResource -> skuResource.getSku(id));
+			_productOptionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productOptionResource -> productOptionResource.getProductOption(
+				id));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Specification getSpecification(@GraphQLName("id") Long id)
-		throws Exception {
-
+	public Sku getSku(@GraphQLName("id") String id) throws Exception {
 		return _applyComponentServiceObjects(
-			_specificationResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			specificationResource -> specificationResource.getSpecification(
-				id));
+			_skuResourceComponentServiceObjects, this::_populateResourceContext,
+			skuResource -> skuResource.getSku(id));
 	}
 
 	@GraphQLField
@@ -422,6 +410,18 @@ public class Query {
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Specification getSpecification(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_specificationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			specificationResource -> specificationResource.getSpecification(
+				id));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R

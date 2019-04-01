@@ -35,13 +35,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface SpecificationResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
-
-	public Specification getSpecification(Long id) throws Exception;
-
-	public Response updateSpecification(Long id, Specification specification)
-		throws Exception;
-
 	public Page<Specification> getSpecifications(
 			Long groupId, Pagination pagination)
 		throws Exception;
@@ -56,6 +49,13 @@ public interface SpecificationResource {
 
 	public SpecificationValue upsertSpecificationValue(
 			Long id, SpecificationValue specificationValue)
+		throws Exception;
+
+	public Response deleteSpecification(Long id) throws Exception;
+
+	public Specification getSpecification(Long id) throws Exception;
+
+	public Response updateSpecification(Long id, Specification specification)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

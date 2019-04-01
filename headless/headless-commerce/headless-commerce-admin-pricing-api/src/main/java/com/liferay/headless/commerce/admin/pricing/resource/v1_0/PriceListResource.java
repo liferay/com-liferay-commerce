@@ -35,6 +35,12 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface PriceListResource {
 
+	public Page<PriceList> getPriceLists(Long groupId, Pagination pagination)
+		throws Exception;
+
+	public PriceList upsertPriceList(Long groupId, PriceList priceList)
+		throws Exception;
+
 	public Page<PriceEntry> getPriceEntries(String id, Pagination pagination)
 		throws Exception;
 
@@ -46,12 +52,6 @@ public interface PriceListResource {
 	public PriceList getPriceList(String id) throws Exception;
 
 	public Response updatePriceList(String id, PriceList priceList)
-		throws Exception;
-
-	public Page<PriceList> getPriceLists(Long groupId, Pagination pagination)
-		throws Exception;
-
-	public PriceList upsertPriceList(Long groupId, PriceList priceList)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

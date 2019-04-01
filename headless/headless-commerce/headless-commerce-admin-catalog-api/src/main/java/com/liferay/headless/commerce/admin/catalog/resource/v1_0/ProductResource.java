@@ -42,52 +42,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductResource {
 
-	public Response deleteProduct(String id) throws Exception;
-
-	public Product getProduct(String id) throws Exception;
-
-	public Response updateProduct(String id, Product product) throws Exception;
-
-	public Page<ProductOption> getProductOptions(
-			String id, Pagination pagination)
-		throws Exception;
-
-	public Response updateProductOptions(
-		String id, ProductOption[] productOptions)
-		throws Exception;
-
-	public ProductConfiguration getProductConfiguration(String id)
-		throws Exception;
-
-	public Response updateProductConfiguraton(
-			String id, ProductConfiguration productConfiguration)
-		throws Exception;
-
-	public ProductShippingConfiguration getProductShippingConfiguration(
-			String id)
-		throws Exception;
-
-	public Response updateProductShippingConfiguration(
-			String id,
-			ProductShippingConfiguration productShippingConfiguration)
-		throws Exception;
-
-	public ProductTaxConfiguration getProductTaxConfiguration(String id)
-		throws Exception;
-
-	public Response updateProductTaxConfiguration(
-			String id, ProductTaxConfiguration productTaxConfiguration)
-		throws Exception;
-
-	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
-			String id)
-		throws Exception;
-
-	public Response updateProductSubscriptionConfiguration(
-			String id,
-			ProductSubscriptionConfiguration productSubscriptionConfiguration)
-		throws Exception;
-
 	public Page<Product> getProducts(Long groupId, Pagination pagination)
 		throws Exception;
 
@@ -101,22 +55,67 @@ public interface ProductResource {
 	public Attachment upsertProductAttachment(String id, Attachment attachment)
 		throws Exception;
 
+	public Page<Category> getProductCategories(String id, Pagination pagination)
+		throws Exception;
+
+	public Response updateProductCategory(String id, Category category)
+		throws Exception;
+
+	public ProductConfiguration getProductConfiguration(String id)
+		throws Exception;
+
+	public Response updateProductConfiguraton(
+			String id, ProductConfiguration productConfiguration)
+		throws Exception;
+
 	public Page<Attachment> getProductImages(String id, Pagination pagination)
 		throws Exception;
 
 	public Attachment upsertProductImage(String id, Attachment attachment)
 		throws Exception;
 
-	public Page<Category> getProductCategories(String id, Pagination pagination)
+	public Page<ProductOption> getProductOptions(
+			String id, Pagination pagination)
 		throws Exception;
 
-	public Response updateProductCategory(String id, Category[] categories)
+	public Response updateProductOptions(String id, ProductOption productOption)
+		throws Exception;
+
+	public ProductShippingConfiguration getProductShippingConfiguration(
+			String id)
+		throws Exception;
+
+	public Response updateProductShippingConfiguration(
+			String id,
+			ProductShippingConfiguration productShippingConfiguration)
 		throws Exception;
 
 	public Page<Sku> getProductSkus(String id, Pagination pagination)
 		throws Exception;
 
 	public Sku upsertProductSku(String id, Sku sku) throws Exception;
+
+	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
+			String id)
+		throws Exception;
+
+	public Response updateProductSubscriptionConfiguration(
+			String id,
+			ProductSubscriptionConfiguration productSubscriptionConfiguration)
+		throws Exception;
+
+	public ProductTaxConfiguration getProductTaxConfiguration(String id)
+		throws Exception;
+
+	public Response updateProductTaxConfiguration(
+			String id, ProductTaxConfiguration productTaxConfiguration)
+		throws Exception;
+
+	public Response deleteProduct(String id) throws Exception;
+
+	public Product getProduct(String id) throws Exception;
+
+	public Response updateProduct(String id, Product product) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

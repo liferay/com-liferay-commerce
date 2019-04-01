@@ -64,42 +64,36 @@ public abstract class BaseUserSegmentResourceImpl
 	implements UserSegmentResource {
 
 	@Override
-	@DELETE
-	@Path("/userSegment/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response deleteUserSegment(@NotNull @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Path("/userSegment/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public UserSegment getUserSegment(@NotNull @PathParam("id") Long id)
+	public Page<UserSegment> getUserSegments(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
 		throws Exception {
 
-		return new UserSegment();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/userSegment/{id}")
+	@POST
+	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Response updateUserSegment(
-			@NotNull @PathParam("id") Long id, UserSegment userSegment)
+	public UserSegment upsertUserSegment(
+			@NotNull @PathParam("groupId") Long groupId,
+			UserSegment userSegment)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new UserSegment();
 	}
 
 	@Override
@@ -108,8 +102,8 @@ public abstract class BaseUserSegmentResourceImpl
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
 	public Response deleteUserSegmentCriterion(
-			@NotNull @PathParam("id") Long id,
-			@NotNull @PathParam("criterionId") Long criterionId)
+			@NotNull @PathParam("criterionId") Long criterionId,
+			@NotNull @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -123,8 +117,8 @@ public abstract class BaseUserSegmentResourceImpl
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
 	public UserSegmentCriterion getUserSegmentCriterion(
-			@NotNull @PathParam("id") Long id,
-			@NotNull @PathParam("criterionId") Long criterionId)
+			@NotNull @PathParam("criterionId") Long criterionId,
+			@NotNull @PathParam("id") Long id)
 		throws Exception {
 
 		return new UserSegmentCriterion();
@@ -137,8 +131,8 @@ public abstract class BaseUserSegmentResourceImpl
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
 	public UserSegmentCriterion updateUserSegmentCriterion(
-			@NotNull @PathParam("id") Long id,
 			@NotNull @PathParam("criterionId") Long criterionId,
+			@NotNull @PathParam("id") Long id,
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception {
 
@@ -178,36 +172,42 @@ public abstract class BaseUserSegmentResourceImpl
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
+	@DELETE
+	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public Page<UserSegment> getUserSegments(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
+	public Response deleteUserSegment(@NotNull @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Path("/userSegment/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "UserSegment")})
+	public UserSegment getUserSegment(@NotNull @PathParam("id") Long id)
+		throws Exception {
+
+		return new UserSegment();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/userSegment/")
+	@PUT
+	@Path("/userSegment/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "UserSegment")})
-	public UserSegment upsertUserSegment(
-			@NotNull @PathParam("groupId") Long groupId,
-			UserSegment userSegment)
+	public Response updateUserSegment(
+			@NotNull @PathParam("id") Long id, UserSegment userSegment)
 		throws Exception {
 
-		return new UserSegment();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

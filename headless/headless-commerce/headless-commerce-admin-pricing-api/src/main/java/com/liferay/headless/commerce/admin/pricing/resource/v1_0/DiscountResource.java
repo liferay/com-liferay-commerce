@@ -35,11 +35,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface DiscountResource {
 
-	public Response deleteDiscount(Long id) throws Exception;
+	public Page<Discount> getDiscounts(Long groupId, Pagination pagination)
+		throws Exception;
 
-	public Discount getDiscount(Long id) throws Exception;
-
-	public Response updateDiscount(Long id, Discount discount) throws Exception;
+	public Discount upsertDiscount(Long groupId, Discount discount)
+		throws Exception;
 
 	public Page<DiscountRule> getDiscountRules(Long id, Pagination pagination)
 		throws Exception;
@@ -47,11 +47,11 @@ public interface DiscountResource {
 	public DiscountRule upsertDiscountRule(Long id, DiscountRule discountRule)
 		throws Exception;
 
-	public Page<Discount> getDiscounts(Long groupId, Pagination pagination)
-		throws Exception;
+	public Response deleteDiscount(Long id) throws Exception;
 
-	public Discount upsertDiscount(Long groupId, Discount discount)
-		throws Exception;
+	public Discount getDiscount(Long id) throws Exception;
+
+	public Response updateDiscount(Long id, Discount discount) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

@@ -67,7 +67,8 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public Response deleteAvailabilityEstimate(@NotNull @PathParam("id") Long id)
+	public Response deleteAvailabilityEstimate(
+			@NotNull @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();

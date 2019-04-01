@@ -63,6 +63,39 @@ public abstract class BaseOptionCategoryResourceImpl
 	implements OptionCategoryResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminCatalog/{groupId}/optionCategory/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionCategory")})
+	public Page<OptionCategory> getOptionCategories(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminCatalog/{groupId}/optionCategory/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionCategory")})
+	public OptionCategory upsertOptionCategory(
+			@NotNull @PathParam("groupId") Long groupId,
+			OptionCategory optionCategory)
+		throws Exception {
+
+		return new OptionCategory();
+	}
+
+	@Override
 	@DELETE
 	@Path("/optionCategory/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -99,39 +132,6 @@ public abstract class BaseOptionCategoryResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminCatalog/{groupId}/optionCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Page<OptionCategory> getOptionCategories(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminCatalog/{groupId}/optionCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public OptionCategory upsertOptionCategory(
-			@NotNull @PathParam("groupId") Long groupId,
-			OptionCategory optionCategory)
-		throws Exception {
-
-		return new OptionCategory();
 	}
 
 	public void setContextCompany(Company contextCompany) {

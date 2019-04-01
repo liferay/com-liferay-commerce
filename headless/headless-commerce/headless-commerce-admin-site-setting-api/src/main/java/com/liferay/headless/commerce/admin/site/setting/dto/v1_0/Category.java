@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -64,7 +64,7 @@ public class Category {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String externalReferenceCode;
 
 	public Long getGroupId() {
@@ -134,7 +134,7 @@ public class Category {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String name;
 
 	public String getVocabulary() {

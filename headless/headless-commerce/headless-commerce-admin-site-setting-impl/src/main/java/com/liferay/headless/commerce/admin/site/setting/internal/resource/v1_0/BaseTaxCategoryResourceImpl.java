@@ -63,6 +63,39 @@ public abstract class BaseTaxCategoryResourceImpl
 	implements TaxCategoryResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "TaxCategory")})
+	public Page<TaxCategory> getTaxCategories(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "TaxCategory")})
+	public TaxCategory upsertTaxCategory(
+			@NotNull @PathParam("groupId") Long groupId,
+			TaxCategory taxCategory)
+		throws Exception {
+
+		return new TaxCategory();
+	}
+
+	@Override
 	@DELETE
 	@Path("/taxCategory/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -99,39 +132,6 @@ public abstract class BaseTaxCategoryResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TaxCategory")})
-	public Page<TaxCategory> getTaxCategories(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/taxCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TaxCategory")})
-	public TaxCategory upsertTaxCategory(
-			@NotNull @PathParam("groupId") Long groupId,
-			TaxCategory taxCategory)
-		throws Exception {
-
-		return new TaxCategory();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -28,6 +28,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -90,7 +91,7 @@ public class Error {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
+	@NotEmpty
 	protected String errorDescription;
 
 	public String getMessage() {
@@ -115,7 +116,7 @@ public class Error {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
+	@NotEmpty
 	protected String message;
 
 	@Schema(description = "HTTP Status code")

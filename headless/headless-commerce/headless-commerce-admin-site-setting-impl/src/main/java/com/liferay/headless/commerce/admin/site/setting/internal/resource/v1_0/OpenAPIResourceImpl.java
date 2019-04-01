@@ -82,9 +82,9 @@ public class OpenAPIResourceImpl {
 
 			add(MeasurementUnitResourceImpl.class);
 
-			add(UserSegmentResourceImpl.class);
-
 			add(TaxCategoryResourceImpl.class);
+
+			add(UserSegmentResourceImpl.class);
 
 			add(WarehouseResourceImpl.class);
 
