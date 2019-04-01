@@ -65,6 +65,8 @@ class AccountSelector extends Component {
 				.then(orders => {
 					this.orders = orders;
 				});
+
+			this._fetchAccounts();
 		}
 
 		this.openingState = 'opening';
