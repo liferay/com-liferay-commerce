@@ -82,6 +82,7 @@
 					{param isVisible: $isOrdersTableVisible /}
 					{param createNewOrderLink: $createNewOrderLink /}
 					{param viewAllOrdersLink: $viewAllOrdersLink /}
+					{param showBack: isNonnull($accounts) and length($accounts) > 1 /}
 					{param spritemap: $spritemap /}
 				{/call}
 				{let $isAccountsTableVisible: $currentView == 'accounts' /}

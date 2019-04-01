@@ -5,6 +5,7 @@
  */
 {template .render}
 	{@param? currentAccountName: string}
+	{@param? showBack: bool}
 	{@param spritemap: string}
 	{@param? filterString: string}
 	{@param? isVisible: bool}
@@ -27,13 +28,15 @@
 	<div class="{$orderSwitcherClasses}">
 
 		<div class="commerce-account-switcher__section commerce-account-switcher__section--header">
-			<button class="commerce-account-switcher__back" data-onclick="_handleBackButtonClick">
-				{call ClayIcon.render}
-					{param spritemap: $spritemap /}
-					{param symbol: 'back' /}
-				{/call}
-				{msg desc="Back"}back{/msg}
-			</button>
+			{if $showBack}
+				<button class="commerce-account-switcher__back" data-onclick="_handleBackButtonClick">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'back' /}
+					{/call}
+					{msg desc="Back"}back{/msg}
+				</button>
+			{/if}
 
 			<div class="commerce-account-switcher__title">
 				{if isNonnull($currentAccountName)}
