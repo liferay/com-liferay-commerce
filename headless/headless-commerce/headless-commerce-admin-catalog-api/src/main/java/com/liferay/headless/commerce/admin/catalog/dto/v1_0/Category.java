@@ -26,6 +26,8 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Objects;
+
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
@@ -160,6 +162,28 @@ public class Category {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected String vocabulary;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Category)) {
+			return false;
+		}
+
+		Category category = (Category)object;
+
+		return Objects.equals(toString(), category.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();

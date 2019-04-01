@@ -210,6 +210,30 @@ public class ProductSubscriptionConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> subscriptionTypeSettings;
 
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof ProductSubscriptionConfiguration)) {
+			return false;
+		}
+
+		ProductSubscriptionConfiguration productSubscriptionConfiguration =
+			(ProductSubscriptionConfiguration)object;
+
+		return Objects.equals(
+			toString(), productSubscriptionConfiguration.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
+
 	public String toString() {
 		StringBundler sb = new StringBundler();
 

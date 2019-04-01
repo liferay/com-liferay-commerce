@@ -25,6 +25,7 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Generated;
 
@@ -210,6 +211,28 @@ public class Specification {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SpecificationValue[] values;
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof Specification)) {
+			return false;
+		}
+
+		Specification specification = (Specification)object;
+
+		return Objects.equals(toString(), specification.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		String string = toString();
+
+		return string.hashCode();
+	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();
