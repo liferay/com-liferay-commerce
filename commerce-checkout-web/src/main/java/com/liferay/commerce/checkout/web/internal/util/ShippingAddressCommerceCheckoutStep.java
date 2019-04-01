@@ -74,9 +74,13 @@ public class ShippingAddressCommerceCheckoutStep
 					commerceOrderService, commerceAddressService,
 					commerceOrderModelResourcePermission);
 
-			addressCommerceCheckoutStepUtil.updateCommerceOrderAddress(
-				actionRequest,
-				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME);
+			CommerceOrder commerceOrder =
+				addressCommerceCheckoutStepUtil.updateCommerceOrderAddress(
+					actionRequest,
+					CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME);
+
+			actionRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceAddressCityException ||

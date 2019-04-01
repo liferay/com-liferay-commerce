@@ -81,7 +81,7 @@ public class AddressCommerceCheckoutStepUtil {
 			phoneNumber, false, false, serviceContext);
 	}
 
-	protected void updateCommerceOrderAddress(
+	protected CommerceOrder updateCommerceOrderAddress(
 			ActionRequest actionRequest, String paramName)
 		throws Exception {
 
@@ -121,7 +121,7 @@ public class AddressCommerceCheckoutStepUtil {
 				paramName) &&
 			useAsBilling) {
 
-			updateCommerceOrderShippingAddress(
+			return updateCommerceOrderAddress(
 				commerceOrder, commerceAddressId, commerceAddressId,
 				commerceContext);
 		}
@@ -131,7 +131,7 @@ public class AddressCommerceCheckoutStepUtil {
 				paramName) &&
 			!useAsBilling) {
 
-			updateCommerceOrderShippingAddress(
+			return updateCommerceOrderAddress(
 				commerceOrder, 0, commerceAddressId, commerceContext);
 		}
 
@@ -145,18 +145,20 @@ public class AddressCommerceCheckoutStepUtil {
 			 Objects.equals(
 				 billingAddress.getCommerceAddressId(), shippingAddressId))) {
 
-			updateCommerceOrderShippingAddress(
+			return updateCommerceOrderAddress(
 				commerceOrder, commerceAddressId,
 				commerceOrder.getShippingAddressId(), commerceContext);
 		}
+
+		return null;
 	}
 
-	protected void updateCommerceOrderShippingAddress(
+	protected CommerceOrder updateCommerceOrderAddress(
 			CommerceOrder commerceOrder, long billingAddressId,
 			long shippingAddressId, CommerceContext commerceContext)
 		throws Exception {
 
-		_commerceOrderService.updateCommerceOrder(
+		return _commerceOrderService.updateCommerceOrder(
 			commerceOrder.getCommerceOrderId(), billingAddressId,
 			shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
