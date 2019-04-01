@@ -79,7 +79,7 @@ definition {
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewCatalogRule(
-			catalogRuleType = "All products",
+			catalogRuleType = "All Products",
 			entryName = "New Catalog Rule",
 			userSegment = "User Segment"
 		);
