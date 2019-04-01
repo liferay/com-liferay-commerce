@@ -69,7 +69,5 @@
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-discount-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-price-list-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-wish-list-service/service\.xml" />
-		<suppress checks="YMLDefinitionOrderCheck" files="headless/headless-commerce/.*/rest-openapi\.yaml" />
-		<suppress checks="YMLWhitespaceCheck" files="headless/headless-commerce/.*/rest-openapi\.yaml" />
 	</source-check>
 </suppressions>
