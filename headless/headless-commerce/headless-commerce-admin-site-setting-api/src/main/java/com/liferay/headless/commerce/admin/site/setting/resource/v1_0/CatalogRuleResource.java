@@ -22,6 +22,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -35,19 +36,19 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface CatalogRuleResource {
 
-	public Response deleteCatalogRule(Long id) throws Exception;
-
-	public CatalogRule getCatalogRule(Long id) throws Exception;
-
-	public Response updateCatalogRule(Long id, CatalogRule catalogRule)
-		throws Exception;
-
 	public Page<Category> getCatalogRuleCategories(
 			Long id, Pagination pagination)
 		throws Exception;
 
 	public Page<UserSegment> getCatalogRuleUserSegments(
 			Long id, Pagination pagination)
+		throws Exception;
+
+	public Response deleteCatalogRule(Long id) throws Exception;
+
+	public CatalogRule getCatalogRule(Long id) throws Exception;
+
+	public Response updateCatalogRule(Long id, CatalogRule catalogRule)
 		throws Exception;
 
 	public Page<CatalogRule> getCatalogRules(

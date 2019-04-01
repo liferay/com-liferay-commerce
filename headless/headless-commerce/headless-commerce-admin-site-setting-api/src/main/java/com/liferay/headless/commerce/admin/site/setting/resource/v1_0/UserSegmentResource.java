@@ -21,6 +21,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -34,22 +35,22 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface UserSegmentResource {
 
-	public Response deleteUserSegment(Long id) throws Exception;
-
-	public UserSegment getUserSegment(Long id) throws Exception;
-
-	public Response updateUserSegment(Long id, UserSegment userSegment)
+	public Page<UserSegment> getUserSegments(
+			Long groupId, Pagination pagination)
 		throws Exception;
 
-	public Response deleteUserSegmentCriterion(Long id, Long criterionId)
+	public UserSegment upsertUserSegment(Long groupId, UserSegment userSegment)
+		throws Exception;
+
+	public Response deleteUserSegmentCriterion(Long criterionId, Long id)
 		throws Exception;
 
 	public UserSegmentCriterion getUserSegmentCriterion(
-			Long id, Long criterionId)
+			Long criterionId, Long id)
 		throws Exception;
 
 	public UserSegmentCriterion updateUserSegmentCriterion(
-			Long id, Long criterionId,
+			Long criterionId, Long id,
 			UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
@@ -61,11 +62,11 @@ public interface UserSegmentResource {
 			Long id, UserSegmentCriterion userSegmentCriterion)
 		throws Exception;
 
-	public Page<UserSegment> getUserSegments(
-			Long groupId, Pagination pagination)
-		throws Exception;
+	public Response deleteUserSegment(Long id) throws Exception;
 
-	public UserSegment upsertUserSegment(Long groupId, UserSegment userSegment)
+	public UserSegment getUserSegment(Long id) throws Exception;
+
+	public Response updateUserSegment(Long id, UserSegment userSegment)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

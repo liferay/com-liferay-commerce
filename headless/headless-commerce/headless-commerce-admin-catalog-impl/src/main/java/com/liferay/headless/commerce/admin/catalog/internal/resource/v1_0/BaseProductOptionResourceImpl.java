@@ -64,45 +64,6 @@ public abstract class BaseProductOptionResourceImpl
 	implements ProductOptionResource {
 
 	@Override
-	@DELETE
-	@Path("/productOption/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response deleteProductOption(@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/productOption/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductOption")})
-	public ProductOption getProductOption(@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		return new ProductOption();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/productOption/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response updateProductOption(
-			@NotNull @PathParam("id") String id, ProductOption productOption)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -165,6 +126,45 @@ public abstract class BaseProductOptionResourceImpl
 		throws Exception {
 
 		return new ProductOptionValue();
+	}
+
+	@Override
+	@DELETE
+	@Path("/productOption/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductOption")})
+	public Response deleteProductOption(@NotNull @PathParam("id") String id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Path("/productOption/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductOption")})
+	public ProductOption getProductOption(@NotNull @PathParam("id") String id)
+		throws Exception {
+
+		return new ProductOption();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PUT
+	@Path("/productOption/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductOption")})
+	public Response updateProductOption(
+			@NotNull @PathParam("id") String id, ProductOption productOption)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

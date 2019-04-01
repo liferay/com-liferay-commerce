@@ -28,6 +28,7 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -108,7 +109,7 @@ public class MeasurementUnit {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String key;
 
 	public Map<String, String> getName() {

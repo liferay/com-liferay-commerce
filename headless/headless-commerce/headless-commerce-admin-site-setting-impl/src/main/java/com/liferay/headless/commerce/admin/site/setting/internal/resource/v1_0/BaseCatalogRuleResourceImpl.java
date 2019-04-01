@@ -65,6 +65,42 @@ public abstract class BaseCatalogRuleResourceImpl
 	implements CatalogRuleResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/catalogRule/{id}/category")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "CatalogRule")})
+	public Page<Category> getCatalogRuleCategories(
+			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/catalogRule/{id}/userSegment")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "CatalogRule")})
+	public Page<UserSegment> getCatalogRuleUserSegments(
+			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
 	@DELETE
 	@Path("/catalogRule/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -101,42 +137,6 @@ public abstract class BaseCatalogRuleResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/catalogRule/{id}/category")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Page<Category> getCatalogRuleCategories(
-			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/catalogRule/{id}/userSegment")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "CatalogRule")})
-	public Page<UserSegment> getCatalogRuleUserSegments(
-			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
 	}
 
 	@Override

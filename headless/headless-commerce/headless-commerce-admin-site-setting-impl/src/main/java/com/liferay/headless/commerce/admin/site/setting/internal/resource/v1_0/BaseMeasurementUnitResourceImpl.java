@@ -64,6 +64,39 @@ public abstract class BaseMeasurementUnitResourceImpl
 	implements MeasurementUnitResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "MeasurementUnit")})
+	public Page<MeasurementUnit> getMeasurementUnits(
+			@NotNull @PathParam("groupId") Long groupId,
+			@QueryParam("type") Integer type, @Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "MeasurementUnit")})
+	public MeasurementUnit upsertMeasurementUnit(
+			@NotNull @PathParam("groupId") Long groupId,
+			MeasurementUnit measurementUnit)
+		throws Exception {
+
+		return new MeasurementUnit();
+	}
+
+	@Override
 	@DELETE
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -100,39 +133,6 @@ public abstract class BaseMeasurementUnitResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public Page<MeasurementUnit> getMeasurementUnits(
-			@NotNull @PathParam("groupId") Long groupId,
-			@QueryParam("type") Integer type, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public MeasurementUnit upsertMeasurementUnit(
-			@NotNull @PathParam("groupId") Long groupId,
-			MeasurementUnit measurementUnit)
-		throws Exception {
-
-		return new MeasurementUnit();
 	}
 
 	public void setContextCompany(Company contextCompany) {

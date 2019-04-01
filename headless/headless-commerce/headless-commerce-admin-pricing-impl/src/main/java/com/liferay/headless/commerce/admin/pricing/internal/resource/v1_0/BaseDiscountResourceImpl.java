@@ -63,6 +63,69 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseDiscountResourceImpl implements DiscountResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminPricing/{groupId}/discount/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public Page<Discount> getDiscounts(
+			@NotNull @PathParam("groupId") Long groupId,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminPricing/{groupId}/discount/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public Discount upsertDiscount(
+			@NotNull @PathParam("groupId") Long groupId, Discount discount)
+		throws Exception {
+
+		return new Discount();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/discount/{id}/discountRule")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public Page<DiscountRule> getDiscountRules(
+			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/discount/{id}/discountRule")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public DiscountRule upsertDiscountRule(
+			@NotNull @PathParam("id") Long id, DiscountRule discountRule)
+		throws Exception {
+
+		return new DiscountRule();
+	}
+
+	@Override
 	@DELETE
 	@Path("/discount/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -99,69 +162,6 @@ public abstract class BaseDiscountResourceImpl implements DiscountResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/discount/{id}/discountRule")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Discount")})
-	public Page<DiscountRule> getDiscountRules(
-			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/discount/{id}/discountRule")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Discount")})
-	public DiscountRule upsertDiscountRule(
-			@NotNull @PathParam("id") Long id, DiscountRule discountRule)
-		throws Exception {
-
-		return new DiscountRule();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminPricing/{groupId}/discount/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Discount")})
-	public Page<Discount> getDiscounts(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminPricing/{groupId}/discount/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Discount")})
-	public Discount upsertDiscount(
-			@NotNull @PathParam("groupId") Long groupId, Discount discount)
-		throws Exception {
-
-		return new Discount();
 	}
 
 	public void setContextCompany(Company contextCompany) {

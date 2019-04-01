@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -33,20 +34,20 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface MeasurementUnitResource {
 
-	public Response deleteMeasurementUnit(Long id) throws Exception;
-
-	public MeasurementUnit getMeasurementUnit(Long id) throws Exception;
-
-	public Response updateMeasurementUnit(
-			Long id, MeasurementUnit measurementUnit)
-		throws Exception;
-
 	public Page<MeasurementUnit> getMeasurementUnits(
 			Long groupId, Integer type, Pagination pagination)
 		throws Exception;
 
 	public MeasurementUnit upsertMeasurementUnit(
 			Long groupId, MeasurementUnit measurementUnit)
+		throws Exception;
+
+	public Response deleteMeasurementUnit(Long id) throws Exception;
+
+	public MeasurementUnit getMeasurementUnit(Long id) throws Exception;
+
+	public Response updateMeasurementUnit(
+			Long id, MeasurementUnit measurementUnit)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

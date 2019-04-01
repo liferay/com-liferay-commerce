@@ -63,6 +63,37 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/priceEntry/{id}/tierPrice/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public Page<TierPrice> getTierPrices(
+			@NotNull @PathParam("id") String id, @Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/priceEntry/{id}/tierPrice/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public TierPrice upsertTierPrice(
+			@NotNull @PathParam("id") String id, TierPrice tierPrice)
+		throws Exception {
+
+		return new TierPrice();
+	}
+
+	@Override
 	@DELETE
 	@Path("/priceEntry/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -99,37 +130,6 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/priceEntry/{id}/tierPrice/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<TierPrice> getTierPrices(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/priceEntry/{id}/tierPrice/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public TierPrice upsertTierPrice(
-			@NotNull @PathParam("id") String id, TierPrice tierPrice)
-		throws Exception {
-
-		return new TierPrice();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -37,6 +37,7 @@ import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.ComponentServiceObjects;
@@ -175,6 +176,21 @@ public class Mutation {
 				groupId, catalogRule));
 	}
 
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public MeasurementUnit upsertMeasurementUnit(
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.upsertMeasurementUnit(
+					groupId, measurementUnit));
+	}
+
 	@GraphQLInvokeDetached
 	public Response deleteMeasurementUnit(@GraphQLName("id") Long id)
 		throws Exception {
@@ -202,101 +218,16 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public MeasurementUnit upsertMeasurementUnit(
+	public TaxCategory upsertTaxCategory(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
+			@GraphQLName("TaxCategory") TaxCategory taxCategory)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_measurementUnitResourceComponentServiceObjects,
+			_taxCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			measurementUnitResource ->
-				measurementUnitResource.upsertMeasurementUnit(
-					groupId, measurementUnit));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteUserSegment(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.deleteUserSegment(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateUserSegment(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegment") UserSegment userSegment)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.updateUserSegment(
-				id, userSegment));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteUserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("criterionId") Long criterionId)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.deleteUserSegmentCriterion(
-					id, criterionId));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public UserSegmentCriterion updateUserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.updateUserSegmentCriterion(
-					id, criterionId, userSegmentCriterion));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public UserSegmentCriterion upsertUserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.upsertUserSegmentCriterion(
-					id, userSegmentCriterion));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public UserSegment upsertUserSegment(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("UserSegment") UserSegment userSegment)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.upsertUserSegment(
-				groupId, userSegment));
+			taxCategoryResource -> taxCategoryResource.upsertTaxCategory(
+				groupId, taxCategory));
 	}
 
 	@GraphQLInvokeDetached
@@ -324,16 +255,100 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public TaxCategory upsertTaxCategory(
+	public UserSegment upsertUserSegment(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("TaxCategory") TaxCategory taxCategory)
+			@GraphQLName("UserSegment") UserSegment userSegment)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_taxCategoryResourceComponentServiceObjects,
+			_userSegmentResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			taxCategoryResource -> taxCategoryResource.upsertTaxCategory(
-				groupId, taxCategory));
+			userSegmentResource -> userSegmentResource.upsertUserSegment(
+				groupId, userSegment));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteUserSegmentCriterion(
+			@GraphQLName("criterionId") Long criterionId,
+			@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.deleteUserSegmentCriterion(
+					criterionId, id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public UserSegmentCriterion updateUserSegmentCriterion(
+			@GraphQLName("criterionId") Long criterionId,
+			@GraphQLName("id") Long id,
+			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
+				userSegmentCriterion)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.updateUserSegmentCriterion(
+					criterionId, id, userSegmentCriterion));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public UserSegmentCriterion upsertUserSegmentCriterion(
+			@GraphQLName("id") Long id,
+			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
+				userSegmentCriterion)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource ->
+				userSegmentResource.upsertUserSegmentCriterion(
+					id, userSegmentCriterion));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteUserSegment(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.deleteUserSegment(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response updateUserSegment(
+			@GraphQLName("id") Long id,
+			@GraphQLName("UserSegment") UserSegment userSegment)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_userSegmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			userSegmentResource -> userSegmentResource.updateUserSegment(
+				id, userSegment));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Warehouse upsertWarehouse(
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("Warehouse") Warehouse warehouse)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.upsertWarehouse(
+				groupId, warehouse));
 	}
 
 	@GraphQLInvokeDetached
@@ -357,20 +372,6 @@ public class Mutation {
 			this::_populateResourceContext,
 			warehouseResource -> warehouseResource.updateWarehouse(
 				id, warehouse));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Warehouse upsertWarehouse(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("Warehouse") Warehouse warehouse)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_warehouseResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			warehouseResource -> warehouseResource.upsertWarehouse(
-				groupId, warehouse));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R

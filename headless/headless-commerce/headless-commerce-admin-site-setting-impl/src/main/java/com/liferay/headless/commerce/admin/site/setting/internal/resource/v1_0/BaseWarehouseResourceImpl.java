@@ -63,6 +63,39 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Warehouse")})
+	public Page<Warehouse> getWarehouses(
+			@NotNull @PathParam("groupId") Long groupId,
+			@QueryParam("active") Boolean active,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Warehouse")})
+	public Warehouse upsertWarehouse(
+			@NotNull @PathParam("groupId") Long groupId, Warehouse warehouse)
+		throws Exception {
+
+		return new Warehouse();
+	}
+
+	@Override
 	@DELETE
 	@Path("/warehouse/{id}")
 	@Produces({"application/json", "application/xml"})
@@ -99,39 +132,6 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Page<Warehouse> getWarehouses(
-			@NotNull @PathParam("groupId") Long groupId,
-			@QueryParam("active") Boolean active,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Warehouse upsertWarehouse(
-			@NotNull @PathParam("groupId") Long groupId, Warehouse warehouse)
-		throws Exception {
-
-		return new Warehouse();
 	}
 
 	public void setContextCompany(Company contextCompany) {

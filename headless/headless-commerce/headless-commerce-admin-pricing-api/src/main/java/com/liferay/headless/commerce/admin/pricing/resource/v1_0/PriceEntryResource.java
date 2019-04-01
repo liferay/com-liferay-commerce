@@ -35,17 +35,17 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface PriceEntryResource {
 
+	public Page<TierPrice> getTierPrices(String id, Pagination pagination)
+		throws Exception;
+
+	public TierPrice upsertTierPrice(String id, TierPrice tierPrice)
+		throws Exception;
+
 	public Response deletePriceEntry(String id) throws Exception;
 
 	public PriceEntry getPriceEntry(String id) throws Exception;
 
 	public Response updatePriceEntry(String id, PriceEntry priceEntry)
-		throws Exception;
-
-	public Page<TierPrice> getTierPrices(String id, Pagination pagination)
-		throws Exception;
-
-	public TierPrice upsertTierPrice(String id, TierPrice tierPrice)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

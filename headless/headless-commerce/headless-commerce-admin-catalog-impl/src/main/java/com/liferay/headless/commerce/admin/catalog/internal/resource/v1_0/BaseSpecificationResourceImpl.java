@@ -64,45 +64,6 @@ public abstract class BaseSpecificationResourceImpl
 	implements SpecificationResource {
 
 	@Override
-	@DELETE
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Response deleteSpecification(@NotNull @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Specification getSpecification(@NotNull @PathParam("id") Long id)
-		throws Exception {
-
-		return new Specification();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Response updateSpecification(
-			@NotNull @PathParam("id") Long id, Specification specification)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -165,6 +126,45 @@ public abstract class BaseSpecificationResourceImpl
 		throws Exception {
 
 		return new SpecificationValue();
+	}
+
+	@Override
+	@DELETE
+	@Path("/specification/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Response deleteSpecification(@NotNull @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Path("/specification/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Specification getSpecification(@NotNull @PathParam("id") Long id)
+		throws Exception {
+
+		return new Specification();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PUT
+	@Path("/specification/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Response updateSpecification(
+			@NotNull @PathParam("id") Long id, Specification specification)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

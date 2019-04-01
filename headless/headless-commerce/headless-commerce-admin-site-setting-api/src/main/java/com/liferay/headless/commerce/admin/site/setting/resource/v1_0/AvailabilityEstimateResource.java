@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 /**

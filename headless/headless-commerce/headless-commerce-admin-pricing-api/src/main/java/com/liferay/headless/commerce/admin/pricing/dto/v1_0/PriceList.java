@@ -28,6 +28,7 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -113,7 +114,7 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String currency;
 
 	public Date getDisplayDate() {
@@ -186,7 +187,7 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String externalReferenceCode;
 
 	public Long getGroupId() {
@@ -255,7 +256,7 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String name;
 
 	public Boolean getNeverExpire() {

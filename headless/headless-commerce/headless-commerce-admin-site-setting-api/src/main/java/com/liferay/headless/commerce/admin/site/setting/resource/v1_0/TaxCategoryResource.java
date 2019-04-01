@@ -20,6 +20,7 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -33,18 +34,18 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface TaxCategoryResource {
 
-	public Response deleteTaxCategory(Long id) throws Exception;
-
-	public TaxCategory getTaxCategory(Long id) throws Exception;
-
-	public Response updateTaxCategory(Long id, TaxCategory taxCategory)
-		throws Exception;
-
 	public Page<TaxCategory> getTaxCategories(
 			Long groupId, Pagination pagination)
 		throws Exception;
 
 	public TaxCategory upsertTaxCategory(Long groupId, TaxCategory taxCategory)
+		throws Exception;
+
+	public Response deleteTaxCategory(Long id) throws Exception;
+
+	public TaxCategory getTaxCategory(Long id) throws Exception;
+
+	public Response updateTaxCategory(Long id, TaxCategory taxCategory)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

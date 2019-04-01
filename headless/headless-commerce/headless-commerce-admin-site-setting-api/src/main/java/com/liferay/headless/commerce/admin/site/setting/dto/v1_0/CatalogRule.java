@@ -28,7 +28,7 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -156,7 +156,7 @@ public class CatalogRule {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String name;
 
 	public String getType() {
@@ -179,7 +179,7 @@ public class CatalogRule {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
+	@NotEmpty
 	protected String type;
 
 	public Map<String, String> getTypeSettings() {
