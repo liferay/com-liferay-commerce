@@ -1,2957 +1,2957 @@
-openapi: 3.0.0
-info:
-  title: Liferay Commerce Admin Site Setting API
-  description: Liferay Commerce Admin Site Setting API
-  contact:
-    name: Commerce Team
-    email: team-commerce@liferay.com
-  license:
-    name: GNU Lesser General Public License 2.1
-    url: https://www.gnu.org/licenses/lgpl-2.1.html
-  version: v1.0
-servers:
-- url: https://virtserver.swaggerhub.com/liferay6/commerce-admin-site-setting/v1.0
-  description: SwaggerHub API Auto Mocking
-- url: https://commerce.{environment}.liferay.com/commerce-admin-site-setting/{basePath}
-  description: Liferay Commerce API server
-  variables:
-    basePath:
-      default: v1.0
-    environment:
-      default: api
-      enum:
-      - api
-      - api.dev
-      - api.uat
-- url: '{protocol}://{host}.ngrok.io/o/commerce-admin-site-setting/{basePath}'
-  description: Liferay Commerce Local Development with Ngrok
-  variables:
-    host:
-      default: commerce
-    protocol:
-      default: http
-      enum:
-      - http
-      - https
-    basePath:
-      default: v1.0
-- url: '{protocol}://{host}:{port}/o/commerce-admin-site-setting/{basePath}'
-  description: Liferay Commerce Local Development (Hosts file)
-  variables:
-    host:
-      default: test.dev
-    port:
-      default: "8080"
-      enum:
-      - "8080"
-      - "8443"
-      - "443"
-    protocol:
-      default: http
-      enum:
-      - http
-      - https
-    basePath:
-      default: v1.0
-tags:
-- name: AvailabilityEstimate
-  description: Operations on Availability Estimates
-- name: CatalogRule
-  description: Operations on Catalog Rules
-- name: MeasurementUnit
-  description: Operations on Measurement Units
-- name: TaxCategory
-  description: Operations on Tax Categories
-- name: UserSegment
-  description: Operations on User Segments
-- name: Warehouse
-  description: Operations on Warehouses
-paths:
-  /availabilityEstimate/{id}:
-    get:
-      tags:
-      - AvailabilityEstimate
-      summary: Gets an Availability Estimate by ID.
-      operationId: getAvailabilityEstimate
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AvailabilityEstimate'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/AvailabilityEstimate'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - AvailabilityEstimate
-      summary: Updates an Availability Estimate by ID.
-      operationId: updateAvailabilityEstimate
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AvailabilityEstimate'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/AvailabilityEstimate'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - AvailabilityEstimate
-      summary: Deletes an Availability Estimate by ID.
-      operationId: deleteAvailabilityEstimate
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /commerceAdminSiteSetting/{groupId}/availabilityEstimate/:
-    get:
-      tags:
-      - AvailabilityEstimate
-      summary: Gets a list of Availability Estimate.
-      operationId: getAvailabilityEstimates
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AvailabilityEstimate'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AvailabilityEstimate'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - AvailabilityEstimate
-      summary: Creates or Updates an Availability Estimate.
-      operationId: upsertAvailabilityEstimate
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AvailabilityEstimate'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/AvailabilityEstimate'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AvailabilityEstimate'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/AvailabilityEstimate'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /catalogRule/{id}:
-    get:
-      tags:
-      - CatalogRule
-      summary: Gets a Catalog Rule by ID.
-      operationId: getCatalogRule
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CatalogRule'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/CatalogRule'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - CatalogRule
-      summary: Updates a Catalog Rule by ID.
-      operationId: updateCatalogRule
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CatalogRule'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/CatalogRule'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - CatalogRule
-      summary: Deletes a Catalog Rule by ID.
-      operationId: deleteCatalogRule
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /catalogRule/{id}/category:
-    get:
-      tags:
-      - CatalogRule
-      summary: Gets a list of Category related to a Catalog Rule.
-      operationId: getCatalogRuleCategories
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-  /catalogRule/{id}/userSegment:
-    get:
-      tags:
-      - CatalogRule
-      summary: Gets a list of User Segment related to a Catalog Rule.
-      operationId: getCatalogRuleUserSegments
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegment'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegment'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-  /commerceAdminSiteSetting/{groupId}/catalogRule/:
-    get:
-      tags:
-      - CatalogRule
-      summary: Gets a list of Catalog Rule.
-      operationId: getCatalogRules
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CatalogRule'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CatalogRule'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - CatalogRule
-      summary: Creates or Updates a Catalog Rule.
-      operationId: upsertCatalogRule
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CatalogRule'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/CatalogRule'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CatalogRule'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/CatalogRule'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /measurementUnit/{id}:
-    get:
-      tags:
-      - MeasurementUnit
-      summary: Gets a Measurement Unit by ID.
-      operationId: getMeasurementUnit
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MeasurementUnit'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/MeasurementUnit'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - MeasurementUnit
-      summary: Updates a Measurement Unit by ID.
-      operationId: updateMeasurementUnit
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MeasurementUnit'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/MeasurementUnit'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - MeasurementUnit
-      summary: Deletes a Measurement Unit by ID.
-      operationId: deleteMeasurementUnit
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /commerceAdminSiteSetting/{groupId}/measurementUnit/:
-    get:
-      tags:
-      - MeasurementUnit
-      summary: Gets a list of Measurement Unit.
-      operationId: getMeasurementUnits
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: type
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          maximum: 1
-          minimum: 0
-          type: integer
-          description: Type to filter
-          format: int32
-          example: 0
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MeasurementUnit'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MeasurementUnit'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - MeasurementUnit
-      summary: Creates a Measurement Unit.
-      operationId: upsertMeasurementUnit
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MeasurementUnit'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/MeasurementUnit'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MeasurementUnit'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/MeasurementUnit'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /taxCategory/{id}:
-    get:
-      tags:
-      - TaxCategory
-      summary: Gets a Tax Category by ID.
-      operationId: getTaxCategory
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaxCategory'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/TaxCategory'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - TaxCategory
-      summary: Updates a Tax Category by ID.
-      operationId: updateTaxCategory
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TaxCategory'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/TaxCategory'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - TaxCategory
-      summary: Deletes a Tax Category by ID.
-      operationId: deleteTaxCategory
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /commerceAdminSiteSetting/{groupId}/taxCategory/:
-    get:
-      tags:
-      - TaxCategory
-      summary: Gets a list of Tax Category.
-      operationId: getTaxCategories
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TaxCategory'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TaxCategory'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - TaxCategory
-      summary: Creates a Tax Category.
-      operationId: upsertTaxCategory
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TaxCategory'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/TaxCategory'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaxCategory'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/TaxCategory'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /userSegment/{id}:
-    get:
-      tags:
-      - UserSegment
-      summary: Gets a User Segment by ID.
-      operationId: getUserSegment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSegment'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/UserSegment'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - UserSegment
-      summary: Updates a User Segment by ID.
-      operationId: updateUserSegment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSegment'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/UserSegment'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - UserSegment
-      summary: Deletes a User Segment by ID.
-      operationId: deleteUserSegment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /userSegment/{id}/userSegmentCriterion/{criterionId}:
-    get:
-      tags:
-      - UserSegment
-      summary: Gets a User Segment Criterion by ID.
-      operationId: getUserSegmentCriterion
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: criterionId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The criterion identifier
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - UserSegment
-      summary: Updates a User Segment Criterion by ID.
-      operationId: updateUserSegmentCriterion
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: criterionId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The criterion identifier
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSegmentCriterion'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/UserSegmentCriterion'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - UserSegment
-      summary: Deletes a User Segment Criterion by ID.
-      operationId: deleteUserSegmentCriterion
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: criterionId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The criterion identifier
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /userSegment/{id}/userSegmentCriterion:
-    get:
-      tags:
-      - UserSegment
-      summary: Gets a list of User Segment Criterion related to a User Segment.
-      operationId: getUserSegmentCriteria
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegmentCriterion'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegmentCriterion'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - UserSegment
-      summary: Creates or Updates a User Segment Criterion.
-      operationId: upsertUserSegmentCriterion
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSegmentCriterion'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/UserSegmentCriterion'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/UserSegmentCriterion'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /commerceAdminSiteSetting/{groupId}/userSegment/:
-    get:
-      tags:
-      - UserSegment
-      summary: Gets a list of User Segment.
-      operationId: getUserSegments
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegment'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserSegment'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - UserSegment
-      summary: Creates or Updates a User Segment.
-      operationId: upsertUserSegment
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSegment'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/UserSegment'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSegment'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/UserSegment'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /warehouse/{id}:
-    get:
-      tags:
-      - Warehouse
-      summary: Gets a Warehouse by ID.
-      operationId: getWarehouse
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Warehouse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Warehouse'
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    put:
-      tags:
-      - Warehouse
-      summary: Updates a Warehouse by ID.
-      operationId: updateWarehouse
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Warehouse'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Warehouse'
-        required: true
-      responses:
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-    delete:
-      tags:
-      - Warehouse
-      summary: Deletes a Warehouse by ID.
-      operationId: deleteWarehouse
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: The resource Id
-          format: int64
-          example: 30130
-      responses:
-        204:
-          description: No content
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
-  /commerceAdminSiteSetting/{groupId}/warehouse/:
-    get:
-      tags:
-      - Warehouse
-      summary: Gets a list of Warehouse.
-      operationId: getWarehouses
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      - name: active
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          description: Active to filter
-          example: true
-      - name: page
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: pageSize
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Warehouse'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Warehouse'
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.read
-    post:
-      tags:
-      - Warehouse
-      summary: Creates a Warehouse.
-      operationId: upsertWarehouse
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          minimum: 0
-          type: integer
-          description: Group to filter (Liferay site)
-          format: int64
-          example: 30130
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Warehouse'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Warehouse'
-        required: true
-      responses:
-        201:
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Warehouse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Warehouse'
-        202:
-          description: Async
-        204:
-          description: Updated
-        400:
-          description: Invalid input
-        401:
-          description: Authentication information is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        404:
-          description: The specified resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-      security:
-      - BasicAuth: []
-      - BearerAuth: []
-      - OAuth2:
-        - HeadlessCommerceAdminSiteSetting.write
 components:
-  schemas:
-    AvailabilityEstimate:
-      required:
-      - title
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        title:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            hu_HU: Horvatorszag
-            hr_HR: Hrvatska
-            en_US: Croatia
-        priority:
-          minimum: 0
-          type: number
-          format: double
-          example: 1.1
-    CatalogRule:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        active:
-          type: boolean
-          example: true
-        categories:
-          type: array
-          example:
-          - id: 22567
-            externalReferenceCode: AB-34098-789-N
-            groupId: 20124
-            name: Sale
-            vocabulary: Default Vocabulary
-          items:
-            $ref: '#/components/schemas/Category'
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        name:
-          type: string
-          example: Catalog Rule Name
-        type:
-          type: string
-          example: all-products
-        typeSettings:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            orSearch: "true"
-        userSegments:
-          type: array
-          example:
-          - id: 20546
-            active: true
-            criteria:
-              id: 20467
-              commerceUserSegmentEntryId: 23145
-              name:
-                hu_HU: Horvatorszag
-                hr_HR: Hrvatska
-                en_US: Croatia
-              type: users
-              typeSettings: 22134,23567
-              priority: 1.1
-            key: user-segment-key
-            name:
-              hu_HU: Horvatorszag
-              hr_HR: Hrvatska
-              en_US: Croatia
-            priority: 1.1
-            system: true
-          items:
-            $ref: '#/components/schemas/UserSegment'
-    Category:
-      required:
-      - externalReferenceCode
-      - name
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 30130
-        externalReferenceCode:
-          type: string
-          example: AB-34098-789-N
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 25124
-        name:
-          type: string
-          description: Category Name
-          example: Sale
-        vocabulary:
-          type: string
-          readOnly: true
-          example: Default Vocabulary
-    Error:
-      required:
-      - errorCode
-      - errorDescription
-      - message
-      - status
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: No CommerceCurrency exists with the key {groupId=41811, code=US Dollar}
-        errorDescription:
-          type: string
-          readOnly: true
-          example: Unable to find currency. Currency code should be expressed with 3-letter ISO 4217 format.
-        status:
-          type: integer
-          description: HTTP Status code
-          readOnly: true
-          example: 404
-        errorCode:
-          type: integer
-          description: Internal error code mapping
-          readOnly: true
-          example: 996
-    MeasurementUnit:
-      required:
-      - key
-      - name
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        key:
-          type: string
-          example: kg
-        name:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            hu_HU: Horvatorszag
-            hr_HR: Hrvatska
-            en_US: Croatia
-        primary:
-          type: boolean
-          example: true
-        priority:
-          minimum: 0
-          type: number
-          format: double
-          example: 1.1
-        rate:
-          minimum: 0
-          type: number
-          format: double
-          example: 1
-        type:
-          maximum: 1
-          minimum: 0
-          type: integer
-          format: int32
-          example: 0
-    UserSegment:
-      required:
-      - key
-      - name
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        active:
-          type: boolean
-          example: true
-        criteria:
-          type: array
-          example:
-          - id: 20546
-            commerceUserSegmentEntryId: 30130
-            name:
-              hu_HU: Horvatorszag
-              hr_HR: Hrvatska
-              en_US: Croatia
-            type: users
-            typeSettings: 22134,23567
-            priority: 1.1
-          items:
-            $ref: '#/components/schemas/UserSegmentCriterion'
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        key:
-          type: string
-          example: user-segment-key
-        name:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            hu_HU: Horvatorszag
-            hr_HR: Hrvatska
-            en_US: Croatia
-        priority:
-          minimum: 0
-          type: number
-          format: double
-          example: 1.1
-        system:
-          type: boolean
-          example: true
-    UserSegmentCriterion:
-      required:
-      - commerceUserSegmentEntryId
-      - type
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        commerceUserSegmentEntryId:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        priority:
-          minimum: 0
-          type: number
-          format: double
-          example: 1.1
-        type:
-          type: string
-          example: users
-        typeSettings:
-          type: string
-          example: 22134,23567
-    TaxCategory:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        description:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            hu_HU: Horvatorszag
-            hr_HR: Hrvatska
-            en_US: Croatia
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        name:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            hu_HU: Horvatorszag
-            hr_HR: Hrvatska
-            en_US: Croatia
-    Warehouse:
-      required:
-      - commerceCountryId
-      - name
-      type: object
-      properties:
-        id:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        active:
-          type: boolean
-          example: true
-        city:
-          type: string
-          example: Diamond Bar
-        commerceCountryId:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30130
-        commerceRegionId:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 30234
-        description:
-          type: string
-          example: right stairs, first room on the left
-        groupId:
-          minimum: 0
-          type: integer
-          format: int64
-          readOnly: true
-          example: 23130
-        latitude:
-          type: number
-          format: double
-          example: 33.9976884
-        longitude:
-          type: number
-          format: double
-          example: -117.8144595
-        name:
-          type: string
-          example: Warehouse Name
-        primary:
-          type: boolean
-          example: true
-        street1:
-          type: string
-          example: 1400 Montefino Ave
-        street2:
-          type: string
-          example: 1st floor
-        street3:
-          type: string
-          example: suite 200
-        zip:
-          type: string
-          example: "91765"
-  responses:
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnauthorizedError:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    idPathParam:
-      name: id
-      in: path
-      required: true
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-        description: The resource Id
-        format: int64
-        example: 30130
-    groupIdPathParam:
-      name: groupId
-      in: path
-      required: true
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-        description: Group to filter (Liferay site)
-        format: int64
-        example: 30130
-    activeQueryParam:
-      name: active
-      in: query
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: boolean
-        description: Active to filter
-        example: true
-    pageQueryParam:
-      name: page
-      in: query
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: integer
-    pageSizeQueryParam:
-      name: pageSize
-      in: query
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: integer
-    typeQueryParam:
-      name: type
-      in: query
-      required: false
-      style: form
-      explode: true
-      schema:
-        maximum: 1
-        minimum: 0
-        type: integer
-        description: Type to filter
-        format: int32
-        example: 0
-  securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: /oauth/authorize
-          tokenUrl: /oauth/token
-          scopes:
-            HeadlessCommerceAdminSiteSetting.read: Grants read access
-            HeadlessCommerceAdminSiteSetting.write: Grants write access
-            HeadlessCommerceAdminSiteSetting.admin: Grants access to admin operations
-    BearerAuth:
-      type: http
-      scheme: bearer
+    parameters:
+        activeQueryParam:
+            explode: true
+            in: query
+            name: active
+            required: false
+            schema:
+                description: Active to filter
+                example: true
+                type: boolean
+            style: form
+        groupIdPathParam:
+            explode: false
+            in: path
+            name: groupId
+            required: true
+            schema:
+                description: Group to filter (Liferay site)
+                example: 30130
+                format: int64
+                minimum: 0
+                type: integer
+            style: simple
+        idPathParam:
+            explode: false
+            in: path
+            name: id
+            required: true
+            schema:
+                description: The resource Id
+                example: 30130
+                format: int64
+                minimum: 0
+                type: integer
+            style: simple
+        pageQueryParam:
+            explode: true
+            in: query
+            name: page
+            required: false
+            schema:
+                type: integer
+            style: form
+        pageSizeQueryParam:
+            explode: true
+            in: query
+            name: pageSize
+            required: false
+            schema:
+                type: integer
+            style: form
+        typeQueryParam:
+            explode: true
+            in: query
+            name: type
+            required: false
+            schema:
+                description: Type to filter
+                example: 0
+                format: int32
+                maximum: 1
+                minimum: 0
+                type: integer
+            style: form
+    responses:
+        NotFound:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+                application/xml:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description: The specified resource was not found
+        UnauthorizedError:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+                application/xml:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description: Authentication information is missing or invalid
+    schemas:
+        AvailabilityEstimate:
+            properties:
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                title:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+            required:
+                - title
+            type: object
+        CatalogRule:
+            properties:
+                active:
+                    example: true
+                    type: boolean
+                categories:
+                    example:
+                        - externalReferenceCode: AB-34098-789-N
+                          groupId: 20124
+                          id: 22567
+                          name: Sale
+                          vocabulary: Default Vocabulary
+                    items:
+                        $ref: '#/components/schemas/Category'
+                    type: array
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                name:
+                    example: Catalog Rule Name
+                    type: string
+                type:
+                    example: all-products
+                    type: string
+                typeSettings:
+                    additionalProperties:
+                        type: string
+                    example:
+                        orSearch: "true"
+                    type: object
+                userSegments:
+                    example:
+                        - active: true
+                          criteria:
+                              commerceUserSegmentEntryId: 23145
+                              id: 20467
+                              name:
+                                  en_US: Croatia
+                                  hr_HR: Hrvatska
+                                  hu_HU: Horvatorszag
+                              priority: 1.1
+                              type: users
+                              typeSettings: 22134,23567
+                          id: 20546
+                          key: user-segment-key
+                          name:
+                              en_US: Croatia
+                              hr_HR: Hrvatska
+                              hu_HU: Horvatorszag
+                          priority: 1.1
+                          system: true
+                    items:
+                        $ref: '#/components/schemas/UserSegment'
+                    type: array
+            required:
+                - name
+                - type
+            type: object
+        Category:
+            properties:
+                externalReferenceCode:
+                    example: AB-34098-789-N
+                    type: string
+                groupId:
+                    example: 25124
+                    format: int64
+                    minimum: 0
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                name:
+                    description: Category Name
+                    example: Sale
+                    type: string
+                vocabulary:
+                    example: Default Vocabulary
+                    readOnly: true
+                    type: string
+            required:
+                - externalReferenceCode
+                - name
+            type: object
+        Error:
+            properties:
+                errorCode:
+                    description: Internal error code mapping
+                    example: 996
+                    readOnly: true
+                    type: integer
+                errorDescription:
+                    example: Unable to find currency. Currency code should be expressed with 3-letter ISO 4217 format.
+                    readOnly: true
+                    type: string
+                message:
+                    example: No CommerceCurrency exists with the key {groupId=41811, code=US Dollar}
+                    readOnly: true
+                    type: string
+                status:
+                    description: HTTP Status code
+                    example: 404
+                    readOnly: true
+                    type: integer
+            required:
+                - errorCode
+                - errorDescription
+                - message
+                - status
+            type: object
+        MeasurementUnit:
+            properties:
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                key:
+                    example: kg
+                    type: string
+                name:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+                primary:
+                    example: true
+                    type: boolean
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                rate:
+                    example: 1
+                    format: double
+                    minimum: 0
+                    type: number
+                type:
+                    example: 0
+                    format: int32
+                    maximum: 1
+                    minimum: 0
+                    type: integer
+            required:
+                - key
+                - name
+            type: object
+        TaxCategory:
+            properties:
+                description:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                name:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+            required:
+                - name
+            type: object
+        UserSegment:
+            properties:
+                active:
+                    example: true
+                    type: boolean
+                criteria:
+                    example:
+                        - commerceUserSegmentEntryId: 30130
+                          id: 20546
+                          name:
+                              en_US: Croatia
+                              hr_HR: Hrvatska
+                              hu_HU: Horvatorszag
+                          priority: 1.1
+                          type: users
+                          typeSettings: 22134,23567
+                    items:
+                        $ref: '#/components/schemas/UserSegmentCriterion'
+                    type: array
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                key:
+                    example: user-segment-key
+                    type: string
+                name:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                system:
+                    example: true
+                    type: boolean
+            required:
+                - key
+                - name
+            type: object
+        UserSegmentCriterion:
+            properties:
+                commerceUserSegmentEntryId:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                type:
+                    example: users
+                    type: string
+                typeSettings:
+                    example: 22134,23567
+                    type: string
+            required:
+                - commerceUserSegmentEntryId
+                - type
+            type: object
+        Warehouse:
+            properties:
+                active:
+                    example: true
+                    type: boolean
+                city:
+                    example: Diamond Bar
+                    type: string
+                commerceCountryId:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                commerceRegionId:
+                    example: 30234
+                    format: int64
+                    minimum: 0
+                    type: integer
+                description:
+                    example: right stairs, first room on the left
+                    type: string
+                groupId:
+                    example: 23130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                latitude:
+                    example: 33.9976884
+                    format: double
+                    type: number
+                longitude:
+                    example: -117.8144595
+                    format: double
+                    type: number
+                name:
+                    example: Warehouse Name
+                    type: string
+                primary:
+                    example: true
+                    type: boolean
+                street1:
+                    example: 1400 Montefino Ave
+                    type: string
+                street2:
+                    example: 1st floor
+                    type: string
+                street3:
+                    example: suite 200
+                    type: string
+                zip:
+                    example: "91765"
+                    type: string
+            required:
+                - commerceCountryId
+                - name
+            type: object
+    securitySchemes:
+        BasicAuth:
+            scheme: basic
+            type: http
+        BearerAuth:
+            scheme: bearer
+            type: http
+        OAuth2:
+            flows:
+                authorizationCode:
+                    authorizationUrl: /oauth/authorize
+                    scopes:
+                        HeadlessCommerceAdminSiteSetting.admin: Grants access to admin operations
+                        HeadlessCommerceAdminSiteSetting.read: Grants read access
+                        HeadlessCommerceAdminSiteSetting.write: Grants write access
+                    tokenUrl: /oauth/token
+            type: oauth2
+info:
+    contact:
+        email: team-commerce@liferay.com
+        name: Commerce Team
+    description: Liferay Commerce Admin Site Setting API
+    license:
+        name: GNU Lesser General Public License 2.1
+        url: https://www.gnu.org/licenses/lgpl-2.1.html
+    title: Liferay Commerce Admin Site Setting API
+    version: v1.0
+openapi: 3.0.0
+paths:
+    /availabilityEstimate/{id}:
+        delete:
+            operationId: deleteAvailabilityEstimate
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes an Availability Estimate by ID.
+            tags:
+                - AvailabilityEstimate
+        get:
+            operationId: getAvailabilityEstimate
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AvailabilityEstimate'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/AvailabilityEstimate'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets an Availability Estimate by ID.
+            tags:
+                - AvailabilityEstimate
+        put:
+            operationId: updateAvailabilityEstimate
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AvailabilityEstimate'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/AvailabilityEstimate'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates an Availability Estimate by ID.
+            tags:
+                - AvailabilityEstimate
+    /catalogRule/{id}/category:
+        get:
+            operationId: getCatalogRuleCategories
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Category'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Category'
+                                type: array
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Category related to a Catalog Rule.
+            tags:
+                - CatalogRule
+    /catalogRule/{id}/userSegment:
+        get:
+            operationId: getCatalogRuleUserSegments
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegment'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegment'
+                                type: array
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of User Segment related to a Catalog Rule.
+            tags:
+                - CatalogRule
+    /catalogRule/{id}:
+        delete:
+            operationId: deleteCatalogRule
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a Catalog Rule by ID.
+            tags:
+                - CatalogRule
+        get:
+            operationId: getCatalogRule
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CatalogRule'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/CatalogRule'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a Catalog Rule by ID.
+            tags:
+                - CatalogRule
+        put:
+            operationId: updateCatalogRule
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CatalogRule'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/CatalogRule'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a Catalog Rule by ID.
+            tags:
+                - CatalogRule
+    /commerceAdminSiteSetting/{groupId}/availabilityEstimate/:
+        get:
+            operationId: getAvailabilityEstimates
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AvailabilityEstimate'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AvailabilityEstimate'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Availability Estimate.
+            tags:
+                - AvailabilityEstimate
+        post:
+            operationId: upsertAvailabilityEstimate
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AvailabilityEstimate'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/AvailabilityEstimate'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AvailabilityEstimate'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/AvailabilityEstimate'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates or Updates an Availability Estimate.
+            tags:
+                - AvailabilityEstimate
+    /commerceAdminSiteSetting/{groupId}/catalogRule/:
+        get:
+            operationId: getCatalogRules
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/CatalogRule'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/CatalogRule'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Catalog Rule.
+            tags:
+                - CatalogRule
+        post:
+            operationId: upsertCatalogRule
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CatalogRule'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/CatalogRule'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CatalogRule'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/CatalogRule'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates or Updates a Catalog Rule.
+            tags:
+                - CatalogRule
+    /commerceAdminSiteSetting/{groupId}/measurementUnit/:
+        get:
+            operationId: getMeasurementUnits
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: type
+                  required: false
+                  schema:
+                      description: Type to filter
+                      example: 0
+                      format: int32
+                      maximum: 1
+                      minimum: 0
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/MeasurementUnit'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/MeasurementUnit'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Measurement Unit.
+            tags:
+                - MeasurementUnit
+        post:
+            operationId: upsertMeasurementUnit
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MeasurementUnit'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/MeasurementUnit'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MeasurementUnit'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/MeasurementUnit'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates a Measurement Unit.
+            tags:
+                - MeasurementUnit
+    /commerceAdminSiteSetting/{groupId}/taxCategory/:
+        get:
+            operationId: getTaxCategories
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/TaxCategory'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/TaxCategory'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Tax Category.
+            tags:
+                - TaxCategory
+        post:
+            operationId: upsertTaxCategory
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TaxCategory'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/TaxCategory'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TaxCategory'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/TaxCategory'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates a Tax Category.
+            tags:
+                - TaxCategory
+    /commerceAdminSiteSetting/{groupId}/userSegment/:
+        get:
+            operationId: getUserSegments
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegment'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegment'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of User Segment.
+            tags:
+                - UserSegment
+        post:
+            operationId: upsertUserSegment
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserSegment'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UserSegment'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserSegment'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UserSegment'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates or Updates a User Segment.
+            tags:
+                - UserSegment
+    /commerceAdminSiteSetting/{groupId}/warehouse/:
+        get:
+            operationId: getWarehouses
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: active
+                  required: false
+                  schema:
+                      description: Active to filter
+                      example: true
+                      type: boolean
+                  style: form
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Warehouse'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Warehouse'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of Warehouse.
+            tags:
+                - Warehouse
+        post:
+            operationId: upsertWarehouse
+            parameters:
+                - explode: false
+                  in: path
+                  name: groupId
+                  required: true
+                  schema:
+                      description: Group to filter (Liferay site)
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Warehouse'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Warehouse'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Warehouse'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Warehouse'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates a Warehouse.
+            tags:
+                - Warehouse
+    /measurementUnit/{id}:
+        delete:
+            operationId: deleteMeasurementUnit
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a Measurement Unit by ID.
+            tags:
+                - MeasurementUnit
+        get:
+            operationId: getMeasurementUnit
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MeasurementUnit'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/MeasurementUnit'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a Measurement Unit by ID.
+            tags:
+                - MeasurementUnit
+        put:
+            operationId: updateMeasurementUnit
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MeasurementUnit'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/MeasurementUnit'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a Measurement Unit by ID.
+            tags:
+                - MeasurementUnit
+    /taxCategory/{id}:
+        delete:
+            operationId: deleteTaxCategory
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a Tax Category by ID.
+            tags:
+                - TaxCategory
+        get:
+            operationId: getTaxCategory
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TaxCategory'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/TaxCategory'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a Tax Category by ID.
+            tags:
+                - TaxCategory
+        put:
+            operationId: updateTaxCategory
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TaxCategory'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/TaxCategory'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a Tax Category by ID.
+            tags:
+                - TaxCategory
+    /userSegment/{id}/userSegmentCriterion/{criterionId}:
+        delete:
+            operationId: deleteUserSegmentCriterion
+            parameters:
+                - explode: false
+                  in: path
+                  name: criterionId
+                  required: true
+                  schema:
+                      description: The criterion identifier
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a User Segment Criterion by ID.
+            tags:
+                - UserSegment
+        get:
+            operationId: getUserSegmentCriterion
+            parameters:
+                - explode: false
+                  in: path
+                  name: criterionId
+                  required: true
+                  schema:
+                      description: The criterion identifier
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a User Segment Criterion by ID.
+            tags:
+                - UserSegment
+        post:
+            operationId: updateUserSegmentCriterion
+            parameters:
+                - explode: false
+                  in: path
+                  name: criterionId
+                  required: true
+                  schema:
+                      description: The criterion identifier
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserSegmentCriterion'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UserSegmentCriterion'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a User Segment Criterion by ID.
+            tags:
+                - UserSegment
+    /userSegment/{id}/userSegmentCriterion:
+        get:
+            operationId: getUserSegmentCriteria
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegmentCriterion'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/UserSegmentCriterion'
+                                type: array
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a list of User Segment Criterion related to a User Segment.
+            tags:
+                - UserSegment
+        post:
+            operationId: upsertUserSegmentCriterion
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserSegmentCriterion'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UserSegmentCriterion'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UserSegmentCriterion'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Creates or Updates a User Segment Criterion.
+            tags:
+                - UserSegment
+    /userSegment/{id}:
+        delete:
+            operationId: deleteUserSegment
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a User Segment by ID.
+            tags:
+                - UserSegment
+        get:
+            operationId: getUserSegment
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserSegment'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UserSegment'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a User Segment by ID.
+            tags:
+                - UserSegment
+        put:
+            operationId: updateUserSegment
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserSegment'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UserSegment'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a User Segment by ID.
+            tags:
+                - UserSegment
+    /warehouse/{id}:
+        delete:
+            operationId: deleteWarehouse
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Deletes a Warehouse by ID.
+            tags:
+                - Warehouse
+        get:
+            operationId: getWarehouse
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Warehouse'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Warehouse'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.read
+            summary: Gets a Warehouse by ID.
+            tags:
+                - Warehouse
+        put:
+            operationId: updateWarehouse
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Warehouse'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Warehouse'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminSiteSetting.write
+            summary: Updates a Warehouse by ID.
+            tags:
+                - Warehouse
+servers:
+    - description: Liferay Commerce API server
+      url: https://commerce.{environment}.liferay.com/commerce-admin-site-setting/{basePath}
+      variables:
+          basePath:
+              default: v1.0
+          environment:
+              default: api
+              enum:
+                  - api
+                  - api.dev
+                  - api.uat
+    - description: Liferay Commerce Local Development (Hosts file)
+      url: '{protocol}://{host}:{port}/o/commerce-admin-site-setting/{basePath}'
+      variables:
+          basePath:
+              default: v1.0
+          host:
+              default: test.dev
+          port:
+              default: "8080"
+              enum:
+                  - "443"
+                  - "8080"
+                  - "8443"
+          protocol:
+              default: http
+              enum:
+                  - http
+                  - https
+    - description: Liferay Commerce Local Development with Ngrok
+      url: '{protocol}://{host}.ngrok.io/o/commerce-admin-site-setting/{basePath}'
+      variables:
+          basePath:
+              default: v1.0
+          host:
+              default: commerce
+          protocol:
+              default: http
+              enum:
+                  - http
+                  - https
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/liferay6/commerce-admin-site-setting/v1.0
+tags:
+    - description: Operations on Availability Estimates
+      name: AvailabilityEstimate
+    - description: Operations on Catalog Rules
+      name: CatalogRule
+    - description: Operations on Measurement Units
+      name: MeasurementUnit
+    - description: Operations on Tax Categories
+      name: TaxCategory
+    - description: Operations on User Segments
+      name: UserSegment
+    - description: Operations on Warehouses
+      name: Warehouse
