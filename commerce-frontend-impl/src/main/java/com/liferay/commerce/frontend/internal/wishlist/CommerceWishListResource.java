@@ -28,6 +28,7 @@ import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
 import com.liferay.commerce.wish.list.service.CommerceWishListService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -78,18 +79,24 @@ public class CommerceWishListResource {
 			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
 				cpDefinitionId);
 
-			CPInstance cpInstance = _cpInstanceService.getCPInstance(
+			CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
 				cpInstanceId);
+
+			String cpInstanceUuid = StringPool.BLANK;
+
+			if (cpInstance != null) {
+				cpInstanceUuid = cpInstance.getCPInstanceUuid();
+			}
 
 			if (_commerceWishListItemService.
 					getCommerceWishListItemByContainsCPInstanceCount(
 						commerceWishList.getCommerceWishListId(),
-						cpInstance.getCPInstanceUuid()) == 0) {
+						cpInstanceUuid) == 0) {
 
 				_commerceWishListItemService.addCommerceWishListItem(
 					commerceWishList.getCommerceWishListId(),
-					cpDefinition.getCProductId(),
-					cpInstance.getCPInstanceUuid(), options, serviceContext);
+					cpDefinition.getCProductId(), cpInstanceUuid, options,
+					serviceContext);
 
 				wishListItemUpdated.setSuccess(true);
 			}
@@ -97,8 +104,7 @@ public class CommerceWishListResource {
 				CommerceWishListItem commerceWishListItem =
 					_commerceWishListItemService.getCommerceWishListItem(
 						commerceWishList.getCommerceWishListId(),
-						cpInstance.getCPInstanceUuid(),
-						cpDefinition.getCProductId());
+						cpInstanceUuid, cpDefinition.getCProductId());
 
 				_commerceWishListItemService.deleteCommerceWishListItem(
 					commerceWishListItem.getCommerceWishListItemId());
