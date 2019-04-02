@@ -4,6 +4,7 @@ dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.dynamic.data.mapping.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.service", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.service", version: "4.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
