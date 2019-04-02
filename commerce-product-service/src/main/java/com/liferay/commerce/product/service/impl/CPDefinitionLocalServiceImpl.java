@@ -2416,24 +2416,23 @@ public class CPDefinitionLocalServiceImpl
 
 		Map<Locale, String> newUrlTitleMap = new HashMap<>();
 
-		Map<Locale, String> titleMap = cpDefinition.getNameMap();
-
 		long classNameId = classNameLocalService.getClassNameId(CProduct.class);
 
-		for (Map.Entry<Locale, String> titleEntry : titleMap.entrySet()) {
+		for (Map.Entry<Locale, String> titleEntry : urlTitleMap.entrySet()) {
 			String urlTitle = urlTitleMap.get(titleEntry.getKey());
 
-			if (Validator.isNull(urlTitle)) {
+			if (Validator.isNotNull(urlTitle)) {
 				urlTitle = titleEntry.getValue();
+
+				String languageId = LanguageUtil.getLanguageId(
+					titleEntry.getKey());
+
+				urlTitle = cpFriendlyURLEntryLocalService.buildUrlTitle(
+					cpDefinition.getGroupId(), classNameId,
+					cpDefinition.getCProductId(), languageId, urlTitle);
+
+				newUrlTitleMap.put(titleEntry.getKey(), urlTitle);
 			}
-
-			String languageId = LanguageUtil.getLanguageId(titleEntry.getKey());
-
-			urlTitle = cpFriendlyURLEntryLocalService.buildUrlTitle(
-				cpDefinition.getGroupId(), classNameId,
-				cpDefinition.getCProductId(), languageId, urlTitle);
-
-			newUrlTitleMap.put(titleEntry.getKey(), urlTitle);
 		}
 
 		return newUrlTitleMap;
