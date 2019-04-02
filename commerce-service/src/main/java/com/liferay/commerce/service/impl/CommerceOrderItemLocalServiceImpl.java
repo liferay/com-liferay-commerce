@@ -143,9 +143,17 @@ public class CommerceOrderItemLocalServiceImpl
 
 		commerceOrderItemPersistence.update(commerceOrderItem);
 
+		commerceOrderLocalService.recalculatePrice(
+			commerceOrderItem.getCommerceOrderId(), commerceContext);
+
 		return commerceOrderItem;
 	}
 
+	/**
+	 * @return
+	 * @deprecated As of Mueller (7.2.x), use deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
+	 */
+	@Deprecated
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceOrderItem deleteCommerceOrderItem(
@@ -160,6 +168,28 @@ public class CommerceOrderItemLocalServiceImpl
 
 		expandoRowLocalService.deleteRows(
 			commerceOrderItem.getCommerceOrderItemId());
+
+		return commerceOrderItem;
+	}
+
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	public CommerceOrderItem deleteCommerceOrderItem(
+			CommerceOrderItem commerceOrderItem,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		// Commerce order item
+
+		commerceOrderItemPersistence.remove(commerceOrderItem);
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(
+			commerceOrderItem.getCommerceOrderItemId());
+
+		commerceOrderLocalService.recalculatePrice(
+			commerceOrderItem.getCommerceOrderId(), commerceContext);
 
 		return commerceOrderItem;
 	}
@@ -387,6 +417,9 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderItem, commerceProductPrice.getDiscountValue());
 
 		commerceOrderItemPersistence.update(commerceOrderItem);
+
+		commerceOrderLocalService.recalculatePrice(
+			commerceOrderItem.getCommerceOrderId(), commerceContext);
 
 		return commerceOrderItem;
 	}

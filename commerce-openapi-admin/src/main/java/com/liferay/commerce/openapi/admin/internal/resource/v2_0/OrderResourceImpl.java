@@ -72,7 +72,8 @@ public class OrderResourceImpl implements OrderResource {
 	public Response deleteOrderItem(String id, String orderItemId)
 		throws Exception {
 
-		_orderItemHelper.deleteOrderItem(orderItemId, _company);
+		_orderItemHelper.deleteOrderItem(
+			orderItemId, _company, _commerceContext);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 

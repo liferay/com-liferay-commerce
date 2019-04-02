@@ -59,6 +59,10 @@ public class EditCommerceOrderItemMVCActionCommand
 	protected void deleteCommerceOrderItems(ActionRequest actionRequest)
 		throws PortalException {
 
+		CommerceContext commerceContext =
+			(CommerceContext)actionRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		long commerceOrderId = ParamUtil.getLong(
 			actionRequest, "commerceOrderId");
 
@@ -70,7 +74,7 @@ public class EditCommerceOrderItemMVCActionCommand
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			_commerceOrderItemService.deleteCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId());
+				commerceOrderItem.getCommerceOrderItemId(), commerceContext);
 		}
 	}
 
@@ -91,7 +95,7 @@ public class EditCommerceOrderItemMVCActionCommand
 		try {
 			if (cmd.equals(Constants.DELETE)) {
 				_commerceOrderItemService.deleteCommerceOrderItem(
-					commerceOrderItemId);
+					commerceOrderItemId, commerceContext);
 			}
 			else if (cmd.equals(Constants.UPDATE)) {
 				int quantity = ParamUtil.getInteger(actionRequest, "quantity");

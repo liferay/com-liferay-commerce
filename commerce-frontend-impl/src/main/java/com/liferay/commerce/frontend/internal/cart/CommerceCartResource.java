@@ -105,7 +105,7 @@ public class CommerceCartResource {
 			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
 			_commerceOrderItemService.deleteCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId());
+				commerceOrderItem.getCommerceOrderItemId(), commerceContext);
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
