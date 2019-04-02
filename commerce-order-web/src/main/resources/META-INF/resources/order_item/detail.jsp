@@ -35,6 +35,10 @@ portletDisplay.setURLBack(redirect);
 String title = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) + " - " + HtmlUtil.escape(commerceOrderItem.getSku());
 
 renderResponse.setTitle(title);
+
+ExpandoBridge expandoBridge = commerceOrderItem.getExpandoBridge();
+
+Map<String, Serializable> attributes = expandoBridge.getAttributes();
 %>
 
 <portlet:actionURL name="editCommerceOrderItem" var="editCommerceOrderItemActionURL" />
@@ -57,12 +61,14 @@ renderResponse.setTitle(title);
 		</aui:fieldset>
 	</aui:fieldset-group>
 
-	<liferay-ui:form-navigator
-		formModelBean="<%= commerceOrderItem %>"
-		id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_ITEM_DETAILS %>"
-		markupView="lexicon"
-		showButtons="<%= false %>"
-	/>
+	<c:if test="<%= attributes.size() > 0 %>">
+		<liferay-ui:form-navigator
+			formModelBean="<%= commerceOrderItem %>"
+			id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_ITEM_DETAILS %>"
+			markupView="lexicon"
+			showButtons="<%= false %>"
+		/>
+	</c:if>
 
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" />

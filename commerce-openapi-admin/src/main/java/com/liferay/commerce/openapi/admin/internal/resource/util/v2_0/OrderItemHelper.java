@@ -45,13 +45,14 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = OrderItemHelper.class)
 public class OrderItemHelper {
 
-	public void deleteOrderItem(String id, Company company)
+	public void deleteOrderItem(
+			String id, Company company, CommerceContext commerceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem = getOrderItemById(id, company);
 
 		_commerceOrderItemService.deleteCommerceOrderItem(
-			commerceOrderItem.getCommerceOrderId());
+			commerceOrderItem.getCommerceOrderId(), commerceContext);
 	}
 
 	public OrderItemDTO getOrderItem(String id, Company company)

@@ -81,6 +81,10 @@ public class EditCommerceOrderItemMVCActionCommand
 	protected void deleteCommerceOrderItems(ActionRequest actionRequest)
 		throws Exception {
 
+		CommerceContext commerceContext =
+			(CommerceContext)actionRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		long[] deleteCommerceOrderItemIds = null;
 
 		long commerceOrderItemId = ParamUtil.getLong(
@@ -98,7 +102,7 @@ public class EditCommerceOrderItemMVCActionCommand
 
 		for (long deleteCommerceOrderItemId : deleteCommerceOrderItemIds) {
 			_commerceOrderItemService.deleteCommerceOrderItem(
-				deleteCommerceOrderItemId);
+				deleteCommerceOrderItemId, commerceContext);
 		}
 	}
 
