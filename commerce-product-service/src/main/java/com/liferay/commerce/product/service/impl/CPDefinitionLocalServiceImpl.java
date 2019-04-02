@@ -790,7 +790,7 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product friendly URL entries
 
 		cpFriendlyURLEntryLocalService.deleteCPFriendlyURLEntries(
-			cpDefinition.getGroupId(), CPDefinition.class,
+			cpDefinition.getGroupId(), CProduct.class,
 			cpDefinition.getCProductId());
 
 		// Commerce product display layout
