@@ -52,6 +52,22 @@ public class QuantityControlTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public long getCommerceOrderItemId() {
+		return _commerceOrderItemId;
+	}
+
+	public boolean isShowInputLabel() {
+		return _showInputLabel;
+	}
+
+	public boolean isUpdateOnChange() {
+		return _updateOnChange;
+	}
+
+	public boolean isUseSelect() {
+		return _useSelect;
+	}
+
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceOrderItemId = commerceOrderItemId;
 	}

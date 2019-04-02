@@ -60,6 +60,10 @@ public class FormatPriceTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public BigDecimal getPrice() {
+		return _price;
+	}
+
 	@Override
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);

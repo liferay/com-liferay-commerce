@@ -45,6 +45,14 @@ public class UserManagementBarTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public String getHref() {
+		return _href;
+	}
+
+	public boolean isShowNotifications() {
+		return _showNotifications;
+	}
+
 	public void setHref(String href) {
 		_href = href;
 	}

@@ -93,6 +93,46 @@ public class PriceTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public long getCPDefinitionId() {
+		return _cpDefinitionId;
+	}
+
+	public long getCPInstanceId() {
+		return _cpInstanceId;
+	}
+
+	public String getDiscountLabel() {
+		return _discountLabel;
+	}
+
+	public String getPromoPriceLabel() {
+		return _promoPriceLabel;
+	}
+
+	public int getQuantity() {
+		return _quantity;
+	}
+
+	public boolean isShowDiscount() {
+		return _showDiscount;
+	}
+
+	public boolean isShowDiscountAmount() {
+		return _showDiscountAmount;
+	}
+
+	public boolean isShowPercentage() {
+		return _showPercentage;
+	}
+
+	public boolean isShowPriceRange() {
+		return _showPriceRange;
+	}
+
+	public boolean isShowPromo() {
+		return _showPromo;
+	}
+
 	public void setCPDefinitionId(long cpDefinitionId) {
 		_cpDefinitionId = cpDefinitionId;
 	}

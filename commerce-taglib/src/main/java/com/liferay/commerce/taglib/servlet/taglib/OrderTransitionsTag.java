@@ -68,6 +68,14 @@ public class OrderTransitionsTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public long getCommerceOrderId() {
+		return _commerceOrderId;
+	}
+
+	public String getCssClass() {
+		return _cssClass;
+	}
+
 	public void setCommerceOrderId(long commerceOrderId) {
 		_commerceOrderId = commerceOrderId;
 	}
