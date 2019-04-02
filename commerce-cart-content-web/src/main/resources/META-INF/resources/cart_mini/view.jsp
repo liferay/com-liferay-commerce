@@ -150,12 +150,12 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				<c:if test="<%= commerceCartContentMiniDisplayContext.hasViewPricePermission() %>">
 
 					<%
-					CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+					CommerceMoney unitPriceMoney = commerceOrderItem.getUnitPriceMoney();
 					%>
 
 					<liferay-ui:search-container-column-text>
 						<div class="mt-3">
-							<%= finalPriceMoney.format(locale) %>
+							<%= unitPriceMoney.format(locale) %>
 						</div>
 					</liferay-ui:search-container-column-text>
 				</c:if>
