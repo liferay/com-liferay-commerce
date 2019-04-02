@@ -98,8 +98,14 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
+	@Deprecated
 	public CommerceOrderItem deleteCommerceOrderItem(
 		CommerceOrderItem commerceOrderItem) throws PortalException;
+
+	@Indexable(type = IndexableType.DELETE)
+	public CommerceOrderItem deleteCommerceOrderItem(
+		CommerceOrderItem commerceOrderItem, CommerceContext commerceContext)
+		throws PortalException;
 
 	/**
 	* Deletes the commerce order item with the primary key from the database. Also notifies the appropriate model listeners.

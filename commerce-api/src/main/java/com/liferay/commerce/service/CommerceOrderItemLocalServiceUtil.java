@@ -83,10 +83,19 @@ public class CommerceOrderItemLocalServiceUtil {
 	* @return the commerce order item that was removed
 	* @throws PortalException
 	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceOrderItem deleteCommerceOrderItem(
 		com.liferay.commerce.model.CommerceOrderItem commerceOrderItem)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCommerceOrderItem(commerceOrderItem);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItem deleteCommerceOrderItem(
+		com.liferay.commerce.model.CommerceOrderItem commerceOrderItem,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .deleteCommerceOrderItem(commerceOrderItem, commerceContext);
 	}
 
 	/**
