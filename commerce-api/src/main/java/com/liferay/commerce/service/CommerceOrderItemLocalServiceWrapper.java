@@ -77,11 +77,21 @@ public class CommerceOrderItemLocalServiceWrapper
 	* @return the commerce order item that was removed
 	* @throws PortalException
 	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem deleteCommerceOrderItem(
 		com.liferay.commerce.model.CommerceOrderItem commerceOrderItem)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderItemLocalService.deleteCommerceOrderItem(commerceOrderItem);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem deleteCommerceOrderItem(
+		com.liferay.commerce.model.CommerceOrderItem commerceOrderItem,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItemLocalService.deleteCommerceOrderItem(commerceOrderItem,
+			commerceContext);
 	}
 
 	/**
