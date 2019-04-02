@@ -63,6 +63,14 @@ public class ProductListEntryRendererTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public CPCatalogEntry getCPCatalogEntry() {
+		return _cpCatalogEntry;
+	}
+
+	public String getKey() {
+		return _key;
+	}
+
 	public void setCPCatalogEntry(CPCatalogEntry cpCatalogEntry) {
 		_cpCatalogEntry = cpCatalogEntry;
 	}

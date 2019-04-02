@@ -45,6 +45,18 @@ public class ProductListRendererTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public CPDataSourceResult getCPDataSourceResult() {
+		return _cpDataSourceResult;
+	}
+
+	public Map<String, String> getEntryKeys() {
+		return _entryKeys;
+	}
+
+	public String getKey() {
+		return _key;
+	}
+
 	public void setCPDataSourceResult(CPDataSourceResult cpDataSourceResult) {
 		_cpDataSourceResult = cpDataSourceResult;
 	}

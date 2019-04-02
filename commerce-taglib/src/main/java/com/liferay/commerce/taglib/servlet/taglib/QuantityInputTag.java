@@ -76,6 +76,26 @@ public class QuantityInputTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public long getCPDefinitionId() {
+		return _cpDefinitionId;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public int getValue() {
+		return _value;
+	}
+
+	public boolean isShowLabel() {
+		return _showLabel;
+	}
+
+	public boolean isUseSelect() {
+		return _useSelect;
+	}
+
 	public void setCPDefinitionId(long cpDefinitionId) {
 		_cpDefinitionId = cpDefinitionId;
 	}

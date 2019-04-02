@@ -130,6 +130,18 @@ public class SubscriptionInfoTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public long getCommerceOrderItemId() {
+		return _commerceOrderItemId;
+	}
+
+	public long getCPInstanceId() {
+		return _cpInstanceId;
+	}
+
+	public boolean isShowDuration() {
+		return _showDuration;
+	}
+
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceOrderItemId = commerceOrderItemId;
 	}
