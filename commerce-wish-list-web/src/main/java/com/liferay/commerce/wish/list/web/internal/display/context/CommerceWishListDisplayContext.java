@@ -201,10 +201,6 @@ public class CommerceWishListDisplayContext {
 		_commerceWishListItemsSearchContainer.setOrderByComparator(
 			orderByComparator);
 
-		_commerceWishListItemsSearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
-				_commerceWishListRequestHelper.getLiferayPortletResponse()));
-
 		CommerceWishList commerceWishList = getCommerceWishList();
 
 		if (commerceWishList == null) {
