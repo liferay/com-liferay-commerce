@@ -25,6 +25,8 @@ CommerceWishListItem commerceWishListItem = (CommerceWishListItem)row.getObject(
 
 CPInstance cpInstance = commerceWishListItem.fetchCPInstance();
 CProduct cProduct = commerceWishListItem.getCProduct();
+
+String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 %>
 
 <c:choose>
@@ -52,10 +54,9 @@ CProduct cProduct = commerceWishListItem.getCProduct();
 	<c:otherwise>
 		<c:choose>
 			<c:when test="<%= commerceWishListItem.isIgnoreSKUCombinations() %>">
-				<liferay-commerce-cart:add-to-cart
-					CPDefinitionId="<%= cProduct.getPublishedCPDefinitionId() %>"
+				<commerce-ui:add-to-cart
 					CPInstanceId="<%= (cpInstance != null) ? cpInstance.getCPInstanceId() : 0 %>"
-					elementClasses="btn-lg btn-primary"
+					id="<%= addToCartId %>"
 				/>
 			</c:when>
 			<c:otherwise>
