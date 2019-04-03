@@ -91,8 +91,7 @@ class AddressModal extends Component {
 		const firstFormValid = !!(
 			this._formData.address && this._formData.address.length &&
 			this._formData.city && this._formData.city.length &&
-			this._formData.country && this._formData.country.length &&
-			this._formData.region && this._formData.region.length
+			this._formData.country && this._formData.country.length
 		);
 		this._firstFormValid = firstFormValid;
 
