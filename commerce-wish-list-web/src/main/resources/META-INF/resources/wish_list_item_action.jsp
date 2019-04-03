@@ -60,7 +60,7 @@ String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 				/>
 			</c:when>
 			<c:otherwise>
-				<aui:button cssClass="btn-primary" href="<%= commerceWishListDisplayContext.getCPDefinitionURL(cProduct.getPublishedCPDefinitionId(), themeDisplay) %>" name="selectOptions" value="select-options" />
+				<a class="commerce-button commerce-button--outline w-100" href="<%= commerceWishListDisplayContext.getCPDefinitionURL(cProduct.getPublishedCPDefinitionId(), themeDisplay) %>"><liferay-ui:message key="view-all-variants" /></a>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
