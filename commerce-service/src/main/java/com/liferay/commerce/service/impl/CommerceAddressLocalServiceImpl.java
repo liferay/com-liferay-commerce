@@ -18,7 +18,6 @@ import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressNameException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
-import com.liferay.commerce.exception.CommerceAddressZipException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceOrder;
@@ -487,10 +486,6 @@ public class CommerceAddressLocalServiceImpl
 
 		if (Validator.isNull(city)) {
 			throw new CommerceAddressCityException();
-		}
-
-		if (Validator.isNull(zip)) {
-			throw new CommerceAddressZipException();
 		}
 
 		if (commerceCountryId <= 0) {
