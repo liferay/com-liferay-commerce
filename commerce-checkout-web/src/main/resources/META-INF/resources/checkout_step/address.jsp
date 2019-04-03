@@ -79,7 +79,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 	<div class="form-group-autofit">
 		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street1" placeholder="shipping-address" wrapperCssClass="form-group-item" />
 
-		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceCountryId" placeholder="country" wrapperCssClass="form-group-item" />
+		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceCountryId" placeholder="country" title="country" wrapperCssClass="form-group-item" />
 	</div>
 
 	<div class="add-street-link form-group-autofit">
@@ -97,7 +97,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 
 		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="city" placeholder="city" wrapperCssClass="form-group-item" />
 
-		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceRegionId" placeholder="region" wrapperCssClass="form-group-item" />
+		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceRegionId" placeholder="region" title="region" wrapperCssClass="form-group-item" />
 	</div>
 
 	<c:if test="<%= Objects.equals(CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME, paramName) %>">
