@@ -48,6 +48,7 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
 		<aui:input name="addOrganizationIds" type="hidden" />
+		<aui:input name="organizationId" type="hidden" />
 	</aui:form>
 
 	<aui:script>
@@ -58,6 +59,17 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 				const addOrganizationsModal = Liferay.component('addOrganizationsModal');
 
 				addOrganizationsModal.open();
+			}
+		);
+
+		Liferay.provide(
+			window,
+			'deleteCommerceAccountOrganization',
+			function(id) {
+				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.REMOVE %>';
+				document.querySelector('#<portlet:namespace />organizationId').value = id;
+
+				submitForm(document.<portlet:namespace />commerceAccountOrganizationRelFm);
 			}
 		);
 
