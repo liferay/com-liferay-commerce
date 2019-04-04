@@ -19,9 +19,9 @@
 <%
 CPDefinitionLinkDisplayContext cpDefinitionLinkDisplayContext = (CPDefinitionLinkDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPDefinition cpDefinition = cpDefinitionLinkDisplayContext.getCPDefinition();
-
 CPDefinitionLink cpDefinitionLink = cpDefinitionLinkDisplayContext.getCPDefinitionLink();
+
+CPDefinition cpDefinition = cpDefinitionLink.getCPDefinition();
 
 long cpDefinitionLinkId = cpDefinitionLinkDisplayContext.getCPDefinitionLinkId();
 
