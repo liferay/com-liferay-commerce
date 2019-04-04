@@ -33,13 +33,10 @@ import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
-import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,10 +44,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -97,15 +90,21 @@ public class CommerceAccountOrganizationClayTable
 				themeDisplay.getPermissionChecker(), commerceAccountId,
 				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS)) {
 
-			String deleteURL = _getAccountOrganizationDeleteURL(
-				organization.getOrganizationId(), organization.getAccountId(),
-				themeDisplay);
+			StringBundler sb = new StringBundler(7);
 
-			ClayTableAction clayTableAction = new ClayTableAction(
-				deleteURL, StringPool.BLANK,
+			sb.append("javascript:deleteCommerceAccountOrganization");
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(organization.getOrganizationId());
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.SEMICOLON);
+
+			ClayTableAction deleteClayTableAction = new ClayTableAction(
+				sb.toString(), StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "delete"), false, false);
 
-			clayTableActions.add(clayTableAction);
+			clayTableActions.add(deleteClayTableAction);
 		}
 
 		return clayTableActions;
@@ -193,34 +192,6 @@ public class CommerceAccountOrganizationClayTable
 		}
 
 		return sb.toString();
-	}
-
-	private String _getAccountOrganizationDeleteURL(
-		long organizationId, long commerceAccountId,
-		ThemeDisplay themeDisplay) {
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		PortletURL deleteURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.ACTION_PHASE);
-
-		deleteURL.setParameter(
-			ActionRequest.ACTION_NAME, "editCommerceAccountOrganizationRel");
-		deleteURL.setParameter(Constants.CMD, Constants.REMOVE);
-
-		String redirect = ParamUtil.getString(
-			themeDisplay.getRequest(), "redirect",
-			themeDisplay.getURLCurrent());
-
-		deleteURL.setParameter("redirect", redirect);
-
-		deleteURL.setParameter(
-			"commerceAccountId", String.valueOf(commerceAccountId));
-		deleteURL.setParameter(
-			"organizationId", String.valueOf(organizationId));
-
-		return deleteURL.toString();
 	}
 
 	@Reference
