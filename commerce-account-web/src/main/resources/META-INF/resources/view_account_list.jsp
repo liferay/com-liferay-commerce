@@ -46,6 +46,7 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 	<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="commerceAccountFm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input name="active" type="hidden" value="<%= true %>" />
+		<aui:input name="commerceAccountId" type="hidden" />
 		<aui:input name="emailAddresses" type="hidden" />
 		<aui:input name="name" type="hidden" />
 		<aui:input name="userIds" type="hidden" />
@@ -63,6 +64,17 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 				const addAccountModal = Liferay.component('addAccountModal');
 
 				addAccountModal.open();
+			}
+		);
+
+		Liferay.provide(
+			window,
+			'deleteCommerceAccount',
+			function(id) {
+				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.DELETE %>';
+				document.querySelector('#<portlet:namespace />commerceAccountId').value = id;
+
+				submitForm(document.<portlet:namespace />commerceAccountFm);
 			}
 		);
 

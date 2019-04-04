@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.frontend;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -102,6 +103,27 @@ public class CommerceAccountClayTable
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableAction);
+		}
+
+		if (_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), account.getAccountId(),
+				CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS)) {
+
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("javascript:deleteCommerceAccount");
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(account.getAccountId());
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.SEMICOLON);
+
+			ClayTableAction deleteClayTableAction = new ClayTableAction(
+				sb.toString(), StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+
+			clayTableActions.add(deleteClayTableAction);
 		}
 
 		return clayTableActions;

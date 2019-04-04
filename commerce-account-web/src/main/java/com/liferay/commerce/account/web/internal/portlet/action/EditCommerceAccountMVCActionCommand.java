@@ -89,6 +89,14 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
+			else if (cmd.equals(Constants.DELETE)) {
+				_commerceAccountService.deleteCommerceAccount(
+					ParamUtil.getLong(actionRequest, "commerceAccountId"));
+
+				sendRedirect(
+					actionRequest, actionResponse,
+					ParamUtil.getString(actionRequest, "redirect"));
+			}
 		}
 		catch (Throwable t) {
 			if (t instanceof NoSuchAccountException ||
