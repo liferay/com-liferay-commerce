@@ -49,6 +49,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ASSIGN %>" />
 		<aui:input name="redirect" type="hidden" value="<%= portletURL %>" />
 		<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
+		<aui:input name="userId" type="hidden" />
 		<aui:input name="userIds" type="hidden" />
 		<aui:input name="emailAddresses" type="hidden" />
 	</aui:form>
@@ -61,6 +62,17 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 			function(evt) {
 				const userInvitationModal = Liferay.component('userInvitationModal');
 				userInvitationModal.open();
+			}
+		);
+
+		Liferay.provide(
+			window,
+			'deleteCommerceAccountUser',
+			function(id) {
+				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.REMOVE %>';
+				document.querySelector('#<portlet:namespace />userId').value = id;
+
+				submitForm(document.<portlet:namespace />inviteUserFm);
 			}
 		);
 

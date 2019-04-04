@@ -29,6 +29,7 @@ import com.liferay.commerce.frontend.ClayTableSchemaBuilderFactory;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -38,16 +39,13 @@ import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
-import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.permission.RolePermissionUtil;
-import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -56,8 +54,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -117,11 +113,18 @@ public class CommerceAccountUserClayTable
 			if (permissionChecker.isCompanyAdmin() ||
 				(member.getMemberId() != themeDisplay.getUserId())) {
 
-				String deleteURL = _getAccountUserDeleteURL(
-					member.getMemberId(), member.getAccountId(), themeDisplay);
+				StringBundler sb = new StringBundler(7);
+
+				sb.append("javascript:deleteCommerceAccountUser");
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(StringPool.APOSTROPHE);
+				sb.append(member.getMemberId());
+				sb.append(StringPool.APOSTROPHE);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.SEMICOLON);
 
 				ClayTableAction deleteClayTableAction = new ClayTableAction(
-					deleteURL, StringPool.BLANK,
+					sb.toString(), StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "delete"), false,
 					false);
 
@@ -234,31 +237,6 @@ public class CommerceAccountUserClayTable
 		).toArray(
 			String[]::new
 		);
-	}
-
-	private String _getAccountUserDeleteURL(
-		long userId, long commerceAccountId, ThemeDisplay themeDisplay) {
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		PortletURL deleteURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.ACTION_PHASE);
-
-		deleteURL.setParameter(ActionRequest.ACTION_NAME, "inviteUser");
-		deleteURL.setParameter(Constants.CMD, Constants.REMOVE);
-
-		String redirect = ParamUtil.getString(
-			themeDisplay.getRequest(), "redirect",
-			themeDisplay.getURLCurrent());
-
-		deleteURL.setParameter("redirect", redirect);
-
-		deleteURL.setParameter(
-			"commerceAccountId", String.valueOf(commerceAccountId));
-		deleteURL.setParameter("userId", String.valueOf(userId));
-
-		return deleteURL.toString();
 	}
 
 	private String _getAccountUserViewDetailURL(
