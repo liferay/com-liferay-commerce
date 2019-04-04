@@ -25,7 +25,9 @@
 		<field name="city" type="String">
 			<validator name="required" />
 		</field>
-		<field name="zip" type="String" />
+		<field name="zip" type="String">
+			<validator name="required" />
+		</field>
 		<field name="commerceRegionId" type="long" />
 		<field name="commerceCountryId" type="long">
 			<validator name="required" />
