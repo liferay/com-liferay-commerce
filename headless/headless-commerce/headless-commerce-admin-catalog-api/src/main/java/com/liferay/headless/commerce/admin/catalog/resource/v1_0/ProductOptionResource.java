@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -35,26 +34,29 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductOptionResource {
 
-	public Page<ProductOption> getOptions(Long groupId, Pagination pagination)
+	public Page<ProductOption> getProductIdProductOptionsPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public ProductOption upsertProductOption(
-			Long groupId, ProductOption productOption)
+	public Page<ProductOption> postProductIdProductOptionsPage(
+			Long id, ProductOption[] productOptions)
 		throws Exception;
 
-	public Page<ProductOptionValue> getProductOptionValues(
-			String id, Pagination pagination)
+	public Page<ProductOption>
+			getProductByExternalReferenceCodeProductOptionsPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public ProductOptionValue upsertProductOptionValue(
-			String id, ProductOptionValue productOptionValue)
+	public Page<ProductOption>
+			postProductByExternalReferenceCodeProductOptionsPage(
+				String externalReferenceCode, ProductOption[] productOptions)
 		throws Exception;
 
-	public Response deleteProductOption(String id) throws Exception;
+	public Response deleteProductOption(Long id) throws Exception;
 
-	public ProductOption getProductOption(String id) throws Exception;
+	public ProductOption getProductOption(Long id) throws Exception;
 
-	public Response updateProductOption(String id, ProductOption productOption)
+	public Response patchProductOption(Long id, ProductOption productOption)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

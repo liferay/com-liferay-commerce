@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -32,11 +34,54 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AttachmentResource {
 
-	public Response deleteAttachment(String id) throws Exception;
+	public Response deleteAttachment(Long id) throws Exception;
 
-	public Attachment getAttachment(String id) throws Exception;
+	public Attachment getAttachment(Long id) throws Exception;
 
-	public Response updateAttachment(String id, Attachment attachment)
+	public Response patchAttachment(Long id, Attachment attachment)
+		throws Exception;
+
+	public Response deleteAttachmentByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Attachment getAttachmentByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchAttachmentByExternalReferenceCode(
+			String externalReferenceCode, Attachment attachment)
+		throws Exception;
+
+	public Page<Attachment> getProductIdAttachmentsPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public Page<Attachment>
+			getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
+				String externalReferenceCode, Pagination pagination)
+		throws Exception;
+
+	public Attachment postProductIdAttachment(Long id, Attachment attachment)
+		throws Exception;
+
+	public Attachment postProductByExternalReferenceCodeAttachment(
+			String externalReferenceCode, Attachment attachment)
+		throws Exception;
+
+	public Page<Attachment> getProductIdImagesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public Page<Attachment> getProductByExternalReferenceCodeImagesPage(
+			String externalReferenceCode, Pagination pagination)
+		throws Exception;
+
+	public Attachment postProductIdImage(Long id, Attachment attachment)
+		throws Exception;
+
+	public Attachment postProductByExternalReferenceCodeImage(
+			String externalReferenceCode, Attachment attachment)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

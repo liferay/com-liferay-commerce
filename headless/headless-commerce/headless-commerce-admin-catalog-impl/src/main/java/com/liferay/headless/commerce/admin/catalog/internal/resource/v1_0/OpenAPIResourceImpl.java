@@ -78,15 +78,35 @@ public class OpenAPIResourceImpl {
 		{
 			add(AttachmentResourceImpl.class);
 
+			add(CategoryResourceImpl.class);
+
+			add(OptionResourceImpl.class);
+
 			add(OptionCategoryResourceImpl.class);
+
+			add(OptionValueResourceImpl.class);
 
 			add(ProductResourceImpl.class);
 
+			add(ProductConfigurationResourceImpl.class);
+
 			add(ProductOptionResourceImpl.class);
+
+			add(ProductOptionValueResourceImpl.class);
+
+			add(ProductShippingConfigurationResourceImpl.class);
+
+			add(ProductSubscriptionConfigurationResourceImpl.class);
+
+			add(ProductTaxConfigurationResourceImpl.class);
+
+			add(RelatedProductResourceImpl.class);
 
 			add(SkuResourceImpl.class);
 
 			add(SpecificationResourceImpl.class);
+
+			add(SpecificationValueResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
 		}

@@ -14,15 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
@@ -48,8 +40,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -66,300 +58,43 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseProductResourceImpl implements ProductResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminCatalog/{groupId}/product/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Page<Product> getProducts(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
+	public Response deleteProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/commerceAdminCatalog/{groupId}/product/")
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Product upsertProduct(
-			@NotNull @PathParam("groupId") Long groupId, Product product)
+	public Product getProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new Product();
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/product/{id}/attachment/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Page<Attachment> getProductAttachments(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/product/{id}/attachment/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Attachment upsertProductAttachment(
-			@NotNull @PathParam("id") String id, Attachment attachment)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/product/{id}/category/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Page<Category> getProductCategories(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/category/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductCategory(
-			@NotNull @PathParam("id") String id, Category[] categories)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/product/{id}/configuration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public ProductConfiguration getProductConfiguration(
-			@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		return new ProductConfiguration();
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/configuration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductConfiguraton(
-			@NotNull @PathParam("id") String id,
-			ProductConfiguration productConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/product/{id}/image/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Page<Attachment> getProductImages(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/product/{id}/image/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Attachment upsertProductImage(
-			@NotNull @PathParam("id") String id, Attachment attachment)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/product/{id}/productOption/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Page<ProductOption> getProductOptions(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/productOption/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductOptions(
-			@NotNull @PathParam("id") String id, ProductOption[] productOptions)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/product/{id}/shippingConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public ProductShippingConfiguration getProductShippingConfiguration(
-			@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		return new ProductShippingConfiguration();
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/shippingConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductShippingConfiguration(
-			@NotNull @PathParam("id") String id,
-			ProductShippingConfiguration productShippingConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/product/{id}/sku/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Page<Sku> getProductSkus(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/product/{id}/sku/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Sku upsertProductSku(@NotNull @PathParam("id") String id, Sku sku)
-		throws Exception {
-
-		return new Sku();
-	}
-
-	@Override
-	@GET
-	@Path("/product/{id}/subscriptionConfiguration")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
-			@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		return new ProductSubscriptionConfiguration();
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/subscriptionConfiguration")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductSubscriptionConfiguration(
-			@NotNull @PathParam("id") String id,
-			ProductSubscriptionConfiguration productSubscriptionConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/product/{id}/taxConfiguration")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public ProductTaxConfiguration getProductTaxConfiguration(
-			@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		return new ProductTaxConfiguration();
-	}
-
-	@Override
-	@Consumes("application/json")
-	@PUT
-	@Path("/product/{id}/taxConfiguration")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProductTaxConfiguration(
-			@NotNull @PathParam("id") String id,
-			ProductTaxConfiguration productTaxConfiguration)
+	public Response patchProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Product product)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -369,10 +104,17 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 
 	@Override
 	@DELETE
-	@Path("/product/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Response deleteProduct(@NotNull @PathParam("id") String id)
+	public Response deleteProductByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -382,10 +124,17 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 
 	@Override
 	@GET
-	@Path("/product/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Product getProduct(@NotNull @PathParam("id") String id)
+	public Product getProductByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		return new Product();
@@ -393,12 +142,19 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/product/{id}")
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Response updateProduct(
-			@NotNull @PathParam("id") String id, Product product)
+	public Response patchProductByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Product product)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -406,11 +162,46 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 		return responseBuilder.build();
 	}
 
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "siteId"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/catalogs/{siteId}/products/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Product")})
+	public Page<Product> getCatalogSiteProductsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
+	@Path("/catalogs/{siteId}/product/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Product")})
+	public Product postCatalogSiteProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
+			Product product)
+		throws Exception {
+
+		return new Product();
+	}
+
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(Product product) {
+	protected void preparePatch(Product product, Product existingProduct) {
 	}
 
 	protected <T, R> List<R> transform(

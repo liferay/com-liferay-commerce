@@ -14,14 +14,12 @@
 
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.SpecificationValue;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,21 +30,14 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface SpecificationResource {
+public interface SpecificationValueResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
-
-	public Specification getSpecification(Long id) throws Exception;
-
-	public Response patchSpecification(Long id, Specification specification)
+	public Page<SpecificationValue> getSpecificationIdSpecificationValuesPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public Page<Specification> getCatalogSiteSpecificationsPage(
-			Long siteId, Pagination pagination)
-		throws Exception;
-
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public SpecificationValue postSpecificationIdSpecificationValue(
+			Long id, SpecificationValue specificationValue)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

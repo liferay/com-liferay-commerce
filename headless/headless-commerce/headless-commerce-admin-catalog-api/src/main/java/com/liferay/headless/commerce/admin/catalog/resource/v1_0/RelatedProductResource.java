@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -32,21 +32,28 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface SpecificationResource {
+public interface RelatedProductResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
+	public Response deleteRelatedProduct(Long id) throws Exception;
 
-	public Specification getSpecification(Long id) throws Exception;
+	public RelatedProduct getRelatedProduct(Long id) throws Exception;
 
-	public Response patchSpecification(Long id, Specification specification)
+	public Page<RelatedProduct> getProductIdRelatedProductsPage(
+			Long id, String type, Pagination pagination)
 		throws Exception;
 
-	public Page<Specification> getCatalogSiteSpecificationsPage(
-			Long siteId, Pagination pagination)
+	public Page<RelatedProduct>
+			getProductByExternalReferenceCodeRelatedProductsPage(
+				String externalReferenceCode, String type,
+				Pagination pagination)
 		throws Exception;
 
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public RelatedProduct postProductIdRelatedProduct(
+			Long id, RelatedProduct relatedProduct)
+		throws Exception;
+
+	public RelatedProduct postProductByExternalReferenceCodeRelatedProduct(
+			String externalReferenceCode, RelatedProduct relatedProduct)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

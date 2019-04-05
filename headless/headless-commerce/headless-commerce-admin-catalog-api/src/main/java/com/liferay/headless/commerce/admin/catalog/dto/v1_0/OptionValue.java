@@ -33,6 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,11 +43,39 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SpecificationValue")
+@GraphQLName("OptionValue")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"value"})
-@XmlRootElement(name = "SpecificationValue")
-public class SpecificationValue {
+@Schema(requiredProperties = {"key", "name"})
+@XmlRootElement(name = "OptionValue")
+public class OptionValue {
+
+	@Schema
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		this.externalReferenceCode = externalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setExternalReferenceCode(
+		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
+
+		try {
+			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String externalReferenceCode;
 
 	@Schema
 	public Long getId() {
@@ -71,25 +100,22 @@ public class SpecificationValue {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
 	@Schema
-	public OptionCategory getOptionCategory() {
-		return optionCategory;
+	public String getKey() {
+		return key;
 	}
 
-	public void setOptionCategory(OptionCategory optionCategory) {
-		this.optionCategory = optionCategory;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	@JsonIgnore
-	public void setOptionCategory(
-		UnsafeSupplier<OptionCategory, Exception>
-			optionCategoryUnsafeSupplier) {
-
+	public void setKey(UnsafeSupplier<String, Exception> keyUnsafeSupplier) {
 		try {
-			optionCategory = optionCategoryUnsafeSupplier.get();
+			key = keyUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -101,7 +127,37 @@ public class SpecificationValue {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected OptionCategory optionCategory;
+	@NotEmpty
+	protected String key;
+
+	@Schema
+	public Map<String, String> getName() {
+		return name;
+	}
+
+	public void setName(Map<String, String> name) {
+		this.name = name;
+	}
+
+	@JsonIgnore
+	public void setName(
+		UnsafeSupplier<Map<String, String>, Exception> nameUnsafeSupplier) {
+
+		try {
+			name = nameUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotNull
+	protected Map<String, String> name;
 
 	@Schema
 	public Double getPriority() {
@@ -131,104 +187,19 @@ public class SpecificationValue {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double priority;
 
-	@Schema
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	@JsonIgnore
-	public void setProduct(
-		UnsafeSupplier<Product, Exception> productUnsafeSupplier) {
-
-		try {
-			product = productUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Product product;
-
-	@Schema
-	public Specification getSpecification() {
-		return specification;
-	}
-
-	public void setSpecification(Specification specification) {
-		this.specification = specification;
-	}
-
-	@JsonIgnore
-	public void setSpecification(
-		UnsafeSupplier<Specification, Exception> specificationUnsafeSupplier) {
-
-		try {
-			specification = specificationUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Specification specification;
-
-	@Schema
-	public Map<String, String> getValue() {
-		return value;
-	}
-
-	public void setValue(Map<String, String> value) {
-		this.value = value;
-	}
-
-	@JsonIgnore
-	public void setValue(
-		UnsafeSupplier<Map<String, String>, Exception> valueUnsafeSupplier) {
-
-		try {
-			value = valueUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Map<String, String> value;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
 		}
 
-		if (!(object instanceof SpecificationValue)) {
+		if (!(object instanceof OptionValue)) {
 			return false;
 		}
 
-		SpecificationValue specificationValue = (SpecificationValue)object;
+		OptionValue optionValue = (OptionValue)object;
 
-		return Objects.equals(toString(), specificationValue.toString());
+		return Objects.equals(toString(), optionValue.toString());
 	}
 
 	@Override
@@ -243,6 +214,20 @@ public class SpecificationValue {
 
 		sb.append("{");
 
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"externalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
+		}
+
 		if (id != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -253,14 +238,28 @@ public class SpecificationValue {
 			sb.append(id);
 		}
 
-		if (optionCategory != null) {
+		if (key != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"optionCategory\": ");
+			sb.append("\"key\": ");
 
-			sb.append(String.valueOf(optionCategory));
+			sb.append("\"");
+
+			sb.append(_escape(key));
+
+			sb.append("\"");
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append(_toJSON(name));
 		}
 
 		if (priority != null) {
@@ -271,36 +270,6 @@ public class SpecificationValue {
 			sb.append("\"priority\": ");
 
 			sb.append(priority);
-		}
-
-		if (product != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"product\": ");
-
-			sb.append(String.valueOf(product));
-		}
-
-		if (specification != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"specification\": ");
-
-			sb.append(String.valueOf(specification));
-		}
-
-		if (value != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"value\": ");
-
-			sb.append(_toJSON(value));
 		}
 
 		sb.append("}");

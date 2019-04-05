@@ -14,14 +14,12 @@
 
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionValue;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,21 +30,21 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface SpecificationResource {
+public interface OptionValueResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
-
-	public Specification getSpecification(Long id) throws Exception;
-
-	public Response patchSpecification(Long id, Specification specification)
+	public Page<OptionValue> getOptionIdOptionValuesPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public Page<Specification> getCatalogSiteSpecificationsPage(
-			Long siteId, Pagination pagination)
+	public Page<OptionValue> getOptionByExternalReferenceCodeOptionValuesPage(
+			String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public OptionValue postOptionIdOptionValue(Long id, OptionValue optionValue)
+		throws Exception;
+
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			String externalReferenceCode, OptionValue optionValue)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
