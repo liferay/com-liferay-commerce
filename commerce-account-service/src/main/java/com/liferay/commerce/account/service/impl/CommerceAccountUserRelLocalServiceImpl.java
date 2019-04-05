@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.exception.CommerceAccountTypeException;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.base.CommerceAccountUserRelLocalServiceBaseImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
@@ -37,6 +39,8 @@ public class CommerceAccountUserRelLocalServiceImpl
 			long commerceAccountId, long commerceAccountUserId,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		validate(commerceAccountId, commerceAccountUserId);
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
@@ -169,6 +173,41 @@ public class CommerceAccountUserRelLocalServiceImpl
 	public int getCommerceAccountUserRelsCount(long commerceAccountId) {
 		return commerceAccountUserRelPersistence.countByCommerceAccountId(
 			commerceAccountId);
+	}
+
+	protected void validate(long commerceAccountId, long commerceAccountUserId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.getCommerceAccount(commerceAccountId);
+
+		if (commerceAccount.isPersonalAccount()) {
+			CommerceAccountUserRel commerceAccountUserRel =
+				commerceAccountUserRelPersistence.findByCommerceAccountId_First(
+					commerceAccountId, null);
+
+			if (commerceAccountUserRel.getCommerceAccountUserId() ==
+					commerceAccountUserId) {
+
+				throw new CommerceAccountTypeException();
+			}
+
+			List<CommerceAccountUserRel> commerceAccountUserRels =
+				commerceAccountUserRelPersistence.findByCommerceAccountUserId(
+					commerceAccountUserId);
+
+			for (CommerceAccountUserRel curCommerceAccountUserRel :
+					commerceAccountUserRels) {
+
+				CommerceAccount curCommerceAccount =
+					commerceAccountLocalService.getCommerceAccount(
+						curCommerceAccountUserRel.getCommerceAccountId());
+
+				if (curCommerceAccount.isPersonalAccount()) {
+					throw new CommerceAccountTypeException();
+				}
+			}
+		}
 	}
 
 }
