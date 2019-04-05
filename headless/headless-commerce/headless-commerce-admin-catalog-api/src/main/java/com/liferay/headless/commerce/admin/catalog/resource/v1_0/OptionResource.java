@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Option;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -32,21 +32,30 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface SpecificationResource {
+public interface OptionResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
+	public Response deleteOption(Long id) throws Exception;
 
-	public Specification getSpecification(Long id) throws Exception;
+	public Option getOption(Long id) throws Exception;
 
-	public Response patchSpecification(Long id, Specification specification)
+	public Response patchOption(Long id, Option option) throws Exception;
+
+	public Response deleteOptionByExternalReferenceCode(
+			String externalReferenceCode)
 		throws Exception;
 
-	public Page<Specification> getCatalogSiteSpecificationsPage(
+	public Option getOptionByExternalReferenceCode(String externalReferenceCode)
+		throws Exception;
+
+	public Response patchOptionByExternalReferenceCode(
+			String externalReferenceCode, Option option)
+		throws Exception;
+
+	public Page<Option> getCatalogSiteOptionsPage(
 			Long siteId, Pagination pagination)
 		throws Exception;
 
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public Option postCatalogSiteOption(Long siteId, Option option)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

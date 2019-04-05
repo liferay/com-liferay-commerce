@@ -26,13 +26,16 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
-
-import javax.validation.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -43,6 +46,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Attachment")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"sku"})
 @XmlRootElement(name = "Attachment")
 public class Attachment {
 
@@ -62,6 +66,9 @@ public class Attachment {
 		try {
 			attachment = attachmentUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -71,6 +78,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String attachment;
 
+	@Schema
 	public Date getDisplayDate() {
 		return displayDate;
 	}
@@ -86,6 +94,9 @@ public class Attachment {
 		try {
 			displayDate = displayDateUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -95,6 +106,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Date displayDate;
 
+	@Schema
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
@@ -110,6 +122,9 @@ public class Attachment {
 		try {
 			expirationDate = expirationDateUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -119,6 +134,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Date expirationDate;
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -134,6 +150,9 @@ public class Attachment {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -141,9 +160,9 @@ public class Attachment {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -157,6 +176,9 @@ public class Attachment {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -166,6 +188,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
+	@Schema
 	public Boolean getNeverExpire() {
 		return neverExpire;
 	}
@@ -181,6 +204,9 @@ public class Attachment {
 		try {
 			neverExpire = neverExpireUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -190,6 +216,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean neverExpire;
 
+	@Schema
 	public Map<String, String> getOptions() {
 		return options;
 	}
@@ -205,6 +232,9 @@ public class Attachment {
 		try {
 			options = optionsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -214,6 +244,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> options;
 
+	@Schema
 	public Double getPriority() {
 		return priority;
 	}
@@ -228,6 +259,9 @@ public class Attachment {
 
 		try {
 			priority = priorityUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -252,6 +286,9 @@ public class Attachment {
 		try {
 			src = srcUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -261,6 +298,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String src;
 
+	@Schema
 	public Map<String, String> getTitle() {
 		return title;
 	}
@@ -276,6 +314,9 @@ public class Attachment {
 		try {
 			title = titleUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -285,6 +326,7 @@ public class Attachment {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> title;
 
+	@Schema
 	public Integer getType() {
 		return type;
 	}
@@ -297,6 +339,9 @@ public class Attachment {
 	public void setType(UnsafeSupplier<Integer, Exception> typeUnsafeSupplier) {
 		try {
 			type = typeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -334,69 +379,173 @@ public class Attachment {
 
 		sb.append("{");
 
-		sb.append("\"attachment\": ");
+		DateFormat liferayToJSONDateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-		sb.append("\"");
-		sb.append(attachment);
-		sb.append("\"");
-		sb.append(", ");
+		if (attachment != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"displayDate\": ");
+			sb.append("\"attachment\": ");
 
-		sb.append("\"");
-		sb.append(displayDate);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"expirationDate\": ");
+			sb.append(_escape(attachment));
 
-		sb.append("\"");
-		sb.append(expirationDate);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"externalReferenceCode\": ");
+		if (displayDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"displayDate\": ");
 
-		sb.append("\"id\": ");
+			sb.append("\"");
 
-		sb.append(id);
-		sb.append(", ");
+			sb.append(liferayToJSONDateFormat.format(displayDate));
 
-		sb.append("\"neverExpire\": ");
+			sb.append("\"");
+		}
 
-		sb.append(neverExpire);
-		sb.append(", ");
+		if (expirationDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"options\": ");
+			sb.append("\"expirationDate\": ");
 
-		sb.append(options);
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"priority\": ");
+			sb.append(liferayToJSONDateFormat.format(expirationDate));
 
-		sb.append(priority);
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"src\": ");
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(src);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"externalReferenceCode\": ");
 
-		sb.append("\"title\": ");
+			sb.append("\"");
 
-		sb.append(title);
-		sb.append(", ");
+			sb.append(_escape(externalReferenceCode));
 
-		sb.append("\"type\": ");
+			sb.append("\"");
+		}
 
-		sb.append(type);
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"id\": ");
+
+			sb.append(id);
+		}
+
+		if (neverExpire != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"neverExpire\": ");
+
+			sb.append(neverExpire);
+		}
+
+		if (options != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"options\": ");
+
+			sb.append(_toJSON(options));
+		}
+
+		if (priority != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priority\": ");
+
+			sb.append(priority);
+		}
+
+		if (src != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"src\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(src));
+
+			sb.append("\"");
+		}
+
+		if (title != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"title\": ");
+
+			sb.append(_toJSON(title));
+		}
+
+		if (type != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"type\": ");
+
+			sb.append(type);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

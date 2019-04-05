@@ -24,12 +24,15 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,9 +44,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Product")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"active", "name", "productTypeName"})
 @XmlRootElement(name = "Product")
 public class Product {
 
+	@Schema
 	public Boolean getActive() {
 		return active;
 	}
@@ -59,6 +64,9 @@ public class Product {
 		try {
 			active = activeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -69,6 +77,7 @@ public class Product {
 	@NotNull
 	protected Boolean active;
 
+	@Schema
 	public Attachment[] getAttachments() {
 		return attachments;
 	}
@@ -84,6 +93,9 @@ public class Product {
 		try {
 			attachments = attachmentsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -93,6 +105,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Attachment[] attachments;
 
+	@Schema
 	public Category[] getCategories() {
 		return categories;
 	}
@@ -108,6 +121,9 @@ public class Product {
 		try {
 			categories = categoriesUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -117,20 +133,25 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Category[] categories;
 
-	public Object getConfiguration() {
+	@Schema
+	public ProductConfiguration getConfiguration() {
 		return configuration;
 	}
 
-	public void setConfiguration(Object configuration) {
+	public void setConfiguration(ProductConfiguration configuration) {
 		this.configuration = configuration;
 	}
 
 	@JsonIgnore
 	public void setConfiguration(
-		UnsafeSupplier<Object, Exception> configurationUnsafeSupplier) {
+		UnsafeSupplier<ProductConfiguration, Exception>
+			configurationUnsafeSupplier) {
 
 		try {
 			configuration = configurationUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -139,8 +160,9 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Object configuration;
+	protected ProductConfiguration configuration;
 
+	@Schema
 	public String getDefaultSku() {
 		return defaultSku;
 	}
@@ -156,6 +178,9 @@ public class Product {
 		try {
 			defaultSku = defaultSkuUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -165,6 +190,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String defaultSku;
 
+	@Schema
 	public Map<String, String> getDescription() {
 		return description;
 	}
@@ -181,6 +207,9 @@ public class Product {
 		try {
 			description = descriptionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -190,6 +219,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> description;
 
+	@Schema
 	public Map<String, ?> getExpando() {
 		return expando;
 	}
@@ -205,6 +235,9 @@ public class Product {
 		try {
 			expando = expandoUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -214,6 +247,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, ?> expando;
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -229,6 +263,9 @@ public class Product {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -236,33 +273,9 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
-	public Long getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	}
-
-	@JsonIgnore
-	public void setGroupId(
-		UnsafeSupplier<Long, Exception> groupIdUnsafeSupplier) {
-
-		try {
-			groupId = groupIdUnsafeSupplier.get();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long groupId;
-
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -276,6 +289,9 @@ public class Product {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -285,6 +301,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
+	@Schema
 	public Attachment[] getImages() {
 		return images;
 	}
@@ -300,6 +317,9 @@ public class Product {
 		try {
 			images = imagesUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -309,6 +329,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Attachment[] images;
 
+	@Schema
 	public Map<String, String> getMetaDescription() {
 		return metaDescription;
 	}
@@ -325,6 +346,9 @@ public class Product {
 		try {
 			metaDescription = metaDescriptionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -334,6 +358,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> metaDescription;
 
+	@Schema
 	public Map<String, String> getMetaKeyword() {
 		return metaKeyword;
 	}
@@ -350,6 +375,9 @@ public class Product {
 		try {
 			metaKeyword = metaKeywordUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -359,6 +387,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> metaKeyword;
 
+	@Schema
 	public Map<String, String> getMetaTitle() {
 		return metaTitle;
 	}
@@ -375,6 +404,9 @@ public class Product {
 		try {
 			metaTitle = metaTitleUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -384,6 +416,7 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> metaTitle;
 
+	@Schema
 	public Map<String, String> getName() {
 		return name;
 	}
@@ -399,6 +432,9 @@ public class Product {
 		try {
 			name = nameUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -409,6 +445,7 @@ public class Product {
 	@NotNull
 	protected Map<String, String> name;
 
+	@Schema
 	public ProductOption[] getOptions() {
 		return options;
 	}
@@ -424,6 +461,9 @@ public class Product {
 		try {
 			options = optionsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -433,6 +473,35 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected ProductOption[] options;
 
+	@Schema
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	@JsonIgnore
+	public void setProductId(
+		UnsafeSupplier<Long, Exception> productIdUnsafeSupplier) {
+
+		try {
+			productId = productIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	protected Long productId;
+
+	@Schema
 	public String getProductType() {
 		return productType;
 	}
@@ -448,6 +517,9 @@ public class Product {
 		try {
 			productType = productTypeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -457,22 +529,26 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String productType;
 
-	public Map<String, String> getRelatedProducts() {
+	@Schema
+	public RelatedProduct[] getRelatedProducts() {
 		return relatedProducts;
 	}
 
-	public void setRelatedProducts(Map<String, String> relatedProducts) {
+	public void setRelatedProducts(RelatedProduct[] relatedProducts) {
 		this.relatedProducts = relatedProducts;
 	}
 
 	@JsonIgnore
 	public void setRelatedProducts(
-		UnsafeSupplier<Map<String, String>, Exception>
+		UnsafeSupplier<RelatedProduct[], Exception>
 			relatedProductsUnsafeSupplier) {
 
 		try {
 			relatedProducts = relatedProductsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -480,22 +556,29 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Map<String, String> relatedProducts;
+	protected RelatedProduct[] relatedProducts;
 
-	public Object getShippingConfiguration() {
+	@Schema
+	public ProductShippingConfiguration getShippingConfiguration() {
 		return shippingConfiguration;
 	}
 
-	public void setShippingConfiguration(Object shippingConfiguration) {
+	public void setShippingConfiguration(
+		ProductShippingConfiguration shippingConfiguration) {
+
 		this.shippingConfiguration = shippingConfiguration;
 	}
 
 	@JsonIgnore
 	public void setShippingConfiguration(
-		UnsafeSupplier<Object, Exception> shippingConfigurationUnsafeSupplier) {
+		UnsafeSupplier<ProductShippingConfiguration, Exception>
+			shippingConfigurationUnsafeSupplier) {
 
 		try {
 			shippingConfiguration = shippingConfigurationUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -504,8 +587,9 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Object shippingConfiguration;
+	protected ProductShippingConfiguration shippingConfiguration;
 
+	@Schema
 	public Map<String, String> getShortDescription() {
 		return shortDescription;
 	}
@@ -522,6 +606,9 @@ public class Product {
 		try {
 			shortDescription = shortDescriptionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -531,6 +618,35 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> shortDescription;
 
+	@Schema
+	public Long getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(Long siteId) {
+		this.siteId = siteId;
+	}
+
+	@JsonIgnore
+	public void setSiteId(
+		UnsafeSupplier<Long, Exception> siteIdUnsafeSupplier) {
+
+		try {
+			siteId = siteIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long siteId;
+
+	@Schema
 	public Sku[] getSkus() {
 		return skus;
 	}
@@ -544,6 +660,9 @@ public class Product {
 		try {
 			skus = skusUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -553,22 +672,28 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Sku[] skus;
 
-	public Object getSubscriptionConfiguration() {
+	@Schema
+	public ProductSubscriptionConfiguration getSubscriptionConfiguration() {
 		return subscriptionConfiguration;
 	}
 
-	public void setSubscriptionConfiguration(Object subscriptionConfiguration) {
+	public void setSubscriptionConfiguration(
+		ProductSubscriptionConfiguration subscriptionConfiguration) {
+
 		this.subscriptionConfiguration = subscriptionConfiguration;
 	}
 
 	@JsonIgnore
 	public void setSubscriptionConfiguration(
-		UnsafeSupplier<Object, Exception>
+		UnsafeSupplier<ProductSubscriptionConfiguration, Exception>
 			subscriptionConfigurationUnsafeSupplier) {
 
 		try {
 			subscriptionConfiguration =
 				subscriptionConfigurationUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -577,8 +702,9 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Object subscriptionConfiguration;
+	protected ProductSubscriptionConfiguration subscriptionConfiguration;
 
+	@Schema
 	public String[] getTags() {
 		return tags;
 	}
@@ -594,6 +720,9 @@ public class Product {
 		try {
 			tags = tagsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -603,20 +732,25 @@ public class Product {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String[] tags;
 
-	public Object getTaxConfiguration() {
+	@Schema
+	public ProductTaxConfiguration getTaxConfiguration() {
 		return taxConfiguration;
 	}
 
-	public void setTaxConfiguration(Object taxConfiguration) {
+	public void setTaxConfiguration(ProductTaxConfiguration taxConfiguration) {
 		this.taxConfiguration = taxConfiguration;
 	}
 
 	@JsonIgnore
 	public void setTaxConfiguration(
-		UnsafeSupplier<Object, Exception> taxConfigurationUnsafeSupplier) {
+		UnsafeSupplier<ProductTaxConfiguration, Exception>
+			taxConfigurationUnsafeSupplier) {
 
 		try {
 			taxConfiguration = taxConfigurationUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -625,8 +759,9 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Object taxConfiguration;
+	protected ProductTaxConfiguration taxConfiguration;
 
+	@Schema
 	public Map<String, String> getUrls() {
 		return urls;
 	}
@@ -641,6 +776,9 @@ public class Product {
 
 		try {
 			urls = urlsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -678,21 +816,27 @@ public class Product {
 
 		sb.append("{");
 
-		sb.append("\"active\": ");
+		if (active != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(active);
-		sb.append(", ");
+			sb.append("\"active\": ");
 
-		sb.append("\"attachments\": ");
-
-		if (attachments == null) {
-			sb.append("null");
+			sb.append(active);
 		}
-		else {
+
+		if (attachments != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"attachments\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < attachments.length; i++) {
-				sb.append(attachments[i]);
+				sb.append(String.valueOf(attachments[i]));
 
 				if ((i + 1) < attachments.length) {
 					sb.append(", ");
@@ -702,18 +846,17 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (categories != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"categories\": ");
+			sb.append("\"categories\": ");
 
-		if (categories == null) {
-			sb.append("null");
-		}
-		else {
 			sb.append("[");
 
 			for (int i = 0; i < categories.length; i++) {
-				sb.append(categories[i]);
+				sb.append(String.valueOf(categories[i]));
 
 				if ((i + 1) < categories.length) {
 					sb.append(", ");
@@ -723,57 +866,85 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (configuration != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"configuration\": ");
+			sb.append("\"configuration\": ");
 
-		sb.append(configuration);
-		sb.append(", ");
-
-		sb.append("\"defaultSku\": ");
-
-		sb.append("\"");
-		sb.append(defaultSku);
-		sb.append("\"");
-		sb.append(", ");
-
-		sb.append("\"description\": ");
-
-		sb.append(description);
-		sb.append(", ");
-
-		sb.append("\"expando\": ");
-
-		sb.append(expando);
-		sb.append(", ");
-
-		sb.append("\"externalReferenceCode\": ");
-
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
-
-		sb.append("\"groupId\": ");
-
-		sb.append(groupId);
-		sb.append(", ");
-
-		sb.append("\"id\": ");
-
-		sb.append(id);
-		sb.append(", ");
-
-		sb.append("\"images\": ");
-
-		if (images == null) {
-			sb.append("null");
+			sb.append(String.valueOf(configuration));
 		}
-		else {
+
+		if (defaultSku != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"defaultSku\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(defaultSku));
+
+			sb.append("\"");
+		}
+
+		if (description != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"description\": ");
+
+			sb.append(_toJSON(description));
+		}
+
+		if (expando != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"expando\": ");
+
+			sb.append(_toJSON(expando));
+		}
+
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"externalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"id\": ");
+
+			sb.append(id);
+		}
+
+		if (images != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"images\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < images.length; i++) {
-				sb.append(images[i]);
+				sb.append(String.valueOf(images[i]));
 
 				if ((i + 1) < images.length) {
 					sb.append(", ");
@@ -783,38 +954,57 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (metaDescription != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"metaDescription\": ");
+			sb.append("\"metaDescription\": ");
 
-		sb.append(metaDescription);
-		sb.append(", ");
-
-		sb.append("\"metaKeyword\": ");
-
-		sb.append(metaKeyword);
-		sb.append(", ");
-
-		sb.append("\"metaTitle\": ");
-
-		sb.append(metaTitle);
-		sb.append(", ");
-
-		sb.append("\"name\": ");
-
-		sb.append(name);
-		sb.append(", ");
-
-		sb.append("\"options\": ");
-
-		if (options == null) {
-			sb.append("null");
+			sb.append(_toJSON(metaDescription));
 		}
-		else {
+
+		if (metaKeyword != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"metaKeyword\": ");
+
+			sb.append(_toJSON(metaKeyword));
+		}
+
+		if (metaTitle != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"metaTitle\": ");
+
+			sb.append(_toJSON(metaTitle));
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append(_toJSON(name));
+		}
+
+		if (options != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"options\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < options.length; i++) {
-				sb.append(options[i]);
+				sb.append(String.valueOf(options[i]));
 
 				if ((i + 1) < options.length) {
 					sb.append(", ");
@@ -824,40 +1014,91 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (productId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"productType\": ");
+			sb.append("\"productId\": ");
 
-		sb.append("\"");
-		sb.append(productType);
-		sb.append("\"");
-		sb.append(", ");
-
-		sb.append("\"relatedProducts\": ");
-
-		sb.append(relatedProducts);
-		sb.append(", ");
-
-		sb.append("\"shippingConfiguration\": ");
-
-		sb.append(shippingConfiguration);
-		sb.append(", ");
-
-		sb.append("\"shortDescription\": ");
-
-		sb.append(shortDescription);
-		sb.append(", ");
-
-		sb.append("\"skus\": ");
-
-		if (skus == null) {
-			sb.append("null");
+			sb.append(productId);
 		}
-		else {
+
+		if (productType != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"productType\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(productType));
+
+			sb.append("\"");
+		}
+
+		if (relatedProducts != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"relatedProducts\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < relatedProducts.length; i++) {
+				sb.append(String.valueOf(relatedProducts[i]));
+
+				if ((i + 1) < relatedProducts.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
+		}
+
+		if (shippingConfiguration != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"shippingConfiguration\": ");
+
+			sb.append(String.valueOf(shippingConfiguration));
+		}
+
+		if (shortDescription != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"shortDescription\": ");
+
+			sb.append(_toJSON(shortDescription));
+		}
+
+		if (siteId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"siteId\": ");
+
+			sb.append(siteId);
+		}
+
+		if (skus != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"skus\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < skus.length; i++) {
-				sb.append(skus[i]);
+				sb.append(String.valueOf(skus[i]));
 
 				if ((i + 1) < skus.length) {
 					sb.append(", ");
@@ -867,24 +1108,30 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (subscriptionConfiguration != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"subscriptionConfiguration\": ");
+			sb.append("\"subscriptionConfiguration\": ");
 
-		sb.append(subscriptionConfiguration);
-		sb.append(", ");
-
-		sb.append("\"tags\": ");
-
-		if (tags == null) {
-			sb.append("null");
+			sb.append(String.valueOf(subscriptionConfiguration));
 		}
-		else {
+
+		if (tags != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"tags\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < tags.length; i++) {
 				sb.append("\"");
-				sb.append(tags[i]);
+
+				sb.append(_escape(tags[i]));
+
 				sb.append("\"");
 
 				if ((i + 1) < tags.length) {
@@ -895,16 +1142,60 @@ public class Product {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (taxConfiguration != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"taxConfiguration\": ");
+			sb.append("\"taxConfiguration\": ");
 
-		sb.append(taxConfiguration);
-		sb.append(", ");
+			sb.append(String.valueOf(taxConfiguration));
+		}
 
-		sb.append("\"urls\": ");
+		if (urls != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(urls);
+			sb.append("\"urls\": ");
+
+			sb.append(_toJSON(urls));
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

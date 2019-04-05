@@ -26,8 +26,12 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -45,7 +49,7 @@ public class ProductSubscriptionConfiguration {
 
 	public static enum SubscriptionType {
 
-		DAY("day"), MONTH("month"), WEEK("week"), YEAR("year");
+		DAY("day"), WEEK("week"), MONTH("month"), YEAR("year");
 
 		@JsonCreator
 		public static SubscriptionType create(String value) {
@@ -76,6 +80,7 @@ public class ProductSubscriptionConfiguration {
 
 	}
 
+	@Schema
 	public Boolean getEnable() {
 		return enable;
 	}
@@ -91,6 +96,9 @@ public class ProductSubscriptionConfiguration {
 		try {
 			enable = enableUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -100,6 +108,7 @@ public class ProductSubscriptionConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean enable;
 
+	@Schema
 	public Integer getLength() {
 		return length;
 	}
@@ -115,6 +124,9 @@ public class ProductSubscriptionConfiguration {
 		try {
 			length = lengthUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -124,6 +136,7 @@ public class ProductSubscriptionConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer length;
 
+	@Schema
 	public Long getNumberOfLength() {
 		return numberOfLength;
 	}
@@ -139,6 +152,9 @@ public class ProductSubscriptionConfiguration {
 		try {
 			numberOfLength = numberOfLengthUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -148,6 +164,7 @@ public class ProductSubscriptionConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long numberOfLength;
 
+	@Schema
 	public SubscriptionType getSubscriptionType() {
 		return subscriptionType;
 	}
@@ -173,6 +190,9 @@ public class ProductSubscriptionConfiguration {
 		try {
 			subscriptionType = subscriptionTypeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -182,6 +202,7 @@ public class ProductSubscriptionConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SubscriptionType subscriptionType;
 
+	@Schema
 	public Map<String, String> getSubscriptionTypeSettings() {
 		return subscriptionTypeSettings;
 	}
@@ -200,6 +221,9 @@ public class ProductSubscriptionConfiguration {
 		try {
 			subscriptionTypeSettings =
 				subscriptionTypeSettingsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -239,31 +263,94 @@ public class ProductSubscriptionConfiguration {
 
 		sb.append("{");
 
-		sb.append("\"enable\": ");
+		if (enable != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(enable);
-		sb.append(", ");
+			sb.append("\"enable\": ");
 
-		sb.append("\"length\": ");
+			sb.append(enable);
+		}
 
-		sb.append(length);
-		sb.append(", ");
+		if (length != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"numberOfLength\": ");
+			sb.append("\"length\": ");
 
-		sb.append(numberOfLength);
-		sb.append(", ");
+			sb.append(length);
+		}
 
-		sb.append("\"subscriptionType\": ");
+		if (numberOfLength != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(subscriptionType);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"numberOfLength\": ");
 
-		sb.append("\"subscriptionTypeSettings\": ");
+			sb.append(numberOfLength);
+		}
 
-		sb.append(subscriptionTypeSettings);
+		if (subscriptionType != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"subscriptionType\": ");
+
+			sb.append("\"");
+
+			sb.append(subscriptionType);
+
+			sb.append("\"");
+		}
+
+		if (subscriptionTypeSettings != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"subscriptionTypeSettings\": ");
+
+			sb.append(_toJSON(subscriptionTypeSettings));
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

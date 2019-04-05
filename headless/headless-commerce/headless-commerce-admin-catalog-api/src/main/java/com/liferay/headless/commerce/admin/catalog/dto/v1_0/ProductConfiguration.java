@@ -26,7 +26,10 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -42,6 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "ProductConfiguration")
 public class ProductConfiguration {
 
+	@Schema
 	public Boolean getAllowBackOrder() {
 		return allowBackOrder;
 	}
@@ -57,6 +61,9 @@ public class ProductConfiguration {
 		try {
 			allowBackOrder = allowBackOrderUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -66,6 +73,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean allowBackOrder;
 
+	@Schema
 	public Integer[] getAllowedOrderQuantities() {
 		return allowedOrderQuantities;
 	}
@@ -82,6 +90,9 @@ public class ProductConfiguration {
 		try {
 			allowedOrderQuantities = allowedOrderQuantitiesUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -91,6 +102,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer[] allowedOrderQuantities;
 
+	@Schema
 	public Boolean getDisplayAvailability() {
 		return displayAvailability;
 	}
@@ -106,6 +118,9 @@ public class ProductConfiguration {
 		try {
 			displayAvailability = displayAvailabilityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -115,6 +130,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean displayAvailability;
 
+	@Schema
 	public Boolean getDisplayStockQuantity() {
 		return displayStockQuantity;
 	}
@@ -129,6 +145,9 @@ public class ProductConfiguration {
 
 		try {
 			displayStockQuantity = displayStockQuantityUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -157,6 +176,9 @@ public class ProductConfiguration {
 		try {
 			inventoryEngine = inventoryEngineUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -184,6 +206,9 @@ public class ProductConfiguration {
 		try {
 			lowStockAction = lowStockActionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -193,6 +218,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String lowStockAction;
 
+	@Schema
 	public Integer getMaxOrderQuantity() {
 		return maxOrderQuantity;
 	}
@@ -208,6 +234,9 @@ public class ProductConfiguration {
 		try {
 			maxOrderQuantity = maxOrderQuantityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -217,6 +246,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer maxOrderQuantity;
 
+	@Schema
 	public Integer getMinOrderQuantity() {
 		return minOrderQuantity;
 	}
@@ -232,6 +262,9 @@ public class ProductConfiguration {
 		try {
 			minOrderQuantity = minOrderQuantityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -241,6 +274,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer minOrderQuantity;
 
+	@Schema
 	public Integer getMinStockQuantity() {
 		return minStockQuantity;
 	}
@@ -256,6 +290,9 @@ public class ProductConfiguration {
 		try {
 			minStockQuantity = minStockQuantityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -265,6 +302,7 @@ public class ProductConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer minStockQuantity;
 
+	@Schema
 	public Integer getMultipleOrderQuantity() {
 		return multipleOrderQuantity;
 	}
@@ -280,6 +318,9 @@ public class ProductConfiguration {
 
 		try {
 			multipleOrderQuantity = multipleOrderQuantityUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -318,17 +359,23 @@ public class ProductConfiguration {
 
 		sb.append("{");
 
-		sb.append("\"allowBackOrder\": ");
+		if (allowBackOrder != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(allowBackOrder);
-		sb.append(", ");
+			sb.append("\"allowBackOrder\": ");
 
-		sb.append("\"allowedOrderQuantities\": ");
-
-		if (allowedOrderQuantities == null) {
-			sb.append("null");
+			sb.append(allowBackOrder);
 		}
-		else {
+
+		if (allowedOrderQuantities != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"allowedOrderQuantities\": ");
+
 			sb.append("[");
 
 			for (int i = 0; i < allowedOrderQuantities.length; i++) {
@@ -342,50 +389,128 @@ public class ProductConfiguration {
 			sb.append("]");
 		}
 
-		sb.append(", ");
+		if (displayAvailability != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"displayAvailability\": ");
+			sb.append("\"displayAvailability\": ");
 
-		sb.append(displayAvailability);
-		sb.append(", ");
+			sb.append(displayAvailability);
+		}
 
-		sb.append("\"displayStockQuantity\": ");
+		if (displayStockQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(displayStockQuantity);
-		sb.append(", ");
+			sb.append("\"displayStockQuantity\": ");
 
-		sb.append("\"inventoryEngine\": ");
+			sb.append(displayStockQuantity);
+		}
 
-		sb.append("\"");
-		sb.append(inventoryEngine);
-		sb.append("\"");
-		sb.append(", ");
+		if (inventoryEngine != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"lowStockAction\": ");
+			sb.append("\"inventoryEngine\": ");
 
-		sb.append("\"");
-		sb.append(lowStockAction);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"maxOrderQuantity\": ");
+			sb.append(_escape(inventoryEngine));
 
-		sb.append(maxOrderQuantity);
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"minOrderQuantity\": ");
+		if (lowStockAction != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(minOrderQuantity);
-		sb.append(", ");
+			sb.append("\"lowStockAction\": ");
 
-		sb.append("\"minStockQuantity\": ");
+			sb.append("\"");
 
-		sb.append(minStockQuantity);
-		sb.append(", ");
+			sb.append(_escape(lowStockAction));
 
-		sb.append("\"multipleOrderQuantity\": ");
+			sb.append("\"");
+		}
 
-		sb.append(multipleOrderQuantity);
+		if (maxOrderQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"maxOrderQuantity\": ");
+
+			sb.append(maxOrderQuantity);
+		}
+
+		if (minOrderQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"minOrderQuantity\": ");
+
+			sb.append(minOrderQuantity);
+		}
+
+		if (minStockQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"minStockQuantity\": ");
+
+			sb.append(minStockQuantity);
+		}
+
+		if (multipleOrderQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"multipleOrderQuantity\": ");
+
+			sb.append(multipleOrderQuantity);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

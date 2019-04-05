@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
@@ -41,8 +40,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -63,15 +62,16 @@ public abstract class BaseProductOptionResourceImpl
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/commerceAdminCatalog/{groupId}/productOption/")
+	@Path("/products/{id}/productOptions/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Page<ProductOption> getOptions(
-			@NotNull @PathParam("groupId") Long groupId,
+	public Page<ProductOption> getProductIdProductOptionsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -81,30 +81,38 @@ public abstract class BaseProductOptionResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/commerceAdminCatalog/{groupId}/productOption/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/productOptions/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public ProductOption upsertProductOption(
-			@NotNull @PathParam("groupId") Long groupId,
-			ProductOption productOption)
+	public Page<ProductOption> postProductIdProductOptionsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductOption[] productOptions)
 		throws Exception {
 
-		return new ProductOption();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/productOption/{id}/productOptionValue/")
+	@Path(
+		"/products/by-externalReferenceCode/{externalReferenceCode}/productOptions/"
+	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Page<ProductOptionValue> getProductOptionValues(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
+	public Page<ProductOption>
+			getProductByExternalReferenceCodeProductOptionsPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -113,23 +121,35 @@ public abstract class BaseProductOptionResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/productOption/{id}/productOptionValue/")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/products/by-externalReferenceCode/{externalReferenceCode}/productOptions/"
+	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public ProductOptionValue upsertProductOptionValue(
-			@NotNull @PathParam("id") String id,
-			ProductOptionValue productOptionValue)
+	public Page<ProductOption>
+			postProductByExternalReferenceCodeProductOptionsPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				ProductOption[] productOptions)
 		throws Exception {
 
-		return new ProductOptionValue();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@DELETE
-	@Path("/productOption/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response deleteProductOption(@NotNull @PathParam("id") String id)
+	public Response deleteProductOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -139,10 +159,12 @@ public abstract class BaseProductOptionResourceImpl
 
 	@Override
 	@GET
-	@Path("/productOption/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public ProductOption getProductOption(@NotNull @PathParam("id") String id)
+	public ProductOption getProductOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new ProductOption();
@@ -150,12 +172,14 @@ public abstract class BaseProductOptionResourceImpl
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/productOption/{id}")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response updateProductOption(
-			@NotNull @PathParam("id") String id, ProductOption productOption)
+	public Response patchProductOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductOption productOption)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -167,7 +191,8 @@ public abstract class BaseProductOptionResourceImpl
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(ProductOption productOption) {
+	protected void preparePatch(
+		ProductOption productOption, ProductOption existingProductOption) {
 	}
 
 	protected <T, R> List<R> transform(
