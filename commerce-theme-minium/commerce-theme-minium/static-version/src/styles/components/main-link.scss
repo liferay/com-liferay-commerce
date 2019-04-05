@@ -38,15 +38,12 @@
 			background-color: $color-theme;
 			content: '';
 			display: block;
+			height: 70%;
+			left: 0;
 			position: absolute;
-
-			@media screen and (hover: hover) {
-				height: 70%;
-				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 4px;
-			}
+			top: 50%;
+			transform: translateY(-50%);
+			width: 4px;
 
 			@media screen and (hover: none) {
 				height: 4px;
@@ -105,11 +102,9 @@
 		transform: translateX(-15px);
 		white-space: nowrap;
 
-		@media screen and (hover: hover) {
-			.minium-sidebar:not(:hover) & {
-				opacity: 0;
-				transform: translateX(20px);
-			}
+		.minium-sidebar:not(:hover) & {
+			opacity: 0;
+			transform: translateX(20px);
 		}
 
 		@media screen and (hover: none) {

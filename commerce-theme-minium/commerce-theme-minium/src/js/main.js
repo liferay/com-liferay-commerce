@@ -11,7 +11,7 @@ AUI().ready(
 
 		if (searchBar) {
 			searchBar.on('toggled', function(status) {
-				document.querySelectorAll(".js-toggle-search").forEach(el => {
+				document.querySelectorAll(".js-toggle-search").forEach(function (el) {
 					el.classList.toggle("is-active", status);
 				});
 
@@ -54,7 +54,7 @@ Liferay.on(
 		if ('IntersectionObserver' in window) {
 			if (jsScrollArea && miniumTop) {
 				new IntersectionObserver(
-					entries => {
+					function (entries) {
 						if (document.getElementById("minium")) {
 							document.getElementById("minium").classList.toggle("is-scrolled", !entries[0].isIntersecting);
 						}
@@ -86,12 +86,10 @@ Liferay.on(
 					: offset;
 
 			if (!ticking) {
-				window.requestAnimationFrame(() => {
+				window.requestAnimationFrame(function () {
 					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-						miniumWrapper.classList.add(`is-scrolling-${myMap.get(Math.sign(lastKnownScrollOffset))}`);
-						miniumWrapper.classList.remove(`is-scrolling-${myMap.get(-1 * Math.sign(lastKnownScrollOffset))}`);
-						// miniumWrapper.classList.add(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "down" : "up"}`);
-						// miniumWrapper.classList.remove(`is-scrolling-${Math.sign(lastKnownScrollOffset) > 0 ? "up" : "down"}`);
+						miniumWrapper.classList.add("is-scrolling-" + myMap.get(Math.sign(lastKnownScrollOffset)));
+						miniumWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * Math.sign(lastKnownScrollOffset)));
 					}
 					ticking = false;
 				});

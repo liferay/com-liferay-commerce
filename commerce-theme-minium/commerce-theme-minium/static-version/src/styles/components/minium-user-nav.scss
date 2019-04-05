@@ -27,10 +27,8 @@
 		}
 	}
 
-	@media screen and (hover: hover) {
-		.minium-sidebar:not(:hover) & {
-			background-color: transparent;
-		}
+	.minium-sidebar:not(:hover) & {
+		background-color: transparent;
 	}
 
 	@media screen and (hover: none) {
@@ -81,11 +79,9 @@
 			transform $transition;
 		white-space: nowrap;
 
-		@media screen and (hover: hover) {
-			.minium-sidebar:not(:hover) & {
-				opacity: 0;
-				transform: translateX(20px);
-			}
+		.minium-sidebar:not(:hover) & {
+			opacity: 0;
+			transform: translateX(20px);
 		}
 
 		// @media screen and (hover: none) {

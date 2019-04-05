@@ -27,13 +27,17 @@ html {
 		}
 	}
 
-	@media screen and (hover: hover) {
-		body.signed-in & .minium-frame__sidebar {
-			top: $liferay-topbar-size;
+	body.signed-in & .minium-frame__sidebar {
+		top: $liferay-topbar-size;
 
-			@media screen and (max-width: 767px) {
-				top: $liferay-topbar-size-small;
-			}
+		@media screen and (max-width: 767px) {
+			top: $liferay-topbar-size-small;
+		}
+	}
+
+	@media screen and (hover: none) {
+		body.signed-in & .minium-frame__sidebar {
+			top: auto;
 		}
 	}
 
