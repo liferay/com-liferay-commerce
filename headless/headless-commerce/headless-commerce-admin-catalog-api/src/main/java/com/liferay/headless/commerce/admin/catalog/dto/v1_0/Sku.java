@@ -24,11 +24,18 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -43,9 +50,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Sku")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"sku"})
 @XmlRootElement(name = "Sku")
 public class Sku {
 
+	@Schema
 	public BigDecimal getCost() {
 		return cost;
 	}
@@ -61,6 +70,9 @@ public class Sku {
 		try {
 			cost = costUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -70,6 +82,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal cost;
 
+	@Schema
 	public Double getDepth() {
 		return depth;
 	}
@@ -85,6 +98,9 @@ public class Sku {
 		try {
 			depth = depthUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -94,6 +110,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double depth;
 
+	@Schema
 	public Date getDisplayDate() {
 		return displayDate;
 	}
@@ -109,6 +126,9 @@ public class Sku {
 		try {
 			displayDate = displayDateUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -118,6 +138,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Date displayDate;
 
+	@Schema
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
@@ -133,6 +154,9 @@ public class Sku {
 		try {
 			expirationDate = expirationDateUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -142,6 +166,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Date expirationDate;
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -157,6 +182,9 @@ public class Sku {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -164,9 +192,9 @@ public class Sku {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
+	@Schema
 	public String getGtin() {
 		return gtin;
 	}
@@ -180,6 +208,9 @@ public class Sku {
 		try {
 			gtin = gtinUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -189,6 +220,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String gtin;
 
+	@Schema
 	public Double getHeight() {
 		return height;
 	}
@@ -204,6 +236,9 @@ public class Sku {
 		try {
 			height = heightUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -213,6 +248,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double height;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -226,6 +262,9 @@ public class Sku {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -235,6 +274,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
+	@Schema
 	public Integer getInventoryLevel() {
 		return inventoryLevel;
 	}
@@ -250,6 +290,9 @@ public class Sku {
 		try {
 			inventoryLevel = inventoryLevelUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -259,6 +302,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Integer inventoryLevel;
 
+	@Schema
 	public String getManufacturerPartNumber() {
 		return manufacturerPartNumber;
 	}
@@ -275,6 +319,9 @@ public class Sku {
 		try {
 			manufacturerPartNumber = manufacturerPartNumberUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -284,6 +331,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String manufacturerPartNumber;
 
+	@Schema
 	public Boolean getNeverExpire() {
 		return neverExpire;
 	}
@@ -299,6 +347,9 @@ public class Sku {
 		try {
 			neverExpire = neverExpireUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -308,6 +359,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean neverExpire;
 
+	@Schema
 	public Map<String, String> getOptions() {
 		return options;
 	}
@@ -323,6 +375,9 @@ public class Sku {
 		try {
 			options = optionsUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -332,6 +387,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> options;
 
+	@Schema
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -347,6 +403,9 @@ public class Sku {
 		try {
 			price = priceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -356,6 +415,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal price;
 
+	@Schema
 	public Long getProductId() {
 		return productId;
 	}
@@ -371,6 +431,9 @@ public class Sku {
 		try {
 			productId = productIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -380,6 +443,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long productId;
 
+	@Schema
 	public BigDecimal getPromoPrice() {
 		return promoPrice;
 	}
@@ -395,6 +459,9 @@ public class Sku {
 		try {
 			promoPrice = promoPriceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -404,6 +471,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal promoPrice;
 
+	@Schema
 	public Boolean getPublished() {
 		return published;
 	}
@@ -419,6 +487,9 @@ public class Sku {
 		try {
 			published = publishedUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -428,6 +499,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean published;
 
+	@Schema
 	public Boolean getPurchasable() {
 		return purchasable;
 	}
@@ -443,6 +515,9 @@ public class Sku {
 		try {
 			purchasable = purchasableUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -452,6 +527,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean purchasable;
 
+	@Schema
 	public String getSku() {
 		return sku;
 	}
@@ -465,6 +541,9 @@ public class Sku {
 		try {
 			sku = skuUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -475,6 +554,7 @@ public class Sku {
 	@NotEmpty
 	protected String sku;
 
+	@Schema
 	public Double getWeight() {
 		return weight;
 	}
@@ -490,6 +570,9 @@ public class Sku {
 		try {
 			weight = weightUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -499,6 +582,7 @@ public class Sku {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double weight;
 
+	@Schema
 	public Double getWidth() {
 		return width;
 	}
@@ -513,6 +597,9 @@ public class Sku {
 
 		try {
 			width = widthUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -550,116 +637,267 @@ public class Sku {
 
 		sb.append("{");
 
-		sb.append("\"cost\": ");
+		DateFormat liferayToJSONDateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-		sb.append(cost);
-		sb.append(", ");
+		if (cost != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"depth\": ");
+			sb.append("\"cost\": ");
 
-		sb.append(depth);
-		sb.append(", ");
+			sb.append(cost);
+		}
 
-		sb.append("\"displayDate\": ");
+		if (depth != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(displayDate);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"depth\": ");
 
-		sb.append("\"expirationDate\": ");
+			sb.append(depth);
+		}
 
-		sb.append("\"");
-		sb.append(expirationDate);
-		sb.append("\"");
-		sb.append(", ");
+		if (displayDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"externalReferenceCode\": ");
+			sb.append("\"displayDate\": ");
 
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"gtin\": ");
+			sb.append(liferayToJSONDateFormat.format(displayDate));
 
-		sb.append("\"");
-		sb.append(gtin);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"height\": ");
+		if (expirationDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(height);
-		sb.append(", ");
+			sb.append("\"expirationDate\": ");
 
-		sb.append("\"id\": ");
+			sb.append("\"");
 
-		sb.append(id);
-		sb.append(", ");
+			sb.append(liferayToJSONDateFormat.format(expirationDate));
 
-		sb.append("\"inventoryLevel\": ");
+			sb.append("\"");
+		}
 
-		sb.append(inventoryLevel);
-		sb.append(", ");
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"manufacturerPartNumber\": ");
+			sb.append("\"externalReferenceCode\": ");
 
-		sb.append("\"");
-		sb.append(manufacturerPartNumber);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"neverExpire\": ");
+			sb.append(_escape(externalReferenceCode));
 
-		sb.append(neverExpire);
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"options\": ");
+		if (gtin != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(options);
-		sb.append(", ");
+			sb.append("\"gtin\": ");
 
-		sb.append("\"price\": ");
+			sb.append("\"");
 
-		sb.append(price);
-		sb.append(", ");
+			sb.append(_escape(gtin));
 
-		sb.append("\"productId\": ");
+			sb.append("\"");
+		}
 
-		sb.append(productId);
-		sb.append(", ");
+		if (height != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"promoPrice\": ");
+			sb.append("\"height\": ");
 
-		sb.append(promoPrice);
-		sb.append(", ");
+			sb.append(height);
+		}
 
-		sb.append("\"published\": ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(published);
-		sb.append(", ");
+			sb.append("\"id\": ");
 
-		sb.append("\"purchasable\": ");
+			sb.append(id);
+		}
 
-		sb.append(purchasable);
-		sb.append(", ");
+		if (inventoryLevel != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"sku\": ");
+			sb.append("\"inventoryLevel\": ");
 
-		sb.append("\"");
-		sb.append(sku);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(inventoryLevel);
+		}
 
-		sb.append("\"weight\": ");
+		if (manufacturerPartNumber != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(weight);
-		sb.append(", ");
+			sb.append("\"manufacturerPartNumber\": ");
 
-		sb.append("\"width\": ");
+			sb.append("\"");
 
-		sb.append(width);
+			sb.append(_escape(manufacturerPartNumber));
+
+			sb.append("\"");
+		}
+
+		if (neverExpire != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"neverExpire\": ");
+
+			sb.append(neverExpire);
+		}
+
+		if (options != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"options\": ");
+
+			sb.append(_toJSON(options));
+		}
+
+		if (price != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"price\": ");
+
+			sb.append(price);
+		}
+
+		if (productId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"productId\": ");
+
+			sb.append(productId);
+		}
+
+		if (promoPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"promoPrice\": ");
+
+			sb.append(promoPrice);
+		}
+
+		if (published != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"published\": ");
+
+			sb.append(published);
+		}
+
+		if (purchasable != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"purchasable\": ");
+
+			sb.append(purchasable);
+		}
+
+		if (sku != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"sku\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(sku));
+
+			sb.append("\"");
+		}
+
+		if (weight != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"weight\": ");
+
+			sb.append(weight);
+		}
+
+		if (width != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"width\": ");
+
+			sb.append(width);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.SpecificationValue;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SpecificationResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
@@ -41,8 +40,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -60,18 +59,64 @@ public abstract class BaseSpecificationResourceImpl
 	implements SpecificationResource {
 
 	@Override
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/specifications/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Response deleteSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/specifications/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Specification getSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new Specification();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/specifications/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Response patchSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Specification specification)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "siteId"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/commerceAdminCatalog/{groupId}/specification/")
+	@Path("/catalogs/{siteId}/specifications/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Specification")})
-	public Page<Specification> getSpecifications(
-			@NotNull @PathParam("groupId") Long groupId,
+	public Page<Specification> getCatalogSiteSpecificationsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -81,93 +126,24 @@ public abstract class BaseSpecificationResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/commerceAdminCatalog/{groupId}/specification/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
+	@Path("/catalogs/{siteId}/specification/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Specification")})
-	public Specification upsertSpecification(
-			@NotNull @PathParam("groupId") Long groupId,
+	public Specification postCatalogSiteSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
 			Specification specification)
 		throws Exception {
 
 		return new Specification();
 	}
 
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/specification/{id}/specificationValue/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Page<SpecificationValue> getSpecificationValues(
-			@NotNull @PathParam("id") Long id, @Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/specification/{id}/specificationValue/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public SpecificationValue upsertSpecificationValue(
-			@NotNull @PathParam("id") Long id,
-			SpecificationValue specificationValue)
-		throws Exception {
-
-		return new SpecificationValue();
-	}
-
-	@Override
-	@DELETE
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Response deleteSpecification(@NotNull @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Specification getSpecification(@NotNull @PathParam("id") Long id)
-		throws Exception {
-
-		return new Specification();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/specification/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Response updateSpecification(
-			@NotNull @PathParam("id") Long id, Specification specification)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(Specification specification) {
+	protected void preparePatch(
+		Specification specification, Specification existingSpecification) {
 	}
 
 	protected <T, R> List<R> transform(

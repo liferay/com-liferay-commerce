@@ -33,6 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,11 +43,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SpecificationValue")
+@GraphQLName("RelatedProduct")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"value"})
-@XmlRootElement(name = "SpecificationValue")
-public class SpecificationValue {
+@Schema(requiredProperties = {"productId", "type"})
+@XmlRootElement(name = "RelatedProduct")
+public class RelatedProduct {
 
 	@Schema
 	public Long getId() {
@@ -71,37 +72,8 @@ public class SpecificationValue {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
-
-	@Schema
-	public OptionCategory getOptionCategory() {
-		return optionCategory;
-	}
-
-	public void setOptionCategory(OptionCategory optionCategory) {
-		this.optionCategory = optionCategory;
-	}
-
-	@JsonIgnore
-	public void setOptionCategory(
-		UnsafeSupplier<OptionCategory, Exception>
-			optionCategoryUnsafeSupplier) {
-
-		try {
-			optionCategory = optionCategoryUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected OptionCategory optionCategory;
 
 	@Schema
 	public Double getPriority() {
@@ -160,20 +132,20 @@ public class SpecificationValue {
 	protected Product product;
 
 	@Schema
-	public Specification getSpecification() {
-		return specification;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setSpecification(Specification specification) {
-		this.specification = specification;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	@JsonIgnore
-	public void setSpecification(
-		UnsafeSupplier<Specification, Exception> specificationUnsafeSupplier) {
+	public void setProductId(
+		UnsafeSupplier<Long, Exception> productIdUnsafeSupplier) {
 
 		try {
-			specification = specificationUnsafeSupplier.get();
+			productId = productIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -184,24 +156,23 @@ public class SpecificationValue {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Specification specification;
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@NotNull
+	protected Long productId;
 
 	@Schema
-	public Map<String, String> getValue() {
-		return value;
+	public String getType() {
+		return type;
 	}
 
-	public void setValue(Map<String, String> value) {
-		this.value = value;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@JsonIgnore
-	public void setValue(
-		UnsafeSupplier<Map<String, String>, Exception> valueUnsafeSupplier) {
-
+	public void setType(UnsafeSupplier<String, Exception> typeUnsafeSupplier) {
 		try {
-			value = valueUnsafeSupplier.get();
+			type = typeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -213,8 +184,8 @@ public class SpecificationValue {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Map<String, String> value;
+	@NotEmpty
+	protected String type;
 
 	@Override
 	public boolean equals(Object object) {
@@ -222,13 +193,13 @@ public class SpecificationValue {
 			return true;
 		}
 
-		if (!(object instanceof SpecificationValue)) {
+		if (!(object instanceof RelatedProduct)) {
 			return false;
 		}
 
-		SpecificationValue specificationValue = (SpecificationValue)object;
+		RelatedProduct relatedProduct = (RelatedProduct)object;
 
-		return Objects.equals(toString(), specificationValue.toString());
+		return Objects.equals(toString(), relatedProduct.toString());
 	}
 
 	@Override
@@ -253,16 +224,6 @@ public class SpecificationValue {
 			sb.append(id);
 		}
 
-		if (optionCategory != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"optionCategory\": ");
-
-			sb.append(String.valueOf(optionCategory));
-		}
-
 		if (priority != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -283,24 +244,28 @@ public class SpecificationValue {
 			sb.append(String.valueOf(product));
 		}
 
-		if (specification != null) {
+		if (productId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"specification\": ");
+			sb.append("\"productId\": ");
 
-			sb.append(String.valueOf(specification));
+			sb.append(productId);
 		}
 
-		if (value != null) {
+		if (type != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"value\": ");
+			sb.append("\"type\": ");
 
-			sb.append(_toJSON(value));
+			sb.append("\"");
+
+			sb.append(_escape(type));
+
+			sb.append("\"");
 		}
 
 		sb.append("}");

@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -32,11 +34,35 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface SkuResource {
 
-	public Response deleteSku(String id) throws Exception;
+	public Response deleteSku(Long id) throws Exception;
 
-	public Sku getSku(String id) throws Exception;
+	public Sku getSku(Long id) throws Exception;
 
-	public Response updateSku(String id, Sku sku) throws Exception;
+	public Response patchSku(Long id, Sku sku) throws Exception;
+
+	public Response deleteSkuByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Sku getSkuByExternalReferenceCode(String externalReferenceCode)
+		throws Exception;
+
+	public Response patchSkuByExternalReferenceCode(
+			String externalReferenceCode, Sku sku)
+		throws Exception;
+
+	public Page<Sku> getProductIdSkusPage(Long id, Pagination pagination)
+		throws Exception;
+
+	public Page<Sku> getProductByExternalReferenceCodeSkusPage(
+			String externalReferenceCode, Pagination pagination)
+		throws Exception;
+
+	public Sku postProductIdSku(Long id, Sku sku) throws Exception;
+
+	public Sku postProductByExternalReferenceCodeSku(
+			String externalReferenceCode, Sku sku)
+		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

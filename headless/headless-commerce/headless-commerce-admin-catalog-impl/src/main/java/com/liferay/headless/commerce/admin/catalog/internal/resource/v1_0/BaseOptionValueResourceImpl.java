@@ -14,8 +14,8 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
-import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionCategoryResource;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionValue;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionValueResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -38,15 +38,12 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -55,68 +52,46 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseOptionCategoryResourceImpl
-	implements OptionCategoryResource {
-
-	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/optionCategories/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Response deleteOptionCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
+public abstract class BaseOptionValueResourceImpl
+	implements OptionValueResource {
 
 	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/optionCategories/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/options/{id}/optionValues/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public OptionCategory getOptionCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new OptionCategory();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/optionCategories/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Response patchOptionCategory(
+	@Tags(value = {@Tag(name = "OptionValue")})
+	public Page<OptionValue> getOptionIdOptionValuesPage(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			OptionCategory optionCategory)
+			@Context Pagination pagination)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "siteId"),
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/catalogs/{siteId}/optionCategories/")
+	@Path(
+		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValues/"
+	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Page<OptionCategory> getCatalogSiteOptionCategoriesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
+	@Tags(value = {@Tag(name = "OptionValue")})
+	public Page<OptionValue> getOptionByExternalReferenceCodeOptionValuesPage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -126,16 +101,38 @@ public abstract class BaseOptionCategoryResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
-	@Path("/catalogs/{siteId}/optionCategory/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/options/{id}/optionValue/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public OptionCategory postCatalogSiteOptionCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			OptionCategory optionCategory)
+	@Tags(value = {@Tag(name = "OptionValue")})
+	public OptionValue postOptionIdOptionValue(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			OptionValue optionValue)
 		throws Exception {
 
-		return new OptionCategory();
+		return new OptionValue();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValue/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionValue")})
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			OptionValue optionValue)
+		throws Exception {
+
+		return new OptionValue();
 	}
 
 	public void setContextCompany(Company contextCompany) {
@@ -143,7 +140,7 @@ public abstract class BaseOptionCategoryResourceImpl
 	}
 
 	protected void preparePatch(
-		OptionCategory optionCategory, OptionCategory existingOptionCategory) {
+		OptionValue optionValue, OptionValue existingOptionValue) {
 	}
 
 	protected <T, R> List<R> transform(

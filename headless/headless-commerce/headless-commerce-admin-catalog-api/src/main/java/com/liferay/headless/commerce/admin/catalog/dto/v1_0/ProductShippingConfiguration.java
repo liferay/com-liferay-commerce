@@ -24,9 +24,14 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -42,6 +47,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "ProductShippingConfiguration")
 public class ProductShippingConfiguration {
 
+	@Schema
 	public BigDecimal getDepth() {
 		return depth;
 	}
@@ -57,6 +63,9 @@ public class ProductShippingConfiguration {
 		try {
 			depth = depthUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -66,6 +75,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal depth;
 
+	@Schema
 	public Boolean getFreeShipping() {
 		return freeShipping;
 	}
@@ -81,6 +91,9 @@ public class ProductShippingConfiguration {
 		try {
 			freeShipping = freeShippingUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -90,6 +103,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean freeShipping;
 
+	@Schema
 	public BigDecimal getHeight() {
 		return height;
 	}
@@ -105,6 +119,9 @@ public class ProductShippingConfiguration {
 		try {
 			height = heightUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -114,6 +131,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal height;
 
+	@Schema
 	public Boolean getShippable() {
 		return shippable;
 	}
@@ -129,6 +147,9 @@ public class ProductShippingConfiguration {
 		try {
 			shippable = shippableUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -138,6 +159,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean shippable;
 
+	@Schema
 	public BigDecimal getShippingExtraPrice() {
 		return shippingExtraPrice;
 	}
@@ -154,6 +176,9 @@ public class ProductShippingConfiguration {
 		try {
 			shippingExtraPrice = shippingExtraPriceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -163,6 +188,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal shippingExtraPrice;
 
+	@Schema
 	public Boolean getShippingSeparately() {
 		return shippingSeparately;
 	}
@@ -178,6 +204,9 @@ public class ProductShippingConfiguration {
 		try {
 			shippingSeparately = shippingSeparatelyUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -187,6 +216,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean shippingSeparately;
 
+	@Schema
 	public BigDecimal getWeight() {
 		return weight;
 	}
@@ -202,6 +232,9 @@ public class ProductShippingConfiguration {
 		try {
 			weight = weightUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -211,6 +244,7 @@ public class ProductShippingConfiguration {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal weight;
 
+	@Schema
 	public BigDecimal getWidth() {
 		return width;
 	}
@@ -225,6 +259,9 @@ public class ProductShippingConfiguration {
 
 		try {
 			width = widthUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -264,44 +301,120 @@ public class ProductShippingConfiguration {
 
 		sb.append("{");
 
-		sb.append("\"depth\": ");
+		if (depth != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(depth);
-		sb.append(", ");
+			sb.append("\"depth\": ");
 
-		sb.append("\"freeShipping\": ");
+			sb.append(depth);
+		}
 
-		sb.append(freeShipping);
-		sb.append(", ");
+		if (freeShipping != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"height\": ");
+			sb.append("\"freeShipping\": ");
 
-		sb.append(height);
-		sb.append(", ");
+			sb.append(freeShipping);
+		}
 
-		sb.append("\"shippable\": ");
+		if (height != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(shippable);
-		sb.append(", ");
+			sb.append("\"height\": ");
 
-		sb.append("\"shippingExtraPrice\": ");
+			sb.append(height);
+		}
 
-		sb.append(shippingExtraPrice);
-		sb.append(", ");
+		if (shippable != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"shippingSeparately\": ");
+			sb.append("\"shippable\": ");
 
-		sb.append(shippingSeparately);
-		sb.append(", ");
+			sb.append(shippable);
+		}
 
-		sb.append("\"weight\": ");
+		if (shippingExtraPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(weight);
-		sb.append(", ");
+			sb.append("\"shippingExtraPrice\": ");
 
-		sb.append("\"width\": ");
+			sb.append(shippingExtraPrice);
+		}
 
-		sb.append(width);
+		if (shippingSeparately != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"shippingSeparately\": ");
+
+			sb.append(shippingSeparately);
+		}
+
+		if (weight != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"weight\": ");
+
+			sb.append(weight);
+		}
+
+		if (width != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"width\": ");
+
+			sb.append(width);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 
