@@ -76,6 +76,13 @@ public class CPDefinitionOptionRelServiceUtil {
 		return getService().fetchCPDefinitionOptionRel(cpDefinitionOptionRelId);
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinitionOptionRel fetchCPDefinitionOptionRel(
+		long cpDefinitionId, long cpOptionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchCPDefinitionOptionRel(cpDefinitionId, cpOptionId);
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinitionOptionRel getCPDefinitionOptionRel(
 		long cpDefinitionOptionRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {

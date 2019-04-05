@@ -254,14 +254,20 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public List<CPDefinitionLink> getCPDefinitionLinks(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
-		String type) throws PortalException;
+		int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
+		String type);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type, int start, int end,
-		OrderByComparator<CPDefinitionLink> orderByComparator)
-		throws PortalException;
+		OrderByComparator<CPDefinitionLink> orderByComparator);
 
 	/**
 	* Returns all the cp definition links matching the UUID and company.
@@ -298,8 +304,10 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public int getCPDefinitionLinksCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
-		throws PortalException;
+	public int getCPDefinitionLinksCount(long cpDefinitionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

@@ -121,6 +121,22 @@ public class CPDefinitionOptionValueRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRelSoap fetchCPDefinitionOptionValueRel(
+		long cpDefinitionOptionRelId, String key) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPDefinitionOptionValueRel returnValue =
+				CPDefinitionOptionValueRelServiceUtil.fetchCPDefinitionOptionValueRel(cpDefinitionOptionRelId,
+					key);
+
+			return com.liferay.commerce.product.model.CPDefinitionOptionValueRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRelSoap getCPDefinitionOptionValueRel(
 		long cpDefinitionOptionValueRelId) throws RemoteException {
 		try {

@@ -42,6 +42,15 @@ public class CPDefinitionLinkServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLink(
+		long cpDefinitionId, long cProductId, double priority, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPDefinitionLink(cpDefinitionId, cProductId, priority,
+			type, serviceContext);
+	}
+
 	public static void deleteCPDefinitionLink(long cpDefinitionLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteCPDefinitionLink(cpDefinitionLinkId);
@@ -60,6 +69,18 @@ public class CPDefinitionLinkServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPDefinitionLinks(cpDefinitionId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPDefinitionLinks(cpDefinitionId, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
 		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPDefinitionLinks(cpDefinitionId, type);
@@ -72,6 +93,11 @@ public class CPDefinitionLinkServiceUtil {
 		return getService()
 				   .getCPDefinitionLinks(cpDefinitionId, type, start, end,
 			orderByComparator);
+	}
+
+	public static int getCPDefinitionLinksCount(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPDefinitionLinksCount(cpDefinitionId);
 	}
 
 	public static int getCPDefinitionLinksCount(long cpDefinitionId, String type)

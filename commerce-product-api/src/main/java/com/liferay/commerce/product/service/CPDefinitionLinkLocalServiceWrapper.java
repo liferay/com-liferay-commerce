@@ -296,8 +296,20 @@ public class CPDefinitionLinkLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId, String type)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cpDefinitionId) {
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId, int start, int end) {
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId,
+			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId, String type) {
 		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId,
 			type);
 	}
@@ -305,8 +317,7 @@ public class CPDefinitionLinkLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
 		long cpDefinitionId, String type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator) {
 		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId,
 			type, start, end, orderByComparator);
 	}
@@ -354,8 +365,12 @@ public class CPDefinitionLinkLocalServiceWrapper
 	}
 
 	@Override
-	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public int getCPDefinitionLinksCount(long cpDefinitionId) {
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinksCount(cpDefinitionId);
+	}
+
+	@Override
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type) {
 		return _cpDefinitionLinkLocalService.getCPDefinitionLinksCount(cpDefinitionId,
 			type);
 	}
