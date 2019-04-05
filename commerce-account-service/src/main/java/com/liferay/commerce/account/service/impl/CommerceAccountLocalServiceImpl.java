@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -732,7 +733,14 @@ public class CommerceAccountLocalServiceImpl
 				indexer.delete(companyId, document.getUID());
 			}
 			else if (commerceAccount != null) {
-				commerceAccounts.add(commerceAccount);
+				User user = _userLocalService.getUser(
+					commerceAccount.getUserId());
+
+				if (commerceAccount.isBusinessAccount() ||
+					(commerceAccount.isPersonalAccount() && user.isActive())) {
+
+					commerceAccounts.add(commerceAccount);
+				}
 			}
 		}
 
@@ -869,5 +877,8 @@ public class CommerceAccountLocalServiceImpl
 
 	@ServiceReference(type = UserFileUploadsSettings.class)
 	private UserFileUploadsSettings _userFileUploadsSettings;
+
+	@ServiceReference(type = UserLocalService.class)
+	private UserLocalService _userLocalService;
 
 }
