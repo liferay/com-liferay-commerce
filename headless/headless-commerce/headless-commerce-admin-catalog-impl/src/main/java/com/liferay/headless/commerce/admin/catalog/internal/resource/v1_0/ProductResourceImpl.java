@@ -14,25 +14,60 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
+import com.liferay.commerce.product.service.CPDefinitionLinkService;
+import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
+import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
+import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentHelper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductHelper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionHelper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.SKUHelper;
+import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.internal.util.ExpandoUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionValueUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductShippingConfigurationUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSubscriptionConfigurationUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductTaxConfigurationUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.RelatedProductUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.SkuUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductResource;
+import com.liferay.headless.commerce.core.util.DateConfig;
+import com.liferay.headless.commerce.core.util.LanguageUtils;
+import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.upload.UniqueFileNameProvider;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -43,6 +78,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/product.properties",
@@ -51,8 +87,11 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Override
-	public Response deleteProduct(@NotNull String id) throws Exception {
-		_productHelper.deleteProduct(id, contextCompany);
+	public Response deleteProduct(Long id) throws Exception {
+		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+
+		_cpDefinitionService.deleteCPDefinition(
+			cpDefinition.getCPDefinitionId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -60,101 +99,16 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Product getProduct(@NotNull String id) throws Exception {
-		return _productHelper.getProduct(
-			id, contextCompany, contextAcceptLanguage);
-	}
-
-	@Override
-	public Page<Attachment> getProductAttachments(
-			@NotNull String id, Pagination pagination)
+	public Response deleteProductByExternalReferenceCode(
+			String externalReferenceCode)
 		throws Exception {
 
-		return _attachmentHelper.getAttachments(id, contextCompany, pagination);
-	}
+		CPDefinition cpDefinition =
+			ProductUtil.getProductByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
 
-	@Override
-	public Page<Category> getProductCategories(
-			@NotNull String id, Pagination pagination)
-		throws Exception {
-
-		return _productHelper.getProductCategories(
-			id, contextCompany, pagination);
-	}
-
-	@Override
-	public ProductConfiguration getProductConfiguration(@NotNull String id)
-		throws Exception {
-
-		return _productHelper.getProductConfiguration(id, contextCompany);
-	}
-
-	@Override
-	public Page<Attachment> getProductImages(
-			@NotNull String id, Pagination pagination)
-		throws Exception {
-
-		return _attachmentHelper.getImages(id, contextCompany, pagination);
-	}
-
-	@Override
-	public Page<ProductOption> getProductOptions(
-			@NotNull String id, Pagination pagination)
-		throws Exception {
-
-		return _productOptionHelper.getProductOptions(
-			id, contextCompany, contextAcceptLanguage, pagination);
-	}
-
-	@Override
-	public Page<Product> getProducts(
-			@NotNull Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _productHelper.getProducts(
-			groupId, contextAcceptLanguage, pagination);
-	}
-
-	@Override
-	public ProductShippingConfiguration getProductShippingConfiguration(
-			@NotNull String id)
-		throws Exception {
-
-		return _productHelper.getProductShippingConfiguration(
-			id, contextCompany);
-	}
-
-	@Override
-	public Page<Sku> getProductSkus(@NotNull String id, Pagination pagination)
-		throws Exception {
-
-		return _skuHelper.getSKUs(id, contextCompany, pagination);
-	}
-
-	@Override
-	public ProductSubscriptionConfiguration getProductSubscriptionConfiguration(
-			@NotNull String id)
-		throws Exception {
-
-		return _productHelper.getProductSubscriptionConfiguration(
-			id, contextCompany);
-	}
-
-	@Override
-	public ProductTaxConfiguration getProductTaxConfiguration(
-			@NotNull String id)
-		throws Exception {
-
-		return _productHelper.getProductTaxConfiguration(
-			id, contextCompany, contextAcceptLanguage);
-	}
-
-	@Override
-	public Response updateProduct(@NotNull String id, Product product)
-		throws Exception {
-
-		_productHelper.updateProduct(
-			id, product, contextCompany, contextAcceptLanguage);
+		_cpDefinitionService.deleteCPDefinition(
+			cpDefinition.getCPDefinitionId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -162,12 +116,45 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Response updateProductCategory(
-			@NotNull String id, Category[] categories)
+	public Page<Product> getCatalogSiteProductsPage(
+			Long siteId, Pagination pagination)
 		throws Exception {
 
-		_productHelper.updateProductCategories(
-			id, contextCompany, categories, contextAcceptLanguage);
+		List<CPDefinition> cpDefinitions =
+			_cpDefinitionService.getCPDefinitions(
+				siteId, WorkflowConstants.STATUS_APPROVED,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int totalItems = _cpDefinitionService.getCPDefinitionsCount(
+			siteId, WorkflowConstants.STATUS_APPROVED);
+
+		return Page.of(_toProducts(cpDefinitions), pagination, totalItems);
+	}
+
+	@Override
+	public Product getProduct(Long id) throws Exception {
+		return _productDTOMapper.toProduct(
+			ProductUtil.getProductById(id),
+			contextAcceptLanguage.getPreferredLanguageId());
+	}
+
+	@Override
+	public Product getProductByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception {
+
+		return _productDTOMapper.toProduct(
+			ProductUtil.getProductByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode),
+			contextAcceptLanguage.getPreferredLanguageId());
+	}
+
+	@Override
+	public Response patchProduct(Long id, Product product) throws Exception {
+		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+
+		_updateProduct(cpDefinition, product);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -175,12 +162,15 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Response updateProductConfiguraton(
-			@NotNull String id, ProductConfiguration productConfiguration)
+	public Response patchProductByExternalReferenceCode(
+			String externalReferenceCode, Product product)
 		throws Exception {
 
-		_productHelper.updateProductConfiguration(
-			id, contextCompany, productConfiguration);
+		CPDefinition cpDefinition =
+			ProductUtil.getProductByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		_updateProduct(cpDefinition, product);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -188,100 +178,349 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Response updateProductOptions(
-			@NotNull String id, ProductOption[] productOptions)
+	public Product postCatalogSiteProduct(Long siteId, Product product)
 		throws Exception {
 
-		_productOptionHelper.updateProductOptions(
-			id, productOptions, contextAcceptLanguage, contextCompany);
-
-		Response.ResponseBuilder responseBuilder = Response.noContent();
-
-		return responseBuilder.build();
+		return _productDTOMapper.toProduct(
+			_upsertProduct(siteId, product),
+			contextAcceptLanguage.getPreferredLanguageId());
 	}
 
-	@Override
-	public Response updateProductShippingConfiguration(
-			@NotNull String id,
-			ProductShippingConfiguration productShippingConfiguration)
+	private List<Product> _toProducts(List<CPDefinition> cpDefinitions) {
+		List<Product> products = new ArrayList<>();
+
+		for (CPDefinition cpDefinition : cpDefinitions) {
+			products.add(
+				_productDTOMapper.toProduct(
+					cpDefinition,
+					contextAcceptLanguage.getPreferredLanguageId()));
+		}
+
+		return products;
+	}
+
+	private CPDefinition _updateNestedResources(
+			Product product, CPDefinition cpDefinition,
+			ServiceContext serviceContext)
 		throws Exception {
 
-		_productHelper.updateProductShippingConfiguration(
-			id, contextCompany, productShippingConfiguration);
+		// Product configuration
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		ProductConfiguration productConfiguration = product.getConfiguration();
 
-		return responseBuilder.build();
+		if (productConfiguration != null) {
+			ProductConfigurationUtil.updateCPDefinitionInventory(
+				_cpDefinitionInventoryService, productConfiguration,
+				cpDefinition.getCPDefinitionId(), serviceContext);
+		}
+
+		// Product shipping configuration
+
+		ProductShippingConfiguration productShippingConfiguration =
+			product.getShippingConfiguration();
+
+		if (productShippingConfiguration != null) {
+			cpDefinition =
+				ProductShippingConfigurationUtil.updateCPDefinitionShippingInfo(
+					_cpDefinitionService, productShippingConfiguration,
+					cpDefinition, serviceContext);
+		}
+
+		// Product subscription configuration
+
+		ProductSubscriptionConfiguration productSubscriptionConfiguration =
+			product.getSubscriptionConfiguration();
+
+		if (productSubscriptionConfiguration != null) {
+			cpDefinition =
+				ProductSubscriptionConfigurationUtil.
+					updateCPDefinitionSubscriptionInfo(
+						_cpDefinitionService, productSubscriptionConfiguration,
+						cpDefinition, serviceContext);
+		}
+
+		// Product tax configuration
+
+		ProductTaxConfiguration productTaxConfiguration =
+			product.getTaxConfiguration();
+
+		if (productTaxConfiguration != null) {
+			cpDefinition =
+				ProductTaxConfigurationUtil.updateCPDefinitionTaxCategoryInfo(
+					_cpDefinitionService, productTaxConfiguration,
+					cpDefinition);
+		}
+
+		// Attachments
+
+		Attachment[] attachments = product.getAttachments();
+
+		if (attachments != null) {
+			for (Attachment attachment : attachments) {
+				AttachmentUtil.upsertCPAttachmentFileEntry(
+					_cpAttachmentFileEntryService, _uniqueFileNameProvider,
+					attachment,
+					_classNameLocalService.getClassNameId(
+						cpDefinition.getModelClassName()),
+					cpDefinition.getCPDefinitionId(),
+					CPAttachmentFileEntryConstants.TYPE_OTHER, serviceContext);
+			}
+		}
+
+		// Images
+
+		Attachment[] images = product.getImages();
+
+		if (images != null) {
+			for (Attachment image : images) {
+				AttachmentUtil.upsertCPAttachmentFileEntry(
+					_cpAttachmentFileEntryService, _uniqueFileNameProvider,
+					image,
+					_classNameLocalService.getClassNameId(
+						cpDefinition.getModelClassName()),
+					cpDefinition.getCPDefinitionId(),
+					CPAttachmentFileEntryConstants.TYPE_IMAGE, serviceContext);
+			}
+		}
+
+		// Product options
+
+		ProductOption[] productOptions = product.getOptions();
+
+		if (productOptions != null) {
+			for (ProductOption productOption : productOptions) {
+				CPDefinitionOptionRel cpDefinitionOptionRel =
+					ProductOptionUtil.upsertCPDefinitionOptionRel(
+						_cpDefinitionOptionRelService, productOption,
+						cpDefinition.getCPDefinitionId(), serviceContext);
+
+				ProductOptionValue[] productOptionValues =
+					productOption.getValues();
+
+				if (productOptionValues != null) {
+					for (ProductOptionValue productOptionValue :
+							productOptionValues) {
+
+						ProductOptionValueUtil.upsertCPDefinitionOptionValueRel(
+							_cpDefinitionOptionValueRelService,
+							productOptionValue,
+							cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+							serviceContext);
+					}
+				}
+			}
+		}
+
+		// Related Products
+
+		RelatedProduct[] relatedProducts = product.getRelatedProducts();
+
+		if (relatedProducts != null) {
+			for (RelatedProduct relatedProduct : relatedProducts) {
+				RelatedProductUtil.upsertCPDefinitionLink(
+					_cpDefinitionLinkService, relatedProduct,
+					cpDefinition.getCPDefinitionId(),
+					_serviceContextHelper.getServiceContext(
+						cpDefinition.getGroupId()));
+			}
+		}
+
+		// Skus
+
+		Sku[] skus = product.getSkus();
+
+		if (skus != null) {
+			for (Sku sku : skus) {
+				SkuUtil.upsertCPInstance(
+					_cpInstanceService, sku, cpDefinition.getCPDefinitionId(),
+					serviceContext);
+			}
+		}
+
+		// Categories
+
+		Category[] categories = product.getCategories();
+
+		if (categories != null) {
+
+			// TODO upsert categories
+
+		}
+
+		return cpDefinition;
 	}
 
-	@Override
-	public Response updateProductSubscriptionConfiguration(
-			@NotNull String id,
-			ProductSubscriptionConfiguration productSubscriptionConfiguration)
+	private CPDefinition _updateProduct(
+			CPDefinition cpDefinition, Product product)
 		throws Exception {
 
-		_productHelper.updateProductSubscriptionConfiguration(
-			id, contextCompany, productSubscriptionConfiguration);
+		long siteId = cpDefinition.getGroupId();
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			siteId);
 
-		return responseBuilder.build();
+		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
+
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
+
+		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
+
+		expirationCalendar.add(Calendar.MONTH, 1);
+
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
+
+		boolean neverExpire = Boolean.TRUE;
+
+		cpDefinition = _cpDefinitionService.updateCPDefinition(
+			cpDefinition.getCPDefinitionId(),
+			LanguageUtils.getLocalizedMap(product.getName()),
+			LanguageUtils.getLocalizedMap(product.getShortDescription()),
+			LanguageUtils.getLocalizedMap(product.getDescription()),
+			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
+			cpDefinition.getMetaDescriptionMap(),
+			cpDefinition.getMetaKeywordsMap(),
+			cpDefinition.isIgnoreSKUCombinations(),
+			cpDefinition.getDDMStructureKey(), true,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
+			neverExpire, serviceContext);
+
+		// Expando
+
+		Map<String, ?> expando = product.getExpando();
+
+		if (!expando.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				serviceContext.getCompanyId(), CPDefinition.class,
+				cpDefinition.getPrimaryKey(), expando);
+		}
+
+		// Update nested resources
+
+		cpDefinition = _updateNestedResources(
+			product, cpDefinition, serviceContext);
+
+		return cpDefinition;
 	}
 
-	@Override
-	public Response updateProductTaxConfiguration(
-			@NotNull String id, ProductTaxConfiguration productTaxConfiguration)
+	private CPDefinition _upsertProduct(Long siteId, Product product)
 		throws Exception {
 
-		_productHelper.updateProductTaxConfiguration(
-			id, contextCompany, productTaxConfiguration, contextAcceptLanguage);
+		boolean neverExpire = Boolean.TRUE;
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			siteId);
 
-		return responseBuilder.build();
-	}
+		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
 
-	@Override
-	public Product upsertProduct(@NotNull Long groupId, Product product)
-		throws Exception {
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
 
-		return _productHelper.upsertProduct(
-			groupId, product, contextAcceptLanguage, _user);
-	}
+		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
 
-	@Override
-	public Attachment upsertProductAttachment(
-			@NotNull String id, Attachment attachment)
-		throws Exception {
+		expirationCalendar.add(Calendar.MONTH, 1);
 
-		return _attachmentHelper.upsertAttachment(
-			id, attachment, contextCompany);
-	}
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
-	@Override
-	public Attachment upsertProductImage(
-			@NotNull String id, Attachment attachment)
-		throws Exception {
+		ProductShippingConfiguration shippingConfiguration =
+			product.getShippingConfiguration();
+		ProductTaxConfiguration taxConfiguration =
+			product.getTaxConfiguration();
 
-		return _attachmentHelper.upsertImage(id, attachment, contextCompany);
-	}
+		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
+			LanguageUtils.getLocalizedMap(product.getName()),
+			LanguageUtils.getLocalizedMap(product.getShortDescription()),
+			LanguageUtils.getLocalizedMap(product.getDescription()), null,
+			LanguageUtils.getLocalizedMap(product.getName()), null, null,
+			product.getProductType(), true,
+			GetterUtil.getBoolean(shippingConfiguration.getShippable(), true),
+			GetterUtil.getBoolean(
+				shippingConfiguration.getFreeShipping(), true),
+			GetterUtil.getBoolean(
+				shippingConfiguration.getShippingSeparately(), true),
+			GetterUtil.getDouble(
+				shippingConfiguration.getShippingExtraPrice(), 0D),
+			GetterUtil.getDouble(shippingConfiguration.getWidth(), 0D),
+			GetterUtil.getDouble(shippingConfiguration.getHeight(), 0D),
+			GetterUtil.getDouble(shippingConfiguration.getDepth(), 0D),
+			GetterUtil.getDouble(shippingConfiguration.getWeight(), 0D),
+			GetterUtil.getLong(taxConfiguration.getId(), 0L),
+			ProductUtil.isTaxExempt(null, taxConfiguration), false, null, true,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
+			neverExpire, product.getDefaultSku(),
+			product.getExternalReferenceCode(), serviceContext);
 
-	@Override
-	public Sku upsertProductSku(@NotNull String id, Sku sku) throws Exception {
-		return _skuHelper.upsertSKU(id, sku, contextCompany);
+		// Workflow
+
+		if (!product.getActive()) {
+			Map<String, Serializable> workflowContext = new HashMap<>();
+
+			_cpDefinitionService.updateStatus(
+				_user.getUserId(), cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_INACTIVE, serviceContext,
+				workflowContext);
+		}
+
+		// Expando
+
+		Map<String, ?> expando = product.getExpando();
+
+		if (!expando.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				serviceContext.getCompanyId(), CPDefinition.class,
+				cpDefinition.getPrimaryKey(), expando);
+		}
+
+		// Update nested resources
+
+		_updateNestedResources(product, cpDefinition, serviceContext);
+
+		return cpDefinition;
 	}
 
 	@Reference
-	private AttachmentHelper _attachmentHelper;
+	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
-	private ProductHelper _productHelper;
+	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 
 	@Reference
-	private ProductOptionHelper _productOptionHelper;
+	private CPDefinitionInventoryService _cpDefinitionInventoryService;
 
 	@Reference
-	private SKUHelper _skuHelper;
+	private CPDefinitionLinkService _cpDefinitionLinkService;
+
+	@Reference
+	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
+
+	@Reference
+	private CPDefinitionOptionValueRelService
+		_cpDefinitionOptionValueRelService;
+
+	@Reference
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private ProductDTOMapper _productDTOMapper;
+
+	@Reference
+	private ServiceContextHelper _serviceContextHelper;
+
+	@Reference
+	private UniqueFileNameProvider _uniqueFileNameProvider;
 
 	@Context
 	private User _user;
