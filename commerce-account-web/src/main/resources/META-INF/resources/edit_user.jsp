@@ -252,7 +252,9 @@ else {
 	</section>
 
 	<div class="commerce-cta is-visible">
-		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
+		<c:if test="<%= Validator.isNotNull(backURL) %>">
+			<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
+		</c:if>
 
 		<aui:button cssClass="commerce-button commerce-button--big" type="submit" />
 	</div>
