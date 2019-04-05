@@ -56,6 +56,10 @@ public interface CPDefinitionLinkService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionLinkServiceUtil} to access the cp definition link remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CPDefinitionLink addCPDefinitionLink(long cpDefinitionId,
+		long cProductId, double priority, String type,
+		ServiceContext serviceContext) throws PortalException;
+
 	public void deleteCPDefinitionLink(long cpDefinitionLinkId)
 		throws PortalException;
 
@@ -68,6 +72,14 @@ public interface CPDefinitionLinkService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
+		int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type) throws PortalException;
 
@@ -75,6 +87,10 @@ public interface CPDefinitionLinkService extends BaseService {
 	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPDefinitionLinksCount(long cpDefinitionId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

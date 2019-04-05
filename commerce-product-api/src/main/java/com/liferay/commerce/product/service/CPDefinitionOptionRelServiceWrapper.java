@@ -72,6 +72,14 @@ public class CPDefinitionOptionRelServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinitionOptionRel fetchCPDefinitionOptionRel(
+		long cpDefinitionId, long cpOptionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionOptionRelService.fetchCPDefinitionOptionRel(cpDefinitionId,
+			cpOptionId);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPDefinitionOptionRel getCPDefinitionOptionRel(
 		long cpDefinitionOptionRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {

@@ -121,6 +121,20 @@ public class CPDefinitionServiceUtil {
 		return getService().fetchCPDefinition(cpDefinitionId);
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchCPDefinitionByCProductExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByCProductId(
+		long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().fetchCPDefinitionByCProductId(cProductId);
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinition getCPDefinition(
 		long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
