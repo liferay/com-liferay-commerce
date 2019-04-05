@@ -2,7 +2,6 @@
 	background-color: $color-bg-alt;
 
 	&__topbar {
-		display: grid;
 		left: 0;
 		margin-left: $frame-size;
 		position: fixed;
@@ -18,7 +17,6 @@
 
 	&__sidebar {
 		bottom: 0;
-		display: grid;
 		left: 0;
 		position: fixed;
 		top: 0;

@@ -2,7 +2,7 @@
 	background-color: $color-bg;
 	color: $color-fg-alt;
 	display: grid;
-	grid-template-columns: repeat(3, auto);
+	grid-template-columns: 1fr minmax(min-content, max-content) minmax(min-content, max-content);
 	justify-content: space-between;
 	position: relative;
 

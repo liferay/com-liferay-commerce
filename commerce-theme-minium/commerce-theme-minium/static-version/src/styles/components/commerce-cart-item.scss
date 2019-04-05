@@ -74,9 +74,11 @@
 			color: $color-mood-bad;
 		}
 
-		@media (hover: hover) {
-			.commerce-cart-item:not(:hover) &:not(:focus) {
-				opacity: 0;
+		.commerce-cart-item:not(:hover) &:not(:focus) {
+			opacity: 0;
+
+			@media (hover: none) {
+				opacity: 1;
 			}
 		}
 

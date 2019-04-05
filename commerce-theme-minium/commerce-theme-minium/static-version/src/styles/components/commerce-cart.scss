@@ -70,14 +70,16 @@
 	&__totals {
 		align-items: baseline;
 		color: $color-bg;
-		display: grid;
-		grid-gap: 0 20px;
-		grid-template-columns: 1fr auto;
+		display: flex;
+		// grid-gap: 0 20px;
+		// grid-template-columns: 1fr auto;
+		flex-wrap: wrap;
 		margin: 0;
 		padding: 10px;
 		text-align: right;
 
 		dt {
+			flex: 1 1 60%;
 			font-size: 11px;
 			font-weight: normal;
 			letter-spacing: 1.1px;
@@ -91,6 +93,7 @@
 		}
 
 		dd {
+			flex: 1 1 10%;
 			font-size: 12px;
 			margin-bottom: 0;
 
