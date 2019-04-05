@@ -25,9 +25,9 @@ import java.util.Map;
 /**
  * @author Igor Beslic
  */
-public class BaseHelper {
+public class ExpandoUtil {
 
-	protected void updateExpando(
+	public static void updateExpando(
 		long companyId, Class<?> clazz, long classPK,
 		Map<String, ?> expandoAttributes) {
 
