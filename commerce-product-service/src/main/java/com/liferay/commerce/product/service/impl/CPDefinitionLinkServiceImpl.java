@@ -106,11 +106,22 @@ public class CPDefinitionLinkServiceImpl
 			ActionKeys.VIEW);
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCProductId(),
+			getPermissionChecker(), cpDefinitionLink.getCPDefinitionId(),
 			ActionKeys.VIEW);
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLink(
 			cpDefinitionLinkId);
+	}
+
+	@Override
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+
+		return cpDefinitionLinkLocalService.getCPDefinitionLinks(
+			cpDefinitionId);
 	}
 
 	@Override
