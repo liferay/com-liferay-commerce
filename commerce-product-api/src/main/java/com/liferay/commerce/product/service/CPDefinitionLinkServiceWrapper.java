@@ -34,6 +34,15 @@ public class CPDefinitionLinkServiceWrapper implements CPDefinitionLinkService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLink(
+		long cpDefinitionId, long cProductId, double priority, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLinkService.addCPDefinitionLink(cpDefinitionId,
+			cProductId, priority, type, serviceContext);
+	}
+
+	@Override
 	public void deleteCPDefinitionLink(long cpDefinitionLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionLinkService.deleteCPDefinitionLink(cpDefinitionLinkId);
@@ -55,6 +64,21 @@ public class CPDefinitionLinkServiceWrapper implements CPDefinitionLinkService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId,
+			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
 		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId,
@@ -68,6 +92,12 @@ public class CPDefinitionLinkServiceWrapper implements CPDefinitionLinkService,
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId,
 			type, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPDefinitionLinksCount(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLinkService.getCPDefinitionLinksCount(cpDefinitionId);
 	}
 
 	@Override

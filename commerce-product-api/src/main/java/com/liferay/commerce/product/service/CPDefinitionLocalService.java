@@ -307,6 +307,14 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinition fetchCPDefinition(long CPDefinitionId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinition fetchCPDefinitionByCProductId(long cProductId)
+		throws PortalException;
+
 	/**
 	* Returns the cp definition matching the UUID and group.
 	*

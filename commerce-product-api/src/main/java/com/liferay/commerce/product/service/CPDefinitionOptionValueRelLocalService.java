@@ -207,6 +207,10 @@ public interface CPDefinitionOptionValueRelLocalService extends BaseLocalService
 	public CPDefinitionOptionValueRel fetchCPDefinitionOptionValueRel(
 		long CPDefinitionOptionValueRelId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinitionOptionValueRel fetchCPDefinitionOptionValueRel(
+		long cpDefinitionOptionRelId, String key);
+
 	/**
 	* Returns the cp definition option value rel matching the UUID and group.
 	*
