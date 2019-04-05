@@ -21,7 +21,15 @@ public class CommerceAccountScreenNavigationConstants {
 
 	public static final String CATEGORY_KEY_COMMERCE_ACCOUNT_DETAIL = "detail";
 
+	public static final String ENTRY_KEY_COMMERCE_ACCOUNT_ADDRESSES =
+		"addresses";
+
 	public static final String ENTRY_KEY_COMMERCE_ACCOUNT_DETAIL = "detail";
+
+	public static final String ENTRY_KEY_COMMERCE_ACCOUNT_ORGANIZATIONS =
+		"organizations";
+
+	public static final String ENTRY_KEY_COMMERCE_ACCOUNT_USERS = "users";
 
 	public static final String SCREEN_NAVIGATION_KEY_COMMERCE_ACCOUNT_GENERAL =
 		"commerce.account.general";
