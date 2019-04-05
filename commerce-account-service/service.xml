@@ -190,6 +190,7 @@
 	</entity>
 	<exceptions>
 		<exception>CommerceAccountName</exception>
+		<exception>CommerceAccountType</exception>
 		<exception>DuplicateCommerceAccount</exception>
 	</exceptions>
 </service-builder>
