@@ -14,15 +14,25 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionHelper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionValueHelper;
+import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductOptionDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionResource;
+import com.liferay.headless.commerce.core.util.LanguageUtils;
+import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.Response;
 
@@ -32,6 +42,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/product-option.properties",
@@ -40,8 +51,12 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 
 	@Override
-	public Response deleteProductOption(@NotNull String id) throws Exception {
-		_productOptionHelper.deleteProductOption(id, contextCompany);
+	public Response deleteProductOption(Long id) throws Exception {
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(id);
+
+		_cpDefinitionOptionRelService.deleteCPDefinitionOptionRel(
+			cpDefinitionOptionRel.getCPDefinitionOptionRelId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -49,36 +64,59 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 	}
 
 	@Override
-	public Page<ProductOption> getOptions(
-			@NotNull Long groupId, Pagination pagination)
+	public Page<ProductOption>
+			getProductByExternalReferenceCodeProductOptionsPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception {
 
-		return _productOptionHelper.getProductOptions(
-			groupId, contextAcceptLanguage, pagination);
+		CPDefinition cpDefinition =
+			ProductUtil.getProductByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		List<CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRels(
+				cpDefinition.getCPDefinitionId(), pagination.getStartPosition(),
+				pagination.getEndPosition());
+
+		int totalItems =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRelsCount(
+				cpDefinition.getCPDefinitionId());
+
+		return Page.of(
+			_toProductOptions(cpDefinitionOptionRels), pagination, totalItems);
 	}
 
 	@Override
-	public ProductOption getProductOption(@NotNull String id) throws Exception {
-		return _productOptionHelper.getProductOption(
-			id, contextAcceptLanguage, contextCompany);
+	public Page<ProductOption> getProductIdProductOptionsPage(
+			Long id, Pagination pagination)
+		throws Exception {
+
+		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+
+		List<CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRels(
+				cpDefinition.getCPDefinitionId(), pagination.getStartPosition(),
+				pagination.getEndPosition());
+
+		int totalItems =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRelsCount(
+				cpDefinition.getCPDefinitionId());
+
+		return Page.of(
+			_toProductOptions(cpDefinitionOptionRels), pagination, totalItems);
 	}
 
 	@Override
-	public Page<ProductOptionValue> getProductOptionValues(
-			@NotNull String id, Pagination pagination)
-		throws Exception {
-
-		return _productOptionValueHelper.getProductOptionValues(
-			id, contextAcceptLanguage, contextCompany, pagination);
+	public ProductOption getProductOption(Long id) throws Exception {
+		return _productOptionDTOMapper.toProductOption(
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(id));
 	}
 
 	@Override
-	public Response updateProductOption(
-			@NotNull String id, ProductOption productOption)
+	public Response patchProductOption(Long id, ProductOption productOption)
 		throws Exception {
 
-		_productOptionHelper.updateProductOption(
-			id, productOption, contextAcceptLanguage, contextCompany);
+		_updateProductOption(id, productOption);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -86,31 +124,108 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 	}
 
 	@Override
-	public ProductOption upsertProductOption(
-			@NotNull Long groupId, ProductOption productOption)
+	public Page<ProductOption>
+			postProductByExternalReferenceCodeProductOptionsPage(
+				String externalReferenceCode, ProductOption[] productOptions)
 		throws Exception {
 
-		return _productOptionHelper.upsertProductOption(
-			groupId, productOption, contextAcceptLanguage);
+		CPDefinition cpDefinition =
+			ProductUtil.getProductByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		return Page.of(
+			ListUtil.toList(
+				_upsertProductOptions(cpDefinition, productOptions)));
 	}
 
 	@Override
-	public ProductOptionValue upsertProductOptionValue(
-			@NotNull String id, ProductOptionValue productOptionValue)
+	public Page<ProductOption> postProductIdProductOptionsPage(
+			Long id, ProductOption[] productOptions)
 		throws Exception {
 
-		ProductOption productOption = _productOptionHelper.getProductOption(
-			id, contextAcceptLanguage, contextCompany);
+		CPDefinition cpDefinition = ProductUtil.getProductById(id);
 
-		return _productOptionValueHelper.upsertProductOptionValue(
-			id, productOption.getGroupId(), productOptionValue,
-			contextAcceptLanguage, contextCompany);
+		return Page.of(
+			ListUtil.toList(
+				_upsertProductOptions(cpDefinition, productOptions)));
+	}
+
+	private List<ProductOption> _toProductOptions(
+		List<CPDefinitionOptionRel> cpDefinitionOptionRels) {
+
+		List<ProductOption> productOptions = new ArrayList<>();
+
+		for (CPDefinitionOptionRel cpDefinitionOptionRel :
+				cpDefinitionOptionRels) {
+
+			productOptions.add(
+				_productOptionDTOMapper.toProductOption(cpDefinitionOptionRel));
+		}
+
+		return productOptions;
+	}
+
+	private ProductOption _updateProductOption(
+			long id, ProductOption productOption)
+		throws PortalException {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(id);
+
+		ProductOption.FieldType fieldType = productOption.getFieldType();
+
+		cpDefinitionOptionRel =
+			_cpDefinitionOptionRelService.updateCPDefinitionOptionRel(
+				cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+				productOption.getOptionId(),
+				LanguageUtils.getLocalizedMap(productOption.getName()),
+				LanguageUtils.getLocalizedMap(productOption.getDescription()),
+				fieldType.getValue(),
+				GetterUtil.get(
+					productOption.getPriority(),
+					cpDefinitionOptionRel.getPriority()),
+				GetterUtil.get(
+					productOption.getFacetable(),
+					cpDefinitionOptionRel.isFacetable()),
+				GetterUtil.get(
+					productOption.getRequired(),
+					cpDefinitionOptionRel.isRequired()),
+				GetterUtil.get(
+					productOption.getSkuContributor(),
+					cpDefinitionOptionRel.isSkuContributor()),
+				_serviceContextHelper.getServiceContext(
+					cpDefinitionOptionRel.getGroupId()));
+
+		return _productOptionDTOMapper.toProductOption(cpDefinitionOptionRel);
+	}
+
+	private ProductOption[] _upsertProductOptions(
+			CPDefinition cpDefinition, ProductOption[] productOptions)
+		throws PortalException {
+
+		for (ProductOption productOption : productOptions) {
+			ProductOptionUtil.upsertCPDefinitionOptionRel(
+				_cpDefinitionOptionRelService, productOption,
+				cpDefinition.getCPDefinitionId(),
+				_serviceContextHelper.getServiceContext(
+					cpDefinition.getGroupId()));
+		}
+
+		return _productOptionDTOMapper.toProductOptions(
+			_cpDefinitionService.getCPDefinition(
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	@Reference
-	private ProductOptionHelper _productOptionHelper;
+	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
 
 	@Reference
-	private ProductOptionValueHelper _productOptionValueHelper;
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private ProductOptionDTOMapper _productOptionDTOMapper;
+
+	@Reference
+	private ServiceContextHelper _serviceContextHelper;
 
 }
