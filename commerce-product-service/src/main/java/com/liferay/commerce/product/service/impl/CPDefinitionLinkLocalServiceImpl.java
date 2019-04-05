@@ -182,6 +182,11 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	@Override
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId) {
+		return cpDefinitionLinkPersistence.findByCPDefinitionId(cpDefinitionId);
+	}
+
+	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
 		long cpDefinitionId, int start, int end) {
 
