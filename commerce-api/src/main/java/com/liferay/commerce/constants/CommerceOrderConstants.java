@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
  */
 public class CommerceOrderConstants {
 
+	public static final String COMMERCE_ORDER = "commerce-order";
+
 	public static final int ORDER_STATUS_ANY = WorkflowConstants.STATUS_ANY;
 
 	public static final int ORDER_STATUS_AWAITING_FULFILLMENT = 11;
