@@ -286,10 +286,10 @@ List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cp
 							%>
 
 								<dt class="autofit-col specification-term">
-									<%= cpSpecificationOption.getTitle(languageId) %>
+									<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
 								</dt>
 								<dd class="autofit-col specification-desc">
-									<%= cpDefinitionSpecificationOptionValue.getValue(languageId) %>
+									<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
 								</dd>
 
 							<%
@@ -344,7 +344,7 @@ List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cp
 						%>
 
 							<dt class="autofit-col specification-term">
-								<%= attachmentCPMedia.getTitle() %>
+								<%= HtmlUtil.escape(attachmentCPMedia.getTitle()) %>
 							</dt>
 							<dd class="autofit-col specification-desc">
 								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= attachmentCPMedia.getDownloadUrl() %>" />

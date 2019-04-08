@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.permission.RolePermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -195,7 +196,7 @@ public class CommerceAccountUserClayTable
 			members.add(
 				new Member(
 					user.getUserId(), accountFilter.getAccountId(),
-					user.getFullName(), user.getEmailAddress(),
+					HtmlUtil.escape(user.getFullName()), user.getEmailAddress(),
 					getUserRoles(
 						user, commerceAccount.getCommerceAccountGroupId(),
 						themeDisplay.getPermissionChecker()),
