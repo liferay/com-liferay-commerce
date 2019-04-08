@@ -8,6 +8,7 @@
 	grid-template-columns: auto 1fr;
 
 	&::before {
+		align-self: center;
 		background-color: $color-theme;
 		border-radius: 50%;
 		content: '';
