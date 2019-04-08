@@ -6,7 +6,7 @@ function _construct(Parent, args) {
 		var instance = new Constructor();
 		return instance;
 	};
-  return _construct.apply(null, arguments);
+return _construct.apply(null, arguments);
 }
 
 var context = Object.assign(
