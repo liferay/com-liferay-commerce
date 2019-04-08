@@ -206,8 +206,8 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>
 				</div>
 
-				<div class="commerce-value">
-					<%= HtmlUtil.escape(commerceCartContentMiniDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
+				<div class="commerce-value pl-1">
+					(<%= HtmlUtil.escape(commerceCartContentMiniDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>)
 				</div>
 			</c:if>
 		</li>
@@ -237,8 +237,8 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					<%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %>
 				</div>
 
-				<div class="commerce-value">
-					<%= HtmlUtil.escape(commerceCartContentMiniDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>
+				<div class="commerce-value pl-1">
+					(<%= HtmlUtil.escape(commerceCartContentMiniDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>)
 				</div>
 			</c:if>
 
