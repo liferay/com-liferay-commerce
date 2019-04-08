@@ -1,3 +1,14 @@
+function _construct(Parent, args) {
+	_construct = function _construct(Parent, args) {
+		var a = [null];
+		a.push.apply(a, args);
+		var Constructor = Function.bind.apply(Parent, a);
+		var instance = new Constructor();
+		return instance;
+	};
+  return _construct.apply(null, arguments);
+}
+
 var context = Object.assign(
 	$CONTEXT
 );
@@ -22,7 +33,7 @@ if (context.defaultEventHandler) {
 
 			Liferay.component(
 				'$ID',
-				new $MODULE.default(...componentArgs),
+				_construct($MODULE.default, componentArgs),
 				componentConfig
 			);
 		}
@@ -31,7 +42,7 @@ if (context.defaultEventHandler) {
 else {
 	Liferay.component(
 		'$ID',
-		new $MODULE.default(...componentArgs),
+		_construct($MODULE.default, componentArgs),
 		componentConfig
 	);
 }

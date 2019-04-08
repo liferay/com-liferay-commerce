@@ -1,14 +1,14 @@
 .minium-topbar {
 	background-color: $color-bg;
 	color: $color-fg-alt;
-	display: grid;
-	grid-template-columns: 1fr minmax(min-content, max-content) minmax(min-content, max-content);
-	justify-content: space-between;
+	display: flex;
+	flex-wrap: wrap;
 	position: relative;
 
 	&__start,
 	&__end {
 		display: flex;
+		flex: 1 1 auto;
 	}
 
 	&__end {
@@ -17,7 +17,7 @@
 
 	&__search {
 		background-color: $color-bg-alt;
-		grid-column: span 3;
+		flex: 1 1 100%;
 		max-height: $frame-size;
 		overflow: hidden;
 		transition: max-height $transition;
