@@ -37,6 +37,7 @@ List<CommerceOrder> commerceOrders = commerceOrderContentDisplayContext.getComme
 		<div class="commerce-orders-container" id="<portlet:namespace />entriesContainer">
 			<commerce-ui:table
 				dataProviderKey="commercePendingOrders"
+				filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 				itemPerPage="<%= 5 %>"
 				namespace="<%= renderResponse.getNamespace() %>"
 				pageNumber="1"
