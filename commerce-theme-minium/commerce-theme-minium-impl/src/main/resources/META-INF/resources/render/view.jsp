@@ -264,10 +264,10 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 						%>
 
 							<dt class="specification-term">
-								<%= cpSpecificationOption.getTitle(languageId) %>
+								<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
 							</dt>
 							<dd class="specification-desc">
-								<%= cpDefinitionSpecificationOptionValue.getValue(languageId) %>
+								<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
 							</dd>
 
 						<%

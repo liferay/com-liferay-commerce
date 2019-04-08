@@ -50,7 +50,7 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 	<div class="card-section-expand">
 		<div class="card-title">
 			<a href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
-				<%= cpCatalogEntry.getName() %>
+				<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 			</a>
 		</div>
 

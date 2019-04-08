@@ -48,7 +48,7 @@ List<CPOptionCategory> cpOptionCategories = cpSpecificationOptionDisplayContext.
 		for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
 		%>
 
-			<aui:option label="<%= cpOptionCategory.getTitle(locale) %>" selected="<%= cpOptionCategoryId == cpOptionCategory.getCPOptionCategoryId() %>" value="<%= cpOptionCategory.getCPOptionCategoryId() %>" />
+			<aui:option label="<%= HtmlUtil.escape(cpOptionCategory.getTitle(locale)) %>" selected="<%= cpOptionCategoryId == cpOptionCategory.getCPOptionCategoryId() %>" value="<%= cpOptionCategory.getCPOptionCategoryId() %>" />
 
 		<%
 		}
