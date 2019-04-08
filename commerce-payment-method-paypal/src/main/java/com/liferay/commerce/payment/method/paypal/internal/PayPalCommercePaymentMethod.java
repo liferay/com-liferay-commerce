@@ -885,8 +885,18 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 
 			item.setName(commerceOrderItem.getName(languageId));
+
+			/*
+			PayPal is checking if the item price is coherent with total.
+			We have to send the 'single item' price calculating also discounts
+			 */
+			BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
+
 			item.setPrice(
-				_payPalDecimalFormat.format(commerceOrderItem.getFinalPrice()));
+				_payPalDecimalFormat.format(
+					finalPrice.divide(
+						new BigDecimal(commerceOrderItem.getQuantity()))));
+
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
 
