@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.util;
 
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.PortalUtil;
 
@@ -45,7 +47,7 @@ public class CPCompareUtil {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		HttpServletRequest originalHttpServletRequest =
+		HttpServletRequest originalServletRequest =
 			PortalUtil.getOriginalServletRequest(httpServletRequest);
 
 		HttpSession httpSession = originalHttpServletRequest.getSession();
@@ -57,7 +59,20 @@ public class CPCompareUtil {
 			return new ArrayList<>();
 		}
 
-		return cpDefinitionIds;
+		List<Long> activeCPDefinitionIds = new ArrayList<>();
+
+		for (long cpDefinitionId : cpDefinitionIds) {
+			CPDefinition cpDefinition =
+				CPDefinitionLocalServiceUtil.fetchCPDefinition(cpDefinitionId);
+
+			if ((cpDefinition != null) && cpDefinition.isApproved()) {
+				activeCPDefinitionIds.add(cpDefinitionId);
+			}
+		}
+
+		setCPDefinitionIds(httpServletRequest, activeCPDefinitionIds);
+
+		return activeCPDefinitionIds;
 	}
 
 	public static void removeCompareProduct(
