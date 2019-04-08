@@ -2,10 +2,8 @@
 	$item-image-size: 60px;
 	$item-image-size-sm: 50px;
 
-	display: grid;
+	display: flex;
 	font-size: 12px;
-	grid-gap: 10px;
-	grid-template-columns: $item-image-size 1fr 100px;
 	max-height: 130px;
 	overflow: hidden;
 	position: relative;
@@ -13,7 +11,10 @@
 
 	&--search {
 		font-size: 14px;
-		grid-template-columns: $item-image-size-sm 1fr 100px;
+	
+		&__image {
+			flex-basis: $item-image-size-sm;
+		}
 	}
 
 	.commerce-item.is-not-valid & {
@@ -23,7 +24,8 @@
 	&__image {
 		align-self: center;
 		border-radius: 4px;
-		margin: auto;
+		flex: 0 0 $item-image-size;
+		margin: auto 10px auto 0;
 		max-height: $item-image-size;
 		max-width: 100%;
 	}
