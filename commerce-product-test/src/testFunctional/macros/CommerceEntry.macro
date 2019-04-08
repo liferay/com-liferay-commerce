@@ -280,7 +280,7 @@ definition {
 	}
 
 	macro gotoBreadcrumb {
-		AssertClick(
+		Click(
 			locator1 = "CommerceEntry#BREADCRUMBS",
 			value1 = "${breadcrumb}",
 			key_breadcrumb = "${breadcrumb}"
