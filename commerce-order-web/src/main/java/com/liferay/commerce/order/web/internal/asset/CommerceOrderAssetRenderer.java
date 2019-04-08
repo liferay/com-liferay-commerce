@@ -15,6 +15,7 @@
 package com.liferay.commerce.order.web.internal.asset;
 
 import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.petra.string.StringPool;
@@ -38,6 +39,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Andrea Di Giorgi
@@ -74,7 +76,7 @@ public class CommerceOrderAssetRenderer
 	public String getJspPath(
 		HttpServletRequest httpServletRequest, String template) {
 
-		return null;
+		return "/asset/full_content.jsp";
 	}
 
 	@Override
@@ -147,6 +149,18 @@ public class CommerceOrderAssetRenderer
 
 		return CommerceOrderPermission.contains(
 			permissionChecker, _commerceOrder, ActionKeys.VIEW);
+	}
+
+	@Override
+	public boolean include(
+			HttpServletRequest request, HttpServletResponse response,
+			String template)
+		throws Exception {
+
+		request.setAttribute(
+			CommerceOrderConstants.COMMERCE_ORDER, _commerceOrder);
+
+		return super.include(request, response, template);
 	}
 
 	@Override
