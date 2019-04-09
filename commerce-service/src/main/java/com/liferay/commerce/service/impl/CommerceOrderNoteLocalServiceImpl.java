@@ -15,6 +15,7 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.exception.CommerceOrderNoteContentException;
+import com.liferay.commerce.exception.DuplicateCommerceOrderNoteException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.service.base.CommerceOrderNoteLocalServiceBaseImpl;
@@ -52,6 +53,9 @@ public class CommerceOrderNoteLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		validate(content);
+
+		validateExternalReferenceCode(
+			serviceContext.getCompanyId(), externalReferenceCode);
 
 		long commerceOrderNoteId = counterLocalService.increment();
 
@@ -181,6 +185,21 @@ public class CommerceOrderNoteLocalServiceImpl
 	protected void validate(String content) throws PortalException {
 		if (Validator.isNull(content)) {
 			throw new CommerceOrderNoteContentException();
+		}
+	}
+
+	protected void validateExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceOrderNote commerceOrderNote =
+			commerceOrderNotePersistence.fetchByC_ERC(
+				companyId, externalReferenceCode);
+
+		if (commerceOrderNote != null) {
+			throw new DuplicateCommerceOrderNoteException(
+				"There is another commerce order note with external " +
+					"reference code " + externalReferenceCode);
 		}
 	}
 

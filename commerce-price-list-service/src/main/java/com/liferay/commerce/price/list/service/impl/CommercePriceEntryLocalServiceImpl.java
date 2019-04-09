@@ -135,6 +135,9 @@ public class CommercePriceEntryLocalServiceImpl
 
 		validate(commercePriceListId, cpInstanceUuid);
 
+		validateExternalReferenceCode(
+			serviceContext.getCompanyId(), externalReferenceCode);
+
 		long commercePriceEntryId = counterLocalService.increment();
 
 		CommercePriceEntry commercePriceEntry =
@@ -535,7 +538,7 @@ public class CommercePriceEntryLocalServiceImpl
 	 *
 	 * @param  commercePriceEntryId - <b>Only</b> used when updating an entity
 	 *         the matching one will be updated
-	 * @param  cpInstanceId - <b>Only</b> used when adding a new entity
+	 * @param  cProductId - <b>Only</b> used when adding a new entity
 	 * @param  commercePriceListId - <b>Only</b> used when adding a new entity
 	 *         to a price list
 	 * @param  externalReferenceCode - The external identifier code from a 3rd
@@ -738,6 +741,21 @@ public class CommercePriceEntryLocalServiceImpl
 
 		if (commercePriceEntry != null) {
 			throw new DuplicateCommercePriceEntryException();
+		}
+	}
+
+	protected void validateExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryPersistence.fetchByC_ERC(
+				companyId, externalReferenceCode);
+
+		if (commercePriceEntry != null) {
+			throw new DuplicateCommercePriceEntryException(
+				"There is another commerce price entry with external " +
+					"reference code " + externalReferenceCode);
 		}
 	}
 

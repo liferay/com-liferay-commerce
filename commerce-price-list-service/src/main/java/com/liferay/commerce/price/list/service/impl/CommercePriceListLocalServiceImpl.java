@@ -19,6 +19,7 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.exception.CommercePriceListCurrencyException;
 import com.liferay.commerce.price.list.exception.CommercePriceListDisplayDateException;
 import com.liferay.commerce.price.list.exception.CommercePriceListExpirationDateException;
+import com.liferay.commerce.price.list.exception.DuplicateCommercePriceListException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceListLocalServiceBaseImpl;
@@ -115,6 +116,9 @@ public class CommercePriceListLocalServiceImpl
 		long groupId = serviceContext.getScopeGroupId();
 
 		validate(commerceCurrencyId);
+
+		validateExternalReferenceCode(
+			serviceContext.getCompanyId(), externalReferenceCode);
 
 		Date displayDate = null;
 		Date expirationDate = null;
@@ -909,6 +913,21 @@ public class CommercePriceListLocalServiceImpl
 
 		if (commerceCurrency == null) {
 			throw new CommercePriceListCurrencyException();
+		}
+	}
+
+	protected void validateExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListPersistence.fetchByC_ERC(
+				companyId, externalReferenceCode);
+
+		if (commercePriceList != null) {
+			throw new DuplicateCommercePriceListException(
+				"There is another commerce price list with external " +
+					"reference code " + externalReferenceCode);
 		}
 	}
 
