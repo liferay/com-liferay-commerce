@@ -38,12 +38,15 @@ import java.util.Objects;
 
 /**
  * @author Ethan Bustad
+ * @author Alessio Antonio Rendina
  */
 public class CProductUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		runSQL(CProductModelImpl.TABLE_SQL_CREATE);
+		if (!hasTable(CProductModelImpl.TABLE_NAME)) {
+			runSQL(CProductModelImpl.TABLE_SQL_CREATE);
+		}
 
 		_addIndexes(CProductModelImpl.TABLE_NAME);
 
