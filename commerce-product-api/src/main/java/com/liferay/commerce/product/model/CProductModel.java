@@ -84,6 +84,21 @@ public interface CProductModel extends BaseModel<CProduct>, GroupedModel,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this c product.
+	 *
+	 * @return the external reference code of this c product
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this c product.
+	 *
+	 * @param externalReferenceCode the external reference code of this c product
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the c product ID of this c product.
 	 *
 	 * @return the c product ID of this c product

@@ -32,7 +32,6 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPDefinition">
 		<field name="uuid" type="String" />
-		<field name="externalReferenceCode" type="String" />
 		<field name="defaultLanguageId" type="String" />
 		<field name="CPDefinitionId" type="long" />
 		<field name="groupId" type="long" />
@@ -380,6 +379,7 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CProduct">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="CProductId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

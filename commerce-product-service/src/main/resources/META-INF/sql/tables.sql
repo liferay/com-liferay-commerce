@@ -43,7 +43,6 @@ create table CPDSpecificationOptionValue (
 
 create table CPDefinition (
 	uuid_ VARCHAR(75) null,
-	externalReferenceCode VARCHAR(75) null,
 	defaultLanguageId VARCHAR(75) null,
 	CPDefinitionId LONG not null primary key,
 	groupId LONG,
@@ -358,6 +357,7 @@ create table CPTaxCategory (
 
 create table CProduct (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	CProductId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

@@ -70,6 +70,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 	public static final String TABLE_NAME = "CProduct";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "CProductId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -84,6 +85,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -95,7 +97,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 		TABLE_COLUMNS_MAP.put("latestVersion", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CProduct (uuid_ VARCHAR(75) null,CProductId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,publishedCPDefinitionId LONG,latestVersion INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CProduct (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CProductId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,publishedCPDefinitionId LONG,latestVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CProduct";
 	public static final String ORDER_BY_JPQL = " ORDER BY cProduct.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CProduct.createDate DESC";
@@ -112,9 +114,10 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CProduct"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
+	public static final long GROUPID_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.product.service.util.ServiceProps.get(
 				"lock.expiration.time.com.liferay.commerce.product.model.CProduct"));
 
@@ -156,6 +159,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CProductId", getCProductId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -178,6 +182,13 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CProductId = (Long)attributes.get("CProductId");
@@ -257,6 +268,31 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@Override
@@ -440,6 +476,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 		CProductImpl cProductImpl = new CProductImpl();
 
 		cProductImpl.setUuid(getUuid());
+		cProductImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cProductImpl.setCProductId(getCProductId());
 		cProductImpl.setGroupId(getGroupId());
 		cProductImpl.setCompanyId(getCompanyId());
@@ -513,6 +550,8 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 		cProductModelImpl._originalUuid = cProductModelImpl._uuid;
 
+		cProductModelImpl._originalExternalReferenceCode = cProductModelImpl._externalReferenceCode;
+
 		cProductModelImpl._originalGroupId = cProductModelImpl._groupId;
 
 		cProductModelImpl._setOriginalGroupId = false;
@@ -536,6 +575,15 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			cProductCacheModel.uuid = null;
+		}
+
+		cProductCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = cProductCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			cProductCacheModel.externalReferenceCode = null;
 		}
 
 		cProductCacheModel.CProductId = getCProductId();
@@ -581,10 +629,12 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", CProductId=");
 		sb.append(getCProductId());
 		sb.append(", groupId=");
@@ -610,7 +660,7 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CProduct");
@@ -619,6 +669,10 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
@@ -668,6 +722,8 @@ public class CProductModelImpl extends BaseModelImpl<CProduct>
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _CProductId;
 	private long _groupId;
 	private long _originalGroupId;

@@ -126,6 +126,8 @@ public class CProductPersistenceTest {
 
 		newCProduct.setUuid(RandomTestUtil.randomString());
 
+		newCProduct.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCProduct.setGroupId(RandomTestUtil.nextLong());
 
 		newCProduct.setCompanyId(RandomTestUtil.nextLong());
@@ -147,6 +149,8 @@ public class CProductPersistenceTest {
 		CProduct existingCProduct = _persistence.findByPrimaryKey(newCProduct.getPrimaryKey());
 
 		Assert.assertEquals(existingCProduct.getUuid(), newCProduct.getUuid());
+		Assert.assertEquals(existingCProduct.getExternalReferenceCode(),
+			newCProduct.getExternalReferenceCode());
 		Assert.assertEquals(existingCProduct.getCProductId(),
 			newCProduct.getCProductId());
 		Assert.assertEquals(existingCProduct.getGroupId(),
@@ -204,6 +208,15 @@ public class CProductPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CProduct newCProduct = addCProduct();
 
@@ -227,9 +240,10 @@ public class CProductPersistenceTest {
 
 	protected OrderByComparator<CProduct> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CProduct", "uuid", true,
-			"CProductId", true, "groupId", true, "companyId", true, "userId",
-			true, "userName", true, "createDate", true, "modifiedDate", true,
-			"publishedCPDefinitionId", true, "latestVersion", true);
+			"externalReferenceCode", true, "CProductId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "publishedCPDefinitionId", true,
+			"latestVersion", true);
 	}
 
 	@Test
@@ -438,6 +452,14 @@ public class CProductPersistenceTest {
 		Assert.assertEquals(Long.valueOf(existingCProduct.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCProduct,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(existingCProduct.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCProduct,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCProduct.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCProduct,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CProduct addCProduct() throws Exception {
@@ -446,6 +468,8 @@ public class CProductPersistenceTest {
 		CProduct cProduct = _persistence.create(pk);
 
 		cProduct.setUuid(RandomTestUtil.randomString());
+
+		cProduct.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		cProduct.setGroupId(RandomTestUtil.nextLong());
 
