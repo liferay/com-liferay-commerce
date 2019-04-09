@@ -33,6 +33,8 @@ if (commerceOrder != null) {
 <aui:form action="<%= applyCommerceDiscountCouponCodeActionURL %>" method="post" name="fm">
 	<liferay-ui:error exception="<%= CommerceDiscountCouponCodeException.class %>" message="please-enter-a-valid-coupon-code" />
 
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+
 	<c:choose>
 		<c:when test="<%= Validator.isNull(commerceOrder) %>">
 		</c:when>
