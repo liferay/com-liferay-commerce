@@ -30,6 +30,7 @@ import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CPTaxCategory;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
@@ -202,6 +203,11 @@ public class DTOMapper {
 					cpDefinition.getCPAttachmentFileEntries(
 						CPAttachmentFileEntryConstants.TYPE_IMAGE,
 						WorkflowConstants.STATUS_APPROVED)));
+
+			CProduct cProduct = cpDefinition.getCProduct();
+
+			product.setExternalReferenceCode(
+				cProduct.getExternalReferenceCode());
 		}
 		catch (Exception e) {
 			_log.error("Cannot instantiate Product ", e);
@@ -212,8 +218,6 @@ public class DTOMapper {
 		product.setActive(!cpDefinition.isInactive());
 		product.setDescription(
 			LanguageUtils.getLanguageIdMap(cpDefinition.getDescriptionMap()));
-		product.setExternalReferenceCode(
-			cpDefinition.getExternalReferenceCode());
 		product.setId(cpDefinition.getCPDefinitionId());
 		product.setProductType(cpDefinition.getProductTypeName());
 		product.setShortDescription(

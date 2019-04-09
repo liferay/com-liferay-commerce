@@ -480,9 +480,10 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addNumber(FIELD_DEPTH, cpDefinition.getDepth());
 		document.addNumber(FIELD_HEIGHT, cpDefinition.getHeight());
 
+		CProduct cProduct = cpDefinition.getCProduct();
+
 		document.addKeyword(
-			FIELD_EXTERNAL_REFERENCE_CODE,
-			cpDefinition.getExternalReferenceCode());
+			FIELD_EXTERNAL_REFERENCE_CODE, cProduct.getExternalReferenceCode());
 
 		document.addKeyword(
 			FIELD_IS_IGNORE_SKU_COMBINATIONS,
@@ -582,8 +583,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addText(
 			FIELD_SPECIFICATION_VALUES_NAMES,
 			ArrayUtil.toStringArray(specificationOptionValuesNames));
-
-		CProduct cProduct = cpDefinition.getCProduct();
 
 		List<String> types = _cpDefinitionLinkTypeRegistry.getTypes();
 
