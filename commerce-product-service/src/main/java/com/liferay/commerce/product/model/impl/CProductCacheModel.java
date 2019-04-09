@@ -64,10 +64,12 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", CProductId=");
 		sb.append(CProductId);
 		sb.append(", groupId=");
@@ -100,6 +102,13 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 		}
 		else {
 			cProductImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			cProductImpl.setExternalReferenceCode("");
+		}
+		else {
+			cProductImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		cProductImpl.setCProductId(CProductId);
@@ -139,6 +148,7 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		CProductId = objectInput.readLong();
 
@@ -166,6 +176,13 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 			objectOutput.writeUTF(uuid);
 		}
 
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(CProductId);
 
 		objectOutput.writeLong(groupId);
@@ -190,6 +207,7 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long CProductId;
 	public long groupId;
 	public long companyId;

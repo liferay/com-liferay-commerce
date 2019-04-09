@@ -47,9 +47,11 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 
 	@Override
 	public com.liferay.commerce.product.model.CProduct addCProduct(
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cProductLocalService.addCProduct(serviceContext);
+		return _cProductLocalService.addCProduct(externalReferenceCode,
+			serviceContext);
 	}
 
 	/**
@@ -188,6 +190,20 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 	public com.liferay.commerce.product.model.CProduct fetchCProduct(
 		long CProductId) {
 		return _cProductLocalService.fetchCProduct(CProductId);
+	}
+
+	/**
+	* Returns the c product with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the c product's external reference code
+	* @return the matching c product, or <code>null</code> if a matching c product could not be found
+	*/
+	@Override
+	public com.liferay.commerce.product.model.CProduct fetchCProductByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _cProductLocalService.fetchCProductByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**
