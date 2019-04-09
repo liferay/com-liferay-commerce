@@ -211,7 +211,7 @@ public class EditCommerceAccountUserMVCActionCommand
 		if (Validator.isNotNull(newPassword1) ||
 			Validator.isNotNull(newPassword2)) {
 
-			_userService.updatePassword(
+			_userLocalService.updatePassword(
 				user.getUserId(), newPassword1, newPassword2, passwordReset);
 		}
 
@@ -261,7 +261,7 @@ public class EditCommerceAccountUserMVCActionCommand
 
 		// Update user
 
-		_userService.updateUser(
+		_userLocalService.updateUser(
 			userId, user.getPassword(), null, null, false,
 			user.getReminderQueryQuestion(), user.getReminderQueryAnswer(),
 			screenName, emailAddress, user.getFacebookId(), user.getOpenId(),
@@ -272,9 +272,7 @@ public class EditCommerceAccountUserMVCActionCommand
 			birthdayCal.get(Calendar.DAY_OF_MONTH),
 			birthdayCal.get(Calendar.YEAR), null, null, null, null, null,
 			user.getJobTitle(), user.getGroupIds(), user.getOrganizationIds(),
-			user.getRoleIds(), null, user.getUserGroupIds(),
-			user.getAddresses(), user.getEmailAddresses(), user.getPhones(),
-			user.getWebsites(), null, serviceContext);
+			user.getRoleIds(), null, user.getUserGroupIds(), serviceContext);
 
 		// Update user password
 
