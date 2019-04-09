@@ -26,7 +26,9 @@ import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.StringPool;
@@ -144,9 +146,15 @@ public class CommerceOrderImporter {
 
 		// Retrieve CPDefinition and associated instances
 
-		CPDefinition cpDefinition =
-			_cpDefinitionLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), externalProductId);
+		CProduct cProduct = _cProductLocalService.fetchCProductByReferenceCode(
+			serviceContext.getCompanyId(), externalProductId);
+
+		if (cProduct == null) {
+			return;
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cProduct.getPublishedCPDefinitionId());
 
 		if (cpDefinition == null) {
 			return;
@@ -210,6 +218,9 @@ public class CommerceOrderImporter {
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private UserIdMapperLocalService _userIdMapperLocalService;

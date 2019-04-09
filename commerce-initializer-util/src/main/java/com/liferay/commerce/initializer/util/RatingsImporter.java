@@ -20,7 +20,9 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.MappingJsonFactory;
 
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -139,9 +141,15 @@ public class RatingsImporter {
 
 		// Retrieve CPDefinition
 
-		CPDefinition cpDefinition =
-			_cpDefinitionLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), externalReferenceId);
+		CProduct cProduct = _cProductLocalService.fetchCProductByReferenceCode(
+			serviceContext.getCompanyId(), externalReferenceId);
+
+		if (cProduct == null) {
+			return;
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cProduct.getPublishedCPDefinitionId());
 
 		if (cpDefinition == null) {
 			return;
@@ -198,6 +206,9 @@ public class RatingsImporter {
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private RatingsEntryLocalService _ratingsEntryLocalService;

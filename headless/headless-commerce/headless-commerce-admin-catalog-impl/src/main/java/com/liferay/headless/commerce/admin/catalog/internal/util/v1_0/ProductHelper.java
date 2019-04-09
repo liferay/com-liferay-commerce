@@ -19,8 +19,11 @@ import com.liferay.asset.kernel.service.AssetCategoryService;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
+import com.liferay.commerce.product.exception.NoSuchCProductException;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
@@ -114,10 +117,10 @@ public class ProductHelper extends BaseHelper {
 	public CPDefinition getProductById(String id, Company company)
 		throws PortalException {
 
-		CPDefinition cpDefinition;
+		CProduct cProduct = null;
 
 		if (IdUtils.isLocalPK(id)) {
-			cpDefinition = _cpDefinitionService.getCPDefinition(
+			cProduct = _cProductLocalService.fetchCProduct(
 				GetterUtil.getLong(id));
 		}
 		else {
@@ -126,9 +129,17 @@ public class ProductHelper extends BaseHelper {
 
 			String erc = IdUtils.getExternalReferenceCodeFromId(id);
 
-			cpDefinition = _cpDefinitionService.fetchByExternalReferenceCode(
+			cProduct = _cProductLocalService.fetchCProductByReferenceCode(
 				company.getCompanyId(), erc);
 		}
+
+		if (cProduct == null) {
+			throw new NoSuchCProductException(
+				"Unable to find Product with ID: " + id);
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionService.fetchCPDefinition(
+			cProduct.getPublishedCPDefinitionId());
 
 		if (cpDefinition == null) {
 			throw new NoSuchCPDefinitionException(
@@ -633,6 +644,9 @@ public class ProductHelper extends BaseHelper {
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private DTOMapper _dtoMapper;
