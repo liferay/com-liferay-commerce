@@ -94,6 +94,10 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 		}
 
 		hideDefaultSuccessMessage(actionRequest);
+
+		sendRedirect(
+			actionRequest, actionResponse,
+			ParamUtil.getString(actionRequest, "redirect"));
 	}
 
 	protected boolean isValidCouponCode(
