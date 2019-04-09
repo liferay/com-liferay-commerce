@@ -398,10 +398,16 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			commerceOrder.getCompanyId(),
-			commerceAccount.getCommerceAccountGroupId(),
-			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId());
+		if (hasWorkflowDefinition(
+				commerceOrder.getScopeGroupId(),
+				commerceOrder.getCommerceOrderId())) {
+
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				commerceOrder.getCompanyId(),
+				commerceAccount.getCommerceAccountGroupId(),
+				CommerceOrder.class.getName(),
+				commerceOrder.getCommerceOrderId());
+		}
 
 		return commerceOrder;
 	}
