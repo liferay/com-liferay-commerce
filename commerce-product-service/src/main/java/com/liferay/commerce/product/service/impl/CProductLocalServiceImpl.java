@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.DuplicateCProductException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CProductLocalServiceBaseImpl;
@@ -27,30 +28,34 @@ import java.util.Date;
 
 /**
  * @author Ethan Bustad
+ * @author Alessio Antonio Rendina
  */
 public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 	@Override
-	public CProduct addCProduct(ServiceContext serviceContext)
+	public CProduct addCProduct(
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		validate(serviceContext.getCompanyId(), externalReferenceCode);
 
 		CProduct cProduct = cProductLocalService.createCProduct(
 			counterLocalService.increment());
 
-		cProduct.setUuid(serviceContext.getUuid());
-		cProduct.setGroupId(serviceContext.getScopeGroupId());
-
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
 		cProduct.setCompanyId(user.getCompanyId());
+		cProduct.setGroupId(serviceContext.getScopeGroupId());
 		cProduct.setUserId(user.getUserId());
 		cProduct.setUserName(user.getFullName());
+		cProduct.setUuid(serviceContext.getUuid());
 
 		Date now = new Date();
 
 		cProduct.setCreateDate(now);
 		cProduct.setModifiedDate(now);
 
+		cProduct.setExternalReferenceCode(externalReferenceCode);
 		cProduct.setLatestVersion(1);
 
 		return cProductPersistence.update(cProduct);
@@ -106,6 +111,19 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 			CPDefinition.class);
 
 		indexer.reindex(CPDefinition.class.getName(), cpDefinitionId);
+	}
+
+	protected void validate(long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CProduct cProduct = cProductPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+
+		if (cProduct != null) {
+			throw new DuplicateCProductException(
+				"There is another commerce product with external reference " +
+					"code " + externalReferenceCode);
+		}
 	}
 
 }
