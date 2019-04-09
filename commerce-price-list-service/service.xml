@@ -285,6 +285,7 @@
 		<exception>CommercePriceListDisplayDate</exception>
 		<exception>CommercePriceListExpirationDate</exception>
 		<exception>DuplicateCommercePriceEntry</exception>
+		<exception>DuplicateCommercePriceList</exception>
 		<exception>DuplicateCommerceTierPriceEntry</exception>
 	</exceptions>
 </service-builder>
