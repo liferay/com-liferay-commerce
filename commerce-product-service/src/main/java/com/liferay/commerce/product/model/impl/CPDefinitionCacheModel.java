@@ -65,12 +65,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", externalReferenceCode=");
-		sb.append(externalReferenceCode);
 		sb.append(", defaultLanguageId=");
 		sb.append(defaultLanguageId);
 		sb.append(", CPDefinitionId=");
@@ -161,13 +159,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		}
 		else {
 			cpDefinitionImpl.setUuid(uuid);
-		}
-
-		if (externalReferenceCode == null) {
-			cpDefinitionImpl.setExternalReferenceCode("");
-		}
-		else {
-			cpDefinitionImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		if (defaultLanguageId == null) {
@@ -300,7 +291,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
-		externalReferenceCode = objectInput.readUTF();
 		defaultLanguageId = objectInput.readUTF();
 
 		CPDefinitionId = objectInput.readLong();
@@ -374,13 +364,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		}
 		else {
 			objectOutput.writeUTF(uuid);
-		}
-
-		if (externalReferenceCode == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		if (defaultLanguageId == null) {
@@ -492,7 +475,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	}
 
 	public String uuid;
-	public String externalReferenceCode;
 	public String defaultLanguageId;
 	public long CPDefinitionId;
 	public long groupId;

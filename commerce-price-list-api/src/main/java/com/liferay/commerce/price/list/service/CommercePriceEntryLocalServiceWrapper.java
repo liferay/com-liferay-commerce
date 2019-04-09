@@ -618,7 +618,7 @@ public class CommercePriceEntryLocalServiceWrapper
 	*
 	* @param commercePriceEntryId - <b>Only</b> used when updating an entity
 	the matching one will be updated
-	* @param cpInstanceId - <b>Only</b> used when adding a new entity
+	* @param cProductId - <b>Only</b> used when adding a new entity
 	* @param commercePriceListId - <b>Only</b> used when adding a new entity
 	to a price list
 	* @param externalReferenceCode - The external identifier code from a 3rd

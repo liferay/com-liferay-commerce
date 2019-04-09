@@ -494,6 +494,56 @@ public interface CProductPersistence extends BasePersistence<CProduct> {
 	public int countByGroupId(long groupId);
 
 	/**
+	* Returns the c product where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCProductException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching c product
+	* @throws NoSuchCProductException if a matching c product could not be found
+	*/
+	public CProduct findByC_ERC(long companyId, String externalReferenceCode)
+		throws NoSuchCProductException;
+
+	/**
+	* Returns the c product where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching c product, or <code>null</code> if a matching c product could not be found
+	*/
+	public CProduct fetchByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
+	* Returns the c product where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching c product, or <code>null</code> if a matching c product could not be found
+	*/
+	public CProduct fetchByC_ERC(long companyId, String externalReferenceCode,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the c product where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the c product that was removed
+	*/
+	public CProduct removeByC_ERC(long companyId, String externalReferenceCode)
+		throws NoSuchCProductException;
+
+	/**
+	* Returns the number of c products where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching c products
+	*/
+	public int countByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
 	* Caches the c product in the entity cache if it is enabled.
 	*
 	* @param cProduct the c product

@@ -74,8 +74,8 @@ public interface CProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct addCProduct(CProduct cProduct);
 
-	public CProduct addCProduct(ServiceContext serviceContext)
-		throws PortalException;
+	public CProduct addCProduct(String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new c product with the primary key. Does not add the c product to the database.
@@ -179,6 +179,17 @@ public interface CProductLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CProduct fetchCProduct(long CProductId);
+
+	/**
+	* Returns the c product with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the c product's external reference code
+	* @return the matching c product, or <code>null</code> if a matching c product could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CProduct fetchCProductByReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	/**
 	* Returns the c product matching the UUID and group.

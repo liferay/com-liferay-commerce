@@ -398,30 +398,9 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinition fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) {
-		return getService()
-				   .fetchByExternalReferenceCode(companyId,
-			externalReferenceCode);
-	}
-
 	public static com.liferay.commerce.product.model.CPDefinition fetchCPDefinition(
 		long CPDefinitionId) {
 		return getService().fetchCPDefinition(CPDefinitionId);
-	}
-
-	/**
-	* Returns the cp definition with the matching external reference code and company.
-	*
-	* @param companyId the primary key of the company
-	* @param externalReferenceCode the cp definition's external reference code
-	* @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
-	*/
-	public static com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByReferenceCode(
-		long companyId, String externalReferenceCode) {
-		return getService()
-				   .fetchCPDefinitionByReferenceCode(companyId,
-			externalReferenceCode);
 	}
 
 	/**
