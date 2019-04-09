@@ -22,13 +22,28 @@ CommerceCartContentTotalDisplayContext commerceCartContentTotalDisplayContext = 
 CommerceMoney subtotal = null;
 CommerceMoney taxValue = null;
 CommerceMoney totalOrder = null;
+CommerceMoney totalDiscountAmount = null;
+CommerceMoney subtotalDiscountAmount = null;
+CommerceDiscountValue totalDiscountValue = null;
+CommerceDiscountValue subtotalDiscountValue = null;
 
 CommerceOrderPrice commerceOrderPrice = commerceCartContentTotalDisplayContext.getCommerceOrderPrice();
 
 if (commerceOrderPrice != null) {
 	subtotal = commerceOrderPrice.getSubtotal();
+	subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
+
+	if (subtotalDiscountValue != null) {
+		subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
+	}
+
 	taxValue = commerceOrderPrice.getTaxValue();
 	totalOrder = commerceOrderPrice.getTotal();
+	totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
+
+	if (totalDiscountValue != null) {
+		totalDiscountAmount = totalDiscountValue.getDiscountAmount();
+	}
 }
 
 Map<String, Object> contextObjects = new HashMap<>();
@@ -48,6 +63,16 @@ SearchContainer<CommerceOrderItem> commerceOrderItemSearchContainer = commerceCa
 	<div class="order-total text-dark">
 		<c:if test="<%= subtotal != null %>">
 			<div class="row">
+				<c:if test="<%= subtotalDiscountValue != null %>">
+					<div class="col-auto">
+						<h4><liferay-ui:message key="subtotal-discount" /></h4>
+					</div>
+
+					<div class="col-auto">
+						<span>(<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>)</span>
+					</div>
+				</c:if>
+
 				<div class="col-auto">
 					<h3 class="h4"><liferay-ui:message key="subtotal" /></h3>
 				</div>
@@ -72,6 +97,16 @@ SearchContainer<CommerceOrderItem> commerceOrderItemSearchContainer = commerceCa
 
 		<c:if test="<%= totalOrder != null %>">
 			<div class="row">
+				<c:if test="<%= totalDiscountValue != null %>">
+					<div class="col-auto">
+						<h4><liferay-ui:message key="total-discount" /></h4>
+					</div>
+
+					<div class="col-auto">
+						<span>(<%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %>)</span>
+					</div>
+				</c:if>
+
 				<div class="col-auto">
 					<h3 class="h4"><liferay-ui:message key="total" /></h3>
 				</div>

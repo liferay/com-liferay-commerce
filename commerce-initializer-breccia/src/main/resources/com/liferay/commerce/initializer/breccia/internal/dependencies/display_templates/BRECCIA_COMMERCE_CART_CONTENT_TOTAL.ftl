@@ -57,6 +57,27 @@
 						</div>
 					</div>
 				</li>
+
+				<#if commerceOrderPrice.getSubtotalDiscountValue()??>
+					<#assign
+					subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue()
+					subtotalDiscount = subtotalDiscountValue.getDiscountAmount()
+					/>
+
+					<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+						<div class="autofit-col autofit-col-expand">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-label total-label">${languageUtil.get(request, "subtotal-discount")}</span>
+							</div>
+						</div>
+
+						<div class="autofit-col">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-value total-value">(${subtotalDiscount.format(locale)})</span>
+							</div>
+						</div>
+					</li>
+				</#if>
 			</#if>
 			<#if shippingPrice??>
 				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
@@ -72,6 +93,27 @@
 						</div>
 					</div>
 				</li>
+
+				<#if commerceOrderPrice.getShippingDiscountValue()??>
+					<#assign
+					shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue()
+					shippingDiscount = shippingDiscountValue.getDiscountAmount()
+					/>
+
+					<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+						<div class="autofit-col autofit-col-expand">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-label total-label">${languageUtil.get(request, "shipping-discount")}</span>
+							</div>
+						</div>
+
+						<div class="autofit-col">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-value total-value">(${shippingDiscount.format(locale)})</span>
+							</div>
+						</div>
+					</li>
+				</#if>
 			</#if>
 			<#if tax??>
 				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
@@ -90,6 +132,27 @@
 			</#if>
 			<#if total??>
 				<li class="commerce-cart-content-total-divider"></li>
+				<#if commerceOrderPrice.getTotalDiscountValue()??>
+					<#assign
+						totalDiscountValue = commerceOrderPrice.getTotalDiscountValue()
+						totalDiscount = totalDiscountValue.getDiscountAmount()
+					/>
+
+					<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+						<div class="autofit-col autofit-col-expand">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-label total-label">${languageUtil.get(request, "total-discount")}</span>
+							</div>
+						</div>
+
+						<div class="autofit-col">
+							<div class="autofit-section">
+								<span class="commerce-cart-content-total-value total-value">(${totalDiscount.format(locale)})</span>
+							</div>
+						</div>
+					</li>
+				</#if>
+
 				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
 					<div class="autofit-col autofit-col-expand">
 						<div class="autofit-section">
