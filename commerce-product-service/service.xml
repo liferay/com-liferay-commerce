@@ -85,7 +85,7 @@
 		<reference entity="DLFileEntry" package-path="com.liferay.portlet.documentlibrary" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity external-reference-code="true" local-service="true" name="CPDefinition" remote-service="true" trash-enabled="true" uuid="true">
+	<entity local-service="true" name="CPDefinition" remote-service="true" trash-enabled="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -842,7 +842,7 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CProduct" remote-service="false" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CProduct" remote-service="false" uuid="true">
 
 		<!-- PK fields -->
 
@@ -1107,6 +1107,7 @@
 		<exception>CPSpecificationOptionTitle</exception>
 		<exception>CPTaxCategoryName</exception>
 		<exception>DuplicateCPFriendlyURLEntry</exception>
+		<exception>DuplicateCProduct</exception>
 		<exception>NoSuchSkuContributorCPDefinitionOptionRel</exception>
 	</exceptions>
 </service-builder>
