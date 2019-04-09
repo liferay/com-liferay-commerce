@@ -38,6 +38,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -203,12 +204,22 @@ public class DTOMapper {
 	public ProductDTO modelToDTO(CPDefinition cpDefinition) {
 		ProductDTO productDTO = new ProductDTO();
 
+		try {
+			CProduct cProduct = cpDefinition.getCProduct();
+
+			productDTO.setExternalReferenceCode(
+				cProduct.getExternalReferenceCode());
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate ProductDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
 		productDTO.setActive(!cpDefinition.isInactive());
 
 		productDTO.setDescription(
 			LanguageUtils.getLanguageIdMap(cpDefinition.getDescriptionMap()));
-		productDTO.setExternalReferenceCode(
-			cpDefinition.getExternalReferenceCode());
 		productDTO.setId(cpDefinition.getCPDefinitionId());
 		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
 		productDTO.setShortDescription(
