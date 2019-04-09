@@ -94,6 +94,9 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 		validate(0, commercePriceEntryId, minQuantity);
 
+		validateExternalReferenceCode(
+			serviceContext.getCompanyId(), externalReferenceCode);
+
 		long commerceTierPriceEntryId = counterLocalService.increment();
 
 		CommerceTierPriceEntry commerceTierPriceEntry =
@@ -529,6 +532,21 @@ public class CommerceTierPriceEntryLocalServiceImpl
 				commerceTierPriceEntryId)) {
 
 			throw new DuplicateCommerceTierPriceEntryException();
+		}
+	}
+
+	protected void validateExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceTierPriceEntry commerceTierPriceEntry =
+			commerceTierPriceEntryPersistence.fetchByC_ERC(
+				companyId, externalReferenceCode);
+
+		if (commerceTierPriceEntry != null) {
+			throw new DuplicateCommerceTierPriceEntryException(
+				"There is another commerce tier price entry with external " +
+					"reference code " + externalReferenceCode);
 		}
 	}
 
