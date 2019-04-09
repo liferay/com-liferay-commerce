@@ -18,17 +18,16 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException;
-import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -72,21 +71,19 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 			String couponCode = ParamUtil.getString(
 				actionRequest, "couponCode");
 
-			boolean valid = isValidCouponCode(actionRequest, couponCode);
+			hideDefaultErrorMessage(actionRequest);
 
-			if (!valid) {
-				hideDefaultErrorMessage(actionRequest);
-				hideDefaultSuccessMessage(actionRequest);
-
+			try {
+				_commerceOrderService.applyCouponCode(
+					commerceOrder.getCommerceOrderId(), couponCode,
+					commerceContext);
+			}
+			catch (CommerceDiscountCouponCodeException cdcce) {
 				SessionErrors.add(
 					actionRequest, CommerceDiscountCouponCodeException.class);
 
 				return;
 			}
-
-			_commerceOrderService.applyCouponCode(
-				commerceOrder.getCommerceOrderId(), couponCode,
-				commerceContext);
 		}
 		else if (cmd.equals(Constants.REMOVE)) {
 			_commerceOrderService.applyCouponCode(
@@ -99,27 +96,6 @@ public class ApplyCommerceDiscountCouponCodeMVCActionCommand
 			actionRequest, actionResponse,
 			ParamUtil.getString(actionRequest, "redirect"));
 	}
-
-	protected boolean isValidCouponCode(
-			ActionRequest actionRequest, String couponCode)
-		throws PortalException {
-
-		if (Validator.isNull(couponCode)) {
-			return false;
-		}
-
-		int count = _commerceDiscountService.getCommerceDiscountsCount(
-			_portal.getScopeGroupId(actionRequest), couponCode);
-
-		if (count > 0) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Reference
-	private CommerceDiscountService _commerceDiscountService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
