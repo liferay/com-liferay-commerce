@@ -258,7 +258,7 @@ public class CPDefinitionLocalServiceImpl
 		cProductServiceContext.setUserId(serviceContext.getUserId());
 
 		CProduct cProduct = cProductLocalService.addCProduct(
-			cProductServiceContext);
+			externalReferenceCode, cProductServiceContext);
 
 		cpDefinition.setUuid(serviceContext.getUuid());
 		cpDefinition.setGroupId(groupId);
@@ -281,7 +281,6 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setTelcoOrElectronics(telcoOrElectronics);
 		cpDefinition.setDDMStructureKey(ddmStructureKey);
 		cpDefinition.setPublished(published);
-		cpDefinition.setExternalReferenceCode(externalReferenceCode);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
@@ -854,14 +853,6 @@ public class CPDefinitionLocalServiceImpl
 		for (CPDefinition cpDefinition : cpDefinitions) {
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
-	}
-
-	@Override
-	public CPDefinition fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) {
-
-		return cpDefinitionPersistence.fetchByC_ERC(
-			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -1591,8 +1582,6 @@ public class CPDefinitionLocalServiceImpl
 				cProductLocalService.updatePublishedCPDefinitionId(
 					cpDefinition.getCProductId(), cpDefinitionId);
 			}
-
-			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
@@ -1965,11 +1954,13 @@ public class CPDefinitionLocalServiceImpl
 			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.fetchByC_ERC(
+		CPDefinition cpDefinition;
+
+		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
 
-		if (cpDefinition == null) {
-			cpDefinition = addCPDefinition(
+		if (cProduct == null) {
+			cpDefinition = cpDefinitionLocalService.addCPDefinition(
 				nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
 				metaTitleMap, metaDescriptionMap, metaKeywordsMap,
 				productTypeName, ignoreSKUCombinations, shippable, freeShipping,
@@ -1982,17 +1973,17 @@ public class CPDefinitionLocalServiceImpl
 				defaultSKU, externalReferenceCode, serviceContext);
 		}
 		else {
-			cpDefinition = updateCPDefinition(
-				cpDefinition.getCPDefinitionId(), nameMap, shortDescriptionMap,
-				descriptionMap, urlTitleMap, metaTitleMap, metaDescriptionMap,
-				metaKeywordsMap, ignoreSKUCombinations, shippable, freeShipping,
-				shipSeparately, shippingExtraPrice, width, height, depth,
-				weight, cpTaxCategoryId, taxExempt, telcoOrElectronics,
-				ddmStructureKey, published, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				serviceContext);
+			cpDefinition = cpDefinitionLocalService.updateCPDefinition(
+				cProduct.getPublishedCPDefinitionId(), nameMap,
+				shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
+				metaDescriptionMap, metaKeywordsMap, ignoreSKUCombinations,
+				shippable, freeShipping, shipSeparately, shippingExtraPrice,
+				width, height, depth, weight, cpTaxCategoryId, taxExempt,
+				telcoOrElectronics, ddmStructureKey, published,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
 		}
 
 		return cpDefinition;
