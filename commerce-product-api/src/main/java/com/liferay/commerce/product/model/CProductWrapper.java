@@ -60,6 +60,7 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CProductId", getCProductId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -79,6 +80,13 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CProductId = (Long)attributes.get("CProductId");
@@ -180,6 +188,16 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cProduct.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this c product.
+	*
+	* @return the external reference code of this c product
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _cProduct.getExternalReferenceCode();
 	}
 
 	/**
@@ -351,6 +369,16 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cProduct.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this c product.
+	*
+	* @param externalReferenceCode the external reference code of this c product
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_cProduct.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

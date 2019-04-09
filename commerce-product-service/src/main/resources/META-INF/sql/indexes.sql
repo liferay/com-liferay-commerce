@@ -17,7 +17,7 @@ create unique index IX_551F2ECC on CPDSpecificationOptionValue (uuid_[$COLUMN_LE
 
 create index IX_3D5A0021 on CPDefinition (CPTaxCategoryId);
 create index IX_1F4B9C67 on CPDefinition (CProductId, status);
-create index IX_573E33FB on CPDefinition (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+create index IX_217AF702 on CPDefinition (companyId);
 create index IX_A465D100 on CPDefinition (displayDate, status);
 create index IX_419350EA on CPDefinition (groupId, status);
 create index IX_8EA585DA on CPDefinition (uuid_[$COLUMN_LENGTH:75$], companyId);
@@ -105,6 +105,7 @@ create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:7
 
 create index IX_DB66F708 on CPTaxCategory (groupId);
 
+create index IX_7BB74B87 on CProduct (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_77F5B8F8 on CProduct (groupId);
 create index IX_39773566 on CProduct (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_9F9DD68 on CProduct (uuid_[$COLUMN_LENGTH:75$], groupId);

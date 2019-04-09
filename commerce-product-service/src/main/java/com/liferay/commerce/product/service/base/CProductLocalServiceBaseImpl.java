@@ -253,6 +253,19 @@ public abstract class CProductLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the c product with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the c product's external reference code
+	 * @return the matching c product, or <code>null</code> if a matching c product could not be found
+	 */
+	@Override
+	public CProduct fetchCProductByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return cProductPersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the c product with the primary key.
 	 *
 	 * @param CProductId the primary key of the c product

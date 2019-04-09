@@ -1338,57 +1338,6 @@ public interface CPDefinitionPersistence extends BasePersistence<CPDefinition> {
 	public int countByLtD_S(Date displayDate, int status);
 
 	/**
-	* Returns the cp definition where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCPDefinitionException} if it could not be found.
-	*
-	* @param companyId the company ID
-	* @param externalReferenceCode the external reference code
-	* @return the matching cp definition
-	* @throws NoSuchCPDefinitionException if a matching cp definition could not be found
-	*/
-	public CPDefinition findByC_ERC(long companyId, String externalReferenceCode)
-		throws NoSuchCPDefinitionException;
-
-	/**
-	* Returns the cp definition where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param companyId the company ID
-	* @param externalReferenceCode the external reference code
-	* @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
-	*/
-	public CPDefinition fetchByC_ERC(long companyId,
-		String externalReferenceCode);
-
-	/**
-	* Returns the cp definition where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param companyId the company ID
-	* @param externalReferenceCode the external reference code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
-	*/
-	public CPDefinition fetchByC_ERC(long companyId,
-		String externalReferenceCode, boolean retrieveFromCache);
-
-	/**
-	* Removes the cp definition where companyId = &#63; and externalReferenceCode = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param externalReferenceCode the external reference code
-	* @return the cp definition that was removed
-	*/
-	public CPDefinition removeByC_ERC(long companyId,
-		String externalReferenceCode) throws NoSuchCPDefinitionException;
-
-	/**
-	* Returns the number of cp definitions where companyId = &#63; and externalReferenceCode = &#63;.
-	*
-	* @param companyId the company ID
-	* @param externalReferenceCode the external reference code
-	* @return the number of matching cp definitions
-	*/
-	public int countByC_ERC(long companyId, String externalReferenceCode);
-
-	/**
 	* Caches the cp definition in the entity cache if it is enabled.
 	*
 	* @param cpDefinition the cp definition
