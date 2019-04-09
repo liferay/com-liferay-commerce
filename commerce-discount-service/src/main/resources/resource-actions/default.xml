@@ -20,6 +20,7 @@
 			<guest-unsupported>
 				<action-key>ADD_COMMERCE_DISCOUNT</action-key>
 				<action-key>PERMISSIONS</action-key>
+				<action-key>VIEW_COMMERCE_DISCOUNTS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
