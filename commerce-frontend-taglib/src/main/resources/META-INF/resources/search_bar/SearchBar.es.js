@@ -53,7 +53,7 @@ class SearchBar extends Component {
 		if (this.active && evt.key === 'Escape') {
 			this.close();
 		}
-		if (!this.active && evt.key === '/' && evt.target.tagName !== "INPUT") {
+		if (!this.active && evt.key === '/' && evt.target.tagName !== 'INPUT') {
 			evt.preventDefault();
 			this.open();
 		}
