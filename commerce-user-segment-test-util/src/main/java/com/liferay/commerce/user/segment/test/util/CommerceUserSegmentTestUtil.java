@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class CommerceUserSegmentTestUtil {
 
 		Map<Locale, String> nameMap = new HashMap<>();
 
-		nameMap.put(Locale.US, "user");
+		nameMap.put(LocaleUtil.US, "user");
 
 		return CommerceUserSegmentEntryLocalServiceUtil.
 			addCommerceUserSegmentEntry(
