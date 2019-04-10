@@ -78,7 +78,7 @@ public class CommerceDiscountCalculationImpl
 			CommerceDiscountTarget.Type.APPLY_TO_SHIPPING);
 
 		return _getCommerceDiscountValue(
-			shippingAmount, commerceContext, searchContext);
+			shippingAmount, 1, commerceContext, searchContext);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class CommerceDiscountCalculationImpl
 			CommerceDiscountTarget.Type.APPLY_TO_SUBTOTAL);
 
 		return _getCommerceDiscountValue(
-			subtotalAmount, commerceContext, searchContext);
+			subtotalAmount, 1, commerceContext, searchContext);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class CommerceDiscountCalculationImpl
 			CommerceDiscountTarget.Type.APPLY_TO_TOTAL);
 
 		return _getCommerceDiscountValue(
-			totalAmount, commerceContext, searchContext);
+			totalAmount, 1, commerceContext, searchContext);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class CommerceDiscountCalculationImpl
 			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
 
 		return _getCommerceDiscountValue(
-			productUnitPrice, commerceContext, searchContext);
+			productUnitPrice, quantity, commerceContext, searchContext);
 	}
 
 	protected SearchContext buildSearchContext(
@@ -188,7 +188,7 @@ public class CommerceDiscountCalculationImpl
 	}
 
 	private CommerceDiscountValue _getCommerceDiscountValue(
-			BigDecimal amount, CommerceContext commerceContext,
+			BigDecimal amount, int quantity, CommerceContext commerceContext,
 			SearchContext searchContext)
 		throws PortalException {
 
@@ -207,7 +207,7 @@ public class CommerceDiscountCalculationImpl
 			if (_isValidDiscount(commerceContext, commerceDiscount)) {
 				commerceDiscountValues.add(
 					_getCommerceDiscountValue(
-						commerceDiscount, amount, commerceCurrency));
+						commerceDiscount, amount, quantity, commerceCurrency));
 			}
 		}
 
@@ -237,7 +237,7 @@ public class CommerceDiscountCalculationImpl
 	}
 
 	private CommerceDiscountValue _getCommerceDiscountValue(
-		CommerceDiscount commerceDiscount, BigDecimal amount,
+		CommerceDiscount commerceDiscount, BigDecimal amount, int quantity,
 		CommerceCurrency commerceCurrency) {
 
 		if ((amount == null) || (amount.compareTo(BigDecimal.ZERO) <= 0)) {
@@ -292,7 +292,8 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		CommerceMoney discountAmount = _commerceMoneyFactory.create(
-			commerceCurrency, currentDiscountAmount);
+			commerceCurrency,
+			currentDiscountAmount.multiply(new BigDecimal(quantity)));
 
 		RoundingMode roundingMode = RoundingMode.valueOf(
 			commerceCurrency.getRoundingMode());
