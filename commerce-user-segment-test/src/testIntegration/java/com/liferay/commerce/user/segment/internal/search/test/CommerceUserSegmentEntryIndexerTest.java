@@ -29,11 +29,10 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.search.test.util.HitsAssert;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -99,7 +98,7 @@ public class CommerceUserSegmentEntryIndexerTest {
 		cleanName = cleanName.replace("]", "");
 
 		Assert.assertEquals(
-			commerceUserSegmentEntry.getName(Locale.ENGLISH), cleanName);
+			commerceUserSegmentEntry.getName(LocaleUtil.ENGLISH), cleanName);
 	}
 
 	@Test

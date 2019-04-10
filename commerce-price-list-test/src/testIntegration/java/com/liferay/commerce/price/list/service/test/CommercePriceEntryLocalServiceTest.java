@@ -34,13 +34,13 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.math.BigDecimal;
 
 import java.util.Currency;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -67,7 +67,7 @@ public class CommercePriceEntryLocalServiceTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
 			_group.getGroupId(), currency.getCurrencyCode());
@@ -99,7 +99,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -148,7 +148,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -191,7 +191,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -230,7 +230,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		long cpInstanceId = RandomTestUtil.randomInt();
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -267,7 +267,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceList parentCommercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -323,7 +323,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceList parentCommercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -383,7 +383,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceList parentCommercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -443,7 +443,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -496,7 +496,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -553,7 +553,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -619,7 +619,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -670,7 +670,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		long cpInstanceId = RandomTestUtil.randomInt();
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =

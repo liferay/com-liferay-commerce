@@ -31,13 +31,13 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -64,12 +64,12 @@ public class CommercePriceListLocalServiceTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		Currency currencyGBP = Currency.getInstance(Locale.UK);
+		Currency currencyGBP = Currency.getInstance(LocaleUtil.UK);
 
 		_commerceCurrencyGBP = CommerceCurrencyTestUtil.addCommerceCurrency(
 			_group.getGroupId(), currencyGBP.getCurrencyCode());
 
-		Currency currencyUSD = Currency.getInstance(Locale.US);
+		Currency currencyUSD = Currency.getInstance(LocaleUtil.US);
 
 		_commerceCurrencyUSD = CommerceCurrencyTestUtil.addCommerceCurrency(
 			_group.getGroupId(), currencyUSD.getCurrencyCode());
@@ -93,7 +93,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -126,7 +126,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String externalReferenceCode = RandomTestUtil.randomString();
 		String name = RandomTestUtil.randomString();
 
@@ -165,7 +165,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
@@ -208,7 +208,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String externalReferenceCode = RandomTestUtil.randomString();
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
@@ -252,7 +252,7 @@ public class CommercePriceListLocalServiceTest {
 				"currency code, name, display date, and expiration date changed"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -260,7 +260,7 @@ public class CommercePriceListLocalServiceTest {
 				_group.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
-		currency = Currency.getInstance(Locale.UK);
+		currency = Currency.getInstance(LocaleUtil.UK);
 		name = RandomTestUtil.randomString();
 		Date displayDate = new Date();
 		Date expirationDate = new Date(
@@ -311,7 +311,7 @@ public class CommercePriceListLocalServiceTest {
 		);
 
 		long commercePriceListId = RandomTestUtil.randomLong();
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 
 		CommercePriceListTestUtil.updateCommercePriceList(
 			_group.getGroupId(), commercePriceListId,
@@ -334,7 +334,7 @@ public class CommercePriceListLocalServiceTest {
 				"the Price List"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -376,7 +376,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -406,7 +406,7 @@ public class CommercePriceListLocalServiceTest {
 				"(externalReferenceCode) on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String externalReferenceCode = RandomTestUtil.randomString();
 		String name = RandomTestUtil.randomString();
 
@@ -415,7 +415,7 @@ public class CommercePriceListLocalServiceTest {
 			RandomTestUtil.randomDouble(), true, null, null,
 			externalReferenceCode);
 
-		Currency updatedCurrency = Currency.getInstance(Locale.UK);
+		Currency updatedCurrency = Currency.getInstance(LocaleUtil.UK);
 		String updatedName = RandomTestUtil.randomString();
 
 		CommercePriceListTestUtil.upsertCommercePriceList(
@@ -450,7 +450,7 @@ public class CommercePriceListLocalServiceTest {
 				"(commercePriceListId) on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -458,7 +458,7 @@ public class CommercePriceListLocalServiceTest {
 				_group.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
-		Currency updatedCurrency = Currency.getInstance(Locale.UK);
+		Currency updatedCurrency = Currency.getInstance(LocaleUtil.UK);
 		String updatedName = RandomTestUtil.randomString();
 
 		CommercePriceListTestUtil.upsertCommercePriceList(
@@ -519,7 +519,7 @@ public class CommercePriceListLocalServiceTest {
 			"The result should be a new Price List on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CommercePriceList commercePriceList =
@@ -551,7 +551,7 @@ public class CommercePriceListLocalServiceTest {
 				"(parentCommercePriceListId) on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
@@ -587,7 +587,7 @@ public class CommercePriceListLocalServiceTest {
 				"(parentCommercePriceListId) on the given site"
 		);
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
