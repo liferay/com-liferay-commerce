@@ -145,9 +145,9 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 											};
 											AddToCartButton.disabled = false;
 
-											document.querySelector('[data-text-cp-instance-sku]').innerHTML = response.sku || '';
-											document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = response.manufacturerPartNumber || '';
-											document.querySelector('[data-text-cp-instance-gtin]').innerHTML = response.gtin || '';
+											document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
+											document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
+											document.querySelector('[data-text-cp-instance-gtin]').innerHTML = Liferay.Util.escape(response.gtin) || '';
 											document.querySelector('[data-text-cp-instance-availability]').innerHTML = response.availability || '';
 											document.querySelector('[data-text-cp-instance-availability-estimate]').innerHTML = response.availabilityEstimate || '';
 											document.querySelector('[data-text-cp-instance-stock-quantity]').innerHTML = response.stockQuantity || '';
