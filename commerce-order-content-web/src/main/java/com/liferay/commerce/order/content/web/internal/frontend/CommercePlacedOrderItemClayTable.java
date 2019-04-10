@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = {ClayTable.class, CommerceDataSetDataProvider.class}
 )
 public class CommercePlacedOrderItemClayTable
-	implements CommerceDataSetDataProvider<PlacedOrderItem>, ClayTable {
+	implements ClayTable, CommerceDataSetDataProvider<PlacedOrderItem> {
 
 	public static final String NAME = "commercePlacedOrderItems";
 

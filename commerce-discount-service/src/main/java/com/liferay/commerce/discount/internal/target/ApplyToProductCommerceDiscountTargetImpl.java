@@ -54,7 +54,7 @@ import org.osgi.service.component.annotations.Reference;
 	}
 )
 public class ApplyToProductCommerceDiscountTargetImpl
-	implements CommerceDiscountTarget, CommerceDiscountProductTarget {
+	implements CommerceDiscountProductTarget, CommerceDiscountTarget {
 
 	@Override
 	public void contributeDocument(

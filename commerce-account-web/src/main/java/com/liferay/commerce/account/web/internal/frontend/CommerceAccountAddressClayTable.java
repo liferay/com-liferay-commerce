@@ -66,8 +66,8 @@ import org.osgi.service.component.annotations.Reference;
 	}
 )
 public class CommerceAccountAddressClayTable
-	implements CommerceDataSetDataProvider<Address>, ClayTable,
-			   ClayTableActionProvider {
+	implements ClayTable, ClayTableActionProvider,
+			   CommerceDataSetDataProvider<Address> {
 
 	public static final String NAME = "commerceAccountAddresses";
 
