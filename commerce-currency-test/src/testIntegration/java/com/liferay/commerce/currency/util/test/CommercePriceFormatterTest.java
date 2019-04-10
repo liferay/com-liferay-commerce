@@ -22,12 +22,11 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.math.BigDecimal;
-
-import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,7 +58,7 @@ public class CommercePriceFormatterTest {
 		String regex = "^(\\d*,?\\.?)*\\d\\d$";
 
 		String formattedPrice = _commercePriceFormatter.format(
-			_price, Locale.getDefault());
+			_price, LocaleUtil.getDefault());
 
 		Assert.assertTrue(formattedPrice.matches(regex));
 	}
@@ -71,12 +70,12 @@ public class CommercePriceFormatterTest {
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
-		commerceCurrency.setFormatPattern("###,##0.00 $", Locale.FRANCE);
+		commerceCurrency.setFormatPattern("###,##0.00 $", LocaleUtil.FRANCE);
 
-		Locale.setDefault(Locale.FRANCE);
+		LocaleUtil.setDefault(LocaleUtil.FRANCE);
 
 		String formattedPrice = _commercePriceFormatter.format(
-			commerceCurrency, _price, Locale.FRANCE);
+			commerceCurrency, _price, LocaleUtil.FRANCE);
 
 		Assert.assertTrue(formattedPrice.matches(regexFR));
 	}
@@ -88,12 +87,12 @@ public class CommercePriceFormatterTest {
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
-		commerceCurrency.setFormatPattern("$ ###,##0.00", Locale.ITALY);
+		commerceCurrency.setFormatPattern("$ ###,##0.00", LocaleUtil.ITALY);
 
-		Locale.setDefault(Locale.ITALY);
+		LocaleUtil.setDefault(LocaleUtil.ITALY);
 
 		String formattedPrice = _commercePriceFormatter.format(
-			commerceCurrency, _price, Locale.ITALY);
+			commerceCurrency, _price, LocaleUtil.ITALY);
 
 		Assert.assertTrue(formattedPrice.matches(regexIT));
 	}
@@ -105,12 +104,12 @@ public class CommercePriceFormatterTest {
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
-		commerceCurrency.setFormatPattern("$###,##0.00", Locale.US);
+		commerceCurrency.setFormatPattern("$###,##0.00", LocaleUtil.US);
 
-		Locale.setDefault(Locale.US);
+		LocaleUtil.setDefault(LocaleUtil.US);
 
 		String formattedPrice = _commercePriceFormatter.format(
-			commerceCurrency, _price, Locale.US);
+			commerceCurrency, _price, LocaleUtil.US);
 
 		Assert.assertTrue(formattedPrice.matches(regexUS));
 	}

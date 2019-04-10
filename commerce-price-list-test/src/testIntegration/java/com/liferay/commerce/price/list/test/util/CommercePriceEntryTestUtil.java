@@ -24,11 +24,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.math.BigDecimal;
 
 import java.util.Currency;
-import java.util.Locale;
 
 /**
  * @author Zoltán Takács
@@ -38,7 +38,7 @@ public class CommercePriceEntryTestUtil {
 	public static CommercePriceEntry addCommercePriceEntry(long groupId)
 		throws PortalException {
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(groupId);

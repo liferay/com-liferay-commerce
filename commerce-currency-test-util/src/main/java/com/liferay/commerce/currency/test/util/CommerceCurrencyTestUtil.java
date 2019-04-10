@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.math.BigDecimal;
 
@@ -46,7 +47,7 @@ public class CommerceCurrencyTestUtil {
 		Map<Locale, String> formatPatternMap = new HashMap();
 
 		formatPatternMap.put(
-			Locale.US, CommerceCurrencyConstants.DEFAULT_FORMAT_PATTERN);
+			LocaleUtil.US, CommerceCurrencyConstants.DEFAULT_FORMAT_PATTERN);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);

@@ -27,10 +27,9 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -116,7 +115,7 @@ public class CommerceUserSegmentEntryLocalServiceTest {
 
 		Assert.assertEquals(
 			CommerceUserSegmentEntryConstants.KEY_GUEST,
-			commerceUserSegmentEntry.getName(Locale.US));
+			commerceUserSegmentEntry.getName(LocaleUtil.US));
 	}
 
 	@Rule

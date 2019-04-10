@@ -36,12 +36,12 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.Collections;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,7 +93,7 @@ public class CommercePaymentEngineTest {
 
 		_httpServletRequest = new MockHttpServletRequest("GET", "");
 
-		_httpServletRequest.setAttribute("LOCALE", Locale.ITALY);
+		_httpServletRequest.setAttribute("LOCALE", LocaleUtil.ITALY);
 	}
 
 	@Test

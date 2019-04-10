@@ -23,6 +23,7 @@ import com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl;
 import com.liferay.portal.kernel.configuration.ConfigurationFactory;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.Collections;
 import java.util.Date;
@@ -111,7 +112,7 @@ public class SKUCombinationsIteratorTest {
 		CPDefinition cpDefinition = new CPDefinitionImpl();
 
 		Map<Locale, String> map = Collections.singletonMap(
-			Locale.US, "Title-Description");
+			LocaleUtil.US, "Title-Description");
 
 		cpDefinition.setCPDefinitionId(RandomTestUtil.randomLong());
 		cpDefinition.setGroupId(RandomTestUtil.randomLong());
