@@ -89,7 +89,7 @@ productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayCont
 
 									<%
 									for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel : cpDefinitionOptionValueRels) {
-										stringJoiner.add(cpDefinitionOptionValueRel.getName(languageId));
+										stringJoiner.add(HtmlUtil.escape(cpDefinitionOptionValueRel.getName(languageId)));
 									}
 									%>
 
