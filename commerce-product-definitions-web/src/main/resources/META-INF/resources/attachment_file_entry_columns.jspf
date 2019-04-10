@@ -55,7 +55,7 @@ for (CPDefinitionOptionRel cpDefinitionOptionRel : cpDefinitionOptionRels) {
 			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels = cpDefinitionOptionRelListMap.get(cpDefinitionOptionRel);
 
 			for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel : cpDefinitionOptionValueRels) {
-				stringJoiner.add(cpDefinitionOptionValueRel.getName(languageId));
+				stringJoiner.add(HtmlUtil.escape(cpDefinitionOptionValueRel.getName(languageId)));
 			}
 		}
 		%>
