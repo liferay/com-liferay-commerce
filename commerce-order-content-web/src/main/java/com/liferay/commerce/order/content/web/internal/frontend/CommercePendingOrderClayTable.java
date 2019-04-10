@@ -59,8 +59,8 @@ import org.osgi.service.component.annotations.Reference;
 	}
 )
 public class CommercePendingOrderClayTable
-	implements CommerceDataSetDataProvider<Order>, ClayTable,
-			   ClayTableActionProvider {
+	implements ClayTable, ClayTableActionProvider,
+			   CommerceDataSetDataProvider<Order> {
 
 	public static final String NAME = "commercePendingOrders";
 

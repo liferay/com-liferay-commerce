@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
 public class CommerceCurrencyExchangeRateScreenNavigationEntry
-	implements ScreenNavigationEntry, ScreenNavigationCategory {
+	implements ScreenNavigationCategory, ScreenNavigationEntry {
 
 	@Override
 	public String getCategoryKey() {

@@ -51,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = {ClayTable.class, CommerceDataSetDataProvider.class}
 )
 public class CommerceAccountUserRolesClayTable
-	implements CommerceDataSetDataProvider<AccountRole>, ClayTable {
+	implements ClayTable, CommerceDataSetDataProvider<AccountRole> {
 
 	public static final String NAME = "commerceAccountUserRoles";
 

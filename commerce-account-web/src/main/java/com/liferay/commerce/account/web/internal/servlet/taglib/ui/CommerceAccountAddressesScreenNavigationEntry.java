@@ -58,8 +58,8 @@ import org.osgi.service.component.annotations.Reference;
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
 public class CommerceAccountAddressesScreenNavigationEntry
-	implements ScreenNavigationEntry<CommerceAccount>,
-			   ScreenNavigationCategory {
+	implements ScreenNavigationCategory,
+			   ScreenNavigationEntry<CommerceAccount> {
 
 	@Override
 	public String getCategoryKey() {
