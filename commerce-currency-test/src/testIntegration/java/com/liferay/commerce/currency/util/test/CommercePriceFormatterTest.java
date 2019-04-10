@@ -72,7 +72,9 @@ public class CommercePriceFormatterTest {
 
 		commerceCurrency.setFormatPattern("###,##0.00 $", LocaleUtil.FRANCE);
 
-		LocaleUtil.setDefault(LocaleUtil.FRANCE);
+		LocaleUtil.setDefault(
+			LocaleUtil.FRANCE.getLanguage(), LocaleUtil.FRANCE.getCountry(),
+			LocaleUtil.FRANCE.getVariant());
 
 		String formattedPrice = _commercePriceFormatter.format(
 			commerceCurrency, _price, LocaleUtil.FRANCE);
@@ -89,7 +91,9 @@ public class CommercePriceFormatterTest {
 
 		commerceCurrency.setFormatPattern("$ ###,##0.00", LocaleUtil.ITALY);
 
-		LocaleUtil.setDefault(LocaleUtil.ITALY);
+		LocaleUtil.setDefault(
+			LocaleUtil.ITALY.getLanguage(), LocaleUtil.ITALY.getCountry(),
+			LocaleUtil.ITALY.getVariant());
 
 		String formattedPrice = _commercePriceFormatter.format(
 			commerceCurrency, _price, LocaleUtil.ITALY);
@@ -106,7 +110,9 @@ public class CommercePriceFormatterTest {
 
 		commerceCurrency.setFormatPattern("$###,##0.00", LocaleUtil.US);
 
-		LocaleUtil.setDefault(LocaleUtil.US);
+		LocaleUtil.setDefault(
+			LocaleUtil.US.getLanguage(), LocaleUtil.US.getCountry(),
+			LocaleUtil.US.getVariant());
 
 		String formattedPrice = _commercePriceFormatter.format(
 			commerceCurrency, _price, LocaleUtil.US);
