@@ -1,6 +1,6 @@
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
-	compileOnly project(":apps:commerce:commerce-user-segment-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "2.0.0"
 }
 
 liferay {
