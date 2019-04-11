@@ -4,6 +4,7 @@ dependencies {
 	compileOnly group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-xml", version: "2.9.8"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.service", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
@@ -17,7 +18,6 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.api", version: "3.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 
 	runtime group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.impl", version: "1.0.0"

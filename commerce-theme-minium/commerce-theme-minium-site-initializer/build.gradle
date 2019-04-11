@@ -20,6 +20,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.shipping.engine.fixed.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.2.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.theme.minium.api", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "2.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "3.3.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
@@ -31,5 +32,4 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-initializer-util")
 	compileOnly project(":apps:commerce:commerce-product-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "2.0.0"
 }
