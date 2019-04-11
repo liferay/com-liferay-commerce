@@ -37,4 +37,9 @@ public class CommerceDiscountCustomAttributesDisplay
 		return CommerceDiscount.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

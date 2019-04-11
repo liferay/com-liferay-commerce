@@ -37,4 +37,9 @@ public class CommercePriceListCustomAttributesDisplay
 		return CommercePriceList.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

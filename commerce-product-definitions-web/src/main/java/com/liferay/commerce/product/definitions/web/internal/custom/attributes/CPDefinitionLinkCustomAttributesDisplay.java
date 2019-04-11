@@ -37,4 +37,9 @@ public class CPDefinitionLinkCustomAttributesDisplay
 		return CPDefinitionLink.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

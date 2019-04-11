@@ -37,4 +37,9 @@ public class CommerceOrderCustomAttributesDisplay
 		return CommerceOrder.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

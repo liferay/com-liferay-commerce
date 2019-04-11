@@ -36,4 +36,9 @@ public class CPRuleCustomAttributesDisplay extends BaseCustomAttributesDisplay {
 		return CPRule.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

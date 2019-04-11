@@ -37,4 +37,9 @@ public class CommerceNotificationTemplateCustomAttributesDisplay
 		return CommerceNotificationTemplate.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

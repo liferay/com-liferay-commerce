@@ -37,4 +37,9 @@ public class CommerceTierPriceEntryCustomAttributesDisplay
 		return CommerceTierPriceEntry.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }
