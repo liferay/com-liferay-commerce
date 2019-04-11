@@ -150,7 +150,6 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	/**
-	 * @return
 	 * @deprecated As of Mueller (7.2.x), use deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
 	 */
 	@Deprecated
