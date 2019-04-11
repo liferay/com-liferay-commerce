@@ -29,7 +29,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 %>
 
-<div class="container-fluid product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
+<div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
 		<div class="col-6" id="minium-product-gallery">
 
