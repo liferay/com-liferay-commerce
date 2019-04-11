@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce User Segment Web
 Bundle-SymbolicName: com.liferay.commerce.user.segment.web
-Bundle-Version: 1.0.10
+Bundle-Version: 1.0.11
 Web-ContextPath: /commerce-user-segment-web
