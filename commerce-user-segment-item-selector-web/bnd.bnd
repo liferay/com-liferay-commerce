@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce User Segment Item Selector Web
 Bundle-SymbolicName: com.liferay.commerce.user.segment.item.selector.web
-Bundle-Version: 1.0.9
+Bundle-Version: 1.0.10
 Web-ContextPath: /commerce-user-segment-item-selector-web
