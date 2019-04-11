@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce OpenAPI Core API
 Bundle-SymbolicName: com.liferay.commerce.openapi.core.api
-Bundle-Version: 3.0.0
+Bundle-Version: 3.0.1
 Export-Package:\
 	com.liferay.commerce.openapi.core.annotation,\
 	com.liferay.commerce.openapi.core.constants,\
