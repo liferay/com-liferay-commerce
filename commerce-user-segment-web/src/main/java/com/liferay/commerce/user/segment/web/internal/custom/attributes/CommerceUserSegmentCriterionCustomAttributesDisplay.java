@@ -37,4 +37,9 @@ public class CommerceUserSegmentCriterionCustomAttributesDisplay
 		return CommerceUserSegmentCriterion.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

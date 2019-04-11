@@ -37,4 +37,9 @@ public class CPOptionValueCustomAttributesDisplay
 		return CPOptionValue.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }

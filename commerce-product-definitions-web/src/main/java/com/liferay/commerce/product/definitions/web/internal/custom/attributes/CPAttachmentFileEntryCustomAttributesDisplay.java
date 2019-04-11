@@ -37,4 +37,9 @@ public class CPAttachmentFileEntryCustomAttributesDisplay
 		return CPAttachmentFileEntry.class.getName();
 	}
 
+	@Override
+	public String getIconCssClass() {
+		return "tag";
+	}
+
 }
