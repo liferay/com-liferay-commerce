@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.configuration.CommerceOrderConfiguration;
 import com.liferay.commerce.constants.CommerceDestinationNames;

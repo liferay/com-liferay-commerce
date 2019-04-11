@@ -20,8 +20,6 @@ import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
