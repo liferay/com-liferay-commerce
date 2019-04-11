@@ -1,5 +1,6 @@
 dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "7.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.test.util", version: "1.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.payment.api", version: "1.0.0"
@@ -10,7 +11,6 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "2.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
 	compileOnly group: "junit", name: "junit", version: "4.12"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "7.1.0"
 }
 
 liferay {

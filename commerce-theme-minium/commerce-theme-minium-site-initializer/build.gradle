@@ -10,6 +10,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.portlet.display.template", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.site.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "7.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.cart.taglib", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.media.api", version: "1.1.0"
@@ -30,6 +31,5 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.cm", version: "1.5.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "7.1.0"
 	compileOnly project(":apps:commerce:commerce-initializer-util")
 }
