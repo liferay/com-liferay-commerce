@@ -55,22 +55,12 @@ public class MiniCartTag extends ComponentRendererTag {
 				"cartAPI",
 				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
 
-			String checkoutURL = StringPool.BLANK;
-
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
 			if (commerceOrder != null) {
 				putValue("cartId", commerceOrder.getCommerceOrderId());
 				putValue(
 					"commerceAccountId", commerceOrder.getCommerceAccountId());
-
-				PortletURL commerceCheckoutPortletURL =
-					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
-						request);
-
-				if (commerceCheckoutPortletURL != null) {
-					checkoutURL = String.valueOf(commerceCheckoutPortletURL);
-				}
 			}
 			else {
 				CommerceAccount commerceAccount =
@@ -81,6 +71,15 @@ public class MiniCartTag extends ComponentRendererTag {
 						"commerceAccountId",
 						commerceAccount.getCommerceAccountId());
 				}
+			}
+
+			PortletURL commerceCheckoutPortletURL =
+				_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(request);
+
+			String checkoutURL = StringPool.BLANK;
+
+			if (commerceCheckoutPortletURL != null) {
+				checkoutURL = String.valueOf(commerceCheckoutPortletURL);
 			}
 
 			putValue("checkoutUrl", checkoutURL);
