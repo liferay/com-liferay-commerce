@@ -158,7 +158,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 								<liferay-ui:search-container-column-text
 									name="price"
-									value="<%= cpInstanceDisplayContext.formatPrice(scopeGroupId, cpInstance.getPrice()) %>"
+									value="<%= HtmlUtil.escape(cpInstanceDisplayContext.formatPrice(scopeGroupId, cpInstance.getPrice())) %>"
 								/>
 
 								<c:if test='<%= cpInstanceDisplayContext.hasDynamicInclude("com.liferay.commerce.inventory.web#/inventory_data#") %>'>

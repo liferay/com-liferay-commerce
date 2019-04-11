@@ -44,7 +44,7 @@ if (commerceShippingFixedOption != null) {
 			<aui:input bean="<%= commerceShippingFixedOption %>" model="<%= CommerceShippingFixedOption.class %>" name="description" />
 
 			<c:if test="<%= commerceShippingFixedOptionsDisplayContext.isFixed() %>">
-				<aui:input name="amount" suffix="<%= commerceShippingFixedOptionsDisplayContext.getCommerceCurrencyCode() %>" type="text" value="<%= (commerceShippingFixedOption == null) ? BigDecimal.ZERO : commerceShippingFixedOptionsDisplayContext.round(commerceShippingFixedOption.getAmount()) %>">
+				<aui:input name="amount" suffix="<%= HtmlUtil.escape(commerceShippingFixedOptionsDisplayContext.getCommerceCurrencyCode()) %>" type="text" value="<%= (commerceShippingFixedOption == null) ? BigDecimal.ZERO : commerceShippingFixedOptionsDisplayContext.round(commerceShippingFixedOption.getAmount()) %>">
 					<aui:validator name="number" />
 				</aui:input>
 			</c:if>

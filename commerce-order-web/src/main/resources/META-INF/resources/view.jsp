@@ -94,7 +94,7 @@ CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrder
 
 			<liferay-ui:search-container-column-text
 				name="order-value"
-				value="<%= commerceOrderListDisplayContext.getCommerceOrderValue(commerceOrder) %>"
+				value="<%= HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceOrderValue(commerceOrder)) %>"
 			/>
 
 			<liferay-ui:search-container-column-jsp

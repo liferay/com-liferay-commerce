@@ -160,7 +160,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 								<div class="value-section">
 									<span class="commerce-value">
-										<%= unitPrice.format(locale) %>
+										<%= HtmlUtil.escape(unitPrice.format(locale)) %>
 									</span>
 
 									<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
@@ -192,7 +192,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 								<div class="value-section">
 									<span class="commerce-value">
-										<%= (discountAmount == null) ? StringPool.BLANK : discountAmount.format(locale) %>
+										<%= (discountAmount == null) ? StringPool.BLANK : HtmlUtil.escape(discountAmount.format(locale)) %>
 									</span>
 								</div>
 							</c:if>
@@ -209,7 +209,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 								<div class="value-section">
 									<span class="commerce-value">
-										<%= finalPrice.format(locale) %>
+										<%= HtmlUtil.escape(finalPrice.format(locale)) %>
 									</span>
 								</div>
 							</c:if>
@@ -355,18 +355,18 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					request.setAttribute("address.jsp-commerceAddress", shippingAddress);
 					%>
 
-					<%= shippingAddress.getName() %> <br />
-					<%= shippingAddress.getStreet1() %> <br />
+					<%= HtmlUtil.escape(shippingAddress.getName()) %> <br />
+					<%= HtmlUtil.escape(shippingAddress.getStreet1()) %> <br />
 
 					<c:if test="<%= Validator.isNotNull(shippingAddress.getStreet2()) %>">
-						<%= shippingAddress.getStreet2() %> <br />
+						<%= HtmlUtil.escape(shippingAddress.getStreet2()) %> <br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(shippingAddress.getStreet3()) %>">
-						<%= shippingAddress.getStreet3() %> <br />
+						<%= HtmlUtil.escape(shippingAddress.getStreet3()) %> <br />
 					</c:if>
 
-					<%= shippingAddress.getCity() %> <br />
+					<%= HtmlUtil.escape(shippingAddress.getCity()) %> <br />
 
 					<%
 					CommerceCountry commerceCountry = shippingAddress.getCommerceCountry();

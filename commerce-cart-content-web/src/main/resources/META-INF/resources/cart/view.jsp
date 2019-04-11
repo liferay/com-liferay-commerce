@@ -135,7 +135,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 							CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
 							%>
 
-							<%= finalPriceMoney.format(locale) %>
+							<%= HtmlUtil.escape(finalPriceMoney.format(locale)) %>
 
 							<liferay-commerce:subscription-info
 								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"

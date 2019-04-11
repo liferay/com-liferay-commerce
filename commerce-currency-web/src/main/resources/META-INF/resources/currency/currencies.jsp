@@ -107,12 +107,13 @@ CommerceCurrenciesDisplayContext commerceCurrenciesDisplayContext = (CommerceCur
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
 						name="name"
-						value="<%= commerceCurrency.getName(locale) %>"
+						value="<%= HtmlUtil.escape(commerceCurrency.getName(locale)) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
-						property="code"
+						name="code"
+						value="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
