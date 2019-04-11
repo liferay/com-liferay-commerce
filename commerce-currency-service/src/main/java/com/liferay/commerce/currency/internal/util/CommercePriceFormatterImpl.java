@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import java.util.Locale;
 import java.util.Map;
@@ -125,7 +126,8 @@ public class CommercePriceFormatterImpl implements CommercePriceFormatter {
 				commerceCurrency.getRoundingMode());
 		}
 
-		DecimalFormat decimalFormat = new DecimalFormat(formatPattern);
+		DecimalFormat decimalFormat = new DecimalFormat(
+			formatPattern, DecimalFormatSymbols.getInstance(locale));
 
 		decimalFormat.setMaximumFractionDigits(maxFractionDigits);
 		decimalFormat.setMinimumFractionDigits(minFractionDigits);
