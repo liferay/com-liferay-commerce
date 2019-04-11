@@ -111,7 +111,8 @@ CPMeasurementUnitsDisplayContext cpMeasurementUnitsDisplayContext = (CPMeasureme
 					/>
 
 					<liferay-ui:search-container-column-text
-						property="key"
+						name="key"
+						value="<%= HtmlUtil.escape(cpMeasurementUnit.getKey()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text

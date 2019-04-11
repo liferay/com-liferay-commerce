@@ -65,7 +65,7 @@ boolean showPriceRange = (boolean)request.getAttribute("liferay-commerce:price:s
 						<%= Validator.isNull(discountLabel) ? StringPool.BLANK : discountLabel %>
 
 						<c:if test="<%= showDiscountAmount %>">
-							<span class="discount-amount"><%= discountAmount.format(locale) %></span>
+							<span class="discount-amount"><%= HtmlUtil.escape(discountAmount.format(locale)) %></span>
 						</c:if>
 
 						<c:if test="<%= showPercentage %>">

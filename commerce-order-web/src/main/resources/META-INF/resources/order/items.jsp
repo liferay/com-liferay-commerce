@@ -110,7 +110,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
 				name="name"
-				value="<%= HtmlUtil.escape(commerceOrderItem.getName(locale)) %>"
+				value="<%= commerceOrderItem.getName(locale) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
@@ -135,7 +135,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 					<div class="value-section">
 						<span class="commerce-value">
-							<%= unitPrice.format(locale) %>
+							<%= HtmlUtil.escape(unitPrice.format(locale)) %>
 						</span>
 						<span class="commerce-subscription-info">
 							<liferay-commerce:subscription-info

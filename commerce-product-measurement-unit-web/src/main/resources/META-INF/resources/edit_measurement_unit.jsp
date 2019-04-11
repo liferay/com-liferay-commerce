@@ -39,7 +39,7 @@ boolean primary = BeanParamUtil.getBoolean(cpMeasurementUnit, request, "primary"
 String title = LanguageUtil.get(request, "add-measurement-unit");
 
 if (cpMeasurementUnit != null) {
-	title = LanguageUtil.format(request, "edit-x", cpMeasurementUnit.getName(locale), false);
+	title = LanguageUtil.format(request, "edit-x", HtmlUtil.escape(cpMeasurementUnit.getName(locale)), false);
 }
 
 Map<String, Object> data = new HashMap<>();
@@ -81,7 +81,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 				String taglibLabel = "ratio-to-primary";
 
 				if (primaryCPMeasurementUnit != null) {
-					taglibLabel = LanguageUtil.format(request, "ratio-to-x", primaryCPMeasurementUnit.getName(locale), false);
+					taglibLabel = LanguageUtil.format(request, "ratio-to-x", HtmlUtil.escape(primaryCPMeasurementUnit.getName(locale)), false);
 				}
 				%>
 

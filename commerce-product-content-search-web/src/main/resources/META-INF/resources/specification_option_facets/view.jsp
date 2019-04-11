@@ -40,7 +40,7 @@ for (Facet facet : cpSpecificationOptionFacetsDisplayContext.getFacets()) {
 			cssClass="search-facet"
 			markupView="lexicon"
 			persistState="<%= true %>"
-			title="<%= cpSpecificationOptionFacetsDisplayContext.getCPSpecificationOptionTitle(facet.getFieldName()) %>"
+			title="<%= HtmlUtil.escape(cpSpecificationOptionFacetsDisplayContext.getCPSpecificationOptionTitle(facet.getFieldName())) %>"
 		>
 			<aui:form method="post" name='<%= "assetEntriesFacetForm_" + facet.getFieldName() %>'>
 				<aui:input cssClass="facet-parameter-name" name="facet-parameter-name" type="hidden" value="<%= cpSpecificationOptionFacetsDisplayContext.getCPSpecificationOptionKey(facet.getFieldName()) %>" />

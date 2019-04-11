@@ -44,13 +44,13 @@ productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceShippingInf
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
 			<aui:fieldset>
-				<aui:input name="width" suffix="<%= cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+				<aui:input name="width" suffix="<%= HtmlUtil.escape(cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-				<aui:input name="height" suffix="<%= cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+				<aui:input name="height" suffix="<%= HtmlUtil.escape(cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-				<aui:input name="depth" suffix="<%= cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+				<aui:input name="depth" suffix="<%= HtmlUtil.escape(cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-				<aui:input name="weight" suffix="<%= cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_WEIGHT) %>" />
+				<aui:input name="weight" suffix="<%= HtmlUtil.escape(cpInstanceShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_WEIGHT)) %>" />
 			</aui:fieldset>
 		</aui:fieldset>
 	</aui:fieldset-group>

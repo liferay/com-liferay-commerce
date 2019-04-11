@@ -85,13 +85,13 @@ CommerceShippingMethodsDisplayContext commerceShippingMethodsDisplayContext = (C
 					cssClass="important table-cell-content"
 					href="<%= rowURL %>"
 					name="name"
-					value="<%= commerceShippingMethod.getName(locale) %>"
+					value="<%= HtmlUtil.escape(commerceShippingMethod.getName(locale)) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
 					cssClass="table-cell-content"
 					name="description"
-					value="<%= commerceShippingMethod.getDescription(locale) %>"
+					value="<%= HtmlUtil.escape(commerceShippingMethod.getDescription(locale)) %>"
 				/>
 
 				<liferay-ui:search-container-column-text

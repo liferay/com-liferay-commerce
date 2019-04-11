@@ -155,7 +155,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 					<liferay-ui:search-container-column-text>
 						<div class="mt-3">
-							<%= unitPriceMoney.format(locale) %>
+							<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
 						</div>
 					</liferay-ui:search-container-column-text>
 				</c:if>

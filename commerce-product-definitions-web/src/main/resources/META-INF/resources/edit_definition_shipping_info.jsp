@@ -46,16 +46,16 @@ boolean shipSeparately = BeanParamUtil.getBoolean(cpDefinition, request, "shipSe
 
 				<aui:input checked="<%= shipSeparately %>" label="always-ship-separately" name="shipSeparately" type="toggle-switch" />
 
-				<aui:input name="shippingExtraPrice" suffix="<%= cpDefinitionShippingInfoDisplayContext.getCommerceCurrencyCode() %>" />
+				<aui:input name="shippingExtraPrice" suffix="<%= HtmlUtil.escape(cpDefinitionShippingInfoDisplayContext.getCommerceCurrencyCode()) %>" />
 			</div>
 
-			<aui:input name="width" suffix="<%= cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+			<aui:input name="width" suffix="<%= HtmlUtil.escape(cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-			<aui:input name="height" suffix="<%= cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+			<aui:input name="height" suffix="<%= HtmlUtil.escape(cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-			<aui:input name="depth" suffix="<%= cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION) %>" />
+			<aui:input name="depth" suffix="<%= HtmlUtil.escape(cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_DIMENSION)) %>" />
 
-			<aui:input name="weight" suffix="<%= cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_WEIGHT) %>" />
+			<aui:input name="weight" suffix="<%= HtmlUtil.escape(cpDefinitionShippingInfoDisplayContext.getCPMeasurementUnitName(CPMeasurementUnitConstants.TYPE_WEIGHT)) %>" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 

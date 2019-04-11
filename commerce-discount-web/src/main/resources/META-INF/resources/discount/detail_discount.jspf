@@ -21,7 +21,7 @@ boolean usePercentage = BeanParamUtil.getBoolean(commerceDiscount, request, "use
 String levelSuffix = StringPool.PERCENT;
 
 if ((commerceDiscount != null) && !commerceDiscount.getUsePercentage()) {
-	levelSuffix = commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode();
+	levelSuffix = HtmlUtil.escape(commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode());
 }
 %>
 
@@ -85,7 +85,7 @@ if (!usePercentage) {
 
 <div id="<portlet:namespace />maximumDiscountAmountContainer">
 	<div class="<%= itemRetractableCssClass %>">
-		<aui:input name="maximumDiscountAmount" suffix="<%= commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode() %>" type="text" value="<%= (commerceDiscount == null) ? BigDecimal.ZERO : commerceDiscountDisplayContext.round(commerceDiscount.getMaximumDiscountAmount()) %>">
+		<aui:input name="maximumDiscountAmount" suffix="<%= HtmlUtil.escape(commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode()) %>" type="text" value="<%= (commerceDiscount == null) ? BigDecimal.ZERO : commerceDiscountDisplayContext.round(commerceDiscount.getMaximumDiscountAmount()) %>">
 			<aui:validator name="number" />
 		</aui:input>
 	</div>
@@ -208,7 +208,7 @@ if (!usePercentage) {
 				A.one('#<portlet:namespace />levelsContainer .level4Container').addClass('hide');
 				A.one('#<portlet:namespace />level3MinusButton').addClass('hide');
 
-				A.all('#<portlet:namespace />levelsContainer .input-group-addon').html('<%= commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode() %>');
+				A.all('#<portlet:namespace />levelsContainer .input-group-addon').html('<%= HtmlUtil.escape(commerceDiscountDisplayContext.getDefaultCommerceCurrencyCode()) %>');
 				A.one('#<portlet:namespace />level1Label').html('<liferay-ui:message key="discount-amount" />');
 			}
 		}
