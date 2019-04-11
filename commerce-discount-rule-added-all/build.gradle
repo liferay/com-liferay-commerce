@@ -2,6 +2,7 @@ dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.discount.api", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "7.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.item.selector.api", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
@@ -9,5 +10,4 @@ dependencies {
 	compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "7.0.0"
 }
