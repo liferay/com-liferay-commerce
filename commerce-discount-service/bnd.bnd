@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Commerce Discount Service
 Bundle-SymbolicName: com.liferay.commerce.discount.service
-Bundle-Version: 1.0.12
+Bundle-Version: 1.0.13
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
