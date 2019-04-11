@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Commerce Tax Service
 Bundle-SymbolicName: com.liferay.commerce.tax.service
-Bundle-Version: 1.0.11
+Bundle-Version: 1.0.12
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
