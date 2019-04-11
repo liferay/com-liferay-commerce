@@ -26,6 +26,7 @@ page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.ArrayUtil" %><%@
+page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%@ page import="java.math.BigDecimal" %>
