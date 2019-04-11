@@ -2,6 +2,7 @@ dependencies {
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.8"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.odata.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.vulcan.api", version: "1.0.0-20190325.181508-2"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.discount.api", version: "2.2.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "7.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "2.0.0"
@@ -15,7 +16,6 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.service.component", version: "1.3.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
 	compileOnly project(":apps:commerce:commerce-currency-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.discount.api", version: "2.2.0"
 	compileOnly project(":apps:commerce:headless:headless-commerce-core-api")
 	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-pricing-api")
 }
