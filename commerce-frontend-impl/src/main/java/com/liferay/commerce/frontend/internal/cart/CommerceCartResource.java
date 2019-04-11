@@ -228,6 +228,7 @@ public class CommerceCartResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateOrderItem(
 		@FormParam("groupId") long groupId,
+		@FormParam("languageId") String languageId,
 		@FormParam("commerceAccountId") long commerceAccountId,
 		@FormParam("quantity") int quantity,
 		@FormParam("productId") long cpInstanceId,
@@ -250,6 +251,7 @@ public class CommerceCartResource {
 					WebKeys.THEME_DISPLAY);
 
 			themeDisplay.setScopeGroupId(groupId);
+			themeDisplay.setLanguageId(languageId);
 
 			CommerceOrder commerceOrder =
 				_commerceOrderService.fetchCommerceOrder(orderId);
