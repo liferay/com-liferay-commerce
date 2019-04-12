@@ -25,7 +25,7 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 <liferay-ui:error exception="<%= UserEmailAddressException.MustValidate.class %>" message="please-enter-a-valid-email-address" />
 
 <div class="commerce-account-container" id="<portlet:namespace />entriesContainer">
-	<commerce-ui:table
+	<commerce-ui:smart-table
 		dataProviderKey="commerceAccounts"
 		filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 		itemPerPage="<%= 5 %>"

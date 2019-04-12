@@ -169,7 +169,7 @@ if (commerceOrder != null) {
 
 <div class="row">
 	<div class="col-md-12">
-		<commerce-ui:table
+		<commerce-ui:smart-table
 			dataProviderKey="commercePlacedOrderItems"
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"

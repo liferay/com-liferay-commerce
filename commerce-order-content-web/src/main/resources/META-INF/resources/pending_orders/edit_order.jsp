@@ -286,7 +286,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 <div class="row">
 	<div class="col-md-9">
-		<commerce-ui:table
+		<commerce-ui:smart-table
 			dataProviderKey="commercePendingOrderItems"
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"

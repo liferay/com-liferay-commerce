@@ -20,37 +20,113 @@
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-<commerce-ui:commerce-datalist
-	componentId="accountsFilter"
-	additionalClasses="mb-3"
-	name="accounts"
-	multiselect="<%= true %>"
-/>
+<span class="accounts-filter"></span>
 
-<aui:script>
-	Liferay.componentReady('accountsFilter').then(
-		function(accountsFilter) {
-			console.log(accountsFilter)
-			/*
-			new DataProvider()
-			accountsFilter.setDataProvider()
+<aui:script require="commerce-frontend-taglib@2.0.0/datalist/SmartDatalist.es as SmartDatalist">
 
-			addAddressModal.on(
-				'addAddressModalSave',
-				function(formData) {
-					console.log('asd')
+	var filterInitialized = false;
+
+	Liferay.componentReady('commercePendingOrders').then(
+		(pendingOrdersTable) => {
+			
+			pendingOrdersTable.showPagination = true;
+
+			pendingOrdersTable.connectorSettings = {
+				remote: {
+					read: pendingOrdersTable.apiUrl
+				},
+				pagination: {
+					page: 1,
+					pageSize: 5
+				},
+				filters: [
+					{
+						field: 'groupId',
+						value: themeDisplay.getScopeGroupId()
+					},
+					{
+						field: 'accountId',
+						value: '<%= commerceOrderContentDisplayContext.getCommerceAccountId() %>'
+					}
+				],
+				on: {
+					mapParameters: (data, component) => {
+						const defaultParams = 'p_auth=' + Liferay.authToken;
+						const paginationParams = 'page=' + data.pagination.page + '&pageSize=' + data.pagination.pageSize;
+						const filters = (component.connector.searchForRelatedConnectorsValues() || []).reduce(
+							(acc, filter) => {
+								return filter.value 
+									? acc.concat(filter.name + '=' + filter.value)
+									: acc
+							},
+							[]
+						).join('&')
+						return defaultParams + '&' + paginationParams + '&' + filters;
+					}
 				}
-			);
-			*/
+			}
+			
+			if(!filterInitialized) {
+				filterInitialized = true;
+				initializeFilters(pendingOrdersTable);
+			}
 		}
 	);
 
-</aui:script>
+	function initializeFilters(tableInstance) {
+		const ordersAccounts = new SmartDatalist.default(
+			{
+				additionalClasses: 'mb-4 d-block',
+				name: 'accountId',
+				valueField: 'accountId',
+				labelField: 'name',
+				spritemap: '/o/minium-theme/images/commerce-icons.svg',
+				events: {
+					'selected': () => {
+						tableInstance.reload()
+					}
+				},
+				connectorSettings: {
+					remote: {
+						read: '/o/commerce-ui/search-accounts'
+					},
+					pagination: {
+						page: 1,
+						pageSize: 5
+					},
+					filters: [
+						{
+							field: 'groupId',
+							value: themeDisplay.getScopeGroupId()
+						}
+					],
+					on: {
+						mapParameters: (data) => {
+							const groupId = 'groupId=' + (
+								data.filters.reduce(
+									(id, filter) => id || (filter.field === 'groupId' && filter.value),
+									false
+								)
+							) || '';
+							const paginationParams = 'page=' + data.pagination.page + '&pageSize=' + data.pagination.pageSize;
+							const queryParams = 'q=' + (data.filters.reduce(
+								(id, filter) => id || (filter.field === 'keyWord' && filter.value),
+								false
+							) || '');
+							return groupId + '&' + paginationParams + '&' + queryParams;
+						},
+						parseResponse: (response) => response.accounts
+					}
+				}
+			},
+			'.accounts-filter'
+		)
+	};
 
-<commerce-ui:table
+</aui:script>
+<commerce-ui:smart-table
 	dataProviderKey="commercePendingOrders"
 	filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 	itemPerPage="<%= 5 %>"

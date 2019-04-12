@@ -60,7 +60,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author Marco Leo
  */
-public class CommerceTableTag extends ComponentRendererTag {
+public class SmartTableTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -83,7 +83,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_setItems(dataProviderKey);
 			_setPagination();
 
-			setComponentId(tableName + "CommerceTable");
+			setComponentId(tableName);
 
 			StringBundler sb = new StringBundler(11);
 
@@ -99,7 +99,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			sb.append("&portletId=");
 			sb.append(portletDisplay.getId());
 
-			putValue("dataSetAPI", sb.toString());
+			putValue("apiUrl", sb.toString());
 
 			putValue(
 				"spritemap",
@@ -109,7 +109,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_log.error(e, e);
 		}
 
-		setTemplateNamespace("CommerceTable.render");
+		setTemplateNamespace("SmartTable.render");
 
 		return super.doStartTag();
 	}
@@ -123,7 +123,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/clay_table/CommerceTable.es");
+			"commerce-frontend-taglib/table/SmartTable.es");
 	}
 
 	public void setDataProviderKey(String dataProviderKey) {
@@ -331,7 +331,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceTableTag.class);
+		SmartTableTag.class);
 
 	private ClayTableContextContributorRegistry
 		_clayTableContextContributorRegistry;

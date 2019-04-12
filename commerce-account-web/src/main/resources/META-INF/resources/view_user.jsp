@@ -70,7 +70,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 	</div>
 
 	<div class="commerce-account-container">
-		<commerce-ui:table
+		<commerce-ui:smart-table
 			dataProviderKey="commerceAccountUserRoles"
 			filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 			itemPerPage="<%= 5 %>"

@@ -28,7 +28,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
 
-<commerce-ui:table
+<commerce-ui:smart-table
 	dataProviderKey="<%= CommerceAccountAddressClayTable.NAME %>"
 	filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 	itemPerPage="<%= 5 %>"

@@ -12,6 +12,7 @@
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
 		"check-source-formatting": "^2.0.6",
 		"cross-env": "^5.2.0",

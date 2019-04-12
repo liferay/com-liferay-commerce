@@ -1,19 +1,22 @@
-{namespace CommerceDatalist}
+{namespace Datalist}
 
 {template .render}
 	{@param? formId: string}
 	{@param name: string}
+	{@param? stringifiedSelected: string}
+	{@param? id: string}
 	{@param? _filteredValues: ?}
 	{@param? data: ?}
 	{@param? label: string}
 	{@param spritemap: string}
 	{@param? multiselect: bool}
-	{@param? value: ?}
+	{@param? addedData: ?}
 	{@param? query: ?}
 	{@param? dropdownVisibilityState: string}
 	{@param? additionalClasses: string}
 
 	{let $inputId kind="text"}
+		commerce-datalist-
 		{if isNonnull($formId)}
 			{$formId}-{$name}
 		{else}
@@ -35,7 +38,23 @@
 		{/if}
 	{/let}
 
-	<div class="{$containerClasses}">
+	{let $containerAttributes kind="attributes"}
+		{if $id}
+			id="{$id}" 
+		{/if}
+		class="{$containerClasses}"
+	{/let}
+
+	<div {$containerAttributes}>
+
+		<input 
+			ref="input"
+			type="hidden"
+			name="{$name}"
+			data-operation="contains"
+			value="{$stringifiedSelected}" 
+		/> 
+
 		{if isNonnull($label)}
 			<label
 				for="{$inputId}"
@@ -54,9 +73,9 @@
 					class="commerce-datalist__query-wrapper"
 					ref="queryWrapper"
 				>
-					{if $multiselect and isNonnull($value)}
+					{if $multiselect and isNonnull($addedData)}
 						{call .addedValues}
-							{param values: $value /}
+							{param values: $addedData /}
 							{param spritemap: $spritemap /}
 						{/call}
 					{/if}
@@ -65,24 +84,28 @@
 						data-onkeyup="_handleInputKeyup"
 						id="{$inputId}"
 						ref="inputText"
-						{if not $multiselect and isNonnull($value)}
-							value="{$value.label}"
+						autocomplete="off" 
+						placeholder="search..."
+						{if not $multiselect and $addedData and $addedData.label}
+							value="{$addedData.label}"
+						{else}
+							value=""
 						{/if}
 						type="text"
 					/>
 				</div>
 			</div>
-			<span 
-				class="commerce-datalist__icon-wrapper"
-				data-onclic="_handleIconClick"
-			>
-				<span class="commerce-datalist__icon commerce-datalist__icon--search">
+			<span class="commerce-datalist__icon-wrapper">
+				<button 
+					class="commerce-datalist__icon commerce-datalist__icon--action"
+					data-onclick="_handleResetButtonClick"
+				>
 					{call ClayIcon.render}
 						{param spritemap: $spritemap /}
-						{param symbol: 'search' /}
+						{param symbol: 'reset' /}
 					{/call}
-				</span>
-				<span class="commerce-datalist__icon commerce-datalist__icon--chevron">
+				</button>
+				<span class="commerce-datalist__icon commerce-datalist__icon--default">
 					{call ClayIcon.render}
 						{param spritemap: $spritemap /}
 						{param symbol: 'chevron' /}
@@ -103,7 +126,7 @@
 				{param data: $data /}
 				{param filteredValues: $_filteredValues /}
 				{param name: $name /}
-				{param selectedValue: $value /}
+				{param selectedValue: $addedData /}
 				{param query: $query /}
 				{param multiselect: $multiselect /}
 			{/call}
@@ -151,6 +174,10 @@
 
 	{let $dataElementVariant: $multiselect ? 'multiselect' : '' /}
 
+	{let $emptyLabelMessage kind="text"}
+		{msg desc="None"}none{/msg}
+	{/let}
+
 	<div class="commerce-datalist__data">
 		{if 
 			isNonnull($query) and $query != '' and 
@@ -158,10 +185,15 @@
 			isNonnull($filteredValues)
 		}
 			{if length($filteredValues) > 0 }
+				{if ($multiselect) == false}
+					{delcall Datalist.DataElement variant="$dataElementVariant"}
+						{param label: $emptyLabelMessage /}
+					{/delcall}
+				{/if}
 				{foreach $filteredValue in $filteredValues}
 					{foreach $dataElement in $data}
 						{if $filteredValue == $dataElement.value}
-							{delcall CommerceDatalist.DataElement variant="$dataElementVariant"}
+							{delcall Datalist.DataElement variant="$dataElementVariant"}
 								{param value: $dataElement.value /}
 								{param label: $dataElement.label /}
 								{param query: $query /}
@@ -176,8 +208,13 @@
 			{/if}
 		{else}
 			{if isNonnull($data) and length($data) > 0}
+				{if ($multiselect) == false}
+					{delcall Datalist.DataElement variant="$dataElementVariant"}
+						{param label: $emptyLabelMessage /}
+					{/delcall}
+				{/if}
 				{foreach $dataElement in $data}
-					{delcall CommerceDatalist.DataElement variant="$dataElementVariant"}
+					{delcall Datalist.DataElement variant="$dataElementVariant"}
 						{param value: $dataElement.value /}
 						{param label: $dataElement.label /}
 						{param query: $query /}
@@ -192,71 +229,79 @@
 	</div>
 {/template}
 
-{deltemplate CommerceDatalist.DataElement variant="'multiselect'"}
-	{@param value: string|number}
-	{@param label: string|number}
+{deltemplate Datalist.DataElement variant="'multiselect'"}
+	{@param? value: string|number}
+	{@param? label: string|number}
 	{@param? query: string}
-	{@param name: string}
+	{@param? name: string}
 	{@param? selectedValue: list<[
 		value: string|number
 	]>}
 
-	{let $inputId kind="text"}
-		{$name}-{$value}
-	{/let}
+	{if $value and $label and $name}
+		{let $inputId kind="text"}
+			{$name}-{$value}
+		{/let}
 
-	<label
-		class="commerce-datalist__option commerce-datalist__option--label"
-		for="{$inputId}"
-	>
-		<input
-			id="{$inputId}"
-			type="checkbox"
-			data-onchange="_handleSelectData"
-			data-value="{$value}"
-			{if isNonnull($selectedValue)}
-				{foreach $currentSelected in $selectedValue}
-					{if $currentSelected.value == $value}
-						checked
-					{/if}
-				{/foreach}
-			{/if}
-		/>
-		{call AutocompleteItem.render}
-			{param text: $label /}
-			{param query: $query /}
-		{/call}
-	</label>
+		<label
+			class="commerce-datalist__option commerce-datalist__option--label"
+			for="{$inputId}"
+		>
+			<input
+			
+				id="{$inputId}"
+				type="checkbox"
+				data-onchange="_handleSelectData"
+				data-value="{$value}"
+				autocomplete="off"
+				{if isNonnull($selectedValue)}
+					{foreach $currentSelected in $selectedValue}
+						{if $currentSelected.value == $value}
+							checked
+						{/if}
+					{/foreach}
+				{/if}
+			/>
+			{call AutocompleteItem.render}
+				{param text: $label /}
+				{param query: $query /}
+			{/call}
+		</label>
+	{/if}
 {/deltemplate}
 
-{deltemplate CommerceDatalist.DataElement}
-	{@param value: string|number}
-	{@param label: string|number}
+{deltemplate Datalist.DataElement}
+	{@param? value: string|number}
+	{@param? label: string|number}
 	{@param? query: string}
-	{@param name: string}
 	{@param? selectedValue: [
 		value: string|number
 	]}
 
-	{let $inputId kind="text"}
-		{$name}-{$value}
-	{/let}
 	{let $dataElementClasses kind="text"}
 		commerce-datalist__option commerce-datalist__option--select
 		{if isNonnull($selectedValue) and $selectedValue.value == $value}
 			{sp}commerce-datalist__option--active
 		{/if}
 	{/let}
+	{let $formattedValue kind="text"}
+		{if $value}
+			{$value}
+		{else}
+			{nil}
+		{/if}
+	{/let}
 	<div 
-		id="{$inputId}" 
 		class="{$dataElementClasses}" 
-		data-value="{$value}" 
+		data-value="{$formattedValue}" 
 		data-onclick="_handleSelectData"
 	>
-		{call AutocompleteItem.render}
-			{param text: $label /}
-			{param query: $query /}
-		{/call}
+		{if $label}
+			{call AutocompleteItem.render}
+				{param text: $label /}
+				{param query: $query /}
+			{/call}
+		{/if}
 	</div>
 {/deltemplate}
 

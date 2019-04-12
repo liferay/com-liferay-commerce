@@ -1,15 +1,15 @@
 'use strict';
 
-import template from './CommerceInputText.soy';
+import template from './Input.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class CommerceInputText extends Component {
+class Input extends Component {
 }
 
-Soy.register(CommerceInputText, template);
+Soy.register(Input, template);
 
-CommerceInputText.STATE = {
+Input.STATE = {
 	contextName: Config.string(),
 	label: Config.string(),
 	name: Config.string(),
@@ -20,5 +20,5 @@ CommerceInputText.STATE = {
 	_handleInputKeyUp: Config.func()
 };
 
-export {CommerceInputText};
-export default CommerceInputText;
+export {Input};
+export default Input;

@@ -35,7 +35,7 @@ List<CommerceOrder> commerceOrders = commerceOrderContentDisplayContext.getComme
 >
 	<div class="container-fluid-1280" id="<portlet:namespace />ordersContainer">
 		<div class="commerce-orders-container" id="<portlet:namespace />entriesContainer">
-			<commerce-ui:table
+			<commerce-ui:smart-table
 				dataProviderKey="commercePlacedOrders"
 				filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 				itemPerPage="<%= 5 %>"

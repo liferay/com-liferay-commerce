@@ -20,7 +20,7 @@
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<commerce-ui:table
+<commerce-ui:smart-table
 	dataProviderKey="commercePlacedOrders"
 	filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 	itemPerPage="<%= 5 %>"

@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  * @author Fabio Mastorilli
  */
-public class CommerceDatalistTag extends ComponentRendererTag {
+public class DatalistTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -52,17 +52,23 @@ public class CommerceDatalistTag extends ComponentRendererTag {
 			context.get("name"));
 		String additionalClasses = GetterUtil.getString(
 			context.get("additionalClasses"));
+		String label = GetterUtil.getString(
+			context.get("label"));
 		boolean multiselect = GetterUtil.getBoolean(
 			context.get("multiselect"));
-		String componentId = GetterUtil.getString(context.get("componentId"));
 
-		setComponentId(componentId);
+		String id = GetterUtil.getString(context.get("id"));
 
 		putValue( "name", name);
 		putValue( "additionalClasses", additionalClasses);
+		putValue( "label", label);
 		putValue( "multiselect", multiselect);
 		putValue( "spritemap", themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-		setTemplateNamespace("CommerceDatalist.render");
+
+		setWrapper(false);
+		setComponentId(id);
+
+		setTemplateNamespace("Datalist.render");
 		return super.doStartTag();
 	}
 
@@ -75,15 +81,19 @@ public class CommerceDatalistTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/input_utils/CommerceDatalist.es");
+			"commerce-frontend-taglib/datalist/Datalist.es");
 	}
 
 	public void setName(String name) {
 		putValue("name", name);
 	}
 
-	public void setComponentId(String componentId) {
-		putValue("componentId", componentId);
+	public void setId(String id) {
+		putValue("id", id);
+	}
+
+	public void setLabel(String label) {
+		putValue("label", label);
 	}
 
 	public void setAdditionalClasses(String additionalClasses) {
@@ -94,7 +104,7 @@ public class CommerceDatalistTag extends ComponentRendererTag {
 		putValue("multiselect", multiselect);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(CommerceDatalistTag.class);
+	private static final Log _log = LogFactoryUtil.getLog(DatalistTag.class);
 
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 

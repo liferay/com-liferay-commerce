@@ -24,7 +24,7 @@ PortletURL portletURL = currentURLObj;
 portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL", backURL);
 %>
 
-<commerce-ui:table
+<commerce-ui:smart-table
 	dataProviderKey="commerceAccountUsers"
 	filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 	itemPerPage="<%= 5 %>"

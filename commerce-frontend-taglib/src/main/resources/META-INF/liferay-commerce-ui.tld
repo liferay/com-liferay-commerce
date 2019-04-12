@@ -86,6 +86,7 @@
 		</attribute>
 	</tag>
 	<tag>
+<<<<<<< HEAD
 		<name>gallery</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.GalleryTag</tag-class>
 		<body-content>empty</body-content>
@@ -103,15 +104,24 @@
 	<tag>
 		<name>commerce-datalist</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceDatalistTag</tag-class>
+=======
+		<name>datalist</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.DatalistTag</tag-class>
+>>>>>>> COMMERCE-1181 magic connectors
 		<body-content>empty</body-content>
 		<attribute>
-			<name>componentId</name>
+			<name>id</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>label</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
@@ -181,8 +191,8 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>table</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
+		<name>smart-table</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SmartTableTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>dataProviderKey</name>

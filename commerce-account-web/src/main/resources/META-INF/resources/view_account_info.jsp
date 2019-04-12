@@ -21,7 +21,7 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 %>
 
 <div class="container-fluid-1280">
-	<commerce-ui:table
+	<commerce-ui:smart-table
 		dataProviderKey="<%= CommerceAccountOrganizationClayTable.NAME %>"
 		filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 		itemPerPage="<%= 5 %>"

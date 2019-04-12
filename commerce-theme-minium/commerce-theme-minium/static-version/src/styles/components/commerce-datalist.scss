@@ -1,12 +1,12 @@
 .commerce-datalist {
 	width: 200px;
+	display: inline-block;
 	line-height: 1.6;
 	position: relative;
 	color: $color-fg;
-	position: relative;
 
 	&__input-wrapper {
-		transition: background-color .1s ease-in, border-radius .4s ease-in;
+		transition: background-color .1s ease-in, border-radius .2s ease-in;
 		border: 2px solid $color-border;
 		border-radius: 8px;
 		overflow: hidden;
@@ -29,12 +29,12 @@
 
 			.commerce-datalist {
 				&__icon {
-					&--search {
+					&--action {
 						transform: translate(0, 50%) scale(1);
 						opacity: 1;
 					}
 					
-					&--chevron {
+					&--default {
 						transform: translate(0, -50%) scale(.5);
 						opacity: 0;
 					}
@@ -59,12 +59,14 @@
 		align-items: center;
 		display: flex;
 		
-		&--search {
+		&--action {
 			transform: translate(0, 130%) scale(.5);
 			opacity: 0;
+			color: $color-fg-alt;
+			padding: 0;
 		}
 		
-		&--chevron {
+		&--default {
 			transform: translate(0, 50%) scale(1);
 			opacity: 1;
 		}
@@ -83,6 +85,7 @@
 		overflow-x: scroll;
 		overflow-y: hidden;
 		-webkit-overflow-scrolling: touch;
+		height: calc(100% + 24px);
 		top: 0;
 		left: 0;
 		right: 0;
@@ -97,7 +100,7 @@
 		border-width: 0;
 		display: inline-block;
 		margin: 0;
-		min-width: calc(100% - 24px);
+		min-width: calc(100% - 50px);
 		flex-grow: 1;
 		background: transparent;
 
@@ -146,6 +149,8 @@
 		transform-origin: 50% 0%;
 		transition: all .1s ease-in;
 		z-index: 1;
+		box-shadow: $minium-shadow;
+		overflow: hidden;
 
 		&.is-collapsing {
 			display: block;
@@ -172,21 +177,11 @@
 		font-weight: normal;
 		cursor: pointer;
 		padding: 7px 14px;
+		margin: 0;
 
-		&:first-of-type {
-			padding-top: 14px
-		}
-
-		&:last-of-type {
-			padding-bottom: 14px
-		}
-
+		.is-hover,
 		&:hover {
-			font-weight: 600;
-			
-			.autocomplete-item {
-				font-weight: 600;
-			}
+			background-color: $color-bg-alt;
 		}
 
 		&--active {
@@ -200,10 +195,6 @@
 			&:first-of-type { 
 				padding: 0;
 			}
-		}
-
-		&--select {
-			
 		}
 
 		&--empty {
