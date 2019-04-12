@@ -125,8 +125,7 @@ ProductCard.STATE = {
 				'available',
 				'notAvailable'
 			]
-		)
-		.value('inStock'),
+		),
 	cartAPI: Config.string(),
 	categories: Config.array(
 		Config.shapeOf(

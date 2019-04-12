@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -184,7 +185,7 @@ public class MiniumCPContentListEntryRenderer
 		}
 
 		context.put("addToCartButtonVisible", true);
-		context.put("availability", "available");
+
 		context.put(
 			"cartAPI",
 			_portal.getPortalURL(httpServletRequest) +
@@ -222,6 +223,28 @@ public class MiniumCPContentListEntryRenderer
 				if (!commerceOrderItems.isEmpty()) {
 					context.put("orderQuantity", 1);
 				}
+			}
+
+			if (productSettingsModel.isShowAvailabilityDot()) {
+				Map<String, Integer> stockQuantities =
+					(Map<String, Integer>)httpServletRequest.getAttribute(
+						"stockQuantities");
+
+				int stockQuantity = MapUtil.getInteger(
+					stockQuantities, cpSku.getSku());
+
+				String status = "inStock";
+
+				if (stockQuantity == 0) {
+					status = "notAvailable";
+				}
+				else if (stockQuantity <=
+							productSettingsModel.getLowStockQuantity()) {
+
+					status = "available";
+				}
+
+				context.put("availability", status);
 			}
 		}
 
