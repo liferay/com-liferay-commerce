@@ -33,8 +33,8 @@ function fix_tomcat_setenv {
 
 	local jvm_opts="-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=512m -XX:NewSize=1536m -XX:SurvivorRatio=7"
 
-	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/${jvm_opts}/" ${1}/bin/setenv.bat
-	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/${jvm_opts}/" ${1}/bin/setenv.sh
+	sed -i "s/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=384m -XX:MetaspaceSize=384m -XX:NewSize=1536m -XX:SurvivorRatio=7/${jvm_opts}/" ${1}/bin/setenv.bat
+	sed -i "s/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=384m -XX:MetaspaceSize=384m -XX:NewSize=1536m -XX:SurvivorRatio=7/${jvm_opts}/" ${1}/bin/setenv.sh
 
 	if $(! grep -q -e "${jvm_opts}" ${1}/bin/setenv.bat) || $(! grep -q -e "${jvm_opts}" ${1}/bin/setenv.sh)
 	then
