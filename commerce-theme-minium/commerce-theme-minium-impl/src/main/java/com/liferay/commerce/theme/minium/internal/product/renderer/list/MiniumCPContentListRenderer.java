@@ -14,13 +14,23 @@
 
 package com.liferay.commerce.theme.minium.internal.product.renderer.list;
 
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
+import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
@@ -66,13 +76,54 @@ public class MiniumCPContentListRenderer implements CPContentListRenderer {
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
+		CPDataSourceResult cpDataSourceResult =
+			(CPDataSourceResult)httpServletRequest.getAttribute(
+				CPWebKeys.CP_DATA_SOURCE_RESULT);
+
+		List<CPSku> cpSkus;
+		List<String> skus = new ArrayList<>();
+
+		for (CPCatalogEntry cpCatalogEntry :
+				cpDataSourceResult.getCPCatalogEntries()) {
+
+			cpSkus = cpCatalogEntry.getCPSkus();
+
+			if (cpSkus.size() != 1) {
+				continue;
+			}
+
+			CPSku cpSku = cpSkus.get(0);
+
+			skus.add(cpSku.getSku());
+		}
+
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest));
+
+		Map<String, Integer> stockQuantities =
+			_commerceInventoryEngine.getStockQuantities(
+				_portal.getCompanyId(httpServletRequest),
+				commerceChannelGroupId, skus);
+
+		httpServletRequest.setAttribute("stockQuantities", stockQuantities);
+
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/list_render/view.jsp");
 	}
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceInventoryEngine _commerceInventoryEngine;
+
+	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.theme.minium.impl)"
