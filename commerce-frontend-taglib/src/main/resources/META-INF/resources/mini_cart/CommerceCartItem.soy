@@ -54,7 +54,7 @@
 		></div>
 		<div class="commerce-cart-item__content">
 			<span class="commerce-cart-item__sku">{$sku}</span>
-			<span class="commerce-cart-item__name">{$name}</span>
+			<span class="commerce-cart-item__name"><big>{$name}</big></span>
 			{if isNonnull($options)}
 				<span class="commerce-cart-item__options">
 					{foreach $option in $options}
@@ -78,13 +78,6 @@
 				{param multipleQuantity: $settings.multipleQuantity /}
 				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
-
-			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}">
-				{call ClayIcon.render}
-					{param spritemap: $spritemap /}
-					{param symbol: 'delete' /}
-				{/call}
-			</button>
 		</div>
 
 		<div class="commerce-cart-item__price">
@@ -98,6 +91,15 @@
 					{param prices: $prices /}
 				{/call}
 			{/if}
+		</div>
+
+		<div class="commerce-cart-item__delete-wrapper">
+			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}">
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'close' /}
+				{/call}
+			</button>
 		</div>
 
 		<div class="commerce-cart-item__cancel-delete">
