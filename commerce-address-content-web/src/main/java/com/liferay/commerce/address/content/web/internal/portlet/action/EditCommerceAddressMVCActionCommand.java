@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.address.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
@@ -21,7 +22,6 @@ import com.liferay.commerce.exception.CommerceAddressStreetException;
 import com.liferay.commerce.exception.NoSuchAddressException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -113,7 +113,8 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 		long commerceAddressId = ParamUtil.getLong(
 			actionRequest, "commerceAddressId");
 
-		long addressUserId = ParamUtil.getLong(actionRequest, "addressUserId");
+		long commerceAccountId = ParamUtil.getLong(
+			actionRequest, "commerceAccountId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
@@ -137,10 +138,10 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceAddressId <= 0) {
 			_commerceAddressService.addCommerceAddress(
-				User.class.getName(), addressUserId, name, description, street1,
-				street2, street3, city, zip, commerceRegionId,
-				commerceCountryId, phoneNumber, defaultBilling, defaultShipping,
-				serviceContext);
+				CommerceAccount.class.getName(), commerceAccountId, name,
+				description, street1, street2, street3, city, zip,
+				commerceRegionId, commerceCountryId, phoneNumber,
+				defaultBilling, defaultShipping, serviceContext);
 		}
 		else {
 			_commerceAddressService.updateCommerceAddress(
