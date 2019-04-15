@@ -35,6 +35,19 @@ public class CPDefinitionLinkServiceImpl
 	extends CPDefinitionLinkServiceBaseImpl {
 
 	@Override
+	public CPDefinitionLink addCPDefinitionLink(
+			long cpDefinitionId, long cProductId, double priority, String type,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
+
+		return cpDefinitionLinkLocalService.addCPDefinitionLinkByCProductId(
+			cpDefinitionId, cProductId, priority, type, serviceContext);
+	}
+
+	@Override
 	public void deleteCPDefinitionLink(long cpDefinitionLinkId)
 		throws PortalException {
 
@@ -102,6 +115,18 @@ public class CPDefinitionLinkServiceImpl
 
 	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
+			long cpDefinitionId, int start, int end)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+
+		return cpDefinitionLinkLocalService.getCPDefinitionLinks(
+			cpDefinitionId, start, end);
+	}
+
+	@Override
+	public List<CPDefinitionLink> getCPDefinitionLinks(
 			long cpDefinitionId, String type)
 		throws PortalException {
 
@@ -123,6 +148,17 @@ public class CPDefinitionLinkServiceImpl
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLinks(
 			cpDefinitionId, type, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPDefinitionLinksCount(long cpDefinitionId)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+
+		return cpDefinitionLinkLocalService.getCPDefinitionLinksCount(
+			cpDefinitionId);
 	}
 
 	@Override

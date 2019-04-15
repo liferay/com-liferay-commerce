@@ -60,7 +60,7 @@ public class CPDefinitionLinkLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = null;
+		CPDefinition cpDefinition;
 
 		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
@@ -105,11 +105,10 @@ public class CPDefinitionLinkLocalServiceImpl
 		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionLink.getCPDefinitionId())) {
 
-			CPDefinition newCPDefinition = null;
-
 			try {
-				newCPDefinition = cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionLink.getCPDefinitionId());
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionLink.getCPDefinitionId());
 
 				cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
 					newCPDefinition.getCPDefinitionId(),
@@ -184,26 +183,36 @@ public class CPDefinitionLinkLocalServiceImpl
 
 	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
-			long cpDefinitionId, String type)
-		throws PortalException {
+		long cpDefinitionId, int start, int end) {
+
+		return cpDefinitionLinkPersistence.findByCPDefinitionId(
+			cpDefinitionId, start, end);
+	}
+
+	@Override
+	public List<CPDefinitionLink> getCPDefinitionLinks(
+		long cpDefinitionId, String type) {
 
 		return cpDefinitionLinkPersistence.findByCPD_T(cpDefinitionId, type);
 	}
 
 	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
-			long cpDefinitionId, String type, int start, int end,
-			OrderByComparator<CPDefinitionLink> orderByComparator)
-		throws PortalException {
+		long cpDefinitionId, String type, int start, int end,
+		OrderByComparator<CPDefinitionLink> orderByComparator) {
 
 		return cpDefinitionLinkPersistence.findByCPD_T(
 			cpDefinitionId, type, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
-		throws PortalException {
+	public int getCPDefinitionLinksCount(long cpDefinitionId) {
+		return cpDefinitionLinkPersistence.countByCPDefinitionId(
+			cpDefinitionId);
+	}
 
+	@Override
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type) {
 		return cpDefinitionLinkPersistence.countByCPD_T(cpDefinitionId, type);
 	}
 
@@ -233,8 +242,6 @@ public class CPDefinitionLinkLocalServiceImpl
 			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
 				newCPDefinition.getCPDefinitionId(),
 				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
-
-			cpDefinitionLinkId = cpDefinitionLink.getCPDefinitionLinkId();
 		}
 
 		cpDefinitionLink.setPriority(priority);
