@@ -219,6 +219,14 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 	}
 
 	@Override
+	public CPDefinitionOptionValueRel fetchCPDefinitionOptionValueRel(
+		long cpDefinitionOptionRelId, String key) {
+
+		return cpDefinitionOptionValueRelPersistence.fetchByC_K(
+			cpDefinitionOptionRelId, key);
+	}
+
+	@Override
 	public List<CPDefinitionOptionValueRel> getCPDefinitionOptionValueRels(
 		long cpDefinitionOptionRelId) {
 
