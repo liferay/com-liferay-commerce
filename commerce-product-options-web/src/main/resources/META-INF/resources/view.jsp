@@ -58,7 +58,7 @@ navigationItem.setLabel(LanguageUtil.get(request, "option-templates"));
 		<portlet:param name="mvcRenderCommandName" value="editProductOptionValue" />
 	</liferay-portlet:renderURL>
 
-	<aui:script require="commerce-product-options-web@1.0.12/CPOptionsEditor.es as CPOptionsEditor">
+	<aui:script require="commerce-product-options-web@1.0.13/CPOptionsEditor.es as CPOptionsEditor">
 		var cpOptionsEditor = new CPOptionsEditor.default(
 			{
 				hasEditPermission : <%= cpOptionDisplayContext.hasPermission(CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION) %>,
