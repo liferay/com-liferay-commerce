@@ -105,6 +105,28 @@ public class CPDefinitionOptionValueRelServiceImpl
 	}
 
 	@Override
+	public CPDefinitionOptionValueRel fetchCPDefinitionOptionValueRel(
+			long cpDefinitionOptionRelId, String key)
+		throws PortalException {
+
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
+			cpDefinitionOptionValueRelLocalService.
+				fetchCPDefinitionOptionValueRel(cpDefinitionOptionRelId, key);
+
+		if (cpDefinitionOptionValueRel != null) {
+			CPDefinitionOptionRel cpDefinitionOptionRel =
+				cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
+					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
+
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(),
+				cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
+		}
+
+		return cpDefinitionOptionValueRel;
+	}
+
+	@Override
 	public CPDefinitionOptionValueRel getCPDefinitionOptionValueRel(
 			long cpDefinitionOptionValueRelId)
 		throws PortalException {
