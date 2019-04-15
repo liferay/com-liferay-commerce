@@ -94,6 +94,15 @@ public class CommerceAddressDisplayContext {
 		return portletURL.toString();
 	}
 
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return CommerceAccountLocalServiceUtil.getPersonalCommerceAccount(
+			themeDisplay.getUserId());
+	}
+
 	public CommerceAddress getCommerceAddress() throws PortalException {
 		if (_commerceAddress != null) {
 			return _commerceAddress;
@@ -270,9 +279,7 @@ public class CommerceAddressDisplayContext {
 
 		_searchContainer.setTotal(total);
 
-		CommerceAccount commerceAccount =
-			CommerceAccountLocalServiceUtil.getPersonalCommerceAccount(
-				themeDisplay.getUserId());
+		CommerceAccount commerceAccount = getCommerceAccount();
 
 		List<CommerceAddress> results =
 			_commerceAddressService.getCommerceAddresses(
