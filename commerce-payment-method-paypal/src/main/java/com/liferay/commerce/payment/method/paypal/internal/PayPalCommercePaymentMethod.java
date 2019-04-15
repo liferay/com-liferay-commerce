@@ -892,6 +892,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		items = _getShipping(commerceOrder, locale, items);
 
+		items = _getTaxes(commerceOrder, locale, items);
+
 		return items;
 	}
 
@@ -1138,6 +1140,24 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		}
 
 		return shippingAddress;
+	}
+
+	private List<Item> _getTaxes(
+			CommerceOrder commerceOrder, Locale locale, List<Item> items)
+		throws PortalException {
+
+		BigDecimal taxAmount = commerceOrder.getTaxAmount();
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		if ((taxAmount != null) && (taxAmount.compareTo(BigDecimal.ZERO) > 0)) {
+			_addItem(
+				commerceCurrency,
+				_getResource(locale, "paypal-taxes-description"), false, items,
+				_getResource(locale, "paypal-taxes"), taxAmount);
+		}
+
+		return items;
 	}
 
 	private List<Transaction> _getTransactions(
