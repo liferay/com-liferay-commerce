@@ -96,7 +96,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<div class="product-detail-image-column">
 							<div class="full-image product-detail-image-container">
 								<div class="liferayzoom liferayzoom--adjacent product-detail-image">
-									<a href="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" tabindex="-1">
+									<a class="thumb thumb-text" data-toggle="modal" href="#<portlet:namespace />ImageWidgetModal">
 										<img class="img-fluid" id="<portlet:namespace />fullImage" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
 									</a>
 
@@ -189,6 +189,13 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<div class="modal-body">
 							<div class="carousel" data-interval="false" data-ride="carousel" id="carouselExampleFade">
 								<div class="carousel-inner">
+									<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDefaultImageFileUrl()) %>">
+										<div class="active carousel-item">
+											<div class="carousel-item-image">
+												<img alt="<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>" class="img-fluid" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
+											</div>
+										</div>
+									</c:if>
 
 									<%
 									for (int i = 0; i > imageOverflowUrls.length; i++) {
@@ -203,7 +210,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 										<div class="<%= carouselItemCssClass %>">
 											<div class="carousel-item-image">
-												<img alt="Product Image" class="img-fluid" src="<%= url %>">
+												<img alt="<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>" class="img-fluid" src="<%= url %>">
 											</div>
 
 											<div class="carousel-index"><%= i %>/<%= imageOverflowUrls.length %></div>
