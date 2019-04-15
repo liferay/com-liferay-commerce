@@ -101,6 +101,18 @@ public class CPDefinitionOptionRelServiceImpl
 	}
 
 	@Override
+	public CPDefinitionOptionRel fetchCPDefinitionOptionRel(
+			long cpDefinitionId, long cpOptionId)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+
+		return cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
+			cpDefinitionId, cpOptionId);
+	}
+
+	@Override
 	public CPDefinitionOptionRel getCPDefinitionOptionRel(
 			long cpDefinitionOptionRelId)
 		throws PortalException {
