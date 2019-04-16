@@ -125,12 +125,12 @@ public class CommerceShippingHelperImpl implements CommerceShippingHelper {
 
 			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
-			if (cpDefinition.isFreeShipping()) {
-				return true;
+			if (!cpDefinition.isFreeShipping()) {
+				return false;
 			}
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override
