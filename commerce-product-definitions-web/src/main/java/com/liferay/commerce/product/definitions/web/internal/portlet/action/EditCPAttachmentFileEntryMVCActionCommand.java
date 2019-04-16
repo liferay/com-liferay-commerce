@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.exception.DuplicateCPAttachmentFileEntryException;
 import com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -121,7 +122,9 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof NoSuchFileEntryException) {
+			else if (e instanceof DuplicateCPAttachmentFileEntryException ||
+					 e instanceof NoSuchFileEntryException) {
+
 				hideDefaultErrorMessage(actionRequest);
 				hideDefaultSuccessMessage(actionRequest);
 

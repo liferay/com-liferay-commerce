@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryDisplayDateException;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryExpirationDateException;
+import com.liferay.commerce.product.exception.DuplicateCPAttachmentFileEntryException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.base.CPAttachmentFileEntryLocalServiceBaseImpl;
@@ -130,6 +131,12 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			fileEntry, user.getUserId(), groupId,
 			cpAttachmentFileEntry.getClassName(),
 			cpAttachmentFileEntry.getClassPK());
+
+		if (cpAttachmentFileEntryPersistence.fetchByC_C_F(
+				classNameId, classPK, fileEntryId) != null) {
+
+			throw new DuplicateCPAttachmentFileEntryException();
+		}
 
 		cpAttachmentFileEntry.setFileEntryId(fileEntryId);
 

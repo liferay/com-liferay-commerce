@@ -35,6 +35,7 @@ int type = cpAttachmentFileEntriesDisplayContext.getType();
 
 <aui:model-context bean="<%= cpAttachmentFileEntry %>" model="<%= CPAttachmentFileEntry.class %>" />
 
+<liferay-ui:error exception="<%= DuplicateCPAttachmentFileEntryException.class %>" message="that-attachment-is-already-in-use-on-this-product" />
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="please-select-an-existing-file" />
 
 <portlet:actionURL name="uploadTempAttachment" var="uploadCoverImageURL">
