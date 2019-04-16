@@ -34,6 +34,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.service.base.CommerceOrderItemLocalServiceBaseImpl;
+import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -187,8 +188,18 @@ public class CommerceOrderItemLocalServiceImpl
 		expandoRowLocalService.deleteRows(
 			commerceOrderItem.getCommerceOrderItemId());
 
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.getCommerceOrder(
+				commerceOrderItem.getCommerceOrderId());
+
+		if (_commerceShippingHelper.isFreeShipping(commerceOrder)) {
+			commerceOrderLocalService.updateShippingMethod(
+				commerceOrder.getCommerceOrderId(), 0, null, BigDecimal.ZERO,
+				commerceContext);
+		}
+
 		commerceOrderLocalService.recalculatePrice(
-			commerceOrderItem.getCommerceOrderId(), commerceContext);
+			commerceOrder.getCommerceOrderId(), commerceContext);
 
 		return commerceOrderItem;
 	}
@@ -654,6 +665,9 @@ public class CommerceOrderItemLocalServiceImpl
 
 	@ServiceReference(type = CommerceProductPriceCalculation.class)
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+
+	@ServiceReference(type = CommerceShippingHelper.class)
+	private CommerceShippingHelper _commerceShippingHelper;
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
