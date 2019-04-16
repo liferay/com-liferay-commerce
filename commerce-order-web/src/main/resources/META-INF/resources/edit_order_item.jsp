@@ -21,7 +21,9 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 
 CommerceOrderItem commerceOrderItem = commerceOrderEditDisplayContext.getCommerceOrderItem();
 
-String title = LanguageUtil.format(request, "edit-x", commerceOrderItem.getName(locale), false);
+CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+
+String title = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) + " - " + HtmlUtil.escape(commerceOrderItem.getSku());
 
 renderResponse.setTitle(title);
 
