@@ -49,7 +49,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	}
 
 	public MockHttpServletRequest(String fieldName, String... parameters) {
-		for (int i = 0; i < parameters.length - 1; i++) {
+		for (int i = 0; i < (parameters.length - 1); i++) {
 			_parameters.put(fieldName + "." + parameters[i], parameters[i + 1]);
 		}
 	}

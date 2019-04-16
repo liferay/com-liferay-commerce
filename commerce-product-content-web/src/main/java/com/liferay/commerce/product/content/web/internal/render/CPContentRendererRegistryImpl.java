@@ -97,7 +97,7 @@ public class CPContentRendererRegistryImpl
 							cpContentRendererServiceWrapper.getService());
 					}
 				}
-				else if (typeObject instanceof String &&
+				else if ((typeObject instanceof String) &&
 						 cpType.equals(GetterUtil.getString(typeObject))) {
 
 					cpContentRenderers.add(
