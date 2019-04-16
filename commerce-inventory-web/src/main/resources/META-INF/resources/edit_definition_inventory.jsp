@@ -82,6 +82,7 @@ long cpDefinitionId = cpDefinitionInventoryDisplayContext.getCPDefinitionId();
 				</aui:input>
 
 				<aui:select label="low-stock-action" name="lowStockActivity">
+					<aui:option selected="<%= cpDefinitionInventory == null %>" value="" />
 
 					<%
 					List<CommerceLowStockActivity> commerceLowStockActivities = cpDefinitionInventoryDisplayContext.getCommerceLowStockActivities();
