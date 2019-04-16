@@ -158,7 +158,7 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 			result = collectionDTO.getItems();
 		}
 
-		if (fieldType.isArray() && result instanceof Collection) {
+		if (fieldType.isArray() && (result instanceof Collection)) {
 			Collection collection = (Collection)result;
 
 			result = Array.newInstance(

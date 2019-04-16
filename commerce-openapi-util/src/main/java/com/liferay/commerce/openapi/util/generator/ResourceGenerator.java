@@ -593,7 +593,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append(oAuth2Scopes.get(i));
 			sb.append("\"");
 
-			if (i < oAuth2Scopes.size() - 1) {
+			if (i < (oAuth2Scopes.size() - 1)) {
 				sb.append(",");
 			}
 		}

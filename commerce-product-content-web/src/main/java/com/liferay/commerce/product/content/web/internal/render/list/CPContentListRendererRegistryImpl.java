@@ -103,7 +103,7 @@ public class CPContentListRendererRegistryImpl
 							cpContentListRendererServiceWrapper.getService());
 					}
 				}
-				else if (valueObject instanceof String &&
+				else if ((valueObject instanceof String) &&
 						 portletName.equals(
 							 GetterUtil.getString(valueObject))) {
 

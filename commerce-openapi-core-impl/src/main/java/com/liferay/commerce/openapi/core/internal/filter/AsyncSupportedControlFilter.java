@@ -35,8 +35,8 @@ public class AsyncSupportedControlFilter implements ContainerResponseFilter {
 		int responseStatus = containerResponseContext.getStatus();
 
 		if (_isStatus(responseStatus, Response.Status.NO_CONTENT) ||
-			_isStatus(responseStatus, Response.Status.CREATED) &&
-			(containerResponseContext.getEntity() == null)) {
+			(_isStatus(responseStatus, Response.Status.CREATED) &&
+			 (containerResponseContext.getEntity() == null))) {
 
 			containerResponseContext.setStatus(
 				Response.Status.ACCEPTED.getStatusCode());

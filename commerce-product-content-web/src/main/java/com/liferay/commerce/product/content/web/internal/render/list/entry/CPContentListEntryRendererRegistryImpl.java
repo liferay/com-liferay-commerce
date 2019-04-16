@@ -83,7 +83,7 @@ public class CPContentListEntryRendererRegistryImpl
 				return null;
 			}
 		}
-		else if (portletNameObject instanceof String &&
+		else if ((portletNameObject instanceof String) &&
 				 !portletName.equals(GetterUtil.getString(portletNameObject))) {
 
 			return null;
@@ -103,7 +103,7 @@ public class CPContentListEntryRendererRegistryImpl
 				return cpContentListEntryRendererServiceWrapper.getService();
 			}
 		}
-		else if (typeObject instanceof String &&
+		else if ((typeObject instanceof String) &&
 				 Objects.equals(cpType, GetterUtil.getString(typeObject))) {
 
 			return cpContentListEntryRendererServiceWrapper.getService();
@@ -152,7 +152,7 @@ public class CPContentListEntryRendererRegistryImpl
 					continue;
 				}
 			}
-			else if (portletNameObject instanceof String &&
+			else if ((portletNameObject instanceof String) &&
 					 !portletName.equals(
 						 GetterUtil.getString(portletNameObject))) {
 
@@ -176,7 +176,7 @@ public class CPContentListEntryRendererRegistryImpl
 						cpContentListEntryRendererServiceWrapper.getService());
 				}
 			}
-			else if (typeObject instanceof String &&
+			else if ((typeObject instanceof String) &&
 					 Objects.equals(cpType, GetterUtil.getString(typeObject))) {
 
 				cpContentListEntryRenderers.add(
