@@ -23,16 +23,32 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
 %>
 
-<liferay-ui:error-marker
-	key="<%= WebKeys.ERROR_SECTION %>"
-	value="custom-fields"
-/>
+<liferay-portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
+<aui:fieldset-group markupView="lexicon">
+	<aui:form action="<%= editCommerceOrderURL %>" method="post" name="orderCustomFieldFm">
+		<aui:fieldset>
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="customFields" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderId %>" />
 
-<liferay-expando:custom-attribute-list
-	className="<%= CommerceOrder.class.getName() %>"
-	classPK="<%= commerceOrderId %>"
-	editable="<%= true %>"
-	label="<%= true %>"
-/>
+			<liferay-ui:error-marker
+				key="<%= WebKeys.ERROR_SECTION %>"
+				value="custom-fields"
+			/>
+
+			<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
+
+			<liferay-expando:custom-attribute-list
+				className="<%= CommerceOrder.class.getName() %>"
+				classPK="<%= commerceOrderId %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:fieldset>
+	</aui:form>
+</aui:fieldset-group>
