@@ -103,15 +103,3 @@ int orderStatus = BeanParamUtil.getInteger(commerceOrder, request, "orderStatus"
 		</aui:row>
 	</aui:container>
 </aui:fieldset-group>
-
-<aui:form action="<%= editCommerceOrderURL %>" method="post" name="orderCustomFieldFm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="customFields" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderId %>" />
-
-	<liferay-ui:form-navigator
-		formModelBean="<%= commerceOrder %>"
-		id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_DETAILS %>"
-		markupView="lexicon"
-	/>
-</aui:form>
