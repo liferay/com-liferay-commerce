@@ -1,0 +1,61 @@
+{
+	"CommerceCatalogScopeDocumentType": {
+		"properties": {
+			"catalogDefaultLanguageId": {
+				"index": true,
+				"store": true,
+				"type": "keyword"
+			},
+			"commerceCatalogGroupId": {
+				"index": true,
+				"store": true,
+				"type": "long"
+			},
+			"companyId": {
+				"index": true,
+				"store": true,
+				"type": "long"
+			},
+			"createDate": {
+				"index": false,
+				"store": true,
+				"type": "date"
+			},
+			"entryClassName": {
+				"index": true,
+				"store": true,
+				"type": "keyword"
+			},
+			"entryClassPK": {
+				"index": true,
+				"store": true,
+				"type": "long"
+			},
+			"modifiedDate": {
+				"index": false,
+				"store": true,
+				"type": "date"
+			},
+			"name": {
+				"index": true,
+				"store": true,
+				"type": "keyword"
+			},
+			"name_sortable": {
+				"index": false,
+				"store": true,
+				"type": "keyword"
+			},
+			"userId": {
+				"index": true,
+				"store": true,
+				"type": "long"
+			},
+			"userName": {
+				"index": false,
+				"store": true,
+				"type": "keyword"
+			}
+		}
+	}
+}
