@@ -41,6 +41,7 @@ import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPers
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
 
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
@@ -458,6 +459,44 @@ public abstract class CPOptionCategoryLocalServiceBaseImpl
 	public CPOptionCategory updateCPOptionCategory(
 		CPOptionCategory cpOptionCategory) {
 		return cpOptionCategoryPersistence.update(cpOptionCategory);
+	}
+
+	/**
+	 * Returns the commerce catalog local service.
+	 *
+	 * @return the commerce catalog local service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogLocalService getCommerceCatalogLocalService() {
+		return commerceCatalogLocalService;
+	}
+
+	/**
+	 * Sets the commerce catalog local service.
+	 *
+	 * @param commerceCatalogLocalService the commerce catalog local service
+	 */
+	public void setCommerceCatalogLocalService(
+		com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService) {
+		this.commerceCatalogLocalService = commerceCatalogLocalService;
+	}
+
+	/**
+	 * Returns the commerce catalog persistence.
+	 *
+	 * @return the commerce catalog persistence
+	 */
+	public CommerceCatalogPersistence getCommerceCatalogPersistence() {
+		return commerceCatalogPersistence;
+	}
+
+	/**
+	 * Sets the commerce catalog persistence.
+	 *
+	 * @param commerceCatalogPersistence the commerce catalog persistence
+	 */
+	public void setCommerceCatalogPersistence(
+		CommerceCatalogPersistence commerceCatalogPersistence) {
+		this.commerceCatalogPersistence = commerceCatalogPersistence;
 	}
 
 	/**
@@ -1418,6 +1457,10 @@ public abstract class CPOptionCategoryLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class)
+	protected com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService;
+	@BeanReference(type = CommerceCatalogPersistence.class)
+	protected CommerceCatalogPersistence commerceCatalogPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class)
 	protected com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService;
 	@BeanReference(type = CPAttachmentFileEntryPersistence.class)

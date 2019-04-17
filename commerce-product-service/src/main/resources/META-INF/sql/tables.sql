@@ -368,3 +368,14 @@ create table CProduct (
 	publishedCPDefinitionId LONG,
 	latestVersion INTEGER
 );
+
+create table CommerceCatalog (
+	commerceCatalogId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name STRING null,
+	catalogDefaultLanguageId VARCHAR(75) null
+);
