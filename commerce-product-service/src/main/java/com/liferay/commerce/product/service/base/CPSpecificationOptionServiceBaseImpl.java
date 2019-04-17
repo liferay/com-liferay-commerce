@@ -39,6 +39,7 @@ import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPers
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
 
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 
@@ -77,6 +78,63 @@ public abstract class CPSpecificationOptionServiceBaseImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.service.CPSpecificationOptionServiceUtil} to access the cp specification option remote service.
 	 */
+
+	/**
+	 * Returns the commerce catalog local service.
+	 *
+	 * @return the commerce catalog local service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogLocalService getCommerceCatalogLocalService() {
+		return commerceCatalogLocalService;
+	}
+
+	/**
+	 * Sets the commerce catalog local service.
+	 *
+	 * @param commerceCatalogLocalService the commerce catalog local service
+	 */
+	public void setCommerceCatalogLocalService(
+		com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService) {
+		this.commerceCatalogLocalService = commerceCatalogLocalService;
+	}
+
+	/**
+	 * Returns the commerce catalog remote service.
+	 *
+	 * @return the commerce catalog remote service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogService getCommerceCatalogService() {
+		return commerceCatalogService;
+	}
+
+	/**
+	 * Sets the commerce catalog remote service.
+	 *
+	 * @param commerceCatalogService the commerce catalog remote service
+	 */
+	public void setCommerceCatalogService(
+		com.liferay.commerce.product.service.CommerceCatalogService commerceCatalogService) {
+		this.commerceCatalogService = commerceCatalogService;
+	}
+
+	/**
+	 * Returns the commerce catalog persistence.
+	 *
+	 * @return the commerce catalog persistence
+	 */
+	public CommerceCatalogPersistence getCommerceCatalogPersistence() {
+		return commerceCatalogPersistence;
+	}
+
+	/**
+	 * Sets the commerce catalog persistence.
+	 *
+	 * @param commerceCatalogPersistence the commerce catalog persistence
+	 */
+	public void setCommerceCatalogPersistence(
+		CommerceCatalogPersistence commerceCatalogPersistence) {
+		this.commerceCatalogPersistence = commerceCatalogPersistence;
+	}
 
 	/**
 	 * Returns the cp attachment file entry local service.
@@ -1412,6 +1470,12 @@ public abstract class CPSpecificationOptionServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class)
+	protected com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService;
+	@BeanReference(type = com.liferay.commerce.product.service.CommerceCatalogService.class)
+	protected com.liferay.commerce.product.service.CommerceCatalogService commerceCatalogService;
+	@BeanReference(type = CommerceCatalogPersistence.class)
+	protected CommerceCatalogPersistence commerceCatalogPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class)
 	protected com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService;
 	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryService.class)
