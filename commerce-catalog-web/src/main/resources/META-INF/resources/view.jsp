@@ -50,7 +50,8 @@ portletURL.setParameter("searchContainerId", "commerceCatalogs");
 						modelVar="commerceCatalog"
 					>
 						<liferay-ui:search-container-column-text
-							href="<%= commerceCatalogDisplayContext.getCatalogURL(request) %>"
+							cssClass="important table-cell-content"
+							href="<%= commerceCatalogDisplayContext.getCatalogURL(request, commerceCatalog) %>"
 							property="name"
 						/>
 

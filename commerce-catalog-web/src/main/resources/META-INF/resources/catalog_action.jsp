@@ -33,7 +33,7 @@ CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
 >
 	<liferay-ui:icon
 		message="view"
-		url="<%= commerceCatalogDisplayContext.getCatalogURL(request) %>"
+		url="<%= commerceCatalogDisplayContext.getCatalogURL(request, commerceCatalog) %>"
 	/>
 
 	<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
