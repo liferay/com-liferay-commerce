@@ -39,6 +39,32 @@
 
 		<reference entity="Group" package-path="com.liferay.portal" />
 	</entity>
+	<entity local-service="true" name="CommerceChannel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceChannelId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="filterType" type="String" />
+		<column name="type" type="String" />
+		<column name="typeSettings" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+	</entity>
 	<entity external-reference-code="true" local-service="true" name="CPAttachmentFileEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
@@ -934,6 +960,7 @@
 
 		<column name="name" type="String" />
 		<column name="active" type="boolean" />
+		<column name="scope" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
 
@@ -990,6 +1017,44 @@
 		</finder>
 		<finder name="AssetCategoryId" return-type="Collection">
 			<finder-column name="assetCategoryId" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CPRuleChannelRel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="CPRuleChannelRelId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="CPRuleId" type="long" />
+		<column name="commerceChannelId" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CPRuleId" return-type="Collection">
+			<finder-column name="CPRuleId" />
+		</finder>
+		<finder name="CommerceChannelId" return-type="Collection">
+			<finder-column name="commerceChannelId" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CPRuleUserSegmentRel" remote-service="true">
