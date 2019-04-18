@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -25,16 +26,19 @@ import com.liferay.layout.item.selector.criterion.LayoutItemSelectorCriterion;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Collections;
+import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +52,7 @@ public class CommerceCatalogDisplayContext
 	public CommerceCatalogDisplayContext(
 			HttpServletRequest httpServletRequest,
 			CommerceCatalogService commerceCatalogService,
-			ItemSelector itemSelector,
+			ItemSelector itemSelector, Portal portal,
 			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
@@ -56,24 +60,30 @@ public class CommerceCatalogDisplayContext
 
 		setDefaultOrderByType("desc");
 
+		_httpServletRequest = httpServletRequest;
 		_commerceCatalogService = commerceCatalogService;
 		_itemSelector = itemSelector;
+		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
 	}
 
-	public String getCatalogURL(HttpServletRequest httpServletRequest)
+	public String getCatalogURL(CommerceCatalog commerceCatalog)
 		throws PortalException {
-
-		CommerceCatalog commerceCatalog = null;
 
 		if (commerceCatalog == null) {
 			return StringPool.BLANK;
 		}
 
-		PortletURL portletURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, CommerceCatalog.class.getName(),
-			PortletProvider.Action.VIEW);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
+		PortletURL portletURL = _portal.getControlPanelPortletURL(
+			_httpServletRequest, CPPortletKeys.COMMERCE_CATALOGS,
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
 		portletURL.setParameter(
 			"commerceCatalogId",
 			String.valueOf(commerceCatalog.getCommerceCatalogId()));
@@ -154,14 +164,24 @@ public class CommerceCatalogDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
-		searchContainer.setTotal(0);
-		searchContainer.setResults(null);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		List<CommerceCatalog> catalogs =
+			_commerceCatalogService.searchCommerceCatalogs(
+				themeDisplay.getCompanyId());
+
+		searchContainer.setTotal(catalogs.size());
+		searchContainer.setResults(catalogs);
 
 		return searchContainer;
 	}
 
 	private final CommerceCatalogService _commerceCatalogService;
+	private final HttpServletRequest _httpServletRequest;
 	private final ItemSelector _itemSelector;
+	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 
 }

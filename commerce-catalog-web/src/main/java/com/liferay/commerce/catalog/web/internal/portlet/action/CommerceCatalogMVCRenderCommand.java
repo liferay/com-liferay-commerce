@@ -57,7 +57,7 @@ public class CommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			CommerceCatalogDisplayContext commerceCatalogDisplayContext =
 				new CommerceCatalogDisplayContext(
 					httpServletRequest, _commerceCatalogService, _itemSelector,
-					_portletResourcePermission);
+					_portal, _portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCatalogDisplayContext);
