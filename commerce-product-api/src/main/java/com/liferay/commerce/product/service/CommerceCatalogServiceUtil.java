@@ -42,6 +42,21 @@ public class CommerceCatalogServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
+		java.util.Map<java.util.Locale, String> nameMap,
+		String catalogDefaultLanguageId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceCatalog(nameMap, catalogDefaultLanguageId,
+			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog deleteCommerceCatalog(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deleteCommerceCatalog(commerceCatalogId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -50,6 +65,29 @@ public class CommerceCatalogServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceCatalogs(companyId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId, String keywords, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceCatalogs(companyId, keywords, start, end);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
+		long commerceCatalogId, String catalogDefaultLanguageId,
+		java.util.Map<java.util.Locale, String> nameMap,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceCatalog(commerceCatalogId,
+			catalogDefaultLanguageId, nameMap, serviceContext);
 	}
 
 	public static CommerceCatalogService getService() {

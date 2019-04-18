@@ -246,6 +246,14 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCatalog> searchCommerceCatalogs(long companyId,
+		String keywords, int start, int end) throws PortalException;
+
 	/**
 	* Updates the commerce catalog in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
