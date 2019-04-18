@@ -14,10 +14,44 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.Locale;
+import java.util.Map;
 
 /**
- * @author Marco Leo
+ * @author Alec Sloan
  */
 public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
+
+	public CommerceCatalog addCommerceCatalog(
+			long parentCatalogId, Map<Locale, String> nameMap,
+			String catalogDefaultLanguageId, ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceCatalogLocalService.addCommerceCatalog(
+			parentCatalogId, nameMap, catalogDefaultLanguageId, serviceContext);
+	}
+
+	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
+		throws PortalException {
+
+		return commerceCatalogLocalService.deleteCommerceCatalog(
+			commerceCatalogId);
+	}
+
+	public CommerceCatalog updateCommerceCatalog(
+			long commerceCatalogId, long parentCatalogId,
+			String catalogDefaultLanguageId, Map<Locale, String> nameMap,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceCatalogLocalService.updateCommerceCatalog(
+			commerceCatalogId, parentCatalogId, catalogDefaultLanguageId,
+			nameMap, serviceContext);
+	}
+
 }
