@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.catalog.CommerceCatalogScopeHelperRegistry;
+import com.liferay.commerce.product.indexer.CommerceCatalogScopeHelper;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -21,14 +23,23 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -38,7 +49,6 @@ import java.util.Map;
 public class CommerceCatalogLocalServiceImpl
 	extends CommerceCatalogLocalServiceBaseImpl {
 
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
 			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
@@ -76,6 +86,13 @@ public class CommerceCatalogLocalServiceImpl
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
+		// Indexer
+
+		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
+			getCommerceCatalogScopeHelper();
+
+		commerceCatalogScopeHelper.reindex(commerceCatalog);
+
 		return commerceCatalog;
 	}
 
@@ -93,23 +110,28 @@ public class CommerceCatalogLocalServiceImpl
 			serviceContext);
 	}
 
-	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException {
+
+		// Group
+
+		Group group = getCommerceCatalogGroup(commerceCatalogId);
+
+		groupLocalService.deleteGroup(group);
 
 		// Commerce catalog
 
 		CommerceCatalog commerceCatalog = commerceCatalogPersistence.remove(
 			commerceCatalogId);
 
-		// Group
+		// Indexer
 
-		Group group = commerceCatalogLocalService.getCommerceCatalogGroup(
-			commerceCatalogId);
+		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
+			getCommerceCatalogScopeHelper();
 
-		groupLocalService.deleteGroup(group);
+		commerceCatalogScopeHelper.deleteDocument(commerceCatalog);
 
 		return commerceCatalog;
 	}
@@ -128,7 +150,56 @@ public class CommerceCatalogLocalServiceImpl
 			commerceCatalog.getCompanyId(), classNameId, commerceCatalogId);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
+		throws PortalException {
+
+		Map<String, String> parameterMap = new HashMap<>();
+
+		parameterMap.put(Field.COMPANY_ID, String.valueOf(companyId));
+		parameterMap.put(
+			Field.ENTRY_CLASS_NAME, CommerceCatalog.class.getName());
+
+		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
+			getCommerceCatalogScopeHelper();
+
+		Hits hits = commerceCatalogScopeHelper.search(companyId, parameterMap);
+
+		if (hits == null) {
+			return Collections.emptyList();
+		}
+
+		return getCommerceCatalogs(hits);
+	}
+
+	@Override
+	public List<CommerceCatalog> searchCommerceCatalogs(
+			long companyId, String keywords, int start, int end)
+		throws PortalException {
+
+		Map<String, String> parameterMap = new HashMap<>();
+
+		parameterMap.put(Field.COMPANY_ID, String.valueOf(companyId));
+		parameterMap.put(
+			Field.ENTRY_CLASS_NAME, CommerceCatalog.class.getName());
+
+		if (!Validator.isBlank(keywords)) {
+			parameterMap.put(Field.NAME, keywords);
+		}
+
+		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
+			getCommerceCatalogScopeHelper();
+
+		Hits hits = commerceCatalogScopeHelper.search(
+			companyId, parameterMap, start, end);
+
+		if (hits == null) {
+			return Collections.emptyList();
+		}
+
+		return getCommerceCatalogs(hits);
+	}
+
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, String catalogDefaultLanguageId,
@@ -141,7 +212,48 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setNameMap(nameMap);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 
-		return commerceCatalogPersistence.update(commerceCatalog);
+		commerceCatalog = commerceCatalogPersistence.update(commerceCatalog);
+
+		// Indexer
+
+		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
+			getCommerceCatalogScopeHelper();
+
+		commerceCatalogScopeHelper.reindex(commerceCatalog);
+
+		return commerceCatalog;
 	}
+
+	protected List<CommerceCatalog> getCommerceCatalogs(Hits hits)
+		throws PortalException {
+
+		List<Document> documents = hits.toList();
+
+		List<CommerceCatalog> commerceCatalogs = new ArrayList<>(
+			documents.size());
+
+		for (Document document : documents) {
+			long commerceCatalogId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			CommerceCatalog commerceCatalog = fetchCommerceCatalog(
+				commerceCatalogId);
+
+			if (commerceCatalog != null) {
+				commerceCatalogs.add(commerceCatalog);
+			}
+		}
+
+		return commerceCatalogs;
+	}
+
+	protected CommerceCatalogScopeHelper getCommerceCatalogScopeHelper() {
+		return _commerceCatalogScopeHelperRegistry.
+			getCommerceCatalogScopeHelper(CommerceCatalog.class.getName());
+	}
+
+	@ServiceReference(type = CommerceCatalogScopeHelperRegistry.class)
+	private CommerceCatalogScopeHelperRegistry
+		_commerceCatalogScopeHelperRegistry;
 
 }

@@ -19,6 +19,7 @@ import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import java.util.Map;
  */
 public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
+	@Override
 	public CommerceCatalog addCommerceCatalog(
 			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
 			ServiceContext serviceContext)
@@ -36,6 +38,7 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			nameMap, catalogDefaultLanguageId, serviceContext);
 	}
 
+	@Override
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException {
 
@@ -43,6 +46,23 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			commerceCatalogId);
 	}
 
+	@Override
+	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
+		throws PortalException {
+
+		return commerceCatalogLocalService.searchCommerceCatalogs(companyId);
+	}
+
+	@Override
+	public List<CommerceCatalog> searchCommerceCatalogs(
+			long companyId, String keywords, int start, int end)
+		throws PortalException {
+
+		return commerceCatalogLocalService.searchCommerceCatalogs(
+			companyId, keywords, start, end);
+	}
+
+	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, String catalogDefaultLanguageId,
 			Map<Locale, String> nameMap, ServiceContext serviceContext)
