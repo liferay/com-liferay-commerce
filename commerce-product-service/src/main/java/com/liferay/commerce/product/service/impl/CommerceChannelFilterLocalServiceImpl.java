@@ -17,24 +17,8 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.service.base.CommerceChannelFilterLocalServiceBaseImpl;
 
 /**
- * The implementation of the commerce channel filter local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.product.service.CommerceChannelFilterLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceChannelFilterLocalServiceBaseImpl
- * @see com.liferay.commerce.product.service.CommerceChannelFilterLocalServiceUtil
  */
 public class CommerceChannelFilterLocalServiceImpl
 	extends CommerceChannelFilterLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.product.service.CommerceChannelFilterLocalServiceUtil} to access the commerce channel filter local service.
-	 */
 }

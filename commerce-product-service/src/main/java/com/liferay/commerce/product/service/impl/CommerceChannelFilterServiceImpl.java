@@ -17,24 +17,8 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.service.base.CommerceChannelFilterServiceBaseImpl;
 
 /**
- * The implementation of the commerce channel filter remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.product.service.CommerceChannelFilterService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceChannelFilterServiceBaseImpl
- * @see com.liferay.commerce.product.service.CommerceChannelFilterServiceUtil
  */
 public class CommerceChannelFilterServiceImpl
 	extends CommerceChannelFilterServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.product.service.CommerceChannelFilterServiceUtil} to access the commerce channel filter remote service.
-	 */
 }
