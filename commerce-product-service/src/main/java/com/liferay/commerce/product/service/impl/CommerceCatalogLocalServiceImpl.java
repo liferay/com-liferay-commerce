@@ -41,8 +41,8 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			long parentCatalogId, Map<Locale, String> nameMap,
-			String catalogDefaultLanguageId, ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		long commerceCatalogId = counterLocalService.increment();
@@ -61,7 +61,6 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setCreateDate(now);
 		commerceCatalog.setModifiedDate(now);
 
-		commerceCatalog.setParentCommerceCatalogId(parentCatalogId);
 		commerceCatalog.setNameMap(nameMap);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 
@@ -83,15 +82,15 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			long parentCatalogId, String name, String catalogDefaultLanguageId,
+			String name, String catalogDefaultLanguageId,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		Locale locale = LocaleUtil.fromLanguageId(catalogDefaultLanguageId);
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			parentCatalogId, Collections.singletonMap(locale, name),
-			catalogDefaultLanguageId, serviceContext);
+			Collections.singletonMap(locale, name), catalogDefaultLanguageId,
+			serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
@@ -132,15 +131,13 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, long parentCatalogId,
-			String catalogDefaultLanguageId, Map<Locale, String> nameMap,
-			ServiceContext serviceContext)
+			long commerceCatalogId, String catalogDefaultLanguageId,
+			Map<Locale, String> nameMap, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
 			commerceCatalogPersistence.findByPrimaryKey(commerceCatalogId);
 
-		commerceCatalog.setParentCommerceCatalogId(parentCatalogId);
 		commerceCatalog.setNameMap(nameMap);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 
