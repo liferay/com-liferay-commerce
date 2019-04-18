@@ -36,12 +36,14 @@ import com.liferay.commerce.product.service.persistence.CPOptionCategoryPersiste
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionValuePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
+import com.liferay.commerce.product.service.persistence.CPRuleChannelRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPRulePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
 import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelPersistence;
 
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 
@@ -373,6 +375,44 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setCommerceCatalogPersistence(
 		CommerceCatalogPersistence commerceCatalogPersistence) {
 		this.commerceCatalogPersistence = commerceCatalogPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel local service.
+	 *
+	 * @return the commerce channel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelLocalService getCommerceChannelLocalService() {
+		return commerceChannelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel local service.
+	 *
+	 * @param commerceChannelLocalService the commerce channel local service
+	 */
+	public void setCommerceChannelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelLocalService commerceChannelLocalService) {
+		this.commerceChannelLocalService = commerceChannelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel persistence.
+	 *
+	 * @return the commerce channel persistence
+	 */
+	public CommerceChannelPersistence getCommerceChannelPersistence() {
+		return commerceChannelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel persistence.
+	 *
+	 * @param commerceChannelPersistence the commerce channel persistence
+	 */
+	public void setCommerceChannelPersistence(
+		CommerceChannelPersistence commerceChannelPersistence) {
+		this.commerceChannelPersistence = commerceChannelPersistence;
 	}
 
 	/**
@@ -1054,6 +1094,44 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the cp rule channel rel local service.
+	 *
+	 * @return the cp rule channel rel local service
+	 */
+	public com.liferay.commerce.product.service.CPRuleChannelRelLocalService getCPRuleChannelRelLocalService() {
+		return cpRuleChannelRelLocalService;
+	}
+
+	/**
+	 * Sets the cp rule channel rel local service.
+	 *
+	 * @param cpRuleChannelRelLocalService the cp rule channel rel local service
+	 */
+	public void setCPRuleChannelRelLocalService(
+		com.liferay.commerce.product.service.CPRuleChannelRelLocalService cpRuleChannelRelLocalService) {
+		this.cpRuleChannelRelLocalService = cpRuleChannelRelLocalService;
+	}
+
+	/**
+	 * Returns the cp rule channel rel persistence.
+	 *
+	 * @return the cp rule channel rel persistence
+	 */
+	public CPRuleChannelRelPersistence getCPRuleChannelRelPersistence() {
+		return cpRuleChannelRelPersistence;
+	}
+
+	/**
+	 * Sets the cp rule channel rel persistence.
+	 *
+	 * @param cpRuleChannelRelPersistence the cp rule channel rel persistence
+	 */
+	public void setCPRuleChannelRelPersistence(
+		CPRuleChannelRelPersistence cpRuleChannelRelPersistence) {
+		this.cpRuleChannelRelPersistence = cpRuleChannelRelPersistence;
+	}
+
+	/**
 	 * Returns the cp rule user segment rel local service.
 	 *
 	 * @return the cp rule user segment rel local service
@@ -1411,6 +1489,10 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService;
 	@BeanReference(type = CommerceCatalogPersistence.class)
 	protected CommerceCatalogPersistence commerceCatalogPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CommerceChannelLocalService.class)
+	protected com.liferay.commerce.product.service.CommerceChannelLocalService commerceChannelLocalService;
+	@BeanReference(type = CommerceChannelPersistence.class)
+	protected CommerceChannelPersistence commerceChannelPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class)
 	protected com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService;
 	@BeanReference(type = CPAttachmentFileEntryPersistence.class)
@@ -1483,6 +1565,10 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService cpRuleAssetCategoryRelLocalService;
 	@BeanReference(type = CPRuleAssetCategoryRelPersistence.class)
 	protected CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CPRuleChannelRelLocalService.class)
+	protected com.liferay.commerce.product.service.CPRuleChannelRelLocalService cpRuleChannelRelLocalService;
+	@BeanReference(type = CPRuleChannelRelPersistence.class)
+	protected CPRuleChannelRelPersistence cpRuleChannelRelPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class)
 	protected com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService cpRuleUserSegmentRelLocalService;
 	@BeanReference(type = CPRuleUserSegmentRelPersistence.class)

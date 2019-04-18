@@ -138,6 +138,8 @@ public class CPRulePersistenceTest {
 
 		newCPRule.setActive(RandomTestUtil.randomBoolean());
 
+		newCPRule.setScope(RandomTestUtil.randomString());
+
 		newCPRule.setType(RandomTestUtil.randomString());
 
 		newCPRule.setTypeSettings(RandomTestUtil.randomString());
@@ -162,6 +164,7 @@ public class CPRulePersistenceTest {
 			Time.getShortTimestamp(newCPRule.getModifiedDate()));
 		Assert.assertEquals(existingCPRule.getName(), newCPRule.getName());
 		Assert.assertEquals(existingCPRule.isActive(), newCPRule.isActive());
+		Assert.assertEquals(existingCPRule.getScope(), newCPRule.getScope());
 		Assert.assertEquals(existingCPRule.getType(), newCPRule.getType());
 		Assert.assertEquals(existingCPRule.getTypeSettings(),
 			newCPRule.getTypeSettings());
@@ -206,7 +209,7 @@ public class CPRulePersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CPRule", "CPRuleId", true,
 			"groupId", true, "companyId", true, "userId", true, "userName",
 			true, "createDate", true, "modifiedDate", true, "name", true,
-			"active", true, "type", true);
+			"active", true, "scope", true, "type", true);
 	}
 
 	@Test
@@ -417,6 +420,8 @@ public class CPRulePersistenceTest {
 		cpRule.setName(RandomTestUtil.randomString());
 
 		cpRule.setActive(RandomTestUtil.randomBoolean());
+
+		cpRule.setScope(RandomTestUtil.randomString());
 
 		cpRule.setType(RandomTestUtil.randomString());
 

@@ -80,6 +80,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "active_", Types.BOOLEAN },
+			{ "scope", Types.VARCHAR },
 			{ "type_", Types.VARCHAR },
 			{ "typeSettings", Types.CLOB }
 		};
@@ -95,11 +96,12 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("scope", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.CLOB);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPRule (CPRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,active_ BOOLEAN,type_ VARCHAR(75) null,typeSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table CPRule (CPRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,active_ BOOLEAN,scope VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table CPRule";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpRule.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPRule.createDate DESC";
@@ -140,6 +142,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setActive(soapModel.isActive());
+		model.setScope(soapModel.getScope());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 
@@ -215,6 +218,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("active", isActive());
+		attributes.put("scope", getScope());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 
@@ -278,6 +282,12 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		String scope = (String)attributes.get("scope");
+
+		if (scope != null) {
+			setScope(scope);
 		}
 
 		String type = (String)attributes.get("type");
@@ -446,6 +456,22 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 	@JSON
 	@Override
+	public String getScope() {
+		if (_scope == null) {
+			return "";
+		}
+		else {
+			return _scope;
+		}
+	}
+
+	@Override
+	public void setScope(String scope) {
+		_scope = scope;
+	}
+
+	@JSON
+	@Override
 	public String getType() {
 		if (_type == null) {
 			return "";
@@ -516,6 +542,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		cpRuleImpl.setModifiedDate(getModifiedDate());
 		cpRuleImpl.setName(getName());
 		cpRuleImpl.setActive(isActive());
+		cpRuleImpl.setScope(getScope());
 		cpRuleImpl.setType(getType());
 		cpRuleImpl.setTypeSettings(getTypeSettings());
 
@@ -637,6 +664,14 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 		cpRuleCacheModel.active = isActive();
 
+		cpRuleCacheModel.scope = getScope();
+
+		String scope = cpRuleCacheModel.scope;
+
+		if ((scope != null) && (scope.length() == 0)) {
+			cpRuleCacheModel.scope = null;
+		}
+
 		cpRuleCacheModel.type = getType();
 
 		String type = cpRuleCacheModel.type;
@@ -658,7 +693,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{CPRuleId=");
 		sb.append(getCPRuleId());
@@ -678,6 +713,8 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		sb.append(getName());
 		sb.append(", active=");
 		sb.append(isActive());
+		sb.append(", scope=");
+		sb.append(getScope());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", typeSettings=");
@@ -689,7 +726,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPRule");
@@ -732,6 +769,10 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		sb.append(isActive());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>scope</column-name><column-value><![CDATA[");
+		sb.append(getScope());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
@@ -761,6 +802,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 	private boolean _setModifiedDate;
 	private String _name;
 	private boolean _active;
+	private String _scope;
 	private String _type;
 	private String _typeSettings;
 	private long _columnBitmask;

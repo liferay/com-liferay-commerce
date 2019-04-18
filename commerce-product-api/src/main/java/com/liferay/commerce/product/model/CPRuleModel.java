@@ -229,6 +229,21 @@ public interface CPRuleModel extends BaseModel<CPRule>, GroupedModel,
 	public void setActive(boolean active);
 
 	/**
+	 * Returns the scope of this cp rule.
+	 *
+	 * @return the scope of this cp rule
+	 */
+	@AutoEscape
+	public String getScope();
+
+	/**
+	 * Sets the scope of this cp rule.
+	 *
+	 * @param scope the scope of this cp rule
+	 */
+	public void setScope(String scope);
+
+	/**
 	 * Returns the type of this cp rule.
 	 *
 	 * @return the type of this cp rule

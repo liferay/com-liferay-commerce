@@ -76,7 +76,6 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(CommerceCatalog commerceCatalog);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
 		String catalogDefaultLanguageId, ServiceContext serviceContext)
 		throws PortalException;
@@ -257,7 +256,6 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	public CommerceCatalog updateCommerceCatalog(
 		CommerceCatalog commerceCatalog);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
 		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
 		ServiceContext serviceContext) throws PortalException;

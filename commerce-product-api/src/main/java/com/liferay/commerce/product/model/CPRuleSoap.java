@@ -43,6 +43,7 @@ public class CPRuleSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setActive(model.isActive());
+		soapModel.setScope(model.getScope());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 
@@ -173,6 +174,14 @@ public class CPRuleSoap implements Serializable {
 		_active = active;
 	}
 
+	public String getScope() {
+		return _scope;
+	}
+
+	public void setScope(String scope) {
+		_scope = scope;
+	}
+
 	public String getType() {
 		return _type;
 	}
@@ -198,6 +207,7 @@ public class CPRuleSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private boolean _active;
+	private String _scope;
 	private String _type;
 	private String _typeSettings;
 }

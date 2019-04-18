@@ -66,6 +66,7 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("active", isActive());
+		attributes.put("scope", getScope());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 
@@ -126,6 +127,12 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		String scope = (String)attributes.get("scope");
+
+		if (scope != null) {
+			setScope(scope);
 		}
 
 		String type = (String)attributes.get("type");
@@ -249,6 +256,16 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _cpRule.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the scope of this cp rule.
+	*
+	* @return the scope of this cp rule
+	*/
+	@Override
+	public String getScope() {
+		return _cpRule.getScope();
 	}
 
 	/**
@@ -450,6 +467,16 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_cpRule.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the scope of this cp rule.
+	*
+	* @param scope the scope of this cp rule
+	*/
+	@Override
+	public void setScope(String scope) {
+		_cpRule.setScope(scope);
 	}
 
 	/**
