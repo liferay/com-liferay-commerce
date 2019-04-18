@@ -28,12 +28,12 @@ import java.util.Map;
 public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
 	public CommerceCatalog addCommerceCatalog(
-			long parentCatalogId, Map<Locale, String> nameMap,
-			String catalogDefaultLanguageId, ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			parentCatalogId, nameMap, catalogDefaultLanguageId, serviceContext);
+			nameMap, catalogDefaultLanguageId, serviceContext);
 	}
 
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
@@ -44,14 +44,13 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, long parentCatalogId,
-			String catalogDefaultLanguageId, Map<Locale, String> nameMap,
-			ServiceContext serviceContext)
+			long commerceCatalogId, String catalogDefaultLanguageId,
+			Map<Locale, String> nameMap, ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceCatalogLocalService.updateCommerceCatalog(
-			commerceCatalogId, parentCatalogId, catalogDefaultLanguageId,
-			nameMap, serviceContext);
+			commerceCatalogId, catalogDefaultLanguageId, nameMap,
+			serviceContext);
 	}
 
 }
