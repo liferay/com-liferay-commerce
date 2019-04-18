@@ -32,6 +32,8 @@ public interface CommerceCatalogScopeHelper {
 	public static final String COMMERCE_CATALOG_SCOPE_DOCUMENT_TYPE =
 		"CommerceCatalogScopeDocumentType";
 
+	public boolean deleteDocument(AuditedModel auditedModel);
+
 	public int getDefaultFetchSize();
 
 	public Sort[] getDefaultSorts();
