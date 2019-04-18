@@ -1019,11 +1019,11 @@
 			<finder-column name="assetCategoryId" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CPRuleUserSegmentRel" remote-service="true">
+	<entity local-service="true" name="CPRuleCommerceAccountGroupRel" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="CPRuleUserSegmentRelId" primary="true" type="long" />
+		<column db-name="CPRuleCAccountGroupRelId" name="CPRuleCommerceAccountGroupRelId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
@@ -1040,7 +1040,7 @@
 		<!-- Other fields -->
 
 		<column name="CPRuleId" type="long" />
-		<column name="commerceUserSegmentEntryId" type="long" />
+		<column name="commerceAccountGroupId" type="long" />
 
 		<!-- Order -->
 
@@ -1053,8 +1053,8 @@
 		<finder name="CPRuleId" return-type="Collection">
 			<finder-column name="CPRuleId" />
 		</finder>
-		<finder name="CommerceUserSegmentEntryId" return-type="Collection">
-			<finder-column name="commerceUserSegmentEntryId" />
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CPSpecificationOption" remote-service="true" uuid="true">

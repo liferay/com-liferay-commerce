@@ -191,11 +191,11 @@
 			<finder-column name="groupId" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CommerceDiscountUserSegmentRel" remote-service="true">
+	<entity local-service="true" name="CommerceDiscountCommerceAccountGroupRel" remote-service="true" table="CDiscountCAccountGroupRel">
 
 		<!-- PK fields -->
 
-		<column db-name="CDiscountUserSegmentRelId" name="commerceDiscountUserSegmentRelId" primary="true" type="long" />
+		<column db-name="CDiscountCAccountGroupRelId" name="commerceDiscountCommerceAccountGroupRelId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
@@ -212,7 +212,7 @@
 		<!-- Other fields -->
 
 		<column name="commerceDiscountId" type="long" />
-		<column name="commerceUserSegmentEntryId" type="long" />
+		<column name="commerceAccountGroupId" type="long" />
 
 		<!-- Order -->
 
@@ -225,8 +225,8 @@
 		<finder name="CommerceDiscountId" return-type="Collection">
 			<finder-column name="commerceDiscountId" />
 		</finder>
-		<finder name="CommerceUserSegmentEntryId" return-type="Collection">
-			<finder-column name="commerceUserSegmentEntryId" />
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
 		</finder>
 	</entity>
 	<exceptions>
