@@ -4,6 +4,73 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.account">
 	<author>Marco Leo</author>
 	<namespace>Commerce</namespace>
+	<entity external-reference-code="true" local-service="true" name="CommerceAccountGroup" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountGroupId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />> >
+		<column name="type" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
+	<entity external-reference-code="true" local-service="true" name="CommerceAccountGroupCommerceAccountRel" remote-service="true" table="CAccountGroupCAccountRel">
+
+		<!-- PK fields -->
+
+		<column db-name="CAccountGroupCAccountRelId" name="commerceAccountGroupCommerceAccountRelId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceAccountGroupId" type="long" />
+		<column name="commerceAccountId" type="long" />
+
+		<!-- Finders -->
+
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
+		</finder>
+		<finder name="CommerceAccountId" return-type="Collection">
+			<finder-column name="commerceAccountId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
 	<entity external-reference-code="true" local-service="true" name="CommerceAccount" remote-service="true">
 
 		<!-- PK fields -->
