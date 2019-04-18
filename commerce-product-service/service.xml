@@ -20,7 +20,6 @@
 
 		<!-- Other fields -->
 
-		<column name="parentCommerceCatalogId" type="long" />
 		<column localized="true" name="name" type="String" />
 		<column name="catalogDefaultLanguageId" type="String" />
 
