@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String title = LanguageUtil.get(request, "add-catalog");
-
 CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog(request);
@@ -31,8 +29,6 @@ CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatal
 	/>
 
 	<%
-	title = LanguageUtil.get(request, "edit-catalog");
-
 	NavigationItem navigationItem = new NavigationItem();
 
 	navigationItem.setActive(true);
@@ -46,6 +42,8 @@ CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatal
 </c:if>
 
 <%
+String title = LanguageUtil.get(request, (commerceCatalog != null) ? "edit-catalog" : "add-catalog");
+
 renderResponse.setTitle(title);
 %>
 
@@ -61,14 +59,8 @@ renderResponse.setTitle(title);
 			<aui:fieldset>
 				<aui:input bean="<%= commerceCatalog %>" model="<%= CommerceCatalog.class %>" name="name" required="true" />
 
-				<label for="<portlet:namespace />defaultCatalogLanguageId"><%= LanguageUtil.get(request, "default-catalog-language") %><liferay-ui:icon-help message='<%= LanguageUtil.get(request, "the-default-language-for-the-content-within-this-catalog") %>' /></label>
-
-				<%
-				Set<Locale> siteAvailableLocales = LanguageUtil.getAvailableLocales(themeDisplay.getScopeGroupId());
-				%>
-
 				<aui:fieldset cssClass="default-language">
-					<aui:select label="" name="catalogDefaultLanguageId" required="true" title="language">
+					<aui:select helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="true" title="language">
 
 						<%
 						String catalogDefaultLanguageId = themeDisplay.getLanguageId();
@@ -76,6 +68,8 @@ renderResponse.setTitle(title);
 						if (commerceCatalog != null) {
 							catalogDefaultLanguageId = commerceCatalog.getCatalogDefaultLanguageId();
 						}
+
+						Set<Locale> siteAvailableLocales = LanguageUtil.getAvailableLocales(themeDisplay.getScopeGroupId());
 
 						for (Locale siteAvailableLocale : siteAvailableLocales) {
 						%>
