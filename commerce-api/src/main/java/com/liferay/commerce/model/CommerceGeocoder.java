@@ -18,8 +18,17 @@ import com.liferay.commerce.exception.CommerceGeocoderException;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public interface CommerceGeocoder {
+
+	public default double[] getCoordinates(
+			long groupId, String street, String city, String zip,
+			String commerceRegionCode, String commerceCountryCode)
+		throws CommerceGeocoderException {
+
+		return new double[] {0, 0};
+	}
 
 	public double[] getCoordinates(
 			String street, String city, String zip,

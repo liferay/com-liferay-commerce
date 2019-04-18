@@ -19,6 +19,8 @@ import com.liferay.commerce.geocoder.bing.internal.configuration.BingCommerceGeo
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -42,12 +44,39 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 @Component(
 	configurationPid = "com.liferay.commerce.geocoder.bing.internal.configuration.BingCommerceGeocoderConfiguration",
 	immediate = true, service = CommerceGeocoder.class
 )
 public class BingCommerceGeocoder implements CommerceGeocoder {
+
+	@Override
+	public double[] getCoordinates(
+			long groupId, String street, String city, String zip,
+			String commerceRegionCode, String commerceCountryCode)
+		throws CommerceGeocoderException {
+
+		try {
+			CommerceCountry commerceCountry =
+				_commerceCountryLocalService.getCommerceCountry(
+					groupId, commerceCountryCode);
+
+			CommerceRegion commerceRegion =
+				_commerceRegionLocalService.getCommerceRegion(
+					commerceCountry.getCommerceCountryId(), commerceRegionCode);
+
+			return _getCoordinates(
+				street, city, zip, commerceRegion, commerceCountry);
+		}
+		catch (CommerceGeocoderException cge) {
+			throw cge;
+		}
+		catch (Exception e) {
+			throw new CommerceGeocoderException(e);
+		}
+	}
 
 	@Override
 	public double[] getCoordinates(
@@ -185,6 +214,12 @@ public class BingCommerceGeocoder implements CommerceGeocoder {
 	}
 
 	private volatile String _apiKey;
+
+	@Reference
+	private CommerceCountryLocalService _commerceCountryLocalService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private Http _http;
