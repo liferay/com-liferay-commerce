@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.search.engine.adapter.SearchEngineAdapter;
+import com.liferay.portal.search.engine.adapter.document.DeleteDocumentRequest;
 import com.liferay.portal.search.engine.adapter.document.IndexDocumentRequest;
 import com.liferay.portal.search.engine.adapter.search.SearchSearchRequest;
 import com.liferay.portal.search.engine.adapter.search.SearchSearchResponse;
@@ -39,6 +40,25 @@ import java.util.Map;
  */
 public abstract class BaseCommerceCatalogScopeHelperImpl
 	implements CommerceCatalogScopeHelper {
+
+	@Override
+	public boolean deleteDocument(AuditedModel auditedModel) {
+		String indexName = commerceCatalogScopeIndexer.getIndexName(
+			auditedModel.getCompanyId());
+
+		String uid = getUid(
+			auditedModel.getModelClassName(),
+			String.valueOf(auditedModel.getPrimaryKeyObj()));
+
+		DeleteDocumentRequest deleteDocumentRequest = new DeleteDocumentRequest(
+			indexName, uid);
+
+		deleteDocumentRequest.setType(COMMERCE_CATALOG_SCOPE_DOCUMENT_TYPE);
+
+		searchEngineAdapter.execute(deleteDocumentRequest);
+
+		return true;
+	}
 
 	@Override
 	public int getDefaultFetchSize() {
@@ -59,9 +79,8 @@ public abstract class BaseCommerceCatalogScopeHelperImpl
 
 		String classPK = String.valueOf(auditedModel.getPrimaryKeyObj());
 
-		document.addUID(
-			COMMERCE_CATALOG_SCOPE_DOCUMENT_TYPE,
-			auditedModel.getModelClassName(), classPK);
+		document.addKeyword(
+			Field.UID, getUid(auditedModel.getModelClassName(), classPK));
 		document.addKeyword(Field.ENTRY_CLASS_PK, classPK);
 
 		document.addKeyword(
@@ -139,6 +158,11 @@ public abstract class BaseCommerceCatalogScopeHelperImpl
 	protected abstract SearchSearchRequest createSearchRequest(
 			Map<String, String> parameters)
 		throws SearchException;
+
+	protected String getUid(String className, String classPK) {
+		return Field.getUID(
+			COMMERCE_CATALOG_SCOPE_DOCUMENT_TYPE, className, classPK);
+	}
 
 	protected abstract Document populateDocument(
 			Document document, AuditedModel auditedModel)
