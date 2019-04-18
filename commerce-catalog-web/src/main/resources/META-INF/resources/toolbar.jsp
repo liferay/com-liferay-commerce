@@ -81,9 +81,8 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-catalogs" />')) {
 			var form = AUI.$(document.<portlet:namespace />fm);
 
-			form.attr('method', 'post');
 			form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
-			form.fm('deleteCommerceCatalogIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+			form.fm('commerceCatalogIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
 
 			submitForm(form, '<portlet:actionURL name="editCommerceCatalog" />');
 		}

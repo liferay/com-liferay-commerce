@@ -35,7 +35,7 @@ portletURL.setParameter("searchContainerId", "commerceCatalogs");
 		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" />
 			<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
-			<aui:input name="deleteCommerceCatalogIds" type="hidden" />
+			<aui:input name="commerceCatalogIds" type="hidden" />
 
 			<div class="products-container" id="<portlet:namespace />commerceCatalogsContainer">
 				<liferay-ui:search-container

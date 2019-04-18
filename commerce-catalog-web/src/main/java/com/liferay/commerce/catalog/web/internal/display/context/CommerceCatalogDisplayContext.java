@@ -18,7 +18,6 @@ import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearc
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -35,9 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Collections;
-import java.util.List;
 
-import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,13 +109,6 @@ public class CommerceCatalogDisplayContext
 			layoutItemSelectorCriterion);
 
 		return itemSelectorURL.toString();
-	}
-
-	@Override
-	public List<ManagementBarFilterItem> getManagementBarStatusFilterItems()
-		throws PortalException, PortletException {
-
-		return null;
 	}
 
 	@Override

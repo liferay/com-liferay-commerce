@@ -17,11 +17,10 @@ package com.liferay.commerce.catalog.web.internal.portlet.action;
 import com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
@@ -63,15 +62,12 @@ public class CommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCatalogDisplayContext);
 		}
+		catch (PortalException pe) {
+			SessionErrors.add(renderRequest, pe.getClass());
+
+			return "/error.jsp";
+		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCPDefinitionException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(renderRequest, e.getClass());
-
-				return "/error.jsp";
-			}
-
 			throw new PortletException(e);
 		}
 

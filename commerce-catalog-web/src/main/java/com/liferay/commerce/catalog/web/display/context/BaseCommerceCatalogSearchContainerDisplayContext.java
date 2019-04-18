@@ -14,22 +14,16 @@
 
 package com.liferay.commerce.catalog.web.display.context;
 
-import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
-import com.liferay.portal.kernel.portlet.PortletURLUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,30 +63,6 @@ public abstract class BaseCommerceCatalogSearchContainerDisplayContext<T>
 		_keywords = ParamUtil.getString(httpServletRequest, "keywords");
 
 		return _keywords;
-	}
-
-	public List<ManagementBarFilterItem> getManagementBarStatusFilterItems()
-		throws PortalException, PortletException {
-
-		List<ManagementBarFilterItem> managementBarFilterItems =
-			new ArrayList<>();
-
-		managementBarFilterItems.add(
-			getManagementBarFilterItem(WorkflowConstants.STATUS_ANY));
-		managementBarFilterItems.add(
-			getManagementBarFilterItem(WorkflowConstants.STATUS_DRAFT));
-		managementBarFilterItems.add(
-			getManagementBarFilterItem(WorkflowConstants.STATUS_SCHEDULED));
-		managementBarFilterItems.add(
-			getManagementBarFilterItem(WorkflowConstants.STATUS_APPROVED));
-		managementBarFilterItems.add(
-			getManagementBarFilterItem(WorkflowConstants.STATUS_EXPIRED));
-
-		return managementBarFilterItems;
-	}
-
-	public String getManagementBarStatusFilterValue() {
-		return WorkflowConstants.getStatusLabel(getStatus());
 	}
 
 	public String getOrderByCol() {
@@ -262,25 +232,6 @@ public abstract class BaseCommerceCatalogSearchContainerDisplayContext<T>
 		}
 
 		return displayStyle;
-	}
-
-	protected ManagementBarFilterItem getManagementBarFilterItem(int status)
-		throws PortalException, PortletException {
-
-		boolean active = false;
-
-		if (status == getStatus()) {
-			active = true;
-		}
-
-		PortletURL portletURL = PortletURLUtil.clone(
-			getPortletURL(), liferayPortletResponse);
-
-		portletURL.setParameter("status", String.valueOf(status));
-
-		return new ManagementBarFilterItem(
-			active, WorkflowConstants.getStatusLabel(status),
-			portletURL.toString());
 	}
 
 	protected SearchContainer<T> searchContainer;

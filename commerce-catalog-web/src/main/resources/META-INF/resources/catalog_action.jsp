@@ -35,4 +35,15 @@ CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
 		message="view"
 		url="<%= commerceCatalogDisplayContext.getCatalogURL(request) %>"
 	/>
+
+	<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalog.getCommerceCatalogId()) %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon-delete
+		message="delete"
+		url="<%= deleteURL %>"
+	/>
 </liferay-ui:icon-menu>
