@@ -155,11 +155,11 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CommerceNotificationTemplateUserSegmentRel" remote-service="true" table="CNTemplateUserSegmentRel">
+	<entity local-service="true" name="CommerceNotificationTemplateCommerceAccountGroupRel" remote-service="true" table="CNTemplateCAccountGroupRel">
 
 		<!-- PK fields -->
 
-		<column db-name="CNTemplateUserSegmentRelId" name="commerceNotificationTemplateUserSegmentRelId" primary="true" type="long" />
+		<column db-name="CNTemplateCAccountGroupRelId" name="commerceNotificationTemplateCommerceAccountGroupRelId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
@@ -176,7 +176,7 @@
 		<!-- Other fields -->
 
 		<column name="commerceNotificationTemplateId" type="long" />
-		<column accessor="true" name="commerceUserSegmentEntryId" type="long" />
+		<column accessor="true" name="commerceAccountGroupId" type="long" />
 
 		<!-- Order -->
 
@@ -186,15 +186,15 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CommerceUserSegmentEntryId" return-type="Collection">
-			<finder-column name="commerceUserSegmentEntryId" />
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
 		</finder>
 		<finder name="CommerceNotificationTemplateId" return-type="Collection">
 			<finder-column name="commerceNotificationTemplateId" />
 		</finder>
-		<finder name="C_C" return-type="CommerceNotificationTemplateUserSegmentRel" unique="true">
+		<finder name="C_C" return-type="CommerceNotificationTemplateCommerceAccountGroupRel" unique="true">
 			<finder-column name="commerceNotificationTemplateId" />
-			<finder-column name="commerceUserSegmentEntryId" />
+			<finder-column name="commerceAccountGroupId" />
 		</finder>
 	</entity>
 	<exceptions>
