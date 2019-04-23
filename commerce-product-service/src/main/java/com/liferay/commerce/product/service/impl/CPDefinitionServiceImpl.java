@@ -45,39 +45,6 @@ import java.util.Map;
 public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 	@Override
-	public CPDefinition fetchCPDefinitionByCProductId(long cProductId)
-		throws PortalException {
-
-		CPDefinition cpDefinition =
-			cpDefinitionLocalService.fetchCPDefinitionByCProductId(cProductId);
-
-		if (cpDefinition != null) {
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), cpDefinition, ActionKeys.VIEW);
-		}
-
-		return cpDefinition;
-	}
-
-	@Override
-	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
-			long companyId, String externalReferenceCode)
-		throws PortalException {
-
-		CPDefinition cpDefinition =
-			cpDefinitionLocalService.
-				fetchCPDefinitionByCProductExternalReferenceCode(
-					companyId, externalReferenceCode);
-
-		if (cpDefinition != null) {
-			_cpDefinitionModelResourcePermission.check(
-					getPermissionChecker(), cpDefinition, ActionKeys.VIEW);
-		}
-
-		return cpDefinition;
-	}
-
-	@Override
 	public CPDefinition addCPDefinition(
 			Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
@@ -171,6 +138,39 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 		CPDefinition cpDefinition = cpDefinitionLocalService.fetchCPDefinition(
 			cpDefinitionId);
+
+		if (cpDefinition != null) {
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(), cpDefinition, ActionKeys.VIEW);
+		}
+
+		return cpDefinition;
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CPDefinition cpDefinition =
+			cpDefinitionLocalService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					companyId, externalReferenceCode);
+
+		if (cpDefinition != null) {
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(), cpDefinition, ActionKeys.VIEW);
+		}
+
+		return cpDefinition;
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductId(long cProductId)
+		throws PortalException {
+
+		CPDefinition cpDefinition =
+			cpDefinitionLocalService.fetchCPDefinitionByCProductId(cProductId);
 
 		if (cpDefinition != null) {
 			_cpDefinitionModelResourcePermission.check(
