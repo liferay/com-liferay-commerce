@@ -15,12 +15,15 @@
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductConfigurationResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 
@@ -46,29 +49,46 @@ public class ProductConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		CPDefinitionInventory cpDefinitionInventory =
-			_cpDefinitionInventoryService.
-				fetchCPDefinitionInventoryByCPDefinitionId(
-					cpDefinition.getCPDefinitionId());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
-		return _productDTOMapper.toProductConfiguration(cpDefinitionInventory);
+		DTOConverter productConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionInventory.class.getName());
+
+		return (ProductConfiguration)productConfigurationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
 	public ProductConfiguration getProductIdConfiguration(Long id)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		CPDefinitionInventory cpDefinitionInventory =
-			_cpDefinitionInventoryService.
-				fetchCPDefinitionInventoryByCPDefinitionId(
-					cpDefinition.getCPDefinitionId());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
-		return _productDTOMapper.toProductConfiguration(cpDefinitionInventory);
+		DTOConverter productConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionInventory.class.getName());
+
+		return (ProductConfiguration)productConfigurationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -78,8 +98,15 @@ public class ProductConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
 			_cpDefinitionInventoryService, productConfiguration,
@@ -96,7 +123,13 @@ public class ProductConfigurationResourceImpl
 			Long id, ProductConfiguration productConfiguration)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
 			_cpDefinitionInventoryService, productConfiguration,
@@ -112,7 +145,10 @@ public class ProductConfigurationResourceImpl
 	private CPDefinitionInventoryService _cpDefinitionInventoryService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

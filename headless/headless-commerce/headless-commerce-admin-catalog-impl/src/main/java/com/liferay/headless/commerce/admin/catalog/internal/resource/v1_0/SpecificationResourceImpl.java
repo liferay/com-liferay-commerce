@@ -17,9 +17,11 @@ package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 import com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPSpecificationOptionService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.SpecificationDTOMapper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.SpecificationUtil;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SpecificationResource;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
@@ -77,8 +79,13 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 	@Override
 	public Specification getSpecification(Long id) throws Exception {
-		return _specificationDTOMapper.toSpecification(
-			_cpSpecificationOptionService.getCPSpecificationOption(id));
+		DTOConverter specificationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPSpecificationOption.class.getName());
+
+		return (Specification)specificationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
@@ -100,16 +107,44 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 		return _upsertSpecification(siteId, specification);
 	}
 
+	private long _getCPOptionCategoryId(Specification specification) {
+		OptionCategory optionCategory = specification.getOptionCategory();
+
+		if (optionCategory == null) {
+			return 0;
+		}
+
+		return optionCategory.getId();
+	}
+
+	private boolean _isFacetable(Specification specification) {
+		boolean facetable = false;
+
+		if (specification.getFacetable() != null) {
+			facetable = specification.getFacetable();
+		}
+
+		return facetable;
+	}
+
 	private List<Specification> _toSpecifications(
-		List<CPSpecificationOption> cpSpecificationOptions) {
+			List<CPSpecificationOption> cpSpecificationOptions)
+		throws Exception {
 
 		List<Specification> specifications = new ArrayList<>();
+
+		DTOConverter specificationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPSpecificationOption.class.getName());
 
 		for (CPSpecificationOption cpSpecificationOption :
 				cpSpecificationOptions) {
 
 			specifications.add(
-				_specificationDTOMapper.toSpecification(cpSpecificationOption));
+				(Specification)specificationDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpSpecificationOption.getCPSpecificationOptionId())));
 		}
 
 		return specifications;
@@ -124,25 +159,30 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 		return _cpSpecificationOptionService.updateCPSpecificationOption(
 			cpSpecificationOption.getCPSpecificationOptionId(),
-			SpecificationUtil.getCPOptionCategoryId(specification),
+			_getCPOptionCategoryId(specification),
 			LanguageUtils.getLocalizedMap(specification.getTitle()),
 			LanguageUtils.getLocalizedMap(specification.getDescription()),
-			SpecificationUtil.isFacetable(specification),
-			specification.getKey(),
+			_isFacetable(specification), specification.getKey(),
 			_serviceContextHelper.getServiceContext(
 				cpSpecificationOption.getGroupId()));
 	}
 
 	private Specification _upsertSpecification(
 			long siteId, Specification specification)
-		throws PortalException {
+		throws Exception {
+
+		DTOConverter specificationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPSpecificationOption.class.getName());
 
 		try {
 			CPSpecificationOption cpSpecificationOption = _updateSpecification(
 				specification.getId(), specification);
 
-			return _specificationDTOMapper.toSpecification(
-				cpSpecificationOption);
+			return (Specification)specificationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpSpecificationOption.getCPSpecificationOptionId()));
 		}
 		catch (NoSuchCPSpecificationOptionException nscpsoe) {
 			if (_log.isDebugEnabled()) {
@@ -154,14 +194,16 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 		CPSpecificationOption cpSpecificationOption =
 			_cpSpecificationOptionService.addCPSpecificationOption(
-				SpecificationUtil.getCPOptionCategoryId(specification),
+				_getCPOptionCategoryId(specification),
 				LanguageUtils.getLocalizedMap(specification.getTitle()),
 				LanguageUtils.getLocalizedMap(specification.getDescription()),
-				SpecificationUtil.isFacetable(specification),
-				specification.getKey(),
+				_isFacetable(specification), specification.getKey(),
 				_serviceContextHelper.getServiceContext(siteId));
 
-		return _specificationDTOMapper.toSpecification(cpSpecificationOption);
+		return (Specification)specificationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpSpecificationOption.getCPSpecificationOptionId()));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -171,9 +213,9 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	private CPSpecificationOptionService _cpSpecificationOptionService;
 
 	@Reference
-	private ServiceContextHelper _serviceContextHelper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
-	private SpecificationDTOMapper _specificationDTOMapper;
+	private ServiceContextHelper _serviceContextHelper;
 
 }

@@ -14,15 +14,16 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductShippingConfigurationUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductShippingConfigurationResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.ws.rs.core.Response;
 
@@ -48,10 +49,25 @@ public class ProductShippingConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		return _productDTOMapper.toProductShippingConfiguration(cpDefinition);
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		DTOConverter productShippingConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductShippingConfiguration");
+
+		return (ProductShippingConfiguration)
+			productShippingConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -59,9 +75,23 @@ public class ProductShippingConfigurationResourceImpl
 			Long id)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		return _productDTOMapper.toProductShippingConfiguration(cpDefinition);
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
+
+		DTOConverter productShippingConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductShippingConfiguration");
+
+		return (ProductShippingConfiguration)
+			productShippingConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -71,8 +101,15 @@ public class ProductShippingConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_updateProductShippingConfiguration(
 			cpDefinition, productShippingConfiguration);
@@ -87,7 +124,13 @@ public class ProductShippingConfigurationResourceImpl
 			Long id, ProductShippingConfiguration productShippingConfiguration)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_updateProductShippingConfiguration(
 			cpDefinition, productShippingConfiguration);
@@ -100,7 +143,7 @@ public class ProductShippingConfigurationResourceImpl
 	private ProductShippingConfiguration _updateProductShippingConfiguration(
 			CPDefinition cpDefinition,
 			ProductShippingConfiguration productShippingConfiguration)
-		throws PortalException {
+		throws Exception {
 
 		cpDefinition =
 			ProductShippingConfigurationUtil.updateCPDefinitionShippingInfo(
@@ -109,14 +152,22 @@ public class ProductShippingConfigurationResourceImpl
 				_serviceContextHelper.getServiceContext(
 					cpDefinition.getGroupId()));
 
-		return _productDTOMapper.toProductShippingConfiguration(cpDefinition);
+		DTOConverter productShippingConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductShippingConfiguration");
+
+		return (ProductShippingConfiguration)
+			productShippingConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

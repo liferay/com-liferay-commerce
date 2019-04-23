@@ -16,13 +16,13 @@ package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryService;
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.CategoryDTOMapper;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.CategoryResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -55,8 +55,15 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		List<AssetCategory> assetCategories =
 			_assetCategoryService.getCategories(
@@ -78,7 +85,13 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 			Long id, Pagination pagination)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		List<AssetCategory> assetCategories =
 			_assetCategoryService.getCategories(
@@ -101,8 +114,15 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_updateProductCategories(cpDefinition, categories);
 
@@ -115,7 +135,13 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 	public Response patchProductIdCategory(Long id, Category[] categories)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_updateProductCategories(cpDefinition, categories);
 
@@ -125,18 +151,27 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 	}
 
 	private List<Category> _toProductCategories(
-		List<AssetCategory> assetCategories) {
+			List<AssetCategory> assetCategories)
+		throws Exception {
 
 		List<Category> categories = new ArrayList<>();
 
+		DTOConverter categoryDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				AssetCategory.class.getName());
+
 		for (AssetCategory category : assetCategories) {
-			categories.add(_categoryDTOMapper.toCategory(category));
+			categories.add(
+				(Category)categoryDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						category.getCategoryId())));
 		}
 
 		return categories;
 	}
 
-	private Product _updateProductCategories(
+	private void _updateProductCategories(
 			CPDefinition cpDefinition, Category[] categories)
 		throws PortalException {
 
@@ -145,18 +180,12 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 
 		// TODO upsert categories
 
-		cpDefinition = _cpDefinitionService.updateCPDefinitionCategorization(
+		_cpDefinitionService.updateCPDefinitionCategorization(
 			cpDefinition.getCPDefinitionId(), serviceContext);
-
-		return _productDTOMapper.toProduct(
-			cpDefinition, contextAcceptLanguage.getPreferredLanguageId());
 	}
 
 	@Reference
 	private AssetCategoryService _assetCategoryService;
-
-	@Reference
-	private CategoryDTOMapper _categoryDTOMapper;
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
@@ -165,7 +194,7 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

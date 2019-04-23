@@ -20,12 +20,13 @@ import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.commerce.product.service.CPOptionValueService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionValue;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.OptionValueDTOMapper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.OptionValueUtil;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionValueResource;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -115,13 +116,21 @@ public class OptionValueResourceImpl extends BaseOptionValueResourceImpl {
 	}
 
 	private List<OptionValue> _toOptionValues(
-		List<CPOptionValue> cpOptionValues) {
+			List<CPOptionValue> cpOptionValues)
+		throws Exception {
 
 		List<OptionValue> productOptionValues = new ArrayList<>();
 
+		DTOConverter optionValueDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPOptionValue.class.getName());
+
 		for (CPOptionValue cpOptionValue : cpOptionValues) {
 			productOptionValues.add(
-				_optionValueDTOMapper.toOptionValue(cpOptionValue));
+				(OptionValue)optionValueDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpOptionValue.getCPOptionValueId())));
 		}
 
 		return productOptionValues;
@@ -129,16 +138,23 @@ public class OptionValueResourceImpl extends BaseOptionValueResourceImpl {
 
 	private OptionValue _upsertOptionValue(
 			CPOption cpOption, OptionValue optionValue)
-		throws PortalException {
+		throws Exception {
 
 		CPOptionValue cpOptionValue = _cpOptionValueService.upsertCPOptionValue(
 			cpOption.getCPOptionId(),
 			LanguageUtils.getLocalizedMap(optionValue.getName()),
-			OptionValueUtil.getPriority(optionValue), optionValue.getKey(),
+			GetterUtil.get(optionValue.getPriority(), 0D), optionValue.getKey(),
 			optionValue.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(cpOption.getGroupId()));
 
-		return _optionValueDTOMapper.toOptionValue(cpOptionValue);
+		DTOConverter optionValueDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPOptionValue.class.getName());
+
+		return (OptionValue)optionValueDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOptionValue.getCPOptionValueId()));
 	}
 
 	@Reference
@@ -148,7 +164,7 @@ public class OptionValueResourceImpl extends BaseOptionValueResourceImpl {
 	private CPOptionValueService _cpOptionValueService;
 
 	@Reference
-	private OptionValueDTOMapper _optionValueDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

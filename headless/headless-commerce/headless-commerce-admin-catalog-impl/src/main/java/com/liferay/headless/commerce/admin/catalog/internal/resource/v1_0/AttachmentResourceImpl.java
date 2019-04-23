@@ -15,15 +15,18 @@
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException;
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.AttachmentDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.AttachmentResource;
 import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
@@ -91,8 +94,13 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 	@Override
 	public Attachment getAttachment(Long id) throws Exception {
-		return _attachmentDTOMapper.toAttachment(
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntry(id));
+		DTOConverter attachmentDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPAttachmentFileEntry.class.getName());
+
+		return (Attachment)attachmentDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
@@ -100,9 +108,18 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			String externalReferenceCode)
 		throws Exception {
 
-		return _attachmentDTOMapper.toAttachment(
+		CPAttachmentFileEntry cpAttachmentFileEntry =
 			_cpAttachmentFileEntryService.fetchByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode));
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		DTOConverter attachmentDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPAttachmentFileEntry.class.getName());
+
+		return (Attachment)attachmentDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
 	}
 
 	@Override
@@ -112,28 +129,19 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_OTHER,
-				WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
-		int totalItems =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_OTHER,
-				WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(
-			_toAttachments(cpAttachmentFileEntries), pagination, totalItems);
+		return _getAttachmentPage(
+			cpDefinition, CPAttachmentFileEntryConstants.TYPE_OTHER,
+			pagination);
 	}
 
 	@Override
@@ -142,28 +150,19 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
-		int totalItems =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(
-			_toAttachments(cpAttachmentFileEntries), pagination, totalItems);
+		return _getAttachmentPage(
+			cpDefinition, CPAttachmentFileEntryConstants.TYPE_IMAGE,
+			pagination);
 	}
 
 	@Override
@@ -171,27 +170,17 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			Long id, Pagination pagination)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_OTHER,
-				WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
-		int totalItems =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_OTHER,
-				WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(
-			_toAttachments(cpAttachmentFileEntries), pagination, totalItems);
+		return _getAttachmentPage(
+			cpDefinition, CPAttachmentFileEntryConstants.TYPE_OTHER,
+			pagination);
 	}
 
 	@Override
@@ -199,27 +188,17 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			Long id, Pagination pagination)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
-		int totalItems =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(
-				_classNameLocalService.getClassNameId(
-					cpDefinition.getModelClass()),
-				cpDefinition.getCPDefinitionId(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(
-			_toAttachments(cpAttachmentFileEntries), pagination, totalItems);
+		return _getAttachmentPage(
+			cpDefinition, CPAttachmentFileEntryConstants.TYPE_IMAGE,
+			pagination);
 	}
 
 	@Override
@@ -264,8 +243,15 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		return _upsertProductAttachment(cpDefinition, attachment);
 	}
@@ -276,8 +262,15 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		return _upsertProductImage(cpDefinition, attachment);
 	}
@@ -286,7 +279,13 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	public Attachment postProductIdAttachment(Long id, Attachment attachment)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		return _upsertProductAttachment(cpDefinition, attachment);
 	}
@@ -295,21 +294,58 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	public Attachment postProductIdImage(Long id, Attachment attachment)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		return _upsertProductImage(cpDefinition, attachment);
 	}
 
+	private Page<Attachment> _getAttachmentPage(
+			CPDefinition cpDefinition, int type, Pagination pagination)
+		throws Exception {
+
+		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
+			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
+				_classNameLocalService.getClassNameId(
+					cpDefinition.getModelClass()),
+				cpDefinition.getCPDefinitionId(), type,
+				WorkflowConstants.STATUS_APPROVED,
+				pagination.getStartPosition(), pagination.getEndPosition());
+
+		int totalItems =
+			_cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(
+				_classNameLocalService.getClassNameId(
+					cpDefinition.getModelClass()),
+				cpDefinition.getCPDefinitionId(), type,
+				WorkflowConstants.STATUS_APPROVED);
+
+		return Page.of(
+			_toAttachments(cpAttachmentFileEntries), pagination, totalItems);
+	}
+
 	private List<Attachment> _toAttachments(
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries) {
+			List<CPAttachmentFileEntry> cpAttachmentFileEntries)
+		throws Exception {
 
 		List<Attachment> attachments = new ArrayList<>();
+
+		DTOConverter attachmentDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPAttachmentFileEntry.class.getName());
 
 		for (CPAttachmentFileEntry cpAttachmentFileEntry :
 				cpAttachmentFileEntries) {
 
 			attachments.add(
-				_attachmentDTOMapper.toAttachment(cpAttachmentFileEntry));
+				(Attachment)attachmentDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpAttachmentFileEntry.getCPAttachmentFileEntryId())));
 		}
 
 		return attachments;
@@ -372,7 +408,14 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 					cpAttachmentFileEntry.getPriority()),
 				attachment.getType(), serviceContext);
 
-		return _attachmentDTOMapper.toAttachment(cpAttachmentFileEntry);
+		DTOConverter attachmentDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPAttachmentFileEntry.class.getName());
+
+		return (Attachment)attachmentDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
 	}
 
 	private Attachment _upsertAttachment(
@@ -389,7 +432,14 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 				_serviceContextHelper.getServiceContext(
 					cpDefinition.getGroupId()));
 
-		return _attachmentDTOMapper.toAttachment(cpAttachmentFileEntry);
+		DTOConverter attachmentDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPAttachmentFileEntry.class.getName());
+
+		return (Attachment)attachmentDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
 	}
 
 	private Attachment _upsertProductAttachment(
@@ -411,13 +461,16 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	}
 
 	@Reference
-	private AttachmentDTOMapper _attachmentDTOMapper;
-
-	@Reference
 	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
+
+	@Reference
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

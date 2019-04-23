@@ -14,19 +14,21 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.SkuDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.SkuUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SkuResource;
 import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -90,8 +92,15 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		List<CPInstance> cpInstances =
 			_cpInstanceService.getCPDefinitionInstances(
@@ -111,7 +120,13 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 	public Page<Sku> getProductIdSkusPage(Long id, Pagination pagination)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		List<CPInstance> cpInstances =
 			_cpInstanceService.getCPDefinitionInstances(
@@ -129,7 +144,12 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 
 	@Override
 	public Sku getSku(Long id) throws Exception {
-		return _skuDTOMapper.toSku(_cpInstanceService.getCPInstance(id));
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+
+		return (Sku)skuDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
@@ -145,7 +165,13 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 					externalReferenceCode);
 		}
 
-		return _skuDTOMapper.toSku(cpInstance);
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+
+		return (Sku)skuDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpInstance.getCPInstanceId()));
 	}
 
 	@Override
@@ -186,32 +212,50 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		return _upsertSKU(cpDefinition, sku);
 	}
 
 	@Override
 	public Sku postProductIdSku(Long id, Sku sku) throws Exception {
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		return _upsertSKU(cpDefinition, sku);
 	}
 
-	private List<Sku> _toSKUs(List<CPInstance> cpInstances) {
+	private List<Sku> _toSKUs(List<CPInstance> cpInstances) throws Exception {
 		List<Sku> skus = new ArrayList<>();
 
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+
 		for (CPInstance cpInstance : cpInstances) {
-			skus.add(_skuDTOMapper.toSku(cpInstance));
+			skus.add(
+				(Sku)skuDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpInstance.getCPInstanceId())));
 		}
 
 		return skus;
 	}
 
-	private Sku _updateSKU(CPInstance cpInstance, Sku sku)
-		throws PortalException {
-
+	private Sku _updateSKU(CPInstance cpInstance, Sku sku) throws Exception {
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			cpInstance.getGroupId());
 
@@ -252,26 +296,41 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 				(cpInstance.getExpirationDate() == null) ? true : false),
 			serviceContext);
 
-		return _skuDTOMapper.toSku(cpInstance);
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+
+		return (Sku)skuDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpInstance.getCPInstanceId()));
 	}
 
 	private Sku _upsertSKU(CPDefinition cpDefinition, Sku sku)
-		throws PortalException {
+		throws Exception {
 
 		CPInstance cpInstance = SkuUtil.upsertCPInstance(
 			_cpInstanceService, sku, cpDefinition.getCPDefinitionId(),
 			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
 
-		return _skuDTOMapper.toSku(cpInstance);
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+
+		return (Sku)skuDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpInstance.getCPInstanceId()));
 	}
+
+	@Reference
+	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
 
 	@Reference
-	private ServiceContextHelper _serviceContextHelper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
-	private SkuDTOMapper _skuDTOMapper;
+	private ServiceContextHelper _serviceContextHelper;
 
 }

@@ -14,14 +14,15 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductTaxConfigurationUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductTaxConfigurationResource;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.ws.rs.core.Response;
 
@@ -47,21 +48,40 @@ public class ProductTaxConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		return _productDTOMapper.toProductTaxConfiguration(
-			cpDefinition, contextAcceptLanguage.getPreferredLanguageId());
+		DTOConverter productTaxConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter("ProductTaxConfiguration");
+
+		return (ProductTaxConfiguration)
+			productTaxConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
 	public ProductTaxConfiguration getProductIdTaxConfiguration(Long id)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		return _productDTOMapper.toProductTaxConfiguration(
-			cpDefinition, contextAcceptLanguage.getPreferredLanguageId());
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
+
+		DTOConverter productTaxConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter("ProductTaxConfiguration");
+
+		return (ProductTaxConfiguration)
+			productTaxConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -71,8 +91,15 @@ public class ProductTaxConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_updateProductTaxConfiguration(cpDefinition, productTaxConfiguration);
 
@@ -86,7 +113,13 @@ public class ProductTaxConfigurationResourceImpl
 			Long id, ProductTaxConfiguration productTaxConfiguration)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_updateProductTaxConfiguration(cpDefinition, productTaxConfiguration);
 
@@ -98,20 +131,26 @@ public class ProductTaxConfigurationResourceImpl
 	private ProductTaxConfiguration _updateProductTaxConfiguration(
 			CPDefinition cpDefinition,
 			ProductTaxConfiguration productTaxConfiguration)
-		throws PortalException {
+		throws Exception {
 
 		cpDefinition =
 			ProductTaxConfigurationUtil.updateCPDefinitionTaxCategoryInfo(
 				_cpDefinitionService, productTaxConfiguration, cpDefinition);
 
-		return _productDTOMapper.toProductTaxConfiguration(
-			cpDefinition, contextAcceptLanguage.getPreferredLanguageId());
+		DTOConverter productTaxConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter("ProductTaxConfiguration");
+
+		return (ProductTaxConfiguration)
+			productTaxConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 }
