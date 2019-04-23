@@ -19,11 +19,12 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductOptionValueDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionValueUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionValueResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -76,16 +77,24 @@ public class ProductOptionValueResourceImpl
 	}
 
 	private List<ProductOptionValue> _toProductOptionValues(
-		List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels) {
+			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels)
+		throws Exception {
 
 		List<ProductOptionValue> productOptionValues = new ArrayList<>();
+
+		DTOConverter productOptionValueDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionOptionValueRel.class.getName());
 
 		for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
 				cpDefinitionOptionValueRels) {
 
 			productOptionValues.add(
-				_productOptionValueDTOMapper.toProductOptionValue(
-					cpDefinitionOptionValueRel));
+				(ProductOptionValue)productOptionValueDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpDefinitionOptionValueRel.
+							getCPDefinitionOptionValueRelId())));
 		}
 
 		return productOptionValues;
@@ -93,7 +102,7 @@ public class ProductOptionValueResourceImpl
 
 	private ProductOptionValue _upsertProductOptionValue(
 			long productOptionId, ProductOptionValue productOptionValue)
-		throws PortalException {
+		throws Exception {
 
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(
@@ -106,8 +115,14 @@ public class ProductOptionValueResourceImpl
 				_serviceContextHelper.getServiceContext(
 					cpDefinitionOptionRel.getGroupId()));
 
-		return _productOptionValueDTOMapper.toProductOptionValue(
-			cpDefinitionOptionValueRel);
+		DTOConverter productOptionValueDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionOptionValueRel.class.getName());
+
+		return (ProductOptionValue)productOptionValueDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()));
 	}
 
 	@Reference
@@ -118,7 +133,7 @@ public class ProductOptionValueResourceImpl
 		_cpDefinitionOptionValueRelService;
 
 	@Reference
-	private ProductOptionValueDTOMapper _productOptionValueDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

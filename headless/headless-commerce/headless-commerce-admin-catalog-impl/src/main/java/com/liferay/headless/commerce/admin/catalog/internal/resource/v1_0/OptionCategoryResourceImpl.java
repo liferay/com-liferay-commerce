@@ -18,7 +18,9 @@ import com.liferay.commerce.product.exception.NoSuchCPOptionCategoryException;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.OptionCategoryDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionCategoryResource;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
@@ -76,8 +78,13 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 	@Override
 	public OptionCategory getOptionCategory(Long id) throws Exception {
-		return _optionCategoryDTOMapper.toOptionCategory(
-			_cpOptionCategoryService.getCPOptionCategory(id));
+		DTOConverter optionCategoryDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPOptionCategory.class.getName());
+
+		return (OptionCategory)optionCategoryDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
@@ -100,13 +107,21 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	}
 
 	private List<OptionCategory> _toOptionCategories(
-		List<CPOptionCategory> cpOptionCategories) {
+			List<CPOptionCategory> cpOptionCategories)
+		throws Exception {
 
 		List<OptionCategory> optionCategories = new ArrayList<>();
 
+		DTOConverter optionCategoryDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPOptionCategory.class.getName());
+
 		for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
 			optionCategories.add(
-				_optionCategoryDTOMapper.toOptionCategory(cpOptionCategory));
+				(OptionCategory)optionCategoryDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpOptionCategory.getCPOptionCategoryId())));
 		}
 
 		return optionCategories;
@@ -132,13 +147,20 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 	private OptionCategory _upsertOptionCategory(
 			Long siteId, OptionCategory optionCategory)
-		throws PortalException {
+		throws Exception {
+
+		DTOConverter optionCategoryDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPOptionCategory.class.getName());
 
 		try {
 			CPOptionCategory cpOptionCategory = _updateOptionCategory(
 				optionCategory.getId(), optionCategory);
 
-			return _optionCategoryDTOMapper.toOptionCategory(cpOptionCategory);
+			return (OptionCategory)optionCategoryDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpOptionCategory.getCPOptionCategoryId()));
 		}
 		catch (NoSuchCPOptionCategoryException nscpoce) {
 			if (_log.isDebugEnabled()) {
@@ -156,7 +178,10 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 				optionCategory.getKey(),
 				_serviceContextHelper.getServiceContext(siteId));
 
-		return _optionCategoryDTOMapper.toOptionCategory(cpOptionCategory);
+		return (OptionCategory)optionCategoryDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOptionCategory.getCPOptionCategoryId()));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -166,7 +191,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	private CPOptionCategoryService _cpOptionCategoryService;
 
 	@Reference
-	private OptionCategoryDTOMapper _optionCategoryDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

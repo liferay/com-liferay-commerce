@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
@@ -23,6 +24,7 @@ import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
@@ -35,7 +37,9 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionC
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.ExpandoUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
@@ -88,7 +92,13 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Override
 	public Response deleteProduct(Long id) throws Exception {
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
@@ -104,8 +114,15 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
@@ -134,9 +151,21 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Override
 	public Product getProduct(Long id) throws Exception {
-		return _productDTOMapper.toProduct(
-			ProductUtil.getProductById(id),
-			contextAcceptLanguage.getPreferredLanguageId());
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
+
+		DTOConverter productDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
+
+		return (Product)productDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -144,15 +173,35 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			String externalReferenceCode)
 		throws Exception {
 
-		return _productDTOMapper.toProduct(
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode),
-			contextAcceptLanguage.getPreferredLanguageId());
+		CPDefinition cpDefinition =
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		DTOConverter productDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
+
+		return (Product)productDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
 	public Response patchProduct(Long id, Product product) throws Exception {
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_updateProduct(cpDefinition, product);
 
@@ -167,8 +216,15 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_updateProduct(cpDefinition, product);
 
@@ -181,19 +237,31 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	public Product postCatalogSiteProduct(Long siteId, Product product)
 		throws Exception {
 
-		return _productDTOMapper.toProduct(
-			_upsertProduct(siteId, product),
-			contextAcceptLanguage.getPreferredLanguageId());
+		CPDefinition cpDefinition = _upsertProduct(siteId, product);
+
+		DTOConverter productDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
+
+		return (Product)productDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
-	private List<Product> _toProducts(List<CPDefinition> cpDefinitions) {
+	private List<Product> _toProducts(List<CPDefinition> cpDefinitions)
+		throws Exception {
+
 		List<Product> products = new ArrayList<>();
+
+		DTOConverter productDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
 
 		for (CPDefinition cpDefinition : cpDefinitions) {
 			products.add(
-				_productDTOMapper.toProduct(
-					cpDefinition,
-					contextAcceptLanguage.getPreferredLanguageId()));
+				(Product)productDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpDefinition.getCPDefinitionId())));
 		}
 
 		return products;
@@ -291,8 +359,9 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			for (ProductOption productOption : productOptions) {
 				CPDefinitionOptionRel cpDefinitionOptionRel =
 					ProductOptionUtil.upsertCPDefinitionOptionRel(
-						_cpDefinitionOptionRelService, productOption,
-						cpDefinition.getCPDefinitionId(), serviceContext);
+						_cpDefinitionOptionRelService, _cpOptionService,
+						productOption, cpDefinition.getCPDefinitionId(),
+						serviceContext);
 
 				ProductOptionValue[] productOptionValues =
 					productOption.getValues();
@@ -514,7 +583,10 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	private CPInstanceService _cpInstanceService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private CPOptionService _cpOptionService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

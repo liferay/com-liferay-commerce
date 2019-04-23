@@ -14,16 +14,18 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.RelatedProductDTOMapper;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.RelatedProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.RelatedProductResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -63,32 +65,17 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
 
-		List<CPDefinitionLink> cpDefinitionLinks;
-		int totalItems;
-
-		if (Validator.isNull(type)) {
-			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
-				cpDefinition.getCPDefinitionId(), pagination.getStartPosition(),
-				pagination.getEndPosition());
-
-			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
-				cpDefinition.getCPDefinitionId());
-		}
-		else {
-			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
-				cpDefinition.getCPDefinitionId(), type,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
-
-			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
-				cpDefinition.getCPDefinitionId(), type);
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
 		}
 
-		return Page.of(
-			_toRelatedProducts(cpDefinitionLinks), pagination, totalItems);
+		return _getRelatedProductPage(cpDefinition, type, pagination);
 	}
 
 	@Override
@@ -96,38 +83,26 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 			Long id, String type, Pagination pagination)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		List<CPDefinitionLink> cpDefinitionLinks;
-		int totalItems;
-
-		if (Validator.isNull(type)) {
-			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
-				cpDefinition.getCPDefinitionId(), pagination.getStartPosition(),
-				pagination.getEndPosition());
-
-			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
-				cpDefinition.getCPDefinitionId());
-		}
-		else {
-			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
-				cpDefinition.getCPDefinitionId(), type,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
-
-			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
-				cpDefinition.getCPDefinitionId(), type);
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
 		}
 
-		return Page.of(
-			_toRelatedProducts(cpDefinitionLinks), pagination, totalItems);
+		return _getRelatedProductPage(cpDefinition, type, pagination);
 	}
 
 	@Override
 	public RelatedProduct getRelatedProduct(Long id) throws Exception {
-		return _relatedProductDTOMapper.toRelatedProduct(
-			_cpDefinitionLinkService.getCPDefinitionLink(id),
-			contextAcceptLanguage.getPreferredLanguageId());
+		DTOConverter relatedProductDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionLink.class.getName());
+
+		return (RelatedProduct)relatedProductDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
@@ -136,8 +111,15 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		return _upsertRelatedProduct(cpDefinition, relatedProduct);
 	}
@@ -147,21 +129,62 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 			Long id, RelatedProduct relatedProduct)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		return _upsertRelatedProduct(cpDefinition, relatedProduct);
 	}
 
+	private Page<RelatedProduct> _getRelatedProductPage(
+			CPDefinition cpDefinition, String type, Pagination pagination)
+		throws Exception {
+
+		List<CPDefinitionLink> cpDefinitionLinks;
+		int totalItems;
+
+		if (Validator.isNull(type)) {
+			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
+				cpDefinition.getCPDefinitionId(), pagination.getStartPosition(),
+				pagination.getEndPosition());
+
+			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
+				cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinitionLinks = _cpDefinitionLinkService.getCPDefinitionLinks(
+				cpDefinition.getCPDefinitionId(), type,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+			totalItems = _cpDefinitionLinkService.getCPDefinitionLinksCount(
+				cpDefinition.getCPDefinitionId(), type);
+		}
+
+		return Page.of(
+			_toRelatedProducts(cpDefinitionLinks), pagination, totalItems);
+	}
+
 	private List<RelatedProduct> _toRelatedProducts(
-		List<CPDefinitionLink> cpDefinitionLinks) {
+			List<CPDefinitionLink> cpDefinitionLinks)
+		throws Exception {
 
 		List<RelatedProduct> relatedProducts = new ArrayList<>();
 
+		DTOConverter relatedProductDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionLink.class.getName());
+
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
 			relatedProducts.add(
-				_relatedProductDTOMapper.toRelatedProduct(
-					cpDefinitionLink,
-					contextAcceptLanguage.getPreferredLanguageId()));
+				(RelatedProduct)relatedProductDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpDefinitionLink.getCPDefinitionLinkId())));
 		}
 
 		return relatedProducts;
@@ -169,7 +192,7 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 
 	private RelatedProduct _upsertRelatedProduct(
 			CPDefinition cpDefinition, RelatedProduct relatedProduct)
-		throws PortalException {
+		throws Exception {
 
 		CPDefinitionLink cpDefinitionLink =
 			RelatedProductUtil.upsertCPDefinitionLink(
@@ -178,15 +201,24 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 				_serviceContextHelper.getServiceContext(
 					cpDefinition.getGroupId()));
 
-		return _relatedProductDTOMapper.toRelatedProduct(
-			cpDefinitionLink, contextAcceptLanguage.getPreferredLanguageId());
+		DTOConverter relatedProductDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionLink.class.getName());
+
+		return (RelatedProduct)relatedProductDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinitionLink.getCPDefinitionLinkId()));
 	}
 
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
 
 	@Reference
-	private RelatedProductDTOMapper _relatedProductDTOMapper;
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

@@ -14,15 +14,16 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.ProductDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSubscriptionConfigurationUtil;
-import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSubscriptionConfigurationResource;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.ws.rs.core.Response;
 
@@ -47,9 +48,20 @@ public class ProductSubscriptionConfigurationResourceImpl
 				String externalReferenceCode)
 		throws Exception {
 
-		return _productDTOMapper.toProductSubscriptionConfiguration(
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode));
+		CPDefinition cpDefinition =
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		DTOConverter productSubscriptionConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductSubscriptionConfiguration");
+
+		return (ProductSubscriptionConfiguration)
+			productSubscriptionConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -57,8 +69,23 @@ public class ProductSubscriptionConfigurationResourceImpl
 			getProductIdSubscriptionConfiguration(Long id)
 		throws Exception {
 
-		return _productDTOMapper.toProductSubscriptionConfiguration(
-			ProductUtil.getProductById(id));
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
+
+		DTOConverter productSubscriptionConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductSubscriptionConfiguration");
+
+		return (ProductSubscriptionConfiguration)
+			productSubscriptionConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Override
@@ -70,8 +97,15 @@ public class ProductSubscriptionConfigurationResourceImpl
 		throws Exception {
 
 		CPDefinition cpDefinition =
-			ProductUtil.getProductByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		_updateProductSubscriptionConfiguration(
 			cpDefinition, productSubscriptionConfiguration);
@@ -87,7 +121,13 @@ public class ProductSubscriptionConfigurationResourceImpl
 			ProductSubscriptionConfiguration productSubscriptionConfiguration)
 		throws Exception {
 
-		CPDefinition cpDefinition = ProductUtil.getProductById(id);
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		_updateProductSubscriptionConfiguration(
 			cpDefinition, productSubscriptionConfiguration);
@@ -102,7 +142,7 @@ public class ProductSubscriptionConfigurationResourceImpl
 				CPDefinition cpDefinition,
 				ProductSubscriptionConfiguration
 					productSubscriptionConfiguration)
-		throws PortalException {
+		throws Exception {
 
 		cpDefinition =
 			ProductSubscriptionConfigurationUtil.
@@ -112,15 +152,22 @@ public class ProductSubscriptionConfigurationResourceImpl
 					_serviceContextHelper.getServiceContext(
 						cpDefinition.getGroupId()));
 
-		return _productDTOMapper.toProductSubscriptionConfiguration(
-			cpDefinition);
+		DTOConverter productSubscriptionConfigurationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				"ProductSubscriptionConfiguration");
+
+		return (ProductSubscriptionConfiguration)
+			productSubscriptionConfigurationDTOConverter.toDTO(
+				new DefaultDTOConverterContext(
+					contextAcceptLanguage.getPreferredLocale(),
+					cpDefinition.getCPDefinitionId()));
 	}
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
-	private ProductDTOMapper _productDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
