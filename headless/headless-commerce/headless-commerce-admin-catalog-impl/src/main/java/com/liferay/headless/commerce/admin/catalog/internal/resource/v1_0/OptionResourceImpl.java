@@ -18,11 +18,12 @@ import com.liferay.commerce.product.exception.NoSuchCPOptionException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Option;
-import com.liferay.headless.commerce.admin.catalog.internal.mapper.v1_0.OptionDTOMapper;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionResource;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -93,16 +94,28 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 
 	@Override
 	public Option getOption(Long id) throws Exception {
-		return _optionDTOMapper.toOption(_cpOptionService.getCPOption(id));
+		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPOption.class.getName());
+
+		return (Option)optionDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
 	}
 
 	@Override
 	public Option getOptionByExternalReferenceCode(String externalReferenceCode)
 		throws Exception {
 
-		return _optionDTOMapper.toOption(
-			_cpOptionService.fetchByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode));
+		CPOption cpOption = _cpOptionService.fetchByExternalReferenceCode(
+			contextCompany.getCompanyId(), externalReferenceCode);
+
+		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPOption.class.getName());
+
+		return (Option)optionDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOption.getCPOptionId()));
 	}
 
 	@Override
@@ -144,18 +157,25 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 		return _upsertOption(siteId, option);
 	}
 
-	private List<Option> _toOptions(List<CPOption> cpOptions) {
+	private List<Option> _toOptions(List<CPOption> cpOptions) throws Exception {
 		List<Option> options = new ArrayList<>();
 
+		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPOption.class.getName());
+
 		for (CPOption cpOption : cpOptions) {
-			options.add(_optionDTOMapper.toOption(cpOption));
+			options.add(
+				(Option)optionDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						cpOption.getCPOptionId())));
 		}
 
 		return options;
 	}
 
 	private Option _updateOption(CPOption cpOption, Option option)
-		throws PortalException {
+		throws Exception {
 
 		Option.FieldType fieldType = option.getFieldType();
 
@@ -171,12 +191,16 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			option.getKey(),
 			_serviceContextHelper.getServiceContext(cpOption.getGroupId()));
 
-		return _optionDTOMapper.toOption(cpOption);
+		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPOption.class.getName());
+
+		return (Option)optionDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOption.getCPOptionId()));
 	}
 
-	private Option _upsertOption(long siteId, Option option)
-		throws PortalException {
-
+	private Option _upsertOption(long siteId, Option option) throws Exception {
 		Option.FieldType fieldType = option.getFieldType();
 
 		CPOption cpOption = _cpOptionService.upsertCPOption(
@@ -188,14 +212,20 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			option.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(siteId));
 
-		return _optionDTOMapper.toOption(cpOption);
+		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPOption.class.getName());
+
+		return (Option)optionDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOption.getCPOptionId()));
 	}
 
 	@Reference
 	private CPOptionService _cpOptionService;
 
 	@Reference
-	private OptionDTOMapper _optionDTOMapper;
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
