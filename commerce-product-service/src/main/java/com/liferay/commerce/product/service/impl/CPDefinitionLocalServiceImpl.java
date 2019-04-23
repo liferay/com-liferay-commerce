@@ -121,6 +121,32 @@ import javax.servlet.http.HttpServletRequest;
 public class CPDefinitionLocalServiceImpl
 	extends CPDefinitionLocalServiceBaseImpl {
 
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductId(long cProductId)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		return cpDefinitionPersistence.fetchByPrimaryKey(
+			cProduct.getPublishedCPDefinitionId());
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(
+			companyId, externalReferenceCode);
+
+		if (cProduct == null) {
+			return null;
+		}
+
+		return cpDefinitionPersistence.fetchByPrimaryKey(
+			cProduct.getPublishedCPDefinitionId());
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPDefinition addCPDefinition(
@@ -853,6 +879,34 @@ public class CPDefinitionLocalServiceImpl
 		for (CPDefinition cpDefinition : cpDefinitions) {
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(
+			companyId, externalReferenceCode);
+
+		if (cProduct == null) {
+			return null;
+		}
+
+		return cpDefinitionPersistence.fetchByPrimaryKey(
+			cProduct.getPublishedCPDefinitionId());
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinitionByCProductId(long cProductId) {
+		CProduct cProduct = cProductLocalService.fetchCProduct(cProductId);
+
+		if (cProduct == null) {
+			return null;
+		}
+
+		return cpDefinitionPersistence.fetchByPrimaryKey(
+			cProduct.getPublishedCPDefinitionId());
 	}
 
 	@Override
