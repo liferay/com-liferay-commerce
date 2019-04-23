@@ -17,7 +17,7 @@ package com.liferay.headless.commerce.admin.catalog.internal.util.v1_0;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
-import com.liferay.commerce.product.service.CPOptionServiceUtil;
+import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -31,11 +31,11 @@ public class ProductOptionUtil {
 
 	public static CPDefinitionOptionRel upsertCPDefinitionOptionRel(
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
-			ProductOption productOption, long cpDefinitionId,
-			ServiceContext serviceContext)
+			CPOptionService cpOptionService, ProductOption productOption,
+			long cpDefinitionId, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPOption cpOption = CPOptionServiceUtil.getCPOption(
+		CPOption cpOption = cpOptionService.getCPOption(
 			productOption.getOptionId());
 
 		ProductOption.FieldType fieldType = productOption.getFieldType();
