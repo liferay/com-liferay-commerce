@@ -21,6 +21,7 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Alessio Antonio Rendina
@@ -58,7 +59,7 @@ public class ProductConfigurationUtil {
 						productConfiguration.getMaxOrderQuantity(),
 						CPDefinitionInventoryConstants.
 							DEFAULT_MAX_ORDER_QUANTITY),
-					ProductUtil.getAllowedOrderQuantities(
+					_getAllowedOrderQuantities(
 						cpDefinitionInventory, productConfiguration),
 					GetterUtil.get(
 						productConfiguration.getMultipleOrderQuantity(),
@@ -94,7 +95,7 @@ public class ProductConfigurationUtil {
 					GetterUtil.get(
 						productConfiguration.getMaxOrderQuantity(),
 						cpDefinitionInventory.getMaxOrderQuantity()),
-					ProductUtil.getAllowedOrderQuantities(
+					_getAllowedOrderQuantities(
 						cpDefinitionInventory, productConfiguration),
 					GetterUtil.get(
 						productConfiguration.getMultipleOrderQuantity(),
@@ -103,6 +104,22 @@ public class ProductConfigurationUtil {
 		}
 
 		return cpDefinitionInventory;
+	}
+
+	private static String _getAllowedOrderQuantities(
+		CPDefinitionInventory cpDefinitionInventory,
+		ProductConfiguration productConfiguration) {
+
+		if (productConfiguration.getAllowedOrderQuantities() != null) {
+			return StringUtil.merge(
+				productConfiguration.getAllowedOrderQuantities());
+		}
+
+		if (cpDefinitionInventory == null) {
+			return null;
+		}
+
+		return cpDefinitionInventory.getAllowedOrderQuantities();
 	}
 
 }
