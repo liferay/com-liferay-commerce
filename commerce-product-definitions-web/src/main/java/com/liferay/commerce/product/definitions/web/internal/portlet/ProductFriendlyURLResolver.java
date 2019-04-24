@@ -16,7 +16,6 @@ package com.liferay.commerce.product.definitions.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalService;
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPConstants;
@@ -24,21 +23,17 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
-import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutFriendlyURLComposite;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -108,8 +103,6 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 					groupId, classNameId, cpFriendlyURLEntry.getClassPK(),
 					languageId, true);
 		}
-
-		_initCPRulesThreadLocal(groupId, httpServletRequest);
 
 		CProduct cProduct = _cProductLocalService.getCProduct(
 			cpFriendlyURLEntry.getClassPK());
@@ -226,8 +219,6 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 					languageId, true);
 		}
 
-		_initCPRulesThreadLocal(groupId, httpServletRequest);
-
 		CProduct cProduct = _cProductLocalService.getCProduct(
 			cpFriendlyURLEntry.getClassPK());
 
@@ -260,51 +251,11 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		return _layoutLocalService.getLayout(plid);
 	}
 
-	private void _initCPRulesThreadLocal(
-			long groupId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		if (ListUtil.isNotEmpty(CPRulesThreadLocal.getCPRules())) {
-			return;
-		}
-
-		User user = _portal.getUser(httpServletRequest);
-
-		if (user == null) {
-			user = _userLocalService.getDefaultUser(
-				_portal.getCompanyId(httpServletRequest));
-		}
-
-		// Passing the groupId is mandatory here. See COMMERCE-728.
-
-		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				groupId, httpServletRequest);
-
-		long commerceAccountId = 0;
-
-		if (commerceAccount != null) {
-			commerceAccountId = commerceAccount.getCommerceAccountId();
-		}
-
-		long[] commerceUserSegmentEntryIds =
-			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				groupId, commerceAccountId, user.getUserId());
-
-		List<CPRule> cpRules = _cpRuleLocalService.getCPRules(
-			groupId, commerceUserSegmentEntryIds);
-
-		CPRulesThreadLocal.setCPRules(cpRules);
-	}
-
 	@Reference
 	private AssetTagLocalService _assetTagLocalService;
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
-
-	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
