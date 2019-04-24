@@ -1,16 +1,16 @@
 [
 	{
-		"name": "Guests",
-		"type": "all-products",
-		"userSegments": [
+		"accountGroups": [
 			"guest"
-		]
+		],
+		"name": "Guests",
+		"type": "all-products"
 	},
 	{
-		"name": "Users",
-		"type": "all-products",
-		"userSegments": [
+		"accountGroups": [
 			"user"
-		]
+		],
+		"name": "Users",
+		"type": "all-products"
 	}
 ]

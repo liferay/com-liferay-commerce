@@ -27,7 +27,6 @@ import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -530,23 +529,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private void _importSystemCommerceUserSegmentEntries(
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Importing system commerce user segment entries...");
-		}
-
-		_commerceUserSegmentEntryLocalService.
-			importSystemCommerceUserSegmentEntries(serviceContext);
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"System commerce user segment entries successfully imported");
-		}
-	}
-
 	private void _importThemePortletSettings(ServiceContext serviceContext)
 		throws Exception {
 
@@ -600,7 +582,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_importDefaultCommerceCountries(serviceContext);
 		_importDefaultCommerceCurrencies(serviceContext);
-		_importSystemCommerceUserSegmentEntries(serviceContext);
 		_importDefaultCPMeasurementUnits(serviceContext);
 
 		_updateThemeLookAndFeel(serviceContext);
@@ -720,10 +701,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
-
-	@Reference
-	private CommerceUserSegmentEntryLocalService
-		_commerceUserSegmentEntryLocalService;
 
 	@Reference
 	private CommerceWarehousesImporter _commerceWarehousesImporter;
