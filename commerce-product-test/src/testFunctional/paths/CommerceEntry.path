@@ -344,8 +344,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>USER_SEGMENTS_RELS_SELECT</td>
-	<td>//button[contains(@id,'selectCommercePriceListUserSegmentEntryRel')]</td>
+	<td>ACCOUNT_GROUPS_RELS_SELECT</td>
+	<td>//button[contains(@id,'selectCommercePriceListCommerceAccountGroupRel')]</td>
 	<td></td>
 </tr>
 <tr>
