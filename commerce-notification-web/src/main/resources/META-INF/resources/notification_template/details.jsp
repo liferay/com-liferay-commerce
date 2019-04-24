@@ -48,7 +48,7 @@ CommerceNotificationType commerceNotificationType = commerceNotificationTemplate
 
 	<aui:input name="description" value="<%= description %>" />
 
-	<%@ include file="/notification_template/user_segments.jspf" %>
+	<%@ include file="/notification_template/account_groups.jspf" %>
 
 	<aui:input label="from-address" name="from" value="<%= from %>" />
 

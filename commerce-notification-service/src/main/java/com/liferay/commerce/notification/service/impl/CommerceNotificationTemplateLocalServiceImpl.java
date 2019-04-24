@@ -103,10 +103,10 @@ public class CommerceNotificationTemplateLocalServiceImpl
 				commerceNotificationTemplate.
 					getCommerceNotificationTemplateId());
 
-		// Commerce notification template user segment rels
+		// Commerce notification template account groups rels
 
-		commerceNotificationTemplateUserSegmentRelLocalService.
-			deleteCNTemplateUserSegmentRelsByCommerceNotificationTemplateId(
+		commerceNotificationTemplateCommerceAccountGroupRelLocalService.
+			deleteCNTemplateCommerceAccountGroupRelsByCommerceNotificationTemplateId(
 				commerceNotificationTemplate.
 					getCommerceNotificationTemplateId());
 
