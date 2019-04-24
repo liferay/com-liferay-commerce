@@ -1,6 +1,6 @@
-create table CPLUserSegmentEntryRel (
+create table CPLCommerceGroupAccountRel (
 	uuid_ VARCHAR(75) null,
-	CPLUserSegmentEntryRelId LONG not null primary key,
+	CPLCommerceAccountGroupRelId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -8,7 +8,22 @@ create table CPLUserSegmentEntryRel (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commercePriceListId LONG,
-	commerceUserSegmentEntryId LONG,
+	commerceAccountGroupId LONG,
+	order_ INTEGER,
+	lastPublishDate DATE null
+);
+
+create table CPLAccountGroupEntryRel (
+	uuid_ VARCHAR(75) null,
+	CPLAccountGroupEntryRelId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commercePriceListId LONG,
+	commerceAccountGroupId LONG,
 	order_ INTEGER,
 	lastPublishDate DATE null
 );
