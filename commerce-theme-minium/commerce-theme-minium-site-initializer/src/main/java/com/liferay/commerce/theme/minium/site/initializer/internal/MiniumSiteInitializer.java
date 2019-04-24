@@ -15,6 +15,7 @@
 package com.liferay.commerce.theme.minium.site.initializer.internal;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
@@ -28,7 +29,6 @@ import com.liferay.commerce.initializer.util.CommerceAccountsImporter;
 import com.liferay.commerce.initializer.util.CommerceDiscountsImporter;
 import com.liferay.commerce.initializer.util.CommercePriceEntriesImporter;
 import com.liferay.commerce.initializer.util.CommercePriceListsImporter;
-import com.liferay.commerce.initializer.util.CommerceUserSegmentsImporter;
 import com.liferay.commerce.initializer.util.CommerceUsersImporter;
 import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.DDMFormImporter;
@@ -46,13 +46,16 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService;
+import com.liferay.commerce.product.service.CPRuleLocalService;
+import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -71,6 +74,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -85,6 +89,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.site.exception.InitializationException;
@@ -105,6 +110,7 @@ import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
 
+import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -209,8 +215,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importCommerceUsers(serviceContext);
 
-			_importCommerceUserSegments(serviceContext);
-
 			_importCPRules(serviceContext);
 
 			_importDDMForms(serviceContext);
@@ -276,8 +280,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		_commerceCountryLocalService.importDefaultCountries(serviceContext);
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
-		_commerceUserSegmentEntryLocalService.
-			importSystemCommerceUserSegmentEntries(serviceContext);
 		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
@@ -652,24 +654,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private void _importCommerceUserSegments(ServiceContext serviceContext)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Importing Commerce User Segments...");
-		}
-
-		JSONArray jsonArray = _getJSONArray("segments.json");
-
-		_commerceUserSegmentsImporter.importCommerceUserSegments(
-			jsonArray, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Commerce User Segments successfully imported");
-		}
-	}
-
 	private List<CommerceWarehouse> _importCommerceWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
@@ -931,6 +915,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private AssetCategoriesImporter _assetCategoriesImporter;
 
 	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
 	private BlogsImporter _blogsImporter;
 
 	@Reference
@@ -969,17 +956,13 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		_commerceShippingMethodLocalService;
 
 	@Reference
-	private CommerceUserSegmentEntryLocalService
-		_commerceUserSegmentEntryLocalService;
-
-	@Reference
-	private CommerceUserSegmentsImporter _commerceUserSegmentsImporter;
-
-	@Reference
 	private CommerceUsersImporter _commerceUsersImporter;
 
 	@Reference
 	private CommerceWarehousesImporter _commerceWarehousesImporter;
+
+	@Reference
+	private ConfigurationAdmin _configurationAdmin;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
@@ -1000,6 +983,10 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CPOptionsImporter _cpOptionsImporter;
+
+	@Reference
+	private CPRuleCommerceAccountGroupRelLocalService
+		_cpRuleCommerceAccountGroupRelLocalService;
 
 	@Reference
 	private CPRulesImporter _cpRulesImporter;

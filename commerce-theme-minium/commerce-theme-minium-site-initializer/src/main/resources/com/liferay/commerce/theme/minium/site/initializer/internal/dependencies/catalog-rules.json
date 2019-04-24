@@ -1,9 +1,9 @@
 [
 	{
-		"name": "All Products",
-		"type": "all-products",
-		"userSegments": [
+		"accountGroups": [
 			"user"
-		]
+		],
+		"name": "All Products",
+		"type": "all-products"
 	}
 ]
