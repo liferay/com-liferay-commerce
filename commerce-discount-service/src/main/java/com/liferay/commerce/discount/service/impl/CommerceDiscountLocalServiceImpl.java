@@ -185,10 +185,10 @@ public class CommerceDiscountLocalServiceImpl
 		commerceDiscountRuleLocalService.deleteCommerceDiscountRules(
 			commerceDiscount.getCommerceDiscountId());
 
-		// Commerce discount user segment rels
+		// Commerce discount account groups rels
 
-		commerceDiscountUserSegmentRelLocalService.
-			deleteCommerceDiscountUserSegmentRelsByCommerceDiscountId(
+		commerceDiscountCommerceAccountGroupRelLocalService.
+			deleteCommerceDiscountCommerceAccountGroupRelsByCommerceDiscountId(
 				commerceDiscount.getCommerceDiscountId());
 
 		// Commerce discount

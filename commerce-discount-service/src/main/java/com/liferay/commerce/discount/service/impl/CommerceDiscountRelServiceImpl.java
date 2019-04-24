@@ -129,7 +129,7 @@ public class CommerceDiscountRelServiceImpl
 	private static volatile ModelResourcePermission<CommerceDiscount>
 		_commerceDiscountResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
-				CommerceDiscountUserSegmentRelServiceImpl.class,
+				CommerceDiscountCommerceAccountGroupRelServiceImpl.class,
 				"_commerceDiscountResourcePermission", CommerceDiscount.class);
 
 }
