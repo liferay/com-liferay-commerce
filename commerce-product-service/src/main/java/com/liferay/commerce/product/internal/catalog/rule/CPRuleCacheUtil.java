@@ -46,10 +46,9 @@ public class CPRuleCacheUtil {
 	}
 
 	public static void putCommerceAccountGroupCPRuleIds(
-		long commerceAccountId, long groupId,
-		long[] commerceUserSegmentEntryIds) {
+		long commerceAccountId, long groupId, long[] commerceAccountGroupIds) {
 
-		if (commerceUserSegmentEntryIds == null) {
+		if (commerceAccountGroupIds == null) {
 			return;
 		}
 
@@ -58,7 +57,7 @@ public class CPRuleCacheUtil {
 
 		PortalCacheHelperUtil.putWithoutReplicator(
 			_accountGroupCPRuleIdsKeyPortalCache, accountGroupCPRuleIdsKey,
-			commerceUserSegmentEntryIds);
+			commerceAccountGroupIds);
 	}
 
 	private static final PortalCache<AccountGroupCPRuleIdsKey, long[]>

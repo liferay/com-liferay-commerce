@@ -108,7 +108,7 @@ public class CPRuleAssetCategoryRelServiceImpl
 	private static volatile ModelResourcePermission<CPRule>
 		_cpRuleModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
-				CPRuleUserSegmentRelServiceImpl.class,
+				CPRuleCommerceAccountGroupRelServiceImpl.class,
 				"_cpRuleModelResourcePermission", CPRule.class);
 
 }

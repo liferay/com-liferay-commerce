@@ -19,17 +19,17 @@ package com.liferay.commerce.product.catalog.rule.web.internal.servlet.taglib.ui
  */
 public class CPRuleScreenNavigationConstants {
 
+	public static final String
+		CATEGORY_KEY_COMMERCE_PRODUCT_RULE_ACCOUNT_GROUPS = "account-groups";
+
 	public static final String CATEGORY_KEY_COMMERCE_PRODUCT_RULE_DETAIL =
 		"detail";
 
-	public static final String
-		CATEGORY_KEY_COMMERCE_PRODUCT_RULE_USER_SEGMENTS = "user-segments";
+	public static final String ENTRY_KEY_COMMERCE_PRODUCT_RULE_ACCOUNT_GROUPS =
+		"account-groups";
 
 	public static final String ENTRY_KEY_COMMERCE_PRODUCT_RULE_DETAIL =
 		"detail";
-
-	public static final String ENTRY_KEY_COMMERCE_PRODUCT_RULE_USER_SEGMENTS =
-		"user-segments";
 
 	public static final String
 		SCREEN_NAVIGATION_KEY_COMMERCE_PRODUCT_RULE_GENERAL =

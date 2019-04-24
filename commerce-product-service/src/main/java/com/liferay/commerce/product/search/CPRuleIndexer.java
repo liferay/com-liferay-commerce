@@ -15,9 +15,9 @@
 package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
+import com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -82,24 +82,22 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		long[] commerceUserSegmentEntryIds = GetterUtil.getLongValues(
-			searchContext.getAttribute("commerceUserSegmentEntryIds"), null);
+		long[] commerceAccountGroupIds = GetterUtil.getLongValues(
+			searchContext.getAttribute("commerceAccountGroupIds"), null);
 
-		if (commerceUserSegmentEntryIds != null) {
+		if (commerceAccountGroupIds != null) {
 			TermsSetFilterBuilder termsSetFilterBuilder =
 				_filterBuilders.termsSetFilterBuilder();
 
-			termsSetFilterBuilder.setFieldName("commerceUserSegmentEntryIds");
+			termsSetFilterBuilder.setFieldName("commerceAccountGroupIds");
 			termsSetFilterBuilder.setMinimumShouldMatchField(
-				"commerceUserSegmentEntryIds_required_matches");
+				"commerceAccountGroupIds_required_matches");
 
 			List<String> values = new ArrayList<>(
-				commerceUserSegmentEntryIds.length);
+				commerceAccountGroupIds.length);
 
-			for (long commerceUserSegmentEntryId :
-					commerceUserSegmentEntryIds) {
-
-				values.add(String.valueOf(commerceUserSegmentEntryId));
+			for (long commerceAccountGroupId : commerceAccountGroupIds) {
+				values.add(String.valueOf(commerceAccountGroupId));
 			}
 
 			termsSetFilterBuilder.setValues(values);
@@ -158,22 +156,22 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 		document.addText(Field.NAME, cpRule.getName());
 		document.addText(Field.USER_NAME, cpRule.getUserName());
 
-		List<CPRuleUserSegmentRel> cpRuleUserSegmentRels =
-			_cpRuleUserSegmentRelLocalService.getCPRuleUserSegmentRels(
-				cpRule.getCPRuleId());
+		List<CPRuleCommerceAccountGroupRel> cpRuleCommerceAccountGroupRels =
+			_cpRuleCommerceAccountGroupRelLocalService.
+				getCPRuleCommerceAccountGroupRels(cpRule.getCPRuleId());
 
-		Stream<CPRuleUserSegmentRel> stream = cpRuleUserSegmentRels.stream();
+		Stream<CPRuleCommerceAccountGroupRel> stream =
+			cpRuleCommerceAccountGroupRels.stream();
 
 		LongStream longStream = stream.mapToLong(
-			CPRuleUserSegmentRel::getCommerceUserSegmentEntryId);
+			CPRuleCommerceAccountGroupRel::getCommerceAccountGroupId);
 
-		long[] commerceUserSegmentEntryIds = longStream.toArray();
+		long[] commerceAccountGroupIds = longStream.toArray();
 
+		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
 		document.addNumber(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
-		document.addNumber(
-			"commerceUserSegmentEntryIds_required_matches",
-			commerceUserSegmentEntryIds.length);
+			"commerceAccountGroupIds_required_matches",
+			commerceAccountGroupIds.length);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + cpRule + " indexed successfully");
@@ -247,10 +245,11 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 	private static final Log _log = LogFactoryUtil.getLog(CPRuleIndexer.class);
 
 	@Reference
-	private CPRuleLocalService _cpRuleLocalService;
+	private CPRuleCommerceAccountGroupRelLocalService
+		_cpRuleCommerceAccountGroupRelLocalService;
 
 	@Reference
-	private CPRuleUserSegmentRelLocalService _cpRuleUserSegmentRelLocalService;
+	private CPRuleLocalService _cpRuleLocalService;
 
 	@Reference
 	private FilterBuilders _filterBuilders;

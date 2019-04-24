@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.catalog.rule.web.internal.display.context;
 
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountGroupItemSelectorCriterion;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistry;
@@ -21,12 +22,11 @@ import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.catalog.rule.web.internal.display.context.util.CPCatalogRuleRequestHelper;
 import com.liferay.commerce.product.catalog.rule.web.internal.util.CPCatalogRulePortletUtil;
 import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
+import com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelService;
 import com.liferay.commerce.product.service.CPRuleService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelService;
-import com.liferay.commerce.product.util.comparator.CPRuleUserSegmentRelCreateDateComparator;
-import com.liferay.commerce.user.segment.item.selector.criterion.CommerceUserSegmentEntryItemSelectorCriterion;
+import com.liferay.commerce.product.util.comparator.CPRuleCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -72,7 +72,8 @@ public class CPCatalogRuleDisplayContext {
 		CPRuleService cpRuleService,
 		CPRuleTypeJSPContributorRegistry cpRuleTypeJSPContributorRegistry,
 		CPRuleTypeRegistry cpRuleTypeRegistry,
-		CPRuleUserSegmentRelService cpRuleUserSegmentRelService,
+		CPRuleCommerceAccountGroupRelService
+			cpRuleCommerceAccountGroupRelService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
 
@@ -81,7 +82,8 @@ public class CPCatalogRuleDisplayContext {
 		_cpRuleService = cpRuleService;
 		_cpRuleTypeJSPContributorRegistry = cpRuleTypeJSPContributorRegistry;
 		_cpRuleTypeRegistry = cpRuleTypeRegistry;
-		_cpRuleUserSegmentRelService = cpRuleUserSegmentRelService;
+		_cpRuleCommerceAccountGroupRelService =
+			cpRuleCommerceAccountGroupRelService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
 
@@ -119,6 +121,55 @@ public class CPCatalogRuleDisplayContext {
 		return _cpRule;
 	}
 
+	public SearchContainer<CPRuleCommerceAccountGroupRel>
+			getCPRuleCommerceAccountGroupRelsSearchContainer()
+		throws PortalException {
+
+		if (_cpRuleCommerceAccountGroupRelsSearchContainer != null) {
+			return _cpRuleCommerceAccountGroupRelsSearchContainer;
+		}
+
+		_cpRuleCommerceAccountGroupRelsSearchContainer = new SearchContainer<>(
+			_cpCatalogRuleRequestHelper.getLiferayPortletRequest(),
+			getPortletURL(), null, "there-are-no-account-group-catalog-rules");
+
+		setOrderByColAndType(
+			CPRuleCommerceAccountGroupRel.class,
+			_cpRuleCommerceAccountGroupRelsSearchContainer, "create-date",
+			"desc");
+
+		OrderByComparator<CPRuleCommerceAccountGroupRel> orderByComparator =
+			CPCatalogRulePortletUtil.
+				getCPRuleCommerceAccountGroupRelOrderByComparator(
+					_cpRuleCommerceAccountGroupRelsSearchContainer.
+						getOrderByCol(),
+					_cpRuleCommerceAccountGroupRelsSearchContainer.
+						getOrderByType());
+
+		_cpRuleCommerceAccountGroupRelsSearchContainer.setOrderByComparator(
+			orderByComparator);
+
+		_cpRuleCommerceAccountGroupRelsSearchContainer.setRowChecker(
+			new EmptyOnClickRowChecker(
+				_cpCatalogRuleRequestHelper.getLiferayPortletResponse()));
+
+		int total =
+			_cpRuleCommerceAccountGroupRelService.
+				getCPRuleCommerceAccountGroupRelsCount(getCPRuleId());
+
+		_cpRuleCommerceAccountGroupRelsSearchContainer.setTotal(total);
+
+		List<CPRuleCommerceAccountGroupRel> results =
+			getCPRuleCommerceAccountGroupRels(
+				_cpRuleCommerceAccountGroupRelsSearchContainer.getStart(),
+				_cpRuleCommerceAccountGroupRelsSearchContainer.getEnd(),
+				orderByComparator);
+
+		_cpRuleCommerceAccountGroupRelsSearchContainer.setResults(results);
+
+		return _cpRuleCommerceAccountGroupRelsSearchContainer;
+	}
+
 	public long getCPRuleId() throws PortalException {
 		CPRule cpRule = getCPRule();
 
@@ -153,72 +204,29 @@ public class CPCatalogRuleDisplayContext {
 		return typeSettingsProperties.get(property);
 	}
 
-	public SearchContainer<CPRuleUserSegmentRel>
-			getCPRuleUserSegmentRelsSearchContainer()
-		throws PortalException {
-
-		if (_cpRuleUserSegmentRelsSearchContainer != null) {
-			return _cpRuleUserSegmentRelsSearchContainer;
-		}
-
-		_cpRuleUserSegmentRelsSearchContainer = new SearchContainer<>(
-			_cpCatalogRuleRequestHelper.getLiferayPortletRequest(),
-			getPortletURL(), null, "there-are-no-user-segment-catalog-rules");
-
-		setOrderByColAndType(
-			CPRuleUserSegmentRel.class, _cpRuleUserSegmentRelsSearchContainer,
-			"create-date", "desc");
-
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator =
-			CPCatalogRulePortletUtil.getCPRuleUserSegmentRelOrderByComparator(
-				_cpRuleUserSegmentRelsSearchContainer.getOrderByCol(),
-				_cpRuleUserSegmentRelsSearchContainer.getOrderByType());
-
-		_cpRuleUserSegmentRelsSearchContainer.setOrderByComparator(
-			orderByComparator);
-
-		_cpRuleUserSegmentRelsSearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
-				_cpCatalogRuleRequestHelper.getLiferayPortletResponse()));
-
-		int total = _cpRuleUserSegmentRelService.getCPRuleUserSegmentRelsCount(
-			getCPRuleId());
-
-		_cpRuleUserSegmentRelsSearchContainer.setTotal(total);
-
-		List<CPRuleUserSegmentRel> results = getCPRuleUserSegmentRels(
-			_cpRuleUserSegmentRelsSearchContainer.getStart(),
-			_cpRuleUserSegmentRelsSearchContainer.getEnd(), orderByComparator);
-
-		_cpRuleUserSegmentRelsSearchContainer.setResults(results);
-
-		return _cpRuleUserSegmentRelsSearchContainer;
-	}
-
 	public String getItemSelectorUrl() throws PortalException {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
 				_cpCatalogRuleRequestHelper.getRequest());
 
-		CommerceUserSegmentEntryItemSelectorCriterion
-			commerceUserSegmentEntryItemSelectorCriterion =
-				new CommerceUserSegmentEntryItemSelectorCriterion();
+		CommerceAccountGroupItemSelectorCriterion
+			commerceAccountGroupItemSelectorCriterion =
+				new CommerceAccountGroupItemSelectorCriterion();
 
-		commerceUserSegmentEntryItemSelectorCriterion.
+		commerceAccountGroupItemSelectorCriterion.
 			setDesiredItemSelectorReturnTypes(
 				Collections.<ItemSelectorReturnType>singletonList(
 					new UUIDItemSelectorReturnType()));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBackedPortletURLFactory, "userSegmentSelectItem",
-			commerceUserSegmentEntryItemSelectorCriterion);
+			requestBackedPortletURLFactory, "accountGroupSelectItem",
+			commerceAccountGroupItemSelectorCriterion);
 
-		String checkedCommerceUserSegmentEntryIds = StringUtil.merge(
-			getCheckedCommerceUserSegmentEntryIds());
+		String checkedcommerceAccountGroupIds = StringUtil.merge(
+			getCheckedcommerceAccountGroupIds());
 
 		itemSelectorURL.setParameter(
-			"checkedCommerceUserSegmentEntryIds",
-			checkedCommerceUserSegmentEntryIds);
+			"checkedcommerceAccountGroupIds", checkedcommerceAccountGroupIds);
 
 		return itemSelectorURL.toString();
 	}
@@ -358,47 +366,51 @@ public class CPCatalogRuleDisplayContext {
 			_cpCatalogRuleRequestHelper.getScopeGroupId(), actionId);
 	}
 
-	protected long[] getCheckedCommerceUserSegmentEntryIds()
+	protected long[] getCheckedcommerceAccountGroupIds()
 		throws PortalException {
 
-		List<Long> commerceUserSegmentEntryIdsList = new ArrayList<>();
+		List<Long> commerceAccountGroupIdsList = new ArrayList<>();
 
-		List<CPRuleUserSegmentRel> cpRuleUserSegmentRels =
-			getCPRuleUserSegmentRels();
+		List<CPRuleCommerceAccountGroupRel> cpRuleCommerceAccountGroupRels =
+			getCPRuleCommerceAccountGroupRels();
 
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
-				cpRuleUserSegmentRels) {
+		for (CPRuleCommerceAccountGroupRel cpRuleCommerceAccountGroupRel :
+				cpRuleCommerceAccountGroupRels) {
 
-			commerceUserSegmentEntryIdsList.add(
-				cpRuleUserSegmentRel.getCommerceUserSegmentEntryId());
+			commerceAccountGroupIdsList.add(
+				cpRuleCommerceAccountGroupRel.getCommerceAccountGroupId());
 		}
 
-		if (commerceUserSegmentEntryIdsList.isEmpty()) {
+		if (commerceAccountGroupIdsList.isEmpty()) {
 			return new long[0];
 		}
 
-		Stream<Long> stream = commerceUserSegmentEntryIdsList.stream();
+		Stream<Long> stream = commerceAccountGroupIdsList.stream();
 
 		LongStream longStream = stream.mapToLong(l -> l);
 
 		return longStream.toArray();
 	}
 
-	protected List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels()
+	protected List<CPRuleCommerceAccountGroupRel>
+			getCPRuleCommerceAccountGroupRels()
 		throws PortalException {
 
-		return getCPRuleUserSegmentRels(
+		return getCPRuleCommerceAccountGroupRels(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new CPRuleUserSegmentRelCreateDateComparator());
+			new CPRuleCommerceAccountGroupRelCreateDateComparator());
 	}
 
-	protected List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels(
-			int start, int end,
-			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+	protected List<CPRuleCommerceAccountGroupRel>
+			getCPRuleCommerceAccountGroupRels(
+				int start, int end,
+				OrderByComparator<CPRuleCommerceAccountGroupRel>
+					orderByComparator)
 		throws PortalException {
 
-		return _cpRuleUserSegmentRelService.getCPRuleUserSegmentRels(
-			getCPRuleId(), start, end, orderByComparator);
+		return _cpRuleCommerceAccountGroupRelService.
+			getCPRuleCommerceAccountGroupRels(
+				getCPRuleId(), start, end, orderByComparator);
 	}
 
 	protected String getKeywords() {
@@ -458,15 +470,16 @@ public class CPCatalogRuleDisplayContext {
 	private final CPCatalogRuleRequestHelper _cpCatalogRuleRequestHelper;
 	private CPRule _cpRule;
 	private final CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
+	private final CPRuleCommerceAccountGroupRelService
+		_cpRuleCommerceAccountGroupRelService;
+	private SearchContainer<CPRuleCommerceAccountGroupRel>
+		_cpRuleCommerceAccountGroupRelsSearchContainer;
 	private final ModelResourcePermission<CPRule>
 		_cpRuleModelResourcePermission;
 	private final CPRuleService _cpRuleService;
 	private final CPRuleTypeJSPContributorRegistry
 		_cpRuleTypeJSPContributorRegistry;
 	private final CPRuleTypeRegistry _cpRuleTypeRegistry;
-	private final CPRuleUserSegmentRelService _cpRuleUserSegmentRelService;
-	private SearchContainer<CPRuleUserSegmentRel>
-		_cpRuleUserSegmentRelsSearchContainer;
 	private final ItemSelector _itemSelector;
 	private String _keywords;
 	private final PortalPreferences _portalPreferences;
