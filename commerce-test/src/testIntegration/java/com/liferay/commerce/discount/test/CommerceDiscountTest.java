@@ -79,6 +79,72 @@ public class CommerceDiscountTest {
 	}
 
 	@Test
+	public void testAccountGroupDiscount() throws Exception {
+		frutillaRule.scenario(
+			"When a discount has an account groups associated to it, it will " +
+				"be applied only if the criteria are fulfilled"
+		).given(
+			"A product with a base price"
+		).and(
+			"A discount with a account groups associated. The account groups " +
+				"is associated to a specific user"
+		).when(
+			"I try to get the final price of the product and I am the user " +
+				"associated to the account groups"
+		).then(
+			"The final price will be calculated taking into consideration " +
+				"the discount"
+		);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		cpInstance.setPrice(BigDecimal.valueOf(35));
+
+		_cpInstanceLocalService.updateCPInstance(cpInstance);
+
+		CommerceDiscount commerceDiscount =
+			CommerceDiscountTestUtil.addFixedCommerceDiscount(
+				_group.getGroupId(), 10,
+				CommerceDiscountConstants.TARGET_PRODUCT,
+				cpDefinition.getCPDefinitionId());
+
+		CommerceDiscountTestUtil.addDiscountCommerceAccountGroupRel(
+			commerceDiscount, _user.getUserId());
+
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+
+		CommerceContext commerceContext = new TestCommerceContext(
+			commerceCurrency, _user, _group, _commerceAccount, null);
+
+		CommerceProductPrice commerceProductPrice =
+			_commerceProductPriceCalculation.getCommerceProductPrice(
+				cpInstance.getCPInstanceId(), 1, commerceContext);
+
+		CommerceDiscountValue discountValue =
+			commerceProductPrice.getDiscountValue();
+
+		CommerceMoney discountAmount = discountValue.getDiscountAmount();
+
+		Assert.assertEquals(
+			commerceDiscount.getLevel1(), discountAmount.getPrice());
+
+		BigDecimal price = cpInstance.getPrice();
+
+		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
+
+		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+
+		BigDecimal actualPrice = finalPrice.getPrice();
+
+		Assert.assertEquals(
+			expectedPrice.stripTrailingZeros(),
+			actualPrice.stripTrailingZeros());
+	}
+
+	@Test
 	public void testCommerceFixedDiscount() throws Exception {
 		frutillaRule.scenario(
 			"Apply a fixed price discount"
@@ -558,72 +624,6 @@ public class CommerceDiscountTest {
 		BigDecimal price = cpInstance.getPrice();
 
 		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
-
-		Assert.assertEquals(
-			expectedPrice.stripTrailingZeros(),
-			actualPrice.stripTrailingZeros());
-	}
-
-	@Test
-	public void testUserSegmentDiscount() throws Exception {
-		frutillaRule.scenario(
-			"When a discount has an user segment associated to it, it will " +
-				"be applied only if the criteria are fulfilled"
-		).given(
-			"A product with a base price"
-		).and(
-			"A discount with a user segment associated. The user segment is " +
-				"associated to a specific user"
-		).when(
-			"I try to get the final price of the product and I am the user " +
-				"associated to the user segment"
-		).then(
-			"The final price will be calculated taking into consideration " +
-				"the discount"
-		);
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
-
-		CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-		cpInstance.setPrice(BigDecimal.valueOf(35));
-
-		_cpInstanceLocalService.updateCPInstance(cpInstance);
-
-		CommerceDiscount commerceDiscount =
-			CommerceDiscountTestUtil.addFixedCommerceDiscount(
-				_group.getGroupId(), 10,
-				CommerceDiscountConstants.TARGET_PRODUCT,
-				cpDefinition.getCPDefinitionId());
-
-		CommerceDiscountTestUtil.addDiscountUserSegmentRel(
-			commerceDiscount, _user.getUserId());
-
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
-		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null);
-
-		CommerceProductPrice commerceProductPrice =
-			_commerceProductPriceCalculation.getCommerceProductPrice(
-				cpInstance.getCPInstanceId(), 1, commerceContext);
-
-		CommerceDiscountValue discountValue =
-			commerceProductPrice.getDiscountValue();
-
-		CommerceMoney discountAmount = discountValue.getDiscountAmount();
-
-		Assert.assertEquals(
-			commerceDiscount.getLevel1(), discountAmount.getPrice());
-
-		BigDecimal price = cpInstance.getPrice();
-
-		BigDecimal expectedPrice = price.subtract(commerceDiscount.getLevel1());
-
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-
-		BigDecimal actualPrice = finalPrice.getPrice();
 
 		Assert.assertEquals(
 			expectedPrice.stripTrailingZeros(),

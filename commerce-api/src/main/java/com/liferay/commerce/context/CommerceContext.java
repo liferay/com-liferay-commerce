@@ -33,6 +33,8 @@ public interface CommerceContext extends Serializable {
 
 	public CommerceAccount getCommerceAccount() throws PortalException;
 
+	public long[] getCommerceAccountGroupIds();
+
 	public CommerceCurrency getCommerceCurrency() throws PortalException;
 
 	public CommerceOrder getCommerceOrder() throws PortalException;
@@ -41,8 +43,6 @@ public interface CommerceContext extends Serializable {
 		throws PortalException;
 
 	public int getCommerceSiteType();
-
-	public long[] getCommerceUserSegmentEntryIds() throws PortalException;
 
 	public List<CPRule> getCPRules() throws PortalException;
 

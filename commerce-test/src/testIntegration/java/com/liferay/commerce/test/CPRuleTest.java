@@ -82,7 +82,7 @@ public class CPRuleTest {
 	}
 
 	@Test
-	public void testUserSegmentCategoryCPDefinitionHelper() throws Exception {
+	public void testAccountGroupCategoryCPDefinitionHelper() throws Exception {
 		frutillaRule.scenario(
 			"Search for CatalogEntries accessible from a given user"
 		).given(
@@ -101,7 +101,7 @@ public class CPRuleTest {
 
 		CPDefinition expectedCPDefinition = cpInstance.getCPDefinition();
 
-		CPRule cpRule = CPRuleTestUtil.addUserSegmentCPRule(
+		CPRule cpRule = CPRuleTestUtil.addAccountGroupCPRule(
 			_group.getGroupId(), _user1.getUserId());
 
 		AssetCategory assetCategory = CPRuleTestUtil.addAssetCategoryToCPRule(
@@ -132,7 +132,7 @@ public class CPRuleTest {
 	}
 
 	@Test
-	public void testUserSegmentCategoryCPRuleService() throws Exception {
+	public void testAccountGroupCategoryCPRuleService() throws Exception {
 		frutillaRule.scenario(
 			"Get a CatalogEntries accessible from a given user"
 		).given(
@@ -148,7 +148,7 @@ public class CPRuleTest {
 
 		CPDefinition expectedCPDefinition = cpInstance.getCPDefinition();
 
-		CPRule cpRule = CPRuleTestUtil.addUserSegmentCPRule(
+		CPRule cpRule = CPRuleTestUtil.addAccountGroupCPRule(
 			_group.getGroupId(), _user1.getUserId());
 
 		AssetCategory assetCategory = CPRuleTestUtil.addAssetCategoryToCPRule(
@@ -169,7 +169,7 @@ public class CPRuleTest {
 	}
 
 	@Test(expected = PrincipalException.class)
-	public void testWrongUserSegmentCategoryCPRuleService() throws Exception {
+	public void testWrongAccountGroupCategoryCPRuleService() throws Exception {
 		frutillaRule.scenario(
 			"Try to get a CatalogEntries not accessible from a given user"
 		).given(
@@ -185,7 +185,7 @@ public class CPRuleTest {
 
 		CPDefinition expectedCPDefinition = cpInstance.getCPDefinition();
 
-		CPRule cpRule = CPRuleTestUtil.addUserSegmentCPRule(
+		CPRule cpRule = CPRuleTestUtil.addAccountGroupCPRule(
 			_group.getGroupId(), _user2.getUserId());
 
 		AssetCategory assetCategory = CPRuleTestUtil.addAssetCategoryToCPRule(
