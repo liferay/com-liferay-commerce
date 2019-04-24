@@ -19,11 +19,11 @@ definition {
 
 		Button.clickSave();
 
-		CommerceEntry.gotoMenuTab(menuTab = "User Segments");
+		CommerceEntry.gotoMenuTab(menuTab = "Account groupss");
 
 		Click(locator1 = "Button#PLUS");
 
-		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
+		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
 		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 	}
@@ -74,7 +74,7 @@ definition {
 
 		Click(locator1 = "Button#SELECT");
 
-		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
+		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
 		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 
@@ -98,7 +98,7 @@ definition {
 
 		Click(locator1 = "Button#SELECT");
 
-		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
+		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
 		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 
@@ -120,9 +120,9 @@ definition {
 
 		Select(locator1 = "CommerceEntry#CURRENCY_SELECT", value1 = "${currencyCode}");
 
-		Click(locator1 = "CommerceEntry#USER_SEGMENTS_RELS_SELECT");
+		Click(locator1 = "CommerceEntry#ACCOUNT_GROUPS_RELS_SELECT");
 
-		CommerceItemSelector.selectEntry(entryName = "${userSegmentName}");
+		CommerceItemSelector.selectEntry(entryName = "${accountGroupName}");
 
 		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 	}
@@ -135,7 +135,7 @@ definition {
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
 	}
 
-	macro addNewUserSegmentsEntry {
+	macro addNewAccountGroupsEntry {
 		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL", value1 = "${entryName}");
 
 		Button.clickSave();
@@ -241,16 +241,16 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
-	macro createNewUserSegment {
+	macro createNewAccountGroup {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "User Segments"
+			portlet = "Account groupss"
 		);
 
 		Click(locator1 = "Button#PLUS");
 
-		CommerceEntry.addNewUserSegmentsEntry(
+		CommerceEntry.addNewAccountGroupsEntry(
 			criteriaType = "${criteriaType}",
 			criterionEntryName = "${criterionEntryName}",
 			entryName = "${entryName}",

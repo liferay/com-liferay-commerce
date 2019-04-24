@@ -43,7 +43,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "User Segments"
+			portlet = "Account groupss"
 		);
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
