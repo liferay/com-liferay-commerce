@@ -34,6 +34,8 @@ $placeholder-colors: (
 $minium-shadow: 0 10px 20px $color-shadow;
 $minium-shadow-focus: 0 3px 20px 0 rgba($color-theme, .5);
 
+$minium-default-radius: 8px;
+
 $minium-gutter: 20px;
 $minium-small-gutter: $minium-gutter / 2;
 $minium-big-gutter: $minium-gutter * 2;

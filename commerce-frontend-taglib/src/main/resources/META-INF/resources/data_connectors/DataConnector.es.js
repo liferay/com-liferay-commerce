@@ -38,7 +38,7 @@ export default class DataConnector {
                     // otherwise it should add it to filters array
                     filter.field === field 
                         ? createFilterObj(field, value, operations)
-                        : el
+                        : filter
                 ],
                 []
             )

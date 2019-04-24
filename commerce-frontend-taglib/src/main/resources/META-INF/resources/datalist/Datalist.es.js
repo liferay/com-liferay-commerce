@@ -122,18 +122,6 @@ class Datalist extends Component {
         }
     }
 
-    _filterDataByQuery(query) {
-        if(!query) {
-            this._filteredValues = null;
-        }
-        if(query && this.data) {
-            this._filteredValues = this.data
-                .filter(el => el.label.toLowerCase().indexOf(query.toLowerCase()) > -1)
-                .map(el => el.value);
-        }
-        return this._filteredValues;
-    }
-
     _getDataElementFromValue(value) {
         const element = this.data.reduce(
             (elementFound, el) => elementFound || el.value == value && el,
