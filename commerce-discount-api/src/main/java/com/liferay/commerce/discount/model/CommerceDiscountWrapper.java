@@ -293,6 +293,11 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 		return _commerceDiscount.getActive();
 	}
 
+	@Override
+	public java.util.List<CommerceDiscountCommerceAccountGroupRel> getCommerceDiscountCommerceAccountGroupRels() {
+		return _commerceDiscount.getCommerceDiscountCommerceAccountGroupRels();
+	}
+
 	/**
 	* Returns the commerce discount ID of this commerce discount.
 	*
@@ -301,11 +306,6 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	@Override
 	public long getCommerceDiscountId() {
 		return _commerceDiscount.getCommerceDiscountId();
-	}
-
-	@Override
-	public java.util.List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels() {
-		return _commerceDiscount.getCommerceDiscountUserSegmentRels();
 	}
 
 	/**

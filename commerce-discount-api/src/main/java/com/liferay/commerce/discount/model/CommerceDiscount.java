@@ -55,5 +55,5 @@ public interface CommerceDiscount extends CommerceDiscountModel, PersistedModel 
 			}
 		};
 
-	public java.util.List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels();
+	public java.util.List<CommerceDiscountCommerceAccountGroupRel> getCommerceDiscountCommerceAccountGroupRels();
 }
