@@ -50,9 +50,9 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 <aui:form action="<%= editCommerceNotificationTemplateActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceNotificationTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceNotificationTemplate == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="addCommerceUserSegmentEntryIds" type="hidden" value="" />
+	<aui:input name="addcommerceAccountGroupIds" type="hidden" value="" />
 	<aui:input name="commerceNotificationTemplateId" type="hidden" value="<%= (commerceNotificationTemplate == null) ? 0 : commerceNotificationTemplate.getCommerceNotificationTemplateId() %>" />
-	<aui:input name="deleteCommerceNotificationTemplateUserSegmentRelIds" type="hidden" value="" />
+	<aui:input name="deleteCommerceNotificationTemplateCommerceAccountGroupRelIds" type="hidden" value="" />
 
 	<div class="col-md-8 offset-md-2">
 		<liferay-ui:form-navigator

@@ -14,20 +14,20 @@
 
 package com.liferay.commerce.notification.web.internal.display.context;
 
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountGroupItemSelectorCriterion;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.notification.constants.CommerceNotificationActionKeys;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
+import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
-import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
-import com.liferay.commerce.notification.util.comparator.CommerceNotificationTemplateUserSegmentRelCreateDateComparator;
+import com.liferay.commerce.notification.util.comparator.CommerceNotificationTemplateCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.commerce.notification.web.internal.admin.NotificationsCommerceAdminModule;
 import com.liferay.commerce.notification.web.internal.display.context.util.CommerceNotificationsRequestHelper;
 import com.liferay.commerce.notification.web.internal.util.CommerceNotificationsUtil;
-import com.liferay.commerce.user.segment.item.selector.criterion.CommerceUserSegmentEntryItemSelectorCriterion;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -60,24 +60,32 @@ public class CommerceNotificationTemplatesDisplayContext {
 
 	public CommerceNotificationTemplatesDisplayContext(
 		CommerceNotificationTemplateService commerceNotificationTemplateService,
-		CommerceNotificationTemplateUserSegmentRelService
-			commerceNotificationTemplateUserSegmentRelService,
+		CommerceNotificationTemplateCommerceAccountGroupRelService
+			commerceNotificationTemplateCommerceAccountGroupRelService,
 		CommerceNotificationTypeRegistry commerceNotificationTypeRegistry,
-		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
+		CommerceAccountGroupService commerceAccountGroupService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
 
 		_commerceNotificationTemplateService =
 			commerceNotificationTemplateService;
-		_commerceNotificationTemplateUserSegmentRelService =
-			commerceNotificationTemplateUserSegmentRelService;
+		_commerceNotificationTemplateCommerceAccountGroupRelService =
+			commerceNotificationTemplateCommerceAccountGroupRelService;
 		_commerceNotificationTypeRegistry = commerceNotificationTypeRegistry;
-		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_commerceAccountGroupService = commerceAccountGroupService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
 
 		_commerceNotificationsRequestHelper =
 			new CommerceNotificationsRequestHelper(httpServletRequest);
+	}
+
+	public CommerceAccountGroup getCommerceAccountGroup(
+			long commerceAccountGroupId)
+		throws PortalException {
+
+		return _commerceAccountGroupService.getCommerceAccountGroup(
+			commerceAccountGroupId);
 	}
 
 	public CommerceNotificationTemplate getCommerceNotificationTemplate()
@@ -101,6 +109,17 @@ public class CommerceNotificationTemplatesDisplayContext {
 		return _commerceNotificationTemplate;
 	}
 
+	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
+			getCommerceNotificationTemplateCommerceAccountGroupRels()
+		throws PortalException {
+
+		return _commerceNotificationTemplateCommerceAccountGroupRelService.
+			getCommerceNotificationTemplateCommerceAccountGroupRels(
+				getCommerceNotificationTemplateId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS,
+				new CommerceNotificationTemplateCommerceAccountGroupRelCreateDateComparator());
+	}
+
 	public long getCommerceNotificationTemplateId() throws PortalException {
 		CommerceNotificationTemplate commerceNotificationTemplate =
 			getCommerceNotificationTemplate();
@@ -112,17 +131,6 @@ public class CommerceNotificationTemplatesDisplayContext {
 		return commerceNotificationTemplate.getCommerceNotificationTemplateId();
 	}
 
-	public List<CommerceNotificationTemplateUserSegmentRel>
-			getCommerceNotificationTemplateUserSegmentRels()
-		throws PortalException {
-
-		return _commerceNotificationTemplateUserSegmentRelService.
-			getCommerceNotificationTemplateUserSegmentRels(
-				getCommerceNotificationTemplateId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS,
-				new CommerceNotificationTemplateUserSegmentRelCreateDateComparator());
-	}
-
 	public CommerceNotificationType getCommerceNotificationType(String key) {
 		return _commerceNotificationTypeRegistry.getCommerceNotificationType(
 			key);
@@ -132,38 +140,29 @@ public class CommerceNotificationTemplatesDisplayContext {
 		return _commerceNotificationTypeRegistry.getCommerceNotificationTypes();
 	}
 
-	public CommerceUserSegmentEntry getCommerceUserSegmentEntry(
-			long commerceUserSegmentEntryId)
-		throws PortalException {
-
-		return _commerceUserSegmentEntryService.getCommerceUserSegmentEntry(
-			commerceUserSegmentEntryId);
-	}
-
 	public String getItemSelectorUrl() throws PortalException {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
 				_commerceNotificationsRequestHelper.getRequest());
 
-		CommerceUserSegmentEntryItemSelectorCriterion
-			commerceUserSegmentEntryItemSelectorCriterion =
-				new CommerceUserSegmentEntryItemSelectorCriterion();
+		CommerceAccountGroupItemSelectorCriterion
+			commerceAccountGroupItemSelectorCriterion =
+				new CommerceAccountGroupItemSelectorCriterion();
 
-		commerceUserSegmentEntryItemSelectorCriterion.
+		commerceAccountGroupItemSelectorCriterion.
 			setDesiredItemSelectorReturnTypes(
 				Collections.<ItemSelectorReturnType>singletonList(
 					new UUIDItemSelectorReturnType()));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBackedPortletURLFactory, "userSegmentsSelectItem",
-			commerceUserSegmentEntryItemSelectorCriterion);
+			requestBackedPortletURLFactory, "accountGroupsSelectItem",
+			commerceAccountGroupItemSelectorCriterion);
 
-		String checkedCommerceUserSegmentEntryIds = StringUtil.merge(
-			getCheckedCommerceUserSegmentEntryIds());
+		String checkedcommerceAccountGroupIds = StringUtil.merge(
+			getCheckedcommerceAccountGroupIds());
 
 		itemSelectorURL.setParameter(
-			"checkedCommerceUserSegmentEntryIds",
-			checkedCommerceUserSegmentEntryIds);
+			"checkedcommerceAccountGroupIds", checkedcommerceAccountGroupIds);
 
 		return itemSelectorURL.toString();
 	}
@@ -291,23 +290,23 @@ public class CommerceNotificationTemplatesDisplayContext {
 			CommerceNotificationActionKeys.ADD_COMMERCE_NOTIFICATION_TEMPLATE);
 	}
 
-	protected long[] getCheckedCommerceUserSegmentEntryIds()
+	protected long[] getCheckedcommerceAccountGroupIds()
 		throws PortalException {
 
-		List<CommerceNotificationTemplateUserSegmentRel>
-			commerceNotificationTemplateUserSegmentRels =
-				getCommerceNotificationTemplateUserSegmentRels();
+		List<CommerceNotificationTemplateCommerceAccountGroupRel>
+			commerceNotificationTemplateCommerceAccountGroupRels =
+				getCommerceNotificationTemplateCommerceAccountGroupRels();
 
-		if (commerceNotificationTemplateUserSegmentRels.isEmpty()) {
+		if (commerceNotificationTemplateCommerceAccountGroupRels.isEmpty()) {
 			return new long[0];
 		}
 
-		Stream<CommerceNotificationTemplateUserSegmentRel> stream =
-			commerceNotificationTemplateUserSegmentRels.stream();
+		Stream<CommerceNotificationTemplateCommerceAccountGroupRel> stream =
+			commerceNotificationTemplateCommerceAccountGroupRels.stream();
 
 		return stream.mapToLong(
-			CommerceNotificationTemplateUserSegmentRel::
-				getCommerceNotificationTemplateUserSegmentRelId
+			CommerceNotificationTemplateCommerceAccountGroupRel::
+				getCommerceNotificationTemplateCommerceAccountGroupRelId
 		).toArray();
 	}
 
@@ -326,17 +325,16 @@ public class CommerceNotificationTemplatesDisplayContext {
 		return _rowChecker;
 	}
 
+	private final CommerceAccountGroupService _commerceAccountGroupService;
 	private final CommerceNotificationsRequestHelper
 		_commerceNotificationsRequestHelper;
 	private CommerceNotificationTemplate _commerceNotificationTemplate;
+	private final CommerceNotificationTemplateCommerceAccountGroupRelService
+		_commerceNotificationTemplateCommerceAccountGroupRelService;
 	private final CommerceNotificationTemplateService
 		_commerceNotificationTemplateService;
-	private final CommerceNotificationTemplateUserSegmentRelService
-		_commerceNotificationTemplateUserSegmentRelService;
 	private final CommerceNotificationTypeRegistry
 		_commerceNotificationTypeRegistry;
-	private final CommerceUserSegmentEntryService
-		_commerceUserSegmentEntryService;
 	private final ItemSelector _itemSelector;
 	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;
