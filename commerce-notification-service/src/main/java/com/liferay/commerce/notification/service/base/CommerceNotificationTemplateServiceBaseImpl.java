@@ -18,8 +18,8 @@ import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationAttachmentPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
+import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplatePersistence;
-import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelPersistence;
 
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 
@@ -212,60 +212,60 @@ public abstract class CommerceNotificationTemplateServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce notification template user segment rel local service.
+	 * Returns the commerce notification template commerce account group rel local service.
 	 *
-	 * @return the commerce notification template user segment rel local service
+	 * @return the commerce notification template commerce account group rel local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService getCommerceNotificationTemplateUserSegmentRelLocalService() {
-		return commerceNotificationTemplateUserSegmentRelLocalService;
+	public com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService getCommerceNotificationTemplateCommerceAccountGroupRelLocalService() {
+		return commerceNotificationTemplateCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Sets the commerce notification template user segment rel local service.
+	 * Sets the commerce notification template commerce account group rel local service.
 	 *
-	 * @param commerceNotificationTemplateUserSegmentRelLocalService the commerce notification template user segment rel local service
+	 * @param commerceNotificationTemplateCommerceAccountGroupRelLocalService the commerce notification template commerce account group rel local service
 	 */
-	public void setCommerceNotificationTemplateUserSegmentRelLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService) {
-		this.commerceNotificationTemplateUserSegmentRelLocalService = commerceNotificationTemplateUserSegmentRelLocalService;
+	public void setCommerceNotificationTemplateCommerceAccountGroupRelLocalService(
+		com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService commerceNotificationTemplateCommerceAccountGroupRelLocalService) {
+		this.commerceNotificationTemplateCommerceAccountGroupRelLocalService = commerceNotificationTemplateCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Returns the commerce notification template user segment rel remote service.
+	 * Returns the commerce notification template commerce account group rel remote service.
 	 *
-	 * @return the commerce notification template user segment rel remote service
+	 * @return the commerce notification template commerce account group rel remote service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService getCommerceNotificationTemplateUserSegmentRelService() {
-		return commerceNotificationTemplateUserSegmentRelService;
+	public com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService getCommerceNotificationTemplateCommerceAccountGroupRelService() {
+		return commerceNotificationTemplateCommerceAccountGroupRelService;
 	}
 
 	/**
-	 * Sets the commerce notification template user segment rel remote service.
+	 * Sets the commerce notification template commerce account group rel remote service.
 	 *
-	 * @param commerceNotificationTemplateUserSegmentRelService the commerce notification template user segment rel remote service
+	 * @param commerceNotificationTemplateCommerceAccountGroupRelService the commerce notification template commerce account group rel remote service
 	 */
-	public void setCommerceNotificationTemplateUserSegmentRelService(
-		com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService commerceNotificationTemplateUserSegmentRelService) {
-		this.commerceNotificationTemplateUserSegmentRelService = commerceNotificationTemplateUserSegmentRelService;
+	public void setCommerceNotificationTemplateCommerceAccountGroupRelService(
+		com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService commerceNotificationTemplateCommerceAccountGroupRelService) {
+		this.commerceNotificationTemplateCommerceAccountGroupRelService = commerceNotificationTemplateCommerceAccountGroupRelService;
 	}
 
 	/**
-	 * Returns the commerce notification template user segment rel persistence.
+	 * Returns the commerce notification template commerce account group rel persistence.
 	 *
-	 * @return the commerce notification template user segment rel persistence
+	 * @return the commerce notification template commerce account group rel persistence
 	 */
-	public CommerceNotificationTemplateUserSegmentRelPersistence getCommerceNotificationTemplateUserSegmentRelPersistence() {
-		return commerceNotificationTemplateUserSegmentRelPersistence;
+	public CommerceNotificationTemplateCommerceAccountGroupRelPersistence getCommerceNotificationTemplateCommerceAccountGroupRelPersistence() {
+		return commerceNotificationTemplateCommerceAccountGroupRelPersistence;
 	}
 
 	/**
-	 * Sets the commerce notification template user segment rel persistence.
+	 * Sets the commerce notification template commerce account group rel persistence.
 	 *
-	 * @param commerceNotificationTemplateUserSegmentRelPersistence the commerce notification template user segment rel persistence
+	 * @param commerceNotificationTemplateCommerceAccountGroupRelPersistence the commerce notification template commerce account group rel persistence
 	 */
-	public void setCommerceNotificationTemplateUserSegmentRelPersistence(
-		CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence) {
-		this.commerceNotificationTemplateUserSegmentRelPersistence = commerceNotificationTemplateUserSegmentRelPersistence;
+	public void setCommerceNotificationTemplateCommerceAccountGroupRelPersistence(
+		CommerceNotificationTemplateCommerceAccountGroupRelPersistence commerceNotificationTemplateCommerceAccountGroupRelPersistence) {
+		this.commerceNotificationTemplateCommerceAccountGroupRelPersistence = commerceNotificationTemplateCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -521,12 +521,12 @@ public abstract class CommerceNotificationTemplateServiceBaseImpl
 	protected CommerceNotificationTemplateService commerceNotificationTemplateService;
 	@BeanReference(type = CommerceNotificationTemplatePersistence.class)
 	protected CommerceNotificationTemplatePersistence commerceNotificationTemplatePersistence;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService commerceNotificationTemplateUserSegmentRelService;
-	@BeanReference(type = CommerceNotificationTemplateUserSegmentRelPersistence.class)
-	protected CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence;
+	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService.class)
+	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService commerceNotificationTemplateCommerceAccountGroupRelLocalService;
+	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService.class)
+	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService commerceNotificationTemplateCommerceAccountGroupRelService;
+	@BeanReference(type = CommerceNotificationTemplateCommerceAccountGroupRelPersistence.class)
+	protected CommerceNotificationTemplateCommerceAccountGroupRelPersistence commerceNotificationTemplateCommerceAccountGroupRelPersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

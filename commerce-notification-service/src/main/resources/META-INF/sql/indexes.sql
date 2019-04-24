@@ -1,5 +1,8 @@
-create unique index IX_7DEAC57F on CNTemplateUserSegmentRel (commerceNotificationTemplateId, commerceUserSegmentEntryId);
-create index IX_355FC10 on CNTemplateUserSegmentRel (commerceUserSegmentEntryId);
+create index IX_7951AAEB on CNTemplateCAccountGroupRel (commerceAccountGroupId);
+create unique index IX_AFBF7DA on CNTemplateCAccountGroupRel (commerceNotificationTemplateId, commerceAccountGroupId);
+
+create index IX_355FC10 on CNTemplateAccountGroupRel (commerceAccountGroupId);
+create unique index IX_7DEAC57F on CNTemplateAccountGroupRel (commerceNotificationTemplateId, commerceAccountGroupId);
 
 create index IX_6E9D8183 on CNotificationAttachment (CNotificationQueueEntryId);
 create index IX_8D120A4B on CNotificationAttachment (uuid_[$COLUMN_LENGTH:75$], companyId);
