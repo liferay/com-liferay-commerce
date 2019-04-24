@@ -16,10 +16,10 @@ package com.liferay.commerce.price.list.internal.search;
 
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
-import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
+import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService;
+import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -110,42 +110,42 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
-		TermsSetFilter userSegmentEntryIdsTermsSetFilter = null;
+		TermsSetFilter commerceAccountGroupIdsTermsSetFilter = null;
 
-		long[] commerceUserSegmentEntryIds = GetterUtil.getLongValues(
-			searchContext.getAttribute("commerceUserSegmentEntryIds"), null);
+		long[] commerceAccountGroupIds = GetterUtil.getLongValues(
+			searchContext.getAttribute("commerceAccountGroupIds"), null);
 
-		if (ArrayUtil.isNotEmpty(commerceUserSegmentEntryIds)) {
+		if (ArrayUtil.isNotEmpty(commerceAccountGroupIds)) {
 			TermsSetFilterBuilder termsSetFilterBuilder =
 				_filterBuilders.termsSetFilterBuilder();
 
-			termsSetFilterBuilder.setFieldName("commerceUserSegmentEntryIds");
+			termsSetFilterBuilder.setFieldName("commerceAccountGroupIds");
 			termsSetFilterBuilder.setMinimumShouldMatchField(
-				"commerceUserSegmentEntryIds_required_matches");
+				"commerceAccountGroupIds_required_matches");
 
 			List<String> values = new ArrayList<>(
-				commerceUserSegmentEntryIds.length);
+				commerceAccountGroupIds.length);
 
-			for (long commerceUserSegmentEntryId :
-					commerceUserSegmentEntryIds) {
-
-				values.add(String.valueOf(commerceUserSegmentEntryId));
+			for (long commerceAccountGroupId : commerceAccountGroupIds) {
+				values.add(String.valueOf(commerceAccountGroupId));
 			}
 
 			termsSetFilterBuilder.setValues(values);
 
-			userSegmentEntryIdsTermsSetFilter = termsSetFilterBuilder.build();
+			commerceAccountGroupIdsTermsSetFilter =
+				termsSetFilterBuilder.build();
 		}
 
 		long commerceAccountId = GetterUtil.getLong(
 			searchContext.getAttribute("commerceAccountId"));
 
 		if ((commerceAccountId > 0) &&
-			(userSegmentEntryIdsTermsSetFilter != null)) {
+			(commerceAccountGroupIdsTermsSetFilter != null)) {
 
 			BooleanFilter applicabilityBooleanFilter = new BooleanFilter();
 
-			applicabilityBooleanFilter.add(userSegmentEntryIdsTermsSetFilter);
+			applicabilityBooleanFilter.add(
+				commerceAccountGroupIdsTermsSetFilter);
 			applicabilityBooleanFilter.addTerm(
 				"commerceAccountId", commerceAccountId);
 
@@ -156,9 +156,9 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 			contextBooleanFilter.addRequiredTerm(
 				"commerceAccountId", commerceAccountId);
 		}
-		else if (userSegmentEntryIdsTermsSetFilter != null) {
+		else if (commerceAccountGroupIdsTermsSetFilter != null) {
 			contextBooleanFilter.add(
-				userSegmentEntryIdsTermsSetFilter, BooleanClauseOccur.MUST);
+				commerceAccountGroupIdsTermsSetFilter, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -229,27 +229,26 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 
 		document.addNumber("commerceAccountId", commerceAccountIds);
 
-		List<CommercePriceListUserSegmentEntryRel>
-			commercePriceListUserSegmentEntryRels =
-				_commercePriceListUserSegmentEntryRelLocalService.
-					getCommercePriceListUserSegmentEntryRels(
+		List<CommercePriceListCommerceAccountGroupRel>
+			commercePriceListCommerceAccountGroupRels =
+				_commercePriceListCommerceAccountGroupRelLocalService.
+					getCommercePriceListCommerceAccountGroupRels(
 						commercePriceList.getCommercePriceListId());
 
-		Stream<CommercePriceListUserSegmentEntryRel>
-			commercePriceListUserSegmentEntryRelStream =
-				commercePriceListUserSegmentEntryRels.stream();
+		Stream<CommercePriceListCommerceAccountGroupRel>
+			commercePriceListCommerceAccountGroupRelStream =
+				commercePriceListCommerceAccountGroupRels.stream();
 
-		long[] commerceUserSegmentEntryIds =
-			commercePriceListUserSegmentEntryRelStream.mapToLong(
-				CommercePriceListUserSegmentEntryRel::
-					getCommerceUserSegmentEntryId
+		long[] commerceAccountGroupIds =
+			commercePriceListCommerceAccountGroupRelStream.mapToLong(
+				CommercePriceListCommerceAccountGroupRel::
+					getCommerceAccountGroupId
 			).toArray();
 
+		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
 		document.addNumber(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
-		document.addNumber(
-			"commerceUserSegmentEntryIds_required_matches",
-			commerceUserSegmentEntryIds.length);
+			"commerceAccountGroupIds_required_matches",
+			commerceAccountGroupIds.length);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -337,11 +336,11 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 		_commercePriceListAccountRelLocalService;
 
 	@Reference
-	private CommercePriceListLocalService _commercePriceListLocalService;
+	private CommercePriceListCommerceAccountGroupRelLocalService
+		_commercePriceListCommerceAccountGroupRelLocalService;
 
 	@Reference
-	private CommercePriceListUserSegmentEntryRelLocalService
-		_commercePriceListUserSegmentEntryRelLocalService;
+	private CommercePriceListLocalService _commercePriceListLocalService;
 
 	@Reference
 	private FilterBuilders _filterBuilders;

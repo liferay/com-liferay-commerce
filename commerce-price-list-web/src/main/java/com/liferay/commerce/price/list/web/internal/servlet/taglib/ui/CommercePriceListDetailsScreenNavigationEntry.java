@@ -14,16 +14,16 @@
 
 package com.liferay.commerce.price.list.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
+import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
-import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -92,9 +92,9 @@ public class CommercePriceListDetailsScreenNavigationEntry
 			CommercePriceListDisplayContext commercePriceListDisplayContext =
 				new CommercePriceListDisplayContext(
 					_commercePriceListActionHelper, _commerceAccountService,
-					_commerceCurrencyService, _commerceUserSegmentEntryService,
+					_commerceCurrencyService, _commerceAccountGroupService,
 					_commercePriceListAccountRelService,
-					_commercePriceListUserSegmentEntryRelService,
+					_commercePriceListCommerceAccountGroupRelService,
 					_commercePriceListService, httpServletRequest,
 					_itemSelector, _portletResourcePermission);
 
@@ -115,6 +115,9 @@ public class CommercePriceListDetailsScreenNavigationEntry
 		CommercePriceListDetailsScreenNavigationEntry.class);
 
 	@Reference
+	private CommerceAccountGroupService _commerceAccountGroupService;
+
+	@Reference
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
@@ -128,14 +131,11 @@ public class CommercePriceListDetailsScreenNavigationEntry
 	private CommercePriceListActionHelper _commercePriceListActionHelper;
 
 	@Reference
+	private CommercePriceListCommerceAccountGroupRelService
+		_commercePriceListCommerceAccountGroupRelService;
+
+	@Reference
 	private CommercePriceListService _commercePriceListService;
-
-	@Reference
-	private CommercePriceListUserSegmentEntryRelService
-		_commercePriceListUserSegmentEntryRelService;
-
-	@Reference
-	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
 
 	@Reference
 	private ItemSelector _itemSelector;
