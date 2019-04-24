@@ -16,22 +16,18 @@ package com.liferay.commerce.media.internal;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
@@ -61,7 +57,6 @@ import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
 import java.io.IOException;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -315,8 +310,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 			CProduct cProduct = _cProductLocalService.fetchCProduct(primaryKey);
 
 			try {
-				setCPRules(httpServletRequest, cProduct.getGroupId());
-
 				if (_cpDefinitionModelResourcePermission.contains(
 						PermissionThreadLocal.getPermissionChecker(),
 						cProduct.getPublishedCPDefinitionId(),
@@ -370,37 +363,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		}
 	}
 
-	protected void setCPRules(
-			HttpServletRequest httpServletRequest, long groupId)
-		throws PortalException {
-
-		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				groupId, httpServletRequest);
-
-		long commerceAccountId = 0;
-
-		if (commerceAccount != null) {
-			commerceAccountId = commerceAccount.getCommerceAccountId();
-		}
-
-		long userId = _portal.getUserId(httpServletRequest);
-
-		if (userId == 0) {
-			userId = _userLocalService.getDefaultUserId(
-				_portal.getCompanyId(httpServletRequest));
-		}
-
-		long[] commerceUserSegmentEntryIds =
-			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				groupId, commerceAccountId, userId);
-
-		List<CPRule> cpRules = _cpRuleLocalService.getCPRules(
-			groupId, commerceUserSegmentEntryIds);
-
-		CPRulesThreadLocal.setCPRules(cpRules);
-	}
-
 	protected String setUrl(String className, long classPK, Locale locale)
 		throws PortalException {
 
@@ -449,9 +411,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
-
-	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
 
 	@Reference
 	private CPAttachmentFileEntryLocalService
