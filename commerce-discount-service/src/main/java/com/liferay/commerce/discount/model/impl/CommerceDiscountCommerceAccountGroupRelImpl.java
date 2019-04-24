@@ -16,30 +16,26 @@ package com.liferay.commerce.discount.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
-import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
-
-import java.util.List;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Marco Leo
- * @author Alessio Antonio Rendina
  */
 @ProviderType
-public class CommerceDiscountImpl extends CommerceDiscountBaseImpl {
+public class CommerceDiscountCommerceAccountGroupRelImpl
+	extends CommerceDiscountCommerceAccountGroupRelBaseImpl {
 
-	public CommerceDiscountImpl() {
+	public CommerceDiscountCommerceAccountGroupRelImpl() {
 	}
 
 	@Override
-	public List<CommerceDiscountCommerceAccountGroupRel>
-		getCommerceDiscountCommerceAccountGroupRels() {
+	public CommerceAccountGroup getCommerceAccountGroup()
+		throws PortalException {
 
-		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
-			getCommerceDiscountCommerceAccountGroupRels(
-				getCommerceDiscountId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null);
+		return CommerceAccountGroupLocalServiceUtil.getCommerceAccountGroup(
+			getCommerceAccountGroupId());
 	}
 
 }

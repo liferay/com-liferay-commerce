@@ -16,11 +16,11 @@ package com.liferay.commerce.discount.service.base;
 
 import com.liferay.commerce.discount.model.CommerceDiscountRule;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;
+import com.liferay.commerce.discount.service.persistence.CommerceDiscountCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRulePersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryPersistence;
-import com.liferay.commerce.discount.service.persistence.CommerceDiscountUserSegmentRelPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -113,6 +113,63 @@ public abstract class CommerceDiscountRuleServiceBaseImpl
 	public void setCommerceDiscountPersistence(
 		CommerceDiscountPersistence commerceDiscountPersistence) {
 		this.commerceDiscountPersistence = commerceDiscountPersistence;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel local service.
+	 *
+	 * @return the commerce discount commerce account group rel local service
+	 */
+	public com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService getCommerceDiscountCommerceAccountGroupRelLocalService() {
+		return commerceDiscountCommerceAccountGroupRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce discount commerce account group rel local service.
+	 *
+	 * @param commerceDiscountCommerceAccountGroupRelLocalService the commerce discount commerce account group rel local service
+	 */
+	public void setCommerceDiscountCommerceAccountGroupRelLocalService(
+		com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService commerceDiscountCommerceAccountGroupRelLocalService) {
+		this.commerceDiscountCommerceAccountGroupRelLocalService = commerceDiscountCommerceAccountGroupRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel remote service.
+	 *
+	 * @return the commerce discount commerce account group rel remote service
+	 */
+	public com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService getCommerceDiscountCommerceAccountGroupRelService() {
+		return commerceDiscountCommerceAccountGroupRelService;
+	}
+
+	/**
+	 * Sets the commerce discount commerce account group rel remote service.
+	 *
+	 * @param commerceDiscountCommerceAccountGroupRelService the commerce discount commerce account group rel remote service
+	 */
+	public void setCommerceDiscountCommerceAccountGroupRelService(
+		com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService commerceDiscountCommerceAccountGroupRelService) {
+		this.commerceDiscountCommerceAccountGroupRelService = commerceDiscountCommerceAccountGroupRelService;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel persistence.
+	 *
+	 * @return the commerce discount commerce account group rel persistence
+	 */
+	public CommerceDiscountCommerceAccountGroupRelPersistence getCommerceDiscountCommerceAccountGroupRelPersistence() {
+		return commerceDiscountCommerceAccountGroupRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce discount commerce account group rel persistence.
+	 *
+	 * @param commerceDiscountCommerceAccountGroupRelPersistence the commerce discount commerce account group rel persistence
+	 */
+	public void setCommerceDiscountCommerceAccountGroupRelPersistence(
+		CommerceDiscountCommerceAccountGroupRelPersistence commerceDiscountCommerceAccountGroupRelPersistence) {
+		this.commerceDiscountCommerceAccountGroupRelPersistence = commerceDiscountCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -265,63 +322,6 @@ public abstract class CommerceDiscountRuleServiceBaseImpl
 	public void setCommerceDiscountUsageEntryPersistence(
 		CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence) {
 		this.commerceDiscountUsageEntryPersistence = commerceDiscountUsageEntryPersistence;
-	}
-
-	/**
-	 * Returns the commerce discount user segment rel local service.
-	 *
-	 * @return the commerce discount user segment rel local service
-	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService getCommerceDiscountUserSegmentRelLocalService() {
-		return commerceDiscountUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Sets the commerce discount user segment rel local service.
-	 *
-	 * @param commerceDiscountUserSegmentRelLocalService the commerce discount user segment rel local service
-	 */
-	public void setCommerceDiscountUserSegmentRelLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService) {
-		this.commerceDiscountUserSegmentRelLocalService = commerceDiscountUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Returns the commerce discount user segment rel remote service.
-	 *
-	 * @return the commerce discount user segment rel remote service
-	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService getCommerceDiscountUserSegmentRelService() {
-		return commerceDiscountUserSegmentRelService;
-	}
-
-	/**
-	 * Sets the commerce discount user segment rel remote service.
-	 *
-	 * @param commerceDiscountUserSegmentRelService the commerce discount user segment rel remote service
-	 */
-	public void setCommerceDiscountUserSegmentRelService(
-		com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService commerceDiscountUserSegmentRelService) {
-		this.commerceDiscountUserSegmentRelService = commerceDiscountUserSegmentRelService;
-	}
-
-	/**
-	 * Returns the commerce discount user segment rel persistence.
-	 *
-	 * @return the commerce discount user segment rel persistence
-	 */
-	public CommerceDiscountUserSegmentRelPersistence getCommerceDiscountUserSegmentRelPersistence() {
-		return commerceDiscountUserSegmentRelPersistence;
-	}
-
-	/**
-	 * Sets the commerce discount user segment rel persistence.
-	 *
-	 * @param commerceDiscountUserSegmentRelPersistence the commerce discount user segment rel persistence
-	 */
-	public void setCommerceDiscountUserSegmentRelPersistence(
-		CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence) {
-		this.commerceDiscountUserSegmentRelPersistence = commerceDiscountUserSegmentRelPersistence;
 	}
 
 	/**
@@ -529,6 +529,12 @@ public abstract class CommerceDiscountRuleServiceBaseImpl
 	protected com.liferay.commerce.discount.service.CommerceDiscountService commerceDiscountService;
 	@BeanReference(type = CommerceDiscountPersistence.class)
 	protected CommerceDiscountPersistence commerceDiscountPersistence;
+	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService.class)
+	protected com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService commerceDiscountCommerceAccountGroupRelLocalService;
+	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService.class)
+	protected com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService commerceDiscountCommerceAccountGroupRelService;
+	@BeanReference(type = CommerceDiscountCommerceAccountGroupRelPersistence.class)
+	protected CommerceDiscountCommerceAccountGroupRelPersistence commerceDiscountCommerceAccountGroupRelPersistence;
 	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class)
 	protected com.liferay.commerce.discount.service.CommerceDiscountRelLocalService commerceDiscountRelLocalService;
 	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRelService.class)
@@ -545,12 +551,6 @@ public abstract class CommerceDiscountRuleServiceBaseImpl
 	protected com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService commerceDiscountUsageEntryLocalService;
 	@BeanReference(type = CommerceDiscountUsageEntryPersistence.class)
 	protected CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService commerceDiscountUserSegmentRelService;
-	@BeanReference(type = CommerceDiscountUserSegmentRelPersistence.class)
-	protected CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
