@@ -1,6 +1,10 @@
-create unique index IX_85F53E15 on CPLUserSegmentEntryRel (commercePriceListId, commerceUserSegmentEntryId);
-create index IX_A215DC0A on CPLUserSegmentEntryRel (uuid_[$COLUMN_LENGTH:75$], companyId);
-create unique index IX_1A99DD0C on CPLUserSegmentEntryRel (uuid_[$COLUMN_LENGTH:75$], groupId);
+create unique index IX_DEFDE07C on CPLCommerceGroupAccountRel (commercePriceListId, commerceAccountGroupId);
+create index IX_E475B7EB on CPLCommerceGroupAccountRel (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_2D513D2D on CPLCommerceGroupAccountRel (uuid_[$COLUMN_LENGTH:75$], groupId);
+
+create unique index IX_85F53E15 on CPLAccountGroupEntryRel (commercePriceListId, commerceAccountGroupId);
+create index IX_A215DC0A on CPLAccountGroupEntryRel (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_1A99DD0C on CPLAccountGroupEntryRel (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create unique index IX_56A1987C on CommercePriceEntry (CPInstanceUuid[$COLUMN_LENGTH:75$], commercePriceListId);
 create unique index IX_2D76B43E on CommercePriceEntry (commercePriceListId, CPInstanceUuid[$COLUMN_LENGTH:75$]);

@@ -61,9 +61,9 @@
 		<field name="order" type="int" />
 		<field name="lastPublishDate" type="Date" />
 	</model>
-	<model name="com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel">
+	<model name="com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel">
 		<field name="uuid" type="String" />
-		<field name="commercePriceListUserSegmentEntryRelId" type="long" />
+		<field name="commercePriceListCommerceAccountGroupRelId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -71,7 +71,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commercePriceListId" type="long" />
-		<field name="commerceUserSegmentEntryId" type="long" />
+		<field name="commerceAccountGroupId" type="long" />
 		<field name="order" type="int" />
 		<field name="lastPublishDate" type="Date" />
 	</model>
