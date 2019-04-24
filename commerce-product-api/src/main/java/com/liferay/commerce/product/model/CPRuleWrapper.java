@@ -176,6 +176,11 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 		return _cpRule.getCPRuleAssetCategoryRels();
 	}
 
+	@Override
+	public java.util.List<CPRuleCommerceAccountGroupRel> getCPRuleCommerceAccountGroupRels() {
+		return _cpRule.getCPRuleCommerceAccountGroupRels();
+	}
+
 	/**
 	* Returns the cp rule ID of this cp rule.
 	*
@@ -184,11 +189,6 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public long getCPRuleId() {
 		return _cpRule.getCPRuleId();
-	}
-
-	@Override
-	public java.util.List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels() {
-		return _cpRule.getCPRuleUserSegmentRels();
 	}
 
 	/**

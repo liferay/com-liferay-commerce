@@ -314,8 +314,8 @@ create table CPRuleAssetCategoryRel (
 	assetCategoryId LONG
 );
 
-create table CPRuleUserSegmentRel (
-	CPRuleUserSegmentRelId LONG not null primary key,
+create table CPRuleCommerceAccountGroupRel (
+	CPRuleCAccountGroupRelId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -323,7 +323,7 @@ create table CPRuleUserSegmentRel (
 	createDate DATE null,
 	modifiedDate DATE null,
 	CPRuleId LONG,
-	commerceUserSegmentEntryId LONG
+	commerceAccountGroupId LONG
 );
 
 create table CPSpecificationOption (

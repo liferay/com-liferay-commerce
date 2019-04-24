@@ -62,9 +62,9 @@
 	<bean class="com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelServiceImpl" id="com.liferay.commerce.product.service.CPRuleAssetCategoryRelService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRuleAssetCategoryRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelServiceImpl" id="com.liferay.commerce.product.service.CPRuleUserSegmentRelService" />
-	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRuleUserSegmentRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.product.service.impl.CPRuleCommerceAccountGroupRelLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService" />
+	<bean class="com.liferay.commerce.product.service.impl.CPRuleCommerceAccountGroupRelServiceImpl" id="com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelService" />
+	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRuleCommerceAccountGroupRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRuleCommerceAccountGroupRelPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.product.service.impl.CPSpecificationOptionLocalServiceImpl" id="com.liferay.commerce.product.service.CPSpecificationOptionLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl" id="com.liferay.commerce.product.service.CPSpecificationOptionService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPSpecificationOptionPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence" parent="basePersistence" />

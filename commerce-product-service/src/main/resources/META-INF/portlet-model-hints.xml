@@ -440,8 +440,8 @@
 		<field name="CPRuleId" type="long" />
 		<field name="assetCategoryId" type="long" />
 	</model>
-	<model name="com.liferay.commerce.product.model.CPRuleUserSegmentRel">
-		<field name="CPRuleUserSegmentRelId" type="long" />
+	<model name="com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel">
+		<field name="CPRuleCommerceAccountGroupRelId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -449,7 +449,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="CPRuleId" type="long" />
-		<field name="commerceUserSegmentEntryId" type="long" />
+		<field name="commerceAccountGroupId" type="long" />
 	</model>
 	<model name="com.liferay.commerce.product.model.CPSpecificationOption">
 		<field name="uuid" type="String" />
