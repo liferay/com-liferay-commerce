@@ -23,7 +23,7 @@ CommerceContext commerceContext = commerceContextDisplayContext.getCommerceConte
 
 CommerceCurrency commerceCurrency = commerceContext.getCommerceCurrency();
 CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-List<CommerceUserSegmentEntry> commerceUserSegmentEntries = commerceContextDisplayContext.getCommerceUserSegmentEntries();
+List<CommerceAccountGroup> commerceAccountGroupEntries = commerceContextDisplayContext.getCommerceAccountGroupEntries();
 List<CPRule> cpRules = commerceContext.getCPRules();
 Optional<CommercePriceList> optionalCommercePriceList = commerceContext.getCommercePriceList();
 CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
@@ -151,12 +151,12 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 </div>
 
 <div class="sheet-section">
-	<h3 class="sheet-subtitle"><liferay-ui:message key="user-segments" /></h3>
+	<h3 class="sheet-subtitle"><liferay-ui:message key="account-groups" /></h3>
 
 	<c:choose>
-		<c:when test="<%= commerceUserSegmentEntries.isEmpty() %>">
+		<c:when test="<%= commerceAccountGroupEntries.isEmpty() %>">
 			<div class="alert alert-info mx-auto">
-				<liferay-ui:message arguments="user-segments" key="x-are-not-set" translateArguments="<%= true %>" />
+				<liferay-ui:message arguments="account-groups" key="x-are-not-set" translateArguments="<%= true %>" />
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -167,12 +167,12 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 				</tr>
 
 				<%
-				for (CommerceUserSegmentEntry commerceUserSegmentEntry : commerceUserSegmentEntries) {
+				for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroupEntries) {
 				%>
 
 					<tr>
-						<td class="table-cell-content"><%= commerceUserSegmentEntry.getCommerceUserSegmentEntryId() %></td>
-						<td class="table-cell-content"><%= commerceUserSegmentEntry.getName(locale) %></td>
+						<td class="table-cell-content"><%= commerceAccountGroup.getCommerceAccountGroupId() %></td>
+						<td class="table-cell-content"><%= commerceAccountGroup.getName() %></td>
 					</tr>
 
 				<%

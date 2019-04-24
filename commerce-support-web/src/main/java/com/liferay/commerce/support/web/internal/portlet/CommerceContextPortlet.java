@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.support.web.internal.portlet;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.support.web.internal.display.context.CommerceContextDisplayContext;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -65,7 +65,7 @@ public class CommerceContextPortlet extends MVCPortlet {
 
 		CommerceContextDisplayContext commerceContextDisplayContext =
 			new CommerceContextDisplayContext(
-				_commerceUserSegmentEntryService, renderRequest);
+				_commerceAccountGroupService, renderRequest);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceContextDisplayContext);
@@ -74,6 +74,6 @@ public class CommerceContextPortlet extends MVCPortlet {
 	}
 
 	@Reference
-	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
+	private CommerceAccountGroupService _commerceAccountGroupService;
 
 }
