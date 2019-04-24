@@ -36,8 +36,8 @@ import com.liferay.commerce.product.service.persistence.CPOptionCategoryPersiste
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionValuePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
+import com.liferay.commerce.product.service.persistence.CPRuleCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPRulePersistence;
-import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
@@ -1224,41 +1224,41 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the cp rule user segment rel local service.
+	 * Returns the cp rule commerce account group rel local service.
 	 *
-	 * @return the cp rule user segment rel local service
+	 * @return the cp rule commerce account group rel local service
 	 */
-	public com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService getCPRuleUserSegmentRelLocalService() {
-		return cpRuleUserSegmentRelLocalService;
+	public com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService getCPRuleCommerceAccountGroupRelLocalService() {
+		return cpRuleCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Sets the cp rule user segment rel local service.
+	 * Sets the cp rule commerce account group rel local service.
 	 *
-	 * @param cpRuleUserSegmentRelLocalService the cp rule user segment rel local service
+	 * @param cpRuleCommerceAccountGroupRelLocalService the cp rule commerce account group rel local service
 	 */
-	public void setCPRuleUserSegmentRelLocalService(
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService cpRuleUserSegmentRelLocalService) {
-		this.cpRuleUserSegmentRelLocalService = cpRuleUserSegmentRelLocalService;
+	public void setCPRuleCommerceAccountGroupRelLocalService(
+		com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService cpRuleCommerceAccountGroupRelLocalService) {
+		this.cpRuleCommerceAccountGroupRelLocalService = cpRuleCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Returns the cp rule user segment rel persistence.
+	 * Returns the cp rule commerce account group rel persistence.
 	 *
-	 * @return the cp rule user segment rel persistence
+	 * @return the cp rule commerce account group rel persistence
 	 */
-	public CPRuleUserSegmentRelPersistence getCPRuleUserSegmentRelPersistence() {
-		return cpRuleUserSegmentRelPersistence;
+	public CPRuleCommerceAccountGroupRelPersistence getCPRuleCommerceAccountGroupRelPersistence() {
+		return cpRuleCommerceAccountGroupRelPersistence;
 	}
 
 	/**
-	 * Sets the cp rule user segment rel persistence.
+	 * Sets the cp rule commerce account group rel persistence.
 	 *
-	 * @param cpRuleUserSegmentRelPersistence the cp rule user segment rel persistence
+	 * @param cpRuleCommerceAccountGroupRelPersistence the cp rule commerce account group rel persistence
 	 */
-	public void setCPRuleUserSegmentRelPersistence(
-		CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence) {
-		this.cpRuleUserSegmentRelPersistence = cpRuleUserSegmentRelPersistence;
+	public void setCPRuleCommerceAccountGroupRelPersistence(
+		CPRuleCommerceAccountGroupRelPersistence cpRuleCommerceAccountGroupRelPersistence) {
+		this.cpRuleCommerceAccountGroupRelPersistence = cpRuleCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -1620,10 +1620,10 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService cpRuleAssetCategoryRelLocalService;
 	@BeanReference(type = CPRuleAssetCategoryRelPersistence.class)
 	protected CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService cpRuleUserSegmentRelLocalService;
-	@BeanReference(type = CPRuleUserSegmentRelPersistence.class)
-	protected CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService.class)
+	protected com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService cpRuleCommerceAccountGroupRelLocalService;
+	@BeanReference(type = CPRuleCommerceAccountGroupRelPersistence.class)
+	protected CPRuleCommerceAccountGroupRelPersistence cpRuleCommerceAccountGroupRelPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPSpecificationOptionLocalService.class)
 	protected com.liferay.commerce.product.service.CPSpecificationOptionLocalService cpSpecificationOptionLocalService;
 	@BeanReference(type = CPSpecificationOptionPersistence.class)

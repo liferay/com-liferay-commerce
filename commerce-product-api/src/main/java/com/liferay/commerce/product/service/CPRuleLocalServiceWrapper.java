@@ -255,10 +255,9 @@ public class CPRuleLocalServiceWrapper implements CPRuleLocalService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPRule> getCPRules(
-		long groupId, long[] commerceUserSegmentEntryIds)
+		long groupId, long[] commerceAccountGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleLocalService.getCPRules(groupId,
-			commerceUserSegmentEntryIds);
+		return _cpRuleLocalService.getCPRules(groupId, commerceAccountGroupIds);
 	}
 
 	/**

@@ -249,9 +249,9 @@ public class CPRuleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPRule> getCPRules(
-		long groupId, long[] commerceUserSegmentEntryIds)
+		long groupId, long[] commerceAccountGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPRules(groupId, commerceUserSegmentEntryIds);
+		return getService().getCPRules(groupId, commerceAccountGroupIds);
 	}
 
 	/**
