@@ -19,19 +19,18 @@ import com.liferay.asset.kernel.model.AssetCategoryConstants;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.ArrayList;
@@ -102,30 +101,31 @@ public class CPRulesImporter {
 		CPRule cpRule = _cpRuleLocalService.addCPRule(
 			name, active, type, typeSettings, serviceContext);
 
-		// Commerce Product Rule User Segment Rels
+		// Commerce Product Rule Account groups Rels
 
-		JSONArray userSegmentsJSONArray = jsonObject.getJSONArray(
-			"userSegments");
+		JSONArray accountGroupsJSONArray = jsonObject.getJSONArray(
+			"accountGroups");
 
-		if (userSegmentsJSONArray != null) {
-			for (int i = 0; i < userSegmentsJSONArray.length(); i++) {
-				String userSegmentName = userSegmentsJSONArray.getString(i);
+		if (accountGroupsJSONArray != null) {
+			for (int i = 0; i < accountGroupsJSONArray.length(); i++) {
+				String AccountGroupExternalReferenceCode =
+					accountGroupsJSONArray.getString(i);
 
-				CommerceUserSegmentEntry commerceUserSegmentEntry =
-					_commerceUserSegmentEntryLocalService.
-						fetchCommerceUserSegmentEntry(
-							serviceContext.getScopeGroupId(),
-							FriendlyURLNormalizerUtil.normalize(
-								userSegmentName));
+				CommerceAccountGroup commerceAccountGroup =
+					_commerceAccountGroupLocalService.
+						fetchCommerceAccountGroupByReferenceCode(
+							serviceContext.getCompanyId(),
+							AccountGroupExternalReferenceCode);
 
-				if (commerceUserSegmentEntry == null) {
+				if (commerceAccountGroup == null) {
 					continue;
 				}
 
-				_cpRuleUserSegmentRelLocalService.addCPRuleUserSegmentRel(
-					cpRule.getCPRuleId(),
-					commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
-					serviceContext);
+				_cpRuleCommerceAccountGroupRelLocalService.
+					addCPRuleCommerceAccountGroupRel(
+						cpRule.getCPRuleId(),
+						commerceAccountGroup.getCommerceAccountGroupId(),
+						serviceContext);
 			}
 		}
 
@@ -164,18 +164,18 @@ public class CPRulesImporter {
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
 
 	@Reference
-	private CommerceUserSegmentEntryLocalService
-		_commerceUserSegmentEntryLocalService;
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CPRuleAssetCategoryRelLocalService
 		_cpRuleAssetCategoryRelLocalService;
 
 	@Reference
-	private CPRuleLocalService _cpRuleLocalService;
+	private CPRuleCommerceAccountGroupRelLocalService
+		_cpRuleCommerceAccountGroupRelLocalService;
 
 	@Reference
-	private CPRuleUserSegmentRelLocalService _cpRuleUserSegmentRelLocalService;
+	private CPRuleLocalService _cpRuleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
