@@ -31,7 +31,7 @@ if ((commerceDiscount != null) && (commerceDiscount.getExpirationDate() != null)
 %>
 
 <liferay-util:buffer
-	var="removeCommerceUserSegmentEntryIcon"
+	var="removeCommerceAccountGroupIcon"
 >
 	<liferay-ui:icon
 		icon="times"
@@ -45,9 +45,9 @@ if ((commerceDiscount != null) && (commerceDiscount.getExpirationDate() != null)
 <aui:form action="<%= editCommerceDiscountActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceDiscount();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceDiscount == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="addCommerceUserSegmentEntryIds" type="hidden" />
+	<aui:input name="addcommerceAccountGroupIds" type="hidden" />
 	<aui:input name="commerceDiscountId" type="hidden" value="<%= commerceDiscountId %>" />
-	<aui:input name="deleteCommerceDiscountUserSegmentRelIds" type="hidden" />
+	<aui:input name="deletecommerceDiscountCommerceAccountGroupRelIds" type="hidden" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 
 	<div class="lfr-form-content">
@@ -77,8 +77,8 @@ if ((commerceDiscount != null) && (commerceDiscount.getExpirationDate() != null)
 				</aui:select>
 			</aui:fieldset>
 
-			<aui:fieldset collapsible="<%= true %>" label="user-segment">
-				<%@ include file="/discount/detail_user_segment.jspf" %>
+			<aui:fieldset collapsible="<%= true %>" label="account-group">
+				<%@ include file="/discount/detail_account_group.jspf" %>
 			</aui:fieldset>
 
 			<aui:fieldset collapsible="<%= true %>" label="discount">

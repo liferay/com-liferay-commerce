@@ -18,8 +18,8 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountDisplayContext;
 import com.liferay.item.selector.ItemSelector;
@@ -83,8 +83,8 @@ public class CommerceDiscountPortlet extends MVCPortlet {
 				_commerceCurrencyLocalService,
 				_commerceDiscountModelResourcePermission,
 				_commerceDiscountService, _commerceDiscountTargetRegistry,
-				_commerceDiscountUserSegmentRelService, httpServletRequest,
-				_itemSelector, _portletResourcePermission);
+				_commerceDiscountCommerceAccountGroupRelService,
+				httpServletRequest, _itemSelector, _portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceDiscountDisplayContext);
@@ -94,6 +94,10 @@ public class CommerceDiscountPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+
+	@Reference
+	private CommerceDiscountCommerceAccountGroupRelService
+		_commerceDiscountCommerceAccountGroupRelService;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.discount.model.CommerceDiscount)"
@@ -106,10 +110,6 @@ public class CommerceDiscountPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceDiscountTargetRegistry _commerceDiscountTargetRegistry;
-
-	@Reference
-	private CommerceDiscountUserSegmentRelService
-		_commerceDiscountUserSegmentRelService;
 
 	@Reference
 	private ItemSelector _itemSelector;

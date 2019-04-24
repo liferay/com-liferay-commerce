@@ -15,9 +15,9 @@
 package com.liferay.commerce.discount.internal.search;
 
 import com.liferay.commerce.discount.model.CommerceDiscount;
-import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
+import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService;
 import com.liferay.commerce.discount.target.CommerceDiscountOrderTarget;
 import com.liferay.commerce.discount.target.CommerceDiscountProductTarget;
 import com.liferay.commerce.discount.target.CommerceDiscountTarget;
@@ -129,32 +129,30 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
-		long[] commerceUserSegmentEntryIds = GetterUtil.getLongValues(
-			searchContext.getAttribute("commerceUserSegmentEntryIds"), null);
+		long[] commerceAccountGroupIds = GetterUtil.getLongValues(
+			searchContext.getAttribute("commerceAccountGroupIds"), null);
 
-		if ((commerceUserSegmentEntryIds != null) &&
-			(commerceUserSegmentEntryIds.length > 0)) {
+		if ((commerceAccountGroupIds != null) &&
+			(commerceAccountGroupIds.length > 0)) {
 
 			TermsSetFilterBuilder termsSetFilterBuilder =
 				_filterBuilders.termsSetFilterBuilder();
 
-			termsSetFilterBuilder.setFieldName("commerceUserSegmentEntryIds");
+			termsSetFilterBuilder.setFieldName("commerceAccountGroupIds");
 			termsSetFilterBuilder.setMinimumShouldMatchField(
-				"commerceUserSegmentEntryIds_required_matches");
+				"commerceAccountGroupIds_required_matches");
 
 			List<String> values = new ArrayList<>(
-				commerceUserSegmentEntryIds.length);
+				commerceAccountGroupIds.length);
 
-			for (long commerceUserSegmentEntryId :
-					commerceUserSegmentEntryIds) {
-
-				values.add(String.valueOf(commerceUserSegmentEntryId));
+			for (long commerceAccountGroupId : commerceAccountGroupIds) {
+				values.add(String.valueOf(commerceAccountGroupId));
 			}
 
 			termsSetFilterBuilder.setValues(values);
 
 			Filter termFilter = new TermFilter(
-				"commerceUserSegmentEntryIds_required_matches", "0");
+				"commerceAccountGroupIds_required_matches", "0");
 
 			BooleanFilter fieldBooleanFilter = new BooleanFilter();
 
@@ -295,25 +293,25 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 		document.addKeyword(
 			FIELD_USE_COUPON_CODE, commerceDiscount.isUseCouponCode());
 
-		List<CommerceDiscountUserSegmentRel> commerceDiscountUserSegmentRels =
-			_commerceDiscountUserSegmentRelLocalService.
-				getCommerceDiscountUserSegmentRels(
-					commerceDiscount.getCommerceDiscountId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null);
+		List<CommerceDiscountCommerceAccountGroupRel>
+			commerceDiscountCommerceAccountGroupRels =
+				_commerceDiscountCommerceAccountGroupRelLocalService.
+					getCommerceDiscountCommerceAccountGroupRels(
+						commerceDiscount.getCommerceDiscountId(),
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		Stream<CommerceDiscountUserSegmentRel> stream =
-			commerceDiscountUserSegmentRels.stream();
+		Stream<CommerceDiscountCommerceAccountGroupRel> stream =
+			commerceDiscountCommerceAccountGroupRels.stream();
 
 		LongStream longStream = stream.mapToLong(
-			CommerceDiscountUserSegmentRel::getCommerceUserSegmentEntryId);
+			CommerceDiscountCommerceAccountGroupRel::getCommerceAccountGroupId);
 
-		long[] commerceUserSegmentEntryIds = longStream.toArray();
+		long[] commerceAccountGroupIds = longStream.toArray();
 
+		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
 		document.addNumber(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
-		document.addNumber(
-			"commerceUserSegmentEntryIds_required_matches",
-			commerceUserSegmentEntryIds.length);
+			"commerceAccountGroupIds_required_matches",
+			commerceAccountGroupIds.length);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -443,6 +441,10 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
+	private CommerceDiscountCommerceAccountGroupRelLocalService
+		_commerceDiscountCommerceAccountGroupRelLocalService;
+
+	@Reference
 	private CommerceDiscountLocalService _commerceDiscountLocalService;
 
 	private final List<CommerceDiscountOrderTarget>
@@ -452,10 +454,6 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 
 	@Reference
 	private CommerceDiscountTargetRegistry _commerceDiscountTargetRegistry;
-
-	@Reference
-	private CommerceDiscountUserSegmentRelLocalService
-		_commerceDiscountUserSegmentRelLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
