@@ -1,3 +1,15 @@
+create table CAccountGroupCAccountRel (
+	externalReferenceCode VARCHAR(75) null,
+	CAccountGroupCAccountRelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commerceAccountGroupId LONG,
+	commerceAccountId LONG
+);
+
 create table CommerceAccount (
 	externalReferenceCode VARCHAR(75) null,
 	commerceAccountId LONG not null primary key,
@@ -20,6 +32,18 @@ create table CommerceAccount (
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
 	statusDate DATE null
+);
+
+create table CommerceAccountGroup (
+	externalReferenceCode VARCHAR(75) null,
+	commerceAccountGroupId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	type_ INTEGER
 );
 
 create table CommerceAccountOrganizationRel (
