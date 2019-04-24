@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.support.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.ArrayList;
@@ -31,11 +31,30 @@ import javax.portlet.RenderRequest;
 public class CommerceContextDisplayContext {
 
 	public CommerceContextDisplayContext(
-		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
+		CommerceAccountGroupService commerceAccountGroupService,
 		RenderRequest renderRequest) {
 
-		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_commerceAccountGroupService = commerceAccountGroupService;
 		_renderRequest = renderRequest;
+	}
+
+	public List<CommerceAccountGroup> getCommerceAccountGroupEntries()
+		throws PortalException {
+
+		List<CommerceAccountGroup> commerceAccountGroupEntries =
+			new ArrayList<>();
+
+		CommerceContext commerceContext = getCommerceContext();
+
+		for (long commerceAccountGroupId :
+				commerceContext.getCommerceAccountGroupIds()) {
+
+			commerceAccountGroupEntries.add(
+				_commerceAccountGroupService.getCommerceAccountGroup(
+					commerceAccountGroupId));
+		}
+
+		return commerceAccountGroupEntries;
 	}
 
 	public CommerceContext getCommerceContext() {
@@ -43,27 +62,7 @@ public class CommerceContextDisplayContext {
 			CommerceWebKeys.COMMERCE_CONTEXT);
 	}
 
-	public List<CommerceUserSegmentEntry> getCommerceUserSegmentEntries()
-		throws PortalException {
-
-		List<CommerceUserSegmentEntry> commerceUserSegmentEntries =
-			new ArrayList<>();
-
-		CommerceContext commerceContext = getCommerceContext();
-
-		for (long commerceUserSegmentEntryId :
-				commerceContext.getCommerceUserSegmentEntryIds()) {
-
-			commerceUserSegmentEntries.add(
-				_commerceUserSegmentEntryService.getCommerceUserSegmentEntry(
-					commerceUserSegmentEntryId));
-		}
-
-		return commerceUserSegmentEntries;
-	}
-
-	private final CommerceUserSegmentEntryService
-		_commerceUserSegmentEntryService;
+	private final CommerceAccountGroupService _commerceAccountGroupService;
 	private final RenderRequest _renderRequest;
 
 }
