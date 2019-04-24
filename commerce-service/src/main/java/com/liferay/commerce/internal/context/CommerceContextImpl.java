@@ -27,7 +27,6 @@ import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -48,7 +47,6 @@ public class CommerceContextImpl implements CommerceContext {
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
 		CommercePriceListLocalService commercePriceListLocalService,
-		CommerceUserSegmentHelper commerceUserSegmentHelper,
 		ConfigurationProvider configurationProvider,
 		CPRuleLocalService cpRuleLocalService) {
 
@@ -60,7 +58,6 @@ public class CommerceContextImpl implements CommerceContext {
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
 		_commercePriceListLocalService = commercePriceListLocalService;
-		_commerceUserSegmentHelper = commerceUserSegmentHelper;
 		_cpRuleLocalService = cpRuleLocalService;
 
 		try {
@@ -85,6 +82,11 @@ public class CommerceContextImpl implements CommerceContext {
 			_commerceAccountId);
 
 		return _commerceAccount;
+	}
+
+	@Override
+	public long[] getCommerceAccountGroupIds() {
+		return new long[0];
 	}
 
 	@Override
@@ -124,7 +126,7 @@ public class CommerceContextImpl implements CommerceContext {
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
 				_groupId, commerceAccount.getCommerceAccountId(),
-				getCommerceUserSegmentEntryIds());
+				getCommerceAccountGroupIds());
 
 		return _commercePriceList;
 	}
@@ -139,26 +141,13 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
-	public long[] getCommerceUserSegmentEntryIds() throws PortalException {
-		if (_commerceUserSegmentEntryIds != null) {
-			return _commerceUserSegmentEntryIds;
-		}
-
-		_commerceUserSegmentEntryIds =
-			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				_groupId, _commerceAccountId, _userId);
-
-		return _commerceUserSegmentEntryIds;
-	}
-
-	@Override
 	public List<CPRule> getCPRules() throws PortalException {
 		if (_cpRules != null) {
 			return _cpRules;
 		}
 
 		_cpRules = _cpRuleLocalService.getCPRules(
-			_groupId, getCommerceUserSegmentEntryIds());
+			_groupId, getCommerceAccountGroupIds());
 
 		return null;
 	}
@@ -187,8 +176,6 @@ public class CommerceContextImpl implements CommerceContext {
 	private final CommerceOrderService _commerceOrderService;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
-	private long[] _commerceUserSegmentEntryIds;
-	private final CommerceUserSegmentHelper _commerceUserSegmentHelper;
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
 	private final long _groupId;

@@ -15,15 +15,14 @@
 package com.liferay.commerce.discount.test.util;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
-import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.test.util.CommerceUserSegmentTestUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -39,6 +38,27 @@ import java.util.Calendar;
  * @author Luca Pellizzon
  */
 public class CommerceDiscountTestUtil {
+
+	public static CommerceDiscountCommerceAccountGroupRel
+			addAccountGroupToDiscount(
+				CommerceDiscount commerceDiscount, long userId)
+		throws Exception {
+
+		long groupId = commerceDiscount.getGroupId();
+
+		CommerceAccountGroup commerceAccountGroup = null; /*
+			CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
+				groupId, userId);*/
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
+			addCommerceDiscountCommerceAccountGroupRel(
+				commerceDiscount.getCommerceDiscountId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				serviceContext);
+	}
 
 	public static CommerceDiscount addCouponDiscount(
 			long groupId, double amount, String couponCode, String target,
@@ -61,21 +81,22 @@ public class CommerceDiscountTestUtil {
 		return commerceDiscount;
 	}
 
-	public static CommerceDiscountUserSegmentRel addDiscountUserSegmentRel(
-			CommerceDiscount commerceDiscount, long userId)
+	public static CommerceDiscountCommerceAccountGroupRel
+			addDiscountCommerceAccountGroupRel(
+				CommerceDiscount commerceDiscount, long userId)
 		throws Exception {
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addUserCommerceUserSegmentEntry(
-				commerceDiscount.getGroupId(), userId);
+		CommerceAccountGroup commerceAccountGroup = null;
+		/*CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
+			commerceDiscount.getGroupId(), userId);*/
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext();
 
-		return CommerceDiscountUserSegmentRelLocalServiceUtil.
-			addCommerceDiscountUserSegmentRel(
+		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
+			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
 				serviceContext);
 	}
 
@@ -147,26 +168,6 @@ public class CommerceDiscountTestUtil {
 		_addTargetDetails(commerceDiscount, target, targetIds);
 
 		return commerceDiscount;
-	}
-
-	public static CommerceDiscountUserSegmentRel addUserSegmentToDiscount(
-			CommerceDiscount commerceDiscount, long userId)
-		throws Exception {
-
-		long groupId = commerceDiscount.getGroupId();
-
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addUserCommerceUserSegmentEntry(
-				groupId, userId);
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		return CommerceDiscountUserSegmentRelLocalServiceUtil.
-			addCommerceDiscountUserSegmentRel(
-				commerceDiscount.getCommerceDiscountId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
-				serviceContext);
 	}
 
 	private static void _addDiscountCategoryRel(

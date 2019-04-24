@@ -24,22 +24,37 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalServiceUtil;
 import com.liferay.commerce.product.service.CPRuleLocalServiceUtil;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalServiceUtil;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalServiceUtil;
-import com.liferay.commerce.user.segment.test.util.CommerceUserSegmentTestUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 
-import java.util.List;
-
 /**
  * @author Luca Pellizzon
  */
 public class CPRuleTestUtil {
+
+	public static CPRule addAccountGroupCPRule(long groupId, long userId)
+		throws Exception {
+
+		/*CPRule cpRule = addCategoryCPRule(groupId);
+
+		CommerceAccountGroup commerceAccountGroup =
+			CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
+				groupId, userId);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		CPRuleCommerceAccountGroupRelLocalServiceUtil.addCPRuleCommerceAccountGroupRel(
+			cpRule.getCPRuleId(),
+			commerceAccountGroup.getCommerceAccountGroupId(),
+			serviceContext);
+
+		return cpRule;*/
+
+		return null;
+	}
 
 	public static AssetCategory addAssetCategoryToCPRule(CPRule cpRule)
 		throws Exception {
@@ -87,38 +102,18 @@ public class CPRuleTestUtil {
 			cPDefinition.getCPDefinitionId(), serviceContext);
 	}
 
-	public static CPRule addUserSegmentCPRule(long groupId, long userId)
-		throws Exception {
-
-		CPRule cpRule = addCategoryCPRule(groupId);
-
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addUserCommerceUserSegmentEntry(
-				groupId, userId);
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		CPRuleUserSegmentRelLocalServiceUtil.addCPRuleUserSegmentRel(
-			cpRule.getCPRuleId(),
-			commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
-			serviceContext);
-
-		return cpRule;
-	}
-
 	public static void setCPRulesThreadLocal(
 			long groupId, long organizationId, long userId)
 		throws PortalException {
 
-		long[] commerceUserSegmentEntryIds =
-			CommerceUserSegmentEntryLocalServiceUtil.
-				getCommerceUserSegmentEntryIds(groupId, organizationId, userId);
+		/*long[] commerceAccountGroupIds =
+			CommerceAccountGroupLocalServiceUtil.
+				getCommerceAccountGroupIds(groupId, organizationId, userId);
 
 		List<CPRule> cpRules = CPRuleLocalServiceUtil.getCPRules(
-			groupId, commerceUserSegmentEntryIds);
+			groupId, commerceAccountGroupIds);
 
-		CPRulesThreadLocal.setCPRules(cpRules);
+		CPRulesThreadLocal.setCPRules(cpRules);*/
 	}
 
 }

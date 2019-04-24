@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -52,6 +51,11 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
+	public long[] getCommerceAccountGroupIds() {
+		return new long[0];
+	}
+
+	@Override
 	public CommerceCurrency getCommerceCurrency() {
 		return _commerceCurrency;
 	}
@@ -71,25 +75,12 @@ public class TestCommerceContext implements CommerceContext {
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
 			_contextGroup.getGroupId(), _commerceAccount.getCommerceAccountId(),
-			getCommerceUserSegmentEntryIds());
+			getCommerceAccountGroupIds());
 	}
 
 	@Override
 	public int getCommerceSiteType() {
 		return 0;
-	}
-
-	@Override
-	public long[] getCommerceUserSegmentEntryIds() throws PortalException {
-		if (_contextUser == null) {
-			return new long[0];
-		}
-
-		return CommerceUserSegmentEntryLocalServiceUtil.
-			getCommerceUserSegmentEntryIds(
-				_contextGroup.getGroupId(),
-				_commerceAccount.getCommerceAccountId(),
-				_contextUser.getUserId());
 	}
 
 	@Override
