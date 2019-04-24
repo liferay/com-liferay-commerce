@@ -21,9 +21,9 @@ import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleType;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributor;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributorRegistry;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeRegistry;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.web.internal.util.CommerceDiscountPortletUtil;
 import com.liferay.commerce.product.item.selector.criterion.CPDefinitionItemSelectorCriterion;
@@ -71,8 +71,8 @@ public class CommerceDiscountRuleDisplayContext
 		CommerceDiscountRuleTypeRegistry commerceDiscountRuleTypeRegistry,
 		CommerceDiscountService commerceDiscountService,
 		CommerceDiscountTargetRegistry commerceDiscountTargetRegistry,
-		CommerceDiscountUserSegmentRelService
-			commerceDiscountUserSegmentRelService,
+		CommerceDiscountCommerceAccountGroupRelService
+			commerceDiscountCommerceAccountGroupRelService,
 		CPDefinitionService cpDefinitionService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
@@ -81,7 +81,7 @@ public class CommerceDiscountRuleDisplayContext
 			commerceCurrencyLocalService,
 			commerceDiscountModelResourcePermission, commerceDiscountService,
 			commerceDiscountTargetRegistry,
-			commerceDiscountUserSegmentRelService, httpServletRequest,
+			commerceDiscountCommerceAccountGroupRelService, httpServletRequest,
 			itemSelector, portletResourcePermission);
 
 		_commerceDiscountRuleService = commerceDiscountRuleService;

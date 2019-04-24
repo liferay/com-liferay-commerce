@@ -19,9 +19,9 @@ import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributorRegistry;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeRegistry;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountRuleDisplayContext;
 import com.liferay.commerce.product.service.CPDefinitionService;
@@ -114,8 +114,9 @@ public class CommerceDiscountRulesScreenNavigationEntry
 				_commerceDiscountRuleTypeJSPContributorRegistry,
 				_commerceDiscountRuleTypeRegistry, _commerceDiscountService,
 				_commerceDiscountTargetRegistry,
-				_commerceDiscountUserSegmentRelService, _cpDefinitionService,
-				httpServletRequest, _itemSelector, _portletResourcePermission);
+				_commerceDiscountCommerceAccountGroupRelService,
+				_cpDefinitionService, httpServletRequest, _itemSelector,
+				_portletResourcePermission);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -128,6 +129,10 @@ public class CommerceDiscountRulesScreenNavigationEntry
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+
+	@Reference
+	private CommerceDiscountCommerceAccountGroupRelService
+		_commerceDiscountCommerceAccountGroupRelService;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.discount.model.CommerceDiscount)"
@@ -150,10 +155,6 @@ public class CommerceDiscountRulesScreenNavigationEntry
 
 	@Reference
 	private CommerceDiscountTargetRegistry _commerceDiscountTargetRegistry;
-
-	@Reference
-	private CommerceDiscountUserSegmentRelService
-		_commerceDiscountUserSegmentRelService;
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;

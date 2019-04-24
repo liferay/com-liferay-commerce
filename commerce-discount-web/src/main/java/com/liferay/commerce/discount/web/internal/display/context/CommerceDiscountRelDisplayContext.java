@@ -18,9 +18,9 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.util.comparator.CommerceDiscountRelCreateDateComparator;
 import com.liferay.commerce.discount.web.internal.util.CommerceDiscountPortletUtil;
@@ -66,8 +66,8 @@ public class CommerceDiscountRelDisplayContext
 		CommerceDiscountRelService commerceDiscountRelService,
 		CommerceDiscountService commerceDiscountService,
 		CommerceDiscountTargetRegistry commerceDiscountTargetRegistry,
-		CommerceDiscountUserSegmentRelService
-			commerceDiscountUserSegmentRelService,
+		CommerceDiscountCommerceAccountGroupRelService
+			commerceDiscountCommerceAccountGroupRelService,
 		CPDefinitionService cpDefinitionService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
@@ -76,7 +76,7 @@ public class CommerceDiscountRelDisplayContext
 			commerceCurrencyLocalService,
 			commerceDiscountModelResourcePermission, commerceDiscountService,
 			commerceDiscountTargetRegistry,
-			commerceDiscountUserSegmentRelService, httpServletRequest,
+			commerceDiscountCommerceAccountGroupRelService, httpServletRequest,
 			itemSelector, portletResourcePermission);
 
 		_commerceDiscountRelService = commerceDiscountRelService;

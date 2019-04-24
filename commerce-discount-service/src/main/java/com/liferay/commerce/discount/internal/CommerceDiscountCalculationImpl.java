@@ -73,7 +73,7 @@ public class CommerceDiscountCalculationImpl
 		SearchContext searchContext = buildSearchContext(
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
-			commerceContext.getCommerceUserSegmentEntryIds(),
+			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_SHIPPING);
 
@@ -94,7 +94,7 @@ public class CommerceDiscountCalculationImpl
 		SearchContext searchContext = buildSearchContext(
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
-			commerceContext.getCommerceUserSegmentEntryIds(),
+			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_SUBTOTAL);
 
@@ -115,7 +115,7 @@ public class CommerceDiscountCalculationImpl
 		SearchContext searchContext = buildSearchContext(
 			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
-			commerceContext.getCommerceUserSegmentEntryIds(),
+			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
 			CommerceDiscountTarget.Type.APPLY_TO_TOTAL);
 
@@ -143,7 +143,7 @@ public class CommerceDiscountCalculationImpl
 		SearchContext searchContext = buildSearchContext(
 			cpInstance.getCompanyId(), cpInstance.getGroupId(),
 			cpInstance.getCPDefinitionId(), cpInstanceId, 0,
-			commerceContext.getCommerceUserSegmentEntryIds(), couponCode,
+			commerceContext.getCommerceAccountGroupIds(), couponCode,
 			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
 
 		return _getCommerceDiscountValue(
@@ -152,8 +152,7 @@ public class CommerceDiscountCalculationImpl
 
 	protected SearchContext buildSearchContext(
 		long companyId, long groupId, long cpDefinitionId, long cpInstanceId,
-		long commerceOrderId, long[] commerceUserSegmentEntryIds,
-		String couponCode,
+		long commerceOrderId, long[] commerceAccountGroupIds, String couponCode,
 		CommerceDiscountTarget.Type commerceDiscountTargetType) {
 
 		SearchContext searchContext = new SearchContext();
@@ -166,9 +165,8 @@ public class CommerceDiscountCalculationImpl
 		attributes.put(
 			CommerceDiscountIndexer.FIELD_TARGET_TYPE,
 			commerceDiscountTargetType.toString());
+		attributes.put("commerceAccountGroupIds", commerceAccountGroupIds);
 		attributes.put("commerceOrderId", commerceOrderId);
-		attributes.put(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
 		attributes.put("cpDefinitionId", cpDefinitionId);
 		attributes.put("cpInstanceId", cpInstanceId);
 

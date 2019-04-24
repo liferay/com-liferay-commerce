@@ -18,10 +18,10 @@ import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException;
 import com.liferay.commerce.discount.exception.NoSuchDiscountException;
 import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
-import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -247,45 +247,45 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		if (commerceDiscount != null) {
-			updateCommerceDiscountUserSegmentRels(
+			updatecommerceDiscountCommerceAccountGroupRels(
 				actionRequest, commerceDiscount);
 		}
 
 		return commerceDiscount;
 	}
 
-	protected void updateCommerceDiscountUserSegmentRels(
+	protected void updatecommerceDiscountCommerceAccountGroupRels(
 			ActionRequest actionRequest, CommerceDiscount commerceDiscount)
 		throws PortalException {
 
-		long[] addCommerceUserSegmentEntryIds = ParamUtil.getLongValues(
-			actionRequest, "addCommerceUserSegmentEntryIds");
+		long[] addcommerceAccountGroupIds = ParamUtil.getLongValues(
+			actionRequest, "addcommerceAccountGroupIds");
 
-		long[] deleteCommerceDiscountUserSegmentRelIds =
+		long[] deletecommerceDiscountCommerceAccountGroupRelIds =
 			ParamUtil.getLongValues(
-				actionRequest, "deleteCommerceDiscountUserSegmentRelIds");
+				actionRequest,
+				"deletecommerceDiscountCommerceAccountGroupRelIds");
 
-		if (deleteCommerceDiscountUserSegmentRelIds.length > 0) {
-			for (long deleteCommerceDiscountUserSegmentRelId :
-					deleteCommerceDiscountUserSegmentRelIds) {
+		if (deletecommerceDiscountCommerceAccountGroupRelIds.length > 0) {
+			for (long deletecommerceDiscountCommerceAccountGroupRelId :
+					deletecommerceDiscountCommerceAccountGroupRelIds) {
 
-				_commerceDiscountUserSegmentRelService.
-					deleteCommerceDiscountUserSegmentRel(
-						deleteCommerceDiscountUserSegmentRelId);
+				_commerceDiscountCommerceAccountGroupRelService.
+					deleteCommerceDiscountCommerceAccountGroupRel(
+						deletecommerceDiscountCommerceAccountGroupRelId);
 			}
 		}
 
-		if (addCommerceUserSegmentEntryIds.length > 0) {
+		if (addcommerceAccountGroupIds.length > 0) {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				CommerceDiscountUserSegmentRel.class.getName(), actionRequest);
+				CommerceDiscountCommerceAccountGroupRel.class.getName(),
+				actionRequest);
 
-			for (long addCommerceUserSegmentEntryId :
-					addCommerceUserSegmentEntryIds) {
-
-				_commerceDiscountUserSegmentRelService.
-					addCommerceDiscountUserSegmentRel(
+			for (long addcommerceAccountGroupId : addcommerceAccountGroupIds) {
+				_commerceDiscountCommerceAccountGroupRelService.
+					addCommerceDiscountCommerceAccountGroupRel(
 						commerceDiscount.getCommerceDiscountId(),
-						addCommerceUserSegmentEntryId, serviceContext);
+						addcommerceAccountGroupId, serviceContext);
 			}
 		}
 	}
@@ -298,11 +298,11 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	@Reference
-	private CommerceDiscountService _commerceDiscountService;
+	private CommerceDiscountCommerceAccountGroupRelService
+		_commerceDiscountCommerceAccountGroupRelService;
 
 	@Reference
-	private CommerceDiscountUserSegmentRelService
-		_commerceDiscountUserSegmentRelService;
+	private CommerceDiscountService _commerceDiscountService;
 
 	@Reference
 	private Portal _portal;
