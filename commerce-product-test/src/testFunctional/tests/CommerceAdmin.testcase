@@ -64,10 +64,10 @@ definition {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCatalogRule";
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 
 		ProductMenu.gotoPortlet(
@@ -81,7 +81,7 @@ definition {
 		CommerceEntry.addNewCatalogRule(
 			catalogRuleType = "All Products",
 			entryName = "New Catalog Rule",
-			userSegment = "User Segment"
+			accountGroup = "Account groups"
 		);
 	}
 
@@ -124,10 +124,10 @@ definition {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewDiscount";
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 
 		ProductMenu.gotoPortlet(
@@ -143,7 +143,7 @@ definition {
 			discountTarget = "Apply to Product",
 			entryTitle = "New Discount",
 			maximumDiscountAmount = "10",
-			userSegment = "User Segment"
+			accountGroup = "Account groups"
 		);
 
 		Button.clickPublish();
@@ -187,10 +187,10 @@ definition {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewNotificationTemplate";
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 
 		ProductMenu.gotoPortlet(
@@ -210,7 +210,7 @@ definition {
 			fromAddress = "test@liferay.com",
 			fromName = "Test Test",
 			notificationType = "Order Placed",
-			userSegment = "User Segment"
+			accountGroup = "Account groups"
 		);
 
 		Button.clickSave();
@@ -224,10 +224,10 @@ definition {
 
 		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 
 		ProductMenu.gotoPortlet(
@@ -241,7 +241,7 @@ definition {
 		CommerceEntry.addNewPriceListsEntry(
 			currencyCode = "NCU",
 			entryName = "New Price List",
-			userSegmentName = "User Segment"
+			accountGroupName = "Account groups"
 		);
 
 		Button.clickPublish();
@@ -249,9 +249,9 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
-	test CreateNewUserSegmentByOrganizations {
+	test CreateNewAccountGroupByOrganizations {
 		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByOrganizations";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByOrganizations";
 
 		ProductMenu.gotoPortlet(
 			category = "Users",
@@ -261,28 +261,28 @@ definition {
 
 		Organization.addCP(orgName = "Commerce Organization", orgType = "Organization");
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Organizations",
 			criterionEntryName = "Commerce Organization",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 	}
 
-	test CreateNewUserSegmentByRegularRole {
+	test CreateNewAccountGroupByRegularRole {
 		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByRegularRole";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByRegularRole";
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Roles",
 			criterionEntryName = "User",
-			entryName = "User Segment",
+			entryName = "Account groups",
 			roleType = "Regular Role"
 		);
 	}
 
-	test CreateNewUserSegmentByUserGroups {
+	test CreateNewAccountGroupByUserGroups {
 		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByUserGroups";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUserGroups";
 
 		ProductMenu.gotoPortlet(
 			category = "Users",
@@ -292,21 +292,21 @@ definition {
 
 		UserGroup.addCP(userGroupName = "Commerce UserGroup");
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "User Groups",
 			criterionEntryName = "Commerce UserGroup",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 	}
 
-	test CreateNewUserSegmentByUsers {
+	test CreateNewAccountGroupByUsers {
 		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByUsers";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUsers";
 
-		CommerceEntry.createNewUserSegment(
+		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "User Segment"
+			entryName = "Account groups"
 		);
 	}
 }
