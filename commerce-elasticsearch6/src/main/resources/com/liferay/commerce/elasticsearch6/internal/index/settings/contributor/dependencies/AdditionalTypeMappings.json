@@ -46,7 +46,7 @@
 			"store": true,
 			"type": "keyword"
 		},
-		"commerceUserSegmentEntryIds_required_matches": {
+		"commerceAccountGroupIds_required_matches": {
 			"store": true,
 			"type": "integer"
 		},
