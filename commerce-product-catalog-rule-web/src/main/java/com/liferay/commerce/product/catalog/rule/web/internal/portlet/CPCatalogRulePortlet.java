@@ -21,8 +21,8 @@ import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelService;
 import com.liferay.commerce.product.service.CPRuleService;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -82,7 +82,7 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 			new CPCatalogRuleDisplayContext(
 				_cpRuleAssetCategoryRelService, _cpRuleModelResourcePermission,
 				_cpRuleService, _cpRuleTypeJSPContributorRegistry,
-				_cpRuleTypeRegistry, _cpRuleUserSegmentRelService,
+				_cpRuleTypeRegistry, _cpRuleCommerceAccountGroupRelService,
 				httpServletRequest, _itemSelector, _portletResourcePermission);
 
 		renderRequest.setAttribute(
@@ -93,6 +93,10 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 
 	@Reference
 	private CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
+
+	@Reference
+	private CPRuleCommerceAccountGroupRelService
+		_cpRuleCommerceAccountGroupRelService;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.product.model.CPRule)"
@@ -107,9 +111,6 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 
 	@Reference
 	private CPRuleTypeRegistry _cpRuleTypeRegistry;
-
-	@Reference
-	private CPRuleUserSegmentRelService _cpRuleUserSegmentRelService;
 
 	@Reference
 	private ItemSelector _itemSelector;

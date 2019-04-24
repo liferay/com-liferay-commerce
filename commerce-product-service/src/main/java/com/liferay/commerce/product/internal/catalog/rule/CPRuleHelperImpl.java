@@ -14,18 +14,14 @@
 
 package com.liferay.commerce.product.internal.catalog.rule;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.product.catalog.rule.CPRuleHelper;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -40,48 +36,49 @@ public class CPRuleHelperImpl implements CPRuleHelper {
 	public List<CPRule> initializeCPRules(
 			long userId, long commerceAccountId, long groupId)
 		throws PortalException {
+		/*
+				List<CPRule> cpRules = CPRulesThreadLocal.getCPRules();
 
-		List<CPRule> cpRules = CPRulesThreadLocal.getCPRules();
+				if (cpRules != null) {
+					return cpRules;
+				}
 
-		if (cpRules != null) {
-			return cpRules;
-		}
+				CommerceAccount commerceAccount =
+					_commerceAccountService.getCommerceAccount(commerceAccountId);
 
-		CommerceAccount commerceAccount =
-			_commerceAccountService.getCommerceAccount(commerceAccountId);
+				long[] cpRuleIds = CPRuleCacheUtil.getCommerceAccountGroupCPRuleIds(
+					commerceAccountId, groupId);
 
-		long[] cpRuleIds = CPRuleCacheUtil.getCommerceAccountGroupCPRuleIds(
-			commerceAccountId, groupId);
+				if (cpRuleIds != null) {
+					cpRules = _getCPRules(cpRuleIds);
 
-		if (cpRuleIds != null) {
-			cpRules = _getCPRules(cpRuleIds);
+					CPRulesThreadLocal.setCPRules(cpRules);
 
-			CPRulesThreadLocal.setCPRules(cpRules);
+					return cpRules;
+				}
 
-			return cpRules;
-		}
+				long[] commerceAccountGroupIds =
+					_commerceAccountGroupHelper.getCommerceAccountGroupIds(
+						groupId, commerceAccount.getCommerceAccountId(), userId);
 
-		long[] commerceUserSegmentEntryIds =
-			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				groupId, commerceAccount.getCommerceAccountId(), userId);
+				cpRules = _cpRuleLocalService.getCPRules(
+					groupId, commerceAccountGroupIds);
 
-		cpRules = _cpRuleLocalService.getCPRules(
-			groupId, commerceUserSegmentEntryIds);
+				Stream<CPRule> stream = cpRules.stream();
 
-		Stream<CPRule> stream = cpRules.stream();
+				cpRuleIds = stream.mapToLong(
+					CPRule::getCPRuleId
+				).toArray();
 
-		cpRuleIds = stream.mapToLong(
-			CPRule::getCPRuleId
-		).toArray();
+				CPRuleCacheUtil.putCommerceAccountGroupCPRuleIds(
+					commerceAccountId, groupId, cpRuleIds);
 
-		CPRuleCacheUtil.putCommerceAccountGroupCPRuleIds(
-			commerceAccountId, groupId, cpRuleIds);
+				cpRules = _getCPRules(cpRuleIds);
 
-		cpRules = _getCPRules(cpRuleIds);
+				CPRulesThreadLocal.setCPRules(cpRules);
+		*/
 
-		CPRulesThreadLocal.setCPRules(cpRules);
-
-		return cpRules;
+		return new ArrayList<>();
 	}
 
 	@Deactivate
@@ -101,9 +98,6 @@ public class CPRuleHelperImpl implements CPRuleHelper {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
-
-	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
 
 	@Reference
 	private CPRuleLocalService _cpRuleLocalService;

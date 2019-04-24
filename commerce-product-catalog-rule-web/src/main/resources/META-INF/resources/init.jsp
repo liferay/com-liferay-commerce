@@ -25,17 +25,17 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.product.catalog.rule.CPRuleType" %><%@
+<%@ page import="com.liferay.commerce.account.model.CommerceAccountGroup" %><%@
+page import="com.liferay.commerce.product.catalog.rule.CPRuleType" %><%@
 page import="com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor" %><%@
 page import="com.liferay.commerce.product.catalog.rule.web.internal.display.context.CPCatalogRuleDisplayContext" %><%@
 page import="com.liferay.commerce.product.catalog.rule.web.internal.servlet.taglib.ui.CPRuleScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.product.constants.CPActionKeys" %><%@
 page import="com.liferay.commerce.product.exception.CPRuleTypeException" %><%@
+page import="com.liferay.commerce.product.exception.NoSuchCPRuleCommerceAccountGroupRelException" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCPRuleException" %><%@
-page import="com.liferay.commerce.product.exception.NoSuchCPRuleUserSegmentRelException" %><%@
 page import="com.liferay.commerce.product.model.CPRule" %><%@
-page import="com.liferay.commerce.product.model.CPRuleUserSegmentRel" %><%@
-page import="com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry" %><%@
+page import="com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@

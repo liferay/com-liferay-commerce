@@ -17,9 +17,9 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
-import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
+import com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalServiceUtil;
-import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalServiceUtil;
+import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalServiceUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
@@ -41,9 +41,11 @@ public class CPRuleImpl extends CPRuleBaseImpl {
 	}
 
 	@Override
-	public List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels() {
-		return CPRuleUserSegmentRelLocalServiceUtil.getCPRuleUserSegmentRels(
-			getCPRuleId());
+	public List<CPRuleCommerceAccountGroupRel>
+		getCPRuleCommerceAccountGroupRels() {
+
+		return CPRuleCommerceAccountGroupRelLocalServiceUtil.
+			getCPRuleCommerceAccountGroupRels(getCPRuleId());
 	}
 
 	@Override
