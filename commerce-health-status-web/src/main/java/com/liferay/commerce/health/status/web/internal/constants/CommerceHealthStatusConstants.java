@@ -80,13 +80,6 @@ public class CommerceHealthStatusConstants {
 	public static final String MEASUREMENT_UNITS_COMMERCE_HEALTH_STATUS_KEY =
 		"measurement.units.commerce.health.status.key";
 
-	public static final String
-		USER_SEGMENTS_COMMERCE_HEALTH_STATUS_DESCRIPTION =
-			"user.segments.commerce.health.status.description";
-
-	public static final String USER_SEGMENTS_COMMERCE_HEALTH_STATUS_KEY =
-		"user.segments.commerce.health.status.key";
-
 	public static final String WAREHOUSES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
 		"warehouses.commerce.health.status.description";
 
