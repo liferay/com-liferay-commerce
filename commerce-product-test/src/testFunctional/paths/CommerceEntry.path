@@ -305,7 +305,7 @@
 </tr>
 <tr>
 	<td>BREADCRUMBS</td>
-	<td>//div/ul[contains (@class,'breadcrumb-horizontal')]//li/a[contains (.,'${key_breadcrumb}')]</td>
+	<td>//div//ul[contains (@class,'breadcrumb-horizontal')]//li/a[contains (.,'${key_breadcrumb}')]</td>
 	<td></td>
 </tr>
 <tr>
