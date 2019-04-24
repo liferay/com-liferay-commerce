@@ -14,14 +14,14 @@
 
 package com.liferay.commerce.notification.web.internal.portlet.action;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.notification.constants.CommerceNotificationConstants;
 import com.liferay.commerce.notification.exception.NoSuchNotificationTemplateException;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
-import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationTemplatesDisplayContext;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
@@ -75,9 +75,9 @@ public class EditCommerceNotificationTemplateMVCRenderCommand
 				commerceNotificationTemplatesDisplayContext =
 					new CommerceNotificationTemplatesDisplayContext(
 						_commerceNotificationTemplateService,
-						_commerceNotificationTemplateUserSegmentRelService,
+						_commerceNotificationTemplateCommerceAccountGroupRelService,
 						_commerceNotificationTypeRegistry,
-						_commerceUserSegmentEntryService, httpServletRequest,
+						_commerceAccountGroupService, httpServletRequest,
 						_itemSelector, _portletResourcePermission);
 
 			renderRequest.setAttribute(
@@ -103,18 +103,18 @@ public class EditCommerceNotificationTemplateMVCRenderCommand
 	}
 
 	@Reference
+	private CommerceAccountGroupService _commerceAccountGroupService;
+
+	@Reference
+	private CommerceNotificationTemplateCommerceAccountGroupRelService
+		_commerceNotificationTemplateCommerceAccountGroupRelService;
+
+	@Reference
 	private CommerceNotificationTemplateService
 		_commerceNotificationTemplateService;
 
 	@Reference
-	private CommerceNotificationTemplateUserSegmentRelService
-		_commerceNotificationTemplateUserSegmentRelService;
-
-	@Reference
 	private CommerceNotificationTypeRegistry _commerceNotificationTypeRegistry;
-
-	@Reference
-	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
 
 	@Reference
 	private ItemSelector _itemSelector;

@@ -20,9 +20,9 @@ import com.liferay.commerce.notification.exception.CommerceNotificationTemplateN
 import com.liferay.commerce.notification.exception.CommerceNotificationTemplateTypeException;
 import com.liferay.commerce.notification.exception.NoSuchNotificationTemplateException;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
+import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
-import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -174,69 +174,73 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 		}
 
 		if (commerceNotificationTemplate != null) {
-			updateCommercePriceListUserSegmentEntryRels(
+			updateCommercePriceListCommerceAccountGroupRels(
 				actionRequest, commerceNotificationTemplate);
 		}
 
 		return commerceNotificationTemplate;
 	}
 
-	protected void updateCommercePriceListUserSegmentEntryRels(
+	protected void updateCommercePriceListCommerceAccountGroupRels(
 			ActionRequest actionRequest,
 			CommerceNotificationTemplate commerceNotificationTemplate)
 		throws PortalException {
 
-		long[] addCommerceUserSegmentEntryIds = ParamUtil.getLongValues(
-			actionRequest, "addCommerceUserSegmentEntryIds");
+		long[] addcommerceAccountGroupIds = ParamUtil.getLongValues(
+			actionRequest, "addcommerceAccountGroupIds");
 
-		long[] deleteCommerceNotificationTemplateUserSegmentRelIds =
+		long[] deleteCommerceNotificationTemplateCommerceAccountGroupRelIds =
 			ParamUtil.getLongValues(
 				actionRequest,
-				"deleteCommerceNotificationTemplateUserSegmentRelIds");
+				"deleteCommerceNotificationTemplateCommerceAccountGroupRelIds");
 
-		if (deleteCommerceNotificationTemplateUserSegmentRelIds.length > 0) {
-			for (long deleteCommerceNotificationTemplateUserSegmentRelId :
-					deleteCommerceNotificationTemplateUserSegmentRelIds) {
+		if (deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.
+				length > 0) {
 
-				_commerceNotificationTemplateUserSegmentRelService.
-					deleteCommerceNotificationTemplateUserSegmentRel(
-						deleteCommerceNotificationTemplateUserSegmentRelId);
+			for (long
+					deleteCommerceNotificationTemplateCommerceAccountGroupRelId :
+						deleteCommerceNotificationTemplateCommerceAccountGroupRelIds) {
+
+				_commerceNotificationTemplateCommerceAccountGroupRelService.
+					deleteCommerceNotificationTemplateCommerceAccountGroupRel(
+						deleteCommerceNotificationTemplateCommerceAccountGroupRelId);
 			}
 		}
 
-		if (addCommerceUserSegmentEntryIds.length > 0) {
+		if (addcommerceAccountGroupIds.length > 0) {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				CommerceNotificationTemplateUserSegmentRel.class.getName(),
+				CommerceNotificationTemplateCommerceAccountGroupRel.class.
+					getName(),
 				actionRequest);
 
-			for (long addCommerceUserSegmentEntryId :
-					addCommerceUserSegmentEntryIds) {
-
-				CommerceNotificationTemplateUserSegmentRel
-					commerceNotificationTemplateUserSegmentRel =
-						_commerceNotificationTemplateUserSegmentRelService.
-							fetchCommerceNotificationTemplateUserSegmentRel(
+			for (long addcommerceAccountGroupId : addcommerceAccountGroupIds) {
+				CommerceNotificationTemplateCommerceAccountGroupRel
+					commerceNotificationTemplateCommerceAccountGroupRel =
+						_commerceNotificationTemplateCommerceAccountGroupRelService.
+							fetchCommerceNotificationTemplateCommerceAccountGroupRel(
 								commerceNotificationTemplate.
 									getCommerceNotificationTemplateId(),
-								addCommerceUserSegmentEntryId);
+								addcommerceAccountGroupId);
 
-				if (commerceNotificationTemplateUserSegmentRel == null) {
-					_commerceNotificationTemplateUserSegmentRelService.
-						addCommerceNotificationTemplateUserSegmentRel(
+				if (commerceNotificationTemplateCommerceAccountGroupRel ==
+						null) {
+
+					_commerceNotificationTemplateCommerceAccountGroupRelService.
+						addCommerceNotificationTemplateCommerceAccountGroupRel(
 							commerceNotificationTemplate.
 								getCommerceNotificationTemplateId(),
-							addCommerceUserSegmentEntryId, serviceContext);
+							addcommerceAccountGroupId, serviceContext);
 				}
 			}
 		}
 	}
 
 	@Reference
-	private CommerceNotificationTemplateService
-		_commerceNotificationTemplateService;
+	private CommerceNotificationTemplateCommerceAccountGroupRelService
+		_commerceNotificationTemplateCommerceAccountGroupRelService;
 
 	@Reference
-	private CommerceNotificationTemplateUserSegmentRelService
-		_commerceNotificationTemplateUserSegmentRelService;
+	private CommerceNotificationTemplateService
+		_commerceNotificationTemplateService;
 
 }

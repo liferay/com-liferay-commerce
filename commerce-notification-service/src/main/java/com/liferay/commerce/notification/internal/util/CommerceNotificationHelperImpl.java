@@ -14,20 +14,18 @@
 
 package com.liferay.commerce.notification.internal.util;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
+import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService;
-import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -75,27 +73,27 @@ public class CommerceNotificationHelperImpl
 		for (CommerceNotificationTemplate commerceNotificationTemplate :
 				commerceNotificationTemplates) {
 
-			List<CommerceNotificationTemplateUserSegmentRel>
-				commerceNotificationTemplateUserSegmentRels =
-					_commerceNotificationTemplateUserSegmentRelLocalService.
-						getCommerceNotificationTemplateUserSegmentRels(
+			List<CommerceNotificationTemplateCommerceAccountGroupRel>
+				commerceNotificationTemplateCommerceAccountGroupRels =
+					_commerceNotificationTemplateCommerceAccountGroupRelLocalService.
+						getCommerceNotificationTemplateCommerceAccountGroupRels(
 							commerceNotificationTemplate.
 								getCommerceNotificationTemplateId(),
 							QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-			long[] commerceUserSegmentEntryIds = ListUtil.toLongArray(
-				commerceNotificationTemplateUserSegmentRels,
-				CommerceNotificationTemplateUserSegmentRel.
-					COMMERCE_USER_SEGMENT_ENTRY_ID_ACCESSOR);
+			long[] commerceAccountGroupIds = ListUtil.toLongArray(
+				commerceNotificationTemplateCommerceAccountGroupRels,
+				CommerceNotificationTemplateCommerceAccountGroupRel.
+					COMMERCE_ACCOUNT_GROUP_ID_ACCESSOR);
 
 			if (ArrayUtil.isEmpty(userIds)) {
-				sendNotificationsToUserSegmentUsers(
-					commerceUserSegmentEntryIds, commerceNotificationTemplate,
+				sendNotificationsToAccountGroupUsers(
+					commerceAccountGroupIds, commerceNotificationTemplate,
 					commerceNotificationType, object);
 			}
 			else {
 				sendNotificationsToUserIds(
-					userIds, commerceUserSegmentEntryIds,
+					userIds, commerceAccountGroupIds,
 					commerceNotificationTemplate, commerceNotificationType,
 					object);
 			}
@@ -184,46 +182,47 @@ public class CommerceNotificationHelperImpl
 				commerceNotificationTemplate.getBcc(), subject, body, 0);
 	}
 
-	protected void sendNotificationsToUserIds(
-			long[] userIds, long[] commerceUserSegmentEntryIds,
+	protected void sendNotificationsToAccountGroupUsers(
+			long[] commerceAccountGroupIds,
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
 
-		for (long userId : userIds) {
-			long[] userCommerceUserSegmentEntryIds =
-				_commerceUserSegmentEntryLocalService.
-					getCommerceUserSegmentEntryIds(
-						commerceNotificationTemplate.getGroupId(),
-						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-						userId);
-
-			if (ArrayUtil.containsAll(
-					userCommerceUserSegmentEntryIds,
-					commerceUserSegmentEntryIds)) {
-
-				sendNotification(
-					commerceNotificationTemplate, commerceNotificationType,
-					object, userId);
-			}
-		}
-	}
-
-	protected void sendNotificationsToUserSegmentUsers(
-			long[] commerceUserSegmentEntryIds,
-			CommerceNotificationTemplate commerceNotificationTemplate,
-			CommerceNotificationType commerceNotificationType, Object object)
-		throws PortalException {
-
-		long[] userIds = _commerceUserSegmentHelper.getUserIds(
+		/*long[] userIds = _commerceAccountGroupHelper.getUserIds(
 			commerceNotificationTemplate.getGroupId(),
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			commerceUserSegmentEntryIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			commerceAccountGroupIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (long userId : userIds) {
 			sendNotification(
 				commerceNotificationTemplate, commerceNotificationType, object,
 				userId);
+		}*/
+	}
+
+	protected void sendNotificationsToUserIds(
+			long[] userIds, long[] commerceAccountGroupIds,
+			CommerceNotificationTemplate commerceNotificationTemplate,
+			CommerceNotificationType commerceNotificationType, Object object)
+		throws PortalException {
+
+		for (long userId : userIds) {
+
+			/*long[] usercommerceAccountGroupIds =
+				_commerceAccountGroupLocalService.
+					getCommerceAccountGroupIds(
+						commerceNotificationTemplate.getGroupId(),
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+						userId);
+
+			if (ArrayUtil.containsAll(
+					usercommerceAccountGroupIds,
+					commerceAccountGroupIds)) {
+
+				sendNotification(
+					commerceNotificationTemplate, commerceNotificationType,
+					object, userId);
+			}*/
 		}
 	}
 
@@ -231,26 +230,22 @@ public class CommerceNotificationHelperImpl
 		"\\[%[^\\[%]+%\\]", Pattern.CASE_INSENSITIVE);
 
 	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
 	private CommerceNotificationQueueEntryLocalService
 		_commerceNotificationQueueEntryLocalService;
+
+	@Reference
+	private CommerceNotificationTemplateCommerceAccountGroupRelLocalService
+		_commerceNotificationTemplateCommerceAccountGroupRelLocalService;
 
 	@Reference
 	private CommerceNotificationTemplateLocalService
 		_commerceNotificationTemplateLocalService;
 
 	@Reference
-	private CommerceNotificationTemplateUserSegmentRelLocalService
-		_commerceNotificationTemplateUserSegmentRelLocalService;
-
-	@Reference
 	private CommerceNotificationTypeRegistry _commerceNotificationTypeRegistry;
-
-	@Reference
-	private CommerceUserSegmentEntryLocalService
-		_commerceUserSegmentEntryLocalService;
-
-	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
 
 	@Reference
 	private Portal _portal;
