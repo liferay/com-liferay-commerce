@@ -23,7 +23,6 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -43,8 +42,8 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 		return new CommerceContextHttpImpl(
 			httpServletRequest, _commerceAccountHelper,
 			_commerceCurrencyLocalService, _commerceOrderHttpHelper,
-			_commercePriceListLocalService, _commerceUserSegmentHelper,
-			_configurationProvider, _cpRuleLocalService, _portal);
+			_commercePriceListLocalService, _configurationProvider,
+			_cpRuleLocalService, _portal);
 	}
 
 	@Override
@@ -55,8 +54,7 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 			groupId, userId, orderId, commerceAccountId,
 			_commerceAccountService, _commerceCurrencyLocalService,
 			_commerceOrderService, _commercePriceListLocalService,
-			_commerceUserSegmentHelper, _configurationProvider,
-			_cpRuleLocalService);
+			_configurationProvider, _cpRuleLocalService);
 	}
 
 	@Reference
@@ -76,9 +74,6 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;
-
-	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

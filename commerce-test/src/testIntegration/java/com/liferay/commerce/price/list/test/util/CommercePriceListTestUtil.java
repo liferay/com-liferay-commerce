@@ -14,14 +14,12 @@
 
 package com.liferay.commerce.price.list.test.util;
 
+import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelServiceUtil;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
-import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelServiceUtil;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalServiceUtil;
-import com.liferay.commerce.user.segment.test.util.CommerceUserSegmentTestUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -73,17 +71,17 @@ public class CommercePriceListTestUtil {
 
 		long groupId = commercePriceList.getGroupId();
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addOrganizationCommerceUserSegmentEntry(
-				groupId, organizationIds);
+		CommerceAccountGroup commerceAccountGroup = null;
+		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
+			groupId, organizationIds);*/
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		CommercePriceListUserSegmentEntryRelServiceUtil.
-			addCommercePriceListUserSegmentEntryRel(
+		CommercePriceListCommerceAccountGroupRelServiceUtil.
+			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
 				RandomTestUtil.randomInt(), serviceContext);
 	}
 
@@ -93,17 +91,17 @@ public class CommercePriceListTestUtil {
 
 		long groupId = commercePriceList.getGroupId();
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addRoleCommerceUserSegmentEntry(
-				groupId, roleIds);
+		CommerceAccountGroup commerceAccountGroup = null;
+		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
+			groupId, organizationIds);*/
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		CommercePriceListUserSegmentEntryRelServiceUtil.
-			addCommercePriceListUserSegmentEntryRel(
+		CommercePriceListCommerceAccountGroupRelServiceUtil.
+			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
 				RandomTestUtil.randomInt(), serviceContext);
 	}
 
@@ -114,17 +112,17 @@ public class CommercePriceListTestUtil {
 		CommercePriceList commercePriceList = addCommercePriceList(
 			groupId, priority);
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			CommerceUserSegmentTestUtil.addUserCommerceUserSegmentEntry(
-				groupId, userId);
+		CommerceAccountGroup commerceAccountGroup = null;
+		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
+			groupId, organizationIds);*/
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		CommercePriceListUserSegmentEntryRelServiceUtil.
-			addCommercePriceListUserSegmentEntryRel(
+		CommercePriceListCommerceAccountGroupRelServiceUtil.
+			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
-				commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
 				RandomTestUtil.randomInt(), serviceContext);
 
 		return commercePriceList;
@@ -134,13 +132,13 @@ public class CommercePriceListTestUtil {
 			long groupId, long commerceAccountId, long userId)
 		throws Exception {
 
-		long[] commerceUserSegmentEntryIds =
-			CommerceUserSegmentEntryLocalServiceUtil.
-				getCommerceUserSegmentEntryIds(
-					groupId, commerceAccountId, userId);
+		long[] commerceAccountGroupIds = null;
+		/*CommerceAccountGroupLocalServiceUtil.
+			getCommerceAccountGroupIds(
+				groupId, commerceAccountId, userId);*/
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			groupId, commerceAccountId, commerceUserSegmentEntryIds);
+			groupId, commerceAccountId, commerceAccountGroupIds);
 	}
 
 }
