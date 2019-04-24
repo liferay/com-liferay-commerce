@@ -15,9 +15,9 @@
 package com.liferay.commerce.product.catalog.rule.web.internal.util;
 
 import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
+import com.liferay.commerce.product.model.CPRuleCommerceAccountGroupRel;
+import com.liferay.commerce.product.util.comparator.CPRuleCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.commerce.product.util.comparator.CPRuleCreateDateComparator;
-import com.liferay.commerce.product.util.comparator.CPRuleUserSegmentRelCreateDateComparator;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
@@ -27,6 +27,28 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  * @author Alessio Antonio Rendina
  */
 public class CPCatalogRulePortletUtil {
+
+	public static OrderByComparator<CPRuleCommerceAccountGroupRel>
+		getCPRuleCommerceAccountGroupRelOrderByComparator(
+			String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator<CPRuleCommerceAccountGroupRel> orderByComparator =
+			null;
+
+		if (orderByCol.equals("create-date")) {
+			orderByComparator =
+				new CPRuleCommerceAccountGroupRelCreateDateComparator(
+					orderByAsc);
+		}
+
+		return orderByComparator;
+	}
 
 	public static OrderByComparator<CPRule> getCPRuleOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -61,26 +83,6 @@ public class CPCatalogRulePortletUtil {
 		}
 
 		return sort;
-	}
-
-	public static OrderByComparator<CPRuleUserSegmentRel>
-		getCPRuleUserSegmentRelOrderByComparator(
-			String orderByCol, String orderByType) {
-
-		boolean orderByAsc = false;
-
-		if (orderByType.equals("asc")) {
-			orderByAsc = true;
-		}
-
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator = null;
-
-		if (orderByCol.equals("create-date")) {
-			orderByComparator = new CPRuleUserSegmentRelCreateDateComparator(
-				orderByAsc);
-		}
-
-		return orderByComparator;
 	}
 
 }

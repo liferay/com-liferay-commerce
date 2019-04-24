@@ -18,7 +18,7 @@
 
 <liferay-ui:error-header />
 
+<liferay-ui:error exception="<%= NoSuchCPRuleCommerceAccountGroupRelException.class %>" message="the-account-group-catalog-rule-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchCPRuleException.class %>" message="the-catalog-rule-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchCPRuleUserSegmentRelException.class %>" message="the-user-segment-catalog-rule-could-not-be-found" />
 
 <liferay-ui:error-principal />

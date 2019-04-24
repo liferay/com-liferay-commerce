@@ -135,10 +135,11 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cpRuleAssetCategoryRelLocalService.
 			deleteCPRuleAssetCategoryRelsByCPRuleId(cpRule.getCPRuleId());
 
-		// Commerce product rule user segment rels
+		// Commerce product rule account groups rels
 
-		cpRuleUserSegmentRelLocalService.deleteCPRuleUserSegmentRelsByCPRuleId(
-			cpRule.getCPRuleId());
+		cpRuleCommerceAccountGroupRelLocalService.
+			deleteCPRuleCommerceAccountGroupRelsByCPRuleId(
+				cpRule.getCPRuleId());
 
 		// Commerce product rule
 
@@ -186,13 +187,12 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 	}
 
 	@Override
-	public List<CPRule> getCPRules(
-			long groupId, long[] commerceUserSegmentEntryIds)
+	public List<CPRule> getCPRules(long groupId, long[] commerceAccountGroupIds)
 		throws PortalException {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		String cacheKey = StringUtil.merge(commerceUserSegmentEntryIds);
+		String cacheKey = StringUtil.merge(commerceAccountGroupIds);
 
 		PortalCache<String, Serializable> portalCache =
 			MultiVMPoolUtil.getPortalCache("CP_RULES_" + groupId);
@@ -210,7 +210,7 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cpRules = new ArrayList<>();
 
 		SearchContext searchContext = buildSearchContext(
-			group.getCompanyId(), groupId, commerceUserSegmentEntryIds);
+			group.getCompanyId(), groupId, commerceAccountGroupIds);
 
 		Indexer<CPRule> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			CPRule.class);
@@ -315,7 +315,7 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, long[] commerceUserSegmentEntryIds) {
+		long companyId, long groupId, long[] commerceAccountGroupIds) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -323,8 +323,7 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 
 		attributes.put("active", true);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-		attributes.put(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
+		attributes.put("commerceAccountGroupIds", commerceAccountGroupIds);
 
 		searchContext.setAttributes(attributes);
 
