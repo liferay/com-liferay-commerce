@@ -244,10 +244,10 @@ public class CommercePriceListLocalServiceImpl
 			deleteCommercePriceListAccountRels(
 				commercePriceList.getCommercePriceListId());
 
-		// Commerce price list user segment entry rels
+		// Commerce price list commerce account group rels
 
-		commercePriceListUserSegmentEntryRelLocalService.
-			deleteCommercePriceListUserSegmentEntryRels(
+		commercePriceListCommerceAccountGroupRelLocalService.
+			deleteCommercePriceListCommerceAccountGroupRels(
 				commercePriceList.getCommercePriceListId());
 
 		// Commerce price list
@@ -305,14 +305,14 @@ public class CommercePriceListLocalServiceImpl
 	@Override
 	public Optional<CommercePriceList> getCommercePriceList(
 			long groupId, long commerceAccountId,
-			long[] commerceUserSegmentEntryIds)
+			long[] commerceAccountGroupIds)
 		throws PortalException {
 
 		Group group = groupLocalService.getGroup(groupId);
 
 		String cacheKey =
 			commerceAccountId + StringPool.POUND +
-				StringUtil.merge(commerceUserSegmentEntryIds);
+				StringUtil.merge(commerceAccountGroupIds);
 
 		PortalCache<String, Serializable> portalCache =
 			MultiVMPoolUtil.getPortalCache("PRICE_LISTS_" + groupId);
@@ -329,7 +329,7 @@ public class CommercePriceListLocalServiceImpl
 
 		SearchContext searchContext = buildSearchContext(
 			group.getCompanyId(), groupId, commerceAccountId,
-			commerceUserSegmentEntryIds);
+			commerceAccountGroupIds);
 
 		Indexer<CommercePriceList> indexer =
 			IndexerRegistryUtil.nullSafeGetIndexer(CommercePriceList.class);
@@ -694,16 +694,15 @@ public class CommercePriceListLocalServiceImpl
 
 	protected SearchContext buildSearchContext(
 		long companyId, long groupId, long commerceAccountId,
-		long[] commerceUserSegmentEntryIds) {
+		long[] commerceAccountGroupIds) {
 
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+		attributes.put("commerceAccountGroupIds", commerceAccountGroupIds);
 		attributes.put("commerceAccountId", commerceAccountId);
-		attributes.put(
-			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
 
 		searchContext.setAttributes(attributes);
 

@@ -14,8 +14,11 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountGroupItemSelectorCriterion;
 import com.liferay.commerce.account.item.selector.criterion.CommerceAccountItemSelectorCriterion;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
@@ -24,17 +27,14 @@ import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelecto
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
-import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
+import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
+import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
-import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
 import com.liferay.commerce.price.list.util.comparator.CommercePriceListPriorityComparator;
 import com.liferay.commerce.price.list.web.display.context.BaseCommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
-import com.liferay.commerce.user.segment.item.selector.criterion.CommerceUserSegmentEntryItemSelectorCriterion;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.Base64ItemSelectorReturnType;
@@ -73,10 +73,10 @@ public class CommercePriceListDisplayContext
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceAccountService commerceAccountService,
 		CommerceCurrencyService commerceCurrencyService,
-		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
+		CommerceAccountGroupService commerceAccountGroupService,
 		CommercePriceListAccountRelService commercePriceListAccountRelService,
-		CommercePriceListUserSegmentEntryRelService
-			commercePriceListUserSegmentEntryRelService,
+		CommercePriceListCommerceAccountGroupRelService
+			commercePriceListCommerceAccountGroupRelService,
 		CommercePriceListService commercePriceListService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
@@ -85,11 +85,11 @@ public class CommercePriceListDisplayContext
 
 		_commerceAccountService = commerceAccountService;
 		_commerceCurrencyService = commerceCurrencyService;
-		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_commerceAccountGroupService = commerceAccountGroupService;
 		_commercePriceListAccountRelService =
 			commercePriceListAccountRelService;
-		_commercePriceListUserSegmentEntryRelService =
-			commercePriceListUserSegmentEntryRelService;
+		_commercePriceListCommerceAccountGroupRelService =
+			commercePriceListCommerceAccountGroupRelService;
 		_commercePriceListService = commercePriceListService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
@@ -102,6 +102,40 @@ public class CommercePriceListDisplayContext
 		throws PortalException {
 
 		return _commerceAccountService.getCommerceAccount(commerceAccountId);
+	}
+
+	public CommerceAccountGroup getCommerceAccountGroup(
+			long commerceAccountGroupId)
+		throws PortalException {
+
+		return _commerceAccountGroupService.getCommerceAccountGroup(
+			commerceAccountGroupId);
+	}
+
+	public String getCommerceAccountGroupSelectorUrl() throws PortalException {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
+
+		CommerceAccountGroupItemSelectorCriterion
+			commerceAccountGroupItemSelectorCriterion =
+				new CommerceAccountGroupItemSelectorCriterion();
+
+		commerceAccountGroupItemSelectorCriterion.
+			setDesiredItemSelectorReturnTypes(
+				Collections.<ItemSelectorReturnType>singletonList(
+					new UUIDItemSelectorReturnType()));
+
+		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, "accountGroupsSelectItem",
+			commerceAccountGroupItemSelectorCriterion);
+
+		String checkedcommerceAccountGroupIds = StringUtil.merge(
+			getCheckedcommerceAccountGroupIds());
+
+		itemSelectorURL.setParameter(
+			"checkedcommerceAccountGroupIds", checkedcommerceAccountGroupIds);
+
+		return itemSelectorURL.toString();
 	}
 
 	public String getCommerceAccountSelectorUrl() throws PortalException {
@@ -154,6 +188,20 @@ public class CommercePriceListDisplayContext
 			getCommercePriceListAccountRels(commercePriceListId);
 	}
 
+	public List<CommercePriceListCommerceAccountGroupRel>
+			getCommercePriceListCommerceAccountGroupRels()
+		throws PortalException {
+
+		long commercePriceListId = getCommercePriceListId();
+
+		if (commercePriceListId <= 0) {
+			return Collections.emptyList();
+		}
+
+		return _commercePriceListCommerceAccountGroupRelService.
+			getCommercePriceListCommerceAccountGroupRels(commercePriceListId);
+	}
+
 	public List<CommercePriceList> getCommercePriceLists()
 		throws PortalException {
 
@@ -170,57 +218,6 @@ public class CommercePriceListDisplayContext
 		commercePriceLists.remove(getCommercePriceList());
 
 		return commercePriceLists;
-	}
-
-	public List<CommercePriceListUserSegmentEntryRel>
-			getCommercePriceListUserSegmentEntryRels()
-		throws PortalException {
-
-		long commercePriceListId = getCommercePriceListId();
-
-		if (commercePriceListId <= 0) {
-			return Collections.emptyList();
-		}
-
-		return _commercePriceListUserSegmentEntryRelService.
-			getCommercePriceListUserSegmentEntryRels(commercePriceListId);
-	}
-
-	public CommerceUserSegmentEntry getCommerceUserSegmentEntry(
-			long commerceUserSegmentEntryId)
-		throws PortalException {
-
-		return _commerceUserSegmentEntryService.getCommerceUserSegmentEntry(
-			commerceUserSegmentEntryId);
-	}
-
-	public String getCommerceUserSegmentEntrySelectorUrl()
-		throws PortalException {
-
-		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
-
-		CommerceUserSegmentEntryItemSelectorCriterion
-			commerceUserSegmentEntryItemSelectorCriterion =
-				new CommerceUserSegmentEntryItemSelectorCriterion();
-
-		commerceUserSegmentEntryItemSelectorCriterion.
-			setDesiredItemSelectorReturnTypes(
-				Collections.<ItemSelectorReturnType>singletonList(
-					new UUIDItemSelectorReturnType()));
-
-		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBackedPortletURLFactory, "userSegmentsSelectItem",
-			commerceUserSegmentEntryItemSelectorCriterion);
-
-		String checkedCommerceUserSegmentEntryIds = StringUtil.merge(
-			getCheckedCommerceUserSegmentEntryIds());
-
-		itemSelectorURL.setParameter(
-			"checkedCommerceUserSegmentEntryIds",
-			checkedCommerceUserSegmentEntryIds);
-
-		return itemSelectorURL.toString();
 	}
 
 	public CommercePriceList getParentCommercePriceList()
@@ -353,6 +350,25 @@ public class CommercePriceListDisplayContext
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
+	protected long[] getCheckedcommerceAccountGroupIds()
+		throws PortalException {
+
+		List<CommercePriceListCommerceAccountGroupRel>
+			commercePriceListCommerceAccountGroupRels =
+				getCommercePriceListCommerceAccountGroupRels();
+
+		if (commercePriceListCommerceAccountGroupRels.isEmpty()) {
+			return new long[0];
+		}
+
+		Stream<CommercePriceListCommerceAccountGroupRel> stream =
+			commercePriceListCommerceAccountGroupRels.stream();
+
+		return stream.mapToLong(
+			CommercePriceListCommerceAccountGroupRel::getCommerceAccountGroupId
+		).toArray();
+	}
+
 	protected long[] getCheckedCommerceAccountIds() throws PortalException {
 		List<CommercePriceListAccountRel> commercePriceListAccountRels =
 			getCommercePriceListAccountRels();
@@ -369,34 +385,14 @@ public class CommercePriceListDisplayContext
 		).toArray();
 	}
 
-	protected long[] getCheckedCommerceUserSegmentEntryIds()
-		throws PortalException {
-
-		List<CommercePriceListUserSegmentEntryRel>
-			commercePriceListUserSegmentEntryRels =
-				getCommercePriceListUserSegmentEntryRels();
-
-		if (commercePriceListUserSegmentEntryRels.isEmpty()) {
-			return new long[0];
-		}
-
-		Stream<CommercePriceListUserSegmentEntryRel> stream =
-			commercePriceListUserSegmentEntryRels.stream();
-
-		return stream.mapToLong(
-			CommercePriceListUserSegmentEntryRel::getCommerceUserSegmentEntryId
-		).toArray();
-	}
-
+	private final CommerceAccountGroupService _commerceAccountGroupService;
 	private final CommerceAccountService _commerceAccountService;
 	private final CommerceCurrencyService _commerceCurrencyService;
 	private final CommercePriceListAccountRelService
 		_commercePriceListAccountRelService;
+	private final CommercePriceListCommerceAccountGroupRelService
+		_commercePriceListCommerceAccountGroupRelService;
 	private final CommercePriceListService _commercePriceListService;
-	private final CommercePriceListUserSegmentEntryRelService
-		_commercePriceListUserSegmentEntryRelService;
-	private final CommerceUserSegmentEntryService
-		_commerceUserSegmentEntryService;
 	private final ItemSelector _itemSelector;
 	private final PortletResourcePermission _portletResourcePermission;
 	private Integer _status;
