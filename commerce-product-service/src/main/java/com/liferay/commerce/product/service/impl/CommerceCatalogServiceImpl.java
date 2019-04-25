@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.List;
@@ -43,6 +44,18 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 		throws PortalException {
 
 		return commerceCatalogLocalService.deleteCommerceCatalog(
+			commerceCatalogId);
+	}
+
+	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId) {
+		return commerceCatalogLocalService.fetchCommerceCatalog(
+			commerceCatalogId);
+	}
+
+	public Group getCommerceCatalogGroup(long commerceCatalogId)
+		throws PortalException {
+
+		return commerceCatalogLocalService.getCommerceCatalogGroup(
 			commerceCatalogId);
 	}
 
