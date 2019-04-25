@@ -33,6 +33,8 @@ public class CommerceAccountConstants {
 
 	public static final long GUEST_ACCOUNT_ID = -1;
 
+	public static final String ROLE_SUBTYPE_ACCOUNT = "account";
+
 	public static final String SERVICE_NAME = "com.liferay.commerce.account";
 
 	public static final int SITE_TYPE_B2B = 1;
