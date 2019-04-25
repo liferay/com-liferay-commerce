@@ -93,8 +93,9 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 	<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasCommerceAccountModelPermissions(ActionKeys.UPDATE) %>">
 		<commerce-ui:user-roles-modal
-			commerceAccountId="<%= commerceAccount.getCommerceAccountId() %>"
 			componentId="userRolesModal"
+			groupId="<%= commerceAccount.getCommerceAccountGroupId() %>"
+			subtype="<%= CommerceAccountConstants.ROLE_SUBTYPE_ACCOUNT %>"
 			userId="<%= selectedUser.getUserId() %>"
 		/>
 
