@@ -21,7 +21,6 @@ import com.liferay.commerce.product.util.CPNavigationItem;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -50,6 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CommerceCatalogNavigationItem implements CPNavigationItem {
 
+	@Override
 	public NavigationItem getNavigationItem(PortletRequest portletRequest)
 		throws PortalException {
 
@@ -71,17 +71,16 @@ public class CommerceCatalogNavigationItem implements CPNavigationItem {
 		navigationItem.setActive(
 			portletId.equals(CPPortletKeys.COMMERCE_CATALOGS));
 
-		PortletURL portletURL = _portletURLFactory.create(
+		PortletURL portletURL = _portal.getControlPanelPortletURL(
 			portletRequest, CPPortletKeys.COMMERCE_CATALOGS,
 			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
-		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 
 		String commerceCatalogId = ParamUtil.getString(
 			portletRequest, "commerceCatalogId");
 
 		portletURL.setParameter("commerceCatalogId", commerceCatalogId);
+
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
 
 		navigationItem.setHref(portletURL.toString());
 
@@ -98,8 +97,5 @@ public class CommerceCatalogNavigationItem implements CPNavigationItem {
 
 	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;
-
-	@Reference
-	private PortletURLFactory _portletURLFactory;
 
 }
