@@ -1,0 +1,60 @@
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<%
+renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
+
+long commerceCatalogId = ParamUtil.getLong(request, "commerceCatalogId");
+%>
+
+<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogDetailsURL">
+	<portlet:param name="catalogNavigationItem" value="view-details" />
+	<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceCatalog" />
+</liferay-portlet:renderURL>
+
+<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogUsersURL">
+	<portlet:param name="catalogNavigationItem" value="view-all-users" />
+	<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceCatalogUsers" />
+</liferay-portlet:renderURL>
+
+<%
+NavigationItem catalogDetailsNavigationItem = new NavigationItem();
+
+catalogDetailsNavigationItem.setActive(catalogNavigationItem.equals("view-details"));
+catalogDetailsNavigationItem.setHref(viewCatalogDetailsURL.toString());
+catalogDetailsNavigationItem.setLabel(LanguageUtil.get(request, "details"));
+
+NavigationItem catalogUsersNavigationItem = new NavigationItem();
+
+catalogUsersNavigationItem.setActive(catalogNavigationItem.equals("view-all-users"));
+catalogUsersNavigationItem.setHref(viewCatalogUsersURL.toString());
+catalogUsersNavigationItem.setLabel(LanguageUtil.get(request, "users"));
+
+List<NavigationItem> catalogSubNavigationItems = Arrays.asList(catalogDetailsNavigationItem, catalogUsersNavigationItem);
+%>
+
+<c:if test="<%= commerceCatalogId != 0 %>">
+	<clay:navigation-bar
+		inverted="<%= true %>"
+		navigationItems="<%= CPNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"
+	/>
+
+	<clay:navigation-bar
+		navigationItems="<%= catalogSubNavigationItems %>"
+	/>
+</c:if>

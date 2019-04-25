@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.catalog.web.internal.portlet.action;
 
-import com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext;
+import com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogUsersDisplayContext;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -22,6 +22,7 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -42,11 +43,12 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CATALOGS,
-		"mvc.command.name=editCommerceCatalog"
+		"mvc.command.name=editCommerceCatalogUsers"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
+public class EditCommerceCatalogUsersMVCRenderCommand
+	implements MVCRenderCommand {
 
 	@Override
 	public String render(
@@ -57,13 +59,16 @@ public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
 
-			CommerceCatalogDisplayContext commerceCatalogDisplayContext =
-				new CommerceCatalogDisplayContext(
-					httpServletRequest, _commerceCatalogService, _itemSelector,
-					_portal, _portletResourcePermission);
+			CommerceCatalogUsersDisplayContext
+				commerceCatalogUsersDisplayContext =
+					new CommerceCatalogUsersDisplayContext(
+						httpServletRequest, _commerceCatalogService,
+						_itemSelector, _portal, _portletResourcePermission,
+						_userService);
 
 			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCatalogDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT,
+				commerceCatalogUsersDisplayContext);
 		}
 		catch (PortalException pe) {
 			SessionErrors.add(renderRequest, pe.getClass());
@@ -74,7 +79,7 @@ public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			throw new PortletException(e);
 		}
 
-		return "/catalog/details.jsp";
+		return "/catalog/users.jsp";
 	}
 
 	@Reference
@@ -88,5 +93,8 @@ public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;
+
+	@Reference
+	private UserService _userService;
 
 }
