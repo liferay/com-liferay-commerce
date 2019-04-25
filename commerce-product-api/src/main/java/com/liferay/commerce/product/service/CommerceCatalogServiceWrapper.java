@@ -50,6 +50,19 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 		return _commerceCatalogService.deleteCommerceCatalog(commerceCatalogId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
+		long commerceCatalogId) {
+		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.getCommerceCatalogGroup(commerceCatalogId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

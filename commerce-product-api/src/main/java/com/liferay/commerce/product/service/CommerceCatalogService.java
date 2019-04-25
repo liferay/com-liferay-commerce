@@ -21,6 +21,7 @@ import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -62,6 +63,13 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException;
 
 	/**

@@ -104,6 +104,34 @@ public class CommerceCatalogServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap fetchCommerceCatalog(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.fetchCommerceCatalog(commerceCatalogId);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.model.Group returnValue = CommerceCatalogServiceUtil.getCommerceCatalogGroup(commerceCatalogId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] searchCommerceCatalogs(
 		long companyId) throws RemoteException {
 		try {

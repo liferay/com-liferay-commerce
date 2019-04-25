@@ -58,6 +58,17 @@ public class CommerceCatalogServiceUtil {
 		return getService().deleteCommerceCatalog(commerceCatalogId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
+		long commerceCatalogId) {
+		return getService().fetchCommerceCatalog(commerceCatalogId);
+	}
+
+	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceCatalogGroup(commerceCatalogId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
