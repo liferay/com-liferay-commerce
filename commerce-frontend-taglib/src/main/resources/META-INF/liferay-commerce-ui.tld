@@ -225,12 +225,17 @@
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>commerceAccountId</name>
+			<name>componentId</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>componentId</name>
+			<name>groupId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subtype</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
