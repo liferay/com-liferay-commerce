@@ -16,6 +16,8 @@ package com.liferay.commerce.catalog.web.internal.application.list;
 
 import com.liferay.application.list.BasePanelCategory;
 import com.liferay.application.list.PanelCategory;
+import com.liferay.application.list.constants.PanelCategoryKeys;
+import com.liferay.commerce.application.list.constants.CommercePanelCategoryKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -33,7 +35,8 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"panel.category.key=control_panel", "panel.category.order:Integer=1200"
+		"panel.category.key=" + PanelCategoryKeys.CONTROL_PANEL,
+		"panel.category.order:Integer=1200"
 	},
 	service = PanelCategory.class
 )
@@ -41,7 +44,7 @@ public class CommerceCatalogPanelCategory extends BasePanelCategory {
 
 	@Override
 	public String getKey() {
-		return "control_panel.commerce";
+		return CommercePanelCategoryKeys.CONTROL_PANEL_COMMERCE;
 	}
 
 	@Override

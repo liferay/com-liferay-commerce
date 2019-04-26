@@ -16,6 +16,7 @@ package com.liferay.commerce.catalog.web.internal.application.list;
 
 import com.liferay.application.list.BasePanelApp;
 import com.liferay.application.list.PanelApp;
+import com.liferay.commerce.application.list.constants.CommercePanelCategoryKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.portal.kernel.model.Portlet;
 
@@ -29,7 +30,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"panel.app.order:Integer=100",
-		"panel.category.key=control_panel.commerce"
+		"panel.category.key=" + CommercePanelCategoryKeys.CONTROL_PANEL_COMMERCE
 	},
 	service = PanelApp.class
 )
