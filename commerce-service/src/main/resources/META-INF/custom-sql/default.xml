@@ -108,6 +108,8 @@
 				(CommerceOrder.groupId = ?) AND
 				(User_.userId  = [$USER_ID$]) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
+			ORDER BY
+				CommerceOrder.modifieddate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderItemFinder.findByAvailableQuantity">
