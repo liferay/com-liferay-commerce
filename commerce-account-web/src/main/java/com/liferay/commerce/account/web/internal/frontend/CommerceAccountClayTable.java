@@ -135,7 +135,7 @@ public class CommerceAccountClayTable
 		ClayTableSchemaField nameField = clayTableSchemaBuilder.addField(
 			"name", "name");
 
-		nameField.setContentRenderer("imageName");
+		nameField.setContentRenderer("commerceTableCellImageName");
 
 		clayTableSchemaBuilder.addField("accountId", "id");
 
