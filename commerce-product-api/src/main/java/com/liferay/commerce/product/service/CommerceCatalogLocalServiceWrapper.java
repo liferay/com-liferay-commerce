@@ -289,10 +289,18 @@ public class CommerceCatalogLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
-		long companyId, String keywords, int start, int end)
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.searchCommerceCatalogs(companyId,
-			keywords, start, end);
+			keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceCatalogsCount(long companyId, String keywords,
+		String name) throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogLocalService.searchCommerceCatalogsCount(companyId,
+			keywords, name);
 	}
 
 	/**

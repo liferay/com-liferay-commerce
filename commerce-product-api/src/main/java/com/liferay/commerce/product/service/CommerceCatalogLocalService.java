@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -76,6 +77,7 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(CommerceCatalog commerceCatalog);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
 		String catalogDefaultLanguageId, ServiceContext serviceContext)
 		throws PortalException;
@@ -111,7 +113,7 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	* @return the commerce catalog that was removed
 	* @throws PortalException if a commerce catalog with the primary key could not be found
 	*/
-	@Indexable(type = IndexableType.DELETE)
+	@Indexable(type = IndexableType.REINDEX)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException;
@@ -252,7 +254,12 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCatalog> searchCommerceCatalogs(long companyId,
-		String keywords, int start, int end) throws PortalException;
+		String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCommerceCatalogsCount(long companyId, String keywords,
+		String name) throws PortalException;
 
 	/**
 	* Updates the commerce catalog in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
@@ -264,6 +271,7 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	public CommerceCatalog updateCommerceCatalog(
 		CommerceCatalog commerceCatalog);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
 		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
 		ServiceContext serviceContext) throws PortalException;
