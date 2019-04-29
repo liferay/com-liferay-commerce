@@ -171,11 +171,8 @@ public class EditCPInstanceCommercePriceEntryMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePriceEntry.class.getName(), actionRequest);
 
-		CommercePriceEntry commercePriceEntry =
-			_commercePriceEntryService.updateCommercePriceEntry(
-				commercePriceEntryId, price, promoPrice, serviceContext);
-
-		return commercePriceEntry;
+		return _commercePriceEntryService.updateCommercePriceEntry(
+			commercePriceEntryId, price, promoPrice, serviceContext);
 	}
 
 	@Reference

@@ -140,12 +140,10 @@ public class CommerceVirtualOrderItemEditDisplayContext {
 
 		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
 
-		String downloadUrl = DLUtil.getDownloadURL(
+		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(),
 			_cpDefinitionVirtualSettingRequestHelper.getThemeDisplay(),
 			StringPool.BLANK, true, true);
-
-		return downloadUrl;
 	}
 
 	public FileEntry getFileEntry() throws PortalException {

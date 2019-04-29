@@ -88,11 +88,9 @@ public abstract class BaseCommerceTaxFixedRateDisplayContext<T> {
 	}
 
 	public long getCommerceTaxMethodId() throws PortalException {
-		long commerceTaxMethodId = ParamUtil.getLong(
+		return ParamUtil.getLong(
 			commerceTaxFixedRateRequestHelper.getRequest(),
 			"commerceTaxMethodId");
-
-		return commerceTaxMethodId;
 	}
 
 	public String getOrderByCol() {

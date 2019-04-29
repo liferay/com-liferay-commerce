@@ -56,19 +56,15 @@ public class CommercePriceListTestUtil {
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
-		CommercePriceList commercePriceList =
-			CommercePriceListLocalServiceUtil.addCommercePriceList(
-				commerceCurrency.getCommerceCurrencyId(),
-				RandomTestUtil.randomString(), priority,
-				calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
-				calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
-				calendar.get(Calendar.MINUTE), true, serviceContext);
-
-		return commercePriceList;
+		return CommercePriceListLocalServiceUtil.addCommercePriceList(
+			commerceCurrency.getCommerceCurrencyId(),
+			RandomTestUtil.randomString(), priority,
+			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
+			calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),
+			calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.YEAR),
+			calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+			true, serviceContext);
 	}
 
 	public static void addOrganizationSegmentToPriceList(

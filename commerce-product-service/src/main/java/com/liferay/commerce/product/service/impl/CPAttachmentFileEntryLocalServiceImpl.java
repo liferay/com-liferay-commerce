@@ -301,11 +301,9 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, className,
 			serviceContext);
 
-		Folder entityFolder = PortletFileRepositoryUtil.addPortletFolder(
+		return PortletFileRepositoryUtil.addPortletFolder(
 			userId, repository.getRepositoryId(), classNameFolder.getFolderId(),
 			String.valueOf(classPK), serviceContext);
-
-		return entityFolder;
 	}
 
 	@Override

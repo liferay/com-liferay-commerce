@@ -27,6 +27,7 @@ import com.liferay.commerce.openapi.util.Security;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -216,13 +217,9 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 		parameterBuilder.content(content);
 		parameterBuilder.schema(schema);
 
-		List<Parameter> parameters = new ArrayList<>();
+		List<Parameter> parameters = Arrays.asList(parameterBuilder.build());
 
-		parameters.add(parameterBuilder.build());
-
-		List<Method> methods = new ArrayList<>();
-
-		methods.add(
+		List<Method> methods = Arrays.asList(
 			new Method(
 				"update", _getSecurity("CommerceOpenApiAdmin.write"),
 				_getRequestContents(), "PUT", "/testModel/", parameters,
@@ -351,40 +348,30 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	}
 
 	private List<Content> _getRequestContents() {
-		List<Content> contents = new ArrayList<>();
-
-		contents.add(
+		return Arrays.asList(
 			new Content(
 				"application/json",
 				new Schema(null, null, "#/components/schemas/TestModel2")));
-
-		return contents;
 	}
 
 	private List<Content> _getResponseContents(boolean responseContentArray) {
-		List<Content> contents = new ArrayList<>();
-
 		String responseContentSchemaType = "object";
 
 		if (responseContentArray) {
 			responseContentSchemaType = "array";
 		}
 
-		contents.add(
+		return Arrays.asList(
 			new Content(
 				"application/json",
 				new Schema(
 					responseContentSchemaType, null,
-					"#/components/schemas/TestModel1")));
-		contents.add(
+					"#/components/schemas/TestModel1")),
 			new Content(
-				"application/json", new Schema("integer", "int32", null)));
-		contents.add(
+				"application/json", new Schema("integer", "int32", null)),
 			new Content(
 				"application/json",
 				new Schema(null, null, "#/components/schemas/Error")));
-
-		return contents;
 	}
 
 	private List<Response> _getResponses(

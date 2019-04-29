@@ -312,9 +312,7 @@ public class CPSearchResultsDisplayContext {
 	}
 
 	protected String getURLString() {
-		String urlString = HttpUtil.getCompleteURL(getSharedRequest());
-
-		return urlString;
+		return HttpUtil.getCompleteURL(getSharedRequest());
 	}
 
 	private final CPContentListEntryRendererRegistry
