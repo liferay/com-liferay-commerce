@@ -148,7 +148,7 @@
 
 		{if $addToCartButtonVisible}
 			<div class="minium-card__actions">
-				{if isNonnull($sku) and  isNonnull($skuId)}
+				{if isNonnull($sku) and isNonnull($skuId)}
 					{call AddToCartButton.render}
 						{param accountId: $accountId /}
 						{param orderId: $orderId /}
@@ -157,9 +157,11 @@
 						{param editMode: false /}
 						{param settings: $settings /}
 						{param productId: $skuId /}
+						{param spritemap: $spritemap /}
+						{param buttonVariant: 'compact' /}
 					{/call}
 				{else}
-					<a class="commerce-button commerce-button--outline" href="{$detailsLink}">
+					<a class="commerce-button commerce-button--small commerce-button--outline" href="{$detailsLink}">
 						{msg desc="View all variants"}view-all-variants{/msg}
 					</a>
 				{/if}
