@@ -1,84 +1,226 @@
+@import "AddToCartButton/mixinsAndVariables";
+@import "AddToCartButton/animations";
+
 .add-to-cart-button {
-	min-width: 200px;
-	position: relative;
-	transition: all ease 100ms;
 
-	&--edit {
-		cursor: default !important;
-		min-width: 160px;
-	}
+	&--compact {
+		::selection {
+			background-color: $color-theme-light;
+		}
 
-	&__fwd {
-		align-items: center;
-		cursor: pointer;
-		display: flex;
-		height: 40px;
-		justify-content: center;
-		position: absolute;
-		right: 0;
-		transition: transform ease 50ms;
-		width: 30px;
+		min-width: 140px;
+		position: relative;
+		border: 0 !important;
+		background-color: $color-theme !important;
+		transition: min-width .1s ease,
+		border .1s ease;
 
 		&:hover {
-			transform: scale(1.5);
+			cursor: pointer !important;
+			min-width: 160px;
+			background-color: $color-theme-dark;
+			transition: $baseTransitions;
 		}
 
 		&::before {
-			border: solid currentColor;
-			border-width: 0 2px 2px 0;
 			content: '';
-			display: inline-block;
-			height: 5px;
-			transform: rotate(-45deg);
-			width: 5px;
-		}
-	}
-
-	&__ok {
-		align-items: center;
-		display: inline-flex;
-		height: 30px;
-		justify-content: center;
-		margin-left: 4px;
-		width: 8px;
-
-		&::before {
-			border: solid currentColor;
-			border-width: 0 2px 2px 0;
-			content: '';
-			display: inline-block;
-			height: 10px;
-			transform: rotate(45deg) translateY(-2px);
-			width: 7px;
-		}
-	}
-
-	.commerce-quantity-selector {
-		transform: translateX(-5px);
-
-		&__input {
-			background: rgba(0, 0, 0, 0.2);
-			border: 0;
+			display: block;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			border: 3px solid transparent;
+			box-sizing: border-box;
 			border-radius: 6px;
-			color: inherit;
-			width: 40px;
+			background: rgba(255, 255, 255, 0);
+			transition: all .2s .5s ease;
 		}
 
-		&__select {
-			background: rgba(0, 0, 0, 0.2);
-			border: 0;
-			border-radius: 6px;
-			color: inherit;
+		&--edit {
+			cursor: default !important;
+			box-shadow: none !important;
+			background-color: inherit !important;
+			min-width: 100px;
+			color: black;
+
+			&::before {
+				@include transformButton(
+												50%, 50%,
+												-22px, -35px,
+												70px, 44px,
+												3px solid $inputOutline,
+												rgba(255, 255, 255, 1)
+				);
+				content: '';
+				display: block;
+				position: absolute;
+				border-radius: 8px;
+				animation: toInput .3s ease-in 1 forwards;
+			}
+
+			&.with-select::before {
+				@include transformButton(
+												50%, 50%,
+												-22px, -35px,
+												70px, 44px,
+												3px solid $inputOutline,
+												rgba(255, 255, 255, 1)
+				);
+				content: '';
+				display: block;
+				position: absolute;
+				border-radius: 8px;
+				animation: toSelect .3s ease-in 1 forwards;
+			}
 		}
 
-		&__btn {
-			color: inherit;
+		&__fwd {
+			opacity: 0;
+			align-items: center;
+			cursor: pointer;
+			display: flex;
 			height: 40px;
-			transition: transform ease 50ms;
+			justify-content: center;
+			position: absolute;
+			right: -35px;
 			width: 30px;
+			color: $color-theme;
+			font-size: 26px !important;
+			line-height: 20px;
+			animation: confirmButton 500ms ease 1 forwards;
+			animation-delay: 200ms;
+
+			&:hover .arrow__line {
+				transform-origin: left center;
+				transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+				transition: transform .2s ease-in;
+			}
+
+			&:hover .arrow__tip {
+				transform: translate3d(-16px, 0px, 0);
+				transition: transform .2s ease-in;
+			}
+
+			& .arrow {
+				&__line {
+					transform-origin: left center;
+					transform: scaleX(.70);
+				}
+
+				&__tip {
+					transform: translateX(-23px);
+				}
+			}
+		}
+
+		&.commerce-button--good {
+			background-color: $color-mood-good !important;
+			padding: 0;
+			transition: all .1s ease;
+			transition-delay: 0ms;
 
 			&:hover {
-				transform: scale(1.5);
+				.added-quantity {
+					height: inherit;
+					width: inherit;
+					display: none;
+				}
+			}
+
+			&:hover::before {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				content: 'edit quantity';
+			}
+
+			&.quantity-changed {
+				transition-delay: 900ms;
+			}
+
+			&.quantity-changed::before {
+				animation: toConfirm 1000ms ease 1;
+			}
+		}
+
+		.commerce-quantity-selector {
+			&__input {
+				@include formElement;
+				width: 65px;
+				height: 44px;
+			}
+
+			&__select {
+				@include formElement;
+				width: 65px;
+				height: 44px;
+			}
+
+			&__btn {
+				font-size: 2em;
+				height: 40px;
+				width: 40px;
+
+				&:nth-child(1) {
+					transform: translate3d(-10px, 0, 0);
+					transform-origin: right center;
+					@include quantityButtonsAnimation('left');
+				}
+
+				&:nth-child(3) {
+					transform: translate3d(10px, 0, 0);
+					transform-origin: left center;
+					@include quantityButtonsAnimation('right');
+				}
+			}
+		}
+	}
+
+	&--inline {
+		display: flex;
+
+		.commerce-button {
+			min-width: 160px;
+			height: 60px;
+			font-size: 12px;
+
+			&.commerce-button--good {
+				&:hover {
+					.added-quantity {
+						height: inherit;
+						width: inherit;
+						display: none;
+					}
+				}
+
+				&:hover::before {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					content: 'add more';
+				}
+			}
+		}
+
+		.commerce-quantity-selector {
+			margin-right: 10px;
+
+			&__input {
+				font-size: 1.3em;
+				height: 60px;
+				width: 60px;
+			}
+
+			&__select {
+				font-size: 1.3em;
+				height: 60px;
+				width: 80px;
+				border-radius: 8px;
+				margin-right: 10px;
+			}
+
+			&__btn {
+				font-size: 2em;
 			}
 		}
 	}
