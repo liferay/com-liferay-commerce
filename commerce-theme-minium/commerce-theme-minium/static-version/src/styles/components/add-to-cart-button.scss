@@ -1,6 +1,9 @@
 @import "AddToCartButton/mixinsAndVariables";
 @import "AddToCartButton/animations";
 
+::selection
+::-webkit-selection
+
 .add-to-cart-button {
 
 	&--compact {
@@ -45,11 +48,11 @@
 
 			&::before {
 				@include transformButton(
-												50%, 50%,
-												-22px, -35px,
-												70px, 44px,
-												3px solid $inputOutline,
-												rgba(255, 255, 255, 1)
+					50%, 50%,
+					-22px, -35px,
+					70px, 44px,
+					3px solid $inputOutline,
+                    rgba(255, 255, 255, 1)
 				);
 				content: '';
 				display: block;
