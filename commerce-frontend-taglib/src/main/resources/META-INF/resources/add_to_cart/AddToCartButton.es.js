@@ -213,9 +213,10 @@ AddToCartButton.STATE = {
 	),
 	buttonVariant: Config.oneOf(
 		[
-			'compact'
+			'compact',
+            'inline'
 		]
-	),
+	).value('inline'),
 	cartAPI: Config.string().required(),
 	disabled: Config.bool().value(false),
 	editMode: Config.bool().value(false),
