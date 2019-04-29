@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.product.catalog.CommerceCatalogScopeHelperRegistry;
-import com.liferay.commerce.product.indexer.CommerceCatalogScopeHelper;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -28,17 +28,20 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,6 +52,7 @@ import java.util.Map;
 public class CommerceCatalogLocalServiceImpl
 	extends CommerceCatalogLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
 			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
@@ -86,13 +90,6 @@ public class CommerceCatalogLocalServiceImpl
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
-		// Indexer
-
-		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
-			getCommerceCatalogScopeHelper();
-
-		commerceCatalogScopeHelper.reindex(commerceCatalog);
-
 		return commerceCatalog;
 	}
 
@@ -110,6 +107,7 @@ public class CommerceCatalogLocalServiceImpl
 			serviceContext);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
@@ -123,17 +121,7 @@ public class CommerceCatalogLocalServiceImpl
 
 		// Commerce catalog
 
-		CommerceCatalog commerceCatalog = commerceCatalogPersistence.remove(
-			commerceCatalogId);
-
-		// Indexer
-
-		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
-			getCommerceCatalogScopeHelper();
-
-		commerceCatalogScopeHelper.deleteDocument(commerceCatalog);
-
-		return commerceCatalog;
+		return commerceCatalogPersistence.remove(commerceCatalogId);
 	}
 
 	@Override
@@ -154,52 +142,38 @@ public class CommerceCatalogLocalServiceImpl
 	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
 		throws PortalException {
 
-		Map<String, String> parameterMap = new HashMap<>();
-
-		parameterMap.put(Field.COMPANY_ID, String.valueOf(companyId));
-		parameterMap.put(
-			Field.ENTRY_CLASS_NAME, CommerceCatalog.class.getName());
-
-		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
-			getCommerceCatalogScopeHelper();
-
-		Hits hits = commerceCatalogScopeHelper.search(companyId, parameterMap);
-
-		if (hits == null) {
-			return Collections.emptyList();
-		}
-
-		return getCommerceCatalogs(hits);
+		return searchCommerceCatalogs(
+			companyId, StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	@Override
 	public List<CommerceCatalog> searchCommerceCatalogs(
-			long companyId, String keywords, int start, int end)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
-		Map<String, String> parameterMap = new HashMap<>();
+		SearchContext searchContext = buildSearchContext(
+			companyId, start, end, sort);
 
-		parameterMap.put(Field.COMPANY_ID, String.valueOf(companyId));
-		parameterMap.put(
-			Field.ENTRY_CLASS_NAME, CommerceCatalog.class.getName());
+		searchContext.setKeywords(keywords);
 
-		if (!Validator.isBlank(keywords)) {
-			parameterMap.put(Field.NAME, keywords);
-		}
-
-		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
-			getCommerceCatalogScopeHelper();
-
-		Hits hits = commerceCatalogScopeHelper.search(
-			companyId, parameterMap, start, end);
-
-		if (hits == null) {
-			return Collections.emptyList();
-		}
-
-		return getCommerceCatalogs(hits);
+		return searchCommerceCatalogs(searchContext);
 	}
 
+	@Override
+	public int searchCommerceCatalogsCount(
+			long companyId, String keywords, String name)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceCatalogsCount(searchContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, String catalogDefaultLanguageId,
@@ -214,14 +188,28 @@ public class CommerceCatalogLocalServiceImpl
 
 		commerceCatalog = commerceCatalogPersistence.update(commerceCatalog);
 
-		// Indexer
-
-		CommerceCatalogScopeHelper commerceCatalogScopeHelper =
-			getCommerceCatalogScopeHelper();
-
-		commerceCatalogScopeHelper.reindex(commerceCatalog);
-
 		return commerceCatalog;
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, int start, int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
 	}
 
 	protected List<CommerceCatalog> getCommerceCatalogs(Hits hits)
@@ -239,7 +227,18 @@ public class CommerceCatalogLocalServiceImpl
 			CommerceCatalog commerceCatalog = fetchCommerceCatalog(
 				commerceCatalogId);
 
-			if (commerceCatalog != null) {
+			if (commerceCatalog == null) {
+				commerceCatalogs = null;
+
+				Indexer<CommerceCatalog> indexer =
+					IndexerRegistryUtil.getIndexer(CommerceCatalog.class);
+
+				long companyId = GetterUtil.getLong(
+					document.get(Field.COMPANY_ID));
+
+				indexer.delete(companyId, document.getUID());
+			}
+			else if (commerceCatalogs != null) {
 				commerceCatalogs.add(commerceCatalog);
 			}
 		}
@@ -247,13 +246,38 @@ public class CommerceCatalogLocalServiceImpl
 		return commerceCatalogs;
 	}
 
-	protected CommerceCatalogScopeHelper getCommerceCatalogScopeHelper() {
-		return _commerceCatalogScopeHelperRegistry.
-			getCommerceCatalogScopeHelper(CommerceCatalog.class.getName());
+	protected List<CommerceCatalog> searchCommerceCatalogs(
+			SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceCatalog> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceCatalog.class);
+
+		for (int i = 0; i < 10; i++) {
+			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
+
+			List<CommerceCatalog> commerceCatalogs = getCommerceCatalogs(hits);
+
+			if (commerceCatalogs != null) {
+				return commerceCatalogs;
+			}
+		}
+
+		throw new SearchException(
+			"Unable to fix the search index after 10 attempts");
 	}
 
-	@ServiceReference(type = CommerceCatalogScopeHelperRegistry.class)
-	private CommerceCatalogScopeHelperRegistry
-		_commerceCatalogScopeHelperRegistry;
+	protected int searchCommerceCatalogsCount(SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceCatalog> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceCatalog.class);
+
+		return GetterUtil.getInteger(indexer.searchCount(searchContext));
+	}
+
+	private static final String[] _SELECTED_FIELD_NAMES = {
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
+	};
 
 }
