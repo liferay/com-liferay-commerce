@@ -80,6 +80,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -237,9 +238,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = true;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(responseCapture.getReasonCode());
+		List<String> messages = Arrays.asList(responseCapture.getReasonCode());
 
 		return new CommercePaymentResult(
 			null, commercePaymentRequest.getCommerceOrderId(),
@@ -283,9 +282,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = false;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(payment.getFailureReason());
+		List<String> messages = Arrays.asList(payment.getFailureReason());
 
 		return new CommercePaymentResult(
 			null, payPalCommercePaymentRequest.getCommerceOrderId(),
@@ -322,9 +319,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = false;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(activeAgreement.getDescription());
+		List<String> messages = Arrays.asList(activeAgreement.getDescription());
 
 		return new CommercePaymentResult(
 			activeAgreement.getId(),
@@ -515,9 +510,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = true;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(detailedRefund.getDescription());
+		List<String> messages = Arrays.asList(detailedRefund.getDescription());
 
 		return new CommercePaymentResult(
 			null, commercePaymentRequest.getCommerceOrderId(),
@@ -569,9 +562,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			status = CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(payment.getFailureReason());
+		List<String> messages = Arrays.asList(payment.getFailureReason());
 
 		return new CommercePaymentResult(
 			payment.getId(), commercePaymentRequest.getCommerceOrderId(),
@@ -624,9 +615,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			status = CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(agreement.getState());
+		List<String> messages = Arrays.asList(agreement.getState());
 
 		return new CommercePaymentResult(
 			agreement.getToken(), commercePaymentRequest.getCommerceOrderId(),
@@ -663,9 +652,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = true;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(detailedRefund.getDescription());
+		List<String> messages = Arrays.asList(detailedRefund.getDescription());
 
 		return new CommercePaymentResult(
 			null, commercePaymentRequest.getCommerceOrderId(),
@@ -734,9 +721,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			success = true;
 		}
 
-		List<String> messages = new ArrayList<>();
-
-		messages.add(authorization.getPendingReason());
+		List<String> messages = Arrays.asList(authorization.getPendingReason());
 
 		return new CommercePaymentResult(
 			null, commercePaymentRequest.getCommerceOrderId(),

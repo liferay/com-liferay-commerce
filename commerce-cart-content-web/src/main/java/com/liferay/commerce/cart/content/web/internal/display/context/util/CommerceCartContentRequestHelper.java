@@ -34,11 +34,8 @@ public class CommerceCartContentRequestHelper extends BaseRequestHelper {
 	public CommerceContext getCommerceContext() {
 		HttpServletRequest httpServletRequest = getRequest();
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		return commerceContext;
+		return (CommerceContext)httpServletRequest.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
 	}
 
 }

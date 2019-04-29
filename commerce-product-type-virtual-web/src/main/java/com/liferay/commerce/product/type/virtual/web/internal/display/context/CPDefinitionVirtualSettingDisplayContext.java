@@ -136,11 +136,9 @@ public class CPDefinitionVirtualSettingDisplayContext
 
 		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
 
-		String downloadUrl = DLUtil.getDownloadURL(
+		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
 			StringPool.BLANK, true, true);
-
-		return downloadUrl;
 	}
 
 	public String getDownloadSampleFileEntryURL() throws PortalException {
@@ -159,11 +157,9 @@ public class CPDefinitionVirtualSettingDisplayContext
 
 		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
 
-		String downloadUrl = DLUtil.getDownloadURL(
+		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
 			StringPool.BLANK, true, true);
-
-		return downloadUrl;
 	}
 
 	public FileEntry getFileEntry() throws PortalException {
@@ -277,11 +273,7 @@ public class CPDefinitionVirtualSettingDisplayContext
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long[] selectedGroupIds = {
-			getScopeGroupId(), themeDisplay.getCompanyGroupId()
-		};
-
-		return selectedGroupIds;
+		return new long[] {getScopeGroupId(), themeDisplay.getCompanyGroupId()};
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
