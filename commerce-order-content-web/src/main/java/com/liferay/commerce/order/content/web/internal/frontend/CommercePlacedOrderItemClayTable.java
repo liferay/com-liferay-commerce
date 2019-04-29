@@ -82,7 +82,7 @@ public class CommercePlacedOrderItemClayTable
 		ClayTableSchemaField skuField = clayTableSchemaBuilder.addField(
 			"sku", "sku");
 
-		skuField.setContentRenderer("imageName");
+		skuField.setContentRenderer("commerceTableCellImageName");
 
 		clayTableSchemaBuilder.addField("name", "name");
 
@@ -101,7 +101,7 @@ public class CommercePlacedOrderItemClayTable
 		ClayTableSchemaField clayTableSchemaField =
 			clayTableSchemaBuilder.addField("shipmentUrl", "shipment");
 
-		clayTableSchemaField.setContentRenderer("modalLink");
+		clayTableSchemaField.setContentRenderer("commerceTableCellModalLink");
 
 		return clayTableSchemaBuilder.build();
 	}

@@ -134,7 +134,7 @@ public class CommercePendingOrderItemClayTable
 		ClayTableSchemaField skuField = clayTableSchemaBuilder.addField(
 			"sku", "sku");
 
-		skuField.setContentRenderer("imageName");
+		skuField.setContentRenderer("commerceTableCellImageName");
 
 		clayTableSchemaBuilder.addField("name", "name");
 
