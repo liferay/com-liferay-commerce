@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.catalog.web.internal.util.CommerceCatalogsPortletUtil;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -158,9 +160,13 @@ public class CommerceCatalogDisplayContext
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		Sort sort = CommerceCatalogsPortletUtil.getCommerceCatalogSort(
+			getOrderByCol(), getOrderByType());
+
 		List<CommerceCatalog> catalogs =
 			_commerceCatalogService.searchCommerceCatalogs(
-				themeDisplay.getCompanyId());
+				themeDisplay.getCompanyId(), getKeywords(),
+				searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(catalogs.size());
 		searchContainer.setResults(catalogs);

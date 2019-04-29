@@ -53,7 +53,7 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 			<liferay-frontend:management-bar-sort
 				orderByCol="<%= commerceCatalogDisplayContext.getOrderByCol() %>"
 				orderByType="<%= commerceCatalogDisplayContext.getOrderByType() %>"
-				orderColumns='<%= new String[] {"modified-date", "display-date", "name"} %>'
+				orderColumns='<%= new String[] {"modified-date", "name"} %>'
 				portletURL="<%= commerceCatalogDisplayContext.getPortletURL() %>"
 			/>
 
