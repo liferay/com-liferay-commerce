@@ -53,10 +53,7 @@ public class CPOptionFacetsDisplayContext {
 		String cpOptionKey =
 			CPOptionFacetsUtil.getCPOptionKeyFromIndexFieldName(fieldName);
 
-		CPOption cpOption = _cpOptionLocalService.fetchCPOption(
-			groupId, cpOptionKey);
-
-		return cpOption;
+		return _cpOptionLocalService.fetchCPOption(groupId, cpOptionKey);
 	}
 
 	public String getCPOptionKey(long groupId, String fieldName)

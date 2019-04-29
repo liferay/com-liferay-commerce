@@ -185,13 +185,10 @@ public class EditCPDefinitionOptionRelMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPDefinitionOptionRel.class.getName(), actionRequest);
 
-		CPDefinitionOptionRel cpDefinitionOptionRel =
-			_cpDefinitionOptionRelService.updateCPDefinitionOptionRel(
-				cpDefinitionOptionRelId, cpOptionId, nameMap, descriptionMap,
-				ddmFormFieldTypeName, priority, facetable, required,
-				skuContributor, serviceContext);
-
-		return cpDefinitionOptionRel;
+		return _cpDefinitionOptionRelService.updateCPDefinitionOptionRel(
+			cpDefinitionOptionRelId, cpOptionId, nameMap, descriptionMap,
+			ddmFormFieldTypeName, priority, facetable, required, skuContributor,
+			serviceContext);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

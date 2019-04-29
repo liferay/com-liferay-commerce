@@ -198,11 +198,9 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		cpPublisherWebHelper.setOrdering(
 			cpQuery, cpContentRequestHelper.getPortletPreferences());
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		return _cpDefinitionHelper.search(
 			cpContentRequestHelper.getScopeGroupId(), searchContext, cpQuery,
 			start, end);
-
-		return cpDataSourceResult;
 	}
 
 	private final CPDataSourceRegistry _cpDataSourceRegistry;

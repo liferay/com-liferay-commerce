@@ -250,11 +250,8 @@ public class CPAssetCategoriesNavigationDisplayContext {
 		String groupFriendlyUrl = _portal.getGroupFriendlyURL(
 			layoutSet, themeDisplay);
 
-		String url =
-			groupFriendlyUrl + CPConstants.SEPARATOR_ASSET_CATEGORY_URL +
-				cpFriendlyURLEntry.getUrlTitle();
-
-		return url;
+		return groupFriendlyUrl + CPConstants.SEPARATOR_ASSET_CATEGORY_URL +
+			cpFriendlyURLEntry.getUrlTitle();
 	}
 
 	public String getRootAssetCategoryId() {

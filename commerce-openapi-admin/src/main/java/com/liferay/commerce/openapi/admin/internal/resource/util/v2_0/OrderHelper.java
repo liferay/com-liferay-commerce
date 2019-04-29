@@ -298,15 +298,13 @@ public class OrderHelper {
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			groupId);
 
-		CommerceOrder commerceOrder = _commerceOrderService.upsertCommerceOrder(
+		return _commerceOrderService.upsertCommerceOrder(
 			commerceAccountId, commerceCurrencyId, billingAddressId,
 			shippingAddressId, commercePaymentMethodKey,
 			_getCommerceShippingMethodId(groupId, commerceShippingMethodKey),
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
 			total, paymentStatus, orderStatus, advanceStatus,
 			externalReferenceCode, commerceContext, serviceContext);
-
-		return commerceOrder;
 	}
 
 	@Reference

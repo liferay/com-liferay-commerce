@@ -56,10 +56,8 @@ public class URLOpenApiReader implements OpenApiReader {
 	@Override
 	public String read() {
 		try {
-			String openAPIDefinitionJSON = _jsonWebServiceClient.doGet(
+			return _jsonWebServiceClient.doGet(
 				_apiDefinitionURL, Collections.emptyList(), _headers);
-
-			return openAPIDefinitionJSON;
 		}
 		catch (JSONWebServiceException jsonwse) {
 			throw new ImporterException(
