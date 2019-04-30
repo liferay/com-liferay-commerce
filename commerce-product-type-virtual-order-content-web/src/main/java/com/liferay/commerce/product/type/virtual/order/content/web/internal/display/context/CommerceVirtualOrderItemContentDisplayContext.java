@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -57,6 +59,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CommerceVirtualOrderItemLocalService
 				commerceVirtualOrderItemLocalService,
 			CPDefinitionHelper cpDefinitionHelper,
+			CommerceAccountHelper commerceAccountHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
 			HttpServletRequest httpServletRequest)
@@ -65,8 +68,12 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_commerceVirtualOrderItemLocalService =
 			commerceVirtualOrderItemLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
+		_commerceAccountHelper = commerceAccountHelper;
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
+
+		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
+			httpServletRequest);
 
 		_commerceVirtualOrderItemContentRequestHelper =
 			new CommerceVirtualOrderItemContentRequestHelper(
@@ -300,7 +307,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		List<CommerceVirtualOrderItem> results =
 			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
 				_commerceVirtualOrderItemContentRequestHelper.getScopeGroupId(),
-				_commerceVirtualOrderItemContentRequestHelper.getUserId(),
+				_commerceAccount.getCommerceAccountId(),
 				_searchContainer.getStart(), _searchContainer.getEnd(),
 				new CommerceVirtualOrderItemCreateDateComparator());
 
@@ -311,6 +318,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	}
 
 	private JournalArticleDisplay _articleDisplay;
+	private final CommerceAccount _commerceAccount;
+	private final CommerceAccountHelper _commerceAccountHelper;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
 		_commerceVirtualOrderItemContentPortletInstanceConfiguration;
 	private final CommerceVirtualOrderItemContentRequestHelper
