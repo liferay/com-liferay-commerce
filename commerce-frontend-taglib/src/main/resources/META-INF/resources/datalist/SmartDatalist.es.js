@@ -91,7 +91,17 @@ SmartDatalist.STATE = Object.assign(
     {},
     {
         valueField: Config.string().value('value'),
-        labelField: Config.string().value('label')
+        labelField: Config.string().value('label'),
+        dependsOn: Config.shapeOf(
+            {
+                id: Config.string(),
+                condition: Config.oneOf(
+                    [
+                        'not null'
+                    ]
+                )
+            }
+        )
     },
     Datalist.STATE,
     defaultEnhancedComponentState

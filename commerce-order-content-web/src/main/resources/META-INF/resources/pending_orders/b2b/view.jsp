@@ -24,7 +24,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 <span class="accounts-filter"></span>
 
-<aui:script require="commerce-frontend-taglib@2.0.0/datalist/SmartDatalist.es as SmartDatalist">
+<aui:script require="commerce-frontend-taglib@2.0.1/datalist/SmartDatalist.es as SmartDatalist">
 
 	var filterInitialized = false;
 

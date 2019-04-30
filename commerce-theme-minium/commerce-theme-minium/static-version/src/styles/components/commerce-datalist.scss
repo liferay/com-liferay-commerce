@@ -4,6 +4,7 @@
 	line-height: 1.6;
 	position: relative;
 	color: $color-fg;
+	font-size: 14px;
 
 	&__input-wrapper {
 		transition: background-color .1s ease-in, border-radius .2s ease-in;
@@ -29,7 +30,7 @@
 
 			.commerce-datalist {
 				&__icon {
-					&--action {
+					&--reset {
 						transform: translate(0, 50%) scale(1);
 						opacity: 1;
 					}
@@ -59,7 +60,7 @@
 		align-items: center;
 		display: flex;
 		
-		&--action {
+		&--reset {
 			transform: translate(0, 130%) scale(.5);
 			opacity: 0;
 			color: $color-fg-alt;
@@ -84,6 +85,7 @@
 		align-items: center;
 		overflow-x: scroll;
 		overflow-y: hidden;
+		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
 		height: calc(100% + 24px);
 		top: 0;

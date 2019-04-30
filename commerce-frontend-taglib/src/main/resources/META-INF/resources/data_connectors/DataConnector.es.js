@@ -7,7 +7,6 @@ import {
 
 import { 
     subscribe,
-    notify,
     createConnectorId,
     getRelatedSelectedValuesById
 } from './orchestratingUtils.es';

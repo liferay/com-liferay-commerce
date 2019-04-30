@@ -18,6 +18,16 @@ export const defaultEnhancedComponentState = {
             remote: Config.object(),
             on: Config.object()
         }
+    ),
+    dependsOn: Config.shapeOf(
+        {
+            id: Config.string(),
+            condition: Config.oneOf(
+                [
+                    'not null'
+                ]
+            )
+        }
     )
 }
 
@@ -33,9 +43,9 @@ export function isPromise(p) {
     return !!p && p instanceof Promise;
 }
 
-export function makeId(length) {
+export function makeId(length = 5) {
     const charsList = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const id = new Array(5).fill('').reduce(
+    const id = new Array(length).fill('').reduce(
         (acc) => {
             return acc + charsList.charAt(Math.floor(Math.random() * charsList.length))
         },
