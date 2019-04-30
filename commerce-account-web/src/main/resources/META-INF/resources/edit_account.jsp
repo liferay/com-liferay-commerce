@@ -33,126 +33,133 @@ if (commerceAddress != null) {
 
 <portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
 
-<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAccount == null) ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAccount == null) ? 0 : commerceAccount.getCommerceAccountId() %>" />
-	<aui:input name="commerceAddressId" type="hidden" value="<%= (commerceAddress == null) ? 0 : commerceAddress.getCommerceAddressId() %>" />
+<div class="account-management">
+	<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="fm">
+		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAccount == null) ? Constants.ADD : Constants.UPDATE %>" />
+		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="commerceAccountId" type="hidden" value="<%= (commerceAccount == null) ? 0 : commerceAccount.getCommerceAccountId() %>" />
+		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="commerceAddressId" type="hidden" value="<%= (commerceAddress == null) ? 0 : commerceAddress.getCommerceAddressId() %>" />
 
-	<liferay-ui:error-marker
-		key="<%= WebKeys.ERROR_SECTION %>"
-		value="details"
-	/>
+		<liferay-ui:error-marker
+			key="<%= WebKeys.ERROR_SECTION %>"
+			value="details"
+		/>
 
-	<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
-
-	<section class="details-header__section">
-		<div class="row">
-			<div class="col-lg-4 u-vac">
-				<aui:fieldset>
-					<c:if test="<%= commerceAccount != null %>">
-
-						<%
-						long logoId = commerceAccount.getLogoId();
-
-						UserFileUploadsConfiguration userFileUploadsConfiguration = commerceAccountDisplayContext.getUserFileUploadsConfiguration();
-						%>
-
-						<liferay-ui:logo-selector
-							currentLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=" + logoId + "&t=" + WebServerServletTokenUtil.getToken(logoId) %>'
-							defaultLogo="<%= logoId == 0 %>"
-							defaultLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=0" %>'
-							logoDisplaySelector=".organization-logo"
-							maxFileSize="<%= userFileUploadsConfiguration.imageMaxSize() %>"
-							tempImageFileName="<%= String.valueOf(themeDisplay.getScopeGroupId()) %>"
-						/>
-					</c:if>
-				</aui:fieldset>
-			</div>
-
-			<div class="col-lg-4 mt-4 mt-lg-0 u-vac">
-				<aui:input inlineLabel="true" name="name" />
-
-				<aui:input inlineLabel="true" name="email" wrapperCssClass="mb-0" />
-			</div>
-		</div>
-	</section>
-
-	<section class="details-header__section pb-0">
-		<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
-
-		<div class="row">
-			<div class="col-lg-4">
-				<aui:select inlineLabel="true" label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
-
-					<%
-					List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getCommerceCountries();
-
-					for (CommerceCountry commerceCountry : commerceCountries) {
-					%>
-
-						<aui:option label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
-			</div>
-
-			<div class="col-lg-4">
-				<aui:select inlineLabel="true" label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
-
-					<%
-					List<CommerceRegion> commerceRegions = commerceAccountDisplayContext.getCommerceRegions(commerceCountryId);
-
-					for (CommerceRegion commerceRegion : commerceRegions) {
-					%>
-
-						<aui:option label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-			</div>
-
-			<div class="col-lg-4">
-				<aui:input inlineLabel="true" label="address" name="street1" />
-			</div>
-
-			<div class="col-lg-4">
-				<aui:input inlineLabel="true" name="zip">
-					<aui:validator name="required" />
-				</aui:input>
-			</div>
-
-			<div class="col-lg-4">
-				<aui:input inlineLabel="true" name="city" />
-			</div>
-		</div>
-	</section>
-
-	<section class="details-header__section pb-0">
 		<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
 
-		<div class="row">
-			<div class="col-lg-4">
-				<aui:input inlineLabel="true" label="vat-number" name="taxId" />
+		<section class="panel panel-secondary">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col col-lg-4">
+						<aui:fieldset>
+							<c:if test="<%= commerceAccount != null %>">
+
+								<%
+								long logoId = commerceAccount.getLogoId();
+
+								UserFileUploadsConfiguration userFileUploadsConfiguration = commerceAccountDisplayContext.getUserFileUploadsConfiguration();
+								%>
+
+								<liferay-ui:logo-selector
+									currentLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=" + logoId + "&t=" + WebServerServletTokenUtil.getToken(logoId) %>'
+									defaultLogo="<%= logoId == 0 %>"
+									defaultLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=0" %>'
+									logoDisplaySelector=".organization-logo"
+									maxFileSize="<%= userFileUploadsConfiguration.imageMaxSize() %>"
+									tempImageFileName="<%= String.valueOf(themeDisplay.getScopeGroupId()) %>"
+								/>
+							</c:if>
+						</aui:fieldset>
+					</div>
+
+					<div class="col col-lg-4">
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="name" />
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="email" />
+					</div>
+				</div>
 			</div>
+		</section>
+
+		<section class="panel panel-secondary">
+			<div class="panel-body">
+				<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
+
+				<div class="row">
+					<div class="col col-lg-4">
+						<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
+
+							<%
+							List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getCommerceCountries();
+
+							for (CommerceCountry commerceCountry : commerceCountries) {
+							%>
+
+								<aui:option label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+					</div>
+
+					<div class="col col-lg-4">
+						<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
+
+							<%
+							List<CommerceRegion> commerceRegions = commerceAccountDisplayContext.getCommerceRegions(commerceCountryId);
+
+							for (CommerceRegion commerceRegion : commerceRegions) {
+							%>
+
+								<aui:option label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+					</div>
+
+					<div class="col col-lg-4">
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" label="address" name="street1" />
+					</div>
+
+					<div class="col col-lg-4">
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="zip">
+							<aui:validator name="required" />
+						</aui:input>
+					</div>
+
+					<div class="col col-lg-4">
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="city" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="panel panel-secondary">
+			<div class="panel-body">
+				<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
+
+				<div class="row">
+					<div class="col-lg-4">
+						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" label="vat-number" name="taxId" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="commerce-cta is-visible">
+			<c:if test="<%= Validator.isNotNull(backURL) %>">
+				<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
+			</c:if>
+
+			<aui:button cssClass="commerce-button commerce-button--big" type="submit" />
 		</div>
-	</section>
-
-	<div class="commerce-cta is-visible">
-		<c:if test="<%= Validator.isNotNull(backURL) %>">
-			<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" />
-		</c:if>
-
-		<aui:button cssClass="commerce-button commerce-button--big" type="submit" />
-	</div>
-</aui:form>
+	</aui:form>
+</div>
 
 <aui:script use="liferay-dynamic-select">
 	new Liferay.DynamicSelect(
@@ -171,7 +178,7 @@ if (commerceAddress != null) {
 				},
 				selectDesc: 'nameCurrentValue',
 				selectId: 'commerceCountryId',
-				selectSort: '<%= true %>',
+				selectSort: true,
 				selectVal: '<%= commerceCountryId %>'
 			},
 			{

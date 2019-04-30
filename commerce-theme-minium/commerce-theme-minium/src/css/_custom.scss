@@ -89,7 +89,7 @@ html {
 	}
 
 	.container-fluid-max-xl {
-	max-width: initial;
+		max-width: initial;
 	}
 
 	.page-header {
@@ -99,11 +99,4 @@ html {
 	.form-group-inline {
 		margin-bottom: 0;
 	}
-}
-
-#commerceAccountOrganizationsCommerceTable,
-#commerceAccountUsersCommerceTable,
-#commerceAccountAddressesCommerceTable {
-	margin-left: -12px;
-	margin-right: -12px;
 }
