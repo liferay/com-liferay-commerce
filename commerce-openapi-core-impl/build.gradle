@@ -29,5 +29,4 @@ deployDependencies {
 	from configurations.compileOnly
 
 	include "aalto-xml-*.jar"
-	include "jackson-*.jar"
 }
