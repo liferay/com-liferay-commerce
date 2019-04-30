@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet;
 
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
@@ -74,18 +75,18 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 
 		try {
 			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
+					_portal.getHttpServletRequest(renderRequest);
 
-			CommerceVirtualOrderItemContentDisplayContext
-				commerceVirtualOrderItemContentDisplayContext =
-					new CommerceVirtualOrderItemContentDisplayContext(
-						_commerceVirtualOrderItemLocalService,
-						_cpDefinitionHelper, _cpDefinitionVirtualSettingService,
-						_cpInstanceHelper, httpServletRequest);
+            CommerceVirtualOrderItemContentDisplayContext
+                    commerceVirtualOrderItemContentDisplayContext =
+                    new CommerceVirtualOrderItemContentDisplayContext(
+                            _commerceVirtualOrderItemLocalService,
+                            _cpDefinitionHelper, _commerceAccountHelper, _cpDefinitionVirtualSettingService,
+                            _cpInstanceHelper, httpServletRequest);
 
 			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				commerceVirtualOrderItemContentDisplayContext);
+					WebKeys.PORTLET_DISPLAY_CONTEXT,
+					commerceVirtualOrderItemContentDisplayContext);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -110,6 +111,9 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private Portal _portal;
