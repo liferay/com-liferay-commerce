@@ -17,14 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
-CommerceAddress commerceAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
-
-PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
-
-portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
+	CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+	CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
+	CommerceAddress commerceAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
+	PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
+	portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 %>
 
 <portlet:renderURL var="editCommerceAccountURL">
@@ -33,68 +30,85 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 	<portlet:param name='<%= PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL" %>' value="<%= portletURL.toString() %>" />
 </portlet:renderURL>
 
-<div class="details-header">
-	<section class="details-header__section details-header__primary">
-		<div class="details-header__main-data">
-			<div class="details-header__avatar">
-				<img alt="avatar" src="<%= commerceAccountDisplayContext.getLogo(commerceAccount) %>" />
-			</div>
-
-			<div class="details-header__name">
-				<%= HtmlUtil.escape(commerceAccount.getName()) %>
-			</div>
-
-			<div class="details-header__email">
-				<%= HtmlUtil.escape(commerceAccount.getEmail()) %>
-			</div>
-		</div>
-
-		<c:if test="<%= commerceAddress != null %>">
-			<div class="details-header__info-wrapper">
-				<div class="details-header__label">
-					<liferay-ui:message key="address" />
+<div class="account-management">
+	<section class="panel panel-secondary">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-auto">
+					<img 
+						class="account-management__thumbnail img-fluid rounded-circle" 
+						alt="avatar" 
+						src="<%= commerceAccountDisplayContext.getLogo(commerceAccount) %>" 
+					/>
 				</div>
+				<div class="col d-flex flex-col justify-content-center">
+					<span class="account-management__name">
+						<%= HtmlUtil.escape(commerceAccount.getName()) %>
+					</span>
+					<span class="account-management__email">
+						<%= HtmlUtil.escape(commerceAccount.getEmail()) %>
+					</span>
+				</div>		
+				<c:if test="<%= commerceAddress != null %>">
+					<div class="col d-flex align-items-center">
+						<div class="account-management__info-wrapper">
+							<span class="account-management__label">
+								<liferay-ui:message key="address" />
+							</span>
 
-				<div class="details-header__value">
-					<%= HtmlUtil.escape(commerceAddress.getStreet1()) %><br />
-					<%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip()) %>
-				</div>
-			</div>
-		</c:if>
-
-		<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), ActionKeys.UPDATE) %>">
-			<div class="details-header__action">
-				<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-account") %>' />
-			</div>
-		</c:if>
-	</section>
-
-	<section class="details-header__section details-header__secondary">
-		<div class="details-header__info-wrapper">
-			<div class="details-header__label">
-				<liferay-ui:message key="vat-number" />
-			</div>
-
-			<div class="details-header__value">
-				<%= commerceAccount.getTaxId() %>
-			</div>
-		</div>
-
-		<div class="details-header__info-wrapper">
-			<div class="details-header__label">
-				<liferay-ui:message key="customer-id" />
-			</div>
-
-			<div class="details-header__value">
-				<%= commerceAccount.getCommerceAccountId() %>
+							<span class="account-management__value">
+								<%= HtmlUtil.escape(commerceAddress.getStreet1()) %><br />
+								<%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip()) %>
+							</span>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), ActionKeys.UPDATE) %>">
+					<div class="col-auto d-flex align-items-center">
+						<div class="account-management__action">
+							<aui:button
+								cssClass="commerce-button commerce-button--big commerce-button--outline"
+								href="<%= editCommerceAccountURL %>"
+								value='<%= LanguageUtil.get(request, "edit-account") %>'
+							/>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</section>
 
-	<liferay-frontend:screen-navigation
-		containerCssClass="p-0"
-		context="<%= commerceAccount %>"
-		key="<%= CommerceAccountScreenNavigationConstants.SCREEN_NAVIGATION_KEY %>"
-		portletURL="<%= portletURL %>"
-	/>
+	<section class="panel panel-secondary mt-1 mb-5">
+		<div class="panel-body">
+
+			<% String taxId = commerceAccount.getTaxId(); %>
+
+			<c:if test="<%= taxId != "" %>">
+				<div class="account-management__info-wrapper">
+					<span class="account-management__label">
+						<liferay-ui:message key="vat-number" />
+					</span>
+
+					<span class="account-management__value">
+						<%= taxId %>
+					</span>
+				</div>
+			</c:if>
+
+			<div class="account-management__info-wrapper">
+				<span class="account-management__label">
+					<liferay-ui:message key="customer-id" />
+				</span>
+				<span class="account-management__value">
+					<%= commerceAccount.getCommerceAccountId() %>
+				</span>
+			</div>
+		</div>
+	</section>
 </div>
+
+<liferay-frontend:screen-navigation
+	context="<%= commerceAccount %>"
+	key="<%= CommerceAccountScreenNavigationConstants.SCREEN_NAVIGATION_KEY %>"
+	portletURL="<%= portletURL %>"
+/>

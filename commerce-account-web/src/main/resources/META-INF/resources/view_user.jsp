@@ -33,26 +33,37 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 	<portlet:param name='<%= PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL" %>' value="<%= portletURL.toString() %>" />
 </portlet:renderURL>
 
-<div class="details-header">
-	<section class="details-header__section details-header__primary">
-		<div class="details-header__main-data">
-			<div class="details-header__avatar">
-				<img alt="avatar" src="<%= selectedUser.getPortraitURL(themeDisplay) %>" />
+<div class="account-management">
+	<section class="panel panel-secondary">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-auto">
+					<img 
+						class="account-management__thumbnail img-fluid rounded-circle" 
+						alt="avatar" 
+						src="<%= selectedUser.getPortraitURL(themeDisplay) %>" 
+					/>
+				</div>
+				<div class="col d-flex flex-col justify-content-center">
+					<span class="account-management__name">
+						<%= selectedUser.getFullName() %>
+					</span>
+					<span class="account-management__email">
+						<%= selectedUser.getEmailAddress() %>
+					</span>
+				</div>
+				<div class="col-auto d-flex align-items-center">
+					<div class="account-management__action">
+						<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
+							<aui:button 
+								cssClass="commerce-button commerce-button--big commerce-button--outline" 
+								href="<%= editCommerceAccountURL %>" 
+								value='<%= LanguageUtil.get(request, "edit-user") %>' 
+							/>
+						</c:if>
+					</div>
+				</div>
 			</div>
-
-			<div class="details-header__name">
-				<%= selectedUser.getFullName() %>
-			</div>
-
-			<div class="details-header__email">
-				<%= selectedUser.getEmailAddress() %>
-			</div>
-		</div>
-
-		<div class="details-header__action">
-			<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
-				<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-user") %>' />
-			</c:if>
 		</div>
 	</section>
 </div>

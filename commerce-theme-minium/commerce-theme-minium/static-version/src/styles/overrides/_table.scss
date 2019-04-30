@@ -21,9 +21,7 @@
 
 	tr {
 		--translate-space: 340px;
-
 		transition: all ease 400ms;
-
 		html:not(.ie):not(.edge) &.is-active {
 			transform: translateX(calc(-1 * var(--translate-space)));
 		}
@@ -35,13 +33,11 @@
 		padding: 10px;
 
 		&:first-child {
-			border-radius: 8px 0 0 8px;
-			padding: 10px;
+			padding: 10px 10px 10px 25px;
 		}
-
+		
 		&:last-child {
-			border-radius: 0 8px 8px 0;
-			padding: 10px;
+			padding: 10px 25px 10px 10px;
 		}
 
 		small {
@@ -97,4 +93,17 @@
 
 .table-list.table-hover tbody tr:hover td {
 	background-color: #FFF;
+}
+
+.table-list {
+	th,td {
+		&:first-child {
+			border-top-left-radius: 8px !important;
+			border-bottom-left-radius: 8px !important;
+		}
+		&:last-child {
+			border-top-right-radius: 8px !important;
+			border-bottom-right-radius: 8px !important;
+		}
+	}
 }
