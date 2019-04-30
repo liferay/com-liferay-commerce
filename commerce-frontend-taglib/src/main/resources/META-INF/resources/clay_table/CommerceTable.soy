@@ -23,15 +23,15 @@
 	{@param? emptyTableMessage: string}
 	{@param? showPagination: bool}
 
-	<div class="commerce-table-wrapper">
+	<div class="commerce-table-wrapper mb-4">
 		{if length($items) == 0}
-			<div class="commerce-empty-table-message">
+			<h4 class="commerce-empty-table-message text-center mb-0">
 				{if $emptyTableMessage}
 					{$emptyTableMessage}
 				{else}
 					{msg desc=""}there-are-no-results{/msg}
 				{/if}
-			</div>
+			</h4>
 		{else}
 			{delcall CommerceTable.Table variant="$tableVariant"}
 				{param _handleItemToggled: $_handleItemToggled /}
@@ -105,25 +105,32 @@
 	{@param? _handleCellContentClick: any}
 	{@param? spritemap: string}
 
-	<td class="image-name-cell">
-		<h1 class="table-list-title">
-			{let $label kind="html"}
-				<div class="image-name-cell-label">
-					{if $item.thumbnail}
-						<img src={$item.thumbnail} />
-					{/if}
-					<span class="text-truncate">{$value}</span>
+	{let $label kind="html"}
+		<div class="row">
+			{if $item.thumbnail}
+				<div class="col-auto">
+					<span class="image-name-cell__image-container">
+						<img class="rounded-circle image-name-cell__image" src={$item.thumbnail} alt={$value} />
+					</span>
 				</div>
-			{/let}
-			{if $item.href}
-				{call ClayLink.render}
-					{param elementClasses: 'text-truncate' /}
-					{param href: $item.href /}
-					{param label: $label /}
-				{/call}
-			{else}
-				{$label}
 			{/if}
-		</h1>
+			<div class="col align-items-center col d-flex">
+				<span class="image-name-cell__value">
+					{$value}
+				</span>
+			</div>
+		</div>
+	{/let}
+
+	<td class="image-name-cell">
+		{if $item.href}
+			{call ClayLink.render}
+				{param elementClasses: 'text-truncate' /}
+				{param href: $item.href /}
+				{param label: $label /}
+			{/call}
+		{else}
+			{$label}
+		{/if}
 	</td>
 {/deltemplate}

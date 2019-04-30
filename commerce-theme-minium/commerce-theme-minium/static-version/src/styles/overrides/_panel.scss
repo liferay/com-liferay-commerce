@@ -1,7 +1,7 @@
 #minium {
 	.panel {
-		background-color: transparent;
 		border: 0;
+		border-radius: 8px;
 
 		.list-unstyled {
 			margin-bottom: 0;
@@ -41,9 +41,5 @@
 			position: absolute;
 			top: 2px;
 		}
-	}
-
-	.term-name {
-		// margin-left: 10px;
 	}
 }
