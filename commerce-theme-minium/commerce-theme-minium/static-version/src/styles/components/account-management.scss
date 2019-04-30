@@ -1,25 +1,12 @@
-.details-header {
-	&__section {
-		background: white;
-		border-radius: 8px;
-		margin-bottom: 5px;
-		padding: 30px;
-
-		&:last-child {
-			margin-bottom: 45px;
-		}
-	}
-
-	&__primary {
-		display: flex;
-		justify-content: space-between;
+.account-management {
+	&__thumbnail {
+		margin: 10px 0;
 	}
 
 	&__main-data {
 		display: grid;
 		grid-auto-columns: auto 1fr;
 		grid-gap: 0 20px;
-		grid-template-areas: "avatar name" "avatar email";
 		margin-right: 20px;
 	}
 
@@ -41,32 +28,14 @@
 		justify-items: center;
 	}
 
-	&__avatar {
-		border-radius: 50%;
-		grid-area: avatar;
-		height: 120px;
-		overflow: hidden;
-		width: 120px;
-
-		img {
-			height: 100%;
-			object-fit: cover;
-			width: 100%;
-		}
-	}
-
 	&__name {
-		align-self: end;
 		color: $color-fg;
 		font-size: 22px;
-		grid-area: name;
 	}
 
 	&__email {
-		align-self: start;
 		color: $color-fg;
 		font-size: 14px;
-		grid-area: email;
 	}
 
 	&__nav {
@@ -90,11 +59,6 @@
 		font-size: 14px;
 		line-height: 21px;
 		vertical-align: baseline;
-	}
-
-	&__secondary {
-		display: flex;
-		flex-wrap: wrap;
 	}
 
 	&__input {
