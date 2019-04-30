@@ -179,9 +179,7 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 	</aui:fieldset-group>
 </aui:form>
 
-<aui:script>
-	var A = AUI();
-
+<aui:script use="aui-base">
 	var publishButton = A.one('#<portlet:namespace />publishButton');
 
 	publishButton.on(
