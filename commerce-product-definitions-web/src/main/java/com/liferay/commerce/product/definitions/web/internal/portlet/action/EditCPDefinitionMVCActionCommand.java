@@ -221,7 +221,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		return assetEntry.getPriority();
 	}
 
-	protected long[] getAssetLinkIds(CPDefinition cpDefinition) {
+	protected long[] getAssetLinkEntryIds(CPDefinition cpDefinition) {
 		AssetEntry assetEntry = _assetEntryLocalService.fetchEntry(
 			cpDefinition.getModelClassName(), cpDefinition.getCPDefinitionId());
 
@@ -229,16 +229,18 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			return new long[0];
 		}
 
-		List<Long> assetLinkIds = new ArrayList<>();
+		List<Long> assetLinkEntryIds = new ArrayList<>();
 
 		List<AssetLink> assetLinks = _assetLinkLocalService.getLinks(
 			assetEntry.getEntryId());
 
 		for (AssetLink assetLink : assetLinks) {
-			assetLinkIds.add(assetLink.getLinkId());
+			if (assetLink.getEntryId1() != assetEntry.getEntryId()) {
+				assetLinkEntryIds.add(assetLink.getEntryId1());
+			}
 		}
 
-		return ArrayUtil.toLongArray(assetLinkIds);
+		return ArrayUtil.toLongArray(assetLinkEntryIds);
 	}
 
 	protected String[] getAssetTagNames(CPDefinition cpDefinition) {
@@ -391,7 +393,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			serviceContext.setAssetCategoryIds(
 				getAssetCategoryIds(oldCPDefinition));
 			serviceContext.setAssetLinkEntryIds(
-				getAssetLinkIds(oldCPDefinition));
+				getAssetLinkEntryIds(oldCPDefinition));
 			serviceContext.setAssetPriority(
 				getAssetEntryPriority(oldCPDefinition));
 			serviceContext.setAssetTagNames(getAssetTagNames(oldCPDefinition));
