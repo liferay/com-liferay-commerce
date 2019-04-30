@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
@@ -62,8 +63,9 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 				commerceVirtualOrderItemContentDisplayContext =
 					new CommerceVirtualOrderItemContentDisplayContext(
 						_commerceVirtualOrderItemLocalService,
-						_cpDefinitionHelper, _cpDefinitionVirtualSettingService,
-						_cpInstanceHelper, httpServletRequest);
+						_cpDefinitionHelper, _commerceAccountHelper,
+						_cpDefinitionVirtualSettingService, _cpInstanceHelper,
+						httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -87,6 +89,9 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceVirtualOrderItemContentConfigurationAction.class);
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService
