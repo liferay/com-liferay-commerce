@@ -76,9 +76,9 @@ renderResponse.setTitle(title);
 		}
 	}
 
-	var editOrderContainer = $('#<portlet:namespace />editOrderContainer');
+	var editOrderContainerPanels = $('#<portlet:namespace />editOrderContainer .panel-body');
 
-	editOrderContainer.on(
+	editOrderContainerPanels.on(
 		'submit', 'form',
 		function(event) {
 			event.preventDefault();
@@ -87,14 +87,14 @@ renderResponse.setTitle(title);
 		}
 	);
 
-	editOrderContainer.on(
+	editOrderContainerPanels.on(
 		'click', '.cancel-form-button',
 		function() {
 			enableFormEdit(this, false);
 		}
 	);
 
-	editOrderContainer.on(
+	editOrderContainerPanels.on(
 		'click', '.edit-form-link',
 		function() {
 			enableFormEdit(this, true);
