@@ -20,7 +20,7 @@ const selectInput = (element) => {
 function doFocusOut() {
 	const parentElement = this.element.parentElement.closest('[tabindex="0"]');
 
-	if (!!parentElement) {
+	if (parentElement) {
 		parentElement.focus();
 	}
 
@@ -214,7 +214,7 @@ AddToCartButton.STATE = {
 	buttonVariant: Config.oneOf(
 		[
 			'compact',
-            'inline'
+			'inline'
 		]
 	).value('inline'),
 	cartAPI: Config.string().required(),

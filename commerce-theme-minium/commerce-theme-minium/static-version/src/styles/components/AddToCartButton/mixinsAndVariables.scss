@@ -2,43 +2,42 @@ $baseTransitions: all .1s ease;
 $inputOutline: rgba(76, 132, 255, 0.5);
 
 @mixin formElement() {
-  font-size: 1.5em !important;
-  background: transparent !important;
-  border-radius: 8px;
-  border: 0;
-  position: relative;
-  z-index: 1;
+background: transparent !important;
+border: 0;
+border-radius: 8px;
+font-size: 1.5em !important;
+position: relative;
+z-index: 1;
 }
 
 @mixin transformButton(
-  $top, $left,
-  $marginTop, $marginLeft,
-  $width, $height,
-  $border,
-  $background
+$top, $left,
+$marginTop, $marginLeft,
+$width, $height,
+$border,
+$background
 ) {
-
-  top: $left;
-  left: $top;
-  margin-left: $marginLeft;
-  margin-top: $marginTop;
-  width: $width;
-  height: $height;
-  border: $border;
-  background: $background;
+background: $background;
+border: $border;
+height: $height;
+left: $top;
+margin-left: $marginLeft;
+margin-top: $marginTop;
+top: $left;
+width: $width;
 }
 
 @mixin constantSteps() {
-  border-radius: 22px;
-  color: $color-mood-good;
-  font-size: 1.7em;
-  line-height: 38px;
+border-radius: 22px;
+color: $color-mood-good;
+font-size: 1.7em;
+line-height: 38px;
 }
 
 @mixin quantityButtonsAnimation($translateX) {
-  @if($translateX == 'left') {
-    animation: quantityButtonsLeft .6s ease 1;
-  } @else {
-    animation: quantityButtonsRight .6s ease 1;
-  }
+@if($translateX == 'left') {
+	animation: quantityButtonsLeft .6s ease 1;
+} @else {
+	animation: quantityButtonsRight .6s ease 1;
+}
 }
