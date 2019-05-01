@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.address.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.address.content.web.internal.display.context.CommerceAddressDisplayContext;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
@@ -62,9 +63,9 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 
 			CommerceAddressDisplayContext commerceAddressDisplayContext =
 				new CommerceAddressDisplayContext(
-					_actionHelper, _commerceAddressService,
-					_commerceCountryService, _commerceRegionService,
-					httpServletRequest);
+					_actionHelper, _commerceAccountHelper,
+					_commerceAddressService, _commerceCountryService,
+					_commerceRegionService, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAddressDisplayContext);
@@ -100,6 +101,9 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
