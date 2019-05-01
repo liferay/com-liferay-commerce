@@ -1,50 +1,49 @@
-@import "AddToCartButton/mixinsAndVariables";
 @import "AddToCartButton/animations";
+@import "AddToCartButton/mixinsAndVariables";
 
 ::selection
 ::-webkit-selection
 
 .add-to-cart-button {
-
 	&--compact {
 		::selection {
 			background-color: $color-theme-light;
 		}
 
+		background-color: $color-theme !important;
+		border: 0 !important;
 		min-width: 140px;
 		position: relative;
-		border: 0 !important;
-		background-color: $color-theme !important;
 		transition: min-width .1s ease,
 		border .1s ease;
 
 		&:hover {
+			background-color: $color-theme-dark;
 			cursor: pointer !important;
 			min-width: 160px;
-			background-color: $color-theme-dark;
 			transition: $baseTransitions;
 		}
 
 		&::before {
+			background: rgba(255, 255, 255, 0);
+			border: 3px solid transparent;
+			border-radius: 6px;
+			box-sizing: border-box;
 			content: '';
 			display: block;
+			height: 100%;
 			position: absolute;
 			top: 0;
-			width: 100%;
-			height: 100%;
-			border: 3px solid transparent;
-			box-sizing: border-box;
-			border-radius: 6px;
-			background: rgba(255, 255, 255, 0);
 			transition: all .2s .5s ease;
+			width: 100%;
 		}
 
 		&--edit {
-			cursor: default !important;
-			box-shadow: none !important;
 			background-color: inherit !important;
-			min-width: 100px;
+			box-shadow: none !important;
 			color: black;
+			cursor: default !important;
+			min-width: 100px;
 
 			&::before {
 				@include transformButton(
@@ -52,13 +51,13 @@
 					-22px, -35px,
 					70px, 44px,
 					3px solid $inputOutline,
-                    rgba(255, 255, 255, 1)
+					rgba(255, 255, 255, 1)
 				);
+				animation: toInput .3s ease-in 1 forwards;
+				border-radius: 8px;
 				content: '';
 				display: block;
 				position: absolute;
-				border-radius: 8px;
-				animation: toInput .3s ease-in 1 forwards;
 			}
 
 			&.with-select::before {
@@ -69,33 +68,33 @@
 												3px solid $inputOutline,
 												rgba(255, 255, 255, 1)
 				);
+				animation: toSelect .3s ease-in 1 forwards;
+				border-radius: 8px;
 				content: '';
 				display: block;
 				position: absolute;
-				border-radius: 8px;
-				animation: toSelect .3s ease-in 1 forwards;
 			}
 		}
 
 		&__fwd {
-			opacity: 0;
 			align-items: center;
+			animation: confirmButton 500ms ease 1 forwards;
+			animation-delay: 200ms;
+			color: $color-theme;
 			cursor: pointer;
 			display: flex;
+			font-size: 26px !important;
 			height: 40px;
 			justify-content: center;
+			line-height: 20px;
+			opacity: 0;
 			position: absolute;
 			right: -35px;
 			width: 30px;
-			color: $color-theme;
-			font-size: 26px !important;
-			line-height: 20px;
-			animation: confirmButton 500ms ease 1 forwards;
-			animation-delay: 200ms;
 
 			&:hover .arrow__line {
-				transform-origin: left center;
 				transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+				transform-origin: left center;
 				transition: transform .2s ease-in;
 			}
 
@@ -106,8 +105,8 @@
 
 			& .arrow {
 				&__line {
-					transform-origin: left center;
 					transform: scaleX(.70);
+					transform-origin: left center;
 				}
 
 				&__tip {
@@ -124,17 +123,17 @@
 
 			&:hover {
 				.added-quantity {
+					display: none;
 					height: inherit;
 					width: inherit;
-					display: none;
 				}
 			}
 
 			&:hover::before {
-				display: flex;
 				align-items: center;
-				justify-content: center;
 				content: 'edit quantity';
+				display: flex;
+				justify-content: center;
 			}
 
 			&.quantity-changed {
@@ -149,14 +148,14 @@
 		.commerce-quantity-selector {
 			&__input {
 				@include formElement;
-				width: 65px;
 				height: 44px;
+				width: 65px;
 			}
 
 			&__select {
 				@include formElement;
-				width: 65px;
 				height: 44px;
+				width: 65px;
 			}
 
 			&__btn {
@@ -183,24 +182,24 @@
 		display: flex;
 
 		.commerce-button {
-			min-width: 160px;
-			height: 60px;
 			font-size: 12px;
+			height: 60px;
+			min-width: 160px;
 
 			&.commerce-button--good {
 				&:hover {
 					.added-quantity {
+						display: none;
 						height: inherit;
 						width: inherit;
-						display: none;
 					}
 				}
 
 				&:hover::before {
-					display: flex;
 					align-items: center;
-					justify-content: center;
 					content: 'add more';
+					display: flex;
+					justify-content: center;
 				}
 			}
 		}
@@ -215,11 +214,11 @@
 			}
 
 			&__select {
+				border-radius: 8px;
 				font-size: 1.3em;
 				height: 60px;
-				width: 80px;
-				border-radius: 8px;
 				margin-right: 10px;
+				width: 80px;
 			}
 
 			&__btn {
