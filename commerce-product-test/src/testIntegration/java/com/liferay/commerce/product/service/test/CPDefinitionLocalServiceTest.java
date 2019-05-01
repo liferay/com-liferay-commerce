@@ -40,7 +40,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,7 +116,6 @@ public class CPDefinitionLocalServiceTest {
 			WorkflowConstants.STATUS_INACTIVE, cpInstance.getStatus());
 	}
 
-	@Ignore
 	@Test
 	public void testAddCPDefinitionWithDefaultInstanceAndNoSKUs()
 		throws Exception {
@@ -179,7 +177,6 @@ public class CPDefinitionLocalServiceTest {
 			WorkflowConstants.STATUS_INACTIVE, cpInstance.getStatus());
 	}
 
-	@Ignore
 	@Test
 	public void testAddCPDefinitionWithDefaultInstanceAndSKUs()
 		throws Exception {
@@ -354,17 +351,17 @@ public class CPDefinitionLocalServiceTest {
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
 	@Inject
-	private static CPDefinitionLocalService _cpDefinitionLocalService;
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Inject
-	private static CPDefinitionOptionRelLocalService
+	private CPDefinitionOptionRelLocalService
 		_cpDefinitionOptionRelLocalService;
 
 	@Inject
-	private static CPInstanceLocalService _cpInstanceLocalService;
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Inject
-	private static CPOptionLocalService _cpOptionLocalService;
+	private CPOptionLocalService _cpOptionLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;
