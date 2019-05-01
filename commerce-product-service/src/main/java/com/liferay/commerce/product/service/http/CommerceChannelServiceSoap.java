@@ -16,9 +16,20 @@ package com.liferay.commerce.product.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CommerceChannelServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
+
+import java.rmi.RemoteException;
+
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.product.service.CommerceChannelServiceUtil} service utility. The
+ * {@link CommerceChannelServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +64,127 @@ import aQute.bnd.annotation.ProviderType;
  * @author Marco Leo
  * @see CommerceChannelServiceHttp
  * @see com.liferay.commerce.product.model.CommerceChannelSoap
- * @see com.liferay.commerce.product.service.CommerceChannelServiceUtil
+ * @see CommerceChannelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceChannelServiceSoap {
+	public static com.liferay.commerce.product.model.CommerceChannelSoap addCommerceChannel(
+		String[] nameMapLanguageIds, String[] nameMapValues, String filterType,
+		String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.addCommerceChannel(nameMap,
+					filterType, type, typeSettings, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap addCommerceChannel(
+		String name, String filterType, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.addCommerceChannel(name,
+					filterType, type, typeSettings, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap deleteCommerceChannel(
+		long commerceChannelId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.deleteCommerceChannel(commerceChannelId);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap fetchCommerceChannel(
+		long commerceChannelId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.fetchCommerceChannel(commerceChannelId);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap getCommerceChannel(
+		long commerceChannelId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.getCommerceChannel(commerceChannelId);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap[] getCommerceChannels(
+		int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceChannel> returnValue =
+				CommerceChannelServiceUtil.getCommerceChannels(start, end);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap updateCommerceChannel(
+		long commerceChannelId, String[] nameMapLanguageIds,
+		String[] nameMapValues, String filterType, String type,
+		String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+
+			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.updateCommerceChannel(commerceChannelId,
+					nameMap, filterType, type, typeSettings, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CommerceChannelServiceSoap.class);
 }

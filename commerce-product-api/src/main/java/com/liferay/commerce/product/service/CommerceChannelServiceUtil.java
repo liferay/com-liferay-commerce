@@ -42,6 +42,47 @@ public class CommerceChannelServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
+		java.util.Map<java.util.Locale, String> nameMap, String filterType,
+		String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceChannel(nameMap, filterType, type, typeSettings,
+			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
+		String name, String filterType, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceChannel(name, filterType, type, typeSettings,
+			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel deleteCommerceChannel(
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deleteCommerceChannel(commerceChannelId);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannel(
+		long commerceChannelId) {
+		return getService().fetchCommerceChannel(commerceChannelId);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel getCommerceChannel(
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannel(commerceChannelId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannels(start, end);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -50,6 +91,17 @@ public class CommerceChannelServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
+		long commerceChannelId,
+		java.util.Map<java.util.Locale, String> nameMap, String filterType,
+		String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceChannel(commerceChannelId, nameMap,
+			filterType, type, typeSettings, serviceContext);
 	}
 
 	public static CommerceChannelService getService() {

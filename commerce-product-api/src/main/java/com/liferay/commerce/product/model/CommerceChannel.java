@@ -54,4 +54,9 @@ public interface CommerceChannel extends CommerceChannelModel, PersistedModel {
 				return CommerceChannel.class;
 			}
 		};
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 }

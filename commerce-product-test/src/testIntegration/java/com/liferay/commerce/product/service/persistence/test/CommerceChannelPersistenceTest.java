@@ -132,6 +132,8 @@ public class CommerceChannelPersistenceTest {
 
 		newCommerceChannel.setModifiedDate(RandomTestUtil.nextDate());
 
+		newCommerceChannel.setName(RandomTestUtil.randomString());
+
 		newCommerceChannel.setFilterType(RandomTestUtil.randomString());
 
 		newCommerceChannel.setType(RandomTestUtil.randomString());
@@ -156,6 +158,8 @@ public class CommerceChannelPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommerceChannel.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceChannel.getModifiedDate()));
+		Assert.assertEquals(existingCommerceChannel.getName(),
+			newCommerceChannel.getName());
 		Assert.assertEquals(existingCommerceChannel.getFilterType(),
 			newCommerceChannel.getFilterType());
 		Assert.assertEquals(existingCommerceChannel.getType(),
@@ -189,8 +193,8 @@ public class CommerceChannelPersistenceTest {
 	protected OrderByComparator<CommerceChannel> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceChannel",
 			"commerceChannelId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true,
-			"filterType", true, "type", true, "typeSettings", true);
+			"userName", true, "createDate", true, "modifiedDate", true, "name",
+			true, "filterType", true, "type", true, "typeSettings", true);
 	}
 
 	@Test
@@ -401,6 +405,8 @@ public class CommerceChannelPersistenceTest {
 		commerceChannel.setCreateDate(RandomTestUtil.nextDate());
 
 		commerceChannel.setModifiedDate(RandomTestUtil.nextDate());
+
+		commerceChannel.setName(RandomTestUtil.randomString());
 
 		commerceChannel.setFilterType(RandomTestUtil.randomString());
 

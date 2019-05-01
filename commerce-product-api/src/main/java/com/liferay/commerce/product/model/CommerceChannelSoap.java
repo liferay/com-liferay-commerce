@@ -40,6 +40,7 @@ public class CommerceChannelSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setName(model.getName());
 		soapModel.setFilterType(model.getFilterType());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
@@ -145,6 +146,14 @@ public class CommerceChannelSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public String getFilterType() {
 		return _filterType;
 	}
@@ -175,6 +184,7 @@ public class CommerceChannelSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _name;
 	private String _filterType;
 	private String _type;
 	private String _typeSettings;

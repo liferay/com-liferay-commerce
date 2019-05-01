@@ -46,6 +46,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="filterType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="type_" name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />

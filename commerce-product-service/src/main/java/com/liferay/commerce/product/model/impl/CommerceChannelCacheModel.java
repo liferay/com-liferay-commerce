@@ -65,7 +65,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{commerceChannelId=");
 		sb.append(commerceChannelId);
@@ -79,6 +79,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append(", filterType=");
 		sb.append(filterType);
 		sb.append(", type=");
@@ -119,6 +121,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			commerceChannelImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		if (name == null) {
+			commerceChannelImpl.setName("");
+		}
+		else {
+			commerceChannelImpl.setName(name);
+		}
+
 		if (filterType == null) {
 			commerceChannelImpl.setFilterType("");
 		}
@@ -155,6 +164,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+		name = objectInput.readUTF();
 		filterType = objectInput.readUTF();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
@@ -178,6 +188,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+
+		if (name == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
 
 		if (filterType == null) {
 			objectOutput.writeUTF("");
@@ -207,6 +224,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public String name;
 	public String filterType;
 	public String type;
 	public String typeSettings;

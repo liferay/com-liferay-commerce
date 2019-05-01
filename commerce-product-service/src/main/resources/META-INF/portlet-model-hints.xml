@@ -18,6 +18,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field localized="true" name="name" type="String" />
 		<field name="filterType" type="String" />
 		<field name="type" type="String" />
 		<field name="typeSettings" type="String" />

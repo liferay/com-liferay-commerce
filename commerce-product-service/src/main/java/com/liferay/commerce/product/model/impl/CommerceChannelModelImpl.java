@@ -24,6 +24,7 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.LocaleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -34,8 +35,11 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -45,7 +49,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The base model implementation for the CommerceChannel service. Represents a row in the &quot;CommerceChannel&quot; database table, with each column mapped to a property of this class.
@@ -77,6 +84,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "name", Types.VARCHAR },
 			{ "filterType", Types.VARCHAR },
 			{ "type_", Types.VARCHAR },
 			{ "typeSettings", Types.VARCHAR }
@@ -90,12 +98,13 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("filterType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,filterType VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,filterType VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceChannel";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceChannel.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceChannel.createDate DESC";
@@ -129,6 +138,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setName(soapModel.getName());
 		model.setFilterType(soapModel.getFilterType());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
@@ -203,6 +213,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("name", getName());
 		attributes.put("filterType", getFilterType());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
@@ -249,6 +260,12 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 
 		String filterType = (String)attributes.get("filterType");
@@ -365,6 +382,105 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@JSON
 	@Override
+	public String getName() {
+		if (_name == null) {
+			return "";
+		}
+		else {
+			return _name;
+		}
+	}
+
+	@Override
+	public String getName(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId);
+	}
+
+	@Override
+	public String getName(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId, useDefault);
+	}
+
+	@Override
+	public String getName(String languageId) {
+		return LocalizationUtil.getLocalization(getName(), languageId);
+	}
+
+	@Override
+	public String getName(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getName(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getNameMap() {
+		return LocalizationUtil.getLocalizationMap(getName());
+	}
+
+	@Override
+	public void setName(String name) {
+		_name = name;
+	}
+
+	@Override
+	public void setName(String name, Locale locale) {
+		setName(name, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setName(String name, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(name)) {
+			setName(LocalizationUtil.updateLocalization(getName(), "Name",
+					name, languageId, defaultLanguageId));
+		}
+		else {
+			setName(LocalizationUtil.removeLocalization(getName(), "Name",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setNameMap(Map<Locale, String> nameMap) {
+		setNameMap(nameMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
+		if (nameMap == null) {
+			return;
+		}
+
+		setName(LocalizationUtil.updateLocalization(nameMap, getName(), "Name",
+				LocaleUtil.toLanguageId(defaultLocale)));
+	}
+
+	@JSON
+	@Override
 	public String getFilterType() {
 		if (_filterType == null) {
 			return "";
@@ -425,6 +541,67 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	}
 
 	@Override
+	public String[] getAvailableLanguageIds() {
+		Set<String> availableLanguageIds = new TreeSet<String>();
+
+		Map<Locale, String> nameMap = getNameMap();
+
+		for (Map.Entry<Locale, String> entry : nameMap.entrySet()) {
+			Locale locale = entry.getKey();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
+			}
+		}
+
+		return availableLanguageIds.toArray(new String[availableLanguageIds.size()]);
+	}
+
+	@Override
+	public String getDefaultLanguageId() {
+		String xml = getName();
+
+		if (xml == null) {
+			return "";
+		}
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
+	}
+
+	@Override
+	public void prepareLocalizedFieldsForImport() throws LocaleException {
+		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
+
+		Locale[] availableLocales = LocaleUtil.fromLanguageIds(getAvailableLanguageIds());
+
+		Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(CommerceChannel.class.getName(),
+				getPrimaryKey(), defaultLocale, availableLocales);
+
+		prepareLocalizedFieldsForImport(defaultImportLocale);
+	}
+
+	@Override
+	@SuppressWarnings("unused")
+	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
+		throws LocaleException {
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String modelDefaultLanguageId = getDefaultLanguageId();
+
+		String name = getName(defaultLocale);
+
+		if (Validator.isNull(name)) {
+			setName(getName(modelDefaultLanguageId), defaultLocale);
+		}
+		else {
+			setName(getName(defaultLocale), defaultLocale, defaultLocale);
+		}
+	}
+
+	@Override
 	public CommerceChannel toEscapedModel() {
 		if (_escapedModel == null) {
 			_escapedModel = (CommerceChannel)ProxyUtil.newProxyInstance(_classLoader,
@@ -444,6 +621,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		commerceChannelImpl.setUserName(getUserName());
 		commerceChannelImpl.setCreateDate(getCreateDate());
 		commerceChannelImpl.setModifiedDate(getModifiedDate());
+		commerceChannelImpl.setName(getName());
 		commerceChannelImpl.setFilterType(getFilterType());
 		commerceChannelImpl.setType(getType());
 		commerceChannelImpl.setTypeSettings(getTypeSettings());
@@ -549,6 +727,14 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			commerceChannelCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		commerceChannelCacheModel.name = getName();
+
+		String name = commerceChannelCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
+			commerceChannelCacheModel.name = null;
+		}
+
 		commerceChannelCacheModel.filterType = getFilterType();
 
 		String filterType = commerceChannelCacheModel.filterType;
@@ -578,7 +764,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{commerceChannelId=");
 		sb.append(getCommerceChannelId());
@@ -592,6 +778,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append(", filterType=");
 		sb.append(getFilterType());
 		sb.append(", type=");
@@ -605,7 +793,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CommerceChannel");
@@ -636,6 +824,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>filterType</column-name><column-value><![CDATA[");
 		sb.append(getFilterType());
 		sb.append("]]></column-value></column>");
@@ -664,6 +856,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
+	private String _name;
+	private String _nameCurrentLanguageId;
 	private String _filterType;
 	private String _type;
 	private String _typeSettings;
