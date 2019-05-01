@@ -26,6 +26,11 @@
 <liferay-ui:error exception="<%= CPDefinitionVirtualSettingTermsOfUseException.class %>" message="please-select-an-existing-web-content-or-enter-terms-of-use-content" />
 
 <aui:fieldset>
+
+	<%
+	boolean termsOfUseRequired = BeanParamUtil.getBoolean(cpDefinitionVirtualSetting, request, "termsOfUseRequired");
+	%>
+
 	<aui:input label="enable-terms-of-use" name="termsOfUseRequired" type="toggle-switch" value="<%= termsOfUseRequired %>" />
 </aui:fieldset>
 
