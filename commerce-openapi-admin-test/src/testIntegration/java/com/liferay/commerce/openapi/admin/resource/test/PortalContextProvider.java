@@ -76,22 +76,22 @@ public abstract class PortalContextProvider {
 	protected static final String USER = "test@liferay.com";
 
 	@Inject
-	protected static CompanyLocalService companyLocalService;
+	protected CompanyLocalService companyLocalService;
 
 	@Inject
-	protected static EROrganizationLocalService erOrganizationLocalService;
+	protected EROrganizationLocalService erOrganizationLocalService;
 
 	@Inject
-	protected static GroupLocalService groupLocalService;
+	protected GroupLocalService groupLocalService;
 
 	@Inject
-	protected static OrganizationLocalService organizationLocalService;
+	protected OrganizationLocalService organizationLocalService;
 
 	@Inject
-	protected static RoleLocalService roleLocalService;
+	protected RoleLocalService roleLocalService;
 
 	@Inject
-	protected static UserLocalService userLocalService;
+	protected UserLocalService userLocalService;
 
 	private static final String _ROOT_END_POINT_SUFFIX = "/o/commerce-admin/";
 
