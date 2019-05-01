@@ -26,6 +26,7 @@ import com.liferay.commerce.product.internal.upgrade.v1_3_0.CProductUpgradeProce
 import com.liferay.commerce.product.internal.upgrade.v1_4_0.CPDefinitionSpecificationOptionValueUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_5_0.CProductExternalReferenceCodeUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_5_0.CommerceCatalogUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_5_0.CommerceChannelUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
@@ -72,6 +73,7 @@ public class CommerceProductUpgradeStepRegistrator
 		registry.register(
 			_SCHEMA_VERSION_1_4_0, _SCHEMA_VERSION_1_5_0,
 			new CommerceCatalogUpgradeProcess(),
+			new CommerceChannelUpgradeProcess(),
 			new CProductExternalReferenceCodeUpgradeProcess(),
 			new com.liferay.commerce.product.internal.upgrade.v1_5_0.
 				CPRuleUpgradeProcess());
