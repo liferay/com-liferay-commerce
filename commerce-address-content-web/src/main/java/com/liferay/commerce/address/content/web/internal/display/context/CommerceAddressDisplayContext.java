@@ -15,7 +15,7 @@
 package com.liferay.commerce.address.content.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.address.content.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.address.content.web.internal.portlet.configuration.CommerceAddressContentPortletInstanceConfiguration;
 import com.liferay.commerce.model.CommerceAddress;
@@ -53,6 +53,7 @@ public class CommerceAddressDisplayContext {
 
 	public CommerceAddressDisplayContext(
 			ActionHelper actionHelper,
+			CommerceAccountHelper commerceAccountHelper,
 			CommerceAddressService commerceAddressService,
 			CommerceCountryService commerceCountryService,
 			CommerceRegionService commerceRegionService,
@@ -60,6 +61,7 @@ public class CommerceAddressDisplayContext {
 		throws PortalException {
 
 		_actionHelper = actionHelper;
+		_commerceAccountHelper = commerceAccountHelper;
 		_commerceAddressService = commerceAddressService;
 		_commerceCountryService = commerceCountryService;
 		_commerceRegionService = commerceRegionService;
@@ -99,8 +101,8 @@ public class CommerceAddressDisplayContext {
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		return CommerceAccountLocalServiceUtil.getPersonalCommerceAccount(
-			themeDisplay.getUserId());
+		return _commerceAccountHelper.getCurrentCommerceAccount(
+			themeDisplay.getScopeGroupId(), _httpServletRequest);
 	}
 
 	public CommerceAddress getCommerceAddress() throws PortalException {
@@ -294,6 +296,7 @@ public class CommerceAddressDisplayContext {
 	}
 
 	private final ActionHelper _actionHelper;
+	private final CommerceAccountHelper _commerceAccountHelper;
 	private CommerceAddress _commerceAddress;
 	private final CommerceAddressContentPortletInstanceConfiguration
 		_commerceAddressContentPortletInstanceConfiguration;
