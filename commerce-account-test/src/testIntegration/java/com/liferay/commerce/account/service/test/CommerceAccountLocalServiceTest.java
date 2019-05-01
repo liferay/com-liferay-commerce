@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -468,6 +469,8 @@ public class CommerceAccountLocalServiceTest {
 		Assert.assertEquals(
 			userCommerceAccounts2.toString(), 2, userCommerceAccounts2.size());
 
+		userCommerceAccounts2 = ListUtil.sort(userCommerceAccounts2);
+
 		CommerceAccount userCommerceAccount2a = userCommerceAccounts2.get(0);
 		CommerceAccount userCommerceAccount2b = userCommerceAccounts2.get(1);
 
@@ -487,6 +490,8 @@ public class CommerceAccountLocalServiceTest {
 
 		Assert.assertEquals(
 			userCommerceAccounts3.toString(), 3, userCommerceAccounts3.size());
+
+		userCommerceAccounts3 = ListUtil.sort(userCommerceAccounts3);
 
 		CommerceAccount userCommerceAccount3a = userCommerceAccounts3.get(0);
 		CommerceAccount userCommerceAccount3b = userCommerceAccounts3.get(1);
@@ -527,6 +532,8 @@ public class CommerceAccountLocalServiceTest {
 
 		Assert.assertEquals(
 			userCommerceAccounts5.toString(), 4, userCommerceAccounts5.size());
+
+		userCommerceAccounts5 = ListUtil.sort(userCommerceAccounts5);
 
 		CommerceAccount userCommerceAccount5a = userCommerceAccounts5.get(0);
 		CommerceAccount userCommerceAccount5b = userCommerceAccounts5.get(1);
