@@ -72,7 +72,9 @@ public class CommerceProductUpgradeStepRegistrator
 		registry.register(
 			_SCHEMA_VERSION_1_4_0, _SCHEMA_VERSION_1_5_0,
 			new CommerceCatalogUpgradeProcess(),
-			new CProductExternalReferenceCodeUpgradeProcess());
+			new CProductExternalReferenceCodeUpgradeProcess(),
+			new com.liferay.commerce.product.internal.upgrade.v1_5_0.
+				CPRuleUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");

@@ -17,7 +17,6 @@ package com.liferay.commerce.account.internal.util;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -65,7 +64,7 @@ public class CommerceAccountRoleHelperImpl
 				serviceContext.getUserId(), null, 0, name,
 				Collections.singletonMap(serviceContext.getLocale(), name),
 				Collections.emptyMap(), RoleConstants.TYPE_SITE,
-				StringPool.BLANK, serviceContext);
+				CommerceAccountConstants.ROLE_SUBTYPE_ACCOUNT, serviceContext);
 		}
 
 		_setRolePermissions(role, serviceContext);
