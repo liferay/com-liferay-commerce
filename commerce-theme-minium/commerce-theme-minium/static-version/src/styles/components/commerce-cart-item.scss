@@ -2,14 +2,14 @@
 	$item-image-size: 70px;
 	$item-image-size-sm: 50px;
 
+	align-items: center;
 	border-bottom: 1px solid rgba(180,187,201,0.2);
-	padding: 10px;
-	position: relative;
+	color: $color-fg;
 	display: grid;
 	font-size: 13px;
 	grid-gap: 15px;
-	align-items: center;
-	color: $color-fg;
+	padding: 10px;
+	position: relative;
 
 	grid-template-areas: "image content actions price delete";
 
@@ -26,8 +26,8 @@
 		grid-area: image;
 		height: 70px;
 		margin: auto;
-		width: 70px;
 		overflow: hidden;
+		width: 70px;
 	}
 
 	&__content {
@@ -43,9 +43,9 @@
 
 	&__name {
 		display: block;
+		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		overflow: hidden;
 	}
 
 	&__sku {
@@ -54,12 +54,12 @@
 
 	&__price {
 		grid-area: price;
-        text-align: right;
+		text-align: right;
 
 		.price__value {
 			display: block;
-			margin: 0;
 			font-size: 1.1em;
+			margin: 0;
 		}
 	}
 
@@ -83,17 +83,17 @@
 
 	&__delete {
 		align-items: center;
+		background-color: transparent;
+		border-radius: 50%;
 		cursor: pointer;
 		display: flex;
 		font-size: 28px;
 		height: 22px;
-		width: 22px;
 		justify-content: center;
 		padding: 0;
 		position: relative;
-		border-radius: 50%;
-		background-color: transparent;
 		transition: background-color .1s ease-out;
+		width: 22px;
 
 		&:hover {
 			background-color: #F8F8F8;
