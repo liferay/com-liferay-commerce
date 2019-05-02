@@ -22,6 +22,7 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
 
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
+List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.getCommerceChannelTypes();
 
 String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
@@ -41,6 +42,17 @@ String type = BeanParamUtil.getString(commerceChannel, request, "type");
 				<aui:input autoFocus="<%= true %>" name="name" required="true" value="<%= name %>" />
 
 				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
+
+					<%
+					for (CommerceChannelType commerceChannelType : commerceChannelTypes) {
+						String commerceChannelTypeKey = commerceChannelType.getKey();
+					%>
+
+						<aui:option label="<%= commerceChannelType.getLabel(locale) %>" selected="<%= (commerceChannel != null) && commerceChannelTypeKey.equals(type) %>" value="<%= commerceChannelTypeKey %>" />
+
+					<%
+					}
+					%>
 
 				</aui:select>
 			</aui:fieldset>

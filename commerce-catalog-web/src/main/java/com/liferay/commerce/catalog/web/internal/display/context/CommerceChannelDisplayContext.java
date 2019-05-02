@@ -15,6 +15,8 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.product.channel.CommerceChannelType;
+import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
@@ -95,6 +97,9 @@ public class CommerceChannelDisplayContext
 		return commerceChannel.getCommerceChannelId();
 	}
 
+	public List<CommerceChannelType> getCommerceChannelTypes() {
+		return _commerceChannelTypeRegistry.getCommerceChannelTypes();
+	}
 
 	@Override
 	public PortletURL getPortletURL() throws PortalException {
@@ -150,6 +155,7 @@ public class CommerceChannelDisplayContext
 	}
 
 	private final CommerceChannelService _commerceChannelService;
+	private final CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 	private final HttpServletRequest _httpServletRequest;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
