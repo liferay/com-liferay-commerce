@@ -23,6 +23,8 @@
 	{let $variant kind="text"}
 		{if isNonnull($buttonVariant)}
 			{$buttonVariant}
+		{else}
+			inline
 		{/if}
 	{/let}
 
@@ -60,6 +62,7 @@
 	{@param? _handleBtnClick: any }
 	{@param? _handleBtnFocus: any }
 	{@param? _handleBtnFocusin: any }
+	{@param? _handleBtnFocusout: any }
 	{@param? _updateQuantity: any }
 	{@param? _submitQuantity: any }
 
@@ -92,6 +95,7 @@
 			data-onclick="{$_handleBtnClick}"
 			data-onfocus="{$_handleBtnFocus}"
 			data-onfocusin="{$_handleBtnFocusin}"
+			data-onfocusout="{$_handleBtnFocusout}"
 			tabindex="0"
 	>
 

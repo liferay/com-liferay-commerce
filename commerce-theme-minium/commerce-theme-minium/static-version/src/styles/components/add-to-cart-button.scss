@@ -1,9 +1,6 @@
 @import "AddToCartButton/animations";
 @import "AddToCartButton/mixinsAndVariables";
 
-::selection
-::-webkit-selection
-
 .add-to-cart-button {
 	&--compact {
 		::selection {
@@ -206,9 +203,10 @@
 
 		.commerce-quantity-selector {
 			margin-right: 10px;
+			font-size: 12px;
 
 			&__input {
-				font-size: 1.3em;
+				font-size: 18px;
 				height: 60px;
 				width: 60px;
 			}
