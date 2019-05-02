@@ -4,7 +4,7 @@
 	box-shadow: -20px 0 40px $color-shadow;
 	display: flex;
 	flex-direction: column;
-	max-width: 420px;
+	max-width: 500px;
 	position: fixed;
 	right: 0;
 	top: $frame-size;
@@ -65,6 +65,11 @@
 
 	&__footer {
 		background-color: $color-bg-dark;
+
+		.commerce-button--block {
+			font-size: 1em;
+			text-transform: capitalize;
+		}
 	}
 
 	&__totals {
@@ -73,20 +78,18 @@
 		display: flex;
 		flex-wrap: wrap;
 		margin: 0;
-		padding: 10px;
+		padding: 20px 35px;
 		text-align: right;
 
 		dt {
 			flex: 1 1 60%;
-			font-size: 11px;
 			font-weight: normal;
-			letter-spacing: 1.1px;
 			margin: 0;
 			opacity: 0.75;
-			text-transform: uppercase;
+			text-transform: capitalize;
 
-			&::after {
-				content: ':';
+			big {
+				font-weight: bold;
 			}
 		}
 
@@ -99,6 +102,10 @@
 				font-size: 18px;
 				font-weight: bold;
 			}
+		}
+
+		.final-total {
+			margin-top: 15px;
 		}
 	}
 

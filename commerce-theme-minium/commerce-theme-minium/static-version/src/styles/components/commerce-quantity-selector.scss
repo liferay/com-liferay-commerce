@@ -11,12 +11,11 @@
 	&__select {
 		background: white;
 		border: 2px solid rgba(180,187,201,0.25);
-		border-radius: 8px;
 		color: $color-fg;
-		font-family: Roboto;
+		font-family: Roboto, sans-serif;
 		font-size: 12px;
-		height: 30px;
 		text-align: center;
+		height: 30px;
 		width: 50px;
 
 		&:focus {
@@ -32,9 +31,9 @@
 	}
 
 	&__btn {
-		color: $color-fg-alt;
+		color: $color-fg;
 		cursor: pointer;
-		font-size: 14px;
+		font-size: 18px;
 		font-weight: bold;
 		line-height: 30px;
 		text-align: center;

@@ -181,7 +181,7 @@ public class CommerceCartResource {
 	@GET
 	@Path("/cart/{orderId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateOrderItem(
+	public Response getOrder(
 		@PathParam("orderId") long commerceOrderId,
 		@Context HttpServletRequest httpServletRequest) {
 
