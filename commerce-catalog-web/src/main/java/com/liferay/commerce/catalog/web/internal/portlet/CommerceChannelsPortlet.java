@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.portlet;
 
 import com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceChannelService;
