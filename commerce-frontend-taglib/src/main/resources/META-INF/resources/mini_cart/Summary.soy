@@ -42,7 +42,7 @@
 					<dt>{msg desc="Taxes"}taxes{/msg}</dt>
 					<dd>{$taxes}</dd>
 				{/if}
-				<dt>{msg desc="Total"}total{/msg}</dt>
+				<dt class="final-total"><big>{msg desc="Total"}total{/msg}</big></dt>
 				<dd>
 					{if isNonnull($loading) and $loading}
 						{call Loader.render}
@@ -64,7 +64,7 @@
 		{/let}
 
 		{if isNonnull($checkoutUrl)}
-			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
+			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Checkout"}Checkout{/msg}</a>
 		{/if}
 	</div>
 {/template}

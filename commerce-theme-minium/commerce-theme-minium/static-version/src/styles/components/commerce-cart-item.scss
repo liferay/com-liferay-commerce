@@ -1,30 +1,33 @@
 .commerce-cart-item {
+	$item-image-size: 70px;
+	$item-image-size-sm: 50px;
+
 	border-bottom: 1px solid rgba(180,187,201,0.2);
 	padding: 10px;
 	position: relative;
-	$item-image-size: 80px;
-	$item-image-size-sm: 50px;
 	display: grid;
 	font-size: 13px;
-	grid-gap: 10px;
+	grid-gap: 15px;
+	align-items: center;
+	color: $color-fg;
 
-	grid-template-areas: "image content actions"
-						 "image price price";
+	grid-template-areas: "image content actions price delete";
 
-	grid-template-columns: $item-image-size 1fr 100px;
+	grid-template-columns: $item-image-size 180px $item-image-size 75px;
 	max-height: 140px;
 	overflow: hidden;
 	transition: max-height .2s ease-in, padding .1s ease-in;
 
 	&__image {
 		align-self: center;
-		background-position: 50%;
+		background-position: center center;
 		background-size: cover;
 		border-radius: 4px;
 		grid-area: image;
-		height: 80px;
+		height: 70px;
 		margin: auto;
-		width: 80px;
+		width: 70px;
+		overflow: hidden;
 	}
 
 	&__content {
@@ -32,15 +35,32 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+
+		big {
+			font-weight: bold;
+		}
 	}
 
-	&__name,
+	&__name {
+		display: block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
 	&__sku {
 		display: block;
 	}
 
 	&__price {
 		grid-area: price;
+        text-align: right;
+
+		.price__value {
+			display: block;
+			margin: 0;
+			font-size: 1.1em;
+		}
 	}
 
 	&__actions {
@@ -57,29 +77,27 @@
 		color: $color-mood-bad
 	}
 
+	&__delete-wrapper {
+		grid-area: delete;
+	}
+
 	&__delete {
 		align-items: center;
-		border-radius: 50%;
-		color: $color-mood-bad;
 		cursor: pointer;
 		display: flex;
-		font-size: 20px;
-		height: 16px;
+		font-size: 28px;
+		height: 22px;
+		width: 22px;
 		justify-content: center;
-		margin: 10px auto 0;
 		padding: 0;
 		position: relative;
+		border-radius: 50%;
+		background-color: transparent;
+		transition: background-color .1s ease-out;
 
 		&:hover {
-			color: $color-mood-bad;
-		}
-
-		.commerce-cart-item:not(:hover) &:not(:focus) {
-			opacity: 0;
-
-			@media (hover: none) {
-				opacity: 1;
-			}
+			background-color: #F8F8F8;
+			transition: background-color .1s ease-in;
 		}
 
 		&.is-disabled {
