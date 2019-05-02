@@ -7,7 +7,7 @@ Export-Package:\
 	com.liferay.commerce.product.definitions.web.portlet.action,\
 	com.liferay.commerce.product.definitions.web.servlet.taglib.ui
 Import-Package:\
-	com.liferay.portal.kernel.portlet;version="[8.0,8.2)",\
+	com.liferay.portal.kernel.portlet;version="[8.0,8.3)",\
 	\
 	*
 Provide-Capability:\
