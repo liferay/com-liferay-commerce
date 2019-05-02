@@ -36,7 +36,9 @@ public class CommerceAccountUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_dropIndex(CommerceAccountImpl.TABLE_NAME, "IX_462292EF");
+		if (_tableHasIndex(CommerceAccountImpl.TABLE_NAME, "IX_462292EF")) {
+			_dropIndex(CommerceAccountImpl.TABLE_NAME, "IX_462292EF");
+		}
 
 		_addIndexes(CommerceAccountImpl.TABLE_NAME);
 	}

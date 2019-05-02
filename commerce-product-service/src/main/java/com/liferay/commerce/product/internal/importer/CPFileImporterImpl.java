@@ -161,9 +161,10 @@ public class CPFileImporterImpl implements CPFileImporter {
 			JSONObject actionsJSONObject = jsonObject.getJSONObject("actions");
 			String name = jsonObject.getString("name");
 			int scope = jsonObject.getInt("scope");
+			String subtype = jsonObject.getString("subtype");
 			int type = jsonObject.getInt("type");
 
-			Role role = getRole(name, type, serviceContext);
+			Role role = getRole(name, type, subtype, serviceContext);
 
 			updateActions(role, actionsJSONObject, scope, serviceContext);
 		}
@@ -646,7 +647,9 @@ public class CPFileImporterImpl implements CPFileImporter {
 		return content;
 	}
 
-	protected Role getRole(String name, int type, ServiceContext serviceContext)
+	protected Role getRole(
+			String name, int type, String subtype,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		Map<Locale, String> titleMap = new HashMap<>();
@@ -659,7 +662,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 		if (role == null) {
 			role = _roleLocalService.addRole(
 				serviceContext.getUserId(), null, 0, name, titleMap, null, type,
-				null, serviceContext);
+				subtype, serviceContext);
 		}
 
 		return role;
