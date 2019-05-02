@@ -118,6 +118,51 @@ public class CommerceCartResource {
 		return getResponse(cart);
 	}
 
+	@GET
+	@Path("/cart/{orderId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getOrder(
+		@PathParam("orderId") long commerceOrderId,
+		@Context HttpServletRequest httpServletRequest) {
+
+		Cart cart = null;
+
+		try {
+			CommerceOrder commerceOrder =
+				_commerceOrderService.getCommerceOrder(commerceOrderId);
+
+			CommerceContext commerceContext = _commerceContextFactory.create(
+				commerceOrder.getGroupId(),
+				_portal.getUserId(httpServletRequest),
+				commerceOrder.getCommerceOrderId(),
+				commerceOrder.getCommerceAccountId());
+
+			httpServletRequest.setAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
+
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			themeDisplay.setScopeGroupId(commerceOrder.getGroupId());
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceOrderItem.class.getName(), httpServletRequest);
+
+			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
+
+			cart = _commerceCartResourceUtil.getCart(
+				commerceOrderId, themeDisplay.getLocale(), commerceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
+		}
+
+		return getResponse(cart);
+	}
+
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/cart/cart-item/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -173,51 +218,6 @@ public class CommerceCartResource {
 			else {
 				cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 			}
-		}
-
-		return getResponse(cart);
-	}
-
-	@GET
-	@Path("/cart/{orderId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getOrder(
-		@PathParam("orderId") long commerceOrderId,
-		@Context HttpServletRequest httpServletRequest) {
-
-		Cart cart = null;
-
-		try {
-			CommerceOrder commerceOrder =
-				_commerceOrderService.getCommerceOrder(commerceOrderId);
-
-			CommerceContext commerceContext = _commerceContextFactory.create(
-				commerceOrder.getGroupId(),
-				_portal.getUserId(httpServletRequest),
-				commerceOrder.getCommerceOrderId(),
-				commerceOrder.getCommerceAccountId());
-
-			httpServletRequest.setAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)httpServletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			themeDisplay.setScopeGroupId(commerceOrder.getGroupId());
-
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				CommerceOrderItem.class.getName(), httpServletRequest);
-
-			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
-
-			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderId, themeDisplay.getLocale(), commerceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 		}
 
 		return getResponse(cart);
