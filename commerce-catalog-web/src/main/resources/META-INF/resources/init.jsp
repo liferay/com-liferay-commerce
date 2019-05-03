@@ -30,7 +30,10 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogUsersDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.SiteCommerceChannelTypeDisplayContext" %><%@
 page import="com.liferay.commerce.product.channel.CommerceChannelType" %><%@
+page import="com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor" %><%@
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
 page import="com.liferay.commerce.product.constants.CommerceCatalogConstants" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCatalogException" %><%@
@@ -42,6 +45,8 @@ page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+page import="com.liferay.portal.kernel.model.Group" %><%@
+page import="com.liferay.portal.kernel.model.Organization" %><%@
 page import="com.liferay.portal.kernel.model.Role" %><%@
 page import="com.liferay.portal.kernel.model.User" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
@@ -49,6 +54,7 @@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.ListUtil" %><%@
 page import="com.liferay.portal.kernel.util.LocaleUtil" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
+page import="com.liferay.portal.kernel.util.UnicodeFormatter" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %><%@
 page import="com.liferay.taglib.search.ResultRow" %>
 
