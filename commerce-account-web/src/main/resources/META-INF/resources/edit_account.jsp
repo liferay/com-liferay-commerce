@@ -35,10 +35,10 @@ if (commerceAddress != null) {
 
 <div class="account-management">
 	<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="fm">
-		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAccount == null) ? Constants.ADD : Constants.UPDATE %>" />
-		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="commerceAccountId" type="hidden" value="<%= (commerceAccount == null) ? 0 : commerceAccount.getCommerceAccountId() %>" />
-		<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="commerceAddressId" type="hidden" value="<%= (commerceAddress == null) ? 0 : commerceAddress.getCommerceAddressId() %>" />
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAccount == null) ? Constants.ADD : Constants.UPDATE %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAccount == null) ? 0 : commerceAccount.getCommerceAccountId() %>" />
+		<aui:input name="commerceAddressId" type="hidden" value="<%= (commerceAddress == null) ? 0 : commerceAddress.getCommerceAddressId() %>" />
 
 		<liferay-ui:error-marker
 			key="<%= WebKeys.ERROR_SECTION %>"
@@ -50,7 +50,7 @@ if (commerceAddress != null) {
 		<section class="panel panel-secondary">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col col-lg-4">
+					<div class="col-lg-4 account-management__thumbnail-container">
 						<aui:fieldset>
 							<c:if test="<%= commerceAccount != null %>">
 
@@ -72,9 +72,9 @@ if (commerceAddress != null) {
 						</aui:fieldset>
 					</div>
 
-					<div class="col col-lg-4">
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="name" />
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="email" />
+					<div class="col-lg-4">
+						<aui:input name="name" />
+						<aui:input name="email" />
 					</div>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ if (commerceAddress != null) {
 				<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
 
 				<div class="row">
-					<div class="col col-lg-4">
+					<div class="col-lg-4">
 						<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
 
 							<%
@@ -93,9 +93,11 @@ if (commerceAddress != null) {
 
 							for (CommerceCountry commerceCountry : commerceCountries) {
 							%>
-
-								<aui:option label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
-
+								<aui:option 
+									label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" 
+									selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" 
+									value="<%= commerceCountry.getCommerceCountryId() %>" 
+								/>
 							<%
 							}
 							%>
@@ -104,7 +106,7 @@ if (commerceAddress != null) {
 
 					</div>
 
-					<div class="col col-lg-4">
+					<div class="col-lg-4">
 						<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
 
 							<%
@@ -112,9 +114,11 @@ if (commerceAddress != null) {
 
 							for (CommerceRegion commerceRegion : commerceRegions) {
 							%>
-
-								<aui:option label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
-
+								<aui:option 
+									label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" 
+									selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" 
+									value="<%= commerceRegion.getCommerceRegionId() %>" 
+								/>
 							<%
 							}
 							%>
@@ -122,18 +126,18 @@ if (commerceAddress != null) {
 						</aui:select>
 					</div>
 
-					<div class="col col-lg-4">
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" label="address" name="street1" />
+					<div class="col-lg-4">
+						<aui:input label="address" name="street1" />
 					</div>
 
-					<div class="col col-lg-4">
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="zip">
+					<div class="col-lg-4">
+						<aui:input name="zip">
 							<aui:validator name="required" />
 						</aui:input>
 					</div>
 
-					<div class="col col-lg-4">
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" name="city" />
+					<div class="col-lg-4">
+						<aui:input name="city" />
 					</div>
 				</div>
 			</div>
@@ -145,7 +149,7 @@ if (commerceAddress != null) {
 
 				<div class="row">
 					<div class="col-lg-4">
-						<aui:input  cssClass="mb-0" wrapperCssClass="mb-0" label="vat-number" name="taxId" />
+						<aui:input label="vat-number" name="taxId" />
 					</div>
 				</div>
 			</div>
