@@ -90,6 +90,20 @@ public class CommerceAccountUserRelServiceImpl
 	}
 
 	@Override
+	public CommerceAccountUserRel getCommerceAccountUserRel(
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(),
+			commerceAccountUserRelPK.getCommerceAccountId(),
+			CommerceAccountActionKeys.VIEW_MEMBERS);
+
+		return commerceAccountUserRelLocalService.getCommerceAccountUserRel(
+			commerceAccountUserRelPK);
+	}
+
+	@Override
 	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
 			long commerceAccountId, int start, int end)
 		throws PortalException {
@@ -98,7 +112,7 @@ public class CommerceAccountUserRelServiceImpl
 			getPermissionChecker(), commerceAccountId,
 			CommerceAccountActionKeys.VIEW_MEMBERS);
 
-		return commerceAccountUserRelPersistence.findByCommerceAccountId(
+		return commerceAccountUserRelLocalService.getCommerceAccountUserRels(
 			commerceAccountId, start, end);
 	}
 
