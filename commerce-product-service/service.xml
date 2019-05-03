@@ -959,9 +959,10 @@
 
 		<!-- Other fields -->
 
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="name" type="String" />
 		<column name="active" type="boolean" />
-		<column name="scope" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
 
@@ -975,6 +976,10 @@
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 		</finder>
 
 		<!-- References -->
