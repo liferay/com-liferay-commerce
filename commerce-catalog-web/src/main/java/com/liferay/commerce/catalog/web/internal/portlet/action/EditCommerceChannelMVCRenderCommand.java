@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.portlet.action;
 
 import com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -59,9 +60,9 @@ public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 			CommerceChannelDisplayContext commerceChannelDisplayContext =
 				new CommerceChannelDisplayContext(
-					httpServletRequest, _commerceChannelService,
-					_commerceChannelTypeRegistry, _portal,
-					_portletResourcePermission);
+					_commerceChannelService, _commerceChannelTypeRegistry,
+					_commerceChannelTypeJSPContributorRegistry,
+					httpServletRequest, _portal, _portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
@@ -80,6 +81,10 @@ public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CommerceChannelService _commerceChannelService;
+
+	@Reference
+	private CommerceChannelTypeJSPContributorRegistry
+		_commerceChannelTypeJSPContributorRegistry;
 
 	@Reference
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
