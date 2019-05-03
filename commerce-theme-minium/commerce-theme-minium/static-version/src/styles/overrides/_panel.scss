@@ -1,15 +1,17 @@
 #minium {
 	.panel {
 		border: 0;
-		border-radius: 8px;
+		background-color: transparent;
 
 		.list-unstyled {
 			margin-bottom: 0;
 		}
 	}
-
-	.panel-group .panel:last-child {
-		margin-bottom: 0;
+	
+	.panel-heading,
+	.panel-body {
+		background-color: white;
+		border-radius: 8px;
 	}
 
 	.panel-group + .panel-group {
