@@ -125,6 +125,22 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap getCommerceAccountOrganizationRel(
+		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountOrganizationRel returnValue =
+				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+
+			return com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRels(
 		long commerceAccountId) throws RemoteException {
 		try {
