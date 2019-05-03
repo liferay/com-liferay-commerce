@@ -32,9 +32,10 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfi
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverterContext;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;

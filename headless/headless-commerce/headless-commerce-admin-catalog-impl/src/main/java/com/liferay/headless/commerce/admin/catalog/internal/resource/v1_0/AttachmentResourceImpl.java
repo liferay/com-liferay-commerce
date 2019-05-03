@@ -22,12 +22,12 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
-import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.AttachmentResource;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -111,6 +111,12 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			_cpAttachmentFileEntryService.fetchByExternalReferenceCode(
 				contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (cpAttachmentFileEntry == null) {
+			throw new NoSuchCPAttachmentFileEntryException(
+				"Unable to find Attachment with externalReferenceCode: " +
+					externalReferenceCode);
+		}
 
 		DTOConverter attachmentDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(

@@ -19,8 +19,8 @@ import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetCategoryService;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
