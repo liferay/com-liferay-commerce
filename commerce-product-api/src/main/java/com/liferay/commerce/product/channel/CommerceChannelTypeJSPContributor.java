@@ -12,18 +12,22 @@
  * details.
  */
 
-package com.liferay.commerce.product.constants;
+package com.liferay.commerce.product.channel;
+
+import aQute.bnd.annotation.ProviderType;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Alec Sloan
  */
-public class CommerceChannelConstants {
+@ProviderType
+public interface CommerceChannelTypeJSPContributor {
 
-	public static final String FILTER_TYPE_AND = "and";
-
-	public static final String FILTER_TYPE_OR = "or";
-
-	public static final String SERVICE_NAME =
-		"com.liferay.commerce.product.channel";
+	public void render(
+			long commerceChannelId, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
+		throws Exception;
 
 }

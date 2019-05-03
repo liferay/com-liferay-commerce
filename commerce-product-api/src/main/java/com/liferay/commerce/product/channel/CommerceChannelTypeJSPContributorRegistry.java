@@ -12,18 +12,22 @@
  * details.
  */
 
-package com.liferay.commerce.product.constants;
+package com.liferay.commerce.product.channel;
+
+import aQute.bnd.annotation.ProviderType;
+
+import java.util.List;
 
 /**
  * @author Alec Sloan
  */
-public class CommerceChannelConstants {
+@ProviderType
+public interface CommerceChannelTypeJSPContributorRegistry {
 
-	public static final String FILTER_TYPE_AND = "and";
+	public CommerceChannelTypeJSPContributor
+		getCommerceChannelTypeJSPContributor(String key);
 
-	public static final String FILTER_TYPE_OR = "or";
-
-	public static final String SERVICE_NAME =
-		"com.liferay.commerce.product.channel";
+	public List<CommerceChannelTypeJSPContributor>
+		getCommerceChannelTypeJSPContributors();
 
 }

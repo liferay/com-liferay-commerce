@@ -16,6 +16,8 @@ package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
 import com.liferay.commerce.product.channel.CommerceChannelType;
+import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
+import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -43,19 +45,23 @@ public class CommerceChannelDisplayContext
 	extends BaseCommerceCatalogSearchContainerDisplayContext<CommerceChannel> {
 
 	public CommerceChannelDisplayContext(
-			HttpServletRequest httpServletRequest,
 			CommerceChannelService commerceChannelService,
 			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
-			Portal portal, PortletResourcePermission portletResourcePermission)
+			CommerceChannelTypeJSPContributorRegistry
+				commerceChannelTypeJSPContributorRegistry,
+			HttpServletRequest httpServletRequest, Portal portal,
+			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
 		super(httpServletRequest, CommerceChannel.class.getSimpleName());
 
 		setDefaultOrderByType("desc");
 
-		_httpServletRequest = httpServletRequest;
 		_commerceChannelService = commerceChannelService;
 		_commerceChannelTypeRegistry = commerceChannelTypeRegistry;
+		_commerceChannelTypeJSPContributorRegistry =
+			commerceChannelTypeJSPContributorRegistry;
+		_httpServletRequest = httpServletRequest;
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
 	}
@@ -71,8 +77,7 @@ public class CommerceChannelDisplayContext
 			_httpServletRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
-		portletURL.setParameter(
-			"mvcRenderCommandName", "editCommerceChannel");
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
 		portletURL.setParameter(
 			"commerceChannelId",
 			String.valueOf(commerceChannel.getCommerceChannelId()));
@@ -95,6 +100,13 @@ public class CommerceChannelDisplayContext
 		}
 
 		return commerceChannel.getCommerceChannelId();
+	}
+
+	public CommerceChannelTypeJSPContributor
+		getCommerceChannelTypeJSPContributor(String key) {
+
+		return _commerceChannelTypeJSPContributorRegistry.
+			getCommerceChannelTypeJSPContributor(key);
 	}
 
 	public List<CommerceChannelType> getCommerceChannelTypes() {
@@ -155,6 +167,8 @@ public class CommerceChannelDisplayContext
 	}
 
 	private final CommerceChannelService _commerceChannelService;
+	private final CommerceChannelTypeJSPContributorRegistry
+		_commerceChannelTypeJSPContributorRegistry;
 	private final CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 	private final HttpServletRequest _httpServletRequest;
 	private final Portal _portal;
