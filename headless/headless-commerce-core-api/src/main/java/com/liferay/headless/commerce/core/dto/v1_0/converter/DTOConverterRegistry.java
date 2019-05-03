@@ -12,16 +12,13 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter;
+package com.liferay.headless.commerce.core.dto.v1_0.converter;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public interface DTOConverter {
+public interface DTOConverterRegistry {
 
-	public String getContentType();
-
-	public Object toDTO(DTOConverterContext dtoConverterContext)
-		throws Exception;
+	public DTOConverter getDTOConverter(String modelClassName);
 
 }
