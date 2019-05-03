@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter;
+package com.liferay.headless.commerce.core.dto.v1_0.converter;
 
 import java.util.Locale;
 import java.util.Optional;
@@ -37,6 +37,26 @@ public class DefaultDTOConverterContext implements DTOConverterContext {
 		_uriInfo = uriInfo;
 	}
 
+	public DefaultDTOConverterContext(
+		Locale locale, Object compositeResourcePrimKey) {
+
+		_locale = locale;
+		_compositeResourcePrimKey = compositeResourcePrimKey;
+	}
+
+	public DefaultDTOConverterContext(
+		Locale locale, Object compositeResourcePrimKey, UriInfo uriInfo) {
+
+		_locale = locale;
+		_compositeResourcePrimKey = compositeResourcePrimKey;
+		_uriInfo = uriInfo;
+	}
+
+	@Override
+	public Object getCompositeResourcePrimKey() {
+		return _compositeResourcePrimKey;
+	}
+
 	@Override
 	public Locale getLocale() {
 		return _locale;
@@ -52,8 +72,9 @@ public class DefaultDTOConverterContext implements DTOConverterContext {
 		return Optional.ofNullable(_uriInfo);
 	}
 
+	private Object _compositeResourcePrimKey;
 	private final Locale _locale;
-	private final long _resourcePrimKey;
+	private long _resourcePrimKey;
 	private UriInfo _uriInfo;
 
 }
