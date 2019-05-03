@@ -1,0 +1,58 @@
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<%
+renderResponse.setTitle(LanguageUtil.get(request, "channels"));
+%>
+
+<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CHANNELS %>" var="viewChannelDetailsURL">
+	<portlet:param name="channelNavigationItem" value="view-details" />
+	<portlet:param name="commerceChannelId" value="<%= String.valueOf(commerceChannelId) %>" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceChannel" />
+</liferay-portlet:renderURL>
+
+<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CHANNELS %>" var="viewChannelFilterURL">
+	<portlet:param name="channelNavigationItem" value="view-filters" />
+	<portlet:param name="commerceChannelId" value="<%= String.valueOf(commerceChannelId) %>" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceChannelFilter" />
+</liferay-portlet:renderURL>
+
+<%
+NavigationItem channelDetailsNavigationItem = new NavigationItem();
+
+channelDetailsNavigationItem.setActive(channelNavigationItem.equals("view-details"));
+channelDetailsNavigationItem.setHref(viewChannelDetailsURL.toString());
+channelDetailsNavigationItem.setLabel(LanguageUtil.get(request, "details"));
+
+NavigationItem channelFiltersNavigationItem = new NavigationItem();
+
+channelFiltersNavigationItem.setActive(channelNavigationItem.equals("view-filters"));
+channelFiltersNavigationItem.setHref(viewChannelFilterURL.toString());
+channelFiltersNavigationItem.setLabel(LanguageUtil.get(request, "filters"));
+
+List<NavigationItem> channelSubNavigationItem = Arrays.asList(channelDetailsNavigationItem, channelFiltersNavigationItem);
+%>
+
+<c:if test="<%= commerceChannelId != 0 %>">
+	<clay:navigation-bar
+		inverted="<%= true %>"
+		navigationItems="<%= ChannelNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"
+	/>
+
+	<clay:navigation-bar
+		navigationItems="<%= channelSubNavigationItem %>"
+	/>
+</c:if>

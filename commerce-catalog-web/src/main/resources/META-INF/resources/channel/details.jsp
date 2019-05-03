@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String channelNavigationItem = ParamUtil.getString(request, "channelNavigationItem", "view-details");
+
 CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
@@ -27,6 +29,8 @@ List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.g
 String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
 %>
+
+<%@ include file="/channel/navbar_definitions.jspf" %>
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
 
