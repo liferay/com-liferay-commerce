@@ -136,11 +136,8 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		CommerceChannel commerceChannel = null;
 
 		if (commerceChannelId > 0) {
-			commerceChannel = _commerceChannelService.getCommerceChannels(
-				-1, -1
-			).get(
-				0
-			);
+			commerceChannel = _commerceChannelService.fetchCommerceChannel(
+				commerceChannelId);
 		}
 
 		if ((commerceChannel != null) &&
