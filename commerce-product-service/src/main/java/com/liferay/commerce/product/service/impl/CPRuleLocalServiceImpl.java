@@ -68,19 +68,8 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPRule addCPRule(
-			String name, boolean active, String type,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpRuleLocalService.addCPRule(
-			name, active, type, null, serviceContext);
-	}
-
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CPRule addCPRule(
-			String name, boolean active, String type,
-			UnicodeProperties typeSettingsProperties,
+			long classNameId, long classPK, String name, boolean active,
+			String type, UnicodeProperties typeSettingsProperties,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -99,6 +88,8 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cpRule.setCompanyId(user.getCompanyId());
 		cpRule.setUserId(user.getUserId());
 		cpRule.setUserName(user.getFullName());
+		cpRule.setClassNameId(classNameId);
+		cpRule.setClassPK(classPK);
 		cpRule.setName(name);
 		cpRule.setActive(active);
 		cpRule.setType(type);
@@ -116,6 +107,42 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cleanCPRulesCache(groupId);
 
 		return cpRule;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPRule addCPRule(
+			String name, boolean active, String type,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return cpRuleLocalService.addCPRule(
+			name, active, type, null, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPRule addCPRule(
+			String name, boolean active, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return cpRuleLocalService.addCPRule(
+			0, 0, name, active, type, typeSettingsProperties, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPRule addCPRule(
+			String className, long classPK, String name, boolean active,
+			String type, UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return cpRuleLocalService.addCPRule(
+			classNameLocalService.getClassNameId(className), classPK, name,
+			active, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
