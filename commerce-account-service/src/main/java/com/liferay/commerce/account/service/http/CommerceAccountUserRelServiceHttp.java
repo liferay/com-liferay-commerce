@@ -174,13 +174,47 @@ public class CommerceAccountUserRelServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel getCommerceAccountUserRel(
+		HttpPrincipal httpPrincipal,
+		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"getCommerceAccountUserRel",
+					_getCommerceAccountUserRelParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountUserRelPK);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccountUserRel)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
 		HttpPrincipal httpPrincipal, long commerceAccountId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRels",
-					_getCommerceAccountUserRelsParameterTypes4);
+					_getCommerceAccountUserRelsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, start, end);
@@ -213,7 +247,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRelsCount",
-					_getCommerceAccountUserRelsCountParameterTypes5);
+					_getCommerceAccountUserRelsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -251,9 +285,12 @@ public class CommerceAccountUserRelServiceHttp {
 		new Class[] { long.class };
 	private static final Class<?>[] _deleteCommerceAccountUserRelsParameterTypes3 =
 		new Class[] { long.class, long[].class };
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountUserRelParameterTypes4 = new Class[] {
+			com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK.class
+		};
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes5 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes5 =
+	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes6 =
 		new Class[] { long.class };
 }
