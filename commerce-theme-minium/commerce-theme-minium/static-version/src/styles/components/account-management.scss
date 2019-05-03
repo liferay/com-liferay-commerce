@@ -64,4 +64,13 @@
 	&__input {
 		flex-grow: 1;
 	}
+
+	&__thumbnail-container {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.commerce-account-container .image-name-cell__image{
+    border-radius: 50%;
 }
