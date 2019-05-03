@@ -69,6 +69,13 @@ public class CommerceAccountOrganizationRelServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
+		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {

@@ -118,6 +118,22 @@ public class CommerceAccountUserRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap getCommerceAccountUserRel(
+		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountUserRel returnValue =
+				CommerceAccountUserRelServiceUtil.getCommerceAccountUserRel(commerceAccountUserRelPK);
+
+			return com.liferay.commerce.account.model.CommerceAccountUserRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap[] getCommerceAccountUserRels(
 		long commerceAccountId, int start, int end) throws RemoteException {
 		try {

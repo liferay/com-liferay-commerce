@@ -67,6 +67,12 @@ public class CommerceAccountUserRelServiceUtil {
 		getService().deleteCommerceAccountUserRels(commerceAccountId, userIds);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel getCommerceAccountUserRel(
+		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAccountUserRel(commerceAccountUserRelPK);
+	}
+
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
 		long commerceAccountId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {

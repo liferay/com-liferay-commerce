@@ -17,6 +17,7 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
+import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -68,6 +69,11 @@ public interface CommerceAccountOrganizationRelService extends BaseService {
 
 	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
 		long[] organizationIds) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
+		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
