@@ -17,8 +17,8 @@ package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;

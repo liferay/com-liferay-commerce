@@ -20,11 +20,11 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DefaultDTOConverterContext;
-import com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductConfigurationResource;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 
 import javax.ws.rs.core.Response;
