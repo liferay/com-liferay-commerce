@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
+package com.liferay.headless.commerce.core.internal.dto.v1_0.converter;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.osgi.service.tracker.collections.map.ServiceReferenceMapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
@@ -26,10 +27,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
 /**
- * @author Alessio Pulido
+ * @author Alessio Antonio Rendina
  */
-@Component(service = DTOConverterRegistry.class)
-public class DTOConverterRegistry {
+@Component(immediate = true, service = DTOConverterRegistry.class)
+public class DTOConverterRegistryImpl implements DTOConverterRegistry {
 
 	public DTOConverter getDTOConverter(String modelClassName) {
 		return _serviceTrackerMap.getService(modelClassName);
@@ -57,10 +58,10 @@ public class DTOConverterRegistry {
 			ServiceReference<DTOConverter> serviceReference,
 			Emitter<String> emitter) {
 
-			String assetEntryClassName = (String)serviceReference.getProperty(
+			String modelClassName = (String)serviceReference.getProperty(
 				"model.class.name");
 
-			emitter.emit(assetEntryClassName);
+			emitter.emit(modelClassName);
 		}
 
 	}

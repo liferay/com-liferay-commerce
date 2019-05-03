@@ -12,22 +12,16 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.catalog.dto.v1_0.converter;
-
-import java.util.Locale;
-import java.util.Optional;
-
-import javax.ws.rs.core.UriInfo;
+package com.liferay.headless.commerce.core.dto.v1_0.converter;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public interface DTOConverterContext {
+public interface DTOConverter {
 
-	public Locale getLocale();
+	public String getContentType();
 
-	public long getResourcePrimKey();
-
-	public Optional<UriInfo> getUriInfoOptional();
+	public Object toDTO(DTOConverterContext dtoConverterContext)
+		throws Exception;
 
 }
