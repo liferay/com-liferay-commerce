@@ -221,8 +221,11 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 		String currentSiteURL = _portal.getGroupFriendlyURL(
 			layout.getLayoutSet(), themeDisplay);
 
-		return currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
-			cpFriendlyURLEntry.getUrlTitle();
+		String productFriendlyURL =
+			currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
+				cpFriendlyURLEntry.getUrlTitle();
+
+		return _portal.addPreservedParameters(themeDisplay, productFriendlyURL);
 	}
 
 	private String _getOrderByCol(String sortField, Locale locale) {
