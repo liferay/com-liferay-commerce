@@ -28,6 +28,10 @@ public class CPRuleConstants {
 		APPLICATION_TYPE_ALL, APPLICATION_TYPE_ANY
 	};
 
+	public static final int SCOPE_COMPANY = 1;
+
+	public static final int SCOPE_GROUP = 2;
+
 	public static final String SERVICE_NAME =
 		"com.liferay.commerce.product.rule";
 

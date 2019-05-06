@@ -64,6 +64,11 @@ public class AllProductsCPRuleTypeImpl implements CPRuleType {
 	}
 
 	@Override
+	public int getScope() {
+		return CPRuleConstants.SCOPE_COMPANY;
+	}
+
+	@Override
 	public UnicodeProperties getTypeSettingsProperties(
 		HttpServletRequest httpServletRequest) {
 

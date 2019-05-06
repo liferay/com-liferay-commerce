@@ -16,6 +16,7 @@ package com.liferay.commerce.product.catalog.rule;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -39,6 +40,10 @@ public interface CPRuleType {
 	public String getKey();
 
 	public String getLabel(Locale locale);
+
+	public default int getScope() {
+		return CPRuleConstants.SCOPE_GROUP;
+	}
 
 	public UnicodeProperties getTypeSettingsProperties(
 		HttpServletRequest httpServletRequest);

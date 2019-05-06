@@ -28,4 +28,6 @@ public interface CPRuleTypeRegistry {
 
 	public List<CPRuleType> getCPRuleTypes();
 
+	public List<CPRuleType> getCPRuleTypes(int scope);
+
 }

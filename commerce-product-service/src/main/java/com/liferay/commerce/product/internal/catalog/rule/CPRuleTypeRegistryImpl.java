@@ -77,6 +77,30 @@ public class CPRuleTypeRegistryImpl implements CPRuleTypeRegistry {
 		return Collections.unmodifiableList(cpRuleTypes);
 	}
 
+	@Override
+	public List<CPRuleType> getCPRuleTypes(int scope) {
+		List<CPRuleType> cpRuleTypes = new ArrayList<>();
+
+		List<ServiceWrapper<CPRuleType>> cpRuleTypeServiceWrappers =
+			ListUtil.fromCollection(_serviceTrackerMap.values());
+
+		Collections.sort(
+			cpRuleTypeServiceWrappers,
+			_cpRuleTypeServiceWrapperOrderComparator);
+
+		for (ServiceWrapper<CPRuleType> cpRuleTypeServiceWrapper :
+				cpRuleTypeServiceWrappers) {
+
+			CPRuleType cpRuleType = cpRuleTypeServiceWrapper.getService();
+
+			if (cpRuleType.getScope() >= scope) {
+				cpRuleTypes.add(cpRuleTypeServiceWrapper.getService());
+			}
+		}
+
+		return Collections.unmodifiableList(cpRuleTypes);
+	}
+
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
