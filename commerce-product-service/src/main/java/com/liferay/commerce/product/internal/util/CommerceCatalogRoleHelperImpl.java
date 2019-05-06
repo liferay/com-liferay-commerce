@@ -60,7 +60,8 @@ public class CommerceCatalogRoleHelperImpl
 			CommerceCatalogConstants.INVENTORY_MANAGER_ROLE_NAME,
 			serviceContext);
 		_checkRole(
-			CommerceCatalogConstants.ORDER_MANAGER_ROLE_NAME, serviceContext);
+			CommerceCatalogConstants.CATALOG_ORDER_MANAGER_ROLE_NAME,
+			serviceContext);
 		_checkRole(
 			CommerceCatalogConstants.PRICING_MANAGER_ROLE_NAME, serviceContext);
 		_checkRole(

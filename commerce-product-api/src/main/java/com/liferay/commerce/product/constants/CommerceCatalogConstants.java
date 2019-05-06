@@ -21,10 +21,11 @@ public class CommerceCatalogConstants {
 
 	public static final String CATALOG_MANAGER_ROLE_NAME = "Catalog Manager";
 
+	public static final String CATALOG_ORDER_MANAGER_ROLE_NAME =
+		"Catalog Order Manager";
+
 	public static final String INVENTORY_MANAGER_ROLE_NAME =
 		"Inventory Manager";
-
-	public static final String ORDER_MANAGER_ROLE_NAME = "Order Manager";
 
 	public static final String PRICING_MANAGER_ROLE_NAME = "Pricing Manager";
 
