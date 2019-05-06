@@ -123,7 +123,7 @@ public class CatalogsCommerceHealthStatus implements CommerceHealthStatus {
 	private static final String[] _CATALOG_ROLE_NAMES = {
 		CommerceCatalogConstants.CATALOG_MANAGER_ROLE_NAME,
 		CommerceCatalogConstants.INVENTORY_MANAGER_ROLE_NAME,
-		CommerceCatalogConstants.ORDER_MANAGER_ROLE_NAME,
+		CommerceCatalogConstants.CATALOG_ORDER_MANAGER_ROLE_NAME,
 		CommerceCatalogConstants.PRICING_MANAGER_ROLE_NAME
 	};
 
