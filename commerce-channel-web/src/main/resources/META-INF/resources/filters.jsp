@@ -19,32 +19,68 @@
 <%
 String channelNavigationItem = ParamUtil.getString(request, "channelNavigationItem", "view-filters");
 
-CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext = (CPCatalogRuleDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
+PortletURL portletURL = cpCatalogRuleDisplayContext.getPortletURL();
 
-long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
+SearchContainer commerceChannelFiltersSearchContainer = cpCatalogRuleDisplayContext.getSearchContainer();
+
+long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
 %>
 
 <%@ include file="/navbar_definitions.jspf" %>
 
-<portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
+<liferay-util:include page="/channel/toolbar_filters.jsp" servletContext="<%= application %>">
+	<liferay-util:param name="searchContainerId" value="commerceChannelFilters" />
+</liferay-util:include>
 
-<aui:form action="<%= editCommerceChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceChannel == null) ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="addTypeSettings" type="hidden" />
-	<aui:input name="commerceChannelId" type="hidden" value="<%= commerceChannelId %>" />
-	<aui:input name="deleteTypeSettings" type="hidden" />
+<portlet:actionURL name="editCommerceChannelFilter" var="editCommerceChannelFilterURL" />
 
-	<div class="lfr-form-content">
-		<aui:model-context bean="<%= commerceChannel %>" model="<%= CommerceChannel.class %>" />
+<div class="closed container-fluid-1280 sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
+	<div class="sidenav-content">
+		<aui:form action="<%= editCommerceChannelFilterURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+			<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+			<aui:input name="cpRuleIds" type="hidden" />
 
-		<aui:fieldset-group markupView="lexicon">
+			<div class="products-container" id="<portlet:namespace />commerceCatalogsContainer">
+				<liferay-ui:search-container
+					emptyResultsMessage="no-filters-were-found"
+					id="commerceChannelFilters"
+					searchContainer="<%= commerceChannelFiltersSearchContainer %>"
+				>
+					<liferay-ui:search-container-row
+						className="com.liferay.commerce.product.model.CPRule"
+						cssClass="entry-display-style"
+						keyProperty="cpRuleId"
+						modelVar="cpRule"
+					>
+						<liferay-ui:search-container-column-text
+							cssClass="important table-cell-content"
+							href="<%= cpCatalogRuleDisplayContext.getCPRuleURL(cpRule) %>"
+							name="name"
+							value="<%= HtmlUtil.escape(LanguageUtil.get(request, cpRule.getName())) %>"
+						/>
 
-		</aui:fieldset-group>
+						<liferay-ui:search-container-column-text
+							cssClass="important table-cell-content"
+							href="<%= cpCatalogRuleDisplayContext.getCPRuleURL(cpRule) %>"
+							name="type"
+							value="<%= HtmlUtil.escape(LanguageUtil.get(request, cpRule.getType())) %>"
+						/>
+
+						<liferay-ui:search-container-column-jsp
+							cssClass="entry-action-column"
+							path="/channel/filter_action.jsp"
+						/>
+					</liferay-ui:search-container-row>
+
+					<liferay-ui:search-iterator
+						displayStyle="list"
+						markupView="lexicon"
+					/>
+				</liferay-ui:search-container>
+			</div>
+		</aui:form>
 	</div>
-
-	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
-	</aui:button-row>
-</aui:form>
+</div>

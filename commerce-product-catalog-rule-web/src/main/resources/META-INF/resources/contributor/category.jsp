@@ -17,13 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext = (CPCatalogRuleDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPRuleTypeDisplayContext cpRuleTypeDisplayContext = (CPRuleTypeDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-boolean orSearch = GetterUtil.getBoolean(cpCatalogRuleDisplayContext.getCPRuleTypeSettingsProperty("orSearch"));
+boolean orSearch = GetterUtil.getBoolean(cpRuleTypeDisplayContext.getCPRuleTypeSettingsProperty("orSearch"));
 
 orSearch = ParamUtil.getBoolean(request, "orSearch", orSearch);
 
-String assetCategoryIds = cpCatalogRuleDisplayContext.getAssetCategoryIds();
+String assetCategoryIds = cpRuleTypeDisplayContext.getAssetCategoryIds();
 %>
 
 <aui:input checked="<%= orSearch %>" label="search-type" labelOff="match-all" labelOn="match-any" name="orSearch" type="toggle-switch" />

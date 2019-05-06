@@ -26,6 +26,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.product.catalog.rule.CPRuleType" %><%@
+page import="com.liferay.commerce.product.catalog.rule.CPRuleTypeDisplayContext" %><%@
 page import="com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor" %><%@
 page import="com.liferay.commerce.product.catalog.rule.web.internal.display.context.CPCatalogRuleDisplayContext" %><%@
 page import="com.liferay.commerce.product.catalog.rule.web.internal.servlet.taglib.ui.CPRuleScreenNavigationConstants" %><%@

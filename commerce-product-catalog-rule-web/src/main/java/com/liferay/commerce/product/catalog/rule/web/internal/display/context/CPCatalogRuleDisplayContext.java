@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.catalog.rule.web.internal.display.context;
 
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeDisplayContext;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistry;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
@@ -64,7 +65,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CPCatalogRuleDisplayContext {
+public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 
 	public CPCatalogRuleDisplayContext(
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService,
@@ -91,6 +92,7 @@ public class CPCatalogRuleDisplayContext {
 			httpServletRequest);
 	}
 
+	@Override
 	public String getAssetCategoryIds() throws PortalException {
 		if (getCPRuleId() <= 0) {
 			return StringPool.BLANK;
@@ -138,6 +140,7 @@ public class CPCatalogRuleDisplayContext {
 		return _cpRuleTypeRegistry.getCPRuleTypes();
 	}
 
+	@Override
 	public String getCPRuleTypeSettingsProperty(String property)
 		throws PortalException {
 

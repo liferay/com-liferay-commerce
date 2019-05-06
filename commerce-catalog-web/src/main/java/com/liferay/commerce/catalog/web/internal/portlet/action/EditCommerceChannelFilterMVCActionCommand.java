@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.channel.web.internal.portlet.action;
+package com.liferay.commerce.catalog.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.constants.CommerceChannelConstants;
+import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CommerceChannel;
-import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.petra.string.StringPool;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -28,14 +27,11 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -52,31 +48,41 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
-		"mvc.command.name=editCommerceChannel"
+		"mvc.command.name=editCommerceChannelFilter"
 	},
 	service = MVCActionCommand.class
 )
-public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
+public class EditCommerceChannelFilterMVCActionCommand
+	extends BaseMVCActionCommand {
 
-	protected void deleteCommerceChannel(ActionRequest actionRequest)
+	public UnicodeProperties getTypeSettingsProperties(
+		ActionRequest actionRequest) {
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		boolean orSearch = ParamUtil.getBoolean(actionRequest, "orSearch");
+
+		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
+
+		return typeSettingsProperties;
+	}
+
+	protected void deleteCommerceChannelFilter(ActionRequest actionRequest)
 		throws Exception {
 
-		long[] commerceChannelIds = null;
+		long[] cpRuleIds = null;
 
-		long commerceChannelId = ParamUtil.getLong(
-			actionRequest, "commerceChannelId");
+		long cpRuleId = ParamUtil.getLong(actionRequest, "cpRuleId");
 
-		if (commerceChannelId > 0) {
-			commerceChannelIds = new long[] {commerceChannelId};
+		if (cpRuleId > 0) {
+			cpRuleIds = new long[] {cpRuleId};
 		}
 		else {
-			commerceChannelIds = ParamUtil.getLongValues(
-				actionRequest, "commerceChannelIds");
+			cpRuleIds = ParamUtil.getLongValues(actionRequest, "cpRuleIds");
 		}
 
-		for (long deleteCommerceChannelId : commerceChannelIds) {
-			_commerceChannelService.deleteCommerceChannel(
-				deleteCommerceChannelId);
+		for (long deleteCPRuleId : cpRuleIds) {
+			_cpRuleService.deleteCPRule(deleteCPRuleId);
 		}
 	}
 
@@ -88,17 +94,20 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
+			CPRule cpRule = null;
+
 			if (cmd.equals(Constants.DELETE)) {
-				deleteCommerceChannel(actionRequest);
+				deleteCommerceChannelFilter(actionRequest);
 			}
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				String redirect = getSaveAndContinueRedirect(
-					actionRequest, updateCommerceChannel(actionRequest));
-
-				sendRedirect(actionRequest, actionResponse, redirect);
+				cpRule = updateCommerceChannelFilter(actionRequest);
 			}
+
+			String redirect = getSaveAndContinueRedirect(actionRequest, cpRule);
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(actionRequest, pe.getClass());
@@ -108,23 +117,34 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	protected String getSaveAndContinueRedirect(
-			ActionRequest actionRequest, CommerceChannel commerceChannel)
+			ActionRequest actionRequest, CPRule cpRule)
 		throws PortalException {
 
 		PortletURL portletURL = _portal.getControlPanelPortletURL(
 			actionRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
+		long commerceChannelId = ParamUtil.getLong(
+			actionRequest, "commerceChannelId");
+
 		portletURL.setParameter(
-			"commerceChannelId",
-			String.valueOf(commerceChannel.getCommerceChannelId()));
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
+			"commerceChannelId", String.valueOf(commerceChannelId));
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "viewCommerceChannelFilters");
+
+		if (cpRule != null) {
+			portletURL.setParameter(
+				"mvcRenderCommandName", "editCommerceChannelFilter");
+			portletURL.setParameter(
+				"cpRuleId", String.valueOf(cpRule.getCPRuleId()));
+		}
 
 		return portletURL.toString();
 	}
 
 	protected String getTypeSettings(
-			long commerceChannelId, String type, ActionRequest actionRequest)
+			long cpRuleId, String type, ActionRequest actionRequest)
 		throws PortalException {
 
 		String typeSettings = ParamUtil.getString(
@@ -134,17 +154,14 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 			return typeSettings;
 		}
 
-		CommerceChannel commerceChannel = null;
+		CPRule cpRule = null;
 
-		if (commerceChannelId > 0) {
-			commerceChannel = _commerceChannelService.fetchCommerceChannel(
-				commerceChannelId);
+		if (cpRuleId > 0) {
+			cpRule = _cpRuleService.getCPRule(cpRuleId);
 		}
 
-		if ((commerceChannel != null) &&
-			type.equals(commerceChannel.getType())) {
-
-			typeSettings = commerceChannel.getTypeSettings();
+		if ((cpRule != null) && type.equals(cpRule.getType())) {
+			typeSettings = cpRule.getTypeSettings();
 		}
 
 		String[] typeSettingsArray = StringUtil.split(typeSettings);
@@ -170,44 +187,31 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		return StringUtil.merge(ArrayUtil.unique(typeSettingsArray));
 	}
 
-	protected CommerceChannel updateCommerceChannel(ActionRequest actionRequest)
+	protected CPRule updateCommerceChannelFilter(ActionRequest actionRequest)
 		throws Exception {
 
-		long commerceChannelId = ParamUtil.getLong(
-			actionRequest, "commerceChannelId");
-		boolean orSearch = ParamUtil.getBoolean(actionRequest, "orSearch");
+		long cpRuleId = ParamUtil.getLong(actionRequest, "cpRuleId");
 
-		String filterType = StringPool.BLANK;
-
-		if (orSearch) {
-			filterType = "orSearch";
-		}
-
-		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "name");
-
+		String name = ParamUtil.getString(actionRequest, "name");
 		String type = ParamUtil.getString(actionRequest, "type");
 
-		String typeSettings = getTypeSettings(
-			commerceChannelId, type, actionRequest);
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties(
+			actionRequest);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannel.class.getName(), actionRequest);
 
-		if (commerceChannelId <= 0) {
-			return _commerceChannelService.addCommerceChannel(
-				nameMap, CommerceChannelConstants.FILTER_TYPE_AND, type,
-				typeSettings, serviceContext);
+		if (cpRuleId <= 0) {
+			return _cpRuleService.addCPRule(
+				name, true, type, typeSettingsProperties, serviceContext);
 		}
 
-		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, nameMap,
-			CommerceChannelConstants.FILTER_TYPE_AND, type, typeSettings,
-			serviceContext);
+		return _cpRuleService.updateCPRule(
+			cpRuleId, name, true, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Reference
-	private CommerceChannelService _commerceChannelService;
+	private CPRuleService _cpRuleService;
 
 	@Reference
 	private Portal _portal;

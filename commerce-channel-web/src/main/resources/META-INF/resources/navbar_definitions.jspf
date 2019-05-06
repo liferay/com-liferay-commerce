@@ -24,10 +24,10 @@ renderResponse.setTitle(LanguageUtil.get(request, "channels"));
 	<portlet:param name="mvcRenderCommandName" value="editCommerceChannel" />
 </liferay-portlet:renderURL>
 
-<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CHANNELS %>" var="viewChannelFilterURL">
+<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CHANNELS %>" var="viewChannelFiltersURL">
 	<portlet:param name="channelNavigationItem" value="view-filters" />
 	<portlet:param name="commerceChannelId" value="<%= String.valueOf(commerceChannelId) %>" />
-	<portlet:param name="mvcRenderCommandName" value="editCommerceChannelFilter" />
+	<portlet:param name="mvcRenderCommandName" value="viewCommerceChannelFilters" />
 </liferay-portlet:renderURL>
 
 <%
@@ -40,7 +40,7 @@ channelDetailsNavigationItem.setLabel(LanguageUtil.get(request, "details"));
 NavigationItem channelFiltersNavigationItem = new NavigationItem();
 
 channelFiltersNavigationItem.setActive(channelNavigationItem.equals("view-filters"));
-channelFiltersNavigationItem.setHref(viewChannelFilterURL.toString());
+channelFiltersNavigationItem.setHref(viewChannelFiltersURL.toString());
 channelFiltersNavigationItem.setLabel(LanguageUtil.get(request, "filters"));
 
 List<NavigationItem> channelSubNavigationItem = Arrays.asList(channelDetailsNavigationItem, channelFiltersNavigationItem);

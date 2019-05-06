@@ -21,17 +21,27 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/commerce-ui" prefix="commerce-ui" %><%@
+taglib uri="http://liferay.com/tld/expando" prefix="liferay-expando" %><%@
 taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext" %><%@
+<%@ page import="com.liferay.commerce.catalog.web.internal.display.context.CPCatalogRuleDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogUsersDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.SiteCommerceChannelTypeDisplayContext" %><%@
+page import="com.liferay.commerce.product.catalog.rule.CPRuleType" %><%@
+page import="com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor" %><%@
+page import="com.liferay.commerce.product.channel.CommerceChannelType" %><%@
+page import="com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor" %><%@
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
 page import="com.liferay.commerce.product.constants.CommerceCatalogConstants" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCatalogException" %><%@
+page import="com.liferay.commerce.product.model.CPRule" %><%@
 page import="com.liferay.commerce.product.model.CommerceCatalog" %><%@
 page import="com.liferay.commerce.product.util.CPNavigationItemRegistryUtil" %><%@
 page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem" %><%@

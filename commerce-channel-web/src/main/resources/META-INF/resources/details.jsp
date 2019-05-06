@@ -23,6 +23,7 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
 
+String filterType = commerceChannel.getFilterType();
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.getCommerceChannelTypes();
 
@@ -45,7 +46,9 @@ String type = BeanParamUtil.getString(commerceChannel, request, "type");
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" name="name" required="true" value="<%= name %>" />
+				<aui:input autoFocus="<%= true %>" name="name" value="<%= name %>" />
+
+				<aui:input checked='<%= filterType.equals("orSearch") %>' label="search-type" labelOff="match-all-filters" labelOn="match-any-filter" name="filterType" type="toggle-switch" />
 
 				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
