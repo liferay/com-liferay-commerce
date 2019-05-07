@@ -11,6 +11,22 @@
 		<field localized="true" name="name" type="String" />
 		<field name="catalogDefaultLanguageId" type="String" />
 	</model>
+	<model name="com.liferay.commerce.product.model.CommerceChannel">
+		<field name="commerceChannelId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="filterType" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
+		<field name="type" type="String">
+			<validator name="required" />
+		</field>
+		<field name="typeSettings" type="String" />
+	</model>
 	<model name="com.liferay.commerce.product.model.CPAttachmentFileEntry">
 		<field name="uuid" type="String" />
 		<field name="externalReferenceCode" type="String" />
