@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"commerce.product.channel.type.key=" + SiteCommerceChannelTypeImpl.KEY,
-		"commerce.product.channel.type.order:Integer=20"
+		"commerce.product.channel.type.order:Integer=30"
 	},
 	service = CommerceChannelType.class
 )

@@ -12,26 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.display.context.util;
+package com.liferay.commerce.item.selector.criterion;
 
-import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
-import com.liferay.portal.kernel.util.PortalUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.item.selector.BaseItemSelectorCriterion;
 
 /**
- * @author Alessio Antonio Rendina
  * @author Alec Sloan
  */
-public class CPCatalogRuleRequestHelper extends BaseRequestHelper {
-
-	public CPCatalogRuleRequestHelper(HttpServletRequest httpServletRequest) {
-		super(httpServletRequest);
-	}
-
-	public HttpServletResponse getResponse() {
-		return PortalUtil.getHttpServletResponse(getLiferayPortletResponse());
-	}
-
+public class CatalogItemSelectorCriterion extends BaseItemSelectorCriterion {
 }

@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.display.context;
+package com.liferay.commerce.channel.web.internal.display.context;
 
-import com.liferay.commerce.catalog.web.internal.display.context.util.CPCatalogRuleRequestHelper;
-import com.liferay.commerce.catalog.web.internal.util.CPCatalogRulePortletUtil;
+import com.liferay.commerce.channel.web.internal.display.context.util.CPCatalogRuleRequestHelper;
+import com.liferay.commerce.channel.web.internal.util.CPCatalogRulePortletUtil;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeDisplayContext;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor;

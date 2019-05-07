@@ -15,10 +15,10 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
-import com.liferay.commerce.catalog.web.internal.util.CommerceCatalogsPortletUtil;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.util.CPUtil;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -160,7 +160,7 @@ public class CommerceCatalogDisplayContext
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		Sort sort = CommerceCatalogsPortletUtil.getCommerceCatalogSort(
+		Sort sort = CPUtil.getCommerceCatalogSort(
 			getOrderByCol(), getOrderByType());
 
 		List<CommerceCatalog> catalogs =

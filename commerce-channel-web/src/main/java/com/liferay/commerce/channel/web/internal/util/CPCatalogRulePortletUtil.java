@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.util;
+package com.liferay.commerce.channel.web.internal.util;
 
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
@@ -20,13 +20,10 @@ import com.liferay.portal.kernel.search.SortFactoryUtil;
 
 /**
  * @author Alec Sloan
- * @author Ethan Bustad
  */
-public class CommerceCatalogsPortletUtil {
+public class CPCatalogRulePortletUtil {
 
-	public static Sort getCommerceCatalogSort(
-		String orderByCol, String orderByType) {
-
+	public static Sort getCPRuleSort(String orderByCol, String orderByType) {
 		boolean reverse = true;
 
 		if (orderByType.equals("asc")) {
@@ -35,13 +32,12 @@ public class CommerceCatalogsPortletUtil {
 
 		Sort sort = null;
 
-		if (orderByCol.equals("name")) {
+		if (orderByCol.equals("modified-date")) {
 			sort = SortFactoryUtil.create(
-				Field.NAME, Sort.STRING_TYPE, reverse);
+				Field.MODIFIED_DATE + "_sortable", reverse);
 		}
-		else if (orderByCol.equals("modified-date")) {
-			sort = SortFactoryUtil.create(
-				Field.MODIFIED_DATE, Sort.STRING_TYPE, reverse);
+		else if (orderByCol.equals("name")) {
+			sort = SortFactoryUtil.create("name_sortable", reverse);
 		}
 
 		return sort;
