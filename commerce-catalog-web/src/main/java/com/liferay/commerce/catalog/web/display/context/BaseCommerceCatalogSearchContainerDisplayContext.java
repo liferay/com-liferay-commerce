@@ -47,10 +47,11 @@ public abstract class BaseCommerceCatalogSearchContainerDisplayContext<T>
 	}
 
 	public String getDisplayStyle() {
-		if (_displayStyle == null) {
-			_displayStyle = getDisplayStyle(
-				httpServletRequest, portalPreferences);
+		if (_displayStyle != null) {
+			return _displayStyle;
 		}
+
+		_displayStyle = getDisplayStyle(httpServletRequest, portalPreferences);
 
 		return _displayStyle;
 	}

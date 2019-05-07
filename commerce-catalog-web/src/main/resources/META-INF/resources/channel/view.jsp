@@ -17,48 +17,48 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+String catalogNavigationItem = ParamUtil.getString(request, "catalogNavigationItem", "view-channel");
 
-SearchContainer commerceCatalogSearchContainer = commerceCatalogDisplayContext.getSearchContainer();
+CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-PortletURL portletURL = commerceCatalogDisplayContext.getPortletURL();
+PortletURL portletURL = commerceChannelDisplayContext.getPortletURL();
 
-portletURL.setParameter("searchContainerId", "commerceCatalogs");
+SearchContainer commerceCatalogChannelsSearchContainer = commerceChannelDisplayContext.getSearchContainer();
 %>
 
-<liferay-util:include page="/catalog/toolbar.jsp" servletContext="<%= application %>">
-	<liferay-util:param name="searchContainerId" value="commerceCatalogs" />
+<liferay-util:include page="/channel/toolbar.jsp" servletContext="<%= application %>">
+	<liferay-util:param name="searchContainerId" value="commerceChannels" />
 </liferay-util:include>
 
 <div class="closed container-fluid-1280 sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
 	<div class="sidenav-content">
 		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 			<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
-			<aui:input name="commerceCatalogIds" type="hidden" />
+			<aui:input name="commerceChannelIds" type="hidden" />
 
 			<div class="products-container" id="<portlet:namespace />commerceCatalogsContainer">
 				<liferay-ui:search-container
-					emptyResultsMessage="no-catalogs-were-found"
-					id="commerceCatalogs"
-					searchContainer="<%= commerceCatalogSearchContainer %>"
+					emptyResultsMessage="no-channels-were-found"
+					id="commerceChannels"
+					searchContainer="<%= commerceCatalogChannelsSearchContainer %>"
 				>
 					<liferay-ui:search-container-row
-						className="com.liferay.commerce.product.model.CommerceCatalog"
+						className="com.liferay.commerce.product.model.CommerceChannel"
 						cssClass="entry-display-style"
-						keyProperty="commerceCatalogId"
-						modelVar="commerceCatalog"
+						keyProperty="commerceChannelId"
+						modelVar="commerceChannel"
 					>
 						<liferay-ui:search-container-column-text
 							cssClass="important table-cell-content"
-							href="<%= commerceCatalogDisplayContext.getCatalogURL(commerceCatalog) %>"
+							href="<%= commerceChannelDisplayContext.getChannelURL(commerceChannel) %>"
 							name="name"
-							value="<%= HtmlUtil.escape(commerceCatalog.getName(locale)) %>"
+							value="<%= HtmlUtil.escape(commerceChannel.getName(locale)) %>"
 						/>
 
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
-							path="/catalog/catalog_action.jsp"
+							path="/channel/channel_action.jsp"
 						/>
 					</liferay-ui:search-container-row>
 
