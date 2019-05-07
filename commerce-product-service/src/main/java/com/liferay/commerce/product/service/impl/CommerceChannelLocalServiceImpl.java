@@ -23,12 +23,8 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.util.LocaleUtil;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Alec Sloan
@@ -39,8 +35,8 @@ public class CommerceChannelLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel addCommerceChannel(
-			Map<Locale, String> nameMap, String filterType, String type,
-			String typeSettings, ServiceContext serviceContext)
+			String name, String filterType, String type, String typeSettings,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		long commerceChannelId = counterLocalService.increment();
@@ -59,26 +55,12 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setCreateDate(now);
 		commerceChannel.setModifiedDate(now);
 
-		commerceChannel.setNameMap(nameMap);
+		commerceChannel.setName(name);
 		commerceChannel.setFilterType(filterType);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettings(typeSettings);
 
 		return commerceChannelPersistence.update(commerceChannel);
-	}
-
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CommerceChannel addCommerceChannel(
-			String name, String filterType, String type, String typeSettings,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		Locale locale = LocaleUtil.getSiteDefault();
-
-		return commerceChannelLocalService.addCommerceChannel(
-			Collections.singletonMap(locale, name), filterType, type,
-			typeSettings, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -93,15 +75,14 @@ public class CommerceChannelLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel updateCommerceChannel(
-			long commerceChannelId, Map<Locale, String> nameMap,
-			String filterType, String type, String typeSettings,
-			ServiceContext serviceContext)
+			long commerceChannelId, String name, String filterType, String type,
+			String typeSettings, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceChannel commerceChannel =
 			commerceChannelPersistence.findByPrimaryKey(commerceChannelId);
 
-		commerceChannel.setNameMap(nameMap);
+		commerceChannel.setName(name);
 		commerceChannel.setFilterType(filterType);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettings(typeSettings);

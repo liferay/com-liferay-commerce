@@ -53,7 +53,7 @@ SearchContainer commerceCatalogChannelsSearchContainer = commerceChannelDisplayC
 							cssClass="important table-cell-content"
 							href="<%= commerceChannelDisplayContext.getChannelURL(commerceChannel) %>"
 							name="name"
-							value="<%= HtmlUtil.escape(commerceChannel.getName(locale)) %>"
+							value="<%= HtmlUtil.escape(commerceChannel.getName()) %>"
 						/>
 
 						<liferay-ui:search-container-column-jsp

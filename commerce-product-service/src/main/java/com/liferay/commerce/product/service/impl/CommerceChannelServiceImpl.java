@@ -20,23 +20,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Alec Sloan
  */
 public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
-
-	@Override
-	public CommerceChannel addCommerceChannel(
-			Map<Locale, String> nameMap, String filterType, String type,
-			String typeSettings, ServiceContext serviceContext)
-		throws PortalException {
-
-		return commerceChannelLocalService.addCommerceChannel(
-			nameMap, filterType, type, typeSettings, serviceContext);
-	}
 
 	@Override
 	public CommerceChannel addCommerceChannel(
@@ -79,13 +67,12 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 
 	@Override
 	public CommerceChannel updateCommerceChannel(
-			long commerceChannelId, Map<Locale, String> nameMap,
-			String filterType, String type, String typeSettings,
-			ServiceContext serviceContext)
+			long commerceChannelId, String name, String filterType, String type,
+			String typeSettings, ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelLocalService.updateCommerceChannel(
-			commerceChannelId, nameMap, filterType, type, typeSettings,
+			commerceChannelId, name, filterType, type, typeSettings,
 			serviceContext);
 	}
 
