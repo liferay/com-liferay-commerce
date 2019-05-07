@@ -77,6 +77,14 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
+	public int searchCommerceCatalogsCount(long companyId, String keywords)
+		throws PortalException {
+
+		return commerceCatalogLocalService.searchCommerceCatalogsCount(
+			companyId, keywords);
+	}
+
+	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, String catalogDefaultLanguageId,
 			Map<Locale, String> nameMap, ServiceContext serviceContext)

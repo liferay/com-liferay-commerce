@@ -161,8 +161,7 @@ public class CommerceCatalogLocalServiceImpl
 	}
 
 	@Override
-	public int searchCommerceCatalogsCount(
-			long companyId, String keywords, String name)
+	public int searchCommerceCatalogsCount(long companyId, String keywords)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
