@@ -24,7 +24,7 @@ CommerceCatalogUsersDisplayContext commerceCatalogUsersDisplayContext = (Commerc
 CommerceCatalog commerceCatalog = commerceCatalogUsersDisplayContext.getCommerceCatalog();
 %>
 
-<%@ include file="/catalog/navbar_definitions.jspf" %>
+<%@ include file="/navbar_definitions.jspf" %>
 
 <liferay-util:include page="/toolbar_users.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="searchContainerId" value="commerceCatalogUsers" />

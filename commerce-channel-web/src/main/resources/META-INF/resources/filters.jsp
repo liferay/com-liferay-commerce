@@ -26,7 +26,7 @@ CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChann
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 %>
 
-<%@ include file="/channel/navbar_definitions.jspf" %>
+<%@ include file="/navbar_definitions.jspf" %>
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
 

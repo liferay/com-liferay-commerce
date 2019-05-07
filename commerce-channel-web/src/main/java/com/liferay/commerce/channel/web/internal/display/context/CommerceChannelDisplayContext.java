@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.display.context;
+package com.liferay.commerce.channel.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
 import com.liferay.commerce.product.channel.CommerceChannelType;
@@ -61,7 +61,6 @@ public class CommerceChannelDisplayContext
 		_commerceChannelTypeRegistry = commerceChannelTypeRegistry;
 		_commerceChannelTypeJSPContributorRegistry =
 			commerceChannelTypeJSPContributorRegistry;
-		_httpServletRequest = httpServletRequest;
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
 	}
@@ -74,20 +73,20 @@ public class CommerceChannelDisplayContext
 		}
 
 		PortletURL portletURL = _portal.getControlPanelPortletURL(
-			_httpServletRequest, CPPortletKeys.COMMERCE_CHANNELS,
+			httpServletRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
 		portletURL.setParameter(
 			"commerceChannelId",
 			String.valueOf(commerceChannel.getCommerceChannelId()));
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
 
 		return portletURL.toString();
 	}
 
 	public CommerceChannel getCommerceChannel() throws PortalException {
 		long commerceChannelId = ParamUtil.getLong(
-			_httpServletRequest, "commerceChannelId");
+			httpServletRequest, "commerceChannelId");
 
 		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
 	}
@@ -156,12 +155,12 @@ public class CommerceChannelDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
-		List<CommerceChannel> channels =
+		List<CommerceChannel> commerceChannels =
 			_commerceChannelService.getCommerceChannels(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		searchContainer.setTotal(channels.size());
-		searchContainer.setResults(channels);
+		searchContainer.setTotal(commerceChannels.size());
+		searchContainer.setResults(commerceChannels);
 
 		return searchContainer;
 	}
@@ -170,7 +169,6 @@ public class CommerceChannelDisplayContext
 	private final CommerceChannelTypeJSPContributorRegistry
 		_commerceChannelTypeJSPContributorRegistry;
 	private final CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
-	private final HttpServletRequest _httpServletRequest;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 

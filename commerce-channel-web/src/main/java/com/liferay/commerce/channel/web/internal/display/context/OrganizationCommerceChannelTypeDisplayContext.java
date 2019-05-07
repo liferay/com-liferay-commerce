@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.display.context;
+package com.liferay.commerce.channel.web.internal.display.context;
 
-import com.liferay.commerce.item.selector.criterion.SimpleSiteItemSelectorCriterion;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -22,12 +21,13 @@ import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
+import com.liferay.organizations.item.selector.OrganizationItemSelectorCriterion;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -43,17 +43,18 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Alec Sloan
  */
-public class SiteCommerceChannelTypeDisplayContext
+public class OrganizationCommerceChannelTypeDisplayContext
 	extends CommerceChannelDisplayContext {
 
-	public SiteCommerceChannelTypeDisplayContext(
+	public OrganizationCommerceChannelTypeDisplayContext(
 			CommerceChannelService commerceChannelService,
 			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
 			CommerceChannelTypeJSPContributorRegistry
 				commerceChannelTypeJSPContributorRegistry,
-			GroupLocalService groupLocalService,
-			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-			Portal portal, PortletResourcePermission portletResourcePermission)
+			HttpServletRequest httpServletRequest,
+			OrganizationLocalService organizationLocalService, Portal portal,
+			PortletResourcePermission portletResourcePermission,
+			ItemSelector itemSelector)
 		throws PortalException {
 
 		super(
@@ -61,47 +62,50 @@ public class SiteCommerceChannelTypeDisplayContext
 			commerceChannelTypeJSPContributorRegistry, httpServletRequest,
 			portal, portletResourcePermission);
 
-		_groupLocalService = groupLocalService;
+		_organizationLocalService = organizationLocalService;
 		_itemSelector = itemSelector;
-	}
-
-	public List<Group> getGroups() throws PortalException {
-		List<Group> groups = new ArrayList<>();
-
-		for (long siteGroupId : getCheckedGroupIds()) {
-			Group group = _groupLocalService.fetchGroup(siteGroupId);
-
-			if (group != null) {
-				groups.add(group);
-			}
-		}
-
-		return groups;
 	}
 
 	public String getItemSelectorUrl() throws PortalException {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
 
-		SimpleSiteItemSelectorCriterion simpleSiteItemSelectorCriterion =
-			new SimpleSiteItemSelectorCriterion();
+		OrganizationItemSelectorCriterion organizationItemSelectorCriterion =
+			new OrganizationItemSelectorCriterion();
 
-		simpleSiteItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+		organizationItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
 				new UUIDItemSelectorReturnType()));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBackedPortletURLFactory, "sitesSelectItem",
-			simpleSiteItemSelectorCriterion);
+			requestBackedPortletURLFactory, "organizationsSelectItem",
+			organizationItemSelectorCriterion);
 
-		String checkedGroupIds = StringUtil.merge(getCheckedGroupIds());
+		String checkedOrganizationIds = StringUtil.merge(
+			getCheckedOrganizationIds());
 
-		itemSelectorURL.setParameter("checkedGroupIds", checkedGroupIds);
+		itemSelectorURL.setParameter(
+			"checkedOrganizationIds", checkedOrganizationIds);
 
 		return itemSelectorURL.toString();
 	}
 
-	protected long[] getCheckedGroupIds() throws PortalException {
+	public List<Organization> getOrganizations() throws PortalException {
+		List<Organization> organizations = new ArrayList<>();
+
+		for (long organizationId : getCheckedOrganizationIds()) {
+			Organization organization =
+				_organizationLocalService.fetchOrganization(organizationId);
+
+			if (organization != null) {
+				organizations.add(organization);
+			}
+		}
+
+		return organizations;
+	}
+
+	protected long[] getCheckedOrganizationIds() throws PortalException {
 		CommerceChannel commerceChannel = getCommerceChannel();
 
 		if (commerceChannel == null) {
@@ -112,10 +116,10 @@ public class SiteCommerceChannelTypeDisplayContext
 			commerceChannel.getTypeSettingsProperties();
 
 		return StringUtil.split(
-			typeSettingsProperties.getProperty("groupIds"), 0L);
+			typeSettingsProperties.getProperty("organizationIds"), 0L);
 	}
 
-	private final GroupLocalService _groupLocalService;
 	private final ItemSelector _itemSelector;
+	private final OrganizationLocalService _organizationLocalService;
 
 }

@@ -25,7 +25,7 @@ public class CPPortletKeys {
 			"CommerceCatalogsPortlet";
 
 	public static final String COMMERCE_CHANNELS =
-		"com_liferay_commerce_catalog_web_internal_portlet_" +
+		"com_liferay_commerce_channel_web_internal_portlet_" +
 			"CommerceChannelsPortlet";
 
 	public static final String COMMERCE_SUBSCRIPTION_CONTENT_WEB =
