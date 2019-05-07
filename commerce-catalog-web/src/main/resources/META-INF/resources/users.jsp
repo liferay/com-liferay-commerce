@@ -26,7 +26,7 @@ List<User> users = commerceCatalogUsersDisplayContext.getSelectedUsers();
 int usersCount = users.size();
 %>
 
-<%@ include file="/catalog/navbar_definitions.jspf" %>
+<%@ include file="/navbar_definitions.jspf" %>
 
 <div class="container-fluid-1280">
 	<aui:button-row>

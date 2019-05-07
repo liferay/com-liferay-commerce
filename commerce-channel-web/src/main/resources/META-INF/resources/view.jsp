@@ -26,7 +26,7 @@ PortletURL portletURL = commerceChannelDisplayContext.getPortletURL();
 SearchContainer commerceCatalogChannelsSearchContainer = commerceChannelDisplayContext.getSearchContainer();
 %>
 
-<liferay-util:include page="/channel/toolbar.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="searchContainerId" value="commerceChannels" />
 </liferay-util:include>
 
@@ -58,7 +58,7 @@ SearchContainer commerceCatalogChannelsSearchContainer = commerceChannelDisplayC
 
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
-							path="/channel/channel_action.jsp"
+							path="/channel_action.jsp"
 						/>
 					</liferay-ui:search-container-row>
 

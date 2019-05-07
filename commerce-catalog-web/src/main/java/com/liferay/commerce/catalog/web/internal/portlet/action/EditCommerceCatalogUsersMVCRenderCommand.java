@@ -79,7 +79,7 @@ public class EditCommerceCatalogUsersMVCRenderCommand
 			throw new PortletException(e);
 		}
 
-		return "/catalog/users.jsp";
+		return "/users.jsp";
 	}
 
 	@Reference

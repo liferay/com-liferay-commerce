@@ -12,26 +12,23 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.portlet.action;
+package com.liferay.commerce.channel.web.internal.channel;
 
-import com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.channel.web.internal.display.context.SiteCommerceChannelTypeDisplayContext;
+import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -41,42 +38,33 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = {
-		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
-		"mvc.command.name=editCommerceChannel"
-	},
-	service = MVCRenderCommand.class
+	property = "commerce.product.channel.type.jsp.contributor.key=site",
+	service = CommerceChannelTypeJSPContributor.class
 )
-public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
+public class SiteCommerceChannelTypeJSPContributor
+	implements CommerceChannelTypeJSPContributor {
 
 	@Override
-	public String render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws PortletException {
+	public void render(
+			long commerceChannelId, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
+		throws Exception {
 
-		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
-			CommerceChannelDisplayContext commerceChannelDisplayContext =
-				new CommerceChannelDisplayContext(
+		SiteCommerceChannelTypeDisplayContext
+			siteCommerceChannelTypeDisplayContext =
+				new SiteCommerceChannelTypeDisplayContext(
 					_commerceChannelService, _commerceChannelTypeRegistry,
 					_commerceChannelTypeJSPContributorRegistry,
-					httpServletRequest, _portal, _portletResourcePermission);
+					_groupLocalService, httpServletRequest, _itemSelector,
+					_portal, _portletResourcePermission);
 
-			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(renderRequest, pe.getClass());
+		httpServletRequest.setAttribute(
+			"site.jsp-portletDisplayContext",
+			siteCommerceChannelTypeDisplayContext);
 
-			return "/error.jsp";
-		}
-		catch (Exception e) {
-			throw new PortletException(e);
-		}
-
-		return "/channel/details.jsp";
+		_jspRenderer.renderJSP(
+			_servletContext, httpServletRequest, httpServletResponse,
+			"/contributor/site.jsp");
 	}
 
 	@Reference
@@ -90,9 +78,23 @@ public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 
 	@Reference
+	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private ItemSelector _itemSelector;
+
+	@Reference
+	private JSPRenderer _jspRenderer;
+
+	@Reference
 	private Portal _portal;
 
 	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;
+
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.commerce.channel.web)"
+	)
+	private ServletContext _servletContext;
 
 }

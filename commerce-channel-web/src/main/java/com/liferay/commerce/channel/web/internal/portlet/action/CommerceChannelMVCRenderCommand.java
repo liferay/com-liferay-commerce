@@ -12,24 +12,21 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.portlet;
+package com.liferay.commerce.channel.web.internal.portlet.action;
 
-import com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.channel.web.internal.display.context.CommerceChannelDisplayContext;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.io.IOException;
-
-import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -44,32 +41,15 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = {
-		"com.liferay.portlet.add-default-resource=true",
-		"com.liferay.portlet.display-category=category.hidden",
-		"com.liferay.portlet.layout-cacheable=true",
-		"com.liferay.portlet.preferences-owned-by-group=false",
-		"com.liferay.portlet.preferences-unique-per-layout=false",
-		"com.liferay.portlet.private-request-attributes=false",
-		"com.liferay.portlet.private-session-attributes=false",
-		"com.liferay.portlet.render-weight=50",
-		"com.liferay.portlet.scopeable=true",
-		"javax.portlet.display-name=Channels",
-		"javax.portlet.expiration-cache=0",
-		"javax.portlet.init-param.view-template=/channel/view.jsp",
-		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
-		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supports.mime-type=text/html"
-	},
-	service = {CommerceChannelsPortlet.class, Portlet.class}
+	property = "javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
+	service = MVCRenderCommand.class
 )
-public class CommerceChannelsPortlet extends MVCPortlet {
+public class CommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
-	public void render(
+	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			HttpServletRequest httpServletRequest =
@@ -86,9 +66,14 @@ public class CommerceChannelsPortlet extends MVCPortlet {
 		}
 		catch (PortalException pe) {
 			SessionErrors.add(renderRequest, pe.getClass());
+
+			return "/error.jsp";
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
 
-		super.render(renderRequest, renderResponse);
+		return "/view.jsp";
 	}
 
 	@Reference

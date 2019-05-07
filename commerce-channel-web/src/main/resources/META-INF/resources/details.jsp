@@ -30,7 +30,7 @@ String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
 %>
 
-<%@ include file="/channel/navbar_definitions.jspf" %>
+<%@ include file="/navbar_definitions.jspf" %>
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
 

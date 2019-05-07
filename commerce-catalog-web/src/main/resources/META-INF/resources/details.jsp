@@ -24,7 +24,7 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog();
 %>
 
-<%@ include file="/catalog/navbar_definitions.jspf" %>
+<%@ include file="/navbar_definitions.jspf" %>
 
 <portlet:actionURL name="editCommerceCatalog" var="editCommerceCatalogActionURL" />
 

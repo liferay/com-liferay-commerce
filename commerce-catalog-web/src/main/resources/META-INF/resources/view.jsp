@@ -26,7 +26,7 @@ PortletURL portletURL = commerceCatalogDisplayContext.getPortletURL();
 portletURL.setParameter("searchContainerId", "commerceCatalogs");
 %>
 
-<liferay-util:include page="/catalog/toolbar.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="searchContainerId" value="commerceCatalogs" />
 </liferay-util:include>
 
@@ -58,7 +58,7 @@ portletURL.setParameter("searchContainerId", "commerceCatalogs");
 
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
-							path="/catalog/catalog_action.jsp"
+							path="/catalog_action.jsp"
 						/>
 					</liferay-ui:search-container-row>
 

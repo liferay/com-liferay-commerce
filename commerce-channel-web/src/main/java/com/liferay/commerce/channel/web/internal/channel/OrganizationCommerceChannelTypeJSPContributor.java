@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.channel.web.internal.channel;
 
-import com.liferay.commerce.catalog.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext;
+import com.liferay.commerce.channel.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
@@ -64,7 +64,7 @@ public class OrganizationCommerceChannelTypeJSPContributor
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
-			"/channel/contributor/organization.jsp");
+			"/contributor/organization.jsp");
 	}
 
 	@Reference
