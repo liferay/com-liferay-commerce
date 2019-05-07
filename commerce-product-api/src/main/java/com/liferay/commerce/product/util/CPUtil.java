@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.catalog.web.internal.util;
+package com.liferay.commerce.product.util;
 
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.search.SortFactoryUtil;
  * @author Alec Sloan
  * @author Ethan Bustad
  */
-public class CommerceCatalogsPortletUtil {
+public class CPUtil {
 
 	public static Sort getCommerceCatalogSort(
 		String orderByCol, String orderByType) {
