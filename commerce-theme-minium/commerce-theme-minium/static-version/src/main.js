@@ -9,7 +9,6 @@ window.Liferay.fire = window.Liferay.emit;
 // import AccountSelector from "../public/soy-components/account-selector/src/AccountSelector";
 // import UserInvitation from "../public/soy-components/user-invitation/src/UserInvitation";
 import AddToCartButton from "../public/soy-components/add-to-cart/src/AddToCartButton";
-import MiniumProductGallery from "../public/soy-components/minium-product-gallery/src/MiniumProductGallery";
 import MiniumSearchBar from "../public/soy-components/commerce-search-bar/src/MiniumSearchBar";
 import MiniumSearchResults from "../public/soy-components/commerce-search-results/src/MiniumSearchResults";
 import MiniumTable from "../public/soy-components/minium-table/src/MiniumTable";

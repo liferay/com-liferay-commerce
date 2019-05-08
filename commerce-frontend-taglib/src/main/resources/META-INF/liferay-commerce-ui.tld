@@ -61,6 +61,26 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>gallery</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.GalleryTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>images</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>selected</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>commerce-product-details-modal</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
 		<body-content>empty</body-content>
