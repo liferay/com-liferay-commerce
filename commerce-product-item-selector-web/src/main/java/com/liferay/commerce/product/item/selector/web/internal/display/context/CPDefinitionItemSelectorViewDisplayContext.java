@@ -75,6 +75,10 @@ public class CPDefinitionItemSelectorViewDisplayContext
 		if (cpDefinitionId > 0) {
 			portletURL.setParameter(
 				"cpDefinitionId", String.valueOf(cpDefinitionId));
+			portletURL.setParameter(
+				"checkedCPDefinitionIds",
+				ParamUtil.getString(
+					httpServletRequest, "checkedCPDefinitionIds"));
 		}
 
 		return portletURL;
