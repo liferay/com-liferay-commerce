@@ -35,15 +35,16 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 
 			<%
 			Map<String, Object> context = new HashMap<>();
-			context.put("images", cpContentHelper.getImages(cpDefinitionId, themeDisplay));
+			List productImages = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
+			context.put("images", productImages);
 			context.put("selected", 0);
 			%>
 
 			<soy:template-renderer
 				componentId="<%= galleryId %>"
 				context="<%= context %>"
-				module='<%= npmResolver.resolveModuleName("commerce-theme-minium-impl/product_gallery/MiniumProductGallery.es") %>'
-				templateNamespace="MiniumProductGallery.render"
+				module='commerce-frontend-taglib@2.0.1/gallery/Gallery.es'
+				templateNamespace="Gallery.render"
 			/>
 		</div>
 
