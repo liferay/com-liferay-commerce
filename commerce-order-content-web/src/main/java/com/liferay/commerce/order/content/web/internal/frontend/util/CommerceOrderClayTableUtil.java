@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.model.Order;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
@@ -92,16 +93,26 @@ public class CommerceOrderClayTableUtil {
 					commerceOrder.getCommerceOrderId(), themeDisplay);
 			}
 
+			String commerceOrderStatus =
+				CommerceOrderConstants.getOrderStatusLabel(
+					commerceOrder.getOrderStatus());
+
+			String commerceOrderStatusLabel = LanguageUtil.get(
+				themeDisplay.getLocale(), commerceOrderStatus);
+
+			String commerceWorkflowStatus = WorkflowConstants.getStatusLabel(
+				commerceOrder.getStatus());
+
+			String workflowStatusLabel = LanguageUtil.get(
+				themeDisplay.getLocale(), commerceWorkflowStatus);
+
 			orders.add(
 				new Order(
 					commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountName(),
 					dateFormat.format(commerceOrder.getCreateDate()),
-					commerceOrder.getUserName(),
-					CommerceOrderConstants.getOrderStatusLabel(
-						commerceOrder.getOrderStatus()),
-					WorkflowConstants.getStatusLabel(commerceOrder.getStatus()),
-					amount, url));
+					commerceOrder.getUserName(), commerceOrderStatusLabel,
+					workflowStatusLabel, amount, url));
 		}
 
 		return orders;
