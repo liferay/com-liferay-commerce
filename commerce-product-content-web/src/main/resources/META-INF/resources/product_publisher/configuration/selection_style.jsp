@@ -25,7 +25,7 @@ CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = 
 
 	<aui:input checked="<%= cpPublisherConfigurationDisplayContext.isSelectionStyleManual() %>" id="selectionStyleManual" label="manual" name="preferences--selectionStyle--" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>' type="radio" value="manual" />
 
-	<aui:input checked="<%= cpPublisherConfigurationDisplayContext.isSelectionStyleDataSource() %>" id="selectionStyleDataSource" label="dataSource" name="preferences--selectionStyle--" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>' type="radio" value="dataSource" />
+	<aui:input checked="<%= cpPublisherConfigurationDisplayContext.isSelectionStyleDataSource() %>" id="selectionStyleDataSource" label='<%= LanguageUtil.get(request, "data-source") %>' name="preferences--selectionStyle--" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>' type="radio" value="dataSource" />
 </aui:fieldset>
 
 <aui:script>
