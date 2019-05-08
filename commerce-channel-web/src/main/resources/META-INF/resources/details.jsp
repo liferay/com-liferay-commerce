@@ -23,7 +23,11 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
 
-String filterType = commerceChannel.getFilterType();
+String filterType = StringPool.BLANK;
+
+if (commerceChannel != null) {
+	filterType = commerceChannel.getFilterType();
+}
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.getCommerceChannelTypes();
 

@@ -15,40 +15,38 @@
 --%>
 
 <%
-renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
-
-long commerceCatalogId = ParamUtil.getLong(request, "commerceCatalogId");
+renderResponse.setTitle(LanguageUtil.get(request, "catalogs"));
 %>
 
-<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogDetailsURL">
-	<portlet:param name="catalogNavigationItem" value="view-details" />
-	<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
-	<portlet:param name="mvcRenderCommandName" value="editCommerceCatalog" />
-</liferay-portlet:renderURL>
+<c:if test="<%= commerceCatalog != null %>">
+	<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogDetailsURL">
+		<portlet:param name="catalogNavigationItem" value="view-details" />
+		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalog.getCommerceCatalogId()) %>" />
+		<portlet:param name="mvcRenderCommandName" value="editCommerceCatalog" />
+	</liferay-portlet:renderURL>
 
-<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogUsersURL">
-	<portlet:param name="catalogNavigationItem" value="view-all-users" />
-	<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
-	<portlet:param name="mvcRenderCommandName" value="editCommerceCatalogUsers" />
-</liferay-portlet:renderURL>
+	<liferay-portlet:renderURL portletName="<%= CPPortletKeys.COMMERCE_CATALOGS %>" var="viewCatalogUsersURL">
+		<portlet:param name="catalogNavigationItem" value="view-all-users" />
+		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalog.getCommerceCatalogId()) %>" />
+		<portlet:param name="mvcRenderCommandName" value="editCommerceCatalogUsers" />
+	</liferay-portlet:renderURL>
 
-<%
-NavigationItem catalogDetailsNavigationItem = new NavigationItem();
+	<%
+	NavigationItem catalogDetailsNavigationItem = new NavigationItem();
 
-catalogDetailsNavigationItem.setActive(catalogNavigationItem.equals("view-details"));
-catalogDetailsNavigationItem.setHref(viewCatalogDetailsURL.toString());
-catalogDetailsNavigationItem.setLabel(LanguageUtil.get(request, "details"));
+	catalogDetailsNavigationItem.setActive(catalogNavigationItem.equals("view-details"));
+	catalogDetailsNavigationItem.setHref(viewCatalogDetailsURL.toString());
+	catalogDetailsNavigationItem.setLabel(LanguageUtil.get(request, "details"));
 
-NavigationItem catalogUsersNavigationItem = new NavigationItem();
+	NavigationItem catalogUsersNavigationItem = new NavigationItem();
 
-catalogUsersNavigationItem.setActive(catalogNavigationItem.equals("view-all-users"));
-catalogUsersNavigationItem.setHref(viewCatalogUsersURL.toString());
-catalogUsersNavigationItem.setLabel(LanguageUtil.get(request, "users"));
+	catalogUsersNavigationItem.setActive(catalogNavigationItem.equals("view-all-users"));
+	catalogUsersNavigationItem.setHref(viewCatalogUsersURL.toString());
+	catalogUsersNavigationItem.setLabel(LanguageUtil.get(request, "users"));
 
-List<NavigationItem> catalogSubNavigationItems = Arrays.asList(catalogDetailsNavigationItem, catalogUsersNavigationItem);
-%>
+	List<NavigationItem> catalogSubNavigationItems = Arrays.asList(catalogDetailsNavigationItem, catalogUsersNavigationItem);
+	%>
 
-<c:if test="<%= commerceCatalogId != 0 %>">
 	<clay:navigation-bar
 		inverted="<%= true %>"
 		navigationItems="<%= CPNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"

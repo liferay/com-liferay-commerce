@@ -71,19 +71,32 @@ public class EditCommerceCatalogUsersMVCActionCommand
 	protected void deleteCommerceCatalogUser(ActionRequest actionRequest)
 		throws Exception {
 
-		long commerceCatalogUserId = ParamUtil.getLong(
-			actionRequest, "commerceCatalogUserIds");
-
 		long commerceCatalogId = ParamUtil.getLong(
 			actionRequest, "commerceCatalogId");
 
 		Group group = _commerceCatalogService.getCommerceCatalogGroup(
 			commerceCatalogId);
 
-		_userGroupRoleLocalService.deleteUserGroupRoles(
-			commerceCatalogUserId, new long[] {group.getGroupId()});
+		long[] commerceCatalogUserIds = null;
 
-		_groupLocalService.deleteUserGroup(commerceCatalogUserId, group);
+		long commerceCatalogUserId = ParamUtil.getLong(
+			actionRequest, "commerceCatalogUserIds");
+
+		if (commerceCatalogUserId > 0) {
+			commerceCatalogUserIds = new long[] {commerceCatalogUserId};
+		}
+		else {
+			commerceCatalogUserIds = ParamUtil.getLongValues(
+				actionRequest, "commerceCatalogUserIds");
+		}
+
+		for (long deleteCommerceCatalogUserId : commerceCatalogUserIds) {
+			_userGroupRoleLocalService.deleteUserGroupRoles(
+				deleteCommerceCatalogUserId, new long[] {group.getGroupId()});
+
+			_groupLocalService.deleteUserGroup(
+				deleteCommerceCatalogUserId, group);
+		}
 	}
 
 	@Override

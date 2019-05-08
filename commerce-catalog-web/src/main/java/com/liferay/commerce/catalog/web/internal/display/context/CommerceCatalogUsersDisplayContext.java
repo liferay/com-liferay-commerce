@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
@@ -72,6 +73,13 @@ public class CommerceCatalogUsersDisplayContext
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
 		_userService = userService;
+	}
+
+	public CommerceCatalog getCommerceCatalog() throws PortalException {
+		long commerceCatalogId = ParamUtil.getLong(
+			httpServletRequest, "commerceCatalogId");
+
+		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
 	}
 
 	public long getCommerceCatalogGroupId() throws PortalException {
@@ -167,7 +175,7 @@ public class CommerceCatalogUsersDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
-		List<User> users = getUsers();
+		List<User> users = getSelectedUsers();
 
 		searchContainer.setTotal(users.size());
 		searchContainer.setResults(users);
