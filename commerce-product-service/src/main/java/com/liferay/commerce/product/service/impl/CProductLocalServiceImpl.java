@@ -44,8 +44,8 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		CProduct cProduct = cProductLocalService.createCProduct(
 			counterLocalService.increment());
 
-		cProduct.setCompanyId(user.getCompanyId());
 		cProduct.setGroupId(serviceContext.getScopeGroupId());
+		cProduct.setCompanyId(user.getCompanyId());
 		cProduct.setUserId(user.getUserId());
 		cProduct.setUserName(user.getFullName());
 		cProduct.setUuid(serviceContext.getUuid());

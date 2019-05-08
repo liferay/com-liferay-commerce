@@ -22,7 +22,6 @@ import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -322,8 +321,5 @@ public class CPPublisherWebHelper {
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
-
-	@Reference
-	private CPDefinitionService _cpDefinitionService;
 
 }
