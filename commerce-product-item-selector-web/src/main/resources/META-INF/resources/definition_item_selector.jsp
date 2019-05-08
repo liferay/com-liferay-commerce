@@ -143,10 +143,6 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 			markupView="lexicon"
 			searchContainer="<%= cpDefinitionSearchContainer %>"
 		/>
-
-		<liferay-ui:search-paginator
-			searchContainer="<%= cpDefinitionSearchContainer %>"
-		/>
 	</liferay-ui:search-container>
 </div>
 
