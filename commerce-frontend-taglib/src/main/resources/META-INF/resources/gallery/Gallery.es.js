@@ -1,4 +1,4 @@
-import template from './MiniumProductGallery.soy';
+import template from './Gallery.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
@@ -12,7 +12,7 @@ function fetchImage(url) {
 	);
 }
 
-class MiniumProductGallery extends Component {
+class Gallery extends Component {
 	loadImage(imageUrl) {
 		return new Promise(
 			resolve => {
@@ -72,9 +72,9 @@ class MiniumProductGallery extends Component {
 	}
 }
 
-Soy.register(MiniumProductGallery, template);
+Soy.register(Gallery, template);
 
-MiniumProductGallery.STATE = {
+Gallery.STATE = {
 	fullscreen: {
 		value: false
 	},
@@ -89,5 +89,5 @@ MiniumProductGallery.STATE = {
 	}
 };
 
-export {MiniumProductGallery};
-export default MiniumProductGallery;
+export {Gallery};
+export default Gallery;
