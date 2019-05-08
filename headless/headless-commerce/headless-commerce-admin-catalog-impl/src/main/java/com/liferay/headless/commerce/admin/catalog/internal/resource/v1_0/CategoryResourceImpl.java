@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.asset.kernel.exception.NoSuchCategoryException;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryService;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
@@ -28,6 +29,7 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -175,10 +177,25 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 			CPDefinition cpDefinition, Category[] categories)
 		throws PortalException {
 
+		long[] assetCategoryIds = new long[0];
+
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			cpDefinition.getGroupId());
 
-		// TODO upsert categories
+		for (Category category : categories) {
+			AssetCategory assetCategory = _assetCategoryService.fetchCategory(
+				category.getId());
+
+			if (assetCategory == null) {
+				throw new NoSuchCategoryException(
+					"Unable to find Category with ID: " + category.getId());
+			}
+
+			assetCategoryIds = ArrayUtil.append(
+				assetCategoryIds, assetCategory.getCategoryId());
+		}
+
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
 
 		_cpDefinitionService.updateCPDefinitionCategorization(
 			cpDefinition.getCPDefinitionId(), serviceContext);
