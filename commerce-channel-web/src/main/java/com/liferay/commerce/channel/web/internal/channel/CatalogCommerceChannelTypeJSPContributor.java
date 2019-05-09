@@ -65,7 +65,7 @@ public class CatalogCommerceChannelTypeJSPContributor
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
-			"/channel/contributor/catalog.jsp");
+			"/contributor/catalog.jsp");
 	}
 
 	@Reference
@@ -94,7 +94,7 @@ public class CatalogCommerceChannelTypeJSPContributor
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.catalog.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.channel.web)"
 	)
 	private ServletContext _servletContext;
 

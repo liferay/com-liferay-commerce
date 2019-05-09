@@ -28,7 +28,11 @@ long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 
 <%@ include file="/navbar_definitions.jspf" %>
 
-<portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
+<liferay-util:include page="/toolbar_filters.jsp" servletContext="<%= application %>">
+	<liferay-util:param name="searchContainerId" value="commerceChannelFilters" />
+</liferay-util:include>
+
+<portlet:actionURL name="editCommerceChannelFilter" var="editCommerceChannelFilterURL" />
 
 <aui:form action="<%= editCommerceChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceChannel == null) ? Constants.ADD : Constants.UPDATE %>" />
