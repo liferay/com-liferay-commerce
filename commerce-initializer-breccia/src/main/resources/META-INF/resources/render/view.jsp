@@ -49,15 +49,17 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 			</div>
 		</div>
 
-		<div class="product-detail-body d-block">
+		<div class="d-block product-detail-body">
 			<div class="row">
 				<div class="col-6">
+
 					<%
-						String galleryId = PortalUtil.generateRandomKey(request, "gallery");
-						Map<String, Object> context = new HashMap<>();
-						context.put("images", cpContentHelper.getImages(cpDefinitionId, themeDisplay));
-						context.put("selected", 0);
+					String galleryId = PortalUtil.generateRandomKey(request, "gallery");
+					Map<String, Object> context = new HashMap<>();
+					context.put("images", cpContentHelper.getImages(cpDefinitionId, themeDisplay));
+					context.put("selected", 0);
 					%>
+
 					<soy:template-renderer
 						componentId="<%= galleryId %>"
 						context="<%= context %>"
@@ -65,6 +67,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						templateNamespace="Gallery.render"
 					/>
 				</div>
+
 				<div class="col-6">
 					<div class="product-detail-info">
 						<div class="autofit-float autofit-row product-detail-info-header">
@@ -130,7 +133,6 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -257,10 +259,10 @@ List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cp
 							if (attachmentsCount >= 2) {
 							%>
 
-									<dt class="autofit-col specification-empty specification-term"></dt>
-									<dd class="autofit-col specification-desc specification-empty"></dd>
+								<dt class="autofit-col specification-empty specification-term"></dt>
+								<dd class="autofit-col specification-desc specification-empty"></dd>
 
-								<%
+							<%
 								attachmentsCount = 0;
 							}
 							%>
