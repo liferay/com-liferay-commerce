@@ -14,26 +14,13 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.model.PriceModel;
-import com.liferay.commerce.frontend.model.ProductSettingsModel;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.util.ProductHelperProvider;
-import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.Map;
 import java.util.List;
-
-import javax.servlet.jsp.PageContext;
+import java.util.Map;
 
 /**
  * @author Fabio Mastrorilli
@@ -42,12 +29,12 @@ public class GalleryTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-			Map<String, Object> context = getContext();
+		Map<String, Object> context = getContext();
 
-			putValue("images", context.get("images"));
-			putValue("selected", context.get("selected"));
+		putValue("images", context.get("images"));
+		putValue("selected", context.get("selected"));
 
-			setTemplateNamespace("Gallery.render");
+		setTemplateNamespace("Gallery.render");
 
 		return super.doStartTag();
 	}
@@ -63,7 +50,11 @@ public class GalleryTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/gallery/Gallery.es");
 	}
-	
+
+	public void setId(String id) {
+		putValue("id", id);
+	}
+
 	public void setImages(List images) {
 		putValue("images", images);
 	}
@@ -71,11 +62,5 @@ public class GalleryTag extends ComponentRendererTag {
 	public void setSelected(int selected) {
 		putValue("selected", selected);
 	}
-
-	public void setId(String id) {
-		putValue("id", id);
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
 
 }
