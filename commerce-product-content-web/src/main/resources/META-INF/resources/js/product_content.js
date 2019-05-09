@@ -262,7 +262,7 @@ AUI.add(
 						var sampleFilesShow = productContent.all('[data-text-cp-instance-sample-file-show]').hide();
 
 						if (cpInstance.sku) {
-							skus.setHTML(cpInstance.sku);
+							skus.setHTML(Liferay.Util.escape(cpInstance.sku));
 							skusShow.show();
 						}
 
