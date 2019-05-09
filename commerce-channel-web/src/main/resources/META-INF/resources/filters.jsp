@@ -30,7 +30,7 @@ long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
 
 <%@ include file="/navbar_definitions.jspf" %>
 
-<liferay-util:include page="/channel/toolbar_filters.jsp" servletContext="<%= application %>">
+<liferay-util:include page="/toolbar_filters.jsp" servletContext="<%= application %>">
 	<liferay-util:param name="searchContainerId" value="commerceChannelFilters" />
 </liferay-util:include>
 
@@ -71,7 +71,7 @@ long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
 
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
-							path="/channel/filter_action.jsp"
+							path="/filter_action.jsp"
 						/>
 					</liferay-ui:search-container-row>
 

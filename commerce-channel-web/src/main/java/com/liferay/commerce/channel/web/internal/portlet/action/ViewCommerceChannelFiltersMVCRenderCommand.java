@@ -69,7 +69,7 @@ public class ViewCommerceChannelFiltersMVCRenderCommand
 			throw new PortletException(e);
 		}
 
-		return "/channel/filters.jsp";
+		return "/filters.jsp";
 	}
 
 	@Reference
