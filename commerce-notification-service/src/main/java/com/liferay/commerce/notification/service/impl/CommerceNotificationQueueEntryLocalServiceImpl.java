@@ -227,11 +227,9 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 			}
 
 			mailMessage.setBCC(
-				bccInternetAddresses.toArray(
-					new InternetAddress[bccInternetAddresses.size()]));
+				bccInternetAddresses.toArray(new InternetAddress[0]));
 			mailMessage.setCC(
-				ccInternetAddresses.toArray(
-					new InternetAddress[ccInternetAddresses.size()]));
+				ccInternetAddresses.toArray(new InternetAddress[0]));
 
 			try {
 				_mailService.sendEmail(mailMessage);

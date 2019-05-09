@@ -91,7 +91,7 @@ public class VirtualCPTypeTestUtil {
 			contentMap, LocaleUtil.toLanguageId(defaultLocale));
 
 		DDMForm ddmForm = DDMStructureTestUtil.getSampleDDMForm(
-			locales.toArray(new Locale[locales.size()]), defaultLocale);
+			locales.toArray(new Locale[0]), defaultLocale);
 
 		long ddmGroupId = GetterUtil.getLong(
 			serviceContext.getAttribute("ddmGroupId"), groupId);

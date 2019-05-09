@@ -169,9 +169,7 @@ public class CPPublisherWebHelper {
 		}
 
 		portletPreferences.setValues(
-			"catalogEntryXml",
-			catalogEntryXmlsList.toArray(
-				new String[catalogEntryXmlsList.size()]));
+			"catalogEntryXml", catalogEntryXmlsList.toArray(new String[0]));
 
 		portletPreferences.store();
 	}
@@ -313,9 +311,7 @@ public class CPPublisherWebHelper {
 			assetCategoryIdsList.add(assetCategoryId);
 		}
 
-		return ArrayUtil.toArray(
-			assetCategoryIdsList.toArray(
-				new Long[assetCategoryIdsList.size()]));
+		return ArrayUtil.toArray(assetCategoryIdsList.toArray(new Long[0]));
 	}
 
 	@Reference
