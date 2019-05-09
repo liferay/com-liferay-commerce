@@ -158,8 +158,7 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 			CPDefinitionLocalServiceUtil.getCPDefinitionLocalizationLanguageIds(
 				getCPDefinitionId()));
 
-		return availableLanguageIds.toArray(
-			new String[availableLanguageIds.size()]);
+		return availableLanguageIds.toArray(new String[0]);
 	}
 
 	@Override

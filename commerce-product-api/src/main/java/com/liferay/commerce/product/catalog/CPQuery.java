@@ -329,8 +329,7 @@ public class CPQuery {
 			}
 		}
 
-		return ArrayUtil.toArray(
-			tagIdsList.toArray(new Long[tagIdsList.size()]));
+		return ArrayUtil.toArray(tagIdsList.toArray(new Long[0]));
 	}
 
 	private long[] _getLeftAndRightCategoryIds(long[] categoryIds) {
