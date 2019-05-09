@@ -267,7 +267,7 @@ AUI.add(
 						}
 
 						if (cpInstance.price) {
-							prices.setHTML(cpInstance.price);
+							prices.setHTML(Liferay.Util.escape(cpInstance.price));
 							pricesShow.show();
 						}
 
