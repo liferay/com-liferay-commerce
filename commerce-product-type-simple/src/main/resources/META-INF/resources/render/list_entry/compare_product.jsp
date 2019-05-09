@@ -56,7 +56,7 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 		<c:if test="<%= cpSku != null %>">
 			<div class="card-subtitle">
-				<liferay-ui:message arguments="<%= cpSku.getSku() %>" key="sku-x" />
+				<liferay-ui:message arguments="<%= HtmlUtil.escape(cpSku.getSku()) %>" key="sku-x" />
 			</div>
 		</c:if>
 	</div>
