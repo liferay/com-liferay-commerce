@@ -26,7 +26,6 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 String galleryId = PortalUtil.generateRandomKey(request, "gallery");
-NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 %>
 
 <div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
@@ -36,6 +35,7 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 			<%
 			Map<String, Object> context = new HashMap<>();
 			List productImages = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
+
 			context.put("images", productImages);
 			context.put("selected", 0);
 			%>
@@ -43,7 +43,7 @@ NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
 			<soy:template-renderer
 				componentId="<%= galleryId %>"
 				context="<%= context %>"
-				module='commerce-frontend-taglib@2.0.1/gallery/Gallery.es'
+				module="commerce-frontend-taglib@2.0.1/gallery/Gallery.es"
 				templateNamespace="Gallery.render"
 			/>
 		</div>
