@@ -20,6 +20,7 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -112,7 +113,8 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 			CPDefinitionSubscriptionInfoDisplayContext
 				cpDefinitionSubscriptionInfoDisplayContext =
 					new CPDefinitionSubscriptionInfoDisplayContext(
-						_actionHelper, httpServletRequest, _cpDefinitionHelper,
+						_actionHelper, httpServletRequest,
+						_commerceCatalogService, _cpDefinitionHelper,
 						_cpDefinitionModelResourcePermission,
 						_cpDefinitionService, _itemSelector,
 						_portletResourcePermission,
@@ -137,6 +139,9 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;

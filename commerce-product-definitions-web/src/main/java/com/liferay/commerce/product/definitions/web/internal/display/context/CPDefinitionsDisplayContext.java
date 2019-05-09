@@ -23,6 +23,7 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.item.selector.ItemSelector;
@@ -33,6 +34,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -74,6 +76,7 @@ public class CPDefinitionsDisplayContext
 
 	public CPDefinitionsDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			CommerceCatalogService commerceCatalogService,
 			CPDefinitionHelper cpDefinitionHelper,
 			ModelResourcePermission<CPDefinition>
 				cpDefinitionModelResourcePermission,
@@ -87,6 +90,7 @@ public class CPDefinitionsDisplayContext
 
 		setDefaultOrderByType("desc");
 
+		_commerceCatalogService = commerceCatalogService;
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpDefinitionModelResourcePermission =
 			cpDefinitionModelResourcePermission;
@@ -292,11 +296,17 @@ public class CPDefinitionsDisplayContext
 		String filtersValues = ParamUtil.getString(
 			httpServletRequest, "filtersValues");
 
+		long commerceCatalogId = ParamUtil.getLong(
+			httpServletRequest, "commerceCatalogId");
+
+		Group group = _commerceCatalogService.getCommerceCatalogGroup(
+			commerceCatalogId);
+
 		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
 			_cpDefinitionService.searchCPDefinitions(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				getKeywords(), filterFields, filtersValues,
-				searchContainer.getStart(), searchContainer.getEnd(), sort);
+				themeDisplay.getCompanyId(), group.getGroupId(), getKeywords(),
+				filterFields, filtersValues, searchContainer.getStart(),
+				searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(cpDefinitionBaseModelSearchResult.getLength());
 		searchContainer.setResults(
@@ -382,6 +392,7 @@ public class CPDefinitionsDisplayContext
 			ActionKeys.VIEW);
 	}
 
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission;

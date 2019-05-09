@@ -21,6 +21,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.petra.string.StringPool;
@@ -40,6 +41,7 @@ public class CPDefinitionShippingInfoDisplayContext
 
 	public CPDefinitionShippingInfoDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			CommerceCatalogService commerceCatalogService,
 			CommerceCurrencyLocalService commerceCurrencyLocalService,
 			CPDefinitionHelper cpDefinitionHelper,
 			ModelResourcePermission<CPDefinition>
@@ -50,9 +52,9 @@ public class CPDefinitionShippingInfoDisplayContext
 		throws PortalException {
 
 		super(
-			actionHelper, httpServletRequest, cpDefinitionHelper,
-			cpDefinitionModelResourcePermission, cpDefinitionService,
-			itemSelector, portletResourcePermission);
+			actionHelper, httpServletRequest, commerceCatalogService,
+			cpDefinitionHelper, cpDefinitionModelResourcePermission,
+			cpDefinitionService, itemSelector, portletResourcePermission);
 
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
