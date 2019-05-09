@@ -296,9 +296,10 @@ create table CPRule (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	name VARCHAR(75) null,
 	active_ BOOLEAN,
-	scope VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	typeSettings TEXT null
 );
@@ -400,7 +401,7 @@ create table CommerceChannel (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	name STRING null,
+	name VARCHAR(75) null,
 	filterType VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	typeSettings VARCHAR(75) null

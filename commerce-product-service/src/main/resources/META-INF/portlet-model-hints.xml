@@ -18,11 +18,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field localized="true" name="name" type="String" />
-		<field name="filterType" type="String" />
 		<field name="name" type="String">
 			<validator name="required" />
 		</field>
+		<field name="filterType" type="String" />
 		<field name="type" type="String">
 			<validator name="required" />
 		</field>
@@ -425,11 +424,12 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="name" type="String">
 			<validator name="required" />
 		</field>
 		<field name="active" type="boolean" />
-		<field name="scope" type="String" />
 		<field name="type" type="String" />
 		<field name="typeSettings" type="String">
 			<hint-collection name="CLOB" />

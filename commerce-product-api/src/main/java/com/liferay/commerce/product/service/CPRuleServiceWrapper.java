@@ -33,6 +33,17 @@ public class CPRuleServiceWrapper implements CPRuleService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPRule addCPRule(
+		long classNameId, long classPK, String name, boolean active,
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleService.addCPRule(classNameId, classPK, name, active,
+			type, typeSettingsProperties, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPRule addCPRule(String name,
 		boolean active, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -84,6 +95,17 @@ public class CPRuleServiceWrapper implements CPRuleService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpRuleService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(
+		long companyId, long groupId,
+		java.util.Map<String, java.io.Serializable> attributes,
+		String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleService.searchCPRules(companyId, groupId, attributes,
+			keywords, start, end, sort);
 	}
 
 	@Override

@@ -20,12 +20,8 @@ import com.liferay.commerce.product.service.CommerceChannelServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 
 import java.rmi.RemoteException;
-
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
@@ -69,44 +65,6 @@ import java.util.Map;
  */
 @ProviderType
 public class CommerceChannelServiceSoap {
-	public static com.liferay.commerce.product.model.CommerceChannelSoap addCommerceChannel(
-		String[] nameMapLanguageIds, String[] nameMapValues, String filterType,
-		String type, String typeSettings,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-
-			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.addCommerceChannel(nameMap,
-					filterType, type, typeSettings, serviceContext);
-
-			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CommerceChannelSoap addCommerceChannel(
-		String name, String filterType, String type, String typeSettings,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.addCommerceChannel(name,
-					filterType, type, typeSettings, serviceContext);
-
-			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CommerceChannelSoap deleteCommerceChannel(
 		long commerceChannelId) throws RemoteException {
 		try {
@@ -156,28 +114,6 @@ public class CommerceChannelServiceSoap {
 				CommerceChannelServiceUtil.getCommerceChannels(start, end);
 
 			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CommerceChannelSoap updateCommerceChannel(
-		long commerceChannelId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String filterType, String type,
-		String typeSettings,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-
-			com.liferay.commerce.product.model.CommerceChannel returnValue = CommerceChannelServiceUtil.updateCommerceChannel(commerceChannelId,
-					nameMap, filterType, type, typeSettings, serviceContext);
-
-			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

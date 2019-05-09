@@ -64,7 +64,7 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{CPRuleId=");
 		sb.append(CPRuleId);
@@ -80,12 +80,14 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", scope=");
-		sb.append(scope);
 		sb.append(", type=");
 		sb.append(type);
 		sb.append(", typeSettings=");
@@ -125,6 +127,9 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 			cpRuleImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		cpRuleImpl.setClassNameId(classNameId);
+		cpRuleImpl.setClassPK(classPK);
+
 		if (name == null) {
 			cpRuleImpl.setName("");
 		}
@@ -133,13 +138,6 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		}
 
 		cpRuleImpl.setActive(active);
-
-		if (scope == null) {
-			cpRuleImpl.setScope("");
-		}
-		else {
-			cpRuleImpl.setScope(scope);
-		}
 
 		if (type == null) {
 			cpRuleImpl.setType("");
@@ -172,10 +170,13 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+
+		classNameId = objectInput.readLong();
+
+		classPK = objectInput.readLong();
 		name = objectInput.readUTF();
 
 		active = objectInput.readBoolean();
-		scope = objectInput.readUTF();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
 	}
@@ -201,6 +202,10 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		objectOutput.writeLong(classNameId);
+
+		objectOutput.writeLong(classPK);
+
 		if (name == null) {
 			objectOutput.writeUTF("");
 		}
@@ -209,13 +214,6 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		}
 
 		objectOutput.writeBoolean(active);
-
-		if (scope == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(scope);
-		}
 
 		if (type == null) {
 			objectOutput.writeUTF("");
@@ -239,9 +237,10 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long classNameId;
+	public long classPK;
 	public String name;
 	public boolean active;
-	public String scope;
 	public String type;
 	public String typeSettings;
 }

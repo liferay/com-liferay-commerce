@@ -297,10 +297,10 @@ public class CommerceCatalogLocalServiceWrapper
 	}
 
 	@Override
-	public int searchCommerceCatalogsCount(long companyId, String keywords,
-		String name) throws com.liferay.portal.kernel.exception.PortalException {
+	public int searchCommerceCatalogsCount(long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.searchCommerceCatalogsCount(companyId,
-			keywords, name);
+			keywords);
 	}
 
 	/**

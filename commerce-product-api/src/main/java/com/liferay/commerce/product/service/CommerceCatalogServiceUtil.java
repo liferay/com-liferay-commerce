@@ -92,6 +92,12 @@ public class CommerceCatalogServiceUtil {
 				   .searchCommerceCatalogs(companyId, keywords, start, end, sort);
 	}
 
+	public static int searchCommerceCatalogsCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceCatalogsCount(companyId, keywords);
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
 		long commerceCatalogId, String catalogDefaultLanguageId,
 		java.util.Map<java.util.Locale, String> nameMap,

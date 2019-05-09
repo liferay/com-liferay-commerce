@@ -89,6 +89,10 @@ public interface CommerceCatalogService extends BaseService {
 		String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCommerceCatalogsCount(long companyId, String keywords)
+		throws PortalException;
+
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
 		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
 		ServiceContext serviceContext) throws PortalException;

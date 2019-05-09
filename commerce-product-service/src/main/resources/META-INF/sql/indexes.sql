@@ -90,6 +90,7 @@ create index IX_F5E154F5 on CPOptionValue (groupId);
 create index IX_17FEC609 on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_1D633ACB on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], groupId);
 
+create index IX_CD1787A4 on CPRule (classNameId, classPK);
 create index IX_B4B2EAFB on CPRule (groupId);
 
 create index IX_5AF83912 on CPRuleAssetCategoryRel (CPRuleId);

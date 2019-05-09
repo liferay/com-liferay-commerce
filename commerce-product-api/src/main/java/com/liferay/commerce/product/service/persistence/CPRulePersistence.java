@@ -234,6 +234,149 @@ public interface CPRulePersistence extends BasePersistence<CPRule> {
 	public int filterCountByGroupId(long groupId);
 
 	/**
+	* Returns all the cp rules where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the matching cp rules
+	*/
+	public java.util.List<CPRule> findByC_C(long classNameId, long classPK);
+
+	/**
+	* Returns a range of all the cp rules where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param start the lower bound of the range of cp rules
+	* @param end the upper bound of the range of cp rules (not inclusive)
+	* @return the range of matching cp rules
+	*/
+	public java.util.List<CPRule> findByC_C(long classNameId, long classPK,
+		int start, int end);
+
+	/**
+	* Returns an ordered range of all the cp rules where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param start the lower bound of the range of cp rules
+	* @param end the upper bound of the range of cp rules (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching cp rules
+	*/
+	public java.util.List<CPRule> findByC_C(long classNameId, long classPK,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the cp rules where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param start the lower bound of the range of cp rules
+	* @param end the upper bound of the range of cp rules (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching cp rules
+	*/
+	public java.util.List<CPRule> findByC_C(long classNameId, long classPK,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first cp rule in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp rule
+	* @throws NoSuchCPRuleException if a matching cp rule could not be found
+	*/
+	public CPRule findByC_C_First(long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator)
+		throws NoSuchCPRuleException;
+
+	/**
+	* Returns the first cp rule in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp rule, or <code>null</code> if a matching cp rule could not be found
+	*/
+	public CPRule fetchByC_C_First(long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator);
+
+	/**
+	* Returns the last cp rule in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp rule
+	* @throws NoSuchCPRuleException if a matching cp rule could not be found
+	*/
+	public CPRule findByC_C_Last(long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator)
+		throws NoSuchCPRuleException;
+
+	/**
+	* Returns the last cp rule in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp rule, or <code>null</code> if a matching cp rule could not be found
+	*/
+	public CPRule fetchByC_C_Last(long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator);
+
+	/**
+	* Returns the cp rules before and after the current cp rule in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param CPRuleId the primary key of the current cp rule
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next cp rule
+	* @throws NoSuchCPRuleException if a cp rule with the primary key could not be found
+	*/
+	public CPRule[] findByC_C_PrevAndNext(long CPRuleId, long classNameId,
+		long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator<CPRule> orderByComparator)
+		throws NoSuchCPRuleException;
+
+	/**
+	* Removes all the cp rules where classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	*/
+	public void removeByC_C(long classNameId, long classPK);
+
+	/**
+	* Returns the number of cp rules where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the number of matching cp rules
+	*/
+	public int countByC_C(long classNameId, long classPK);
+
+	/**
 	* Caches the cp rule in the entity cache if it is enabled.
 	*
 	* @param cpRule the cp rule

@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.model.AttachedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.GroupedModel;
@@ -43,8 +44,8 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface CPRuleModel extends BaseModel<CPRule>, GroupedModel,
-	ShardedModel {
+public interface CPRuleModel extends AttachedModel, BaseModel<CPRule>,
+	GroupedModel, ShardedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -193,6 +194,48 @@ public interface CPRuleModel extends BaseModel<CPRule>, GroupedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the fully qualified class name of this cp rule.
+	 *
+	 * @return the fully qualified class name of this cp rule
+	 */
+	@Override
+	public String getClassName();
+
+	public void setClassName(String className);
+
+	/**
+	 * Returns the class name ID of this cp rule.
+	 *
+	 * @return the class name ID of this cp rule
+	 */
+	@Override
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this cp rule.
+	 *
+	 * @param classNameId the class name ID of this cp rule
+	 */
+	@Override
+	public void setClassNameId(long classNameId);
+
+	/**
+	 * Returns the class pk of this cp rule.
+	 *
+	 * @return the class pk of this cp rule
+	 */
+	@Override
+	public long getClassPK();
+
+	/**
+	 * Sets the class pk of this cp rule.
+	 *
+	 * @param classPK the class pk of this cp rule
+	 */
+	@Override
+	public void setClassPK(long classPK);
+
+	/**
 	 * Returns the name of this cp rule.
 	 *
 	 * @return the name of this cp rule
@@ -227,21 +270,6 @@ public interface CPRuleModel extends BaseModel<CPRule>, GroupedModel,
 	 * @param active the active of this cp rule
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the scope of this cp rule.
-	 *
-	 * @return the scope of this cp rule
-	 */
-	@AutoEscape
-	public String getScope();
-
-	/**
-	 * Sets the scope of this cp rule.
-	 *
-	 * @param scope the scope of this cp rule
-	 */
-	public void setScope(String scope);
 
 	/**
 	 * Returns the type of this cp rule.

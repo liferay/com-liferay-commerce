@@ -55,6 +55,17 @@ public class CPRuleLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPRule addCPRule(
+		long classNameId, long classPK, String name, boolean active,
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPRule(classNameId, classPK, name, active, type,
+			typeSettingsProperties, serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPRule addCPRule(
 		String name, boolean active, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -69,6 +80,17 @@ public class CPRuleLocalServiceUtil {
 		return getService()
 				   .addCPRule(name, active, type, typeSettingsProperties,
 			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPRule addCPRule(
+		String className, long classPK, String name, boolean active,
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPRule(className, classPK, name, active, type,
+			typeSettingsProperties, serviceContext);
 	}
 
 	public static void cleanCPRulesCache(long groupId) {
@@ -284,6 +306,17 @@ public class CPRuleLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(
+		long companyId, long groupId,
+		java.util.Map<String, java.io.Serializable> attributes,
+		String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCPRules(companyId, groupId, attributes, keywords,
+			start, end, sort);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(

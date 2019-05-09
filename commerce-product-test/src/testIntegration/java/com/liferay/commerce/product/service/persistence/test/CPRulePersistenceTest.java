@@ -134,11 +134,13 @@ public class CPRulePersistenceTest {
 
 		newCPRule.setModifiedDate(RandomTestUtil.nextDate());
 
+		newCPRule.setClassNameId(RandomTestUtil.nextLong());
+
+		newCPRule.setClassPK(RandomTestUtil.nextLong());
+
 		newCPRule.setName(RandomTestUtil.randomString());
 
 		newCPRule.setActive(RandomTestUtil.randomBoolean());
-
-		newCPRule.setScope(RandomTestUtil.randomString());
 
 		newCPRule.setType(RandomTestUtil.randomString());
 
@@ -162,9 +164,11 @@ public class CPRulePersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPRule.getModifiedDate()),
 			Time.getShortTimestamp(newCPRule.getModifiedDate()));
+		Assert.assertEquals(existingCPRule.getClassNameId(),
+			newCPRule.getClassNameId());
+		Assert.assertEquals(existingCPRule.getClassPK(), newCPRule.getClassPK());
 		Assert.assertEquals(existingCPRule.getName(), newCPRule.getName());
 		Assert.assertEquals(existingCPRule.isActive(), newCPRule.isActive());
-		Assert.assertEquals(existingCPRule.getScope(), newCPRule.getScope());
 		Assert.assertEquals(existingCPRule.getType(), newCPRule.getType());
 		Assert.assertEquals(existingCPRule.getTypeSettings(),
 			newCPRule.getTypeSettings());
@@ -175,6 +179,14 @@ public class CPRulePersistenceTest {
 		_persistence.countByGroupId(RandomTestUtil.nextLong());
 
 		_persistence.countByGroupId(0L);
+	}
+
+	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
@@ -208,8 +220,8 @@ public class CPRulePersistenceTest {
 	protected OrderByComparator<CPRule> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPRule", "CPRuleId", true,
 			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "name", true,
-			"active", true, "scope", true, "type", true);
+			true, "createDate", true, "modifiedDate", true, "classNameId",
+			true, "classPK", true, "name", true, "active", true, "type", true);
 	}
 
 	@Test
@@ -417,11 +429,13 @@ public class CPRulePersistenceTest {
 
 		cpRule.setModifiedDate(RandomTestUtil.nextDate());
 
+		cpRule.setClassNameId(RandomTestUtil.nextLong());
+
+		cpRule.setClassPK(RandomTestUtil.nextLong());
+
 		cpRule.setName(RandomTestUtil.randomString());
 
 		cpRule.setActive(RandomTestUtil.randomBoolean());
-
-		cpRule.setScope(RandomTestUtil.randomString());
 
 		cpRule.setType(RandomTestUtil.randomString());
 

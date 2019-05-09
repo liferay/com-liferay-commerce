@@ -282,10 +282,9 @@ public class CommerceCatalogLocalServiceUtil {
 	}
 
 	public static int searchCommerceCatalogsCount(long companyId,
-		String keywords, String name)
+		String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .searchCommerceCatalogsCount(companyId, keywords, name);
+		return getService().searchCommerceCatalogsCount(companyId, keywords);
 	}
 
 	/**

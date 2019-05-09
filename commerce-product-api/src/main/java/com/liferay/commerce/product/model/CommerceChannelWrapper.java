@@ -145,11 +145,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		return _commerceChannel.compareTo(commerceChannel);
 	}
 
-	@Override
-	public String[] getAvailableLanguageIds() {
-		return _commerceChannel.getAvailableLanguageIds();
-	}
-
 	/**
 	* Returns the commerce channel ID of this commerce channel.
 	*
@@ -178,11 +173,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public Date getCreateDate() {
 		return _commerceChannel.getCreateDate();
-	}
-
-	@Override
-	public String getDefaultLanguageId() {
-		return _commerceChannel.getDefaultLanguageId();
 	}
 
 	@Override
@@ -218,72 +208,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public String getName() {
 		return _commerceChannel.getName();
-	}
-
-	/**
-	* Returns the localized name of this commerce channel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce channel
-	*/
-	@Override
-	public String getName(java.util.Locale locale) {
-		return _commerceChannel.getName(locale);
-	}
-
-	/**
-	* Returns the localized name of this commerce channel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce channel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
-	@Override
-	public String getName(java.util.Locale locale, boolean useDefault) {
-		return _commerceChannel.getName(locale, useDefault);
-	}
-
-	/**
-	* Returns the localized name of this commerce channel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce channel
-	*/
-	@Override
-	public String getName(String languageId) {
-		return _commerceChannel.getName(languageId);
-	}
-
-	/**
-	* Returns the localized name of this commerce channel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce channel
-	*/
-	@Override
-	public String getName(String languageId, boolean useDefault) {
-		return _commerceChannel.getName(languageId, useDefault);
-	}
-
-	@Override
-	public String getNameCurrentLanguageId() {
-		return _commerceChannel.getNameCurrentLanguageId();
-	}
-
-	@Override
-	public String getNameCurrentValue() {
-		return _commerceChannel.getNameCurrentValue();
-	}
-
-	/**
-	* Returns a map of the locales and localized names of this commerce channel.
-	*
-	* @return the locales and localized names of this commerce channel
-	*/
-	@Override
-	public Map<java.util.Locale, String> getNameMap() {
-		return _commerceChannel.getNameMap();
 	}
 
 	/**
@@ -382,19 +306,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	}
 
 	@Override
-	public void prepareLocalizedFieldsForImport()
-		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceChannel.prepareLocalizedFieldsForImport();
-	}
-
-	@Override
-	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
-		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceChannel.prepareLocalizedFieldsForImport(defaultImportLocale);
-	}
-
-	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_commerceChannel.setCachedModel(cachedModel);
 	}
@@ -473,57 +384,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public void setName(String name) {
 		_commerceChannel.setName(name);
-	}
-
-	/**
-	* Sets the localized name of this commerce channel in the language.
-	*
-	* @param name the localized name of this commerce channel
-	* @param locale the locale of the language
-	*/
-	@Override
-	public void setName(String name, java.util.Locale locale) {
-		_commerceChannel.setName(name, locale);
-	}
-
-	/**
-	* Sets the localized name of this commerce channel in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce channel
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
-		_commerceChannel.setName(name, locale, defaultLocale);
-	}
-
-	@Override
-	public void setNameCurrentLanguageId(String languageId) {
-		_commerceChannel.setNameCurrentLanguageId(languageId);
-	}
-
-	/**
-	* Sets the localized names of this commerce channel from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce channel
-	*/
-	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap) {
-		_commerceChannel.setNameMap(nameMap);
-	}
-
-	/**
-	* Sets the localized names of this commerce channel from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce channel
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
-		_commerceChannel.setNameMap(nameMap, defaultLocale);
 	}
 
 	@Override

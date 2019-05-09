@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import java.io.Serializable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides the local service interface for CPRule. Methods of this
@@ -78,6 +79,11 @@ public interface CPRuleLocalService extends BaseLocalService,
 	public CPRule addCPRule(CPRule cpRule);
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CPRule addCPRule(long classNameId, long classPK, String name,
+		boolean active, String type, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CPRule addCPRule(String name, boolean active, String type,
 		ServiceContext serviceContext) throws PortalException;
 
@@ -85,6 +91,11 @@ public interface CPRuleLocalService extends BaseLocalService,
 	public CPRule addCPRule(String name, boolean active, String type,
 		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
 		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPRule addCPRule(String className, long classPK, String name,
+		boolean active, String type, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) throws PortalException;
 
 	public void cleanCPRulesCache(long groupId);
 
@@ -255,6 +266,11 @@ public interface CPRuleLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPRule> searchCPRules(long companyId,
+		long groupId, Map<String, Serializable> attributes, String keywords,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPRule> searchCPRules(long companyId,

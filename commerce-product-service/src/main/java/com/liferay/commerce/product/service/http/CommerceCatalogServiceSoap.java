@@ -164,6 +164,21 @@ public class CommerceCatalogServiceSoap {
 		}
 	}
 
+	public static int searchCommerceCatalogsCount(long companyId,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceCatalogServiceUtil.searchCommerceCatalogsCount(companyId,
+					keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap updateCommerceCatalog(
 		long commerceCatalogId, String catalogDefaultLanguageId,
 		String[] nameMapLanguageIds, String[] nameMapValues,
