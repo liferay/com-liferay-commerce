@@ -134,7 +134,7 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 			}
 
 			String[] cpOptionValueNames = cpOptionValueNamesList.toArray(
-				new String[cpOptionValueNamesList.size()]);
+				new String[0]);
 
 			if (languageId.equals(cpOptionDefaultLanguageId)) {
 				document.addText(Field.DESCRIPTION, description);

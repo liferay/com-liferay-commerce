@@ -166,8 +166,7 @@ public class CPDefinitionOptionRelIndexer
 			}
 
 			String[] cpDefinitionOptionValueRelNames =
-				cpDefinitionOptionValueRelNamesList.toArray(
-					new String[cpDefinitionOptionValueRelNamesList.size()]);
+				cpDefinitionOptionValueRelNamesList.toArray(new String[0]);
 
 			if (languageId.equals(cpDefinitionOptionRelDefaultLanguageId)) {
 				document.addText(
