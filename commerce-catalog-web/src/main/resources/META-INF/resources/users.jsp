@@ -83,3 +83,20 @@ CommerceCatalog commerceCatalog = commerceCatalogUsersDisplayContext.getCommerce
 		</aui:form>
 	</div>
 </div>
+
+<%
+List<User> users = commerceCatalogUsersDisplayContext.getSelectedUsers();
+
+for (User catalogUser : users) {
+%>
+
+	<commerce-ui:user-roles-modal
+		componentId='<%= "userRolesModal" + String.valueOf(catalogUser.getUserId()) %>'
+		groupId="<%= commerceCatalogUsersDisplayContext.getCommerceCatalogGroupId() %>"
+		subtype="<%= CommerceCatalogConstants.ROLE_SUBTYPE_CATALOG %>"
+		userId="<%= catalogUser.getUserId() %>"
+	/>
+
+<%
+}
+%>

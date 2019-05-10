@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceCatalogUsersDisplayContext commerceCatalogUsersDisplayContext = (CommerceCatalogUsersDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 User catalogUser = (User)row.getObject();
@@ -49,13 +47,6 @@ String userId = String.valueOf(catalogUser.getUserId());
 		url="<%= deleteURL %>"
 	/>
 </liferay-ui:icon-menu>
-
-<commerce-ui:user-roles-modal
-	componentId='<%= "userRolesModal" + userId %>'
-	groupId="<%= commerceCatalogUsersDisplayContext.getCommerceCatalogGroupId() %>"
-	subtype="<%= CommerceCatalogConstants.ROLE_SUBTYPE_CATALOG %>"
-	userId="<%= catalogUser.getUserId() %>"
-/>
 
 <aui:script use="aui-base">
 
