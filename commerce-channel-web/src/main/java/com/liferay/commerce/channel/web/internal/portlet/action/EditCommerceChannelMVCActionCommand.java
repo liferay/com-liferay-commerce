@@ -14,11 +14,12 @@
 
 package com.liferay.commerce.channel.web.internal.portlet.action;
 
+import com.liferay.commerce.product.channel.CommerceChannelType;
+import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CommerceChannelConstants;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -26,17 +27,17 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -119,89 +120,57 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		return portletURL.toString();
 	}
 
-	protected String getTypeSettings(
-			long commerceChannelId, String type, ActionRequest actionRequest)
-		throws PortalException {
-
-		String typeSettings = ParamUtil.getString(
-			actionRequest, "typeSettings");
-
-		if (Validator.isNotNull(typeSettings)) {
-			return typeSettings;
-		}
-
-		CommerceChannel commerceChannel = null;
-
-		if (commerceChannelId > 0) {
-			commerceChannel = _commerceChannelService.fetchCommerceChannel(
-				commerceChannelId);
-		}
-
-		if ((commerceChannel != null) &&
-			type.equals(commerceChannel.getType())) {
-
-			typeSettings = commerceChannel.getTypeSettings();
-		}
-
-		String[] typeSettingsArray = StringUtil.split(typeSettings);
-
-		String[] addTypeSettings = ParamUtil.getStringValues(
-			actionRequest, "addTypeSettings");
-
-		String[] deleteTypeSettings = ParamUtil.getStringValues(
-			actionRequest, "deleteTypeSettings");
-
-		if (deleteTypeSettings.length > 0) {
-			for (String deleteTypeSetting : deleteTypeSettings) {
-				typeSettingsArray = ArrayUtil.remove(
-					typeSettingsArray, deleteTypeSetting);
-			}
-		}
-
-		if (addTypeSettings.length > 0) {
-			typeSettingsArray = ArrayUtil.append(
-				typeSettingsArray, addTypeSettings);
-		}
-
-		return StringUtil.merge(ArrayUtil.unique(typeSettingsArray));
-	}
-
 	protected CommerceChannel updateCommerceChannel(ActionRequest actionRequest)
 		throws Exception {
 
 		long commerceChannelId = ParamUtil.getLong(
 			actionRequest, "commerceChannelId");
-		boolean orSearch = ParamUtil.getBoolean(actionRequest, "orSearch");
-
-		String filterType = StringPool.BLANK;
-
-		if (orSearch) {
-			filterType = "orSearch";
-		}
-
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		String type = ParamUtil.getString(actionRequest, "type");
+		String filterType = CommerceChannelConstants.FILTER_TYPE_AND;
 
-		String typeSettings = getTypeSettings(
-			commerceChannelId, type, actionRequest);
+		boolean orSearch = ParamUtil.getBoolean(actionRequest, "orSearch");
+
+		if (orSearch) {
+			filterType = CommerceChannelConstants.FILTER_TYPE_OR;
+		}
+
+		String type = ParamUtil.getString(actionRequest, "type");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannel.class.getName(), actionRequest);
 
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
+
+		CommerceChannelType commerceChannelType =
+			_commerceChannelTypeRegistry.getCommerceChannelType(type);
+
+		UnicodeProperties typeSettingsProperties =
+			commerceChannelType.getTypeSettingsProperties(httpServletRequest);
+
+		CommerceChannel commerceChannel = null;
+
 		if (commerceChannelId <= 0) {
-			return _commerceChannelService.addCommerceChannel(
-				name, CommerceChannelConstants.FILTER_TYPE_AND, type,
-				typeSettings, serviceContext);
+			commerceChannel = _commerceChannelService.addCommerceChannel(
+				name, filterType, type, typeSettingsProperties, serviceContext);
+		}
+		else {
+			commerceChannel = _commerceChannelService.updateCommerceChannel(
+				commerceChannelId, name, filterType, type,
+				typeSettingsProperties, serviceContext);
 		}
 
-		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, name, CommerceChannelConstants.FILTER_TYPE_AND,
-			type, typeSettings, serviceContext);
+		commerceChannelType.update(commerceChannel, httpServletRequest);
+
+		return commerceChannel;
 	}
 
 	@Reference
 	private CommerceChannelService _commerceChannelService;
+
+	@Reference
+	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 
 	@Reference
 	private Portal _portal;

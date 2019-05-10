@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Date;
 
@@ -35,7 +36,8 @@ public class CommerceChannelLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel addCommerceChannel(
-			String name, String filterType, String type, String typeSettings,
+			String name, String filterType, String type,
+			UnicodeProperties typeSettingsProperties,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -58,7 +60,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setName(name);
 		commerceChannel.setFilterType(filterType);
 		commerceChannel.setType(type);
-		commerceChannel.setTypeSettings(typeSettings);
+		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 
 		return commerceChannelPersistence.update(commerceChannel);
 	}
@@ -76,7 +78,8 @@ public class CommerceChannelLocalServiceImpl
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String filterType, String type,
-			String typeSettings, ServiceContext serviceContext)
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceChannel commerceChannel =
@@ -85,7 +88,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setName(name);
 		commerceChannel.setFilterType(filterType);
 		commerceChannel.setType(type);
-		commerceChannel.setTypeSettings(typeSettings);
+		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 
 		return commerceChannelPersistence.update(commerceChannel);
 	}

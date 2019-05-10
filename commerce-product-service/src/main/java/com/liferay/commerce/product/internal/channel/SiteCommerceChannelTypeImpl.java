@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
@@ -60,9 +61,11 @@ public class SiteCommerceChannelTypeImpl implements CommerceChannelType {
 
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
-		boolean orSearch = ParamUtil.getBoolean(httpServletRequest, "orSearch");
+		long[] groupIds = ParamUtil.getLongValues(
+			httpServletRequest,
+			"CommerceChannelSitesSearchContainerPrimaryKeys");
 
-		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
+		typeSettingsProperties.put("groupIds", StringUtil.merge(groupIds));
 
 		return typeSettingsProperties;
 	}
