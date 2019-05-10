@@ -18,6 +18,7 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -28,12 +29,13 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 
 	@Override
 	public CommerceChannel addCommerceChannel(
-			String name, String filterType, String type, String typeSettings,
+			String name, String filterType, String type,
+			UnicodeProperties typeSettingsProperties,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelLocalService.addCommerceChannel(
-			name, filterType, type, typeSettings, serviceContext);
+			name, filterType, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
@@ -68,11 +70,12 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String filterType, String type,
-			String typeSettings, ServiceContext serviceContext)
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelLocalService.updateCommerceChannel(
-			commerceChannelId, name, filterType, type, typeSettings,
+			commerceChannelId, name, filterType, type, typeSettingsProperties,
 			serviceContext);
 	}
 
