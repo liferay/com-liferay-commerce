@@ -64,18 +64,12 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 			"userId, userName, createDate, modifiedDate, name, type_, ",
 			"typeSettings) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-		String updateCPDefinitionSQL =
-			"update CPDefinition set groupId = ? where groupId = ?";
-
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, insertCommerceCatalogSQL);
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, insertCommerceChannelSQL);
-			PreparedStatement ps3 =
-				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection, updateCPDefinitionSQL);
 			Statement s = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = s.executeQuery(
@@ -127,16 +121,36 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 					GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false,
 					true, null);
 
-				ps3.setLong(1, catalogGroup.getGroupId());
+				String updateTableGroupIdSQL = StringBundler.concat(
+					"update %s set groupId = ",
+					String.valueOf(catalogGroup.getGroupId()),
+					" where groupId = ",
+					String.valueOf(siteGroup.getGroupId()));
 
-				ps3.setLong(2, groupId);
-
-				ps3.executeUpdate();
+				runSQL(String.format(updateTableGroupIdSQL, "CPDefinition"));
+				runSQL(String.format(updateTableGroupIdSQL, "AssetEntry"));
+				runSQL(String.format(updateTableGroupIdSQL, "AssetCategory"));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPAttachmentFileEntry"));
+				runSQL(
+					String.format(updateTableGroupIdSQL, "CPDefinitionLink"));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDefinitionOptionRel"));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDefinitionOptionValueRel"));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDSpecificationOptionValue"));
+				runSQL(String.format(updateTableGroupIdSQL, "CPDisplayLayout"));
+				runSQL(String.format(updateTableGroupIdSQL, "CPInstance"));
+				runSQL(String.format(updateTableGroupIdSQL, "CProduct"));
 			}
 
 			ps1.executeBatch();
 			ps2.executeBatch();
-			ps3.executeBatch();
 		}
 	}
 
