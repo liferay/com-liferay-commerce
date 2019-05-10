@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.text.DateFormat;
@@ -34,6 +35,7 @@ import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -82,7 +84,7 @@ public class CommerceOrderClayTableUtil {
 				DateFormat.MEDIUM, themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
 
-			String url;
+			String url = null;
 
 			if (editable) {
 				url = getEditOrderURL(
@@ -93,18 +95,18 @@ public class CommerceOrderClayTableUtil {
 					commerceOrder.getCommerceOrderId(), themeDisplay);
 			}
 
-			String commerceOrderStatus =
-				CommerceOrderConstants.getOrderStatusLabel(
-					commerceOrder.getOrderStatus());
+			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+				"content.Language", themeDisplay.getLocale(),
+				CommerceOrderClayTableUtil.class);
 
 			String commerceOrderStatusLabel = LanguageUtil.get(
-				themeDisplay.getLocale(), commerceOrderStatus);
-
-			String commerceWorkflowStatus = WorkflowConstants.getStatusLabel(
-				commerceOrder.getStatus());
+				resourceBundle,
+				CommerceOrderConstants.getOrderStatusLabel(
+					commerceOrder.getOrderStatus()));
 
 			String workflowStatusLabel = LanguageUtil.get(
-				themeDisplay.getLocale(), commerceWorkflowStatus);
+				resourceBundle,
+				WorkflowConstants.getStatusLabel(commerceOrder.getStatus()));
 
 			orders.add(
 				new Order(
