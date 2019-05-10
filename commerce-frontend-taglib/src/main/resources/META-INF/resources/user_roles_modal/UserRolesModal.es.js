@@ -87,6 +87,7 @@ class UserRolesModal extends Component {
 	}
 
 	open() {
+		this.identifier = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
 		this._modalVisible = true;
 		return this._modalVisible;
 	}
@@ -113,6 +114,7 @@ const ROLE_SCHEMA = Config.shapeOf(
 
 UserRolesModal.STATE = {
 	filteredRoles: Config.array(ROLE_SCHEMA).value([]),
+	identifier: Config.string(),
 	query: Config.string().value(''),
 	roles: Config.array(ROLE_SCHEMA).value([]),
 	selectedRoles: Config.array(ROLE_SCHEMA).value([]),

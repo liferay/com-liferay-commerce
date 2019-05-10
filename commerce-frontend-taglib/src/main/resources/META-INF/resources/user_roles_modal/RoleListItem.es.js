@@ -39,6 +39,7 @@ RoleListItem.STATE = {
 			Config.string()
 		]
 	),
+	identifier:	Config.string(),
 	name: Config.string(),
 	query: Config.string(),
 	selectedRoles: Config.array(
