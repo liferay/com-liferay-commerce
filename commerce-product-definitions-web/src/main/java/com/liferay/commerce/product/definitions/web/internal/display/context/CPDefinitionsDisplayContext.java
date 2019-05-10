@@ -245,6 +245,13 @@ public class CPDefinitionsDisplayContext
 			portletURL.setParameter("filtersValues", filtersValues);
 		}
 
+		String commerceCatalogId = ParamUtil.getString(
+			httpServletRequest, "commerceCatalogId");
+
+		if (Validator.isNotNull(commerceCatalogId)) {
+			portletURL.setParameter("commerceCatalogId", commerceCatalogId);
+		}
+
 		return portletURL;
 	}
 
