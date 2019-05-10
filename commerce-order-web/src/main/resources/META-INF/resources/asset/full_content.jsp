@@ -21,55 +21,51 @@ CommerceOrder commerceOrder = (CommerceOrder)request.getAttribute(CommerceOrderC
 %>
 
 <div class="container-fluid-1280">
-	<div style="margin-left: 10px;margin-top: 20px;">
-		<h4><%= LanguageUtil.get(request, "order-details") %></h4>
+	<h4><liferay-ui:message key="order-details" /></h4>
 
-		<div style="margin-left:10px;">
-			<liferay-ui:search-container
-				id="commerceOrderItems"
-			>
-				<liferay-ui:search-container-results
-					results="<%= commerceOrder.getCommerceOrderItems() %>"
-					resultsVar="commerceOrderItems"
-				/>
+	<liferay-ui:search-container
+		id="commerceOrderItems"
+	>
+		<liferay-ui:search-container-results
+			results="<%= commerceOrder.getCommerceOrderItems() %>"
+			resultsVar="commerceOrderItems"
+		/>
 
-				<liferay-ui:search-container-row
-					className="com.liferay.commerce.model.CommerceOrderItem"
-					escapedModel="<%= true %>"
-					keyProperty="commerceOrderItemId"
-					modelVar="commerceOrderItem"
-				>
-					<liferay-ui:search-container-column-text
-						cssClass="important table-cell-content"
-						property="sku"
-					/>
+		<liferay-ui:search-container-row
+			className="com.liferay.commerce.model.CommerceOrderItem"
+			escapedModel="<%= true %>"
+			keyProperty="commerceOrderItemId"
+			modelVar="commerceOrderItem"
+		>
+			<liferay-ui:search-container-column-text
+				cssClass="important table-cell-content"
+				property="sku"
+			/>
 
-					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
-						name="name"
-						value="<%= commerceOrderItem.getName(locale) %>"
-					/>
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				name="name"
+				value="<%= commerceOrderItem.getName(locale) %>"
+			/>
 
-					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
-						property="quantity"
-					/>
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				property="quantity"
+			/>
 
-					<%
-					CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
-					%>
+			<%
+			CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+			%>
 
-					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
-						name="price"
-						value="<%= finalPriceMoney.format(locale) %>"
-					/>
-				</liferay-ui:search-container-row>
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				name="price"
+				value="<%= finalPriceMoney.format(locale) %>"
+			/>
+		</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator
-					markupView="lexicon"
-				/>
-			</liferay-ui:search-container>
-		</div>
-	</div>
+		<liferay-ui:search-iterator
+			markupView="lexicon"
+		/>
+	</liferay-ui:search-container>
 </div>
