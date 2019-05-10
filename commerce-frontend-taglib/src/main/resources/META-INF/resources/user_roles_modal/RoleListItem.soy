@@ -2,6 +2,7 @@
 
 {template .render}
 	{@param id: string|int }
+	{@param? identifier: string }
 	{@param name: string }
 	{@param? query: string }
 
@@ -13,7 +14,7 @@
 		type="checkbox"
 		name="{$name}"
 		value="{$id}"
-		id="role-checkbox--{$id}"
+		id="role-checkbox--{$id}-{$identifier}"
 		{if isNonnull($_selected) and $_selected == true}
 			{sp}checked
 		{/if}
@@ -36,7 +37,7 @@
 
 		<label
 			class="commerce-input commerce-input--checkbox__label"
-			for="role-checkbox--{$id}"
+			for="role-checkbox--{$id}-{$identifier}"
 		>
 			{call AutocompleteItem.render}
 				{param text: $name /}
