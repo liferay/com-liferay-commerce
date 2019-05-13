@@ -7,16 +7,16 @@
 				{CommerceCountry.*}
 			FROM
 				CommerceCountry
+			INNER JOIN
+				CIWarehouse
+			ON
+				CIWarehouse.countryTwoLettersISOCode = CommerceCountry.twoLettersISOCode
+			INNER JOIN
+				CIWarehouseGroupRel
+			ON
+				CIWarehouseGroupRel.commerceWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
-				CommerceCountry.commerceCountryId IN
-					(
-						SELECT
-							commerceCountryId
-						FROM
-							CommerceWarehouse
-						WHERE
-							(CommerceWarehouse.groupId = ?) [$ALL$]
-					)
+				(CIWarehouseGroupRel.groupId = ?) [$ALL$]
 			ORDER BY
 				CommerceCountry.priority
 		]]>
@@ -173,52 +173,6 @@
 			WHERE
 				(CommerceSubscriptionEntry.nextIterationDate < ?) AND
 				(CommerceSubscriptionEntry.subscriptionStatus = 0)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder.countByG_N_D_S_C_Z_C">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT commerceWarehouseId) AS COUNT_VALUE
-			FROM
-				CommerceWarehouse
-			WHERE
-				(CommerceWarehouse.groupId = ?) AND
-				(
-					(LOWER(CommerceWarehouse.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(CommerceWarehouse.description LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(LOWER(CommerceWarehouse.street1) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CommerceWarehouse.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CommerceWarehouse.street3) LIKE ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(LOWER(CommerceWarehouse.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(LOWER(CommerceWarehouse.zip) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(CommerceWarehouse.commerceCountryId = ?) [$ALL$]
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder.findByG_N_D_S_C_Z_C">
-		<![CDATA[
-			SELECT
-				{CommerceWarehouse.*}
-			FROM
-				CommerceWarehouse
-			WHERE
-				(CommerceWarehouse.groupId = ?) AND
-				(
-					(LOWER(CommerceWarehouse.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(CommerceWarehouse.description LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(LOWER(CommerceWarehouse.street1) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CommerceWarehouse.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CommerceWarehouse.street3) LIKE ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(LOWER(CommerceWarehouse.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(LOWER(CommerceWarehouse.zip) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(CommerceWarehouse.commerceCountryId = ?) [$ALL$]
-			ORDER BY
-				CommerceWarehouse.name ASC
 		]]>
 	</sql>
 </custom-sql>
