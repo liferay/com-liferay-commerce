@@ -111,6 +111,10 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 		return cpRule.getCPRuleId();
 	}
 
+	public CPRuleType getCPRuleType(String key) {
+		return _cpRuleTypeRegistry.getCPRuleType(key);
+	}
+
 	public CPRuleTypeJSPContributor getCPRuleTypeJSPContributor(String key) {
 		return _cpRuleTypeJSPContributorRegistry.getCPRuleTypeJSPContributor(
 			key);

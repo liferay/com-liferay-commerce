@@ -62,11 +62,15 @@ long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
 							value="<%= HtmlUtil.escape(LanguageUtil.get(request, cpRule.getName())) %>"
 						/>
 
+						<%
+						CPRuleType cpRuleType = cpCatalogRuleDisplayContext.getCPRuleType(cpRule.getType());
+						%>
+
 						<liferay-ui:search-container-column-text
 							cssClass="important table-cell-content"
 							href="<%= cpCatalogRuleDisplayContext.getCPRuleURL(cpRule) %>"
 							name="type"
-							value="<%= HtmlUtil.escape(LanguageUtil.get(request, cpRule.getType())) %>"
+							value="<%= HtmlUtil.escape(cpRuleType.getLabel(locale)) %>"
 						/>
 
 						<liferay-ui:search-container-column-jsp
