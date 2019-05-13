@@ -21,6 +21,8 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfigurat
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 
+import java.util.Locale;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -51,10 +53,18 @@ public class ProductTaxConfigurationDTOConverter implements DTOConverter {
 			{
 				id = cpDefinition.getCPTaxCategoryId();
 				taxable = !cpDefinition.isTaxExempt();
-				taxCategory = cpTaxCategory.getName(
-					dtoConverterContext.getLocale());
+				taxCategory = _getTaxCategory(
+					cpTaxCategory, dtoConverterContext.getLocale());
 			}
 		};
+	}
+
+	private String _getTaxCategory(CPTaxCategory cpTaxCategory, Locale locale) {
+		if (cpTaxCategory == null) {
+			return null;
+		}
+
+		return cpTaxCategory.getName(locale);
 	}
 
 	@Reference
