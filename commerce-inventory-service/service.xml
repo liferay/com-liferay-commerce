@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_1_0.dtd">
+
+<service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.inventory">
+	<author>Luca Pellizzon</author>
+	<namespace>Commerce</namespace>
+	<entity local-service="true" name="CommerceInventoryAudit" remote-service="true" table="CIAudit">
+
+		<!-- PK fields -->
+
+		<column db-name="CIAuditId" name="commerceInventoryAuditId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="sku" type="String" />
+		<column name="description" type="String" />
+		<column name="quantity" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="sku" return-type="">
+			<finder-column name="sku" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CommerceInventoryBookedQuantity" remote-service="true" table="CIBookedQuantity">
+
+		<!-- PK fields -->
+
+		<column db-name="CIBookedQuantityId" name="commerceInventoryBookedQuantityId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="sku" type="String" />
+		<column name="quantity" type="int" />
+		<column name="expireDate" type="Date" />
+		<column name="bookedNote" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="sku" return-type="Collection">
+			<finder-column name="sku" />
+		</finder>
+		<finder name="expireDate" return-type="Collection">
+			<finder-column name="expireDate" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CommerceInventoryReplenishmentItem" remote-service="true" table="CIReplenishmentItem">
+
+		<!-- PK fields -->
+
+		<column db-name="CIReplenishmentItemId" name="commerceInventoryReplenishmentItemId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceWarehouseId" type="long" />
+		<column name="sku" type="String" />
+		<column name="availabilityDate" type="Date" />
+		<column name="quantity" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="CommerceWarehouseId" return-type="Collection">
+			<finder-column name="commerceWarehouseId" />
+		</finder>
+		<finder name="sku" return-type="Collection">
+			<finder-column name="sku" />
+		</finder>
+		<finder name="availabilityDate" return-type="Collection">
+			<finder-column name="availabilityDate" />
+		</finder>
+		<finder name="S_AD" return-type="Collection">
+			<finder-column name="sku" />
+			<finder-column name="availabilityDate" />
+		</finder>
+	</entity>
+	<entity external-reference-code="true" local-service="true" name="CommerceInventoryWarehouse" remote-service="true" table="CIWarehouse">
+
+		<!-- PK fields -->
+
+		<column db-name="CIWarehouseId" name="commerceInventoryWarehouseId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="active" type="boolean" />
+		<column name="street1" type="String" />
+		<column name="street2" type="String" />
+		<column name="street3" type="String" />
+		<column name="city" type="String" />
+		<column name="zip" type="String" />
+		<column name="commerceRegionCode" type="String" />
+		<column name="countryTwoLettersISOCode" type="String" />
+		<column name="latitude" type="double" />
+		<column name="longitude" type="double" />
+		<column name="type" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+		<finder name="countryTwoLettersISOCode" return-type="Collection">
+			<finder-column name="countryTwoLettersISOCode" />
+		</finder>
+		<finder name="A_C" return-type="Collection">
+			<finder-column name="active" />
+			<finder-column name="countryTwoLettersISOCode" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
+	<entity local-service="true" name="CommerceInventoryWarehouseGroupRel" remote-service="true" table="CIWarehouseGroupRel">
+
+		<!-- PK fields -->
+
+		<column db-name="CIWarehouseGroupRelId" name="commerceInventoryWarehouseGroupRelId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceWarehouseId" type="long" />
+		<column name="primary" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="groupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_CWI" return-type="CommerceWarehouseGroupRel">
+			<finder-column name="groupId" />
+			<finder-column name="commerceWarehouseId" />
+		</finder>
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="primary" />
+		</finder>
+		<finder name="G_CWI_P" return-type="CommerceWarehouseGroupRel">
+			<finder-column name="groupId" />
+			<finder-column name="commerceWarehouseId" />
+			<finder-column name="primary" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CommerceInventoryWarehouseItem" remote-service="true" table="CIWarehouseItem">
+
+		<!-- PK fields -->
+
+		<column db-name="CIWarehouseItemId" name="commerceInventoryWarehouseItemId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceWarehouseId" type="long" />
+		<column name="sku" type="String" />
+		<column name="quantity" type="int" />
+		<column name="reservedQuantity" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="CommerceWarehouseId" return-type="Collection">
+			<finder-column name="commerceWarehouseId" />
+		</finder>
+		<finder name="sku" return-type="Collection">
+			<finder-column name="sku"></finder-column>
+		</finder>
+		<finder name="C_S" return-type="CommerceWarehouseItem">
+			<finder-column name="commerceWarehouseId" />
+			<finder-column name="sku" />
+		</finder>
+	</entity>
+	<exceptions>
+		<exception>CommerceInventoryWarehouseActive</exception>
+		<exception>CommerceInventoryWarehouseItemQuantityBelowZero</exception>
+		<exception>CommerceInventoryWarehouseName</exception>
+	</exceptions>
+</service-builder>
