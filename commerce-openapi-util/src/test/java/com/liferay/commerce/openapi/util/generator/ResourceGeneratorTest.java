@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -284,7 +285,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 					responseContentArray, "testModel",
 					Collections.emptyList())) {
 
-			if ("GET".equals(method.getHttpMethod())) {
+			if (Objects.equals(method.getHttpMethod(), "GET")) {
 				return method;
 			}
 		}

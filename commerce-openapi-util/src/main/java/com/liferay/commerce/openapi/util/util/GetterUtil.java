@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +72,7 @@ public class GetterUtil {
 	}
 
 	public static boolean getBoolean(String value) {
-		if ("true".equals(value) || "TRUE".equals(value)) {
+		if (Objects.equals(value, "true") || Objects.equals(value, "TRUE")) {
 			return true;
 		}
 

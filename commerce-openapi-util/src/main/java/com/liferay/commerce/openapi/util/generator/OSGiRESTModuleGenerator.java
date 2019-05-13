@@ -26,6 +26,7 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -83,9 +84,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"osgi.module.application.name");
 		_author = properties.getProperty("osgi.module.author");
 
-		if ("true".equals(
+		if (Objects.equals(
 				properties.getProperty(
-					"osgi.module.application.security.basic.auth.allowed"))) {
+					"osgi.module.application.security.basic.auth.allowed"),
+				"true")) {
 
 			_basicSecurityAllowed = true;
 		}
@@ -93,9 +95,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_basicSecurityAllowed = false;
 		}
 
-		if ("true".equals(
+		if (Objects.equals(
 				properties.getProperty(
-					"osgi.module.application.security.oauth2.auth.allowed"))) {
+					"osgi.module.application.security.oauth2.auth.allowed"),
+				"true")) {
 
 			_oauth2SecurityAllowed = true;
 		}
@@ -103,9 +106,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_oauth2SecurityAllowed = false;
 		}
 
-		if ("true".equals(
+		if (Objects.equals(
 				properties.getProperty(
-					"osgi.module.application.security.guests.allowed"))) {
+					"osgi.module.application.security.guests.allowed"),
+				"true")) {
 
 			_guestsAllowed = true;
 		}
@@ -131,9 +135,9 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"%s/%s", moduleRootPath,
 			properties.getProperty("osgi.module.name"));
 
-		if ("true".equals(
-				properties.getProperty(
-					"osgi.module.generator.overwrite.bnd"))) {
+		if (Objects.equals(
+				properties.getProperty("osgi.module.generator.overwrite.bnd"),
+				"true")) {
 
 			_overwriteBND = true;
 		}
@@ -174,10 +178,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeApplicationSource();
 
-			if ("true".equals(
+			if (Objects.equals(
 					_configuration.getProperty(
-						"osgi.module.generator.embed.message.body." +
-							"converters"))) {
+						"osgi.module.generator.embed.message.body.converters"),
+					"true")) {
 
 				_jsonMessageBodyGenerator.writeJsonMessageBodySources();
 			}
@@ -279,9 +283,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private void _writeGradleSource(OpenApi openApi) throws IOException {
 		boolean overwriteBuildGradle = false;
 
-		if ("true".equals(
+		if (Objects.equals(
 				_configuration.getProperty(
-					"osgi.module.generator.overwrite.gradle"))) {
+					"osgi.module.generator.overwrite.gradle"),
+				"true")) {
 
 			overwriteBuildGradle = true;
 		}
@@ -296,9 +301,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private void _writeResourceSources(OpenApi openApi) throws IOException {
 		boolean overwriteImplementation = false;
 
-		if ("true".equals(
+		if (Objects.equals(
 				_configuration.getProperty(
-					"osgi.module.generator.overwrite.implementation"))) {
+					"osgi.module.generator.overwrite.implementation"),
+				"true")) {
 
 			overwriteImplementation = true;
 		}

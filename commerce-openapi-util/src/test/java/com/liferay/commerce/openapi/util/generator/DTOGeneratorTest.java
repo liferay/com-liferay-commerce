@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -83,7 +84,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 						"private %s _%s", javaTypeProvider.getClassName(),
 						openApiProperty.getName())));
 
-			if (!"Boolean".equals(javaTypeProvider.getClassName())) {
+			if (!Objects.equals(javaTypeProvider.getClassName(), "Boolean")) {
 				continue;
 			}
 
@@ -159,7 +160,9 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		OpenApiComponent dictionaryConsumerOpenApiComponent = null;
 
 		for (OpenApiComponent openApiComponent : components) {
-			if ("DictionaryConsumer".equals(openApiComponent.getName())) {
+			if (Objects.equals(
+					openApiComponent.getName(), "DictionaryConsumer")) {
+
 				dictionaryConsumerOpenApiComponent = openApiComponent;
 
 				break;
@@ -284,7 +287,9 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		OpenApiComponent hostOpenApiComponent = null;
 
 		for (OpenApiComponent openApiComponent : components) {
-			if ("FreeFormObjectConsumer".equals(openApiComponent.getName())) {
+			if (Objects.equals(
+					openApiComponent.getName(), "FreeFormObjectConsumer")) {
+
 				hostOpenApiComponent = openApiComponent;
 
 				break;
@@ -389,7 +394,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		OpenApiComponent childOpenApiComponent = null;
 
 		for (OpenApiComponent openApiComponent : components) {
-			if ("ChildComponent".equals(openApiComponent.getName())) {
+			if (Objects.equals(openApiComponent.getName(), "ChildComponent")) {
 				childOpenApiComponent = openApiComponent;
 
 				break;
@@ -438,7 +443,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		OpenApiComponent hostOpenApiComponent = null;
 
 		for (OpenApiComponent openApiComponent : components) {
-			if ("HostComponent".equals(openApiComponent.getName())) {
+			if (Objects.equals(openApiComponent.getName(), "HostComponent")) {
 				hostOpenApiComponent = openApiComponent;
 
 				break;

@@ -307,7 +307,7 @@ public class CommerceUsersImporter {
 		String gender = jsonObject.getString("gender");
 
 		if (Validator.isNotNull(gender)) {
-			male = "male".equals(gender);
+			male = gender.equals("male");
 		}
 
 		Calendar calendar = CalendarFactoryUtil.getCalendar(timeZone);
