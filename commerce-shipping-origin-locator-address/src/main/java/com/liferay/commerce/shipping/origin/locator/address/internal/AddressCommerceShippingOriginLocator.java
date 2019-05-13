@@ -14,14 +14,18 @@
 
 package com.liferay.commerce.shipping.origin.locator.address.internal;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceAddressLocalService;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
-import com.liferay.commerce.service.CommerceWarehouseService;
+import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.shipping.origin.locator.address.internal.constants.AddressCommerceShippingOriginLocatorConstants;
 import com.liferay.commerce.shipping.origin.locator.address.internal.display.context.AddressCommerceShippingOriginLocatorDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -89,8 +93,8 @@ public class AddressCommerceShippingOriginLocator
 		CommerceAddress commerceAddress =
 			_commerceAddressLocalService.createCommerceAddress(0);
 
-		CommerceWarehouse commerceWarehouse = _getDefaultCommerceWarehouse(
-			commerceOrder.getGroupId());
+		CommerceInventoryWarehouse commerceWarehouse =
+			_getDefaultCommerceWarehouse(commerceOrder.getGroupId());
 
 		commerceAddress.setName(commerceWarehouse.getName());
 		commerceAddress.setStreet1(commerceWarehouse.getStreet1());
@@ -98,10 +102,23 @@ public class AddressCommerceShippingOriginLocator
 		commerceAddress.setStreet3(commerceWarehouse.getStreet3());
 		commerceAddress.setCity(commerceWarehouse.getCity());
 		commerceAddress.setZip(commerceWarehouse.getZip());
+
+		CommerceCountry commerceCountry =
+			_commerceCountryLocalService.getCommerceCountry(
+				commerceOrder.getGroupId(),
+				commerceWarehouse.getCountryTwoLettersISOCode());
+
+		CommerceRegion commerceRegion =
+			_commerceRegionLocalService.getCommerceRegion(
+				commerceCountry.getCommerceCountryId(),
+				commerceWarehouse.getCommerceRegionCode());
+
 		commerceAddress.setCommerceRegionId(
-			commerceWarehouse.getCommerceRegionId());
+			commerceRegion.getCommerceRegionId());
+
 		commerceAddress.setCommerceCountryId(
-			commerceWarehouse.getCommerceCountryId());
+			commerceCountry.getCommerceCountryId());
+
 		commerceAddress.setLatitude(commerceWarehouse.getLatitude());
 		commerceAddress.setLongitude(commerceWarehouse.getLongitude());
 
@@ -117,8 +134,9 @@ public class AddressCommerceShippingOriginLocator
 		AddressCommerceShippingOriginLocatorDisplayContext
 			addressCommerceShippingOriginLocatorDisplayContext =
 				new AddressCommerceShippingOriginLocatorDisplayContext(
-					KEY, _commerceWarehouseService, _configurationProvider,
-					renderRequest);
+					KEY, _commerceCountryLocalService,
+					_commerceWarehouseService, _commerceRegionLocalService,
+					_configurationProvider, renderRequest);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -154,7 +172,8 @@ public class AddressCommerceShippingOriginLocator
 		modifiableSettings.store();
 	}
 
-	private CommerceWarehouse _getDefaultCommerceWarehouse(long groupId)
+	private CommerceInventoryWarehouse _getDefaultCommerceWarehouse(
+			long groupId)
 		throws PortalException {
 
 		return _commerceWarehouseLocalService.fetchDefaultCommerceWarehouse(
@@ -170,10 +189,17 @@ public class AddressCommerceShippingOriginLocator
 	private CommerceAddressLocalService _commerceAddressLocalService;
 
 	@Reference
-	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+	private CommerceCountryLocalService _commerceCountryLocalService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceRegionLocalService _commerceRegionLocalService;
+
+	@Reference
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
+
+	@Reference
+	private CommerceInventoryWarehouseService _commerceWarehouseService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

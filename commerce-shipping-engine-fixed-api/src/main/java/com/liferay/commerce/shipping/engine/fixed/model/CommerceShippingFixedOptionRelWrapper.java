@@ -303,7 +303,7 @@ public class CommerceShippingFixedOptionRelWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceWarehouse getCommerceWarehouse()
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShippingFixedOptionRel.getCommerceWarehouse();

@@ -16,10 +16,10 @@ package com.liferay.commerce.shipment.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.shipment.web.internal.display.context.CommerceShipmentDisplayContext;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -62,7 +62,7 @@ public class SelectCommerceShipmentItemsMVCRenderCommand
 			new CommerceShipmentDisplayContext(
 				_actionHelper, httpServletRequest, _commerceOrderItemService,
 				_commerceOrderService, _commerceShipmentService,
-				_commerceWarehouseService, _configurationProvider,
+				_commerceWarehouseLocalService, _configurationProvider,
 				_portletResourcePermission);
 
 		renderRequest.setAttribute(
@@ -84,7 +84,8 @@ public class SelectCommerceShipmentItemsMVCRenderCommand
 	private CommerceShipmentService _commerceShipmentService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

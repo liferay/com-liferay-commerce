@@ -102,7 +102,7 @@ CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWar
 			searchContainer="<%= commerceWarehousesDisplayContext.getSearchContainer() %>"
 		>
 			<liferay-ui:search-container-row
-				className="com.liferay.commerce.model.CommerceWarehouse"
+				className="com.liferay.commerce.inventory.model.CommerceInventoryWarehouse"
 				keyProperty="commerceWarehouseId"
 				modelVar="commerceWarehouse"
 			>
@@ -112,7 +112,7 @@ CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWar
 
 				rowURL.setParameter("mvcRenderCommandName", "editCommerceWarehouse");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("commerceWarehouseId", String.valueOf(commerceWarehouse.getCommerceWarehouseId()));
+				rowURL.setParameter("commerceWarehouseId", String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()));
 				%>
 
 				<liferay-ui:search-container-column-text

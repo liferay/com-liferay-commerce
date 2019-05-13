@@ -15,15 +15,13 @@
 package com.liferay.commerce.warehouse.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.exception.NoSuchWarehouseException;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -68,8 +66,8 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 
 			CommerceWarehousesDisplayContext commerceWarehousesDisplayContext =
 				new CommerceWarehousesDisplayContext(
-					_commerceCountryService, _commerceWarehouseService,
-					httpServletRequest, _portletResourcePermission);
+					_commerceCountryService, _commerceWarehouseLocalService,
+					httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -97,15 +95,11 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.warehouse.web)"

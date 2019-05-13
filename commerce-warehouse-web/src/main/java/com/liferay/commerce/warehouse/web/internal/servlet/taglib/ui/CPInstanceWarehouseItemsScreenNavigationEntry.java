@@ -15,11 +15,11 @@
 package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.service.CommerceWarehouseItemService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehouseItemsDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -98,8 +98,8 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 			CommerceWarehouseItemsDisplayContext
 				commerceWarehouseItemsDisplayContext =
 					new CommerceWarehouseItemsDisplayContext(
-						_commerceWarehouseItemService,
-						_commerceWarehouseService, _configurationProvider,
+						_commerceWarehouseItemLocalService,
+						_commerceWarehouseLocalService, _configurationProvider,
 						_cpInstanceService, httpServletRequest, _portal,
 						_portletResourcePermission);
 
@@ -120,10 +120,12 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 		CPInstanceWarehouseItemsScreenNavigationEntry.class);
 
 	@Reference
-	private CommerceWarehouseItemService _commerceWarehouseItemService;
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceWarehouseItemLocalService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

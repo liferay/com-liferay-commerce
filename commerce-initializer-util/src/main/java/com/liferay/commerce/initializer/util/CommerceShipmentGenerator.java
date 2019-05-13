@@ -17,17 +17,15 @@ package com.liferay.commerce.initializer.util;
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalService;
 import com.liferay.commerce.service.CommerceShipmentLocalService;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
-import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -97,7 +95,7 @@ public class CommerceShipmentGenerator {
 
 	private void _generateCommerceShipment(
 			CommerceOrder commerceOrder,
-			List<CommerceWarehouse> commerceWarehouses)
+			List<CommerceInventoryWarehouse> commerceWarehouses)
 		throws PortalException {
 
 		// Commerce order items
@@ -153,13 +151,13 @@ public class CommerceShipmentGenerator {
 
 	private void _generateCommerceShipmentItems(
 			long commerceShipmentId, List<CommerceOrderItem> commerceOrderItems,
-			List<CommerceWarehouse> commerceWarehouses,
+			List<CommerceInventoryWarehouse> commerceWarehouses,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CommerceWarehouse commerceWarehouse = _getRandomCommerceWarehouse(
-				commerceWarehouses);
+			CommerceInventoryWarehouse commerceWarehouse =
+				_getRandomCommerceWarehouse(commerceWarehouses);
 
 			int quantity =
 				commerceOrderItem.getQuantity() -
@@ -175,7 +173,7 @@ public class CommerceShipmentGenerator {
 
 			_commerceShipmentItemLocalService.addCommerceShipmentItem(
 				commerceShipmentId, commerceOrderItem.getCommerceOrderItemId(),
-				commerceWarehouse.getCommerceWarehouseId(),
+				commerceWarehouse.getCommerceInventoryWarehouseId(),
 				commerceWarehouseItemQuantity, serviceContext);
 		}
 	}
@@ -189,8 +187,8 @@ public class CommerceShipmentGenerator {
 
 		// Commerce warehouses
 
-		List<CommerceWarehouse> commerceWarehouses = _getCommerceWarehouses(
-			groupId);
+		List<CommerceInventoryWarehouse> commerceWarehouses =
+			_getCommerceWarehouses(groupId);
 
 		if (commerceWarehouses.isEmpty()) {
 			_log.error("There are no active warehouses");
@@ -218,7 +216,8 @@ public class CommerceShipmentGenerator {
 		}
 	}
 
-	private List<CommerceWarehouse> _getCommerceWarehouses(long groupId)
+	private List<CommerceInventoryWarehouse> _getCommerceWarehouses(
+			long groupId)
 		throws PortalException {
 
 		CommerceShippingGroupServiceConfiguration
@@ -233,7 +232,7 @@ public class CommerceShipmentGenerator {
 				commerceShippingOriginLocatorKey();
 
 		if (commerceShippingOriginLocatorKey.equals("address")) {
-			CommerceWarehouse commerceWarehouse =
+			CommerceInventoryWarehouse commerceWarehouse =
 				_commerceWarehouseLocalService.fetchDefaultCommerceWarehouse(
 					groupId);
 
@@ -244,9 +243,10 @@ public class CommerceShipmentGenerator {
 			return Collections.singletonList(commerceWarehouse);
 		}
 
-		return _commerceWarehouseLocalService.getCommerceWarehouses(
-			groupId, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new CommerceWarehouseNameComparator(true));
+		Group group = _groupLocalService.getGroup(groupId);
+
+		return _commerceWarehouseLocalService.getCommerceWarehousesByGroupId(
+			group.getCompanyId(), groupId);
 	}
 
 	private int _getRandomCommerceShipmentStatus() {
@@ -256,8 +256,8 @@ public class CommerceShipmentGenerator {
 		return CommerceShipmentConstants.SHIPMENT_STATUSES[i];
 	}
 
-	private CommerceWarehouse _getRandomCommerceWarehouse(
-		List<CommerceWarehouse> commerceWarehouses) {
+	private CommerceInventoryWarehouse _getRandomCommerceWarehouse(
+		List<CommerceInventoryWarehouse> commerceWarehouses) {
 
 		return commerceWarehouses.get(
 			_randomInt(0, commerceWarehouses.size() - 1));
@@ -265,13 +265,13 @@ public class CommerceShipmentGenerator {
 
 	private int _getRandomCommerceWarehouseItemQuantity(
 			CommerceOrderItem commerceOrderItem,
-			CommerceWarehouse commerceWarehouse, int quantity)
+			CommerceInventoryWarehouse commerceWarehouse, int quantity)
 		throws PortalException {
 
 		int commerceWarehouseItemQuantity =
 			_commerceOrderItemService.getCommerceWarehouseItemQuantity(
 				commerceOrderItem.getCommerceOrderItemId(),
-				commerceWarehouse.getCommerceWarehouseId());
+				commerceWarehouse.getCommerceInventoryWarehouseId());
 
 		if (quantity < commerceWarehouseItemQuantity) {
 			commerceWarehouseItemQuantity = quantity;
@@ -352,7 +352,8 @@ public class CommerceShipmentGenerator {
 	private CommerceShipmentLocalService _commerceShipmentLocalService;
 
 	@Reference
-	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private CompanyLocalService _companyLocalService;

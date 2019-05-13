@@ -14,22 +14,22 @@
 
 package com.liferay.commerce.util;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseCityComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseItemQuantityComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseItemWarehouseNameComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.util.comparator.CommerceAddressCreateDateComparator;
 import com.liferay.commerce.util.comparator.CommerceAddressRestrictionCreateDateComparator;
 import com.liferay.commerce.util.comparator.CommerceCountryNameComparator;
 import com.liferay.commerce.util.comparator.CommerceCountryPriorityComparator;
 import com.liferay.commerce.util.comparator.CommerceRegionNameComparator;
 import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
-import com.liferay.commerce.util.comparator.CommerceWarehouseCityComparator;
-import com.liferay.commerce.util.comparator.CommerceWarehouseItemQuantityComparator;
-import com.liferay.commerce.util.comparator.CommerceWarehouseItemWarehouseNameComparator;
-import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.Validator;
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 public class CommerceUtil {
 
@@ -206,7 +207,7 @@ public class CommerceUtil {
 		return orderByComparator;
 	}
 
-	public static OrderByComparator<CommerceWarehouseItem>
+	public static OrderByComparator<CommerceInventoryWarehouseItem>
 		getCommerceWarehouseItemOrderByComparator(
 			String orderByCol, String orderByType) {
 
@@ -216,7 +217,8 @@ public class CommerceUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator<CommerceWarehouseItem> orderByComparator = null;
+		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator =
+			null;
 
 		if (orderByCol.equals("name")) {
 			orderByComparator =
@@ -230,7 +232,7 @@ public class CommerceUtil {
 		return orderByComparator;
 	}
 
-	public static OrderByComparator<CommerceWarehouse>
+	public static OrderByComparator<CommerceInventoryWarehouse>
 		getCommerceWarehouseOrderByComparator(
 			String orderByCol, String orderByType) {
 
@@ -240,7 +242,7 @@ public class CommerceUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator<CommerceWarehouse> orderByComparator = null;
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator = null;
 
 		if (orderByCol.equals("city")) {
 			orderByComparator = new CommerceWarehouseCityComparator(orderByAsc);

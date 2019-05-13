@@ -15,8 +15,8 @@
 package com.liferay.commerce.shipping.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingSettingsDisplayContext;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -77,7 +77,7 @@ public class ShippingSettingsCommerceAdminModule
 
 		return _portletResourcePermission.contains(
 			permissionChecker, groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 	}
 
 	@Override

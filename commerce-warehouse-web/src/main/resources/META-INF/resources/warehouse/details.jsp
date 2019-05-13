@@ -19,7 +19,7 @@
 <%
 CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
+CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
 %>
 
 <liferay-ui:error-marker
@@ -27,10 +27,10 @@ CommerceWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommer
 	value="details"
 />
 
-<liferay-ui:error exception="<%= CommerceWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
-<liferay-ui:error exception="<%= CommerceWarehouseNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= CommerceInventoryWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
+<liferay-ui:error exception="<%= CommerceInventoryWarehouseNameException.class %>" message="please-enter-a-valid-name" />
 
-<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceWarehouse.class %>" />
+<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
 
 <aui:fieldset>
 	<aui:input name="name" />

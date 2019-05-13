@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.internal.stock.activity;
 
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.stock.activity.CommerceLowStockActivity;
@@ -28,6 +27,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
@@ -42,11 +42,7 @@ public class CommerceLowStockActivityImpl implements CommerceLowStockActivity {
 	public static final String KEY = "default";
 
 	@Override
-	public void execute(CommerceWarehouseItem commerceWarehouseItem)
-		throws PortalException {
-
-		CPInstance cpInstance = commerceWarehouseItem.getCPInstance();
-
+	public void execute(CPInstance cpInstance) throws PortalException {
 		if (cpInstance.isPublished()) {
 			cpInstance.setPublished(false);
 

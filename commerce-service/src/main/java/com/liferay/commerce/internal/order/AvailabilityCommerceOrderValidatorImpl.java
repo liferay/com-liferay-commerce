@@ -17,6 +17,7 @@ package com.liferay.commerce.internal.order;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -28,6 +29,7 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
@@ -93,8 +95,9 @@ public class AvailabilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(true);
 		}
 
-		int availableQuantity = cpDefinitionInventoryEngine.getStockQuantity(
-			cpInstance);
+		int availableQuantity = _commerceInventoryEngine.getStockQuantity(
+			cpInstance.getCompanyId(), cpInstance.getGroupId(),
+			cpInstance.getSku());
 
 		int orderQuantity =
 			_commerceOrderItemLocalService.getCPInstanceQuantity(
@@ -143,8 +146,9 @@ public class AvailabilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(true);
 		}
 
-		int availableQuantity = cpDefinitionInventoryEngine.getStockQuantity(
-			cpInstance);
+		int availableQuantity = _commerceInventoryEngine.getStockQuantity(
+			cpInstance.getCompanyId(), cpInstance.getGroupId(),
+			cpInstance.getSku());
 
 		int orderQuantity =
 			_commerceOrderItemLocalService.getCPInstanceQuantity(
@@ -168,7 +172,13 @@ public class AvailabilityCommerceOrderValidatorImpl
 	}
 
 	@Reference
+	private CommerceInventoryEngine _commerceInventoryEngine;
+
+	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

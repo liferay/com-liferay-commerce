@@ -14,8 +14,12 @@
 
 package com.liferay.commerce.shipping.origin.locator.address.internal.display.context;
 
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.service.CommerceWarehouseService;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.shipping.origin.locator.address.internal.configuration.AddressCommerceShippingOriginLocatorGroupServiceConfiguration;
 import com.liferay.commerce.shipping.origin.locator.address.internal.constants.AddressCommerceShippingOriginLocatorConstants;
 import com.liferay.commerce.util.SuffixParameterMapSettingsLocator;
@@ -36,15 +40,19 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 
 	public AddressCommerceShippingOriginLocatorDisplayContext(
 			String commerceShippingOriginLocatorKey,
-			CommerceWarehouseService commerceWarehouseService,
+			CommerceCountryLocalService commerceCountryLocalService,
+			CommerceInventoryWarehouseService commerceWarehouseService,
+			CommerceRegionLocalService commerceRegionLocalService,
 			ConfigurationProvider configurationProvider,
 			RenderRequest renderRequest)
 		throws PortalException {
 
+		_commerceCountryLocalService = commerceCountryLocalService;
 		_commerceWarehouseService = commerceWarehouseService;
+		_commerceRegionLocalService = commerceRegionLocalService;
 		_renderRequest = renderRequest;
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+		_themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		_addressCommerceShippingOriginLocatorGroupServiceConfiguration =
@@ -56,7 +64,7 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 					commerceShippingOriginLocatorKey + "Origin--",
 					StringPool.DOUBLE_DASH,
 					new GroupServiceSettingsLocator(
-						themeDisplay.getScopeGroupId(),
+						_themeDisplay.getScopeGroupId(),
 						AddressCommerceShippingOriginLocatorConstants.
 							SERVICE_NAME)));
 	}
@@ -67,7 +75,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				city();
 
 		if (Validator.isNull(city)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				city = commerceWarehouse.getCity();
@@ -83,10 +92,19 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				commerceCountryId();
 
 		if (commerceCountryId <= 0) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
-			if (commerceWarehouse != null) {
-				commerceCountryId = commerceWarehouse.getCommerceCountryId();
+			if ((commerceWarehouse != null) &&
+				Validator.isNotNull(
+					commerceWarehouse.getCountryTwoLettersISOCode())) {
+
+				CommerceCountry commerceCountry =
+					_commerceCountryLocalService.getCommerceCountry(
+						_themeDisplay.getScopeGroupId(),
+						commerceWarehouse.getCountryTwoLettersISOCode());
+
+				commerceCountryId = commerceCountry.getCommerceCountryId();
 			}
 		}
 
@@ -99,10 +117,19 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				commerceRegionId();
 
 		if (commerceRegionId <= 0) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
-			if (commerceWarehouse != null) {
-				commerceRegionId = commerceWarehouse.getCommerceRegionId();
+			if ((commerceWarehouse != null) &&
+				Validator.isNotNull(
+					commerceWarehouse.getCommerceRegionCode())) {
+
+				CommerceRegion commerceRegion =
+					_commerceRegionLocalService.getCommerceRegion(
+						getCommerceCountryId(),
+						commerceWarehouse.getCommerceRegionCode());
+
+				commerceRegionId = commerceRegion.getCommerceRegionId();
 			}
 		}
 
@@ -110,7 +137,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 	}
 
 	public double getLatitude() throws PortalException {
-		CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+		CommerceInventoryWarehouse commerceWarehouse =
+			getDefaultCommerceWarehouse();
 
 		if (commerceWarehouse != null) {
 			return commerceWarehouse.getLatitude();
@@ -121,7 +149,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 	}
 
 	public double getLongitude() throws PortalException {
-		CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+		CommerceInventoryWarehouse commerceWarehouse =
+			getDefaultCommerceWarehouse();
 
 		if (commerceWarehouse != null) {
 			return commerceWarehouse.getLongitude();
@@ -137,7 +166,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				name();
 
 		if (Validator.isNull(name)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				name = commerceWarehouse.getName();
@@ -153,7 +183,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				street1();
 
 		if (Validator.isNull(street1)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				street1 = commerceWarehouse.getStreet1();
@@ -169,7 +200,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				street2();
 
 		if (Validator.isNull(street2)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				street2 = commerceWarehouse.getStreet2();
@@ -185,7 +217,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				street3();
 
 		if (Validator.isNull(street3)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				street3 = commerceWarehouse.getStreet3();
@@ -201,7 +234,8 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 				zip();
 
 		if (Validator.isNull(zip)) {
-			CommerceWarehouse commerceWarehouse = getDefaultCommerceWarehouse();
+			CommerceInventoryWarehouse commerceWarehouse =
+				getDefaultCommerceWarehouse();
 
 			if (commerceWarehouse != null) {
 				zip = commerceWarehouse.getZip();
@@ -211,7 +245,7 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 		return zip;
 	}
 
-	protected CommerceWarehouse getDefaultCommerceWarehouse()
+	protected CommerceInventoryWarehouse getDefaultCommerceWarehouse()
 		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
@@ -223,7 +257,10 @@ public class AddressCommerceShippingOriginLocatorDisplayContext {
 
 	private final AddressCommerceShippingOriginLocatorGroupServiceConfiguration
 		_addressCommerceShippingOriginLocatorGroupServiceConfiguration;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private final CommerceCountryLocalService _commerceCountryLocalService;
+	private final CommerceRegionLocalService _commerceRegionLocalService;
+	private final CommerceInventoryWarehouseService _commerceWarehouseService;
 	private final RenderRequest _renderRequest;
+	private final ThemeDisplay _themeDisplay;
 
 }

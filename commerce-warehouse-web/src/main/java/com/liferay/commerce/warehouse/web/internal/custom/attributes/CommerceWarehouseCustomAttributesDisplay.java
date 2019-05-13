@@ -15,7 +15,7 @@
 package com.liferay.commerce.warehouse.web.internal.custom.attributes;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.expando.kernel.model.BaseCustomAttributesDisplay;
 import com.liferay.expando.kernel.model.CustomAttributesDisplay;
 
@@ -34,7 +34,7 @@ public class CommerceWarehouseCustomAttributesDisplay
 
 	@Override
 	public String getClassName() {
-		return CommerceWarehouse.class.getName();
+		return CommerceInventoryWarehouse.class.getName();
 	}
 
 	@Override

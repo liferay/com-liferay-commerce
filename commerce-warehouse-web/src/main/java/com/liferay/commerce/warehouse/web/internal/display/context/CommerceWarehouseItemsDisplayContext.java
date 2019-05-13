@@ -15,20 +15,17 @@
 package com.liferay.commerce.warehouse.web.internal.display.context;
 
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.service.CommerceWarehouseItemService;
-import com.liferay.commerce.service.CommerceWarehouseService;
-import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
@@ -55,15 +52,16 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceWarehouseItemsDisplayContext {
 
 	public CommerceWarehouseItemsDisplayContext(
-		CommerceWarehouseItemService commerceWarehouseItemService,
-		CommerceWarehouseService commerceWarehouseService,
+		CommerceInventoryWarehouseItemLocalService
+			commerceWarehouseItemLocalService,
+		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		ConfigurationProvider configurationProvider,
 		CPInstanceService cpInstanceService,
 		HttpServletRequest httpServletRequest, Portal portal,
 		PortletResourcePermission portletResourcePermission) {
 
-		_commerceWarehouseItemService = commerceWarehouseItemService;
-		_commerceWarehouseService = commerceWarehouseService;
+		_commerceWarehouseItemLocalService = commerceWarehouseItemLocalService;
+		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 		_configurationProvider = configurationProvider;
 		_cpInstanceService = cpInstanceService;
 		_portal = portal;
@@ -96,18 +94,18 @@ public class CommerceWarehouseItemsDisplayContext {
 		return portletURL.toString();
 	}
 
-	public CommerceWarehouseItem getCommerceWarehouseItem(
-			CommerceWarehouse commerceWarehouse)
+	public CommerceInventoryWarehouseItem getCommerceWarehouseItem(
+			CommerceInventoryWarehouse commerceWarehouse)
 		throws PortalException {
 
 		CPInstance cpInstance = getCPInstance();
 
-		return _commerceWarehouseItemService.fetchCommerceWarehouseItem(
-			commerceWarehouse.getCommerceWarehouseId(),
-			cpInstance.getCPInstanceId());
+		return _commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(
+			commerceWarehouse.getCommerceInventoryWarehouseId(),
+			cpInstance.getSku());
 	}
 
-	public List<CommerceWarehouse> getCommerceWarehouses()
+	public List<CommerceInventoryWarehouse> getCommerceWarehouses()
 		throws PortalException {
 
 		return _getCommerceWarehouses();
@@ -146,13 +144,10 @@ public class CommerceWarehouseItemsDisplayContext {
 	}
 
 	public boolean hasManageCommerceWarehousePermission() {
-		return _portletResourcePermission.contains(
-			_cpRequestHelper.getPermissionChecker(),
-			_cpRequestHelper.getScopeGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+		return true;
 	}
 
-	private List<CommerceWarehouse> _getCommerceWarehouses()
+	private List<CommerceInventoryWarehouse> _getCommerceWarehouses()
 		throws PortalException {
 
 		if (_commerceWarehouses != null) {
@@ -172,8 +167,8 @@ public class CommerceWarehouseItemsDisplayContext {
 				commerceShippingOriginLocatorKey();
 
 		if (commerceShippingOriginLocatorKey.equals("address")) {
-			CommerceWarehouse commerceWarehouse =
-				_commerceWarehouseService.fetchDefaultCommerceWarehouse(
+			CommerceInventoryWarehouse commerceWarehouse =
+				_commerceWarehouseLocalService.fetchDefaultCommerceWarehouse(
 					_cpRequestHelper.getScopeGroupId());
 
 			if (commerceWarehouse == null) {
@@ -187,16 +182,19 @@ public class CommerceWarehouseItemsDisplayContext {
 			return _commerceWarehouses;
 		}
 
-		_commerceWarehouses = _commerceWarehouseService.getCommerceWarehouses(
-			_cpRequestHelper.getScopeGroupId(), true, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, new CommerceWarehouseNameComparator(true));
+		_commerceWarehouses =
+			_commerceWarehouseLocalService.getCommerceWarehousesByGroupId(
+				_cpRequestHelper.getCompanyId(),
+				_cpRequestHelper.getScopeGroupId());
 
 		return _commerceWarehouses;
 	}
 
-	private final CommerceWarehouseItemService _commerceWarehouseItemService;
-	private List<CommerceWarehouse> _commerceWarehouses;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private final CommerceInventoryWarehouseItemLocalService
+		_commerceWarehouseItemLocalService;
+	private final CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
+	private List<CommerceInventoryWarehouse> _commerceWarehouses;
 	private final ConfigurationProvider _configurationProvider;
 	private CPInstance _cpInstance;
 	private final CPInstanceService _cpInstanceService;

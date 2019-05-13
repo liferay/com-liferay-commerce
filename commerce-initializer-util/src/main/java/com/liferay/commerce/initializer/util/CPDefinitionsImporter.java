@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.MappingJsonFactory;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOptionRelException;
@@ -50,7 +51,6 @@ import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
-import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.commerce.util.comparator.CommerceAvailabilityEstimatePriorityComparator;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -257,8 +257,8 @@ public class CPDefinitionsImporter {
 
 			if (quantity > 0) {
 				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
-					commerceWarehouseId, cpInstance.getCPInstanceId(), quantity,
-					serviceContext);
+					commerceWarehouseId, cpInstance.getSku(), quantity,
+					serviceContext.getUserId());
 			}
 		}
 	}
@@ -789,7 +789,7 @@ public class CPDefinitionsImporter {
 	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
-	private CommerceWarehouseItemLocalService
+	private CommerceInventoryWarehouseItemLocalService
 		_commerceWarehouseItemLocalService;
 
 	@Reference

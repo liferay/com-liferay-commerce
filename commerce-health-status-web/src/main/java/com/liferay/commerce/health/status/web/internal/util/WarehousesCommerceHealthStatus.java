@@ -16,10 +16,11 @@ package com.liferay.commerce.health.status.web.internal.util;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
 import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -89,13 +90,18 @@ public class WarehousesCommerceHealthStatus implements CommerceHealthStatus {
 	public boolean isFixed(long companyId, long groupId)
 		throws PortalException {
 
-		List<CommerceWarehouse> commerceWarehouses =
-			_commerceWarehouseLocalService.getCommerceWarehouses(groupId);
+		List<CommerceInventoryWarehouse> commerceWarehouses =
+			_commerceWarehouseLocalService.getCommerceWarehousesByGroupId(
+				companyId, groupId);
 
 		return !commerceWarehouses.isEmpty();
 	}
 
 	@Reference
-	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 }
