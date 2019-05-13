@@ -31,21 +31,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 <div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
 		<div class="col-6" id="minium-product-gallery">
-
-			<%
-			Map<String, Object> context = new HashMap<>();
-			List productImages = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
-
-			context.put("images", productImages);
-			context.put("selected", 0);
-			%>
-
-			<soy:template-renderer
-				componentId="<%= galleryId %>"
-				context="<%= context %>"
-				module="commerce-frontend-taglib@2.0.1/gallery/Gallery.es"
-				templateNamespace="Gallery.render"
-			/>
+			<commerce-ui:gallery id="<%= galleryId %>" CPDefinitionId="<%= cpDefinitionId %>" />
 		</div>
 
 		<div class="col-6">
