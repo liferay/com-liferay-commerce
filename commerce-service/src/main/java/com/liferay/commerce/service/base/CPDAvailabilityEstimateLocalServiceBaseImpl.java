@@ -38,9 +38,13 @@ import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
+<<<<<<< HEAD
 import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
 import com.liferay.commerce.service.persistence.CommerceWarehousePersistence;
+=======
+
+>>>>>>> COMMERCE-1405 build service
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -1212,6 +1216,7 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the commerce warehouse local service.
 	 *
 	 * @return the commerce warehouse local service
@@ -1322,6 +1327,8 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
+=======
+>>>>>>> COMMERCE-1405 build service
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1735,6 +1742,7 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
 	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
+<<<<<<< HEAD
 
 	@BeanReference(
 		type = com.liferay.commerce.service.CommerceWarehouseLocalService.class
@@ -1757,6 +1765,8 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	@BeanReference(type = CommerceWarehouseItemPersistence.class)
 	protected CommerceWarehouseItemPersistence commerceWarehouseItemPersistence;
 
+=======
+>>>>>>> COMMERCE-1405 build service
 	@BeanReference(type = CPDAvailabilityEstimateLocalService.class)
 	protected CPDAvailabilityEstimateLocalService
 		cpdAvailabilityEstimateLocalService;

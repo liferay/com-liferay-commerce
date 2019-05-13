@@ -38,9 +38,13 @@ import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
+<<<<<<< HEAD
 import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
 import com.liferay.commerce.service.persistence.CommerceWarehousePersistence;
+=======
+
+>>>>>>> COMMERCE-1405 build service
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -1042,6 +1046,7 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the commerce warehouse local service.
 	 *
 	 * @return the commerce warehouse local service
@@ -1152,6 +1157,8 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	}
 
 	/**
+=======
+>>>>>>> COMMERCE-1405 build service
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1561,6 +1568,7 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
 	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
+<<<<<<< HEAD
 
 	@BeanReference(
 		type = com.liferay.commerce.service.CommerceWarehouseLocalService.class
@@ -1589,6 +1597,10 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	protected com.liferay.commerce.service.CPDAvailabilityEstimateLocalService
 		cpdAvailabilityEstimateLocalService;
 
+=======
+	@BeanReference(type = com.liferay.commerce.service.CPDAvailabilityEstimateLocalService.class)
+	protected com.liferay.commerce.service.CPDAvailabilityEstimateLocalService cpdAvailabilityEstimateLocalService;
+>>>>>>> COMMERCE-1405 build service
 	@BeanReference(type = CPDAvailabilityEstimatePersistence.class)
 	protected CPDAvailabilityEstimatePersistence
 		cpdAvailabilityEstimatePersistence;

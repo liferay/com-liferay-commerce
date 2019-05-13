@@ -123,9 +123,9 @@ create table CommerceOrder (
 	billingAddressId LONG,
 	shippingAddressId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
-	transactionId TEXT null,
+	transactionId VARCHAR(75) null,
 	commerceShippingMethodId LONG,
-	shippingOptionName VARCHAR(255) null,
+	shippingOptionName VARCHAR(75) null,
 	purchaseOrderNumber VARCHAR(75) null,
 	couponCode VARCHAR(75) null,
 	lastPriceUpdateDate DATE null,
@@ -173,7 +173,7 @@ create table CommerceOrderItem (
 	CPInstanceId LONG,
 	quantity INTEGER,
 	shippedQuantity INTEGER,
-	json TEXT null,
+	json VARCHAR(75) null,
 	name STRING null,
 	sku VARCHAR(75) null,
 	unitPrice DECIMAL(30, 16) null,
@@ -200,7 +200,7 @@ create table CommerceOrderNote (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceOrderId LONG,
-	content STRING null,
+	content VARCHAR(75) null,
 	restricted BOOLEAN
 );
 
@@ -214,7 +214,7 @@ create table CommerceOrderPayment (
 	modifiedDate DATE null,
 	commerceOrderId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
-	content TEXT null,
+	content VARCHAR(75) null,
 	status INTEGER
 );
 
@@ -298,48 +298,11 @@ create table CommerceSubscriptionEntry (
 	commerceOrderItemId LONG,
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
-	subscriptionTypeSettings TEXT null,
+	subscriptionTypeSettings VARCHAR(75) null,
 	currentCycle LONG,
 	maxSubscriptionCycles LONG,
 	subscriptionStatus INTEGER,
 	lastIterationDate DATE null,
 	nextIterationDate DATE null,
 	startDate DATE null
-);
-
-create table CommerceWarehouse (
-	commerceWarehouseId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description VARCHAR(75) null,
-	active_ BOOLEAN,
-	street1 VARCHAR(75) null,
-	street2 VARCHAR(75) null,
-	street3 VARCHAR(75) null,
-	city VARCHAR(75) null,
-	zip VARCHAR(75) null,
-	commerceRegionId LONG,
-	commerceCountryId LONG,
-	latitude DOUBLE,
-	longitude DOUBLE,
-	primary_ BOOLEAN
-);
-
-create table CommerceWarehouseItem (
-	commerceWarehouseItemId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	commerceWarehouseId LONG,
-	CProductId LONG,
-	CPInstanceUuid VARCHAR(75) null,
-	quantity INTEGER
 );

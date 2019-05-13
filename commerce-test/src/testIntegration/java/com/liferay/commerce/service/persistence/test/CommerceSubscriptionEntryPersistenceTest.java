@@ -349,10 +349,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			true, "userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "CPInstanceUuid", true, "CProductId", true,
 			"commerceOrderItemId", true, "subscriptionLength", true,
-			"subscriptionType", true, "currentCycle", true,
-			"maxSubscriptionCycles", true, "subscriptionStatus", true,
-			"lastIterationDate", true, "nextIterationDate", true, "startDate",
-			true);
+			"subscriptionType", true, "subscriptionTypeSettings", true,
+			"currentCycle", true, "maxSubscriptionCycles", true,
+			"subscriptionStatus", true, "lastIterationDate", true,
+			"nextIterationDate", true, "startDate", true);
 	}
 
 	@Test

@@ -308,47 +308,6 @@
 		<field name="nextIterationDate" type="Date" />
 		<field name="startDate" type="Date" />
 	</model>
-	<model name="com.liferay.commerce.model.CommerceWarehouse">
-		<field name="commerceWarehouseId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String">
-			<validator name="required" />
-		</field>
-		<field name="description" type="String" />
-		<field name="active" type="boolean" />
-		<field name="street1" type="String" />
-		<field name="street2" type="String" />
-		<field name="street3" type="String" />
-		<field name="city" type="String" />
-		<field name="zip" type="String" />
-		<field name="commerceRegionId" type="long" />
-		<field name="commerceCountryId" type="long">
-			<validator name="required" />
-		</field>
-		<field name="latitude" type="double" />
-		<field name="longitude" type="double" />
-		<field name="primary" type="boolean" />
-	</model>
-	<model name="com.liferay.commerce.model.CommerceWarehouseItem">
-		<field name="commerceWarehouseItemId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="commerceWarehouseId" type="long" />
-		<field name="CProductId" type="long" />
-		<field name="CPInstanceUuid" type="String" />
-		<field name="quantity" type="int">
-			<validator name="number" />
-		</field>
-	</model>
 	<model name="com.liferay.commerce.model.CPDAvailabilityEstimate">
 		<field name="uuid" type="String" />
 		<field name="CPDAvailabilityEstimateId" type="long" />
