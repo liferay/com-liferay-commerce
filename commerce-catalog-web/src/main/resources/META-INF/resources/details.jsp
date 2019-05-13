@@ -22,6 +22,19 @@ String catalogNavigationItem = ParamUtil.getString(request, "catalogNavigationIt
 CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog();
+
+String title = LanguageUtil.get(request, "add-catalog");
+
+if (commerceCatalog != null) {
+	title = HtmlUtil.escape(commerceCatalog.getName());
+}
+
+Map<String, Object> data = new HashMap<>();
+
+data.put("direction-right", StringPool.TRUE);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "catalogs"), String.valueOf(renderResponse.createRenderURL()), data);
+PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 %>
 
 <%@ include file="/navbar_definitions.jspf" %>
