@@ -50,13 +50,6 @@
 	<bean class="com.liferay.commerce.service.impl.CommerceSubscriptionEntryServiceImpl" id="com.liferay.commerce.service.CommerceSubscriptionEntryService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceSubscriptionEntryPersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceSubscriptionEntryFinderImpl" id="com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder" parent="basePersistence" />
-	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseLocalServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseLocalService" />
-	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseService" />
-	<bean class="com.liferay.commerce.service.persistence.impl.CommerceWarehousePersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceWarehousePersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.service.persistence.impl.CommerceWarehouseFinderImpl" id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder" parent="basePersistence" />
-	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseItemLocalServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseItemLocalService" />
-	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseItemServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseItemService" />
-	<bean class="com.liferay.commerce.service.persistence.impl.CommerceWarehouseItemPersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.service.impl.CPDAvailabilityEstimateLocalServiceImpl" id="com.liferay.commerce.service.CPDAvailabilityEstimateLocalService" />
 	<bean class="com.liferay.commerce.service.impl.CPDAvailabilityEstimateServiceImpl" id="com.liferay.commerce.service.CPDAvailabilityEstimateService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CPDAvailabilityEstimatePersistenceImpl" id="com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence" parent="basePersistence" />
