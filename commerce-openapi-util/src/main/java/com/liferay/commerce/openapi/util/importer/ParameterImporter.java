@@ -26,6 +26,7 @@ import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -77,7 +78,7 @@ public class ParameterImporter {
 		String type = GetterUtil.getAsTextOrNullIfMisses(
 			"type", schemaJSONNode);
 
-		if ("array".equals(type)) {
+		if (Objects.equals(type, "array")) {
 			Schema itemSchema = getSchema(schemaJSONNode.get("items"));
 
 			if (itemSchema.getReference() == null) {

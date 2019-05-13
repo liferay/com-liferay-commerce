@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -166,9 +167,9 @@ public class UserHelper {
 			userDTO.getAlternateName(), userDTO.getEmail(),
 			LocaleUtil.getDefault(), userDTO.getGivenName(),
 			userDTO.getAdditionalName(), userDTO.getFamilyName(), 0, 0,
-			"male".equals(userDTO.getGender()), _getBirthdayMonth(birthDate),
-			_getBirthdayDay(birthDate), _getBirthdayYear(birthDate),
-			userDTO.getJobTitle(), null,
+			Objects.equals(userDTO.getGender(), "male"),
+			_getBirthdayMonth(birthDate), _getBirthdayDay(birthDate),
+			_getBirthdayYear(birthDate), userDTO.getJobTitle(), null,
 			ArrayUtil.toArray(_getCommerceAccountIds(userDTO)),
 			_getRoleIds(companyId, userDTO.getRoleNames()), null, null, true,
 			new ServiceContext());

@@ -21,6 +21,8 @@ import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
+import java.util.Objects;
+
 /**
  * @author Igor Beslic
  */
@@ -110,7 +112,7 @@ public class ParameterGenerator {
 
 		String arrayExpression = "";
 
-		if ("array".equals(schema.getType())) {
+		if (Objects.equals(schema.getType(), "array")) {
 			arrayExpression = "[]";
 		}
 

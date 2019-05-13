@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -165,7 +166,7 @@ public class UserHelper {
 			userDTO.getAlternateName(), userDTO.getEmail(),
 			LocaleUtil.getDefault(), userDTO.getGivenName(),
 			userDTO.getAdditionalName(), userDTO.getFamilyName(), 0, 0,
-			"male".equals(userDTO.getGender()), birthDate.getMonth(),
+			Objects.equals(userDTO.getGender(), "male"), birthDate.getMonth(),
 			birthDate.getDay(), birthDate.getYear(), userDTO.getJobTitle(),
 			null, ArrayUtil.toArray(userDTO.getCommerceAccountIds()),
 			_getRoleIds(companyId, userDTO.getRoleNames()), null, null, true,

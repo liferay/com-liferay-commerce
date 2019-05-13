@@ -68,7 +68,7 @@ public class ComponentImporter {
 
 		openApiComponentBuilder.type(type);
 
-		if ("array".equals(type)) {
+		if (type.equals("array")) {
 			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
 
 			_setIfHas(
@@ -188,7 +188,7 @@ public class ComponentImporter {
 					openApiPropertyBuilder.required(true);
 				}
 
-				if ("object".equals(openApiTypeValue)) {
+				if (openApiTypeValue.equals("object")) {
 					if (propertyJSONNode.has("additionalProperties")) {
 						openApiPropertyBuilder.openApiTypeDefinition(
 							"dictionary");

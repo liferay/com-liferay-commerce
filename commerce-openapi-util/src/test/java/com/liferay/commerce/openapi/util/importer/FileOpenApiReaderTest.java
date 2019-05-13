@@ -22,6 +22,7 @@ import com.liferay.commerce.openapi.util.config.exception.ConfigurationException
 import java.io.IOException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 import org.junit.Assert;
@@ -83,7 +84,9 @@ public class FileOpenApiReaderTest {
 			ConfigurationFactory.getConfigurations();
 
 		for (Properties candidate : configurations) {
-			if ("a".equals(candidate.getProperty("osgi.module.name"))) {
+			if (Objects.equals(
+					candidate.getProperty("osgi.module.name"), "a")) {
+
 				return candidate;
 			}
 		}
