@@ -14,16 +14,14 @@
 
 package com.liferay.commerce.channel.web.internal.portlet.action;
 
-import com.liferay.commerce.channel.web.internal.display.context.CommerceChannelDisplayContext;
-import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
-import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
-import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.channel.web.internal.display.context.CPCatalogRuleDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistry;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -59,19 +57,14 @@ public class EditCommerceChannelFilterMVCRenderCommand
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
 
-			CommerceChannelDisplayContext commerceChannelDisplayContext =
-				new CommerceChannelDisplayContext(
-					_commerceChannelService, _commerceChannelTypeRegistry,
-					_commerceChannelTypeJSPContributorRegistry,
-					httpServletRequest, _portal, _portletResourcePermission);
+			CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext =
+				new CPCatalogRuleDisplayContext(
+					_commerceChannelService, _cpRuleAssetCategoryRelService,
+					_cpRuleService, _cpRuleTypeJSPContributorRegistry,
+					_cpRuleTypeRegistry, _portal, httpServletRequest);
 
 			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(renderRequest, pe.getClass());
-
-			return "/error.jsp";
+				WebKeys.PORTLET_DISPLAY_CONTEXT, cpCatalogRuleDisplayContext);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -84,16 +77,18 @@ public class EditCommerceChannelFilterMVCRenderCommand
 	private CommerceChannelService _commerceChannelService;
 
 	@Reference
-	private CommerceChannelTypeJSPContributorRegistry
-		_commerceChannelTypeJSPContributorRegistry;
+	private CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
 
 	@Reference
-	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeJSPContributorRegistry _cpRuleTypeJSPContributorRegistry;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 }
