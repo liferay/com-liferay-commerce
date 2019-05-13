@@ -271,14 +271,24 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPRule> searchCPRules(
+			long companyId, long groupId, Map<String, Serializable> attributes,
+			String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, attributes, keywords, start, end, sort);
+
+		return cpRuleLocalService.searchCPRules(searchContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CPRule> searchCPRules(
 			long companyId, long groupId, String keywords, int start, int end,
 			Sort sort)
 		throws PortalException {
 
-		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, start, end, sort);
-
-		return cpRuleLocalService.searchCPRules(searchContext);
+		return cpRuleLocalService.searchCPRules(
+			companyId, groupId, null, keywords, start, end, sort);
 	}
 
 	@Override
@@ -374,8 +384,8 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int start, int end,
-		Sort sort) {
+		long companyId, long groupId, Map<String, Serializable> attributes,
+		String keywords, int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -383,7 +393,16 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 
 		params.put("keywords", keywords);
 
-		Map<String, Serializable> attributes = new HashMap<>();
+		if (attributes != null) {
+			Map<String, Serializable> customAttributes = attributes;
+
+			attributes = new HashMap<>();
+
+			attributes.putAll(customAttributes);
+		}
+		else {
+			attributes = new HashMap<>();
+		}
 
 		attributes.put("active", true);
 		attributes.put(Field.NAME, keywords);
@@ -410,6 +429,14 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		}
 
 		return searchContext;
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, long groupId, String keywords, int start, int end,
+		Sort sort) {
+
+		return buildSearchContext(
+			companyId, groupId, null, keywords, start, end, sort);
 	}
 
 	protected List<CPRule> getCPRules(Hits hits) throws PortalException {

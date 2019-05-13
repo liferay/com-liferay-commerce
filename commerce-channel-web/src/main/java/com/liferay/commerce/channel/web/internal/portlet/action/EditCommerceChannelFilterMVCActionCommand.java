@@ -135,6 +135,9 @@ public class EditCommerceChannelFilterMVCActionCommand
 	protected CPRule updateCommerceChannelFilter(ActionRequest actionRequest)
 		throws Exception {
 
+		long commerceChannelId = ParamUtil.getLong(
+			actionRequest, "commerceChannelId");
+
 		long cpRuleId = ParamUtil.getLong(actionRequest, "cpRuleId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -153,7 +156,9 @@ public class EditCommerceChannelFilterMVCActionCommand
 
 		if (cpRuleId <= 0) {
 			return _cpRuleService.addCPRule(
-				name, true, type, typeSettingsProperties, serviceContext);
+				_portal.getClassNameId(CommerceChannel.class),
+				commerceChannelId, name, true, type, typeSettingsProperties,
+				serviceContext);
 		}
 
 		return _cpRuleService.updateCPRule(

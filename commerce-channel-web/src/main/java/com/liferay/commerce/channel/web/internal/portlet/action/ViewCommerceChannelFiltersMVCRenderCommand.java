@@ -61,7 +61,7 @@ public class ViewCommerceChannelFiltersMVCRenderCommand
 				new CPCatalogRuleDisplayContext(
 					_commerceChannelService, _cpRuleAssetCategoryRelService,
 					_cpRuleService, _cpRuleTypeJSPContributorRegistry,
-					_cpRuleTypeRegistry, httpServletRequest);
+					_cpRuleTypeRegistry, _portal, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpCatalogRuleDisplayContext);

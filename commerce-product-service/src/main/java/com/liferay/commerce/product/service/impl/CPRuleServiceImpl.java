@@ -30,13 +30,32 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.io.Serializable;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
 public class CPRuleServiceImpl extends CPRuleServiceBaseImpl {
+
+	@Override
+	public CPRule addCPRule(
+			long classNameId, long classPK, String name, boolean active,
+			String type, UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			CPActionKeys.ADD_COMMERCE_PRODUCT_RULE);
+
+		return cpRuleLocalService.addCPRule(
+			classNameId, classPK, name, active, type, typeSettingsProperties,
+			serviceContext);
+	}
 
 	@Override
 	public CPRule addCPRule(
@@ -103,6 +122,20 @@ public class CPRuleServiceImpl extends CPRuleServiceBaseImpl {
 			CPActionKeys.VIEW_COMMERCE_PRODUCT_RULES);
 
 		return cpRuleLocalService.getCPRulesCount(groupId);
+	}
+
+	@Override
+	public BaseModelSearchResult<CPRule> searchCPRules(
+			long companyId, long groupId, Map<String, Serializable> attributes,
+			String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CPActionKeys.VIEW_COMMERCE_PRODUCT_RULES);
+
+		return cpRuleLocalService.searchCPRules(
+			companyId, groupId, attributes, keywords, start, end, sort);
 	}
 
 	@Override
