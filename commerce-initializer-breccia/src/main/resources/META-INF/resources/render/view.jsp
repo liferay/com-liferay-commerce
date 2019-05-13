@@ -55,17 +55,9 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 					<%
 					String galleryId = PortalUtil.generateRandomKey(request, "gallery");
-					Map<String, Object> context = new HashMap<>();
-					context.put("images", cpContentHelper.getImages(cpDefinitionId, themeDisplay));
-					context.put("selected", 0);
 					%>
 
-					<soy:template-renderer
-						componentId="<%= galleryId %>"
-						context="<%= context %>"
-						module="commerce-frontend-taglib@2.0.1/gallery/Gallery.es"
-						templateNamespace="Gallery.render"
-					/>
+					<commerce-ui:gallery id="<%= galleryId %>" CPDefinitionId="<%= cpDefinitionId %>" />
 				</div>
 
 				<div class="col-6">
