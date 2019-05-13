@@ -74,8 +74,6 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 					_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CommerceSubscriptionEntryUpgradeProcess(
 				_cpDefinitionLocalService, _cpInstanceLocalService),
-			new CommerceWarehouseItemUpgradeProcess(
-				_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CPDAvailabilityEstimateUpgradeProcess(
 				_cpDefinitionLocalService));
 
