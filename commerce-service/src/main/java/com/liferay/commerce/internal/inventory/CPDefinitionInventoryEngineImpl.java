@@ -15,17 +15,13 @@
 package com.liferay.commerce.internal.inventory;
 
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
-import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
-import com.liferay.commerce.service.CommerceOrderItemLocalService;
-import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -168,20 +164,6 @@ public class CPDefinitionInventoryEngineImpl
 	}
 
 	@Override
-	public int getStockQuantity(CPInstance cpInstance) {
-		int warehouseCPInstanceQuantity =
-			_commerceWarehouseItemLocalService.getCPInstanceQuantity(
-				cpInstance.getCPInstanceId());
-
-		int orderCPInstanceQuantity =
-			_commerceOrderItemLocalService.getCPInstanceQuantity(
-				cpInstance.getCPInstanceId(),
-				CommerceOrderConstants.ORDER_STATUS_COMPLETED);
-
-		return warehouseCPInstanceQuantity - orderCPInstanceQuantity;
-	}
-
-	@Override
 	public boolean isBackOrderAllowed(CPInstance cpInstance)
 		throws PortalException {
 
@@ -228,27 +210,6 @@ public class CPDefinitionInventoryEngineImpl
 
 		return cpDefinitionInventory.isDisplayStockQuantity();
 	}
-
-	@Override
-	public int updateStockQuantity(
-		CommerceWarehouseItem commerceWarehouseItem, int quantity) {
-
-		quantity = commerceWarehouseItem.getQuantity() - quantity;
-
-		commerceWarehouseItem.setQuantity(quantity);
-
-		_commerceWarehouseItemLocalService.updateCommerceWarehouseItem(
-			commerceWarehouseItem);
-
-		return quantity;
-	}
-
-	@Reference
-	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
-
-	@Reference
-	private CommerceWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
 
 	@Reference
 	private CPDAvailabilityEstimateLocalService

@@ -21,9 +21,10 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.exception.GuestCartItemMaxAllowedException;
 import com.liferay.commerce.internal.search.CommerceOrderItemIndexer;
+import com.liferay.commerce.inventory.model.CommerceWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceWarehouseItemLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -310,9 +311,11 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceOrderItem commerceOrderItem =
 			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
 
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
 		CommerceWarehouseItem commerceWarehouseItem =
-			commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(
-				commerceWarehouseId, commerceOrderItem.getCPInstanceId());
+			_commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(
+				commerceWarehouseId, cpInstance.getSku());
 
 		if (commerceWarehouseItem == null) {
 			return 0;
@@ -668,6 +671,10 @@ public class CommerceOrderItemLocalServiceImpl
 
 	@ServiceReference(type = CommerceShippingHelper.class)
 	private CommerceShippingHelper _commerceShippingHelper;
+
+	@ServiceReference(type = CommerceWarehouseItemLocalService.class)
+	private CommerceWarehouseItemLocalService
+		_commerceWarehouseItemLocalService;
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
