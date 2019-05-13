@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = FormNavigatorEntry.class
 )
 public class CommerceWarehouseCustomFieldsFormNavigatorEntry
-	extends BaseJSPFormNavigatorEntry<CommerceWarehouse> {
+	extends BaseJSPFormNavigatorEntry<CommerceInventoryWarehouse> {
 
 	@Override
 	public String getCategoryKey() {
@@ -63,20 +63,22 @@ public class CommerceWarehouseCustomFieldsFormNavigatorEntry
 	}
 
 	@Override
-	public boolean isVisible(User user, CommerceWarehouse commerceWarehouse) {
+	public boolean isVisible(
+		User user, CommerceInventoryWarehouse commerceWarehouse) {
+
 		boolean hasCustomAttributesAvailable = false;
 
 		try {
 			long classPK = 0;
 
 			if (commerceWarehouse != null) {
-				classPK = commerceWarehouse.getCommerceWarehouseId();
+				classPK = commerceWarehouse.getCommerceInventoryWarehouseId();
 			}
 
 			hasCustomAttributesAvailable =
 				CustomAttributesUtil.hasCustomAttributes(
-					user.getCompanyId(), CommerceWarehouse.class.getName(),
-					classPK, null);
+					user.getCompanyId(),
+					CommerceInventoryWarehouse.class.getName(), classPK, null);
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {

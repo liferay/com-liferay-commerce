@@ -14,12 +14,11 @@
 
 package com.liferay.commerce.warehouse.web.internal.display.context;
 
-import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
@@ -27,7 +26,6 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -48,13 +46,11 @@ public class CommerceWarehousesDisplayContext {
 
 	public CommerceWarehousesDisplayContext(
 		CommerceCountryService commerceCountryService,
-		CommerceWarehouseService commerceWarehouseService,
-		HttpServletRequest httpServletRequest,
-		PortletResourcePermission portletResourcePermission) {
+		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
+		HttpServletRequest httpServletRequest) {
 
 		_commerceCountryService = commerceCountryService;
-		_commerceWarehouseService = commerceWarehouseService;
-		_portletResourcePermission = portletResourcePermission;
+		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 	}
@@ -64,7 +60,9 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getRenderRequest(), "commerceCountryId", -1);
 	}
 
-	public CommerceWarehouse getCommerceWarehouse() throws PortalException {
+	public CommerceInventoryWarehouse getCommerceWarehouse()
+		throws PortalException {
+
 		if (_commerceWarehouse != null) {
 			return _commerceWarehouse;
 		}
@@ -73,8 +71,9 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getRenderRequest(), "commerceWarehouseId");
 
 		if (commerceWarehouseId > 0) {
-			_commerceWarehouse = _commerceWarehouseService.getCommerceWarehouse(
-				commerceWarehouseId);
+			_commerceWarehouse =
+				_commerceWarehouseLocalService.getCommerceInventoryWarehouse(
+					commerceWarehouseId);
 		}
 
 		return _commerceWarehouse;
@@ -140,7 +139,7 @@ public class CommerceWarehousesDisplayContext {
 		return portletURL;
 	}
 
-	public SearchContainer<CommerceWarehouse> getSearchContainer()
+	public SearchContainer<CommerceInventoryWarehouse> getSearchContainer()
 		throws PortalException {
 
 		if (_searchContainer != null) {
@@ -167,11 +166,13 @@ public class CommerceWarehousesDisplayContext {
 			emptyResultsMessage = "no-warehouses-were-found";
 		}
 
+		CommerceCountry commerceCountry = null;
+
 		if (commerceCountryId > 0) {
 			emptyResultsMessage += "-in-x";
 
-			CommerceCountry commerceCountry =
-				_commerceCountryService.getCommerceCountry(commerceCountryId);
+			commerceCountry = _commerceCountryService.getCommerceCountry(
+				commerceCountryId);
 
 			emptyResultsMessage = LanguageUtil.format(
 				_cpRequestHelper.getRequest(), emptyResultsMessage,
@@ -190,7 +191,7 @@ public class CommerceWarehousesDisplayContext {
 		String orderByCol = getOrderByCol();
 		String orderByType = getOrderByType();
 
-		OrderByComparator<CommerceWarehouse> orderByComparator =
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator =
 			CommerceUtil.getCommerceWarehouseOrderByComparator(
 				orderByCol, orderByType);
 
@@ -199,26 +200,29 @@ public class CommerceWarehousesDisplayContext {
 		_searchContainer.setOrderByType(orderByType);
 		_searchContainer.setSearch(search);
 
-		List<CommerceWarehouse> results;
+		List<CommerceInventoryWarehouse> results;
 
-		if (_searchContainer.isSearch()) {
-			results = _commerceWarehouseService.search(
+		if (_searchContainer.isSearch() && (commerceCountry != null)) {
+			results = _commerceWarehouseLocalService.search(
+				_cpRequestHelper.getCompanyId(),
 				_cpRequestHelper.getScopeGroupId(), getKeywords(), active,
-				commerceCountryId, _searchContainer.getStart(),
-				_searchContainer.getEnd(), orderByComparator);
+				commerceCountry.getTwoLettersISOCode(),
+				_searchContainer.getStart(), _searchContainer.getEnd(),
+				orderByComparator);
 		}
 		else {
 			if (active == null) {
-				results = _commerceWarehouseService.getCommerceWarehouses(
-					_cpRequestHelper.getScopeGroupId(), commerceCountryId,
-					_searchContainer.getStart(), _searchContainer.getEnd(),
-					orderByComparator);
+				results =
+					_commerceWarehouseLocalService.
+						getCommerceWarehousesByGroupId(
+							_cpRequestHelper.getCompanyId(),
+							_cpRequestHelper.getScopeGroupId());
 			}
 			else {
-				results = _commerceWarehouseService.getCommerceWarehouses(
+				results = _commerceWarehouseLocalService.getCommerceWarehouses(
+					_cpRequestHelper.getCompanyId(),
 					_cpRequestHelper.getScopeGroupId(), active,
-					commerceCountryId, false, _searchContainer.getStart(),
-					_searchContainer.getEnd(), orderByComparator);
+					commerceCountry.getTwoLettersISOCode());
 			}
 		}
 
@@ -229,10 +233,7 @@ public class CommerceWarehousesDisplayContext {
 	}
 
 	public boolean hasManageCommerceWarehousePermission() {
-		return _portletResourcePermission.contains(
-			_cpRequestHelper.getPermissionChecker(),
-			_cpRequestHelper.getScopeGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+		return true;
 	}
 
 	protected String getKeywords() {
@@ -281,11 +282,11 @@ public class CommerceWarehousesDisplayContext {
 	}
 
 	private final CommerceCountryService _commerceCountryService;
-	private CommerceWarehouse _commerceWarehouse;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouse _commerceWarehouse;
+	private final CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 	private final CPRequestHelper _cpRequestHelper;
 	private String _keywords;
-	private final PortletResourcePermission _portletResourcePermission;
-	private SearchContainer<CommerceWarehouse> _searchContainer;
+	private SearchContainer<CommerceInventoryWarehouse> _searchContainer;
 
 }

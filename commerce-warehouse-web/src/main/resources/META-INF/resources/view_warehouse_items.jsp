@@ -30,7 +30,7 @@ if (Validator.isNotNull(backURL)) {
 <c:if test="<%= commerceWarehouseItemsDisplayContext.hasManageCommerceWarehousePermission() %>">
 
 	<%
-	List<CommerceWarehouse> commerceWarehouses = commerceWarehouseItemsDisplayContext.getCommerceWarehouses();
+	List<CommerceInventoryWarehouse> commerceWarehouses = commerceWarehouseItemsDisplayContext.getCommerceWarehouses();
 	CPInstance cpInstance = commerceWarehouseItemsDisplayContext.getCPInstance();
 	%>
 
@@ -49,7 +49,7 @@ if (Validator.isNotNull(backURL)) {
 					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 					<aui:input name="commerceWarehouseId" type="hidden" />
 					<aui:input name="commerceWarehouseItemId" type="hidden" />
-					<aui:input name="cpInstanceId" type="hidden" value="<%= cpInstance.getCPInstanceId() %>" />
+					<aui:input name="sku" type="hidden" value="<%= cpInstance.getSku() %>" />
 
 					<table class="show-quick-actions-on-hover table table-autofit table-list table-responsive-lg">
 						<thead>
@@ -63,19 +63,19 @@ if (Validator.isNotNull(backURL)) {
 						<tbody>
 
 							<%
-							for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
-								CommerceWarehouseItem commerceWarehouseItem = commerceWarehouseItemsDisplayContext.getCommerceWarehouseItem(commerceWarehouse);
+							for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
+								CommerceInventoryWarehouseItem commerceWarehouseItem = commerceWarehouseItemsDisplayContext.getCommerceWarehouseItem(commerceWarehouse);
 
 								long commerceWarehouseItemId = 0;
 
 								if (commerceWarehouseItem != null) {
-									commerceWarehouseItemId = commerceWarehouseItem.getCommerceWarehouseItemId();
+									commerceWarehouseItemId = commerceWarehouseItem.getCommerceInventoryWarehouseItemId();
 								}
 
 								int curIndex = commerceWarehouses.indexOf(commerceWarehouse);
 							%>
 
-								<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceWarehouseItem.class %>" />
+								<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceInventoryWarehouseItem.class %>" />
 
 								<tr>
 									<td>
@@ -85,7 +85,7 @@ if (Validator.isNotNull(backURL)) {
 										<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
 									</td>
 									<td class="text-center">
-										<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
+										<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceInventoryWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
 									</td>
 								</tr>
 

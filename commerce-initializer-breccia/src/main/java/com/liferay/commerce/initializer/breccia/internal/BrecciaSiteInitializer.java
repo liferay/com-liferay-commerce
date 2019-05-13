@@ -22,7 +22,7 @@ import com.liferay.commerce.initializer.util.CPOptionsImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
@@ -228,7 +228,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private List<CommerceWarehouse> _importCommerceWarehouses(
+	private List<CommerceInventoryWarehouse> _importCommerceWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -241,7 +241,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("warehouses.json");
 
-		List<CommerceWarehouse> commerceWarehouses =
+		List<CommerceInventoryWarehouse> commerceWarehouses =
 			_commerceWarehousesImporter.importCommerceWarehouses(
 				jsonArray, serviceContext.getScopeGroupId(),
 				serviceContext.getUserId());
@@ -254,7 +254,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	}
 
 	private void _importCPDefinitions(
-			List<CommerceWarehouse> commerceWarehouses,
+			List<CommerceInventoryWarehouse> commerceWarehouses,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -266,7 +266,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		long[] commerceWarehouseIds = ListUtil.toLongArray(
 			commerceWarehouses,
-			CommerceWarehouse.COMMERCE_WAREHOUSE_ID_ACCESSOR);
+			CommerceInventoryWarehouse.
+				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		_cpDefinitionsImporter.importCPDefinitions(
 			jsonArray, _COMMERCE_VOCABULARY, commerceWarehouseIds,
@@ -578,8 +579,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_importCPOptions(serviceContext);
 		_importCPSpecificationOptions(serviceContext);
 
-		List<CommerceWarehouse> commerceWarehouses = _importCommerceWarehouses(
-			serviceContext);
+		List<CommerceInventoryWarehouse> commerceWarehouses =
+			_importCommerceWarehouses(serviceContext);
 
 		_importCPDefinitions(commerceWarehouses, serviceContext);
 

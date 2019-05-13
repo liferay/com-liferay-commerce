@@ -23,7 +23,7 @@ ServletContext commerceAdminServletContext = (ServletContext)request.getAttribut
 
 CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
+CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
 
 String title = LanguageUtil.get(request, "add-warehouse");
 
@@ -50,7 +50,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 <aui:form action="<%= editCommerceWarehouseActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceWarehouse();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceWarehouse == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="commerceWarehouseId" type="hidden" value="<%= (commerceWarehouse == null) ? 0 : commerceWarehouse.getCommerceWarehouseId() %>" />
+	<aui:input name="commerceWarehouseId" type="hidden" value="<%= (commerceWarehouse == null) ? 0 : commerceWarehouse.getCommerceInventoryWarehouseId() %>" />
 
 	<liferay-ui:form-navigator
 		formModelBean="<%= commerceWarehouse %>"

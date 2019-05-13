@@ -69,6 +69,6 @@ public interface CommerceShippingFixedOptionRel
 	public com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.model.CommerceWarehouse getCommerceWarehouse()
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
 }

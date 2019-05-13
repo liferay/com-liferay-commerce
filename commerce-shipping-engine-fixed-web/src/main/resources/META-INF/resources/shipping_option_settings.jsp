@@ -102,7 +102,7 @@ boolean manageCommerceShippingMethodsPermission = commerceShippingFixedOptionRel
 					CommerceRegion commerceRegion = commerceShippingFixedOptionRel.getCommerceRegion();
 					CommerceShippingFixedOption commerceShippingFixedOption = commerceShippingFixedOptionRel.getCommerceShippingFixedOption();
 					CommerceShippingMethod commerceShippingMethod = commerceShippingFixedOptionRel.getCommerceShippingMethod();
-					CommerceWarehouse commerceWarehouse = commerceShippingFixedOptionRel.getCommerceWarehouse();
+					CommerceInventoryWarehouse commerceWarehouse = commerceShippingFixedOptionRel.getCommerceWarehouse();
 					%>
 
 					<liferay-ui:search-container-column-text

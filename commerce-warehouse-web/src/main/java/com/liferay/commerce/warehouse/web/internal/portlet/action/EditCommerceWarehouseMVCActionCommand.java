@@ -16,12 +16,16 @@ package com.liferay.commerce.warehouse.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.CommerceGeocoderException;
-import com.liferay.commerce.exception.CommerceWarehouseActiveException;
-import com.liferay.commerce.exception.CommerceWarehouseCommerceRegionIdException;
-import com.liferay.commerce.exception.CommerceWarehouseNameException;
 import com.liferay.commerce.exception.NoSuchWarehouseException;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.service.CommerceWarehouseService;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceGeocoder;
+import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -32,6 +36,7 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
@@ -118,9 +123,8 @@ public class EditCommerceWarehouseMVCActionCommand
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof CommerceWarehouseActiveException ||
-					 e instanceof CommerceWarehouseCommerceRegionIdException ||
-					 e instanceof CommerceWarehouseNameException) {
+			else if (e instanceof CommerceInventoryWarehouseActiveException ||
+					 e instanceof CommerceInventoryWarehouseNameException) {
 
 				hideDefaultErrorMessage(actionRequest);
 				hideDefaultSuccessMessage(actionRequest);
@@ -142,8 +146,23 @@ public class EditCommerceWarehouseMVCActionCommand
 		long commerceWarehouseId = ParamUtil.getLong(
 			actionRequest, "commerceWarehouseId");
 
+		CommerceInventoryWarehouse commerceWarehouse =
+			_commerceWarehouseService.getCommerceWarehouse(commerceWarehouseId);
+
+		CommerceCountry commerceCountry = _getCommerceCountry(
+			_portal.getScopeGroupId(actionRequest),
+			commerceWarehouse.getCountryTwoLettersISOCode());
+
+		CommerceRegion commerceRegion = _getCommerceRegion(
+			commerceCountry.getCommerceCountryId(),
+			commerceWarehouse.getCommerceRegionCode());
+
+		double[] coordinates = _commerceGeocoder.getCoordinates(
+			commerceWarehouse.getStreet1(), commerceWarehouse.getCity(),
+			commerceWarehouse.getZip(), commerceRegion, commerceCountry);
+
 		_commerceWarehouseService.geolocateCommerceWarehouse(
-			commerceWarehouseId);
+			commerceWarehouseId, coordinates[0], coordinates[1]);
 	}
 
 	protected void setActive(ActionRequest actionRequest) throws Exception {
@@ -155,7 +174,7 @@ public class EditCommerceWarehouseMVCActionCommand
 		_commerceWarehouseService.setActive(commerceWarehouseId, active);
 	}
 
-	protected CommerceWarehouse updateCommerceWarehouse(
+	protected CommerceInventoryWarehouse updateCommerceWarehouse(
 			ActionRequest actionRequest)
 		throws PortalException {
 
@@ -170,36 +189,76 @@ public class EditCommerceWarehouseMVCActionCommand
 		String street3 = ParamUtil.getString(actionRequest, "street3");
 		String city = ParamUtil.getString(actionRequest, "city");
 		String zip = ParamUtil.getString(actionRequest, "zip");
+
 		long commerceRegionId = ParamUtil.getLong(
 			actionRequest, "commerceRegionId");
+
 		long commerceCountryId = ParamUtil.getLong(
 			actionRequest, "commerceCountryId");
+
+		CommerceCountry commerceCountry =
+			_commerceCountryLocalService.getCommerceCountry(commerceCountryId);
+
+		CommerceRegion commerceRegion =
+			_commerceRegionLocalService.getCommerceRegion(commerceRegionId);
+
 		double latitude = ParamUtil.getDouble(actionRequest, "latitude");
 		double longitude = ParamUtil.getDouble(actionRequest, "longitude");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceWarehouse.class.getName(), actionRequest);
+			CommerceInventoryWarehouse.class.getName(), actionRequest);
 
-		CommerceWarehouse commerceWarehouse = null;
+		CommerceInventoryWarehouse commerceWarehouse = null;
 
 		if (commerceWarehouseId <= 0) {
-			commerceWarehouse = _commerceWarehouseService.addCommerceWarehouse(
-				name, description, active, street1, street2, street3, city, zip,
-				commerceRegionId, commerceCountryId, latitude, longitude,
-				serviceContext);
+			commerceWarehouse =
+				_commerceWarehouseService.addCommerceWarehouseAndGroupRel(
+					name, description, active, street1, street2, street3, city,
+					zip, commerceRegion.getCode(),
+					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
+					serviceContext);
 		}
 		else {
 			commerceWarehouse =
 				_commerceWarehouseService.updateCommerceWarehouse(
 					commerceWarehouseId, name, description, active, street1,
-					street2, street3, city, zip, commerceRegionId,
-					commerceCountryId, latitude, longitude, serviceContext);
+					street2, street3, city, zip, commerceRegion.getCode(),
+					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
+					serviceContext);
 		}
 
 		return commerceWarehouse;
 	}
 
+	private CommerceCountry _getCommerceCountry(
+			long groupId, String countryCode)
+		throws PortalException {
+
+		return _commerceCountryLocalService.getCommerceCountry(
+			groupId, countryCode);
+	}
+
+	private CommerceRegion _getCommerceRegion(
+			long commerceCountryId, String regionCode)
+		throws PortalException {
+
+		return _commerceRegionLocalService.getCommerceRegion(
+			commerceCountryId, regionCode);
+	}
+
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceCountryLocalService _commerceCountryLocalService;
+
+	@Reference
+	private CommerceGeocoder _commerceGeocoder;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
+
+	@Reference
+	private CommerceInventoryWarehouseService _commerceWarehouseService;
+
+	@Reference
+	private Portal _portal;
 
 }

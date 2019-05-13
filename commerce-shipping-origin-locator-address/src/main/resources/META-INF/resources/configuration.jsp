@@ -26,9 +26,9 @@ AddressCommerceShippingOriginLocatorDisplayContext addressCommerceShippingOrigin
 			<aui:validator name="required" />
 		</aui:input>
 
-		<aui:select id='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceCountryId--" %>' label="country" name='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceCountryId--" %>' />
+		<aui:select id='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceCountryCode--" %>' label="country" name='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceCountryCode--" %>' />
 
-		<aui:select id='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceRegionId--" %>' label="region" name='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceRegionId--" %>' />
+		<aui:select id='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceRegionCode--" %>' label="region" name='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--commerceRegionCode--" %>' />
 
 		<aui:input id='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--zip--" %>' label="postal-code" name='<%= AddressCommerceShippingOriginLocator.KEY + "Origin--zip--" %>' value="<%= addressCommerceShippingOriginLocatorDisplayContext.getZip() %>" />
 
@@ -52,7 +52,7 @@ AddressCommerceShippingOriginLocatorDisplayContext addressCommerceShippingOrigin
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: '<portlet:namespace /><%= AddressCommerceShippingOriginLocator.KEY %>Origin--commerceCountryId--',
+				select: '<portlet:namespace /><%= AddressCommerceShippingOriginLocator.KEY %>Origin--commerceCountryCode--',
 				selectData: function(callback) {
 					Liferay.Service(
 						'/commerce.commercecountry/get-commerce-countries',
@@ -69,7 +69,7 @@ AddressCommerceShippingOriginLocatorDisplayContext addressCommerceShippingOrigin
 				selectVal: '<%= addressCommerceShippingOriginLocatorDisplayContext.getCommerceCountryId() %>'
 			},
 			{
-				select: '<portlet:namespace /><%= AddressCommerceShippingOriginLocator.KEY %>Origin--commerceRegionId--',
+				select: '<portlet:namespace /><%= AddressCommerceShippingOriginLocator.KEY %>Origin--commerceRegionCode--',
 				selectData: function(callback, selectKey) {
 					Liferay.Service(
 						'/commerce.commerceregion/get-commerce-regions',

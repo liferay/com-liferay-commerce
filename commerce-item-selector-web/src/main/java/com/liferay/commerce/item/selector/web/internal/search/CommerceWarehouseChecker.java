@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.item.selector.web.internal.search;
 
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.util.SetUtil;
 
@@ -41,18 +41,20 @@ public class CommerceWarehouseChecker extends EmptyOnClickRowChecker {
 
 	@Override
 	public boolean isChecked(Object obj) {
-		CommerceWarehouse commerceWarehouse = (CommerceWarehouse)obj;
+		CommerceInventoryWarehouse commerceWarehouse =
+			(CommerceInventoryWarehouse)obj;
 
 		return _checkedCommerceWarehouseIds.contains(
-			commerceWarehouse.getCommerceWarehouseId());
+			commerceWarehouse.getCommerceInventoryWarehouseId());
 	}
 
 	@Override
 	public boolean isDisabled(Object obj) {
-		CommerceWarehouse commerceWarehouse = (CommerceWarehouse)obj;
+		CommerceInventoryWarehouse commerceWarehouse =
+			(CommerceInventoryWarehouse)obj;
 
 		return _disabledCommerceWarehouseIds.contains(
-			commerceWarehouse.getCommerceWarehouseId());
+			commerceWarehouse.getCommerceInventoryWarehouseId());
 	}
 
 	private final Set<Long> _checkedCommerceWarehouseIds;

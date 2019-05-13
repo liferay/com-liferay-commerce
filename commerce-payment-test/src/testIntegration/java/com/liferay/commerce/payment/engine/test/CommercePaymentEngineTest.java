@@ -18,8 +18,8 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.payment.test.util.TestCommercePaymentMethod;
@@ -119,11 +119,11 @@ public class CommercePaymentEngineTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceWarehouse =
 			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 10);
+			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -181,11 +181,11 @@ public class CommercePaymentEngineTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceWarehouse =
 			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 10);
+			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.BaseJSPFormNavigatorEntry;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = FormNavigatorEntry.class
 )
 public class CommerceWarehouseGeolocationFormNavigatorEntry
-	extends BaseJSPFormNavigatorEntry<CommerceWarehouse> {
+	extends BaseJSPFormNavigatorEntry<CommerceInventoryWarehouse> {
 
 	@Override
 	public String getCategoryKey() {

@@ -15,13 +15,14 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -48,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceWarehousesImporter.class)
 public class CommerceWarehousesImporter {
 
-	public List<CommerceWarehouse> importCommerceWarehouses(
+	public List<CommerceInventoryWarehouse> importCommerceWarehouses(
 			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws Exception {
 
@@ -58,14 +59,14 @@ public class CommerceWarehousesImporter {
 			return Collections.emptyList();
 		}
 
-		List<CommerceWarehouse> commerceWarehouses = new ArrayList<>(
+		List<CommerceInventoryWarehouse> commerceWarehouses = new ArrayList<>(
 			jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			CommerceWarehouse commerceWarehouse = _importCommerceWarehouse(
-				jsonObject, serviceContext);
+			CommerceInventoryWarehouse commerceWarehouse =
+				_importCommerceWarehouse(jsonObject, serviceContext);
 
 			commerceWarehouses.add(commerceWarehouse);
 		}
@@ -75,7 +76,7 @@ public class CommerceWarehousesImporter {
 		return commerceWarehouses;
 	}
 
-	public CommerceWarehouse importDefaultCommerceWarehouse(
+	public CommerceInventoryWarehouse importDefaultCommerceWarehouse(
 			long scopeGroupId, long userId)
 		throws PortalException {
 
@@ -99,7 +100,7 @@ public class CommerceWarehousesImporter {
 		return serviceContext;
 	}
 
-	private CommerceWarehouse _importCommerceWarehouse(
+	private CommerceInventoryWarehouse _importCommerceWarehouse(
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -126,11 +127,18 @@ public class CommerceWarehousesImporter {
 		double latitude = jsonObject.getDouble("Latitude");
 		double longitude = jsonObject.getDouble("Longitude");
 
-		return _commerceWarehouseLocalService.addCommerceWarehouse(
-			name, description, active, street1, street2, street3, city, zip,
-			commerceRegion.getCommerceRegionId(),
-			commerceRegion.getCommerceCountryId(), latitude, longitude,
+		CommerceInventoryWarehouse commerceWarehouse =
+			_commerceWarehouseLocalService.addCommerceWarehouse(
+				name, description, active, street1, street2, street3, city, zip,
+				commerceRegion.getCode(),
+				commerceCountry.getTwoLettersISOCode(), latitude, longitude,
+				serviceContext);
+
+		_commerceWarehouseGroupRelLocalService.addCommerceWarehouseGroupRel(
+			commerceWarehouse.getCommerceInventoryWarehouseId(), false,
 			serviceContext);
+
+		return commerceWarehouse;
 	}
 
 	private void _updateCommerceShippingGroupServiceConfiguration(
@@ -170,7 +178,12 @@ public class CommerceWarehousesImporter {
 		_commerceShippingOriginLocatorRegistry;
 
 	@Reference
-	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseGroupRelLocalService
+		_commerceWarehouseGroupRelLocalService;
+
+	@Reference
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private SettingsFactory _settingsFactory;

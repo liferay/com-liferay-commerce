@@ -69,7 +69,7 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 		searchContainer="<%= commerceWarehouseItemSelectorViewDisplayContext.getSearchContainer() %>"
 	>
 		<liferay-ui:search-container-row
-			className="com.liferay.commerce.model.CommerceWarehouse"
+			className="com.liferay.commerce.inventory.model.CommerceWarehouse"
 			keyProperty="commerceWarehouseId"
 			modelVar="commerceWarehouse"
 		>

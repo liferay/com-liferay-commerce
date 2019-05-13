@@ -14,8 +14,8 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
@@ -53,7 +53,7 @@ public class DTOMapper {
 		return availabilityEstimate;
 	}
 
-	public Warehouse modelToDTO(CommerceWarehouse commerceWarehouse) {
+	public Warehouse modelToDTO(CommerceInventoryWarehouse commerceWarehouse) {
 		Warehouse warehouse = new Warehouse();
 
 		if (commerceWarehouse == null) {
@@ -62,16 +62,11 @@ public class DTOMapper {
 
 		warehouse.setActive(commerceWarehouse.isActive());
 		warehouse.setCity(commerceWarehouse.getCity());
-		warehouse.setCommerceCountryId(
-			commerceWarehouse.getCommerceCountryId());
-		warehouse.setCommerceRegionId(commerceWarehouse.getCommerceRegionId());
 		warehouse.setDescription(commerceWarehouse.getDescription());
-		warehouse.setGroupId(commerceWarehouse.getGroupId());
-		warehouse.setId(commerceWarehouse.getCommerceWarehouseId());
+		warehouse.setId(commerceWarehouse.getCommerceInventoryWarehouseId());
 		warehouse.setLatitude(commerceWarehouse.getLatitude());
 		warehouse.setLongitude(commerceWarehouse.getLongitude());
 		warehouse.setName(commerceWarehouse.getName());
-		warehouse.setPrimary(commerceWarehouse.isPrimary());
 		warehouse.setStreet1(commerceWarehouse.getStreet1());
 		warehouse.setStreet2(commerceWarehouse.getStreet2());
 		warehouse.setStreet3(commerceWarehouse.getStreet3());

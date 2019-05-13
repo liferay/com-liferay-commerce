@@ -17,18 +17,16 @@ package com.liferay.commerce.shipment.web.internal.display.context;
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
-import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -57,7 +55,7 @@ public class CommerceShipmentDisplayContext
 		CommerceOrderItemService commerceOrderItemService,
 		CommerceOrderService commerceOrderService,
 		CommerceShipmentService commerceShipmentService,
-		CommerceWarehouseService commerceWarehouseService,
+		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		ConfigurationProvider configurationProvider,
 		PortletResourcePermission portletResourcePermission) {
 
@@ -68,7 +66,7 @@ public class CommerceShipmentDisplayContext
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderService = commerceOrderService;
 		_commerceShipmentService = commerceShipmentService;
-		_commerceWarehouseService = commerceWarehouseService;
+		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 		_configurationProvider = configurationProvider;
 	}
 
@@ -103,7 +101,7 @@ public class CommerceShipmentDisplayContext
 			commerceOrderItemId, commerceWarehouseId);
 	}
 
-	public List<CommerceWarehouse> getCommerceWarehouses()
+	public List<CommerceInventoryWarehouse> getCommerceWarehouses()
 		throws PortalException {
 
 		if (_commerceWarehouses != null) {
@@ -123,8 +121,8 @@ public class CommerceShipmentDisplayContext
 				commerceShippingOriginLocatorKey();
 
 		if (commerceShippingOriginLocatorKey.equals("address")) {
-			CommerceWarehouse commerceWarehouse =
-				_commerceWarehouseService.fetchDefaultCommerceWarehouse(
+			CommerceInventoryWarehouse commerceWarehouse =
+				_commerceWarehouseLocalService.fetchDefaultCommerceWarehouse(
 					cpRequestHelper.getScopeGroupId());
 
 			if (commerceWarehouse == null) {
@@ -138,9 +136,10 @@ public class CommerceShipmentDisplayContext
 			return _commerceWarehouses;
 		}
 
-		_commerceWarehouses = _commerceWarehouseService.getCommerceWarehouses(
-			cpRequestHelper.getScopeGroupId(), true, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, new CommerceWarehouseNameComparator(true));
+		_commerceWarehouses =
+			_commerceWarehouseLocalService.getCommerceWarehousesByGroupId(
+				cpRequestHelper.getCompanyId(),
+				cpRequestHelper.getScopeGroupId());
 
 		return _commerceWarehouses;
 	}
@@ -238,8 +237,9 @@ public class CommerceShipmentDisplayContext
 	private final CommerceOrderItemService _commerceOrderItemService;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommerceShipmentService _commerceShipmentService;
-	private List<CommerceWarehouse> _commerceWarehouses;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private final CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
+	private List<CommerceInventoryWarehouse> _commerceWarehouses;
 	private final ConfigurationProvider _configurationProvider;
 
 }

@@ -14,15 +14,20 @@
 
 package com.liferay.commerce.shipping.origin.locator.warehouse.internal;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceAddressLocalService;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
+import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.shipping.origin.locator.warehouse.internal.util.DistanceCalculator;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -81,15 +86,18 @@ public class WarehouseCommerceShippingOriginLocator
 			return Collections.emptyMap();
 		}
 
-		Map<CommerceWarehouse, List<CommerceOrderItem>>
+		Map<CommerceInventoryWarehouse, List<CommerceOrderItem>>
 			commerceWarehouseOrderItemsMap = new HashMap<>();
 
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CommerceWarehouse commerceWarehouse = _getClosestCommerceWarehouse(
-				commerceAddress, commerceOrderItem.getCPInstanceId());
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+			CommerceInventoryWarehouse commerceWarehouse =
+				_getClosestCommerceWarehouse(
+					commerceAddress, cpInstance.getSku());
 
 			List<CommerceOrderItem> commerceWarehouseOrderItems =
 				commerceWarehouseOrderItemsMap.get(commerceWarehouse);
@@ -108,10 +116,10 @@ public class WarehouseCommerceShippingOriginLocator
 		Map<CommerceAddress, List<CommerceOrderItem>> originAddress =
 			new HashMap<>();
 
-		for (Map.Entry<CommerceWarehouse, List<CommerceOrderItem>> entry :
-				commerceWarehouseOrderItemsMap.entrySet()) {
+		for (Map.Entry<CommerceInventoryWarehouse, List<CommerceOrderItem>>
+				entry : commerceWarehouseOrderItemsMap.entrySet()) {
 
-			CommerceWarehouse commerceWarehouse = entry.getKey();
+			CommerceInventoryWarehouse commerceWarehouse = entry.getKey();
 
 			originAddress.put(
 				_getCommerceAddress(commerceWarehouse), entry.getValue());
@@ -132,22 +140,39 @@ public class WarehouseCommerceShippingOriginLocator
 		throws Exception {
 	}
 
-	private CommerceWarehouse _getClosestCommerceWarehouse(
-			CommerceAddress commerceAddress, long cpInstanceId)
+	private CommerceInventoryWarehouse _getClosestCommerceWarehouse(
+			CommerceAddress commerceAddress, String sku)
 		throws PortalException {
 
-		List<CommerceWarehouse> commerceWarehouses =
-			_commerceWarehouseLocalService.getCommerceWarehouses(
-				cpInstanceId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<CommerceInventoryWarehouse> commerceWarehouses =
+			_commerceWarehouseLocalService.getCommerceWarehousesByGroupIdAndSku(
+				commerceAddress.getCompanyId(), commerceAddress.getGroupId(),
+				sku);
 
-		CommerceWarehouse closestCommerceWarehouse = null;
+		CommerceInventoryWarehouse closestCommerceWarehouse = null;
 		double closestDistance = Double.MAX_VALUE;
 
-		for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
+		for (CommerceInventoryWarehouse commerceWarehouse :
+				commerceWarehouses) {
+
 			if (!commerceWarehouse.isGeolocated()) {
+				CommerceCountry commerceCountry = _getCommerceCountry(
+					commerceAddress.getGroupId(),
+					commerceWarehouse.getCountryTwoLettersISOCode());
+
+				CommerceRegion commerceRegion = _getCommerceRegion(
+					commerceCountry.getCommerceCountryId(),
+					commerceWarehouse.getCommerceRegionCode());
+
+				double[] coordinates = _commerceGeocoder.getCoordinates(
+					commerceWarehouse.getStreet1(), commerceWarehouse.getCity(),
+					commerceWarehouse.getZip(), commerceRegion,
+					commerceCountry);
+
 				commerceWarehouse =
 					_commerceWarehouseLocalService.geolocateCommerceWarehouse(
-						commerceWarehouse.getCommerceWarehouseId());
+						commerceWarehouse.getCommerceInventoryWarehouseId(),
+						coordinates[0], coordinates[1]);
 			}
 
 			double distance = _distanceCalculator.getDistance(
@@ -165,25 +190,53 @@ public class WarehouseCommerceShippingOriginLocator
 	}
 
 	private CommerceAddress _getCommerceAddress(
-		CommerceWarehouse commerceWarehouse) {
+			CommerceInventoryWarehouse commerceWarehouse)
+		throws PortalException {
 
 		CommerceAddress commerceAddress =
 			_commerceAddressLocalService.createCommerceAddress(
-				-commerceWarehouse.getCommerceWarehouseId());
+				-commerceWarehouse.getCommerceInventoryWarehouseId());
 
 		commerceAddress.setStreet1(commerceWarehouse.getStreet1());
 		commerceAddress.setStreet2(commerceWarehouse.getStreet2());
 		commerceAddress.setStreet3(commerceWarehouse.getStreet3());
 		commerceAddress.setCity(commerceWarehouse.getCity());
 		commerceAddress.setZip(commerceWarehouse.getZip());
+
+		CommerceCountry commerceCountry = _getCommerceCountry(
+			commerceAddress.getGroupId(),
+			commerceWarehouse.getCountryTwoLettersISOCode());
+
+		CommerceRegion commerceRegion = _getCommerceRegion(
+			commerceCountry.getCommerceCountryId(),
+			commerceWarehouse.getCommerceRegionCode());
+
 		commerceAddress.setCommerceRegionId(
-			commerceWarehouse.getCommerceRegionId());
+			commerceRegion.getCommerceRegionId());
+
 		commerceAddress.setCommerceCountryId(
-			commerceWarehouse.getCommerceCountryId());
+			commerceCountry.getCommerceCountryId());
+
 		commerceAddress.setLatitude(commerceWarehouse.getLatitude());
 		commerceAddress.setLongitude(commerceWarehouse.getLongitude());
 
 		return commerceAddress;
+	}
+
+	private CommerceCountry _getCommerceCountry(
+			long groupId, String countryCode)
+		throws PortalException {
+
+		return _commerceCountryLocalService.getCommerceCountry(
+			groupId, countryCode);
+	}
+
+	private CommerceRegion _getCommerceRegion(
+			long commerceCountryId, String regionCode)
+		throws PortalException {
+
+		return _commerceRegionLocalService.getCommerceRegion(
+			commerceCountryId, regionCode);
 	}
 
 	private ResourceBundle _getResourceBundle(Locale locale) {
@@ -195,7 +248,17 @@ public class WarehouseCommerceShippingOriginLocator
 	private CommerceAddressLocalService _commerceAddressLocalService;
 
 	@Reference
-	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+	private CommerceCountryLocalService _commerceCountryLocalService;
+
+	@Reference
+	private CommerceGeocoder _commerceGeocoder;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
+
+	@Reference
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	private final DistanceCalculator _distanceCalculator =
 		new DistanceCalculator();

@@ -27,11 +27,10 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
 page import="com.liferay.commerce.exception.CommerceGeocoderException" %><%@
-page import="com.liferay.commerce.exception.CommerceWarehouseActiveException" %><%@
-page import="com.liferay.commerce.exception.CommerceWarehouseCommerceRegionIdException" %><%@
-page import="com.liferay.commerce.exception.CommerceWarehouseNameException" %><%@
-page import="com.liferay.commerce.model.CommerceWarehouse" %><%@
-page import="com.liferay.commerce.model.CommerceWarehouseItem" %><%@
+page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException" %><%@
+page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException" %><%@
+page import="com.liferay.commerce.inventory.model.CommerceInventoryWarehouse" %><%@
+page import="com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehouseItemsDisplayContext" %><%@
