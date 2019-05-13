@@ -82,6 +82,21 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
+		long classNameId = GetterUtil.getLong(
+			searchContext.getAttribute(Field.CLASS_NAME_ID));
+
+		if (classNameId > 0) {
+			contextBooleanFilter.addRequiredTerm(
+				Field.CLASS_NAME_ID, classNameId);
+		}
+
+		long classPK = GetterUtil.getLong(
+			searchContext.getAttribute(Field.CLASS_PK));
+
+		if (classPK > 0) {
+			contextBooleanFilter.addRequiredTerm(Field.CLASS_PK, classPK);
+		}
+
 		long[] commerceUserSegmentEntryIds = GetterUtil.getLongValues(
 			searchContext.getAttribute("commerceUserSegmentEntryIds"), null);
 
@@ -154,6 +169,8 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 		Document document = getBaseModelDocument(CLASS_NAME, cpRule);
 
 		document.addKeyword(FIELD_ACTIVE, cpRule.isActive());
+		document.addNumber(Field.CLASS_NAME_ID, cpRule.getClassNameId());
+		document.addNumber(Field.CLASS_PK, cpRule.getClassPK());
 		document.addNumber(Field.ENTRY_CLASS_PK, cpRule.getCPRuleId());
 		document.addText(Field.NAME, cpRule.getName());
 		document.addText(Field.USER_NAME, cpRule.getUserName());

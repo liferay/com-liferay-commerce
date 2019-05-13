@@ -33,15 +33,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.io.Serializable;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -57,7 +63,7 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService,
 		CPRuleService cpRuleService,
 		CPRuleTypeJSPContributorRegistry cpRuleTypeJSPContributorRegistry,
-		CPRuleTypeRegistry cpRuleTypeRegistry,
+		CPRuleTypeRegistry cpRuleTypeRegistry, Portal portal,
 		HttpServletRequest httpServletRequest) {
 
 		_commerceChannelService = commerceChannelService;
@@ -65,11 +71,12 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 		_cpRuleService = cpRuleService;
 		_cpRuleTypeJSPContributorRegistry = cpRuleTypeJSPContributorRegistry;
 		_cpRuleTypeRegistry = cpRuleTypeRegistry;
+		_portal = portal;
+		_httpServletRequest = httpServletRequest;
 
 		_cpCatalogRuleRequestHelper = new CPCatalogRuleRequestHelper(
 			httpServletRequest);
 
-		_httpServletRequest = httpServletRequest;
 		_liferayPortletRequest =
 			_cpCatalogRuleRequestHelper.getLiferayPortletRequest();
 		_liferayPortletResponse =
@@ -236,6 +243,16 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(
+			Field.CLASS_NAME_ID, _portal.getClassNameId(CommerceChannel.class));
+
+		String commerceChannelId = ParamUtil.getString(
+			_httpServletRequest, "commerceChannelId");
+
+		attributes.put(Field.CLASS_PK, commerceChannelId);
+
 		_searchContainer = new SearchContainer<>(
 			_liferayPortletRequest, getPortletURL(), null, null);
 
@@ -245,7 +262,7 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 		BaseModelSearchResult<CPRule> cpRulesBaseModelSearchResult =
 			_cpRuleService.searchCPRules(
 				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				getKeywords(), _searchContainer.getStart(),
+				attributes, getKeywords(), _searchContainer.getStart(),
 				_searchContainer.getEnd(), sort);
 
 		_searchContainer.setTotal(cpRulesBaseModelSearchResult.getLength());
@@ -267,6 +284,7 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 	private String _keywords;
 	private final LiferayPortletRequest _liferayPortletRequest;
 	private final LiferayPortletResponse _liferayPortletResponse;
+	private final Portal _portal;
 	private SearchContainer<CPRule> _searchContainer;
 
 }
