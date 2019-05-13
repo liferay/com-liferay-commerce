@@ -23,15 +23,11 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
 
-String filterType = StringPool.BLANK;
-
-if (commerceChannel != null) {
-	filterType = commerceChannel.getFilterType();
-}
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.getCommerceChannelTypes();
 
 String name = BeanParamUtil.getString(commerceChannel, request, "name");
+String filterType = BeanParamUtil.getString(commerceChannel, request, "filterType");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
 %>
 
@@ -109,11 +105,13 @@ String type = BeanParamUtil.getString(commerceChannel, request, "type");
 			var A = AUI();
 
 			var name = A.one('#<portlet:namespace />name').val();
+			var filterType = A.one('#<portlet:namespace />filterType').get('checked') ? 'orSearch' : '';
 			var type = A.one('#<portlet:namespace />type').val();
 
 			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
 			portletURL.setParameter('name', name);
+			portletURL.setParameter('filterType', filterType);
 			portletURL.setParameter('type', type);
 
 			window.location.replace(portletURL.toString());
