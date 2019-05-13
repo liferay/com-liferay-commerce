@@ -16,7 +16,6 @@ package com.liferay.commerce.inventory;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -50,8 +49,6 @@ public interface CPDefinitionInventoryEngine {
 	public int getMultipleOrderQuantity(CPInstance cpInstance)
 		throws PortalException;
 
-	public int getStockQuantity(CPInstance cpInstance);
-
 	public boolean isBackOrderAllowed(CPInstance cpInstance)
 		throws PortalException;
 
@@ -60,8 +57,5 @@ public interface CPDefinitionInventoryEngine {
 
 	public boolean isDisplayStockQuantity(CPInstance cpInstance)
 		throws PortalException;
-
-	public int updateStockQuantity(
-		CommerceWarehouseItem commerceWarehouseItem, int quantity);
 
 }
