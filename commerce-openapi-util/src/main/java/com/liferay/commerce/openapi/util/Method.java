@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -280,7 +281,7 @@ public class Method {
 			OpenApiComponentUtil.getOpenApiComponent(
 				schema.getReference(), openApiComponents);
 
-		if ("array".equals(schema.getType())) {
+		if (Objects.equals(schema.getType(), "array")) {
 			return OpenApiComponent.asComponentTypeArray(
 				schemaOpenApiComponent, schema.getReference());
 		}
