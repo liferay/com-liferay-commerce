@@ -537,8 +537,10 @@ public class DTOMapper {
 		try {
 			CPTaxCategory cpTaxCategory = cpDefinition.getCPTaxCategory();
 
-			productTaxConfiguration.setTaxCategory(
-				cpTaxCategory.getName(languageId));
+			if (cpTaxCategory != null) {
+				productTaxConfiguration.setTaxCategory(
+						cpTaxCategory.getName(languageId));
+			}
 		}
 		catch (Exception e) {
 			_log.error("Cannot instantiate ProductTaxConfiguration ", e);
