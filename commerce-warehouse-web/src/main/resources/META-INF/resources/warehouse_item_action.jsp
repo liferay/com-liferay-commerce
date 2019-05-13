@@ -21,7 +21,7 @@ CommerceWarehouseItemsDisplayContext commerceWarehouseItemsDisplayContext = (Com
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)row.getObject();
+CommerceInventoryWarehouseItem commerceWarehouseItem = (CommerceInventoryWarehouseItem)row.getObject();
 %>
 
 <liferay-ui:icon-menu
@@ -35,7 +35,7 @@ CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)row.getObje
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editCommerceWarehouseItem" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseItemId" value="<%= String.valueOf(commerceWarehouseItem.getCommerceWarehouseItemId()) %>" />
+			<portlet:param name="commerceWarehouseItemId" value="<%= String.valueOf(commerceWarehouseItem.getCommerceInventoryWarehouseItemId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -46,7 +46,7 @@ CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)row.getObje
 		<portlet:actionURL name="editCommerceWarehouseItem" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseItemId" value="<%= String.valueOf(commerceWarehouseItem.getCommerceWarehouseItemId()) %>" />
+			<portlet:param name="commerceWarehouseItemId" value="<%= String.valueOf(commerceWarehouseItem.getCommerceInventoryWarehouseItemId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete

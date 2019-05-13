@@ -24,7 +24,7 @@ CommerceShipmentDisplayContext commerceShipmentDisplayContext = (CommerceShipmen
 CommerceShipment commerceShipment = commerceShipmentDisplayContext.getCommerceShipment();
 long commerceShipmentId = commerceShipmentDisplayContext.getCommerceShipmentId();
 List<CommerceOrderItem> commerceOrderItems = commerceShipmentDisplayContext.getCommerceOrderItems(commerceOrderId);
-List<CommerceWarehouse> commerceWarehouses = commerceShipmentDisplayContext.getCommerceWarehouses();
+List<CommerceInventoryWarehouse> commerceWarehouses = commerceShipmentDisplayContext.getCommerceWarehouses();
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(shipmentsURL);
@@ -64,7 +64,7 @@ portletDisplay.setURLBack(shipmentsURL);
 							<th class="text-center"><liferay-ui:message key="ordered-quantity" /></th>
 
 							<%
-							for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
+							for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
 							%>
 
 								<th><%= HtmlUtil.escape(commerceWarehouse.getName()) %></th>
@@ -94,10 +94,10 @@ portletDisplay.setURLBack(shipmentsURL);
 								</td>
 
 								<%
-								for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
+								for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
 									int maxQuantityAllowed;
 
-									int commerceWarehouseItemQuantity = commerceShipmentDisplayContext.getCommerceWarehouseItemQuantity(commerceOrderItem.getCommerceOrderItemId(), commerceWarehouse.getCommerceWarehouseId());
+									int commerceWarehouseItemQuantity = commerceShipmentDisplayContext.getCommerceWarehouseItemQuantity(commerceOrderItem.getCommerceOrderItemId(), commerceWarehouse.getCommerceInventoryWarehouseId());
 
 									if (remainedQuantity > commerceWarehouseItemQuantity) {
 										maxQuantityAllowed = commerceWarehouseItemQuantity;
@@ -108,9 +108,9 @@ portletDisplay.setURLBack(shipmentsURL);
 								%>
 
 									<td>
-										<aui:input name='<%= commerceOrderItem.getCommerceOrderItemId() + "_warehouse" %>' type="hidden" value="<%= commerceWarehouse.getCommerceWarehouseId() %>" />
+										<aui:input name='<%= commerceOrderItem.getCommerceOrderItemId() + "_warehouse" %>' type="hidden" value="<%= commerceWarehouse.getCommerceInventoryWarehouseId() %>" />
 
-										<aui:input label="" name='<%= commerceOrderItem.getCommerceOrderItemId() + "_" + commerceWarehouse.getCommerceWarehouseId() + "_quantity" %>' placeholder='<%= LanguageUtil.format(request, "x-available", commerceWarehouseItemQuantity, false) %>' title="" type="number" wrapperCssClass="m-0">
+										<aui:input label="" name='<%= commerceOrderItem.getCommerceOrderItemId() + "_" + commerceWarehouse.getCommerceInventoryWarehouseId() + "_quantity" %>' placeholder='<%= LanguageUtil.format(request, "x-available", commerceWarehouseItemQuantity, false) %>' title="" type="number" wrapperCssClass="m-0">
 											<aui:validator name="max"><%= maxQuantityAllowed %></aui:validator>
 											<aui:validator name="min">0</aui:validator>
 											<aui:validator name="number" />

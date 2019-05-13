@@ -16,10 +16,10 @@ package com.liferay.commerce.shipping.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.exception.CommerceWarehouseActiveException;
-import com.liferay.commerce.exception.CommerceWarehouseNameException;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -81,8 +81,8 @@ public class EditCommerceShippingSettingsMVCActionCommand
 			modifiableSettings.store();
 		}
 		catch (Exception e) {
-			if (e instanceof CommerceWarehouseActiveException ||
-				e instanceof CommerceWarehouseNameException ||
+			if (e instanceof CommerceInventoryWarehouseActiveException ||
+				e instanceof CommerceInventoryWarehouseNameException ||
 				e instanceof PrincipalException) {
 
 				hideDefaultErrorMessage(actionRequest);
@@ -127,12 +127,12 @@ public class EditCommerceShippingSettingsMVCActionCommand
 			actionRequest, commerceShippingOriginLocatorKey + "Origin--city--");
 		String zip = ParamUtil.getString(
 			actionRequest, commerceShippingOriginLocatorKey + "Origin--zip--");
-		long commerceRegionId = ParamUtil.getLong(
+		String commerceRegionCode = ParamUtil.getString(
 			actionRequest,
-			commerceShippingOriginLocatorKey + "Origin--commerceRegionId--");
-		long commerceCountryId = ParamUtil.getLong(
+			commerceShippingOriginLocatorKey + "Origin--commerceRegionCode--");
+		String commerceCountryCode = ParamUtil.getString(
 			actionRequest,
-			commerceShippingOriginLocatorKey + "Origin--commerceCountryId--");
+			commerceShippingOriginLocatorKey + "Origin--commerceCountryCode--");
 		double latitude = ParamUtil.getDouble(
 			actionRequest,
 			commerceShippingOriginLocatorKey + "Origin--latitude--");
@@ -141,8 +141,8 @@ public class EditCommerceShippingSettingsMVCActionCommand
 			commerceShippingOriginLocatorKey + "Origin--longitude--");
 
 		_commerceWarehouseService.updateDefaultCommerceWarehouse(
-			name, street1, street2, street3, city, zip, commerceRegionId,
-			commerceCountryId, latitude, longitude, serviceContext);
+			name, street1, street2, street3, city, zip, commerceRegionCode,
+			commerceCountryCode, latitude, longitude, serviceContext);
 	}
 
 	protected void updateOrigin(
@@ -174,7 +174,7 @@ public class EditCommerceShippingSettingsMVCActionCommand
 		_commerceShippingOriginLocatorRegistry;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseService _commerceWarehouseService;
 
 	@Reference
 	private SettingsFactory _settingsFactory;

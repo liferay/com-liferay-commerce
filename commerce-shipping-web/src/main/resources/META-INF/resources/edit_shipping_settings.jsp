@@ -23,63 +23,61 @@ CommerceShippingGroupServiceConfiguration commerceShippingGroupServiceConfigurat
 Map<String, CommerceShippingOriginLocator> commerceShippingOriginLocators = commerceShippingSettingsDisplayContext.getCommerceShippingOriginLocators();
 %>
 
-<c:if test="<%= commerceShippingSettingsDisplayContext.hasManageCommerceWarehousesPermission() %>">
-	<div class="container-fluid-1280 mt-4 sheet">
-		<portlet:actionURL name="editCommerceShippingSettings" var="editCommerceShippingSettingsActionURL" />
+<div class="container-fluid-1280 mt-4 sheet">
+	<portlet:actionURL name="editCommerceShippingSettings" var="editCommerceShippingSettingsActionURL" />
 
-		<%
-		for (Map.Entry<String, CommerceShippingOriginLocator> entry : commerceShippingOriginLocators.entrySet()) {
-			boolean checked = false;
+	<%
+	for (Map.Entry<String, CommerceShippingOriginLocator> entry : commerceShippingOriginLocators.entrySet()) {
+		boolean checked = false;
 
-			String key = entry.getKey();
-			CommerceShippingOriginLocator commerceShippingOriginLocator = entry.getValue();
+		String key = entry.getKey();
+		CommerceShippingOriginLocator commerceShippingOriginLocator = entry.getValue();
 
-			if (key.equals(commerceShippingGroupServiceConfiguration.commerceShippingOriginLocatorKey())) {
-				checked = true;
-			}
-		%>
-
-			<aui:input checked="<%= checked %>" helpMessage="<%= commerceShippingOriginLocator.getDescription(locale) %>" id='<%= key + "Origin" %>' label="<%= commerceShippingOriginLocator.getName(locale) %>" name="commerceShippingOriginLocatorKeySelector" type="radio" value="<%= key %>" />
-
-			<aui:form action="<%= editCommerceShippingSettingsActionURL %>" method="post" name='<%= key + "Fm" %>'>
-				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-
-				<liferay-ui:error exception="<%= CommerceWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
-				<liferay-ui:error exception="<%= CommerceWarehouseNameException.class %>" message="please-enter-a-valid-name" />
-
-				<div class="<%= checked ? StringPool.BLANK : "hide" %>" id="<portlet:namespace /><%= key %>OriginOptions">
-					<aui:fieldset>
-						<aui:input name="commerceShippingOriginLocatorKey" type="hidden" value="<%= key %>" />
-
-						<%
-						commerceShippingOriginLocator.renderConfiguration(renderRequest, renderResponse);
-						%>
-
-					</aui:fieldset>
-
-					<aui:button-row>
-						<aui:button cssClass="btn-lg" type="submit" value="save" />
-					</aui:button-row>
-				</div>
-			</aui:form>
-
-		<%
+		if (key.equals(commerceShippingGroupServiceConfiguration.commerceShippingOriginLocatorKey())) {
+			checked = true;
 		}
-		%>
+	%>
 
-	</div>
+		<aui:input checked="<%= checked %>" helpMessage="<%= commerceShippingOriginLocator.getDescription(locale) %>" id='<%= key + "Origin" %>' label="<%= commerceShippingOriginLocator.getName(locale) %>" name="commerceShippingOriginLocatorKeySelector" type="radio" value="<%= key %>" />
 
-	<aui:script>
+		<aui:form action="<%= editCommerceShippingSettingsActionURL %>" method="post" name='<%= key + "Fm" %>'>
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
-		<%
-		for (String key : commerceShippingOriginLocators.keySet()) {
-		%>
+			<liferay-ui:error exception="<%= CommerceWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
+			<liferay-ui:error exception="<%= CommerceWarehouseNameException.class %>" message="please-enter-a-valid-name" />
 
-			Liferay.Util.toggleRadio('<portlet:namespace /><%= key %>Origin', '<portlet:namespace /><%= key %>OriginOptions', <%= commerceShippingSettingsDisplayContext.getCommerceShippingOriginLocatorHideBoxIds(key) %>);
+			<div class="<%= checked ? StringPool.BLANK : "hide" %>" id="<portlet:namespace /><%= key %>OriginOptions">
+				<aui:fieldset>
+					<aui:input name="commerceShippingOriginLocatorKey" type="hidden" value="<%= key %>" />
 
-		<%
-		}
-		%>
+					<%
+					commerceShippingOriginLocator.renderConfiguration(renderRequest, renderResponse);
+					%>
 
-	</aui:script>
-</c:if>
+				</aui:fieldset>
+
+				<aui:button-row>
+					<aui:button cssClass="btn-lg" type="submit" value="save" />
+				</aui:button-row>
+			</div>
+		</aui:form>
+
+	<%
+	}
+	%>
+
+</div>
+
+<aui:script>
+
+	<%
+	for (String key : commerceShippingOriginLocators.keySet()) {
+	%>
+
+		Liferay.Util.toggleRadio('<portlet:namespace /><%= key %>Origin', '<portlet:namespace /><%= key %>OriginOptions', <%= commerceShippingSettingsDisplayContext.getCommerceShippingOriginLocatorHideBoxIds(key) %>);
+
+	<%
+	}
+	%>
+
+</aui:script>

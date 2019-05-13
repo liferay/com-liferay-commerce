@@ -21,7 +21,7 @@ CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWar
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
+CommerceInventoryWarehouse commerceWarehouse = (CommerceInventoryWarehouse)row.getObject();
 %>
 
 <liferay-ui:icon-menu
@@ -35,7 +35,7 @@ CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editCommerceWarehouse" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceWarehouseId()) %>" />
+			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -46,7 +46,7 @@ CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
 		<portlet:actionURL name="editCommerceWarehouse" var="geolocateURL">
 			<portlet:param name="<%= Constants.CMD %>" value="geolocate" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceWarehouseId()) %>" />
+			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
@@ -57,7 +57,7 @@ CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
 		<portlet:actionURL name="editCommerceWarehouse" var="setActiveURL">
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceWarehouseId()) %>" />
+			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
 			<portlet:param name="active" value="<%= String.valueOf(!commerceWarehouse.isActive()) %>" />
 		</portlet:actionURL>
 
@@ -69,7 +69,7 @@ CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
 		<portlet:actionURL name="editCommerceWarehouse" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceWarehouseId()) %>" />
+			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete

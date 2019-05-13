@@ -16,6 +16,7 @@ package com.liferay.commerce.internal.product.content.contributor;
 
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
@@ -81,11 +82,16 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 				CPContentContributorConstants.STOCK_QUANTITY_NAME,
 				LanguageUtil.format(
 					themeDisplay.getLocale(), "stock-quantity-x",
-					cpDefinitionInventoryEngine.getStockQuantity(cpInstance)));
+					_commerceInventoryEngine.getStockQuantity(
+						cpInstance.getCompanyId(), cpInstance.getGroupId(),
+						cpInstance.getSku())));
 		}
 
 		return jsonObject;
 	}
+
+	@Reference
+	private CommerceInventoryEngine _commerceInventoryEngine;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

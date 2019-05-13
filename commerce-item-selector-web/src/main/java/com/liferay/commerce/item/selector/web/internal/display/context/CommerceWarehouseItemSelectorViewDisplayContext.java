@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.item.selector.web.internal.display.context;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.item.selector.web.internal.search.CommerceWarehouseChecker;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -44,18 +45,19 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alessio Antonio Rendina
  */
 public class CommerceWarehouseItemSelectorViewDisplayContext
-	extends BaseCommerceItemSelectorViewDisplayContext<CommerceWarehouse> {
+	extends BaseCommerceItemSelectorViewDisplayContext
+		<CommerceInventoryWarehouse> {
 
 	public CommerceWarehouseItemSelectorViewDisplayContext(
 		CommerceCountryService commerceCountryService,
-		CommerceWarehouseService commerceWarehouseService,
+		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		HttpServletRequest httpServletRequest, PortletURL portletURL,
 		String itemSelectedEventName, boolean search) {
 
 		super(httpServletRequest, portletURL, itemSelectedEventName);
 
 		_commerceCountryService = commerceCountryService;
-		_commerceWarehouseService = commerceWarehouseService;
+		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 		_search = search;
 	}
 
@@ -96,7 +98,7 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 		return portletURL;
 	}
 
-	public SearchContainer<CommerceWarehouse> getSearchContainer()
+	public SearchContainer<CommerceInventoryWarehouse> getSearchContainer()
 		throws PortalException {
 
 		if (searchContainer != null) {
@@ -111,11 +113,13 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 			emptyResultsMessage = "no-warehouses-were-found";
 		}
 
+		CommerceCountry commerceCountry = null;
+
 		if (commerceCountryId > 0) {
 			emptyResultsMessage += "-in-x";
 
-			CommerceCountry commerceCountry =
-				_commerceCountryService.getCommerceCountry(commerceCountryId);
+			commerceCountry = _commerceCountryService.getCommerceCountry(
+				commerceCountryId);
 
 			Locale locale = cpRequestHelper.getLocale();
 
@@ -134,7 +138,7 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 		String orderByCol = getOrderByCol();
 		String orderByType = getOrderByType();
 
-		OrderByComparator<CommerceWarehouse> orderByComparator =
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator =
 			CommerceUtil.getCommerceWarehouseOrderByComparator(
 				orderByCol, orderByType);
 
@@ -148,26 +152,30 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 				getDisabledCommerceWarehouseIds()));
 		searchContainer.setSearch(_search);
 
-		int total;
-		List<CommerceWarehouse> results;
+		int total = 0;
+		List<CommerceInventoryWarehouse> results = Collections.emptyList();
 
-		if (searchContainer.isSearch()) {
-			total = _commerceWarehouseService.searchCount(
+		if (searchContainer.isSearch() && (commerceCountry != null)) {
+			total = _commerceWarehouseLocalService.searchCount(
+				cpRequestHelper.getCompanyId(),
 				cpRequestHelper.getScopeGroupId(), getKeywords(), false,
-				commerceCountryId);
-			results = _commerceWarehouseService.search(
+				commerceCountry.getTwoLettersISOCode());
+			results = _commerceWarehouseLocalService.search(
+				cpRequestHelper.getCompanyId(),
 				cpRequestHelper.getScopeGroupId(), getKeywords(), false,
-				commerceCountryId, searchContainer.getStart(),
-				searchContainer.getEnd(),
-				searchContainer.getOrderByComparator());
-		}
-		else {
-			total = _commerceWarehouseService.getCommerceWarehousesCount(
-				cpRequestHelper.getScopeGroupId(), true, commerceCountryId);
-			results = _commerceWarehouseService.getCommerceWarehouses(
-				cpRequestHelper.getScopeGroupId(), true, commerceCountryId,
+				commerceCountry.getTwoLettersISOCode(),
 				searchContainer.getStart(), searchContainer.getEnd(),
 				searchContainer.getOrderByComparator());
+		}
+		else if (commerceCountry != null) {
+			total = _commerceWarehouseLocalService.getCommerceWarehousesCount(
+				cpRequestHelper.getCompanyId(),
+				cpRequestHelper.getScopeGroupId(), true,
+				commerceCountry.getTwoLettersISOCode());
+			results = _commerceWarehouseLocalService.getCommerceWarehouses(
+				cpRequestHelper.getCompanyId(),
+				cpRequestHelper.getScopeGroupId(), true,
+				commerceCountry.getTwoLettersISOCode());
 		}
 
 		searchContainer.setTotal(total);
@@ -208,7 +216,8 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 	}
 
 	private final CommerceCountryService _commerceCountryService;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private final CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 	private final boolean _search;
 
 }

@@ -16,10 +16,11 @@ package com.liferay.commerce.warehouse.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
+import com.liferay.commerce.inventory.constants.CommerceInventoryConstants;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -113,7 +114,7 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 
 		return _portletResourcePermission.contains(
 			permissionChecker, groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 	}
 
 	@Override
@@ -144,8 +145,8 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		if (commerceWarehousesDisplayContext == null) {
 			commerceWarehousesDisplayContext =
 				new CommerceWarehousesDisplayContext(
-					_commerceCountryService, _commerceWarehouseService,
-					httpServletRequest, _portletResourcePermission);
+					_commerceCountryService, _commerceWarehouseLocalService,
+					httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -159,7 +160,8 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
@@ -171,7 +173,7 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	private Portal _portal;
 
 	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+		target = "(resource.name=" + CommerceInventoryConstants.RESOURCE_NAME + ")"
 	)
 	private PortletResourcePermission _portletResourcePermission;
 
