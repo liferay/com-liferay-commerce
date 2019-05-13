@@ -16,6 +16,7 @@ package com.liferay.commerce.internal.product.content.contributor;
 
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
@@ -78,8 +79,11 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 		boolean available = false;
 
-		if (cpDefinitionInventoryEngine.getStockQuantity(cpInstance) >
-				cpDefinitionInventoryEngine.getMinStockQuantity(cpInstance)) {
+		if (_commerceInventoryEngine.getStockQuantity(
+				cpInstance.getCompanyId(), cpInstance.getGroupId(),
+				cpInstance.getSku()) >
+					cpDefinitionInventoryEngine.getMinStockQuantity(
+						cpInstance)) {
 
 			available = true;
 		}
@@ -102,6 +106,9 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 		return jsonObject;
 	}
+
+	@Reference
+	private CommerceInventoryEngine _commerceInventoryEngine;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

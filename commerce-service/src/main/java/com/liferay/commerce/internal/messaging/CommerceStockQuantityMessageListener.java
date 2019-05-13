@@ -17,11 +17,11 @@ package com.liferay.commerce.internal.messaging;
 import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
-import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.commerce.stock.activity.CommerceLowStockActivity;
 import com.liferay.commerce.stock.activity.CommerceLowStockActivityRegistry;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -33,6 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
@@ -43,14 +44,10 @@ public class CommerceStockQuantityMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		long commerceWarehouseItemId = message.getLong(
-			"commerceWarehouseItemId");
+		long cpInstanceId = message.getLong("cpInstanceId");
 
-		CommerceWarehouseItem commerceWarehouseItem =
-			_commerceWarehouseItemLocalService.getCommerceWarehouseItem(
-				commerceWarehouseItemId);
-
-		CPInstance cpInstance = commerceWarehouseItem.getCPInstance();
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
 
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
@@ -69,23 +66,23 @@ public class CommerceStockQuantityMessageListener extends BaseMessageListener {
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		int stockQuantity =
-			_commerceWarehouseItemLocalService.getCPInstanceQuantity(
-				cpInstance.getCPInstanceId());
+		long groupId = cpDefinitionInventory.getGroupId();
+
+		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
+			cpInstance.getCompanyId(), groupId, cpInstance.getSku());
 
 		if (stockQuantity <= cpDefinitionInventoryEngine.getMinStockQuantity(
 				cpInstance)) {
 
-			commerceLowStockActivity.execute(commerceWarehouseItem);
+			commerceLowStockActivity.execute(cpInstance);
 		}
 	}
 
 	@Reference
-	private CommerceLowStockActivityRegistry _commerceLowStockActivityRegistry;
+	private CommerceInventoryEngine _commerceInventoryEngine;
 
 	@Reference
-	private CommerceWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
+	private CommerceLowStockActivityRegistry _commerceLowStockActivityRegistry;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry
@@ -94,5 +91,8 @@ public class CommerceStockQuantityMessageListener extends BaseMessageListener {
 	@Reference
 	private CPDefinitionInventoryLocalService
 		_cpDefinitionInventoryLocalService;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }

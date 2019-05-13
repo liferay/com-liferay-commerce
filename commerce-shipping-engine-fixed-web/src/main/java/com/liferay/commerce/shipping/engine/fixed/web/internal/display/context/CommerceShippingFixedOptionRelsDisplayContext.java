@@ -15,15 +15,15 @@
 package com.liferay.commerce.shipping.engine.fixed.web.internal.display.context;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.commerce.shipping.engine.fixed.constants.CommerceShippingEngineFixedWebKeys;
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel;
@@ -31,7 +31,6 @@ import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedO
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionService;
 import com.liferay.commerce.shipping.engine.fixed.util.CommerceShippingEngineFixedUtil;
 import com.liferay.commerce.shipping.engine.fixed.web.internal.servlet.taglib.ui.CommerceShippingMethodFixedOptionSettingsScreenNavigationEntry;
-import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -60,7 +59,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		CommerceRegionService commerceRegionService,
 		CommerceShippingMethodService commerceShippingMethodService,
 		CommerceShippingFixedOptionService commerceShippingFixedOptionService,
-		CommerceWarehouseService commerceWarehouseService,
+		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		CommerceShippingFixedOptionRelService
 			commerceShippingFixedOptionRelService,
 		CPMeasurementUnitLocalService cpMeasurementUnitLocalService,
@@ -75,7 +74,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		_commerceRegionService = commerceRegionService;
 		_commerceShippingFixedOptionService =
 			commerceShippingFixedOptionService;
-		_commerceWarehouseService = commerceWarehouseService;
+		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 		_commerceShippingFixedOptionRelService =
 			commerceShippingFixedOptionRelService;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
@@ -165,18 +164,16 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 				QueryUtil.ALL_POS);
 	}
 
-	public List<CommerceWarehouse> getCommerceWarehouses()
+	public List<CommerceInventoryWarehouse> getCommerceWarehouses()
 		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		OrderByComparator<CommerceWarehouse> orderByComparator =
-			CommerceUtil.getCommerceWarehouseOrderByComparator("name", "asc");
-
-		return _commerceWarehouseService.getCommerceWarehouses(
-			themeDisplay.getScopeGroupId(), true, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, orderByComparator);
+		return _commerceWarehouseLocalService.
+			getCommerceWarehousesByGroupIdAndActive(
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				true);
 	}
 
 	public String getCPMeasurementUnitName(int type) {
@@ -259,7 +256,8 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		_commerceShippingFixedOptionRelService;
 	private final CommerceShippingFixedOptionService
 		_commerceShippingFixedOptionService;
-	private final CommerceWarehouseService _commerceWarehouseService;
+	private final CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 	private final CPMeasurementUnitLocalService _cpMeasurementUnitLocalService;
 
 }

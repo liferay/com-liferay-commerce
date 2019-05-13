@@ -36,10 +36,10 @@ import com.liferay.commerce.initializer.util.JournalArticleImporter;
 import com.liferay.commerce.initializer.util.KBArticleImporter;
 import com.liferay.commerce.initializer.util.OrganizationImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
@@ -188,7 +188,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importCPSpecificationOptions(serviceContext);
 
-			List<CommerceWarehouse> commerceWarehouses =
+			List<CommerceInventoryWarehouse> commerceWarehouses =
 				_importCommerceWarehouses(serviceContext);
 
 			_importCPOptions(serviceContext);
@@ -645,7 +645,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private List<CommerceWarehouse> _importCommerceWarehouses(
+	private List<CommerceInventoryWarehouse> _importCommerceWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -657,7 +657,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	}
 
 	private List<CPDefinition> _importCPDefinitions(
-			List<CommerceWarehouse> commerceWarehouses,
+			List<CommerceInventoryWarehouse> commerceWarehouses,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -665,7 +665,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		long[] commerceWarehouseIds = ListUtil.toLongArray(
 			commerceWarehouses,
-			CommerceWarehouse.COMMERCE_WAREHOUSE_ID_ACCESSOR);
+			CommerceInventoryWarehouse.
+				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		return _cpDefinitionsImporter.importCPDefinitions(
 			jsonArray, _COMMERCE_VOCABULARY, commerceWarehouseIds,

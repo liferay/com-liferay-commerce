@@ -19,7 +19,7 @@
 <%
 CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
+CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
 
 long commerceCountryId = BeanParamUtil.getLong(commerceWarehouse, request, "commerceCountryId");
 long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "commerceRegionId");
@@ -30,9 +30,7 @@ long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "comme
 	value="address"
 />
 
-<liferay-ui:error exception="<%= CommerceWarehouseCommerceRegionIdException.class %>" message="please-enter-a-valid-region" />
-
-<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceWarehouse.class %>" />
+<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
 
 <aui:fieldset>
 	<div class="col-md-6">

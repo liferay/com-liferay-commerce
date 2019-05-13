@@ -19,6 +19,11 @@ import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.inventory.configuration.CommerceInventoryConfigurationUtil;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.model.CommerceWarehouseItem;
@@ -252,16 +257,17 @@ public class CommerceShipmentItemLocalServiceImpl
 		}
 	}
 
-	private CommerceWarehouseItem _fetchCommerceWarehouseItem(
-			long commerceShipmentItemId, long cpInstanceId)
+	private CommerceInventoryWarehouseItem _fetchCommerceWarehouseItem(
+			long commerceShipmentItemId, String sku)
 		throws PortalException {
 
 		CommerceShipmentItem commerceShipmentItem =
 			commerceShipmentItemPersistence.findByPrimaryKey(
 				commerceShipmentItemId);
 
-		return commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(
-			commerceShipmentItem.getCommerceWarehouseId(), cpInstanceId);
+		return _commerceInventoryWarehouseItemLocalService.
+			fetchCommerceWarehouseItem(
+				commerceShipmentItem.getCommerceWarehouseId(), sku);
 	}
 
 	private void _updateStockQuantity(
@@ -273,7 +279,9 @@ public class CommerceShipmentItemLocalServiceImpl
 			return;
 		}
 
-		CommerceWarehouseItem commerceWarehouseItem =
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CommerceInventoryWarehouseItem commerceWarehouseItem =
 			_fetchCommerceWarehouseItem(
 				commerceShipmentItemId, commerceOrderItem.getCPInstanceId());
 
@@ -281,19 +289,15 @@ public class CommerceShipmentItemLocalServiceImpl
 			return;
 		}
 
-		CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
-		CPDefinitionInventory cpDefinitionInventory =
-			cpDefinitionInventoryLocalService.
-				fetchCPDefinitionInventoryByCPDefinitionId(
-					cpDefinition.getCPDefinitionId());
-
-		CPDefinitionInventoryEngine cpDefinitionInventoryEngine =
-			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
-				cpDefinitionInventory);
-
-		cpDefinitionInventoryEngine.updateStockQuantity(
-			commerceWarehouseItem, quantity);
+		_commerceInventoryEngine.commitBookedQuantity(
+			_commerceInventoryConfigurationUtil.
+				getCommerceInventoryEngineMethod(
+					commerceOrderItem.getGroupId()),
+			CommerceOrder.class.getName(),
+			commerceOrderItem.getCommerceOrderId(), cpInstance.getSku(),
+			commerceWarehouseItem.getCommerceWarehouseId(),
+			commerceOrderItem.getUserId(),
+			commerceOrderItem.getBookedQuantityUUID());
 
 		TransactionCommitCallbackUtil.registerCallback(
 			new Callable<Void>() {
@@ -318,8 +322,15 @@ public class CommerceShipmentItemLocalServiceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceShipmentItemLocalServiceImpl.class);
 
-	@ServiceReference(type = CPDefinitionInventoryEngineRegistry.class)
-	private CPDefinitionInventoryEngineRegistry
-		_cpDefinitionInventoryEngineRegistry;
+	@ServiceReference(type = CommerceInventoryConfigurationUtil.class)
+	private CommerceInventoryConfigurationUtil
+		_commerceInventoryConfigurationUtil;
+
+	@ServiceReference(type = CommerceInventoryEngine.class)
+	private CommerceInventoryEngine _commerceInventoryEngine;
+
+	@ServiceReference(type = CommerceInventoryWarehouseItemLocalService.class)
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceInventoryWarehouseItemLocalService;
 
 }

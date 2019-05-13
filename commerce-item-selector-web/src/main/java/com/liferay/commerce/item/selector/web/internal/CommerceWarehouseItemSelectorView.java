@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.item.selector.web.internal;
 
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.item.selector.criterion.CommerceWarehouseItemSelectorCriterion;
 import com.liferay.commerce.item.selector.web.internal.display.context.CommerceWarehouseItemSelectorViewDisplayContext;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.service.CommerceWarehouseService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -96,7 +96,7 @@ public class CommerceWarehouseItemSelectorView
 		CommerceWarehouseItemSelectorViewDisplayContext
 			commerceWarehouseItemSelectorViewDisplayContext =
 				new CommerceWarehouseItemSelectorViewDisplayContext(
-					_commerceCountryService, _commerceWarehouseService,
+					_commerceCountryService, _commerceWarehouseLocalService,
 					httpServletRequest, portletURL, itemSelectedEventName,
 					search);
 
@@ -123,7 +123,8 @@ public class CommerceWarehouseItemSelectorView
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseLocalService
+		_commerceWarehouseLocalService;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.item.selector.web)"

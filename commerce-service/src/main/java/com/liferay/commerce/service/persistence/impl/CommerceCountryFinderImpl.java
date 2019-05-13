@@ -77,7 +77,7 @@ public class CommerceCountryFinderImpl
 	}
 
 	private static final String _ACTIVE_SQL =
-		"AND (CommerceWarehouse.active_ = true)";
+		"AND (CIWarehouse.active_ = true)";
 
 	private static final String _ALL_SQL = "[$ALL$]";
 

@@ -98,12 +98,12 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 						<aui:select bean="<%= commerceShippingFixedOptionRel %>" label="warehouse" model="<%= CommerceShippingFixedOptionRel.class %>" name="commerceWarehouseId" showEmptyOption="<%= true %>">
 
 							<%
-							List<CommerceWarehouse> commerceWarehouses = commerceShippingFixedOptionRelsDisplayContext.getCommerceWarehouses();
+							List<CommerceInventoryWarehouse> commerceWarehouses = commerceShippingFixedOptionRelsDisplayContext.getCommerceWarehouses();
 
-							for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
+							for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
 							%>
 
-								<aui:option label="<%= commerceWarehouse.getName() %>" value="<%= commerceWarehouse.getCommerceWarehouseId() %>" />
+								<aui:option label="<%= commerceWarehouse.getName() %>" value="<%= commerceWarehouse.getCommerceInventoryWarehouseId() %>" />
 
 							<%
 							}

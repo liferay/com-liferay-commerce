@@ -15,7 +15,6 @@
 package com.liferay.commerce.shipping.web.internal.display.context;
 
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
@@ -110,15 +109,6 @@ public class CommerceShippingSettingsDisplayContext {
 
 		return _commerceShippingOriginLocatorRegistry.
 			getCommerceShippingOriginLocators();
-	}
-
-	public boolean hasManageCommerceWarehousesPermission() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
 	}
 
 	private final CommerceShippingOriginLocatorRegistry

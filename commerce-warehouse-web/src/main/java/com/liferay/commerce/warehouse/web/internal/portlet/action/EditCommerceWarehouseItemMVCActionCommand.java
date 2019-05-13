@@ -15,9 +15,9 @@
 package com.liferay.commerce.warehouse.web.internal.portlet.action;
 
 import com.liferay.commerce.exception.NoSuchWarehouseItemException;
-import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.service.CommerceWarehouseItemService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -75,7 +75,7 @@ public class EditCommerceWarehouseItemMVCActionCommand
 		}
 	}
 
-	protected CommerceWarehouseItem updateCommerceWarehouseItem(
+	protected CommerceInventoryWarehouseItem updateCommerceWarehouseItem(
 			ActionRequest actionRequest)
 		throws PortalException {
 
@@ -83,31 +83,32 @@ public class EditCommerceWarehouseItemMVCActionCommand
 			actionRequest, "commerceWarehouseId");
 		long commerceWarehouseItemId = ParamUtil.getLong(
 			actionRequest, "commerceWarehouseItemId");
-		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
+		String sku = ParamUtil.getString(actionRequest, "sku");
 
 		int quantity = ParamUtil.getInteger(actionRequest, "quantity");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceWarehouseItem.class.getName(), actionRequest);
+			CommerceInventoryWarehouseItem.class.getName(), actionRequest);
 
-		CommerceWarehouseItem commerceWarehouseItem = null;
+		CommerceInventoryWarehouseItem commerceWarehouseItem = null;
 
 		if (commerceWarehouseItemId > 0) {
 			commerceWarehouseItem =
-				_commerceWarehouseItemService.updateCommerceWarehouseItem(
-					commerceWarehouseItemId, quantity, serviceContext);
+				_commerceWarehouseItemLocalService.updateCommerceWarehouseItem(
+					commerceWarehouseItemId, quantity);
 		}
 		else {
 			commerceWarehouseItem =
-				_commerceWarehouseItemService.addCommerceWarehouseItem(
-					commerceWarehouseId, cpInstanceId, quantity,
-					serviceContext);
+				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
+					commerceWarehouseId, sku, quantity,
+					serviceContext.getUserId());
 		}
 
 		return commerceWarehouseItem;
 	}
 
 	@Reference
-	private CommerceWarehouseItemService _commerceWarehouseItemService;
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceWarehouseItemLocalService;
 
 }
