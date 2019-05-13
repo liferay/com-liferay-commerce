@@ -15,12 +15,25 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.frontend.taglib.internal.util.CPContentHelperProvider;
+import com.liferay.commerce.product.catalog.CPMedia;
+import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Fabio Mastrorilli
@@ -31,8 +44,28 @@ public class GalleryTag extends ComponentRendererTag {
 	public int doStartTag() {
 		Map<String, Object> context = getContext();
 
-		putValue("images", context.get("images"));
-		putValue("selected", context.get("selected"));
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String id = GetterUtil.getString(context.get("id"));
+		long cpDefinitionId = GetterUtil.getLong(context.get("cpDefinitionId"));
+
+		List<CPMedia> productImages = Collections.emptyList();
+
+		try {
+			productImages = _cpContentHelper.getImages(
+				cpDefinitionId, themeDisplay);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		putValue("images", productImages);
+		putValue("selected", 0);
+
+		if (Validator.isNotNull(id)) {
+			setComponentId(id);
+		}
 
 		setTemplateNamespace("Gallery.render");
 
@@ -51,16 +84,23 @@ public class GalleryTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/gallery/Gallery.es");
 	}
 
+	public void setCPDefinitionId(long cpDefinitionId) {
+		putValue("cpDefinitionId", cpDefinitionId);
+	}
+
 	public void setId(String id) {
 		putValue("id", id);
 	}
 
-	public void setImages(List images) {
-		putValue("images", images);
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		_cpContentHelper = CPContentHelperProvider.getCPContentHelper();
 	}
 
-	public void setSelected(int selected) {
-		putValue("selected", selected);
-	}
+	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
+
+	private CPContentHelper _cpContentHelper;
 
 }
