@@ -23,8 +23,10 @@ import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistr
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPRule;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
 import com.liferay.commerce.product.service.CPRuleService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -51,12 +53,14 @@ import javax.servlet.http.HttpServletRequest;
 public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 
 	public CPCatalogRuleDisplayContext(
+		CommerceChannelService commerceChannelService,
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService,
 		CPRuleService cpRuleService,
 		CPRuleTypeJSPContributorRegistry cpRuleTypeJSPContributorRegistry,
 		CPRuleTypeRegistry cpRuleTypeRegistry,
 		HttpServletRequest httpServletRequest) {
 
+		_commerceChannelService = commerceChannelService;
 		_cpRuleAssetCategoryRelService = cpRuleAssetCategoryRelService;
 		_cpRuleService = cpRuleService;
 		_cpRuleTypeJSPContributorRegistry = cpRuleTypeJSPContributorRegistry;
@@ -82,6 +86,13 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 			_cpRuleAssetCategoryRelService.getAssetCategoryIds(getCPRuleId());
 
 		return StringUtil.merge(assetCategoryIds, StringPool.COMMA);
+	}
+
+	public CommerceChannel getCommerceChannel() {
+		long commerceChannelId = ParamUtil.getLong(
+			_httpServletRequest, "commerceChannelId");
+
+		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
 	}
 
 	public CPRule getCPRule() throws PortalException {
@@ -248,6 +259,7 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 		return _searchContainer;
 	}
 
+	private final CommerceChannelService _commerceChannelService;
 	private final CPCatalogRuleRequestHelper _cpCatalogRuleRequestHelper;
 	private CPRule _cpRule;
 	private final CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;

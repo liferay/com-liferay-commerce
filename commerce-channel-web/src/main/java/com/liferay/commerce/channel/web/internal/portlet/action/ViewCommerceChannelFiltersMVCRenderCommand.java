@@ -20,6 +20,7 @@ import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
 import com.liferay.commerce.product.service.CPRuleService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -58,9 +59,9 @@ public class ViewCommerceChannelFiltersMVCRenderCommand
 
 			CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext =
 				new CPCatalogRuleDisplayContext(
-					_cpRuleAssetCategoryRelService, _cpRuleService,
-					_cpRuleTypeJSPContributorRegistry, _cpRuleTypeRegistry,
-					httpServletRequest);
+					_commerceChannelService, _cpRuleAssetCategoryRelService,
+					_cpRuleService, _cpRuleTypeJSPContributorRegistry,
+					_cpRuleTypeRegistry, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpCatalogRuleDisplayContext);
@@ -71,6 +72,9 @@ public class ViewCommerceChannelFiltersMVCRenderCommand
 
 		return "/filters.jsp";
 	}
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;

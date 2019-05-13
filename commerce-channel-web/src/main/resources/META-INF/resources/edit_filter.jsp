@@ -25,10 +25,37 @@ CPRule cpRule = cpCatalogRuleDisplayContext.getCPRule();
 long cpRuleId = cpCatalogRuleDisplayContext.getCPRuleId();
 List<CPRuleType> cpRuleTypes = cpCatalogRuleDisplayContext.getCPRuleTypes();
 
-long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
+CommerceChannel commerceChannel = cpCatalogRuleDisplayContext.getCommerceChannel();
+
+long commerceChannelId = commerceChannel.getCommerceChannelId();
 
 String name = BeanParamUtil.getString(cpRule, request, "name");
 String type = BeanParamUtil.getString(cpRule, request, "type");
+
+String title = LanguageUtil.get(request, "add-filter");
+
+if (cpRule != null) {
+	title = LanguageUtil.format(request, "edit-x", cpRule.getName(), false);
+}
+
+Map<String, Object> data = new HashMap<>();
+
+data.put("direction-right", StringPool.TRUE);
+
+PortletURL editChannelURL = renderResponse.createRenderURL();
+
+editChannelURL.setParameter("commerceChannelId", String.valueOf(commerceChannelId));
+editChannelURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
+
+PortletURL viewFiltersURL = renderResponse.createRenderURL();
+
+viewFiltersURL.setParameter("commerceChannelId", String.valueOf(commerceChannelId));
+viewFiltersURL.setParameter("mvcRenderCommandName", "viewCommerceChannelFilters");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "channels"), String.valueOf(renderResponse.createRenderURL()), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceChannel.getName(), editChannelURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "filters"), viewFiltersURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 %>
 
 <%@ include file="/navbar_definitions.jspf" %>

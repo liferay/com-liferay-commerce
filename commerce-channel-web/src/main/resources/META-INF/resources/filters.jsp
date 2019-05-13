@@ -25,7 +25,24 @@ PortletURL portletURL = cpCatalogRuleDisplayContext.getPortletURL();
 
 SearchContainer commerceChannelFiltersSearchContainer = cpCatalogRuleDisplayContext.getSearchContainer();
 
-long commerceChannelId = ParamUtil.getLong(request, "commerceChannelId");
+CommerceChannel commerceChannel = cpCatalogRuleDisplayContext.getCommerceChannel();
+
+long commerceChannelId = commerceChannel.getCommerceChannelId();
+
+String title = LanguageUtil.get(request, "filters");
+
+Map<String, Object> data = new HashMap<>();
+
+data.put("direction-right", StringPool.TRUE);
+
+PortletURL editChannelURL = renderResponse.createRenderURL();
+
+editChannelURL.setParameter("commerceChannelId", String.valueOf(commerceChannelId));
+editChannelURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "channels"), String.valueOf(renderResponse.createRenderURL()), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceChannel.getName(), editChannelURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 %>
 
 <%@ include file="/navbar_definitions.jspf" %>

@@ -52,6 +52,8 @@ List<NavigationItem> channelSubNavigationItem = Arrays.asList(channelDetailsNavi
 		navigationItems="<%= ChannelNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"
 	/>
 
+	<%@ include file="/breadcrumb.jspf" %>
+
 	<clay:navigation-bar
 		navigationItems="<%= channelSubNavigationItem %>"
 	/>

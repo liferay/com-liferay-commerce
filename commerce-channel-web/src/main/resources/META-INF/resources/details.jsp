@@ -29,6 +29,24 @@ List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.g
 String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String filterType = BeanParamUtil.getString(commerceChannel, request, "filterType");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
+
+String title = LanguageUtil.get(request, "add-channel");
+
+if (commerceChannel != null) {
+	title = HtmlUtil.escape(commerceChannel.getName());
+}
+
+Map<String, Object> data = new HashMap<>();
+
+data.put("direction-right", StringPool.TRUE);
+
+PortletURL editChannelURL = renderResponse.createRenderURL();
+
+editChannelURL.setParameter("commerceChannelId", String.valueOf(commerceChannelId));
+editChannelURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "channels"), String.valueOf(renderResponse.createRenderURL()), data);
+PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), data);
 %>
 
 <%@ include file="/navbar_definitions.jspf" %>
