@@ -89,6 +89,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 								rowURL.setParameter("redirect", currentURL);
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 								rowURL.setParameter("screenNavigationCategoryKey", CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS);
+								rowURL.setParameter("commerceCatalogId", ParamUtil.getString(request, "commerceCatalogId"));
 
 								CPType cpType = cpDefinitionsDisplayContext.getCPType(cpDefinition.getProductTypeName());
 								%>

@@ -14,13 +14,19 @@
  */
 --%>
 
+<%
+String commerceCatalogId = ParamUtil.getString(request, "commerceCatalogId");
+%>
+
 <liferay-portlet:renderURL portletName="<%= CPPortletKeys.CP_DEFINITIONS %>" varImpl="viewProductDefinitionsCatalogURL">
 	<portlet:param name="catalogNavigationItem" value="view-all-product-definitions" />
+	<portlet:param name="commerceCatalogId" value="<%= commerceCatalogId %>" />
 </liferay-portlet:renderURL>
 
 <liferay-portlet:renderURL portletName="<%= CPPortletKeys.CP_DEFINITIONS %>" varImpl="viewProductInstancesCatalogURL">
 	<portlet:param name="mvcRenderCommandName" value="viewInstances" />
 	<portlet:param name="catalogNavigationItem" value="view-all-instances" />
+	<portlet:param name="commerceCatalogId" value="<%= commerceCatalogId %>" />
 </liferay-portlet:renderURL>
 
 <%
