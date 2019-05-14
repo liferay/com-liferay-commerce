@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -114,8 +115,8 @@ public class CommerceAccountMembersScreenNavigationEntry
 			new CommerceAccountDisplayContext(
 				_commerceAccountService, _commerceAddressService,
 				_commerceCountryService, _commerceRegionService,
-				httpServletRequest, _modelResourcePermission, null,
-				_userLocalService);
+				_configurationProvider, httpServletRequest,
+				_modelResourcePermission, null, _userLocalService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
@@ -139,6 +140,9 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 	@Reference
 	private CommerceRegionService _commerceRegionService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
