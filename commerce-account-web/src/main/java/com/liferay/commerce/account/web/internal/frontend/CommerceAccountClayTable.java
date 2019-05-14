@@ -225,9 +225,13 @@ public class CommerceAccountClayTable
 		viewURL.setParameter(
 			"commerceAccountId", String.valueOf(commerceAccountId));
 
+		PortletURL backURL = PortletProviderUtil.getPortletURL(
+			httpServletRequest, CommerceAccount.class.getName(),
+			PortletProvider.Action.MANAGE);
+
 		viewURL.setParameter(
 			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			_portal.getCurrentURL(httpServletRequest));
+			backURL.toString());
 
 		return viewURL.toString();
 	}
