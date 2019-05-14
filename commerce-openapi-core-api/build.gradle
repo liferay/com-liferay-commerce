@@ -1,6 +1,0 @@
-dependencies {
-	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
-	compileOnly group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-xml", version: "2.9.8"
-	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
-	compileOnly group: "javax.ws.rs", name: "javax.ws.rs-api", version: "2.1"
-}
