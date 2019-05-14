@@ -150,7 +150,7 @@ class AddToCartButton extends Component {
 		) {
 			this._enableEditMode();
 		}
-		else {
+		else if (!this.accountId || this.disabled) {
 			showNotification('No account selected.', 'danger');
 		}
 	}
