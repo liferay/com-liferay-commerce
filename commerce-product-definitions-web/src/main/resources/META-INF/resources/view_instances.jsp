@@ -143,6 +143,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 								rowURL.setParameter("mvcRenderCommandName", "editProductInstance");
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpInstance.getCPDefinitionId()));
 								rowURL.setParameter("cpInstanceId", String.valueOf(cpInstance.getCPInstanceId()));
+								rowURL.setParameter("commerceCatalogId", ParamUtil.getString(request, "commerceCatalogId"));
 								%>
 
 								<liferay-ui:search-container-column-text
