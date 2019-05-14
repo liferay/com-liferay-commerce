@@ -111,7 +111,7 @@
 				{/let}
 
 				<div class="{$quantityChanged}">
-					<span class="added-quantity">{$quantity} {msg desc="in cart"}added{/msg}</span>
+					<span class="added-quantity">{msg desc="in cart"}items added{/msg}</span>
 				</div>
 			{/if}
 		{else}
@@ -120,7 +120,7 @@
 				'submitQuantity' : $_submitQuantity,
 				'updateQuantity' : $_updateQuantity
 				] /}
-				{param quantity: $quantity /}
+				{param quantity: $inputQuantity /}
 				{param minQuantity: $settings.minQuantity /}
 				{param maxQuantity: $settings.maxQuantity /}
 				{param multipleQuantity: $settings.multipleQuantity /}
