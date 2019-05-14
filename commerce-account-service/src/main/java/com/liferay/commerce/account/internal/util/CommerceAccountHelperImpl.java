@@ -180,8 +180,10 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 					new GroupServiceSettingsLocator(
 						groupId, CommerceAccountConstants.SERVICE_NAME));
 
-		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				CommerceAccountConstants.SITE_TYPE_B2C) {
+		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
+				CommerceAccountConstants.SITE_TYPE_B2C) ||
+			(commerceAccountGroupServiceConfiguration.commerceSiteType() ==
+				CommerceAccountConstants.SITE_TYPE_B2C_B2B)) {
 
 			return _commerceAccountService.getPersonalCommerceAccount(
 				user.getUserId());
