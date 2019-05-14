@@ -181,7 +181,7 @@ else {
 								}
 								%>
 
-								<aui:input bean="<%= displayEmailAddressUser %>" model="<%= User.class %>" name="emailAddress" >
+								<aui:input bean="<%= displayEmailAddressUser %>" model="<%= User.class %>" name="emailAddress">
 									<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED) %>">
 										<aui:validator name="required" />
 									</c:if>
@@ -263,6 +263,5 @@ else {
 
 			<aui:button cssClass="commerce-button commerce-button--big" type="submit" />
 		</div>
-
 	</aui:form>
 </div>

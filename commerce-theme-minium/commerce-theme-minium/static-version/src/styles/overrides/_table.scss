@@ -35,7 +35,7 @@
 		&:first-child {
 			padding: 10px 10px 10px 25px;
 		}
-		
+
 		&:last-child {
 			padding: 10px 25px 10px 10px;
 		}
@@ -98,12 +98,12 @@
 .table-list {
 	th,td {
 		&:first-child {
-			border-top-left-radius: 8px !important;
 			border-bottom-left-radius: 8px !important;
+			border-top-left-radius: 8px !important;
 		}
 		&:last-child {
-			border-top-right-radius: 8px !important;
 			border-bottom-right-radius: 8px !important;
+			border-top-right-radius: 8px !important;
 		}
 	}
 }
