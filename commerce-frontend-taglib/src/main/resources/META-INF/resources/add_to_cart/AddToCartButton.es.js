@@ -17,6 +17,28 @@ const selectInput = (element) => {
 	}
 };
 
+function showNotification(message, type) {
+	AUI().use(
+		'liferay-notification',
+		() => {
+			new Liferay.Notification(
+				{
+					closeable: true,
+					delay: {
+						hide: 5000,
+						show: 0
+					},
+					duration: 500,
+					message: message,
+					render: true,
+					title: '',
+					type: type
+				}
+			);
+		}
+	);
+}
+
 function doFocusOut() {
 	const parentElement = this.element.parentElement.closest('[tabindex="0"]');
 
@@ -63,7 +85,7 @@ function doSubmit() {
 
 			}
 			else if (jsonresponse.errorMessages) {
-				this._showNotification(jsonresponse.errorMessages[0], 'danger');
+				showNotification(jsonresponse.errorMessages[0], 'danger');
 			}
 			else {
 				const validatorErrors = jsonresponse.validatorErrors;
@@ -71,12 +93,12 @@ function doSubmit() {
 				if (validatorErrors) {
 					validatorErrors.forEach(
 						validatorError => {
-							this._showNotification(validatorError.message, 'danger');
+							showNotification(validatorError.message, 'danger');
 						}
 					);
 				}
 				else {
-					this._showNotification(jsonresponse.error, 'danger');
+					showNotification(jsonresponse.error, 'danger');
 				}
 			}
 		}).catch(weShouldHandleErrors => {});
@@ -128,6 +150,9 @@ class AddToCartButton extends Component {
 		) {
 			this._enableEditMode();
 		}
+		else {
+			showNotification('No account selected.', 'danger');
+		}
 	}
 
 	_handleBtnFocus(e) {
@@ -155,28 +180,6 @@ class AddToCartButton extends Component {
 
 		doSubmit.call(this);
 		doFocusOut.call(this);
-	}
-
-	_showNotification(message, type) {
-		AUI().use(
-			'liferay-notification',
-			() => {
-				new Liferay.Notification(
-					{
-						closeable: true,
-						delay: {
-							hide: 5000,
-							show: 0
-						},
-						duration: 500,
-						message: message,
-						render: true,
-						title: '',
-						type: type
-					}
-				);
-			}
-		);
 	}
 }
 
