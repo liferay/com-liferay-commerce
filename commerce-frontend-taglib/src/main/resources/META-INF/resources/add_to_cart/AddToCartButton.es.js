@@ -59,7 +59,6 @@ function doSubmit() {
 				Liferay.fire('updateCart', jsonresponse);
 
 				this.initialQuantity = this.quantity;
-				this.oldQuantity = this.quantity;
 				this.emit('submitQuantity', this.productId, this.quantity);
 
 			}
@@ -87,8 +86,6 @@ class AddToCartButton extends Component {
 
 	created() {
 		this.initialQuantity = this.quantity;
-		this.oldQuantity = 0;
-		this.hasQuantityChanged = false;
 		this.inputQuantity = this.settings.minQuantity;
 
 		window.Liferay.on('accountSelected', this._handleAccountChange, this);
@@ -105,12 +102,7 @@ class AddToCartButton extends Component {
 	}
 
 	_updateQuantity(quantity) {
-		if (isInline(this.element)) {
-			this.inputQuantity = quantity;
-		}
-		else {
-			this.quantity = quantity;
-		}
+		this.inputQuantity = quantity;
 	}
 
 	_submitQuantity(quantity) {
@@ -125,7 +117,6 @@ class AddToCartButton extends Component {
 	_disableEditMode() {
 		this.editMode = false;
 		this.quantity = this.initialQuantity;
-		this.oldQuantity = this.initialQuantity;
 	}
 
 	_handleBtnClick(e) {
@@ -159,23 +150,10 @@ class AddToCartButton extends Component {
 	}
 
 	_handleSubmitClick() {
-		if (isInline(this.element) && this.inputQuantity > 0) {
-			this.quantity += this.inputQuantity;
-			this.inputQuantity = this.settings.minQuantity;
+		this.quantity = this.inputQuantity;
+		this.inputQuantity = this.settings.minQuantity;
 
-			this.hasQuantityChanged = true;
-
-			doSubmit.call(this);
-		}
-		else if (this.oldQuantity !== this.quantity) {
-			this.hasQuantityChanged = true;
-
-			doSubmit.call(this);
-		}
-		else {
-			this.hasQuantityChanged = false;
-		}
-
+		doSubmit.call(this);
 		doFocusOut.call(this);
 	}
 
