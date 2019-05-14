@@ -35,8 +35,6 @@ if (cpOptionValue != null) {
 	}
 }
 
-Locale[] availableLocales = availableLocalesSet.toArray(new Locale[0]);
-
 boolean hasCustomAttributesAvailable = CustomAttributesUtil.hasCustomAttributes(company.getCompanyId(), CPOptionValue.class.getName(), cpOptionValueId, null);
 %>
 
