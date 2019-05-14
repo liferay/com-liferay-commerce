@@ -20,6 +20,7 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.util.ProductHelperProvider;
 import com.liferay.commerce.frontend.util.ProductHelper;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -64,6 +65,12 @@ public class AddToCartTag extends ComponentRendererTag {
 
 			if (commerceAccount != null) {
 				putValue("accountId", commerceAccount.getCommerceAccountId());
+			}
+
+			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
+			if (commerceOrder != null) {
+				putValue("orderId", commerceOrder.getCommerceOrderId());
 			}
 
 			putValue("editMode", false);
