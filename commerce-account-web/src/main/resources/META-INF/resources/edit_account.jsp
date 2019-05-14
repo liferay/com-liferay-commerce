@@ -93,11 +93,9 @@ if (commerceAddress != null) {
 
 							for (CommerceCountry commerceCountry : commerceCountries) {
 							%>
-								<aui:option 
-									label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" 
-									selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" 
-									value="<%= commerceCountry.getCommerceCountryId() %>" 
-								/>
+
+								<aui:option label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
+
 							<%
 							}
 							%>
@@ -114,11 +112,9 @@ if (commerceAddress != null) {
 
 							for (CommerceRegion commerceRegion : commerceRegions) {
 							%>
-								<aui:option 
-									label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" 
-									selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" 
-									value="<%= commerceRegion.getCommerceRegionId() %>" 
-								/>
+
+								<aui:option label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
+
 							<%
 							}
 							%>

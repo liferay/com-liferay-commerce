@@ -17,11 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-	CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-	CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
-	CommerceAddress commerceAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
-	PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
-	portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
+CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
+CommerceAddress commerceAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
+PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
+
+portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 %>
 
 <portlet:renderURL var="editCommerceAccountURL">
@@ -35,12 +37,9 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-auto">
-					<img 
-						class="account-management__thumbnail img-fluid rounded-circle" 
-						alt="avatar" 
-						src="<%= commerceAccountDisplayContext.getLogo(commerceAccount) %>" 
-					/>
+					<img alt="avatar" class="account-management__thumbnail img-fluid rounded-circle" src="<%= commerceAccountDisplayContext.getLogo(commerceAccount) %>" />
 				</div>
+
 				<div class="col d-flex flex-col justify-content-center">
 					<span class="account-management__name">
 						<%= HtmlUtil.escape(commerceAccount.getName()) %>
@@ -48,14 +47,14 @@
 					<span class="account-management__email">
 						<%= HtmlUtil.escape(commerceAccount.getEmail()) %>
 					</span>
-				</div>		
+				</div>
+
 				<c:if test="<%= commerceAddress != null %>">
-					<div class="col d-flex align-items-center">
+					<div class="align-items-center col d-flex">
 						<div class="account-management__info-wrapper">
 							<span class="account-management__label">
 								<liferay-ui:message key="address" />
 							</span>
-
 							<span class="account-management__value">
 								<%= HtmlUtil.escape(commerceAddress.getStreet1()) %><br />
 								<%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip()) %>
@@ -63,14 +62,11 @@
 						</div>
 					</div>
 				</c:if>
+
 				<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), ActionKeys.UPDATE) %>">
-					<div class="col-auto d-flex align-items-center">
+					<div class="align-items-center col-auto d-flex">
 						<div class="account-management__action">
-							<aui:button
-								cssClass="commerce-button commerce-button--big commerce-button--outline"
-								href="<%= editCommerceAccountURL %>"
-								value='<%= LanguageUtil.get(request, "edit-account") %>'
-							/>
+							<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-account") %>' />
 						</div>
 					</div>
 				</c:if>
@@ -78,17 +74,18 @@
 		</div>
 	</section>
 
-	<section class="panel panel-secondary mt-1 mb-5">
+	<section class="mb-5 mt-1 panel panel-secondary">
 		<div class="panel-body">
 
-			<% String taxId = commerceAccount.getTaxId(); %>
+			<%
+			String taxId = commerceAccount.getTaxId();
+			%>
 
-			<c:if test="<%= taxId != "" %>">
+			<c:if test='<%= taxId != "" %>'>
 				<div class="account-management__info-wrapper">
 					<span class="account-management__label">
 						<liferay-ui:message key="vat-number" />
 					</span>
-
 					<span class="account-management__value">
 						<%= taxId %>
 					</span>
