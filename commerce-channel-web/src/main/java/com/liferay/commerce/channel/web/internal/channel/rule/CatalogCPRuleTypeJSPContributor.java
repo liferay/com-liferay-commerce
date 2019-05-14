@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.channel.web.internal.channel;
+package com.liferay.commerce.channel.web.internal.channel.rule;
 
-import com.liferay.commerce.channel.web.internal.display.context.CatalogCommerceChannelJSPDisplayContext;
-import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
+import com.liferay.commerce.channel.web.internal.display.context.CatalogCPCatalogRuleDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor;
 import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -35,28 +35,26 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.channel.type.jsp.contributor.key=catalog",
-	service = CommerceChannelTypeJSPContributor.class
+	property = "commerce.product.rule.type.jsp.contributor.key=catalogs",
+	service = CPRuleTypeJSPContributor.class
 )
-public class CatalogCommerceChannelTypeJSPContributor
-	implements CommerceChannelTypeJSPContributor {
+public class CatalogCPRuleTypeJSPContributor
+	implements CPRuleTypeJSPContributor {
 
 	@Override
 	public void render(
-			long commerceChannelId, HttpServletRequest httpServletRequest,
+			long cpRuleId, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		CatalogCommerceChannelJSPDisplayContext
-			catalogCommerceChannelTypeDisplayContext =
-				new CatalogCommerceChannelJSPDisplayContext(
-					_commerceCatalogService, _commerceChannelService,
-					httpServletRequest, _itemSelector,
-					_portletResourcePermission);
+		CatalogCPCatalogRuleDisplayContext catalogCPCatalogRuleDisplayContext =
+			new CatalogCPCatalogRuleDisplayContext(
+				_commerceCatalogService, _cpRuleService, httpServletRequest,
+				_itemSelector, _portletResourcePermission);
 
 		httpServletRequest.setAttribute(
 			"catalog.jsp-portletDisplayContext",
-			catalogCommerceChannelTypeDisplayContext);
+			catalogCPCatalogRuleDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
@@ -67,7 +65,7 @@ public class CatalogCommerceChannelTypeJSPContributor
 	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
-	private CommerceChannelService _commerceChannelService;
+	private CPRuleService _cpRuleService;
 
 	@Reference
 	private ItemSelector _itemSelector;

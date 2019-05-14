@@ -64,8 +64,10 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 
 <aui:form action="<%= editCommerceChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="addTypeSettings" type="hidden" />
 	<aui:input name="commerceChannelId" type="hidden" value="<%= commerceChannelId %>" />
 	<aui:input name="cpRuleId" type="hidden" value="<%= cpRuleId %>" />
+	<aui:input name="deleteTypeSettings" type="hidden" />
 
 	<div class="lfr-form-content">
 		<aui:fieldset-group markupView="lexicon">

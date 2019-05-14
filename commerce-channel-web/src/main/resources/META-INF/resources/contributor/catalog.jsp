@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CatalogCommerceChannelTypeDisplayContext catalogCommerceChannelTypeDisplayContext = (CatalogCommerceChannelTypeDisplayContext)request.getAttribute("catalog.jsp-portletDisplayContext");
+CatalogJSPContributorDisplayContext catalogJSPContributorDisplayContext = (CatalogJSPContributorDisplayContext)request.getAttribute("catalog.jsp-portletDisplayContext");
 
-List<CommerceCatalog> catalogs = catalogCommerceChannelTypeDisplayContext.getCatalogs();
+List<CommerceCatalog> catalogs = catalogJSPContributorDisplayContext.getCatalogs();
 %>
 
 <liferay-util:buffer
@@ -91,7 +91,7 @@ List<CommerceCatalog> catalogs = catalogCommerceChannelTypeDisplayContext.getCat
 						}
 					},
 					title: '<liferay-ui:message arguments="catalog" key="select-x" />',
-					url: '<%= catalogCommerceChannelTypeDisplayContext.getItemSelectorUrl() %>'
+					url: '<%= catalogJSPContributorDisplayContext.getItemSelectorUrl() %>'
 				}
 			);
 

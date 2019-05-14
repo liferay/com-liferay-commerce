@@ -27,12 +27,12 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.channel.web.internal.display.context.CPCatalogRuleDisplayContext" %><%@
-page import="com.liferay.commerce.channel.web.internal.display.context.CatalogCommerceChannelTypeDisplayContext" %><%@
 page import="com.liferay.commerce.channel.web.internal.display.context.CommerceChannelDisplayContext" %><%@
 page import="com.liferay.commerce.channel.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext" %><%@
 page import="com.liferay.commerce.channel.web.internal.display.context.SiteCommerceChannelTypeDisplayContext" %><%@
 page import="com.liferay.commerce.product.catalog.rule.CPRuleType" %><%@
 page import="com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributor" %><%@
+page import="com.liferay.commerce.product.channel.CatalogJSPContributorDisplayContext" %><%@
 page import="com.liferay.commerce.product.channel.CommerceChannelType" %><%@
 page import="com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor" %><%@
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
