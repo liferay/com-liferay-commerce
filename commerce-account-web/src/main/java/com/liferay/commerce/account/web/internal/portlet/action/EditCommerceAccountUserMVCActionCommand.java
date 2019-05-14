@@ -14,11 +14,14 @@
 
 package com.liferay.commerce.account.web.internal.portlet.action;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.exception.ContactBirthdayException;
 import com.liferay.portal.kernel.exception.ContactNameException;
 import com.liferay.portal.kernel.exception.GroupFriendlyURLException;
@@ -32,8 +35,11 @@ import com.liferay.portal.kernel.exception.UserReminderQueryException;
 import com.liferay.portal.kernel.exception.UserScreenNameException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.CompanyConstants;
 import com.liferay.portal.kernel.model.PasswordPolicy;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
@@ -41,12 +47,17 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.auth.session.AuthenticatedSessionManager;
+import com.liferay.portal.kernel.security.ldap.LDAPSettingsUtil;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.service.permission.UserPermissionUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
@@ -55,10 +66,11 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.users.admin.kernel.util.UsersAdmin;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -66,7 +78,6 @@ import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
@@ -95,7 +106,8 @@ public class EditCommerceAccountUserMVCActionCommand
 
 		try {
 			if (cmd.equals(Constants.UPDATE)) {
-				Callable<User> userCallable = new UserCallable(actionRequest);
+				Callable<User> userCallable = new UserCallable(
+					actionRequest, actionResponse);
 
 				TransactionInvokerUtil.invoke(_transactionConfig, userCallable);
 			}
@@ -106,9 +118,23 @@ public class EditCommerceAccountUserMVCActionCommand
 				TransactionInvokerUtil.invoke(_transactionConfig, userCallable);
 			}
 
-			String redirect = getSaveAndContinueRedirect(actionRequest);
+			CommerceAccountGroupServiceConfiguration
+				commerceAccountGroupServiceConfiguration =
+					_configurationProvider.getConfiguration(
+						CommerceAccountGroupServiceConfiguration.class,
+						new GroupServiceSettingsLocator(
+							_portal.getScopeGroupId(actionRequest),
+							CommerceAccountConstants.SERVICE_NAME));
 
-			sendRedirect(actionRequest, actionResponse, redirect);
+			if (commerceAccountGroupServiceConfiguration.commerceSiteType() !=
+					CommerceAccountConstants.SITE_TYPE_B2C) {
+
+				String redirect = getSaveAndContinueRedirect(actionRequest);
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+
+				hideDefaultSuccessMessage(actionRequest);
+			}
 		}
 		catch (Throwable t) {
 			if (t instanceof NoSuchUserException ||
@@ -134,8 +160,6 @@ public class EditCommerceAccountUserMVCActionCommand
 				_log.error(t, t);
 			}
 		}
-
-		hideDefaultSuccessMessage(actionRequest);
 	}
 
 	protected void editUserRoles(ActionRequest actionRequest)
@@ -189,48 +213,126 @@ public class EditCommerceAccountUserMVCActionCommand
 		return portletURL.toString();
 	}
 
-	protected void updatePassword(User user, ActionRequest actionRequest)
-		throws PortalException {
+	protected void updatePassword(
+			User user, ActionRequest actionRequest,
+			ActionResponse actionResponse)
+		throws Exception {
 
-		String newPassword1 = actionRequest.getParameter("password1");
-		String newPassword2 = actionRequest.getParameter("password2");
+		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		boolean passwordReset = ParamUtil.getBoolean(
-			actionRequest, "passwordReset");
+			UserPermissionUtil.check(
+				themeDisplay.getPermissionChecker(), user.getUserId(),
+				ActionKeys.UPDATE);
 
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+			String newPassword1 = actionRequest.getParameter("password1");
+			String newPassword2 = actionRequest.getParameter("password2");
 
-		if ((user.getLastLoginDate() == null) &&
-			((passwordPolicy == null) ||
-			 (passwordPolicy.isChangeable() &&
-			  passwordPolicy.isChangeRequired()))) {
+			boolean passwordReset = ParamUtil.getBoolean(
+				actionRequest, "passwordReset");
 
-			passwordReset = true;
+			PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+			boolean ldapPasswordPolicyEnabled =
+				LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId());
+
+			if ((user.getLastLoginDate() == null) &&
+				(((passwordPolicy == null) && !ldapPasswordPolicyEnabled) ||
+				 ((passwordPolicy != null) && passwordPolicy.isChangeable() &&
+				  passwordPolicy.isChangeRequired()))) {
+
+				passwordReset = true;
+			}
+
+			String reminderQueryQuestion = BeanParamUtil.getString(
+				user, actionRequest, "reminderQueryQuestion");
+
+			if (reminderQueryQuestion.equals(UsersAdmin.CUSTOM_QUESTION)) {
+				reminderQueryQuestion = BeanParamUtil.getStringSilent(
+					user, actionRequest, "reminderQueryCustomQuestion");
+			}
+
+			String reminderQueryAnswer = BeanParamUtil.getString(
+				user, actionRequest, "reminderQueryAnswer");
+
+			boolean passwordModified = false;
+
+			if (Validator.isNotNull(newPassword1) ||
+				Validator.isNotNull(newPassword2)) {
+
+				_userLocalService.updatePassword(
+					user.getUserId(), newPassword1, newPassword2,
+					passwordReset);
+
+				passwordModified = true;
+			}
+
+			_userLocalService.updatePasswordReset(
+				user.getUserId(), passwordReset);
+
+			if (Validator.isNotNull(reminderQueryQuestion) &&
+				Validator.isNotNull(reminderQueryAnswer)) {
+
+				_userLocalService.updateReminderQuery(
+					user.getUserId(), reminderQueryQuestion,
+					reminderQueryAnswer);
+			}
+
+			if ((user.getUserId() == themeDisplay.getUserId()) &&
+				passwordModified) {
+
+				String login = null;
+
+				Company company = themeDisplay.getCompany();
+
+				String authType = company.getAuthType();
+
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+					login = user.getEmailAddress();
+				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+					login = user.getScreenName();
+				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+					login = String.valueOf(user.getUserId());
+				}
+
+				_authenticatedSessionManager.login(
+					_portal.getOriginalServletRequest(
+						_portal.getHttpServletRequest(actionRequest)),
+					_portal.getHttpServletResponse(actionResponse), login,
+					newPassword1, false, null);
+			}
 		}
+		catch (Exception e) {
+			if (e instanceof NoSuchUserException ||
+				e instanceof PrincipalException) {
 
-		if (Validator.isNotNull(newPassword1) ||
-			Validator.isNotNull(newPassword2)) {
+				SessionErrors.add(actionRequest, e.getClass());
 
-			_userService.updatePassword(
-				user.getUserId(), newPassword1, newPassword2, passwordReset);
-		}
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+			}
+			else if (e instanceof UserPasswordException) {
+				SessionErrors.add(actionRequest, e.getClass(), e);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+				String redirect = _portal.escapeRedirect(
+					ParamUtil.getString(actionRequest, "redirect"));
 
-		if ((user.getUserId() == themeDisplay.getUserId()) &&
-			PropsValues.SESSION_STORE_PASSWORD &&
-			Validator.isNotNull(newPassword1)) {
-
-			PortletSession portletSession = actionRequest.getPortletSession();
-
-			portletSession.setAttribute(
-				WebKeys.USER_PASSWORD, newPassword1,
-				PortletSession.APPLICATION_SCOPE);
+				if (Validator.isNotNull(redirect)) {
+					sendRedirect(actionRequest, actionResponse, redirect);
+				}
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 
-	protected void updateUser(ActionRequest actionRequest) throws Exception {
+	protected void updateUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
 		long userId = ParamUtil.getLong(actionRequest, "userId");
 
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
@@ -278,7 +380,7 @@ public class EditCommerceAccountUserMVCActionCommand
 
 		// Update user password
 
-		updatePassword(user, actionRequest);
+		updatePassword(user, actionRequest, actionResponse);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -289,10 +391,19 @@ public class EditCommerceAccountUserMVCActionCommand
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	@Reference
+	private AuthenticatedSessionManager _authenticatedSessionManager;
+
+	@Reference
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
+	private ConfigurationProvider _configurationProvider;
+
+	@Reference
 	private DLAppLocalService _dlAppLocalService;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private UserGroupRoleLocalService _userGroupRoleLocalService;
@@ -324,16 +435,20 @@ public class EditCommerceAccountUserMVCActionCommand
 
 		@Override
 		public User call() throws Exception {
-			updateUser(_actionRequest);
+			updateUser(_actionRequest, _actionResponse);
 
 			return null;
 		}
 
-		private UserCallable(ActionRequest actionRequest) {
+		private UserCallable(
+			ActionRequest actionRequest, ActionResponse actionResponse) {
+
 			_actionRequest = actionRequest;
+			_actionResponse = actionResponse;
 		}
 
 		private final ActionRequest _actionRequest;
+		private final ActionResponse _actionResponse;
 
 	}
 
