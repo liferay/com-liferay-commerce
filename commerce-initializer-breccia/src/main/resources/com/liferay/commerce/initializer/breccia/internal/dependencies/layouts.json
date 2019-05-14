@@ -170,7 +170,7 @@
 		],
 		"subLayouts": [
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Your Account",
 				"permissions": [
 					{
@@ -190,7 +190,7 @@
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet"
+						"portletName": "com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet"
 					}
 				]
 			},
