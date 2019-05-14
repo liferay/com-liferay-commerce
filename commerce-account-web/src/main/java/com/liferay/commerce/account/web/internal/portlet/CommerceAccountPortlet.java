@@ -24,6 +24,7 @@ import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -107,7 +108,8 @@ public class CommerceAccountPortlet extends MVCPortlet {
 			new CommerceAccountDisplayContext(
 				_commerceAccountService, _commerceAddressService,
 				_commerceCountryService, _commerceRegionService,
-				httpServletRequest, _modelResourcePermission, null,
+				_configurationProvider, httpServletRequest,
+				_modelResourcePermission, _userFileUploadsConfiguration,
 				_userLocalService);
 
 		renderRequest.setAttribute(
@@ -134,6 +136,9 @@ public class CommerceAccountPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceRegionService _commerceRegionService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
