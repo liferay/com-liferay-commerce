@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.display.context;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
@@ -33,11 +34,14 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -62,6 +66,7 @@ public class CommerceAccountDisplayContext {
 		CommerceAddressService commerceAddressService,
 		CommerceCountryService commerceCountryService,
 		CommerceRegionService commerceRegionService,
+		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<CommerceAccount> modelResourcePermission,
 		UserFileUploadsConfiguration userFileUploadsConfiguration,
@@ -71,6 +76,7 @@ public class CommerceAccountDisplayContext {
 		_commerceAddressService = commerceAddressService;
 		_commerceCountryService = commerceCountryService;
 		_commerceRegionService = commerceRegionService;
+		_configurationProvider = configurationProvider;
 		_modelResourcePermission = modelResourcePermission;
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
 		_userLocalService = userLocalService;
@@ -109,6 +115,18 @@ public class CommerceAccountDisplayContext {
 	public List<CommerceRegion> getCommerceRegions(long commerceCountryId) {
 		return _commerceRegionService.getCommerceRegions(
 			commerceCountryId, true);
+	}
+
+	public int getCommerceSiteType() throws ConfigurationException {
+		CommerceAccountGroupServiceConfiguration
+			commerceAccountGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_commerceAccountRequestHelper.getScopeGroupId(),
+						CommerceAccountConstants.SERVICE_NAME));
+
+		return commerceAccountGroupServiceConfiguration.commerceSiteType();
 	}
 
 	public CommerceAccount getCurrentCommerceAccount() throws PortalException {
@@ -250,6 +268,10 @@ public class CommerceAccountDisplayContext {
 	}
 
 	public User getSelectedUser() throws PortalException {
+		if (getCommerceSiteType() == CommerceAccountConstants.SITE_TYPE_B2C) {
+			return _commerceAccountRequestHelper.getUser();
+		}
+
 		return _userLocalService.getUser(getSelectedUserId());
 	}
 
@@ -319,6 +341,7 @@ public class CommerceAccountDisplayContext {
 	private final CommerceContext _commerceContext;
 	private final CommerceCountryService _commerceCountryService;
 	private final CommerceRegionService _commerceRegionService;
+	private final ConfigurationProvider _configurationProvider;
 	private String _keywords;
 	private final ModelResourcePermission<CommerceAccount>
 		_modelResourcePermission;
