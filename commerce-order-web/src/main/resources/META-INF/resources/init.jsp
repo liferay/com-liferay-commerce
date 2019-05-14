@@ -49,7 +49,6 @@ page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceO
 page import="com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission" %><%@
 page import="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel" %><%@
 page import="com.liferay.commerce.price.CommerceProductPrice" %><%@
-page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
