@@ -18,7 +18,6 @@
 		<suppress checks="BNDExportsCheck" files="commerce-product-type-simple/bnd\.bnd" />
 		<suppress checks="BNDExportsCheck" files="commerce-service/bnd\.bnd" />
 		<suppress checks="BNDExportsCheck" files="commerce-shipping-web/bnd\.bnd" />
-		<suppress checks="GradleDependencyConfigurationCheck" files="commerce-openapi-util/build\.gradle" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-account-api/src/main/java/com/liferay/commerce/account/util/CommerceAccountHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-account-api/src/main/java/com/liferay/commerce/account/util/CommerceAccountRoleHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/context/CommerceContextFactory\.java" />
@@ -42,12 +41,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-health-status-api/src/main/java/com/liferay/commerce/health/status/CommerceHealthStatus\.java" />>
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolver\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolverUtil\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/mapper/v1_0/DTOMapper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/mapper/v2_0/DTOMapper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v1_0/UserHelper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/v2_0/UserHelper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/resource/v1_0/UserResource\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/resource/v2_0/UserResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-organization-api/src/main/java/com/liferay/commerce/organization/util/CommerceOrganizationHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-payment-api/src/main/java/com/liferay/commerce/payment/util/CommercePaymentUtils\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/catalog/rule/CPRuleType\.java" />
@@ -71,7 +64,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/ProductUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/RelatedProductUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/SkuUtil\.java" />
-		<suppress checks="JavaModuleInternalImportsCheck" files="commerce-openapi-util/src/main/java/com/liferay/commerce/openapi/util/importer/URLOpenApiReader\.java" />
 		<suppress checks="JavaModuleServiceProxyFactoryCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-account-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-currency-service/service\.xml" />
