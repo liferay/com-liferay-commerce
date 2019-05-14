@@ -23,6 +23,9 @@ List<CommerceAccount> commerceAccounts = commerceAccountDisplayContext.getCommer
 %>
 
 <c:choose>
+	<c:when test="<%= commerceAccountDisplayContext.getCommerceSiteType() == CommerceAccountConstants.SITE_TYPE_B2C %>">
+		<liferay-util:include page="/edit_user.jsp" servletContext="<%= application %>" />
+	</c:when>
 	<c:when test="<%= (commerceAccounts.size() > 1) || commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 		<liferay-util:include page="/view_account_list.jsp" servletContext="<%= application %>" />
 	</c:when>
