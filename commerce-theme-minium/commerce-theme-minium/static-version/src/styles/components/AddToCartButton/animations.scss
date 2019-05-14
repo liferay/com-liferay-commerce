@@ -14,8 +14,8 @@
 60% {
 	@include transformButton(
 					50%, 50%,
-					-22px, -25px,
-					50px, 44px,
+					-22px, -35px,
+					70px, 44px,
 					3px solid $inputOutline,
 					rgba(255, 255, 255, 1)
 	);
@@ -24,8 +24,8 @@
 100% {
 	@include transformButton(
 					50%, 50%,
-					-22px, -25px,
-					50px, 44px,
+					-22px, -35px,
+					70px, 44px,
 					3px solid $inputOutline,
 					rgba(255, 255, 255, 0)
 	);
