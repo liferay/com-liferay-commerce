@@ -19,7 +19,6 @@
 <%
 CPDefinitionOptionRelDisplayContext cpDefinitionOptionRelDisplayContext = (CPDefinitionOptionRelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPDefinition cpDefinition = cpDefinitionOptionRelDisplayContext.getCPDefinition();
 long cpDefinitionId = cpDefinitionOptionRelDisplayContext.getCPDefinitionId();
 %>
 

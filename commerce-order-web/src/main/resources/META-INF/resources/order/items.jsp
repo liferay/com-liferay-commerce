@@ -120,7 +120,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 			<%
 			CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
-			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 			%>
 
 			<liferay-ui:search-container-column-text

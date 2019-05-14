@@ -32,7 +32,6 @@ page import="com.liferay.commerce.exception.CommerceWarehouseCommerceRegionIdExc
 page import="com.liferay.commerce.exception.CommerceWarehouseNameException" %><%@
 page import="com.liferay.commerce.model.CommerceWarehouse" %><%@
 page import="com.liferay.commerce.model.CommerceWarehouseItem" %><%@
-page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehouseItemsDisplayContext" %><%@
@@ -64,10 +63,4 @@ page import="java.util.Map" %>
 
 <%
 String commerceAdminModuleKey = WarehousesCommerceAdminModule.KEY;
-
-String lifecycle = (String)request.getAttribute(liferayPortletRequest.LIFECYCLE_PHASE);
-
-PortletURL catalogURLObj = PortalUtil.getControlPanelPortletURL(request, CPPortletKeys.CP_DEFINITIONS, lifecycle);
-
-String catalogURL = catalogURLObj.toString();
 %>
