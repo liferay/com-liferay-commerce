@@ -84,10 +84,6 @@
 				{sp}with-select
 			{/if}
 		{/if}
-
-		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
-			{sp}commerce-button--disabled
-		{/if}
 	{/let}
 
 	<div
@@ -177,10 +173,6 @@
 
 		{if $editMode == true}
 			{sp}add-to-cart-button--inline--edit
-		{/if}
-
-		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
-			{sp}commerce-button--disabled
 		{/if}
 	{/let}
 
