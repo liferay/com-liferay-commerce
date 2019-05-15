@@ -21,6 +21,7 @@ import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistr
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.catalog.rule.web.internal.display.context.util.CPCatalogRuleRequestHelper;
 import com.liferay.commerce.product.catalog.rule.web.internal.util.CPCatalogRulePortletUtil;
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
@@ -137,7 +138,7 @@ public class CPCatalogRuleDisplayContext implements CPRuleTypeDisplayContext {
 	}
 
 	public List<CPRuleType> getCPRuleTypes() {
-		return _cpRuleTypeRegistry.getCPRuleTypes();
+		return _cpRuleTypeRegistry.getCPRuleTypes(CPRuleConstants.SCOPE_GROUP);
 	}
 
 	@Override

@@ -15,6 +15,7 @@
 package com.liferay.commerce.channel.web.internal.channel.rule;
 
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
+import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -80,6 +81,11 @@ public class CatalogCPRuleTypeImpl implements CPRuleType {
 	@Override
 	public String getLabel(Locale locale) {
 		return LanguageUtil.get(locale, getKey());
+	}
+
+	@Override
+	public int getScope() {
+		return CPRuleConstants.SCOPE_COMPANY;
 	}
 
 	@Override
