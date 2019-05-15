@@ -54,6 +54,37 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
+		<model-name>com.liferay.commerce.product.model.CommerceCatalog</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_commerce_catalog_web_internal_portlet_CommerceCatalogsPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_product_catalog_rule_web_internal_portlet_CPCatalogRulePortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_product_definitions_web_internal_portlet_CPDefinitionsPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_product_options_web_internal_portlet_CPOptionCategoriesPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_product_options_web_internal_portlet_CPOptionsPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_product_options_web_internal_portlet_CPSpecificationOptionsPortlet</portlet-name>
+		</portlet-ref>
+		<root>true</root>
+		<weight>1</weight>
+		<permissions>
+			<supports>
+				<action-key>ADD_CATALOG</action-key>
+				<action-key>DELETE</action-key>
+				<action-key>MANAGE_ALL_CATALOG</action-key>
+				<action-key>MANAGE_AVAILABLE_CATALOG</action-key>
+				<action-key>MANAGE_CATALOG</action-key>
+				<action-key>MANAGE_CATALOG_USERS</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+				<action-key>VIEW_CATALOG_USERS</action-key>
+				<action-key>VIEW_CATALOGS</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported />
+		</permissions>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.commerce.product.model.CPRule</model-name>
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_product_catalog_rule_web_internal_portlet_CPCatalogRulePortlet</portlet-name>
