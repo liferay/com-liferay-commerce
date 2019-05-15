@@ -57,9 +57,9 @@ public class AccountDTOConverter implements DTOConverter {
 		return new Account() {
 			{
 				emailAddresses = new String[] {commerceAccount.getEmail()};
-				id = commerceAccount.getCommerceAccountId();
 				externalReferenceCode =
 					commerceAccount.getExternalReferenceCode();
+				id = commerceAccount.getCommerceAccountId();
 				logoId = commerceAccount.getLogoId();
 				name = commerceAccount.getName();
 				organizations = _getOrganizations(
