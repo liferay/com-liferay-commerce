@@ -37,7 +37,7 @@ Map<String, Object> data = new HashMap<>();
 data.put("direction-right", StringPool.TRUE);
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "catalogs"), viewCatalogURL.toString(), data);
-PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(), editCatalogURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(locale), editCatalogURL.toString(), data);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "products"), catalogURL, data);
 PortalUtil.addPortletBreadcrumbEntry(request, cpDefinition.getName(languageId), String.valueOf(cpInstanceDisplayContext.getEditProductDefinitionURL()), data);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, CPDefinitionScreenNavigationConstants.CATEGORY_KEY_SKUS), productSkusURL.toString(), data);

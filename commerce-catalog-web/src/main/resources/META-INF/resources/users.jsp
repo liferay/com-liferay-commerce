@@ -35,7 +35,7 @@ editCatalogURL.setParameter("commerceCatalogId", String.valueOf(commerceCatalog.
 editCatalogURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "catalogs"), String.valueOf(renderResponse.createRenderURL()), data);
-PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(), editCatalogURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(locale), editCatalogURL.toString(), data);
 PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 %>
 
