@@ -59,7 +59,7 @@ String itemSelectedEventName = catalogItemSelectorViewDisplayContext.getItemSele
 			Map<String, Object> data = new HashMap<>();
 
 			data.put("id", commerceCatalog.getCommerceCatalogId());
-			data.put("name", commerceCatalog.getName());
+			data.put("name", commerceCatalog.getName(locale));
 
 			row.setData(data);
 			%>

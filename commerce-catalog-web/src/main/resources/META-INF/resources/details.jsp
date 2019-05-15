@@ -26,7 +26,7 @@ CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatal
 String title = LanguageUtil.get(request, "add-catalog");
 
 if (commerceCatalog != null) {
-	title = HtmlUtil.escape(commerceCatalog.getName());
+	title = commerceCatalog.getName(locale);
 }
 
 Map<String, Object> data = new HashMap<>();
