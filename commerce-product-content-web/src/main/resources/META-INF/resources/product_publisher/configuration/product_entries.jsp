@@ -152,15 +152,7 @@ List<CPCatalogEntry> catalogEntries = cpPublisherConfigurationDisplayContext.get
 							var selectedItems = event.newVal;
 
 							if (selectedItems) {
-								A.Array.each(
-									selectedItems,
-									function(item, index, selectedItems) {
-										<portlet:namespace />addCPDefinitionIds.push(item.cpDefinitionId);
-									}
-								);
-
-								document.<portlet:namespace />fm.<portlet:namespace />cpDefinitionIds.value = <portlet:namespace />addCPDefinitionIds.join(',');
-
+								document.<portlet:namespace />fm.<portlet:namespace />cpDefinitionIds.value = selectedItems;
 								document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
 								document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HtmlUtil.escapeJS(currentURL) %>';
 
