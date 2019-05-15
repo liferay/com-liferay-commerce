@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceDiscountUserSegmentRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceDiscountUserSegmentRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel}, that is translated to a
- * {@link com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel</code>, that is translated to a
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,22 +59,29 @@ import java.rmi.RemoteException;
  *
  * @author Marco Leo
  * @see CommerceDiscountUserSegmentRelServiceHttp
- * @see com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap
- * @see CommerceDiscountUserSegmentRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceDiscountUserSegmentRelServiceSoap {
-	public static com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap addCommerceDiscountUserSegmentRel(
-		long commerceDiscountId, long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel returnValue =
-				CommerceDiscountUserSegmentRelServiceUtil.addCommerceDiscountUserSegmentRel(commerceDiscountId,
-					commerceUserSegmentEntryId, serviceContext);
 
-			return com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap.toSoapModel(returnValue);
+	public static
+		com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap
+				addCommerceDiscountUserSegmentRel(
+					long commerceDiscountId, long commerceUserSegmentEntryId,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel
+				returnValue =
+					CommerceDiscountUserSegmentRelServiceUtil.
+						addCommerceDiscountUserSegmentRel(
+							commerceDiscountId, commerceUserSegmentEntryId,
+							serviceContext);
+
+			return com.liferay.commerce.discount.model.
+				CommerceDiscountUserSegmentRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,27 +91,13 @@ public class CommerceDiscountUserSegmentRelServiceSoap {
 	}
 
 	public static void deleteCommerceDiscountUserSegmentRel(
-		long commerceDiscountUserSegmentRelId) throws RemoteException {
-		try {
-			CommerceDiscountUserSegmentRelServiceUtil.deleteCommerceDiscountUserSegmentRel(commerceDiscountUserSegmentRelId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap[] getCommerceDiscountUserSegmentRels(
-		long commerceDiscountId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel> orderByComparator)
+			long commerceDiscountUserSegmentRelId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel> returnValue =
-				CommerceDiscountUserSegmentRelServiceUtil.getCommerceDiscountUserSegmentRels(commerceDiscountId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap.toSoapModels(returnValue);
+		try {
+			CommerceDiscountUserSegmentRelServiceUtil.
+				deleteCommerceDiscountUserSegmentRel(
+					commerceDiscountUserSegmentRelId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -113,5 +106,35 @@ public class CommerceDiscountUserSegmentRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceDiscountUserSegmentRelServiceSoap.class);
+	public static
+		com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRelSoap[]
+				getCommerceDiscountUserSegmentRels(
+					long commerceDiscountId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.discount.model.
+							CommerceDiscountUserSegmentRel> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.discount.model.
+					CommerceDiscountUserSegmentRel> returnValue =
+						CommerceDiscountUserSegmentRelServiceUtil.
+							getCommerceDiscountUserSegmentRels(
+								commerceDiscountId, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.discount.model.
+				CommerceDiscountUserSegmentRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceDiscountUserSegmentRelServiceSoap.class);
+
 }

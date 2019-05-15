@@ -35,18 +35,22 @@ import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLoc
 public abstract class CommerceUserSegmentCriterionBaseImpl
 	extends CommerceUserSegmentCriterionModelImpl
 	implements CommerceUserSegmentCriterion {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce user segment criterion model instance should use the {@link CommerceUserSegmentCriterion} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce user segment criterion model instance should use the <code>CommerceUserSegmentCriterion</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceUserSegmentCriterionLocalServiceUtil.addCommerceUserSegmentCriterion(this);
+			CommerceUserSegmentCriterionLocalServiceUtil.
+				addCommerceUserSegmentCriterion(this);
 		}
 		else {
-			CommerceUserSegmentCriterionLocalServiceUtil.updateCommerceUserSegmentCriterion(this);
+			CommerceUserSegmentCriterionLocalServiceUtil.
+				updateCommerceUserSegmentCriterion(this);
 		}
 	}
+
 }

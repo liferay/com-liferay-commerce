@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CommerceChannel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceChannel in entity cache.
  *
  * @author Marco Leo
- * @see CommerceChannel
  * @generated
  */
 @ProviderType
-public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
-	Externalizable {
+public class CommerceChannelCacheModel
+	implements CacheModel<CommerceChannel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			return false;
 		}
 
-		CommerceChannelCacheModel commerceChannelCacheModel = (CommerceChannelCacheModel)obj;
+		CommerceChannelCacheModel commerceChannelCacheModel =
+			(CommerceChannelCacheModel)obj;
 
 		if (commerceChannelId == commerceChannelCacheModel.commerceChannelId) {
 			return true;
@@ -171,8 +171,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceChannelId);
 
 		objectOutput.writeLong(companyId);
@@ -228,4 +227,5 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public String filterType;
 	public String type;
 	public String typeSettings;
+
 }

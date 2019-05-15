@@ -17,7 +17,6 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -38,40 +37,49 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceAccountServiceUtil
- * @see com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl
- * @see com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAccount"}, service = CommerceAccountService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceAccount"
+	},
+	service = CommerceAccountService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceAccountService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAccountServiceUtil} to access the commerce account remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountServiceUtil} to access the commerce account remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceAccount addBusinessCommerceAccount(String name,
-		long parentCommerceAccountId, String email, String taxId,
-		boolean active, String externalReferenceCode, long[] userIds,
-		String[] emailAddresses, ServiceContext serviceContext)
+	public CommerceAccount addBusinessCommerceAccount(
+			String name, long parentCommerceAccountId, String email,
+			String taxId, boolean active, String externalReferenceCode,
+			long[] userIds, String[] emailAddresses,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceAccount addCommerceAccount(String name,
-		long parentCommerceAccountId, String email, String taxId, int type,
-		boolean active, String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceAccount addCommerceAccount(
+			String name, long parentCommerceAccountId, String email,
+			String taxId, int type, boolean active,
+			String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceAccount(long commerceAccountId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceAccount fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CommerceAccount fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
@@ -82,10 +90,10 @@ public interface CommerceAccountService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -93,23 +101,28 @@ public interface CommerceAccountService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		long parentCommerceAccountId, int commerceSiteType, String keywords,
-		int start, int end) throws PortalException;
+	public List<CommerceAccount> getUserCommerceAccounts(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceAccountsCount(long userId,
-		long parentCommerceAccountId, int commerceSiteType, String keywords)
+	public int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords)
 		throws PortalException;
 
-	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, boolean logo, byte[] logoBytes, String email,
-		String taxId, boolean active, ServiceContext serviceContext)
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceAccount upsertCommerceAccount(String name,
-		long parentCommerceAccountId, boolean logo, byte[] logoBytes,
-		String email, String taxId, int type, boolean active,
-		String externalReferenceCode, ServiceContext serviceContext)
+	public CommerceAccount upsertCommerceAccount(
+			String name, long parentCommerceAccountId, boolean logo,
+			byte[] logoBytes, String email, String taxId, int type,
+			boolean active, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

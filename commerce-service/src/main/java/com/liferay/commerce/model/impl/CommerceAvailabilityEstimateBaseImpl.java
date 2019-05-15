@@ -35,18 +35,22 @@ import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil
 public abstract class CommerceAvailabilityEstimateBaseImpl
 	extends CommerceAvailabilityEstimateModelImpl
 	implements CommerceAvailabilityEstimate {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce availability estimate model instance should use the {@link CommerceAvailabilityEstimate} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce availability estimate model instance should use the <code>CommerceAvailabilityEstimate</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceAvailabilityEstimateLocalServiceUtil.addCommerceAvailabilityEstimate(this);
+			CommerceAvailabilityEstimateLocalServiceUtil.
+				addCommerceAvailabilityEstimate(this);
 		}
 		else {
-			CommerceAvailabilityEstimateLocalServiceUtil.updateCommerceAvailabilityEstimate(this);
+			CommerceAvailabilityEstimateLocalServiceUtil.
+				updateCommerceAvailabilityEstimate(this);
 		}
 	}
+
 }

@@ -34,10 +34,11 @@ import com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalServiceUtil
 @ProviderType
 public abstract class CPRuleUserSegmentRelBaseImpl
 	extends CPRuleUserSegmentRelModelImpl implements CPRuleUserSegmentRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp rule user segment rel model instance should use the {@link CPRuleUserSegmentRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp rule user segment rel model instance should use the <code>CPRuleUserSegmentRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -45,7 +46,9 @@ public abstract class CPRuleUserSegmentRelBaseImpl
 			CPRuleUserSegmentRelLocalServiceUtil.addCPRuleUserSegmentRel(this);
 		}
 		else {
-			CPRuleUserSegmentRelLocalServiceUtil.updateCPRuleUserSegmentRel(this);
+			CPRuleUserSegmentRelLocalServiceUtil.updateCPRuleUserSegmentRel(
+				this);
 		}
 	}
+
 }

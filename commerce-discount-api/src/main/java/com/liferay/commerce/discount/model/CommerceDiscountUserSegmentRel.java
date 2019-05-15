@@ -25,38 +25,47 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceDiscountUserSegmentRelModel
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelImpl
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelImpl"
+)
 @ProviderType
 public interface CommerceDiscountUserSegmentRel
 	extends CommerceDiscountUserSegmentRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceDiscountUserSegmentRel, Long> COMMERCE_DISCOUNT_USER_SEGMENT_REL_ID_ACCESSOR =
-		new Accessor<CommerceDiscountUserSegmentRel, Long>() {
-			@Override
-			public Long get(
-				CommerceDiscountUserSegmentRel commerceDiscountUserSegmentRel) {
-				return commerceDiscountUserSegmentRel.getCommerceDiscountUserSegmentRelId();
-			}
+	public static final Accessor<CommerceDiscountUserSegmentRel, Long>
+		COMMERCE_DISCOUNT_USER_SEGMENT_REL_ID_ACCESSOR =
+			new Accessor<CommerceDiscountUserSegmentRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceDiscountUserSegmentRel
+						commerceDiscountUserSegmentRel) {
 
-			@Override
-			public Class<CommerceDiscountUserSegmentRel> getTypeClass() {
-				return CommerceDiscountUserSegmentRel.class;
-			}
-		};
+					return commerceDiscountUserSegmentRel.
+						getCommerceDiscountUserSegmentRelId();
+				}
 
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry getCommerceUserSegmentEntry()
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceDiscountUserSegmentRel> getTypeClass() {
+					return CommerceDiscountUserSegmentRel.class;
+				}
+
+			};
+
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+			getCommerceUserSegmentEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CPInstanceBaseImpl extends CPInstanceModelImpl
-	implements CPInstance {
+public abstract class CPInstanceBaseImpl
+	extends CPInstanceModelImpl implements CPInstance {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp instance model instance should use the {@link CPInstance} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp instance model instance should use the <code>CPInstance</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPInstanceBaseImpl extends CPInstanceModelImpl
 			CPInstanceLocalServiceUtil.updateCPInstance(this);
 		}
 	}
+
 }

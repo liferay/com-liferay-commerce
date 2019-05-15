@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
-	ModelWrapper<CPRuleAssetCategoryRel> {
+public class CPRuleAssetCategoryRelWrapper
+	implements CPRuleAssetCategoryRel, ModelWrapper<CPRuleAssetCategoryRel> {
+
 	public CPRuleAssetCategoryRelWrapper(
 		CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
+
 		_cpRuleAssetCategoryRel = cpRuleAssetCategoryRel;
 	}
 
@@ -59,7 +60,8 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("CPRuleAssetCategoryRelId", getCPRuleAssetCategoryRelId());
+		attributes.put(
+			"CPRuleAssetCategoryRelId", getCPRuleAssetCategoryRelId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -75,7 +77,7 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long CPRuleAssetCategoryRelId = (Long)attributes.get(
-				"CPRuleAssetCategoryRelId");
+			"CPRuleAssetCategoryRelId");
 
 		if (CPRuleAssetCategoryRelId != null) {
 			setCPRuleAssetCategoryRelId(CPRuleAssetCategoryRelId);
@@ -132,7 +134,8 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 
 	@Override
 	public Object clone() {
-		return new CPRuleAssetCategoryRelWrapper((CPRuleAssetCategoryRel)_cpRuleAssetCategoryRel.clone());
+		return new CPRuleAssetCategoryRelWrapper(
+			(CPRuleAssetCategoryRel)_cpRuleAssetCategoryRel.clone());
 	}
 
 	@Override
@@ -143,54 +146,55 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	@Override
 	public com.liferay.asset.kernel.model.AssetCategory getAssetCategory()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleAssetCategoryRel.getAssetCategory();
 	}
 
 	/**
-	* Returns the asset category ID of this cp rule asset category rel.
-	*
-	* @return the asset category ID of this cp rule asset category rel
-	*/
+	 * Returns the asset category ID of this cp rule asset category rel.
+	 *
+	 * @return the asset category ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getAssetCategoryId() {
 		return _cpRuleAssetCategoryRel.getAssetCategoryId();
 	}
 
 	/**
-	* Returns the company ID of this cp rule asset category rel.
-	*
-	* @return the company ID of this cp rule asset category rel
-	*/
+	 * Returns the company ID of this cp rule asset category rel.
+	 *
+	 * @return the company ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpRuleAssetCategoryRel.getCompanyId();
 	}
 
 	/**
-	* Returns the cp rule asset category rel ID of this cp rule asset category rel.
-	*
-	* @return the cp rule asset category rel ID of this cp rule asset category rel
-	*/
+	 * Returns the cp rule asset category rel ID of this cp rule asset category rel.
+	 *
+	 * @return the cp rule asset category rel ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getCPRuleAssetCategoryRelId() {
 		return _cpRuleAssetCategoryRel.getCPRuleAssetCategoryRelId();
 	}
 
 	/**
-	* Returns the cp rule ID of this cp rule asset category rel.
-	*
-	* @return the cp rule ID of this cp rule asset category rel
-	*/
+	 * Returns the cp rule ID of this cp rule asset category rel.
+	 *
+	 * @return the cp rule ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getCPRuleId() {
 		return _cpRuleAssetCategoryRel.getCPRuleId();
 	}
 
 	/**
-	* Returns the create date of this cp rule asset category rel.
-	*
-	* @return the create date of this cp rule asset category rel
-	*/
+	 * Returns the create date of this cp rule asset category rel.
+	 *
+	 * @return the create date of this cp rule asset category rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpRuleAssetCategoryRel.getCreateDate();
@@ -202,30 +206,30 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Returns the group ID of this cp rule asset category rel.
-	*
-	* @return the group ID of this cp rule asset category rel
-	*/
+	 * Returns the group ID of this cp rule asset category rel.
+	 *
+	 * @return the group ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpRuleAssetCategoryRel.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this cp rule asset category rel.
-	*
-	* @return the modified date of this cp rule asset category rel
-	*/
+	 * Returns the modified date of this cp rule asset category rel.
+	 *
+	 * @return the modified date of this cp rule asset category rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpRuleAssetCategoryRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp rule asset category rel.
-	*
-	* @return the primary key of this cp rule asset category rel
-	*/
+	 * Returns the primary key of this cp rule asset category rel.
+	 *
+	 * @return the primary key of this cp rule asset category rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpRuleAssetCategoryRel.getPrimaryKey();
@@ -237,30 +241,30 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Returns the user ID of this cp rule asset category rel.
-	*
-	* @return the user ID of this cp rule asset category rel
-	*/
+	 * Returns the user ID of this cp rule asset category rel.
+	 *
+	 * @return the user ID of this cp rule asset category rel
+	 */
 	@Override
 	public long getUserId() {
 		return _cpRuleAssetCategoryRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp rule asset category rel.
-	*
-	* @return the user name of this cp rule asset category rel
-	*/
+	 * Returns the user name of this cp rule asset category rel.
+	 *
+	 * @return the user name of this cp rule asset category rel
+	 */
 	@Override
 	public String getUserName() {
 		return _cpRuleAssetCategoryRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp rule asset category rel.
-	*
-	* @return the user uuid of this cp rule asset category rel
-	*/
+	 * Returns the user uuid of this cp rule asset category rel.
+	 *
+	 * @return the user uuid of this cp rule asset category rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpRuleAssetCategoryRel.getUserUuid();
@@ -292,10 +296,10 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Sets the asset category ID of this cp rule asset category rel.
-	*
-	* @param assetCategoryId the asset category ID of this cp rule asset category rel
-	*/
+	 * Sets the asset category ID of this cp rule asset category rel.
+	 *
+	 * @param assetCategoryId the asset category ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setAssetCategoryId(long assetCategoryId) {
 		_cpRuleAssetCategoryRel.setAssetCategoryId(assetCategoryId);
@@ -307,40 +311,41 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Sets the company ID of this cp rule asset category rel.
-	*
-	* @param companyId the company ID of this cp rule asset category rel
-	*/
+	 * Sets the company ID of this cp rule asset category rel.
+	 *
+	 * @param companyId the company ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpRuleAssetCategoryRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp rule asset category rel ID of this cp rule asset category rel.
-	*
-	* @param CPRuleAssetCategoryRelId the cp rule asset category rel ID of this cp rule asset category rel
-	*/
+	 * Sets the cp rule asset category rel ID of this cp rule asset category rel.
+	 *
+	 * @param CPRuleAssetCategoryRelId the cp rule asset category rel ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setCPRuleAssetCategoryRelId(long CPRuleAssetCategoryRelId) {
-		_cpRuleAssetCategoryRel.setCPRuleAssetCategoryRelId(CPRuleAssetCategoryRelId);
+		_cpRuleAssetCategoryRel.setCPRuleAssetCategoryRelId(
+			CPRuleAssetCategoryRelId);
 	}
 
 	/**
-	* Sets the cp rule ID of this cp rule asset category rel.
-	*
-	* @param CPRuleId the cp rule ID of this cp rule asset category rel
-	*/
+	 * Sets the cp rule ID of this cp rule asset category rel.
+	 *
+	 * @param CPRuleId the cp rule ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setCPRuleId(long CPRuleId) {
 		_cpRuleAssetCategoryRel.setCPRuleId(CPRuleId);
 	}
 
 	/**
-	* Sets the create date of this cp rule asset category rel.
-	*
-	* @param createDate the create date of this cp rule asset category rel
-	*/
+	 * Sets the create date of this cp rule asset category rel.
+	 *
+	 * @param createDate the create date of this cp rule asset category rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpRuleAssetCategoryRel.setCreateDate(createDate);
@@ -349,6 +354,7 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpRuleAssetCategoryRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -363,20 +369,20 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Sets the group ID of this cp rule asset category rel.
-	*
-	* @param groupId the group ID of this cp rule asset category rel
-	*/
+	 * Sets the group ID of this cp rule asset category rel.
+	 *
+	 * @param groupId the group ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpRuleAssetCategoryRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this cp rule asset category rel.
-	*
-	* @param modifiedDate the modified date of this cp rule asset category rel
-	*/
+	 * Sets the modified date of this cp rule asset category rel.
+	 *
+	 * @param modifiedDate the modified date of this cp rule asset category rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpRuleAssetCategoryRel.setModifiedDate(modifiedDate);
@@ -388,10 +394,10 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Sets the primary key of this cp rule asset category rel.
-	*
-	* @param primaryKey the primary key of this cp rule asset category rel
-	*/
+	 * Sets the primary key of this cp rule asset category rel.
+	 *
+	 * @param primaryKey the primary key of this cp rule asset category rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpRuleAssetCategoryRel.setPrimaryKey(primaryKey);
@@ -403,43 +409,46 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	/**
-	* Sets the user ID of this cp rule asset category rel.
-	*
-	* @param userId the user ID of this cp rule asset category rel
-	*/
+	 * Sets the user ID of this cp rule asset category rel.
+	 *
+	 * @param userId the user ID of this cp rule asset category rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpRuleAssetCategoryRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp rule asset category rel.
-	*
-	* @param userName the user name of this cp rule asset category rel
-	*/
+	 * Sets the user name of this cp rule asset category rel.
+	 *
+	 * @param userName the user name of this cp rule asset category rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpRuleAssetCategoryRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp rule asset category rel.
-	*
-	* @param userUuid the user uuid of this cp rule asset category rel
-	*/
+	 * Sets the user uuid of this cp rule asset category rel.
+	 *
+	 * @param userUuid the user uuid of this cp rule asset category rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpRuleAssetCategoryRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPRuleAssetCategoryRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPRuleAssetCategoryRel>
+		toCacheModel() {
+
 		return _cpRuleAssetCategoryRel.toCacheModel();
 	}
 
 	@Override
 	public CPRuleAssetCategoryRel toEscapedModel() {
-		return new CPRuleAssetCategoryRelWrapper(_cpRuleAssetCategoryRel.toEscapedModel());
+		return new CPRuleAssetCategoryRelWrapper(
+			_cpRuleAssetCategoryRel.toEscapedModel());
 	}
 
 	@Override
@@ -449,7 +458,8 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 
 	@Override
 	public CPRuleAssetCategoryRel toUnescapedModel() {
-		return new CPRuleAssetCategoryRelWrapper(_cpRuleAssetCategoryRel.toUnescapedModel());
+		return new CPRuleAssetCategoryRelWrapper(
+			_cpRuleAssetCategoryRel.toUnescapedModel());
 	}
 
 	@Override
@@ -467,10 +477,13 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 			return false;
 		}
 
-		CPRuleAssetCategoryRelWrapper cpRuleAssetCategoryRelWrapper = (CPRuleAssetCategoryRelWrapper)obj;
+		CPRuleAssetCategoryRelWrapper cpRuleAssetCategoryRelWrapper =
+			(CPRuleAssetCategoryRelWrapper)obj;
 
-		if (Objects.equals(_cpRuleAssetCategoryRel,
-					cpRuleAssetCategoryRelWrapper._cpRuleAssetCategoryRel)) {
+		if (Objects.equals(
+				_cpRuleAssetCategoryRel,
+				cpRuleAssetCategoryRelWrapper._cpRuleAssetCategoryRel)) {
+
 			return true;
 		}
 
@@ -498,4 +511,5 @@ public class CPRuleAssetCategoryRelWrapper implements CPRuleAssetCategoryRel,
 	}
 
 	private final CPRuleAssetCategoryRel _cpRuleAssetCategoryRel;
+
 }

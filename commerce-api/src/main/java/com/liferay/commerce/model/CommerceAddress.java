@@ -25,20 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAddressModel
- * @see com.liferay.commerce.model.impl.CommerceAddressImpl
- * @see com.liferay.commerce.model.impl.CommerceAddressModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.model.impl.CommerceAddressImpl")
 @ProviderType
 public interface CommerceAddress extends CommerceAddressModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceAddressImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceAddressImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAddress, Long> COMMERCE_ADDRESS_ID_ACCESSOR =
-		new Accessor<CommerceAddress, Long>() {
+	public static final Accessor<CommerceAddress, Long>
+		COMMERCE_ADDRESS_ID_ACCESSOR = new Accessor<CommerceAddress, Long>() {
+
 			@Override
 			public Long get(CommerceAddress commerceAddress) {
 				return commerceAddress.getCommerceAddressId();
@@ -53,6 +53,7 @@ public interface CommerceAddress extends CommerceAddressModel, PersistedModel {
 			public Class<CommerceAddress> getTypeClass() {
 				return CommerceAddress.class;
 			}
+
 		};
 
 	public CommerceCountry fetchCommerceCountry();
@@ -66,4 +67,5 @@ public interface CommerceAddress extends CommerceAddressModel, PersistedModel {
 	public boolean isGeolocated();
 
 	public boolean isSameAddress(CommerceAddress commerceAddress);
+
 }

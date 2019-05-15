@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceWarehouse;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,28 +38,35 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehouseServiceUtil
- * @see com.liferay.commerce.service.base.CommerceWarehouseServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceWarehouseServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceWarehouse"}, service = CommerceWarehouseService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceWarehouse"
+	},
+	service = CommerceWarehouseService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceWarehouseService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceWarehouseServiceUtil} to access the commerce warehouse remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceWarehouseServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceWarehouseServiceUtil} to access the commerce warehouse remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceWarehouseServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceWarehouse addCommerceWarehouse(String name,
-		String description, boolean active, String street1, String street2,
-		String street3, String city, String zip, long commerceRegionId,
-		long commerceCountryId, double latitude, double longitude,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceWarehouse addCommerceWarehouse(
+			String name, String description, boolean active, String street1,
+			String street2, String street3, String city, String zip,
+			long commerceRegionId, long commerceCountryId, double latitude,
+			double longitude, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceWarehouse(long commerceWarehouseId)
 		throws PortalException;
@@ -70,88 +76,96 @@ public interface CommerceWarehouseService extends BaseService {
 		throws PortalException;
 
 	public CommerceWarehouse geolocateCommerceWarehouse(
-		long commerceWarehouseId) throws PortalException;
+			long commerceWarehouseId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWarehouse getCommerceWarehouse(long commerceWarehouseId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
-		boolean active, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, boolean active, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
-		boolean active, long commerceCountryId, boolean primary, int start,
-		int end, OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, boolean active, long commerceCountryId,
+			boolean primary, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
-		boolean active, long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, boolean active, long commerceCountryId, int start,
+			int end, OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
-		int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
-		long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> getCommerceWarehouses(
+			long groupId, long commerceCountryId, int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehousesCount(long groupId)
-		throws PortalException;
+	public int getCommerceWarehousesCount(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehousesCount(long groupId, boolean active)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehousesCount(long groupId, boolean active,
-		long commerceCountryId) throws PortalException;
+	public int getCommerceWarehousesCount(
+			long groupId, boolean active, long commerceCountryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehousesCount(long groupId, long commerceCountryId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWarehouse> search(long groupId, String keywords,
-		boolean all, long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	public List<CommerceWarehouse> search(
+			long groupId, String keywords, boolean all, long commerceCountryId,
+			int start, int end,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int searchCount(long groupId, String keywords, Boolean active,
-		long commerceCountryId) throws PortalException;
+	public int searchCount(
+			long groupId, String keywords, Boolean active,
+			long commerceCountryId)
+		throws PortalException;
 
 	public CommerceWarehouse setActive(long commerceWarehouseId, boolean active)
 		throws PortalException;
 
-	public CommerceWarehouse updateCommerceWarehouse(long commerceWarehouseId,
-		String name, String description, boolean active, String street1,
-		String street2, String street3, String city, String zip,
-		long commerceRegionId, long commerceCountryId, double latitude,
-		double longitude, ServiceContext serviceContext)
+	public CommerceWarehouse updateCommerceWarehouse(
+			long commerceWarehouseId, String name, String description,
+			boolean active, String street1, String street2, String street3,
+			String city, String zip, long commerceRegionId,
+			long commerceCountryId, double latitude, double longitude,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceWarehouse updateDefaultCommerceWarehouse(String name,
-		String street1, String street2, String street3, String city,
-		String zip, long commerceRegionId, long commerceCountryId,
-		double latitude, double longitude, ServiceContext serviceContext)
+	public CommerceWarehouse updateDefaultCommerceWarehouse(
+			String name, String street1, String street2, String street3,
+			String city, String zip, long commerceRegionId,
+			long commerceCountryId, double latitude, double longitude,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

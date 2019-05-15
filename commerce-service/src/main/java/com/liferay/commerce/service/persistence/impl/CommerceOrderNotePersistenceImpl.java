@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.impl.CommerceOrderNoteImpl;
 import com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl;
 import com.liferay.commerce.service.persistence.CommerceOrderNotePersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -64,57 +63,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceOrderNotePersistence
- * @see com.liferay.commerce.service.persistence.CommerceOrderNoteUtil
  * @generated
  */
 @ProviderType
-public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<CommerceOrderNote>
+public class CommerceOrderNotePersistenceImpl
+	extends BasePersistenceImpl<CommerceOrderNote>
 	implements CommerceOrderNotePersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceOrderNoteUtil} to access the commerce order note persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceOrderNoteUtil</code> to access the commerce order note persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceOrderNoteImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEORDERID =
-		new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceOrderId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID =
-		new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCommerceOrderId",
-			new String[] { Long.class.getName() },
-			CommerceOrderNoteModelImpl.COMMERCEORDERID_COLUMN_BITMASK |
-			CommerceOrderNoteModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEORDERID = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceOrderId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceOrderNoteImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceOrderId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceOrderId;
+	private FinderPath _finderPathCountByCommerceOrderId;
 
 	/**
 	 * Returns all the commerce order notes where commerceOrderId = &#63;.
@@ -124,15 +99,15 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public List<CommerceOrderNote> findByCommerceOrderId(long commerceOrderId) {
-		return findByCommerceOrderId(commerceOrderId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return findByCommerceOrderId(
+			commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce order notes where commerceOrderId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -141,8 +116,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByCommerceOrderId(long commerceOrderId,
-		int start, int end) {
+	public List<CommerceOrderNote> findByCommerceOrderId(
+		long commerceOrderId, int start, int end) {
+
 		return findByCommerceOrderId(commerceOrderId, start, end, null);
 	}
 
@@ -150,7 +126,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce order notes where commerceOrderId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -160,18 +136,19 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByCommerceOrderId(long commerceOrderId,
-		int start, int end,
+	public List<CommerceOrderNote> findByCommerceOrderId(
+		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
-		return findByCommerceOrderId(commerceOrderId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceOrderId(
+			commerceOrderId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce order notes where commerceOrderId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -182,38 +159,40 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByCommerceOrderId(long commerceOrderId,
-		int start, int end,
+	public List<CommerceOrderNote> findByCommerceOrderId(
+		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID;
-			finderArgs = new Object[] { commerceOrderId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceOrderId;
+			finderArgs = new Object[] {commerceOrderId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEORDERID;
+			finderPath = _finderPathWithPaginationFindByCommerceOrderId;
 			finderArgs = new Object[] {
-					commerceOrderId,
-					
-					start, end, orderByComparator
-				};
+				commerceOrderId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceOrderNote> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceOrderNote>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderNote commerceOrderNote : list) {
-					if ((commerceOrderId != commerceOrderNote.getCommerceOrderId())) {
+					if ((commerceOrderId !=
+							commerceOrderNote.getCommerceOrderId())) {
+
 						list = null;
 
 						break;
@@ -226,8 +205,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -238,11 +217,10 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			query.append(_FINDER_COLUMN_COMMERCEORDERID_COMMERCEORDERID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -260,16 +238,16 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				qPos.add(commerceOrderId);
 
 				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -298,11 +276,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote findByCommerceOrderId_First(long commerceOrderId,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+	public CommerceOrderNote findByCommerceOrderId_First(
+			long commerceOrderId,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = fetchByCommerceOrderId_First(commerceOrderId,
-				orderByComparator);
+
+		CommerceOrderNote commerceOrderNote = fetchByCommerceOrderId_First(
+			commerceOrderId, orderByComparator);
 
 		if (commerceOrderNote != null) {
 			return commerceOrderNote;
@@ -331,8 +311,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	public CommerceOrderNote fetchByCommerceOrderId_First(
 		long commerceOrderId,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
-		List<CommerceOrderNote> list = findByCommerceOrderId(commerceOrderId,
-				0, 1, orderByComparator);
+
+		List<CommerceOrderNote> list = findByCommerceOrderId(
+			commerceOrderId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -350,11 +331,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote findByCommerceOrderId_Last(long commerceOrderId,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+	public CommerceOrderNote findByCommerceOrderId_Last(
+			long commerceOrderId,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = fetchByCommerceOrderId_Last(commerceOrderId,
-				orderByComparator);
+
+		CommerceOrderNote commerceOrderNote = fetchByCommerceOrderId_Last(
+			commerceOrderId, orderByComparator);
 
 		if (commerceOrderNote != null) {
 			return commerceOrderNote;
@@ -380,16 +363,18 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the last matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote fetchByCommerceOrderId_Last(long commerceOrderId,
+	public CommerceOrderNote fetchByCommerceOrderId_Last(
+		long commerceOrderId,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
+
 		int count = countByCommerceOrderId(commerceOrderId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceOrderNote> list = findByCommerceOrderId(commerceOrderId,
-				count - 1, count, orderByComparator);
+		List<CommerceOrderNote> list = findByCommerceOrderId(
+			commerceOrderId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -409,10 +394,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public CommerceOrderNote[] findByCommerceOrderId_PrevAndNext(
-		long commerceOrderNoteId, long commerceOrderId,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+			long commerceOrderNoteId, long commerceOrderId,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = findByPrimaryKey(commerceOrderNoteId);
+
+		CommerceOrderNote commerceOrderNote = findByPrimaryKey(
+			commerceOrderNoteId);
 
 		Session session = null;
 
@@ -421,13 +408,15 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 			CommerceOrderNote[] array = new CommerceOrderNoteImpl[3];
 
-			array[0] = getByCommerceOrderId_PrevAndNext(session,
-					commerceOrderNote, commerceOrderId, orderByComparator, true);
+			array[0] = getByCommerceOrderId_PrevAndNext(
+				session, commerceOrderNote, commerceOrderId, orderByComparator,
+				true);
 
 			array[1] = commerceOrderNote;
 
-			array[2] = getByCommerceOrderId_PrevAndNext(session,
-					commerceOrderNote, commerceOrderId, orderByComparator, false);
+			array[2] = getByCommerceOrderId_PrevAndNext(
+				session, commerceOrderNote, commerceOrderId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -442,12 +431,14 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	protected CommerceOrderNote getByCommerceOrderId_PrevAndNext(
 		Session session, CommerceOrderNote commerceOrderNote,
 		long commerceOrderId,
-		OrderByComparator<CommerceOrderNote> orderByComparator, boolean previous) {
+		OrderByComparator<CommerceOrderNote> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -459,7 +450,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		query.append(_FINDER_COLUMN_COMMERCEORDERID_COMMERCEORDERID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -529,10 +521,11 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		qPos.add(commerceOrderId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceOrderNote);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceOrderNote)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -553,8 +546,11 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void removeByCommerceOrderId(long commerceOrderId) {
-		for (CommerceOrderNote commerceOrderNote : findByCommerceOrderId(
-				commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceOrderNote commerceOrderNote :
+				findByCommerceOrderId(
+					commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceOrderNote);
 		}
 	}
@@ -567,9 +563,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByCommerceOrderId(long commerceOrderId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEORDERID;
+		FinderPath finderPath = _finderPathCountByCommerceOrderId;
 
-		Object[] finderArgs = new Object[] { commerceOrderId };
+		Object[] finderArgs = new Object[] {commerceOrderId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -610,30 +606,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEORDERID_COMMERCEORDERID_2 =
-		"commerceOrderNote.commerceOrderId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_R = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_R",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_R",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceOrderNoteModelImpl.COMMERCEORDERID_COLUMN_BITMASK |
-			CommerceOrderNoteModelImpl.RESTRICTED_COLUMN_BITMASK |
-			CommerceOrderNoteModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_R = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_R",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEORDERID_COMMERCEORDERID_2 =
+			"commerceOrderNote.commerceOrderId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByC_R;
+	private FinderPath _finderPathWithoutPaginationFindByC_R;
+	private FinderPath _finderPathCountByC_R;
 
 	/**
 	 * Returns all the commerce order notes where commerceOrderId = &#63; and restricted = &#63;.
@@ -643,17 +622,19 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByC_R(long commerceOrderId,
-		boolean restricted) {
-		return findByC_R(commerceOrderId, restricted, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceOrderNote> findByC_R(
+		long commerceOrderId, boolean restricted) {
+
+		return findByC_R(
+			commerceOrderId, restricted, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce order notes where commerceOrderId = &#63; and restricted = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -663,8 +644,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByC_R(long commerceOrderId,
-		boolean restricted, int start, int end) {
+	public List<CommerceOrderNote> findByC_R(
+		long commerceOrderId, boolean restricted, int start, int end) {
+
 		return findByC_R(commerceOrderId, restricted, start, end, null);
 	}
 
@@ -672,7 +654,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce order notes where commerceOrderId = &#63; and restricted = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -683,18 +665,19 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByC_R(long commerceOrderId,
-		boolean restricted, int start, int end,
+	public List<CommerceOrderNote> findByC_R(
+		long commerceOrderId, boolean restricted, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
-		return findByC_R(commerceOrderId, restricted, start, end,
-			orderByComparator, true);
+
+		return findByC_R(
+			commerceOrderId, restricted, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce order notes where commerceOrderId = &#63; and restricted = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceOrderId the commerce order ID
@@ -706,39 +689,41 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findByC_R(long commerceOrderId,
-		boolean restricted, int start, int end,
+	public List<CommerceOrderNote> findByC_R(
+		long commerceOrderId, boolean restricted, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R;
-			finderArgs = new Object[] { commerceOrderId, restricted };
+			finderPath = _finderPathWithoutPaginationFindByC_R;
+			finderArgs = new Object[] {commerceOrderId, restricted};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_R;
+			finderPath = _finderPathWithPaginationFindByC_R;
 			finderArgs = new Object[] {
-					commerceOrderId, restricted,
-					
-					start, end, orderByComparator
-				};
+				commerceOrderId, restricted, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceOrderNote> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceOrderNote>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderNote commerceOrderNote : list) {
-					if ((commerceOrderId != commerceOrderNote.getCommerceOrderId()) ||
-							(restricted != commerceOrderNote.isRestricted())) {
+					if ((commerceOrderId !=
+							commerceOrderNote.getCommerceOrderId()) ||
+						(restricted != commerceOrderNote.isRestricted())) {
+
 						list = null;
 
 						break;
@@ -751,8 +736,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -765,11 +750,10 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			query.append(_FINDER_COLUMN_C_R_RESTRICTED_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -789,16 +773,16 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				qPos.add(restricted);
 
 				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -828,12 +812,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote findByC_R_First(long commerceOrderId,
-		boolean restricted,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+	public CommerceOrderNote findByC_R_First(
+			long commerceOrderId, boolean restricted,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = fetchByC_R_First(commerceOrderId,
-				restricted, orderByComparator);
+
+		CommerceOrderNote commerceOrderNote = fetchByC_R_First(
+			commerceOrderId, restricted, orderByComparator);
 
 		if (commerceOrderNote != null) {
 			return commerceOrderNote;
@@ -863,11 +848,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the first matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote fetchByC_R_First(long commerceOrderId,
-		boolean restricted,
+	public CommerceOrderNote fetchByC_R_First(
+		long commerceOrderId, boolean restricted,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
-		List<CommerceOrderNote> list = findByC_R(commerceOrderId, restricted,
-				0, 1, orderByComparator);
+
+		List<CommerceOrderNote> list = findByC_R(
+			commerceOrderId, restricted, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -886,12 +872,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote findByC_R_Last(long commerceOrderId,
-		boolean restricted,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+	public CommerceOrderNote findByC_R_Last(
+			long commerceOrderId, boolean restricted,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = fetchByC_R_Last(commerceOrderId,
-				restricted, orderByComparator);
+
+		CommerceOrderNote commerceOrderNote = fetchByC_R_Last(
+			commerceOrderId, restricted, orderByComparator);
 
 		if (commerceOrderNote != null) {
 			return commerceOrderNote;
@@ -921,17 +908,18 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the last matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote fetchByC_R_Last(long commerceOrderId,
-		boolean restricted,
+	public CommerceOrderNote fetchByC_R_Last(
+		long commerceOrderId, boolean restricted,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
+
 		int count = countByC_R(commerceOrderId, restricted);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceOrderNote> list = findByC_R(commerceOrderId, restricted,
-				count - 1, count, orderByComparator);
+		List<CommerceOrderNote> list = findByC_R(
+			commerceOrderId, restricted, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -951,11 +939,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a commerce order note with the primary key could not be found
 	 */
 	@Override
-	public CommerceOrderNote[] findByC_R_PrevAndNext(long commerceOrderNoteId,
-		long commerceOrderId, boolean restricted,
-		OrderByComparator<CommerceOrderNote> orderByComparator)
+	public CommerceOrderNote[] findByC_R_PrevAndNext(
+			long commerceOrderNoteId, long commerceOrderId, boolean restricted,
+			OrderByComparator<CommerceOrderNote> orderByComparator)
 		throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = findByPrimaryKey(commerceOrderNoteId);
+
+		CommerceOrderNote commerceOrderNote = findByPrimaryKey(
+			commerceOrderNoteId);
 
 		Session session = null;
 
@@ -964,13 +954,15 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 			CommerceOrderNote[] array = new CommerceOrderNoteImpl[3];
 
-			array[0] = getByC_R_PrevAndNext(session, commerceOrderNote,
-					commerceOrderId, restricted, orderByComparator, true);
+			array[0] = getByC_R_PrevAndNext(
+				session, commerceOrderNote, commerceOrderId, restricted,
+				orderByComparator, true);
 
 			array[1] = commerceOrderNote;
 
-			array[2] = getByC_R_PrevAndNext(session, commerceOrderNote,
-					commerceOrderId, restricted, orderByComparator, false);
+			array[2] = getByC_R_PrevAndNext(
+				session, commerceOrderNote, commerceOrderId, restricted,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -982,15 +974,17 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		}
 	}
 
-	protected CommerceOrderNote getByC_R_PrevAndNext(Session session,
-		CommerceOrderNote commerceOrderNote, long commerceOrderId,
-		boolean restricted,
-		OrderByComparator<CommerceOrderNote> orderByComparator, boolean previous) {
+	protected CommerceOrderNote getByC_R_PrevAndNext(
+		Session session, CommerceOrderNote commerceOrderNote,
+		long commerceOrderId, boolean restricted,
+		OrderByComparator<CommerceOrderNote> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1004,7 +998,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		query.append(_FINDER_COLUMN_C_R_RESTRICTED_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1076,10 +1071,11 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		qPos.add(restricted);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceOrderNote);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceOrderNote)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1101,8 +1097,11 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void removeByC_R(long commerceOrderId, boolean restricted) {
-		for (CommerceOrderNote commerceOrderNote : findByC_R(commerceOrderId,
-				restricted, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceOrderNote commerceOrderNote :
+				findByC_R(
+					commerceOrderId, restricted, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceOrderNote);
 		}
 	}
@@ -1116,9 +1115,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByC_R(long commerceOrderId, boolean restricted) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_R;
+		FinderPath finderPath = _finderPathCountByC_R;
 
-		Object[] finderArgs = new Object[] { commerceOrderId, restricted };
+		Object[] finderArgs = new Object[] {commerceOrderId, restricted};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1163,22 +1162,17 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_R_COMMERCEORDERID_2 = "commerceOrderNote.commerceOrderId = ? AND ";
-	private static final String _FINDER_COLUMN_C_R_RESTRICTED_2 = "commerceOrderNote.restricted = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
-			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_ERC",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceOrderNoteModelImpl.COMPANYID_COLUMN_BITMASK |
-			CommerceOrderNoteModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_ERC = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_C_R_COMMERCEORDERID_2 =
+		"commerceOrderNote.commerceOrderId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_R_RESTRICTED_2 =
+		"commerceOrderNote.restricted = ?";
+
+	private FinderPath _finderPathFetchByC_ERC;
+	private FinderPath _finderPathCountByC_ERC;
 
 	/**
-	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchOrderNoteException} if it could not be found.
+	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or throws a <code>NoSuchOrderNoteException</code> if it could not be found.
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
@@ -1186,10 +1180,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote findByC_ERC(long companyId,
-		String externalReferenceCode) throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = fetchByC_ERC(companyId,
-				externalReferenceCode);
+	public CommerceOrderNote findByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchOrderNoteException {
+
+		CommerceOrderNote commerceOrderNote = fetchByC_ERC(
+			companyId, externalReferenceCode);
 
 		if (commerceOrderNote == null) {
 			StringBundler msg = new StringBundler(6);
@@ -1222,8 +1218,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote fetchByC_ERC(long companyId,
-		String externalReferenceCode) {
+	public CommerceOrderNote fetchByC_ERC(
+		long companyId, String externalReferenceCode) {
+
 		return fetchByC_ERC(companyId, externalReferenceCode, true);
 	}
 
@@ -1236,23 +1233,29 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
-	public CommerceOrderNote fetchByC_ERC(long companyId,
-		String externalReferenceCode, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+	public CommerceOrderNote fetchByC_ERC(
+		long companyId, String externalReferenceCode,
+		boolean retrieveFromCache) {
+
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
+
+		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_ERC,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_ERC, finderArgs, this);
 		}
 
 		if (result instanceof CommerceOrderNote) {
 			CommerceOrderNote commerceOrderNote = (CommerceOrderNote)result;
 
 			if ((companyId != commerceOrderNote.getCompanyId()) ||
-					!Objects.equals(externalReferenceCode,
-						commerceOrderNote.getExternalReferenceCode())) {
+				!Objects.equals(
+					externalReferenceCode,
+					commerceOrderNote.getExternalReferenceCode())) {
+
 				result = null;
 			}
 		}
@@ -1266,10 +1269,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 			boolean bindExternalReferenceCode = false;
 
-			if (externalReferenceCode == null) {
-				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
-			}
-			else if (externalReferenceCode.equals("")) {
+			if (externalReferenceCode.isEmpty()) {
 				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
 			}
 			else {
@@ -1298,8 +1298,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				List<CommerceOrderNote> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
-						finderArgs, list);
+					finderCache.putResult(
+						_finderPathFetchByC_ERC, finderArgs, list);
 				}
 				else {
 					if (list.size() > 1) {
@@ -1308,8 +1308,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"CommerceOrderNotePersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
-								StringUtil.merge(finderArgs) +
-								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
 					}
 
@@ -1321,7 +1321,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
 
 				throw processException(e);
 			}
@@ -1346,10 +1346,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the commerce order note that was removed
 	 */
 	@Override
-	public CommerceOrderNote removeByC_ERC(long companyId,
-		String externalReferenceCode) throws NoSuchOrderNoteException {
-		CommerceOrderNote commerceOrderNote = findByC_ERC(companyId,
-				externalReferenceCode);
+	public CommerceOrderNote removeByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchOrderNoteException {
+
+		CommerceOrderNote commerceOrderNote = findByC_ERC(
+			companyId, externalReferenceCode);
 
 		return remove(commerceOrderNote);
 	}
@@ -1363,9 +1365,11 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByC_ERC(long companyId, String externalReferenceCode) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_ERC;
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+		FinderPath finderPath = _finderPathCountByC_ERC;
+
+		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1378,10 +1382,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 			boolean bindExternalReferenceCode = false;
 
-			if (externalReferenceCode == null) {
-				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
-			}
-			else if (externalReferenceCode.equals("")) {
+			if (externalReferenceCode.isEmpty()) {
 				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
 			}
 			else {
@@ -1424,10 +1425,14 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 = "commerceOrderNote.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1 = "commerceOrderNote.externalReferenceCode IS NULL";
-	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 = "commerceOrderNote.externalReferenceCode = ?";
-	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 = "(commerceOrderNote.externalReferenceCode IS NULL OR commerceOrderNote.externalReferenceCode = '')";
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 =
+		"commerceOrderNote.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 =
+		"commerceOrderNote.externalReferenceCode = ?";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 =
+		"(commerceOrderNote.externalReferenceCode IS NULL OR commerceOrderNote.externalReferenceCode = '')";
 
 	public CommerceOrderNotePersistenceImpl() {
 		setModelClass(CommerceOrderNote.class);
@@ -1440,15 +1445,18 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void cacheResult(CommerceOrderNote commerceOrderNote) {
-		entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey(),
 			commerceOrderNote);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+		finderCache.putResult(
+			_finderPathFetchByC_ERC,
 			new Object[] {
 				commerceOrderNote.getCompanyId(),
 				commerceOrderNote.getExternalReferenceCode()
-			}, commerceOrderNote);
+			},
+			commerceOrderNote);
 
 		commerceOrderNote.resetOriginalValues();
 	}
@@ -1462,9 +1470,10 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	public void cacheResult(List<CommerceOrderNote> commerceOrderNotes) {
 		for (CommerceOrderNote commerceOrderNote : commerceOrderNotes) {
 			if (entityCache.getResult(
-						CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceOrderNoteImpl.class,
-						commerceOrderNote.getPrimaryKey()) == null) {
+					CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceOrderNoteImpl.class,
+					commerceOrderNote.getPrimaryKey()) == null) {
+
 				cacheResult(commerceOrderNote);
 			}
 			else {
@@ -1477,7 +1486,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Clears the cache for all commerce order notes.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1493,19 +1502,20 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Clears the cache for the commerce order note.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceOrderNote commerceOrderNote) {
-		entityCache.removeResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceOrderNoteModelImpl)commerceOrderNote,
-			true);
+		clearUniqueFindersCache(
+			(CommerceOrderNoteModelImpl)commerceOrderNote, true);
 	}
 
 	@Override
@@ -1514,49 +1524,53 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CommerceOrderNote commerceOrderNote : commerceOrderNotes) {
-			entityCache.removeResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			entityCache.removeResult(
+				CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceOrderNoteModelImpl)commerceOrderNote,
-				true);
+			clearUniqueFindersCache(
+				(CommerceOrderNoteModelImpl)commerceOrderNote, true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl) {
-		Object[] args = new Object[] {
-				commerceOrderNoteModelImpl.getCompanyId(),
-				commerceOrderNoteModelImpl.getExternalReferenceCode()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C_ERC, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC, args,
-			commerceOrderNoteModelImpl, false);
+		Object[] args = new Object[] {
+			commerceOrderNoteModelImpl.getCompanyId(),
+			commerceOrderNoteModelImpl.getExternalReferenceCode()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_ERC, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_ERC, args, commerceOrderNoteModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceOrderNoteModelImpl.getCompanyId(),
-					commerceOrderNoteModelImpl.getExternalReferenceCode()
-				};
+				commerceOrderNoteModelImpl.getCompanyId(),
+				commerceOrderNoteModelImpl.getExternalReferenceCode()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
 		}
 
 		if ((commerceOrderNoteModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C_ERC.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceOrderNoteModelImpl.getOriginalCompanyId(),
-					commerceOrderNoteModelImpl.getOriginalExternalReferenceCode()
-				};
+			 _finderPathFetchByC_ERC.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
+			Object[] args = new Object[] {
+				commerceOrderNoteModelImpl.getOriginalCompanyId(),
+				commerceOrderNoteModelImpl.getOriginalExternalReferenceCode()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
 		}
 	}
 
@@ -1588,6 +1602,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceOrderNote remove(long commerceOrderNoteId)
 		throws NoSuchOrderNoteException {
+
 		return remove((Serializable)commerceOrderNoteId);
 	}
 
@@ -1601,21 +1616,23 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceOrderNote remove(Serializable primaryKey)
 		throws NoSuchOrderNoteException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceOrderNote commerceOrderNote = (CommerceOrderNote)session.get(CommerceOrderNoteImpl.class,
-					primaryKey);
+			CommerceOrderNote commerceOrderNote =
+				(CommerceOrderNote)session.get(
+					CommerceOrderNoteImpl.class, primaryKey);
 
 			if (commerceOrderNote == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchOrderNoteException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchOrderNoteException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceOrderNote);
@@ -1632,15 +1649,18 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	}
 
 	@Override
-	protected CommerceOrderNote removeImpl(CommerceOrderNote commerceOrderNote) {
+	protected CommerceOrderNote removeImpl(
+		CommerceOrderNote commerceOrderNote) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceOrderNote)) {
-				commerceOrderNote = (CommerceOrderNote)session.get(CommerceOrderNoteImpl.class,
-						commerceOrderNote.getPrimaryKeyObj());
+				commerceOrderNote = (CommerceOrderNote)session.get(
+					CommerceOrderNoteImpl.class,
+					commerceOrderNote.getPrimaryKeyObj());
 			}
 
 			if (commerceOrderNote != null) {
@@ -1669,21 +1689,24 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceOrderNote.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceOrderNote);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceOrderNote);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceOrderNote proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceOrderNote implementation " +
-				commerceOrderNote.getClass());
+					commerceOrderNote.getClass());
 		}
 
-		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl = (CommerceOrderNoteModelImpl)commerceOrderNote;
+		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl =
+			(CommerceOrderNoteModelImpl)commerceOrderNote;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1692,8 +1715,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				commerceOrderNote.setCreateDate(now);
 			}
 			else {
-				commerceOrderNote.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceOrderNote.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1702,8 +1725,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				commerceOrderNote.setModifiedDate(now);
 			}
 			else {
-				commerceOrderNote.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceOrderNote.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1718,7 +1741,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				commerceOrderNote.setNew(false);
 			}
 			else {
-				commerceOrderNote = (CommerceOrderNote)session.merge(commerceOrderNote);
+				commerceOrderNote = (CommerceOrderNote)session.merge(
+					commerceOrderNote);
 			}
 		}
 		catch (Exception e) {
@@ -1733,75 +1757,78 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		if (!CommerceOrderNoteModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceOrderNoteModelImpl.getCommerceOrderId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCommerceOrderId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceOrderId, args);
+
+			args = new Object[] {
+				commerceOrderNoteModelImpl.getCommerceOrderId(),
+				commerceOrderNoteModelImpl.isRestricted()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_R, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_R, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceOrderNoteModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceOrderId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceOrderNoteModelImpl.getOriginalCommerceOrderId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceOrderId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceOrderId, args);
+
+				args = new Object[] {
 					commerceOrderNoteModelImpl.getCommerceOrderId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEORDERID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceOrderId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceOrderId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceOrderNoteModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_R.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceOrderNoteModelImpl.getOriginalCommerceOrderId(),
+					commerceOrderNoteModelImpl.getOriginalRestricted()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_R, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_R, args);
+
+				args = new Object[] {
 					commerceOrderNoteModelImpl.getCommerceOrderId(),
 					commerceOrderNoteModelImpl.isRestricted()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_R, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceOrderNoteModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceOrderNoteModelImpl.getOriginalCommerceOrderId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEORDERID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID,
-					args);
-
-				args = new Object[] {
-						commerceOrderNoteModelImpl.getCommerceOrderId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEORDERID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEORDERID,
-					args);
-			}
-
-			if ((commerceOrderNoteModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceOrderNoteModelImpl.getOriginalCommerceOrderId(),
-						commerceOrderNoteModelImpl.getOriginalRestricted()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_R, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R,
-					args);
-
-				args = new Object[] {
-						commerceOrderNoteModelImpl.getCommerceOrderId(),
-						commerceOrderNoteModelImpl.isRestricted()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_R, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_R,
-					args);
+				finderCache.removeResult(_finderPathCountByC_R, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_R, args);
 			}
 		}
 
-		entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey(),
 			commerceOrderNote, false);
 
@@ -1814,7 +1841,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	}
 
 	/**
-	 * Returns the commerce order note with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce order note with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce order note
 	 * @return the commerce order note
@@ -1823,6 +1850,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceOrderNote findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchOrderNoteException {
+
 		CommerceOrderNote commerceOrderNote = fetchByPrimaryKey(primaryKey);
 
 		if (commerceOrderNote == null) {
@@ -1830,15 +1858,15 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchOrderNoteException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchOrderNoteException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceOrderNote;
 	}
 
 	/**
-	 * Returns the commerce order note with the primary key or throws a {@link NoSuchOrderNoteException} if it could not be found.
+	 * Returns the commerce order note with the primary key or throws a <code>NoSuchOrderNoteException</code> if it could not be found.
 	 *
 	 * @param commerceOrderNoteId the primary key of the commerce order note
 	 * @return the commerce order note
@@ -1847,6 +1875,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceOrderNote findByPrimaryKey(long commerceOrderNoteId)
 		throws NoSuchOrderNoteException {
+
 		return findByPrimaryKey((Serializable)commerceOrderNoteId);
 	}
 
@@ -1858,8 +1887,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public CommerceOrderNote fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceOrderNoteImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -1873,19 +1903,21 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			try {
 				session = openSession();
 
-				commerceOrderNote = (CommerceOrderNote)session.get(CommerceOrderNoteImpl.class,
-						primaryKey);
+				commerceOrderNote = (CommerceOrderNote)session.get(
+					CommerceOrderNoteImpl.class, primaryKey);
 
 				if (commerceOrderNote != null) {
 					cacheResult(commerceOrderNote);
 				}
 				else {
-					entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceOrderNoteImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceOrderNoteImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1912,11 +1944,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public Map<Serializable, CommerceOrderNote> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceOrderNote> map = new HashMap<Serializable, CommerceOrderNote>();
+		Map<Serializable, CommerceOrderNote> map =
+			new HashMap<Serializable, CommerceOrderNote>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -1935,8 +1969,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceOrderNoteImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceOrderNoteImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1956,8 +1991,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEORDERNOTE_WHERE_PKS_IN);
 
@@ -1980,16 +2015,21 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceOrderNote commerceOrderNote : (List<CommerceOrderNote>)q.list()) {
-				map.put(commerceOrderNote.getPrimaryKeyObj(), commerceOrderNote);
+			for (CommerceOrderNote commerceOrderNote :
+					(List<CommerceOrderNote>)q.list()) {
+
+				map.put(
+					commerceOrderNote.getPrimaryKeyObj(), commerceOrderNote);
 
 				cacheResult(commerceOrderNote);
 
-				uncachedPrimaryKeys.remove(commerceOrderNote.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceOrderNote.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceOrderNoteImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -2017,7 +2057,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns a range of all the commerce order notes.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce order notes
@@ -2033,7 +2073,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce order notes.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce order notes
@@ -2042,8 +2082,10 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findAll(int start, int end,
+	public List<CommerceOrderNote> findAll(
+		int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2051,7 +2093,7 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce order notes.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce order notes
@@ -2061,29 +2103,32 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of commerce order notes
 	 */
 	@Override
-	public List<CommerceOrderNote> findAll(int start, int end,
+	public List<CommerceOrderNote> findAll(
+		int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceOrderNote> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceOrderNote>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2091,13 +2136,13 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEORDERNOTE);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2117,16 +2162,16 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceOrderNote>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2164,8 +2209,8 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2177,12 +2222,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2203,6 +2248,91 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 	 * Initializes the commerce order note persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceOrderId = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceOrderId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceOrderId = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCommerceOrderId",
+			new String[] {Long.class.getName()},
+			CommerceOrderNoteModelImpl.COMMERCEORDERID_COLUMN_BITMASK |
+			CommerceOrderNoteModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceOrderId = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCommerceOrderId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByC_R = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByC_R",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_R = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_R",
+			new String[] {Long.class.getName(), Boolean.class.getName()},
+			CommerceOrderNoteModelImpl.COMMERCEORDERID_COLUMN_BITMASK |
+			CommerceOrderNoteModelImpl.RESTRICTED_COLUMN_BITMASK |
+			CommerceOrderNoteModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByC_R = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_R",
+			new String[] {Long.class.getName(), Boolean.class.getName()});
+
+		_finderPathFetchByC_ERC = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceOrderNoteModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceOrderNoteModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+
+		_finderPathCountByC_ERC = new FinderPath(
+			CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {
@@ -2214,17 +2344,37 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEORDERNOTE = "SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote";
-	private static final String _SQL_SELECT_COMMERCEORDERNOTE_WHERE_PKS_IN = "SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote WHERE commerceOrderNoteId IN (";
-	private static final String _SQL_SELECT_COMMERCEORDERNOTE_WHERE = "SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote WHERE ";
-	private static final String _SQL_COUNT_COMMERCEORDERNOTE = "SELECT COUNT(commerceOrderNote) FROM CommerceOrderNote commerceOrderNote";
-	private static final String _SQL_COUNT_COMMERCEORDERNOTE_WHERE = "SELECT COUNT(commerceOrderNote) FROM CommerceOrderNote commerceOrderNote WHERE ";
+
+	private static final String _SQL_SELECT_COMMERCEORDERNOTE =
+		"SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote";
+
+	private static final String _SQL_SELECT_COMMERCEORDERNOTE_WHERE_PKS_IN =
+		"SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote WHERE commerceOrderNoteId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEORDERNOTE_WHERE =
+		"SELECT commerceOrderNote FROM CommerceOrderNote commerceOrderNote WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEORDERNOTE =
+		"SELECT COUNT(commerceOrderNote) FROM CommerceOrderNote commerceOrderNote";
+
+	private static final String _SQL_COUNT_COMMERCEORDERNOTE_WHERE =
+		"SELECT COUNT(commerceOrderNote) FROM CommerceOrderNote commerceOrderNote WHERE ";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceOrderNote.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceOrderNote exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceOrderNote exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceOrderNotePersistenceImpl.class);
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceOrderNote exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceOrderNote exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderNotePersistenceImpl.class);
+
 }

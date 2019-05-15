@@ -28,71 +28,90 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceDiscountRelServiceWrapper
 	implements CommerceDiscountRelService,
-		ServiceWrapper<CommerceDiscountRelService> {
+			   ServiceWrapper<CommerceDiscountRelService> {
+
 	public CommerceDiscountRelServiceWrapper(
 		CommerceDiscountRelService commerceDiscountRelService) {
+
 		_commerceDiscountRelService = commerceDiscountRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscountRel addCommerceDiscountRel(
-		long commerceDiscountId, String className, long classPK,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.discount.model.CommerceDiscountRel
+			addCommerceDiscountRel(
+				long commerceDiscountId, String className, long classPK,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.addCommerceDiscountRel(commerceDiscountId,
-			className, classPK, serviceContext);
+
+		return _commerceDiscountRelService.addCommerceDiscountRel(
+			commerceDiscountId, className, classPK, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceDiscountRel(long commerceDiscountRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceDiscountRelService.deleteCommerceDiscountRel(commerceDiscountRelId);
+
+		_commerceDiscountRelService.deleteCommerceDiscountRel(
+			commerceDiscountRelId);
 	}
 
 	@Override
 	public long[] getClassPKs(long commerceDiscountId, String className)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.getClassPKs(commerceDiscountId,
-			className);
+
+		return _commerceDiscountRelService.getClassPKs(
+			commerceDiscountId, className);
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscountRel getCommerceDiscountRel(
-		long commerceDiscountRelId)
+	public com.liferay.commerce.discount.model.CommerceDiscountRel
+			getCommerceDiscountRel(long commerceDiscountRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.getCommerceDiscountRel(commerceDiscountRelId);
+
+		return _commerceDiscountRelService.getCommerceDiscountRel(
+			commerceDiscountRelId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.discount.model.CommerceDiscountRel> getCommerceDiscountRels(
-		long commerceDiscountId, String className)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.getCommerceDiscountRels(commerceDiscountId,
-			className);
+	public java.util.List
+		<com.liferay.commerce.discount.model.CommerceDiscountRel>
+				getCommerceDiscountRels(
+					long commerceDiscountId, String className)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountRelService.getCommerceDiscountRels(
+			commerceDiscountId, className);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.discount.model.CommerceDiscountRel> getCommerceDiscountRels(
-		long commerceDiscountId, String className, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscountRel> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.getCommerceDiscountRels(commerceDiscountId,
-			className, start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.discount.model.CommerceDiscountRel>
+				getCommerceDiscountRels(
+					long commerceDiscountId, String className, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.discount.model.
+							CommerceDiscountRel> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountRelService.getCommerceDiscountRels(
+			commerceDiscountId, className, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceDiscountRelsCount(long commerceDiscountId,
-		String className)
+	public int getCommerceDiscountRelsCount(
+			long commerceDiscountId, String className)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRelService.getCommerceDiscountRelsCount(commerceDiscountId,
-			className);
+
+		return _commerceDiscountRelService.getCommerceDiscountRelsCount(
+			commerceDiscountId, className);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceDiscountRelService.getOSGiServiceIdentifier();
@@ -106,8 +125,10 @@ public class CommerceDiscountRelServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceDiscountRelService commerceDiscountRelService) {
+
 		_commerceDiscountRelService = commerceDiscountRelService;
 	}
 
 	private CommerceDiscountRelService _commerceDiscountRelService;
+
 }

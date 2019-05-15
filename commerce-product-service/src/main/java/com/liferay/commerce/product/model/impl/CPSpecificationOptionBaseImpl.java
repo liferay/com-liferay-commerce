@@ -34,18 +34,22 @@ import com.liferay.commerce.product.service.CPSpecificationOptionLocalServiceUti
 @ProviderType
 public abstract class CPSpecificationOptionBaseImpl
 	extends CPSpecificationOptionModelImpl implements CPSpecificationOption {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp specification option model instance should use the {@link CPSpecificationOption} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp specification option model instance should use the <code>CPSpecificationOption</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPSpecificationOptionLocalServiceUtil.addCPSpecificationOption(this);
+			CPSpecificationOptionLocalServiceUtil.addCPSpecificationOption(
+				this);
 		}
 		else {
-			CPSpecificationOptionLocalServiceUtil.updateCPSpecificationOption(this);
+			CPSpecificationOptionLocalServiceUtil.updateCPSpecificationOption(
+				this);
 		}
 	}
+
 }

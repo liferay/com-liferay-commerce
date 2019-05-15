@@ -26,17 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPSpecificationOptionServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPSpecificationOptionServiceSoap
  * @generated
  */
 @ProviderType
 public class CPSpecificationOptionSoap implements Serializable {
+
 	public static CPSpecificationOptionSoap toSoapModel(
 		CPSpecificationOption model) {
+
 		CPSpecificationOptionSoap soapModel = new CPSpecificationOptionSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPSpecificationOptionId(model.getCPSpecificationOptionId());
+		soapModel.setCPSpecificationOptionId(
+			model.getCPSpecificationOptionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -55,7 +57,9 @@ public class CPSpecificationOptionSoap implements Serializable {
 
 	public static CPSpecificationOptionSoap[] toSoapModels(
 		CPSpecificationOption[] models) {
-		CPSpecificationOptionSoap[] soapModels = new CPSpecificationOptionSoap[models.length];
+
+		CPSpecificationOptionSoap[] soapModels =
+			new CPSpecificationOptionSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -66,10 +70,12 @@ public class CPSpecificationOptionSoap implements Serializable {
 
 	public static CPSpecificationOptionSoap[][] toSoapModels(
 		CPSpecificationOption[][] models) {
+
 		CPSpecificationOptionSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPSpecificationOptionSoap[models.length][models[0].length];
+			soapModels =
+				new CPSpecificationOptionSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPSpecificationOptionSoap[0][0];
@@ -84,13 +90,16 @@ public class CPSpecificationOptionSoap implements Serializable {
 
 	public static CPSpecificationOptionSoap[] toSoapModels(
 		List<CPSpecificationOption> models) {
-		List<CPSpecificationOptionSoap> soapModels = new ArrayList<CPSpecificationOptionSoap>(models.size());
+
+		List<CPSpecificationOptionSoap> soapModels =
+			new ArrayList<CPSpecificationOptionSoap>(models.size());
 
 		for (CPSpecificationOption model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPSpecificationOptionSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPSpecificationOptionSoap[soapModels.size()]);
 	}
 
 	public CPSpecificationOptionSoap() {
@@ -234,4 +243,5 @@ public class CPSpecificationOptionSoap implements Serializable {
 	private boolean _facetable;
 	private String _key;
 	private Date _lastPublishDate;
+
 }

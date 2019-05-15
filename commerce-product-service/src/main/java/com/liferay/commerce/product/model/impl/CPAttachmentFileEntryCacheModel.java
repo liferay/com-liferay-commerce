@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPAttachmentFileEntry in entity cache.
  *
  * @author Marco Leo
- * @see CPAttachmentFileEntry
  * @generated
  */
 @ProviderType
-public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentFileEntry>,
-	Externalizable {
+public class CPAttachmentFileEntryCacheModel
+	implements CacheModel<CPAttachmentFileEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 			return false;
 		}
 
-		CPAttachmentFileEntryCacheModel cpAttachmentFileEntryCacheModel = (CPAttachmentFileEntryCacheModel)obj;
+		CPAttachmentFileEntryCacheModel cpAttachmentFileEntryCacheModel =
+			(CPAttachmentFileEntryCacheModel)obj;
 
-		if (CPAttachmentFileEntryId == cpAttachmentFileEntryCacheModel.CPAttachmentFileEntryId) {
+		if (CPAttachmentFileEntryId ==
+				cpAttachmentFileEntryCacheModel.CPAttachmentFileEntryId) {
+
 			return true;
 		}
 
@@ -120,7 +122,8 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 
 	@Override
 	public CPAttachmentFileEntry toEntityModel() {
-		CPAttachmentFileEntryImpl cpAttachmentFileEntryImpl = new CPAttachmentFileEntryImpl();
+		CPAttachmentFileEntryImpl cpAttachmentFileEntryImpl =
+			new CPAttachmentFileEntryImpl();
 
 		if (uuid == null) {
 			cpAttachmentFileEntryImpl.setUuid("");
@@ -133,10 +136,12 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 			cpAttachmentFileEntryImpl.setExternalReferenceCode("");
 		}
 		else {
-			cpAttachmentFileEntryImpl.setExternalReferenceCode(externalReferenceCode);
+			cpAttachmentFileEntryImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
-		cpAttachmentFileEntryImpl.setCPAttachmentFileEntryId(CPAttachmentFileEntryId);
+		cpAttachmentFileEntryImpl.setCPAttachmentFileEntryId(
+			CPAttachmentFileEntryId);
 		cpAttachmentFileEntryImpl.setGroupId(groupId);
 		cpAttachmentFileEntryImpl.setCompanyId(companyId);
 		cpAttachmentFileEntryImpl.setUserId(userId);
@@ -177,7 +182,8 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 			cpAttachmentFileEntryImpl.setExpirationDate(null);
 		}
 		else {
-			cpAttachmentFileEntryImpl.setExpirationDate(new Date(expirationDate));
+			cpAttachmentFileEntryImpl.setExpirationDate(
+				new Date(expirationDate));
 		}
 
 		if (title == null) {
@@ -201,8 +207,8 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 			cpAttachmentFileEntryImpl.setLastPublishDate(null);
 		}
 		else {
-			cpAttachmentFileEntryImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			cpAttachmentFileEntryImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		cpAttachmentFileEntryImpl.setStatus(status);
@@ -266,8 +272,7 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -364,4 +369,5 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

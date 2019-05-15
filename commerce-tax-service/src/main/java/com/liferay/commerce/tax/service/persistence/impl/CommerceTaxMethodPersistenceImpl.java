@@ -21,7 +21,6 @@ import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl;
 import com.liferay.commerce.tax.model.impl.CommerceTaxMethodModelImpl;
 import com.liferay.commerce.tax.service.persistence.CommerceTaxMethodPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -65,56 +64,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CommerceTaxMethodPersistence
- * @see com.liferay.commerce.tax.service.persistence.CommerceTaxMethodUtil
  * @generated
  */
 @ProviderType
-public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<CommerceTaxMethod>
+public class CommerceTaxMethodPersistenceImpl
+	extends BasePersistenceImpl<CommerceTaxMethod>
 	implements CommerceTaxMethodPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceTaxMethodUtil} to access the commerce tax method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceTaxMethodUtil</code> to access the commerce tax method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceTaxMethodImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceTaxMethodModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceTaxMethodImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the commerce tax methods where groupId = &#63;.
@@ -124,14 +100,15 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public List<CommerceTaxMethod> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce tax methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -140,8 +117,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByGroupId(long groupId, int start,
-		int end) {
+	public List<CommerceTaxMethod> findByGroupId(
+		long groupId, int start, int end) {
+
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -149,7 +127,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -159,8 +137,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceTaxMethod> orderByComparator) {
+	public List<CommerceTaxMethod> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -168,7 +148,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -179,29 +159,32 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceTaxMethod> orderByComparator,
+	public List<CommerceTaxMethod> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceTaxMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceTaxMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceTaxMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxMethod commerceTaxMethod : list) {
@@ -218,8 +201,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -230,11 +213,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -252,16 +234,16 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -290,11 +272,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchTaxMethodException if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod findByGroupId_First(long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+	public CommerceTaxMethod findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CommerceTaxMethod commerceTaxMethod = fetchByGroupId_First(
+			groupId, orderByComparator);
 
 		if (commerceTaxMethod != null) {
 			return commerceTaxMethod;
@@ -320,10 +304,11 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the first matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod fetchByGroupId_First(long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator) {
-		List<CommerceTaxMethod> list = findByGroupId(groupId, 0, 1,
-				orderByComparator);
+	public CommerceTaxMethod fetchByGroupId_First(
+		long groupId, OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
+		List<CommerceTaxMethod> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -341,11 +326,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchTaxMethodException if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+	public CommerceTaxMethod findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CommerceTaxMethod commerceTaxMethod = fetchByGroupId_Last(
+			groupId, orderByComparator);
 
 		if (commerceTaxMethod != null) {
 			return commerceTaxMethod;
@@ -371,16 +358,17 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the last matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod fetchByGroupId_Last(long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator) {
+	public CommerceTaxMethod fetchByGroupId_Last(
+		long groupId, OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceTaxMethod> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
+		List<CommerceTaxMethod> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -400,10 +388,12 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public CommerceTaxMethod[] findByGroupId_PrevAndNext(
-		long commerceTaxMethodId, long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+			long commerceTaxMethodId, long groupId,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = findByPrimaryKey(commerceTaxMethodId);
+
+		CommerceTaxMethod commerceTaxMethod = findByPrimaryKey(
+			commerceTaxMethodId);
 
 		Session session = null;
 
@@ -412,13 +402,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 			CommerceTaxMethod[] array = new CommerceTaxMethodImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, commerceTaxMethod,
-					groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, commerceTaxMethod, groupId, orderByComparator, true);
 
 			array[1] = commerceTaxMethod;
 
-			array[2] = getByGroupId_PrevAndNext(session, commerceTaxMethod,
-					groupId, orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, commerceTaxMethod, groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -430,14 +420,16 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		}
 	}
 
-	protected CommerceTaxMethod getByGroupId_PrevAndNext(Session session,
-		CommerceTaxMethod commerceTaxMethod, long groupId,
-		OrderByComparator<CommerceTaxMethod> orderByComparator, boolean previous) {
+	protected CommerceTaxMethod getByGroupId_PrevAndNext(
+		Session session, CommerceTaxMethod commerceTaxMethod, long groupId,
+		OrderByComparator<CommerceTaxMethod> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -449,7 +441,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -519,10 +512,11 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceTaxMethod);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceTaxMethod)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -543,8 +537,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CommerceTaxMethod commerceTaxMethod : findByGroupId(groupId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceTaxMethod commerceTaxMethod :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceTaxMethod);
 		}
 	}
@@ -557,9 +553,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -600,21 +596,14 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceTaxMethod.groupId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_E = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_E",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceTaxMethodModelImpl.ENGINEKEY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_E = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_E",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"commerceTaxMethod.groupId = ?";
+
+	private FinderPath _finderPathFetchByG_E;
+	private FinderPath _finderPathCountByG_E;
 
 	/**
-	 * Returns the commerce tax method where groupId = &#63; and engineKey = &#63; or throws a {@link NoSuchTaxMethodException} if it could not be found.
+	 * Returns the commerce tax method where groupId = &#63; and engineKey = &#63; or throws a <code>NoSuchTaxMethodException</code> if it could not be found.
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
@@ -624,6 +613,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod findByG_E(long groupId, String engineKey)
 		throws NoSuchTaxMethodException {
+
 		CommerceTaxMethod commerceTaxMethod = fetchByG_E(groupId, engineKey);
 
 		if (commerceTaxMethod == null) {
@@ -670,22 +660,26 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod fetchByG_E(long groupId, String engineKey,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, engineKey };
+	public CommerceTaxMethod fetchByG_E(
+		long groupId, String engineKey, boolean retrieveFromCache) {
+
+		engineKey = Objects.toString(engineKey, "");
+
+		Object[] finderArgs = new Object[] {groupId, engineKey};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_E,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByG_E, finderArgs, this);
 		}
 
 		if (result instanceof CommerceTaxMethod) {
 			CommerceTaxMethod commerceTaxMethod = (CommerceTaxMethod)result;
 
 			if ((groupId != commerceTaxMethod.getGroupId()) ||
-					!Objects.equals(engineKey, commerceTaxMethod.getEngineKey())) {
+				!Objects.equals(engineKey, commerceTaxMethod.getEngineKey())) {
+
 				result = null;
 			}
 		}
@@ -699,10 +693,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 			boolean bindEngineKey = false;
 
-			if (engineKey == null) {
-				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_1);
-			}
-			else if (engineKey.equals("")) {
+			if (engineKey.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_3);
 			}
 			else {
@@ -731,8 +722,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				List<CommerceTaxMethod> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_E, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByG_E, finderArgs, list);
 				}
 				else {
 					CommerceTaxMethod commerceTaxMethod = list.get(0);
@@ -743,7 +734,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, finderArgs);
+				finderCache.removeResult(_finderPathFetchByG_E, finderArgs);
 
 				throw processException(e);
 			}
@@ -770,6 +761,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod removeByG_E(long groupId, String engineKey)
 		throws NoSuchTaxMethodException {
+
 		CommerceTaxMethod commerceTaxMethod = findByG_E(groupId, engineKey);
 
 		return remove(commerceTaxMethod);
@@ -784,9 +776,11 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByG_E(long groupId, String engineKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_E;
+		engineKey = Objects.toString(engineKey, "");
 
-		Object[] finderArgs = new Object[] { groupId, engineKey };
+		FinderPath finderPath = _finderPathCountByG_E;
+
+		Object[] finderArgs = new Object[] {groupId, engineKey};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -799,10 +793,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 			boolean bindEngineKey = false;
 
-			if (engineKey == null) {
-				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_1);
-			}
-			else if (engineKey.equals("")) {
+			if (engineKey.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_3);
 			}
 			else {
@@ -845,32 +836,18 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_E_GROUPID_2 = "commerceTaxMethod.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_1 = "commerceTaxMethod.engineKey IS NULL";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_2 = "commerceTaxMethod.engineKey = ?";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_3 = "(commerceTaxMethod.engineKey IS NULL OR commerceTaxMethod.engineKey = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceTaxMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceTaxMethodModelImpl.ACTIVE_COLUMN_BITMASK |
-			CommerceTaxMethodModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+	private static final String _FINDER_COLUMN_G_E_GROUPID_2 =
+		"commerceTaxMethod.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_2 =
+		"commerceTaxMethod.engineKey = ?";
+
+	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_3 =
+		"(commerceTaxMethod.engineKey IS NULL OR commerceTaxMethod.engineKey = '')";
+
+	private FinderPath _finderPathWithPaginationFindByG_A;
+	private FinderPath _finderPathWithoutPaginationFindByG_A;
+	private FinderPath _finderPathCountByG_A;
 
 	/**
 	 * Returns all the commerce tax methods where groupId = &#63; and active = &#63;.
@@ -881,15 +858,15 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public List<CommerceTaxMethod> findByG_A(long groupId, boolean active) {
-		return findByG_A(groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByG_A(
+			groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce tax methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -899,8 +876,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByG_A(long groupId, boolean active,
-		int start, int end) {
+	public List<CommerceTaxMethod> findByG_A(
+		long groupId, boolean active, int start, int end) {
+
 		return findByG_A(groupId, active, start, end, null);
 	}
 
@@ -908,7 +886,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -919,9 +897,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByG_A(long groupId, boolean active,
-		int start, int end,
+	public List<CommerceTaxMethod> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
 		return findByG_A(groupId, active, start, end, orderByComparator, true);
 	}
 
@@ -929,7 +908,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -941,39 +920,40 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findByG_A(long groupId, boolean active,
-		int start, int end,
+	public List<CommerceTaxMethod> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A;
-			finderArgs = new Object[] { groupId, active };
+			finderPath = _finderPathWithoutPaginationFindByG_A;
+			finderArgs = new Object[] {groupId, active};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A;
+			finderPath = _finderPathWithPaginationFindByG_A;
 			finderArgs = new Object[] {
-					groupId, active,
-					
-					start, end, orderByComparator
-				};
+				groupId, active, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceTaxMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceTaxMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceTaxMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxMethod commerceTaxMethod : list) {
 					if ((groupId != commerceTaxMethod.getGroupId()) ||
-							(active != commerceTaxMethod.isActive())) {
+						(active != commerceTaxMethod.isActive())) {
+
 						list = null;
 
 						break;
@@ -986,8 +966,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1000,11 +980,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1024,16 +1003,16 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				qPos.add(active);
 
 				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1063,11 +1042,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchTaxMethodException if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod findByG_A_First(long groupId, boolean active,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+	public CommerceTaxMethod findByG_A_First(
+			long groupId, boolean active,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = fetchByG_A_First(groupId, active,
-				orderByComparator);
+
+		CommerceTaxMethod commerceTaxMethod = fetchByG_A_First(
+			groupId, active, orderByComparator);
 
 		if (commerceTaxMethod != null) {
 			return commerceTaxMethod;
@@ -1097,10 +1078,12 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the first matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod fetchByG_A_First(long groupId, boolean active,
+	public CommerceTaxMethod fetchByG_A_First(
+		long groupId, boolean active,
 		OrderByComparator<CommerceTaxMethod> orderByComparator) {
-		List<CommerceTaxMethod> list = findByG_A(groupId, active, 0, 1,
-				orderByComparator);
+
+		List<CommerceTaxMethod> list = findByG_A(
+			groupId, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1119,11 +1102,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchTaxMethodException if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod findByG_A_Last(long groupId, boolean active,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+	public CommerceTaxMethod findByG_A_Last(
+			long groupId, boolean active,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = fetchByG_A_Last(groupId, active,
-				orderByComparator);
+
+		CommerceTaxMethod commerceTaxMethod = fetchByG_A_Last(
+			groupId, active, orderByComparator);
 
 		if (commerceTaxMethod != null) {
 			return commerceTaxMethod;
@@ -1153,16 +1138,18 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the last matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	@Override
-	public CommerceTaxMethod fetchByG_A_Last(long groupId, boolean active,
+	public CommerceTaxMethod fetchByG_A_Last(
+		long groupId, boolean active,
 		OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
 		int count = countByG_A(groupId, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceTaxMethod> list = findByG_A(groupId, active, count - 1,
-				count, orderByComparator);
+		List<CommerceTaxMethod> list = findByG_A(
+			groupId, active, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1182,11 +1169,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @throws NoSuchTaxMethodException if a commerce tax method with the primary key could not be found
 	 */
 	@Override
-	public CommerceTaxMethod[] findByG_A_PrevAndNext(long commerceTaxMethodId,
-		long groupId, boolean active,
-		OrderByComparator<CommerceTaxMethod> orderByComparator)
+	public CommerceTaxMethod[] findByG_A_PrevAndNext(
+			long commerceTaxMethodId, long groupId, boolean active,
+			OrderByComparator<CommerceTaxMethod> orderByComparator)
 		throws NoSuchTaxMethodException {
-		CommerceTaxMethod commerceTaxMethod = findByPrimaryKey(commerceTaxMethodId);
+
+		CommerceTaxMethod commerceTaxMethod = findByPrimaryKey(
+			commerceTaxMethodId);
 
 		Session session = null;
 
@@ -1195,13 +1184,15 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 			CommerceTaxMethod[] array = new CommerceTaxMethodImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(session, commerceTaxMethod,
-					groupId, active, orderByComparator, true);
+			array[0] = getByG_A_PrevAndNext(
+				session, commerceTaxMethod, groupId, active, orderByComparator,
+				true);
 
 			array[1] = commerceTaxMethod;
 
-			array[2] = getByG_A_PrevAndNext(session, commerceTaxMethod,
-					groupId, active, orderByComparator, false);
+			array[2] = getByG_A_PrevAndNext(
+				session, commerceTaxMethod, groupId, active, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -1213,14 +1204,16 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		}
 	}
 
-	protected CommerceTaxMethod getByG_A_PrevAndNext(Session session,
-		CommerceTaxMethod commerceTaxMethod, long groupId, boolean active,
-		OrderByComparator<CommerceTaxMethod> orderByComparator, boolean previous) {
+	protected CommerceTaxMethod getByG_A_PrevAndNext(
+		Session session, CommerceTaxMethod commerceTaxMethod, long groupId,
+		boolean active, OrderByComparator<CommerceTaxMethod> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1234,7 +1227,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1306,10 +1300,11 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		qPos.add(active);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceTaxMethod);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceTaxMethod)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1331,8 +1326,11 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void removeByG_A(long groupId, boolean active) {
-		for (CommerceTaxMethod commerceTaxMethod : findByG_A(groupId, active,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceTaxMethod commerceTaxMethod :
+				findByG_A(
+					groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceTaxMethod);
 		}
 	}
@@ -1346,9 +1344,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countByG_A(long groupId, boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
+		FinderPath finderPath = _finderPathCountByG_A;
 
-		Object[] finderArgs = new Object[] { groupId, active };
+		Object[] finderArgs = new Object[] {groupId, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1393,21 +1391,24 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "commerceTaxMethod.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "commerceTaxMethod.active = ?";
+	private static final String _FINDER_COLUMN_G_A_GROUPID_2 =
+		"commerceTaxMethod.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 =
+		"commerceTaxMethod.active = ?";
 
 	public CommerceTaxMethodPersistenceImpl() {
 		setModelClass(CommerceTaxMethod.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -1425,14 +1426,17 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public void cacheResult(CommerceTaxMethod commerceTaxMethod) {
-		entityCache.putResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceTaxMethodImpl.class, commerceTaxMethod.getPrimaryKey(),
 			commerceTaxMethod);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_E,
+		finderCache.putResult(
+			_finderPathFetchByG_E,
 			new Object[] {
 				commerceTaxMethod.getGroupId(), commerceTaxMethod.getEngineKey()
-			}, commerceTaxMethod);
+			},
+			commerceTaxMethod);
 
 		commerceTaxMethod.resetOriginalValues();
 	}
@@ -1446,9 +1450,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	public void cacheResult(List<CommerceTaxMethod> commerceTaxMethods) {
 		for (CommerceTaxMethod commerceTaxMethod : commerceTaxMethods) {
 			if (entityCache.getResult(
-						CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceTaxMethodImpl.class,
-						commerceTaxMethod.getPrimaryKey()) == null) {
+					CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceTaxMethodImpl.class,
+					commerceTaxMethod.getPrimaryKey()) == null) {
+
 				cacheResult(commerceTaxMethod);
 			}
 			else {
@@ -1461,7 +1466,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Clears the cache for all commerce tax methods.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1477,19 +1482,20 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Clears the cache for the commerce tax method.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceTaxMethod commerceTaxMethod) {
-		entityCache.removeResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceTaxMethodImpl.class, commerceTaxMethod.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceTaxMethodModelImpl)commerceTaxMethod,
-			true);
+		clearUniqueFindersCache(
+			(CommerceTaxMethodModelImpl)commerceTaxMethod, true);
 	}
 
 	@Override
@@ -1498,49 +1504,53 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CommerceTaxMethod commerceTaxMethod : commerceTaxMethods) {
-			entityCache.removeResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			entityCache.removeResult(
+				CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceTaxMethodImpl.class, commerceTaxMethod.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceTaxMethodModelImpl)commerceTaxMethod,
-				true);
+			clearUniqueFindersCache(
+				(CommerceTaxMethodModelImpl)commerceTaxMethod, true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceTaxMethodModelImpl commerceTaxMethodModelImpl) {
-		Object[] args = new Object[] {
-				commerceTaxMethodModelImpl.getGroupId(),
-				commerceTaxMethodModelImpl.getEngineKey()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_E, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_E, args,
-			commerceTaxMethodModelImpl, false);
+		Object[] args = new Object[] {
+			commerceTaxMethodModelImpl.getGroupId(),
+			commerceTaxMethodModelImpl.getEngineKey()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByG_E, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByG_E, args, commerceTaxMethodModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceTaxMethodModelImpl commerceTaxMethodModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceTaxMethodModelImpl.getGroupId(),
-					commerceTaxMethodModelImpl.getEngineKey()
-				};
+				commerceTaxMethodModelImpl.getGroupId(),
+				commerceTaxMethodModelImpl.getEngineKey()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_E, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, args);
+			finderCache.removeResult(_finderPathCountByG_E, args);
+			finderCache.removeResult(_finderPathFetchByG_E, args);
 		}
 
 		if ((commerceTaxMethodModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_E.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceTaxMethodModelImpl.getOriginalGroupId(),
-					commerceTaxMethodModelImpl.getOriginalEngineKey()
-				};
+			 _finderPathFetchByG_E.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_E, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, args);
+			Object[] args = new Object[] {
+				commerceTaxMethodModelImpl.getOriginalGroupId(),
+				commerceTaxMethodModelImpl.getOriginalEngineKey()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_E, args);
+			finderCache.removeResult(_finderPathFetchByG_E, args);
 		}
 	}
 
@@ -1572,6 +1582,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod remove(long commerceTaxMethodId)
 		throws NoSuchTaxMethodException {
+
 		return remove((Serializable)commerceTaxMethodId);
 	}
 
@@ -1585,21 +1596,23 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod remove(Serializable primaryKey)
 		throws NoSuchTaxMethodException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceTaxMethod commerceTaxMethod = (CommerceTaxMethod)session.get(CommerceTaxMethodImpl.class,
-					primaryKey);
+			CommerceTaxMethod commerceTaxMethod =
+				(CommerceTaxMethod)session.get(
+					CommerceTaxMethodImpl.class, primaryKey);
 
 			if (commerceTaxMethod == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchTaxMethodException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchTaxMethodException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceTaxMethod);
@@ -1616,15 +1629,18 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	}
 
 	@Override
-	protected CommerceTaxMethod removeImpl(CommerceTaxMethod commerceTaxMethod) {
+	protected CommerceTaxMethod removeImpl(
+		CommerceTaxMethod commerceTaxMethod) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceTaxMethod)) {
-				commerceTaxMethod = (CommerceTaxMethod)session.get(CommerceTaxMethodImpl.class,
-						commerceTaxMethod.getPrimaryKeyObj());
+				commerceTaxMethod = (CommerceTaxMethod)session.get(
+					CommerceTaxMethodImpl.class,
+					commerceTaxMethod.getPrimaryKeyObj());
 			}
 
 			if (commerceTaxMethod != null) {
@@ -1653,21 +1669,24 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceTaxMethod.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceTaxMethod);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceTaxMethod);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceTaxMethod proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceTaxMethod implementation " +
-				commerceTaxMethod.getClass());
+					commerceTaxMethod.getClass());
 		}
 
-		CommerceTaxMethodModelImpl commerceTaxMethodModelImpl = (CommerceTaxMethodModelImpl)commerceTaxMethod;
+		CommerceTaxMethodModelImpl commerceTaxMethodModelImpl =
+			(CommerceTaxMethodModelImpl)commerceTaxMethod;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1676,8 +1695,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				commerceTaxMethod.setCreateDate(now);
 			}
 			else {
-				commerceTaxMethod.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceTaxMethod.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1686,8 +1705,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				commerceTaxMethod.setModifiedDate(now);
 			}
 			else {
-				commerceTaxMethod.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceTaxMethod.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1702,7 +1721,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				commerceTaxMethod.setNew(false);
 			}
 			else {
-				commerceTaxMethod = (CommerceTaxMethod)session.merge(commerceTaxMethod);
+				commerceTaxMethod = (CommerceTaxMethod)session.merge(
+					commerceTaxMethod);
 			}
 		}
 		catch (Exception e) {
@@ -1717,69 +1737,74 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		if (!CommerceTaxMethodModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
-			Object[] args = new Object[] { commerceTaxMethodModelImpl.getGroupId() };
+		else if (isNew) {
+			Object[] args = new Object[] {
+				commerceTaxMethodModelImpl.getGroupId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
 
 			args = new Object[] {
+				commerceTaxMethodModelImpl.getGroupId(),
+				commerceTaxMethodModelImpl.isActive()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_A, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_A, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceTaxMethodModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceTaxMethodModelImpl.getOriginalGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+
+				args = new Object[] {commerceTaxMethodModelImpl.getGroupId()};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+			}
+
+			if ((commerceTaxMethodModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_A.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceTaxMethodModelImpl.getOriginalGroupId(),
+					commerceTaxMethodModelImpl.getOriginalActive()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
+
+				args = new Object[] {
 					commerceTaxMethodModelImpl.getGroupId(),
 					commerceTaxMethodModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceTaxMethodModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceTaxMethodModelImpl.getOriginalGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-
-				args = new Object[] { commerceTaxMethodModelImpl.getGroupId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-			}
-
-			if ((commerceTaxMethodModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceTaxMethodModelImpl.getOriginalGroupId(),
-						commerceTaxMethodModelImpl.getOriginalActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
-
-				args = new Object[] {
-						commerceTaxMethodModelImpl.getGroupId(),
-						commerceTaxMethodModelImpl.isActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
 			}
 		}
 
-		entityCache.putResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceTaxMethodImpl.class, commerceTaxMethod.getPrimaryKey(),
 			commerceTaxMethod, false);
 
@@ -1792,7 +1817,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	}
 
 	/**
-	 * Returns the commerce tax method with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce tax method with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce tax method
 	 * @return the commerce tax method
@@ -1801,6 +1826,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchTaxMethodException {
+
 		CommerceTaxMethod commerceTaxMethod = fetchByPrimaryKey(primaryKey);
 
 		if (commerceTaxMethod == null) {
@@ -1808,15 +1834,15 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchTaxMethodException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchTaxMethodException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceTaxMethod;
 	}
 
 	/**
-	 * Returns the commerce tax method with the primary key or throws a {@link NoSuchTaxMethodException} if it could not be found.
+	 * Returns the commerce tax method with the primary key or throws a <code>NoSuchTaxMethodException</code> if it could not be found.
 	 *
 	 * @param commerceTaxMethodId the primary key of the commerce tax method
 	 * @return the commerce tax method
@@ -1825,6 +1851,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public CommerceTaxMethod findByPrimaryKey(long commerceTaxMethodId)
 		throws NoSuchTaxMethodException {
+
 		return findByPrimaryKey((Serializable)commerceTaxMethodId);
 	}
 
@@ -1836,8 +1863,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public CommerceTaxMethod fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceTaxMethodImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -1851,19 +1879,21 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			try {
 				session = openSession();
 
-				commerceTaxMethod = (CommerceTaxMethod)session.get(CommerceTaxMethodImpl.class,
-						primaryKey);
+				commerceTaxMethod = (CommerceTaxMethod)session.get(
+					CommerceTaxMethodImpl.class, primaryKey);
 
 				if (commerceTaxMethod != null) {
 					cacheResult(commerceTaxMethod);
 				}
 				else {
-					entityCache.putResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceTaxMethodImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceTaxMethodImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1890,11 +1920,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	@Override
 	public Map<Serializable, CommerceTaxMethod> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceTaxMethod> map = new HashMap<Serializable, CommerceTaxMethod>();
+		Map<Serializable, CommerceTaxMethod> map =
+			new HashMap<Serializable, CommerceTaxMethod>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -1913,8 +1945,9 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceTaxMethodImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceTaxMethodImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1934,8 +1967,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCETAXMETHOD_WHERE_PKS_IN);
 
@@ -1958,16 +1991,21 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceTaxMethod commerceTaxMethod : (List<CommerceTaxMethod>)q.list()) {
-				map.put(commerceTaxMethod.getPrimaryKeyObj(), commerceTaxMethod);
+			for (CommerceTaxMethod commerceTaxMethod :
+					(List<CommerceTaxMethod>)q.list()) {
+
+				map.put(
+					commerceTaxMethod.getPrimaryKeyObj(), commerceTaxMethod);
 
 				cacheResult(commerceTaxMethod);
 
-				uncachedPrimaryKeys.remove(commerceTaxMethod.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceTaxMethod.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceTaxMethodImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -1995,7 +2033,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns a range of all the commerce tax methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce tax methods
@@ -2011,7 +2049,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce tax methods
@@ -2020,8 +2058,10 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findAll(int start, int end,
+	public List<CommerceTaxMethod> findAll(
+		int start, int end,
 		OrderByComparator<CommerceTaxMethod> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2029,7 +2069,7 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Returns an ordered range of all the commerce tax methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceTaxMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceTaxMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce tax methods
@@ -2039,29 +2079,32 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * @return the ordered range of commerce tax methods
 	 */
 	@Override
-	public List<CommerceTaxMethod> findAll(int start, int end,
+	public List<CommerceTaxMethod> findAll(
+		int start, int end,
 		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceTaxMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceTaxMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceTaxMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2069,13 +2112,13 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCETAXMETHOD);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2095,16 +2138,16 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceTaxMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2142,8 +2185,8 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2155,12 +2198,12 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2186,6 +2229,90 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 	 * Initializes the commerce tax method persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceTaxMethodModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] {Long.class.getName()});
+
+		_finderPathFetchByG_E = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_E",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceTaxMethodModelImpl.ENGINEKEY_COLUMN_BITMASK);
+
+		_finderPathCountByG_E = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_E",
+			new String[] {Long.class.getName(), String.class.getName()});
+
+		_finderPathWithPaginationFindByG_A = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_A",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_A = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceTaxMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()},
+			CommerceTaxMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceTaxMethodModelImpl.ACTIVE_COLUMN_BITMASK |
+			CommerceTaxMethodModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_A = new FinderPath(
+			CommerceTaxMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceTaxMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()});
 	}
 
 	public void destroy() {
@@ -2197,20 +2324,40 @@ public class CommerceTaxMethodPersistenceImpl extends BasePersistenceImpl<Commer
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCETAXMETHOD = "SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod";
-	private static final String _SQL_SELECT_COMMERCETAXMETHOD_WHERE_PKS_IN = "SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod WHERE commerceTaxMethodId IN (";
-	private static final String _SQL_SELECT_COMMERCETAXMETHOD_WHERE = "SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod WHERE ";
-	private static final String _SQL_COUNT_COMMERCETAXMETHOD = "SELECT COUNT(commerceTaxMethod) FROM CommerceTaxMethod commerceTaxMethod";
-	private static final String _SQL_COUNT_COMMERCETAXMETHOD_WHERE = "SELECT COUNT(commerceTaxMethod) FROM CommerceTaxMethod commerceTaxMethod WHERE ";
+
+	private static final String _SQL_SELECT_COMMERCETAXMETHOD =
+		"SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod";
+
+	private static final String _SQL_SELECT_COMMERCETAXMETHOD_WHERE_PKS_IN =
+		"SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod WHERE commerceTaxMethodId IN (";
+
+	private static final String _SQL_SELECT_COMMERCETAXMETHOD_WHERE =
+		"SELECT commerceTaxMethod FROM CommerceTaxMethod commerceTaxMethod WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCETAXMETHOD =
+		"SELECT COUNT(commerceTaxMethod) FROM CommerceTaxMethod commerceTaxMethod";
+
+	private static final String _SQL_COUNT_COMMERCETAXMETHOD_WHERE =
+		"SELECT COUNT(commerceTaxMethod) FROM CommerceTaxMethod commerceTaxMethod WHERE ";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceTaxMethod.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceTaxMethod exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceTaxMethod exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceTaxMethodPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"active"
-			});
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceTaxMethod exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceTaxMethod exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceTaxMethodPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"active"});
+
 }

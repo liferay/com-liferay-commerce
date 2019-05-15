@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,47 +38,60 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateUserSegmentRelServiceUtil
- * @see com.liferay.commerce.notification.service.base.CommerceNotificationTemplateUserSegmentRelServiceBaseImpl
- * @see com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateUserSegmentRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceNotificationTemplateUserSegmentRel"}, service = CommerceNotificationTemplateUserSegmentRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceNotificationTemplateUserSegmentRel"
+	},
+	service = CommerceNotificationTemplateUserSegmentRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceNotificationTemplateUserSegmentRelService
 	extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateUserSegmentRelServiceUtil} to access the commerce notification template user segment rel remote service. Add custom service methods to {@link com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateUserSegmentRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateUserSegmentRelServiceUtil} to access the commerce notification template user segment rel remote service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateUserSegmentRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceNotificationTemplateUserSegmentRel addCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceNotificationTemplateUserSegmentRel
+			addCommerceNotificationTemplateUserSegmentRel(
+				long commerceNotificationTemplateId,
+				long commerceUserSegmentEntryId, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId)
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceNotificationTemplateUserSegmentRel fetchCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId)
+	public CommerceNotificationTemplateUserSegmentRel
+			fetchCommerceNotificationTemplateUserSegmentRel(
+				long commerceNotificationTemplateId,
+				long commerceUserSegmentEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceNotificationTemplateUserSegmentRel> getCommerceNotificationTemplateUserSegmentRels(
-		long commerceNotificationTemplateId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public List<CommerceNotificationTemplateUserSegmentRel>
+			getCommerceNotificationTemplateUserSegmentRels(
+				long commerceNotificationTemplateId, int start, int end,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

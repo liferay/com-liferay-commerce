@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderNote;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceOrderNote in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceOrderNote
  * @generated
  */
 @ProviderType
-public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote>,
-	Externalizable {
+public class CommerceOrderNoteCacheModel
+	implements CacheModel<CommerceOrderNote>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 			return false;
 		}
 
-		CommerceOrderNoteCacheModel commerceOrderNoteCacheModel = (CommerceOrderNoteCacheModel)obj;
+		CommerceOrderNoteCacheModel commerceOrderNoteCacheModel =
+			(CommerceOrderNoteCacheModel)obj;
 
-		if (commerceOrderNoteId == commerceOrderNoteCacheModel.commerceOrderNoteId) {
+		if (commerceOrderNoteId ==
+				commerceOrderNoteCacheModel.commerceOrderNoteId) {
+
 			return true;
 		}
 
@@ -96,13 +98,15 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 
 	@Override
 	public CommerceOrderNote toEntityModel() {
-		CommerceOrderNoteImpl commerceOrderNoteImpl = new CommerceOrderNoteImpl();
+		CommerceOrderNoteImpl commerceOrderNoteImpl =
+			new CommerceOrderNoteImpl();
 
 		if (externalReferenceCode == null) {
 			commerceOrderNoteImpl.setExternalReferenceCode("");
 		}
 		else {
-			commerceOrderNoteImpl.setExternalReferenceCode(externalReferenceCode);
+			commerceOrderNoteImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
 		commerceOrderNoteImpl.setCommerceOrderNoteId(commerceOrderNoteId);
@@ -169,8 +173,7 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (externalReferenceCode == null) {
 			objectOutput.writeUTF("");
 		}
@@ -219,4 +222,5 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 	public long commerceOrderId;
 	public String content;
 	public boolean restricted;
+
 }

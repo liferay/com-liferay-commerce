@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,10 +39,14 @@ import java.util.Objects;
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelWrapper
 	implements CommerceNotificationTemplateUserSegmentRel,
-		ModelWrapper<CommerceNotificationTemplateUserSegmentRel> {
+			   ModelWrapper<CommerceNotificationTemplateUserSegmentRel> {
+
 	public CommerceNotificationTemplateUserSegmentRelWrapper(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		_commerceNotificationTemplateUserSegmentRel = commerceNotificationTemplateUserSegmentRel;
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
+		_commerceNotificationTemplateUserSegmentRel =
+			commerceNotificationTemplateUserSegmentRel;
 	}
 
 	@Override
@@ -60,7 +63,8 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceNotificationTemplateUserSegmentRelId",
+		attributes.put(
+			"commerceNotificationTemplateUserSegmentRelId",
 			getCommerceNotificationTemplateUserSegmentRelId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -68,21 +72,24 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceNotificationTemplateId",
+		attributes.put(
+			"commerceNotificationTemplateId",
 			getCommerceNotificationTemplateId());
-		attributes.put("commerceUserSegmentEntryId",
-			getCommerceUserSegmentEntryId());
+		attributes.put(
+			"commerceUserSegmentEntryId", getCommerceUserSegmentEntryId());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long commerceNotificationTemplateUserSegmentRelId = (Long)attributes.get(
+		Long commerceNotificationTemplateUserSegmentRelId =
+			(Long)attributes.get(
 				"commerceNotificationTemplateUserSegmentRelId");
 
 		if (commerceNotificationTemplateUserSegmentRelId != null) {
-			setCommerceNotificationTemplateUserSegmentRelId(commerceNotificationTemplateUserSegmentRelId);
+			setCommerceNotificationTemplateUserSegmentRelId(
+				commerceNotificationTemplateUserSegmentRelId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -122,14 +129,14 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 		}
 
 		Long commerceNotificationTemplateId = (Long)attributes.get(
-				"commerceNotificationTemplateId");
+			"commerceNotificationTemplateId");
 
 		if (commerceNotificationTemplateId != null) {
 			setCommerceNotificationTemplateId(commerceNotificationTemplateId);
 		}
 
 		Long commerceUserSegmentEntryId = (Long)attributes.get(
-				"commerceUserSegmentEntryId");
+			"commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId != null) {
 			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
@@ -138,60 +145,68 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceNotificationTemplateUserSegmentRelWrapper((CommerceNotificationTemplateUserSegmentRel)_commerceNotificationTemplateUserSegmentRel.clone());
+		return new CommerceNotificationTemplateUserSegmentRelWrapper(
+			(CommerceNotificationTemplateUserSegmentRel)
+				_commerceNotificationTemplateUserSegmentRel.clone());
 	}
 
 	@Override
 	public int compareTo(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		return _commerceNotificationTemplateUserSegmentRel.compareTo(commerceNotificationTemplateUserSegmentRel);
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
+		return _commerceNotificationTemplateUserSegmentRel.compareTo(
+			commerceNotificationTemplateUserSegmentRel);
 	}
 
 	/**
-	* Returns the commerce notification template ID of this commerce notification template user segment rel.
-	*
-	* @return the commerce notification template ID of this commerce notification template user segment rel
-	*/
+	 * Returns the commerce notification template ID of this commerce notification template user segment rel.
+	 *
+	 * @return the commerce notification template ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getCommerceNotificationTemplateId() {
-		return _commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId();
+		return _commerceNotificationTemplateUserSegmentRel.
+			getCommerceNotificationTemplateId();
 	}
 
 	/**
-	* Returns the commerce notification template user segment rel ID of this commerce notification template user segment rel.
-	*
-	* @return the commerce notification template user segment rel ID of this commerce notification template user segment rel
-	*/
+	 * Returns the commerce notification template user segment rel ID of this commerce notification template user segment rel.
+	 *
+	 * @return the commerce notification template user segment rel ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getCommerceNotificationTemplateUserSegmentRelId() {
-		return _commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId();
+		return _commerceNotificationTemplateUserSegmentRel.
+			getCommerceNotificationTemplateUserSegmentRelId();
 	}
 
 	/**
-	* Returns the commerce user segment entry ID of this commerce notification template user segment rel.
-	*
-	* @return the commerce user segment entry ID of this commerce notification template user segment rel
-	*/
+	 * Returns the commerce user segment entry ID of this commerce notification template user segment rel.
+	 *
+	 * @return the commerce user segment entry ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getCommerceUserSegmentEntryId() {
-		return _commerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId();
+		return _commerceNotificationTemplateUserSegmentRel.
+			getCommerceUserSegmentEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce notification template user segment rel.
-	*
-	* @return the company ID of this commerce notification template user segment rel
-	*/
+	 * Returns the company ID of this commerce notification template user segment rel.
+	 *
+	 * @return the company ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceNotificationTemplateUserSegmentRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce notification template user segment rel.
-	*
-	* @return the create date of this commerce notification template user segment rel
-	*/
+	 * Returns the create date of this commerce notification template user segment rel.
+	 *
+	 * @return the create date of this commerce notification template user segment rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceNotificationTemplateUserSegmentRel.getCreateDate();
@@ -203,30 +218,30 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce notification template user segment rel.
-	*
-	* @return the group ID of this commerce notification template user segment rel
-	*/
+	 * Returns the group ID of this commerce notification template user segment rel.
+	 *
+	 * @return the group ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceNotificationTemplateUserSegmentRel.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce notification template user segment rel.
-	*
-	* @return the modified date of this commerce notification template user segment rel
-	*/
+	 * Returns the modified date of this commerce notification template user segment rel.
+	 *
+	 * @return the modified date of this commerce notification template user segment rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceNotificationTemplateUserSegmentRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce notification template user segment rel.
-	*
-	* @return the primary key of this commerce notification template user segment rel
-	*/
+	 * Returns the primary key of this commerce notification template user segment rel.
+	 *
+	 * @return the primary key of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceNotificationTemplateUserSegmentRel.getPrimaryKey();
@@ -238,30 +253,30 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	}
 
 	/**
-	* Returns the user ID of this commerce notification template user segment rel.
-	*
-	* @return the user ID of this commerce notification template user segment rel
-	*/
+	 * Returns the user ID of this commerce notification template user segment rel.
+	 *
+	 * @return the user ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceNotificationTemplateUserSegmentRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce notification template user segment rel.
-	*
-	* @return the user name of this commerce notification template user segment rel
-	*/
+	 * Returns the user name of this commerce notification template user segment rel.
+	 *
+	 * @return the user name of this commerce notification template user segment rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceNotificationTemplateUserSegmentRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce notification template user segment rel.
-	*
-	* @return the user uuid of this commerce notification template user segment rel
-	*/
+	 * Returns the user uuid of this commerce notification template user segment rel.
+	 *
+	 * @return the user uuid of this commerce notification template user segment rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceNotificationTemplateUserSegmentRel.getUserUuid();
@@ -298,52 +313,58 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	}
 
 	/**
-	* Sets the commerce notification template ID of this commerce notification template user segment rel.
-	*
-	* @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification template user segment rel
-	*/
+	 * Sets the commerce notification template ID of this commerce notification template user segment rel.
+	 *
+	 * @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		_commerceNotificationTemplateUserSegmentRel.setCommerceNotificationTemplateId(commerceNotificationTemplateId);
+
+		_commerceNotificationTemplateUserSegmentRel.
+			setCommerceNotificationTemplateId(commerceNotificationTemplateId);
 	}
 
 	/**
-	* Sets the commerce notification template user segment rel ID of this commerce notification template user segment rel.
-	*
-	* @param commerceNotificationTemplateUserSegmentRelId the commerce notification template user segment rel ID of this commerce notification template user segment rel
-	*/
+	 * Sets the commerce notification template user segment rel ID of this commerce notification template user segment rel.
+	 *
+	 * @param commerceNotificationTemplateUserSegmentRelId the commerce notification template user segment rel ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setCommerceNotificationTemplateUserSegmentRelId(
 		long commerceNotificationTemplateUserSegmentRelId) {
-		_commerceNotificationTemplateUserSegmentRel.setCommerceNotificationTemplateUserSegmentRelId(commerceNotificationTemplateUserSegmentRelId);
+
+		_commerceNotificationTemplateUserSegmentRel.
+			setCommerceNotificationTemplateUserSegmentRelId(
+				commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
-	* Sets the commerce user segment entry ID of this commerce notification template user segment rel.
-	*
-	* @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce notification template user segment rel
-	*/
+	 * Sets the commerce user segment entry ID of this commerce notification template user segment rel.
+	 *
+	 * @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setCommerceUserSegmentEntryId(long commerceUserSegmentEntryId) {
-		_commerceNotificationTemplateUserSegmentRel.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		_commerceNotificationTemplateUserSegmentRel.
+			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce notification template user segment rel.
-	*
-	* @param companyId the company ID of this commerce notification template user segment rel
-	*/
+	 * Sets the company ID of this commerce notification template user segment rel.
+	 *
+	 * @param companyId the company ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceNotificationTemplateUserSegmentRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce notification template user segment rel.
-	*
-	* @param createDate the create date of this commerce notification template user segment rel
-	*/
+	 * Sets the create date of this commerce notification template user segment rel.
+	 *
+	 * @param createDate the create date of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceNotificationTemplateUserSegmentRel.setCreateDate(createDate);
@@ -352,37 +373,42 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(baseModel);
+
+		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(
+			baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(expandoBridge);
+		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(
+			expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(serviceContext);
+		_commerceNotificationTemplateUserSegmentRel.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the group ID of this commerce notification template user segment rel.
-	*
-	* @param groupId the group ID of this commerce notification template user segment rel
-	*/
+	 * Sets the group ID of this commerce notification template user segment rel.
+	 *
+	 * @param groupId the group ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceNotificationTemplateUserSegmentRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce notification template user segment rel.
-	*
-	* @param modifiedDate the modified date of this commerce notification template user segment rel
-	*/
+	 * Sets the modified date of this commerce notification template user segment rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
-		_commerceNotificationTemplateUserSegmentRel.setModifiedDate(modifiedDate);
+		_commerceNotificationTemplateUserSegmentRel.setModifiedDate(
+			modifiedDate);
 	}
 
 	@Override
@@ -391,10 +417,10 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce notification template user segment rel.
-	*
-	* @param primaryKey the primary key of this commerce notification template user segment rel
-	*/
+	 * Sets the primary key of this commerce notification template user segment rel.
+	 *
+	 * @param primaryKey the primary key of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceNotificationTemplateUserSegmentRel.setPrimaryKey(primaryKey);
@@ -402,47 +428,51 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_commerceNotificationTemplateUserSegmentRel.setPrimaryKeyObj(primaryKeyObj);
+		_commerceNotificationTemplateUserSegmentRel.setPrimaryKeyObj(
+			primaryKeyObj);
 	}
 
 	/**
-	* Sets the user ID of this commerce notification template user segment rel.
-	*
-	* @param userId the user ID of this commerce notification template user segment rel
-	*/
+	 * Sets the user ID of this commerce notification template user segment rel.
+	 *
+	 * @param userId the user ID of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceNotificationTemplateUserSegmentRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce notification template user segment rel.
-	*
-	* @param userName the user name of this commerce notification template user segment rel
-	*/
+	 * Sets the user name of this commerce notification template user segment rel.
+	 *
+	 * @param userName the user name of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceNotificationTemplateUserSegmentRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce notification template user segment rel.
-	*
-	* @param userUuid the user uuid of this commerce notification template user segment rel
-	*/
+	 * Sets the user uuid of this commerce notification template user segment rel.
+	 *
+	 * @param userUuid the user uuid of this commerce notification template user segment rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceNotificationTemplateUserSegmentRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceNotificationTemplateUserSegmentRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceNotificationTemplateUserSegmentRel> toCacheModel() {
+
 		return _commerceNotificationTemplateUserSegmentRel.toCacheModel();
 	}
 
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel toEscapedModel() {
-		return new CommerceNotificationTemplateUserSegmentRelWrapper(_commerceNotificationTemplateUserSegmentRel.toEscapedModel());
+		return new CommerceNotificationTemplateUserSegmentRelWrapper(
+			_commerceNotificationTemplateUserSegmentRel.toEscapedModel());
 	}
 
 	@Override
@@ -452,7 +482,8 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel toUnescapedModel() {
-		return new CommerceNotificationTemplateUserSegmentRelWrapper(_commerceNotificationTemplateUserSegmentRel.toUnescapedModel());
+		return new CommerceNotificationTemplateUserSegmentRelWrapper(
+			_commerceNotificationTemplateUserSegmentRel.toUnescapedModel());
 	}
 
 	@Override
@@ -466,15 +497,21 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 			return true;
 		}
 
-		if (!(obj instanceof CommerceNotificationTemplateUserSegmentRelWrapper)) {
+		if (!(obj instanceof
+				CommerceNotificationTemplateUserSegmentRelWrapper)) {
+
 			return false;
 		}
 
-		CommerceNotificationTemplateUserSegmentRelWrapper commerceNotificationTemplateUserSegmentRelWrapper =
-			(CommerceNotificationTemplateUserSegmentRelWrapper)obj;
+		CommerceNotificationTemplateUserSegmentRelWrapper
+			commerceNotificationTemplateUserSegmentRelWrapper =
+				(CommerceNotificationTemplateUserSegmentRelWrapper)obj;
 
-		if (Objects.equals(_commerceNotificationTemplateUserSegmentRel,
-					commerceNotificationTemplateUserSegmentRelWrapper._commerceNotificationTemplateUserSegmentRel)) {
+		if (Objects.equals(
+				_commerceNotificationTemplateUserSegmentRel,
+				commerceNotificationTemplateUserSegmentRelWrapper.
+					_commerceNotificationTemplateUserSegmentRel)) {
+
 			return true;
 		}
 
@@ -488,12 +525,14 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 
 	@Override
 	public boolean isEntityCacheEnabled() {
-		return _commerceNotificationTemplateUserSegmentRel.isEntityCacheEnabled();
+		return _commerceNotificationTemplateUserSegmentRel.
+			isEntityCacheEnabled();
 	}
 
 	@Override
 	public boolean isFinderCacheEnabled() {
-		return _commerceNotificationTemplateUserSegmentRel.isFinderCacheEnabled();
+		return _commerceNotificationTemplateUserSegmentRel.
+			isFinderCacheEnabled();
 	}
 
 	@Override
@@ -501,5 +540,7 @@ public class CommerceNotificationTemplateUserSegmentRelWrapper
 		_commerceNotificationTemplateUserSegmentRel.resetOriginalValues();
 	}
 
-	private final CommerceNotificationTemplateUserSegmentRel _commerceNotificationTemplateUserSegmentRel;
+	private final CommerceNotificationTemplateUserSegmentRel
+		_commerceNotificationTemplateUserSegmentRel;
+
 }

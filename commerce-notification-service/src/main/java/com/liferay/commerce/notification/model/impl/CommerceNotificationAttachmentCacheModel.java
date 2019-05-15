@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationAttachment;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceNotificationAttachment in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceNotificationAttachment
  * @generated
  */
 @ProviderType
-public class CommerceNotificationAttachmentCacheModel implements CacheModel<CommerceNotificationAttachment>,
-	Externalizable {
+public class CommerceNotificationAttachmentCacheModel
+	implements CacheModel<CommerceNotificationAttachment>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 			return false;
 		}
 
-		CommerceNotificationAttachmentCacheModel commerceNotificationAttachmentCacheModel =
-			(CommerceNotificationAttachmentCacheModel)obj;
+		CommerceNotificationAttachmentCacheModel
+			commerceNotificationAttachmentCacheModel =
+				(CommerceNotificationAttachmentCacheModel)obj;
 
-		if (commerceNotificationAttachmentId == commerceNotificationAttachmentCacheModel.commerceNotificationAttachmentId) {
+		if (commerceNotificationAttachmentId ==
+				commerceNotificationAttachmentCacheModel.
+					commerceNotificationAttachmentId) {
+
 			return true;
 		}
 
@@ -97,7 +100,8 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 
 	@Override
 	public CommerceNotificationAttachment toEntityModel() {
-		CommerceNotificationAttachmentImpl commerceNotificationAttachmentImpl = new CommerceNotificationAttachmentImpl();
+		CommerceNotificationAttachmentImpl commerceNotificationAttachmentImpl =
+			new CommerceNotificationAttachmentImpl();
 
 		if (uuid == null) {
 			commerceNotificationAttachmentImpl.setUuid("");
@@ -106,7 +110,8 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 			commerceNotificationAttachmentImpl.setUuid(uuid);
 		}
 
-		commerceNotificationAttachmentImpl.setCommerceNotificationAttachmentId(commerceNotificationAttachmentId);
+		commerceNotificationAttachmentImpl.setCommerceNotificationAttachmentId(
+			commerceNotificationAttachmentId);
 		commerceNotificationAttachmentImpl.setGroupId(groupId);
 		commerceNotificationAttachmentImpl.setCompanyId(companyId);
 		commerceNotificationAttachmentImpl.setUserId(userId);
@@ -122,19 +127,20 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 			commerceNotificationAttachmentImpl.setCreateDate(null);
 		}
 		else {
-			commerceNotificationAttachmentImpl.setCreateDate(new Date(
-					createDate));
+			commerceNotificationAttachmentImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceNotificationAttachmentImpl.setModifiedDate(null);
 		}
 		else {
-			commerceNotificationAttachmentImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceNotificationAttachmentImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceNotificationAttachmentImpl.setCommerceNotificationQueueEntryId(commerceNotificationQueueEntryId);
+		commerceNotificationAttachmentImpl.setCommerceNotificationQueueEntryId(
+			commerceNotificationQueueEntryId);
 		commerceNotificationAttachmentImpl.setFileEntryId(fileEntryId);
 		commerceNotificationAttachmentImpl.setDeleteOnSend(deleteOnSend);
 
@@ -166,8 +172,7 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -211,4 +216,5 @@ public class CommerceNotificationAttachmentCacheModel implements CacheModel<Comm
 	public long commerceNotificationQueueEntryId;
 	public long fileEntryId;
 	public boolean deleteOnSend;
+
 }

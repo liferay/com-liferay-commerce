@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.virtual.order.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceVirtualOrderItemServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceVirtualOrderItemServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem}, that is translated to a
- * {@link com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem</code>, that is translated to a
+ * <code>com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,23 +59,29 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceVirtualOrderItemServiceHttp
- * @see com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap
- * @see CommerceVirtualOrderItemServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceVirtualOrderItemServiceSoap {
-	public static com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap updateCommerceVirtualOrderItem(
-		long commerceVirtualOrderItemId, long fileEntryId, String url,
-		int activationStatus, long duration, int usages, int maxUsages,
-		boolean active) throws RemoteException {
-		try {
-			com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem returnValue =
-				CommerceVirtualOrderItemServiceUtil.updateCommerceVirtualOrderItem(commerceVirtualOrderItemId,
-					fileEntryId, url, activationStatus, duration, usages,
-					maxUsages, active);
 
-			return com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.product.type.virtual.order.model.
+		CommerceVirtualOrderItemSoap updateCommerceVirtualOrderItem(
+				long commerceVirtualOrderItemId, long fileEntryId, String url,
+				int activationStatus, long duration, int usages, int maxUsages,
+				boolean active)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.product.type.virtual.order.model.
+				CommerceVirtualOrderItem returnValue =
+					CommerceVirtualOrderItemServiceUtil.
+						updateCommerceVirtualOrderItem(
+							commerceVirtualOrderItemId, fileEntryId, url,
+							activationStatus, duration, usages, maxUsages,
+							active);
+
+			return com.liferay.commerce.product.type.virtual.order.model.
+				CommerceVirtualOrderItemSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,5 +90,7 @@ public class CommerceVirtualOrderItemServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceVirtualOrderItemServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceVirtualOrderItemServiceSoap.class);
+
 }

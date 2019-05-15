@@ -17,7 +17,6 @@ package com.liferay.commerce.account.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceAccountOrganizationRelServiceUtil} service utility. The
+ * <code>CommerceAccountOrganizationRelServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,24 +49,28 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Marco Leo
  * @see CommerceAccountOrganizationRelServiceSoap
- * @see HttpPrincipal
- * @see CommerceAccountOrganizationRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAccountOrganizationRelServiceHttp {
-	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
-		HttpPrincipal httpPrincipal, long commerceAccountId,
-		long organizationId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"addCommerceAccountOrganizationRel",
-					_addCommerceAccountOrganizationRelParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, organizationId, serviceContext);
+	public static
+		com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+				addCommerceAccountOrganizationRel(
+					HttpPrincipal httpPrincipal, long commerceAccountId,
+					long organizationId,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"addCommerceAccountOrganizationRel",
+				_addCommerceAccountOrganizationRelParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, organizationId, serviceContext);
 
 			Object returnObj = null;
 
@@ -74,14 +78,19 @@ public class CommerceAccountOrganizationRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.account.model.CommerceAccountOrganizationRel)returnObj;
+			return (com.liferay.commerce.account.model.
+				CommerceAccountOrganizationRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -91,27 +100,33 @@ public class CommerceAccountOrganizationRelServiceHttp {
 	}
 
 	public static void addCommerceAccountOrganizationRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId,
-		long[] organizationIds,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			HttpPrincipal httpPrincipal, long commerceAccountId,
+			long[] organizationIds,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"addCommerceAccountOrganizationRels",
-					_addCommerceAccountOrganizationRelsParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, organizationIds, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"addCommerceAccountOrganizationRels",
+				_addCommerceAccountOrganizationRelsParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, organizationIds, serviceContext);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -122,25 +137,32 @@ public class CommerceAccountOrganizationRelServiceHttp {
 	}
 
 	public static void deleteCommerceAccountOrganizationRel(
-		HttpPrincipal httpPrincipal, long commerceAccountId, long organizationId)
+			HttpPrincipal httpPrincipal, long commerceAccountId,
+			long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"deleteCommerceAccountOrganizationRel",
-					_deleteCommerceAccountOrganizationRelParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, organizationId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"deleteCommerceAccountOrganizationRel",
+				_deleteCommerceAccountOrganizationRelParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, organizationId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -151,26 +173,32 @@ public class CommerceAccountOrganizationRelServiceHttp {
 	}
 
 	public static void deleteCommerceAccountOrganizationRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId,
-		long[] organizationIds)
+			HttpPrincipal httpPrincipal, long commerceAccountId,
+			long[] organizationIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"deleteCommerceAccountOrganizationRels",
-					_deleteCommerceAccountOrganizationRelsParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, organizationIds);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"deleteCommerceAccountOrganizationRels",
+				_deleteCommerceAccountOrganizationRelsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, organizationIds);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -180,17 +208,23 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
-		HttpPrincipal httpPrincipal,
-		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRel",
-					_getCommerceAccountOrganizationRelParameterTypes4);
+	public static
+		com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+				getCommerceAccountOrganizationRel(
+					HttpPrincipal httpPrincipal,
+					com.liferay.commerce.account.service.persistence.
+						CommerceAccountOrganizationRelPK
+							commerceAccountOrganizationRelPK)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountOrganizationRelPK);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"getCommerceAccountOrganizationRel",
+				_getCommerceAccountOrganizationRelParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountOrganizationRelPK);
 
 			Object returnObj = null;
 
@@ -198,14 +232,19 @@ public class CommerceAccountOrganizationRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.account.model.CommerceAccountOrganizationRel)returnObj;
+			return (com.liferay.commerce.account.model.
+				CommerceAccountOrganizationRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -214,16 +253,20 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRels",
-					_getCommerceAccountOrganizationRelsParameterTypes5);
+	public static java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+				getCommerceAccountOrganizationRels(
+					HttpPrincipal httpPrincipal, long commerceAccountId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"getCommerceAccountOrganizationRels",
+				_getCommerceAccountOrganizationRelsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId);
 
 			Object returnObj = null;
 
@@ -231,14 +274,20 @@ public class CommerceAccountOrganizationRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.account.model.
+					CommerceAccountOrganizationRel>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -247,16 +296,21 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRels",
-					_getCommerceAccountOrganizationRelsParameterTypes6);
+	public static java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+				getCommerceAccountOrganizationRels(
+					HttpPrincipal httpPrincipal, long commerceAccountId,
+					int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, start, end);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"getCommerceAccountOrganizationRels",
+				_getCommerceAccountOrganizationRelsParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, start, end);
 
 			Object returnObj = null;
 
@@ -264,14 +318,20 @@ public class CommerceAccountOrganizationRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.account.model.
+					CommerceAccountOrganizationRel>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -281,15 +341,17 @@ public class CommerceAccountOrganizationRelServiceHttp {
 	}
 
 	public static int getCommerceAccountOrganizationRelsCount(
-		HttpPrincipal httpPrincipal, long commerceAccountId)
+			HttpPrincipal httpPrincipal, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRelsCount",
-					_getCommerceAccountOrganizationRelsCountParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountOrganizationRelServiceUtil.class,
+				"getCommerceAccountOrganizationRelsCount",
+				_getCommerceAccountOrganizationRelsCountParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId);
 
 			Object returnObj = null;
 
@@ -297,11 +359,15 @@ public class CommerceAccountOrganizationRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -313,29 +379,43 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceAccountOrganizationRelServiceHttp.class);
-	private static final Class<?>[] _addCommerceAccountOrganizationRelParameterTypes0 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceAccountOrganizationRelServiceHttp.class);
+
+	private static final Class<?>[]
+		_addCommerceAccountOrganizationRelParameterTypes0 = new Class[] {
 			long.class, long.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _addCommerceAccountOrganizationRelsParameterTypes1 =
-		new Class[] {
+	private static final Class<?>[]
+		_addCommerceAccountOrganizationRelsParameterTypes1 = new Class[] {
 			long.class, long[].class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceAccountOrganizationRelParameterTypes2 =
-		new Class[] { long.class, long.class };
-	private static final Class<?>[] _deleteCommerceAccountOrganizationRelsParameterTypes3 =
-		new Class[] { long.class, long[].class };
-	private static final Class<?>[] _getCommerceAccountOrganizationRelParameterTypes4 =
-		new Class[] {
-			com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK.class
+	private static final Class<?>[]
+		_deleteCommerceAccountOrganizationRelParameterTypes2 = new Class[] {
+			long.class, long.class
 		};
-	private static final Class<?>[] _getCommerceAccountOrganizationRelsParameterTypes5 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceAccountOrganizationRelsParameterTypes6 =
-		new Class[] { long.class, int.class, int.class };
-	private static final Class<?>[] _getCommerceAccountOrganizationRelsCountParameterTypes7 =
-		new Class[] { long.class };
+	private static final Class<?>[]
+		_deleteCommerceAccountOrganizationRelsParameterTypes3 = new Class[] {
+			long.class, long[].class
+		};
+	private static final Class<?>[]
+		_getCommerceAccountOrganizationRelParameterTypes4 = new Class[] {
+			com.liferay.commerce.account.service.persistence.
+				CommerceAccountOrganizationRelPK.class
+		};
+	private static final Class<?>[]
+		_getCommerceAccountOrganizationRelsParameterTypes5 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceAccountOrganizationRelsParameterTypes6 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[]
+		_getCommerceAccountOrganizationRelsCountParameterTypes7 = new Class[] {
+			long.class
+		};
+
 }

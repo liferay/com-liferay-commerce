@@ -25,38 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAddressRestrictionModel
- * @see com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl
- * @see com.liferay.commerce.model.impl.CommerceAddressRestrictionModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl"
+)
 @ProviderType
 public interface CommerceAddressRestriction
 	extends CommerceAddressRestrictionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAddressRestriction, Long> COMMERCE_ADDRESS_RESTRICTION_ID_ACCESSOR =
-		new Accessor<CommerceAddressRestriction, Long>() {
-			@Override
-			public Long get(
-				CommerceAddressRestriction commerceAddressRestriction) {
-				return commerceAddressRestriction.getCommerceAddressRestrictionId();
-			}
+	public static final Accessor<CommerceAddressRestriction, Long>
+		COMMERCE_ADDRESS_RESTRICTION_ID_ACCESSOR =
+			new Accessor<CommerceAddressRestriction, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceAddressRestriction commerceAddressRestriction) {
 
-			@Override
-			public Class<CommerceAddressRestriction> getTypeClass() {
-				return CommerceAddressRestriction.class;
-			}
-		};
+					return commerceAddressRestriction.
+						getCommerceAddressRestrictionId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceAddressRestriction> getTypeClass() {
+					return CommerceAddressRestriction.class;
+				}
+
+			};
 
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

@@ -21,7 +21,6 @@ import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl;
 import com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -64,57 +63,33 @@ import java.util.Set;
  * </p>
  *
  * @author Andrea Di Giorgi
- * @see CommerceWishListItemPersistence
- * @see com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemUtil
  * @generated
  */
 @ProviderType
-public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<CommerceWishListItem>
+public class CommerceWishListItemPersistenceImpl
+	extends BasePersistenceImpl<CommerceWishListItem>
 	implements CommerceWishListItemPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceWishListItemUtil} to access the commerce wish list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceWishListItemUtil</code> to access the commerce wish list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceWishListItemImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWISHLISTID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceWishListId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceWishListId", new String[] { Long.class.getName() },
-			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEWISHLISTID = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceWishListId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceWishListItemImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceWishListId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceWishListId;
+	private FinderPath _finderPathCountByCommerceWishListId;
 
 	/**
 	 * Returns all the commerce wish list items where commerceWishListId = &#63;.
@@ -125,15 +100,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId) {
-		return findByCommerceWishListId(commerceWishListId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+
+		return findByCommerceWishListId(
+			commerceWishListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce wish list items where commerceWishListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -144,6 +120,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId, int start, int end) {
+
 		return findByCommerceWishListId(commerceWishListId, start, end, null);
 	}
 
@@ -151,7 +128,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -164,15 +141,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return findByCommerceWishListId(commerceWishListId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceWishListId(
+			commerceWishListId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -187,34 +165,36 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		long commerceWishListId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID;
-			finderArgs = new Object[] { commerceWishListId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceWishListId;
+			finderArgs = new Object[] {commerceWishListId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWISHLISTID;
+			finderPath = _finderPathWithPaginationFindByCommerceWishListId;
 			finderArgs = new Object[] {
-					commerceWishListId,
-					
-					start, end, orderByComparator
-				};
+				commerceWishListId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if ((commerceWishListId != commerceWishListItem.getCommerceWishListId())) {
+					if ((commerceWishListId !=
+							commerceWishListItem.getCommerceWishListId())) {
+
 						list = null;
 
 						break;
@@ -227,8 +207,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -236,14 +216,14 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			query.append(_SQL_SELECT_COMMERCEWISHLISTITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -261,16 +241,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				qPos.add(commerceWishListId);
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -300,11 +280,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem findByCommerceWishListId_First(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCommerceWishListId_First(commerceWishListId,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem =
+			fetchByCommerceWishListId_First(
+				commerceWishListId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -333,8 +315,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public CommerceWishListItem fetchByCommerceWishListId_First(
 		long commerceWishListId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		List<CommerceWishListItem> list = findByCommerceWishListId(commerceWishListId,
-				0, 1, orderByComparator);
+
+		List<CommerceWishListItem> list = findByCommerceWishListId(
+			commerceWishListId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -353,11 +336,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem findByCommerceWishListId_Last(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCommerceWishListId_Last(commerceWishListId,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem =
+			fetchByCommerceWishListId_Last(
+				commerceWishListId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -386,14 +371,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public CommerceWishListItem fetchByCommerceWishListId_Last(
 		long commerceWishListId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		int count = countByCommerceWishListId(commerceWishListId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWishListItem> list = findByCommerceWishListId(commerceWishListId,
-				count - 1, count, orderByComparator);
+		List<CommerceWishListItem> list = findByCommerceWishListId(
+			commerceWishListId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -413,10 +399,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem[] findByCommerceWishListId_PrevAndNext(
-		long commerceWishListItemId, long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListItemId, long commerceWishListId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByPrimaryKey(commerceWishListItemId);
+
+		CommerceWishListItem commerceWishListItem = findByPrimaryKey(
+			commerceWishListItemId);
 
 		Session session = null;
 
@@ -425,15 +413,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			CommerceWishListItem[] array = new CommerceWishListItemImpl[3];
 
-			array[0] = getByCommerceWishListId_PrevAndNext(session,
-					commerceWishListItem, commerceWishListId,
-					orderByComparator, true);
+			array[0] = getByCommerceWishListId_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId,
+				orderByComparator, true);
 
 			array[1] = commerceWishListItem;
 
-			array[2] = getByCommerceWishListId_PrevAndNext(session,
-					commerceWishListItem, commerceWishListId,
-					orderByComparator, false);
+			array[2] = getByCommerceWishListId_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -450,11 +438,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		long commerceWishListId,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -466,7 +455,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		query.append(_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -536,10 +526,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		qPos.add(commerceWishListId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWishListItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWishListItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -560,8 +551,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void removeByCommerceWishListId(long commerceWishListId) {
-		for (CommerceWishListItem commerceWishListItem : findByCommerceWishListId(
-				commerceWishListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceWishListItem commerceWishListItem :
+				findByCommerceWishListId(
+					commerceWishListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceWishListItem);
 		}
 	}
@@ -574,9 +568,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countByCommerceWishListId(long commerceWishListId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEWISHLISTID;
+		FinderPath finderPath = _finderPathCountByCommerceWishListId;
 
-		Object[] finderArgs = new Object[] { commerceWishListId };
+		Object[] finderArgs = new Object[] {commerceWishListId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -585,7 +579,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			query.append(_SQL_COUNT_COMMERCEWISHLISTITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2);
 
 			String sql = query.toString();
 
@@ -617,31 +612,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2 =
-		"commerceWishListItem.commerceWishListId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPINSTANCEUUID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPInstanceUuid",
-			new String[] {
-				String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPInstanceUuid",
-			new String[] { String.class.getName() },
-			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPINSTANCEUUID = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPInstanceUuid",
-			new String[] { String.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEWISHLISTID_COMMERCEWISHLISTID_2 =
+			"commerceWishListItem.commerceWishListId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCPInstanceUuid;
+	private FinderPath _finderPathWithoutPaginationFindByCPInstanceUuid;
+	private FinderPath _finderPathCountByCPInstanceUuid;
 
 	/**
 	 * Returns all the commerce wish list items where CPInstanceUuid = &#63;.
@@ -652,15 +629,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid) {
-		return findByCPInstanceUuid(CPInstanceUuid, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+
+		return findByCPInstanceUuid(
+			CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce wish list items where CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPInstanceUuid the cp instance uuid
@@ -671,6 +649,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end) {
+
 		return findByCPInstanceUuid(CPInstanceUuid, start, end, null);
 	}
 
@@ -678,7 +657,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items where CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPInstanceUuid the cp instance uuid
@@ -691,15 +670,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return findByCPInstanceUuid(CPInstanceUuid, start, end,
-			orderByComparator, true);
+
+		return findByCPInstanceUuid(
+			CPInstanceUuid, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPInstanceUuid the cp instance uuid
@@ -714,35 +694,38 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID;
-			finderArgs = new Object[] { CPInstanceUuid };
+			finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
+			finderArgs = new Object[] {CPInstanceUuid};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPINSTANCEUUID;
+			finderPath = _finderPathWithPaginationFindByCPInstanceUuid;
 			finderArgs = new Object[] {
-					CPInstanceUuid,
-					
-					start, end, orderByComparator
-				};
+				CPInstanceUuid, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if (!Objects.equals(CPInstanceUuid,
-								commerceWishListItem.getCPInstanceUuid())) {
+					if (!CPInstanceUuid.equals(
+							commerceWishListItem.getCPInstanceUuid())) {
+
 						list = null;
 
 						break;
@@ -755,8 +738,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -766,10 +749,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
 			}
 			else {
@@ -779,11 +759,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -803,16 +782,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				}
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -842,11 +821,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem findByCPInstanceUuid_First(
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCPInstanceUuid_First(CPInstanceUuid,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCPInstanceUuid_First(
+			CPInstanceUuid, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -875,8 +855,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public CommerceWishListItem fetchByCPInstanceUuid_First(
 		String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		List<CommerceWishListItem> list = findByCPInstanceUuid(CPInstanceUuid,
-				0, 1, orderByComparator);
+
+		List<CommerceWishListItem> list = findByCPInstanceUuid(
+			CPInstanceUuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -895,11 +876,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem findByCPInstanceUuid_Last(
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCPInstanceUuid_Last(CPInstanceUuid,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCPInstanceUuid_Last(
+			CPInstanceUuid, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -928,14 +910,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	public CommerceWishListItem fetchByCPInstanceUuid_Last(
 		String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		int count = countByCPInstanceUuid(CPInstanceUuid);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWishListItem> list = findByCPInstanceUuid(CPInstanceUuid,
-				count - 1, count, orderByComparator);
+		List<CommerceWishListItem> list = findByCPInstanceUuid(
+			CPInstanceUuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -955,10 +938,14 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem[] findByCPInstanceUuid_PrevAndNext(
-		long commerceWishListItemId, String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListItemId, String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByPrimaryKey(commerceWishListItemId);
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		CommerceWishListItem commerceWishListItem = findByPrimaryKey(
+			commerceWishListItemId);
 
 		Session session = null;
 
@@ -967,15 +954,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			CommerceWishListItem[] array = new CommerceWishListItemImpl[3];
 
-			array[0] = getByCPInstanceUuid_PrevAndNext(session,
-					commerceWishListItem, CPInstanceUuid, orderByComparator,
-					true);
+			array[0] = getByCPInstanceUuid_PrevAndNext(
+				session, commerceWishListItem, CPInstanceUuid,
+				orderByComparator, true);
 
 			array[1] = commerceWishListItem;
 
-			array[2] = getByCPInstanceUuid_PrevAndNext(session,
-					commerceWishListItem, CPInstanceUuid, orderByComparator,
-					false);
+			array[2] = getByCPInstanceUuid_PrevAndNext(
+				session, commerceWishListItem, CPInstanceUuid,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -992,11 +979,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1007,10 +995,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 		boolean bindCPInstanceUuid = false;
 
-		if (CPInstanceUuid == null) {
-			query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_1);
-		}
-		else if (CPInstanceUuid.equals("")) {
+		if (CPInstanceUuid.isEmpty()) {
 			query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
 		}
 		else {
@@ -1020,7 +1005,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1092,10 +1078,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWishListItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWishListItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1116,8 +1103,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void removeByCPInstanceUuid(String CPInstanceUuid) {
-		for (CommerceWishListItem commerceWishListItem : findByCPInstanceUuid(
-				CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceWishListItem commerceWishListItem :
+				findByCPInstanceUuid(
+					CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceWishListItem);
 		}
 	}
@@ -1130,9 +1120,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countByCPInstanceUuid(String CPInstanceUuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPINSTANCEUUID;
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
-		Object[] finderArgs = new Object[] { CPInstanceUuid };
+		FinderPath finderPath = _finderPathCountByCPInstanceUuid;
+
+		Object[] finderArgs = new Object[] {CPInstanceUuid};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1143,10 +1135,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
 			}
 			else {
@@ -1187,32 +1176,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_1 = "commerceWishListItem.CPInstanceUuid IS NULL";
-	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2 = "commerceWishListItem.CPInstanceUuid = ?";
-	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3 = "(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRODUCTID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCProductId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCProductId",
-			new String[] { Long.class.getName() },
-			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPRODUCTID = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCProductId",
-			new String[] { Long.class.getName() });
+	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2 =
+		"commerceWishListItem.CPInstanceUuid = ?";
+
+	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3 =
+		"(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '')";
+
+	private FinderPath _finderPathWithPaginationFindByCProductId;
+	private FinderPath _finderPathWithoutPaginationFindByCProductId;
+	private FinderPath _finderPathCountByCProductId;
 
 	/**
 	 * Returns all the commerce wish list items where CProductId = &#63;.
@@ -1222,15 +1194,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCProductId(long CProductId) {
-		return findByCProductId(CProductId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return findByCProductId(
+			CProductId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce wish list items where CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -1239,8 +1211,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCProductId(long CProductId,
-		int start, int end) {
+	public List<CommerceWishListItem> findByCProductId(
+		long CProductId, int start, int end) {
+
 		return findByCProductId(CProductId, start, end, null);
 	}
 
@@ -1248,7 +1221,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items where CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -1258,17 +1231,19 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCProductId(long CProductId,
-		int start, int end,
+	public List<CommerceWishListItem> findByCProductId(
+		long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return findByCProductId(CProductId, start, end, orderByComparator, true);
+
+		return findByCProductId(
+			CProductId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -1279,30 +1254,34 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCProductId(long CProductId,
-		int start, int end,
+	public List<CommerceWishListItem> findByCProductId(
+		long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID;
-			finderArgs = new Object[] { CProductId };
+			finderPath = _finderPathWithoutPaginationFindByCProductId;
+			finderArgs = new Object[] {CProductId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRODUCTID;
-			finderArgs = new Object[] { CProductId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByCProductId;
+			finderArgs = new Object[] {
+				CProductId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
@@ -1319,8 +1298,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1331,11 +1310,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1353,16 +1331,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				qPos.add(CProductId);
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1391,11 +1369,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCProductId_First(long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCProductId_First(
+			long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCProductId_First(CProductId,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCProductId_First(
+			CProductId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -1421,10 +1401,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the first matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCProductId_First(long CProductId,
+	public CommerceWishListItem fetchByCProductId_First(
+		long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		List<CommerceWishListItem> list = findByCProductId(CProductId, 0, 1,
-				orderByComparator);
+
+		List<CommerceWishListItem> list = findByCProductId(
+			CProductId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1442,11 +1424,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCProductId_Last(long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCProductId_Last(
+			long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCProductId_Last(CProductId,
-				orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCProductId_Last(
+			CProductId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -1472,16 +1456,18 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the last matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCProductId_Last(long CProductId,
+	public CommerceWishListItem fetchByCProductId_Last(
+		long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		int count = countByCProductId(CProductId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWishListItem> list = findByCProductId(CProductId,
-				count - 1, count, orderByComparator);
+		List<CommerceWishListItem> list = findByCProductId(
+			CProductId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1501,10 +1487,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem[] findByCProductId_PrevAndNext(
-		long commerceWishListItemId, long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListItemId, long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByPrimaryKey(commerceWishListItemId);
+
+		CommerceWishListItem commerceWishListItem = findByPrimaryKey(
+			commerceWishListItemId);
 
 		Session session = null;
 
@@ -1513,13 +1501,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			CommerceWishListItem[] array = new CommerceWishListItemImpl[3];
 
-			array[0] = getByCProductId_PrevAndNext(session,
-					commerceWishListItem, CProductId, orderByComparator, true);
+			array[0] = getByCProductId_PrevAndNext(
+				session, commerceWishListItem, CProductId, orderByComparator,
+				true);
 
 			array[1] = commerceWishListItem;
 
-			array[2] = getByCProductId_PrevAndNext(session,
-					commerceWishListItem, CProductId, orderByComparator, false);
+			array[2] = getByCProductId_PrevAndNext(
+				session, commerceWishListItem, CProductId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -1536,11 +1526,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1552,7 +1543,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1622,10 +1614,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		qPos.add(CProductId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWishListItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWishListItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1646,8 +1639,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void removeByCProductId(long CProductId) {
-		for (CommerceWishListItem commerceWishListItem : findByCProductId(
-				CProductId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceWishListItem commerceWishListItem :
+				findByCProductId(
+					CProductId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceWishListItem);
 		}
 	}
@@ -1660,9 +1655,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countByCProductId(long CProductId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRODUCTID;
+		FinderPath finderPath = _finderPathCountByCProductId;
 
-		Object[] finderArgs = new Object[] { CProductId };
+		Object[] finderArgs = new Object[] {CProductId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1703,30 +1698,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2 = "commerceWishListItem.CProductId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CW_CPI = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCW_CPI",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI =
-		new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCW_CPI",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CW_CPI = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CPI",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2 =
+		"commerceWishListItem.CProductId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCW_CPI;
+	private FinderPath _finderPathWithoutPaginationFindByCW_CPI;
+	private FinderPath _finderPathCountByCW_CPI;
 
 	/**
 	 * Returns all the commerce wish list items where commerceWishListId = &#63; and CPInstanceUuid = &#63;.
@@ -1736,17 +1713,19 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CPI(long commerceWishListId,
-		String CPInstanceUuid) {
-		return findByCW_CPI(commerceWishListId, CPInstanceUuid,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceWishListItem> findByCW_CPI(
+		long commerceWishListId, String CPInstanceUuid) {
+
+		return findByCW_CPI(
+			commerceWishListId, CPInstanceUuid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce wish list items where commerceWishListId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -1756,16 +1735,18 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CPI(long commerceWishListId,
-		String CPInstanceUuid, int start, int end) {
-		return findByCW_CPI(commerceWishListId, CPInstanceUuid, start, end, null);
+	public List<CommerceWishListItem> findByCW_CPI(
+		long commerceWishListId, String CPInstanceUuid, int start, int end) {
+
+		return findByCW_CPI(
+			commerceWishListId, CPInstanceUuid, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -1776,18 +1757,20 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CPI(long commerceWishListId,
-		String CPInstanceUuid, int start, int end,
+	public List<CommerceWishListItem> findByCW_CPI(
+		long commerceWishListId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return findByCW_CPI(commerceWishListId, CPInstanceUuid, start, end,
-			orderByComparator, true);
+
+		return findByCW_CPI(
+			commerceWishListId, CPInstanceUuid, start, end, orderByComparator,
+			true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -1799,40 +1782,45 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CPI(long commerceWishListId,
-		String CPInstanceUuid, int start, int end,
+	public List<CommerceWishListItem> findByCW_CPI(
+		long commerceWishListId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI;
-			finderArgs = new Object[] { commerceWishListId, CPInstanceUuid };
+			finderPath = _finderPathWithoutPaginationFindByCW_CPI;
+			finderArgs = new Object[] {commerceWishListId, CPInstanceUuid};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CW_CPI;
+			finderPath = _finderPathWithPaginationFindByCW_CPI;
 			finderArgs = new Object[] {
-					commerceWishListId, CPInstanceUuid,
-					
-					start, end, orderByComparator
-				};
+				commerceWishListId, CPInstanceUuid, start, end,
+				orderByComparator
+			};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if ((commerceWishListId != commerceWishListItem.getCommerceWishListId()) ||
-							!Objects.equals(CPInstanceUuid,
-								commerceWishListItem.getCPInstanceUuid())) {
+					if ((commerceWishListId !=
+							commerceWishListItem.getCommerceWishListId()) ||
+						!CPInstanceUuid.equals(
+							commerceWishListItem.getCPInstanceUuid())) {
+
 						list = null;
 
 						break;
@@ -1845,8 +1833,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1858,10 +1846,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_3);
 			}
 			else {
@@ -1871,11 +1856,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1897,16 +1881,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				}
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1936,12 +1920,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCW_CPI_First(long commerceWishListId,
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCW_CPI_First(
+			long commerceWishListId, String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_First(commerceWishListId,
-				CPInstanceUuid, orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_First(
+			commerceWishListId, CPInstanceUuid, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -1971,11 +1956,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the first matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CPI_First(long commerceWishListId,
-		String CPInstanceUuid,
+	public CommerceWishListItem fetchByCW_CPI_First(
+		long commerceWishListId, String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		List<CommerceWishListItem> list = findByCW_CPI(commerceWishListId,
-				CPInstanceUuid, 0, 1, orderByComparator);
+
+		List<CommerceWishListItem> list = findByCW_CPI(
+			commerceWishListId, CPInstanceUuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1994,12 +1980,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCW_CPI_Last(long commerceWishListId,
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCW_CPI_Last(
+			long commerceWishListId, String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_Last(commerceWishListId,
-				CPInstanceUuid, orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_Last(
+			commerceWishListId, CPInstanceUuid, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -2029,17 +2016,19 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the last matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CPI_Last(long commerceWishListId,
-		String CPInstanceUuid,
+	public CommerceWishListItem fetchByCW_CPI_Last(
+		long commerceWishListId, String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		int count = countByCW_CPI(commerceWishListId, CPInstanceUuid);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWishListItem> list = findByCW_CPI(commerceWishListId,
-				CPInstanceUuid, count - 1, count, orderByComparator);
+		List<CommerceWishListItem> list = findByCW_CPI(
+			commerceWishListId, CPInstanceUuid, count - 1, count,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2060,11 +2049,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem[] findByCW_CPI_PrevAndNext(
-		long commerceWishListItemId, long commerceWishListId,
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListItemId, long commerceWishListId,
+			String CPInstanceUuid,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByPrimaryKey(commerceWishListItemId);
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		CommerceWishListItem commerceWishListItem = findByPrimaryKey(
+			commerceWishListItemId);
 
 		Session session = null;
 
@@ -2073,13 +2066,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			CommerceWishListItem[] array = new CommerceWishListItemImpl[3];
 
-			array[0] = getByCW_CPI_PrevAndNext(session, commerceWishListItem,
-					commerceWishListId, CPInstanceUuid, orderByComparator, true);
+			array[0] = getByCW_CPI_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId,
+				CPInstanceUuid, orderByComparator, true);
 
 			array[1] = commerceWishListItem;
 
-			array[2] = getByCW_CPI_PrevAndNext(session, commerceWishListItem,
-					commerceWishListId, CPInstanceUuid, orderByComparator, false);
+			array[2] = getByCW_CPI_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId,
+				CPInstanceUuid, orderByComparator, false);
 
 			return array;
 		}
@@ -2091,16 +2086,17 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 	}
 
-	protected CommerceWishListItem getByCW_CPI_PrevAndNext(Session session,
-		CommerceWishListItem commerceWishListItem, long commerceWishListId,
-		String CPInstanceUuid,
+	protected CommerceWishListItem getByCW_CPI_PrevAndNext(
+		Session session, CommerceWishListItem commerceWishListItem,
+		long commerceWishListId, String CPInstanceUuid,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -2113,10 +2109,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 		boolean bindCPInstanceUuid = false;
 
-		if (CPInstanceUuid == null) {
-			query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_1);
-		}
-		else if (CPInstanceUuid.equals("")) {
+		if (CPInstanceUuid.isEmpty()) {
 			query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_3);
 		}
 		else {
@@ -2126,7 +2119,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -2200,10 +2194,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWishListItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWishListItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2225,9 +2220,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void removeByCW_CPI(long commerceWishListId, String CPInstanceUuid) {
-		for (CommerceWishListItem commerceWishListItem : findByCW_CPI(
-				commerceWishListId, CPInstanceUuid, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (CommerceWishListItem commerceWishListItem :
+				findByCW_CPI(
+					commerceWishListId, CPInstanceUuid, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceWishListItem);
 		}
 	}
@@ -2241,9 +2238,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countByCW_CPI(long commerceWishListId, String CPInstanceUuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CW_CPI;
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
-		Object[] finderArgs = new Object[] { commerceWishListId, CPInstanceUuid };
+		FinderPath finderPath = _finderPathCountByCW_CPI;
+
+		Object[] finderArgs = new Object[] {commerceWishListId, CPInstanceUuid};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2256,10 +2255,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_3);
 			}
 			else {
@@ -2302,32 +2298,18 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CW_CPI_COMMERCEWISHLISTID_2 = "commerceWishListItem.commerceWishListId = ? AND ";
-	private static final String _FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_1 = "commerceWishListItem.CPInstanceUuid IS NULL";
-	private static final String _FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_2 = "commerceWishListItem.CPInstanceUuid = ?";
-	private static final String _FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_3 = "(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CW_CP = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCW_CP",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCW_CP",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CW_CP = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CP",
-			new String[] { Long.class.getName(), Long.class.getName() });
+	private static final String _FINDER_COLUMN_CW_CPI_COMMERCEWISHLISTID_2 =
+		"commerceWishListItem.commerceWishListId = ? AND ";
+
+	private static final String _FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_2 =
+		"commerceWishListItem.CPInstanceUuid = ?";
+
+	private static final String _FINDER_COLUMN_CW_CPI_CPINSTANCEUUID_3 =
+		"(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '')";
+
+	private FinderPath _finderPathWithPaginationFindByCW_CP;
+	private FinderPath _finderPathWithoutPaginationFindByCW_CP;
+	private FinderPath _finderPathCountByCW_CP;
 
 	/**
 	 * Returns all the commerce wish list items where commerceWishListId = &#63; and CProductId = &#63;.
@@ -2337,9 +2319,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CP(long commerceWishListId,
-		long CProductId) {
-		return findByCW_CP(commerceWishListId, CProductId, QueryUtil.ALL_POS,
+	public List<CommerceWishListItem> findByCW_CP(
+		long commerceWishListId, long CProductId) {
+
+		return findByCW_CP(
+			commerceWishListId, CProductId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -2347,7 +2331,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns a range of all the commerce wish list items where commerceWishListId = &#63; and CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -2357,8 +2341,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CP(long commerceWishListId,
-		long CProductId, int start, int end) {
+	public List<CommerceWishListItem> findByCW_CP(
+		long commerceWishListId, long CProductId, int start, int end) {
+
 		return findByCW_CP(commerceWishListId, CProductId, start, end, null);
 	}
 
@@ -2366,7 +2351,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63; and CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -2377,18 +2362,20 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CP(long commerceWishListId,
-		long CProductId, int start, int end,
+	public List<CommerceWishListItem> findByCW_CP(
+		long commerceWishListId, long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return findByCW_CP(commerceWishListId, CProductId, start, end,
-			orderByComparator, true);
+
+		return findByCW_CP(
+			commerceWishListId, CProductId, start, end, orderByComparator,
+			true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63; and CProductId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWishListId the commerce wish list ID
@@ -2400,39 +2387,41 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findByCW_CP(long commerceWishListId,
-		long CProductId, int start, int end,
+	public List<CommerceWishListItem> findByCW_CP(
+		long commerceWishListId, long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP;
-			finderArgs = new Object[] { commerceWishListId, CProductId };
+			finderPath = _finderPathWithoutPaginationFindByCW_CP;
+			finderArgs = new Object[] {commerceWishListId, CProductId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CW_CP;
+			finderPath = _finderPathWithPaginationFindByCW_CP;
 			finderArgs = new Object[] {
-					commerceWishListId, CProductId,
-					
-					start, end, orderByComparator
-				};
+				commerceWishListId, CProductId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if ((commerceWishListId != commerceWishListItem.getCommerceWishListId()) ||
-							(CProductId != commerceWishListItem.getCProductId())) {
+					if ((commerceWishListId !=
+							commerceWishListItem.getCommerceWishListId()) ||
+						(CProductId != commerceWishListItem.getCProductId())) {
+
 						list = null;
 
 						break;
@@ -2445,8 +2434,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2459,11 +2448,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			query.append(_FINDER_COLUMN_CW_CP_CPRODUCTID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2483,16 +2471,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				qPos.add(CProductId);
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2522,12 +2510,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCW_CP_First(long commerceWishListId,
-		long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCW_CP_First(
+			long commerceWishListId, long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCW_CP_First(commerceWishListId,
-				CProductId, orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCW_CP_First(
+			commerceWishListId, CProductId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -2557,11 +2546,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the first matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CP_First(long commerceWishListId,
-		long CProductId,
+	public CommerceWishListItem fetchByCW_CP_First(
+		long commerceWishListId, long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		List<CommerceWishListItem> list = findByCW_CP(commerceWishListId,
-				CProductId, 0, 1, orderByComparator);
+
+		List<CommerceWishListItem> list = findByCW_CP(
+			commerceWishListId, CProductId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2580,12 +2570,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCW_CP_Last(long commerceWishListId,
-		long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+	public CommerceWishListItem findByCW_CP_Last(
+			long commerceWishListId, long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCW_CP_Last(commerceWishListId,
-				CProductId, orderByComparator);
+
+		CommerceWishListItem commerceWishListItem = fetchByCW_CP_Last(
+			commerceWishListId, CProductId, orderByComparator);
 
 		if (commerceWishListItem != null) {
 			return commerceWishListItem;
@@ -2615,17 +2606,19 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the last matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CP_Last(long commerceWishListId,
-		long CProductId,
+	public CommerceWishListItem fetchByCW_CP_Last(
+		long commerceWishListId, long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		int count = countByCW_CP(commerceWishListId, CProductId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWishListItem> list = findByCW_CP(commerceWishListId,
-				CProductId, count - 1, count, orderByComparator);
+		List<CommerceWishListItem> list = findByCW_CP(
+			commerceWishListId, CProductId, count - 1, count,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2646,10 +2639,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem[] findByCW_CP_PrevAndNext(
-		long commerceWishListItemId, long commerceWishListId, long CProductId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
+			long commerceWishListItemId, long commerceWishListId,
+			long CProductId,
+			OrderByComparator<CommerceWishListItem> orderByComparator)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByPrimaryKey(commerceWishListItemId);
+
+		CommerceWishListItem commerceWishListItem = findByPrimaryKey(
+			commerceWishListItemId);
 
 		Session session = null;
 
@@ -2658,13 +2654,15 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			CommerceWishListItem[] array = new CommerceWishListItemImpl[3];
 
-			array[0] = getByCW_CP_PrevAndNext(session, commerceWishListItem,
-					commerceWishListId, CProductId, orderByComparator, true);
+			array[0] = getByCW_CP_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId, CProductId,
+				orderByComparator, true);
 
 			array[1] = commerceWishListItem;
 
-			array[2] = getByCW_CP_PrevAndNext(session, commerceWishListItem,
-					commerceWishListId, CProductId, orderByComparator, false);
+			array[2] = getByCW_CP_PrevAndNext(
+				session, commerceWishListItem, commerceWishListId, CProductId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -2676,16 +2674,17 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		}
 	}
 
-	protected CommerceWishListItem getByCW_CP_PrevAndNext(Session session,
-		CommerceWishListItem commerceWishListItem, long commerceWishListId,
-		long CProductId,
+	protected CommerceWishListItem getByCW_CP_PrevAndNext(
+		Session session, CommerceWishListItem commerceWishListItem,
+		long commerceWishListId, long CProductId,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -2699,7 +2698,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		query.append(_FINDER_COLUMN_CW_CP_CPRODUCTID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -2771,10 +2771,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		qPos.add(CProductId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWishListItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWishListItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2796,9 +2797,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void removeByCW_CP(long commerceWishListId, long CProductId) {
-		for (CommerceWishListItem commerceWishListItem : findByCW_CP(
-				commerceWishListId, CProductId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (CommerceWishListItem commerceWishListItem :
+				findByCW_CP(
+					commerceWishListId, CProductId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceWishListItem);
 		}
 	}
@@ -2812,9 +2815,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countByCW_CP(long commerceWishListId, long CProductId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CW_CP;
+		FinderPath finderPath = _finderPathCountByCW_CP;
 
-		Object[] finderArgs = new Object[] { commerceWishListId, CProductId };
+		Object[] finderArgs = new Object[] {commerceWishListId, CProductId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2859,29 +2862,17 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CW_CP_COMMERCEWISHLISTID_2 = "commerceWishListItem.commerceWishListId = ? AND ";
-	private static final String _FINDER_COLUMN_CW_CP_CPRODUCTID_2 = "commerceWishListItem.CProductId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CW_CPI_CP = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWishListItemImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCW_CPI_CP",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Long.class.getName()
-			},
-			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
-			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CW_CPI_CP = new FinderPath(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CPI_CP",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Long.class.getName()
-			});
+	private static final String _FINDER_COLUMN_CW_CP_COMMERCEWISHLISTID_2 =
+		"commerceWishListItem.commerceWishListId = ? AND ";
+
+	private static final String _FINDER_COLUMN_CW_CP_CPRODUCTID_2 =
+		"commerceWishListItem.CProductId = ?";
+
+	private FinderPath _finderPathFetchByCW_CPI_CP;
+	private FinderPath _finderPathCountByCW_CPI_CP;
 
 	/**
-	 * Returns the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; or throws a {@link NoSuchWishListItemException} if it could not be found.
+	 * Returns the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; or throws a <code>NoSuchWishListItemException</code> if it could not be found.
 	 *
 	 * @param commerceWishListId the commerce wish list ID
 	 * @param CPInstanceUuid the cp instance uuid
@@ -2890,11 +2881,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem findByCW_CPI_CP(long commerceWishListId,
-		String CPInstanceUuid, long CProductId)
+	public CommerceWishListItem findByCW_CPI_CP(
+			long commerceWishListId, String CPInstanceUuid, long CProductId)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_CP(commerceWishListId,
-				CPInstanceUuid, CProductId);
+
+		CommerceWishListItem commerceWishListItem = fetchByCW_CPI_CP(
+			commerceWishListId, CPInstanceUuid, CProductId);
 
 		if (commerceWishListItem == null) {
 			StringBundler msg = new StringBundler(8);
@@ -2931,10 +2923,11 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CPI_CP(long commerceWishListId,
-		String CPInstanceUuid, long CProductId) {
-		return fetchByCW_CPI_CP(commerceWishListId, CPInstanceUuid, CProductId,
-			true);
+	public CommerceWishListItem fetchByCW_CPI_CP(
+		long commerceWishListId, String CPInstanceUuid, long CProductId) {
+
+		return fetchByCW_CPI_CP(
+			commerceWishListId, CPInstanceUuid, CProductId, true);
 	}
 
 	/**
@@ -2947,26 +2940,33 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
-	public CommerceWishListItem fetchByCW_CPI_CP(long commerceWishListId,
-		String CPInstanceUuid, long CProductId, boolean retrieveFromCache) {
+	public CommerceWishListItem fetchByCW_CPI_CP(
+		long commerceWishListId, String CPInstanceUuid, long CProductId,
+		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
 		Object[] finderArgs = new Object[] {
-				commerceWishListId, CPInstanceUuid, CProductId
-			};
+			commerceWishListId, CPInstanceUuid, CProductId
+		};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CW_CPI_CP,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByCW_CPI_CP, finderArgs, this);
 		}
 
 		if (result instanceof CommerceWishListItem) {
-			CommerceWishListItem commerceWishListItem = (CommerceWishListItem)result;
+			CommerceWishListItem commerceWishListItem =
+				(CommerceWishListItem)result;
 
-			if ((commerceWishListId != commerceWishListItem.getCommerceWishListId()) ||
-					!Objects.equals(CPInstanceUuid,
-						commerceWishListItem.getCPInstanceUuid()) ||
-					(CProductId != commerceWishListItem.getCProductId())) {
+			if ((commerceWishListId !=
+					commerceWishListItem.getCommerceWishListId()) ||
+				!Objects.equals(
+					CPInstanceUuid, commerceWishListItem.getCPInstanceUuid()) ||
+				(CProductId != commerceWishListItem.getCProductId())) {
+
 				result = null;
 			}
 		}
@@ -2980,10 +2980,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_3);
 			}
 			else {
@@ -3016,8 +3013,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				List<CommerceWishListItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CW_CPI_CP,
-						finderArgs, list);
+					finderCache.putResult(
+						_finderPathFetchByCW_CPI_CP, finderArgs, list);
 				}
 				else {
 					if (list.size() > 1) {
@@ -3026,8 +3023,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"CommerceWishListItemPersistenceImpl.fetchByCW_CPI_CP(long, String, long, boolean) with parameters (" +
-								StringUtil.merge(finderArgs) +
-								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
 					}
 
@@ -3039,8 +3036,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CW_CPI_CP,
-					finderArgs);
+				finderCache.removeResult(
+					_finderPathFetchByCW_CPI_CP, finderArgs);
 
 				throw processException(e);
 			}
@@ -3066,11 +3063,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the commerce wish list item that was removed
 	 */
 	@Override
-	public CommerceWishListItem removeByCW_CPI_CP(long commerceWishListId,
-		String CPInstanceUuid, long CProductId)
+	public CommerceWishListItem removeByCW_CPI_CP(
+			long commerceWishListId, String CPInstanceUuid, long CProductId)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = findByCW_CPI_CP(commerceWishListId,
-				CPInstanceUuid, CProductId);
+
+		CommerceWishListItem commerceWishListItem = findByCW_CPI_CP(
+			commerceWishListId, CPInstanceUuid, CProductId);
 
 		return remove(commerceWishListItem);
 	}
@@ -3084,13 +3082,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the number of matching commerce wish list items
 	 */
 	@Override
-	public int countByCW_CPI_CP(long commerceWishListId, String CPInstanceUuid,
-		long CProductId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CW_CPI_CP;
+	public int countByCW_CPI_CP(
+		long commerceWishListId, String CPInstanceUuid, long CProductId) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		FinderPath finderPath = _finderPathCountByCW_CPI_CP;
 
 		Object[] finderArgs = new Object[] {
-				commerceWishListId, CPInstanceUuid, CProductId
-			};
+			commerceWishListId, CPInstanceUuid, CProductId
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3103,10 +3104,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_3);
 			}
 			else {
@@ -3153,11 +3151,17 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CW_CPI_CP_COMMERCEWISHLISTID_2 = "commerceWishListItem.commerceWishListId = ? AND ";
-	private static final String _FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_1 = "commerceWishListItem.CPInstanceUuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_2 = "commerceWishListItem.CPInstanceUuid = ? AND ";
-	private static final String _FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_3 = "(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '') AND ";
-	private static final String _FINDER_COLUMN_CW_CPI_CP_CPRODUCTID_2 = "commerceWishListItem.CProductId = ?";
+	private static final String _FINDER_COLUMN_CW_CPI_CP_COMMERCEWISHLISTID_2 =
+		"commerceWishListItem.commerceWishListId = ? AND ";
+
+	private static final String _FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_2 =
+		"commerceWishListItem.CPInstanceUuid = ? AND ";
+
+	private static final String _FINDER_COLUMN_CW_CPI_CP_CPINSTANCEUUID_3 =
+		"(commerceWishListItem.CPInstanceUuid IS NULL OR commerceWishListItem.CPInstanceUuid = '') AND ";
+
+	private static final String _FINDER_COLUMN_CW_CPI_CP_CPRODUCTID_2 =
+		"commerceWishListItem.CProductId = ?";
 
 	public CommerceWishListItemPersistenceImpl() {
 		setModelClass(CommerceWishListItem.class);
@@ -3170,16 +3174,19 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void cacheResult(CommerceWishListItem commerceWishListItem) {
-		entityCache.putResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWishListItemImpl.class,
 			commerceWishListItem.getPrimaryKey(), commerceWishListItem);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CW_CPI_CP,
+		finderCache.putResult(
+			_finderPathFetchByCW_CPI_CP,
 			new Object[] {
 				commerceWishListItem.getCommerceWishListId(),
 				commerceWishListItem.getCPInstanceUuid(),
 				commerceWishListItem.getCProductId()
-			}, commerceWishListItem);
+			},
+			commerceWishListItem);
 
 		commerceWishListItem.resetOriginalValues();
 	}
@@ -3191,11 +3198,14 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public void cacheResult(List<CommerceWishListItem> commerceWishListItems) {
-		for (CommerceWishListItem commerceWishListItem : commerceWishListItems) {
+		for (CommerceWishListItem commerceWishListItem :
+				commerceWishListItems) {
+
 			if (entityCache.getResult(
-						CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceWishListItemImpl.class,
-						commerceWishListItem.getPrimaryKey()) == null) {
+					CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceWishListItemImpl.class,
+					commerceWishListItem.getPrimaryKey()) == null) {
+
 				cacheResult(commerceWishListItem);
 			}
 			else {
@@ -3208,7 +3218,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Clears the cache for all commerce wish list items.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -3224,19 +3234,21 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Clears the cache for the commerce wish list item.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceWishListItem commerceWishListItem) {
-		entityCache.removeResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWishListItemImpl.class, commerceWishListItem.getPrimaryKey());
+		entityCache.removeResult(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			commerceWishListItem.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceWishListItemModelImpl)commerceWishListItem,
-			true);
+		clearUniqueFindersCache(
+			(CommerceWishListItemModelImpl)commerceWishListItem, true);
 	}
 
 	@Override
@@ -3244,54 +3256,61 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceWishListItem commerceWishListItem : commerceWishListItems) {
-			entityCache.removeResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceWishListItem commerceWishListItem :
+				commerceWishListItems) {
+
+			entityCache.removeResult(
+				CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceWishListItemImpl.class,
 				commerceWishListItem.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceWishListItemModelImpl)commerceWishListItem,
-				true);
+			clearUniqueFindersCache(
+				(CommerceWishListItemModelImpl)commerceWishListItem, true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceWishListItemModelImpl commerceWishListItemModelImpl) {
-		Object[] args = new Object[] {
-				commerceWishListItemModelImpl.getCommerceWishListId(),
-				commerceWishListItemModelImpl.getCPInstanceUuid(),
-				commerceWishListItemModelImpl.getCProductId()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_CW_CPI_CP, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CW_CPI_CP, args,
-			commerceWishListItemModelImpl, false);
+		Object[] args = new Object[] {
+			commerceWishListItemModelImpl.getCommerceWishListId(),
+			commerceWishListItemModelImpl.getCPInstanceUuid(),
+			commerceWishListItemModelImpl.getCProductId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByCW_CPI_CP, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByCW_CPI_CP, args, commerceWishListItemModelImpl,
+			false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceWishListItemModelImpl commerceWishListItemModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceWishListItemModelImpl.getCommerceWishListId(),
-					commerceWishListItemModelImpl.getCPInstanceUuid(),
-					commerceWishListItemModelImpl.getCProductId()
-				};
+				commerceWishListItemModelImpl.getCommerceWishListId(),
+				commerceWishListItemModelImpl.getCPInstanceUuid(),
+				commerceWishListItemModelImpl.getCProductId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CPI_CP, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CW_CPI_CP, args);
+			finderCache.removeResult(_finderPathCountByCW_CPI_CP, args);
+			finderCache.removeResult(_finderPathFetchByCW_CPI_CP, args);
 		}
 
 		if ((commerceWishListItemModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CW_CPI_CP.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceWishListItemModelImpl.getOriginalCommerceWishListId(),
-					commerceWishListItemModelImpl.getOriginalCPInstanceUuid(),
-					commerceWishListItemModelImpl.getOriginalCProductId()
-				};
+			 _finderPathFetchByCW_CPI_CP.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CPI_CP, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CW_CPI_CP, args);
+			Object[] args = new Object[] {
+				commerceWishListItemModelImpl.getOriginalCommerceWishListId(),
+				commerceWishListItemModelImpl.getOriginalCPInstanceUuid(),
+				commerceWishListItemModelImpl.getOriginalCProductId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCW_CPI_CP, args);
+			finderCache.removeResult(_finderPathFetchByCW_CPI_CP, args);
 		}
 	}
 
@@ -3303,7 +3322,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem create(long commerceWishListItemId) {
-		CommerceWishListItem commerceWishListItem = new CommerceWishListItemImpl();
+		CommerceWishListItem commerceWishListItem =
+			new CommerceWishListItemImpl();
 
 		commerceWishListItem.setNew(true);
 		commerceWishListItem.setPrimaryKey(commerceWishListItemId);
@@ -3323,6 +3343,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public CommerceWishListItem remove(long commerceWishListItemId)
 		throws NoSuchWishListItemException {
+
 		return remove((Serializable)commerceWishListItemId);
 	}
 
@@ -3336,21 +3357,23 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public CommerceWishListItem remove(Serializable primaryKey)
 		throws NoSuchWishListItemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceWishListItem commerceWishListItem = (CommerceWishListItem)session.get(CommerceWishListItemImpl.class,
-					primaryKey);
+			CommerceWishListItem commerceWishListItem =
+				(CommerceWishListItem)session.get(
+					CommerceWishListItemImpl.class, primaryKey);
 
 			if (commerceWishListItem == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchWishListItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchWishListItemException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceWishListItem);
@@ -3369,14 +3392,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	protected CommerceWishListItem removeImpl(
 		CommerceWishListItem commerceWishListItem) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceWishListItem)) {
-				commerceWishListItem = (CommerceWishListItem)session.get(CommerceWishListItemImpl.class,
-						commerceWishListItem.getPrimaryKeyObj());
+				commerceWishListItem = (CommerceWishListItem)session.get(
+					CommerceWishListItemImpl.class,
+					commerceWishListItem.getPrimaryKeyObj());
 			}
 
 			if (commerceWishListItem != null) {
@@ -3400,27 +3425,31 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public CommerceWishListItem updateImpl(
 		CommerceWishListItem commerceWishListItem) {
+
 		boolean isNew = commerceWishListItem.isNew();
 
 		if (!(commerceWishListItem instanceof CommerceWishListItemModelImpl)) {
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceWishListItem.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceWishListItem);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceWishListItem);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceWishListItem proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceWishListItem implementation " +
-				commerceWishListItem.getClass());
+					commerceWishListItem.getClass());
 		}
 
-		CommerceWishListItemModelImpl commerceWishListItemModelImpl = (CommerceWishListItemModelImpl)commerceWishListItem;
+		CommerceWishListItemModelImpl commerceWishListItemModelImpl =
+			(CommerceWishListItemModelImpl)commerceWishListItem;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -3429,8 +3458,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				commerceWishListItem.setCreateDate(now);
 			}
 			else {
-				commerceWishListItem.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceWishListItem.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -3439,8 +3468,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				commerceWishListItem.setModifiedDate(now);
 			}
 			else {
-				commerceWishListItem.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceWishListItem.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -3455,7 +3484,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				commerceWishListItem.setNew(false);
 			}
 			else {
-				commerceWishListItem = (CommerceWishListItem)session.merge(commerceWishListItem);
+				commerceWishListItem = (CommerceWishListItem)session.merge(
+					commerceWishListItem);
 			}
 		}
 		catch (Exception e) {
@@ -3470,160 +3500,172 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		if (!CommerceWishListItemModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceWishListItemModelImpl.getCommerceWishListId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceWishListId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceWishListId, args);
+
+			args = new Object[] {
+				commerceWishListItemModelImpl.getCPInstanceUuid()
+			};
+
+			finderCache.removeResult(_finderPathCountByCPInstanceUuid, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCPInstanceUuid, args);
+
+			args = new Object[] {commerceWishListItemModelImpl.getCProductId()};
+
+			finderCache.removeResult(_finderPathCountByCProductId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCProductId, args);
+
+			args = new Object[] {
+				commerceWishListItemModelImpl.getCommerceWishListId(),
+				commerceWishListItemModelImpl.getCPInstanceUuid()
+			};
+
+			finderCache.removeResult(_finderPathCountByCW_CPI, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCW_CPI, args);
+
+			args = new Object[] {
+				commerceWishListItemModelImpl.getCommerceWishListId(),
+				commerceWishListItemModelImpl.getCProductId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCW_CP, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCW_CP, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceWishListItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceWishListId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceWishListItemModelImpl.
+						getOriginalCommerceWishListId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceWishListId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceWishListId, args);
+
+				args = new Object[] {
 					commerceWishListItemModelImpl.getCommerceWishListId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWISHLISTID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceWishListId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceWishListId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceWishListItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCPInstanceUuid.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceWishListItemModelImpl.getOriginalCPInstanceUuid()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCPInstanceUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPInstanceUuid, args);
+
+				args = new Object[] {
 					commerceWishListItemModelImpl.getCPInstanceUuid()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPINSTANCEUUID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCPInstanceUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPInstanceUuid, args);
+			}
 
-			args = new Object[] { commerceWishListItemModelImpl.getCProductId() };
+			if ((commerceWishListItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCProductId.
+					 getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
-				args);
+				Object[] args = new Object[] {
+					commerceWishListItemModelImpl.getOriginalCProductId()
+				};
 
-			args = new Object[] {
+				finderCache.removeResult(_finderPathCountByCProductId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCProductId, args);
+
+				args = new Object[] {
+					commerceWishListItemModelImpl.getCProductId()
+				};
+
+				finderCache.removeResult(_finderPathCountByCProductId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCProductId, args);
+			}
+
+			if ((commerceWishListItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCW_CPI.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceWishListItemModelImpl.
+						getOriginalCommerceWishListId(),
+					commerceWishListItemModelImpl.getOriginalCPInstanceUuid()
+				};
+
+				finderCache.removeResult(_finderPathCountByCW_CPI, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCW_CPI, args);
+
+				args = new Object[] {
 					commerceWishListItemModelImpl.getCommerceWishListId(),
 					commerceWishListItemModelImpl.getCPInstanceUuid()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CPI, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI,
-				args);
+				finderCache.removeResult(_finderPathCountByCW_CPI, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCW_CPI, args);
+			}
 
-			args = new Object[] {
+			if ((commerceWishListItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCW_CP.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceWishListItemModelImpl.
+						getOriginalCommerceWishListId(),
+					commerceWishListItemModelImpl.getOriginalCProductId()
+				};
+
+				finderCache.removeResult(_finderPathCountByCW_CP, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCW_CP, args);
+
+				args = new Object[] {
 					commerceWishListItemModelImpl.getCommerceWishListId(),
 					commerceWishListItemModelImpl.getCProductId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CP, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceWishListItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWishListItemModelImpl.getOriginalCommerceWishListId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWISHLISTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID,
-					args);
-
-				args = new Object[] {
-						commerceWishListItemModelImpl.getCommerceWishListId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWISHLISTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWISHLISTID,
-					args);
-			}
-
-			if ((commerceWishListItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWishListItemModelImpl.getOriginalCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPINSTANCEUUID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID,
-					args);
-
-				args = new Object[] {
-						commerceWishListItemModelImpl.getCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPINSTANCEUUID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPINSTANCEUUID,
-					args);
-			}
-
-			if ((commerceWishListItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWishListItemModelImpl.getOriginalCProductId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
-					args);
-
-				args = new Object[] {
-						commerceWishListItemModelImpl.getCProductId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
-					args);
-			}
-
-			if ((commerceWishListItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWishListItemModelImpl.getOriginalCommerceWishListId(),
-						commerceWishListItemModelImpl.getOriginalCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CPI, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI,
-					args);
-
-				args = new Object[] {
-						commerceWishListItemModelImpl.getCommerceWishListId(),
-						commerceWishListItemModelImpl.getCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CPI, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CPI,
-					args);
-			}
-
-			if ((commerceWishListItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWishListItemModelImpl.getOriginalCommerceWishListId(),
-						commerceWishListItemModelImpl.getOriginalCProductId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CP, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP,
-					args);
-
-				args = new Object[] {
-						commerceWishListItemModelImpl.getCommerceWishListId(),
-						commerceWishListItemModelImpl.getCProductId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CW_CP, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CW_CP,
-					args);
+				finderCache.removeResult(_finderPathCountByCW_CP, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCW_CP, args);
 			}
 		}
 
-		entityCache.putResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWishListItemImpl.class,
 			commerceWishListItem.getPrimaryKey(), commerceWishListItem, false);
 
@@ -3636,7 +3678,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	}
 
 	/**
-	 * Returns the commerce wish list item with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce wish list item with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce wish list item
 	 * @return the commerce wish list item
@@ -3645,22 +3687,24 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public CommerceWishListItem findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchWishListItemException {
-		CommerceWishListItem commerceWishListItem = fetchByPrimaryKey(primaryKey);
+
+		CommerceWishListItem commerceWishListItem = fetchByPrimaryKey(
+			primaryKey);
 
 		if (commerceWishListItem == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchWishListItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchWishListItemException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceWishListItem;
 	}
 
 	/**
-	 * Returns the commerce wish list item with the primary key or throws a {@link NoSuchWishListItemException} if it could not be found.
+	 * Returns the commerce wish list item with the primary key or throws a <code>NoSuchWishListItemException</code> if it could not be found.
 	 *
 	 * @param commerceWishListItemId the primary key of the commerce wish list item
 	 * @return the commerce wish list item
@@ -3669,6 +3713,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public CommerceWishListItem findByPrimaryKey(long commerceWishListItemId)
 		throws NoSuchWishListItemException {
+
 		return findByPrimaryKey((Serializable)commerceWishListItemId);
 	}
 
@@ -3680,14 +3725,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public CommerceWishListItem fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceWishListItemImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceWishListItem commerceWishListItem = (CommerceWishListItem)serializable;
+		CommerceWishListItem commerceWishListItem =
+			(CommerceWishListItem)serializable;
 
 		if (commerceWishListItem == null) {
 			Session session = null;
@@ -3695,19 +3742,21 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			try {
 				session = openSession();
 
-				commerceWishListItem = (CommerceWishListItem)session.get(CommerceWishListItemImpl.class,
-						primaryKey);
+				commerceWishListItem = (CommerceWishListItem)session.get(
+					CommerceWishListItemImpl.class, primaryKey);
 
 				if (commerceWishListItem != null) {
 					cacheResult(commerceWishListItem);
 				}
 				else {
-					entityCache.putResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceWishListItemImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceWishListItemImpl.class, primaryKey);
 
 				throw processException(e);
@@ -3734,18 +3783,21 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	@Override
 	public Map<Serializable, CommerceWishListItem> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceWishListItem> map = new HashMap<Serializable, CommerceWishListItem>();
+		Map<Serializable, CommerceWishListItem> map =
+			new HashMap<Serializable, CommerceWishListItem>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceWishListItem commerceWishListItem = fetchByPrimaryKey(primaryKey);
+			CommerceWishListItem commerceWishListItem = fetchByPrimaryKey(
+				primaryKey);
 
 			if (commerceWishListItem != null) {
 				map.put(primaryKey, commerceWishListItem);
@@ -3757,8 +3809,9 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceWishListItemImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceWishListItemImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -3778,8 +3831,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEWISHLISTITEM_WHERE_PKS_IN);
 
@@ -3802,17 +3855,22 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceWishListItem commerceWishListItem : (List<CommerceWishListItem>)q.list()) {
-				map.put(commerceWishListItem.getPrimaryKeyObj(),
+			for (CommerceWishListItem commerceWishListItem :
+					(List<CommerceWishListItem>)q.list()) {
+
+				map.put(
+					commerceWishListItem.getPrimaryKeyObj(),
 					commerceWishListItem);
 
 				cacheResult(commerceWishListItem);
 
-				uncachedPrimaryKeys.remove(commerceWishListItem.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceWishListItem.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceWishListItemImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -3840,7 +3898,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns a range of all the commerce wish list items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce wish list items
@@ -3856,7 +3914,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce wish list items
@@ -3865,8 +3923,10 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findAll(int start, int end,
+	public List<CommerceWishListItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -3874,7 +3934,7 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Returns an ordered range of all the commerce wish list items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce wish list items
@@ -3884,29 +3944,32 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * @return the ordered range of commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> findAll(int start, int end,
+	public List<CommerceWishListItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceWishListItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWishListItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWishListItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -3914,13 +3977,13 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEWISHLISTITEM);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -3928,7 +3991,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				sql = _SQL_SELECT_COMMERCEWISHLISTITEM;
 
 				if (pagination) {
-					sql = sql.concat(CommerceWishListItemModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceWishListItemModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -3940,16 +4004,16 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWishListItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWishListItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -3987,8 +4051,8 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -4000,12 +4064,12 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -4026,6 +4090,175 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 	 * Initializes the commerce wish list item persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceWishListId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceWishListId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceWishListId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceWishListId", new String[] {Long.class.getName()},
+			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceWishListId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceWishListId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCPInstanceUuid = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPInstanceUuid",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCPInstanceUuid = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPInstanceUuid",
+			new String[] {String.class.getName()},
+			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCPInstanceUuid = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPInstanceUuid",
+			new String[] {String.class.getName()});
+
+		_finderPathWithPaginationFindByCProductId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCProductId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCProductId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCProductId",
+			new String[] {Long.class.getName()},
+			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCProductId = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCProductId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCW_CPI = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCW_CPI",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCW_CPI = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCW_CPI",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCW_CPI = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CPI",
+			new String[] {Long.class.getName(), String.class.getName()});
+
+		_finderPathWithPaginationFindByCW_CP = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCW_CP",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCW_CP = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCW_CP",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCW_CP = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CP",
+			new String[] {Long.class.getName(), Long.class.getName()});
+
+		_finderPathFetchByCW_CPI_CP = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWishListItemImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByCW_CPI_CP",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Long.class.getName()
+			},
+			CommerceWishListItemModelImpl.COMMERCEWISHLISTID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
+			CommerceWishListItemModelImpl.CPRODUCTID_COLUMN_BITMASK);
+
+		_finderPathCountByCW_CPI_CP = new FinderPath(
+			CommerceWishListItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWishListItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCW_CPI_CP",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Long.class.getName()
+			});
 	}
 
 	public void destroy() {
@@ -4037,17 +4270,38 @@ public class CommerceWishListItemPersistenceImpl extends BasePersistenceImpl<Com
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM = "SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem";
-	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM_WHERE_PKS_IN = "SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem WHERE commerceWishListItemId IN (";
-	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM_WHERE = "SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem WHERE ";
-	private static final String _SQL_COUNT_COMMERCEWISHLISTITEM = "SELECT COUNT(commerceWishListItem) FROM CommerceWishListItem commerceWishListItem";
-	private static final String _SQL_COUNT_COMMERCEWISHLISTITEM_WHERE = "SELECT COUNT(commerceWishListItem) FROM CommerceWishListItem commerceWishListItem WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceWishListItem.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceWishListItem exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceWishListItem exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceWishListItemPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM =
+		"SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem";
+
+	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM_WHERE_PKS_IN =
+		"SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem WHERE commerceWishListItemId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEWISHLISTITEM_WHERE =
+		"SELECT commerceWishListItem FROM CommerceWishListItem commerceWishListItem WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEWISHLISTITEM =
+		"SELECT COUNT(commerceWishListItem) FROM CommerceWishListItem commerceWishListItem";
+
+	private static final String _SQL_COUNT_COMMERCEWISHLISTITEM_WHERE =
+		"SELECT COUNT(commerceWishListItem) FROM CommerceWishListItem commerceWishListItem WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceWishListItem.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceWishListItem exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceWishListItem exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceWishListItemPersistenceImpl.class);
+
 }

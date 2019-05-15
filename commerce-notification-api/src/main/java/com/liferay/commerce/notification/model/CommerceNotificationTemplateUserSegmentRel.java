@@ -25,54 +25,75 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateUserSegmentRelModel
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl"
+)
 @ProviderType
 public interface CommerceNotificationTemplateUserSegmentRel
 	extends CommerceNotificationTemplateUserSegmentRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceNotificationTemplateUserSegmentRel, Long> COMMERCE_NOTIFICATION_TEMPLATE_USER_SEGMENT_REL_ID_ACCESSOR =
-		new Accessor<CommerceNotificationTemplateUserSegmentRel, Long>() {
-			@Override
-			public Long get(
-				CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-				return commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId();
-			}
+	public static final Accessor
+		<CommerceNotificationTemplateUserSegmentRel, Long>
+			COMMERCE_NOTIFICATION_TEMPLATE_USER_SEGMENT_REL_ID_ACCESSOR =
+				new Accessor
+					<CommerceNotificationTemplateUserSegmentRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+					@Override
+					public Long get(
+						CommerceNotificationTemplateUserSegmentRel
+							commerceNotificationTemplateUserSegmentRel) {
 
-			@Override
-			public Class<CommerceNotificationTemplateUserSegmentRel> getTypeClass() {
-				return CommerceNotificationTemplateUserSegmentRel.class;
-			}
-		};
+						return commerceNotificationTemplateUserSegmentRel.
+							getCommerceNotificationTemplateUserSegmentRelId();
+					}
 
-	public static final Accessor<CommerceNotificationTemplateUserSegmentRel, Long> COMMERCE_USER_SEGMENT_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceNotificationTemplateUserSegmentRel, Long>() {
-			@Override
-			public Long get(
-				CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-				return commerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId();
-			}
+					@Override
+					public Class<Long> getAttributeClass() {
+						return Long.class;
+					}
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+					@Override
+					public Class<CommerceNotificationTemplateUserSegmentRel>
+						getTypeClass() {
 
-			@Override
-			public Class<CommerceNotificationTemplateUserSegmentRel> getTypeClass() {
-				return CommerceNotificationTemplateUserSegmentRel.class;
-			}
-		};
+						return CommerceNotificationTemplateUserSegmentRel.class;
+					}
+
+				};
+	public static final Accessor
+		<CommerceNotificationTemplateUserSegmentRel, Long>
+			COMMERCE_USER_SEGMENT_ENTRY_ID_ACCESSOR =
+				new Accessor
+					<CommerceNotificationTemplateUserSegmentRel, Long>() {
+
+					@Override
+					public Long get(
+						CommerceNotificationTemplateUserSegmentRel
+							commerceNotificationTemplateUserSegmentRel) {
+
+						return commerceNotificationTemplateUserSegmentRel.
+							getCommerceUserSegmentEntryId();
+					}
+
+					@Override
+					public Class<Long> getAttributeClass() {
+						return Long.class;
+					}
+
+					@Override
+					public Class<CommerceNotificationTemplateUserSegmentRel>
+						getTypeClass() {
+
+						return CommerceNotificationTemplateUserSegmentRel.class;
+					}
+
+				};
+
 }

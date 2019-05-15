@@ -17,7 +17,6 @@ package com.liferay.commerce.account.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
-	ModelWrapper<CommerceAccountUserRel> {
+public class CommerceAccountUserRelWrapper
+	implements CommerceAccountUserRel, ModelWrapper<CommerceAccountUserRel> {
+
 	public CommerceAccountUserRelWrapper(
 		CommerceAccountUserRel commerceAccountUserRel) {
+
 		_commerceAccountUserRel = commerceAccountUserRel;
 	}
 
@@ -79,7 +80,7 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 		}
 
 		Long commerceAccountUserId = (Long)attributes.get(
-				"commerceAccountUserId");
+			"commerceAccountUserId");
 
 		if (commerceAccountUserId != null) {
 			setCommerceAccountUserId(commerceAccountUserId);
@@ -118,7 +119,8 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 
 	@Override
 	public Object clone() {
-		return new CommerceAccountUserRelWrapper((CommerceAccountUserRel)_commerceAccountUserRel.clone());
+		return new CommerceAccountUserRelWrapper(
+			(CommerceAccountUserRel)_commerceAccountUserRel.clone());
 	}
 
 	@Override
@@ -127,50 +129,50 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Returns the commerce account ID of this commerce account user rel.
-	*
-	* @return the commerce account ID of this commerce account user rel
-	*/
+	 * Returns the commerce account ID of this commerce account user rel.
+	 *
+	 * @return the commerce account ID of this commerce account user rel
+	 */
 	@Override
 	public long getCommerceAccountId() {
 		return _commerceAccountUserRel.getCommerceAccountId();
 	}
 
 	/**
-	* Returns the commerce account user ID of this commerce account user rel.
-	*
-	* @return the commerce account user ID of this commerce account user rel
-	*/
+	 * Returns the commerce account user ID of this commerce account user rel.
+	 *
+	 * @return the commerce account user ID of this commerce account user rel
+	 */
 	@Override
 	public long getCommerceAccountUserId() {
 		return _commerceAccountUserRel.getCommerceAccountUserId();
 	}
 
 	/**
-	* Returns the commerce account user uuid of this commerce account user rel.
-	*
-	* @return the commerce account user uuid of this commerce account user rel
-	*/
+	 * Returns the commerce account user uuid of this commerce account user rel.
+	 *
+	 * @return the commerce account user uuid of this commerce account user rel
+	 */
 	@Override
 	public String getCommerceAccountUserUuid() {
 		return _commerceAccountUserRel.getCommerceAccountUserUuid();
 	}
 
 	/**
-	* Returns the company ID of this commerce account user rel.
-	*
-	* @return the company ID of this commerce account user rel
-	*/
+	 * Returns the company ID of this commerce account user rel.
+	 *
+	 * @return the company ID of this commerce account user rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceAccountUserRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce account user rel.
-	*
-	* @return the create date of this commerce account user rel
-	*/
+	 * Returns the create date of this commerce account user rel.
+	 *
+	 * @return the create date of this commerce account user rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceAccountUserRel.getCreateDate();
@@ -182,22 +184,25 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Returns the modified date of this commerce account user rel.
-	*
-	* @return the modified date of this commerce account user rel
-	*/
+	 * Returns the modified date of this commerce account user rel.
+	 *
+	 * @return the modified date of this commerce account user rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceAccountUserRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce account user rel.
-	*
-	* @return the primary key of this commerce account user rel
-	*/
+	 * Returns the primary key of this commerce account user rel.
+	 *
+	 * @return the primary key of this commerce account user rel
+	 */
 	@Override
-	public com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK getPrimaryKey() {
+	public
+		com.liferay.commerce.account.service.persistence.
+			CommerceAccountUserRelPK getPrimaryKey() {
+
 		return _commerceAccountUserRel.getPrimaryKey();
 	}
 
@@ -209,40 +214,43 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	@Override
 	public com.liferay.portal.kernel.model.User getUser()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountUserRel.getUser();
 	}
 
 	@Override
-	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole> getUserGroupRoles()
+	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole>
+			getUserGroupRoles()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountUserRel.getUserGroupRoles();
 	}
 
 	/**
-	* Returns the user ID of this commerce account user rel.
-	*
-	* @return the user ID of this commerce account user rel
-	*/
+	 * Returns the user ID of this commerce account user rel.
+	 *
+	 * @return the user ID of this commerce account user rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceAccountUserRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce account user rel.
-	*
-	* @return the user name of this commerce account user rel
-	*/
+	 * Returns the user name of this commerce account user rel.
+	 *
+	 * @return the user name of this commerce account user rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceAccountUserRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce account user rel.
-	*
-	* @return the user uuid of this commerce account user rel
-	*/
+	 * Returns the user uuid of this commerce account user rel.
+	 *
+	 * @return the user uuid of this commerce account user rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceAccountUserRel.getUserUuid();
@@ -279,50 +287,51 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Sets the commerce account ID of this commerce account user rel.
-	*
-	* @param commerceAccountId the commerce account ID of this commerce account user rel
-	*/
+	 * Sets the commerce account ID of this commerce account user rel.
+	 *
+	 * @param commerceAccountId the commerce account ID of this commerce account user rel
+	 */
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commerceAccountUserRel.setCommerceAccountId(commerceAccountId);
 	}
 
 	/**
-	* Sets the commerce account user ID of this commerce account user rel.
-	*
-	* @param commerceAccountUserId the commerce account user ID of this commerce account user rel
-	*/
+	 * Sets the commerce account user ID of this commerce account user rel.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID of this commerce account user rel
+	 */
 	@Override
 	public void setCommerceAccountUserId(long commerceAccountUserId) {
 		_commerceAccountUserRel.setCommerceAccountUserId(commerceAccountUserId);
 	}
 
 	/**
-	* Sets the commerce account user uuid of this commerce account user rel.
-	*
-	* @param commerceAccountUserUuid the commerce account user uuid of this commerce account user rel
-	*/
+	 * Sets the commerce account user uuid of this commerce account user rel.
+	 *
+	 * @param commerceAccountUserUuid the commerce account user uuid of this commerce account user rel
+	 */
 	@Override
 	public void setCommerceAccountUserUuid(String commerceAccountUserUuid) {
-		_commerceAccountUserRel.setCommerceAccountUserUuid(commerceAccountUserUuid);
+		_commerceAccountUserRel.setCommerceAccountUserUuid(
+			commerceAccountUserUuid);
 	}
 
 	/**
-	* Sets the company ID of this commerce account user rel.
-	*
-	* @param companyId the company ID of this commerce account user rel
-	*/
+	 * Sets the company ID of this commerce account user rel.
+	 *
+	 * @param companyId the company ID of this commerce account user rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceAccountUserRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce account user rel.
-	*
-	* @param createDate the create date of this commerce account user rel
-	*/
+	 * Sets the create date of this commerce account user rel.
+	 *
+	 * @param createDate the create date of this commerce account user rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceAccountUserRel.setCreateDate(createDate);
@@ -331,6 +340,7 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceAccountUserRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -345,10 +355,10 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Sets the modified date of this commerce account user rel.
-	*
-	* @param modifiedDate the modified date of this commerce account user rel
-	*/
+	 * Sets the modified date of this commerce account user rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce account user rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceAccountUserRel.setModifiedDate(modifiedDate);
@@ -360,13 +370,15 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Sets the primary key of this commerce account user rel.
-	*
-	* @param primaryKey the primary key of this commerce account user rel
-	*/
+	 * Sets the primary key of this commerce account user rel.
+	 *
+	 * @param primaryKey the primary key of this commerce account user rel
+	 */
 	@Override
 	public void setPrimaryKey(
-		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK primaryKey) {
+		com.liferay.commerce.account.service.persistence.
+			CommerceAccountUserRelPK primaryKey) {
+
 		_commerceAccountUserRel.setPrimaryKey(primaryKey);
 	}
 
@@ -376,43 +388,46 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
-	* Sets the user ID of this commerce account user rel.
-	*
-	* @param userId the user ID of this commerce account user rel
-	*/
+	 * Sets the user ID of this commerce account user rel.
+	 *
+	 * @param userId the user ID of this commerce account user rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceAccountUserRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce account user rel.
-	*
-	* @param userName the user name of this commerce account user rel
-	*/
+	 * Sets the user name of this commerce account user rel.
+	 *
+	 * @param userName the user name of this commerce account user rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceAccountUserRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce account user rel.
-	*
-	* @param userUuid the user uuid of this commerce account user rel
-	*/
+	 * Sets the user uuid of this commerce account user rel.
+	 *
+	 * @param userUuid the user uuid of this commerce account user rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceAccountUserRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceAccountUserRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceAccountUserRel>
+		toCacheModel() {
+
 		return _commerceAccountUserRel.toCacheModel();
 	}
 
 	@Override
 	public CommerceAccountUserRel toEscapedModel() {
-		return new CommerceAccountUserRelWrapper(_commerceAccountUserRel.toEscapedModel());
+		return new CommerceAccountUserRelWrapper(
+			_commerceAccountUserRel.toEscapedModel());
 	}
 
 	@Override
@@ -422,7 +437,8 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 
 	@Override
 	public CommerceAccountUserRel toUnescapedModel() {
-		return new CommerceAccountUserRelWrapper(_commerceAccountUserRel.toUnescapedModel());
+		return new CommerceAccountUserRelWrapper(
+			_commerceAccountUserRel.toUnescapedModel());
 	}
 
 	@Override
@@ -440,10 +456,13 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 			return false;
 		}
 
-		CommerceAccountUserRelWrapper commerceAccountUserRelWrapper = (CommerceAccountUserRelWrapper)obj;
+		CommerceAccountUserRelWrapper commerceAccountUserRelWrapper =
+			(CommerceAccountUserRelWrapper)obj;
 
-		if (Objects.equals(_commerceAccountUserRel,
-					commerceAccountUserRelWrapper._commerceAccountUserRel)) {
+		if (Objects.equals(
+				_commerceAccountUserRel,
+				commerceAccountUserRelWrapper._commerceAccountUserRel)) {
+
 			return true;
 		}
 
@@ -471,4 +490,5 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	private final CommerceAccountUserRel _commerceAccountUserRel;
+
 }

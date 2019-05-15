@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CPDAvailabilityEstimateServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPDAvailabilityEstimateServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPDAvailabilityEstimateServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.model.CPDAvailabilityEstimateSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.model.CPDAvailabilityEstimate}, that is translated to a
- * {@link com.liferay.commerce.model.CPDAvailabilityEstimateSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.model.CPDAvailabilityEstimateSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.model.CPDAvailabilityEstimate</code>, that is translated to a
+ * <code>com.liferay.commerce.model.CPDAvailabilityEstimateSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,37 +59,23 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CPDAvailabilityEstimateServiceHttp
- * @see com.liferay.commerce.model.CPDAvailabilityEstimateSoap
- * @see CPDAvailabilityEstimateServiceUtil
  * @generated
  */
 @ProviderType
 public class CPDAvailabilityEstimateServiceSoap {
-	public static com.liferay.commerce.model.CPDAvailabilityEstimateSoap fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CPDAvailabilityEstimate returnValue = CPDAvailabilityEstimateServiceUtil.fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 
-			return com.liferay.commerce.model.CPDAvailabilityEstimateSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CPDAvailabilityEstimateSoap updateCPDAvailabilityEstimate(
-		long cpdAvailabilityEstimateId, long cpDefinitionId,
-		long commerceAvailabilityEstimateId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CPDAvailabilityEstimateSoap
+			fetchCPDAvailabilityEstimateByCPDefinitionId(long cpDefinitionId)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CPDAvailabilityEstimate returnValue = CPDAvailabilityEstimateServiceUtil.updateCPDAvailabilityEstimate(cpdAvailabilityEstimateId,
-					cpDefinitionId, commerceAvailabilityEstimateId,
-					serviceContext);
 
-			return com.liferay.commerce.model.CPDAvailabilityEstimateSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CPDAvailabilityEstimate returnValue =
+				CPDAvailabilityEstimateServiceUtil.
+					fetchCPDAvailabilityEstimateByCPDefinitionId(
+						cpDefinitionId);
+
+			return com.liferay.commerce.model.CPDAvailabilityEstimateSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,5 +84,31 @@ public class CPDAvailabilityEstimateServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPDAvailabilityEstimateServiceSoap.class);
+	public static com.liferay.commerce.model.CPDAvailabilityEstimateSoap
+			updateCPDAvailabilityEstimate(
+				long cpdAvailabilityEstimateId, long cpDefinitionId,
+				long commerceAvailabilityEstimateId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CPDAvailabilityEstimate returnValue =
+				CPDAvailabilityEstimateServiceUtil.
+					updateCPDAvailabilityEstimate(
+						cpdAvailabilityEstimateId, cpDefinitionId,
+						commerceAvailabilityEstimateId, serviceContext);
+
+			return com.liferay.commerce.model.CPDAvailabilityEstimateSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CPDAvailabilityEstimateServiceSoap.class);
+
 }

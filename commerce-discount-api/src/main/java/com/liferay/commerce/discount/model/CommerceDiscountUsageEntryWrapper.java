@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,9 +39,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceDiscountUsageEntryWrapper
 	implements CommerceDiscountUsageEntry,
-		ModelWrapper<CommerceDiscountUsageEntry> {
+			   ModelWrapper<CommerceDiscountUsageEntry> {
+
 	public CommerceDiscountUsageEntryWrapper(
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
+
 		_commerceDiscountUsageEntry = commerceDiscountUsageEntry;
 	}
 
@@ -60,8 +61,8 @@ public class CommerceDiscountUsageEntryWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceDiscountUsageEntryId",
-			getCommerceDiscountUsageEntryId());
+		attributes.put(
+			"commerceDiscountUsageEntryId", getCommerceDiscountUsageEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -78,7 +79,7 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceDiscountUsageEntryId = (Long)attributes.get(
-				"commerceDiscountUsageEntryId");
+			"commerceDiscountUsageEntryId");
 
 		if (commerceDiscountUsageEntryId != null) {
 			setCommerceDiscountUsageEntryId(commerceDiscountUsageEntryId);
@@ -141,69 +142,73 @@ public class CommerceDiscountUsageEntryWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceDiscountUsageEntryWrapper((CommerceDiscountUsageEntry)_commerceDiscountUsageEntry.clone());
+		return new CommerceDiscountUsageEntryWrapper(
+			(CommerceDiscountUsageEntry)_commerceDiscountUsageEntry.clone());
 	}
 
 	@Override
-	public int compareTo(CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
-		return _commerceDiscountUsageEntry.compareTo(commerceDiscountUsageEntry);
+	public int compareTo(
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
+
+		return _commerceDiscountUsageEntry.compareTo(
+			commerceDiscountUsageEntry);
 	}
 
 	/**
-	* Returns the commerce account ID of this commerce discount usage entry.
-	*
-	* @return the commerce account ID of this commerce discount usage entry
-	*/
+	 * Returns the commerce account ID of this commerce discount usage entry.
+	 *
+	 * @return the commerce account ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getCommerceAccountId() {
 		return _commerceDiscountUsageEntry.getCommerceAccountId();
 	}
 
 	/**
-	* Returns the commerce discount ID of this commerce discount usage entry.
-	*
-	* @return the commerce discount ID of this commerce discount usage entry
-	*/
+	 * Returns the commerce discount ID of this commerce discount usage entry.
+	 *
+	 * @return the commerce discount ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getCommerceDiscountId() {
 		return _commerceDiscountUsageEntry.getCommerceDiscountId();
 	}
 
 	/**
-	* Returns the commerce discount usage entry ID of this commerce discount usage entry.
-	*
-	* @return the commerce discount usage entry ID of this commerce discount usage entry
-	*/
+	 * Returns the commerce discount usage entry ID of this commerce discount usage entry.
+	 *
+	 * @return the commerce discount usage entry ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getCommerceDiscountUsageEntryId() {
 		return _commerceDiscountUsageEntry.getCommerceDiscountUsageEntryId();
 	}
 
 	/**
-	* Returns the commerce order ID of this commerce discount usage entry.
-	*
-	* @return the commerce order ID of this commerce discount usage entry
-	*/
+	 * Returns the commerce order ID of this commerce discount usage entry.
+	 *
+	 * @return the commerce order ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getCommerceOrderId() {
 		return _commerceDiscountUsageEntry.getCommerceOrderId();
 	}
 
 	/**
-	* Returns the company ID of this commerce discount usage entry.
-	*
-	* @return the company ID of this commerce discount usage entry
-	*/
+	 * Returns the company ID of this commerce discount usage entry.
+	 *
+	 * @return the company ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceDiscountUsageEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce discount usage entry.
-	*
-	* @return the create date of this commerce discount usage entry
-	*/
+	 * Returns the create date of this commerce discount usage entry.
+	 *
+	 * @return the create date of this commerce discount usage entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceDiscountUsageEntry.getCreateDate();
@@ -215,30 +220,30 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce discount usage entry.
-	*
-	* @return the group ID of this commerce discount usage entry
-	*/
+	 * Returns the group ID of this commerce discount usage entry.
+	 *
+	 * @return the group ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceDiscountUsageEntry.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce discount usage entry.
-	*
-	* @return the modified date of this commerce discount usage entry
-	*/
+	 * Returns the modified date of this commerce discount usage entry.
+	 *
+	 * @return the modified date of this commerce discount usage entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceDiscountUsageEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce discount usage entry.
-	*
-	* @return the primary key of this commerce discount usage entry
-	*/
+	 * Returns the primary key of this commerce discount usage entry.
+	 *
+	 * @return the primary key of this commerce discount usage entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceDiscountUsageEntry.getPrimaryKey();
@@ -250,30 +255,30 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Returns the user ID of this commerce discount usage entry.
-	*
-	* @return the user ID of this commerce discount usage entry
-	*/
+	 * Returns the user ID of this commerce discount usage entry.
+	 *
+	 * @return the user ID of this commerce discount usage entry
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceDiscountUsageEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce discount usage entry.
-	*
-	* @return the user name of this commerce discount usage entry
-	*/
+	 * Returns the user name of this commerce discount usage entry.
+	 *
+	 * @return the user name of this commerce discount usage entry
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceDiscountUsageEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce discount usage entry.
-	*
-	* @return the user uuid of this commerce discount usage entry
-	*/
+	 * Returns the user uuid of this commerce discount usage entry.
+	 *
+	 * @return the user uuid of this commerce discount usage entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceDiscountUsageEntry.getUserUuid();
@@ -310,61 +315,63 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Sets the commerce account ID of this commerce discount usage entry.
-	*
-	* @param commerceAccountId the commerce account ID of this commerce discount usage entry
-	*/
+	 * Sets the commerce account ID of this commerce discount usage entry.
+	 *
+	 * @param commerceAccountId the commerce account ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commerceDiscountUsageEntry.setCommerceAccountId(commerceAccountId);
 	}
 
 	/**
-	* Sets the commerce discount ID of this commerce discount usage entry.
-	*
-	* @param commerceDiscountId the commerce discount ID of this commerce discount usage entry
-	*/
+	 * Sets the commerce discount ID of this commerce discount usage entry.
+	 *
+	 * @param commerceDiscountId the commerce discount ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setCommerceDiscountId(long commerceDiscountId) {
 		_commerceDiscountUsageEntry.setCommerceDiscountId(commerceDiscountId);
 	}
 
 	/**
-	* Sets the commerce discount usage entry ID of this commerce discount usage entry.
-	*
-	* @param commerceDiscountUsageEntryId the commerce discount usage entry ID of this commerce discount usage entry
-	*/
+	 * Sets the commerce discount usage entry ID of this commerce discount usage entry.
+	 *
+	 * @param commerceDiscountUsageEntryId the commerce discount usage entry ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setCommerceDiscountUsageEntryId(
 		long commerceDiscountUsageEntryId) {
-		_commerceDiscountUsageEntry.setCommerceDiscountUsageEntryId(commerceDiscountUsageEntryId);
+
+		_commerceDiscountUsageEntry.setCommerceDiscountUsageEntryId(
+			commerceDiscountUsageEntryId);
 	}
 
 	/**
-	* Sets the commerce order ID of this commerce discount usage entry.
-	*
-	* @param commerceOrderId the commerce order ID of this commerce discount usage entry
-	*/
+	 * Sets the commerce order ID of this commerce discount usage entry.
+	 *
+	 * @param commerceOrderId the commerce order ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setCommerceOrderId(long commerceOrderId) {
 		_commerceDiscountUsageEntry.setCommerceOrderId(commerceOrderId);
 	}
 
 	/**
-	* Sets the company ID of this commerce discount usage entry.
-	*
-	* @param companyId the company ID of this commerce discount usage entry
-	*/
+	 * Sets the company ID of this commerce discount usage entry.
+	 *
+	 * @param companyId the company ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceDiscountUsageEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce discount usage entry.
-	*
-	* @param createDate the create date of this commerce discount usage entry
-	*/
+	 * Sets the create date of this commerce discount usage entry.
+	 *
+	 * @param createDate the create date of this commerce discount usage entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceDiscountUsageEntry.setCreateDate(createDate);
@@ -373,6 +380,7 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceDiscountUsageEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -387,20 +395,20 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Sets the group ID of this commerce discount usage entry.
-	*
-	* @param groupId the group ID of this commerce discount usage entry
-	*/
+	 * Sets the group ID of this commerce discount usage entry.
+	 *
+	 * @param groupId the group ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceDiscountUsageEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce discount usage entry.
-	*
-	* @param modifiedDate the modified date of this commerce discount usage entry
-	*/
+	 * Sets the modified date of this commerce discount usage entry.
+	 *
+	 * @param modifiedDate the modified date of this commerce discount usage entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceDiscountUsageEntry.setModifiedDate(modifiedDate);
@@ -412,10 +420,10 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce discount usage entry.
-	*
-	* @param primaryKey the primary key of this commerce discount usage entry
-	*/
+	 * Sets the primary key of this commerce discount usage entry.
+	 *
+	 * @param primaryKey the primary key of this commerce discount usage entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceDiscountUsageEntry.setPrimaryKey(primaryKey);
@@ -427,43 +435,46 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
-	* Sets the user ID of this commerce discount usage entry.
-	*
-	* @param userId the user ID of this commerce discount usage entry
-	*/
+	 * Sets the user ID of this commerce discount usage entry.
+	 *
+	 * @param userId the user ID of this commerce discount usage entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceDiscountUsageEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce discount usage entry.
-	*
-	* @param userName the user name of this commerce discount usage entry
-	*/
+	 * Sets the user name of this commerce discount usage entry.
+	 *
+	 * @param userName the user name of this commerce discount usage entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceDiscountUsageEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce discount usage entry.
-	*
-	* @param userUuid the user uuid of this commerce discount usage entry
-	*/
+	 * Sets the user uuid of this commerce discount usage entry.
+	 *
+	 * @param userUuid the user uuid of this commerce discount usage entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceDiscountUsageEntry.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceDiscountUsageEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceDiscountUsageEntry> toCacheModel() {
+
 		return _commerceDiscountUsageEntry.toCacheModel();
 	}
 
 	@Override
 	public CommerceDiscountUsageEntry toEscapedModel() {
-		return new CommerceDiscountUsageEntryWrapper(_commerceDiscountUsageEntry.toEscapedModel());
+		return new CommerceDiscountUsageEntryWrapper(
+			_commerceDiscountUsageEntry.toEscapedModel());
 	}
 
 	@Override
@@ -473,7 +484,8 @@ public class CommerceDiscountUsageEntryWrapper
 
 	@Override
 	public CommerceDiscountUsageEntry toUnescapedModel() {
-		return new CommerceDiscountUsageEntryWrapper(_commerceDiscountUsageEntry.toUnescapedModel());
+		return new CommerceDiscountUsageEntryWrapper(
+			_commerceDiscountUsageEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -491,10 +503,14 @@ public class CommerceDiscountUsageEntryWrapper
 			return false;
 		}
 
-		CommerceDiscountUsageEntryWrapper commerceDiscountUsageEntryWrapper = (CommerceDiscountUsageEntryWrapper)obj;
+		CommerceDiscountUsageEntryWrapper commerceDiscountUsageEntryWrapper =
+			(CommerceDiscountUsageEntryWrapper)obj;
 
-		if (Objects.equals(_commerceDiscountUsageEntry,
-					commerceDiscountUsageEntryWrapper._commerceDiscountUsageEntry)) {
+		if (Objects.equals(
+				_commerceDiscountUsageEntry,
+				commerceDiscountUsageEntryWrapper.
+					_commerceDiscountUsageEntry)) {
+
 			return true;
 		}
 
@@ -522,4 +538,5 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	private final CommerceDiscountUsageEntry _commerceDiscountUsageEntry;
+
 }

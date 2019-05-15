@@ -34,10 +34,11 @@ import com.liferay.commerce.service.CommerceShipmentItemLocalServiceUtil;
 @ProviderType
 public abstract class CommerceShipmentItemBaseImpl
 	extends CommerceShipmentItemModelImpl implements CommerceShipmentItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce shipment item model instance should use the {@link CommerceShipmentItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce shipment item model instance should use the <code>CommerceShipmentItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -45,7 +46,9 @@ public abstract class CommerceShipmentItemBaseImpl
 			CommerceShipmentItemLocalServiceUtil.addCommerceShipmentItem(this);
 		}
 		else {
-			CommerceShipmentItemLocalServiceUtil.updateCommerceShipmentItem(this);
+			CommerceShipmentItemLocalServiceUtil.updateCommerceShipmentItem(
+				this);
 		}
 	}
+
 }

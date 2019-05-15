@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRule;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,11 +32,11 @@ import java.util.Date;
  * The cache model class for representing CPRule in entity cache.
  *
  * @author Marco Leo
- * @see CPRule
  * @generated
  */
 @ProviderType
 public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -171,8 +170,7 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(CPRuleId);
 
 		objectOutput.writeLong(groupId);
@@ -226,4 +224,5 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 	public boolean active;
 	public String type;
 	public String typeSettings;
+
 }

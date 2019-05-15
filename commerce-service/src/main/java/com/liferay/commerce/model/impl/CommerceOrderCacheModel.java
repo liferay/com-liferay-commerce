@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrder;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceOrder in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceOrder
  * @generated
  */
 @ProviderType
-public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
-	Externalizable {
+public class CommerceOrderCacheModel
+	implements CacheModel<CommerceOrder>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,7 +50,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			return false;
 		}
 
-		CommerceOrderCacheModel commerceOrderCacheModel = (CommerceOrderCacheModel)obj;
+		CommerceOrderCacheModel commerceOrderCacheModel =
+			(CommerceOrderCacheModel)obj;
 
 		if (commerceOrderId == commerceOrderCacheModel.commerceOrderId) {
 			return true;
@@ -219,7 +219,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			commerceOrderImpl.setCommercePaymentMethodKey("");
 		}
 		else {
-			commerceOrderImpl.setCommercePaymentMethodKey(commercePaymentMethodKey);
+			commerceOrderImpl.setCommercePaymentMethodKey(
+				commercePaymentMethodKey);
 		}
 
 		if (transactionId == null) {
@@ -256,29 +257,41 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			commerceOrderImpl.setLastPriceUpdateDate(null);
 		}
 		else {
-			commerceOrderImpl.setLastPriceUpdateDate(new Date(
-					lastPriceUpdateDate));
+			commerceOrderImpl.setLastPriceUpdateDate(
+				new Date(lastPriceUpdateDate));
 		}
 
 		commerceOrderImpl.setSubtotal(subtotal);
 		commerceOrderImpl.setSubtotalDiscountAmount(subtotalDiscountAmount);
-		commerceOrderImpl.setSubtotalDiscountPercentageLevel1(subtotalDiscountPercentageLevel1);
-		commerceOrderImpl.setSubtotalDiscountPercentageLevel2(subtotalDiscountPercentageLevel2);
-		commerceOrderImpl.setSubtotalDiscountPercentageLevel3(subtotalDiscountPercentageLevel3);
-		commerceOrderImpl.setSubtotalDiscountPercentageLevel4(subtotalDiscountPercentageLevel4);
+		commerceOrderImpl.setSubtotalDiscountPercentageLevel1(
+			subtotalDiscountPercentageLevel1);
+		commerceOrderImpl.setSubtotalDiscountPercentageLevel2(
+			subtotalDiscountPercentageLevel2);
+		commerceOrderImpl.setSubtotalDiscountPercentageLevel3(
+			subtotalDiscountPercentageLevel3);
+		commerceOrderImpl.setSubtotalDiscountPercentageLevel4(
+			subtotalDiscountPercentageLevel4);
 		commerceOrderImpl.setShippingAmount(shippingAmount);
 		commerceOrderImpl.setShippingDiscountAmount(shippingDiscountAmount);
-		commerceOrderImpl.setShippingDiscountPercentageLevel1(shippingDiscountPercentageLevel1);
-		commerceOrderImpl.setShippingDiscountPercentageLevel2(shippingDiscountPercentageLevel2);
-		commerceOrderImpl.setShippingDiscountPercentageLevel3(shippingDiscountPercentageLevel3);
-		commerceOrderImpl.setShippingDiscountPercentageLevel4(shippingDiscountPercentageLevel4);
+		commerceOrderImpl.setShippingDiscountPercentageLevel1(
+			shippingDiscountPercentageLevel1);
+		commerceOrderImpl.setShippingDiscountPercentageLevel2(
+			shippingDiscountPercentageLevel2);
+		commerceOrderImpl.setShippingDiscountPercentageLevel3(
+			shippingDiscountPercentageLevel3);
+		commerceOrderImpl.setShippingDiscountPercentageLevel4(
+			shippingDiscountPercentageLevel4);
 		commerceOrderImpl.setTaxAmount(taxAmount);
 		commerceOrderImpl.setTotal(total);
 		commerceOrderImpl.setTotalDiscountAmount(totalDiscountAmount);
-		commerceOrderImpl.setTotalDiscountPercentageLevel1(totalDiscountPercentageLevel1);
-		commerceOrderImpl.setTotalDiscountPercentageLevel2(totalDiscountPercentageLevel2);
-		commerceOrderImpl.setTotalDiscountPercentageLevel3(totalDiscountPercentageLevel3);
-		commerceOrderImpl.setTotalDiscountPercentageLevel4(totalDiscountPercentageLevel4);
+		commerceOrderImpl.setTotalDiscountPercentageLevel1(
+			totalDiscountPercentageLevel1);
+		commerceOrderImpl.setTotalDiscountPercentageLevel2(
+			totalDiscountPercentageLevel2);
+		commerceOrderImpl.setTotalDiscountPercentageLevel3(
+			totalDiscountPercentageLevel3);
+		commerceOrderImpl.setTotalDiscountPercentageLevel4(
+			totalDiscountPercentageLevel4);
 
 		if (advanceStatus == null) {
 			commerceOrderImpl.setAdvanceStatus("");
@@ -314,6 +327,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		uuid = objectInput.readUTF();
 		externalReferenceCode = objectInput.readUTF();
 
@@ -376,8 +390,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -547,4 +560,5 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

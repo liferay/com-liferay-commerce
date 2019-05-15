@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,59 +42,71 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingFixedOptionServiceUtil
- * @see com.liferay.commerce.shipping.engine.fixed.service.base.CommerceShippingFixedOptionServiceBaseImpl
- * @see com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceShippingFixedOption"}, service = CommerceShippingFixedOptionService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceShippingFixedOption"
+	},
+	service = CommerceShippingFixedOptionService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceShippingFixedOptionService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionServiceUtil} to access the commerce shipping fixed option remote service. Add custom service methods to {@link com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionServiceUtil} to access the commerce shipping fixed option remote service. Add custom service methods to <code>com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceShippingFixedOption addCommerceShippingFixedOption(
-		long commerceShippingMethodId, Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, BigDecimal amount, double priority,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceShippingMethodId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, BigDecimal amount,
+			double priority, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceShippingFixedOption(
-		long commerceShippingFixedOptionId) throws PortalException;
+			long commerceShippingFixedOptionId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingFixedOption fetchCommerceShippingFixedOption(
-		long commerceShippingFixedOptionId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShippingFixedOption> getCommerceShippingFixedOptions(
-		long commerceShippingMethodId, int start, int end)
+			long commerceShippingFixedOptionId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingFixedOption> getCommerceShippingFixedOptions(
-		long commerceShippingMethodId, int start, int end,
-		OrderByComparator<CommerceShippingFixedOption> orderByComparator)
+			long commerceShippingMethodId, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceShippingFixedOption> getCommerceShippingFixedOptions(
+			long commerceShippingMethodId, int start, int end,
+			OrderByComparator<CommerceShippingFixedOption> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShippingFixedOptionsCount(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceShippingFixedOption updateCommerceShippingFixedOption(
-		long commerceShippingFixedOptionId, Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, BigDecimal amount, double priority)
+			long commerceShippingFixedOptionId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, BigDecimal amount,
+			double priority)
 		throws PortalException;
+
 }

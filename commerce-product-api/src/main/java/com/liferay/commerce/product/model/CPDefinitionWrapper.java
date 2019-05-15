@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPDefinitionWrapper implements CPDefinition,
-	ModelWrapper<CPDefinition> {
+public class CPDefinitionWrapper
+	implements CPDefinition, ModelWrapper<CPDefinition> {
+
 	public CPDefinitionWrapper(CPDefinition cpDefinition) {
 		_cpDefinition = cpDefinition;
 	}
@@ -92,7 +91,8 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("subscriptionEnabled", isSubscriptionEnabled());
 		attributes.put("subscriptionLength", getSubscriptionLength());
 		attributes.put("subscriptionType", getSubscriptionType());
-		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put(
+			"subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
@@ -178,14 +178,14 @@ public class CPDefinitionWrapper implements CPDefinition,
 		}
 
 		Boolean availableIndividually = (Boolean)attributes.get(
-				"availableIndividually");
+			"availableIndividually");
 
 		if (availableIndividually != null) {
 			setAvailableIndividually(availableIndividually);
 		}
 
 		Boolean ignoreSKUCombinations = (Boolean)attributes.get(
-				"ignoreSKUCombinations");
+			"ignoreSKUCombinations");
 
 		if (ignoreSKUCombinations != null) {
 			setIgnoreSKUCombinations(ignoreSKUCombinations);
@@ -209,7 +209,8 @@ public class CPDefinitionWrapper implements CPDefinition,
 			setShipSeparately(shipSeparately);
 		}
 
-		Double shippingExtraPrice = (Double)attributes.get("shippingExtraPrice");
+		Double shippingExtraPrice = (Double)attributes.get(
+			"shippingExtraPrice");
 
 		if (shippingExtraPrice != null) {
 			setShippingExtraPrice(shippingExtraPrice);
@@ -246,7 +247,7 @@ public class CPDefinitionWrapper implements CPDefinition,
 		}
 
 		Boolean telcoOrElectronics = (Boolean)attributes.get(
-				"telcoOrElectronics");
+			"telcoOrElectronics");
 
 		if (telcoOrElectronics != null) {
 			setTelcoOrElectronics(telcoOrElectronics);
@@ -283,14 +284,14 @@ public class CPDefinitionWrapper implements CPDefinition,
 		}
 
 		Boolean subscriptionEnabled = (Boolean)attributes.get(
-				"subscriptionEnabled");
+			"subscriptionEnabled");
 
 		if (subscriptionEnabled != null) {
 			setSubscriptionEnabled(subscriptionEnabled);
 		}
 
 		Integer subscriptionLength = (Integer)attributes.get(
-				"subscriptionLength");
+			"subscriptionLength");
 
 		if (subscriptionLength != null) {
 			setSubscriptionLength(subscriptionLength);
@@ -303,14 +304,14 @@ public class CPDefinitionWrapper implements CPDefinition,
 		}
 
 		String subscriptionTypeSettings = (String)attributes.get(
-				"subscriptionTypeSettings");
+			"subscriptionTypeSettings");
 
 		if (subscriptionTypeSettings != null) {
 			setSubscriptionTypeSettings(subscriptionTypeSettings);
 		}
 
 		Long maxSubscriptionCycles = (Long)attributes.get(
-				"maxSubscriptionCycles");
+			"maxSubscriptionCycles");
 
 		if (maxSubscriptionCycles != null) {
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
@@ -358,10 +359,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the available individually of this cp definition.
-	*
-	* @return the available individually of this cp definition
-	*/
+	 * Returns the available individually of this cp definition.
+	 *
+	 * @return the available individually of this cp definition
+	 */
 	@Override
 	public boolean getAvailableIndividually() {
 		return _cpDefinition.getAvailableIndividually();
@@ -373,10 +374,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the company ID of this cp definition.
-	*
-	* @return the company ID of this cp definition
-	*/
+	 * Returns the company ID of this cp definition.
+	 *
+	 * @return the company ID of this cp definition
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpDefinition.getCompanyId();
@@ -384,16 +385,17 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 	@Override
 	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
-		int type, int status)
+			int type, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinition.getCPAttachmentFileEntries(type, status);
 	}
 
 	/**
-	* Returns the cp definition ID of this cp definition.
-	*
-	* @return the cp definition ID of this cp definition
-	*/
+	 * Returns the cp definition ID of this cp definition.
+	 *
+	 * @return the cp definition ID of this cp definition
+	 */
 	@Override
 	public long getCPDefinitionId() {
 		return _cpDefinition.getCPDefinitionId();
@@ -405,7 +407,9 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	@Override
-	public java.util.List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues() {
+	public java.util.List<CPDefinitionSpecificationOptionValue>
+		getCPDefinitionSpecificationOptionValues() {
+
 		return _cpDefinition.getCPDefinitionSpecificationOptionValues();
 	}
 
@@ -417,14 +421,15 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public CProduct getCProduct()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinition.getCProduct();
 	}
 
 	/**
-	* Returns the c product ID of this cp definition.
-	*
-	* @return the c product ID of this cp definition
-	*/
+	 * Returns the c product ID of this cp definition.
+	 *
+	 * @return the c product ID of this cp definition
+	 */
 	@Override
 	public long getCProductId() {
 		return _cpDefinition.getCProductId();
@@ -433,34 +438,35 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public CPTaxCategory getCPTaxCategory()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinition.getCPTaxCategory();
 	}
 
 	/**
-	* Returns the cp tax category ID of this cp definition.
-	*
-	* @return the cp tax category ID of this cp definition
-	*/
+	 * Returns the cp tax category ID of this cp definition.
+	 *
+	 * @return the cp tax category ID of this cp definition
+	 */
 	@Override
 	public long getCPTaxCategoryId() {
 		return _cpDefinition.getCPTaxCategoryId();
 	}
 
 	/**
-	* Returns the create date of this cp definition.
-	*
-	* @return the create date of this cp definition
-	*/
+	 * Returns the create date of this cp definition.
+	 *
+	 * @return the create date of this cp definition
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpDefinition.getCreateDate();
 	}
 
 	/**
-	* Returns the ddm structure key of this cp definition.
-	*
-	* @return the ddm structure key of this cp definition
-	*/
+	 * Returns the ddm structure key of this cp definition.
+	 *
+	 * @return the ddm structure key of this cp definition
+	 */
 	@Override
 	public String getDDMStructureKey() {
 		return _cpDefinition.getDDMStructureKey();
@@ -469,6 +475,7 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public String getDefaultImageFileURL()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinition.getDefaultImageFileURL();
 	}
 
@@ -478,20 +485,20 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the default language ID of this cp definition.
-	*
-	* @return the default language ID of this cp definition
-	*/
+	 * Returns the default language ID of this cp definition.
+	 *
+	 * @return the default language ID of this cp definition
+	 */
 	@Override
 	public String getDefaultLanguageId() {
 		return _cpDefinition.getDefaultLanguageId();
 	}
 
 	/**
-	* Returns the depth of this cp definition.
-	*
-	* @return the depth of this cp definition
-	*/
+	 * Returns the depth of this cp definition.
+	 *
+	 * @return the depth of this cp definition
+	 */
 	@Override
 	public double getDepth() {
 		return _cpDefinition.getDepth();
@@ -523,10 +530,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the display date of this cp definition.
-	*
-	* @return the display date of this cp definition
-	*/
+	 * Returns the display date of this cp definition.
+	 *
+	 * @return the display date of this cp definition
+	 */
 	@Override
 	public Date getDisplayDate() {
 		return _cpDefinition.getDisplayDate();
@@ -538,50 +545,50 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the expiration date of this cp definition.
-	*
-	* @return the expiration date of this cp definition
-	*/
+	 * Returns the expiration date of this cp definition.
+	 *
+	 * @return the expiration date of this cp definition
+	 */
 	@Override
 	public Date getExpirationDate() {
 		return _cpDefinition.getExpirationDate();
 	}
 
 	/**
-	* Returns the free shipping of this cp definition.
-	*
-	* @return the free shipping of this cp definition
-	*/
+	 * Returns the free shipping of this cp definition.
+	 *
+	 * @return the free shipping of this cp definition
+	 */
 	@Override
 	public boolean getFreeShipping() {
 		return _cpDefinition.getFreeShipping();
 	}
 
 	/**
-	* Returns the group ID of this cp definition.
-	*
-	* @return the group ID of this cp definition
-	*/
+	 * Returns the group ID of this cp definition.
+	 *
+	 * @return the group ID of this cp definition
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpDefinition.getGroupId();
 	}
 
 	/**
-	* Returns the height of this cp definition.
-	*
-	* @return the height of this cp definition
-	*/
+	 * Returns the height of this cp definition.
+	 *
+	 * @return the height of this cp definition
+	 */
 	@Override
 	public double getHeight() {
 		return _cpDefinition.getHeight();
 	}
 
 	/**
-	* Returns the ignore sku combinations of this cp definition.
-	*
-	* @return the ignore sku combinations of this cp definition
-	*/
+	 * Returns the ignore sku combinations of this cp definition.
+	 *
+	 * @return the ignore sku combinations of this cp definition
+	 */
 	@Override
 	public boolean getIgnoreSKUCombinations() {
 		return _cpDefinition.getIgnoreSKUCombinations();
@@ -618,10 +625,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the last publish date of this cp definition.
-	*
-	* @return the last publish date of this cp definition
-	*/
+	 * Returns the last publish date of this cp definition.
+	 *
+	 * @return the last publish date of this cp definition
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _cpDefinition.getLastPublishDate();
@@ -633,10 +640,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the max subscription cycles of this cp definition.
-	*
-	* @return the max subscription cycles of this cp definition
-	*/
+	 * Returns the max subscription cycles of this cp definition.
+	 *
+	 * @return the max subscription cycles of this cp definition
+	 */
 	@Override
 	public long getMaxSubscriptionCycles() {
 		return _cpDefinition.getMaxSubscriptionCycles();
@@ -718,10 +725,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the modified date of this cp definition.
-	*
-	* @return the modified date of this cp definition
-	*/
+	 * Returns the modified date of this cp definition.
+	 *
+	 * @return the modified date of this cp definition
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpDefinition.getModifiedDate();
@@ -758,10 +765,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the primary key of this cp definition.
-	*
-	* @return the primary key of this cp definition
-	*/
+	 * Returns the primary key of this cp definition.
+	 *
+	 * @return the primary key of this cp definition
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpDefinition.getPrimaryKey();
@@ -773,50 +780,50 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the product type name of this cp definition.
-	*
-	* @return the product type name of this cp definition
-	*/
+	 * Returns the product type name of this cp definition.
+	 *
+	 * @return the product type name of this cp definition
+	 */
 	@Override
 	public String getProductTypeName() {
 		return _cpDefinition.getProductTypeName();
 	}
 
 	/**
-	* Returns the published of this cp definition.
-	*
-	* @return the published of this cp definition
-	*/
+	 * Returns the published of this cp definition.
+	 *
+	 * @return the published of this cp definition
+	 */
 	@Override
 	public boolean getPublished() {
 		return _cpDefinition.getPublished();
 	}
 
 	/**
-	* Returns the shippable of this cp definition.
-	*
-	* @return the shippable of this cp definition
-	*/
+	 * Returns the shippable of this cp definition.
+	 *
+	 * @return the shippable of this cp definition
+	 */
 	@Override
 	public boolean getShippable() {
 		return _cpDefinition.getShippable();
 	}
 
 	/**
-	* Returns the shipping extra price of this cp definition.
-	*
-	* @return the shipping extra price of this cp definition
-	*/
+	 * Returns the shipping extra price of this cp definition.
+	 *
+	 * @return the shipping extra price of this cp definition
+	 */
 	@Override
 	public double getShippingExtraPrice() {
 		return _cpDefinition.getShippingExtraPrice();
 	}
 
 	/**
-	* Returns the ship separately of this cp definition.
-	*
-	* @return the ship separately of this cp definition
-	*/
+	 * Returns the ship separately of this cp definition.
+	 *
+	 * @return the ship separately of this cp definition
+	 */
 	@Override
 	public boolean getShipSeparately() {
 		return _cpDefinition.getShipSeparately();
@@ -848,147 +855,150 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the status of this cp definition.
-	*
-	* @return the status of this cp definition
-	*/
+	 * Returns the status of this cp definition.
+	 *
+	 * @return the status of this cp definition
+	 */
 	@Override
 	public int getStatus() {
 		return _cpDefinition.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this cp definition.
-	*
-	* @return the status by user ID of this cp definition
-	*/
+	 * Returns the status by user ID of this cp definition.
+	 *
+	 * @return the status by user ID of this cp definition
+	 */
 	@Override
 	public long getStatusByUserId() {
 		return _cpDefinition.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this cp definition.
-	*
-	* @return the status by user name of this cp definition
-	*/
+	 * Returns the status by user name of this cp definition.
+	 *
+	 * @return the status by user name of this cp definition
+	 */
 	@Override
 	public String getStatusByUserName() {
 		return _cpDefinition.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this cp definition.
-	*
-	* @return the status by user uuid of this cp definition
-	*/
+	 * Returns the status by user uuid of this cp definition.
+	 *
+	 * @return the status by user uuid of this cp definition
+	 */
 	@Override
 	public String getStatusByUserUuid() {
 		return _cpDefinition.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this cp definition.
-	*
-	* @return the status date of this cp definition
-	*/
+	 * Returns the status date of this cp definition.
+	 *
+	 * @return the status date of this cp definition
+	 */
 	@Override
 	public Date getStatusDate() {
 		return _cpDefinition.getStatusDate();
 	}
 
 	/**
-	* Returns the subscription enabled of this cp definition.
-	*
-	* @return the subscription enabled of this cp definition
-	*/
+	 * Returns the subscription enabled of this cp definition.
+	 *
+	 * @return the subscription enabled of this cp definition
+	 */
 	@Override
 	public boolean getSubscriptionEnabled() {
 		return _cpDefinition.getSubscriptionEnabled();
 	}
 
 	/**
-	* Returns the subscription length of this cp definition.
-	*
-	* @return the subscription length of this cp definition
-	*/
+	 * Returns the subscription length of this cp definition.
+	 *
+	 * @return the subscription length of this cp definition
+	 */
 	@Override
 	public int getSubscriptionLength() {
 		return _cpDefinition.getSubscriptionLength();
 	}
 
 	/**
-	* Returns the subscription type of this cp definition.
-	*
-	* @return the subscription type of this cp definition
-	*/
+	 * Returns the subscription type of this cp definition.
+	 *
+	 * @return the subscription type of this cp definition
+	 */
 	@Override
 	public String getSubscriptionType() {
 		return _cpDefinition.getSubscriptionType();
 	}
 
 	/**
-	* Returns the subscription type settings of this cp definition.
-	*
-	* @return the subscription type settings of this cp definition
-	*/
+	 * Returns the subscription type settings of this cp definition.
+	 *
+	 * @return the subscription type settings of this cp definition
+	 */
 	@Override
 	public String getSubscriptionTypeSettings() {
 		return _cpDefinition.getSubscriptionTypeSettings();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties() {
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getSubscriptionTypeSettingsProperties() {
+
 		return _cpDefinition.getSubscriptionTypeSettingsProperties();
 	}
 
 	/**
-	* Returns the tax exempt of this cp definition.
-	*
-	* @return the tax exempt of this cp definition
-	*/
+	 * Returns the tax exempt of this cp definition.
+	 *
+	 * @return the tax exempt of this cp definition
+	 */
 	@Override
 	public boolean getTaxExempt() {
 		return _cpDefinition.getTaxExempt();
 	}
 
 	/**
-	* Returns the telco or electronics of this cp definition.
-	*
-	* @return the telco or electronics of this cp definition
-	*/
+	 * Returns the telco or electronics of this cp definition.
+	 *
+	 * @return the telco or electronics of this cp definition
+	 */
 	@Override
 	public boolean getTelcoOrElectronics() {
 		return _cpDefinition.getTelcoOrElectronics();
 	}
 
 	/**
-	* Returns the trash entry created when this cp definition was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp definition.
-	*
-	* @return the trash entry created when this cp definition was moved to the Recycle Bin
-	*/
+	 * Returns the trash entry created when this cp definition was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp definition.
+	 *
+	 * @return the trash entry created when this cp definition was moved to the Recycle Bin
+	 */
 	@Override
 	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinition.getTrashEntry();
 	}
 
 	/**
-	* Returns the class primary key of the trash entry for this cp definition.
-	*
-	* @return the class primary key of the trash entry for this cp definition
-	*/
+	 * Returns the class primary key of the trash entry for this cp definition.
+	 *
+	 * @return the class primary key of the trash entry for this cp definition
+	 */
 	@Override
 	public long getTrashEntryClassPK() {
 		return _cpDefinition.getTrashEntryClassPK();
 	}
 
 	/**
-	* Returns the trash handler for this cp definition.
-	*
-	* @return the trash handler for this cp definition
-	* @deprecated As of 7.0.0, with no direct replacement
-	*/
+	 * Returns the trash handler for this cp definition.
+	 *
+	 * @return the trash handler for this cp definition
+	 * @deprecated As of Judson (7.1.x), with no direct replacement
+	 */
 	@Deprecated
 	@Override
 	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
@@ -1006,70 +1016,70 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns the user ID of this cp definition.
-	*
-	* @return the user ID of this cp definition
-	*/
+	 * Returns the user ID of this cp definition.
+	 *
+	 * @return the user ID of this cp definition
+	 */
 	@Override
 	public long getUserId() {
 		return _cpDefinition.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp definition.
-	*
-	* @return the user name of this cp definition
-	*/
+	 * Returns the user name of this cp definition.
+	 *
+	 * @return the user name of this cp definition
+	 */
 	@Override
 	public String getUserName() {
 		return _cpDefinition.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp definition.
-	*
-	* @return the user uuid of this cp definition
-	*/
+	 * Returns the user uuid of this cp definition.
+	 *
+	 * @return the user uuid of this cp definition
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpDefinition.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp definition.
-	*
-	* @return the uuid of this cp definition
-	*/
+	 * Returns the uuid of this cp definition.
+	 *
+	 * @return the uuid of this cp definition
+	 */
 	@Override
 	public String getUuid() {
 		return _cpDefinition.getUuid();
 	}
 
 	/**
-	* Returns the version of this cp definition.
-	*
-	* @return the version of this cp definition
-	*/
+	 * Returns the version of this cp definition.
+	 *
+	 * @return the version of this cp definition
+	 */
 	@Override
 	public int getVersion() {
 		return _cpDefinition.getVersion();
 	}
 
 	/**
-	* Returns the weight of this cp definition.
-	*
-	* @return the weight of this cp definition
-	*/
+	 * Returns the weight of this cp definition.
+	 *
+	 * @return the weight of this cp definition
+	 */
 	@Override
 	public double getWeight() {
 		return _cpDefinition.getWeight();
 	}
 
 	/**
-	* Returns the width of this cp definition.
-	*
-	* @return the width of this cp definition
-	*/
+	 * Returns the width of this cp definition.
+	 *
+	 * @return the width of this cp definition
+	 */
 	@Override
 	public double getWidth() {
 		return _cpDefinition.getWidth();
@@ -1081,20 +1091,20 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is approved.
-	*
-	* @return <code>true</code> if this cp definition is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is approved.
+	 *
+	 * @return <code>true</code> if this cp definition is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
 		return _cpDefinition.isApproved();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is available individually.
-	*
-	* @return <code>true</code> if this cp definition is available individually; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is available individually.
+	 *
+	 * @return <code>true</code> if this cp definition is available individually; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isAvailableIndividually() {
 		return _cpDefinition.isAvailableIndividually();
@@ -1106,20 +1116,20 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is denied.
-	*
-	* @return <code>true</code> if this cp definition is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is denied.
+	 *
+	 * @return <code>true</code> if this cp definition is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
 		return _cpDefinition.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is a draft.
-	*
-	* @return <code>true</code> if this cp definition is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is a draft.
+	 *
+	 * @return <code>true</code> if this cp definition is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
 		return _cpDefinition.isDraft();
@@ -1131,70 +1141,70 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is expired.
-	*
-	* @return <code>true</code> if this cp definition is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is expired.
+	 *
+	 * @return <code>true</code> if this cp definition is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
 		return _cpDefinition.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is free shipping.
-	*
-	* @return <code>true</code> if this cp definition is free shipping; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is free shipping.
+	 *
+	 * @return <code>true</code> if this cp definition is free shipping; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isFreeShipping() {
 		return _cpDefinition.isFreeShipping();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is ignore sku combinations.
-	*
-	* @return <code>true</code> if this cp definition is ignore sku combinations; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is ignore sku combinations.
+	 *
+	 * @return <code>true</code> if this cp definition is ignore sku combinations; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIgnoreSKUCombinations() {
 		return _cpDefinition.isIgnoreSKUCombinations();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is inactive.
-	*
-	* @return <code>true</code> if this cp definition is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is inactive.
+	 *
+	 * @return <code>true</code> if this cp definition is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
 		return _cpDefinition.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is incomplete.
-	*
-	* @return <code>true</code> if this cp definition is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is incomplete.
+	 *
+	 * @return <code>true</code> if this cp definition is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
 		return _cpDefinition.isIncomplete();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is in the Recycle Bin.
-	*
-	* @return <code>true</code> if this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is in the Recycle Bin.
+	 *
+	 * @return <code>true</code> if this cp definition is in the Recycle Bin; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInTrash() {
 		return _cpDefinition.isInTrash();
 	}
 
 	/**
-	* Returns <code>true</code> if the parent of this cp definition is in the Recycle Bin.
-	*
-	* @return <code>true</code> if the parent of this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if the parent of this cp definition is in the Recycle Bin.
+	 *
+	 * @return <code>true</code> if the parent of this cp definition is in the Recycle Bin; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInTrashContainer() {
 		return _cpDefinition.isInTrashContainer();
@@ -1216,80 +1226,80 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is pending.
-	*
-	* @return <code>true</code> if this cp definition is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is pending.
+	 *
+	 * @return <code>true</code> if this cp definition is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
 		return _cpDefinition.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is published.
-	*
-	* @return <code>true</code> if this cp definition is published; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is published.
+	 *
+	 * @return <code>true</code> if this cp definition is published; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPublished() {
 		return _cpDefinition.isPublished();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is scheduled.
-	*
-	* @return <code>true</code> if this cp definition is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is scheduled.
+	 *
+	 * @return <code>true</code> if this cp definition is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
 		return _cpDefinition.isScheduled();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is shippable.
-	*
-	* @return <code>true</code> if this cp definition is shippable; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is shippable.
+	 *
+	 * @return <code>true</code> if this cp definition is shippable; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isShippable() {
 		return _cpDefinition.isShippable();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is ship separately.
-	*
-	* @return <code>true</code> if this cp definition is ship separately; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is ship separately.
+	 *
+	 * @return <code>true</code> if this cp definition is ship separately; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isShipSeparately() {
 		return _cpDefinition.isShipSeparately();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is subscription enabled.
-	*
-	* @return <code>true</code> if this cp definition is subscription enabled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is subscription enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is subscription enabled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isSubscriptionEnabled() {
 		return _cpDefinition.isSubscriptionEnabled();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is tax exempt.
-	*
-	* @return <code>true</code> if this cp definition is tax exempt; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is tax exempt.
+	 *
+	 * @return <code>true</code> if this cp definition is tax exempt; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isTaxExempt() {
 		return _cpDefinition.isTaxExempt();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is telco or electronics.
-	*
-	* @return <code>true</code> if this cp definition is telco or electronics; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition is telco or electronics.
+	 *
+	 * @return <code>true</code> if this cp definition is telco or electronics; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isTelcoOrElectronics() {
 		return _cpDefinition.isTelcoOrElectronics();
@@ -1301,10 +1311,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets whether this cp definition is available individually.
-	*
-	* @param availableIndividually the available individually of this cp definition
-	*/
+	 * Sets whether this cp definition is available individually.
+	 *
+	 * @param availableIndividually the available individually of this cp definition
+	 */
 	@Override
 	public void setAvailableIndividually(boolean availableIndividually) {
 		_cpDefinition.setAvailableIndividually(availableIndividually);
@@ -1316,95 +1326,97 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the company ID of this cp definition.
-	*
-	* @param companyId the company ID of this cp definition
-	*/
+	 * Sets the company ID of this cp definition.
+	 *
+	 * @param companyId the company ID of this cp definition
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDefinition.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp definition ID of this cp definition.
-	*
-	* @param CPDefinitionId the cp definition ID of this cp definition
-	*/
+	 * Sets the cp definition ID of this cp definition.
+	 *
+	 * @param CPDefinitionId the cp definition ID of this cp definition
+	 */
 	@Override
 	public void setCPDefinitionId(long CPDefinitionId) {
 		_cpDefinition.setCPDefinitionId(CPDefinitionId);
 	}
 
 	/**
-	* Sets the c product ID of this cp definition.
-	*
-	* @param CProductId the c product ID of this cp definition
-	*/
+	 * Sets the c product ID of this cp definition.
+	 *
+	 * @param CProductId the c product ID of this cp definition
+	 */
 	@Override
 	public void setCProductId(long CProductId) {
 		_cpDefinition.setCProductId(CProductId);
 	}
 
 	/**
-	* Sets the cp tax category ID of this cp definition.
-	*
-	* @param CPTaxCategoryId the cp tax category ID of this cp definition
-	*/
+	 * Sets the cp tax category ID of this cp definition.
+	 *
+	 * @param CPTaxCategoryId the cp tax category ID of this cp definition
+	 */
 	@Override
 	public void setCPTaxCategoryId(long CPTaxCategoryId) {
 		_cpDefinition.setCPTaxCategoryId(CPTaxCategoryId);
 	}
 
 	/**
-	* Sets the create date of this cp definition.
-	*
-	* @param createDate the create date of this cp definition
-	*/
+	 * Sets the create date of this cp definition.
+	 *
+	 * @param createDate the create date of this cp definition
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpDefinition.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the ddm structure key of this cp definition.
-	*
-	* @param DDMStructureKey the ddm structure key of this cp definition
-	*/
+	 * Sets the ddm structure key of this cp definition.
+	 *
+	 * @param DDMStructureKey the ddm structure key of this cp definition
+	 */
 	@Override
 	public void setDDMStructureKey(String DDMStructureKey) {
 		_cpDefinition.setDDMStructureKey(DDMStructureKey);
 	}
 
 	/**
-	* Sets the default language ID of this cp definition.
-	*
-	* @param defaultLanguageId the default language ID of this cp definition
-	*/
+	 * Sets the default language ID of this cp definition.
+	 *
+	 * @param defaultLanguageId the default language ID of this cp definition
+	 */
 	@Override
 	public void setDefaultLanguageId(String defaultLanguageId) {
 		_cpDefinition.setDefaultLanguageId(defaultLanguageId);
 	}
 
 	/**
-	* Sets the depth of this cp definition.
-	*
-	* @param depth the depth of this cp definition
-	*/
+	 * Sets the depth of this cp definition.
+	 *
+	 * @param depth the depth of this cp definition
+	 */
 	@Override
 	public void setDepth(double depth) {
 		_cpDefinition.setDepth(depth);
 	}
 
 	@Override
-	public void setDescriptionMap(Map<java.util.Locale, String> descriptionMap) {
+	public void setDescriptionMap(
+		Map<java.util.Locale, String> descriptionMap) {
+
 		_cpDefinition.setDescriptionMap(descriptionMap);
 	}
 
 	/**
-	* Sets the display date of this cp definition.
-	*
-	* @param displayDate the display date of this cp definition
-	*/
+	 * Sets the display date of this cp definition.
+	 *
+	 * @param displayDate the display date of this cp definition
+	 */
 	@Override
 	public void setDisplayDate(Date displayDate) {
 		_cpDefinition.setDisplayDate(displayDate);
@@ -1413,6 +1425,7 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpDefinition.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -1427,60 +1440,60 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the expiration date of this cp definition.
-	*
-	* @param expirationDate the expiration date of this cp definition
-	*/
+	 * Sets the expiration date of this cp definition.
+	 *
+	 * @param expirationDate the expiration date of this cp definition
+	 */
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_cpDefinition.setExpirationDate(expirationDate);
 	}
 
 	/**
-	* Sets whether this cp definition is free shipping.
-	*
-	* @param freeShipping the free shipping of this cp definition
-	*/
+	 * Sets whether this cp definition is free shipping.
+	 *
+	 * @param freeShipping the free shipping of this cp definition
+	 */
 	@Override
 	public void setFreeShipping(boolean freeShipping) {
 		_cpDefinition.setFreeShipping(freeShipping);
 	}
 
 	/**
-	* Sets the group ID of this cp definition.
-	*
-	* @param groupId the group ID of this cp definition
-	*/
+	 * Sets the group ID of this cp definition.
+	 *
+	 * @param groupId the group ID of this cp definition
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDefinition.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the height of this cp definition.
-	*
-	* @param height the height of this cp definition
-	*/
+	 * Sets the height of this cp definition.
+	 *
+	 * @param height the height of this cp definition
+	 */
 	@Override
 	public void setHeight(double height) {
 		_cpDefinition.setHeight(height);
 	}
 
 	/**
-	* Sets whether this cp definition is ignore sku combinations.
-	*
-	* @param ignoreSKUCombinations the ignore sku combinations of this cp definition
-	*/
+	 * Sets whether this cp definition is ignore sku combinations.
+	 *
+	 * @param ignoreSKUCombinations the ignore sku combinations of this cp definition
+	 */
 	@Override
 	public void setIgnoreSKUCombinations(boolean ignoreSKUCombinations) {
 		_cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
 	}
 
 	/**
-	* Sets the last publish date of this cp definition.
-	*
-	* @param lastPublishDate the last publish date of this cp definition
-	*/
+	 * Sets the last publish date of this cp definition.
+	 *
+	 * @param lastPublishDate the last publish date of this cp definition
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_cpDefinition.setLastPublishDate(lastPublishDate);
@@ -1492,20 +1505,20 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the max subscription cycles of this cp definition.
-	*
-	* @param maxSubscriptionCycles the max subscription cycles of this cp definition
-	*/
+	 * Sets the max subscription cycles of this cp definition.
+	 *
+	 * @param maxSubscriptionCycles the max subscription cycles of this cp definition
+	 */
 	@Override
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
 		_cpDefinition.setMaxSubscriptionCycles(maxSubscriptionCycles);
 	}
 
 	/**
-	* Sets the modified date of this cp definition.
-	*
-	* @param modifiedDate the modified date of this cp definition
-	*/
+	 * Sets the modified date of this cp definition.
+	 *
+	 * @param modifiedDate the modified date of this cp definition
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpDefinition.setModifiedDate(modifiedDate);
@@ -1522,10 +1535,10 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the primary key of this cp definition.
-	*
-	* @param primaryKey the primary key of this cp definition
-	*/
+	 * Sets the primary key of this cp definition.
+	 *
+	 * @param primaryKey the primary key of this cp definition
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpDefinition.setPrimaryKey(primaryKey);
@@ -1537,50 +1550,50 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the product type name of this cp definition.
-	*
-	* @param productTypeName the product type name of this cp definition
-	*/
+	 * Sets the product type name of this cp definition.
+	 *
+	 * @param productTypeName the product type name of this cp definition
+	 */
 	@Override
 	public void setProductTypeName(String productTypeName) {
 		_cpDefinition.setProductTypeName(productTypeName);
 	}
 
 	/**
-	* Sets whether this cp definition is published.
-	*
-	* @param published the published of this cp definition
-	*/
+	 * Sets whether this cp definition is published.
+	 *
+	 * @param published the published of this cp definition
+	 */
 	@Override
 	public void setPublished(boolean published) {
 		_cpDefinition.setPublished(published);
 	}
 
 	/**
-	* Sets whether this cp definition is shippable.
-	*
-	* @param shippable the shippable of this cp definition
-	*/
+	 * Sets whether this cp definition is shippable.
+	 *
+	 * @param shippable the shippable of this cp definition
+	 */
 	@Override
 	public void setShippable(boolean shippable) {
 		_cpDefinition.setShippable(shippable);
 	}
 
 	/**
-	* Sets the shipping extra price of this cp definition.
-	*
-	* @param shippingExtraPrice the shipping extra price of this cp definition
-	*/
+	 * Sets the shipping extra price of this cp definition.
+	 *
+	 * @param shippingExtraPrice the shipping extra price of this cp definition
+	 */
 	@Override
 	public void setShippingExtraPrice(double shippingExtraPrice) {
 		_cpDefinition.setShippingExtraPrice(shippingExtraPrice);
 	}
 
 	/**
-	* Sets whether this cp definition is ship separately.
-	*
-	* @param shipSeparately the ship separately of this cp definition
-	*/
+	 * Sets whether this cp definition is ship separately.
+	 *
+	 * @param shipSeparately the ship separately of this cp definition
+	 */
 	@Override
 	public void setShipSeparately(boolean shipSeparately) {
 		_cpDefinition.setShipSeparately(shipSeparately);
@@ -1589,94 +1602,95 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setShortDescriptionMap(
 		Map<java.util.Locale, String> shortDescriptionMap) {
+
 		_cpDefinition.setShortDescriptionMap(shortDescriptionMap);
 	}
 
 	/**
-	* Sets the status of this cp definition.
-	*
-	* @param status the status of this cp definition
-	*/
+	 * Sets the status of this cp definition.
+	 *
+	 * @param status the status of this cp definition
+	 */
 	@Override
 	public void setStatus(int status) {
 		_cpDefinition.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this cp definition.
-	*
-	* @param statusByUserId the status by user ID of this cp definition
-	*/
+	 * Sets the status by user ID of this cp definition.
+	 *
+	 * @param statusByUserId the status by user ID of this cp definition
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_cpDefinition.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this cp definition.
-	*
-	* @param statusByUserName the status by user name of this cp definition
-	*/
+	 * Sets the status by user name of this cp definition.
+	 *
+	 * @param statusByUserName the status by user name of this cp definition
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_cpDefinition.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this cp definition.
-	*
-	* @param statusByUserUuid the status by user uuid of this cp definition
-	*/
+	 * Sets the status by user uuid of this cp definition.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this cp definition
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_cpDefinition.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this cp definition.
-	*
-	* @param statusDate the status date of this cp definition
-	*/
+	 * Sets the status date of this cp definition.
+	 *
+	 * @param statusDate the status date of this cp definition
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_cpDefinition.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets whether this cp definition is subscription enabled.
-	*
-	* @param subscriptionEnabled the subscription enabled of this cp definition
-	*/
+	 * Sets whether this cp definition is subscription enabled.
+	 *
+	 * @param subscriptionEnabled the subscription enabled of this cp definition
+	 */
 	@Override
 	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
 		_cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
 	}
 
 	/**
-	* Sets the subscription length of this cp definition.
-	*
-	* @param subscriptionLength the subscription length of this cp definition
-	*/
+	 * Sets the subscription length of this cp definition.
+	 *
+	 * @param subscriptionLength the subscription length of this cp definition
+	 */
 	@Override
 	public void setSubscriptionLength(int subscriptionLength) {
 		_cpDefinition.setSubscriptionLength(subscriptionLength);
 	}
 
 	/**
-	* Sets the subscription type of this cp definition.
-	*
-	* @param subscriptionType the subscription type of this cp definition
-	*/
+	 * Sets the subscription type of this cp definition.
+	 *
+	 * @param subscriptionType the subscription type of this cp definition
+	 */
 	@Override
 	public void setSubscriptionType(String subscriptionType) {
 		_cpDefinition.setSubscriptionType(subscriptionType);
 	}
 
 	/**
-	* Sets the subscription type settings of this cp definition.
-	*
-	* @param subscriptionTypeSettings the subscription type settings of this cp definition
-	*/
+	 * Sets the subscription type settings of this cp definition.
+	 *
+	 * @param subscriptionTypeSettings the subscription type settings of this cp definition
+	 */
 	@Override
 	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
 		_cpDefinition.setSubscriptionTypeSettings(subscriptionTypeSettings);
@@ -1684,25 +1698,28 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 	@Override
 	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties) {
-		_cpDefinition.setSubscriptionTypeSettingsProperties(subscriptionTypeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			subscriptionTypeSettingsProperties) {
+
+		_cpDefinition.setSubscriptionTypeSettingsProperties(
+			subscriptionTypeSettingsProperties);
 	}
 
 	/**
-	* Sets whether this cp definition is tax exempt.
-	*
-	* @param taxExempt the tax exempt of this cp definition
-	*/
+	 * Sets whether this cp definition is tax exempt.
+	 *
+	 * @param taxExempt the tax exempt of this cp definition
+	 */
 	@Override
 	public void setTaxExempt(boolean taxExempt) {
 		_cpDefinition.setTaxExempt(taxExempt);
 	}
 
 	/**
-	* Sets whether this cp definition is telco or electronics.
-	*
-	* @param telcoOrElectronics the telco or electronics of this cp definition
-	*/
+	 * Sets whether this cp definition is telco or electronics.
+	 *
+	 * @param telcoOrElectronics the telco or electronics of this cp definition
+	 */
 	@Override
 	public void setTelcoOrElectronics(boolean telcoOrElectronics) {
 		_cpDefinition.setTelcoOrElectronics(telcoOrElectronics);
@@ -1714,77 +1731,79 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the user ID of this cp definition.
-	*
-	* @param userId the user ID of this cp definition
-	*/
+	 * Sets the user ID of this cp definition.
+	 *
+	 * @param userId the user ID of this cp definition
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpDefinition.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp definition.
-	*
-	* @param userName the user name of this cp definition
-	*/
+	 * Sets the user name of this cp definition.
+	 *
+	 * @param userName the user name of this cp definition
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpDefinition.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp definition.
-	*
-	* @param userUuid the user uuid of this cp definition
-	*/
+	 * Sets the user uuid of this cp definition.
+	 *
+	 * @param userUuid the user uuid of this cp definition
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpDefinition.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp definition.
-	*
-	* @param uuid the uuid of this cp definition
-	*/
+	 * Sets the uuid of this cp definition.
+	 *
+	 * @param uuid the uuid of this cp definition
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpDefinition.setUuid(uuid);
 	}
 
 	/**
-	* Sets the version of this cp definition.
-	*
-	* @param version the version of this cp definition
-	*/
+	 * Sets the version of this cp definition.
+	 *
+	 * @param version the version of this cp definition
+	 */
 	@Override
 	public void setVersion(int version) {
 		_cpDefinition.setVersion(version);
 	}
 
 	/**
-	* Sets the weight of this cp definition.
-	*
-	* @param weight the weight of this cp definition
-	*/
+	 * Sets the weight of this cp definition.
+	 *
+	 * @param weight the weight of this cp definition
+	 */
 	@Override
 	public void setWeight(double weight) {
 		_cpDefinition.setWeight(weight);
 	}
 
 	/**
-	* Sets the width of this cp definition.
-	*
-	* @param width the width of this cp definition
-	*/
+	 * Sets the width of this cp definition.
+	 *
+	 * @param width the width of this cp definition
+	 */
 	@Override
 	public void setWidth(double width) {
 		_cpDefinition.setWidth(width);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDefinition> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPDefinition>
+		toCacheModel() {
+
 		return _cpDefinition.toCacheModel();
 	}
 
@@ -1853,4 +1872,5 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	private final CPDefinition _cpDefinition;
+
 }

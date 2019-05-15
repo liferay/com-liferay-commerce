@@ -26,24 +26,28 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPDefinitionOptionValueRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPDefinitionOptionValueRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionOptionValueRelSoap implements Serializable {
+
 	public static CPDefinitionOptionValueRelSoap toSoapModel(
 		CPDefinitionOptionValueRel model) {
-		CPDefinitionOptionValueRelSoap soapModel = new CPDefinitionOptionValueRelSoap();
+
+		CPDefinitionOptionValueRelSoap soapModel =
+			new CPDefinitionOptionValueRelSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionOptionValueRelId(model.getCPDefinitionOptionValueRelId());
+		soapModel.setCPDefinitionOptionValueRelId(
+			model.getCPDefinitionOptionValueRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPDefinitionOptionRelId(model.getCPDefinitionOptionRelId());
+		soapModel.setCPDefinitionOptionRelId(
+			model.getCPDefinitionOptionRelId());
 		soapModel.setName(model.getName());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setKey(model.getKey());
@@ -53,7 +57,9 @@ public class CPDefinitionOptionValueRelSoap implements Serializable {
 
 	public static CPDefinitionOptionValueRelSoap[] toSoapModels(
 		CPDefinitionOptionValueRel[] models) {
-		CPDefinitionOptionValueRelSoap[] soapModels = new CPDefinitionOptionValueRelSoap[models.length];
+
+		CPDefinitionOptionValueRelSoap[] soapModels =
+			new CPDefinitionOptionValueRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -64,10 +70,13 @@ public class CPDefinitionOptionValueRelSoap implements Serializable {
 
 	public static CPDefinitionOptionValueRelSoap[][] toSoapModels(
 		CPDefinitionOptionValueRel[][] models) {
+
 		CPDefinitionOptionValueRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionOptionValueRelSoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionOptionValueRelSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionOptionValueRelSoap[0][0];
@@ -82,13 +91,16 @@ public class CPDefinitionOptionValueRelSoap implements Serializable {
 
 	public static CPDefinitionOptionValueRelSoap[] toSoapModels(
 		List<CPDefinitionOptionValueRel> models) {
-		List<CPDefinitionOptionValueRelSoap> soapModels = new ArrayList<CPDefinitionOptionValueRelSoap>(models.size());
+
+		List<CPDefinitionOptionValueRelSoap> soapModels =
+			new ArrayList<CPDefinitionOptionValueRelSoap>(models.size());
 
 		for (CPDefinitionOptionValueRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionOptionValueRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionOptionValueRelSoap[soapModels.size()]);
 	}
 
 	public CPDefinitionOptionValueRelSoap() {
@@ -116,6 +128,7 @@ public class CPDefinitionOptionValueRelSoap implements Serializable {
 
 	public void setCPDefinitionOptionValueRelId(
 		long CPDefinitionOptionValueRelId) {
+
 		_CPDefinitionOptionValueRelId = CPDefinitionOptionValueRelId;
 	}
 
@@ -211,4 +224,5 @@ public class CPDefinitionOptionValueRelSoap implements Serializable {
 	private String _name;
 	private double _priority;
 	private String _key;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommercePriceListUserSegmentEntryRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommercePriceListUserSegmentEntryRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel}, that is translated to a
- * {@link com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel</code>, that is translated to a
+ * <code>com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,22 +59,31 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceListUserSegmentEntryRelServiceHttp
- * @see com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap
- * @see CommercePriceListUserSegmentEntryRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommercePriceListUserSegmentEntryRelServiceSoap {
-	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap addCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId, int order,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel returnValue =
-				CommercePriceListUserSegmentEntryRelServiceUtil.addCommercePriceListUserSegmentEntryRel(commercePriceListId,
-					commerceUserSegmentEntryId, order, serviceContext);
 
-			return com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListUserSegmentEntryRelSoap
+				addCommercePriceListUserSegmentEntryRel(
+					long commercePriceListId, long commerceUserSegmentEntryId,
+					int order,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRel returnValue =
+					CommercePriceListUserSegmentEntryRelServiceUtil.
+						addCommercePriceListUserSegmentEntryRel(
+							commercePriceListId, commerceUserSegmentEntryId,
+							order, serviceContext);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRelSoap.toSoapModel(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,26 +93,13 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 	}
 
 	public static void deleteCommercePriceListUserSegmentEntryRel(
-		long commercePriceListUserSegmentEntryRelId) throws RemoteException {
-		try {
-			CommercePriceListUserSegmentEntryRelServiceUtil.deleteCommercePriceListUserSegmentEntryRel(commercePriceListUserSegmentEntryRelId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap fetchCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId)
+			long commercePriceListUserSegmentEntryRelId)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel returnValue =
-				CommercePriceListUserSegmentEntryRelServiceUtil.fetchCommercePriceListUserSegmentEntryRel(commercePriceListId,
-					commerceUserSegmentEntryId);
 
-			return com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap.toSoapModel(returnValue);
+		try {
+			CommercePriceListUserSegmentEntryRelServiceUtil.
+				deleteCommercePriceListUserSegmentEntryRel(
+					commercePriceListUserSegmentEntryRelId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -112,13 +108,22 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap[] getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> returnValue =
-				CommercePriceListUserSegmentEntryRelServiceUtil.getCommercePriceListUserSegmentEntryRels(commercePriceListId);
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListUserSegmentEntryRelSoap
+				fetchCommercePriceListUserSegmentEntryRel(
+					long commercePriceListId, long commerceUserSegmentEntryId)
+			throws RemoteException {
 
-			return com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap.toSoapModels(returnValue);
+		try {
+			com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRel returnValue =
+					CommercePriceListUserSegmentEntryRelServiceUtil.
+						fetchCommercePriceListUserSegmentEntryRel(
+							commercePriceListId, commerceUserSegmentEntryId);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRelSoap.toSoapModel(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -127,16 +132,53 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap[] getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> returnValue =
-				CommercePriceListUserSegmentEntryRelServiceUtil.getCommercePriceListUserSegmentEntryRels(commercePriceListId,
-					start, end, orderByComparator);
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListUserSegmentEntryRelSoap[]
+				getCommercePriceListUserSegmentEntryRels(
+					long commercePriceListId)
+			throws RemoteException {
 
-			return com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.price.list.model.
+					CommercePriceListUserSegmentEntryRel> returnValue =
+						CommercePriceListUserSegmentEntryRelServiceUtil.
+							getCommercePriceListUserSegmentEntryRels(
+								commercePriceListId);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRelSoap.toSoapModels(
+					returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListUserSegmentEntryRelSoap[]
+				getCommercePriceListUserSegmentEntryRels(
+					long commercePriceListId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.price.list.model.
+							CommercePriceListUserSegmentEntryRel>
+								orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.price.list.model.
+					CommercePriceListUserSegmentEntryRel> returnValue =
+						CommercePriceListUserSegmentEntryRelServiceUtil.
+							getCommercePriceListUserSegmentEntryRels(
+								commercePriceListId, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRelSoap.toSoapModels(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -146,9 +188,14 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 	}
 
 	public static int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId) throws RemoteException {
+			long commercePriceListId)
+		throws RemoteException {
+
 		try {
-			int returnValue = CommercePriceListUserSegmentEntryRelServiceUtil.getCommercePriceListUserSegmentEntryRelsCount(commercePriceListId);
+			int returnValue =
+				CommercePriceListUserSegmentEntryRelServiceUtil.
+					getCommercePriceListUserSegmentEntryRelsCount(
+						commercePriceListId);
 
 			return returnValue;
 		}
@@ -159,16 +206,25 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap updateCommercePriceListUserSegmentEntryRel(
-		long commercePriceListUserSegmentEntryRelId, int order,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel returnValue =
-				CommercePriceListUserSegmentEntryRelServiceUtil.updateCommercePriceListUserSegmentEntryRel(commercePriceListUserSegmentEntryRelId,
-					order, serviceContext);
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListUserSegmentEntryRelSoap
+				updateCommercePriceListUserSegmentEntryRel(
+					long commercePriceListUserSegmentEntryRelId, int order,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
 
-			return com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRel returnValue =
+					CommercePriceListUserSegmentEntryRelServiceUtil.
+						updateCommercePriceListUserSegmentEntryRel(
+							commercePriceListUserSegmentEntryRelId, order,
+							serviceContext);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListUserSegmentEntryRelSoap.toSoapModel(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -177,5 +233,7 @@ public class CommercePriceListUserSegmentEntryRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommercePriceListUserSegmentEntryRelServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommercePriceListUserSegmentEntryRelServiceSoap.class);
+
 }

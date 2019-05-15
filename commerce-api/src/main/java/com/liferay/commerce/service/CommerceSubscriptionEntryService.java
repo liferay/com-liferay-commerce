@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,34 +40,42 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceSubscriptionEntryServiceUtil
- * @see com.liferay.commerce.service.base.CommerceSubscriptionEntryServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceSubscriptionEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceSubscriptionEntry"}, service = CommerceSubscriptionEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceSubscriptionEntry"
+	},
+	service = CommerceSubscriptionEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceSubscriptionEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceSubscriptionEntryServiceUtil} to access the commerce subscription entry remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceSubscriptionEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceSubscriptionEntryServiceUtil} to access the commerce subscription entry remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceSubscriptionEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public void deleteCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId) throws PortalException;
+			long commerceSubscriptionEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId) throws PortalException;
+			long commerceSubscriptionEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+			long groupId, long userId, int start, int end,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -76,30 +83,33 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
-		Integer subscriptionStatus, String keywords, int start, int end,
-		Sort sort) throws PortalException;
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			searchCommerceSubscriptionEntries(
+				long companyId, long groupId, Long maxSubscriptionCycles,
+				Integer subscriptionStatus, String keywords, int start, int end,
+				Sort sort)
+		throws PortalException;
 
 	public CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId, int subscriptionLength,
-		String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, int subscriptionStatus, int startDateMonth,
-		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextIterationDateMonth,
-		int nextIterationDateDay, int nextIterationDateYear,
-		int nextIterationDateHour, int nextIterationDateMinute)
+			long commerceSubscriptionEntryId, int subscriptionLength,
+			String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, int subscriptionStatus,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int nextIterationDateMonth,
+			int nextIterationDateDay, int nextIterationDateYear,
+			int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException;
 
 	public CommerceSubscriptionEntry updateSubscriptionStatus(
-		long commerceSubscriptionEntryId, int subscriptionStatus)
+			long commerceSubscriptionEntryId, int subscriptionStatus)
 		throws PortalException;
+
 }

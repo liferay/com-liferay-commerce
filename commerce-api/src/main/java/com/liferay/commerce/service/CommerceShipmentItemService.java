@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceShipmentItem;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,26 +38,33 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShipmentItemServiceUtil
- * @see com.liferay.commerce.service.base.CommerceShipmentItemServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceShipmentItemServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceShipmentItem"}, service = CommerceShipmentItemService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceShipmentItem"
+	},
+	service = CommerceShipmentItemService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceShipmentItemService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceShipmentItemServiceUtil} to access the commerce shipment item remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShipmentItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceShipmentItemServiceUtil} to access the commerce shipment item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShipmentItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceShipmentItem addCommerceShipmentItem(
-		long commerceShipmentId, long commerceOrderItemId,
-		long commerceWarehouseId, int quantity, ServiceContext serviceContext)
+			long commerceShipmentId, long commerceOrderItemId,
+			long commerceWarehouseId, int quantity,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceShipmentItem(long commerceShipmentItemId)
@@ -66,12 +72,13 @@ public interface CommerceShipmentItemService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipmentItem> getCommerceShipmentItems(
-		long commerceOrderItemId) throws PortalException;
+			long commerceOrderItemId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipmentItem> getCommerceShipmentItems(
-		long commerceShipmentId, int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator)
+			long commerceShipmentId, int start, int end,
+			OrderByComparator<CommerceShipmentItem> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -79,12 +86,14 @@ public interface CommerceShipmentItemService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceShipmentItem updateCommerceShipmentItem(
-		long commerceShipmentItemId, int quantity) throws PortalException;
+			long commerceShipmentItemId, int quantity)
+		throws PortalException;
+
 }

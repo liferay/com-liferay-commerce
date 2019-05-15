@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDisplayLayout;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDisplayLayout in entity cache.
  *
  * @author Marco Leo
- * @see CPDisplayLayout
  * @generated
  */
 @ProviderType
-public class CPDisplayLayoutCacheModel implements CacheModel<CPDisplayLayout>,
-	Externalizable {
+public class CPDisplayLayoutCacheModel
+	implements CacheModel<CPDisplayLayout>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CPDisplayLayoutCacheModel implements CacheModel<CPDisplayLayout>,
 			return false;
 		}
 
-		CPDisplayLayoutCacheModel cpDisplayLayoutCacheModel = (CPDisplayLayoutCacheModel)obj;
+		CPDisplayLayoutCacheModel cpDisplayLayoutCacheModel =
+			(CPDisplayLayoutCacheModel)obj;
 
 		if (CPDisplayLayoutId == cpDisplayLayoutCacheModel.CPDisplayLayoutId) {
 			return true;
@@ -168,8 +168,7 @@ public class CPDisplayLayoutCacheModel implements CacheModel<CPDisplayLayout>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -218,4 +217,5 @@ public class CPDisplayLayoutCacheModel implements CacheModel<CPDisplayLayout>,
 	public long classNameId;
 	public long classPK;
 	public String layoutUuid;
+
 }

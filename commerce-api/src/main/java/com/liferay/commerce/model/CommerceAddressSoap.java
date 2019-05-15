@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceAddressServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceAddressServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceAddressSoap implements Serializable {
+
 	public static CommerceAddressSoap toSoapModel(CommerceAddress model) {
 		CommerceAddressSoap soapModel = new CommerceAddressSoap();
 
@@ -62,7 +62,8 @@ public class CommerceAddressSoap implements Serializable {
 	}
 
 	public static CommerceAddressSoap[] toSoapModels(CommerceAddress[] models) {
-		CommerceAddressSoap[] soapModels = new CommerceAddressSoap[models.length];
+		CommerceAddressSoap[] soapModels =
+			new CommerceAddressSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -73,10 +74,12 @@ public class CommerceAddressSoap implements Serializable {
 
 	public static CommerceAddressSoap[][] toSoapModels(
 		CommerceAddress[][] models) {
+
 		CommerceAddressSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceAddressSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceAddressSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceAddressSoap[0][0];
@@ -91,7 +94,9 @@ public class CommerceAddressSoap implements Serializable {
 
 	public static CommerceAddressSoap[] toSoapModels(
 		List<CommerceAddress> models) {
-		List<CommerceAddressSoap> soapModels = new ArrayList<CommerceAddressSoap>(models.size());
+
+		List<CommerceAddressSoap> soapModels =
+			new ArrayList<CommerceAddressSoap>(models.size());
 
 		for (CommerceAddress model : models) {
 			soapModels.add(toSoapModel(model));
@@ -326,4 +331,5 @@ public class CommerceAddressSoap implements Serializable {
 	private String _phoneNumber;
 	private boolean _defaultBilling;
 	private boolean _defaultShipping;
+
 }

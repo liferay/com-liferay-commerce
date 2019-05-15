@@ -19,7 +19,6 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.payment.service.persistence.CommercePaymentMethodGroupRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -62,18 +61,18 @@ import javax.sql.DataSource;
  *
  * @author Luca Pellizzon
  * @see com.liferay.commerce.payment.service.impl.CommercePaymentMethodGroupRelLocalServiceImpl
- * @see com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommercePaymentMethodGroupRelLocalService,
-		IdentifiableOSGiService {
+			   IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil} to access the commerce payment method group rel local service.
+	 * Never modify or reference this class directly. Use <code>CommercePaymentMethodGroupRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -86,9 +85,11 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Override
 	public CommercePaymentMethodGroupRel addCommercePaymentMethodGroupRel(
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
+
 		commercePaymentMethodGroupRel.setNew(true);
 
-		return commercePaymentMethodGroupRelPersistence.update(commercePaymentMethodGroupRel);
+		return commercePaymentMethodGroupRelPersistence.update(
+			commercePaymentMethodGroupRel);
 	}
 
 	/**
@@ -101,7 +102,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommercePaymentMethodGroupRel createCommercePaymentMethodGroupRel(
 		long commercePaymentMethodGroupRelId) {
-		return commercePaymentMethodGroupRelPersistence.create(commercePaymentMethodGroupRelId);
+
+		return commercePaymentMethodGroupRelPersistence.create(
+			commercePaymentMethodGroupRelId);
 	}
 
 	/**
@@ -114,8 +117,11 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommercePaymentMethodGroupRel deleteCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId) throws PortalException {
-		return commercePaymentMethodGroupRelPersistence.remove(commercePaymentMethodGroupRelId);
+			long commercePaymentMethodGroupRelId)
+		throws PortalException {
+
+		return commercePaymentMethodGroupRelPersistence.remove(
+			commercePaymentMethodGroupRelId);
 	}
 
 	/**
@@ -128,17 +134,19 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommercePaymentMethodGroupRel deleteCommercePaymentMethodGroupRel(
-		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
 		throws PortalException {
-		return commercePaymentMethodGroupRelPersistence.remove(commercePaymentMethodGroupRel);
+
+		return commercePaymentMethodGroupRelPersistence.remove(
+			commercePaymentMethodGroupRel);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommercePaymentMethodGroupRel.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommercePaymentMethodGroupRel.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -149,14 +157,15 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(dynamicQuery);
+		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -165,17 +174,18 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -185,10 +195,12 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commercePaymentMethodGroupRelPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -199,7 +211,8 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commercePaymentMethodGroupRelPersistence.countWithDynamicQuery(dynamicQuery);
+		return commercePaymentMethodGroupRelPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -210,16 +223,19 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commercePaymentMethodGroupRelPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commercePaymentMethodGroupRelPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommercePaymentMethodGroupRel fetchCommercePaymentMethodGroupRel(
 		long commercePaymentMethodGroupRelId) {
-		return commercePaymentMethodGroupRelPersistence.fetchByPrimaryKey(commercePaymentMethodGroupRelId);
+
+		return commercePaymentMethodGroupRelPersistence.fetchByPrimaryKey(
+			commercePaymentMethodGroupRelId);
 	}
 
 	/**
@@ -231,17 +247,23 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	@Override
 	public CommercePaymentMethodGroupRel getCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId) throws PortalException {
-		return commercePaymentMethodGroupRelPersistence.findByPrimaryKey(commercePaymentMethodGroupRelId);
+			long commercePaymentMethodGroupRelId)
+		throws PortalException {
+
+		return commercePaymentMethodGroupRelPersistence.findByPrimaryKey(
+			commercePaymentMethodGroupRelId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commercePaymentMethodGroupRelLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commercePaymentMethodGroupRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommercePaymentMethodGroupRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommercePaymentMethodGroupRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commercePaymentMethodGroupRelId");
@@ -250,12 +272,17 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commercePaymentMethodGroupRelLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commercePaymentMethodGroupRelLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommercePaymentMethodGroupRel.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommercePaymentMethodGroupRel.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commercePaymentMethodGroupRelId");
@@ -265,9 +292,12 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commercePaymentMethodGroupRelLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commercePaymentMethodGroupRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommercePaymentMethodGroupRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommercePaymentMethodGroupRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commercePaymentMethodGroupRelId");
@@ -279,20 +309,25 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commercePaymentMethodGroupRelLocalService.deleteCommercePaymentMethodGroupRel((CommercePaymentMethodGroupRel)persistedModel);
+
+		return commercePaymentMethodGroupRelLocalService.
+			deleteCommercePaymentMethodGroupRel(
+				(CommercePaymentMethodGroupRel)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return commercePaymentMethodGroupRelPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return commercePaymentMethodGroupRelPersistence.findByPrimaryKey(
+			primaryKeyObj);
 	}
 
 	/**
 	 * Returns a range of all the commerce payment method group rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce payment method group rels
@@ -300,8 +335,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @return the range of commerce payment method group rels
 	 */
 	@Override
-	public List<CommercePaymentMethodGroupRel> getCommercePaymentMethodGroupRels(
-		int start, int end) {
+	public List<CommercePaymentMethodGroupRel>
+		getCommercePaymentMethodGroupRels(int start, int end) {
+
 		return commercePaymentMethodGroupRelPersistence.findAll(start, end);
 	}
 
@@ -325,7 +361,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	@Override
 	public CommercePaymentMethodGroupRel updateCommercePaymentMethodGroupRel(
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
-		return commercePaymentMethodGroupRelPersistence.update(commercePaymentMethodGroupRel);
+
+		return commercePaymentMethodGroupRelPersistence.update(
+			commercePaymentMethodGroupRel);
 	}
 
 	/**
@@ -333,7 +371,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce payment method group rel local service
 	 */
-	public CommercePaymentMethodGroupRelLocalService getCommercePaymentMethodGroupRelLocalService() {
+	public CommercePaymentMethodGroupRelLocalService
+		getCommercePaymentMethodGroupRelLocalService() {
+
 		return commercePaymentMethodGroupRelLocalService;
 	}
 
@@ -343,8 +383,11 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @param commercePaymentMethodGroupRelLocalService the commerce payment method group rel local service
 	 */
 	public void setCommercePaymentMethodGroupRelLocalService(
-		CommercePaymentMethodGroupRelLocalService commercePaymentMethodGroupRelLocalService) {
-		this.commercePaymentMethodGroupRelLocalService = commercePaymentMethodGroupRelLocalService;
+		CommercePaymentMethodGroupRelLocalService
+			commercePaymentMethodGroupRelLocalService) {
+
+		this.commercePaymentMethodGroupRelLocalService =
+			commercePaymentMethodGroupRelLocalService;
 	}
 
 	/**
@@ -352,7 +395,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce payment method group rel persistence
 	 */
-	public CommercePaymentMethodGroupRelPersistence getCommercePaymentMethodGroupRelPersistence() {
+	public CommercePaymentMethodGroupRelPersistence
+		getCommercePaymentMethodGroupRelPersistence() {
+
 		return commercePaymentMethodGroupRelPersistence;
 	}
 
@@ -362,8 +407,11 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @param commercePaymentMethodGroupRelPersistence the commerce payment method group rel persistence
 	 */
 	public void setCommercePaymentMethodGroupRelPersistence(
-		CommercePaymentMethodGroupRelPersistence commercePaymentMethodGroupRelPersistence) {
-		this.commercePaymentMethodGroupRelPersistence = commercePaymentMethodGroupRelPersistence;
+		CommercePaymentMethodGroupRelPersistence
+			commercePaymentMethodGroupRelPersistence) {
+
+		this.commercePaymentMethodGroupRelPersistence =
+			commercePaymentMethodGroupRelPersistence;
 	}
 
 	/**
@@ -371,7 +419,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -381,7 +431,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -390,7 +442,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -400,7 +454,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -420,6 +476,7 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -428,7 +485,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the image local service
 	 */
-	public com.liferay.portal.kernel.service.ImageLocalService getImageLocalService() {
+	public com.liferay.portal.kernel.service.ImageLocalService
+		getImageLocalService() {
+
 		return imageLocalService;
 	}
 
@@ -439,6 +498,7 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	public void setImageLocalService(
 		com.liferay.portal.kernel.service.ImageLocalService imageLocalService) {
+
 		this.imageLocalService = imageLocalService;
 	}
 
@@ -465,7 +525,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -475,7 +537,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -484,7 +548,9 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -495,6 +561,7 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -517,7 +584,8 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel",
 			commercePaymentMethodGroupRelLocalService);
 	}
 
@@ -551,15 +619,16 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commercePaymentMethodGroupRelPersistence.getDataSource();
+			DataSource dataSource =
+				commercePaymentMethodGroupRelPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -569,25 +638,54 @@ public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	}
 
 	@BeanReference(type = CommercePaymentMethodGroupRelLocalService.class)
-	protected CommercePaymentMethodGroupRelLocalService commercePaymentMethodGroupRelLocalService;
+	protected CommercePaymentMethodGroupRelLocalService
+		commercePaymentMethodGroupRelLocalService;
+
 	@BeanReference(type = CommercePaymentMethodGroupRelPersistence.class)
-	protected CommercePaymentMethodGroupRelPersistence commercePaymentMethodGroupRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CommercePaymentMethodGroupRelPersistence
+		commercePaymentMethodGroupRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ImageLocalService.class)
-	protected com.liferay.portal.kernel.service.ImageLocalService imageLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ImageLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ImageLocalService
+		imageLocalService;
+
 	@ServiceReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

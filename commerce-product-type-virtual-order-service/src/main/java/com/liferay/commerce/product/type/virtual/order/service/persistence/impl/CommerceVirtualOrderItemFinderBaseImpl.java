@@ -16,7 +16,6 @@ package com.liferay.commerce.product.type.virtual.order.service.persistence.impl
 
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,20 +31,22 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceVirtualOrderItemFinderBaseImpl extends BasePersistenceImpl<CommerceVirtualOrderItem> {
+public class CommerceVirtualOrderItemFinderBaseImpl
+	extends BasePersistenceImpl<CommerceVirtualOrderItem> {
+
 	public CommerceVirtualOrderItemFinderBaseImpl() {
 		setModelClass(CommerceVirtualOrderItem.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -66,7 +67,9 @@ public class CommerceVirtualOrderItemFinderBaseImpl extends BasePersistenceImpl<
 	 *
 	 * @return the commerce virtual order item persistence
 	 */
-	public CommerceVirtualOrderItemPersistence getCommerceVirtualOrderItemPersistence() {
+	public CommerceVirtualOrderItemPersistence
+		getCommerceVirtualOrderItemPersistence() {
+
 		return commerceVirtualOrderItemPersistence;
 	}
 
@@ -76,11 +79,18 @@ public class CommerceVirtualOrderItemFinderBaseImpl extends BasePersistenceImpl<
 	 * @param commerceVirtualOrderItemPersistence the commerce virtual order item persistence
 	 */
 	public void setCommerceVirtualOrderItemPersistence(
-		CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence) {
-		this.commerceVirtualOrderItemPersistence = commerceVirtualOrderItemPersistence;
+		CommerceVirtualOrderItemPersistence
+			commerceVirtualOrderItemPersistence) {
+
+		this.commerceVirtualOrderItemPersistence =
+			commerceVirtualOrderItemPersistence;
 	}
 
 	@BeanReference(type = CommerceVirtualOrderItemPersistence.class)
-	protected CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceVirtualOrderItemFinderBaseImpl.class);
+	protected CommerceVirtualOrderItemPersistence
+		commerceVirtualOrderItemPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceVirtualOrderItemFinderBaseImpl.class);
+
 }

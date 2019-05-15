@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,8 +37,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
-	ModelWrapper<CommerceDiscountRel> {
+public class CommerceDiscountRelWrapper
+	implements CommerceDiscountRel, ModelWrapper<CommerceDiscountRel> {
+
 	public CommerceDiscountRelWrapper(CommerceDiscountRel commerceDiscountRel) {
 		_commerceDiscountRel = commerceDiscountRel;
 	}
@@ -75,7 +75,7 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceDiscountRelId = (Long)attributes.get(
-				"commerceDiscountRelId");
+			"commerceDiscountRelId");
 
 		if (commerceDiscountRelId != null) {
 			setCommerceDiscountRelId(commerceDiscountRelId);
@@ -138,7 +138,8 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 
 	@Override
 	public Object clone() {
-		return new CommerceDiscountRelWrapper((CommerceDiscountRel)_commerceDiscountRel.clone());
+		return new CommerceDiscountRelWrapper(
+			(CommerceDiscountRel)_commerceDiscountRel.clone());
 	}
 
 	@Override
@@ -147,70 +148,70 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Returns the fully qualified class name of this commerce discount rel.
-	*
-	* @return the fully qualified class name of this commerce discount rel
-	*/
+	 * Returns the fully qualified class name of this commerce discount rel.
+	 *
+	 * @return the fully qualified class name of this commerce discount rel
+	 */
 	@Override
 	public String getClassName() {
 		return _commerceDiscountRel.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this commerce discount rel.
-	*
-	* @return the class name ID of this commerce discount rel
-	*/
+	 * Returns the class name ID of this commerce discount rel.
+	 *
+	 * @return the class name ID of this commerce discount rel
+	 */
 	@Override
 	public long getClassNameId() {
 		return _commerceDiscountRel.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this commerce discount rel.
-	*
-	* @return the class pk of this commerce discount rel
-	*/
+	 * Returns the class pk of this commerce discount rel.
+	 *
+	 * @return the class pk of this commerce discount rel
+	 */
 	@Override
 	public long getClassPK() {
 		return _commerceDiscountRel.getClassPK();
 	}
 
 	/**
-	* Returns the commerce discount ID of this commerce discount rel.
-	*
-	* @return the commerce discount ID of this commerce discount rel
-	*/
+	 * Returns the commerce discount ID of this commerce discount rel.
+	 *
+	 * @return the commerce discount ID of this commerce discount rel
+	 */
 	@Override
 	public long getCommerceDiscountId() {
 		return _commerceDiscountRel.getCommerceDiscountId();
 	}
 
 	/**
-	* Returns the commerce discount rel ID of this commerce discount rel.
-	*
-	* @return the commerce discount rel ID of this commerce discount rel
-	*/
+	 * Returns the commerce discount rel ID of this commerce discount rel.
+	 *
+	 * @return the commerce discount rel ID of this commerce discount rel
+	 */
 	@Override
 	public long getCommerceDiscountRelId() {
 		return _commerceDiscountRel.getCommerceDiscountRelId();
 	}
 
 	/**
-	* Returns the company ID of this commerce discount rel.
-	*
-	* @return the company ID of this commerce discount rel
-	*/
+	 * Returns the company ID of this commerce discount rel.
+	 *
+	 * @return the company ID of this commerce discount rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceDiscountRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce discount rel.
-	*
-	* @return the create date of this commerce discount rel
-	*/
+	 * Returns the create date of this commerce discount rel.
+	 *
+	 * @return the create date of this commerce discount rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceDiscountRel.getCreateDate();
@@ -222,30 +223,30 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Returns the group ID of this commerce discount rel.
-	*
-	* @return the group ID of this commerce discount rel
-	*/
+	 * Returns the group ID of this commerce discount rel.
+	 *
+	 * @return the group ID of this commerce discount rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceDiscountRel.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce discount rel.
-	*
-	* @return the modified date of this commerce discount rel
-	*/
+	 * Returns the modified date of this commerce discount rel.
+	 *
+	 * @return the modified date of this commerce discount rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceDiscountRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce discount rel.
-	*
-	* @return the primary key of this commerce discount rel
-	*/
+	 * Returns the primary key of this commerce discount rel.
+	 *
+	 * @return the primary key of this commerce discount rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceDiscountRel.getPrimaryKey();
@@ -257,30 +258,30 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Returns the user ID of this commerce discount rel.
-	*
-	* @return the user ID of this commerce discount rel
-	*/
+	 * Returns the user ID of this commerce discount rel.
+	 *
+	 * @return the user ID of this commerce discount rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceDiscountRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce discount rel.
-	*
-	* @return the user name of this commerce discount rel
-	*/
+	 * Returns the user name of this commerce discount rel.
+	 *
+	 * @return the user name of this commerce discount rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceDiscountRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce discount rel.
-	*
-	* @return the user uuid of this commerce discount rel
-	*/
+	 * Returns the user uuid of this commerce discount rel.
+	 *
+	 * @return the user uuid of this commerce discount rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceDiscountRel.getUserUuid();
@@ -322,60 +323,60 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Sets the class name ID of this commerce discount rel.
-	*
-	* @param classNameId the class name ID of this commerce discount rel
-	*/
+	 * Sets the class name ID of this commerce discount rel.
+	 *
+	 * @param classNameId the class name ID of this commerce discount rel
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_commerceDiscountRel.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this commerce discount rel.
-	*
-	* @param classPK the class pk of this commerce discount rel
-	*/
+	 * Sets the class pk of this commerce discount rel.
+	 *
+	 * @param classPK the class pk of this commerce discount rel
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_commerceDiscountRel.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the commerce discount ID of this commerce discount rel.
-	*
-	* @param commerceDiscountId the commerce discount ID of this commerce discount rel
-	*/
+	 * Sets the commerce discount ID of this commerce discount rel.
+	 *
+	 * @param commerceDiscountId the commerce discount ID of this commerce discount rel
+	 */
 	@Override
 	public void setCommerceDiscountId(long commerceDiscountId) {
 		_commerceDiscountRel.setCommerceDiscountId(commerceDiscountId);
 	}
 
 	/**
-	* Sets the commerce discount rel ID of this commerce discount rel.
-	*
-	* @param commerceDiscountRelId the commerce discount rel ID of this commerce discount rel
-	*/
+	 * Sets the commerce discount rel ID of this commerce discount rel.
+	 *
+	 * @param commerceDiscountRelId the commerce discount rel ID of this commerce discount rel
+	 */
 	@Override
 	public void setCommerceDiscountRelId(long commerceDiscountRelId) {
 		_commerceDiscountRel.setCommerceDiscountRelId(commerceDiscountRelId);
 	}
 
 	/**
-	* Sets the company ID of this commerce discount rel.
-	*
-	* @param companyId the company ID of this commerce discount rel
-	*/
+	 * Sets the company ID of this commerce discount rel.
+	 *
+	 * @param companyId the company ID of this commerce discount rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceDiscountRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce discount rel.
-	*
-	* @param createDate the create date of this commerce discount rel
-	*/
+	 * Sets the create date of this commerce discount rel.
+	 *
+	 * @param createDate the create date of this commerce discount rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceDiscountRel.setCreateDate(createDate);
@@ -384,6 +385,7 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceDiscountRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -398,20 +400,20 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Sets the group ID of this commerce discount rel.
-	*
-	* @param groupId the group ID of this commerce discount rel
-	*/
+	 * Sets the group ID of this commerce discount rel.
+	 *
+	 * @param groupId the group ID of this commerce discount rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceDiscountRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce discount rel.
-	*
-	* @param modifiedDate the modified date of this commerce discount rel
-	*/
+	 * Sets the modified date of this commerce discount rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce discount rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceDiscountRel.setModifiedDate(modifiedDate);
@@ -423,10 +425,10 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Sets the primary key of this commerce discount rel.
-	*
-	* @param primaryKey the primary key of this commerce discount rel
-	*/
+	 * Sets the primary key of this commerce discount rel.
+	 *
+	 * @param primaryKey the primary key of this commerce discount rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceDiscountRel.setPrimaryKey(primaryKey);
@@ -438,43 +440,46 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	/**
-	* Sets the user ID of this commerce discount rel.
-	*
-	* @param userId the user ID of this commerce discount rel
-	*/
+	 * Sets the user ID of this commerce discount rel.
+	 *
+	 * @param userId the user ID of this commerce discount rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceDiscountRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce discount rel.
-	*
-	* @param userName the user name of this commerce discount rel
-	*/
+	 * Sets the user name of this commerce discount rel.
+	 *
+	 * @param userName the user name of this commerce discount rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceDiscountRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce discount rel.
-	*
-	* @param userUuid the user uuid of this commerce discount rel
-	*/
+	 * Sets the user uuid of this commerce discount rel.
+	 *
+	 * @param userUuid the user uuid of this commerce discount rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceDiscountRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceDiscountRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceDiscountRel>
+		toCacheModel() {
+
 		return _commerceDiscountRel.toCacheModel();
 	}
 
 	@Override
 	public CommerceDiscountRel toEscapedModel() {
-		return new CommerceDiscountRelWrapper(_commerceDiscountRel.toEscapedModel());
+		return new CommerceDiscountRelWrapper(
+			_commerceDiscountRel.toEscapedModel());
 	}
 
 	@Override
@@ -484,7 +489,8 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 
 	@Override
 	public CommerceDiscountRel toUnescapedModel() {
-		return new CommerceDiscountRelWrapper(_commerceDiscountRel.toUnescapedModel());
+		return new CommerceDiscountRelWrapper(
+			_commerceDiscountRel.toUnescapedModel());
 	}
 
 	@Override
@@ -502,10 +508,13 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 			return false;
 		}
 
-		CommerceDiscountRelWrapper commerceDiscountRelWrapper = (CommerceDiscountRelWrapper)obj;
+		CommerceDiscountRelWrapper commerceDiscountRelWrapper =
+			(CommerceDiscountRelWrapper)obj;
 
-		if (Objects.equals(_commerceDiscountRel,
-					commerceDiscountRelWrapper._commerceDiscountRel)) {
+		if (Objects.equals(
+				_commerceDiscountRel,
+				commerceDiscountRelWrapper._commerceDiscountRel)) {
+
 			return true;
 		}
 
@@ -533,4 +542,5 @@ public class CommerceDiscountRelWrapper implements CommerceDiscountRel,
 	}
 
 	private final CommerceDiscountRel _commerceDiscountRel;
+
 }

@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPOptionCategoryException;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPOptionCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionCategoryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPOptionCategoryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -109,7 +108,8 @@ public class CPOptionCategoryPersistenceTest {
 
 		_persistence.remove(newCPOptionCategory);
 
-		CPOptionCategory existingCPOptionCategory = _persistence.fetchByPrimaryKey(newCPOptionCategory.getPrimaryKey());
+		CPOptionCategory existingCPOptionCategory =
+			_persistence.fetchByPrimaryKey(newCPOptionCategory.getPrimaryKey());
 
 		Assert.assertNull(existingCPOptionCategory);
 	}
@@ -151,35 +151,45 @@ public class CPOptionCategoryPersistenceTest {
 
 		_cpOptionCategories.add(_persistence.update(newCPOptionCategory));
 
-		CPOptionCategory existingCPOptionCategory = _persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
+		CPOptionCategory existingCPOptionCategory =
+			_persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
 
-		Assert.assertEquals(existingCPOptionCategory.getUuid(),
-			newCPOptionCategory.getUuid());
-		Assert.assertEquals(existingCPOptionCategory.getCPOptionCategoryId(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getUuid(), newCPOptionCategory.getUuid());
+		Assert.assertEquals(
+			existingCPOptionCategory.getCPOptionCategoryId(),
 			newCPOptionCategory.getCPOptionCategoryId());
-		Assert.assertEquals(existingCPOptionCategory.getGroupId(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getGroupId(),
 			newCPOptionCategory.getGroupId());
-		Assert.assertEquals(existingCPOptionCategory.getCompanyId(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getCompanyId(),
 			newCPOptionCategory.getCompanyId());
-		Assert.assertEquals(existingCPOptionCategory.getUserId(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getUserId(),
 			newCPOptionCategory.getUserId());
-		Assert.assertEquals(existingCPOptionCategory.getUserName(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getUserName(),
 			newCPOptionCategory.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPOptionCategory.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPOptionCategory.getCreateDate()),
 			Time.getShortTimestamp(newCPOptionCategory.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPOptionCategory.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPOptionCategory.getModifiedDate()),
 			Time.getShortTimestamp(newCPOptionCategory.getModifiedDate()));
-		Assert.assertEquals(existingCPOptionCategory.getTitle(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getTitle(),
 			newCPOptionCategory.getTitle());
-		Assert.assertEquals(existingCPOptionCategory.getDescription(),
+		Assert.assertEquals(
+			existingCPOptionCategory.getDescription(),
 			newCPOptionCategory.getDescription());
-		AssertUtils.assertEquals(existingCPOptionCategory.getPriority(),
+		AssertUtils.assertEquals(
+			existingCPOptionCategory.getPriority(),
 			newCPOptionCategory.getPriority());
-		Assert.assertEquals(existingCPOptionCategory.getKey(),
-			newCPOptionCategory.getKey());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			existingCPOptionCategory.getKey(), newCPOptionCategory.getKey());
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPOptionCategory.getLastPublishDate()),
 			Time.getShortTimestamp(newCPOptionCategory.getLastPublishDate()));
 	}
@@ -238,7 +248,8 @@ public class CPOptionCategoryPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
-		CPOptionCategory existingCPOptionCategory = _persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
+		CPOptionCategory existingCPOptionCategory =
+			_persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
 
 		Assert.assertEquals(existingCPOptionCategory, newCPOptionCategory);
 	}
@@ -252,23 +263,25 @@ public class CPOptionCategoryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPOptionCategory> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPOptionCategory", "uuid",
-			true, "CPOptionCategoryId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "title", true, "description", true,
-			"priority", true, "key", true, "lastPublishDate", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPOptionCategory", "uuid", true, "CPOptionCategoryId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "title", true,
+			"description", true, "priority", true, "key", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
-		CPOptionCategory existingCPOptionCategory = _persistence.fetchByPrimaryKey(newCPOptionCategory.getPrimaryKey());
+		CPOptionCategory existingCPOptionCategory =
+			_persistence.fetchByPrimaryKey(newCPOptionCategory.getPrimaryKey());
 
 		Assert.assertEquals(existingCPOptionCategory, newCPOptionCategory);
 	}
@@ -277,7 +290,8 @@ public class CPOptionCategoryPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPOptionCategory missingCPOptionCategory = _persistence.fetchByPrimaryKey(pk);
+		CPOptionCategory missingCPOptionCategory =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPOptionCategory);
 	}
@@ -285,6 +299,7 @@ public class CPOptionCategoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPOptionCategory newCPOptionCategory1 = addCPOptionCategory();
 		CPOptionCategory newCPOptionCategory2 = addCPOptionCategory();
 
@@ -293,18 +308,22 @@ public class CPOptionCategoryPersistenceTest {
 		primaryKeys.add(newCPOptionCategory1.getPrimaryKey());
 		primaryKeys.add(newCPOptionCategory2.getPrimaryKey());
 
-		Map<Serializable, CPOptionCategory> cpOptionCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOptionCategory> cpOptionCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpOptionCategories.size());
-		Assert.assertEquals(newCPOptionCategory1,
+		Assert.assertEquals(
+			newCPOptionCategory1,
 			cpOptionCategories.get(newCPOptionCategory1.getPrimaryKey()));
-		Assert.assertEquals(newCPOptionCategory2,
+		Assert.assertEquals(
+			newCPOptionCategory2,
 			cpOptionCategories.get(newCPOptionCategory2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -314,7 +333,8 @@ public class CPOptionCategoryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPOptionCategory> cpOptionCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOptionCategory> cpOptionCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpOptionCategories.isEmpty());
 	}
@@ -322,6 +342,7 @@ public class CPOptionCategoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
 		long pk = RandomTestUtil.nextLong();
@@ -331,36 +352,39 @@ public class CPOptionCategoryPersistenceTest {
 		primaryKeys.add(newCPOptionCategory.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPOptionCategory> cpOptionCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOptionCategory> cpOptionCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpOptionCategories.size());
-		Assert.assertEquals(newCPOptionCategory,
+		Assert.assertEquals(
+			newCPOptionCategory,
 			cpOptionCategories.get(newCPOptionCategory.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPOptionCategory> cpOptionCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOptionCategory> cpOptionCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpOptionCategories.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPOptionCategory.getPrimaryKey());
 
-		Map<Serializable, CPOptionCategory> cpOptionCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOptionCategory> cpOptionCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpOptionCategories.size());
-		Assert.assertEquals(newCPOptionCategory,
+		Assert.assertEquals(
+			newCPOptionCategory,
 			cpOptionCategories.get(newCPOptionCategory.getPrimaryKey()));
 	}
 
@@ -368,15 +392,19 @@ public class CPOptionCategoryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPOptionCategoryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPOptionCategoryLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPOptionCategory>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPOptionCategory>() {
+
 				@Override
 				public void performAction(CPOptionCategory cpOptionCategory) {
 					Assert.assertNotNull(cpOptionCategory);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -385,17 +413,19 @@ public class CPOptionCategoryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOptionCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOptionCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPOptionCategoryId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPOptionCategoryId",
 				newCPOptionCategory.getCPOptionCategoryId()));
 
-		List<CPOptionCategory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPOptionCategory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -406,32 +436,35 @@ public class CPOptionCategoryPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOptionCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOptionCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPOptionCategoryId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPOptionCategoryId", RandomTestUtil.nextLong()));
 
-		List<CPOptionCategory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPOptionCategory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPOptionCategory newCPOptionCategory = addCPOptionCategory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOptionCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOptionCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPOptionCategoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPOptionCategoryId"));
 
-		Object newCPOptionCategoryId = newCPOptionCategory.getCPOptionCategoryId();
+		Object newCPOptionCategoryId =
+			newCPOptionCategory.getCPOptionCategoryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPOptionCategoryId",
-				new Object[] { newCPOptionCategoryId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPOptionCategoryId", new Object[] {newCPOptionCategoryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -444,14 +477,16 @@ public class CPOptionCategoryPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOptionCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOptionCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPOptionCategoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPOptionCategoryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPOptionCategoryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPOptionCategoryId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -464,21 +499,32 @@ public class CPOptionCategoryPersistenceTest {
 
 		_persistence.clearCache();
 
-		CPOptionCategory existingCPOptionCategory = _persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
+		CPOptionCategory existingCPOptionCategory =
+			_persistence.findByPrimaryKey(newCPOptionCategory.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPOptionCategory.getUuid(),
-				ReflectionTestUtil.invoke(existingCPOptionCategory,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPOptionCategory.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPOptionCategory,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPOptionCategory.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPOptionCategory, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPOptionCategory.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPOptionCategory, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCPOptionCategory.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPOptionCategory,
-				"getOriginalGroupId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCPOptionCategory.getKey(),
-				ReflectionTestUtil.invoke(existingCPOptionCategory,
-					"getOriginalKey", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPOptionCategory.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPOptionCategory, "getOriginalGroupId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPOptionCategory.getKey(),
+				ReflectionTestUtil.invoke(
+					existingCPOptionCategory, "getOriginalKey",
+					new Class<?>[0])));
 	}
 
 	protected CPOptionCategory addCPOptionCategory() throws Exception {
@@ -515,7 +561,9 @@ public class CPOptionCategoryPersistenceTest {
 		return cpOptionCategory;
 	}
 
-	private List<CPOptionCategory> _cpOptionCategories = new ArrayList<CPOptionCategory>();
+	private List<CPOptionCategory> _cpOptionCategories =
+		new ArrayList<CPOptionCategory>();
 	private CPOptionCategoryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

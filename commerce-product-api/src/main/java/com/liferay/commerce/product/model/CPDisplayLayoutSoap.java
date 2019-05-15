@@ -30,6 +30,7 @@ import java.util.List;
  */
 @ProviderType
 public class CPDisplayLayoutSoap implements Serializable {
+
 	public static CPDisplayLayoutSoap toSoapModel(CPDisplayLayout model) {
 		CPDisplayLayoutSoap soapModel = new CPDisplayLayoutSoap();
 
@@ -49,7 +50,8 @@ public class CPDisplayLayoutSoap implements Serializable {
 	}
 
 	public static CPDisplayLayoutSoap[] toSoapModels(CPDisplayLayout[] models) {
-		CPDisplayLayoutSoap[] soapModels = new CPDisplayLayoutSoap[models.length];
+		CPDisplayLayoutSoap[] soapModels =
+			new CPDisplayLayoutSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -60,10 +62,12 @@ public class CPDisplayLayoutSoap implements Serializable {
 
 	public static CPDisplayLayoutSoap[][] toSoapModels(
 		CPDisplayLayout[][] models) {
+
 		CPDisplayLayoutSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDisplayLayoutSoap[models.length][models[0].length];
+			soapModels =
+				new CPDisplayLayoutSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDisplayLayoutSoap[0][0];
@@ -78,7 +82,9 @@ public class CPDisplayLayoutSoap implements Serializable {
 
 	public static CPDisplayLayoutSoap[] toSoapModels(
 		List<CPDisplayLayout> models) {
-		List<CPDisplayLayoutSoap> soapModels = new ArrayList<CPDisplayLayoutSoap>(models.size());
+
+		List<CPDisplayLayoutSoap> soapModels =
+			new ArrayList<CPDisplayLayoutSoap>(models.size());
 
 		for (CPDisplayLayout model : models) {
 			soapModels.add(toSoapModel(model));
@@ -197,4 +203,5 @@ public class CPDisplayLayoutSoap implements Serializable {
 	private long _classNameId;
 	private long _classPK;
 	private String _layoutUuid;
+
 }

@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.service.persistence.CommerceOrderItemPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 
@@ -24,7 +23,9 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceOrderItemFinderBaseImpl extends BasePersistenceImpl<CommerceOrderItem> {
+public class CommerceOrderItemFinderBaseImpl
+	extends BasePersistenceImpl<CommerceOrderItem> {
+
 	public CommerceOrderItemFinderBaseImpl() {
 		setModelClass(CommerceOrderItem.class);
 	}
@@ -45,9 +46,11 @@ public class CommerceOrderItemFinderBaseImpl extends BasePersistenceImpl<Commerc
 	 */
 	public void setCommerceOrderItemPersistence(
 		CommerceOrderItemPersistence commerceOrderItemPersistence) {
+
 		this.commerceOrderItemPersistence = commerceOrderItemPersistence;
 	}
 
 	@BeanReference(type = CommerceOrderItemPersistence.class)
 	protected CommerceOrderItemPersistence commerceOrderItemPersistence;
+
 }

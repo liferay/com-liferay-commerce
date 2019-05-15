@@ -25,36 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Andrea Di Giorgi
  * @see CommerceWishListModel
- * @see com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl
- * @see com.liferay.commerce.wish.list.model.impl.CommerceWishListModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl"
+)
 @ProviderType
-public interface CommerceWishList extends CommerceWishListModel, PersistedModel {
+public interface CommerceWishList
+	extends CommerceWishListModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceWishList, Long> COMMERCE_WISH_LIST_ID_ACCESSOR =
-		new Accessor<CommerceWishList, Long>() {
-			@Override
-			public Long get(CommerceWishList commerceWishList) {
-				return commerceWishList.getCommerceWishListId();
-			}
+	public static final Accessor<CommerceWishList, Long>
+		COMMERCE_WISH_LIST_ID_ACCESSOR =
+			new Accessor<CommerceWishList, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceWishList commerceWishList) {
+					return commerceWishList.getCommerceWishListId();
+				}
 
-			@Override
-			public Class<CommerceWishList> getTypeClass() {
-				return CommerceWishList.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceWishList> getTypeClass() {
+					return CommerceWishList.class;
+				}
+
+			};
 
 	public boolean isGuestWishList()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

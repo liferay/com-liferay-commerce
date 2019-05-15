@@ -35,18 +35,22 @@ import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValue
 public abstract class CPDefinitionSpecificationOptionValueBaseImpl
 	extends CPDefinitionSpecificationOptionValueModelImpl
 	implements CPDefinitionSpecificationOptionValue {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition specification option value model instance should use the {@link CPDefinitionSpecificationOptionValue} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition specification option value model instance should use the <code>CPDefinitionSpecificationOptionValue</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDefinitionSpecificationOptionValueLocalServiceUtil.addCPDefinitionSpecificationOptionValue(this);
+			CPDefinitionSpecificationOptionValueLocalServiceUtil.
+				addCPDefinitionSpecificationOptionValue(this);
 		}
 		else {
-			CPDefinitionSpecificationOptionValueLocalServiceUtil.updateCPDefinitionSpecificationOptionValue(this);
+			CPDefinitionSpecificationOptionValueLocalServiceUtil.
+				updateCPDefinitionSpecificationOptionValue(this);
 		}
 	}
+
 }

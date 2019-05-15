@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPInstancePersistence;
 import com.liferay.commerce.product.service.persistence.CPInstanceUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -62,17 +51,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPInstancePersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -111,7 +110,8 @@ public class CPInstancePersistenceTest {
 
 		_persistence.remove(newCPInstance);
 
-		CPInstance existingCPInstance = _persistence.fetchByPrimaryKey(newCPInstance.getPrimaryKey());
+		CPInstance existingCPInstance = _persistence.fetchByPrimaryKey(
+			newCPInstance.getPrimaryKey());
 
 		Assert.assertNull(existingCPInstance);
 	}
@@ -167,7 +167,8 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setPrice(new BigDecimal(RandomTestUtil.nextDouble()));
 
-		newCPInstance.setPromoPrice(new BigDecimal(RandomTestUtil.nextDouble()));
+		newCPInstance.setPromoPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
 
 		newCPInstance.setCost(new BigDecimal(RandomTestUtil.nextDouble()));
 
@@ -179,7 +180,8 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setLastPublishDate(RandomTestUtil.nextDate());
 
-		newCPInstance.setOverrideSubscriptionInfo(RandomTestUtil.randomBoolean());
+		newCPInstance.setOverrideSubscriptionInfo(
+			RandomTestUtil.randomBoolean());
 
 		newCPInstance.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
 
@@ -187,7 +189,8 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setSubscriptionType(RandomTestUtil.randomString());
 
-		newCPInstance.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+		newCPInstance.setSubscriptionTypeSettings(
+			RandomTestUtil.randomString());
 
 		newCPInstance.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
@@ -201,86 +204,101 @@ public class CPInstancePersistenceTest {
 
 		_cpInstances.add(_persistence.update(newCPInstance));
 
-		CPInstance existingCPInstance = _persistence.findByPrimaryKey(newCPInstance.getPrimaryKey());
+		CPInstance existingCPInstance = _persistence.findByPrimaryKey(
+			newCPInstance.getPrimaryKey());
 
-		Assert.assertEquals(existingCPInstance.getUuid(),
-			newCPInstance.getUuid());
-		Assert.assertEquals(existingCPInstance.getExternalReferenceCode(),
+		Assert.assertEquals(
+			existingCPInstance.getUuid(), newCPInstance.getUuid());
+		Assert.assertEquals(
+			existingCPInstance.getExternalReferenceCode(),
 			newCPInstance.getExternalReferenceCode());
-		Assert.assertEquals(existingCPInstance.getCPInstanceId(),
+		Assert.assertEquals(
+			existingCPInstance.getCPInstanceId(),
 			newCPInstance.getCPInstanceId());
-		Assert.assertEquals(existingCPInstance.getGroupId(),
-			newCPInstance.getGroupId());
-		Assert.assertEquals(existingCPInstance.getCompanyId(),
-			newCPInstance.getCompanyId());
-		Assert.assertEquals(existingCPInstance.getUserId(),
-			newCPInstance.getUserId());
-		Assert.assertEquals(existingCPInstance.getUserName(),
-			newCPInstance.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getCreateDate()),
+		Assert.assertEquals(
+			existingCPInstance.getGroupId(), newCPInstance.getGroupId());
+		Assert.assertEquals(
+			existingCPInstance.getCompanyId(), newCPInstance.getCompanyId());
+		Assert.assertEquals(
+			existingCPInstance.getUserId(), newCPInstance.getUserId());
+		Assert.assertEquals(
+			existingCPInstance.getUserName(), newCPInstance.getUserName());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getCreateDate()),
 			Time.getShortTimestamp(newCPInstance.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getModifiedDate()),
 			Time.getShortTimestamp(newCPInstance.getModifiedDate()));
-		Assert.assertEquals(existingCPInstance.getCPDefinitionId(),
+		Assert.assertEquals(
+			existingCPInstance.getCPDefinitionId(),
 			newCPInstance.getCPDefinitionId());
-		Assert.assertEquals(existingCPInstance.getCPInstanceUuid(),
+		Assert.assertEquals(
+			existingCPInstance.getCPInstanceUuid(),
 			newCPInstance.getCPInstanceUuid());
-		Assert.assertEquals(existingCPInstance.getSku(), newCPInstance.getSku());
-		Assert.assertEquals(existingCPInstance.getGtin(),
-			newCPInstance.getGtin());
-		Assert.assertEquals(existingCPInstance.getManufacturerPartNumber(),
+		Assert.assertEquals(
+			existingCPInstance.getSku(), newCPInstance.getSku());
+		Assert.assertEquals(
+			existingCPInstance.getGtin(), newCPInstance.getGtin());
+		Assert.assertEquals(
+			existingCPInstance.getManufacturerPartNumber(),
 			newCPInstance.getManufacturerPartNumber());
-		Assert.assertEquals(existingCPInstance.isPurchasable(),
-			newCPInstance.isPurchasable());
-		Assert.assertEquals(existingCPInstance.getJson(),
-			newCPInstance.getJson());
-		AssertUtils.assertEquals(existingCPInstance.getWidth(),
-			newCPInstance.getWidth());
-		AssertUtils.assertEquals(existingCPInstance.getHeight(),
-			newCPInstance.getHeight());
-		AssertUtils.assertEquals(existingCPInstance.getDepth(),
-			newCPInstance.getDepth());
-		AssertUtils.assertEquals(existingCPInstance.getWeight(),
-			newCPInstance.getWeight());
-		Assert.assertEquals(existingCPInstance.getPrice(),
-			newCPInstance.getPrice());
-		Assert.assertEquals(existingCPInstance.getPromoPrice(),
-			newCPInstance.getPromoPrice());
-		Assert.assertEquals(existingCPInstance.getCost(),
-			newCPInstance.getCost());
-		Assert.assertEquals(existingCPInstance.isPublished(),
-			newCPInstance.isPublished());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getDisplayDate()),
+		Assert.assertEquals(
+			existingCPInstance.isPurchasable(), newCPInstance.isPurchasable());
+		Assert.assertEquals(
+			existingCPInstance.getJson(), newCPInstance.getJson());
+		AssertUtils.assertEquals(
+			existingCPInstance.getWidth(), newCPInstance.getWidth());
+		AssertUtils.assertEquals(
+			existingCPInstance.getHeight(), newCPInstance.getHeight());
+		AssertUtils.assertEquals(
+			existingCPInstance.getDepth(), newCPInstance.getDepth());
+		AssertUtils.assertEquals(
+			existingCPInstance.getWeight(), newCPInstance.getWeight());
+		Assert.assertEquals(
+			existingCPInstance.getPrice(), newCPInstance.getPrice());
+		Assert.assertEquals(
+			existingCPInstance.getPromoPrice(), newCPInstance.getPromoPrice());
+		Assert.assertEquals(
+			existingCPInstance.getCost(), newCPInstance.getCost());
+		Assert.assertEquals(
+			existingCPInstance.isPublished(), newCPInstance.isPublished());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getDisplayDate()),
 			Time.getShortTimestamp(newCPInstance.getDisplayDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getExpirationDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getExpirationDate()),
 			Time.getShortTimestamp(newCPInstance.getExpirationDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getLastPublishDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getLastPublishDate()),
 			Time.getShortTimestamp(newCPInstance.getLastPublishDate()));
-		Assert.assertEquals(existingCPInstance.isOverrideSubscriptionInfo(),
+		Assert.assertEquals(
+			existingCPInstance.isOverrideSubscriptionInfo(),
 			newCPInstance.isOverrideSubscriptionInfo());
-		Assert.assertEquals(existingCPInstance.isSubscriptionEnabled(),
+		Assert.assertEquals(
+			existingCPInstance.isSubscriptionEnabled(),
 			newCPInstance.isSubscriptionEnabled());
-		Assert.assertEquals(existingCPInstance.getSubscriptionLength(),
+		Assert.assertEquals(
+			existingCPInstance.getSubscriptionLength(),
 			newCPInstance.getSubscriptionLength());
-		Assert.assertEquals(existingCPInstance.getSubscriptionType(),
+		Assert.assertEquals(
+			existingCPInstance.getSubscriptionType(),
 			newCPInstance.getSubscriptionType());
-		Assert.assertEquals(existingCPInstance.getSubscriptionTypeSettings(),
+		Assert.assertEquals(
+			existingCPInstance.getSubscriptionTypeSettings(),
 			newCPInstance.getSubscriptionTypeSettings());
-		Assert.assertEquals(existingCPInstance.getMaxSubscriptionCycles(),
+		Assert.assertEquals(
+			existingCPInstance.getMaxSubscriptionCycles(),
 			newCPInstance.getMaxSubscriptionCycles());
-		Assert.assertEquals(existingCPInstance.getStatus(),
-			newCPInstance.getStatus());
-		Assert.assertEquals(existingCPInstance.getStatusByUserId(),
+		Assert.assertEquals(
+			existingCPInstance.getStatus(), newCPInstance.getStatus());
+		Assert.assertEquals(
+			existingCPInstance.getStatusByUserId(),
 			newCPInstance.getStatusByUserId());
-		Assert.assertEquals(existingCPInstance.getStatusByUserName(),
+		Assert.assertEquals(
+			existingCPInstance.getStatusByUserName(),
 			newCPInstance.getStatusByUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPInstance.getStatusDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPInstance.getStatusDate()),
 			Time.getShortTimestamp(newCPInstance.getStatusDate()));
 	}
 
@@ -334,16 +352,16 @@ public class CPInstancePersistenceTest {
 
 	@Test
 	public void testCountByG_ST() throws Exception {
-		_persistence.countByG_ST(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByG_ST(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByG_ST(0L, 0);
 	}
 
 	@Test
 	public void testCountByG_NotST() throws Exception {
-		_persistence.countByG_NotST(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByG_NotST(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByG_NotST(0L, 0);
 	}
@@ -368,32 +386,33 @@ public class CPInstancePersistenceTest {
 
 	@Test
 	public void testCountByC_ST() throws Exception {
-		_persistence.countByC_ST(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByC_ST(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByC_ST(0L, 0);
 	}
 
 	@Test
 	public void testCountByC_NotST() throws Exception {
-		_persistence.countByC_NotST(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByC_NotST(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByC_NotST(0L, 0);
 	}
 
 	@Test
 	public void testCountByLtD_S() throws Exception {
-		_persistence.countByLtD_S(RandomTestUtil.nextDate(),
-			RandomTestUtil.nextInt());
+		_persistence.countByLtD_S(
+			RandomTestUtil.nextDate(), RandomTestUtil.nextInt());
 
 		_persistence.countByLtD_S(RandomTestUtil.nextDate(), 0);
 	}
 
 	@Test
 	public void testCountByC_LtD_S() throws Exception {
-		_persistence.countByC_LtD_S(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextDate(), RandomTestUtil.nextInt());
+		_persistence.countByC_LtD_S(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextDate(),
+			RandomTestUtil.nextInt());
 
 		_persistence.countByC_LtD_S(0L, RandomTestUtil.nextDate(), 0);
 	}
@@ -411,7 +430,8 @@ public class CPInstancePersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
-		CPInstance existingCPInstance = _persistence.findByPrimaryKey(newCPInstance.getPrimaryKey());
+		CPInstance existingCPInstance = _persistence.findByPrimaryKey(
+			newCPInstance.getPrimaryKey());
 
 		Assert.assertEquals(existingCPInstance, newCPInstance);
 	}
@@ -425,18 +445,18 @@ public class CPInstancePersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPInstance> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPInstance", "uuid", true,
-			"externalReferenceCode", true, "CPInstanceId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "CPDefinitionId", true,
-			"CPInstanceUuid", true, "sku", true, "gtin", true,
-			"manufacturerPartNumber", true, "purchasable", true, "width", true,
-			"height", true, "depth", true, "weight", true, "price", true,
+		return OrderByComparatorFactoryUtil.create(
+			"CPInstance", "uuid", true, "externalReferenceCode", true,
+			"CPInstanceId", true, "groupId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"CPDefinitionId", true, "CPInstanceUuid", true, "sku", true, "gtin",
+			true, "manufacturerPartNumber", true, "purchasable", true, "width",
+			true, "height", true, "depth", true, "weight", true, "price", true,
 			"promoPrice", true, "cost", true, "published", true, "displayDate",
 			true, "expirationDate", true, "lastPublishDate", true,
 			"overrideSubscriptionInfo", true, "subscriptionEnabled", true,
@@ -449,7 +469,8 @@ public class CPInstancePersistenceTest {
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
-		CPInstance existingCPInstance = _persistence.fetchByPrimaryKey(newCPInstance.getPrimaryKey());
+		CPInstance existingCPInstance = _persistence.fetchByPrimaryKey(
+			newCPInstance.getPrimaryKey());
 
 		Assert.assertEquals(existingCPInstance, newCPInstance);
 	}
@@ -466,6 +487,7 @@ public class CPInstancePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPInstance newCPInstance1 = addCPInstance();
 		CPInstance newCPInstance2 = addCPInstance();
 
@@ -474,18 +496,20 @@ public class CPInstancePersistenceTest {
 		primaryKeys.add(newCPInstance1.getPrimaryKey());
 		primaryKeys.add(newCPInstance2.getPrimaryKey());
 
-		Map<Serializable, CPInstance> cpInstances = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPInstance> cpInstances =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpInstances.size());
-		Assert.assertEquals(newCPInstance1,
-			cpInstances.get(newCPInstance1.getPrimaryKey()));
-		Assert.assertEquals(newCPInstance2,
-			cpInstances.get(newCPInstance2.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPInstance1, cpInstances.get(newCPInstance1.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPInstance2, cpInstances.get(newCPInstance2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -495,7 +519,8 @@ public class CPInstancePersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPInstance> cpInstances = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPInstance> cpInstances =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpInstances.isEmpty());
 	}
@@ -503,6 +528,7 @@ public class CPInstancePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPInstance newCPInstance = addCPInstance();
 
 		long pk = RandomTestUtil.nextLong();
@@ -512,52 +538,57 @@ public class CPInstancePersistenceTest {
 		primaryKeys.add(newCPInstance.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPInstance> cpInstances = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPInstance> cpInstances =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpInstances.size());
-		Assert.assertEquals(newCPInstance,
-			cpInstances.get(newCPInstance.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPInstance, cpInstances.get(newCPInstance.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPInstance> cpInstances = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPInstance> cpInstances =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpInstances.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPInstance.getPrimaryKey());
 
-		Map<Serializable, CPInstance> cpInstances = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPInstance> cpInstances =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpInstances.size());
-		Assert.assertEquals(newCPInstance,
-			cpInstances.get(newCPInstance.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPInstance, cpInstances.get(newCPInstance.getPrimaryKey()));
 	}
 
 	@Test
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPInstanceLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPInstanceLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPInstance>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPInstance>() {
+
 				@Override
 				public void performAction(CPInstance cpInstance) {
 					Assert.assertNotNull(cpInstance);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -566,17 +597,18 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPInstance.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPInstance.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPInstanceId",
-				newCPInstance.getCPInstanceId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPInstanceId", newCPInstance.getCPInstanceId()));
 
-		List<CPInstance> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPInstance> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -587,32 +619,34 @@ public class CPInstancePersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPInstance.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPInstance.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPInstanceId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPInstanceId", RandomTestUtil.nextLong()));
 
-		List<CPInstance> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPInstance> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPInstance.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPInstance.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPInstanceId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPInstanceId"));
 
 		Object newCPInstanceId = newCPInstance.getCPInstanceId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPInstanceId",
-				new Object[] { newCPInstanceId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPInstanceId", new Object[] {newCPInstanceId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -625,14 +659,15 @@ public class CPInstancePersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPInstance.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPInstance.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPInstanceId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPInstanceId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPInstanceId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPInstanceId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -645,37 +680,52 @@ public class CPInstancePersistenceTest {
 
 		_persistence.clearCache();
 
-		CPInstance existingCPInstance = _persistence.findByPrimaryKey(newCPInstance.getPrimaryKey());
+		CPInstance existingCPInstance = _persistence.findByPrimaryKey(
+			newCPInstance.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPInstance.getUuid(),
-				ReflectionTestUtil.invoke(existingCPInstance,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPInstance.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPInstance,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPInstance.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPInstance, "getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPInstance.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPInstance, "getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPInstance,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCPInstance.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPInstance, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPInstance.getCPInstanceUuid(),
-				ReflectionTestUtil.invoke(existingCPInstance,
-					"getOriginalCPInstanceUuid", new Class<?>[0])));
-
-		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPInstance,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCPInstance.getSku(),
-				ReflectionTestUtil.invoke(existingCPInstance, "getOriginalSku",
+				ReflectionTestUtil.invoke(
+					existingCPInstance, "getOriginalCPInstanceUuid",
 					new Class<?>[0])));
 
-		Assert.assertEquals(Long.valueOf(existingCPInstance.getCompanyId()),
-			ReflectionTestUtil.<Long>invoke(existingCPInstance,
-				"getOriginalCompanyId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCPInstance.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPInstance, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPInstance.getSku(),
+				ReflectionTestUtil.invoke(
+					existingCPInstance, "getOriginalSku", new Class<?>[0])));
+
+		Assert.assertEquals(
+			Long.valueOf(existingCPInstance.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPInstance, "getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPInstance.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCPInstance,
-					"getOriginalExternalReferenceCode", new Class<?>[0])));
+				ReflectionTestUtil.invoke(
+					existingCPInstance, "getOriginalExternalReferenceCode",
+					new Class<?>[0])));
 	}
 
 	protected CPInstance addCPInstance() throws Exception {
@@ -763,4 +813,5 @@ public class CPInstancePersistenceTest {
 	private List<CPInstance> _cpInstances = new ArrayList<CPInstance>();
 	private CPInstancePersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

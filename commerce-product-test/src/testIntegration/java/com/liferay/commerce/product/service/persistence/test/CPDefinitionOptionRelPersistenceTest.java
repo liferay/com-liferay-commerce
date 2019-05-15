@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionRelException;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPDefinitionOptionRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPDefinitionOptionRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionOptionRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -83,7 +82,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPDefinitionOptionRel> iterator = _cpDefinitionOptionRels.iterator();
+		Iterator<CPDefinitionOptionRel> iterator =
+			_cpDefinitionOptionRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -105,11 +105,14 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
 		_persistence.remove(newCPDefinitionOptionRel);
 
-		CPDefinitionOptionRel existingCPDefinitionOptionRel = _persistence.fetchByPrimaryKey(newCPDefinitionOptionRel.getPrimaryKey());
+		CPDefinitionOptionRel existingCPDefinitionOptionRel =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionOptionRel.getPrimaryKey());
 
 		Assert.assertNull(existingCPDefinitionOptionRel);
 	}
@@ -123,7 +126,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionOptionRel newCPDefinitionOptionRel = _persistence.create(pk);
+		CPDefinitionOptionRel newCPDefinitionOptionRel = _persistence.create(
+			pk);
 
 		newCPDefinitionOptionRel.setUuid(RandomTestUtil.randomString());
 
@@ -147,7 +151,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 		newCPDefinitionOptionRel.setDescription(RandomTestUtil.randomString());
 
-		newCPDefinitionOptionRel.setDDMFormFieldTypeName(RandomTestUtil.randomString());
+		newCPDefinitionOptionRel.setDDMFormFieldTypeName(
+			RandomTestUtil.randomString());
 
 		newCPDefinitionOptionRel.setPriority(RandomTestUtil.nextDouble());
 
@@ -155,48 +160,68 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 		newCPDefinitionOptionRel.setRequired(RandomTestUtil.randomBoolean());
 
-		newCPDefinitionOptionRel.setSkuContributor(RandomTestUtil.randomBoolean());
+		newCPDefinitionOptionRel.setSkuContributor(
+			RandomTestUtil.randomBoolean());
 
-		_cpDefinitionOptionRels.add(_persistence.update(
-				newCPDefinitionOptionRel));
+		_cpDefinitionOptionRels.add(
+			_persistence.update(newCPDefinitionOptionRel));
 
-		CPDefinitionOptionRel existingCPDefinitionOptionRel = _persistence.findByPrimaryKey(newCPDefinitionOptionRel.getPrimaryKey());
+		CPDefinitionOptionRel existingCPDefinitionOptionRel =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionOptionRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionOptionRel.getUuid(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getUuid(),
 			newCPDefinitionOptionRel.getUuid());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getCPDefinitionOptionRelId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getCPDefinitionOptionRelId(),
 			newCPDefinitionOptionRel.getCPDefinitionOptionRelId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getGroupId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getGroupId(),
 			newCPDefinitionOptionRel.getGroupId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getCompanyId(),
 			newCPDefinitionOptionRel.getCompanyId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getUserId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getUserId(),
 			newCPDefinitionOptionRel.getUserId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getUserName(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getUserName(),
 			newCPDefinitionOptionRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionOptionRel.getCreateDate()),
 			Time.getShortTimestamp(newCPDefinitionOptionRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionOptionRel.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinitionOptionRel.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionOptionRel.getCPDefinitionId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getCPDefinitionId(),
 			newCPDefinitionOptionRel.getCPDefinitionId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getCPOptionId(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getCPOptionId(),
 			newCPDefinitionOptionRel.getCPOptionId());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getName(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getName(),
 			newCPDefinitionOptionRel.getName());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getDescription(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getDescription(),
 			newCPDefinitionOptionRel.getDescription());
-		Assert.assertEquals(existingCPDefinitionOptionRel.getDDMFormFieldTypeName(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getDDMFormFieldTypeName(),
 			newCPDefinitionOptionRel.getDDMFormFieldTypeName());
-		AssertUtils.assertEquals(existingCPDefinitionOptionRel.getPriority(),
+		AssertUtils.assertEquals(
+			existingCPDefinitionOptionRel.getPriority(),
 			newCPDefinitionOptionRel.getPriority());
-		Assert.assertEquals(existingCPDefinitionOptionRel.isFacetable(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.isFacetable(),
 			newCPDefinitionOptionRel.isFacetable());
-		Assert.assertEquals(existingCPDefinitionOptionRel.isRequired(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.isRequired(),
 			newCPDefinitionOptionRel.isRequired());
-		Assert.assertEquals(existingCPDefinitionOptionRel.isSkuContributor(),
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.isSkuContributor(),
 			newCPDefinitionOptionRel.isSkuContributor());
 	}
 
@@ -250,28 +275,31 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
 	public void testCountByC_SC() throws Exception {
-		_persistence.countByC_SC(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean());
+		_persistence.countByC_SC(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
 		_persistence.countByC_SC(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
-		CPDefinitionOptionRel existingCPDefinitionOptionRel = _persistence.findByPrimaryKey(newCPDefinitionOptionRel.getPrimaryKey());
+		CPDefinitionOptionRel existingCPDefinitionOptionRel =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionOptionRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionOptionRel,
-			newCPDefinitionOptionRel);
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel, newCPDefinitionOptionRel);
 	}
 
 	@Test(expected = NoSuchCPDefinitionOptionRelException.class)
@@ -283,35 +311,39 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPDefinitionOptionRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDefinitionOptionRel",
-			"uuid", true, "CPDefinitionOptionRelId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPDefinitionId", true, "CPOptionId",
-			true, "name", true, "description", true, "DDMFormFieldTypeName",
-			true, "priority", true, "facetable", true, "required", true,
-			"skuContributor", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPDefinitionOptionRel", "uuid", true, "CPDefinitionOptionRelId",
+			true, "groupId", true, "companyId", true, "userId", true,
+			"userName", true, "createDate", true, "modifiedDate", true,
+			"CPDefinitionId", true, "CPOptionId", true, "name", true,
+			"description", true, "DDMFormFieldTypeName", true, "priority", true,
+			"facetable", true, "required", true, "skuContributor", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
-		CPDefinitionOptionRel existingCPDefinitionOptionRel = _persistence.fetchByPrimaryKey(newCPDefinitionOptionRel.getPrimaryKey());
+		CPDefinitionOptionRel existingCPDefinitionOptionRel =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionOptionRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionOptionRel,
-			newCPDefinitionOptionRel);
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel, newCPDefinitionOptionRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionOptionRel missingCPDefinitionOptionRel = _persistence.fetchByPrimaryKey(pk);
+		CPDefinitionOptionRel missingCPDefinitionOptionRel =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDefinitionOptionRel);
 	}
@@ -319,21 +351,27 @@ public class CPDefinitionOptionRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel1 = addCPDefinitionOptionRel();
-		CPDefinitionOptionRel newCPDefinitionOptionRel2 = addCPDefinitionOptionRel();
+
+		CPDefinitionOptionRel newCPDefinitionOptionRel1 =
+			addCPDefinitionOptionRel();
+		CPDefinitionOptionRel newCPDefinitionOptionRel2 =
+			addCPDefinitionOptionRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionOptionRel1.getPrimaryKey());
 		primaryKeys.add(newCPDefinitionOptionRel2.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpDefinitionOptionRels.size());
-		Assert.assertEquals(newCPDefinitionOptionRel1,
+		Assert.assertEquals(
+			newCPDefinitionOptionRel1,
 			cpDefinitionOptionRels.get(
 				newCPDefinitionOptionRel1.getPrimaryKey()));
-		Assert.assertEquals(newCPDefinitionOptionRel2,
+		Assert.assertEquals(
+			newCPDefinitionOptionRel2,
 			cpDefinitionOptionRels.get(
 				newCPDefinitionOptionRel2.getPrimaryKey()));
 	}
@@ -341,6 +379,7 @@ public class CPDefinitionOptionRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -350,7 +389,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionOptionRels.isEmpty());
 	}
@@ -358,7 +398,9 @@ public class CPDefinitionOptionRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -367,53 +409,65 @@ public class CPDefinitionOptionRelPersistenceTest {
 		primaryKeys.add(newCPDefinitionOptionRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionOptionRels.size());
-		Assert.assertEquals(newCPDefinitionOptionRel,
-			cpDefinitionOptionRels.get(newCPDefinitionOptionRel.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPDefinitionOptionRel,
+			cpDefinitionOptionRels.get(
+				newCPDefinitionOptionRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionOptionRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionOptionRel.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionOptionRel> cpDefinitionOptionRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionOptionRels.size());
-		Assert.assertEquals(newCPDefinitionOptionRel,
-			cpDefinitionOptionRels.get(newCPDefinitionOptionRel.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPDefinitionOptionRel,
+			cpDefinitionOptionRels.get(
+				newCPDefinitionOptionRel.getPrimaryKey()));
 	}
 
 	@Test
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDefinitionOptionRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDefinitionOptionRelLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionOptionRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDefinitionOptionRel>() {
+
 				@Override
 				public void performAction(
 					CPDefinitionOptionRel cpDefinitionOptionRel) {
+
 					Assert.assertNotNull(cpDefinitionOptionRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -422,54 +476,62 @@ public class CPDefinitionOptionRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionOptionRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionOptionRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionOptionRelId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionOptionRelId",
 				newCPDefinitionOptionRel.getCPDefinitionOptionRelId()));
 
-		List<CPDefinitionOptionRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionOptionRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CPDefinitionOptionRel existingCPDefinitionOptionRel = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionOptionRel,
-			newCPDefinitionOptionRel);
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel, newCPDefinitionOptionRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionOptionRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionOptionRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionOptionRelId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionOptionRelId", RandomTestUtil.nextLong()));
 
-		List<CPDefinitionOptionRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionOptionRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionOptionRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionOptionRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionOptionRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionOptionRelId"));
 
-		Object newCPDefinitionOptionRelId = newCPDefinitionOptionRel.getCPDefinitionOptionRelId();
+		Object newCPDefinitionOptionRelId =
+			newCPDefinitionOptionRel.getCPDefinitionOptionRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionOptionRelId",
-				new Object[] { newCPDefinitionOptionRelId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionOptionRelId",
+				new Object[] {newCPDefinitionOptionRelId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -477,20 +539,22 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 		Object existingCPDefinitionOptionRelId = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionOptionRelId,
-			newCPDefinitionOptionRelId);
+		Assert.assertEquals(
+			existingCPDefinitionOptionRelId, newCPDefinitionOptionRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionOptionRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionOptionRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionOptionRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionOptionRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionOptionRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionOptionRelId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -499,33 +563,42 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CPDefinitionOptionRel newCPDefinitionOptionRel = addCPDefinitionOptionRel();
+		CPDefinitionOptionRel newCPDefinitionOptionRel =
+			addCPDefinitionOptionRel();
 
 		_persistence.clearCache();
 
-		CPDefinitionOptionRel existingCPDefinitionOptionRel = _persistence.findByPrimaryKey(newCPDefinitionOptionRel.getPrimaryKey());
+		CPDefinitionOptionRel existingCPDefinitionOptionRel =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionOptionRel.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPDefinitionOptionRel.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDefinitionOptionRel,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionOptionRel.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionOptionRel, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionOptionRel.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionOptionRel, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionOptionRel.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionOptionRel.getCPOptionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
-				"getOriginalCPOptionId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionOptionRel.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionOptionRel, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionOptionRel.getCPOptionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionOptionRel, "getOriginalCPOptionId",
+				new Class<?>[0]));
 	}
 
 	protected CPDefinitionOptionRel addCPDefinitionOptionRel()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
 		CPDefinitionOptionRel cpDefinitionOptionRel = _persistence.create(pk);
@@ -552,7 +625,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 
 		cpDefinitionOptionRel.setDescription(RandomTestUtil.randomString());
 
-		cpDefinitionOptionRel.setDDMFormFieldTypeName(RandomTestUtil.randomString());
+		cpDefinitionOptionRel.setDDMFormFieldTypeName(
+			RandomTestUtil.randomString());
 
 		cpDefinitionOptionRel.setPriority(RandomTestUtil.nextDouble());
 
@@ -567,7 +641,9 @@ public class CPDefinitionOptionRelPersistenceTest {
 		return cpDefinitionOptionRel;
 	}
 
-	private List<CPDefinitionOptionRel> _cpDefinitionOptionRels = new ArrayList<CPDefinitionOptionRel>();
+	private List<CPDefinitionOptionRel> _cpDefinitionOptionRels =
+		new ArrayList<CPDefinitionOptionRel>();
 	private CPDefinitionOptionRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

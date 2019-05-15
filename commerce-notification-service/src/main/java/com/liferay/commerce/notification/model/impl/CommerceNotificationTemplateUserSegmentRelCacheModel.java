@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,27 +32,33 @@ import java.util.Date;
  * The cache model class for representing CommerceNotificationTemplateUserSegmentRel in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceNotificationTemplateUserSegmentRel
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelCacheModel
 	implements CacheModel<CommerceNotificationTemplateUserSegmentRel>,
-		Externalizable {
+			   Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
 
-		if (!(obj instanceof CommerceNotificationTemplateUserSegmentRelCacheModel)) {
+		if (!(obj instanceof
+				CommerceNotificationTemplateUserSegmentRelCacheModel)) {
+
 			return false;
 		}
 
-		CommerceNotificationTemplateUserSegmentRelCacheModel commerceNotificationTemplateUserSegmentRelCacheModel =
-			(CommerceNotificationTemplateUserSegmentRelCacheModel)obj;
+		CommerceNotificationTemplateUserSegmentRelCacheModel
+			commerceNotificationTemplateUserSegmentRelCacheModel =
+				(CommerceNotificationTemplateUserSegmentRelCacheModel)obj;
 
-		if (commerceNotificationTemplateUserSegmentRelId == commerceNotificationTemplateUserSegmentRelCacheModel.commerceNotificationTemplateUserSegmentRelId) {
+		if (commerceNotificationTemplateUserSegmentRelId ==
+				commerceNotificationTemplateUserSegmentRelCacheModel.
+					commerceNotificationTemplateUserSegmentRelId) {
+
 			return true;
 		}
 
@@ -94,10 +99,13 @@ public class CommerceNotificationTemplateUserSegmentRelCacheModel
 
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel toEntityModel() {
-		CommerceNotificationTemplateUserSegmentRelImpl commerceNotificationTemplateUserSegmentRelImpl =
-			new CommerceNotificationTemplateUserSegmentRelImpl();
+		CommerceNotificationTemplateUserSegmentRelImpl
+			commerceNotificationTemplateUserSegmentRelImpl =
+				new CommerceNotificationTemplateUserSegmentRelImpl();
 
-		commerceNotificationTemplateUserSegmentRelImpl.setCommerceNotificationTemplateUserSegmentRelId(commerceNotificationTemplateUserSegmentRelId);
+		commerceNotificationTemplateUserSegmentRelImpl.
+			setCommerceNotificationTemplateUserSegmentRelId(
+				commerceNotificationTemplateUserSegmentRelId);
 		commerceNotificationTemplateUserSegmentRelImpl.setGroupId(groupId);
 		commerceNotificationTemplateUserSegmentRelImpl.setCompanyId(companyId);
 		commerceNotificationTemplateUserSegmentRelImpl.setUserId(userId);
@@ -106,27 +114,31 @@ public class CommerceNotificationTemplateUserSegmentRelCacheModel
 			commerceNotificationTemplateUserSegmentRelImpl.setUserName("");
 		}
 		else {
-			commerceNotificationTemplateUserSegmentRelImpl.setUserName(userName);
+			commerceNotificationTemplateUserSegmentRelImpl.setUserName(
+				userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
 			commerceNotificationTemplateUserSegmentRelImpl.setCreateDate(null);
 		}
 		else {
-			commerceNotificationTemplateUserSegmentRelImpl.setCreateDate(new Date(
-					createDate));
+			commerceNotificationTemplateUserSegmentRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			commerceNotificationTemplateUserSegmentRelImpl.setModifiedDate(null);
+			commerceNotificationTemplateUserSegmentRelImpl.setModifiedDate(
+				null);
 		}
 		else {
-			commerceNotificationTemplateUserSegmentRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceNotificationTemplateUserSegmentRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceNotificationTemplateUserSegmentRelImpl.setCommerceNotificationTemplateId(commerceNotificationTemplateId);
-		commerceNotificationTemplateUserSegmentRelImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		commerceNotificationTemplateUserSegmentRelImpl.
+			setCommerceNotificationTemplateId(commerceNotificationTemplateId);
+		commerceNotificationTemplateUserSegmentRelImpl.
+			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
 
 		commerceNotificationTemplateUserSegmentRelImpl.resetOriginalValues();
 
@@ -152,8 +164,7 @@ public class CommerceNotificationTemplateUserSegmentRelCacheModel
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceNotificationTemplateUserSegmentRelId);
 
 		objectOutput.writeLong(groupId);
@@ -186,4 +197,5 @@ public class CommerceNotificationTemplateUserSegmentRelCacheModel
 	public long modifiedDate;
 	public long commerceNotificationTemplateId;
 	public long commerceUserSegmentEntryId;
+
 }

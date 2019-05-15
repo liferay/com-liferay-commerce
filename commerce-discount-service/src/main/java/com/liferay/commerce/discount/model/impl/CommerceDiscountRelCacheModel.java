@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceDiscountRel in entity cache.
  *
  * @author Marco Leo
- * @see CommerceDiscountRel
  * @generated
  */
 @ProviderType
-public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscountRel>,
-	Externalizable {
+public class CommerceDiscountRelCacheModel
+	implements CacheModel<CommerceDiscountRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 			return false;
 		}
 
-		CommerceDiscountRelCacheModel commerceDiscountRelCacheModel = (CommerceDiscountRelCacheModel)obj;
+		CommerceDiscountRelCacheModel commerceDiscountRelCacheModel =
+			(CommerceDiscountRelCacheModel)obj;
 
-		if (commerceDiscountRelId == commerceDiscountRelCacheModel.commerceDiscountRelId) {
+		if (commerceDiscountRelId ==
+				commerceDiscountRelCacheModel.commerceDiscountRelId) {
+
 			return true;
 		}
 
@@ -94,7 +96,8 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 
 	@Override
 	public CommerceDiscountRel toEntityModel() {
-		CommerceDiscountRelImpl commerceDiscountRelImpl = new CommerceDiscountRelImpl();
+		CommerceDiscountRelImpl commerceDiscountRelImpl =
+			new CommerceDiscountRelImpl();
 
 		commerceDiscountRelImpl.setCommerceDiscountRelId(commerceDiscountRelId);
 		commerceDiscountRelImpl.setGroupId(groupId);
@@ -152,8 +155,7 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceDiscountRelId);
 
 		objectOutput.writeLong(groupId);
@@ -189,4 +191,5 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 	public long commerceDiscountId;
 	public long classNameId;
 	public long classPK;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceShipmentServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceShipmentServiceUtil} service utility. The
+ * <code>CommerceShipmentServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,22 +49,24 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShipmentServiceSoap
- * @see HttpPrincipal
- * @see CommerceShipmentServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceShipmentServiceHttp {
-	public static com.liferay.commerce.model.CommerceShipment addCommerceShipment(
-		HttpPrincipal httpPrincipal, long commerceOrderId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"addCommerceShipment", _addCommerceShipmentParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceOrderId, serviceContext);
+	public static com.liferay.commerce.model.CommerceShipment
+			addCommerceShipment(
+				HttpPrincipal httpPrincipal, long commerceOrderId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "addCommerceShipment",
+				_addCommerceShipmentParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceOrderId, serviceContext);
 
 			Object returnObj = null;
 
@@ -72,11 +74,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceShipment)returnObj;
@@ -88,26 +94,31 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static void deleteCommerceShipment(HttpPrincipal httpPrincipal,
-		long commerceShipmentId)
+	public static void deleteCommerceShipment(
+			HttpPrincipal httpPrincipal, long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"deleteCommerceShipment",
-					_deleteCommerceShipmentParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShipmentId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "deleteCommerceShipment",
+				_deleteCommerceShipmentParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceShipmentId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -117,15 +128,18 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipment getCommerceShipment(
-		HttpPrincipal httpPrincipal, long commerceShipmentId)
+	public static com.liferay.commerce.model.CommerceShipment
+			getCommerceShipment(
+				HttpPrincipal httpPrincipal, long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"getCommerceShipment", _getCommerceShipmentParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShipmentId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "getCommerceShipment",
+				_getCommerceShipmentParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceShipmentId);
 
 			Object returnObj = null;
 
@@ -133,11 +147,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceShipment)returnObj;
@@ -149,17 +167,22 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		HttpPrincipal httpPrincipal, long groupId, int status, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public static java.util.List<com.liferay.commerce.model.CommerceShipment>
+			getCommerceShipments(
+				HttpPrincipal httpPrincipal, long groupId, int status,
+				int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceShipment>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"getCommerceShipments", _getCommerceShipmentsParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "getCommerceShipments",
+				_getCommerceShipmentsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, status, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -167,14 +190,19 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceShipment>)returnObj;
+			return (java.util.List<com.liferay.commerce.model.CommerceShipment>)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -183,16 +211,21 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public static java.util.List<com.liferay.commerce.model.CommerceShipment>
+			getCommerceShipments(
+				HttpPrincipal httpPrincipal, long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceShipment>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"getCommerceShipments", _getCommerceShipmentsParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "getCommerceShipments",
+				_getCommerceShipmentsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -200,14 +233,19 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceShipment>)returnObj;
+			return (java.util.List<com.liferay.commerce.model.CommerceShipment>)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -216,13 +254,14 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static int getCommerceShipmentsCount(HttpPrincipal httpPrincipal,
-		long groupId)
+	public static int getCommerceShipmentsCount(
+			HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"getCommerceShipmentsCount",
-					_getCommerceShipmentsCountParameterTypes5);
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "getCommerceShipmentsCount",
+				_getCommerceShipmentsCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -232,11 +271,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -248,16 +291,17 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static int getCommerceShipmentsCount(HttpPrincipal httpPrincipal,
-		long groupId, int status)
+	public static int getCommerceShipmentsCount(
+			HttpPrincipal httpPrincipal, long groupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"getCommerceShipmentsCount",
-					_getCommerceShipmentsCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "getCommerceShipmentsCount",
+				_getCommerceShipmentsCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, status);
 
 			Object returnObj = null;
 
@@ -265,11 +309,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -281,24 +329,28 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
-		HttpPrincipal httpPrincipal, long commerceShipmentId, String carrier,
-		String trackingNumber, int status, int shippingDateMonth,
-		int shippingDateDay, int shippingDateYear, int shippingDateHour,
-		int shippingDateMinute, int expectedDateMonth, int expectedDateDay,
-		int expectedDateYear, int expectedDateHour, int expectedDateMinute)
+	public static com.liferay.commerce.model.CommerceShipment
+			updateCommerceShipment(
+				HttpPrincipal httpPrincipal, long commerceShipmentId,
+				String carrier, String trackingNumber, int status,
+				int shippingDateMonth, int shippingDateDay,
+				int shippingDateYear, int shippingDateHour,
+				int shippingDateMinute, int expectedDateMonth,
+				int expectedDateDay, int expectedDateYear, int expectedDateHour,
+				int expectedDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"updateCommerceShipment",
-					_updateCommerceShipmentParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShipmentId, carrier, trackingNumber, status,
-					shippingDateMonth, shippingDateDay, shippingDateYear,
-					shippingDateHour, shippingDateMinute, expectedDateMonth,
-					expectedDateDay, expectedDateYear, expectedDateHour,
-					expectedDateMinute);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "updateCommerceShipment",
+				_updateCommerceShipmentParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceShipmentId, carrier, trackingNumber, status,
+				shippingDateMonth, shippingDateDay, shippingDateYear,
+				shippingDateHour, shippingDateMinute, expectedDateMonth,
+				expectedDateDay, expectedDateYear, expectedDateHour,
+				expectedDateMinute);
 
 			Object returnObj = null;
 
@@ -306,11 +358,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceShipment)returnObj;
@@ -322,29 +378,32 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
-		HttpPrincipal httpPrincipal, long commerceShipmentId, String name,
-		String description, String street1, String street2, String street3,
-		String city, String zip, long commerceRegionId, long commerceCountryId,
-		String phoneNumber, String carrier, String trackingNumber, int status,
-		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
-		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
-		int expectedDateDay, int expectedDateYear, int expectedDateHour,
-		int expectedDateMinute)
+	public static com.liferay.commerce.model.CommerceShipment
+			updateCommerceShipment(
+				HttpPrincipal httpPrincipal, long commerceShipmentId,
+				String name, String description, String street1, String street2,
+				String street3, String city, String zip, long commerceRegionId,
+				long commerceCountryId, String phoneNumber, String carrier,
+				String trackingNumber, int status, int shippingDateMonth,
+				int shippingDateDay, int shippingDateYear, int shippingDateHour,
+				int shippingDateMinute, int expectedDateMonth,
+				int expectedDateDay, int expectedDateYear, int expectedDateHour,
+				int expectedDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
-					"updateCommerceShipment",
-					_updateCommerceShipmentParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShipmentId, name, description, street1, street2,
-					street3, city, zip, commerceRegionId, commerceCountryId,
-					phoneNumber, carrier, trackingNumber, status,
-					shippingDateMonth, shippingDateDay, shippingDateYear,
-					shippingDateHour, shippingDateMinute, expectedDateMonth,
-					expectedDateDay, expectedDateYear, expectedDateHour,
-					expectedDateMinute);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "updateCommerceShipment",
+				_updateCommerceShipmentParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceShipmentId, name, description, street1,
+				street2, street3, city, zip, commerceRegionId,
+				commerceCountryId, phoneNumber, carrier, trackingNumber, status,
+				shippingDateMonth, shippingDateDay, shippingDateYear,
+				shippingDateHour, shippingDateMinute, expectedDateMonth,
+				expectedDateDay, expectedDateYear, expectedDateHour,
+				expectedDateMinute);
 
 			Object returnObj = null;
 
@@ -352,11 +411,15 @@ public class CommerceShipmentServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceShipment)returnObj;
@@ -368,40 +431,44 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceShipmentServiceHttp.class);
-	private static final Class<?>[] _addCommerceShipmentParameterTypes0 = new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceShipmentServiceHttp.class);
+
+	private static final Class<?>[] _addCommerceShipmentParameterTypes0 =
+		new Class[] {
 			long.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceShipmentParameterTypes1 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCommerceShipmentParameterTypes2 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCommerceShipmentsParameterTypes3 = new Class[] {
+	private static final Class<?>[] _deleteCommerceShipmentParameterTypes1 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceShipmentParameterTypes2 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceShipmentsParameterTypes3 =
+		new Class[] {
 			long.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceShipmentsParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCommerceShipmentsParameterTypes4 =
+		new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes5 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes6 = new Class[] {
-			long.class, int.class
-		};
-	private static final Class<?>[] _updateCommerceShipmentParameterTypes7 = new Class[] {
+	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes5 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes6 =
+		new Class[] {long.class, int.class};
+	private static final Class<?>[] _updateCommerceShipmentParameterTypes7 =
+		new Class[] {
 			long.class, String.class, String.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class
 		};
-	private static final Class<?>[] _updateCommerceShipmentParameterTypes8 = new Class[] {
+	private static final Class<?>[] _updateCommerceShipmentParameterTypes8 =
+		new Class[] {
 			long.class, String.class, String.class, String.class, String.class,
 			String.class, String.class, String.class, long.class, long.class,
 			String.class, String.class, String.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class
 		};
+
 }

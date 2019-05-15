@@ -17,7 +17,6 @@ package com.liferay.commerce.wish.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.wish.list.model.CommerceWishList;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceWishList in entity cache.
  *
  * @author Andrea Di Giorgi
- * @see CommerceWishList
  * @generated
  */
 @ProviderType
-public class CommerceWishListCacheModel implements CacheModel<CommerceWishList>,
-	Externalizable {
+public class CommerceWishListCacheModel
+	implements CacheModel<CommerceWishList>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceWishListCacheModel implements CacheModel<CommerceWishList>,
 			return false;
 		}
 
-		CommerceWishListCacheModel commerceWishListCacheModel = (CommerceWishListCacheModel)obj;
+		CommerceWishListCacheModel commerceWishListCacheModel =
+			(CommerceWishListCacheModel)obj;
 
-		if (commerceWishListId == commerceWishListCacheModel.commerceWishListId) {
+		if (commerceWishListId ==
+				commerceWishListCacheModel.commerceWishListId) {
+
 			return true;
 		}
 
@@ -163,8 +165,7 @@ public class CommerceWishListCacheModel implements CacheModel<CommerceWishList>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -210,4 +211,5 @@ public class CommerceWishListCacheModel implements CacheModel<CommerceWishList>,
 	public long modifiedDate;
 	public String name;
 	public boolean defaultWishList;
+
 }

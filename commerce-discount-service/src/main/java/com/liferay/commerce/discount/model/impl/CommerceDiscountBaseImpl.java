@@ -32,12 +32,13 @@ import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceDiscountBaseImpl extends CommerceDiscountModelImpl
-	implements CommerceDiscount {
+public abstract class CommerceDiscountBaseImpl
+	extends CommerceDiscountModelImpl implements CommerceDiscount {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce discount model instance should use the {@link CommerceDiscount} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce discount model instance should use the <code>CommerceDiscount</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceDiscountBaseImpl extends CommerceDiscountModelImpl
 			CommerceDiscountLocalServiceUtil.updateCommerceDiscount(this);
 		}
 	}
+
 }

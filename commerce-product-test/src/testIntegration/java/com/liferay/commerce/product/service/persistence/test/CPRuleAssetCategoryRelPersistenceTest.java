@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPRuleAssetCategoryRelException;
 import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,17 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPRuleAssetCategoryRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -80,7 +79,8 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPRuleAssetCategoryRel> iterator = _cpRuleAssetCategoryRels.iterator();
+		Iterator<CPRuleAssetCategoryRel> iterator =
+			_cpRuleAssetCategoryRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -102,11 +102,14 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
 		_persistence.remove(newCPRuleAssetCategoryRel);
 
-		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel = _persistence.fetchByPrimaryKey(newCPRuleAssetCategoryRel.getPrimaryKey());
+		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel =
+			_persistence.fetchByPrimaryKey(
+				newCPRuleAssetCategoryRel.getPrimaryKey());
 
 		Assert.assertNull(existingCPRuleAssetCategoryRel);
 	}
@@ -120,7 +123,8 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = _persistence.create(pk);
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = _persistence.create(
+			pk);
 
 		newCPRuleAssetCategoryRel.setGroupId(RandomTestUtil.nextLong());
 
@@ -138,30 +142,42 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 		newCPRuleAssetCategoryRel.setAssetCategoryId(RandomTestUtil.nextLong());
 
-		_cpRuleAssetCategoryRels.add(_persistence.update(
-				newCPRuleAssetCategoryRel));
+		_cpRuleAssetCategoryRels.add(
+			_persistence.update(newCPRuleAssetCategoryRel));
 
-		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel = _persistence.findByPrimaryKey(newCPRuleAssetCategoryRel.getPrimaryKey());
+		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel =
+			_persistence.findByPrimaryKey(
+				newCPRuleAssetCategoryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId(),
 			newCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId());
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getGroupId(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getGroupId(),
 			newCPRuleAssetCategoryRel.getGroupId());
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getCompanyId(),
 			newCPRuleAssetCategoryRel.getCompanyId());
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getUserId(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getUserId(),
 			newCPRuleAssetCategoryRel.getUserId());
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getUserName(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getUserName(),
 			newCPRuleAssetCategoryRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPRuleAssetCategoryRel.getCreateDate()),
 			Time.getShortTimestamp(newCPRuleAssetCategoryRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPRuleAssetCategoryRel.getModifiedDate()),
-			Time.getShortTimestamp(newCPRuleAssetCategoryRel.getModifiedDate()));
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getCPRuleId(),
+			Time.getShortTimestamp(
+				newCPRuleAssetCategoryRel.getModifiedDate()));
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getCPRuleId(),
 			newCPRuleAssetCategoryRel.getCPRuleId());
-		Assert.assertEquals(existingCPRuleAssetCategoryRel.getAssetCategoryId(),
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel.getAssetCategoryId(),
 			newCPRuleAssetCategoryRel.getAssetCategoryId());
 	}
 
@@ -181,12 +197,15 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
-		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel = _persistence.findByPrimaryKey(newCPRuleAssetCategoryRel.getPrimaryKey());
+		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel =
+			_persistence.findByPrimaryKey(
+				newCPRuleAssetCategoryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPRuleAssetCategoryRel,
-			newCPRuleAssetCategoryRel);
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel, newCPRuleAssetCategoryRel);
 	}
 
 	@Test(expected = NoSuchCPRuleAssetCategoryRelException.class)
@@ -198,32 +217,37 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPRuleAssetCategoryRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPRuleAssetCategoryRel",
-			"CPRuleAssetCategoryRelId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "CPRuleId", true, "assetCategoryId", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPRuleAssetCategoryRel", "CPRuleAssetCategoryRelId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "CPRuleId", true,
+			"assetCategoryId", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
-		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel = _persistence.fetchByPrimaryKey(newCPRuleAssetCategoryRel.getPrimaryKey());
+		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel =
+			_persistence.fetchByPrimaryKey(
+				newCPRuleAssetCategoryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCPRuleAssetCategoryRel,
-			newCPRuleAssetCategoryRel);
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel, newCPRuleAssetCategoryRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPRuleAssetCategoryRel missingCPRuleAssetCategoryRel = _persistence.fetchByPrimaryKey(pk);
+		CPRuleAssetCategoryRel missingCPRuleAssetCategoryRel =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPRuleAssetCategoryRel);
 	}
@@ -231,21 +255,27 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel1 = addCPRuleAssetCategoryRel();
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel2 = addCPRuleAssetCategoryRel();
+
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel1 =
+			addCPRuleAssetCategoryRel();
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel2 =
+			addCPRuleAssetCategoryRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPRuleAssetCategoryRel1.getPrimaryKey());
 		primaryKeys.add(newCPRuleAssetCategoryRel2.getPrimaryKey());
 
-		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpRuleAssetCategoryRels.size());
-		Assert.assertEquals(newCPRuleAssetCategoryRel1,
+		Assert.assertEquals(
+			newCPRuleAssetCategoryRel1,
 			cpRuleAssetCategoryRels.get(
 				newCPRuleAssetCategoryRel1.getPrimaryKey()));
-		Assert.assertEquals(newCPRuleAssetCategoryRel2,
+		Assert.assertEquals(
+			newCPRuleAssetCategoryRel2,
 			cpRuleAssetCategoryRels.get(
 				newCPRuleAssetCategoryRel2.getPrimaryKey()));
 	}
@@ -253,6 +283,7 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -262,7 +293,8 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpRuleAssetCategoryRels.isEmpty());
 	}
@@ -270,7 +302,9 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -279,37 +313,41 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 		primaryKeys.add(newCPRuleAssetCategoryRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpRuleAssetCategoryRels.size());
-		Assert.assertEquals(newCPRuleAssetCategoryRel,
+		Assert.assertEquals(
+			newCPRuleAssetCategoryRel,
 			cpRuleAssetCategoryRels.get(
 				newCPRuleAssetCategoryRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpRuleAssetCategoryRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPRuleAssetCategoryRel.getPrimaryKey());
 
-		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpRuleAssetCategoryRels.size());
-		Assert.assertEquals(newCPRuleAssetCategoryRel,
+		Assert.assertEquals(
+			newCPRuleAssetCategoryRel,
 			cpRuleAssetCategoryRels.get(
 				newCPRuleAssetCategoryRel.getPrimaryKey()));
 	}
@@ -318,16 +356,22 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPRuleAssetCategoryRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPRuleAssetCategoryRelLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPRuleAssetCategoryRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPRuleAssetCategoryRel>() {
+
 				@Override
 				public void performAction(
 					CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
+
 					Assert.assertNotNull(cpRuleAssetCategoryRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -336,56 +380,62 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRuleAssetCategoryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRuleAssetCategoryRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPRuleAssetCategoryRelId",
 				newCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId()));
 
-		List<CPRuleAssetCategoryRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPRuleAssetCategoryRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CPRuleAssetCategoryRel existingCPRuleAssetCategoryRel = result.get(0);
 
-		Assert.assertEquals(existingCPRuleAssetCategoryRel,
-			newCPRuleAssetCategoryRel);
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRel, newCPRuleAssetCategoryRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRuleAssetCategoryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRuleAssetCategoryRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPRuleAssetCategoryRelId", RandomTestUtil.nextLong()));
 
-		List<CPRuleAssetCategoryRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPRuleAssetCategoryRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel = addCPRuleAssetCategoryRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPRuleAssetCategoryRel newCPRuleAssetCategoryRel =
+			addCPRuleAssetCategoryRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRuleAssetCategoryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRuleAssetCategoryRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPRuleAssetCategoryRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPRuleAssetCategoryRelId"));
 
-		Object newCPRuleAssetCategoryRelId = newCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId();
+		Object newCPRuleAssetCategoryRelId =
+			newCPRuleAssetCategoryRel.getCPRuleAssetCategoryRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPRuleAssetCategoryRelId",
-				new Object[] { newCPRuleAssetCategoryRelId }));
+				new Object[] {newCPRuleAssetCategoryRelId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -393,21 +443,22 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 		Object existingCPRuleAssetCategoryRelId = result.get(0);
 
-		Assert.assertEquals(existingCPRuleAssetCategoryRelId,
-			newCPRuleAssetCategoryRelId);
+		Assert.assertEquals(
+			existingCPRuleAssetCategoryRelId, newCPRuleAssetCategoryRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRuleAssetCategoryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRuleAssetCategoryRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPRuleAssetCategoryRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPRuleAssetCategoryRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPRuleAssetCategoryRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -416,6 +467,7 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 	protected CPRuleAssetCategoryRel addCPRuleAssetCategoryRel()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
 		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = _persistence.create(pk);
@@ -436,12 +488,15 @@ public class CPRuleAssetCategoryRelPersistenceTest {
 
 		cpRuleAssetCategoryRel.setAssetCategoryId(RandomTestUtil.nextLong());
 
-		_cpRuleAssetCategoryRels.add(_persistence.update(cpRuleAssetCategoryRel));
+		_cpRuleAssetCategoryRels.add(
+			_persistence.update(cpRuleAssetCategoryRel));
 
 		return cpRuleAssetCategoryRel;
 	}
 
-	private List<CPRuleAssetCategoryRel> _cpRuleAssetCategoryRels = new ArrayList<CPRuleAssetCategoryRel>();
+	private List<CPRuleAssetCategoryRel> _cpRuleAssetCategoryRels =
+		new ArrayList<CPRuleAssetCategoryRel>();
 	private CPRuleAssetCategoryRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

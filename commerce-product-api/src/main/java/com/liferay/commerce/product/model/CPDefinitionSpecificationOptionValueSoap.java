@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPDefinitionSpecificationOptionValueServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPDefinitionSpecificationOptionValueServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
+
 	public static CPDefinitionSpecificationOptionValueSoap toSoapModel(
 		CPDefinitionSpecificationOptionValue model) {
-		CPDefinitionSpecificationOptionValueSoap soapModel = new CPDefinitionSpecificationOptionValueSoap();
+
+		CPDefinitionSpecificationOptionValueSoap soapModel =
+			new CPDefinitionSpecificationOptionValueSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionSpecificationOptionValueId(model.getCPDefinitionSpecificationOptionValueId());
+		soapModel.setCPDefinitionSpecificationOptionValueId(
+			model.getCPDefinitionSpecificationOptionValueId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -44,7 +47,8 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPDefinitionId(model.getCPDefinitionId());
-		soapModel.setCPSpecificationOptionId(model.getCPSpecificationOptionId());
+		soapModel.setCPSpecificationOptionId(
+			model.getCPSpecificationOptionId());
 		soapModel.setCPOptionCategoryId(model.getCPOptionCategoryId());
 		soapModel.setValue(model.getValue());
 		soapModel.setPriority(model.getPriority());
@@ -55,7 +59,9 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 
 	public static CPDefinitionSpecificationOptionValueSoap[] toSoapModels(
 		CPDefinitionSpecificationOptionValue[] models) {
-		CPDefinitionSpecificationOptionValueSoap[] soapModels = new CPDefinitionSpecificationOptionValueSoap[models.length];
+
+		CPDefinitionSpecificationOptionValueSoap[] soapModels =
+			new CPDefinitionSpecificationOptionValueSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -66,10 +72,12 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 
 	public static CPDefinitionSpecificationOptionValueSoap[][] toSoapModels(
 		CPDefinitionSpecificationOptionValue[][] models) {
+
 		CPDefinitionSpecificationOptionValueSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionSpecificationOptionValueSoap[models.length][models[0].length];
+			soapModels = new CPDefinitionSpecificationOptionValueSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionSpecificationOptionValueSoap[0][0];
@@ -84,13 +92,17 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 
 	public static CPDefinitionSpecificationOptionValueSoap[] toSoapModels(
 		List<CPDefinitionSpecificationOptionValue> models) {
-		List<CPDefinitionSpecificationOptionValueSoap> soapModels = new ArrayList<CPDefinitionSpecificationOptionValueSoap>(models.size());
+
+		List<CPDefinitionSpecificationOptionValueSoap> soapModels =
+			new ArrayList<CPDefinitionSpecificationOptionValueSoap>(
+				models.size());
 
 		for (CPDefinitionSpecificationOptionValue model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionSpecificationOptionValueSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionSpecificationOptionValueSoap[soapModels.size()]);
 	}
 
 	public CPDefinitionSpecificationOptionValueSoap() {
@@ -118,7 +130,9 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 
 	public void setCPDefinitionSpecificationOptionValueId(
 		long CPDefinitionSpecificationOptionValueId) {
-		_CPDefinitionSpecificationOptionValueId = CPDefinitionSpecificationOptionValueId;
+
+		_CPDefinitionSpecificationOptionValueId =
+			CPDefinitionSpecificationOptionValueId;
 	}
 
 	public long getGroupId() {
@@ -231,4 +245,5 @@ public class CPDefinitionSpecificationOptionValueSoap implements Serializable {
 	private String _value;
 	private double _priority;
 	private Date _lastPublishDate;
+
 }

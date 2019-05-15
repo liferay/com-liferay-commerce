@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPDefinitionServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPDefinitionServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionSoap implements Serializable {
+
 	public static CPDefinitionSoap toSoapModel(CPDefinition model) {
 		CPDefinitionSoap soapModel = new CPDefinitionSoap();
 
@@ -66,7 +66,8 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setSubscriptionEnabled(model.isSubscriptionEnabled());
 		soapModel.setSubscriptionLength(model.getSubscriptionLength());
 		soapModel.setSubscriptionType(model.getSubscriptionType());
-		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
+		soapModel.setSubscriptionTypeSettings(
+			model.getSubscriptionTypeSettings());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setStatus(model.getStatus());
@@ -105,7 +106,8 @@ public class CPDefinitionSoap implements Serializable {
 	}
 
 	public static CPDefinitionSoap[] toSoapModels(List<CPDefinition> models) {
-		List<CPDefinitionSoap> soapModels = new ArrayList<CPDefinitionSoap>(models.size());
+		List<CPDefinitionSoap> soapModels = new ArrayList<CPDefinitionSoap>(
+			models.size());
 
 		for (CPDefinition model : models) {
 			soapModels.add(toSoapModel(model));
@@ -512,4 +514,5 @@ public class CPDefinitionSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

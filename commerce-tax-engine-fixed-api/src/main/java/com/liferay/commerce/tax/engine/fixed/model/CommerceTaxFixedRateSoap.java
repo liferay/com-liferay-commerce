@@ -26,13 +26,14 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.tax.engine.fixed.service.http.CommerceTaxFixedRateServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.tax.engine.fixed.service.http.CommerceTaxFixedRateServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceTaxFixedRateSoap implements Serializable {
+
 	public static CommerceTaxFixedRateSoap toSoapModel(
 		CommerceTaxFixedRate model) {
+
 		CommerceTaxFixedRateSoap soapModel = new CommerceTaxFixedRateSoap();
 
 		soapModel.setCommerceTaxFixedRateId(model.getCommerceTaxFixedRateId());
@@ -51,7 +52,9 @@ public class CommerceTaxFixedRateSoap implements Serializable {
 
 	public static CommerceTaxFixedRateSoap[] toSoapModels(
 		CommerceTaxFixedRate[] models) {
-		CommerceTaxFixedRateSoap[] soapModels = new CommerceTaxFixedRateSoap[models.length];
+
+		CommerceTaxFixedRateSoap[] soapModels =
+			new CommerceTaxFixedRateSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +65,12 @@ public class CommerceTaxFixedRateSoap implements Serializable {
 
 	public static CommerceTaxFixedRateSoap[][] toSoapModels(
 		CommerceTaxFixedRate[][] models) {
+
 		CommerceTaxFixedRateSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceTaxFixedRateSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceTaxFixedRateSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceTaxFixedRateSoap[0][0];
@@ -80,13 +85,16 @@ public class CommerceTaxFixedRateSoap implements Serializable {
 
 	public static CommerceTaxFixedRateSoap[] toSoapModels(
 		List<CommerceTaxFixedRate> models) {
-		List<CommerceTaxFixedRateSoap> soapModels = new ArrayList<CommerceTaxFixedRateSoap>(models.size());
+
+		List<CommerceTaxFixedRateSoap> soapModels =
+			new ArrayList<CommerceTaxFixedRateSoap>(models.size());
 
 		for (CommerceTaxFixedRate model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceTaxFixedRateSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceTaxFixedRateSoap[soapModels.size()]);
 	}
 
 	public CommerceTaxFixedRateSoap() {
@@ -190,4 +198,5 @@ public class CommerceTaxFixedRateSoap implements Serializable {
 	private long _CPTaxCategoryId;
 	private long _commerceTaxMethodId;
 	private double _rate;
+
 }

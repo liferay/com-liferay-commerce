@@ -28,13 +28,14 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.account.service.http.CommerceAccountUserRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.account.service.http.CommerceAccountUserRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceAccountUserRelSoap implements Serializable {
+
 	public static CommerceAccountUserRelSoap toSoapModel(
 		CommerceAccountUserRel model) {
+
 		CommerceAccountUserRelSoap soapModel = new CommerceAccountUserRelSoap();
 
 		soapModel.setCommerceAccountId(model.getCommerceAccountId());
@@ -50,7 +51,9 @@ public class CommerceAccountUserRelSoap implements Serializable {
 
 	public static CommerceAccountUserRelSoap[] toSoapModels(
 		CommerceAccountUserRel[] models) {
-		CommerceAccountUserRelSoap[] soapModels = new CommerceAccountUserRelSoap[models.length];
+
+		CommerceAccountUserRelSoap[] soapModels =
+			new CommerceAccountUserRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +64,12 @@ public class CommerceAccountUserRelSoap implements Serializable {
 
 	public static CommerceAccountUserRelSoap[][] toSoapModels(
 		CommerceAccountUserRel[][] models) {
+
 		CommerceAccountUserRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceAccountUserRelSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceAccountUserRelSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceAccountUserRelSoap[0][0];
@@ -79,21 +84,24 @@ public class CommerceAccountUserRelSoap implements Serializable {
 
 	public static CommerceAccountUserRelSoap[] toSoapModels(
 		List<CommerceAccountUserRel> models) {
-		List<CommerceAccountUserRelSoap> soapModels = new ArrayList<CommerceAccountUserRelSoap>(models.size());
+
+		List<CommerceAccountUserRelSoap> soapModels =
+			new ArrayList<CommerceAccountUserRelSoap>(models.size());
 
 		for (CommerceAccountUserRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceAccountUserRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceAccountUserRelSoap[soapModels.size()]);
 	}
 
 	public CommerceAccountUserRelSoap() {
 	}
 
 	public CommerceAccountUserRelPK getPrimaryKey() {
-		return new CommerceAccountUserRelPK(_commerceAccountId,
-			_commerceAccountUserId);
+		return new CommerceAccountUserRelPK(
+			_commerceAccountId, _commerceAccountUserId);
 	}
 
 	public void setPrimaryKey(CommerceAccountUserRelPK pk) {
@@ -164,4 +172,5 @@ public class CommerceAccountUserRelSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+
 }

@@ -18,9 +18,7 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.commerce.user.segment.service.persistence.CommerceUserSegmentCriterionPersistence;
 import com.liferay.commerce.user.segment.service.persistence.CommerceUserSegmentEntryPersistence;
-
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -47,16 +45,16 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.user.segment.service.impl.CommerceUserSegmentEntryServiceImpl
- * @see com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryServiceUtil
  * @generated
  */
 public abstract class CommerceUserSegmentEntryServiceBaseImpl
-	extends BaseServiceImpl implements CommerceUserSegmentEntryService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceUserSegmentEntryService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryServiceUtil} to access the commerce user segment entry remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceUserSegmentEntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryServiceUtil</code>.
 	 */
 
 	/**
@@ -64,7 +62,10 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment criterion local service
 	 */
-	public com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService getCommerceUserSegmentCriterionLocalService() {
+	public com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentCriterionLocalService
+			getCommerceUserSegmentCriterionLocalService() {
+
 		return commerceUserSegmentCriterionLocalService;
 	}
 
@@ -74,8 +75,12 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param commerceUserSegmentCriterionLocalService the commerce user segment criterion local service
 	 */
 	public void setCommerceUserSegmentCriterionLocalService(
-		com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService commerceUserSegmentCriterionLocalService) {
-		this.commerceUserSegmentCriterionLocalService = commerceUserSegmentCriterionLocalService;
+		com.liferay.commerce.user.segment.service.
+			CommerceUserSegmentCriterionLocalService
+				commerceUserSegmentCriterionLocalService) {
+
+		this.commerceUserSegmentCriterionLocalService =
+			commerceUserSegmentCriterionLocalService;
 	}
 
 	/**
@@ -83,7 +88,10 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment criterion remote service
 	 */
-	public com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService getCommerceUserSegmentCriterionService() {
+	public com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentCriterionService
+			getCommerceUserSegmentCriterionService() {
+
 		return commerceUserSegmentCriterionService;
 	}
 
@@ -93,8 +101,12 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param commerceUserSegmentCriterionService the commerce user segment criterion remote service
 	 */
 	public void setCommerceUserSegmentCriterionService(
-		com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService commerceUserSegmentCriterionService) {
-		this.commerceUserSegmentCriterionService = commerceUserSegmentCriterionService;
+		com.liferay.commerce.user.segment.service.
+			CommerceUserSegmentCriterionService
+				commerceUserSegmentCriterionService) {
+
+		this.commerceUserSegmentCriterionService =
+			commerceUserSegmentCriterionService;
 	}
 
 	/**
@@ -102,7 +114,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment criterion persistence
 	 */
-	public CommerceUserSegmentCriterionPersistence getCommerceUserSegmentCriterionPersistence() {
+	public CommerceUserSegmentCriterionPersistence
+		getCommerceUserSegmentCriterionPersistence() {
+
 		return commerceUserSegmentCriterionPersistence;
 	}
 
@@ -112,8 +126,11 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param commerceUserSegmentCriterionPersistence the commerce user segment criterion persistence
 	 */
 	public void setCommerceUserSegmentCriterionPersistence(
-		CommerceUserSegmentCriterionPersistence commerceUserSegmentCriterionPersistence) {
-		this.commerceUserSegmentCriterionPersistence = commerceUserSegmentCriterionPersistence;
+		CommerceUserSegmentCriterionPersistence
+			commerceUserSegmentCriterionPersistence) {
+
+		this.commerceUserSegmentCriterionPersistence =
+			commerceUserSegmentCriterionPersistence;
 	}
 
 	/**
@@ -121,7 +138,10 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment entry local service
 	 */
-	public com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService getCommerceUserSegmentEntryLocalService() {
+	public com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentEntryLocalService
+			getCommerceUserSegmentEntryLocalService() {
+
 		return commerceUserSegmentEntryLocalService;
 	}
 
@@ -131,8 +151,12 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param commerceUserSegmentEntryLocalService the commerce user segment entry local service
 	 */
 	public void setCommerceUserSegmentEntryLocalService(
-		com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService commerceUserSegmentEntryLocalService) {
-		this.commerceUserSegmentEntryLocalService = commerceUserSegmentEntryLocalService;
+		com.liferay.commerce.user.segment.service.
+			CommerceUserSegmentEntryLocalService
+				commerceUserSegmentEntryLocalService) {
+
+		this.commerceUserSegmentEntryLocalService =
+			commerceUserSegmentEntryLocalService;
 	}
 
 	/**
@@ -140,7 +164,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment entry remote service
 	 */
-	public CommerceUserSegmentEntryService getCommerceUserSegmentEntryService() {
+	public CommerceUserSegmentEntryService
+		getCommerceUserSegmentEntryService() {
+
 		return commerceUserSegmentEntryService;
 	}
 
@@ -151,6 +177,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setCommerceUserSegmentEntryService(
 		CommerceUserSegmentEntryService commerceUserSegmentEntryService) {
+
 		this.commerceUserSegmentEntryService = commerceUserSegmentEntryService;
 	}
 
@@ -159,7 +186,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the commerce user segment entry persistence
 	 */
-	public CommerceUserSegmentEntryPersistence getCommerceUserSegmentEntryPersistence() {
+	public CommerceUserSegmentEntryPersistence
+		getCommerceUserSegmentEntryPersistence() {
+
 		return commerceUserSegmentEntryPersistence;
 	}
 
@@ -169,8 +198,11 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param commerceUserSegmentEntryPersistence the commerce user segment entry persistence
 	 */
 	public void setCommerceUserSegmentEntryPersistence(
-		CommerceUserSegmentEntryPersistence commerceUserSegmentEntryPersistence) {
-		this.commerceUserSegmentEntryPersistence = commerceUserSegmentEntryPersistence;
+		CommerceUserSegmentEntryPersistence
+			commerceUserSegmentEntryPersistence) {
+
+		this.commerceUserSegmentEntryPersistence =
+			commerceUserSegmentEntryPersistence;
 	}
 
 	/**
@@ -178,7 +210,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -188,7 +222,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -197,7 +233,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -207,7 +245,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -216,7 +256,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -227,6 +269,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -246,6 +289,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -254,7 +298,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the group local service
 	 */
-	public com.liferay.portal.kernel.service.GroupLocalService getGroupLocalService() {
+	public com.liferay.portal.kernel.service.GroupLocalService
+		getGroupLocalService() {
+
 		return groupLocalService;
 	}
 
@@ -265,6 +311,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setGroupLocalService(
 		com.liferay.portal.kernel.service.GroupLocalService groupLocalService) {
+
 		this.groupLocalService = groupLocalService;
 	}
 
@@ -284,6 +331,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setGroupService(
 		com.liferay.portal.kernel.service.GroupService groupService) {
+
 		this.groupService = groupService;
 	}
 
@@ -310,7 +358,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -320,7 +370,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -329,7 +381,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the role local service
 	 */
-	public com.liferay.portal.kernel.service.RoleLocalService getRoleLocalService() {
+	public com.liferay.portal.kernel.service.RoleLocalService
+		getRoleLocalService() {
+
 		return roleLocalService;
 	}
 
@@ -340,6 +394,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setRoleLocalService(
 		com.liferay.portal.kernel.service.RoleLocalService roleLocalService) {
+
 		this.roleLocalService = roleLocalService;
 	}
 
@@ -359,6 +414,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setRoleService(
 		com.liferay.portal.kernel.service.RoleService roleService) {
+
 		this.roleService = roleService;
 	}
 
@@ -385,7 +441,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -396,6 +454,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -415,6 +474,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -441,7 +501,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 *
 	 * @return the expando row local service
 	 */
-	public com.liferay.expando.kernel.service.ExpandoRowLocalService getExpandoRowLocalService() {
+	public com.liferay.expando.kernel.service.ExpandoRowLocalService
+		getExpandoRowLocalService() {
+
 		return expandoRowLocalService;
 	}
 
@@ -451,7 +513,9 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 * @param expandoRowLocalService the expando row local service
 	 */
 	public void setExpandoRowLocalService(
-		com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService) {
+		com.liferay.expando.kernel.service.ExpandoRowLocalService
+			expandoRowLocalService) {
+
 		this.expandoRowLocalService = expandoRowLocalService;
 	}
 
@@ -471,6 +535,7 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	public void setExpandoRowPersistence(
 		ExpandoRowPersistence expandoRowPersistence) {
+
 		this.expandoRowPersistence = expandoRowPersistence;
 	}
 
@@ -505,15 +570,16 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceUserSegmentEntryPersistence.getDataSource();
+			DataSource dataSource =
+				commerceUserSegmentEntryPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -522,48 +588,113 @@ public abstract class CommerceUserSegmentEntryServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService.class)
-	protected com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService commerceUserSegmentCriterionLocalService;
-	@BeanReference(type = com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService.class)
-	protected com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService commerceUserSegmentCriterionService;
+	@BeanReference(
+		type = com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService.class
+	)
+	protected com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentCriterionLocalService
+			commerceUserSegmentCriterionLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService.class
+	)
+	protected com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentCriterionService commerceUserSegmentCriterionService;
+
 	@BeanReference(type = CommerceUserSegmentCriterionPersistence.class)
-	protected CommerceUserSegmentCriterionPersistence commerceUserSegmentCriterionPersistence;
-	@BeanReference(type = com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService.class)
-	protected com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService commerceUserSegmentEntryLocalService;
+	protected CommerceUserSegmentCriterionPersistence
+		commerceUserSegmentCriterionPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService.class
+	)
+	protected com.liferay.commerce.user.segment.service.
+		CommerceUserSegmentEntryLocalService
+			commerceUserSegmentEntryLocalService;
+
 	@BeanReference(type = CommerceUserSegmentEntryService.class)
 	protected CommerceUserSegmentEntryService commerceUserSegmentEntryService;
+
 	@BeanReference(type = CommerceUserSegmentEntryPersistence.class)
-	protected CommerceUserSegmentEntryPersistence commerceUserSegmentEntryPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceUserSegmentEntryPersistence
+		commerceUserSegmentEntryPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.GroupLocalService.class)
-	protected com.liferay.portal.kernel.service.GroupLocalService groupLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.GroupService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.GroupLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.GroupLocalService
+		groupLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.GroupService.class
+	)
 	protected com.liferay.portal.kernel.service.GroupService groupService;
+
 	@ServiceReference(type = GroupPersistence.class)
 	protected GroupPersistence groupPersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.RoleLocalService.class)
-	protected com.liferay.portal.kernel.service.RoleLocalService roleLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.RoleService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.RoleLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.RoleLocalService
+		roleLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.RoleService.class
+	)
 	protected com.liferay.portal.kernel.service.RoleService roleService;
+
 	@ServiceReference(type = RolePersistence.class)
 	protected RolePersistence rolePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class)
-	protected com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService;
+
+	@ServiceReference(
+		type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class
+	)
+	protected com.liferay.expando.kernel.service.ExpandoRowLocalService
+		expandoRowLocalService;
+
 	@ServiceReference(type = ExpandoRowPersistence.class)
 	protected ExpandoRowPersistence expandoRowPersistence;
+
 }

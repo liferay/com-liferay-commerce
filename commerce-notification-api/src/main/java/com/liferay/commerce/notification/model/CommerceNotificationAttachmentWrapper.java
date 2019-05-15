@@ -17,9 +17,7 @@ package com.liferay.commerce.notification.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceNotificationAttachmentWrapper
 	implements CommerceNotificationAttachment,
-		ModelWrapper<CommerceNotificationAttachment> {
+			   ModelWrapper<CommerceNotificationAttachment> {
+
 	public CommerceNotificationAttachmentWrapper(
 		CommerceNotificationAttachment commerceNotificationAttachment) {
+
 		_commerceNotificationAttachment = commerceNotificationAttachment;
 	}
 
@@ -63,7 +63,8 @@ public class CommerceNotificationAttachmentWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("commerceNotificationAttachmentId",
+		attributes.put(
+			"commerceNotificationAttachmentId",
 			getCommerceNotificationAttachmentId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -71,7 +72,8 @@ public class CommerceNotificationAttachmentWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceNotificationQueueEntryId",
+		attributes.put(
+			"commerceNotificationQueueEntryId",
 			getCommerceNotificationQueueEntryId());
 		attributes.put("fileEntryId", getFileEntryId());
 		attributes.put("deleteOnSend", isDeleteOnSend());
@@ -88,10 +90,11 @@ public class CommerceNotificationAttachmentWrapper
 		}
 
 		Long commerceNotificationAttachmentId = (Long)attributes.get(
-				"commerceNotificationAttachmentId");
+			"commerceNotificationAttachmentId");
 
 		if (commerceNotificationAttachmentId != null) {
-			setCommerceNotificationAttachmentId(commerceNotificationAttachmentId);
+			setCommerceNotificationAttachmentId(
+				commerceNotificationAttachmentId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -131,10 +134,11 @@ public class CommerceNotificationAttachmentWrapper
 		}
 
 		Long commerceNotificationQueueEntryId = (Long)attributes.get(
-				"commerceNotificationQueueEntryId");
+			"commerceNotificationQueueEntryId");
 
 		if (commerceNotificationQueueEntryId != null) {
-			setCommerceNotificationQueueEntryId(commerceNotificationQueueEntryId);
+			setCommerceNotificationQueueEntryId(
+				commerceNotificationQueueEntryId);
 		}
 
 		Long fileEntryId = (Long)attributes.get("fileEntryId");
@@ -152,60 +156,66 @@ public class CommerceNotificationAttachmentWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceNotificationAttachmentWrapper((CommerceNotificationAttachment)_commerceNotificationAttachment.clone());
+		return new CommerceNotificationAttachmentWrapper(
+			(CommerceNotificationAttachment)
+				_commerceNotificationAttachment.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceNotificationAttachment commerceNotificationAttachment) {
-		return _commerceNotificationAttachment.compareTo(commerceNotificationAttachment);
+
+		return _commerceNotificationAttachment.compareTo(
+			commerceNotificationAttachment);
 	}
 
 	/**
-	* Returns the commerce notification attachment ID of this commerce notification attachment.
-	*
-	* @return the commerce notification attachment ID of this commerce notification attachment
-	*/
+	 * Returns the commerce notification attachment ID of this commerce notification attachment.
+	 *
+	 * @return the commerce notification attachment ID of this commerce notification attachment
+	 */
 	@Override
 	public long getCommerceNotificationAttachmentId() {
-		return _commerceNotificationAttachment.getCommerceNotificationAttachmentId();
+		return _commerceNotificationAttachment.
+			getCommerceNotificationAttachmentId();
 	}
 
 	/**
-	* Returns the commerce notification queue entry ID of this commerce notification attachment.
-	*
-	* @return the commerce notification queue entry ID of this commerce notification attachment
-	*/
+	 * Returns the commerce notification queue entry ID of this commerce notification attachment.
+	 *
+	 * @return the commerce notification queue entry ID of this commerce notification attachment
+	 */
 	@Override
 	public long getCommerceNotificationQueueEntryId() {
-		return _commerceNotificationAttachment.getCommerceNotificationQueueEntryId();
+		return _commerceNotificationAttachment.
+			getCommerceNotificationQueueEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce notification attachment.
-	*
-	* @return the company ID of this commerce notification attachment
-	*/
+	 * Returns the company ID of this commerce notification attachment.
+	 *
+	 * @return the company ID of this commerce notification attachment
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceNotificationAttachment.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce notification attachment.
-	*
-	* @return the create date of this commerce notification attachment
-	*/
+	 * Returns the create date of this commerce notification attachment.
+	 *
+	 * @return the create date of this commerce notification attachment
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceNotificationAttachment.getCreateDate();
 	}
 
 	/**
-	* Returns the delete on send of this commerce notification attachment.
-	*
-	* @return the delete on send of this commerce notification attachment
-	*/
+	 * Returns the delete on send of this commerce notification attachment.
+	 *
+	 * @return the delete on send of this commerce notification attachment
+	 */
 	@Override
 	public boolean getDeleteOnSend() {
 		return _commerceNotificationAttachment.getDeleteOnSend();
@@ -219,44 +229,45 @@ public class CommerceNotificationAttachmentWrapper
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceNotificationAttachment.getFileEntry();
 	}
 
 	/**
-	* Returns the file entry ID of this commerce notification attachment.
-	*
-	* @return the file entry ID of this commerce notification attachment
-	*/
+	 * Returns the file entry ID of this commerce notification attachment.
+	 *
+	 * @return the file entry ID of this commerce notification attachment
+	 */
 	@Override
 	public long getFileEntryId() {
 		return _commerceNotificationAttachment.getFileEntryId();
 	}
 
 	/**
-	* Returns the group ID of this commerce notification attachment.
-	*
-	* @return the group ID of this commerce notification attachment
-	*/
+	 * Returns the group ID of this commerce notification attachment.
+	 *
+	 * @return the group ID of this commerce notification attachment
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceNotificationAttachment.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce notification attachment.
-	*
-	* @return the modified date of this commerce notification attachment
-	*/
+	 * Returns the modified date of this commerce notification attachment.
+	 *
+	 * @return the modified date of this commerce notification attachment
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceNotificationAttachment.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce notification attachment.
-	*
-	* @return the primary key of this commerce notification attachment
-	*/
+	 * Returns the primary key of this commerce notification attachment.
+	 *
+	 * @return the primary key of this commerce notification attachment
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceNotificationAttachment.getPrimaryKey();
@@ -268,40 +279,40 @@ public class CommerceNotificationAttachmentWrapper
 	}
 
 	/**
-	* Returns the user ID of this commerce notification attachment.
-	*
-	* @return the user ID of this commerce notification attachment
-	*/
+	 * Returns the user ID of this commerce notification attachment.
+	 *
+	 * @return the user ID of this commerce notification attachment
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceNotificationAttachment.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce notification attachment.
-	*
-	* @return the user name of this commerce notification attachment
-	*/
+	 * Returns the user name of this commerce notification attachment.
+	 *
+	 * @return the user name of this commerce notification attachment
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceNotificationAttachment.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce notification attachment.
-	*
-	* @return the user uuid of this commerce notification attachment
-	*/
+	 * Returns the user uuid of this commerce notification attachment.
+	 *
+	 * @return the user uuid of this commerce notification attachment
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceNotificationAttachment.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce notification attachment.
-	*
-	* @return the uuid of this commerce notification attachment
-	*/
+	 * Returns the uuid of this commerce notification attachment.
+	 *
+	 * @return the uuid of this commerce notification attachment
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceNotificationAttachment.getUuid();
@@ -318,10 +329,10 @@ public class CommerceNotificationAttachmentWrapper
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce notification attachment is delete on send.
-	*
-	* @return <code>true</code> if this commerce notification attachment is delete on send; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce notification attachment is delete on send.
+	 *
+	 * @return <code>true</code> if this commerce notification attachment is delete on send; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDeleteOnSend() {
 		return _commerceNotificationAttachment.isDeleteOnSend();
@@ -348,52 +359,56 @@ public class CommerceNotificationAttachmentWrapper
 	}
 
 	/**
-	* Sets the commerce notification attachment ID of this commerce notification attachment.
-	*
-	* @param commerceNotificationAttachmentId the commerce notification attachment ID of this commerce notification attachment
-	*/
+	 * Sets the commerce notification attachment ID of this commerce notification attachment.
+	 *
+	 * @param commerceNotificationAttachmentId the commerce notification attachment ID of this commerce notification attachment
+	 */
 	@Override
 	public void setCommerceNotificationAttachmentId(
 		long commerceNotificationAttachmentId) {
-		_commerceNotificationAttachment.setCommerceNotificationAttachmentId(commerceNotificationAttachmentId);
+
+		_commerceNotificationAttachment.setCommerceNotificationAttachmentId(
+			commerceNotificationAttachmentId);
 	}
 
 	/**
-	* Sets the commerce notification queue entry ID of this commerce notification attachment.
-	*
-	* @param commerceNotificationQueueEntryId the commerce notification queue entry ID of this commerce notification attachment
-	*/
+	 * Sets the commerce notification queue entry ID of this commerce notification attachment.
+	 *
+	 * @param commerceNotificationQueueEntryId the commerce notification queue entry ID of this commerce notification attachment
+	 */
 	@Override
 	public void setCommerceNotificationQueueEntryId(
 		long commerceNotificationQueueEntryId) {
-		_commerceNotificationAttachment.setCommerceNotificationQueueEntryId(commerceNotificationQueueEntryId);
+
+		_commerceNotificationAttachment.setCommerceNotificationQueueEntryId(
+			commerceNotificationQueueEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce notification attachment.
-	*
-	* @param companyId the company ID of this commerce notification attachment
-	*/
+	 * Sets the company ID of this commerce notification attachment.
+	 *
+	 * @param companyId the company ID of this commerce notification attachment
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceNotificationAttachment.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce notification attachment.
-	*
-	* @param createDate the create date of this commerce notification attachment
-	*/
+	 * Sets the create date of this commerce notification attachment.
+	 *
+	 * @param createDate the create date of this commerce notification attachment
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceNotificationAttachment.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets whether this commerce notification attachment is delete on send.
-	*
-	* @param deleteOnSend the delete on send of this commerce notification attachment
-	*/
+	 * Sets whether this commerce notification attachment is delete on send.
+	 *
+	 * @param deleteOnSend the delete on send of this commerce notification attachment
+	 */
 	@Override
 	public void setDeleteOnSend(boolean deleteOnSend) {
 		_commerceNotificationAttachment.setDeleteOnSend(deleteOnSend);
@@ -402,44 +417,47 @@ public class CommerceNotificationAttachmentWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceNotificationAttachment.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_commerceNotificationAttachment.setExpandoBridgeAttributes(expandoBridge);
+		_commerceNotificationAttachment.setExpandoBridgeAttributes(
+			expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceNotificationAttachment.setExpandoBridgeAttributes(serviceContext);
+		_commerceNotificationAttachment.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the file entry ID of this commerce notification attachment.
-	*
-	* @param fileEntryId the file entry ID of this commerce notification attachment
-	*/
+	 * Sets the file entry ID of this commerce notification attachment.
+	 *
+	 * @param fileEntryId the file entry ID of this commerce notification attachment
+	 */
 	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_commerceNotificationAttachment.setFileEntryId(fileEntryId);
 	}
 
 	/**
-	* Sets the group ID of this commerce notification attachment.
-	*
-	* @param groupId the group ID of this commerce notification attachment
-	*/
+	 * Sets the group ID of this commerce notification attachment.
+	 *
+	 * @param groupId the group ID of this commerce notification attachment
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceNotificationAttachment.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce notification attachment.
-	*
-	* @param modifiedDate the modified date of this commerce notification attachment
-	*/
+	 * Sets the modified date of this commerce notification attachment.
+	 *
+	 * @param modifiedDate the modified date of this commerce notification attachment
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceNotificationAttachment.setModifiedDate(modifiedDate);
@@ -451,10 +469,10 @@ public class CommerceNotificationAttachmentWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce notification attachment.
-	*
-	* @param primaryKey the primary key of this commerce notification attachment
-	*/
+	 * Sets the primary key of this commerce notification attachment.
+	 *
+	 * @param primaryKey the primary key of this commerce notification attachment
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceNotificationAttachment.setPrimaryKey(primaryKey);
@@ -466,53 +484,56 @@ public class CommerceNotificationAttachmentWrapper
 	}
 
 	/**
-	* Sets the user ID of this commerce notification attachment.
-	*
-	* @param userId the user ID of this commerce notification attachment
-	*/
+	 * Sets the user ID of this commerce notification attachment.
+	 *
+	 * @param userId the user ID of this commerce notification attachment
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceNotificationAttachment.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce notification attachment.
-	*
-	* @param userName the user name of this commerce notification attachment
-	*/
+	 * Sets the user name of this commerce notification attachment.
+	 *
+	 * @param userName the user name of this commerce notification attachment
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceNotificationAttachment.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce notification attachment.
-	*
-	* @param userUuid the user uuid of this commerce notification attachment
-	*/
+	 * Sets the user uuid of this commerce notification attachment.
+	 *
+	 * @param userUuid the user uuid of this commerce notification attachment
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceNotificationAttachment.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce notification attachment.
-	*
-	* @param uuid the uuid of this commerce notification attachment
-	*/
+	 * Sets the uuid of this commerce notification attachment.
+	 *
+	 * @param uuid the uuid of this commerce notification attachment
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceNotificationAttachment.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceNotificationAttachment> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceNotificationAttachment> toCacheModel() {
+
 		return _commerceNotificationAttachment.toCacheModel();
 	}
 
 	@Override
 	public CommerceNotificationAttachment toEscapedModel() {
-		return new CommerceNotificationAttachmentWrapper(_commerceNotificationAttachment.toEscapedModel());
+		return new CommerceNotificationAttachmentWrapper(
+			_commerceNotificationAttachment.toEscapedModel());
 	}
 
 	@Override
@@ -522,7 +543,8 @@ public class CommerceNotificationAttachmentWrapper
 
 	@Override
 	public CommerceNotificationAttachment toUnescapedModel() {
-		return new CommerceNotificationAttachmentWrapper(_commerceNotificationAttachment.toUnescapedModel());
+		return new CommerceNotificationAttachmentWrapper(
+			_commerceNotificationAttachment.toUnescapedModel());
 	}
 
 	@Override
@@ -540,11 +562,15 @@ public class CommerceNotificationAttachmentWrapper
 			return false;
 		}
 
-		CommerceNotificationAttachmentWrapper commerceNotificationAttachmentWrapper =
-			(CommerceNotificationAttachmentWrapper)obj;
+		CommerceNotificationAttachmentWrapper
+			commerceNotificationAttachmentWrapper =
+				(CommerceNotificationAttachmentWrapper)obj;
 
-		if (Objects.equals(_commerceNotificationAttachment,
-					commerceNotificationAttachmentWrapper._commerceNotificationAttachment)) {
+		if (Objects.equals(
+				_commerceNotificationAttachment,
+				commerceNotificationAttachmentWrapper.
+					_commerceNotificationAttachment)) {
+
 			return true;
 		}
 
@@ -576,5 +602,7 @@ public class CommerceNotificationAttachmentWrapper
 		_commerceNotificationAttachment.resetOriginalValues();
 	}
 
-	private final CommerceNotificationAttachment _commerceNotificationAttachment;
+	private final CommerceNotificationAttachment
+		_commerceNotificationAttachment;
+
 }

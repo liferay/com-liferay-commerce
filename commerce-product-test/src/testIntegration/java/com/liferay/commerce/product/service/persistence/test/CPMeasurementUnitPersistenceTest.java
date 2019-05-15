@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPMeasurementUnitException;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPMeasurementUnitPersistence;
 import com.liferay.commerce.product.service.persistence.CPMeasurementUnitUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPMeasurementUnitPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -109,7 +108,9 @@ public class CPMeasurementUnitPersistenceTest {
 
 		_persistence.remove(newCPMeasurementUnit);
 
-		CPMeasurementUnit existingCPMeasurementUnit = _persistence.fetchByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
+		CPMeasurementUnit existingCPMeasurementUnit =
+			_persistence.fetchByPrimaryKey(
+				newCPMeasurementUnit.getPrimaryKey());
 
 		Assert.assertNull(existingCPMeasurementUnit);
 	}
@@ -155,39 +156,52 @@ public class CPMeasurementUnitPersistenceTest {
 
 		_cpMeasurementUnits.add(_persistence.update(newCPMeasurementUnit));
 
-		CPMeasurementUnit existingCPMeasurementUnit = _persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
+		CPMeasurementUnit existingCPMeasurementUnit =
+			_persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
 
-		Assert.assertEquals(existingCPMeasurementUnit.getUuid(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getUuid(),
 			newCPMeasurementUnit.getUuid());
-		Assert.assertEquals(existingCPMeasurementUnit.getCPMeasurementUnitId(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getCPMeasurementUnitId(),
 			newCPMeasurementUnit.getCPMeasurementUnitId());
-		Assert.assertEquals(existingCPMeasurementUnit.getGroupId(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getGroupId(),
 			newCPMeasurementUnit.getGroupId());
-		Assert.assertEquals(existingCPMeasurementUnit.getCompanyId(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getCompanyId(),
 			newCPMeasurementUnit.getCompanyId());
-		Assert.assertEquals(existingCPMeasurementUnit.getUserId(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getUserId(),
 			newCPMeasurementUnit.getUserId());
-		Assert.assertEquals(existingCPMeasurementUnit.getUserName(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getUserName(),
 			newCPMeasurementUnit.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPMeasurementUnit.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPMeasurementUnit.getCreateDate()),
 			Time.getShortTimestamp(newCPMeasurementUnit.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPMeasurementUnit.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPMeasurementUnit.getModifiedDate()),
 			Time.getShortTimestamp(newCPMeasurementUnit.getModifiedDate()));
-		Assert.assertEquals(existingCPMeasurementUnit.getName(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getName(),
 			newCPMeasurementUnit.getName());
-		Assert.assertEquals(existingCPMeasurementUnit.getKey(),
-			newCPMeasurementUnit.getKey());
-		AssertUtils.assertEquals(existingCPMeasurementUnit.getRate(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getKey(), newCPMeasurementUnit.getKey());
+		AssertUtils.assertEquals(
+			existingCPMeasurementUnit.getRate(),
 			newCPMeasurementUnit.getRate());
-		Assert.assertEquals(existingCPMeasurementUnit.isPrimary(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.isPrimary(),
 			newCPMeasurementUnit.isPrimary());
-		AssertUtils.assertEquals(existingCPMeasurementUnit.getPriority(),
+		AssertUtils.assertEquals(
+			existingCPMeasurementUnit.getPriority(),
 			newCPMeasurementUnit.getPriority());
-		Assert.assertEquals(existingCPMeasurementUnit.getType(),
+		Assert.assertEquals(
+			existingCPMeasurementUnit.getType(),
 			newCPMeasurementUnit.getType());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPMeasurementUnit.getLastPublishDate()),
 			Time.getShortTimestamp(newCPMeasurementUnit.getLastPublishDate()));
 	}
@@ -228,16 +242,16 @@ public class CPMeasurementUnitPersistenceTest {
 
 	@Test
 	public void testCountByG_T() throws Exception {
-		_persistence.countByG_T(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByG_T(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByG_T(0L, 0);
 	}
 
 	@Test
 	public void testCountByG_K_T() throws Exception {
-		_persistence.countByG_K_T(RandomTestUtil.nextLong(), "",
-			RandomTestUtil.nextInt());
+		_persistence.countByG_K_T(
+			RandomTestUtil.nextLong(), "", RandomTestUtil.nextInt());
 
 		_persistence.countByG_K_T(0L, "null", 0);
 
@@ -246,8 +260,9 @@ public class CPMeasurementUnitPersistenceTest {
 
 	@Test
 	public void testCountByG_P_T() throws Exception {
-		_persistence.countByG_P_T(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean(), RandomTestUtil.nextInt());
+		_persistence.countByG_P_T(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
+			RandomTestUtil.nextInt());
 
 		_persistence.countByG_P_T(0L, RandomTestUtil.randomBoolean(), 0);
 	}
@@ -256,7 +271,8 @@ public class CPMeasurementUnitPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
-		CPMeasurementUnit existingCPMeasurementUnit = _persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
+		CPMeasurementUnit existingCPMeasurementUnit =
+			_persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
 
 		Assert.assertEquals(existingCPMeasurementUnit, newCPMeasurementUnit);
 	}
@@ -270,24 +286,26 @@ public class CPMeasurementUnitPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPMeasurementUnit> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPMeasurementUnit", "uuid",
-			true, "CPMeasurementUnitId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "name", true, "key", true, "rate", true,
-			"primary", true, "priority", true, "type", true, "lastPublishDate",
-			true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPMeasurementUnit", "uuid", true, "CPMeasurementUnitId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "name", true, "key",
+			true, "rate", true, "primary", true, "priority", true, "type", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
-		CPMeasurementUnit existingCPMeasurementUnit = _persistence.fetchByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
+		CPMeasurementUnit existingCPMeasurementUnit =
+			_persistence.fetchByPrimaryKey(
+				newCPMeasurementUnit.getPrimaryKey());
 
 		Assert.assertEquals(existingCPMeasurementUnit, newCPMeasurementUnit);
 	}
@@ -296,7 +314,8 @@ public class CPMeasurementUnitPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPMeasurementUnit missingCPMeasurementUnit = _persistence.fetchByPrimaryKey(pk);
+		CPMeasurementUnit missingCPMeasurementUnit =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPMeasurementUnit);
 	}
@@ -304,6 +323,7 @@ public class CPMeasurementUnitPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPMeasurementUnit newCPMeasurementUnit1 = addCPMeasurementUnit();
 		CPMeasurementUnit newCPMeasurementUnit2 = addCPMeasurementUnit();
 
@@ -312,18 +332,22 @@ public class CPMeasurementUnitPersistenceTest {
 		primaryKeys.add(newCPMeasurementUnit1.getPrimaryKey());
 		primaryKeys.add(newCPMeasurementUnit2.getPrimaryKey());
 
-		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpMeasurementUnits.size());
-		Assert.assertEquals(newCPMeasurementUnit1,
+		Assert.assertEquals(
+			newCPMeasurementUnit1,
 			cpMeasurementUnits.get(newCPMeasurementUnit1.getPrimaryKey()));
-		Assert.assertEquals(newCPMeasurementUnit2,
+		Assert.assertEquals(
+			newCPMeasurementUnit2,
 			cpMeasurementUnits.get(newCPMeasurementUnit2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -333,7 +357,8 @@ public class CPMeasurementUnitPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpMeasurementUnits.isEmpty());
 	}
@@ -341,6 +366,7 @@ public class CPMeasurementUnitPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
 		long pk = RandomTestUtil.nextLong();
@@ -350,36 +376,39 @@ public class CPMeasurementUnitPersistenceTest {
 		primaryKeys.add(newCPMeasurementUnit.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpMeasurementUnits.size());
-		Assert.assertEquals(newCPMeasurementUnit,
+		Assert.assertEquals(
+			newCPMeasurementUnit,
 			cpMeasurementUnits.get(newCPMeasurementUnit.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpMeasurementUnits.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPMeasurementUnit.getPrimaryKey());
 
-		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPMeasurementUnit> cpMeasurementUnits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpMeasurementUnits.size());
-		Assert.assertEquals(newCPMeasurementUnit,
+		Assert.assertEquals(
+			newCPMeasurementUnit,
 			cpMeasurementUnits.get(newCPMeasurementUnit.getPrimaryKey()));
 	}
 
@@ -387,15 +416,20 @@ public class CPMeasurementUnitPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPMeasurementUnitLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPMeasurementUnitLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPMeasurementUnit>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPMeasurementUnit>() {
+
 				@Override
 				public void performAction(CPMeasurementUnit cpMeasurementUnit) {
 					Assert.assertNotNull(cpMeasurementUnit);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -404,17 +438,19 @@ public class CPMeasurementUnitPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPMeasurementUnit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPMeasurementUnit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPMeasurementUnitId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPMeasurementUnitId",
 				newCPMeasurementUnit.getCPMeasurementUnitId()));
 
-		List<CPMeasurementUnit> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPMeasurementUnit> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -425,32 +461,35 @@ public class CPMeasurementUnitPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPMeasurementUnit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPMeasurementUnit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPMeasurementUnitId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPMeasurementUnitId", RandomTestUtil.nextLong()));
 
-		List<CPMeasurementUnit> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPMeasurementUnit> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPMeasurementUnit newCPMeasurementUnit = addCPMeasurementUnit();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPMeasurementUnit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPMeasurementUnit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPMeasurementUnitId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPMeasurementUnitId"));
 
-		Object newCPMeasurementUnitId = newCPMeasurementUnit.getCPMeasurementUnitId();
+		Object newCPMeasurementUnitId =
+			newCPMeasurementUnit.getCPMeasurementUnitId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPMeasurementUnitId",
-				new Object[] { newCPMeasurementUnitId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPMeasurementUnitId", new Object[] {newCPMeasurementUnitId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -458,19 +497,22 @@ public class CPMeasurementUnitPersistenceTest {
 
 		Object existingCPMeasurementUnitId = result.get(0);
 
-		Assert.assertEquals(existingCPMeasurementUnitId, newCPMeasurementUnitId);
+		Assert.assertEquals(
+			existingCPMeasurementUnitId, newCPMeasurementUnitId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPMeasurementUnit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPMeasurementUnit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPMeasurementUnitId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPMeasurementUnitId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPMeasurementUnitId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPMeasurementUnitId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -483,28 +525,39 @@ public class CPMeasurementUnitPersistenceTest {
 
 		_persistence.clearCache();
 
-		CPMeasurementUnit existingCPMeasurementUnit = _persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
+		CPMeasurementUnit existingCPMeasurementUnit =
+			_persistence.findByPrimaryKey(newCPMeasurementUnit.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPMeasurementUnit.getUuid(),
-				ReflectionTestUtil.invoke(existingCPMeasurementUnit,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPMeasurementUnit.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPMeasurementUnit,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPMeasurementUnit.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPMeasurementUnit, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPMeasurementUnit.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPMeasurementUnit, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCPMeasurementUnit.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPMeasurementUnit,
-				"getOriginalGroupId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCPMeasurementUnit.getKey(),
-				ReflectionTestUtil.invoke(existingCPMeasurementUnit,
-					"getOriginalKey", new Class<?>[0])));
-		Assert.assertEquals(Integer.valueOf(existingCPMeasurementUnit.getType()),
-			ReflectionTestUtil.<Integer>invoke(existingCPMeasurementUnit,
-				"getOriginalType", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPMeasurementUnit.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPMeasurementUnit, "getOriginalGroupId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPMeasurementUnit.getKey(),
+				ReflectionTestUtil.invoke(
+					existingCPMeasurementUnit, "getOriginalKey",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Integer.valueOf(existingCPMeasurementUnit.getType()),
+			ReflectionTestUtil.<Integer>invoke(
+				existingCPMeasurementUnit, "getOriginalType", new Class<?>[0]));
 	}
 
-	protected CPMeasurementUnit addCPMeasurementUnit()
-		throws Exception {
+	protected CPMeasurementUnit addCPMeasurementUnit() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CPMeasurementUnit cpMeasurementUnit = _persistence.create(pk);
@@ -542,7 +595,9 @@ public class CPMeasurementUnitPersistenceTest {
 		return cpMeasurementUnit;
 	}
 
-	private List<CPMeasurementUnit> _cpMeasurementUnits = new ArrayList<CPMeasurementUnit>();
+	private List<CPMeasurementUnit> _cpMeasurementUnits =
+		new ArrayList<CPMeasurementUnit>();
 	private CPMeasurementUnitPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

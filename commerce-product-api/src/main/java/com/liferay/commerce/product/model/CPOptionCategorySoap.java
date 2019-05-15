@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPOptionCategoryServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPOptionCategoryServiceSoap
  * @generated
  */
 @ProviderType
 public class CPOptionCategorySoap implements Serializable {
+
 	public static CPOptionCategorySoap toSoapModel(CPOptionCategory model) {
 		CPOptionCategorySoap soapModel = new CPOptionCategorySoap();
 
@@ -51,8 +51,11 @@ public class CPOptionCategorySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CPOptionCategorySoap[] toSoapModels(CPOptionCategory[] models) {
-		CPOptionCategorySoap[] soapModels = new CPOptionCategorySoap[models.length];
+	public static CPOptionCategorySoap[] toSoapModels(
+		CPOptionCategory[] models) {
+
+		CPOptionCategorySoap[] soapModels =
+			new CPOptionCategorySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +66,12 @@ public class CPOptionCategorySoap implements Serializable {
 
 	public static CPOptionCategorySoap[][] toSoapModels(
 		CPOptionCategory[][] models) {
+
 		CPOptionCategorySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPOptionCategorySoap[models.length][models[0].length];
+			soapModels =
+				new CPOptionCategorySoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPOptionCategorySoap[0][0];
@@ -81,7 +86,9 @@ public class CPOptionCategorySoap implements Serializable {
 
 	public static CPOptionCategorySoap[] toSoapModels(
 		List<CPOptionCategory> models) {
-		List<CPOptionCategorySoap> soapModels = new ArrayList<CPOptionCategorySoap>(models.size());
+
+		List<CPOptionCategorySoap> soapModels =
+			new ArrayList<CPOptionCategorySoap>(models.size());
 
 		for (CPOptionCategory model : models) {
 			soapModels.add(toSoapModel(model));
@@ -218,4 +225,5 @@ public class CPOptionCategorySoap implements Serializable {
 	private double _priority;
 	private String _key;
 	private Date _lastPublishDate;
+
 }

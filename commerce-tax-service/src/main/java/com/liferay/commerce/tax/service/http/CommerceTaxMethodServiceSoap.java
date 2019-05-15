@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.service.CommerceTaxMethodServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceTaxMethodServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceTaxMethodServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.tax.model.CommerceTaxMethodSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.tax.model.CommerceTaxMethod}, that is translated to a
- * {@link com.liferay.commerce.tax.model.CommerceTaxMethodSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.tax.model.CommerceTaxMethodSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.tax.model.CommerceTaxMethod</code>, that is translated to a
+ * <code>com.liferay.commerce.tax.model.CommerceTaxMethodSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,29 +63,34 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CommerceTaxMethodServiceHttp
- * @see com.liferay.commerce.tax.model.CommerceTaxMethodSoap
- * @see CommerceTaxMethodServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceTaxMethodServiceSoap {
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap addCommerceTaxMethod(
-		String[] nameMapLanguageIds, String[] nameMapValues,
-		String[] descriptionMapLanguageIds, String[] descriptionMapValues,
-		String engineKey, boolean percentage, boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
 
-			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue = CommerceTaxMethodServiceUtil.addCommerceTaxMethod(nameMap,
-					descriptionMap, engineKey, percentage, active,
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap
+			addCommerceTaxMethod(
+				String[] nameMapLanguageIds, String[] nameMapValues,
+				String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues, String engineKey,
+				boolean percentage, boolean active,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
+
+			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue =
+				CommerceTaxMethodServiceUtil.addCommerceTaxMethod(
+					nameMap, descriptionMap, engineKey, percentage, active,
 					serviceContext);
 
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,13 +99,17 @@ public class CommerceTaxMethodServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap createCommerceTaxMethod(
-		long groupId, long commerceTaxMethodId) throws RemoteException {
-		try {
-			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue = CommerceTaxMethodServiceUtil.createCommerceTaxMethod(groupId,
-					commerceTaxMethodId);
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap
+			createCommerceTaxMethod(long groupId, long commerceTaxMethodId)
+		throws RemoteException {
 
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue =
+				CommerceTaxMethodServiceUtil.createCommerceTaxMethod(
+					groupId, commerceTaxMethodId);
+
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,8 +120,10 @@ public class CommerceTaxMethodServiceSoap {
 
 	public static void deleteCommerceTaxMethod(long commerceTaxMethodId)
 		throws RemoteException {
+
 		try {
-			CommerceTaxMethodServiceUtil.deleteCommerceTaxMethod(commerceTaxMethodId);
+			CommerceTaxMethodServiceUtil.deleteCommerceTaxMethod(
+				commerceTaxMethodId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -121,81 +132,17 @@ public class CommerceTaxMethodServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap getCommerceTaxMethod(
-		long commerceTaxMethodId) throws RemoteException {
-		try {
-			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue = CommerceTaxMethodServiceUtil.getCommerceTaxMethod(commerceTaxMethodId);
-
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap[] getCommerceTaxMethods(
-		long groupId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.tax.model.CommerceTaxMethod> returnValue =
-				CommerceTaxMethodServiceUtil.getCommerceTaxMethods(groupId);
-
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap[] getCommerceTaxMethods(
-		long groupId, boolean active) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.tax.model.CommerceTaxMethod> returnValue =
-				CommerceTaxMethodServiceUtil.getCommerceTaxMethods(groupId,
-					active);
-
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap setActive(
-		long commerceTaxMethodId, boolean active) throws RemoteException {
-		try {
-			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue = CommerceTaxMethodServiceUtil.setActive(commerceTaxMethodId,
-					active);
-
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap updateCommerceTaxMethod(
-		long commerceTaxMethodId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String[] descriptionMapLanguageIds,
-		String[] descriptionMapValues, boolean percentage, boolean active)
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap
+			getCommerceTaxMethod(long commerceTaxMethodId)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
+			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue =
+				CommerceTaxMethodServiceUtil.getCommerceTaxMethod(
+					commerceTaxMethodId);
 
-			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue = CommerceTaxMethodServiceUtil.updateCommerceTaxMethod(commerceTaxMethodId,
-					nameMap, descriptionMap, percentage, active);
-
-			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -204,5 +151,95 @@ public class CommerceTaxMethodServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceTaxMethodServiceSoap.class);
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap[]
+			getCommerceTaxMethods(long groupId)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.tax.model.CommerceTaxMethod>
+				returnValue =
+					CommerceTaxMethodServiceUtil.getCommerceTaxMethods(groupId);
+
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap[]
+			getCommerceTaxMethods(long groupId, boolean active)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.tax.model.CommerceTaxMethod>
+				returnValue =
+					CommerceTaxMethodServiceUtil.getCommerceTaxMethods(
+						groupId, active);
+
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap
+			setActive(long commerceTaxMethodId, boolean active)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue =
+				CommerceTaxMethodServiceUtil.setActive(
+					commerceTaxMethodId, active);
+
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.tax.model.CommerceTaxMethodSoap
+			updateCommerceTaxMethod(
+				long commerceTaxMethodId, String[] nameMapLanguageIds,
+				String[] nameMapValues, String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues, boolean percentage,
+				boolean active)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
+
+			com.liferay.commerce.tax.model.CommerceTaxMethod returnValue =
+				CommerceTaxMethodServiceUtil.updateCommerceTaxMethod(
+					commerceTaxMethodId, nameMap, descriptionMap, percentage,
+					active);
+
+			return com.liferay.commerce.tax.model.CommerceTaxMethodSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceTaxMethodServiceSoap.class);
+
 }

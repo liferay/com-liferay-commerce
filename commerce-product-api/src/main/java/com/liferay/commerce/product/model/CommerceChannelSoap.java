@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CommerceChannelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CommerceChannelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceChannelSoap implements Serializable {
+
 	public static CommerceChannelSoap toSoapModel(CommerceChannel model) {
 		CommerceChannelSoap soapModel = new CommerceChannelSoap();
 
@@ -49,7 +49,8 @@ public class CommerceChannelSoap implements Serializable {
 	}
 
 	public static CommerceChannelSoap[] toSoapModels(CommerceChannel[] models) {
-		CommerceChannelSoap[] soapModels = new CommerceChannelSoap[models.length];
+		CommerceChannelSoap[] soapModels =
+			new CommerceChannelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -60,10 +61,12 @@ public class CommerceChannelSoap implements Serializable {
 
 	public static CommerceChannelSoap[][] toSoapModels(
 		CommerceChannel[][] models) {
+
 		CommerceChannelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceChannelSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceChannelSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceChannelSoap[0][0];
@@ -78,7 +81,9 @@ public class CommerceChannelSoap implements Serializable {
 
 	public static CommerceChannelSoap[] toSoapModels(
 		List<CommerceChannel> models) {
-		List<CommerceChannelSoap> soapModels = new ArrayList<CommerceChannelSoap>(models.size());
+
+		List<CommerceChannelSoap> soapModels =
+			new ArrayList<CommerceChannelSoap>(models.size());
 
 		for (CommerceChannel model : models) {
 			soapModels.add(toSoapModel(model));
@@ -188,4 +193,5 @@ public class CommerceChannelSoap implements Serializable {
 	private String _filterType;
 	private String _type;
 	private String _typeSettings;
+
 }

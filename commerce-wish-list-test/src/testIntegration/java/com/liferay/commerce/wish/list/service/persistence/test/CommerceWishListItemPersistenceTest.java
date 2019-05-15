@@ -15,13 +15,11 @@
 package com.liferay.commerce.wish.list.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.wish.list.exception.NoSuchWishListItemException;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUtil;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemPersistence;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,16 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceWishListItemPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.wish.list.service"));
 
 	@Before
@@ -82,7 +82,8 @@ public class CommerceWishListItemPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceWishListItem> iterator = _commerceWishListItems.iterator();
+		Iterator<CommerceWishListItem> iterator =
+			_commerceWishListItems.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -104,11 +105,14 @@ public class CommerceWishListItemPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
 		_persistence.remove(newCommerceWishListItem);
 
-		CommerceWishListItem existingCommerceWishListItem = _persistence.fetchByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+		CommerceWishListItem existingCommerceWishListItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceWishListItem.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceWishListItem);
 	}
@@ -136,41 +140,57 @@ public class CommerceWishListItemPersistenceTest {
 
 		newCommerceWishListItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceWishListItem.setCommerceWishListId(RandomTestUtil.nextLong());
+		newCommerceWishListItem.setCommerceWishListId(
+			RandomTestUtil.nextLong());
 
-		newCommerceWishListItem.setCPInstanceUuid(RandomTestUtil.randomString());
+		newCommerceWishListItem.setCPInstanceUuid(
+			RandomTestUtil.randomString());
 
 		newCommerceWishListItem.setCProductId(RandomTestUtil.nextLong());
 
 		newCommerceWishListItem.setJson(RandomTestUtil.randomString());
 
-		_commerceWishListItems.add(_persistence.update(newCommerceWishListItem));
+		_commerceWishListItems.add(
+			_persistence.update(newCommerceWishListItem));
 
-		CommerceWishListItem existingCommerceWishListItem = _persistence.findByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+		CommerceWishListItem existingCommerceWishListItem =
+			_persistence.findByPrimaryKey(
+				newCommerceWishListItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceWishListItem.getCommerceWishListItemId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getCommerceWishListItemId(),
 			newCommerceWishListItem.getCommerceWishListItemId());
-		Assert.assertEquals(existingCommerceWishListItem.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getGroupId(),
 			newCommerceWishListItem.getGroupId());
-		Assert.assertEquals(existingCommerceWishListItem.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getCompanyId(),
 			newCommerceWishListItem.getCompanyId());
-		Assert.assertEquals(existingCommerceWishListItem.getUserId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getUserId(),
 			newCommerceWishListItem.getUserId());
-		Assert.assertEquals(existingCommerceWishListItem.getUserName(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getUserName(),
 			newCommerceWishListItem.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceWishListItem.getCreateDate()),
 			Time.getShortTimestamp(newCommerceWishListItem.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceWishListItem.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceWishListItem.getModifiedDate()));
-		Assert.assertEquals(existingCommerceWishListItem.getCommerceWishListId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getCommerceWishListId(),
 			newCommerceWishListItem.getCommerceWishListId());
-		Assert.assertEquals(existingCommerceWishListItem.getCPInstanceUuid(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getCPInstanceUuid(),
 			newCommerceWishListItem.getCPInstanceUuid());
-		Assert.assertEquals(existingCommerceWishListItem.getCProductId(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getCProductId(),
 			newCommerceWishListItem.getCProductId());
-		Assert.assertEquals(existingCommerceWishListItem.getJson(),
+		Assert.assertEquals(
+			existingCommerceWishListItem.getJson(),
 			newCommerceWishListItem.getJson());
 	}
 
@@ -208,16 +228,16 @@ public class CommerceWishListItemPersistenceTest {
 
 	@Test
 	public void testCountByCW_CP() throws Exception {
-		_persistence.countByCW_CP(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByCW_CP(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByCW_CP(0L, 0L);
 	}
 
 	@Test
 	public void testCountByCW_CPI_CP() throws Exception {
-		_persistence.countByCW_CPI_CP(RandomTestUtil.nextLong(), "",
-			RandomTestUtil.nextLong());
+		_persistence.countByCW_CPI_CP(
+			RandomTestUtil.nextLong(), "", RandomTestUtil.nextLong());
 
 		_persistence.countByCW_CPI_CP(0L, "null", 0L);
 
@@ -226,12 +246,15 @@ public class CommerceWishListItemPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
-		CommerceWishListItem existingCommerceWishListItem = _persistence.findByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+		CommerceWishListItem existingCommerceWishListItem =
+			_persistence.findByPrimaryKey(
+				newCommerceWishListItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceWishListItem,
-			newCommerceWishListItem);
+		Assert.assertEquals(
+			existingCommerceWishListItem, newCommerceWishListItem);
 	}
 
 	@Test(expected = NoSuchWishListItemException.class)
@@ -243,33 +266,37 @@ public class CommerceWishListItemPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceWishListItem> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceWishListItem",
-			"commerceWishListItemId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWishListId", true, "CPInstanceUuid",
-			true, "CProductId", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceWishListItem", "commerceWishListItemId", true, "groupId",
+			true, "companyId", true, "userId", true, "userName", true,
+			"createDate", true, "modifiedDate", true, "commerceWishListId",
+			true, "CPInstanceUuid", true, "CProductId", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
-		CommerceWishListItem existingCommerceWishListItem = _persistence.fetchByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+		CommerceWishListItem existingCommerceWishListItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceWishListItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceWishListItem,
-			newCommerceWishListItem);
+		Assert.assertEquals(
+			existingCommerceWishListItem, newCommerceWishListItem);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceWishListItem missingCommerceWishListItem = _persistence.fetchByPrimaryKey(pk);
+		CommerceWishListItem missingCommerceWishListItem =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceWishListItem);
 	}
@@ -277,26 +304,35 @@ public class CommerceWishListItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceWishListItem newCommerceWishListItem1 = addCommerceWishListItem();
-		CommerceWishListItem newCommerceWishListItem2 = addCommerceWishListItem();
+
+		CommerceWishListItem newCommerceWishListItem1 =
+			addCommerceWishListItem();
+		CommerceWishListItem newCommerceWishListItem2 =
+			addCommerceWishListItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceWishListItem1.getPrimaryKey());
 		primaryKeys.add(newCommerceWishListItem2.getPrimaryKey());
 
-		Map<Serializable, CommerceWishListItem> commerceWishListItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceWishListItem> commerceWishListItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceWishListItems.size());
-		Assert.assertEquals(newCommerceWishListItem1,
-			commerceWishListItems.get(newCommerceWishListItem1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceWishListItem2,
-			commerceWishListItems.get(newCommerceWishListItem2.getPrimaryKey()));
+		Assert.assertEquals(
+			newCommerceWishListItem1,
+			commerceWishListItems.get(
+				newCommerceWishListItem1.getPrimaryKey()));
+		Assert.assertEquals(
+			newCommerceWishListItem2,
+			commerceWishListItems.get(
+				newCommerceWishListItem2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -306,7 +342,8 @@ public class CommerceWishListItemPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceWishListItem> commerceWishListItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceWishListItem> commerceWishListItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceWishListItems.isEmpty());
 	}
@@ -314,7 +351,9 @@ public class CommerceWishListItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -323,36 +362,40 @@ public class CommerceWishListItemPersistenceTest {
 		primaryKeys.add(newCommerceWishListItem.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceWishListItem> commerceWishListItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceWishListItem> commerceWishListItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceWishListItems.size());
-		Assert.assertEquals(newCommerceWishListItem,
+		Assert.assertEquals(
+			newCommerceWishListItem,
 			commerceWishListItems.get(newCommerceWishListItem.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceWishListItem> commerceWishListItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceWishListItem> commerceWishListItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceWishListItems.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceWishListItem.getPrimaryKey());
 
-		Map<Serializable, CommerceWishListItem> commerceWishListItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceWishListItem> commerceWishListItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceWishListItems.size());
-		Assert.assertEquals(newCommerceWishListItem,
+		Assert.assertEquals(
+			newCommerceWishListItem,
 			commerceWishListItems.get(newCommerceWishListItem.getPrimaryKey()));
 	}
 
@@ -360,16 +403,22 @@ public class CommerceWishListItemPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceWishListItemLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceWishListItemLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceWishListItem>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceWishListItem>() {
+
 				@Override
 				public void performAction(
 					CommerceWishListItem commerceWishListItem) {
+
 					Assert.assertNotNull(commerceWishListItem);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -378,54 +427,62 @@ public class CommerceWishListItemPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceWishListItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceWishListItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceWishListItemId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceWishListItemId",
 				newCommerceWishListItem.getCommerceWishListItemId()));
 
-		List<CommerceWishListItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceWishListItem> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CommerceWishListItem existingCommerceWishListItem = result.get(0);
 
-		Assert.assertEquals(existingCommerceWishListItem,
-			newCommerceWishListItem);
+		Assert.assertEquals(
+			existingCommerceWishListItem, newCommerceWishListItem);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceWishListItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceWishListItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceWishListItemId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceWishListItemId", RandomTestUtil.nextLong()));
 
-		List<CommerceWishListItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceWishListItem> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceWishListItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceWishListItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceWishListItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceWishListItemId"));
 
-		Object newCommerceWishListItemId = newCommerceWishListItem.getCommerceWishListItemId();
+		Object newCommerceWishListItemId =
+			newCommerceWishListItem.getCommerceWishListItemId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceWishListItemId",
-				new Object[] { newCommerceWishListItemId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceWishListItemId",
+				new Object[] {newCommerceWishListItemId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -433,20 +490,22 @@ public class CommerceWishListItemPersistenceTest {
 
 		Object existingCommerceWishListItemId = result.get(0);
 
-		Assert.assertEquals(existingCommerceWishListItemId,
-			newCommerceWishListItemId);
+		Assert.assertEquals(
+			existingCommerceWishListItemId, newCommerceWishListItemId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceWishListItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceWishListItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceWishListItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceWishListItemId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceWishListItemId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceWishListItemId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -455,28 +514,34 @@ public class CommerceWishListItemPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceWishListItem newCommerceWishListItem = addCommerceWishListItem();
+		CommerceWishListItem newCommerceWishListItem =
+			addCommerceWishListItem();
 
 		_persistence.clearCache();
 
-		CommerceWishListItem existingCommerceWishListItem = _persistence.findByPrimaryKey(newCommerceWishListItem.getPrimaryKey());
+		CommerceWishListItem existingCommerceWishListItem =
+			_persistence.findByPrimaryKey(
+				newCommerceWishListItem.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceWishListItem.getCommerceWishListId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceWishListItem,
-				"getOriginalCommerceWishListId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceWishListItem.getCommerceWishListId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceWishListItem, "getOriginalCommerceWishListId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceWishListItem.getCPInstanceUuid(),
-				ReflectionTestUtil.invoke(existingCommerceWishListItem,
-					"getOriginalCPInstanceUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceWishListItem.getCProductId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceWishListItem,
-				"getOriginalCProductId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCommerceWishListItem, "getOriginalCPInstanceUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceWishListItem.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceWishListItem, "getOriginalCProductId",
+				new Class<?>[0]));
 	}
 
-	protected CommerceWishListItem addCommerceWishListItem()
-		throws Exception {
+	protected CommerceWishListItem addCommerceWishListItem() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceWishListItem commerceWishListItem = _persistence.create(pk);
@@ -506,7 +571,9 @@ public class CommerceWishListItemPersistenceTest {
 		return commerceWishListItem;
 	}
 
-	private List<CommerceWishListItem> _commerceWishListItems = new ArrayList<CommerceWishListItem>();
+	private List<CommerceWishListItem> _commerceWishListItems =
+		new ArrayList<CommerceWishListItem>();
 	private CommerceWishListItemPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

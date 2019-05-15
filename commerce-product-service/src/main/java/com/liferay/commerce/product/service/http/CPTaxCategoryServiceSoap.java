@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPTaxCategoryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPTaxCategoryServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPTaxCategoryServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.model.CPTaxCategorySoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.model.CPTaxCategory}, that is translated to a
- * {@link com.liferay.commerce.product.model.CPTaxCategorySoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.model.CPTaxCategorySoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.model.CPTaxCategory</code>, that is translated to a
+ * <code>com.liferay.commerce.product.model.CPTaxCategorySoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,27 +63,32 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPTaxCategoryServiceHttp
- * @see com.liferay.commerce.product.model.CPTaxCategorySoap
- * @see CPTaxCategoryServiceUtil
  * @generated
  */
 @ProviderType
 public class CPTaxCategoryServiceSoap {
-	public static com.liferay.commerce.product.model.CPTaxCategorySoap addCPTaxCategory(
-		String[] nameMapLanguageIds, String[] nameMapValues,
-		String[] descriptionMapLanguageIds, String[] descriptionMapValues,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.product.model.CPTaxCategorySoap
+			addCPTaxCategory(
+				String[] nameMapLanguageIds, String[] nameMapValues,
+				String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
 
-			com.liferay.commerce.product.model.CPTaxCategory returnValue = CPTaxCategoryServiceUtil.addCPTaxCategory(nameMap,
-					descriptionMap, serviceContext);
+			com.liferay.commerce.product.model.CPTaxCategory returnValue =
+				CPTaxCategoryServiceUtil.addCPTaxCategory(
+					nameMap, descriptionMap, serviceContext);
 
-			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPTaxCategorySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,6 +99,7 @@ public class CPTaxCategoryServiceSoap {
 
 	public static void deleteCPTaxCategory(long cpTaxCategoryId)
 		throws RemoteException {
+
 		try {
 			CPTaxCategoryServiceUtil.deleteCPTaxCategory(cpTaxCategoryId);
 		}
@@ -104,13 +110,17 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPTaxCategorySoap[] getCPTaxCategories(
-		long groupId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPTaxCategory> returnValue =
-				CPTaxCategoryServiceUtil.getCPTaxCategories(groupId);
+	public static com.liferay.commerce.product.model.CPTaxCategorySoap[]
+			getCPTaxCategories(long groupId)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
+				returnValue = CPTaxCategoryServiceUtil.getCPTaxCategories(
+					groupId);
+
+			return com.liferay.commerce.product.model.CPTaxCategorySoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -119,16 +129,21 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPTaxCategorySoap[] getCPTaxCategories(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPTaxCategory> orderByComparator)
+	public static com.liferay.commerce.product.model.CPTaxCategorySoap[]
+			getCPTaxCategories(
+				long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CPTaxCategory>
+						orderByComparator)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPTaxCategory> returnValue =
-				CPTaxCategoryServiceUtil.getCPTaxCategories(groupId, start,
-					end, orderByComparator);
 
-			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
+				returnValue = CPTaxCategoryServiceUtil.getCPTaxCategories(
+					groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPTaxCategorySoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -139,8 +154,10 @@ public class CPTaxCategoryServiceSoap {
 
 	public static int getCPTaxCategoriesCount(long groupId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CPTaxCategoryServiceUtil.getCPTaxCategoriesCount(groupId);
+			int returnValue = CPTaxCategoryServiceUtil.getCPTaxCategoriesCount(
+				groupId);
 
 			return returnValue;
 		}
@@ -151,12 +168,16 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPTaxCategorySoap getCPTaxCategory(
-		long cpTaxCategoryId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPTaxCategory returnValue = CPTaxCategoryServiceUtil.getCPTaxCategory(cpTaxCategoryId);
+	public static com.liferay.commerce.product.model.CPTaxCategorySoap
+			getCPTaxCategory(long cpTaxCategoryId)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPTaxCategory returnValue =
+				CPTaxCategoryServiceUtil.getCPTaxCategory(cpTaxCategoryId);
+
+			return com.liferay.commerce.product.model.CPTaxCategorySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -165,20 +186,26 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPTaxCategorySoap updateCPTaxCategory(
-		long cpTaxCategoryId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String[] descriptionMapLanguageIds,
-		String[] descriptionMapValues) throws RemoteException {
+	public static com.liferay.commerce.product.model.CPTaxCategorySoap
+			updateCPTaxCategory(
+				long cpTaxCategoryId, String[] nameMapLanguageIds,
+				String[] nameMapValues, String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues)
+		throws RemoteException {
+
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
 
-			com.liferay.commerce.product.model.CPTaxCategory returnValue = CPTaxCategoryServiceUtil.updateCPTaxCategory(cpTaxCategoryId,
-					nameMap, descriptionMap);
+			com.liferay.commerce.product.model.CPTaxCategory returnValue =
+				CPTaxCategoryServiceUtil.updateCPTaxCategory(
+					cpTaxCategoryId, nameMap, descriptionMap);
 
-			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPTaxCategorySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -187,5 +214,7 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPTaxCategoryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CPTaxCategoryServiceSoap.class);
+
 }

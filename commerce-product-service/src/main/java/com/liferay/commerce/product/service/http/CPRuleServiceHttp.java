@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPRuleServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CPRuleServiceUtil} service utility. The
+ * <code>CPRuleServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,22 +49,24 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Marco Leo
  * @see CPRuleServiceSoap
- * @see HttpPrincipal
- * @see CPRuleServiceUtil
  * @generated
  */
 @ProviderType
 public class CPRuleServiceHttp {
-	public static com.liferay.commerce.product.model.CPRule addCPRule(
-		HttpPrincipal httpPrincipal, String name, boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"addCPRule", _addCPRuleParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					active, type, serviceContext);
+	public static com.liferay.commerce.product.model.CPRule addCPRule(
+			HttpPrincipal httpPrincipal, String name, boolean active,
+			String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "addCPRule",
+				_addCPRuleParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, name, active, type, serviceContext);
 
 			Object returnObj = null;
 
@@ -72,11 +74,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.product.model.CPRule)returnObj;
@@ -89,16 +95,21 @@ public class CPRuleServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CPRule addCPRule(
-		HttpPrincipal httpPrincipal, String name, boolean active, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			HttpPrincipal httpPrincipal, String name, boolean active,
+			String type,
+			com.liferay.portal.kernel.util.UnicodeProperties
+				typeSettingsProperties,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"addCPRule", _addCPRuleParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					active, type, typeSettingsProperties, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "addCPRule",
+				_addCPRuleParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, name, active, type, typeSettingsProperties,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -106,11 +117,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.product.model.CPRule)returnObj;
@@ -124,21 +139,28 @@ public class CPRuleServiceHttp {
 
 	public static void deleteCPRule(HttpPrincipal httpPrincipal, long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"deleteCPRule", _deleteCPRuleParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, cpRuleId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "deleteCPRule",
+				_deleteCPRuleParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpRuleId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -149,13 +171,16 @@ public class CPRuleServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CPRule getCPRule(
-		HttpPrincipal httpPrincipal, long cpRuleId)
+			HttpPrincipal httpPrincipal, long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"getCPRule", _getCPRuleParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, cpRuleId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "getCPRule",
+				_getCPRuleParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpRuleId);
 
 			Object returnObj = null;
 
@@ -163,11 +188,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.product.model.CPRule)returnObj;
@@ -179,16 +208,21 @@ public class CPRuleServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPRule> getCPRules(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPRule> orderByComparator)
+	public static java.util.List<com.liferay.commerce.product.model.CPRule>
+			getCPRules(
+				HttpPrincipal httpPrincipal, long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CPRule>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"getCPRules", _getCPRulesParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "getCPRules",
+				_getCPRulesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -196,14 +230,19 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.product.model.CPRule>)returnObj;
+			return (java.util.List<com.liferay.commerce.product.model.CPRule>)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -214,9 +253,11 @@ public class CPRuleServiceHttp {
 
 	public static int getCPRulesCount(HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"getCPRulesCount", _getCPRulesCountParameterTypes5);
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "getCPRulesCount",
+				_getCPRulesCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -226,11 +267,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -242,17 +287,20 @@ public class CPRuleServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"searchCPRules", _searchCPRulesParameterTypes6);
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPRule> searchCPRules(
+				HttpPrincipal httpPrincipal, long companyId, long groupId,
+				String keywords, int start, int end,
+				com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, keywords, start, end, sort);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "searchCPRules",
+				_searchCPRulesParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, groupId, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -260,14 +308,19 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule>)returnObj;
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult
+				<com.liferay.commerce.product.model.CPRule>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -277,16 +330,18 @@ public class CPRuleServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CPRule updateCPRule(
-		HttpPrincipal httpPrincipal, long cpRuleId, String name,
-		boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			HttpPrincipal httpPrincipal, long cpRuleId, String name,
+			boolean active, String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"updateCPRule", _updateCPRuleParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpRuleId, name, active, type, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "updateCPRule",
+				_updateCPRuleParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpRuleId, name, active, type, serviceContext);
 
 			Object returnObj = null;
 
@@ -294,11 +349,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.product.model.CPRule)returnObj;
@@ -311,18 +370,21 @@ public class CPRuleServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CPRule updateCPRule(
-		HttpPrincipal httpPrincipal, long cpRuleId, String name,
-		boolean active, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			HttpPrincipal httpPrincipal, long cpRuleId, String name,
+			boolean active, String type,
+			com.liferay.portal.kernel.util.UnicodeProperties
+				typeSettingsProperties,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"updateCPRule", _updateCPRuleParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpRuleId, name, active, type, typeSettingsProperties,
-					serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPRuleServiceUtil.class, "updateCPRule",
+				_updateCPRuleParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpRuleId, name, active, type, typeSettingsProperties,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -330,11 +392,15 @@ public class CPRuleServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.product.model.CPRule)returnObj;
@@ -347,39 +413,41 @@ public class CPRuleServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CPRuleServiceHttp.class);
+
 	private static final Class<?>[] _addCPRuleParameterTypes0 = new Class[] {
-			String.class, boolean.class, String.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
+		String.class, boolean.class, String.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
 	private static final Class<?>[] _addCPRuleParameterTypes1 = new Class[] {
-			String.class, boolean.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
+		String.class, boolean.class, String.class,
+		com.liferay.portal.kernel.util.UnicodeProperties.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
 	private static final Class<?>[] _deleteCPRuleParameterTypes2 = new Class[] {
-			long.class
-		};
+		long.class
+	};
 	private static final Class<?>[] _getCPRuleParameterTypes3 = new Class[] {
-			long.class
-		};
+		long.class
+	};
 	private static final Class<?>[] _getCPRulesParameterTypes4 = new Class[] {
-			long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
-		};
-	private static final Class<?>[] _getCPRulesCountParameterTypes5 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _searchCPRulesParameterTypes6 = new Class[] {
+		long.class, int.class, int.class,
+		com.liferay.portal.kernel.util.OrderByComparator.class
+	};
+	private static final Class<?>[] _getCPRulesCountParameterTypes5 =
+		new Class[] {long.class};
+	private static final Class<?>[] _searchCPRulesParameterTypes6 =
+		new Class[] {
 			long.class, long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[] _updateCPRuleParameterTypes7 = new Class[] {
-			long.class, String.class, boolean.class, String.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
+		long.class, String.class, boolean.class, String.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
 	private static final Class<?>[] _updateCPRuleParameterTypes8 = new Class[] {
-			long.class, String.class, boolean.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
+		long.class, String.class, boolean.class, String.class,
+		com.liferay.portal.kernel.util.UnicodeProperties.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
+
 }

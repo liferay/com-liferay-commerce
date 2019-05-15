@@ -25,37 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPRuleAssetCategoryRelModel
- * @see com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl
- * @see com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl"
+)
 @ProviderType
-public interface CPRuleAssetCategoryRel extends CPRuleAssetCategoryRelModel,
-	PersistedModel {
+public interface CPRuleAssetCategoryRel
+	extends CPRuleAssetCategoryRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPRuleAssetCategoryRel, Long> CP_RULE_ASSET_CATEGORY_REL_ID_ACCESSOR =
-		new Accessor<CPRuleAssetCategoryRel, Long>() {
-			@Override
-			public Long get(CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
-				return cpRuleAssetCategoryRel.getCPRuleAssetCategoryRelId();
-			}
+	public static final Accessor<CPRuleAssetCategoryRel, Long>
+		CP_RULE_ASSET_CATEGORY_REL_ID_ACCESSOR =
+			new Accessor<CPRuleAssetCategoryRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
+					return cpRuleAssetCategoryRel.getCPRuleAssetCategoryRelId();
+				}
 
-			@Override
-			public Class<CPRuleAssetCategoryRel> getTypeClass() {
-				return CPRuleAssetCategoryRel.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPRuleAssetCategoryRel> getTypeClass() {
+					return CPRuleAssetCategoryRel.class;
+				}
+
+			};
 
 	public com.liferay.asset.kernel.model.AssetCategory getAssetCategory()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

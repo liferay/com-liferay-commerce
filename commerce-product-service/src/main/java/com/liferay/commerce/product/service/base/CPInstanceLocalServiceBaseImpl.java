@@ -43,9 +43,7 @@ import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
 import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
 import com.liferay.commerce.product.service.persistence.CommerceChannelPersistence;
-
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
-
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -53,7 +51,6 @@ import com.liferay.exportimport.kernel.lar.StagedModelDataHandler;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerRegistryUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -104,17 +101,17 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.product.service.impl.CPInstanceLocalServiceImpl
- * @see com.liferay.commerce.product.service.CPInstanceLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CPInstanceLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements CPInstanceLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements CPInstanceLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.service.CPInstanceLocalServiceUtil} to access the cp instance local service.
+	 * Never modify or reference this class directly. Use <code>CPInstanceLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPInstanceLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -154,6 +151,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public CPInstance deleteCPInstance(long CPInstanceId)
 		throws PortalException {
+
 		return cpInstancePersistence.remove(CPInstanceId);
 	}
 
@@ -168,6 +166,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public CPInstance deleteCPInstance(CPInstance cpInstance)
 		throws PortalException {
+
 		return cpInstancePersistence.remove(cpInstance);
 	}
 
@@ -175,8 +174,8 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CPInstance.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CPInstance.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -194,7 +193,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPInstanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -203,17 +202,18 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return cpInstancePersistence.findWithDynamicQuery(dynamicQuery, start,
-			end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return cpInstancePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPInstanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -223,10 +223,12 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return cpInstancePersistence.findWithDynamicQuery(dynamicQuery, start,
-			end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return cpInstancePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -248,10 +250,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return cpInstancePersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return cpInstancePersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
@@ -267,7 +270,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
-	public CPInstance fetchCPInstanceByUuidAndGroupId(String uuid, long groupId) {
+	public CPInstance fetchCPInstanceByUuidAndGroupId(
+		String uuid, long groupId) {
+
 		return cpInstancePersistence.fetchByUUID_G(uuid, groupId);
 	}
 
@@ -279,9 +284,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
-	public CPInstance fetchCPInstanceByReferenceCode(long companyId,
-		String externalReferenceCode) {
-		return cpInstancePersistence.fetchByC_ERC(companyId, null);
+	public CPInstance fetchCPInstanceByReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return cpInstancePersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	/**
@@ -292,14 +299,14 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @throws PortalException if a cp instance with the primary key could not be found
 	 */
 	@Override
-	public CPInstance getCPInstance(long CPInstanceId)
-		throws PortalException {
+	public CPInstance getCPInstance(long CPInstanceId) throws PortalException {
 		return cpInstancePersistence.findByPrimaryKey(CPInstanceId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(cpInstanceLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
@@ -311,10 +318,14 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(cpInstanceLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			cpInstanceLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(CPInstance.class);
 
@@ -326,6 +337,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
+
 		actionableDynamicQuery.setBaseLocalService(cpInstanceLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CPInstance.class);
@@ -336,48 +348,59 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) {
-		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+
+		final ExportActionableDynamicQuery exportActionableDynamicQuery =
+			new ExportActionableDynamicQuery() {
+
 				@Override
 				public long performCount() throws PortalException {
-					ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+					ManifestSummary manifestSummary =
+						portletDataContext.getManifestSummary();
 
 					StagedModelType stagedModelType = getStagedModelType();
 
 					long modelAdditionCount = super.performCount();
 
-					manifestSummary.addModelAdditionCount(stagedModelType,
-						modelAdditionCount);
+					manifestSummary.addModelAdditionCount(
+						stagedModelType, modelAdditionCount);
 
-					long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext,
-							stagedModelType);
+					long modelDeletionCount =
+						ExportImportHelperUtil.getModelDeletionCount(
+							portletDataContext, stagedModelType);
 
-					manifestSummary.addModelDeletionCount(stagedModelType,
-						modelDeletionCount);
+					manifestSummary.addModelDeletionCount(
+						stagedModelType, modelDeletionCount);
 
 					return modelAdditionCount;
 				}
+
 			};
 
 		initActionableDynamicQuery(exportActionableDynamicQuery);
 
-		exportActionableDynamicQuery.setAddCriteriaMethod(new ActionableDynamicQuery.AddCriteriaMethod() {
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Criterion modifiedDateCriterion = portletDataContext.getDateRangeCriteria(
-							"modifiedDate");
+					Criterion modifiedDateCriterion =
+						portletDataContext.getDateRangeCriteria("modifiedDate");
 
 					if (modifiedDateCriterion != null) {
-						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
+						Conjunction conjunction =
+							RestrictionsFactoryUtil.conjunction();
 
 						conjunction.add(modifiedDateCriterion);
 
-						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+						Disjunction disjunction =
+							RestrictionsFactoryUtil.disjunction();
 
-						disjunction.add(RestrictionsFactoryUtil.gtProperty(
+						disjunction.add(
+							RestrictionsFactoryUtil.gtProperty(
 								"modifiedDate", "lastPublishDate"));
 
-						Property lastPublishDateProperty = PropertyFactoryUtil.forName(
-								"lastPublishDate");
+						Property lastPublishDateProperty =
+							PropertyFactoryUtil.forName("lastPublishDate");
 
 						disjunction.add(lastPublishDateProperty.isNull());
 
@@ -386,12 +409,14 @@ public abstract class CPInstanceLocalServiceBaseImpl
 						modifiedDateCriterion = conjunction;
 					}
 
-					Criterion statusDateCriterion = portletDataContext.getDateRangeCriteria(
-							"statusDate");
+					Criterion statusDateCriterion =
+						portletDataContext.getDateRangeCriteria("statusDate");
 
 					if ((modifiedDateCriterion != null) &&
-							(statusDateCriterion != null)) {
-						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+						(statusDateCriterion != null)) {
+
+						Disjunction disjunction =
+							RestrictionsFactoryUtil.disjunction();
 
 						disjunction.add(modifiedDateCriterion);
 						disjunction.add(statusDateCriterion);
@@ -399,35 +424,49 @@ public abstract class CPInstanceLocalServiceBaseImpl
 						dynamicQuery.add(disjunction);
 					}
 
-					Property workflowStatusProperty = PropertyFactoryUtil.forName(
-							"status");
+					Property workflowStatusProperty =
+						PropertyFactoryUtil.forName("status");
 
 					if (portletDataContext.isInitialPublication()) {
-						dynamicQuery.add(workflowStatusProperty.ne(
+						dynamicQuery.add(
+							workflowStatusProperty.ne(
 								WorkflowConstants.STATUS_IN_TRASH));
 					}
 					else {
-						StagedModelDataHandler<?> stagedModelDataHandler = StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(CPInstance.class.getName());
+						StagedModelDataHandler<?> stagedModelDataHandler =
+							StagedModelDataHandlerRegistryUtil.
+								getStagedModelDataHandler(
+									CPInstance.class.getName());
 
-						dynamicQuery.add(workflowStatusProperty.in(
-								stagedModelDataHandler.getExportableStatuses()));
+						dynamicQuery.add(
+							workflowStatusProperty.in(
+								stagedModelDataHandler.
+									getExportableStatuses()));
 					}
 				}
+
 			});
 
-		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
+		exportActionableDynamicQuery.setGroupId(
+			portletDataContext.getScopeGroupId());
 
-		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPInstance>() {
+		exportActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPInstance>() {
+
 				@Override
 				public void performAction(CPInstance cpInstance)
 					throws PortalException {
-					StagedModelDataHandlerUtil.exportStagedModel(portletDataContext,
-						cpInstance);
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, cpInstance);
 				}
+
 			});
-		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
 				PortalUtil.getClassNameId(CPInstance.class.getName())));
 
 		return exportActionableDynamicQuery;
@@ -439,12 +478,15 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return cpInstanceLocalService.deleteCPInstance((CPInstance)persistedModel);
+
+		return cpInstanceLocalService.deleteCPInstance(
+			(CPInstance)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
+
 		return cpInstancePersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -456,8 +498,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the matching cp instances, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CPInstance> getCPInstancesByUuidAndCompanyId(String uuid,
-		long companyId) {
+	public List<CPInstance> getCPInstancesByUuidAndCompanyId(
+		String uuid, long companyId) {
+
 		return cpInstancePersistence.findByUuid_C(uuid, companyId);
 	}
 
@@ -472,11 +515,12 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @return the range of matching cp instances, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CPInstance> getCPInstancesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end,
+	public List<CPInstance> getCPInstancesByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator) {
-		return cpInstancePersistence.findByUuid_C(uuid, companyId, start, end,
-			orderByComparator);
+
+		return cpInstancePersistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -490,6 +534,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public CPInstance getCPInstanceByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException {
+
 		return cpInstancePersistence.findByUUID_G(uuid, groupId);
 	}
 
@@ -497,7 +542,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * Returns a range of all the cp instances.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPInstanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp instances
@@ -536,7 +581,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the commerce catalog local service
 	 */
-	public com.liferay.commerce.product.service.CommerceCatalogLocalService getCommerceCatalogLocalService() {
+	public com.liferay.commerce.product.service.CommerceCatalogLocalService
+		getCommerceCatalogLocalService() {
+
 		return commerceCatalogLocalService;
 	}
 
@@ -546,7 +593,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param commerceCatalogLocalService the commerce catalog local service
 	 */
 	public void setCommerceCatalogLocalService(
-		com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService) {
+		com.liferay.commerce.product.service.CommerceCatalogLocalService
+			commerceCatalogLocalService) {
+
 		this.commerceCatalogLocalService = commerceCatalogLocalService;
 	}
 
@@ -566,6 +615,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCommerceCatalogPersistence(
 		CommerceCatalogPersistence commerceCatalogPersistence) {
+
 		this.commerceCatalogPersistence = commerceCatalogPersistence;
 	}
 
@@ -574,7 +624,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the commerce channel local service
 	 */
-	public com.liferay.commerce.product.service.CommerceChannelLocalService getCommerceChannelLocalService() {
+	public com.liferay.commerce.product.service.CommerceChannelLocalService
+		getCommerceChannelLocalService() {
+
 		return commerceChannelLocalService;
 	}
 
@@ -584,7 +636,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param commerceChannelLocalService the commerce channel local service
 	 */
 	public void setCommerceChannelLocalService(
-		com.liferay.commerce.product.service.CommerceChannelLocalService commerceChannelLocalService) {
+		com.liferay.commerce.product.service.CommerceChannelLocalService
+			commerceChannelLocalService) {
+
 		this.commerceChannelLocalService = commerceChannelLocalService;
 	}
 
@@ -604,6 +658,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCommerceChannelPersistence(
 		CommerceChannelPersistence commerceChannelPersistence) {
+
 		this.commerceChannelPersistence = commerceChannelPersistence;
 	}
 
@@ -612,7 +667,10 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp attachment file entry local service
 	 */
-	public com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService getCPAttachmentFileEntryLocalService() {
+	public
+		com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService
+			getCPAttachmentFileEntryLocalService() {
+
 		return cpAttachmentFileEntryLocalService;
 	}
 
@@ -622,8 +680,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpAttachmentFileEntryLocalService the cp attachment file entry local service
 	 */
 	public void setCPAttachmentFileEntryLocalService(
-		com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService) {
-		this.cpAttachmentFileEntryLocalService = cpAttachmentFileEntryLocalService;
+		com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService
+			cpAttachmentFileEntryLocalService) {
+
+		this.cpAttachmentFileEntryLocalService =
+			cpAttachmentFileEntryLocalService;
 	}
 
 	/**
@@ -631,7 +692,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp attachment file entry persistence
 	 */
-	public CPAttachmentFileEntryPersistence getCPAttachmentFileEntryPersistence() {
+	public CPAttachmentFileEntryPersistence
+		getCPAttachmentFileEntryPersistence() {
+
 		return cpAttachmentFileEntryPersistence;
 	}
 
@@ -642,7 +705,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPAttachmentFileEntryPersistence(
 		CPAttachmentFileEntryPersistence cpAttachmentFileEntryPersistence) {
-		this.cpAttachmentFileEntryPersistence = cpAttachmentFileEntryPersistence;
+
+		this.cpAttachmentFileEntryPersistence =
+			cpAttachmentFileEntryPersistence;
 	}
 
 	/**
@@ -661,6 +726,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPAttachmentFileEntryFinder(
 		CPAttachmentFileEntryFinder cpAttachmentFileEntryFinder) {
+
 		this.cpAttachmentFileEntryFinder = cpAttachmentFileEntryFinder;
 	}
 
@@ -669,7 +735,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition local service
 	 */
-	public com.liferay.commerce.product.service.CPDefinitionLocalService getCPDefinitionLocalService() {
+	public com.liferay.commerce.product.service.CPDefinitionLocalService
+		getCPDefinitionLocalService() {
+
 		return cpDefinitionLocalService;
 	}
 
@@ -679,7 +747,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionLocalService the cp definition local service
 	 */
 	public void setCPDefinitionLocalService(
-		com.liferay.commerce.product.service.CPDefinitionLocalService cpDefinitionLocalService) {
+		com.liferay.commerce.product.service.CPDefinitionLocalService
+			cpDefinitionLocalService) {
+
 		this.cpDefinitionLocalService = cpDefinitionLocalService;
 	}
 
@@ -699,6 +769,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPDefinitionPersistence(
 		CPDefinitionPersistence cpDefinitionPersistence) {
+
 		this.cpDefinitionPersistence = cpDefinitionPersistence;
 	}
 
@@ -725,7 +796,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition link local service
 	 */
-	public com.liferay.commerce.product.service.CPDefinitionLinkLocalService getCPDefinitionLinkLocalService() {
+	public com.liferay.commerce.product.service.CPDefinitionLinkLocalService
+		getCPDefinitionLinkLocalService() {
+
 		return cpDefinitionLinkLocalService;
 	}
 
@@ -735,7 +808,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionLinkLocalService the cp definition link local service
 	 */
 	public void setCPDefinitionLinkLocalService(
-		com.liferay.commerce.product.service.CPDefinitionLinkLocalService cpDefinitionLinkLocalService) {
+		com.liferay.commerce.product.service.CPDefinitionLinkLocalService
+			cpDefinitionLinkLocalService) {
+
 		this.cpDefinitionLinkLocalService = cpDefinitionLinkLocalService;
 	}
 
@@ -755,6 +830,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPDefinitionLinkPersistence(
 		CPDefinitionLinkPersistence cpDefinitionLinkPersistence) {
+
 		this.cpDefinitionLinkPersistence = cpDefinitionLinkPersistence;
 	}
 
@@ -763,7 +839,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition localization persistence
 	 */
-	public CPDefinitionLocalizationPersistence getCPDefinitionLocalizationPersistence() {
+	public CPDefinitionLocalizationPersistence
+		getCPDefinitionLocalizationPersistence() {
+
 		return cpDefinitionLocalizationPersistence;
 	}
 
@@ -773,8 +851,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionLocalizationPersistence the cp definition localization persistence
 	 */
 	public void setCPDefinitionLocalizationPersistence(
-		CPDefinitionLocalizationPersistence cpDefinitionLocalizationPersistence) {
-		this.cpDefinitionLocalizationPersistence = cpDefinitionLocalizationPersistence;
+		CPDefinitionLocalizationPersistence
+			cpDefinitionLocalizationPersistence) {
+
+		this.cpDefinitionLocalizationPersistence =
+			cpDefinitionLocalizationPersistence;
 	}
 
 	/**
@@ -782,7 +863,10 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition option rel local service
 	 */
-	public com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService getCPDefinitionOptionRelLocalService() {
+	public
+		com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService
+			getCPDefinitionOptionRelLocalService() {
+
 		return cpDefinitionOptionRelLocalService;
 	}
 
@@ -792,8 +876,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionOptionRelLocalService the cp definition option rel local service
 	 */
 	public void setCPDefinitionOptionRelLocalService(
-		com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService cpDefinitionOptionRelLocalService) {
-		this.cpDefinitionOptionRelLocalService = cpDefinitionOptionRelLocalService;
+		com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService
+			cpDefinitionOptionRelLocalService) {
+
+		this.cpDefinitionOptionRelLocalService =
+			cpDefinitionOptionRelLocalService;
 	}
 
 	/**
@@ -801,7 +888,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition option rel persistence
 	 */
-	public CPDefinitionOptionRelPersistence getCPDefinitionOptionRelPersistence() {
+	public CPDefinitionOptionRelPersistence
+		getCPDefinitionOptionRelPersistence() {
+
 		return cpDefinitionOptionRelPersistence;
 	}
 
@@ -812,7 +901,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPDefinitionOptionRelPersistence(
 		CPDefinitionOptionRelPersistence cpDefinitionOptionRelPersistence) {
-		this.cpDefinitionOptionRelPersistence = cpDefinitionOptionRelPersistence;
+
+		this.cpDefinitionOptionRelPersistence =
+			cpDefinitionOptionRelPersistence;
 	}
 
 	/**
@@ -820,7 +911,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition option value rel local service
 	 */
-	public com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService getCPDefinitionOptionValueRelLocalService() {
+	public
+		com.liferay.commerce.product.service.
+			CPDefinitionOptionValueRelLocalService
+				getCPDefinitionOptionValueRelLocalService() {
+
 		return cpDefinitionOptionValueRelLocalService;
 	}
 
@@ -830,8 +925,12 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionOptionValueRelLocalService the cp definition option value rel local service
 	 */
 	public void setCPDefinitionOptionValueRelLocalService(
-		com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService cpDefinitionOptionValueRelLocalService) {
-		this.cpDefinitionOptionValueRelLocalService = cpDefinitionOptionValueRelLocalService;
+		com.liferay.commerce.product.service.
+			CPDefinitionOptionValueRelLocalService
+				cpDefinitionOptionValueRelLocalService) {
+
+		this.cpDefinitionOptionValueRelLocalService =
+			cpDefinitionOptionValueRelLocalService;
 	}
 
 	/**
@@ -839,7 +938,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition option value rel persistence
 	 */
-	public CPDefinitionOptionValueRelPersistence getCPDefinitionOptionValueRelPersistence() {
+	public CPDefinitionOptionValueRelPersistence
+		getCPDefinitionOptionValueRelPersistence() {
+
 		return cpDefinitionOptionValueRelPersistence;
 	}
 
@@ -849,8 +950,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionOptionValueRelPersistence the cp definition option value rel persistence
 	 */
 	public void setCPDefinitionOptionValueRelPersistence(
-		CPDefinitionOptionValueRelPersistence cpDefinitionOptionValueRelPersistence) {
-		this.cpDefinitionOptionValueRelPersistence = cpDefinitionOptionValueRelPersistence;
+		CPDefinitionOptionValueRelPersistence
+			cpDefinitionOptionValueRelPersistence) {
+
+		this.cpDefinitionOptionValueRelPersistence =
+			cpDefinitionOptionValueRelPersistence;
 	}
 
 	/**
@@ -858,7 +962,10 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition specification option value local service
 	 */
-	public com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService getCPDefinitionSpecificationOptionValueLocalService() {
+	public com.liferay.commerce.product.service.
+		CPDefinitionSpecificationOptionValueLocalService
+			getCPDefinitionSpecificationOptionValueLocalService() {
+
 		return cpDefinitionSpecificationOptionValueLocalService;
 	}
 
@@ -868,8 +975,12 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionSpecificationOptionValueLocalService the cp definition specification option value local service
 	 */
 	public void setCPDefinitionSpecificationOptionValueLocalService(
-		com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService cpDefinitionSpecificationOptionValueLocalService) {
-		this.cpDefinitionSpecificationOptionValueLocalService = cpDefinitionSpecificationOptionValueLocalService;
+		com.liferay.commerce.product.service.
+			CPDefinitionSpecificationOptionValueLocalService
+				cpDefinitionSpecificationOptionValueLocalService) {
+
+		this.cpDefinitionSpecificationOptionValueLocalService =
+			cpDefinitionSpecificationOptionValueLocalService;
 	}
 
 	/**
@@ -877,7 +988,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp definition specification option value persistence
 	 */
-	public CPDefinitionSpecificationOptionValuePersistence getCPDefinitionSpecificationOptionValuePersistence() {
+	public CPDefinitionSpecificationOptionValuePersistence
+		getCPDefinitionSpecificationOptionValuePersistence() {
+
 		return cpDefinitionSpecificationOptionValuePersistence;
 	}
 
@@ -887,8 +1000,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDefinitionSpecificationOptionValuePersistence the cp definition specification option value persistence
 	 */
 	public void setCPDefinitionSpecificationOptionValuePersistence(
-		CPDefinitionSpecificationOptionValuePersistence cpDefinitionSpecificationOptionValuePersistence) {
-		this.cpDefinitionSpecificationOptionValuePersistence = cpDefinitionSpecificationOptionValuePersistence;
+		CPDefinitionSpecificationOptionValuePersistence
+			cpDefinitionSpecificationOptionValuePersistence) {
+
+		this.cpDefinitionSpecificationOptionValuePersistence =
+			cpDefinitionSpecificationOptionValuePersistence;
 	}
 
 	/**
@@ -896,7 +1012,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp display layout local service
 	 */
-	public com.liferay.commerce.product.service.CPDisplayLayoutLocalService getCPDisplayLayoutLocalService() {
+	public com.liferay.commerce.product.service.CPDisplayLayoutLocalService
+		getCPDisplayLayoutLocalService() {
+
 		return cpDisplayLayoutLocalService;
 	}
 
@@ -906,7 +1024,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpDisplayLayoutLocalService the cp display layout local service
 	 */
 	public void setCPDisplayLayoutLocalService(
-		com.liferay.commerce.product.service.CPDisplayLayoutLocalService cpDisplayLayoutLocalService) {
+		com.liferay.commerce.product.service.CPDisplayLayoutLocalService
+			cpDisplayLayoutLocalService) {
+
 		this.cpDisplayLayoutLocalService = cpDisplayLayoutLocalService;
 	}
 
@@ -926,6 +1046,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPDisplayLayoutPersistence(
 		CPDisplayLayoutPersistence cpDisplayLayoutPersistence) {
+
 		this.cpDisplayLayoutPersistence = cpDisplayLayoutPersistence;
 	}
 
@@ -934,7 +1055,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp friendly url entry local service
 	 */
-	public com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService getCPFriendlyURLEntryLocalService() {
+	public com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService
+		getCPFriendlyURLEntryLocalService() {
+
 		return cpFriendlyURLEntryLocalService;
 	}
 
@@ -944,7 +1067,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpFriendlyURLEntryLocalService the cp friendly url entry local service
 	 */
 	public void setCPFriendlyURLEntryLocalService(
-		com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService cpFriendlyURLEntryLocalService) {
+		com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService
+			cpFriendlyURLEntryLocalService) {
+
 		this.cpFriendlyURLEntryLocalService = cpFriendlyURLEntryLocalService;
 	}
 
@@ -964,6 +1089,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPFriendlyURLEntryPersistence(
 		CPFriendlyURLEntryPersistence cpFriendlyURLEntryPersistence) {
+
 		this.cpFriendlyURLEntryPersistence = cpFriendlyURLEntryPersistence;
 	}
 
@@ -983,6 +1109,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPInstanceLocalService(
 		CPInstanceLocalService cpInstanceLocalService) {
+
 		this.cpInstanceLocalService = cpInstanceLocalService;
 	}
 
@@ -1002,6 +1129,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPInstancePersistence(
 		CPInstancePersistence cpInstancePersistence) {
+
 		this.cpInstancePersistence = cpInstancePersistence;
 	}
 
@@ -1028,7 +1156,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp measurement unit local service
 	 */
-	public com.liferay.commerce.product.service.CPMeasurementUnitLocalService getCPMeasurementUnitLocalService() {
+	public com.liferay.commerce.product.service.CPMeasurementUnitLocalService
+		getCPMeasurementUnitLocalService() {
+
 		return cpMeasurementUnitLocalService;
 	}
 
@@ -1038,7 +1168,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpMeasurementUnitLocalService the cp measurement unit local service
 	 */
 	public void setCPMeasurementUnitLocalService(
-		com.liferay.commerce.product.service.CPMeasurementUnitLocalService cpMeasurementUnitLocalService) {
+		com.liferay.commerce.product.service.CPMeasurementUnitLocalService
+			cpMeasurementUnitLocalService) {
+
 		this.cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
 	}
 
@@ -1058,6 +1190,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPMeasurementUnitPersistence(
 		CPMeasurementUnitPersistence cpMeasurementUnitPersistence) {
+
 		this.cpMeasurementUnitPersistence = cpMeasurementUnitPersistence;
 	}
 
@@ -1066,7 +1199,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp option local service
 	 */
-	public com.liferay.commerce.product.service.CPOptionLocalService getCPOptionLocalService() {
+	public com.liferay.commerce.product.service.CPOptionLocalService
+		getCPOptionLocalService() {
+
 		return cpOptionLocalService;
 	}
 
@@ -1076,7 +1211,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpOptionLocalService the cp option local service
 	 */
 	public void setCPOptionLocalService(
-		com.liferay.commerce.product.service.CPOptionLocalService cpOptionLocalService) {
+		com.liferay.commerce.product.service.CPOptionLocalService
+			cpOptionLocalService) {
+
 		this.cpOptionLocalService = cpOptionLocalService;
 	}
 
@@ -1094,7 +1231,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @param cpOptionPersistence the cp option persistence
 	 */
-	public void setCPOptionPersistence(CPOptionPersistence cpOptionPersistence) {
+	public void setCPOptionPersistence(
+		CPOptionPersistence cpOptionPersistence) {
+
 		this.cpOptionPersistence = cpOptionPersistence;
 	}
 
@@ -1103,7 +1242,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp option category local service
 	 */
-	public com.liferay.commerce.product.service.CPOptionCategoryLocalService getCPOptionCategoryLocalService() {
+	public com.liferay.commerce.product.service.CPOptionCategoryLocalService
+		getCPOptionCategoryLocalService() {
+
 		return cpOptionCategoryLocalService;
 	}
 
@@ -1113,7 +1254,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpOptionCategoryLocalService the cp option category local service
 	 */
 	public void setCPOptionCategoryLocalService(
-		com.liferay.commerce.product.service.CPOptionCategoryLocalService cpOptionCategoryLocalService) {
+		com.liferay.commerce.product.service.CPOptionCategoryLocalService
+			cpOptionCategoryLocalService) {
+
 		this.cpOptionCategoryLocalService = cpOptionCategoryLocalService;
 	}
 
@@ -1133,6 +1276,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPOptionCategoryPersistence(
 		CPOptionCategoryPersistence cpOptionCategoryPersistence) {
+
 		this.cpOptionCategoryPersistence = cpOptionCategoryPersistence;
 	}
 
@@ -1141,7 +1285,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp option value local service
 	 */
-	public com.liferay.commerce.product.service.CPOptionValueLocalService getCPOptionValueLocalService() {
+	public com.liferay.commerce.product.service.CPOptionValueLocalService
+		getCPOptionValueLocalService() {
+
 		return cpOptionValueLocalService;
 	}
 
@@ -1151,7 +1297,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpOptionValueLocalService the cp option value local service
 	 */
 	public void setCPOptionValueLocalService(
-		com.liferay.commerce.product.service.CPOptionValueLocalService cpOptionValueLocalService) {
+		com.liferay.commerce.product.service.CPOptionValueLocalService
+			cpOptionValueLocalService) {
+
 		this.cpOptionValueLocalService = cpOptionValueLocalService;
 	}
 
@@ -1171,6 +1319,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPOptionValuePersistence(
 		CPOptionValuePersistence cpOptionValuePersistence) {
+
 		this.cpOptionValuePersistence = cpOptionValuePersistence;
 	}
 
@@ -1179,7 +1328,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the c product local service
 	 */
-	public com.liferay.commerce.product.service.CProductLocalService getCProductLocalService() {
+	public com.liferay.commerce.product.service.CProductLocalService
+		getCProductLocalService() {
+
 		return cProductLocalService;
 	}
 
@@ -1189,7 +1340,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cProductLocalService the c product local service
 	 */
 	public void setCProductLocalService(
-		com.liferay.commerce.product.service.CProductLocalService cProductLocalService) {
+		com.liferay.commerce.product.service.CProductLocalService
+			cProductLocalService) {
+
 		this.cProductLocalService = cProductLocalService;
 	}
 
@@ -1207,7 +1360,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @param cProductPersistence the c product persistence
 	 */
-	public void setCProductPersistence(CProductPersistence cProductPersistence) {
+	public void setCProductPersistence(
+		CProductPersistence cProductPersistence) {
+
 		this.cProductPersistence = cProductPersistence;
 	}
 
@@ -1216,7 +1371,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp rule local service
 	 */
-	public com.liferay.commerce.product.service.CPRuleLocalService getCPRuleLocalService() {
+	public com.liferay.commerce.product.service.CPRuleLocalService
+		getCPRuleLocalService() {
+
 		return cpRuleLocalService;
 	}
 
@@ -1226,7 +1383,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpRuleLocalService the cp rule local service
 	 */
 	public void setCPRuleLocalService(
-		com.liferay.commerce.product.service.CPRuleLocalService cpRuleLocalService) {
+		com.liferay.commerce.product.service.CPRuleLocalService
+			cpRuleLocalService) {
+
 		this.cpRuleLocalService = cpRuleLocalService;
 	}
 
@@ -1253,7 +1412,10 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp rule asset category rel local service
 	 */
-	public com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService getCPRuleAssetCategoryRelLocalService() {
+	public
+		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
+			getCPRuleAssetCategoryRelLocalService() {
+
 		return cpRuleAssetCategoryRelLocalService;
 	}
 
@@ -1263,8 +1425,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpRuleAssetCategoryRelLocalService the cp rule asset category rel local service
 	 */
 	public void setCPRuleAssetCategoryRelLocalService(
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService cpRuleAssetCategoryRelLocalService) {
-		this.cpRuleAssetCategoryRelLocalService = cpRuleAssetCategoryRelLocalService;
+		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
+			cpRuleAssetCategoryRelLocalService) {
+
+		this.cpRuleAssetCategoryRelLocalService =
+			cpRuleAssetCategoryRelLocalService;
 	}
 
 	/**
@@ -1272,7 +1437,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp rule asset category rel persistence
 	 */
-	public CPRuleAssetCategoryRelPersistence getCPRuleAssetCategoryRelPersistence() {
+	public CPRuleAssetCategoryRelPersistence
+		getCPRuleAssetCategoryRelPersistence() {
+
 		return cpRuleAssetCategoryRelPersistence;
 	}
 
@@ -1283,7 +1450,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPRuleAssetCategoryRelPersistence(
 		CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence) {
-		this.cpRuleAssetCategoryRelPersistence = cpRuleAssetCategoryRelPersistence;
+
+		this.cpRuleAssetCategoryRelPersistence =
+			cpRuleAssetCategoryRelPersistence;
 	}
 
 	/**
@@ -1291,7 +1460,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp rule user segment rel local service
 	 */
-	public com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService getCPRuleUserSegmentRelLocalService() {
+	public com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
+		getCPRuleUserSegmentRelLocalService() {
+
 		return cpRuleUserSegmentRelLocalService;
 	}
 
@@ -1301,8 +1472,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpRuleUserSegmentRelLocalService the cp rule user segment rel local service
 	 */
 	public void setCPRuleUserSegmentRelLocalService(
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService cpRuleUserSegmentRelLocalService) {
-		this.cpRuleUserSegmentRelLocalService = cpRuleUserSegmentRelLocalService;
+		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
+			cpRuleUserSegmentRelLocalService) {
+
+		this.cpRuleUserSegmentRelLocalService =
+			cpRuleUserSegmentRelLocalService;
 	}
 
 	/**
@@ -1310,7 +1484,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp rule user segment rel persistence
 	 */
-	public CPRuleUserSegmentRelPersistence getCPRuleUserSegmentRelPersistence() {
+	public CPRuleUserSegmentRelPersistence
+		getCPRuleUserSegmentRelPersistence() {
+
 		return cpRuleUserSegmentRelPersistence;
 	}
 
@@ -1321,6 +1497,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPRuleUserSegmentRelPersistence(
 		CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence) {
+
 		this.cpRuleUserSegmentRelPersistence = cpRuleUserSegmentRelPersistence;
 	}
 
@@ -1329,7 +1506,10 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp specification option local service
 	 */
-	public com.liferay.commerce.product.service.CPSpecificationOptionLocalService getCPSpecificationOptionLocalService() {
+	public
+		com.liferay.commerce.product.service.CPSpecificationOptionLocalService
+			getCPSpecificationOptionLocalService() {
+
 		return cpSpecificationOptionLocalService;
 	}
 
@@ -1339,8 +1519,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpSpecificationOptionLocalService the cp specification option local service
 	 */
 	public void setCPSpecificationOptionLocalService(
-		com.liferay.commerce.product.service.CPSpecificationOptionLocalService cpSpecificationOptionLocalService) {
-		this.cpSpecificationOptionLocalService = cpSpecificationOptionLocalService;
+		com.liferay.commerce.product.service.CPSpecificationOptionLocalService
+			cpSpecificationOptionLocalService) {
+
+		this.cpSpecificationOptionLocalService =
+			cpSpecificationOptionLocalService;
 	}
 
 	/**
@@ -1348,7 +1531,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp specification option persistence
 	 */
-	public CPSpecificationOptionPersistence getCPSpecificationOptionPersistence() {
+	public CPSpecificationOptionPersistence
+		getCPSpecificationOptionPersistence() {
+
 		return cpSpecificationOptionPersistence;
 	}
 
@@ -1359,7 +1544,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPSpecificationOptionPersistence(
 		CPSpecificationOptionPersistence cpSpecificationOptionPersistence) {
-		this.cpSpecificationOptionPersistence = cpSpecificationOptionPersistence;
+
+		this.cpSpecificationOptionPersistence =
+			cpSpecificationOptionPersistence;
 	}
 
 	/**
@@ -1367,7 +1554,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the cp tax category local service
 	 */
-	public com.liferay.commerce.product.service.CPTaxCategoryLocalService getCPTaxCategoryLocalService() {
+	public com.liferay.commerce.product.service.CPTaxCategoryLocalService
+		getCPTaxCategoryLocalService() {
+
 		return cpTaxCategoryLocalService;
 	}
 
@@ -1377,7 +1566,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param cpTaxCategoryLocalService the cp tax category local service
 	 */
 	public void setCPTaxCategoryLocalService(
-		com.liferay.commerce.product.service.CPTaxCategoryLocalService cpTaxCategoryLocalService) {
+		com.liferay.commerce.product.service.CPTaxCategoryLocalService
+			cpTaxCategoryLocalService) {
+
 		this.cpTaxCategoryLocalService = cpTaxCategoryLocalService;
 	}
 
@@ -1397,6 +1588,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setCPTaxCategoryPersistence(
 		CPTaxCategoryPersistence cpTaxCategoryPersistence) {
+
 		this.cpTaxCategoryPersistence = cpTaxCategoryPersistence;
 	}
 
@@ -1405,7 +1597,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -1415,7 +1609,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -1424,7 +1620,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -1434,7 +1632,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -1454,6 +1654,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -1462,7 +1663,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -1472,7 +1675,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -1481,7 +1686,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -1492,6 +1699,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -1518,7 +1726,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the workflow instance link local service
 	 */
-	public com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+	public com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+		getWorkflowInstanceLinkLocalService() {
+
 		return workflowInstanceLinkLocalService;
 	}
 
@@ -1528,8 +1738,11 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param workflowInstanceLinkLocalService the workflow instance link local service
 	 */
 	public void setWorkflowInstanceLinkLocalService(
-		com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
-		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+		com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+			workflowInstanceLinkLocalService) {
+
+		this.workflowInstanceLinkLocalService =
+			workflowInstanceLinkLocalService;
 	}
 
 	/**
@@ -1537,7 +1750,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the workflow instance link persistence
 	 */
-	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+	public WorkflowInstanceLinkPersistence
+		getWorkflowInstanceLinkPersistence() {
+
 		return workflowInstanceLinkPersistence;
 	}
 
@@ -1548,6 +1763,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setWorkflowInstanceLinkPersistence(
 		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+
 		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
 	}
 
@@ -1556,7 +1772,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 *
 	 * @return the expando row local service
 	 */
-	public com.liferay.expando.kernel.service.ExpandoRowLocalService getExpandoRowLocalService() {
+	public com.liferay.expando.kernel.service.ExpandoRowLocalService
+		getExpandoRowLocalService() {
+
 		return expandoRowLocalService;
 	}
 
@@ -1566,7 +1784,9 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 * @param expandoRowLocalService the expando row local service
 	 */
 	public void setExpandoRowLocalService(
-		com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService) {
+		com.liferay.expando.kernel.service.ExpandoRowLocalService
+			expandoRowLocalService) {
+
 		this.expandoRowLocalService = expandoRowLocalService;
 	}
 
@@ -1586,11 +1806,13 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	 */
 	public void setExpandoRowPersistence(
 		ExpandoRowPersistence expandoRowPersistence) {
+
 		this.expandoRowPersistence = expandoRowPersistence;
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.product.model.CPInstance",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.product.model.CPInstance",
 			cpInstanceLocalService);
 	}
 
@@ -1631,8 +1853,8 @@ public abstract class CPInstanceLocalServiceBaseImpl
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -1641,118 +1863,267 @@ public abstract class CPInstanceLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class)
-	protected com.liferay.commerce.product.service.CommerceCatalogLocalService commerceCatalogLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceCatalogLocalService
+		commerceCatalogLocalService;
+
 	@BeanReference(type = CommerceCatalogPersistence.class)
 	protected CommerceCatalogPersistence commerceCatalogPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CommerceChannelLocalService.class)
-	protected com.liferay.commerce.product.service.CommerceChannelLocalService commerceChannelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceChannelLocalService
+		commerceChannelLocalService;
+
 	@BeanReference(type = CommerceChannelPersistence.class)
 	protected CommerceChannelPersistence commerceChannelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class)
-	protected com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService
+			cpAttachmentFileEntryLocalService;
+
 	@BeanReference(type = CPAttachmentFileEntryPersistence.class)
 	protected CPAttachmentFileEntryPersistence cpAttachmentFileEntryPersistence;
+
 	@BeanReference(type = CPAttachmentFileEntryFinder.class)
 	protected CPAttachmentFileEntryFinder cpAttachmentFileEntryFinder;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDefinitionLocalService.class)
-	protected com.liferay.commerce.product.service.CPDefinitionLocalService cpDefinitionLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDefinitionLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPDefinitionLocalService
+		cpDefinitionLocalService;
+
 	@BeanReference(type = CPDefinitionPersistence.class)
 	protected CPDefinitionPersistence cpDefinitionPersistence;
+
 	@BeanReference(type = CPDefinitionFinder.class)
 	protected CPDefinitionFinder cpDefinitionFinder;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDefinitionLinkLocalService.class)
-	protected com.liferay.commerce.product.service.CPDefinitionLinkLocalService cpDefinitionLinkLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDefinitionLinkLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPDefinitionLinkLocalService
+		cpDefinitionLinkLocalService;
+
 	@BeanReference(type = CPDefinitionLinkPersistence.class)
 	protected CPDefinitionLinkPersistence cpDefinitionLinkPersistence;
+
 	@BeanReference(type = CPDefinitionLocalizationPersistence.class)
-	protected CPDefinitionLocalizationPersistence cpDefinitionLocalizationPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService.class)
-	protected com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService cpDefinitionOptionRelLocalService;
+	protected CPDefinitionLocalizationPersistence
+		cpDefinitionLocalizationPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService
+			cpDefinitionOptionRelLocalService;
+
 	@BeanReference(type = CPDefinitionOptionRelPersistence.class)
 	protected CPDefinitionOptionRelPersistence cpDefinitionOptionRelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService.class)
-	protected com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService cpDefinitionOptionValueRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.
+			CPDefinitionOptionValueRelLocalService
+				cpDefinitionOptionValueRelLocalService;
+
 	@BeanReference(type = CPDefinitionOptionValueRelPersistence.class)
-	protected CPDefinitionOptionValueRelPersistence cpDefinitionOptionValueRelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService.class)
-	protected com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService cpDefinitionSpecificationOptionValueLocalService;
+	protected CPDefinitionOptionValueRelPersistence
+		cpDefinitionOptionValueRelPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService.class
+	)
+	protected com.liferay.commerce.product.service.
+		CPDefinitionSpecificationOptionValueLocalService
+			cpDefinitionSpecificationOptionValueLocalService;
+
 	@BeanReference(type = CPDefinitionSpecificationOptionValuePersistence.class)
-	protected CPDefinitionSpecificationOptionValuePersistence cpDefinitionSpecificationOptionValuePersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPDisplayLayoutLocalService.class)
-	protected com.liferay.commerce.product.service.CPDisplayLayoutLocalService cpDisplayLayoutLocalService;
+	protected CPDefinitionSpecificationOptionValuePersistence
+		cpDefinitionSpecificationOptionValuePersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDisplayLayoutLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPDisplayLayoutLocalService
+		cpDisplayLayoutLocalService;
+
 	@BeanReference(type = CPDisplayLayoutPersistence.class)
 	protected CPDisplayLayoutPersistence cpDisplayLayoutPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService.class)
-	protected com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService cpFriendlyURLEntryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService
+			cpFriendlyURLEntryLocalService;
+
 	@BeanReference(type = CPFriendlyURLEntryPersistence.class)
 	protected CPFriendlyURLEntryPersistence cpFriendlyURLEntryPersistence;
+
 	@BeanReference(type = CPInstanceLocalService.class)
 	protected CPInstanceLocalService cpInstanceLocalService;
+
 	@BeanReference(type = CPInstancePersistence.class)
 	protected CPInstancePersistence cpInstancePersistence;
+
 	@BeanReference(type = CPInstanceFinder.class)
 	protected CPInstanceFinder cpInstanceFinder;
-	@BeanReference(type = com.liferay.commerce.product.service.CPMeasurementUnitLocalService.class)
-	protected com.liferay.commerce.product.service.CPMeasurementUnitLocalService cpMeasurementUnitLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPMeasurementUnitLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPMeasurementUnitLocalService
+		cpMeasurementUnitLocalService;
+
 	@BeanReference(type = CPMeasurementUnitPersistence.class)
 	protected CPMeasurementUnitPersistence cpMeasurementUnitPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPOptionLocalService.class)
-	protected com.liferay.commerce.product.service.CPOptionLocalService cpOptionLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPOptionLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPOptionLocalService
+		cpOptionLocalService;
+
 	@BeanReference(type = CPOptionPersistence.class)
 	protected CPOptionPersistence cpOptionPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPOptionCategoryLocalService.class)
-	protected com.liferay.commerce.product.service.CPOptionCategoryLocalService cpOptionCategoryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPOptionCategoryLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPOptionCategoryLocalService
+		cpOptionCategoryLocalService;
+
 	@BeanReference(type = CPOptionCategoryPersistence.class)
 	protected CPOptionCategoryPersistence cpOptionCategoryPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPOptionValueLocalService.class)
-	protected com.liferay.commerce.product.service.CPOptionValueLocalService cpOptionValueLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPOptionValueLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPOptionValueLocalService
+		cpOptionValueLocalService;
+
 	@BeanReference(type = CPOptionValuePersistence.class)
 	protected CPOptionValuePersistence cpOptionValuePersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CProductLocalService.class)
-	protected com.liferay.commerce.product.service.CProductLocalService cProductLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CProductLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CProductLocalService
+		cProductLocalService;
+
 	@BeanReference(type = CProductPersistence.class)
 	protected CProductPersistence cProductPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPRuleLocalService.class)
-	protected com.liferay.commerce.product.service.CPRuleLocalService cpRuleLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPRuleLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPRuleLocalService
+		cpRuleLocalService;
+
 	@BeanReference(type = CPRulePersistence.class)
 	protected CPRulePersistence cpRulePersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService.class)
-	protected com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService cpRuleAssetCategoryRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
+			cpRuleAssetCategoryRelLocalService;
+
 	@BeanReference(type = CPRuleAssetCategoryRelPersistence.class)
-	protected CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService cpRuleUserSegmentRelLocalService;
+	protected CPRuleAssetCategoryRelPersistence
+		cpRuleAssetCategoryRelPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
+			cpRuleUserSegmentRelLocalService;
+
 	@BeanReference(type = CPRuleUserSegmentRelPersistence.class)
 	protected CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPSpecificationOptionLocalService.class)
-	protected com.liferay.commerce.product.service.CPSpecificationOptionLocalService cpSpecificationOptionLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPSpecificationOptionLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CPSpecificationOptionLocalService
+			cpSpecificationOptionLocalService;
+
 	@BeanReference(type = CPSpecificationOptionPersistence.class)
 	protected CPSpecificationOptionPersistence cpSpecificationOptionPersistence;
-	@BeanReference(type = com.liferay.commerce.product.service.CPTaxCategoryLocalService.class)
-	protected com.liferay.commerce.product.service.CPTaxCategoryLocalService cpTaxCategoryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPTaxCategoryLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CPTaxCategoryLocalService
+		cpTaxCategoryLocalService;
+
 	@BeanReference(type = CPTaxCategoryPersistence.class)
 	protected CPTaxCategoryPersistence cpTaxCategoryPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService.class)
-	protected com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+		workflowInstanceLinkLocalService;
+
 	@ServiceReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class)
-	protected com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService;
+
+	@ServiceReference(
+		type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class
+	)
+	protected com.liferay.expando.kernel.service.ExpandoRowLocalService
+		expandoRowLocalService;
+
 	@ServiceReference(type = ExpandoRowPersistence.class)
 	protected ExpandoRowPersistence expandoRowPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

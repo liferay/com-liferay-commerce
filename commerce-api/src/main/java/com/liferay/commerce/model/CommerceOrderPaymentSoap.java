@@ -30,8 +30,10 @@ import java.util.List;
  */
 @ProviderType
 public class CommerceOrderPaymentSoap implements Serializable {
+
 	public static CommerceOrderPaymentSoap toSoapModel(
 		CommerceOrderPayment model) {
+
 		CommerceOrderPaymentSoap soapModel = new CommerceOrderPaymentSoap();
 
 		soapModel.setCommerceOrderPaymentId(model.getCommerceOrderPaymentId());
@@ -42,7 +44,8 @@ public class CommerceOrderPaymentSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceOrderId(model.getCommerceOrderId());
-		soapModel.setCommercePaymentMethodKey(model.getCommercePaymentMethodKey());
+		soapModel.setCommercePaymentMethodKey(
+			model.getCommercePaymentMethodKey());
 		soapModel.setContent(model.getContent());
 		soapModel.setStatus(model.getStatus());
 
@@ -51,7 +54,9 @@ public class CommerceOrderPaymentSoap implements Serializable {
 
 	public static CommerceOrderPaymentSoap[] toSoapModels(
 		CommerceOrderPayment[] models) {
-		CommerceOrderPaymentSoap[] soapModels = new CommerceOrderPaymentSoap[models.length];
+
+		CommerceOrderPaymentSoap[] soapModels =
+			new CommerceOrderPaymentSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +67,12 @@ public class CommerceOrderPaymentSoap implements Serializable {
 
 	public static CommerceOrderPaymentSoap[][] toSoapModels(
 		CommerceOrderPayment[][] models) {
+
 		CommerceOrderPaymentSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceOrderPaymentSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceOrderPaymentSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceOrderPaymentSoap[0][0];
@@ -80,13 +87,16 @@ public class CommerceOrderPaymentSoap implements Serializable {
 
 	public static CommerceOrderPaymentSoap[] toSoapModels(
 		List<CommerceOrderPayment> models) {
-		List<CommerceOrderPaymentSoap> soapModels = new ArrayList<CommerceOrderPaymentSoap>(models.size());
+
+		List<CommerceOrderPaymentSoap> soapModels =
+			new ArrayList<CommerceOrderPaymentSoap>(models.size());
 
 		for (CommerceOrderPayment model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceOrderPaymentSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceOrderPaymentSoap[soapModels.size()]);
 	}
 
 	public CommerceOrderPaymentSoap() {
@@ -199,4 +209,5 @@ public class CommerceOrderPaymentSoap implements Serializable {
 	private String _commercePaymentMethodKey;
 	private String _content;
 	private int _status;
+
 }

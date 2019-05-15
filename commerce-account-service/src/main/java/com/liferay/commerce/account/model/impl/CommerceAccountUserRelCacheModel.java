@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -34,12 +33,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAccountUserRel in entity cache.
  *
  * @author Marco Leo
- * @see CommerceAccountUserRel
  * @generated
  */
 @ProviderType
-public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAccountUserRel>,
-	Externalizable {
+public class CommerceAccountUserRelCacheModel
+	implements CacheModel<CommerceAccountUserRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -50,10 +49,12 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 			return false;
 		}
 
-		CommerceAccountUserRelCacheModel commerceAccountUserRelCacheModel = (CommerceAccountUserRelCacheModel)obj;
+		CommerceAccountUserRelCacheModel commerceAccountUserRelCacheModel =
+			(CommerceAccountUserRelCacheModel)obj;
 
 		if (commerceAccountUserRelPK.equals(
-					commerceAccountUserRelCacheModel.commerceAccountUserRelPK)) {
+				commerceAccountUserRelCacheModel.commerceAccountUserRelPK)) {
+
 			return true;
 		}
 
@@ -90,10 +91,12 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 
 	@Override
 	public CommerceAccountUserRel toEntityModel() {
-		CommerceAccountUserRelImpl commerceAccountUserRelImpl = new CommerceAccountUserRelImpl();
+		CommerceAccountUserRelImpl commerceAccountUserRelImpl =
+			new CommerceAccountUserRelImpl();
 
 		commerceAccountUserRelImpl.setCommerceAccountId(commerceAccountId);
-		commerceAccountUserRelImpl.setCommerceAccountUserId(commerceAccountUserId);
+		commerceAccountUserRelImpl.setCommerceAccountUserId(
+			commerceAccountUserId);
 		commerceAccountUserRelImpl.setCompanyId(companyId);
 		commerceAccountUserRelImpl.setUserId(userId);
 
@@ -136,13 +139,12 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceAccountUserRelPK = new CommerceAccountUserRelPK(commerceAccountId,
-				commerceAccountUserId);
+		commerceAccountUserRelPK = new CommerceAccountUserRelPK(
+			commerceAccountId, commerceAccountUserId);
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceAccountId);
 
 		objectOutput.writeLong(commerceAccountUserId);
@@ -170,4 +172,5 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 	public long createDate;
 	public long modifiedDate;
 	public transient CommerceAccountUserRelPK commerceAccountUserRelPK;
+
 }

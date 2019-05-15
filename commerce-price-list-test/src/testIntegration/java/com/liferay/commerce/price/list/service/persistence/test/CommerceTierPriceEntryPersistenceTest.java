@@ -15,13 +15,11 @@
 package com.liferay.commerce.price.list.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.price.list.exception.NoSuchTierPriceEntryException;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServiceUtil;
 import com.liferay.commerce.price.list.service.persistence.CommerceTierPriceEntryPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommerceTierPriceEntryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -61,16 +50,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceTierPriceEntryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.price.list.service"));
 
 	@Before
@@ -84,7 +84,8 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceTierPriceEntry> iterator = _commerceTierPriceEntries.iterator();
+		Iterator<CommerceTierPriceEntry> iterator =
+			_commerceTierPriceEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -106,11 +107,14 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
 		_persistence.remove(newCommerceTierPriceEntry);
 
-		CommerceTierPriceEntry existingCommerceTierPriceEntry = _persistence.fetchByPrimaryKey(newCommerceTierPriceEntry.getPrimaryKey());
+		CommerceTierPriceEntry existingCommerceTierPriceEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceTierPriceEntry.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceTierPriceEntry);
 	}
@@ -124,11 +128,13 @@ public class CommerceTierPriceEntryPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTierPriceEntry newCommerceTierPriceEntry = _persistence.create(pk);
+		CommerceTierPriceEntry newCommerceTierPriceEntry = _persistence.create(
+			pk);
 
 		newCommerceTierPriceEntry.setUuid(RandomTestUtil.randomString());
 
-		newCommerceTierPriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
+		newCommerceTierPriceEntry.setExternalReferenceCode(
+			RandomTestUtil.randomString());
 
 		newCommerceTierPriceEntry.setGroupId(RandomTestUtil.nextLong());
 
@@ -142,52 +148,70 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 		newCommerceTierPriceEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceTierPriceEntry.setCommercePriceEntryId(RandomTestUtil.nextLong());
+		newCommerceTierPriceEntry.setCommercePriceEntryId(
+			RandomTestUtil.nextLong());
 
-		newCommerceTierPriceEntry.setPrice(new BigDecimal(
-				RandomTestUtil.nextDouble()));
+		newCommerceTierPriceEntry.setPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
 
-		newCommerceTierPriceEntry.setPromoPrice(new BigDecimal(
-				RandomTestUtil.nextDouble()));
+		newCommerceTierPriceEntry.setPromoPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
 
 		newCommerceTierPriceEntry.setMinQuantity(RandomTestUtil.nextInt());
 
 		newCommerceTierPriceEntry.setLastPublishDate(RandomTestUtil.nextDate());
 
-		_commerceTierPriceEntries.add(_persistence.update(
-				newCommerceTierPriceEntry));
+		_commerceTierPriceEntries.add(
+			_persistence.update(newCommerceTierPriceEntry));
 
-		CommerceTierPriceEntry existingCommerceTierPriceEntry = _persistence.findByPrimaryKey(newCommerceTierPriceEntry.getPrimaryKey());
+		CommerceTierPriceEntry existingCommerceTierPriceEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceTierPriceEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTierPriceEntry.getUuid(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getUuid(),
 			newCommerceTierPriceEntry.getUuid());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getExternalReferenceCode(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getExternalReferenceCode(),
 			newCommerceTierPriceEntry.getExternalReferenceCode());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getCommerceTierPriceEntryId(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getCommerceTierPriceEntryId(),
 			newCommerceTierPriceEntry.getCommerceTierPriceEntryId());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getGroupId(),
 			newCommerceTierPriceEntry.getGroupId());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getCompanyId(),
 			newCommerceTierPriceEntry.getCompanyId());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getUserId(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getUserId(),
 			newCommerceTierPriceEntry.getUserId());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getUserName(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getUserName(),
 			newCommerceTierPriceEntry.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceTierPriceEntry.getCreateDate()),
 			Time.getShortTimestamp(newCommerceTierPriceEntry.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceTierPriceEntry.getModifiedDate()),
-			Time.getShortTimestamp(newCommerceTierPriceEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceTierPriceEntry.getCommercePriceEntryId(),
+			Time.getShortTimestamp(
+				newCommerceTierPriceEntry.getModifiedDate()));
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getCommercePriceEntryId(),
 			newCommerceTierPriceEntry.getCommercePriceEntryId());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getPrice(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getPrice(),
 			newCommerceTierPriceEntry.getPrice());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getPromoPrice(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getPromoPrice(),
 			newCommerceTierPriceEntry.getPromoPrice());
-		Assert.assertEquals(existingCommerceTierPriceEntry.getMinQuantity(),
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry.getMinQuantity(),
 			newCommerceTierPriceEntry.getMinQuantity());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceTierPriceEntry.getLastPublishDate()),
 			Time.getShortTimestamp(
 				newCommerceTierPriceEntry.getLastPublishDate()));
@@ -243,16 +267,16 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@Test
 	public void testCountByC_M() throws Exception {
-		_persistence.countByC_M(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByC_M(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByC_M(0L, 0);
 	}
 
 	@Test
 	public void testCountByC_LtM() throws Exception {
-		_persistence.countByC_LtM(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByC_LtM(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByC_LtM(0L, 0);
 	}
@@ -268,12 +292,15 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
-		CommerceTierPriceEntry existingCommerceTierPriceEntry = _persistence.findByPrimaryKey(newCommerceTierPriceEntry.getPrimaryKey());
+		CommerceTierPriceEntry existingCommerceTierPriceEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceTierPriceEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTierPriceEntry,
-			newCommerceTierPriceEntry);
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry, newCommerceTierPriceEntry);
 	}
 
 	@Test(expected = NoSuchTierPriceEntryException.class)
@@ -285,34 +312,39 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceTierPriceEntry> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceTierPriceEntry",
-			"uuid", true, "externalReferenceCode", true,
-			"commerceTierPriceEntryId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commercePriceEntryId", true, "price", true,
-			"promoPrice", true, "minQuantity", true, "lastPublishDate", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceTierPriceEntry", "uuid", true, "externalReferenceCode",
+			true, "commerceTierPriceEntryId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commercePriceEntryId", true, "price",
+			true, "promoPrice", true, "minQuantity", true, "lastPublishDate",
+			true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
-		CommerceTierPriceEntry existingCommerceTierPriceEntry = _persistence.fetchByPrimaryKey(newCommerceTierPriceEntry.getPrimaryKey());
+		CommerceTierPriceEntry existingCommerceTierPriceEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceTierPriceEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTierPriceEntry,
-			newCommerceTierPriceEntry);
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry, newCommerceTierPriceEntry);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTierPriceEntry missingCommerceTierPriceEntry = _persistence.fetchByPrimaryKey(pk);
+		CommerceTierPriceEntry missingCommerceTierPriceEntry =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceTierPriceEntry);
 	}
@@ -320,21 +352,27 @@ public class CommerceTierPriceEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry1 = addCommerceTierPriceEntry();
-		CommerceTierPriceEntry newCommerceTierPriceEntry2 = addCommerceTierPriceEntry();
+
+		CommerceTierPriceEntry newCommerceTierPriceEntry1 =
+			addCommerceTierPriceEntry();
+		CommerceTierPriceEntry newCommerceTierPriceEntry2 =
+			addCommerceTierPriceEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceTierPriceEntry1.getPrimaryKey());
 		primaryKeys.add(newCommerceTierPriceEntry2.getPrimaryKey());
 
-		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceTierPriceEntries.size());
-		Assert.assertEquals(newCommerceTierPriceEntry1,
+		Assert.assertEquals(
+			newCommerceTierPriceEntry1,
 			commerceTierPriceEntries.get(
 				newCommerceTierPriceEntry1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceTierPriceEntry2,
+		Assert.assertEquals(
+			newCommerceTierPriceEntry2,
 			commerceTierPriceEntries.get(
 				newCommerceTierPriceEntry2.getPrimaryKey()));
 	}
@@ -342,6 +380,7 @@ public class CommerceTierPriceEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -351,7 +390,8 @@ public class CommerceTierPriceEntryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceTierPriceEntries.isEmpty());
 	}
@@ -359,7 +399,9 @@ public class CommerceTierPriceEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -368,37 +410,41 @@ public class CommerceTierPriceEntryPersistenceTest {
 		primaryKeys.add(newCommerceTierPriceEntry.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceTierPriceEntries.size());
-		Assert.assertEquals(newCommerceTierPriceEntry,
+		Assert.assertEquals(
+			newCommerceTierPriceEntry,
 			commerceTierPriceEntries.get(
 				newCommerceTierPriceEntry.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceTierPriceEntries.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceTierPriceEntry.getPrimaryKey());
 
-		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTierPriceEntry> commerceTierPriceEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceTierPriceEntries.size());
-		Assert.assertEquals(newCommerceTierPriceEntry,
+		Assert.assertEquals(
+			newCommerceTierPriceEntry,
 			commerceTierPriceEntries.get(
 				newCommerceTierPriceEntry.getPrimaryKey()));
 	}
@@ -407,16 +453,22 @@ public class CommerceTierPriceEntryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceTierPriceEntryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceTierPriceEntryLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceTierPriceEntry>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceTierPriceEntry>() {
+
 				@Override
 				public void performAction(
 					CommerceTierPriceEntry commerceTierPriceEntry) {
+
 					Assert.assertNotNull(commerceTierPriceEntry);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -425,56 +477,62 @@ public class CommerceTierPriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTierPriceEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTierPriceEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceTierPriceEntryId",
 				newCommerceTierPriceEntry.getCommerceTierPriceEntryId()));
 
-		List<CommerceTierPriceEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceTierPriceEntry> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CommerceTierPriceEntry existingCommerceTierPriceEntry = result.get(0);
 
-		Assert.assertEquals(existingCommerceTierPriceEntry,
-			newCommerceTierPriceEntry);
+		Assert.assertEquals(
+			existingCommerceTierPriceEntry, newCommerceTierPriceEntry);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTierPriceEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTierPriceEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceTierPriceEntryId", RandomTestUtil.nextLong()));
 
-		List<CommerceTierPriceEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceTierPriceEntry> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTierPriceEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTierPriceEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceTierPriceEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceTierPriceEntryId"));
 
-		Object newCommerceTierPriceEntryId = newCommerceTierPriceEntry.getCommerceTierPriceEntryId();
+		Object newCommerceTierPriceEntryId =
+			newCommerceTierPriceEntry.getCommerceTierPriceEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceTierPriceEntryId",
-				new Object[] { newCommerceTierPriceEntryId }));
+				new Object[] {newCommerceTierPriceEntryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -482,21 +540,22 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 		Object existingCommerceTierPriceEntryId = result.get(0);
 
-		Assert.assertEquals(existingCommerceTierPriceEntryId,
-			newCommerceTierPriceEntryId);
+		Assert.assertEquals(
+			existingCommerceTierPriceEntryId, newCommerceTierPriceEntryId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTierPriceEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTierPriceEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceTierPriceEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceTierPriceEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceTierPriceEntryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -505,49 +564,63 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceTierPriceEntry newCommerceTierPriceEntry = addCommerceTierPriceEntry();
+		CommerceTierPriceEntry newCommerceTierPriceEntry =
+			addCommerceTierPriceEntry();
 
 		_persistence.clearCache();
 
-		CommerceTierPriceEntry existingCommerceTierPriceEntry = _persistence.findByPrimaryKey(newCommerceTierPriceEntry.getPrimaryKey());
+		CommerceTierPriceEntry existingCommerceTierPriceEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceTierPriceEntry.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceTierPriceEntry.getUuid(),
-				ReflectionTestUtil.invoke(existingCommerceTierPriceEntry,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceTierPriceEntry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceTierPriceEntry,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCommerceTierPriceEntry, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceTierPriceEntry.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceTierPriceEntry, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
+		Assert.assertEquals(
+			Long.valueOf(
 				existingCommerceTierPriceEntry.getCommercePriceEntryId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceTierPriceEntry,
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceTierPriceEntry,
 				"getOriginalCommercePriceEntryId", new Class<?>[0]));
-		Assert.assertEquals(Integer.valueOf(
-				existingCommerceTierPriceEntry.getMinQuantity()),
-			ReflectionTestUtil.<Integer>invoke(existingCommerceTierPriceEntry,
-				"getOriginalMinQuantity", new Class<?>[0]));
+		Assert.assertEquals(
+			Integer.valueOf(existingCommerceTierPriceEntry.getMinQuantity()),
+			ReflectionTestUtil.<Integer>invoke(
+				existingCommerceTierPriceEntry, "getOriginalMinQuantity",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceTierPriceEntry.getCompanyId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceTierPriceEntry,
-				"getOriginalCompanyId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceTierPriceEntry.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceTierPriceEntry, "getOriginalCompanyId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceTierPriceEntry.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCommerceTierPriceEntry,
+				ReflectionTestUtil.invoke(
+					existingCommerceTierPriceEntry,
 					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CommerceTierPriceEntry addCommerceTierPriceEntry()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceTierPriceEntry commerceTierPriceEntry = _persistence.create(pk);
 
 		commerceTierPriceEntry.setUuid(RandomTestUtil.randomString());
 
-		commerceTierPriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
+		commerceTierPriceEntry.setExternalReferenceCode(
+			RandomTestUtil.randomString());
 
 		commerceTierPriceEntry.setGroupId(RandomTestUtil.nextLong());
 
@@ -561,25 +634,28 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 		commerceTierPriceEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceTierPriceEntry.setCommercePriceEntryId(RandomTestUtil.nextLong());
+		commerceTierPriceEntry.setCommercePriceEntryId(
+			RandomTestUtil.nextLong());
 
-		commerceTierPriceEntry.setPrice(new BigDecimal(
-				RandomTestUtil.nextDouble()));
+		commerceTierPriceEntry.setPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
 
-		commerceTierPriceEntry.setPromoPrice(new BigDecimal(
-				RandomTestUtil.nextDouble()));
+		commerceTierPriceEntry.setPromoPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
 
 		commerceTierPriceEntry.setMinQuantity(RandomTestUtil.nextInt());
 
 		commerceTierPriceEntry.setLastPublishDate(RandomTestUtil.nextDate());
 
-		_commerceTierPriceEntries.add(_persistence.update(
-				commerceTierPriceEntry));
+		_commerceTierPriceEntries.add(
+			_persistence.update(commerceTierPriceEntry));
 
 		return commerceTierPriceEntry;
 	}
 
-	private List<CommerceTierPriceEntry> _commerceTierPriceEntries = new ArrayList<CommerceTierPriceEntry>();
+	private List<CommerceTierPriceEntry> _commerceTierPriceEntries =
+		new ArrayList<CommerceTierPriceEntry>();
 	private CommerceTierPriceEntryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

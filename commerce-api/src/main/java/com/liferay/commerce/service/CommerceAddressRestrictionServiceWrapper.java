@@ -28,17 +28,19 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceAddressRestrictionServiceWrapper
 	implements CommerceAddressRestrictionService,
-		ServiceWrapper<CommerceAddressRestrictionService> {
+			   ServiceWrapper<CommerceAddressRestrictionService> {
+
 	public CommerceAddressRestrictionServiceWrapper(
 		CommerceAddressRestrictionService commerceAddressRestrictionService) {
+
 		_commerceAddressRestrictionService = commerceAddressRestrictionService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAddressRestrictionService.getOSGiServiceIdentifier();
@@ -52,8 +54,11 @@ public class CommerceAddressRestrictionServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceAddressRestrictionService commerceAddressRestrictionService) {
+
 		_commerceAddressRestrictionService = commerceAddressRestrictionService;
 	}
 
-	private CommerceAddressRestrictionService _commerceAddressRestrictionService;
+	private CommerceAddressRestrictionService
+		_commerceAddressRestrictionService;
+
 }

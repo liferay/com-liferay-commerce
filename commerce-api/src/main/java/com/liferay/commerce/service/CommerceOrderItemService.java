@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrderItem;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,37 +40,46 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderItemServiceUtil
- * @see com.liferay.commerce.service.base.CommerceOrderItemServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceOrderItem"}, service = CommerceOrderItemService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceOrderItem"
+	},
+	service = CommerceOrderItemService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceOrderItemService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceOrderItem addCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
-		CommerceContext commerceContext, ServiceContext serviceContext)
+	public CommerceOrderItem addCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceOrderItem(long commerceOrderItemId)
 		throws PortalException;
 
-	public void deleteCommerceOrderItem(long commerceOrderItemId,
-		CommerceContext commerceContext) throws PortalException;
+	public void deleteCommerceOrderItem(
+			long commerceOrderItemId, CommerceContext commerceContext)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceOrderItem fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CommerceOrderItem fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderItem fetchCommerceOrderItem(long commerceOrderItemId)
@@ -79,15 +87,17 @@ public interface CommerceOrderItemService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrderItem> getAvailableForShipmentCommerceOrderItems(
-		long commerceOrderId) throws PortalException;
+			long commerceOrderId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderItem getCommerceOrderItem(long commerceOrderItemId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId,
-		int start, int end) throws PortalException;
+	public List<CommerceOrderItem> getCommerceOrderItems(
+			long commerceOrderId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderItemsCount(long commerceOrderId)
@@ -98,36 +108,43 @@ public interface CommerceOrderItemService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId) throws PortalException;
+	public int getCommerceWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceWarehouseId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceOrderItem> search(
-		long commerceOrderId, String keywords, int start, int end, Sort sort)
+			long commerceOrderId, String keywords, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceOrderItem> search(
-		long commerceOrderId, String sku, String name, boolean andOperator,
-		int start, int end, Sort sort) throws PortalException;
-
-	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
-		int quantity, CommerceContext commerceContext,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
-		int quantity, String json, CommerceContext commerceContext,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CommerceOrderItem upsertCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
-		CommerceContext commerceContext, ServiceContext serviceContext)
+			long commerceOrderId, String sku, String name, boolean andOperator,
+			int start, int end, Sort sort)
 		throws PortalException;
+
+	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity,
+			CommerceContext commerceContext, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceOrderItem upsertCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

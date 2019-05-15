@@ -22,7 +22,6 @@ import com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl;
 import com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,57 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CommerceAccountUserRelPersistence
- * @see com.liferay.commerce.account.service.persistence.CommerceAccountUserRelUtil
  * @generated
  */
 @ProviderType
-public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<CommerceAccountUserRel>
+public class CommerceAccountUserRelPersistenceImpl
+	extends BasePersistenceImpl<CommerceAccountUserRel>
 	implements CommerceAccountUserRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceAccountUserRelUtil} to access the commerce account user rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceAccountUserRelUtil</code> to access the commerce account user rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceAccountUserRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTID =
-		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceAccountId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID =
-		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceAccountId", new String[] { Long.class.getName() },
-			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
-			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceAccountId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceAccountUserRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceAccountId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceAccountId;
+	private FinderPath _finderPathCountByCommerceAccountId;
 
 	/**
 	 * Returns all the commerce account user rels where commerceAccountId = &#63;.
@@ -123,15 +98,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId) {
-		return findByCommerceAccountId(commerceAccountId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+
+		return findByCommerceAccountId(
+			commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce account user rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -142,6 +118,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end) {
+
 		return findByCommerceAccountId(commerceAccountId, start, end, null);
 	}
 
@@ -149,7 +126,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce account user rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -162,15 +139,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return findByCommerceAccountId(commerceAccountId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceAccountId(
+			commerceAccountId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce account user rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -185,34 +163,36 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID;
-			finderArgs = new Object[] { commerceAccountId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceAccountId;
+			finderArgs = new Object[] {commerceAccountId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTID;
+			finderPath = _finderPathWithPaginationFindByCommerceAccountId;
 			finderArgs = new Object[] {
-					commerceAccountId,
-					
-					start, end, orderByComparator
-				};
+				commerceAccountId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAccountUserRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAccountUserRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAccountUserRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountUserRel commerceAccountUserRel : list) {
-					if ((commerceAccountId != commerceAccountUserRel.getCommerceAccountId())) {
+					if ((commerceAccountId !=
+							commerceAccountUserRel.getCommerceAccountId())) {
+
 						list = null;
 
 						break;
@@ -225,8 +205,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -237,11 +217,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			query.append(_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -259,16 +238,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(commerceAccountId);
 
 				if (!pagination) {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -298,11 +277,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel findByCommerceAccountId_First(
-		long commerceAccountId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			long commerceAccountId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountId_First(commerceAccountId,
-				orderByComparator);
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			fetchByCommerceAccountId_First(
+				commerceAccountId, orderByComparator);
 
 		if (commerceAccountUserRel != null) {
 			return commerceAccountUserRel;
@@ -331,8 +312,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public CommerceAccountUserRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		List<CommerceAccountUserRel> list = findByCommerceAccountId(commerceAccountId,
-				0, 1, orderByComparator);
+
+		List<CommerceAccountUserRel> list = findByCommerceAccountId(
+			commerceAccountId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -351,11 +333,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel findByCommerceAccountId_Last(
-		long commerceAccountId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			long commerceAccountId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountId_Last(commerceAccountId,
-				orderByComparator);
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			fetchByCommerceAccountId_Last(commerceAccountId, orderByComparator);
 
 		if (commerceAccountUserRel != null) {
 			return commerceAccountUserRel;
@@ -384,14 +367,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public CommerceAccountUserRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+
 		int count = countByCommerceAccountId(commerceAccountId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountUserRel> list = findByCommerceAccountId(commerceAccountId,
-				count - 1, count, orderByComparator);
+		List<CommerceAccountUserRel> list = findByCommerceAccountId(
+			commerceAccountId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -411,11 +395,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel[] findByCommerceAccountId_PrevAndNext(
-		CommerceAccountUserRelPK commerceAccountUserRelPK,
-		long commerceAccountId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			CommerceAccountUserRelPK commerceAccountUserRelPK,
+			long commerceAccountId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(commerceAccountUserRelPK);
+
+		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(
+			commerceAccountUserRelPK);
 
 		Session session = null;
 
@@ -424,15 +410,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
 
-			array[0] = getByCommerceAccountId_PrevAndNext(session,
-					commerceAccountUserRel, commerceAccountId,
-					orderByComparator, true);
+			array[0] = getByCommerceAccountId_PrevAndNext(
+				session, commerceAccountUserRel, commerceAccountId,
+				orderByComparator, true);
 
 			array[1] = commerceAccountUserRel;
 
-			array[2] = getByCommerceAccountId_PrevAndNext(session,
-					commerceAccountUserRel, commerceAccountId,
-					orderByComparator, false);
+			array[2] = getByCommerceAccountId_PrevAndNext(
+				session, commerceAccountUserRel, commerceAccountId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -449,11 +435,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -465,7 +452,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		query.append(_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -535,10 +523,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(commerceAccountId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccountUserRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAccountUserRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -559,8 +548,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByCommerceAccountId(long commerceAccountId) {
-		for (CommerceAccountUserRel commerceAccountUserRel : findByCommerceAccountId(
-				commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				findByCommerceAccountId(
+					commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAccountUserRel);
 		}
 	}
@@ -573,9 +565,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByCommerceAccountId(long commerceAccountId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID;
+		FinderPath finderPath = _finderPathCountByCommerceAccountId;
 
-		Object[] finderArgs = new Object[] { commerceAccountId };
+		Object[] finderArgs = new Object[] {commerceAccountId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -616,34 +608,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2 =
-		"commerceAccountUserRel.id.commerceAccountId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID =
-		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceAccountUserId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID =
-		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceAccountUserId",
-			new String[] { Long.class.getName() },
-			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTUSERID_COLUMN_BITMASK |
-			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceAccountUserId",
-			new String[] { Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2 =
+			"commerceAccountUserRel.id.commerceAccountId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCommerceAccountUserId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceAccountUserId;
+	private FinderPath _finderPathCountByCommerceAccountUserId;
 
 	/**
 	 * Returns all the commerce account user rels where commerceAccountUserId = &#63;.
@@ -654,15 +625,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
 		long commerceAccountUserId) {
-		return findByCommerceAccountUserId(commerceAccountUserId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return findByCommerceAccountUserId(
+			commerceAccountUserId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce account user rels where commerceAccountUserId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountUserId the commerce account user ID
@@ -673,15 +645,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
 		long commerceAccountUserId, int start, int end) {
-		return findByCommerceAccountUserId(commerceAccountUserId, start, end,
-			null);
+
+		return findByCommerceAccountUserId(
+			commerceAccountUserId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountUserId the commerce account user ID
@@ -694,15 +667,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
 		long commerceAccountUserId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return findByCommerceAccountUserId(commerceAccountUserId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceAccountUserId(
+			commerceAccountUserId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceAccountUserId the commerce account user ID
@@ -717,34 +691,38 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		long commerceAccountUserId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID;
-			finderArgs = new Object[] { commerceAccountUserId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceAccountUserId;
+			finderArgs = new Object[] {commerceAccountUserId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID;
+			finderPath = _finderPathWithPaginationFindByCommerceAccountUserId;
 			finderArgs = new Object[] {
-					commerceAccountUserId,
-					
-					start, end, orderByComparator
-				};
+				commerceAccountUserId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAccountUserRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAccountUserRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAccountUserRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountUserRel commerceAccountUserRel : list) {
-					if ((commerceAccountUserId != commerceAccountUserRel.getCommerceAccountUserId())) {
+					if ((commerceAccountUserId !=
+							commerceAccountUserRel.
+								getCommerceAccountUserId())) {
+
 						list = null;
 
 						break;
@@ -757,8 +735,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -766,14 +744,14 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -791,16 +769,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(commerceAccountUserId);
 
 				if (!pagination) {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -830,11 +808,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel findByCommerceAccountUserId_First(
-		long commerceAccountUserId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			long commerceAccountUserId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountUserId_First(commerceAccountUserId,
-				orderByComparator);
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			fetchByCommerceAccountUserId_First(
+				commerceAccountUserId, orderByComparator);
 
 		if (commerceAccountUserRel != null) {
 			return commerceAccountUserRel;
@@ -863,8 +843,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public CommerceAccountUserRel fetchByCommerceAccountUserId_First(
 		long commerceAccountUserId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(commerceAccountUserId,
-				0, 1, orderByComparator);
+
+		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(
+			commerceAccountUserId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -883,11 +864,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel findByCommerceAccountUserId_Last(
-		long commerceAccountUserId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			long commerceAccountUserId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountUserId_Last(commerceAccountUserId,
-				orderByComparator);
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			fetchByCommerceAccountUserId_Last(
+				commerceAccountUserId, orderByComparator);
 
 		if (commerceAccountUserRel != null) {
 			return commerceAccountUserRel;
@@ -916,14 +899,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public CommerceAccountUserRel fetchByCommerceAccountUserId_Last(
 		long commerceAccountUserId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+
 		int count = countByCommerceAccountUserId(commerceAccountUserId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(commerceAccountUserId,
-				count - 1, count, orderByComparator);
+		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(
+			commerceAccountUserId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -943,11 +927,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel[] findByCommerceAccountUserId_PrevAndNext(
-		CommerceAccountUserRelPK commerceAccountUserRelPK,
-		long commerceAccountUserId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+			CommerceAccountUserRelPK commerceAccountUserRelPK,
+			long commerceAccountUserId,
+			OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(commerceAccountUserRelPK);
+
+		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(
+			commerceAccountUserRelPK);
 
 		Session session = null;
 
@@ -956,15 +942,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
 
-			array[0] = getByCommerceAccountUserId_PrevAndNext(session,
-					commerceAccountUserRel, commerceAccountUserId,
-					orderByComparator, true);
+			array[0] = getByCommerceAccountUserId_PrevAndNext(
+				session, commerceAccountUserRel, commerceAccountUserId,
+				orderByComparator, true);
 
 			array[1] = commerceAccountUserRel;
 
-			array[2] = getByCommerceAccountUserId_PrevAndNext(session,
-					commerceAccountUserRel, commerceAccountUserId,
-					orderByComparator, false);
+			array[2] = getByCommerceAccountUserId_PrevAndNext(
+				session, commerceAccountUserRel, commerceAccountUserId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -981,11 +967,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		long commerceAccountUserId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -994,10 +981,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 		query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1067,10 +1056,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(commerceAccountUserId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccountUserRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAccountUserRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1091,9 +1081,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByCommerceAccountUserId(long commerceAccountUserId) {
-		for (CommerceAccountUserRel commerceAccountUserRel : findByCommerceAccountUserId(
-				commerceAccountUserId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null)) {
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				findByCommerceAccountUserId(
+					commerceAccountUserId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAccountUserRel);
 		}
 	}
@@ -1106,9 +1098,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByCommerceAccountUserId(long commerceAccountUserId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID;
+		FinderPath finderPath = _finderPathCountByCommerceAccountUserId;
 
-		Object[] finderArgs = new Object[] { commerceAccountUserId };
+		Object[] finderArgs = new Object[] {commerceAccountUserId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1117,7 +1109,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			query.append(_SQL_COUNT_COMMERCEACCOUNTUSERREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
 
 			String sql = query.toString();
 
@@ -1149,8 +1142,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2 =
-		"commerceAccountUserRel.id.commerceAccountUserId = ?";
+	private static final String
+		_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2 =
+			"commerceAccountUserRel.id.commerceAccountUserId = ?";
 
 	public CommerceAccountUserRelPersistenceImpl() {
 		setModelClass(CommerceAccountUserRel.class);
@@ -1163,7 +1157,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void cacheResult(CommerceAccountUserRel commerceAccountUserRel) {
-		entityCache.putResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
 			commerceAccountUserRel.getPrimaryKey(), commerceAccountUserRel);
 
@@ -1178,11 +1173,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public void cacheResult(
 		List<CommerceAccountUserRel> commerceAccountUserRels) {
-		for (CommerceAccountUserRel commerceAccountUserRel : commerceAccountUserRels) {
+
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				commerceAccountUserRels) {
+
 			if (entityCache.getResult(
-						CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceAccountUserRelImpl.class,
-						commerceAccountUserRel.getPrimaryKey()) == null) {
+					CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceAccountUserRelImpl.class,
+					commerceAccountUserRel.getPrimaryKey()) == null) {
+
 				cacheResult(commerceAccountUserRel);
 			}
 			else {
@@ -1195,7 +1194,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for all commerce account user rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1211,12 +1210,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for the commerce account user rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceAccountUserRel commerceAccountUserRel) {
-		entityCache.removeResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
 			commerceAccountUserRel.getPrimaryKey());
 
@@ -1225,12 +1225,17 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	}
 
 	@Override
-	public void clearCache(List<CommerceAccountUserRel> commerceAccountUserRels) {
+	public void clearCache(
+		List<CommerceAccountUserRel> commerceAccountUserRels) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceAccountUserRel commerceAccountUserRel : commerceAccountUserRels) {
-			entityCache.removeResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				commerceAccountUserRels) {
+
+			entityCache.removeResult(
+				CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceAccountUserRelImpl.class,
 				commerceAccountUserRel.getPrimaryKey());
 		}
@@ -1245,7 +1250,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceAccountUserRel create(
 		CommerceAccountUserRelPK commerceAccountUserRelPK) {
-		CommerceAccountUserRel commerceAccountUserRel = new CommerceAccountUserRelImpl();
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			new CommerceAccountUserRelImpl();
 
 		commerceAccountUserRel.setNew(true);
 		commerceAccountUserRel.setPrimaryKey(commerceAccountUserRelPK);
@@ -1264,8 +1271,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel remove(
-		CommerceAccountUserRelPK commerceAccountUserRelPK)
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws NoSuchAccountUserRelException {
+
 		return remove((Serializable)commerceAccountUserRelPK);
 	}
 
@@ -1279,21 +1287,23 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceAccountUserRel remove(Serializable primaryKey)
 		throws NoSuchAccountUserRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceAccountUserRel commerceAccountUserRel = (CommerceAccountUserRel)session.get(CommerceAccountUserRelImpl.class,
-					primaryKey);
+			CommerceAccountUserRel commerceAccountUserRel =
+				(CommerceAccountUserRel)session.get(
+					CommerceAccountUserRelImpl.class, primaryKey);
 
 			if (commerceAccountUserRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchAccountUserRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchAccountUserRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceAccountUserRel);
@@ -1312,14 +1322,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	protected CommerceAccountUserRel removeImpl(
 		CommerceAccountUserRel commerceAccountUserRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceAccountUserRel)) {
-				commerceAccountUserRel = (CommerceAccountUserRel)session.get(CommerceAccountUserRelImpl.class,
-						commerceAccountUserRel.getPrimaryKeyObj());
+				commerceAccountUserRel = (CommerceAccountUserRel)session.get(
+					CommerceAccountUserRelImpl.class,
+					commerceAccountUserRel.getPrimaryKeyObj());
 			}
 
 			if (commerceAccountUserRel != null) {
@@ -1343,27 +1355,33 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceAccountUserRel updateImpl(
 		CommerceAccountUserRel commerceAccountUserRel) {
+
 		boolean isNew = commerceAccountUserRel.isNew();
 
-		if (!(commerceAccountUserRel instanceof CommerceAccountUserRelModelImpl)) {
+		if (!(commerceAccountUserRel instanceof
+				CommerceAccountUserRelModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceAccountUserRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceAccountUserRel);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceAccountUserRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceAccountUserRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceAccountUserRel implementation " +
-				commerceAccountUserRel.getClass());
+					commerceAccountUserRel.getClass());
 		}
 
-		CommerceAccountUserRelModelImpl commerceAccountUserRelModelImpl = (CommerceAccountUserRelModelImpl)commerceAccountUserRel;
+		CommerceAccountUserRelModelImpl commerceAccountUserRelModelImpl =
+			(CommerceAccountUserRelModelImpl)commerceAccountUserRel;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1372,8 +1390,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				commerceAccountUserRel.setCreateDate(now);
 			}
 			else {
-				commerceAccountUserRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceAccountUserRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1382,8 +1400,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				commerceAccountUserRel.setModifiedDate(now);
 			}
 			else {
-				commerceAccountUserRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceAccountUserRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1398,7 +1416,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				commerceAccountUserRel.setNew(false);
 			}
 			else {
-				commerceAccountUserRel = (CommerceAccountUserRel)session.merge(commerceAccountUserRel);
+				commerceAccountUserRel = (CommerceAccountUserRel)session.merge(
+					commerceAccountUserRel);
 			}
 		}
 		catch (Exception e) {
@@ -1413,76 +1432,82 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		if (!CommerceAccountUserRelModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceAccountUserRelModelImpl.getCommerceAccountId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCommerceAccountId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceAccountId, args);
+
+			args = new Object[] {
+				commerceAccountUserRelModelImpl.getCommerceAccountUserId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceAccountUserId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceAccountUserId, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceAccountId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAccountUserRelModelImpl.
+						getOriginalCommerceAccountId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountId, args);
+
+				args = new Object[] {
 					commerceAccountUserRelModelImpl.getCommerceAccountId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceAccountUserId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAccountUserRelModelImpl.
+						getOriginalCommerceAccountUserId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountUserId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountUserId,
+					args);
+
+				args = new Object[] {
 					commerceAccountUserRelModelImpl.getCommerceAccountUserId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAccountUserRelModelImpl.getOriginalCommerceAccountId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID,
-					args);
-
-				args = new Object[] {
-						commerceAccountUserRelModelImpl.getCommerceAccountId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID,
-					args);
-			}
-
-			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAccountUserRelModelImpl.getOriginalCommerceAccountUserId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
-					args);
-
-				args = new Object[] {
-						commerceAccountUserRelModelImpl.getCommerceAccountUserId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountUserId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountUserId,
 					args);
 			}
 		}
 
-		entityCache.putResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
 			commerceAccountUserRel.getPrimaryKey(), commerceAccountUserRel,
 			false);
@@ -1493,7 +1518,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	}
 
 	/**
-	 * Returns the commerce account user rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce account user rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce account user rel
 	 * @return the commerce account user rel
@@ -1502,22 +1527,24 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceAccountUserRel findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByPrimaryKey(primaryKey);
+
+		CommerceAccountUserRel commerceAccountUserRel = fetchByPrimaryKey(
+			primaryKey);
 
 		if (commerceAccountUserRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchAccountUserRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchAccountUserRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceAccountUserRel;
 	}
 
 	/**
-	 * Returns the commerce account user rel with the primary key or throws a {@link NoSuchAccountUserRelException} if it could not be found.
+	 * Returns the commerce account user rel with the primary key or throws a <code>NoSuchAccountUserRelException</code> if it could not be found.
 	 *
 	 * @param commerceAccountUserRelPK the primary key of the commerce account user rel
 	 * @return the commerce account user rel
@@ -1525,8 +1552,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel findByPrimaryKey(
-		CommerceAccountUserRelPK commerceAccountUserRelPK)
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws NoSuchAccountUserRelException {
+
 		return findByPrimaryKey((Serializable)commerceAccountUserRelPK);
 	}
 
@@ -1538,14 +1566,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceAccountUserRel fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceAccountUserRelImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceAccountUserRel commerceAccountUserRel = (CommerceAccountUserRel)serializable;
+		CommerceAccountUserRel commerceAccountUserRel =
+			(CommerceAccountUserRel)serializable;
 
 		if (commerceAccountUserRel == null) {
 			Session session = null;
@@ -1553,19 +1583,22 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				commerceAccountUserRel = (CommerceAccountUserRel)session.get(CommerceAccountUserRelImpl.class,
-						primaryKey);
+				commerceAccountUserRel = (CommerceAccountUserRel)session.get(
+					CommerceAccountUserRelImpl.class, primaryKey);
 
 				if (commerceAccountUserRel != null) {
 					cacheResult(commerceAccountUserRel);
 				}
 				else {
-					entityCache.putResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceAccountUserRelImpl.class, primaryKey, nullModel);
+					entityCache.putResult(
+						CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+						CommerceAccountUserRelImpl.class, primaryKey,
+						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceAccountUserRelImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1587,20 +1620,24 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceAccountUserRel fetchByPrimaryKey(
 		CommerceAccountUserRelPK commerceAccountUserRelPK) {
+
 		return fetchByPrimaryKey((Serializable)commerceAccountUserRelPK);
 	}
 
 	@Override
 	public Map<Serializable, CommerceAccountUserRel> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceAccountUserRel> map = new HashMap<Serializable, CommerceAccountUserRel>();
+		Map<Serializable, CommerceAccountUserRel> map =
+			new HashMap<Serializable, CommerceAccountUserRel>();
 
 		for (Serializable primaryKey : primaryKeys) {
-			CommerceAccountUserRel commerceAccountUserRel = fetchByPrimaryKey(primaryKey);
+			CommerceAccountUserRel commerceAccountUserRel = fetchByPrimaryKey(
+				primaryKey);
 
 			if (commerceAccountUserRel != null) {
 				map.put(primaryKey, commerceAccountUserRel);
@@ -1624,7 +1661,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns a range of all the commerce account user rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account user rels
@@ -1640,7 +1677,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce account user rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account user rels
@@ -1649,8 +1686,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findAll(int start, int end,
+	public List<CommerceAccountUserRel> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1658,7 +1697,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce account user rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account user rels
@@ -1668,29 +1707,32 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findAll(int start, int end,
+	public List<CommerceAccountUserRel> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceAccountUserRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAccountUserRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAccountUserRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1698,13 +1740,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1712,7 +1754,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				sql = _SQL_SELECT_COMMERCEACCOUNTUSERREL;
 
 				if (pagination) {
-					sql = sql.concat(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1724,16 +1767,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1771,8 +1814,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1780,16 +1823,17 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEACCOUNTUSERREL);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEACCOUNTUSERREL);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1815,6 +1859,79 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Initializes the commerce account user rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceAccountId = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceAccountId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceAccountId = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceAccountId", new String[] {Long.class.getName()},
+			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
+			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceAccountId = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceAccountUserId = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceAccountUserId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceAccountUserId =
+			new FinderPath(
+				CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+				CommerceAccountUserRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceAccountUserId",
+				new String[] {Long.class.getName()},
+				CommerceAccountUserRelModelImpl.
+					COMMERCEACCOUNTUSERID_COLUMN_BITMASK |
+				CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceAccountUserId = new FinderPath(
+			CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountUserId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1826,19 +1943,38 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEACCOUNTUSERREL = "SELECT commerceAccountUserRel FROM CommerceAccountUserRel commerceAccountUserRel";
-	private static final String _SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE = "SELECT commerceAccountUserRel FROM CommerceAccountUserRel commerceAccountUserRel WHERE ";
-	private static final String _SQL_COUNT_COMMERCEACCOUNTUSERREL = "SELECT COUNT(commerceAccountUserRel) FROM CommerceAccountUserRel commerceAccountUserRel";
-	private static final String _SQL_COUNT_COMMERCEACCOUNTUSERREL_WHERE = "SELECT COUNT(commerceAccountUserRel) FROM CommerceAccountUserRel commerceAccountUserRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceAccountUserRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceAccountUserRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAccountUserRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceAccountUserRelPersistenceImpl.class);
-	private static final Set<String> _compoundPKColumnNames = SetUtil.fromArray(new String[] {
-				"commerceAccountId", "commerceAccountUserId"
-			});
+
+	private static final String _SQL_SELECT_COMMERCEACCOUNTUSERREL =
+		"SELECT commerceAccountUserRel FROM CommerceAccountUserRel commerceAccountUserRel";
+
+	private static final String _SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE =
+		"SELECT commerceAccountUserRel FROM CommerceAccountUserRel commerceAccountUserRel WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEACCOUNTUSERREL =
+		"SELECT COUNT(commerceAccountUserRel) FROM CommerceAccountUserRel commerceAccountUserRel";
+
+	private static final String _SQL_COUNT_COMMERCEACCOUNTUSERREL_WHERE =
+		"SELECT COUNT(commerceAccountUserRel) FROM CommerceAccountUserRel commerceAccountUserRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceAccountUserRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceAccountUserRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceAccountUserRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountUserRelPersistenceImpl.class);
+
+	private static final Set<String> _compoundPKColumnNames = SetUtil.fromArray(
+		new String[] {"commerceAccountId", "commerceAccountUserId"});
+
 }

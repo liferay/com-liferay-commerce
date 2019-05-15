@@ -22,23 +22,34 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CPInstanceFinder {
-	public int countByC_NotCST_NotST(long cpDefinitionId,
-		int cpDefinitionStatus, int cpInstanceStatus);
 
-	public int countByC_NotCST_ST(long cpDefinitionId, int cpDefinitionStatus,
-		int cpInstanceStatus);
+	public int countByC_NotCST_NotST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus);
 
-	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByExpirationDate(
-		java.util.Date expirationDate,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.product.model.CPInstance> queryDefinition);
+	public int countByC_NotCST_ST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus);
 
-	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_NotST(
-		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator);
+	public java.util.List<com.liferay.commerce.product.model.CPInstance>
+		findByExpirationDate(
+			java.util.Date expirationDate,
+			com.liferay.portal.kernel.dao.orm.QueryDefinition
+				<com.liferay.commerce.product.model.CPInstance>
+					queryDefinition);
 
-	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_ST(
-		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator);
+	public java.util.List<com.liferay.commerce.product.model.CPInstance>
+		findByC_NotCST_NotST(
+			long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CPInstance>
+					orderByComparator);
+
+	public java.util.List<com.liferay.commerce.product.model.CPInstance>
+		findByC_NotCST_ST(
+			long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CPInstance>
+					orderByComparator);
+
 }

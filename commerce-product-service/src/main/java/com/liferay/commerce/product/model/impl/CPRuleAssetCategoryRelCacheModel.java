@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPRuleAssetCategoryRel in entity cache.
  *
  * @author Marco Leo
- * @see CPRuleAssetCategoryRel
  * @generated
  */
 @ProviderType
-public class CPRuleAssetCategoryRelCacheModel implements CacheModel<CPRuleAssetCategoryRel>,
-	Externalizable {
+public class CPRuleAssetCategoryRelCacheModel
+	implements CacheModel<CPRuleAssetCategoryRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPRuleAssetCategoryRelCacheModel implements CacheModel<CPRuleAssetC
 			return false;
 		}
 
-		CPRuleAssetCategoryRelCacheModel cpRuleAssetCategoryRelCacheModel = (CPRuleAssetCategoryRelCacheModel)obj;
+		CPRuleAssetCategoryRelCacheModel cpRuleAssetCategoryRelCacheModel =
+			(CPRuleAssetCategoryRelCacheModel)obj;
 
-		if (CPRuleAssetCategoryRelId == cpRuleAssetCategoryRelCacheModel.CPRuleAssetCategoryRelId) {
+		if (CPRuleAssetCategoryRelId ==
+				cpRuleAssetCategoryRelCacheModel.CPRuleAssetCategoryRelId) {
+
 			return true;
 		}
 
@@ -92,9 +94,11 @@ public class CPRuleAssetCategoryRelCacheModel implements CacheModel<CPRuleAssetC
 
 	@Override
 	public CPRuleAssetCategoryRel toEntityModel() {
-		CPRuleAssetCategoryRelImpl cpRuleAssetCategoryRelImpl = new CPRuleAssetCategoryRelImpl();
+		CPRuleAssetCategoryRelImpl cpRuleAssetCategoryRelImpl =
+			new CPRuleAssetCategoryRelImpl();
 
-		cpRuleAssetCategoryRelImpl.setCPRuleAssetCategoryRelId(CPRuleAssetCategoryRelId);
+		cpRuleAssetCategoryRelImpl.setCPRuleAssetCategoryRelId(
+			CPRuleAssetCategoryRelId);
 		cpRuleAssetCategoryRelImpl.setGroupId(groupId);
 		cpRuleAssetCategoryRelImpl.setCompanyId(companyId);
 		cpRuleAssetCategoryRelImpl.setUserId(userId);
@@ -147,8 +151,7 @@ public class CPRuleAssetCategoryRelCacheModel implements CacheModel<CPRuleAssetC
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(CPRuleAssetCategoryRelId);
 
 		objectOutput.writeLong(groupId);
@@ -181,4 +184,5 @@ public class CPRuleAssetCategoryRelCacheModel implements CacheModel<CPRuleAssetC
 	public long modifiedDate;
 	public long CPRuleId;
 	public long assetCategoryId;
+
 }

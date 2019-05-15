@@ -17,9 +17,7 @@ package com.liferay.commerce.notification.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceNotificationTemplateWrapper
 	implements CommerceNotificationTemplate,
-		ModelWrapper<CommerceNotificationTemplate> {
+			   ModelWrapper<CommerceNotificationTemplate> {
+
 	public CommerceNotificationTemplateWrapper(
 		CommerceNotificationTemplate commerceNotificationTemplate) {
+
 		_commerceNotificationTemplate = commerceNotificationTemplate;
 	}
 
@@ -63,7 +63,8 @@ public class CommerceNotificationTemplateWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("commerceNotificationTemplateId",
+		attributes.put(
+			"commerceNotificationTemplateId",
 			getCommerceNotificationTemplateId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -94,7 +95,7 @@ public class CommerceNotificationTemplateWrapper
 		}
 
 		Long commerceNotificationTemplateId = (Long)attributes.get(
-				"commerceNotificationTemplateId");
+			"commerceNotificationTemplateId");
 
 		if (commerceNotificationTemplateId != null) {
 			setCommerceNotificationTemplateId(commerceNotificationTemplateId);
@@ -199,13 +200,17 @@ public class CommerceNotificationTemplateWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceNotificationTemplateWrapper((CommerceNotificationTemplate)_commerceNotificationTemplate.clone());
+		return new CommerceNotificationTemplateWrapper(
+			(CommerceNotificationTemplate)
+				_commerceNotificationTemplate.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceNotificationTemplate commerceNotificationTemplate) {
-		return _commerceNotificationTemplate.compareTo(commerceNotificationTemplate);
+
+		return _commerceNotificationTemplate.compareTo(
+			commerceNotificationTemplate);
 	}
 
 	@Override
@@ -214,66 +219,66 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns the bcc of this commerce notification template.
-	*
-	* @return the bcc of this commerce notification template
-	*/
+	 * Returns the bcc of this commerce notification template.
+	 *
+	 * @return the bcc of this commerce notification template
+	 */
 	@Override
 	public String getBcc() {
 		return _commerceNotificationTemplate.getBcc();
 	}
 
 	/**
-	* Returns the body of this commerce notification template.
-	*
-	* @return the body of this commerce notification template
-	*/
+	 * Returns the body of this commerce notification template.
+	 *
+	 * @return the body of this commerce notification template
+	 */
 	@Override
 	public String getBody() {
 		return _commerceNotificationTemplate.getBody();
 	}
 
 	/**
-	* Returns the localized body of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized body of this commerce notification template
-	*/
+	 * Returns the localized body of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized body of this commerce notification template
+	 */
 	@Override
 	public String getBody(java.util.Locale locale) {
 		return _commerceNotificationTemplate.getBody(locale);
 	}
 
 	/**
-	* Returns the localized body of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized body of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized body of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized body of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getBody(java.util.Locale locale, boolean useDefault) {
 		return _commerceNotificationTemplate.getBody(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized body of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized body of this commerce notification template
-	*/
+	 * Returns the localized body of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized body of this commerce notification template
+	 */
 	@Override
 	public String getBody(String languageId) {
 		return _commerceNotificationTemplate.getBody(languageId);
 	}
 
 	/**
-	* Returns the localized body of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized body of this commerce notification template
-	*/
+	 * Returns the localized body of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized body of this commerce notification template
+	 */
 	@Override
 	public String getBody(String languageId, boolean useDefault) {
 		return _commerceNotificationTemplate.getBody(languageId, useDefault);
@@ -290,50 +295,51 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized bodies of this commerce notification template.
-	*
-	* @return the locales and localized bodies of this commerce notification template
-	*/
+	 * Returns a map of the locales and localized bodies of this commerce notification template.
+	 *
+	 * @return the locales and localized bodies of this commerce notification template
+	 */
 	@Override
 	public Map<java.util.Locale, String> getBodyMap() {
 		return _commerceNotificationTemplate.getBodyMap();
 	}
 
 	/**
-	* Returns the cc of this commerce notification template.
-	*
-	* @return the cc of this commerce notification template
-	*/
+	 * Returns the cc of this commerce notification template.
+	 *
+	 * @return the cc of this commerce notification template
+	 */
 	@Override
 	public String getCc() {
 		return _commerceNotificationTemplate.getCc();
 	}
 
 	/**
-	* Returns the commerce notification template ID of this commerce notification template.
-	*
-	* @return the commerce notification template ID of this commerce notification template
-	*/
+	 * Returns the commerce notification template ID of this commerce notification template.
+	 *
+	 * @return the commerce notification template ID of this commerce notification template
+	 */
 	@Override
 	public long getCommerceNotificationTemplateId() {
-		return _commerceNotificationTemplate.getCommerceNotificationTemplateId();
+		return _commerceNotificationTemplate.
+			getCommerceNotificationTemplateId();
 	}
 
 	/**
-	* Returns the company ID of this commerce notification template.
-	*
-	* @return the company ID of this commerce notification template
-	*/
+	 * Returns the company ID of this commerce notification template.
+	 *
+	 * @return the company ID of this commerce notification template
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceNotificationTemplate.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce notification template.
-	*
-	* @return the create date of this commerce notification template
-	*/
+	 * Returns the create date of this commerce notification template.
+	 *
+	 * @return the create date of this commerce notification template
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceNotificationTemplate.getCreateDate();
@@ -345,20 +351,20 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns the description of this commerce notification template.
-	*
-	* @return the description of this commerce notification template
-	*/
+	 * Returns the description of this commerce notification template.
+	 *
+	 * @return the description of this commerce notification template
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceNotificationTemplate.getDescription();
 	}
 
 	/**
-	* Returns the enabled of this commerce notification template.
-	*
-	* @return the enabled of this commerce notification template
-	*/
+	 * Returns the enabled of this commerce notification template.
+	 *
+	 * @return the enabled of this commerce notification template
+	 */
 	@Override
 	public boolean getEnabled() {
 		return _commerceNotificationTemplate.getEnabled();
@@ -370,69 +376,70 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns the from of this commerce notification template.
-	*
-	* @return the from of this commerce notification template
-	*/
+	 * Returns the from of this commerce notification template.
+	 *
+	 * @return the from of this commerce notification template
+	 */
 	@Override
 	public String getFrom() {
 		return _commerceNotificationTemplate.getFrom();
 	}
 
 	/**
-	* Returns the from name of this commerce notification template.
-	*
-	* @return the from name of this commerce notification template
-	*/
+	 * Returns the from name of this commerce notification template.
+	 *
+	 * @return the from name of this commerce notification template
+	 */
 	@Override
 	public String getFromName() {
 		return _commerceNotificationTemplate.getFromName();
 	}
 
 	/**
-	* Returns the localized from name of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized from name of this commerce notification template
-	*/
+	 * Returns the localized from name of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized from name of this commerce notification template
+	 */
 	@Override
 	public String getFromName(java.util.Locale locale) {
 		return _commerceNotificationTemplate.getFromName(locale);
 	}
 
 	/**
-	* Returns the localized from name of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized from name of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized from name of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized from name of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getFromName(java.util.Locale locale, boolean useDefault) {
 		return _commerceNotificationTemplate.getFromName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized from name of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized from name of this commerce notification template
-	*/
+	 * Returns the localized from name of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized from name of this commerce notification template
+	 */
 	@Override
 	public String getFromName(String languageId) {
 		return _commerceNotificationTemplate.getFromName(languageId);
 	}
 
 	/**
-	* Returns the localized from name of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized from name of this commerce notification template
-	*/
+	 * Returns the localized from name of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized from name of this commerce notification template
+	 */
 	@Override
 	public String getFromName(String languageId, boolean useDefault) {
-		return _commerceNotificationTemplate.getFromName(languageId, useDefault);
+		return _commerceNotificationTemplate.getFromName(
+			languageId, useDefault);
 	}
 
 	@Override
@@ -446,50 +453,50 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized from names of this commerce notification template.
-	*
-	* @return the locales and localized from names of this commerce notification template
-	*/
+	 * Returns a map of the locales and localized from names of this commerce notification template.
+	 *
+	 * @return the locales and localized from names of this commerce notification template
+	 */
 	@Override
 	public Map<java.util.Locale, String> getFromNameMap() {
 		return _commerceNotificationTemplate.getFromNameMap();
 	}
 
 	/**
-	* Returns the group ID of this commerce notification template.
-	*
-	* @return the group ID of this commerce notification template
-	*/
+	 * Returns the group ID of this commerce notification template.
+	 *
+	 * @return the group ID of this commerce notification template
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceNotificationTemplate.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce notification template.
-	*
-	* @return the modified date of this commerce notification template
-	*/
+	 * Returns the modified date of this commerce notification template.
+	 *
+	 * @return the modified date of this commerce notification template
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceNotificationTemplate.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce notification template.
-	*
-	* @return the name of this commerce notification template
-	*/
+	 * Returns the name of this commerce notification template.
+	 *
+	 * @return the name of this commerce notification template
+	 */
 	@Override
 	public String getName() {
 		return _commerceNotificationTemplate.getName();
 	}
 
 	/**
-	* Returns the primary key of this commerce notification template.
-	*
-	* @return the primary key of this commerce notification template
-	*/
+	 * Returns the primary key of this commerce notification template.
+	 *
+	 * @return the primary key of this commerce notification template
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceNotificationTemplate.getPrimaryKey();
@@ -501,56 +508,56 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns the subject of this commerce notification template.
-	*
-	* @return the subject of this commerce notification template
-	*/
+	 * Returns the subject of this commerce notification template.
+	 *
+	 * @return the subject of this commerce notification template
+	 */
 	@Override
 	public String getSubject() {
 		return _commerceNotificationTemplate.getSubject();
 	}
 
 	/**
-	* Returns the localized subject of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized subject of this commerce notification template
-	*/
+	 * Returns the localized subject of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized subject of this commerce notification template
+	 */
 	@Override
 	public String getSubject(java.util.Locale locale) {
 		return _commerceNotificationTemplate.getSubject(locale);
 	}
 
 	/**
-	* Returns the localized subject of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized subject of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized subject of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized subject of this commerce notification template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getSubject(java.util.Locale locale, boolean useDefault) {
 		return _commerceNotificationTemplate.getSubject(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized subject of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized subject of this commerce notification template
-	*/
+	 * Returns the localized subject of this commerce notification template in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized subject of this commerce notification template
+	 */
 	@Override
 	public String getSubject(String languageId) {
 		return _commerceNotificationTemplate.getSubject(languageId);
 	}
 
 	/**
-	* Returns the localized subject of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized subject of this commerce notification template
-	*/
+	 * Returns the localized subject of this commerce notification template in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized subject of this commerce notification template
+	 */
 	@Override
 	public String getSubject(String languageId, boolean useDefault) {
 		return _commerceNotificationTemplate.getSubject(languageId, useDefault);
@@ -567,60 +574,60 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized subjects of this commerce notification template.
-	*
-	* @return the locales and localized subjects of this commerce notification template
-	*/
+	 * Returns a map of the locales and localized subjects of this commerce notification template.
+	 *
+	 * @return the locales and localized subjects of this commerce notification template
+	 */
 	@Override
 	public Map<java.util.Locale, String> getSubjectMap() {
 		return _commerceNotificationTemplate.getSubjectMap();
 	}
 
 	/**
-	* Returns the type of this commerce notification template.
-	*
-	* @return the type of this commerce notification template
-	*/
+	 * Returns the type of this commerce notification template.
+	 *
+	 * @return the type of this commerce notification template
+	 */
 	@Override
 	public String getType() {
 		return _commerceNotificationTemplate.getType();
 	}
 
 	/**
-	* Returns the user ID of this commerce notification template.
-	*
-	* @return the user ID of this commerce notification template
-	*/
+	 * Returns the user ID of this commerce notification template.
+	 *
+	 * @return the user ID of this commerce notification template
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceNotificationTemplate.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce notification template.
-	*
-	* @return the user name of this commerce notification template
-	*/
+	 * Returns the user name of this commerce notification template.
+	 *
+	 * @return the user name of this commerce notification template
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceNotificationTemplate.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce notification template.
-	*
-	* @return the user uuid of this commerce notification template
-	*/
+	 * Returns the user uuid of this commerce notification template.
+	 *
+	 * @return the user uuid of this commerce notification template
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceNotificationTemplate.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce notification template.
-	*
-	* @return the uuid of this commerce notification template
-	*/
+	 * Returns the uuid of this commerce notification template.
+	 *
+	 * @return the uuid of this commerce notification template
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceNotificationTemplate.getUuid();
@@ -637,10 +644,10 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce notification template is enabled.
-	*
-	* @return <code>true</code> if this commerce notification template is enabled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce notification template is enabled.
+	 *
+	 * @return <code>true</code> if this commerce notification template is enabled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isEnabled() {
 		return _commerceNotificationTemplate.isEnabled();
@@ -664,57 +671,61 @@ public class CommerceNotificationTemplateWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceNotificationTemplate.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceNotificationTemplate.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commerceNotificationTemplate.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets the bcc of this commerce notification template.
-	*
-	* @param bcc the bcc of this commerce notification template
-	*/
+	 * Sets the bcc of this commerce notification template.
+	 *
+	 * @param bcc the bcc of this commerce notification template
+	 */
 	@Override
 	public void setBcc(String bcc) {
 		_commerceNotificationTemplate.setBcc(bcc);
 	}
 
 	/**
-	* Sets the body of this commerce notification template.
-	*
-	* @param body the body of this commerce notification template
-	*/
+	 * Sets the body of this commerce notification template.
+	 *
+	 * @param body the body of this commerce notification template
+	 */
 	@Override
 	public void setBody(String body) {
 		_commerceNotificationTemplate.setBody(body);
 	}
 
 	/**
-	* Sets the localized body of this commerce notification template in the language.
-	*
-	* @param body the localized body of this commerce notification template
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized body of this commerce notification template in the language.
+	 *
+	 * @param body the localized body of this commerce notification template
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setBody(String body, java.util.Locale locale) {
 		_commerceNotificationTemplate.setBody(body, locale);
 	}
 
 	/**
-	* Sets the localized body of this commerce notification template in the language, and sets the default locale.
-	*
-	* @param body the localized body of this commerce notification template
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized body of this commerce notification template in the language, and sets the default locale.
+	 *
+	 * @param body the localized body of this commerce notification template
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setBody(String body, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setBody(
+		String body, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceNotificationTemplate.setBody(body, locale, defaultLocale);
 	}
 
@@ -724,24 +735,25 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the localized bodies of this commerce notification template from the map of locales and localized bodies.
-	*
-	* @param bodyMap the locales and localized bodies of this commerce notification template
-	*/
+	 * Sets the localized bodies of this commerce notification template from the map of locales and localized bodies.
+	 *
+	 * @param bodyMap the locales and localized bodies of this commerce notification template
+	 */
 	@Override
 	public void setBodyMap(Map<java.util.Locale, String> bodyMap) {
 		_commerceNotificationTemplate.setBodyMap(bodyMap);
 	}
 
 	/**
-	* Sets the localized bodies of this commerce notification template from the map of locales and localized bodies, and sets the default locale.
-	*
-	* @param bodyMap the locales and localized bodies of this commerce notification template
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized bodies of this commerce notification template from the map of locales and localized bodies, and sets the default locale.
+	 *
+	 * @param bodyMap the locales and localized bodies of this commerce notification template
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setBodyMap(Map<java.util.Locale, String> bodyMap,
-		java.util.Locale defaultLocale) {
+	public void setBodyMap(
+		Map<java.util.Locale, String> bodyMap, java.util.Locale defaultLocale) {
+
 		_commerceNotificationTemplate.setBodyMap(bodyMap, defaultLocale);
 	}
 
@@ -751,61 +763,63 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the cc of this commerce notification template.
-	*
-	* @param cc the cc of this commerce notification template
-	*/
+	 * Sets the cc of this commerce notification template.
+	 *
+	 * @param cc the cc of this commerce notification template
+	 */
 	@Override
 	public void setCc(String cc) {
 		_commerceNotificationTemplate.setCc(cc);
 	}
 
 	/**
-	* Sets the commerce notification template ID of this commerce notification template.
-	*
-	* @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification template
-	*/
+	 * Sets the commerce notification template ID of this commerce notification template.
+	 *
+	 * @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification template
+	 */
 	@Override
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		_commerceNotificationTemplate.setCommerceNotificationTemplateId(commerceNotificationTemplateId);
+
+		_commerceNotificationTemplate.setCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
 	}
 
 	/**
-	* Sets the company ID of this commerce notification template.
-	*
-	* @param companyId the company ID of this commerce notification template
-	*/
+	 * Sets the company ID of this commerce notification template.
+	 *
+	 * @param companyId the company ID of this commerce notification template
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceNotificationTemplate.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce notification template.
-	*
-	* @param createDate the create date of this commerce notification template
-	*/
+	 * Sets the create date of this commerce notification template.
+	 *
+	 * @param createDate the create date of this commerce notification template
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceNotificationTemplate.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce notification template.
-	*
-	* @param description the description of this commerce notification template
-	*/
+	 * Sets the description of this commerce notification template.
+	 *
+	 * @param description the description of this commerce notification template
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceNotificationTemplate.setDescription(description);
 	}
 
 	/**
-	* Sets whether this commerce notification template is enabled.
-	*
-	* @param enabled the enabled of this commerce notification template
-	*/
+	 * Sets whether this commerce notification template is enabled.
+	 *
+	 * @param enabled the enabled of this commerce notification template
+	 */
 	@Override
 	public void setEnabled(boolean enabled) {
 		_commerceNotificationTemplate.setEnabled(enabled);
@@ -814,6 +828,7 @@ public class CommerceNotificationTemplateWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceNotificationTemplate.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -824,52 +839,55 @@ public class CommerceNotificationTemplateWrapper
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceNotificationTemplate.setExpandoBridgeAttributes(serviceContext);
+		_commerceNotificationTemplate.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the from of this commerce notification template.
-	*
-	* @param from the from of this commerce notification template
-	*/
+	 * Sets the from of this commerce notification template.
+	 *
+	 * @param from the from of this commerce notification template
+	 */
 	@Override
 	public void setFrom(String from) {
 		_commerceNotificationTemplate.setFrom(from);
 	}
 
 	/**
-	* Sets the from name of this commerce notification template.
-	*
-	* @param fromName the from name of this commerce notification template
-	*/
+	 * Sets the from name of this commerce notification template.
+	 *
+	 * @param fromName the from name of this commerce notification template
+	 */
 	@Override
 	public void setFromName(String fromName) {
 		_commerceNotificationTemplate.setFromName(fromName);
 	}
 
 	/**
-	* Sets the localized from name of this commerce notification template in the language.
-	*
-	* @param fromName the localized from name of this commerce notification template
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized from name of this commerce notification template in the language.
+	 *
+	 * @param fromName the localized from name of this commerce notification template
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setFromName(String fromName, java.util.Locale locale) {
 		_commerceNotificationTemplate.setFromName(fromName, locale);
 	}
 
 	/**
-	* Sets the localized from name of this commerce notification template in the language, and sets the default locale.
-	*
-	* @param fromName the localized from name of this commerce notification template
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized from name of this commerce notification template in the language, and sets the default locale.
+	 *
+	 * @param fromName the localized from name of this commerce notification template
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setFromName(String fromName, java.util.Locale locale,
+	public void setFromName(
+		String fromName, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
-		_commerceNotificationTemplate.setFromName(fromName, locale,
-			defaultLocale);
+
+		_commerceNotificationTemplate.setFromName(
+			fromName, locale, defaultLocale);
 	}
 
 	@Override
@@ -878,52 +896,55 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the localized from names of this commerce notification template from the map of locales and localized from names.
-	*
-	* @param fromNameMap the locales and localized from names of this commerce notification template
-	*/
+	 * Sets the localized from names of this commerce notification template from the map of locales and localized from names.
+	 *
+	 * @param fromNameMap the locales and localized from names of this commerce notification template
+	 */
 	@Override
 	public void setFromNameMap(Map<java.util.Locale, String> fromNameMap) {
 		_commerceNotificationTemplate.setFromNameMap(fromNameMap);
 	}
 
 	/**
-	* Sets the localized from names of this commerce notification template from the map of locales and localized from names, and sets the default locale.
-	*
-	* @param fromNameMap the locales and localized from names of this commerce notification template
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized from names of this commerce notification template from the map of locales and localized from names, and sets the default locale.
+	 *
+	 * @param fromNameMap the locales and localized from names of this commerce notification template
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setFromNameMap(Map<java.util.Locale, String> fromNameMap,
+	public void setFromNameMap(
+		Map<java.util.Locale, String> fromNameMap,
 		java.util.Locale defaultLocale) {
-		_commerceNotificationTemplate.setFromNameMap(fromNameMap, defaultLocale);
+
+		_commerceNotificationTemplate.setFromNameMap(
+			fromNameMap, defaultLocale);
 	}
 
 	/**
-	* Sets the group ID of this commerce notification template.
-	*
-	* @param groupId the group ID of this commerce notification template
-	*/
+	 * Sets the group ID of this commerce notification template.
+	 *
+	 * @param groupId the group ID of this commerce notification template
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceNotificationTemplate.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce notification template.
-	*
-	* @param modifiedDate the modified date of this commerce notification template
-	*/
+	 * Sets the modified date of this commerce notification template.
+	 *
+	 * @param modifiedDate the modified date of this commerce notification template
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceNotificationTemplate.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce notification template.
-	*
-	* @param name the name of this commerce notification template
-	*/
+	 * Sets the name of this commerce notification template.
+	 *
+	 * @param name the name of this commerce notification template
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceNotificationTemplate.setName(name);
@@ -935,10 +956,10 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce notification template.
-	*
-	* @param primaryKey the primary key of this commerce notification template
-	*/
+	 * Sets the primary key of this commerce notification template.
+	 *
+	 * @param primaryKey the primary key of this commerce notification template
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceNotificationTemplate.setPrimaryKey(primaryKey);
@@ -950,37 +971,40 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the subject of this commerce notification template.
-	*
-	* @param subject the subject of this commerce notification template
-	*/
+	 * Sets the subject of this commerce notification template.
+	 *
+	 * @param subject the subject of this commerce notification template
+	 */
 	@Override
 	public void setSubject(String subject) {
 		_commerceNotificationTemplate.setSubject(subject);
 	}
 
 	/**
-	* Sets the localized subject of this commerce notification template in the language.
-	*
-	* @param subject the localized subject of this commerce notification template
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized subject of this commerce notification template in the language.
+	 *
+	 * @param subject the localized subject of this commerce notification template
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setSubject(String subject, java.util.Locale locale) {
 		_commerceNotificationTemplate.setSubject(subject, locale);
 	}
 
 	/**
-	* Sets the localized subject of this commerce notification template in the language, and sets the default locale.
-	*
-	* @param subject the localized subject of this commerce notification template
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized subject of this commerce notification template in the language, and sets the default locale.
+	 *
+	 * @param subject the localized subject of this commerce notification template
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setSubject(String subject, java.util.Locale locale,
+	public void setSubject(
+		String subject, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
-		_commerceNotificationTemplate.setSubject(subject, locale, defaultLocale);
+
+		_commerceNotificationTemplate.setSubject(
+			subject, locale, defaultLocale);
 	}
 
 	@Override
@@ -989,85 +1013,90 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	/**
-	* Sets the localized subjects of this commerce notification template from the map of locales and localized subjects.
-	*
-	* @param subjectMap the locales and localized subjects of this commerce notification template
-	*/
+	 * Sets the localized subjects of this commerce notification template from the map of locales and localized subjects.
+	 *
+	 * @param subjectMap the locales and localized subjects of this commerce notification template
+	 */
 	@Override
 	public void setSubjectMap(Map<java.util.Locale, String> subjectMap) {
 		_commerceNotificationTemplate.setSubjectMap(subjectMap);
 	}
 
 	/**
-	* Sets the localized subjects of this commerce notification template from the map of locales and localized subjects, and sets the default locale.
-	*
-	* @param subjectMap the locales and localized subjects of this commerce notification template
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized subjects of this commerce notification template from the map of locales and localized subjects, and sets the default locale.
+	 *
+	 * @param subjectMap the locales and localized subjects of this commerce notification template
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setSubjectMap(Map<java.util.Locale, String> subjectMap,
+	public void setSubjectMap(
+		Map<java.util.Locale, String> subjectMap,
 		java.util.Locale defaultLocale) {
+
 		_commerceNotificationTemplate.setSubjectMap(subjectMap, defaultLocale);
 	}
 
 	/**
-	* Sets the type of this commerce notification template.
-	*
-	* @param type the type of this commerce notification template
-	*/
+	 * Sets the type of this commerce notification template.
+	 *
+	 * @param type the type of this commerce notification template
+	 */
 	@Override
 	public void setType(String type) {
 		_commerceNotificationTemplate.setType(type);
 	}
 
 	/**
-	* Sets the user ID of this commerce notification template.
-	*
-	* @param userId the user ID of this commerce notification template
-	*/
+	 * Sets the user ID of this commerce notification template.
+	 *
+	 * @param userId the user ID of this commerce notification template
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceNotificationTemplate.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce notification template.
-	*
-	* @param userName the user name of this commerce notification template
-	*/
+	 * Sets the user name of this commerce notification template.
+	 *
+	 * @param userName the user name of this commerce notification template
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceNotificationTemplate.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce notification template.
-	*
-	* @param userUuid the user uuid of this commerce notification template
-	*/
+	 * Sets the user uuid of this commerce notification template.
+	 *
+	 * @param userUuid the user uuid of this commerce notification template
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceNotificationTemplate.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce notification template.
-	*
-	* @param uuid the uuid of this commerce notification template
-	*/
+	 * Sets the uuid of this commerce notification template.
+	 *
+	 * @param uuid the uuid of this commerce notification template
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceNotificationTemplate.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceNotificationTemplate> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceNotificationTemplate> toCacheModel() {
+
 		return _commerceNotificationTemplate.toCacheModel();
 	}
 
 	@Override
 	public CommerceNotificationTemplate toEscapedModel() {
-		return new CommerceNotificationTemplateWrapper(_commerceNotificationTemplate.toEscapedModel());
+		return new CommerceNotificationTemplateWrapper(
+			_commerceNotificationTemplate.toEscapedModel());
 	}
 
 	@Override
@@ -1077,7 +1106,8 @@ public class CommerceNotificationTemplateWrapper
 
 	@Override
 	public CommerceNotificationTemplate toUnescapedModel() {
-		return new CommerceNotificationTemplateWrapper(_commerceNotificationTemplate.toUnescapedModel());
+		return new CommerceNotificationTemplateWrapper(
+			_commerceNotificationTemplate.toUnescapedModel());
 	}
 
 	@Override
@@ -1095,10 +1125,15 @@ public class CommerceNotificationTemplateWrapper
 			return false;
 		}
 
-		CommerceNotificationTemplateWrapper commerceNotificationTemplateWrapper = (CommerceNotificationTemplateWrapper)obj;
+		CommerceNotificationTemplateWrapper
+			commerceNotificationTemplateWrapper =
+				(CommerceNotificationTemplateWrapper)obj;
 
-		if (Objects.equals(_commerceNotificationTemplate,
-					commerceNotificationTemplateWrapper._commerceNotificationTemplate)) {
+		if (Objects.equals(
+				_commerceNotificationTemplate,
+				commerceNotificationTemplateWrapper.
+					_commerceNotificationTemplate)) {
+
 			return true;
 		}
 
@@ -1131,4 +1166,5 @@ public class CommerceNotificationTemplateWrapper
 	}
 
 	private final CommerceNotificationTemplate _commerceNotificationTemplate;
+
 }

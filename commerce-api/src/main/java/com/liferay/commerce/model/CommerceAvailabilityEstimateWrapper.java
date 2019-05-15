@@ -17,9 +17,7 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceAvailabilityEstimateWrapper
 	implements CommerceAvailabilityEstimate,
-		ModelWrapper<CommerceAvailabilityEstimate> {
+			   ModelWrapper<CommerceAvailabilityEstimate> {
+
 	public CommerceAvailabilityEstimateWrapper(
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
+
 		_commerceAvailabilityEstimate = commerceAvailabilityEstimate;
 	}
 
@@ -63,7 +63,8 @@ public class CommerceAvailabilityEstimateWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("commerceAvailabilityEstimateId",
+		attributes.put(
+			"commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -87,7 +88,7 @@ public class CommerceAvailabilityEstimateWrapper
 		}
 
 		Long commerceAvailabilityEstimateId = (Long)attributes.get(
-				"commerceAvailabilityEstimateId");
+			"commerceAvailabilityEstimateId");
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
@@ -150,13 +151,17 @@ public class CommerceAvailabilityEstimateWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceAvailabilityEstimateWrapper((CommerceAvailabilityEstimate)_commerceAvailabilityEstimate.clone());
+		return new CommerceAvailabilityEstimateWrapper(
+			(CommerceAvailabilityEstimate)
+				_commerceAvailabilityEstimate.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
-		return _commerceAvailabilityEstimate.compareTo(commerceAvailabilityEstimate);
+
+		return _commerceAvailabilityEstimate.compareTo(
+			commerceAvailabilityEstimate);
 	}
 
 	@Override
@@ -165,30 +170,31 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Returns the commerce availability estimate ID of this commerce availability estimate.
-	*
-	* @return the commerce availability estimate ID of this commerce availability estimate
-	*/
+	 * Returns the commerce availability estimate ID of this commerce availability estimate.
+	 *
+	 * @return the commerce availability estimate ID of this commerce availability estimate
+	 */
 	@Override
 	public long getCommerceAvailabilityEstimateId() {
-		return _commerceAvailabilityEstimate.getCommerceAvailabilityEstimateId();
+		return _commerceAvailabilityEstimate.
+			getCommerceAvailabilityEstimateId();
 	}
 
 	/**
-	* Returns the company ID of this commerce availability estimate.
-	*
-	* @return the company ID of this commerce availability estimate
-	*/
+	 * Returns the company ID of this commerce availability estimate.
+	 *
+	 * @return the company ID of this commerce availability estimate
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceAvailabilityEstimate.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce availability estimate.
-	*
-	* @return the create date of this commerce availability estimate
-	*/
+	 * Returns the create date of this commerce availability estimate.
+	 *
+	 * @return the create date of this commerce availability estimate
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceAvailabilityEstimate.getCreateDate();
@@ -205,40 +211,40 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce availability estimate.
-	*
-	* @return the group ID of this commerce availability estimate
-	*/
+	 * Returns the group ID of this commerce availability estimate.
+	 *
+	 * @return the group ID of this commerce availability estimate
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceAvailabilityEstimate.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce availability estimate.
-	*
-	* @return the last publish date of this commerce availability estimate
-	*/
+	 * Returns the last publish date of this commerce availability estimate.
+	 *
+	 * @return the last publish date of this commerce availability estimate
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commerceAvailabilityEstimate.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this commerce availability estimate.
-	*
-	* @return the modified date of this commerce availability estimate
-	*/
+	 * Returns the modified date of this commerce availability estimate.
+	 *
+	 * @return the modified date of this commerce availability estimate
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceAvailabilityEstimate.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce availability estimate.
-	*
-	* @return the primary key of this commerce availability estimate
-	*/
+	 * Returns the primary key of this commerce availability estimate.
+	 *
+	 * @return the primary key of this commerce availability estimate
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceAvailabilityEstimate.getPrimaryKey();
@@ -250,66 +256,66 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Returns the priority of this commerce availability estimate.
-	*
-	* @return the priority of this commerce availability estimate
-	*/
+	 * Returns the priority of this commerce availability estimate.
+	 *
+	 * @return the priority of this commerce availability estimate
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceAvailabilityEstimate.getPriority();
 	}
 
 	/**
-	* Returns the title of this commerce availability estimate.
-	*
-	* @return the title of this commerce availability estimate
-	*/
+	 * Returns the title of this commerce availability estimate.
+	 *
+	 * @return the title of this commerce availability estimate
+	 */
 	@Override
 	public String getTitle() {
 		return _commerceAvailabilityEstimate.getTitle();
 	}
 
 	/**
-	* Returns the localized title of this commerce availability estimate in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized title of this commerce availability estimate
-	*/
+	 * Returns the localized title of this commerce availability estimate in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized title of this commerce availability estimate
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale) {
 		return _commerceAvailabilityEstimate.getTitle(locale);
 	}
 
 	/**
-	* Returns the localized title of this commerce availability estimate in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this commerce availability estimate. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized title of this commerce availability estimate in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this commerce availability estimate. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale, boolean useDefault) {
 		return _commerceAvailabilityEstimate.getTitle(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized title of this commerce availability estimate in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized title of this commerce availability estimate
-	*/
+	 * Returns the localized title of this commerce availability estimate in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized title of this commerce availability estimate
+	 */
 	@Override
 	public String getTitle(String languageId) {
 		return _commerceAvailabilityEstimate.getTitle(languageId);
 	}
 
 	/**
-	* Returns the localized title of this commerce availability estimate in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this commerce availability estimate
-	*/
+	 * Returns the localized title of this commerce availability estimate in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this commerce availability estimate
+	 */
 	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		return _commerceAvailabilityEstimate.getTitle(languageId, useDefault);
@@ -326,50 +332,50 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized titles of this commerce availability estimate.
-	*
-	* @return the locales and localized titles of this commerce availability estimate
-	*/
+	 * Returns a map of the locales and localized titles of this commerce availability estimate.
+	 *
+	 * @return the locales and localized titles of this commerce availability estimate
+	 */
 	@Override
 	public Map<java.util.Locale, String> getTitleMap() {
 		return _commerceAvailabilityEstimate.getTitleMap();
 	}
 
 	/**
-	* Returns the user ID of this commerce availability estimate.
-	*
-	* @return the user ID of this commerce availability estimate
-	*/
+	 * Returns the user ID of this commerce availability estimate.
+	 *
+	 * @return the user ID of this commerce availability estimate
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceAvailabilityEstimate.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce availability estimate.
-	*
-	* @return the user name of this commerce availability estimate
-	*/
+	 * Returns the user name of this commerce availability estimate.
+	 *
+	 * @return the user name of this commerce availability estimate
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceAvailabilityEstimate.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce availability estimate.
-	*
-	* @return the user uuid of this commerce availability estimate
-	*/
+	 * Returns the user uuid of this commerce availability estimate.
+	 *
+	 * @return the user uuid of this commerce availability estimate
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceAvailabilityEstimate.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce availability estimate.
-	*
-	* @return the uuid of this commerce availability estimate
-	*/
+	 * Returns the uuid of this commerce availability estimate.
+	 *
+	 * @return the uuid of this commerce availability estimate
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceAvailabilityEstimate.getUuid();
@@ -403,14 +409,17 @@ public class CommerceAvailabilityEstimateWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceAvailabilityEstimate.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceAvailabilityEstimate.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commerceAvailabilityEstimate.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	@Override
@@ -419,31 +428,33 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Sets the commerce availability estimate ID of this commerce availability estimate.
-	*
-	* @param commerceAvailabilityEstimateId the commerce availability estimate ID of this commerce availability estimate
-	*/
+	 * Sets the commerce availability estimate ID of this commerce availability estimate.
+	 *
+	 * @param commerceAvailabilityEstimateId the commerce availability estimate ID of this commerce availability estimate
+	 */
 	@Override
 	public void setCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId) {
-		_commerceAvailabilityEstimate.setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+
+		_commerceAvailabilityEstimate.setCommerceAvailabilityEstimateId(
+			commerceAvailabilityEstimateId);
 	}
 
 	/**
-	* Sets the company ID of this commerce availability estimate.
-	*
-	* @param companyId the company ID of this commerce availability estimate
-	*/
+	 * Sets the company ID of this commerce availability estimate.
+	 *
+	 * @param companyId the company ID of this commerce availability estimate
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceAvailabilityEstimate.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce availability estimate.
-	*
-	* @param createDate the create date of this commerce availability estimate
-	*/
+	 * Sets the create date of this commerce availability estimate.
+	 *
+	 * @param createDate the create date of this commerce availability estimate
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceAvailabilityEstimate.setCreateDate(createDate);
@@ -452,6 +463,7 @@ public class CommerceAvailabilityEstimateWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceAvailabilityEstimate.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -462,34 +474,35 @@ public class CommerceAvailabilityEstimateWrapper
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceAvailabilityEstimate.setExpandoBridgeAttributes(serviceContext);
+		_commerceAvailabilityEstimate.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the group ID of this commerce availability estimate.
-	*
-	* @param groupId the group ID of this commerce availability estimate
-	*/
+	 * Sets the group ID of this commerce availability estimate.
+	 *
+	 * @param groupId the group ID of this commerce availability estimate
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceAvailabilityEstimate.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce availability estimate.
-	*
-	* @param lastPublishDate the last publish date of this commerce availability estimate
-	*/
+	 * Sets the last publish date of this commerce availability estimate.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce availability estimate
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commerceAvailabilityEstimate.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this commerce availability estimate.
-	*
-	* @param modifiedDate the modified date of this commerce availability estimate
-	*/
+	 * Sets the modified date of this commerce availability estimate.
+	 *
+	 * @param modifiedDate the modified date of this commerce availability estimate
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceAvailabilityEstimate.setModifiedDate(modifiedDate);
@@ -501,10 +514,10 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce availability estimate.
-	*
-	* @param primaryKey the primary key of this commerce availability estimate
-	*/
+	 * Sets the primary key of this commerce availability estimate.
+	 *
+	 * @param primaryKey the primary key of this commerce availability estimate
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceAvailabilityEstimate.setPrimaryKey(primaryKey);
@@ -516,46 +529,47 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Sets the priority of this commerce availability estimate.
-	*
-	* @param priority the priority of this commerce availability estimate
-	*/
+	 * Sets the priority of this commerce availability estimate.
+	 *
+	 * @param priority the priority of this commerce availability estimate
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceAvailabilityEstimate.setPriority(priority);
 	}
 
 	/**
-	* Sets the title of this commerce availability estimate.
-	*
-	* @param title the title of this commerce availability estimate
-	*/
+	 * Sets the title of this commerce availability estimate.
+	 *
+	 * @param title the title of this commerce availability estimate
+	 */
 	@Override
 	public void setTitle(String title) {
 		_commerceAvailabilityEstimate.setTitle(title);
 	}
 
 	/**
-	* Sets the localized title of this commerce availability estimate in the language.
-	*
-	* @param title the localized title of this commerce availability estimate
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized title of this commerce availability estimate in the language.
+	 *
+	 * @param title the localized title of this commerce availability estimate
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setTitle(String title, java.util.Locale locale) {
 		_commerceAvailabilityEstimate.setTitle(title, locale);
 	}
 
 	/**
-	* Sets the localized title of this commerce availability estimate in the language, and sets the default locale.
-	*
-	* @param title the localized title of this commerce availability estimate
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized title of this commerce availability estimate in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this commerce availability estimate
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitle(String title, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setTitle(
+		String title, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceAvailabilityEstimate.setTitle(title, locale, defaultLocale);
 	}
 
@@ -565,75 +579,80 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	/**
-	* Sets the localized titles of this commerce availability estimate from the map of locales and localized titles.
-	*
-	* @param titleMap the locales and localized titles of this commerce availability estimate
-	*/
+	 * Sets the localized titles of this commerce availability estimate from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this commerce availability estimate
+	 */
 	@Override
 	public void setTitleMap(Map<java.util.Locale, String> titleMap) {
 		_commerceAvailabilityEstimate.setTitleMap(titleMap);
 	}
 
 	/**
-	* Sets the localized titles of this commerce availability estimate from the map of locales and localized titles, and sets the default locale.
-	*
-	* @param titleMap the locales and localized titles of this commerce availability estimate
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized titles of this commerce availability estimate from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this commerce availability estimate
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitleMap(Map<java.util.Locale, String> titleMap,
+	public void setTitleMap(
+		Map<java.util.Locale, String> titleMap,
 		java.util.Locale defaultLocale) {
+
 		_commerceAvailabilityEstimate.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
-	* Sets the user ID of this commerce availability estimate.
-	*
-	* @param userId the user ID of this commerce availability estimate
-	*/
+	 * Sets the user ID of this commerce availability estimate.
+	 *
+	 * @param userId the user ID of this commerce availability estimate
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceAvailabilityEstimate.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce availability estimate.
-	*
-	* @param userName the user name of this commerce availability estimate
-	*/
+	 * Sets the user name of this commerce availability estimate.
+	 *
+	 * @param userName the user name of this commerce availability estimate
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceAvailabilityEstimate.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce availability estimate.
-	*
-	* @param userUuid the user uuid of this commerce availability estimate
-	*/
+	 * Sets the user uuid of this commerce availability estimate.
+	 *
+	 * @param userUuid the user uuid of this commerce availability estimate
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceAvailabilityEstimate.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce availability estimate.
-	*
-	* @param uuid the uuid of this commerce availability estimate
-	*/
+	 * Sets the uuid of this commerce availability estimate.
+	 *
+	 * @param uuid the uuid of this commerce availability estimate
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceAvailabilityEstimate.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceAvailabilityEstimate> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceAvailabilityEstimate> toCacheModel() {
+
 		return _commerceAvailabilityEstimate.toCacheModel();
 	}
 
 	@Override
 	public CommerceAvailabilityEstimate toEscapedModel() {
-		return new CommerceAvailabilityEstimateWrapper(_commerceAvailabilityEstimate.toEscapedModel());
+		return new CommerceAvailabilityEstimateWrapper(
+			_commerceAvailabilityEstimate.toEscapedModel());
 	}
 
 	@Override
@@ -643,7 +662,8 @@ public class CommerceAvailabilityEstimateWrapper
 
 	@Override
 	public CommerceAvailabilityEstimate toUnescapedModel() {
-		return new CommerceAvailabilityEstimateWrapper(_commerceAvailabilityEstimate.toUnescapedModel());
+		return new CommerceAvailabilityEstimateWrapper(
+			_commerceAvailabilityEstimate.toUnescapedModel());
 	}
 
 	@Override
@@ -661,10 +681,15 @@ public class CommerceAvailabilityEstimateWrapper
 			return false;
 		}
 
-		CommerceAvailabilityEstimateWrapper commerceAvailabilityEstimateWrapper = (CommerceAvailabilityEstimateWrapper)obj;
+		CommerceAvailabilityEstimateWrapper
+			commerceAvailabilityEstimateWrapper =
+				(CommerceAvailabilityEstimateWrapper)obj;
 
-		if (Objects.equals(_commerceAvailabilityEstimate,
-					commerceAvailabilityEstimateWrapper._commerceAvailabilityEstimate)) {
+		if (Objects.equals(
+				_commerceAvailabilityEstimate,
+				commerceAvailabilityEstimateWrapper.
+					_commerceAvailabilityEstimate)) {
+
 			return true;
 		}
 
@@ -697,4 +722,5 @@ public class CommerceAvailabilityEstimateWrapper
 	}
 
 	private final CommerceAvailabilityEstimate _commerceAvailabilityEstimate;
+
 }

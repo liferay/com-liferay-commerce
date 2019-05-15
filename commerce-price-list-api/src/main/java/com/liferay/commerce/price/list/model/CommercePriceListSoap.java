@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.price.list.service.http.CommercePriceListServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.price.list.service.http.CommercePriceListServiceSoap
  * @generated
  */
 @ProviderType
 public class CommercePriceListSoap implements Serializable {
+
 	public static CommercePriceListSoap toSoapModel(CommercePriceList model) {
 		CommercePriceListSoap soapModel = new CommercePriceListSoap();
 
@@ -44,7 +44,8 @@ public class CommercePriceListSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
-		soapModel.setParentCommercePriceListId(model.getParentCommercePriceListId());
+		soapModel.setParentCommercePriceListId(
+			model.getParentCommercePriceListId());
 		soapModel.setName(model.getName());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setDisplayDate(model.getDisplayDate());
@@ -60,7 +61,9 @@ public class CommercePriceListSoap implements Serializable {
 
 	public static CommercePriceListSoap[] toSoapModels(
 		CommercePriceList[] models) {
-		CommercePriceListSoap[] soapModels = new CommercePriceListSoap[models.length];
+
+		CommercePriceListSoap[] soapModels =
+			new CommercePriceListSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +74,12 @@ public class CommercePriceListSoap implements Serializable {
 
 	public static CommercePriceListSoap[][] toSoapModels(
 		CommercePriceList[][] models) {
+
 		CommercePriceListSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommercePriceListSoap[models.length][models[0].length];
+			soapModels =
+				new CommercePriceListSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommercePriceListSoap[0][0];
@@ -89,7 +94,9 @@ public class CommercePriceListSoap implements Serializable {
 
 	public static CommercePriceListSoap[] toSoapModels(
 		List<CommercePriceList> models) {
-		List<CommercePriceListSoap> soapModels = new ArrayList<CommercePriceListSoap>(models.size());
+
+		List<CommercePriceListSoap> soapModels =
+			new ArrayList<CommercePriceListSoap>(models.size());
 
 		for (CommercePriceList model : models) {
 			soapModels.add(toSoapModel(model));
@@ -289,4 +296,5 @@ public class CommercePriceListSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

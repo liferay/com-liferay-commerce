@@ -28,49 +28,70 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceNotificationQueueEntryServiceWrapper
 	implements CommerceNotificationQueueEntryService,
-		ServiceWrapper<CommerceNotificationQueueEntryService> {
+			   ServiceWrapper<CommerceNotificationQueueEntryService> {
+
 	public CommerceNotificationQueueEntryServiceWrapper(
-		CommerceNotificationQueueEntryService commerceNotificationQueueEntryService) {
-		_commerceNotificationQueueEntryService = commerceNotificationQueueEntryService;
+		CommerceNotificationQueueEntryService
+			commerceNotificationQueueEntryService) {
+
+		_commerceNotificationQueueEntryService =
+			commerceNotificationQueueEntryService;
 	}
 
 	@Override
 	public void deleteCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId)
+			long commerceNotificationQueueEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceNotificationQueueEntryService.deleteCommerceNotificationQueueEntry(commerceNotificationQueueEntryId);
+
+		_commerceNotificationQueueEntryService.
+			deleteCommerceNotificationQueueEntry(
+				commerceNotificationQueueEntryId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> getCommerceNotificationQueueEntries(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationQueueEntryService.getCommerceNotificationQueueEntries(groupId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>
+				getCommerceNotificationQueueEntries(
+					long groupId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.notification.model.
+							CommerceNotificationQueueEntry> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryService.
+			getCommerceNotificationQueueEntries(
+				groupId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceNotificationQueueEntriesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationQueueEntryService.getCommerceNotificationQueueEntriesCount(groupId);
+
+		return _commerceNotificationQueueEntryService.
+			getCommerceNotificationQueueEntriesCount(groupId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceNotificationQueueEntryService.getOSGiServiceIdentifier();
+		return _commerceNotificationQueueEntryService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.notification.model.CommerceNotificationQueueEntry resendCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationQueueEntryService.resendCommerceNotificationQueueEntry(commerceNotificationQueueEntryId);
+	public
+		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
+				resendCommerceNotificationQueueEntry(
+					long commerceNotificationQueueEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryService.
+			resendCommerceNotificationQueueEntry(
+				commerceNotificationQueueEntryId);
 	}
 
 	@Override
@@ -80,9 +101,14 @@ public class CommerceNotificationQueueEntryServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceNotificationQueueEntryService commerceNotificationQueueEntryService) {
-		_commerceNotificationQueueEntryService = commerceNotificationQueueEntryService;
+		CommerceNotificationQueueEntryService
+			commerceNotificationQueueEntryService) {
+
+		_commerceNotificationQueueEntryService =
+			commerceNotificationQueueEntryService;
 	}
 
-	private CommerceNotificationQueueEntryService _commerceNotificationQueueEntryService;
+	private CommerceNotificationQueueEntryService
+		_commerceNotificationQueueEntryService;
+
 }

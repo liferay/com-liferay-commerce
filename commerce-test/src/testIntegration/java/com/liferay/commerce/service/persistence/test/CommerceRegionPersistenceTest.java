@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchRegionException;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceRegionPersistence;
 import com.liferay.commerce.service.persistence.CommerceRegionUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceRegionPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -109,7 +108,8 @@ public class CommerceRegionPersistenceTest {
 
 		_persistence.remove(newCommerceRegion);
 
-		CommerceRegion existingCommerceRegion = _persistence.fetchByPrimaryKey(newCommerceRegion.getPrimaryKey());
+		CommerceRegion existingCommerceRegion = _persistence.fetchByPrimaryKey(
+			newCommerceRegion.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceRegion);
 	}
@@ -153,38 +153,45 @@ public class CommerceRegionPersistenceTest {
 
 		_commerceRegions.add(_persistence.update(newCommerceRegion));
 
-		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(newCommerceRegion.getPrimaryKey());
+		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(
+			newCommerceRegion.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceRegion.getUuid(),
-			newCommerceRegion.getUuid());
-		Assert.assertEquals(existingCommerceRegion.getCommerceRegionId(),
+		Assert.assertEquals(
+			existingCommerceRegion.getUuid(), newCommerceRegion.getUuid());
+		Assert.assertEquals(
+			existingCommerceRegion.getCommerceRegionId(),
 			newCommerceRegion.getCommerceRegionId());
-		Assert.assertEquals(existingCommerceRegion.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceRegion.getGroupId(),
 			newCommerceRegion.getGroupId());
-		Assert.assertEquals(existingCommerceRegion.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceRegion.getCompanyId(),
 			newCommerceRegion.getCompanyId());
-		Assert.assertEquals(existingCommerceRegion.getUserId(),
-			newCommerceRegion.getUserId());
-		Assert.assertEquals(existingCommerceRegion.getUserName(),
+		Assert.assertEquals(
+			existingCommerceRegion.getUserId(), newCommerceRegion.getUserId());
+		Assert.assertEquals(
+			existingCommerceRegion.getUserName(),
 			newCommerceRegion.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceRegion.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceRegion.getCreateDate()),
 			Time.getShortTimestamp(newCommerceRegion.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceRegion.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceRegion.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceRegion.getModifiedDate()));
-		Assert.assertEquals(existingCommerceRegion.getCommerceCountryId(),
+		Assert.assertEquals(
+			existingCommerceRegion.getCommerceCountryId(),
 			newCommerceRegion.getCommerceCountryId());
-		Assert.assertEquals(existingCommerceRegion.getName(),
-			newCommerceRegion.getName());
-		Assert.assertEquals(existingCommerceRegion.getCode(),
-			newCommerceRegion.getCode());
-		AssertUtils.assertEquals(existingCommerceRegion.getPriority(),
+		Assert.assertEquals(
+			existingCommerceRegion.getName(), newCommerceRegion.getName());
+		Assert.assertEquals(
+			existingCommerceRegion.getCode(), newCommerceRegion.getCode());
+		AssertUtils.assertEquals(
+			existingCommerceRegion.getPriority(),
 			newCommerceRegion.getPriority());
-		Assert.assertEquals(existingCommerceRegion.isActive(),
-			newCommerceRegion.isActive());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceRegion.getLastPublishDate()),
+		Assert.assertEquals(
+			existingCommerceRegion.isActive(), newCommerceRegion.isActive());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceRegion.getLastPublishDate()),
 			Time.getShortTimestamp(newCommerceRegion.getLastPublishDate()));
 	}
 
@@ -233,8 +240,8 @@ public class CommerceRegionPersistenceTest {
 
 	@Test
 	public void testCountByC_A() throws Exception {
-		_persistence.countByC_A(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean());
+		_persistence.countByC_A(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
 		_persistence.countByC_A(0L, RandomTestUtil.randomBoolean());
 	}
@@ -243,7 +250,8 @@ public class CommerceRegionPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
-		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(newCommerceRegion.getPrimaryKey());
+		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(
+			newCommerceRegion.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceRegion, newCommerceRegion);
 	}
@@ -257,24 +265,25 @@ public class CommerceRegionPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceRegion> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceRegion", "uuid",
-			true, "commerceRegionId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceCountryId", true, "name", true,
-			"code", true, "priority", true, "active", true, "lastPublishDate",
-			true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceRegion", "uuid", true, "commerceRegionId", true, "groupId",
+			true, "companyId", true, "userId", true, "userName", true,
+			"createDate", true, "modifiedDate", true, "commerceCountryId", true,
+			"name", true, "code", true, "priority", true, "active", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
-		CommerceRegion existingCommerceRegion = _persistence.fetchByPrimaryKey(newCommerceRegion.getPrimaryKey());
+		CommerceRegion existingCommerceRegion = _persistence.fetchByPrimaryKey(
+			newCommerceRegion.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceRegion, newCommerceRegion);
 	}
@@ -283,7 +292,8 @@ public class CommerceRegionPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceRegion missingCommerceRegion = _persistence.fetchByPrimaryKey(pk);
+		CommerceRegion missingCommerceRegion = _persistence.fetchByPrimaryKey(
+			pk);
 
 		Assert.assertNull(missingCommerceRegion);
 	}
@@ -291,6 +301,7 @@ public class CommerceRegionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CommerceRegion newCommerceRegion1 = addCommerceRegion();
 		CommerceRegion newCommerceRegion2 = addCommerceRegion();
 
@@ -299,18 +310,22 @@ public class CommerceRegionPersistenceTest {
 		primaryKeys.add(newCommerceRegion1.getPrimaryKey());
 		primaryKeys.add(newCommerceRegion2.getPrimaryKey());
 
-		Map<Serializable, CommerceRegion> commerceRegions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceRegion> commerceRegions =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceRegions.size());
-		Assert.assertEquals(newCommerceRegion1,
+		Assert.assertEquals(
+			newCommerceRegion1,
 			commerceRegions.get(newCommerceRegion1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceRegion2,
+		Assert.assertEquals(
+			newCommerceRegion2,
 			commerceRegions.get(newCommerceRegion2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -320,7 +335,8 @@ public class CommerceRegionPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceRegion> commerceRegions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceRegion> commerceRegions =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceRegions.isEmpty());
 	}
@@ -328,6 +344,7 @@ public class CommerceRegionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
 		long pk = RandomTestUtil.nextLong();
@@ -337,36 +354,39 @@ public class CommerceRegionPersistenceTest {
 		primaryKeys.add(newCommerceRegion.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceRegion> commerceRegions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceRegion> commerceRegions =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceRegions.size());
-		Assert.assertEquals(newCommerceRegion,
+		Assert.assertEquals(
+			newCommerceRegion,
 			commerceRegions.get(newCommerceRegion.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceRegion> commerceRegions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceRegion> commerceRegions =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceRegions.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceRegion.getPrimaryKey());
 
-		Map<Serializable, CommerceRegion> commerceRegions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceRegion> commerceRegions =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceRegions.size());
-		Assert.assertEquals(newCommerceRegion,
+		Assert.assertEquals(
+			newCommerceRegion,
 			commerceRegions.get(newCommerceRegion.getPrimaryKey()));
 	}
 
@@ -374,15 +394,19 @@ public class CommerceRegionPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceRegionLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceRegionLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceRegion>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CommerceRegion>() {
+
 				@Override
 				public void performAction(CommerceRegion commerceRegion) {
 					Assert.assertNotNull(commerceRegion);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -391,17 +415,18 @@ public class CommerceRegionPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceRegion.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceRegion.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceRegionId",
-				newCommerceRegion.getCommerceRegionId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceRegionId", newCommerceRegion.getCommerceRegionId()));
 
-		List<CommerceRegion> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceRegion> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -412,32 +437,34 @@ public class CommerceRegionPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceRegion.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceRegion.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceRegionId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceRegionId", RandomTestUtil.nextLong()));
 
-		List<CommerceRegion> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceRegion> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CommerceRegion newCommerceRegion = addCommerceRegion();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceRegion.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceRegion.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceRegionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceRegionId"));
 
 		Object newCommerceRegionId = newCommerceRegion.getCommerceRegionId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceRegionId",
-				new Object[] { newCommerceRegionId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceRegionId", new Object[] {newCommerceRegionId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -450,14 +477,15 @@ public class CommerceRegionPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceRegion.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceRegion.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceRegionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceRegionId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceRegionId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceRegionId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -470,22 +498,31 @@ public class CommerceRegionPersistenceTest {
 
 		_persistence.clearCache();
 
-		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(newCommerceRegion.getPrimaryKey());
+		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(
+			newCommerceRegion.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCommerceRegion.getUuid(),
-				ReflectionTestUtil.invoke(existingCommerceRegion,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCommerceRegion.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceRegion,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCommerceRegion.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCommerceRegion, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceRegion.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceRegion, "getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceRegion.getCommerceCountryId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceRegion,
-				"getOriginalCommerceCountryId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCommerceRegion.getCode(),
-				ReflectionTestUtil.invoke(existingCommerceRegion,
-					"getOriginalCode", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceRegion.getCommerceCountryId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceRegion, "getOriginalCommerceCountryId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCommerceRegion.getCode(),
+				ReflectionTestUtil.invoke(
+					existingCommerceRegion, "getOriginalCode",
+					new Class<?>[0])));
 	}
 
 	protected CommerceRegion addCommerceRegion() throws Exception {
@@ -524,7 +561,9 @@ public class CommerceRegionPersistenceTest {
 		return commerceRegion;
 	}
 
-	private List<CommerceRegion> _commerceRegions = new ArrayList<CommerceRegion>();
+	private List<CommerceRegion> _commerceRegions =
+		new ArrayList<CommerceRegion>();
 	private CommerceRegionPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

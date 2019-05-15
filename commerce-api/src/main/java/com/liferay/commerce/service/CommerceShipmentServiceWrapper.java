@@ -26,71 +26,87 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CommerceShipmentServiceWrapper implements CommerceShipmentService,
-	ServiceWrapper<CommerceShipmentService> {
+public class CommerceShipmentServiceWrapper
+	implements CommerceShipmentService,
+			   ServiceWrapper<CommerceShipmentService> {
+
 	public CommerceShipmentServiceWrapper(
 		CommerceShipmentService commerceShipmentService) {
+
 		_commerceShipmentService = commerceShipmentService;
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceShipment addCommerceShipment(
-		long commerceOrderId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long commerceOrderId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.addCommerceShipment(commerceOrderId,
-			serviceContext);
+
+		return _commerceShipmentService.addCommerceShipment(
+			commerceOrderId, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceShipment(long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_commerceShipmentService.deleteCommerceShipment(commerceShipmentId);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceShipment getCommerceShipment(
-		long commerceShipmentId)
+			long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceShipmentService.getCommerceShipment(commerceShipmentId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public java.util.List<com.liferay.commerce.model.CommerceShipment>
+			getCommerceShipments(
+				long groupId, int status, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceShipment>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.getCommerceShipments(groupId, status,
-			start, end, orderByComparator);
+
+		return _commerceShipmentService.getCommerceShipments(
+			groupId, status, start, end, orderByComparator);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public java.util.List<com.liferay.commerce.model.CommerceShipment>
+			getCommerceShipments(
+				long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceShipment>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.getCommerceShipments(groupId, start,
-			end, orderByComparator);
+
+		return _commerceShipmentService.getCommerceShipments(
+			groupId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceShipmentsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceShipmentService.getCommerceShipmentsCount(groupId);
 	}
 
 	@Override
 	public int getCommerceShipmentsCount(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.getCommerceShipmentsCount(groupId,
-			status);
+
+		return _commerceShipmentService.getCommerceShipmentsCount(
+			groupId, status);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceShipmentService.getOSGiServiceIdentifier();
@@ -98,34 +114,37 @@ public class CommerceShipmentServiceWrapper implements CommerceShipmentService,
 
 	@Override
 	public com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
-		long commerceShipmentId, String carrier, String trackingNumber,
-		int status, int shippingDateMonth, int shippingDateDay,
-		int shippingDateYear, int shippingDateHour, int shippingDateMinute,
-		int expectedDateMonth, int expectedDateDay, int expectedDateYear,
-		int expectedDateHour, int expectedDateMinute)
+			long commerceShipmentId, String carrier, String trackingNumber,
+			int status, int shippingDateMonth, int shippingDateDay,
+			int shippingDateYear, int shippingDateHour, int shippingDateMinute,
+			int expectedDateMonth, int expectedDateDay, int expectedDateYear,
+			int expectedDateHour, int expectedDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.updateCommerceShipment(commerceShipmentId,
-			carrier, trackingNumber, status, shippingDateMonth,
-			shippingDateDay, shippingDateYear, shippingDateHour,
-			shippingDateMinute, expectedDateMonth, expectedDateDay,
-			expectedDateYear, expectedDateHour, expectedDateMinute);
+
+		return _commerceShipmentService.updateCommerceShipment(
+			commerceShipmentId, carrier, trackingNumber, status,
+			shippingDateMonth, shippingDateDay, shippingDateYear,
+			shippingDateHour, shippingDateMinute, expectedDateMonth,
+			expectedDateDay, expectedDateYear, expectedDateHour,
+			expectedDateMinute);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
-		long commerceShipmentId, String name, String description,
-		String street1, String street2, String street3, String city,
-		String zip, long commerceRegionId, long commerceCountryId,
-		String phoneNumber, String carrier, String trackingNumber, int status,
-		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
-		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
-		int expectedDateDay, int expectedDateYear, int expectedDateHour,
-		int expectedDateMinute)
+			long commerceShipmentId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, String carrier, String trackingNumber,
+			int status, int shippingDateMonth, int shippingDateDay,
+			int shippingDateYear, int shippingDateHour, int shippingDateMinute,
+			int expectedDateMonth, int expectedDateDay, int expectedDateYear,
+			int expectedDateHour, int expectedDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentService.updateCommerceShipment(commerceShipmentId,
-			name, description, street1, street2, street3, city, zip,
-			commerceRegionId, commerceCountryId, phoneNumber, carrier,
-			trackingNumber, status, shippingDateMonth, shippingDateDay,
+
+		return _commerceShipmentService.updateCommerceShipment(
+			commerceShipmentId, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber,
+			carrier, trackingNumber, status, shippingDateMonth, shippingDateDay,
 			shippingDateYear, shippingDateHour, shippingDateMinute,
 			expectedDateMonth, expectedDateDay, expectedDateYear,
 			expectedDateHour, expectedDateMinute);
@@ -139,8 +158,10 @@ public class CommerceShipmentServiceWrapper implements CommerceShipmentService,
 	@Override
 	public void setWrappedService(
 		CommerceShipmentService commerceShipmentService) {
+
 		_commerceShipmentService = commerceShipmentService;
 	}
 
 	private CommerceShipmentService _commerceShipmentService;
+
 }

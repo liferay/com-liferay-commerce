@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.impl.CommerceAddressImpl;
 import com.liferay.commerce.model.impl.CommerceAddressModelImpl;
 import com.liferay.commerce.service.persistence.CommerceAddressPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,57 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceAddressPersistence
- * @see com.liferay.commerce.service.persistence.CommerceAddressUtil
  * @generated
  */
 @ProviderType
-public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<CommerceAddress>
+public class CommerceAddressPersistenceImpl
+	extends BasePersistenceImpl<CommerceAddress>
 	implements CommerceAddressPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceAddressUtil} to access the commerce address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceAddressUtil</code> to access the commerce address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceAddressImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEREGIONID =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceRegionId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceRegionId", new String[] { Long.class.getName() },
-			CommerceAddressModelImpl.COMMERCEREGIONID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEREGIONID = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceRegionId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceAddressImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceRegionId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceRegionId;
+	private FinderPath _finderPathCountByCommerceRegionId;
 
 	/**
 	 * Returns all the commerce addresses where commerceRegionId = &#63;.
@@ -122,15 +97,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public List<CommerceAddress> findByCommerceRegionId(long commerceRegionId) {
-		return findByCommerceRegionId(commerceRegionId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return findByCommerceRegionId(
+			commerceRegionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where commerceRegionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceRegionId the commerce region ID
@@ -139,8 +114,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByCommerceRegionId(long commerceRegionId,
-		int start, int end) {
+	public List<CommerceAddress> findByCommerceRegionId(
+		long commerceRegionId, int start, int end) {
+
 		return findByCommerceRegionId(commerceRegionId, start, end, null);
 	}
 
@@ -148,7 +124,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses where commerceRegionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceRegionId the commerce region ID
@@ -158,17 +134,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByCommerceRegionId(long commerceRegionId,
-		int start, int end, OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByCommerceRegionId(commerceRegionId, start, end,
-			orderByComparator, true);
+	public List<CommerceAddress> findByCommerceRegionId(
+		long commerceRegionId, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		return findByCommerceRegionId(
+			commerceRegionId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where commerceRegionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceRegionId the commerce region ID
@@ -179,38 +157,40 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByCommerceRegionId(long commerceRegionId,
-		int start, int end,
+	public List<CommerceAddress> findByCommerceRegionId(
+		long commerceRegionId, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID;
-			finderArgs = new Object[] { commerceRegionId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceRegionId;
+			finderArgs = new Object[] {commerceRegionId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEREGIONID;
+			finderPath = _finderPathWithPaginationFindByCommerceRegionId;
 			finderArgs = new Object[] {
-					commerceRegionId,
-					
-					start, end, orderByComparator
-				};
+				commerceRegionId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
-					if ((commerceRegionId != commerceAddress.getCommerceRegionId())) {
+					if ((commerceRegionId !=
+							commerceAddress.getCommerceRegionId())) {
+
 						list = null;
 
 						break;
@@ -223,8 +203,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -235,11 +215,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_COMMERCEREGIONID_COMMERCEREGIONID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -257,16 +236,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(commerceRegionId);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -295,11 +274,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByCommerceRegionId_First(long commerceRegionId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByCommerceRegionId_First(
+			long commerceRegionId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByCommerceRegionId_First(commerceRegionId,
-				orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByCommerceRegionId_First(
+			commerceRegionId, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -328,8 +309,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	public CommerceAddress fetchByCommerceRegionId_First(
 		long commerceRegionId,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByCommerceRegionId(commerceRegionId,
-				0, 1, orderByComparator);
+
+		List<CommerceAddress> list = findByCommerceRegionId(
+			commerceRegionId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -347,11 +329,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByCommerceRegionId_Last(long commerceRegionId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByCommerceRegionId_Last(
+			long commerceRegionId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByCommerceRegionId_Last(commerceRegionId,
-				orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByCommerceRegionId_Last(
+			commerceRegionId, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -377,16 +361,18 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByCommerceRegionId_Last(long commerceRegionId,
+	public CommerceAddress fetchByCommerceRegionId_Last(
+		long commerceRegionId,
 		OrderByComparator<CommerceAddress> orderByComparator) {
+
 		int count = countByCommerceRegionId(commerceRegionId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByCommerceRegionId(commerceRegionId,
-				count - 1, count, orderByComparator);
+		List<CommerceAddress> list = findByCommerceRegionId(
+			commerceRegionId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -406,9 +392,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress[] findByCommerceRegionId_PrevAndNext(
-		long commerceAddressId, long commerceRegionId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceAddressId, long commerceRegionId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -418,13 +405,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByCommerceRegionId_PrevAndNext(session,
-					commerceAddress, commerceRegionId, orderByComparator, true);
+			array[0] = getByCommerceRegionId_PrevAndNext(
+				session, commerceAddress, commerceRegionId, orderByComparator,
+				true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByCommerceRegionId_PrevAndNext(session,
-					commerceAddress, commerceRegionId, orderByComparator, false);
+			array[2] = getByCommerceRegionId_PrevAndNext(
+				session, commerceAddress, commerceRegionId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -437,14 +426,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	protected CommerceAddress getByCommerceRegionId_PrevAndNext(
-		Session session, CommerceAddress commerceAddress,
-		long commerceRegionId,
-		OrderByComparator<CommerceAddress> orderByComparator, boolean previous) {
+		Session session, CommerceAddress commerceAddress, long commerceRegionId,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -456,7 +446,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_COMMERCEREGIONID_COMMERCEREGIONID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -526,10 +517,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(commerceRegionId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -550,8 +542,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void removeByCommerceRegionId(long commerceRegionId) {
-		for (CommerceAddress commerceAddress : findByCommerceRegionId(
-				commerceRegionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddress commerceAddress :
+				findByCommerceRegionId(
+					commerceRegionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -564,9 +559,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countByCommerceRegionId(long commerceRegionId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEREGIONID;
+		FinderPath finderPath = _finderPathCountByCommerceRegionId;
 
-		Object[] finderArgs = new Object[] { commerceRegionId };
+		Object[] finderArgs = new Object[] {commerceRegionId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -607,31 +602,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEREGIONID_COMMERCEREGIONID_2 =
-		"commerceAddress.commerceRegionId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCECOUNTRYID =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceCountryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceCountryId", new String[] { Long.class.getName() },
-			CommerceAddressModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceCountryId", new String[] { Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEREGIONID_COMMERCEREGIONID_2 =
+			"commerceAddress.commerceRegionId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCommerceCountryId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceCountryId;
+	private FinderPath _finderPathCountByCommerceCountryId;
 
 	/**
 	 * Returns all the commerce addresses where commerceCountryId = &#63;.
@@ -640,16 +617,18 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByCommerceCountryId(long commerceCountryId) {
-		return findByCommerceCountryId(commerceCountryId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceAddress> findByCommerceCountryId(
+		long commerceCountryId) {
+
+		return findByCommerceCountryId(
+			commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -660,6 +639,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end) {
+
 		return findByCommerceCountryId(commerceCountryId, start, end, null);
 	}
 
@@ -667,7 +647,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -680,15 +660,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	public List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByCommerceCountryId(commerceCountryId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceCountryId(
+			commerceCountryId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -703,34 +684,36 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID;
-			finderArgs = new Object[] { commerceCountryId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceCountryId;
+			finderArgs = new Object[] {commerceCountryId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCECOUNTRYID;
+			finderPath = _finderPathWithPaginationFindByCommerceCountryId;
 			finderArgs = new Object[] {
-					commerceCountryId,
-					
-					start, end, orderByComparator
-				};
+				commerceCountryId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
-					if ((commerceCountryId != commerceAddress.getCommerceCountryId())) {
+					if ((commerceCountryId !=
+							commerceAddress.getCommerceCountryId())) {
+
 						list = null;
 
 						break;
@@ -743,8 +726,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -755,11 +738,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -777,16 +759,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(commerceCountryId);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -816,11 +798,12 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress findByCommerceCountryId_First(
-		long commerceCountryId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceCountryId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByCommerceCountryId_First(commerceCountryId,
-				orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByCommerceCountryId_First(
+			commerceCountryId, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -849,8 +832,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	public CommerceAddress fetchByCommerceCountryId_First(
 		long commerceCountryId,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByCommerceCountryId(commerceCountryId,
-				0, 1, orderByComparator);
+
+		List<CommerceAddress> list = findByCommerceCountryId(
+			commerceCountryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -869,11 +853,12 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress findByCommerceCountryId_Last(
-		long commerceCountryId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceCountryId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByCommerceCountryId_Last(commerceCountryId,
-				orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByCommerceCountryId_Last(
+			commerceCountryId, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -902,14 +887,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	public CommerceAddress fetchByCommerceCountryId_Last(
 		long commerceCountryId,
 		OrderByComparator<CommerceAddress> orderByComparator) {
+
 		int count = countByCommerceCountryId(commerceCountryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByCommerceCountryId(commerceCountryId,
-				count - 1, count, orderByComparator);
+		List<CommerceAddress> list = findByCommerceCountryId(
+			commerceCountryId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -929,9 +915,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress[] findByCommerceCountryId_PrevAndNext(
-		long commerceAddressId, long commerceCountryId,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceAddressId, long commerceCountryId,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -941,13 +928,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByCommerceCountryId_PrevAndNext(session,
-					commerceAddress, commerceCountryId, orderByComparator, true);
+			array[0] = getByCommerceCountryId_PrevAndNext(
+				session, commerceAddress, commerceCountryId, orderByComparator,
+				true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByCommerceCountryId_PrevAndNext(session,
-					commerceAddress, commerceCountryId, orderByComparator, false);
+			array[2] = getByCommerceCountryId_PrevAndNext(
+				session, commerceAddress, commerceCountryId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -962,12 +951,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	protected CommerceAddress getByCommerceCountryId_PrevAndNext(
 		Session session, CommerceAddress commerceAddress,
 		long commerceCountryId,
-		OrderByComparator<CommerceAddress> orderByComparator, boolean previous) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -979,7 +970,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1049,10 +1041,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(commerceCountryId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1073,8 +1066,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void removeByCommerceCountryId(long commerceCountryId) {
-		for (CommerceAddress commerceAddress : findByCommerceCountryId(
-				commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddress commerceAddress :
+				findByCommerceCountryId(
+					commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -1087,9 +1083,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countByCommerceCountryId(long commerceCountryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID;
+		FinderPath finderPath = _finderPathCountByCommerceCountryId;
 
-		Object[] finderArgs = new Object[] { commerceCountryId };
+		Object[] finderArgs = new Object[] {commerceCountryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1130,30 +1126,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2 =
-		"commerceAddress.commerceCountryId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2 =
+			"commerceAddress.commerceCountryId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByC_C;
+	private FinderPath _finderPathWithoutPaginationFindByC_C;
+	private FinderPath _finderPathCountByC_C;
 
 	/**
 	 * Returns all the commerce addresses where classNameId = &#63; and classPK = &#63;.
@@ -1164,15 +1143,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public List<CommerceAddress> findByC_C(long classNameId, long classPK) {
-		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return findByC_C(
+			classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -1182,8 +1161,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByC_C(long classNameId, long classPK,
-		int start, int end) {
+	public List<CommerceAddress> findByC_C(
+		long classNameId, long classPK, int start, int end) {
+
 		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
@@ -1191,7 +1171,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -1202,17 +1182,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByC_C(long classNameId, long classPK,
-		int start, int end, OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByC_C(classNameId, classPK, start, end, orderByComparator,
-			true);
+	public List<CommerceAddress> findByC_C(
+		long classNameId, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		return findByC_C(
+			classNameId, classPK, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -1224,39 +1206,40 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByC_C(long classNameId, long classPK,
-		int start, int end,
+	public List<CommerceAddress> findByC_C(
+		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C;
-			finderArgs = new Object[] { classNameId, classPK };
+			finderPath = _finderPathWithoutPaginationFindByC_C;
+			finderArgs = new Object[] {classNameId, classPK};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C;
+			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
-					classNameId, classPK,
-					
-					start, end, orderByComparator
-				};
+				classNameId, classPK, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
 					if ((classNameId != commerceAddress.getClassNameId()) ||
-							(classPK != commerceAddress.getClassPK())) {
+						(classPK != commerceAddress.getClassPK())) {
+
 						list = null;
 
 						break;
@@ -1269,8 +1252,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1283,11 +1266,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1307,16 +1289,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(classPK);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1346,11 +1328,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByC_C_First(long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByC_C_First(
+			long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByC_C_First(classNameId,
-				classPK, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByC_C_First(
+			classNameId, classPK, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -1380,10 +1364,12 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByC_C_First(long classNameId, long classPK,
+	public CommerceAddress fetchByC_C_First(
+		long classNameId, long classPK,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByC_C(classNameId, classPK, 0, 1,
-				orderByComparator);
+
+		List<CommerceAddress> list = findByC_C(
+			classNameId, classPK, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1402,11 +1388,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByC_C_Last(long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByC_C_Last(
+			long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByC_C_Last(classNameId, classPK,
-				orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByC_C_Last(
+			classNameId, classPK, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -1436,16 +1424,18 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByC_C_Last(long classNameId, long classPK,
+	public CommerceAddress fetchByC_C_Last(
+		long classNameId, long classPK,
 		OrderByComparator<CommerceAddress> orderByComparator) {
+
 		int count = countByC_C(classNameId, classPK);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByC_C(classNameId, classPK, count - 1,
-				count, orderByComparator);
+		List<CommerceAddress> list = findByC_C(
+			classNameId, classPK, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1465,10 +1455,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
 	 */
 	@Override
-	public CommerceAddress[] findByC_C_PrevAndNext(long commerceAddressId,
-		long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress[] findByC_C_PrevAndNext(
+			long commerceAddressId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -1478,13 +1469,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByC_C_PrevAndNext(session, commerceAddress,
-					classNameId, classPK, orderByComparator, true);
+			array[0] = getByC_C_PrevAndNext(
+				session, commerceAddress, classNameId, classPK,
+				orderByComparator, true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByC_C_PrevAndNext(session, commerceAddress,
-					classNameId, classPK, orderByComparator, false);
+			array[2] = getByC_C_PrevAndNext(
+				session, commerceAddress, classNameId, classPK,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1496,14 +1489,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		}
 	}
 
-	protected CommerceAddress getByC_C_PrevAndNext(Session session,
-		CommerceAddress commerceAddress, long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator, boolean previous) {
+	protected CommerceAddress getByC_C_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long classNameId,
+		long classPK, OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1517,7 +1512,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1589,10 +1585,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(classPK);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1614,8 +1611,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void removeByC_C(long classNameId, long classPK) {
-		for (CommerceAddress commerceAddress : findByC_C(classNameId, classPK,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddress commerceAddress :
+				findByC_C(
+					classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -1629,9 +1629,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countByC_C(long classNameId, long classPK) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
+		FinderPath finderPath = _finderPathCountByC_C;
 
-		Object[] finderArgs = new Object[] { classNameId, classPK };
+		Object[] finderArgs = new Object[] {classNameId, classPK};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1676,35 +1676,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "commerceAddress.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "commerceAddress.classPK = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			},
-			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 =
+		"commerceAddress.classPK = ?";
+
+	private FinderPath _finderPathWithPaginationFindByG_C_C;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_C;
+	private FinderPath _finderPathCountByG_C_C;
 
 	/**
 	 * Returns all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
@@ -1715,17 +1695,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C(long groupId, long classNameId,
-		long classPK) {
-		return findByG_C_C(groupId, classNameId, classPK, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK) {
+
+		return findByG_C_C(
+			groupId, classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1736,8 +1718,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C(long groupId, long classNameId,
-		long classPK, int start, int end) {
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end) {
+
 		return findByG_C_C(groupId, classNameId, classPK, start, end, null);
 	}
 
@@ -1745,7 +1728,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1757,18 +1740,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C(long groupId, long classNameId,
-		long classPK, int start, int end,
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByG_C_C(groupId, classNameId, classPK, start, end,
-			orderByComparator, true);
+
+		return findByG_C_C(
+			groupId, classNameId, classPK, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1781,40 +1765,41 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C(long groupId, long classNameId,
-		long classPK, int start, int end,
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C;
-			finderArgs = new Object[] { groupId, classNameId, classPK };
+			finderPath = _finderPathWithoutPaginationFindByG_C_C;
+			finderArgs = new Object[] {groupId, classNameId, classPK};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C;
+			finderPath = _finderPathWithPaginationFindByG_C_C;
 			finderArgs = new Object[] {
-					groupId, classNameId, classPK,
-					
-					start, end, orderByComparator
-				};
+				groupId, classNameId, classPK, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
 					if ((groupId != commerceAddress.getGroupId()) ||
-							(classNameId != commerceAddress.getClassNameId()) ||
-							(classPK != commerceAddress.getClassPK())) {
+						(classNameId != commerceAddress.getClassNameId()) ||
+						(classPK != commerceAddress.getClassPK())) {
+
 						list = null;
 
 						break;
@@ -1827,8 +1812,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					5 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1843,11 +1828,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1869,16 +1853,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(classPK);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1909,11 +1893,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_First(long groupId, long classNameId,
-		long classPK, OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_First(
+			long groupId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_First(groupId,
-				classNameId, classPK, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_First(
+			groupId, classNameId, classPK, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -1947,10 +1933,12 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_First(long groupId, long classNameId,
-		long classPK, OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByG_C_C(groupId, classNameId, classPK,
-				0, 1, orderByComparator);
+	public CommerceAddress fetchByG_C_C_First(
+		long groupId, long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		List<CommerceAddress> list = findByG_C_C(
+			groupId, classNameId, classPK, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1970,11 +1958,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_Last(long groupId, long classNameId,
-		long classPK, OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_Last(
+			long groupId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_Last(groupId,
-				classNameId, classPK, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_Last(
+			groupId, classNameId, classPK, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -2008,16 +1998,18 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_Last(long groupId, long classNameId,
-		long classPK, OrderByComparator<CommerceAddress> orderByComparator) {
+	public CommerceAddress fetchByG_C_C_Last(
+		long groupId, long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
 		int count = countByG_C_C(groupId, classNameId, classPK);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByG_C_C(groupId, classNameId, classPK,
-				count - 1, count, orderByComparator);
+		List<CommerceAddress> list = findByG_C_C(
+			groupId, classNameId, classPK, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2038,10 +2030,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
 	 */
 	@Override
-	public CommerceAddress[] findByG_C_C_PrevAndNext(long commerceAddressId,
-		long groupId, long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress[] findByG_C_C_PrevAndNext(
+			long commerceAddressId, long groupId, long classNameId,
+			long classPK, OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -2051,13 +2044,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByG_C_C_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, orderByComparator, true);
+			array[0] = getByG_C_C_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				orderByComparator, true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByG_C_C_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, orderByComparator, false);
+			array[2] = getByG_C_C_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -2069,15 +2064,17 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		}
 	}
 
-	protected CommerceAddress getByG_C_C_PrevAndNext(Session session,
-		CommerceAddress commerceAddress, long groupId, long classNameId,
-		long classPK, OrderByComparator<CommerceAddress> orderByComparator,
+	protected CommerceAddress getByG_C_C_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long groupId,
+		long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				6 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -2093,7 +2090,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -2167,10 +2165,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(classPK);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2193,8 +2192,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void removeByG_C_C(long groupId, long classNameId, long classPK) {
-		for (CommerceAddress commerceAddress : findByG_C_C(groupId,
-				classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddress commerceAddress :
+				findByG_C_C(
+					groupId, classNameId, classPK, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -2209,9 +2211,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countByG_C_C(long groupId, long classNameId, long classPK) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_C;
+		FinderPath finderPath = _finderPathCountByG_C_C;
 
-		Object[] finderArgs = new Object[] { groupId, classNameId, classPK };
+		Object[] finderArgs = new Object[] {groupId, classNameId, classPK};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2260,41 +2262,18 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "commerceAddress.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "commerceAddress.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 = "commerceAddress.classPK = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C_DB = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_C_C_DB",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C_DB",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			},
-			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.DEFAULTBILLING_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C_DB = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C_DB",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			});
+	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 =
+		"commerceAddress.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 =
+		"commerceAddress.classPK = ?";
+
+	private FinderPath _finderPathWithPaginationFindByG_C_C_DB;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_C_DB;
+	private FinderPath _finderPathCountByG_C_C_DB;
 
 	/**
 	 * Returns all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
@@ -2306,17 +2285,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DB(long groupId, long classNameId,
-		long classPK, boolean defaultBilling) {
-		return findByG_C_C_DB(groupId, classNameId, classPK, defaultBilling,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceAddress> findByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling) {
+
+		return findByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -2328,17 +2309,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DB(long groupId, long classNameId,
-		long classPK, boolean defaultBilling, int start, int end) {
-		return findByG_C_C_DB(groupId, classNameId, classPK, defaultBilling,
-			start, end, null);
+	public List<CommerceAddress> findByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling,
+		int start, int end) {
+
+		return findByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -2351,18 +2334,21 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DB(long groupId, long classNameId,
-		long classPK, boolean defaultBilling, int start, int end,
+	public List<CommerceAddress> findByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling,
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByG_C_C_DB(groupId, classNameId, classPK, defaultBilling,
-			start, end, orderByComparator, true);
+
+		return findByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling, start, end,
+			orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -2376,43 +2362,47 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DB(long groupId, long classNameId,
-		long classPK, boolean defaultBilling, int start, int end,
+	public List<CommerceAddress> findByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling,
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB;
+			finderPath = _finderPathWithoutPaginationFindByG_C_C_DB;
 			finderArgs = new Object[] {
-					groupId, classNameId, classPK, defaultBilling
-				};
+				groupId, classNameId, classPK, defaultBilling
+			};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C_DB;
+			finderPath = _finderPathWithPaginationFindByG_C_C_DB;
 			finderArgs = new Object[] {
-					groupId, classNameId, classPK, defaultBilling,
-					
-					start, end, orderByComparator
-				};
+				groupId, classNameId, classPK, defaultBilling, start, end,
+				orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
 					if ((groupId != commerceAddress.getGroupId()) ||
-							(classNameId != commerceAddress.getClassNameId()) ||
-							(classPK != commerceAddress.getClassPK()) ||
-							(defaultBilling != commerceAddress.isDefaultBilling())) {
+						(classNameId != commerceAddress.getClassNameId()) ||
+						(classPK != commerceAddress.getClassPK()) ||
+						(defaultBilling !=
+							commerceAddress.isDefaultBilling())) {
+
 						list = null;
 
 						break;
@@ -2425,8 +2415,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(6 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					6 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(6);
@@ -2443,11 +2433,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_G_C_C_DB_DEFAULTBILLING_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2471,16 +2460,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(defaultBilling);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2512,12 +2501,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_DB_First(long groupId, long classNameId,
-		long classPK, boolean defaultBilling,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_DB_First(
+			long groupId, long classNameId, long classPK,
+			boolean defaultBilling,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_DB_First(groupId,
-				classNameId, classPK, defaultBilling, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_DB_First(
+			groupId, classNameId, classPK, defaultBilling, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -2555,11 +2546,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_DB_First(long groupId,
-		long classNameId, long classPK, boolean defaultBilling,
+	public CommerceAddress fetchByG_C_C_DB_First(
+		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByG_C_C_DB(groupId, classNameId,
-				classPK, defaultBilling, 0, 1, orderByComparator);
+
+		List<CommerceAddress> list = findByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling, 0, 1,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2580,12 +2573,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_DB_Last(long groupId, long classNameId,
-		long classPK, boolean defaultBilling,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_DB_Last(
+			long groupId, long classNameId, long classPK,
+			boolean defaultBilling,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_DB_Last(groupId,
-				classNameId, classPK, defaultBilling, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_DB_Last(
+			groupId, classNameId, classPK, defaultBilling, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -2623,18 +2618,20 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_DB_Last(long groupId, long classNameId,
-		long classPK, boolean defaultBilling,
+	public CommerceAddress fetchByG_C_C_DB_Last(
+		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		int count = countByG_C_C_DB(groupId, classNameId, classPK,
-				defaultBilling);
+
+		int count = countByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByG_C_C_DB(groupId, classNameId,
-				classPK, defaultBilling, count - 1, count, orderByComparator);
+		List<CommerceAddress> list = findByG_C_C_DB(
+			groupId, classNameId, classPK, defaultBilling, count - 1, count,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2657,10 +2654,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress[] findByG_C_C_DB_PrevAndNext(
-		long commerceAddressId, long groupId, long classNameId, long classPK,
-		boolean defaultBilling,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceAddressId, long groupId, long classNameId,
+			long classPK, boolean defaultBilling,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -2670,15 +2668,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByG_C_C_DB_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, defaultBilling,
-					orderByComparator, true);
+			array[0] = getByG_C_C_DB_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				defaultBilling, orderByComparator, true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByG_C_C_DB_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, defaultBilling,
-					orderByComparator, false);
+			array[2] = getByG_C_C_DB_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				defaultBilling, orderByComparator, false);
 
 			return array;
 		}
@@ -2690,15 +2688,17 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		}
 	}
 
-	protected CommerceAddress getByG_C_C_DB_PrevAndNext(Session session,
-		CommerceAddress commerceAddress, long groupId, long classNameId,
-		long classPK, boolean defaultBilling,
-		OrderByComparator<CommerceAddress> orderByComparator, boolean previous) {
+	protected CommerceAddress getByG_C_C_DB_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long groupId,
+		long classNameId, long classPK, boolean defaultBilling,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(7 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				7 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -2716,7 +2716,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_G_C_C_DB_DEFAULTBILLING_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -2792,10 +2793,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(defaultBilling);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2818,11 +2820,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @param defaultBilling the default billing
 	 */
 	@Override
-	public void removeByG_C_C_DB(long groupId, long classNameId, long classPK,
-		boolean defaultBilling) {
-		for (CommerceAddress commerceAddress : findByG_C_C_DB(groupId,
-				classNameId, classPK, defaultBilling, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+	public void removeByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling) {
+
+		for (CommerceAddress commerceAddress :
+				findByG_C_C_DB(
+					groupId, classNameId, classPK, defaultBilling,
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -2837,13 +2842,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the number of matching commerce addresses
 	 */
 	@Override
-	public int countByG_C_C_DB(long groupId, long classNameId, long classPK,
-		boolean defaultBilling) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_C_DB;
+	public int countByG_C_C_DB(
+		long groupId, long classNameId, long classPK, boolean defaultBilling) {
+
+		FinderPath finderPath = _finderPathCountByG_C_C_DB;
 
 		Object[] finderArgs = new Object[] {
-				groupId, classNameId, classPK, defaultBilling
-			};
+			groupId, classNameId, classPK, defaultBilling
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2896,42 +2902,21 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_C_C_DB_GROUPID_2 = "commerceAddress.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DB_CLASSNAMEID_2 = "commerceAddress.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DB_CLASSPK_2 = "commerceAddress.classPK = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DB_DEFAULTBILLING_2 = "commerceAddress.defaultBilling = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C_DS = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_C_C_DS",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS =
-		new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C_DS",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			},
-			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.DEFAULTSHIPPING_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C_DS = new FinderPath(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C_DS",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			});
+	private static final String _FINDER_COLUMN_G_C_C_DB_GROUPID_2 =
+		"commerceAddress.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DB_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DB_CLASSPK_2 =
+		"commerceAddress.classPK = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DB_DEFAULTBILLING_2 =
+		"commerceAddress.defaultBilling = ?";
+
+	private FinderPath _finderPathWithPaginationFindByG_C_C_DS;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_C_DS;
+	private FinderPath _finderPathCountByG_C_C_DS;
 
 	/**
 	 * Returns all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
@@ -2943,17 +2928,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DS(long groupId, long classNameId,
-		long classPK, boolean defaultShipping) {
-		return findByG_C_C_DS(groupId, classNameId, classPK, defaultShipping,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceAddress> findByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping) {
+
+		return findByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -2965,17 +2952,19 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DS(long groupId, long classNameId,
-		long classPK, boolean defaultShipping, int start, int end) {
-		return findByG_C_C_DS(groupId, classNameId, classPK, defaultShipping,
-			start, end, null);
+	public List<CommerceAddress> findByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping,
+		int start, int end) {
+
+		return findByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -2988,18 +2977,21 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DS(long groupId, long classNameId,
-		long classPK, boolean defaultShipping, int start, int end,
+	public List<CommerceAddress> findByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping,
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		return findByG_C_C_DS(groupId, classNameId, classPK, defaultShipping,
-			start, end, orderByComparator, true);
+
+		return findByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping, start, end,
+			orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -3013,43 +3005,47 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findByG_C_C_DS(long groupId, long classNameId,
-		long classPK, boolean defaultShipping, int start, int end,
+	public List<CommerceAddress> findByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping,
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS;
+			finderPath = _finderPathWithoutPaginationFindByG_C_C_DS;
 			finderArgs = new Object[] {
-					groupId, classNameId, classPK, defaultShipping
-				};
+				groupId, classNameId, classPK, defaultShipping
+			};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C_DS;
+			finderPath = _finderPathWithPaginationFindByG_C_C_DS;
 			finderArgs = new Object[] {
-					groupId, classNameId, classPK, defaultShipping,
-					
-					start, end, orderByComparator
-				};
+				groupId, classNameId, classPK, defaultShipping, start, end,
+				orderByComparator
+			};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
 					if ((groupId != commerceAddress.getGroupId()) ||
-							(classNameId != commerceAddress.getClassNameId()) ||
-							(classPK != commerceAddress.getClassPK()) ||
-							(defaultShipping != commerceAddress.isDefaultShipping())) {
+						(classNameId != commerceAddress.getClassNameId()) ||
+						(classPK != commerceAddress.getClassPK()) ||
+						(defaultShipping !=
+							commerceAddress.isDefaultShipping())) {
+
 						list = null;
 
 						break;
@@ -3062,8 +3058,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(6 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					6 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(6);
@@ -3080,11 +3076,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_G_C_C_DS_DEFAULTSHIPPING_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -3108,16 +3103,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(defaultShipping);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -3149,12 +3144,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_DS_First(long groupId, long classNameId,
-		long classPK, boolean defaultShipping,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_DS_First(
+			long groupId, long classNameId, long classPK,
+			boolean defaultShipping,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_DS_First(groupId,
-				classNameId, classPK, defaultShipping, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_DS_First(
+			groupId, classNameId, classPK, defaultShipping, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -3192,11 +3189,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_DS_First(long groupId,
-		long classNameId, long classPK, boolean defaultShipping,
+	public CommerceAddress fetchByG_C_C_DS_First(
+		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		List<CommerceAddress> list = findByG_C_C_DS(groupId, classNameId,
-				classPK, defaultShipping, 0, 1, orderByComparator);
+
+		List<CommerceAddress> list = findByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping, 0, 1,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3217,12 +3216,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchAddressException if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress findByG_C_C_DS_Last(long groupId, long classNameId,
-		long classPK, boolean defaultShipping,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public CommerceAddress findByG_C_C_DS_Last(
+			long groupId, long classNameId, long classPK,
+			boolean defaultShipping,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
-		CommerceAddress commerceAddress = fetchByG_C_C_DS_Last(groupId,
-				classNameId, classPK, defaultShipping, orderByComparator);
+
+		CommerceAddress commerceAddress = fetchByG_C_C_DS_Last(
+			groupId, classNameId, classPK, defaultShipping, orderByComparator);
 
 		if (commerceAddress != null) {
 			return commerceAddress;
@@ -3260,18 +3261,20 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
 	 */
 	@Override
-	public CommerceAddress fetchByG_C_C_DS_Last(long groupId, long classNameId,
-		long classPK, boolean defaultShipping,
+	public CommerceAddress fetchByG_C_C_DS_Last(
+		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		OrderByComparator<CommerceAddress> orderByComparator) {
-		int count = countByG_C_C_DS(groupId, classNameId, classPK,
-				defaultShipping);
+
+		int count = countByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddress> list = findByG_C_C_DS(groupId, classNameId,
-				classPK, defaultShipping, count - 1, count, orderByComparator);
+		List<CommerceAddress> list = findByG_C_C_DS(
+			groupId, classNameId, classPK, defaultShipping, count - 1, count,
+			orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3294,10 +3297,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress[] findByG_C_C_DS_PrevAndNext(
-		long commerceAddressId, long groupId, long classNameId, long classPK,
-		boolean defaultShipping,
-		OrderByComparator<CommerceAddress> orderByComparator)
+			long commerceAddressId, long groupId, long classNameId,
+			long classPK, boolean defaultShipping,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
 
 		Session session = null;
@@ -3307,15 +3311,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceAddress[] array = new CommerceAddressImpl[3];
 
-			array[0] = getByG_C_C_DS_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, defaultShipping,
-					orderByComparator, true);
+			array[0] = getByG_C_C_DS_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				defaultShipping, orderByComparator, true);
 
 			array[1] = commerceAddress;
 
-			array[2] = getByG_C_C_DS_PrevAndNext(session, commerceAddress,
-					groupId, classNameId, classPK, defaultShipping,
-					orderByComparator, false);
+			array[2] = getByG_C_C_DS_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				defaultShipping, orderByComparator, false);
 
 			return array;
 		}
@@ -3327,15 +3331,17 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		}
 	}
 
-	protected CommerceAddress getByG_C_C_DS_PrevAndNext(Session session,
-		CommerceAddress commerceAddress, long groupId, long classNameId,
-		long classPK, boolean defaultShipping,
-		OrderByComparator<CommerceAddress> orderByComparator, boolean previous) {
+	protected CommerceAddress getByG_C_C_DS_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long groupId,
+		long classNameId, long classPK, boolean defaultShipping,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(7 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				7 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -3353,7 +3359,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_G_C_C_DS_DEFAULTSHIPPING_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -3429,10 +3436,11 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(defaultShipping);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddress);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -3455,11 +3463,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @param defaultShipping the default shipping
 	 */
 	@Override
-	public void removeByG_C_C_DS(long groupId, long classNameId, long classPK,
-		boolean defaultShipping) {
-		for (CommerceAddress commerceAddress : findByG_C_C_DS(groupId,
-				classNameId, classPK, defaultShipping, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+	public void removeByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping) {
+
+		for (CommerceAddress commerceAddress :
+				findByG_C_C_DS(
+					groupId, classNameId, classPK, defaultShipping,
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceAddress);
 		}
 	}
@@ -3474,13 +3485,14 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the number of matching commerce addresses
 	 */
 	@Override
-	public int countByG_C_C_DS(long groupId, long classNameId, long classPK,
-		boolean defaultShipping) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_C_DS;
+	public int countByG_C_C_DS(
+		long groupId, long classNameId, long classPK, boolean defaultShipping) {
+
+		FinderPath finderPath = _finderPathCountByG_C_C_DS;
 
 		Object[] finderArgs = new Object[] {
-				groupId, classNameId, classPK, defaultShipping
-			};
+			groupId, classNameId, classPK, defaultShipping
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3533,10 +3545,17 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_C_C_DS_GROUPID_2 = "commerceAddress.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DS_CLASSNAMEID_2 = "commerceAddress.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DS_CLASSPK_2 = "commerceAddress.classPK = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_C_DS_DEFAULTSHIPPING_2 = "commerceAddress.defaultShipping = ?";
+	private static final String _FINDER_COLUMN_G_C_C_DS_GROUPID_2 =
+		"commerceAddress.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DS_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DS_CLASSPK_2 =
+		"commerceAddress.classPK = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_DS_DEFAULTSHIPPING_2 =
+		"commerceAddress.defaultShipping = ?";
 
 	public CommerceAddressPersistenceImpl() {
 		setModelClass(CommerceAddress.class);
@@ -3549,7 +3568,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void cacheResult(CommerceAddress commerceAddress) {
-		entityCache.putResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressImpl.class, commerceAddress.getPrimaryKey(),
 			commerceAddress);
 
@@ -3565,9 +3585,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	public void cacheResult(List<CommerceAddress> commerceAddresses) {
 		for (CommerceAddress commerceAddress : commerceAddresses) {
 			if (entityCache.getResult(
-						CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceAddressImpl.class,
-						commerceAddress.getPrimaryKey()) == null) {
+					CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceAddressImpl.class,
+					commerceAddress.getPrimaryKey()) == null) {
+
 				cacheResult(commerceAddress);
 			}
 			else {
@@ -3580,7 +3601,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Clears the cache for all commerce addresses.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -3596,12 +3617,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Clears the cache for the commerce address.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceAddress commerceAddress) {
-		entityCache.removeResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressImpl.class, commerceAddress.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -3614,7 +3636,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CommerceAddress commerceAddress : commerceAddresses) {
-			entityCache.removeResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			entityCache.removeResult(
+				CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceAddressImpl.class, commerceAddress.getPrimaryKey());
 		}
 	}
@@ -3647,6 +3670,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceAddress remove(long commerceAddressId)
 		throws NoSuchAddressException {
+
 		return remove((Serializable)commerceAddressId);
 	}
 
@@ -3660,21 +3684,22 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceAddress remove(Serializable primaryKey)
 		throws NoSuchAddressException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceAddress commerceAddress = (CommerceAddress)session.get(CommerceAddressImpl.class,
-					primaryKey);
+			CommerceAddress commerceAddress = (CommerceAddress)session.get(
+				CommerceAddressImpl.class, primaryKey);
 
 			if (commerceAddress == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchAddressException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchAddressException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceAddress);
@@ -3698,8 +3723,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			session = openSession();
 
 			if (!session.contains(commerceAddress)) {
-				commerceAddress = (CommerceAddress)session.get(CommerceAddressImpl.class,
-						commerceAddress.getPrimaryKeyObj());
+				commerceAddress = (CommerceAddress)session.get(
+					CommerceAddressImpl.class,
+					commerceAddress.getPrimaryKeyObj());
 			}
 
 			if (commerceAddress != null) {
@@ -3728,21 +3754,24 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceAddress.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceAddress);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceAddress);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceAddress proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceAddress implementation " +
-				commerceAddress.getClass());
+					commerceAddress.getClass());
 		}
 
-		CommerceAddressModelImpl commerceAddressModelImpl = (CommerceAddressModelImpl)commerceAddress;
+		CommerceAddressModelImpl commerceAddressModelImpl =
+			(CommerceAddressModelImpl)commerceAddress;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -3751,7 +3780,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceAddress.setCreateDate(now);
 			}
 			else {
-				commerceAddress.setCreateDate(serviceContext.getCreateDate(now));
+				commerceAddress.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -3760,8 +3790,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceAddress.setModifiedDate(now);
 			}
 			else {
-				commerceAddress.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceAddress.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -3776,7 +3806,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceAddress.setNew(false);
 			}
 			else {
-				commerceAddress = (CommerceAddress)session.merge(commerceAddress);
+				commerceAddress = (CommerceAddress)session.merge(
+					commerceAddress);
 			}
 		}
 		catch (Exception e) {
@@ -3791,208 +3822,220 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		if (!CommerceAddressModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceAddressModelImpl.getCommerceRegionId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCommerceRegionId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceRegionId, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getCommerceCountryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCommerceCountryId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceCountryId, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_C, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getGroupId(),
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_C_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_C_C, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getGroupId(),
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK(),
+				commerceAddressModelImpl.isDefaultBilling()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_C_C_DB, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_C_C_DB, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getGroupId(),
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK(),
+				commerceAddressModelImpl.isDefaultShipping()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_C_C_DS, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_C_C_DS, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceRegionId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalCommerceRegionId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceRegionId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceRegionId, args);
+
+				args = new Object[] {
 					commerceAddressModelImpl.getCommerceRegionId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEREGIONID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceRegionId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceRegionId, args);
+			}
 
-			args = new Object[] { commerceAddressModelImpl.getCommerceCountryId() };
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceCountryId.
+					 getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-				args);
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalCommerceCountryId()
+				};
 
-			args = new Object[] {
+				finderCache.removeResult(
+					_finderPathCountByCommerceCountryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceCountryId, args);
+
+				args = new Object[] {
+					commerceAddressModelImpl.getCommerceCountryId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceCountryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceCountryId, args);
+			}
+
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_C.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C, args);
+
+				args = new Object[] {
 					commerceAddressModelImpl.getClassNameId(),
 					commerceAddressModelImpl.getClassPK()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-				args);
+				finderCache.removeResult(_finderPathCountByC_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C, args);
+			}
 
-			args = new Object[] {
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_C_C.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalGroupId(),
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C, args);
+
+				args = new Object[] {
 					commerceAddressModelImpl.getGroupId(),
 					commerceAddressModelImpl.getClassNameId(),
 					commerceAddressModelImpl.getClassPK()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C,
-				args);
+				finderCache.removeResult(_finderPathCountByG_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C, args);
+			}
 
-			args = new Object[] {
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_C_C_DB.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalGroupId(),
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK(),
+					commerceAddressModelImpl.getOriginalDefaultBilling()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_C_C_DB, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_DB, args);
+
+				args = new Object[] {
 					commerceAddressModelImpl.getGroupId(),
 					commerceAddressModelImpl.getClassNameId(),
 					commerceAddressModelImpl.getClassPK(),
 					commerceAddressModelImpl.isDefaultBilling()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DB, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB,
-				args);
+				finderCache.removeResult(_finderPathCountByG_C_C_DB, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_DB, args);
+			}
 
-			args = new Object[] {
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_C_C_DS.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalGroupId(),
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK(),
+					commerceAddressModelImpl.getOriginalDefaultShipping()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_C_C_DS, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_DS, args);
+
+				args = new Object[] {
 					commerceAddressModelImpl.getGroupId(),
 					commerceAddressModelImpl.getClassNameId(),
 					commerceAddressModelImpl.getClassPK(),
 					commerceAddressModelImpl.isDefaultShipping()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DS, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalCommerceRegionId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEREGIONID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getCommerceRegionId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEREGIONID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEREGIONID,
-					args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalCommerceCountryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getCommerceCountryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-					args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalClassNameId(),
-						commerceAddressModelImpl.getOriginalClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getClassNameId(),
-						commerceAddressModelImpl.getClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-					args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalGroupId(),
-						commerceAddressModelImpl.getOriginalClassNameId(),
-						commerceAddressModelImpl.getOriginalClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getGroupId(),
-						commerceAddressModelImpl.getClassNameId(),
-						commerceAddressModelImpl.getClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C,
-					args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalGroupId(),
-						commerceAddressModelImpl.getOriginalClassNameId(),
-						commerceAddressModelImpl.getOriginalClassPK(),
-						commerceAddressModelImpl.getOriginalDefaultBilling()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DB, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getGroupId(),
-						commerceAddressModelImpl.getClassNameId(),
-						commerceAddressModelImpl.getClassPK(),
-						commerceAddressModelImpl.isDefaultBilling()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DB, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DB,
-					args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressModelImpl.getOriginalGroupId(),
-						commerceAddressModelImpl.getOriginalClassNameId(),
-						commerceAddressModelImpl.getOriginalClassPK(),
-						commerceAddressModelImpl.getOriginalDefaultShipping()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS,
-					args);
-
-				args = new Object[] {
-						commerceAddressModelImpl.getGroupId(),
-						commerceAddressModelImpl.getClassNameId(),
-						commerceAddressModelImpl.getClassPK(),
-						commerceAddressModelImpl.isDefaultShipping()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C_DS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C_DS,
-					args);
+				finderCache.removeResult(_finderPathCountByG_C_C_DS, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_DS, args);
 			}
 		}
 
-		entityCache.putResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressImpl.class, commerceAddress.getPrimaryKey(),
 			commerceAddress, false);
 
@@ -4002,7 +4045,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	/**
-	 * Returns the commerce address with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce address with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce address
 	 * @return the commerce address
@@ -4011,6 +4054,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceAddress findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchAddressException {
+
 		CommerceAddress commerceAddress = fetchByPrimaryKey(primaryKey);
 
 		if (commerceAddress == null) {
@@ -4018,15 +4062,15 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchAddressException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchAddressException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceAddress;
 	}
 
 	/**
-	 * Returns the commerce address with the primary key or throws a {@link NoSuchAddressException} if it could not be found.
+	 * Returns the commerce address with the primary key or throws a <code>NoSuchAddressException</code> if it could not be found.
 	 *
 	 * @param commerceAddressId the primary key of the commerce address
 	 * @return the commerce address
@@ -4035,6 +4079,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceAddress findByPrimaryKey(long commerceAddressId)
 		throws NoSuchAddressException {
+
 		return findByPrimaryKey((Serializable)commerceAddressId);
 	}
 
@@ -4046,8 +4091,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceAddress fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceAddressImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -4061,19 +4107,21 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			try {
 				session = openSession();
 
-				commerceAddress = (CommerceAddress)session.get(CommerceAddressImpl.class,
-						primaryKey);
+				commerceAddress = (CommerceAddress)session.get(
+					CommerceAddressImpl.class, primaryKey);
 
 				if (commerceAddress != null) {
 					cacheResult(commerceAddress);
 				}
 				else {
-					entityCache.putResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceAddressImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceAddressImpl.class, primaryKey);
 
 				throw processException(e);
@@ -4100,11 +4148,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public Map<Serializable, CommerceAddress> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceAddress> map = new HashMap<Serializable, CommerceAddress>();
+		Map<Serializable, CommerceAddress> map =
+			new HashMap<Serializable, CommerceAddress>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -4123,8 +4173,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceAddressImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceAddressImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -4144,8 +4195,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE_PKS_IN);
 
@@ -4168,7 +4219,9 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceAddress commerceAddress : (List<CommerceAddress>)q.list()) {
+			for (CommerceAddress commerceAddress :
+					(List<CommerceAddress>)q.list()) {
+
 				map.put(commerceAddress.getPrimaryKeyObj(), commerceAddress);
 
 				cacheResult(commerceAddress);
@@ -4177,7 +4230,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceAddressImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -4205,7 +4259,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns a range of all the commerce addresses.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce addresses
@@ -4221,7 +4275,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce addresses
@@ -4230,8 +4284,10 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findAll(int start, int end,
+	public List<CommerceAddress> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -4239,7 +4295,7 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce addresses.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce addresses
@@ -4249,29 +4305,32 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of commerce addresses
 	 */
 	@Override
-	public List<CommerceAddress> findAll(int start, int end,
+	public List<CommerceAddress> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceAddress> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -4279,13 +4338,13 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEADDRESS);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -4305,16 +4364,16 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddress>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -4352,8 +4411,8 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -4365,12 +4424,12 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -4391,6 +4450,205 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Initializes the commerce address persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceRegionId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceRegionId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceRegionId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCommerceRegionId",
+			new String[] {Long.class.getName()},
+			CommerceAddressModelImpl.COMMERCEREGIONID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceRegionId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceRegionId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceCountryId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceCountryId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceCountryId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceCountryId", new String[] {Long.class.getName()},
+			CommerceAddressModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceCountryId = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceCountryId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByC_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByC_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
+
+		_finderPathWithPaginationFindByG_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+
+		_finderPathWithPaginationFindByG_C_C_DB = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_C_C_DB",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_C_C_DB = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C_DB",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			},
+			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.DEFAULTBILLING_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_C_C_DB = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C_DB",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			});
+
+		_finderPathWithPaginationFindByG_C_C_DS = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_C_C_DS",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_C_C_DS = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C_DS",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			},
+			CommerceAddressModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.DEFAULTSHIPPING_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_C_C_DS = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C_DS",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			});
 	}
 
 	public void destroy() {
@@ -4402,17 +4660,37 @@ public class CommerceAddressPersistenceImpl extends BasePersistenceImpl<Commerce
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEADDRESS = "SELECT commerceAddress FROM CommerceAddress commerceAddress";
-	private static final String _SQL_SELECT_COMMERCEADDRESS_WHERE_PKS_IN = "SELECT commerceAddress FROM CommerceAddress commerceAddress WHERE commerceAddressId IN (";
-	private static final String _SQL_SELECT_COMMERCEADDRESS_WHERE = "SELECT commerceAddress FROM CommerceAddress commerceAddress WHERE ";
-	private static final String _SQL_COUNT_COMMERCEADDRESS = "SELECT COUNT(commerceAddress) FROM CommerceAddress commerceAddress";
-	private static final String _SQL_COUNT_COMMERCEADDRESS_WHERE = "SELECT COUNT(commerceAddress) FROM CommerceAddress commerceAddress WHERE ";
+
+	private static final String _SQL_SELECT_COMMERCEADDRESS =
+		"SELECT commerceAddress FROM CommerceAddress commerceAddress";
+
+	private static final String _SQL_SELECT_COMMERCEADDRESS_WHERE_PKS_IN =
+		"SELECT commerceAddress FROM CommerceAddress commerceAddress WHERE commerceAddressId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEADDRESS_WHERE =
+		"SELECT commerceAddress FROM CommerceAddress commerceAddress WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEADDRESS =
+		"SELECT COUNT(commerceAddress) FROM CommerceAddress commerceAddress";
+
+	private static final String _SQL_COUNT_COMMERCEADDRESS_WHERE =
+		"SELECT COUNT(commerceAddress) FROM CommerceAddress commerceAddress WHERE ";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceAddress.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceAddress exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAddress exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceAddressPersistenceImpl.class);
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceAddress exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceAddress exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAddressPersistenceImpl.class);
+
 }

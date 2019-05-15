@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.impl.CommerceShippingMethodImpl;
 import com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -65,56 +64,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShippingMethodPersistence
- * @see com.liferay.commerce.service.persistence.CommerceShippingMethodUtil
  * @generated
  */
 @ProviderType
-public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<CommerceShippingMethod>
+public class CommerceShippingMethodPersistenceImpl
+	extends BasePersistenceImpl<CommerceShippingMethod>
 	implements CommerceShippingMethodPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceShippingMethodUtil} to access the commerce shipping method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceShippingMethodUtil</code> to access the commerce shipping method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceShippingMethodImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceShippingMethodModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceShippingMethodImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the commerce shipping methods where groupId = &#63;.
@@ -124,14 +100,15 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public List<CommerceShippingMethod> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce shipping methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -140,8 +117,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByGroupId(long groupId, int start,
-		int end) {
+	public List<CommerceShippingMethod> findByGroupId(
+		long groupId, int start, int end) {
+
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -149,7 +127,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -159,8 +137,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceShippingMethod> orderByComparator) {
+	public List<CommerceShippingMethod> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -168,7 +148,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -179,29 +159,32 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceShippingMethod> orderByComparator,
+	public List<CommerceShippingMethod> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceShippingMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceShippingMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShippingMethod commerceShippingMethod : list) {
@@ -218,8 +201,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -230,11 +213,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceShippingMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -252,16 +234,16 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -290,11 +272,13 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchShippingMethodException if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod findByGroupId_First(long groupId,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+	public CommerceShippingMethod findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByGroupId_First(
+			groupId, orderByComparator);
 
 		if (commerceShippingMethod != null) {
 			return commerceShippingMethod;
@@ -320,10 +304,12 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the first matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByGroupId_First(long groupId,
+	public CommerceShippingMethod fetchByGroupId_First(
+		long groupId,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
-		List<CommerceShippingMethod> list = findByGroupId(groupId, 0, 1,
-				orderByComparator);
+
+		List<CommerceShippingMethod> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -341,11 +327,13 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchShippingMethodException if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+	public CommerceShippingMethod findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByGroupId_Last(
+			groupId, orderByComparator);
 
 		if (commerceShippingMethod != null) {
 			return commerceShippingMethod;
@@ -371,16 +359,18 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the last matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByGroupId_Last(long groupId,
+	public CommerceShippingMethod fetchByGroupId_Last(
+		long groupId,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceShippingMethod> list = findByGroupId(groupId, count - 1,
-				count, orderByComparator);
+		List<CommerceShippingMethod> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -400,10 +390,12 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceShippingMethod[] findByGroupId_PrevAndNext(
-		long commerceShippingMethodId, long groupId,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+			long commerceShippingMethodId, long groupId,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = findByPrimaryKey(commerceShippingMethodId);
+
+		CommerceShippingMethod commerceShippingMethod = findByPrimaryKey(
+			commerceShippingMethodId);
 
 		Session session = null;
 
@@ -412,13 +404,15 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceShippingMethod[] array = new CommerceShippingMethodImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session,
-					commerceShippingMethod, groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, commerceShippingMethod, groupId, orderByComparator,
+				true);
 
 			array[1] = commerceShippingMethod;
 
-			array[2] = getByGroupId_PrevAndNext(session,
-					commerceShippingMethod, groupId, orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, commerceShippingMethod, groupId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -430,15 +424,17 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		}
 	}
 
-	protected CommerceShippingMethod getByGroupId_PrevAndNext(Session session,
-		CommerceShippingMethod commerceShippingMethod, long groupId,
+	protected CommerceShippingMethod getByGroupId_PrevAndNext(
+		Session session, CommerceShippingMethod commerceShippingMethod,
+		long groupId,
 		OrderByComparator<CommerceShippingMethod> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -450,7 +446,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -520,10 +517,11 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceShippingMethod);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceShippingMethod)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -544,8 +542,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CommerceShippingMethod commerceShippingMethod : findByGroupId(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceShippingMethod commerceShippingMethod :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceShippingMethod);
 		}
 	}
@@ -558,9 +558,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -601,21 +601,14 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceShippingMethod.groupId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_E = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_E",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceShippingMethodModelImpl.ENGINEKEY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_E = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_E",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"commerceShippingMethod.groupId = ?";
+
+	private FinderPath _finderPathFetchByG_E;
+	private FinderPath _finderPathCountByG_E;
 
 	/**
-	 * Returns the commerce shipping method where groupId = &#63; and engineKey = &#63; or throws a {@link NoSuchShippingMethodException} if it could not be found.
+	 * Returns the commerce shipping method where groupId = &#63; and engineKey = &#63; or throws a <code>NoSuchShippingMethodException</code> if it could not be found.
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
@@ -625,8 +618,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod findByG_E(long groupId, String engineKey)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByG_E(groupId,
-				engineKey);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByG_E(
+			groupId, engineKey);
 
 		if (commerceShippingMethod == null) {
 			StringBundler msg = new StringBundler(6);
@@ -672,23 +666,28 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByG_E(long groupId, String engineKey,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, engineKey };
+	public CommerceShippingMethod fetchByG_E(
+		long groupId, String engineKey, boolean retrieveFromCache) {
+
+		engineKey = Objects.toString(engineKey, "");
+
+		Object[] finderArgs = new Object[] {groupId, engineKey};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_E,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByG_E, finderArgs, this);
 		}
 
 		if (result instanceof CommerceShippingMethod) {
-			CommerceShippingMethod commerceShippingMethod = (CommerceShippingMethod)result;
+			CommerceShippingMethod commerceShippingMethod =
+				(CommerceShippingMethod)result;
 
 			if ((groupId != commerceShippingMethod.getGroupId()) ||
-					!Objects.equals(engineKey,
-						commerceShippingMethod.getEngineKey())) {
+				!Objects.equals(
+					engineKey, commerceShippingMethod.getEngineKey())) {
+
 				result = null;
 			}
 		}
@@ -702,10 +701,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 			boolean bindEngineKey = false;
 
-			if (engineKey == null) {
-				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_1);
-			}
-			else if (engineKey.equals("")) {
+			if (engineKey.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_3);
 			}
 			else {
@@ -734,8 +730,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				List<CommerceShippingMethod> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_E, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByG_E, finderArgs, list);
 				}
 				else {
 					CommerceShippingMethod commerceShippingMethod = list.get(0);
@@ -746,7 +742,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, finderArgs);
+				finderCache.removeResult(_finderPathFetchByG_E, finderArgs);
 
 				throw processException(e);
 			}
@@ -773,8 +769,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod removeByG_E(long groupId, String engineKey)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = findByG_E(groupId,
-				engineKey);
+
+		CommerceShippingMethod commerceShippingMethod = findByG_E(
+			groupId, engineKey);
 
 		return remove(commerceShippingMethod);
 	}
@@ -788,9 +785,11 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByG_E(long groupId, String engineKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_E;
+		engineKey = Objects.toString(engineKey, "");
 
-		Object[] finderArgs = new Object[] { groupId, engineKey };
+		FinderPath finderPath = _finderPathCountByG_E;
+
+		Object[] finderArgs = new Object[] {groupId, engineKey};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -803,10 +802,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 			boolean bindEngineKey = false;
 
-			if (engineKey == null) {
-				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_1);
-			}
-			else if (engineKey.equals("")) {
+			if (engineKey.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_E_ENGINEKEY_3);
 			}
 			else {
@@ -849,32 +845,18 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_E_GROUPID_2 = "commerceShippingMethod.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_1 = "commerceShippingMethod.engineKey IS NULL";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_2 = "commerceShippingMethod.engineKey = ?";
-	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_3 = "(commerceShippingMethod.engineKey IS NULL OR commerceShippingMethod.engineKey = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingMethodImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceShippingMethodModelImpl.ACTIVE_COLUMN_BITMASK |
-			CommerceShippingMethodModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+	private static final String _FINDER_COLUMN_G_E_GROUPID_2 =
+		"commerceShippingMethod.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_2 =
+		"commerceShippingMethod.engineKey = ?";
+
+	private static final String _FINDER_COLUMN_G_E_ENGINEKEY_3 =
+		"(commerceShippingMethod.engineKey IS NULL OR commerceShippingMethod.engineKey = '')";
+
+	private FinderPath _finderPathWithPaginationFindByG_A;
+	private FinderPath _finderPathWithoutPaginationFindByG_A;
+	private FinderPath _finderPathCountByG_A;
 
 	/**
 	 * Returns all the commerce shipping methods where groupId = &#63; and active = &#63;.
@@ -884,16 +866,18 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByG_A(long groupId, boolean active) {
-		return findByG_A(groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<CommerceShippingMethod> findByG_A(
+		long groupId, boolean active) {
+
+		return findByG_A(
+			groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce shipping methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -903,8 +887,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByG_A(long groupId, boolean active,
-		int start, int end) {
+	public List<CommerceShippingMethod> findByG_A(
+		long groupId, boolean active, int start, int end) {
+
 		return findByG_A(groupId, active, start, end, null);
 	}
 
@@ -912,7 +897,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -923,9 +908,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByG_A(long groupId, boolean active,
-		int start, int end,
+	public List<CommerceShippingMethod> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+
 		return findByG_A(groupId, active, start, end, orderByComparator, true);
 	}
 
@@ -933,7 +919,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -945,39 +931,40 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findByG_A(long groupId, boolean active,
-		int start, int end,
+	public List<CommerceShippingMethod> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceShippingMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A;
-			finderArgs = new Object[] { groupId, active };
+			finderPath = _finderPathWithoutPaginationFindByG_A;
+			finderArgs = new Object[] {groupId, active};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A;
+			finderPath = _finderPathWithPaginationFindByG_A;
 			finderArgs = new Object[] {
-					groupId, active,
-					
-					start, end, orderByComparator
-				};
+				groupId, active, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceShippingMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShippingMethod commerceShippingMethod : list) {
 					if ((groupId != commerceShippingMethod.getGroupId()) ||
-							(active != commerceShippingMethod.isActive())) {
+						(active != commerceShippingMethod.isActive())) {
+
 						list = null;
 
 						break;
@@ -990,8 +977,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1004,11 +991,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceShippingMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1028,16 +1014,16 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(active);
 
 				if (!pagination) {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1067,11 +1053,13 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchShippingMethodException if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod findByG_A_First(long groupId, boolean active,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+	public CommerceShippingMethod findByG_A_First(
+			long groupId, boolean active,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByG_A_First(groupId,
-				active, orderByComparator);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByG_A_First(
+			groupId, active, orderByComparator);
 
 		if (commerceShippingMethod != null) {
 			return commerceShippingMethod;
@@ -1101,11 +1089,12 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the first matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByG_A_First(long groupId,
-		boolean active,
+	public CommerceShippingMethod fetchByG_A_First(
+		long groupId, boolean active,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
-		List<CommerceShippingMethod> list = findByG_A(groupId, active, 0, 1,
-				orderByComparator);
+
+		List<CommerceShippingMethod> list = findByG_A(
+			groupId, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1124,11 +1113,13 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchShippingMethodException if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod findByG_A_Last(long groupId, boolean active,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+	public CommerceShippingMethod findByG_A_Last(
+			long groupId, boolean active,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByG_A_Last(groupId,
-				active, orderByComparator);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByG_A_Last(
+			groupId, active, orderByComparator);
 
 		if (commerceShippingMethod != null) {
 			return commerceShippingMethod;
@@ -1158,16 +1149,18 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the last matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByG_A_Last(long groupId, boolean active,
+	public CommerceShippingMethod fetchByG_A_Last(
+		long groupId, boolean active,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+
 		int count = countByG_A(groupId, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceShippingMethod> list = findByG_A(groupId, active,
-				count - 1, count, orderByComparator);
+		List<CommerceShippingMethod> list = findByG_A(
+			groupId, active, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1188,10 +1181,12 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceShippingMethod[] findByG_A_PrevAndNext(
-		long commerceShippingMethodId, long groupId, boolean active,
-		OrderByComparator<CommerceShippingMethod> orderByComparator)
+			long commerceShippingMethodId, long groupId, boolean active,
+			OrderByComparator<CommerceShippingMethod> orderByComparator)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = findByPrimaryKey(commerceShippingMethodId);
+
+		CommerceShippingMethod commerceShippingMethod = findByPrimaryKey(
+			commerceShippingMethodId);
 
 		Session session = null;
 
@@ -1200,13 +1195,15 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceShippingMethod[] array = new CommerceShippingMethodImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(session, commerceShippingMethod,
-					groupId, active, orderByComparator, true);
+			array[0] = getByG_A_PrevAndNext(
+				session, commerceShippingMethod, groupId, active,
+				orderByComparator, true);
 
 			array[1] = commerceShippingMethod;
 
-			array[2] = getByG_A_PrevAndNext(session, commerceShippingMethod,
-					groupId, active, orderByComparator, false);
+			array[2] = getByG_A_PrevAndNext(
+				session, commerceShippingMethod, groupId, active,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1218,16 +1215,17 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		}
 	}
 
-	protected CommerceShippingMethod getByG_A_PrevAndNext(Session session,
-		CommerceShippingMethod commerceShippingMethod, long groupId,
-		boolean active,
+	protected CommerceShippingMethod getByG_A_PrevAndNext(
+		Session session, CommerceShippingMethod commerceShippingMethod,
+		long groupId, boolean active,
 		OrderByComparator<CommerceShippingMethod> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1241,7 +1239,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1313,10 +1312,11 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(active);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceShippingMethod);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceShippingMethod)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1338,8 +1338,11 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByG_A(long groupId, boolean active) {
-		for (CommerceShippingMethod commerceShippingMethod : findByG_A(
-				groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceShippingMethod commerceShippingMethod :
+				findByG_A(
+					groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceShippingMethod);
 		}
 	}
@@ -1353,9 +1356,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByG_A(long groupId, boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
+		FinderPath finderPath = _finderPathCountByG_A;
 
-		Object[] finderArgs = new Object[] { groupId, active };
+		Object[] finderArgs = new Object[] {groupId, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1400,21 +1403,24 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "commerceShippingMethod.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "commerceShippingMethod.active = ?";
+	private static final String _FINDER_COLUMN_G_A_GROUPID_2 =
+		"commerceShippingMethod.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 =
+		"commerceShippingMethod.active = ?";
 
 	public CommerceShippingMethodPersistenceImpl() {
 		setModelClass(CommerceShippingMethod.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -1432,15 +1438,18 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void cacheResult(CommerceShippingMethod commerceShippingMethod) {
-		entityCache.putResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingMethodImpl.class,
 			commerceShippingMethod.getPrimaryKey(), commerceShippingMethod);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_E,
+		finderCache.putResult(
+			_finderPathFetchByG_E,
 			new Object[] {
 				commerceShippingMethod.getGroupId(),
 				commerceShippingMethod.getEngineKey()
-			}, commerceShippingMethod);
+			},
+			commerceShippingMethod);
 
 		commerceShippingMethod.resetOriginalValues();
 	}
@@ -1453,11 +1462,15 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public void cacheResult(
 		List<CommerceShippingMethod> commerceShippingMethods) {
-		for (CommerceShippingMethod commerceShippingMethod : commerceShippingMethods) {
+
+		for (CommerceShippingMethod commerceShippingMethod :
+				commerceShippingMethods) {
+
 			if (entityCache.getResult(
-						CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceShippingMethodImpl.class,
-						commerceShippingMethod.getPrimaryKey()) == null) {
+					CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceShippingMethodImpl.class,
+					commerceShippingMethod.getPrimaryKey()) == null) {
+
 				cacheResult(commerceShippingMethod);
 			}
 			else {
@@ -1470,7 +1483,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for all commerce shipping methods.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1486,72 +1499,82 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for the commerce shipping method.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceShippingMethod commerceShippingMethod) {
-		entityCache.removeResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingMethodImpl.class,
 			commerceShippingMethod.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceShippingMethodModelImpl)commerceShippingMethod,
-			true);
+		clearUniqueFindersCache(
+			(CommerceShippingMethodModelImpl)commerceShippingMethod, true);
 	}
 
 	@Override
-	public void clearCache(List<CommerceShippingMethod> commerceShippingMethods) {
+	public void clearCache(
+		List<CommerceShippingMethod> commerceShippingMethods) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceShippingMethod commerceShippingMethod : commerceShippingMethods) {
-			entityCache.removeResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceShippingMethod commerceShippingMethod :
+				commerceShippingMethods) {
+
+			entityCache.removeResult(
+				CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceShippingMethodImpl.class,
 				commerceShippingMethod.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceShippingMethodModelImpl)commerceShippingMethod,
-				true);
+			clearUniqueFindersCache(
+				(CommerceShippingMethodModelImpl)commerceShippingMethod, true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceShippingMethodModelImpl commerceShippingMethodModelImpl) {
-		Object[] args = new Object[] {
-				commerceShippingMethodModelImpl.getGroupId(),
-				commerceShippingMethodModelImpl.getEngineKey()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_E, args, Long.valueOf(1),
+		Object[] args = new Object[] {
+			commerceShippingMethodModelImpl.getGroupId(),
+			commerceShippingMethodModelImpl.getEngineKey()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByG_E, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByG_E, args, commerceShippingMethodModelImpl,
 			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_E, args,
-			commerceShippingMethodModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceShippingMethodModelImpl commerceShippingMethodModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceShippingMethodModelImpl.getGroupId(),
-					commerceShippingMethodModelImpl.getEngineKey()
-				};
+				commerceShippingMethodModelImpl.getGroupId(),
+				commerceShippingMethodModelImpl.getEngineKey()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_E, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, args);
+			finderCache.removeResult(_finderPathCountByG_E, args);
+			finderCache.removeResult(_finderPathFetchByG_E, args);
 		}
 
 		if ((commerceShippingMethodModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_E.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceShippingMethodModelImpl.getOriginalGroupId(),
-					commerceShippingMethodModelImpl.getOriginalEngineKey()
-				};
+			 _finderPathFetchByG_E.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_E, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_E, args);
+			Object[] args = new Object[] {
+				commerceShippingMethodModelImpl.getOriginalGroupId(),
+				commerceShippingMethodModelImpl.getOriginalEngineKey()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_E, args);
+			finderCache.removeResult(_finderPathFetchByG_E, args);
 		}
 	}
 
@@ -1563,7 +1586,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceShippingMethod create(long commerceShippingMethodId) {
-		CommerceShippingMethod commerceShippingMethod = new CommerceShippingMethodImpl();
+		CommerceShippingMethod commerceShippingMethod =
+			new CommerceShippingMethodImpl();
 
 		commerceShippingMethod.setNew(true);
 		commerceShippingMethod.setPrimaryKey(commerceShippingMethodId);
@@ -1583,6 +1607,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod remove(long commerceShippingMethodId)
 		throws NoSuchShippingMethodException {
+
 		return remove((Serializable)commerceShippingMethodId);
 	}
 
@@ -1596,21 +1621,23 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod remove(Serializable primaryKey)
 		throws NoSuchShippingMethodException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceShippingMethod commerceShippingMethod = (CommerceShippingMethod)session.get(CommerceShippingMethodImpl.class,
-					primaryKey);
+			CommerceShippingMethod commerceShippingMethod =
+				(CommerceShippingMethod)session.get(
+					CommerceShippingMethodImpl.class, primaryKey);
 
 			if (commerceShippingMethod == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchShippingMethodException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchShippingMethodException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceShippingMethod);
@@ -1629,14 +1656,16 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	protected CommerceShippingMethod removeImpl(
 		CommerceShippingMethod commerceShippingMethod) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceShippingMethod)) {
-				commerceShippingMethod = (CommerceShippingMethod)session.get(CommerceShippingMethodImpl.class,
-						commerceShippingMethod.getPrimaryKeyObj());
+				commerceShippingMethod = (CommerceShippingMethod)session.get(
+					CommerceShippingMethodImpl.class,
+					commerceShippingMethod.getPrimaryKeyObj());
 			}
 
 			if (commerceShippingMethod != null) {
@@ -1660,27 +1689,33 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod updateImpl(
 		CommerceShippingMethod commerceShippingMethod) {
+
 		boolean isNew = commerceShippingMethod.isNew();
 
-		if (!(commerceShippingMethod instanceof CommerceShippingMethodModelImpl)) {
+		if (!(commerceShippingMethod instanceof
+				CommerceShippingMethodModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceShippingMethod.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceShippingMethod);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceShippingMethod);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceShippingMethod proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceShippingMethod implementation " +
-				commerceShippingMethod.getClass());
+					commerceShippingMethod.getClass());
 		}
 
-		CommerceShippingMethodModelImpl commerceShippingMethodModelImpl = (CommerceShippingMethodModelImpl)commerceShippingMethod;
+		CommerceShippingMethodModelImpl commerceShippingMethodModelImpl =
+			(CommerceShippingMethodModelImpl)commerceShippingMethod;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1689,8 +1724,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				commerceShippingMethod.setCreateDate(now);
 			}
 			else {
-				commerceShippingMethod.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceShippingMethod.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1699,8 +1734,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				commerceShippingMethod.setModifiedDate(now);
 			}
 			else {
-				commerceShippingMethod.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceShippingMethod.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1715,7 +1750,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				commerceShippingMethod.setNew(false);
 			}
 			else {
-				commerceShippingMethod = (CommerceShippingMethod)session.merge(commerceShippingMethod);
+				commerceShippingMethod = (CommerceShippingMethod)session.merge(
+					commerceShippingMethod);
 			}
 		}
 		catch (Exception e) {
@@ -1730,71 +1766,76 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		if (!CommerceShippingMethodModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceShippingMethodModelImpl.getGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
+
+			args = new Object[] {
+				commerceShippingMethodModelImpl.getGroupId(),
+				commerceShippingMethodModelImpl.isActive()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_A, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_A, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceShippingMethodModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceShippingMethodModelImpl.getOriginalGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+
+				args = new Object[] {
 					commerceShippingMethodModelImpl.getGroupId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceShippingMethodModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_A.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceShippingMethodModelImpl.getOriginalGroupId(),
+					commerceShippingMethodModelImpl.getOriginalActive()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
+
+				args = new Object[] {
 					commerceShippingMethodModelImpl.getGroupId(),
 					commerceShippingMethodModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceShippingMethodModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceShippingMethodModelImpl.getOriginalGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-
-				args = new Object[] { commerceShippingMethodModelImpl.getGroupId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-			}
-
-			if ((commerceShippingMethodModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceShippingMethodModelImpl.getOriginalGroupId(),
-						commerceShippingMethodModelImpl.getOriginalActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
-
-				args = new Object[] {
-						commerceShippingMethodModelImpl.getGroupId(),
-						commerceShippingMethodModelImpl.isActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
 			}
 		}
 
-		entityCache.putResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingMethodImpl.class,
 			commerceShippingMethod.getPrimaryKey(), commerceShippingMethod,
 			false);
@@ -1808,7 +1849,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	}
 
 	/**
-	 * Returns the commerce shipping method with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce shipping method with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce shipping method
 	 * @return the commerce shipping method
@@ -1817,22 +1858,24 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchShippingMethodException {
-		CommerceShippingMethod commerceShippingMethod = fetchByPrimaryKey(primaryKey);
+
+		CommerceShippingMethod commerceShippingMethod = fetchByPrimaryKey(
+			primaryKey);
 
 		if (commerceShippingMethod == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchShippingMethodException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchShippingMethodException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceShippingMethod;
 	}
 
 	/**
-	 * Returns the commerce shipping method with the primary key or throws a {@link NoSuchShippingMethodException} if it could not be found.
+	 * Returns the commerce shipping method with the primary key or throws a <code>NoSuchShippingMethodException</code> if it could not be found.
 	 *
 	 * @param commerceShippingMethodId the primary key of the commerce shipping method
 	 * @return the commerce shipping method
@@ -1840,7 +1883,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceShippingMethod findByPrimaryKey(
-		long commerceShippingMethodId) throws NoSuchShippingMethodException {
+			long commerceShippingMethodId)
+		throws NoSuchShippingMethodException {
+
 		return findByPrimaryKey((Serializable)commerceShippingMethodId);
 	}
 
@@ -1852,14 +1897,16 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CommerceShippingMethod fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceShippingMethodImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceShippingMethod commerceShippingMethod = (CommerceShippingMethod)serializable;
+		CommerceShippingMethod commerceShippingMethod =
+			(CommerceShippingMethod)serializable;
 
 		if (commerceShippingMethod == null) {
 			Session session = null;
@@ -1867,19 +1914,22 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				commerceShippingMethod = (CommerceShippingMethod)session.get(CommerceShippingMethodImpl.class,
-						primaryKey);
+				commerceShippingMethod = (CommerceShippingMethod)session.get(
+					CommerceShippingMethodImpl.class, primaryKey);
 
 				if (commerceShippingMethod != null) {
 					cacheResult(commerceShippingMethod);
 				}
 				else {
-					entityCache.putResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceShippingMethodImpl.class, primaryKey, nullModel);
+					entityCache.putResult(
+						CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+						CommerceShippingMethodImpl.class, primaryKey,
+						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceShippingMethodImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1901,24 +1951,28 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CommerceShippingMethod fetchByPrimaryKey(
 		long commerceShippingMethodId) {
+
 		return fetchByPrimaryKey((Serializable)commerceShippingMethodId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceShippingMethod> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceShippingMethod> map = new HashMap<Serializable, CommerceShippingMethod>();
+		Map<Serializable, CommerceShippingMethod> map =
+			new HashMap<Serializable, CommerceShippingMethod>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceShippingMethod commerceShippingMethod = fetchByPrimaryKey(primaryKey);
+			CommerceShippingMethod commerceShippingMethod = fetchByPrimaryKey(
+				primaryKey);
 
 			if (commerceShippingMethod != null) {
 				map.put(primaryKey, commerceShippingMethod);
@@ -1930,8 +1984,9 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceShippingMethodImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingMethodImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1951,8 +2006,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCESHIPPINGMETHOD_WHERE_PKS_IN);
 
@@ -1975,17 +2030,22 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceShippingMethod commerceShippingMethod : (List<CommerceShippingMethod>)q.list()) {
-				map.put(commerceShippingMethod.getPrimaryKeyObj(),
+			for (CommerceShippingMethod commerceShippingMethod :
+					(List<CommerceShippingMethod>)q.list()) {
+
+				map.put(
+					commerceShippingMethod.getPrimaryKeyObj(),
 					commerceShippingMethod);
 
 				cacheResult(commerceShippingMethod);
 
-				uncachedPrimaryKeys.remove(commerceShippingMethod.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceShippingMethod.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceShippingMethodImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -2013,7 +2073,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns a range of all the commerce shipping methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping methods
@@ -2029,7 +2089,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping methods
@@ -2038,8 +2098,10 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findAll(int start, int end,
+	public List<CommerceShippingMethod> findAll(
+		int start, int end,
 		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2047,7 +2109,7 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the commerce shipping methods.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping methods
@@ -2057,29 +2119,32 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of commerce shipping methods
 	 */
 	@Override
-	public List<CommerceShippingMethod> findAll(int start, int end,
+	public List<CommerceShippingMethod> findAll(
+		int start, int end,
 		OrderByComparator<CommerceShippingMethod> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceShippingMethod> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingMethod>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2087,13 +2152,13 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCESHIPPINGMETHOD);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2101,7 +2166,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				sql = _SQL_SELECT_COMMERCESHIPPINGMETHOD;
 
 				if (pagination) {
-					sql = sql.concat(CommerceShippingMethodModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceShippingMethodModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2113,16 +2179,16 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingMethod>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingMethod>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2160,8 +2226,8 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2169,16 +2235,17 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCESHIPPINGMETHOD);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCESHIPPINGMETHOD);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2204,6 +2271,91 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 	 * Initializes the commerce shipping method persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceShippingMethodModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] {Long.class.getName()});
+
+		_finderPathFetchByG_E = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_E",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceShippingMethodModelImpl.ENGINEKEY_COLUMN_BITMASK);
+
+		_finderPathCountByG_E = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_E",
+			new String[] {Long.class.getName(), String.class.getName()});
+
+		_finderPathWithPaginationFindByG_A = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_A = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingMethodImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()},
+			CommerceShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceShippingMethodModelImpl.ACTIVE_COLUMN_BITMASK |
+			CommerceShippingMethodModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByG_A = new FinderPath(
+			CommerceShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()});
 	}
 
 	public void destroy() {
@@ -2215,20 +2367,42 @@ public class CommerceShippingMethodPersistenceImpl extends BasePersistenceImpl<C
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCESHIPPINGMETHOD = "SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod";
-	private static final String _SQL_SELECT_COMMERCESHIPPINGMETHOD_WHERE_PKS_IN = "SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod WHERE commerceShippingMethodId IN (";
-	private static final String _SQL_SELECT_COMMERCESHIPPINGMETHOD_WHERE = "SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod WHERE ";
-	private static final String _SQL_COUNT_COMMERCESHIPPINGMETHOD = "SELECT COUNT(commerceShippingMethod) FROM CommerceShippingMethod commerceShippingMethod";
-	private static final String _SQL_COUNT_COMMERCESHIPPINGMETHOD_WHERE = "SELECT COUNT(commerceShippingMethod) FROM CommerceShippingMethod commerceShippingMethod WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceShippingMethod.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceShippingMethod exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceShippingMethod exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceShippingMethodPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"active"
-			});
+
+	private static final String _SQL_SELECT_COMMERCESHIPPINGMETHOD =
+		"SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod";
+
+	private static final String
+		_SQL_SELECT_COMMERCESHIPPINGMETHOD_WHERE_PKS_IN =
+			"SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod WHERE commerceShippingMethodId IN (";
+
+	private static final String _SQL_SELECT_COMMERCESHIPPINGMETHOD_WHERE =
+		"SELECT commerceShippingMethod FROM CommerceShippingMethod commerceShippingMethod WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCESHIPPINGMETHOD =
+		"SELECT COUNT(commerceShippingMethod) FROM CommerceShippingMethod commerceShippingMethod";
+
+	private static final String _SQL_COUNT_COMMERCESHIPPINGMETHOD_WHERE =
+		"SELECT COUNT(commerceShippingMethod) FROM CommerceShippingMethod commerceShippingMethod WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceShippingMethod.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceShippingMethod exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceShippingMethod exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceShippingMethodPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"active"});
+
 }

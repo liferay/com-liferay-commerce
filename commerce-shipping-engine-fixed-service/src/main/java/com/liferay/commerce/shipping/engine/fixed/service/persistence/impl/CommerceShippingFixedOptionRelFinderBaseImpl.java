@@ -16,7 +16,6 @@ package com.liferay.commerce.shipping.engine.fixed.service.persistence.impl;
 
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel;
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,19 +33,20 @@ import java.util.Set;
  */
 public class CommerceShippingFixedOptionRelFinderBaseImpl
 	extends BasePersistenceImpl<CommerceShippingFixedOptionRel> {
+
 	public CommerceShippingFixedOptionRelFinderBaseImpl() {
 		setModelClass(CommerceShippingFixedOptionRel.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceShippingFixedOptionRelId", "CShippingFixedOptionRelId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceShippingFixedOptionRelId",
-				"CShippingFixedOptionRelId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -59,7 +59,8 @@ public class CommerceShippingFixedOptionRelFinderBaseImpl
 
 	@Override
 	public Set<String> getBadColumnNames() {
-		return getCommerceShippingFixedOptionRelPersistence().getBadColumnNames();
+		return getCommerceShippingFixedOptionRelPersistence().
+			getBadColumnNames();
 	}
 
 	/**
@@ -67,7 +68,9 @@ public class CommerceShippingFixedOptionRelFinderBaseImpl
 	 *
 	 * @return the commerce shipping fixed option rel persistence
 	 */
-	public CommerceShippingFixedOptionRelPersistence getCommerceShippingFixedOptionRelPersistence() {
+	public CommerceShippingFixedOptionRelPersistence
+		getCommerceShippingFixedOptionRelPersistence() {
+
 		return commerceShippingFixedOptionRelPersistence;
 	}
 
@@ -77,11 +80,18 @@ public class CommerceShippingFixedOptionRelFinderBaseImpl
 	 * @param commerceShippingFixedOptionRelPersistence the commerce shipping fixed option rel persistence
 	 */
 	public void setCommerceShippingFixedOptionRelPersistence(
-		CommerceShippingFixedOptionRelPersistence commerceShippingFixedOptionRelPersistence) {
-		this.commerceShippingFixedOptionRelPersistence = commerceShippingFixedOptionRelPersistence;
+		CommerceShippingFixedOptionRelPersistence
+			commerceShippingFixedOptionRelPersistence) {
+
+		this.commerceShippingFixedOptionRelPersistence =
+			commerceShippingFixedOptionRelPersistence;
 	}
 
 	@BeanReference(type = CommerceShippingFixedOptionRelPersistence.class)
-	protected CommerceShippingFixedOptionRelPersistence commerceShippingFixedOptionRelPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceShippingFixedOptionRelFinderBaseImpl.class);
+	protected CommerceShippingFixedOptionRelPersistence
+		commerceShippingFixedOptionRelPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceShippingFixedOptionRelFinderBaseImpl.class);
+
 }

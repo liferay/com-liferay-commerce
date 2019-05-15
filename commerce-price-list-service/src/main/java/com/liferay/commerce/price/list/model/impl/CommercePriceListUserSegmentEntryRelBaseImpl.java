@@ -35,18 +35,22 @@ import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntry
 public abstract class CommercePriceListUserSegmentEntryRelBaseImpl
 	extends CommercePriceListUserSegmentEntryRelModelImpl
 	implements CommercePriceListUserSegmentEntryRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce price list user segment entry rel model instance should use the {@link CommercePriceListUserSegmentEntryRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce price list user segment entry rel model instance should use the <code>CommercePriceListUserSegmentEntryRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommercePriceListUserSegmentEntryRelLocalServiceUtil.addCommercePriceListUserSegmentEntryRel(this);
+			CommercePriceListUserSegmentEntryRelLocalServiceUtil.
+				addCommercePriceListUserSegmentEntryRel(this);
 		}
 		else {
-			CommercePriceListUserSegmentEntryRelLocalServiceUtil.updateCommercePriceListUserSegmentEntryRel(this);
+			CommercePriceListUserSegmentEntryRelLocalServiceUtil.
+				updateCommercePriceListUserSegmentEntryRel(this);
 		}
 	}
+
 }

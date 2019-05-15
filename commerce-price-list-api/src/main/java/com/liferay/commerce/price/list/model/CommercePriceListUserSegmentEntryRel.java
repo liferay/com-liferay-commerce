@@ -25,35 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceListUserSegmentEntryRelModel
- * @see com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelImpl
- * @see com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelImpl"
+)
 @ProviderType
 public interface CommercePriceListUserSegmentEntryRel
 	extends CommercePriceListUserSegmentEntryRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.price.list.model.impl.CommercePriceListUserSegmentEntryRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommercePriceListUserSegmentEntryRel, Long> COMMERCE_PRICE_LIST_USER_SEGMENT_ENTRY_REL_ID_ACCESSOR =
-		new Accessor<CommercePriceListUserSegmentEntryRel, Long>() {
-			@Override
-			public Long get(
-				CommercePriceListUserSegmentEntryRel commercePriceListUserSegmentEntryRel) {
-				return commercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId();
-			}
+	public static final Accessor<CommercePriceListUserSegmentEntryRel, Long>
+		COMMERCE_PRICE_LIST_USER_SEGMENT_ENTRY_REL_ID_ACCESSOR =
+			new Accessor<CommercePriceListUserSegmentEntryRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommercePriceListUserSegmentEntryRel
+						commercePriceListUserSegmentEntryRel) {
 
-			@Override
-			public Class<CommercePriceListUserSegmentEntryRel> getTypeClass() {
-				return CommercePriceListUserSegmentEntryRel.class;
-			}
-		};
+					return commercePriceListUserSegmentEntryRel.
+						getCommercePriceListUserSegmentEntryRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommercePriceListUserSegmentEntryRel>
+					getTypeClass() {
+
+					return CommercePriceListUserSegmentEntryRel.class;
+				}
+
+			};
+
 }

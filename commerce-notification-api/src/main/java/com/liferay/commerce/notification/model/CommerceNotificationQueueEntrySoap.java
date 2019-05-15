@@ -26,23 +26,27 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.notification.service.http.CommerceNotificationQueueEntryServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.notification.service.http.CommerceNotificationQueueEntryServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceNotificationQueueEntrySoap implements Serializable {
+
 	public static CommerceNotificationQueueEntrySoap toSoapModel(
 		CommerceNotificationQueueEntry model) {
-		CommerceNotificationQueueEntrySoap soapModel = new CommerceNotificationQueueEntrySoap();
 
-		soapModel.setCommerceNotificationQueueEntryId(model.getCommerceNotificationQueueEntryId());
+		CommerceNotificationQueueEntrySoap soapModel =
+			new CommerceNotificationQueueEntrySoap();
+
+		soapModel.setCommerceNotificationQueueEntryId(
+			model.getCommerceNotificationQueueEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceNotificationTemplateId(model.getCommerceNotificationTemplateId());
+		soapModel.setCommerceNotificationTemplateId(
+			model.getCommerceNotificationTemplateId());
 		soapModel.setFrom(model.getFrom());
 		soapModel.setFromName(model.getFromName());
 		soapModel.setTo(model.getTo());
@@ -60,7 +64,9 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public static CommerceNotificationQueueEntrySoap[] toSoapModels(
 		CommerceNotificationQueueEntry[] models) {
-		CommerceNotificationQueueEntrySoap[] soapModels = new CommerceNotificationQueueEntrySoap[models.length];
+
+		CommerceNotificationQueueEntrySoap[] soapModels =
+			new CommerceNotificationQueueEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +77,12 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public static CommerceNotificationQueueEntrySoap[][] toSoapModels(
 		CommerceNotificationQueueEntry[][] models) {
+
 		CommerceNotificationQueueEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceNotificationQueueEntrySoap[models.length][models[0].length];
+			soapModels = new CommerceNotificationQueueEntrySoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceNotificationQueueEntrySoap[0][0];
@@ -89,13 +97,16 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public static CommerceNotificationQueueEntrySoap[] toSoapModels(
 		List<CommerceNotificationQueueEntry> models) {
-		List<CommerceNotificationQueueEntrySoap> soapModels = new ArrayList<CommerceNotificationQueueEntrySoap>(models.size());
+
+		List<CommerceNotificationQueueEntrySoap> soapModels =
+			new ArrayList<CommerceNotificationQueueEntrySoap>(models.size());
 
 		for (CommerceNotificationQueueEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceNotificationQueueEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceNotificationQueueEntrySoap[soapModels.size()]);
 	}
 
 	public CommerceNotificationQueueEntrySoap() {
@@ -115,6 +126,7 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public void setCommerceNotificationQueueEntryId(
 		long commerceNotificationQueueEntryId) {
+
 		_commerceNotificationQueueEntryId = commerceNotificationQueueEntryId;
 	}
 
@@ -172,6 +184,7 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
+
 		_commerceNotificationTemplateId = commerceNotificationTemplateId;
 	}
 
@@ -286,4 +299,5 @@ public class CommerceNotificationQueueEntrySoap implements Serializable {
 	private double _priority;
 	private boolean _sent;
 	private Date _sentDate;
+
 }

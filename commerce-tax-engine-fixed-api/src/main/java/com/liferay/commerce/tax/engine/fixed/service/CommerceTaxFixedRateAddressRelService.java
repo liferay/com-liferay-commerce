@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.engine.fixed.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,54 +38,67 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceTaxFixedRateAddressRelServiceUtil
- * @see com.liferay.commerce.tax.engine.fixed.service.base.CommerceTaxFixedRateAddressRelServiceBaseImpl
- * @see com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceTaxFixedRateAddressRel"}, service = CommerceTaxFixedRateAddressRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceTaxFixedRateAddressRel"
+	},
+	service = CommerceTaxFixedRateAddressRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceTaxFixedRateAddressRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceTaxFixedRateAddressRelServiceUtil} to access the commerce tax fixed rate address rel remote service. Add custom service methods to {@link com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceTaxFixedRateAddressRelServiceUtil} to access the commerce tax fixed rate address rel remote service. Add custom service methods to <code>com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceTaxFixedRateAddressRel addCommerceTaxFixedRateAddressRel(
-		long commerceTaxMethodId, long cpTaxCategoryId, long commerceCountryId,
-		long commerceRegionId, String zip, double rate,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceTaxMethodId, long cpTaxCategoryId,
+			long commerceCountryId, long commerceRegionId, String zip,
+			double rate, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId) throws PortalException;
+			long commerceTaxFixedRateAddressRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceTaxFixedRateAddressRel fetchCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceTaxFixedRateAddressRel> getCommerceTaxMethodFixedRateAddressRels(
-		long groupId, long commerceTaxMethodId, int start, int end,
-		OrderByComparator<CommerceTaxFixedRateAddressRel> orderByComparator)
+			long commerceTaxFixedRateAddressRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTaxMethodFixedRateAddressRelsCount(long groupId,
-		long commerceTaxMethodId) throws PortalException;
+	public List<CommerceTaxFixedRateAddressRel>
+			getCommerceTaxMethodFixedRateAddressRels(
+				long groupId, long commerceTaxMethodId, int start, int end,
+				OrderByComparator<CommerceTaxFixedRateAddressRel>
+					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceTaxMethodFixedRateAddressRelsCount(
+			long groupId, long commerceTaxMethodId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceTaxFixedRateAddressRel updateCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId, long commerceCountryId,
-		long commerceRegionId, String zip, double rate)
+			long commerceTaxFixedRateAddressRelId, long commerceCountryId,
+			long commerceRegionId, String zip, double rate)
 		throws PortalException;
+
 }

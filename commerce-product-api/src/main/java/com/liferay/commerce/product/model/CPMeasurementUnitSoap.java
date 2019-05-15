@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPMeasurementUnitServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPMeasurementUnitServiceSoap
  * @generated
  */
 @ProviderType
 public class CPMeasurementUnitSoap implements Serializable {
+
 	public static CPMeasurementUnitSoap toSoapModel(CPMeasurementUnit model) {
 		CPMeasurementUnitSoap soapModel = new CPMeasurementUnitSoap();
 
@@ -55,7 +55,9 @@ public class CPMeasurementUnitSoap implements Serializable {
 
 	public static CPMeasurementUnitSoap[] toSoapModels(
 		CPMeasurementUnit[] models) {
-		CPMeasurementUnitSoap[] soapModels = new CPMeasurementUnitSoap[models.length];
+
+		CPMeasurementUnitSoap[] soapModels =
+			new CPMeasurementUnitSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -66,10 +68,12 @@ public class CPMeasurementUnitSoap implements Serializable {
 
 	public static CPMeasurementUnitSoap[][] toSoapModels(
 		CPMeasurementUnit[][] models) {
+
 		CPMeasurementUnitSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPMeasurementUnitSoap[models.length][models[0].length];
+			soapModels =
+				new CPMeasurementUnitSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPMeasurementUnitSoap[0][0];
@@ -84,7 +88,9 @@ public class CPMeasurementUnitSoap implements Serializable {
 
 	public static CPMeasurementUnitSoap[] toSoapModels(
 		List<CPMeasurementUnit> models) {
-		List<CPMeasurementUnitSoap> soapModels = new ArrayList<CPMeasurementUnitSoap>(models.size());
+
+		List<CPMeasurementUnitSoap> soapModels =
+			new ArrayList<CPMeasurementUnitSoap>(models.size());
 
 		for (CPMeasurementUnit model : models) {
 			soapModels.add(toSoapModel(model));
@@ -243,4 +249,5 @@ public class CPMeasurementUnitSoap implements Serializable {
 	private double _priority;
 	private int _type;
 	private Date _lastPublishDate;
+
 }

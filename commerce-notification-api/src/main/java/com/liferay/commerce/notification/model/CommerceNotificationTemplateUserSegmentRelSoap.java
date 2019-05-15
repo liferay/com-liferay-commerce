@@ -26,32 +26,39 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.notification.service.http.CommerceNotificationTemplateUserSegmentRelServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.notification.service.http.CommerceNotificationTemplateUserSegmentRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelSoap
 	implements Serializable {
+
 	public static CommerceNotificationTemplateUserSegmentRelSoap toSoapModel(
 		CommerceNotificationTemplateUserSegmentRel model) {
-		CommerceNotificationTemplateUserSegmentRelSoap soapModel = new CommerceNotificationTemplateUserSegmentRelSoap();
 
-		soapModel.setCommerceNotificationTemplateUserSegmentRelId(model.getCommerceNotificationTemplateUserSegmentRelId());
+		CommerceNotificationTemplateUserSegmentRelSoap soapModel =
+			new CommerceNotificationTemplateUserSegmentRelSoap();
+
+		soapModel.setCommerceNotificationTemplateUserSegmentRelId(
+			model.getCommerceNotificationTemplateUserSegmentRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceNotificationTemplateId(model.getCommerceNotificationTemplateId());
-		soapModel.setCommerceUserSegmentEntryId(model.getCommerceUserSegmentEntryId());
+		soapModel.setCommerceNotificationTemplateId(
+			model.getCommerceNotificationTemplateId());
+		soapModel.setCommerceUserSegmentEntryId(
+			model.getCommerceUserSegmentEntryId());
 
 		return soapModel;
 	}
 
 	public static CommerceNotificationTemplateUserSegmentRelSoap[] toSoapModels(
 		CommerceNotificationTemplateUserSegmentRel[] models) {
-		CommerceNotificationTemplateUserSegmentRelSoap[] soapModels = new CommerceNotificationTemplateUserSegmentRelSoap[models.length];
+
+		CommerceNotificationTemplateUserSegmentRelSoap[] soapModels =
+			new CommerceNotificationTemplateUserSegmentRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -60,15 +67,18 @@ public class CommerceNotificationTemplateUserSegmentRelSoap
 		return soapModels;
 	}
 
-	public static CommerceNotificationTemplateUserSegmentRelSoap[][] toSoapModels(
-		CommerceNotificationTemplateUserSegmentRel[][] models) {
+	public static CommerceNotificationTemplateUserSegmentRelSoap[][]
+		toSoapModels(CommerceNotificationTemplateUserSegmentRel[][] models) {
+
 		CommerceNotificationTemplateUserSegmentRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceNotificationTemplateUserSegmentRelSoap[models.length][models[0].length];
+			soapModels = new CommerceNotificationTemplateUserSegmentRelSoap
+				[models.length][models[0].length];
 		}
 		else {
-			soapModels = new CommerceNotificationTemplateUserSegmentRelSoap[0][0];
+			soapModels =
+				new CommerceNotificationTemplateUserSegmentRelSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -80,13 +90,18 @@ public class CommerceNotificationTemplateUserSegmentRelSoap
 
 	public static CommerceNotificationTemplateUserSegmentRelSoap[] toSoapModels(
 		List<CommerceNotificationTemplateUserSegmentRel> models) {
-		List<CommerceNotificationTemplateUserSegmentRelSoap> soapModels = new ArrayList<CommerceNotificationTemplateUserSegmentRelSoap>(models.size());
+
+		List<CommerceNotificationTemplateUserSegmentRelSoap> soapModels =
+			new ArrayList<CommerceNotificationTemplateUserSegmentRelSoap>(
+				models.size());
 
 		for (CommerceNotificationTemplateUserSegmentRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceNotificationTemplateUserSegmentRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceNotificationTemplateUserSegmentRelSoap
+				[soapModels.size()]);
 	}
 
 	public CommerceNotificationTemplateUserSegmentRelSoap() {
@@ -106,7 +121,9 @@ public class CommerceNotificationTemplateUserSegmentRelSoap
 
 	public void setCommerceNotificationTemplateUserSegmentRelId(
 		long commerceNotificationTemplateUserSegmentRelId) {
-		_commerceNotificationTemplateUserSegmentRelId = commerceNotificationTemplateUserSegmentRelId;
+
+		_commerceNotificationTemplateUserSegmentRelId =
+			commerceNotificationTemplateUserSegmentRelId;
 	}
 
 	public long getGroupId() {
@@ -163,6 +180,7 @@ public class CommerceNotificationTemplateUserSegmentRelSoap
 
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
+
 		_commerceNotificationTemplateId = commerceNotificationTemplateId;
 	}
 
@@ -183,4 +201,5 @@ public class CommerceNotificationTemplateUserSegmentRelSoap
 	private Date _modifiedDate;
 	private long _commerceNotificationTemplateId;
 	private long _commerceUserSegmentEntryId;
+
 }

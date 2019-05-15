@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.type.grouped.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.type.grouped.exception.NoSuchCPDefinitionGroupedEntryException;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,16 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionGroupedEntryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.product.type.grouped.service"));
 
 	@Before
@@ -83,7 +83,8 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPDefinitionGroupedEntry> iterator = _cpDefinitionGroupedEntries.iterator();
+		Iterator<CPDefinitionGroupedEntry> iterator =
+			_cpDefinitionGroupedEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -96,7 +97,8 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = _persistence.create(pk);
+		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = _persistence.create(
+			pk);
 
 		Assert.assertNotNull(cpDefinitionGroupedEntry);
 
@@ -105,11 +107,14 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
 		_persistence.remove(newCPDefinitionGroupedEntry);
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = _persistence.fetchByPrimaryKey(newCPDefinitionGroupedEntry.getPrimaryKey());
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionGroupedEntry.getPrimaryKey());
 
 		Assert.assertNull(existingCPDefinitionGroupedEntry);
 	}
@@ -123,7 +128,8 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = _persistence.create(pk);
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			_persistence.create(pk);
 
 		newCPDefinitionGroupedEntry.setUuid(RandomTestUtil.randomString());
 
@@ -139,45 +145,62 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 		newCPDefinitionGroupedEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCPDefinitionGroupedEntry.setCPDefinitionId(RandomTestUtil.nextLong());
+		newCPDefinitionGroupedEntry.setCPDefinitionId(
+			RandomTestUtil.nextLong());
 
-		newCPDefinitionGroupedEntry.setEntryCProductId(RandomTestUtil.nextLong());
+		newCPDefinitionGroupedEntry.setEntryCProductId(
+			RandomTestUtil.nextLong());
 
 		newCPDefinitionGroupedEntry.setPriority(RandomTestUtil.nextDouble());
 
 		newCPDefinitionGroupedEntry.setQuantity(RandomTestUtil.nextInt());
 
-		_cpDefinitionGroupedEntries.add(_persistence.update(
-				newCPDefinitionGroupedEntry));
+		_cpDefinitionGroupedEntries.add(
+			_persistence.update(newCPDefinitionGroupedEntry));
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = _persistence.findByPrimaryKey(newCPDefinitionGroupedEntry.getPrimaryKey());
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionGroupedEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getUuid(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getUuid(),
 			newCPDefinitionGroupedEntry.getUuid());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId(),
 			newCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getGroupId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getGroupId(),
 			newCPDefinitionGroupedEntry.getGroupId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getCompanyId(),
 			newCPDefinitionGroupedEntry.getCompanyId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getUserId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getUserId(),
 			newCPDefinitionGroupedEntry.getUserId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getUserName(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getUserName(),
 			newCPDefinitionGroupedEntry.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionGroupedEntry.getCreateDate()),
-			Time.getShortTimestamp(newCPDefinitionGroupedEntry.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+			Time.getShortTimestamp(
+				newCPDefinitionGroupedEntry.getCreateDate()));
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionGroupedEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCPDefinitionGroupedEntry.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getCPDefinitionId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getCPDefinitionId(),
 			newCPDefinitionGroupedEntry.getCPDefinitionId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getEntryCProductId(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getEntryCProductId(),
 			newCPDefinitionGroupedEntry.getEntryCProductId());
-		AssertUtils.assertEquals(existingCPDefinitionGroupedEntry.getPriority(),
+		AssertUtils.assertEquals(
+			existingCPDefinitionGroupedEntry.getPriority(),
 			newCPDefinitionGroupedEntry.getPriority());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry.getQuantity(),
 			newCPDefinitionGroupedEntry.getQuantity());
 	}
 
@@ -217,20 +240,23 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 	@Test
 	public void testCountByC_E() throws Exception {
-		_persistence.countByC_E(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_E(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_E(0L, 0L);
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = _persistence.findByPrimaryKey(newCPDefinitionGroupedEntry.getPrimaryKey());
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionGroupedEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionGroupedEntry,
-			newCPDefinitionGroupedEntry);
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry, newCPDefinitionGroupedEntry);
 	}
 
 	@Test(expected = NoSuchCPDefinitionGroupedEntryException.class)
@@ -242,33 +268,40 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CPDefinitionGroupedEntry> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDefinitionGroupedEntry",
-			"uuid", true, "CPDefinitionGroupedEntryId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPDefinitionId", true,
-			"entryCProductId", true, "priority", true, "quantity", true);
+	protected OrderByComparator<CPDefinitionGroupedEntry>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CPDefinitionGroupedEntry", "uuid", true,
+			"CPDefinitionGroupedEntryId", true, "groupId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "CPDefinitionId", true, "entryCProductId",
+			true, "priority", true, "quantity", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = _persistence.fetchByPrimaryKey(newCPDefinitionGroupedEntry.getPrimaryKey());
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionGroupedEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionGroupedEntry,
-			newCPDefinitionGroupedEntry);
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry, newCPDefinitionGroupedEntry);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionGroupedEntry missingCPDefinitionGroupedEntry = _persistence.fetchByPrimaryKey(pk);
+		CPDefinitionGroupedEntry missingCPDefinitionGroupedEntry =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDefinitionGroupedEntry);
 	}
@@ -276,21 +309,27 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry1 = addCPDefinitionGroupedEntry();
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry2 = addCPDefinitionGroupedEntry();
+
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry1 =
+			addCPDefinitionGroupedEntry();
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry2 =
+			addCPDefinitionGroupedEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionGroupedEntry1.getPrimaryKey());
 		primaryKeys.add(newCPDefinitionGroupedEntry2.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpDefinitionGroupedEntries.size());
-		Assert.assertEquals(newCPDefinitionGroupedEntry1,
+		Assert.assertEquals(
+			newCPDefinitionGroupedEntry1,
 			cpDefinitionGroupedEntries.get(
 				newCPDefinitionGroupedEntry1.getPrimaryKey()));
-		Assert.assertEquals(newCPDefinitionGroupedEntry2,
+		Assert.assertEquals(
+			newCPDefinitionGroupedEntry2,
 			cpDefinitionGroupedEntries.get(
 				newCPDefinitionGroupedEntry2.getPrimaryKey()));
 	}
@@ -298,6 +337,7 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -307,7 +347,8 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionGroupedEntries.isEmpty());
 	}
@@ -315,7 +356,9 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -324,37 +367,41 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 		primaryKeys.add(newCPDefinitionGroupedEntry.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionGroupedEntries.size());
-		Assert.assertEquals(newCPDefinitionGroupedEntry,
+		Assert.assertEquals(
+			newCPDefinitionGroupedEntry,
 			cpDefinitionGroupedEntries.get(
 				newCPDefinitionGroupedEntry.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionGroupedEntries.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionGroupedEntry.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionGroupedEntries.size());
-		Assert.assertEquals(newCPDefinitionGroupedEntry,
+		Assert.assertEquals(
+			newCPDefinitionGroupedEntry,
 			cpDefinitionGroupedEntries.get(
 				newCPDefinitionGroupedEntry.getPrimaryKey()));
 	}
@@ -363,16 +410,23 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDefinitionGroupedEntryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDefinitionGroupedEntryLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionGroupedEntry>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDefinitionGroupedEntry>() {
+
 				@Override
 				public void performAction(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
+
 					Assert.assertNotNull(cpDefinitionGroupedEntry);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -381,56 +435,63 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionGroupedEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionGroupedEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDefinitionGroupedEntryId",
 				newCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId()));
 
-		List<CPDefinitionGroupedEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionGroupedEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = result.get(0);
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = result.get(
+			0);
 
-		Assert.assertEquals(existingCPDefinitionGroupedEntry,
-			newCPDefinitionGroupedEntry);
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntry, newCPDefinitionGroupedEntry);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionGroupedEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionGroupedEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDefinitionGroupedEntryId", RandomTestUtil.nextLong()));
 
-		List<CPDefinitionGroupedEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionGroupedEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionGroupedEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionGroupedEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionGroupedEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionGroupedEntryId"));
 
-		Object newCPDefinitionGroupedEntryId = newCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId();
+		Object newCPDefinitionGroupedEntryId =
+			newCPDefinitionGroupedEntry.getCPDefinitionGroupedEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDefinitionGroupedEntryId",
-				new Object[] { newCPDefinitionGroupedEntryId }));
+				new Object[] {newCPDefinitionGroupedEntryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -438,21 +499,22 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 		Object existingCPDefinitionGroupedEntryId = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionGroupedEntryId,
-			newCPDefinitionGroupedEntryId);
+		Assert.assertEquals(
+			existingCPDefinitionGroupedEntryId, newCPDefinitionGroupedEntryId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionGroupedEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionGroupedEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionGroupedEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionGroupedEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDefinitionGroupedEntryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -461,36 +523,46 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry = addCPDefinitionGroupedEntry();
+		CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+			addCPDefinitionGroupedEntry();
 
 		_persistence.clearCache();
 
-		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry = _persistence.findByPrimaryKey(newCPDefinitionGroupedEntry.getPrimaryKey());
+		CPDefinitionGroupedEntry existingCPDefinitionGroupedEntry =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionGroupedEntry.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPDefinitionGroupedEntry.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDefinitionGroupedEntry,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionGroupedEntry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionGroupedEntry,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionGroupedEntry, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionGroupedEntry.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionGroupedEntry, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionGroupedEntry.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionGroupedEntry,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionGroupedEntry.getEntryCProductId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionGroupedEntry,
-				"getOriginalEntryCProductId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionGroupedEntry.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionGroupedEntry, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionGroupedEntry.getEntryCProductId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionGroupedEntry, "getOriginalEntryCProductId",
+				new Class<?>[0]));
 	}
 
 	protected CPDefinitionGroupedEntry addCPDefinitionGroupedEntry()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = _persistence.create(pk);
+		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = _persistence.create(
+			pk);
 
 		cpDefinitionGroupedEntry.setUuid(RandomTestUtil.randomString());
 
@@ -514,13 +586,15 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 		cpDefinitionGroupedEntry.setQuantity(RandomTestUtil.nextInt());
 
-		_cpDefinitionGroupedEntries.add(_persistence.update(
-				cpDefinitionGroupedEntry));
+		_cpDefinitionGroupedEntries.add(
+			_persistence.update(cpDefinitionGroupedEntry));
 
 		return cpDefinitionGroupedEntry;
 	}
 
-	private List<CPDefinitionGroupedEntry> _cpDefinitionGroupedEntries = new ArrayList<CPDefinitionGroupedEntry>();
+	private List<CPDefinitionGroupedEntry> _cpDefinitionGroupedEntries =
+		new ArrayList<CPDefinitionGroupedEntry>();
 	private CPDefinitionGroupedEntryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

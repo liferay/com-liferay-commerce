@@ -28,120 +28,147 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceShippingMethodServiceWrapper
 	implements CommerceShippingMethodService,
-		ServiceWrapper<CommerceShippingMethodService> {
+			   ServiceWrapper<CommerceShippingMethodService> {
+
 	public CommerceShippingMethodServiceWrapper(
 		CommerceShippingMethodService commerceShippingMethodService) {
+
 		_commerceShippingMethodService = commerceShippingMethodService;
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		long commerceShippingMethodId, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceAddressRestriction
+			addCommerceAddressRestriction(
+				long commerceShippingMethodId, long commerceCountryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.addCommerceAddressRestriction(commerceShippingMethodId,
-			commerceCountryId, serviceContext);
+
+		return _commerceShippingMethodService.addCommerceAddressRestriction(
+			commerceShippingMethodId, commerceCountryId, serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShippingMethod addCommerceShippingMethod(
-		java.util.Map<java.util.Locale, String> nameMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		java.io.File imageFile, String engineKey, double priority,
-		boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceShippingMethod
+			addCommerceShippingMethod(
+				java.util.Map<java.util.Locale, String> nameMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				java.io.File imageFile, String engineKey, double priority,
+				boolean active,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.addCommerceShippingMethod(nameMap,
-			descriptionMap, imageFile, engineKey, priority, active,
+
+		return _commerceShippingMethodService.addCommerceShippingMethod(
+			nameMap, descriptionMap, imageFile, engineKey, priority, active,
 			serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShippingMethod createCommerceShippingMethod(
-		long commerceShippingMethodId)
+	public com.liferay.commerce.model.CommerceShippingMethod
+			createCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.createCommerceShippingMethod(commerceShippingMethodId);
+
+		return _commerceShippingMethodService.createCommerceShippingMethod(
+			commerceShippingMethodId);
 	}
 
 	@Override
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId)
+			long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceShippingMethodService.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
+
+		_commerceShippingMethodService.deleteCommerceAddressRestriction(
+			commerceAddressRestrictionId);
 	}
 
 	@Override
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceShippingMethodService.deleteCommerceShippingMethod(commerceShippingMethodId);
+
+		_commerceShippingMethodService.deleteCommerceShippingMethod(
+			commerceShippingMethodId);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShippingMethod fetchCommerceShippingMethod(
-		long groupId, String engineKey)
+	public com.liferay.commerce.model.CommerceShippingMethod
+			fetchCommerceShippingMethod(long groupId, String engineKey)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.fetchCommerceShippingMethod(groupId,
-			engineKey);
+
+		return _commerceShippingMethodService.fetchCommerceShippingMethod(
+			groupId, engineKey);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
-		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
+	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction>
+			getCommerceAddressRestrictions(
+				long commerceShippingMethodId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceAddressRestriction>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceAddressRestrictions(commerceShippingMethodId,
-			start, end, orderByComparator);
+
+		return _commerceShippingMethodService.getCommerceAddressRestrictions(
+			commerceShippingMethodId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId)
+			long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceAddressRestrictionsCount(commerceShippingMethodId);
+
+		return _commerceShippingMethodService.
+			getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod(
-		long commerceShippingMethodId)
+	public com.liferay.commerce.model.CommerceShippingMethod
+			getCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceShippingMethod(commerceShippingMethodId);
+
+		return _commerceShippingMethodService.getCommerceShippingMethod(
+			commerceShippingMethodId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId)
+	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod>
+			getCommerceShippingMethods(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceShippingMethods(groupId);
+
+		return _commerceShippingMethodService.getCommerceShippingMethods(
+			groupId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, boolean active)
+	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod>
+			getCommerceShippingMethods(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceShippingMethods(groupId,
-			active);
+
+		return _commerceShippingMethodService.getCommerceShippingMethods(
+			groupId, active);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, long commerceCountryId, boolean active)
+	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod>
+			getCommerceShippingMethods(
+				long groupId, long commerceCountryId, boolean active)
 		throws com.liferay.portal.kernel.security.auth.PrincipalException {
-		return _commerceShippingMethodService.getCommerceShippingMethods(groupId,
-			commerceCountryId, active);
+
+		return _commerceShippingMethodService.getCommerceShippingMethods(
+			groupId, commerceCountryId, active);
 	}
 
 	@Override
 	public int getCommerceShippingMethodsCount(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceShippingMethodsCount(groupId,
-			active);
+
+		return _commerceShippingMethodService.getCommerceShippingMethodsCount(
+			groupId, active);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceShippingMethodService.getOSGiServiceIdentifier();
@@ -149,21 +176,25 @@ public class CommerceShippingMethodServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceShippingMethod setActive(
-		long commerceShippingMethodId, boolean active)
+			long commerceShippingMethodId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.setActive(commerceShippingMethodId,
-			active);
+
+		return _commerceShippingMethodService.setActive(
+			commerceShippingMethodId, active);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShippingMethod updateCommerceShippingMethod(
-		long commerceShippingMethodId,
-		java.util.Map<java.util.Locale, String> nameMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		java.io.File imageFile, double priority, boolean active)
+	public com.liferay.commerce.model.CommerceShippingMethod
+			updateCommerceShippingMethod(
+				long commerceShippingMethodId,
+				java.util.Map<java.util.Locale, String> nameMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				java.io.File imageFile, double priority, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.updateCommerceShippingMethod(commerceShippingMethodId,
-			nameMap, descriptionMap, imageFile, priority, active);
+
+		return _commerceShippingMethodService.updateCommerceShippingMethod(
+			commerceShippingMethodId, nameMap, descriptionMap, imageFile,
+			priority, active);
 	}
 
 	@Override
@@ -174,8 +205,10 @@ public class CommerceShippingMethodServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceShippingMethodService commerceShippingMethodService) {
+
 		_commerceShippingMethodService = commerceShippingMethodService;
 	}
 
 	private CommerceShippingMethodService _commerceShippingMethodService;
+
 }

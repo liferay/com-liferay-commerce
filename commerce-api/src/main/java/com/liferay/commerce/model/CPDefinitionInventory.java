@@ -25,36 +25,41 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CPDefinitionInventoryModel
- * @see com.liferay.commerce.model.impl.CPDefinitionInventoryImpl
- * @see com.liferay.commerce.model.impl.CPDefinitionInventoryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CPDefinitionInventoryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CPDefinitionInventoryImpl"
+)
 @ProviderType
-public interface CPDefinitionInventory extends CPDefinitionInventoryModel,
-	PersistedModel {
+public interface CPDefinitionInventory
+	extends CPDefinitionInventoryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CPDefinitionInventoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CPDefinitionInventoryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionInventory, Long> CP_DEFINITION_INVENTORY_ID_ACCESSOR =
-		new Accessor<CPDefinitionInventory, Long>() {
-			@Override
-			public Long get(CPDefinitionInventory cpDefinitionInventory) {
-				return cpDefinitionInventory.getCPDefinitionInventoryId();
-			}
+	public static final Accessor<CPDefinitionInventory, Long>
+		CP_DEFINITION_INVENTORY_ID_ACCESSOR =
+			new Accessor<CPDefinitionInventory, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPDefinitionInventory cpDefinitionInventory) {
+					return cpDefinitionInventory.getCPDefinitionInventoryId();
+				}
 
-			@Override
-			public Class<CPDefinitionInventory> getTypeClass() {
-				return CPDefinitionInventory.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionInventory> getTypeClass() {
+					return CPDefinitionInventory.class;
+				}
+
+			};
 
 	public int[] getAllowedOrderQuantitiesArray();
+
 }

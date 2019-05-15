@@ -28,48 +28,62 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommercePriceListAccountRelServiceWrapper
 	implements CommercePriceListAccountRelService,
-		ServiceWrapper<CommercePriceListAccountRelService> {
+			   ServiceWrapper<CommercePriceListAccountRelService> {
+
 	public CommercePriceListAccountRelServiceWrapper(
 		CommercePriceListAccountRelService commercePriceListAccountRelService) {
-		_commercePriceListAccountRelService = commercePriceListAccountRelService;
+
+		_commercePriceListAccountRelService =
+			commercePriceListAccountRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.price.list.model.CommercePriceListAccountRel addCommercePriceListAccountRel(
-		long commercePriceListId, long commerceAccountId, int order,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.price.list.model.CommercePriceListAccountRel
+			addCommercePriceListAccountRel(
+				long commercePriceListId, long commerceAccountId, int order,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceListAccountRelService.addCommercePriceListAccountRel(commercePriceListId,
-			commerceAccountId, order, serviceContext);
+
+		return _commercePriceListAccountRelService.
+			addCommercePriceListAccountRel(
+				commercePriceListId, commerceAccountId, order, serviceContext);
 	}
 
 	@Override
 	public void deleteCommercePriceListAccountRel(
-		long commercePriceListAccountRelId)
+			long commercePriceListAccountRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commercePriceListAccountRelService.deleteCommercePriceListAccountRel(commercePriceListAccountRelId);
+
+		_commercePriceListAccountRelService.deleteCommercePriceListAccountRel(
+			commercePriceListAccountRelId);
 	}
 
 	@Override
-	public com.liferay.commerce.price.list.model.CommercePriceListAccountRel fetchCommercePriceListAccountRel(
-		long commercePriceListId, long commerceAccountId)
+	public com.liferay.commerce.price.list.model.CommercePriceListAccountRel
+			fetchCommercePriceListAccountRel(
+				long commercePriceListId, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceListAccountRelService.fetchCommercePriceListAccountRel(commercePriceListId,
-			commerceAccountId);
+
+		return _commercePriceListAccountRelService.
+			fetchCommercePriceListAccountRel(
+				commercePriceListId, commerceAccountId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceListAccountRel> getCommercePriceListAccountRels(
-		long commercePriceListId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceListAccountRelService.getCommercePriceListAccountRels(commercePriceListId);
+	public java.util.List
+		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
+				getCommercePriceListAccountRels(long commercePriceListId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceListAccountRelService.
+			getCommercePriceListAccountRels(commercePriceListId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commercePriceListAccountRelService.getOSGiServiceIdentifier();
@@ -83,8 +97,12 @@ public class CommercePriceListAccountRelServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommercePriceListAccountRelService commercePriceListAccountRelService) {
-		_commercePriceListAccountRelService = commercePriceListAccountRelService;
+
+		_commercePriceListAccountRelService =
+			commercePriceListAccountRelService;
 	}
 
-	private CommercePriceListAccountRelService _commercePriceListAccountRelService;
+	private CommercePriceListAccountRelService
+		_commercePriceListAccountRelService;
+
 }

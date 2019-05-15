@@ -25,49 +25,55 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionLinkModel
- * @see com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl
- * @see com.liferay.commerce.product.model.impl.CPDefinitionLinkModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl"
+)
 @ProviderType
-public interface CPDefinitionLink extends CPDefinitionLinkModel, PersistedModel {
+public interface CPDefinitionLink
+	extends CPDefinitionLinkModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionLink, Long> CP_DEFINITION_LINK_ID_ACCESSOR =
-		new Accessor<CPDefinitionLink, Long>() {
-			@Override
-			public Long get(CPDefinitionLink cpDefinitionLink) {
-				return cpDefinitionLink.getCPDefinitionLinkId();
-			}
+	public static final Accessor<CPDefinitionLink, Long>
+		CP_DEFINITION_LINK_ID_ACCESSOR =
+			new Accessor<CPDefinitionLink, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPDefinitionLink cpDefinitionLink) {
+					return cpDefinitionLink.getCPDefinitionLinkId();
+				}
 
-			@Override
-			public Class<CPDefinitionLink> getTypeClass() {
-				return CPDefinitionLink.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionLink> getTypeClass() {
+					return CPDefinitionLink.class;
+				}
+
+			};
 
 	public CPDefinition getCPDefinition();
 
 	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated()
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public CPDefinition getCPDefinition1();
 
 	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated()
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public CPDefinition getCPDefinition2();
 
 	public CProduct getCProduct();
+
 }

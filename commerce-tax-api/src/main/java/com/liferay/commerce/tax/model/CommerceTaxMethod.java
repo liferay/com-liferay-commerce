@@ -25,33 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceTaxMethodModel
- * @see com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl
- * @see com.liferay.commerce.tax.model.impl.CommerceTaxMethodModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl"
+)
 @ProviderType
-public interface CommerceTaxMethod extends CommerceTaxMethodModel, PersistedModel {
+public interface CommerceTaxMethod
+	extends CommerceTaxMethodModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceTaxMethod, Long> COMMERCE_TAX_METHOD_ID_ACCESSOR =
-		new Accessor<CommerceTaxMethod, Long>() {
-			@Override
-			public Long get(CommerceTaxMethod commerceTaxMethod) {
-				return commerceTaxMethod.getCommerceTaxMethodId();
-			}
+	public static final Accessor<CommerceTaxMethod, Long>
+		COMMERCE_TAX_METHOD_ID_ACCESSOR =
+			new Accessor<CommerceTaxMethod, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceTaxMethod commerceTaxMethod) {
+					return commerceTaxMethod.getCommerceTaxMethodId();
+				}
 
-			@Override
-			public Class<CommerceTaxMethod> getTypeClass() {
-				return CommerceTaxMethod.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceTaxMethod> getTypeClass() {
+					return CommerceTaxMethod.class;
+				}
+
+			};
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceOrderItemServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceOrderItemServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceOrderItemServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.model.CommerceOrderItemSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.model.CommerceOrderItem}, that is translated to a
- * {@link com.liferay.commerce.model.CommerceOrderItemSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.model.CommerceOrderItemSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.model.CommerceOrderItem</code>, that is translated to a
+ * <code>com.liferay.commerce.model.CommerceOrderItemSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,24 +59,27 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderItemServiceHttp
- * @see com.liferay.commerce.model.CommerceOrderItemSoap
- * @see CommerceOrderItemServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceOrderItemServiceSoap {
-	public static com.liferay.commerce.model.CommerceOrderItemSoap addCommerceOrderItem(
-		long commerceOrderId, long cpInstanceId, int quantity,
-		int shippedQuantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.addCommerceOrderItem(commerceOrderId,
-					cpInstanceId, quantity, shippedQuantity, json,
-					commerceContext, serviceContext);
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			addCommerceOrderItem(
+				long commerceOrderId, long cpInstanceId, int quantity,
+				int shippedQuantity, String json,
+				com.liferay.commerce.context.CommerceContext commerceContext,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.addCommerceOrderItem(
+					commerceOrderId, cpInstanceId, quantity, shippedQuantity,
+					json, commerceContext, serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -87,8 +90,10 @@ public class CommerceOrderItemServiceSoap {
 
 	public static void deleteCommerceOrderItem(long commerceOrderItemId)
 		throws RemoteException {
+
 		try {
-			CommerceOrderItemServiceUtil.deleteCommerceOrderItem(commerceOrderItemId);
+			CommerceOrderItemServiceUtil.deleteCommerceOrderItem(
+				commerceOrderItemId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -97,12 +102,14 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static void deleteCommerceOrderItem(long commerceOrderItemId,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+	public static void deleteCommerceOrderItem(
+			long commerceOrderItemId,
+			com.liferay.commerce.context.CommerceContext commerceContext)
 		throws RemoteException {
+
 		try {
-			CommerceOrderItemServiceUtil.deleteCommerceOrderItem(commerceOrderItemId,
-				commerceContext);
+			CommerceOrderItemServiceUtil.deleteCommerceOrderItem(
+				commerceOrderItemId, commerceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,13 +118,18 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.fetchByExternalReferenceCode(companyId,
-					externalReferenceCode);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws RemoteException {
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.fetchByExternalReferenceCode(
+					companyId, externalReferenceCode);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -126,12 +138,17 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap fetchCommerceOrderItem(
-		long commerceOrderItemId) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.fetchCommerceOrderItem(commerceOrderItemId);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			fetchCommerceOrderItem(long commerceOrderItemId)
+		throws RemoteException {
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.fetchCommerceOrderItem(
+					commerceOrderItemId);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -140,13 +157,19 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap[] getAvailableForShipmentCommerceOrderItems(
-		long commerceOrderId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceOrderItem> returnValue =
-				CommerceOrderItemServiceUtil.getAvailableForShipmentCommerceOrderItems(commerceOrderId);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap[]
+			getAvailableForShipmentCommerceOrderItems(long commerceOrderId)
+		throws RemoteException {
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrderItem>
+				returnValue =
+					CommerceOrderItemServiceUtil.
+						getAvailableForShipmentCommerceOrderItems(
+							commerceOrderId);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -155,12 +178,17 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap getCommerceOrderItem(
-		long commerceOrderItemId) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.getCommerceOrderItem(commerceOrderItemId);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			getCommerceOrderItem(long commerceOrderItemId)
+		throws RemoteException {
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.getCommerceOrderItem(
+					commerceOrderItemId);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -169,14 +197,18 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap[] getCommerceOrderItems(
-		long commerceOrderId, int start, int end) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceOrderItem> returnValue =
-				CommerceOrderItemServiceUtil.getCommerceOrderItems(commerceOrderId,
-					start, end);
+	public static com.liferay.commerce.model.CommerceOrderItemSoap[]
+			getCommerceOrderItems(long commerceOrderId, int start, int end)
+		throws RemoteException {
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrderItem>
+				returnValue =
+					CommerceOrderItemServiceUtil.getCommerceOrderItems(
+						commerceOrderId, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -187,8 +219,11 @@ public class CommerceOrderItemServiceSoap {
 
 	public static int getCommerceOrderItemsCount(long commerceOrderId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceOrderItemServiceUtil.getCommerceOrderItemsCount(commerceOrderId);
+			int returnValue =
+				CommerceOrderItemServiceUtil.getCommerceOrderItemsCount(
+					commerceOrderId);
 
 			return returnValue;
 		}
@@ -201,8 +236,11 @@ public class CommerceOrderItemServiceSoap {
 
 	public static int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceOrderItemServiceUtil.getCommerceOrderItemsQuantity(commerceOrderId);
+			int returnValue =
+				CommerceOrderItemServiceUtil.getCommerceOrderItemsQuantity(
+					commerceOrderId);
 
 			return returnValue;
 		}
@@ -214,11 +252,13 @@ public class CommerceOrderItemServiceSoap {
 	}
 
 	public static int getCommerceWarehouseItemQuantity(
-		long commerceOrderItemId, long commerceWarehouseId)
+			long commerceOrderItemId, long commerceWarehouseId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceOrderItemServiceUtil.getCommerceWarehouseItemQuantity(commerceOrderItemId,
-					commerceWarehouseId);
+			int returnValue =
+				CommerceOrderItemServiceUtil.getCommerceWarehouseItemQuantity(
+					commerceOrderItemId, commerceWarehouseId);
 
 			return returnValue;
 		}
@@ -229,16 +269,21 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap updateCommerceOrderItem(
-		long commerceOrderItemId, int quantity,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			updateCommerceOrderItem(
+				long commerceOrderItemId, int quantity,
+				com.liferay.commerce.context.CommerceContext commerceContext,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.updateCommerceOrderItem(commerceOrderItemId,
-					quantity, commerceContext, serviceContext);
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.updateCommerceOrderItem(
+					commerceOrderItemId, quantity, commerceContext,
+					serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -247,16 +292,21 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap updateCommerceOrderItem(
-		long commerceOrderItemId, int quantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			updateCommerceOrderItem(
+				long commerceOrderItemId, int quantity, String json,
+				com.liferay.commerce.context.CommerceContext commerceContext,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.updateCommerceOrderItem(commerceOrderItemId,
-					quantity, json, commerceContext, serviceContext);
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.updateCommerceOrderItem(
+					commerceOrderItemId, quantity, json, commerceContext,
+					serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -265,18 +315,22 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderItemSoap upsertCommerceOrderItem(
-		long commerceOrderId, long cpInstanceId, int quantity,
-		int shippedQuantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			upsertCommerceOrderItem(
+				long commerceOrderId, long cpInstanceId, int quantity,
+				int shippedQuantity, String json,
+				com.liferay.commerce.context.CommerceContext commerceContext,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.upsertCommerceOrderItem(commerceOrderId,
-					cpInstanceId, quantity, shippedQuantity, json,
-					commerceContext, serviceContext);
 
-			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.upsertCommerceOrderItem(
+					commerceOrderId, cpInstanceId, quantity, shippedQuantity,
+					json, commerceContext, serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -285,5 +339,7 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceOrderItemServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceOrderItemServiceSoap.class);
+
 }

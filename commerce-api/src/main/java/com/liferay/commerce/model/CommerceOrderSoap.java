@@ -28,11 +28,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceOrderServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceOrderServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceOrderSoap implements Serializable {
+
 	public static CommerceOrderSoap toSoapModel(CommerceOrder model) {
 		CommerceOrderSoap soapModel = new CommerceOrderSoap();
 
@@ -49,32 +49,46 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
 		soapModel.setBillingAddressId(model.getBillingAddressId());
 		soapModel.setShippingAddressId(model.getShippingAddressId());
-		soapModel.setCommercePaymentMethodKey(model.getCommercePaymentMethodKey());
+		soapModel.setCommercePaymentMethodKey(
+			model.getCommercePaymentMethodKey());
 		soapModel.setTransactionId(model.getTransactionId());
-		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
+		soapModel.setCommerceShippingMethodId(
+			model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
 		soapModel.setPurchaseOrderNumber(model.getPurchaseOrderNumber());
 		soapModel.setCouponCode(model.getCouponCode());
 		soapModel.setLastPriceUpdateDate(model.getLastPriceUpdateDate());
 		soapModel.setSubtotal(model.getSubtotal());
 		soapModel.setSubtotalDiscountAmount(model.getSubtotalDiscountAmount());
-		soapModel.setSubtotalDiscountPercentageLevel1(model.getSubtotalDiscountPercentageLevel1());
-		soapModel.setSubtotalDiscountPercentageLevel2(model.getSubtotalDiscountPercentageLevel2());
-		soapModel.setSubtotalDiscountPercentageLevel3(model.getSubtotalDiscountPercentageLevel3());
-		soapModel.setSubtotalDiscountPercentageLevel4(model.getSubtotalDiscountPercentageLevel4());
+		soapModel.setSubtotalDiscountPercentageLevel1(
+			model.getSubtotalDiscountPercentageLevel1());
+		soapModel.setSubtotalDiscountPercentageLevel2(
+			model.getSubtotalDiscountPercentageLevel2());
+		soapModel.setSubtotalDiscountPercentageLevel3(
+			model.getSubtotalDiscountPercentageLevel3());
+		soapModel.setSubtotalDiscountPercentageLevel4(
+			model.getSubtotalDiscountPercentageLevel4());
 		soapModel.setShippingAmount(model.getShippingAmount());
 		soapModel.setShippingDiscountAmount(model.getShippingDiscountAmount());
-		soapModel.setShippingDiscountPercentageLevel1(model.getShippingDiscountPercentageLevel1());
-		soapModel.setShippingDiscountPercentageLevel2(model.getShippingDiscountPercentageLevel2());
-		soapModel.setShippingDiscountPercentageLevel3(model.getShippingDiscountPercentageLevel3());
-		soapModel.setShippingDiscountPercentageLevel4(model.getShippingDiscountPercentageLevel4());
+		soapModel.setShippingDiscountPercentageLevel1(
+			model.getShippingDiscountPercentageLevel1());
+		soapModel.setShippingDiscountPercentageLevel2(
+			model.getShippingDiscountPercentageLevel2());
+		soapModel.setShippingDiscountPercentageLevel3(
+			model.getShippingDiscountPercentageLevel3());
+		soapModel.setShippingDiscountPercentageLevel4(
+			model.getShippingDiscountPercentageLevel4());
 		soapModel.setTaxAmount(model.getTaxAmount());
 		soapModel.setTotal(model.getTotal());
 		soapModel.setTotalDiscountAmount(model.getTotalDiscountAmount());
-		soapModel.setTotalDiscountPercentageLevel1(model.getTotalDiscountPercentageLevel1());
-		soapModel.setTotalDiscountPercentageLevel2(model.getTotalDiscountPercentageLevel2());
-		soapModel.setTotalDiscountPercentageLevel3(model.getTotalDiscountPercentageLevel3());
-		soapModel.setTotalDiscountPercentageLevel4(model.getTotalDiscountPercentageLevel4());
+		soapModel.setTotalDiscountPercentageLevel1(
+			model.getTotalDiscountPercentageLevel1());
+		soapModel.setTotalDiscountPercentageLevel2(
+			model.getTotalDiscountPercentageLevel2());
+		soapModel.setTotalDiscountPercentageLevel3(
+			model.getTotalDiscountPercentageLevel3());
+		soapModel.setTotalDiscountPercentageLevel4(
+			model.getTotalDiscountPercentageLevel4());
 		soapModel.setAdvanceStatus(model.getAdvanceStatus());
 		soapModel.setPaymentStatus(model.getPaymentStatus());
 		soapModel.setOrderStatus(model.getOrderStatus());
@@ -114,7 +128,8 @@ public class CommerceOrderSoap implements Serializable {
 	}
 
 	public static CommerceOrderSoap[] toSoapModels(List<CommerceOrder> models) {
-		List<CommerceOrderSoap> soapModels = new ArrayList<CommerceOrderSoap>(models.size());
+		List<CommerceOrderSoap> soapModels = new ArrayList<CommerceOrderSoap>(
+			models.size());
 
 		for (CommerceOrder model : models) {
 			soapModels.add(toSoapModel(model));
@@ -316,6 +331,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setSubtotalDiscountPercentageLevel1(
 		BigDecimal subtotalDiscountPercentageLevel1) {
+
 		_subtotalDiscountPercentageLevel1 = subtotalDiscountPercentageLevel1;
 	}
 
@@ -325,6 +341,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setSubtotalDiscountPercentageLevel2(
 		BigDecimal subtotalDiscountPercentageLevel2) {
+
 		_subtotalDiscountPercentageLevel2 = subtotalDiscountPercentageLevel2;
 	}
 
@@ -334,6 +351,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setSubtotalDiscountPercentageLevel3(
 		BigDecimal subtotalDiscountPercentageLevel3) {
+
 		_subtotalDiscountPercentageLevel3 = subtotalDiscountPercentageLevel3;
 	}
 
@@ -343,6 +361,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setSubtotalDiscountPercentageLevel4(
 		BigDecimal subtotalDiscountPercentageLevel4) {
+
 		_subtotalDiscountPercentageLevel4 = subtotalDiscountPercentageLevel4;
 	}
 
@@ -368,6 +387,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setShippingDiscountPercentageLevel1(
 		BigDecimal shippingDiscountPercentageLevel1) {
+
 		_shippingDiscountPercentageLevel1 = shippingDiscountPercentageLevel1;
 	}
 
@@ -377,6 +397,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setShippingDiscountPercentageLevel2(
 		BigDecimal shippingDiscountPercentageLevel2) {
+
 		_shippingDiscountPercentageLevel2 = shippingDiscountPercentageLevel2;
 	}
 
@@ -386,6 +407,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setShippingDiscountPercentageLevel3(
 		BigDecimal shippingDiscountPercentageLevel3) {
+
 		_shippingDiscountPercentageLevel3 = shippingDiscountPercentageLevel3;
 	}
 
@@ -395,6 +417,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setShippingDiscountPercentageLevel4(
 		BigDecimal shippingDiscountPercentageLevel4) {
+
 		_shippingDiscountPercentageLevel4 = shippingDiscountPercentageLevel4;
 	}
 
@@ -428,6 +451,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setTotalDiscountPercentageLevel1(
 		BigDecimal totalDiscountPercentageLevel1) {
+
 		_totalDiscountPercentageLevel1 = totalDiscountPercentageLevel1;
 	}
 
@@ -437,6 +461,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setTotalDiscountPercentageLevel2(
 		BigDecimal totalDiscountPercentageLevel2) {
+
 		_totalDiscountPercentageLevel2 = totalDiscountPercentageLevel2;
 	}
 
@@ -446,6 +471,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setTotalDiscountPercentageLevel3(
 		BigDecimal totalDiscountPercentageLevel3) {
+
 		_totalDiscountPercentageLevel3 = totalDiscountPercentageLevel3;
 	}
 
@@ -455,6 +481,7 @@ public class CommerceOrderSoap implements Serializable {
 
 	public void setTotalDiscountPercentageLevel4(
 		BigDecimal totalDiscountPercentageLevel4) {
+
 		_totalDiscountPercentageLevel4 = totalDiscountPercentageLevel4;
 	}
 
@@ -560,4 +587,5 @@ public class CommerceOrderSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

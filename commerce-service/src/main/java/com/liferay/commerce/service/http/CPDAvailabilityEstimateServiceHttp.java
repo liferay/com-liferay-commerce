@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CPDAvailabilityEstimateServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CPDAvailabilityEstimateServiceUtil} service utility. The
+ * <code>CPDAvailabilityEstimateServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,22 +49,24 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CPDAvailabilityEstimateServiceSoap
- * @see HttpPrincipal
- * @see CPDAvailabilityEstimateServiceUtil
  * @generated
  */
 @ProviderType
 public class CPDAvailabilityEstimateServiceHttp {
-	public static com.liferay.commerce.model.CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		HttpPrincipal httpPrincipal, long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDAvailabilityEstimateServiceUtil.class,
-					"fetchCPDAvailabilityEstimateByCPDefinitionId",
-					_fetchCPDAvailabilityEstimateByCPDefinitionIdParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId);
+	public static com.liferay.commerce.model.CPDAvailabilityEstimate
+			fetchCPDAvailabilityEstimateByCPDefinitionId(
+				HttpPrincipal httpPrincipal, long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDAvailabilityEstimateServiceUtil.class,
+				"fetchCPDAvailabilityEstimateByCPDefinitionId",
+				_fetchCPDAvailabilityEstimateByCPDefinitionIdParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionId);
 
 			Object returnObj = null;
 
@@ -72,14 +74,19 @@ public class CPDAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CPDAvailabilityEstimate)returnObj;
+			return (com.liferay.commerce.model.CPDAvailabilityEstimate)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -88,19 +95,22 @@ public class CPDAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
-		HttpPrincipal httpPrincipal, long cpdAvailabilityEstimateId,
-		long cpDefinitionId, long commerceAvailabilityEstimateId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CPDAvailabilityEstimate
+			updateCPDAvailabilityEstimate(
+				HttpPrincipal httpPrincipal, long cpdAvailabilityEstimateId,
+				long cpDefinitionId, long commerceAvailabilityEstimateId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDAvailabilityEstimateServiceUtil.class,
-					"updateCPDAvailabilityEstimate",
-					_updateCPDAvailabilityEstimateParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpdAvailabilityEstimateId, cpDefinitionId,
-					commerceAvailabilityEstimateId, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDAvailabilityEstimateServiceUtil.class,
+				"updateCPDAvailabilityEstimate",
+				_updateCPDAvailabilityEstimateParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpdAvailabilityEstimateId, cpDefinitionId,
+				commerceAvailabilityEstimateId, serviceContext);
 
 			Object returnObj = null;
 
@@ -108,14 +118,19 @@ public class CPDAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CPDAvailabilityEstimate)returnObj;
+			return (com.liferay.commerce.model.CPDAvailabilityEstimate)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -124,12 +139,16 @@ public class CPDAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPDAvailabilityEstimateServiceHttp.class);
-	private static final Class<?>[] _fetchCPDAvailabilityEstimateByCPDefinitionIdParameterTypes0 =
-		new Class[] { long.class };
-	private static final Class<?>[] _updateCPDAvailabilityEstimateParameterTypes1 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CPDAvailabilityEstimateServiceHttp.class);
+
+	private static final Class<?>[]
+		_fetchCPDAvailabilityEstimateByCPDefinitionIdParameterTypes0 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_updateCPDAvailabilityEstimateParameterTypes1 = new Class[] {
 			long.class, long.class, long.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
+
 }

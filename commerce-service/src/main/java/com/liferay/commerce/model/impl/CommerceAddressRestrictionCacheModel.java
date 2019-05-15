@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAddressRestriction;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAddressRestriction in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceAddressRestriction
  * @generated
  */
 @ProviderType
-public class CommerceAddressRestrictionCacheModel implements CacheModel<CommerceAddressRestriction>,
-	Externalizable {
+public class CommerceAddressRestrictionCacheModel
+	implements CacheModel<CommerceAddressRestriction>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceAddressRestrictionCacheModel implements CacheModel<Commerce
 			return false;
 		}
 
-		CommerceAddressRestrictionCacheModel commerceAddressRestrictionCacheModel =
-			(CommerceAddressRestrictionCacheModel)obj;
+		CommerceAddressRestrictionCacheModel
+			commerceAddressRestrictionCacheModel =
+				(CommerceAddressRestrictionCacheModel)obj;
 
-		if (commerceAddressRestrictionId == commerceAddressRestrictionCacheModel.commerceAddressRestrictionId) {
+		if (commerceAddressRestrictionId ==
+				commerceAddressRestrictionCacheModel.
+					commerceAddressRestrictionId) {
+
 			return true;
 		}
 
@@ -95,9 +98,11 @@ public class CommerceAddressRestrictionCacheModel implements CacheModel<Commerce
 
 	@Override
 	public CommerceAddressRestriction toEntityModel() {
-		CommerceAddressRestrictionImpl commerceAddressRestrictionImpl = new CommerceAddressRestrictionImpl();
+		CommerceAddressRestrictionImpl commerceAddressRestrictionImpl =
+			new CommerceAddressRestrictionImpl();
 
-		commerceAddressRestrictionImpl.setCommerceAddressRestrictionId(commerceAddressRestrictionId);
+		commerceAddressRestrictionImpl.setCommerceAddressRestrictionId(
+			commerceAddressRestrictionId);
 		commerceAddressRestrictionImpl.setGroupId(groupId);
 		commerceAddressRestrictionImpl.setCompanyId(companyId);
 		commerceAddressRestrictionImpl.setUserId(userId);
@@ -120,8 +125,8 @@ public class CommerceAddressRestrictionCacheModel implements CacheModel<Commerce
 			commerceAddressRestrictionImpl.setModifiedDate(null);
 		}
 		else {
-			commerceAddressRestrictionImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceAddressRestrictionImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		commerceAddressRestrictionImpl.setClassNameId(classNameId);
@@ -154,8 +159,7 @@ public class CommerceAddressRestrictionCacheModel implements CacheModel<Commerce
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceAddressRestrictionId);
 
 		objectOutput.writeLong(groupId);
@@ -191,4 +195,5 @@ public class CommerceAddressRestrictionCacheModel implements CacheModel<Commerce
 	public long classNameId;
 	public long classPK;
 	public long commerceCountryId;
+
 }

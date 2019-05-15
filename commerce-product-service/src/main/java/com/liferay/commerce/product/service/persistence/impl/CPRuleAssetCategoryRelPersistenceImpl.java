@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
 import com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelImpl;
 import com.liferay.commerce.product.model.impl.CPRuleAssetCategoryRelModelImpl;
 import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,56 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CPRuleAssetCategoryRelPersistence
- * @see com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelUtil
  * @generated
  */
 @ProviderType
-public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<CPRuleAssetCategoryRel>
+public class CPRuleAssetCategoryRelPersistenceImpl
+	extends BasePersistenceImpl<CPRuleAssetCategoryRel>
 	implements CPRuleAssetCategoryRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CPRuleAssetCategoryRelUtil} to access the cp rule asset category rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CPRuleAssetCategoryRelUtil</code> to access the cp rule asset category rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CPRuleAssetCategoryRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRULEID = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPRuleId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID =
-		new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPRuleId",
-			new String[] { Long.class.getName() },
-			CPRuleAssetCategoryRelModelImpl.CPRULEID_COLUMN_BITMASK |
-			CPRuleAssetCategoryRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPRULEID = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPRuleId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CPRuleAssetCategoryRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCPRuleId;
+	private FinderPath _finderPathWithoutPaginationFindByCPRuleId;
+	private FinderPath _finderPathCountByCPRuleId;
 
 	/**
 	 * Returns all the cp rule asset category rels where CPRuleId = &#63;.
@@ -121,15 +97,15 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public List<CPRuleAssetCategoryRel> findByCPRuleId(long CPRuleId) {
-		return findByCPRuleId(CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByCPRuleId(
+			CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp rule asset category rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -138,8 +114,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the range of matching cp rule asset category rels
 	 */
 	@Override
-	public List<CPRuleAssetCategoryRel> findByCPRuleId(long CPRuleId,
-		int start, int end) {
+	public List<CPRuleAssetCategoryRel> findByCPRuleId(
+		long CPRuleId, int start, int end) {
+
 		return findByCPRuleId(CPRuleId, start, end, null);
 	}
 
@@ -147,7 +124,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the cp rule asset category rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -157,9 +134,10 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching cp rule asset category rels
 	 */
 	@Override
-	public List<CPRuleAssetCategoryRel> findByCPRuleId(long CPRuleId,
-		int start, int end,
+	public List<CPRuleAssetCategoryRel> findByCPRuleId(
+		long CPRuleId, int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
+
 		return findByCPRuleId(CPRuleId, start, end, orderByComparator, true);
 	}
 
@@ -167,7 +145,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the cp rule asset category rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -178,30 +156,32 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching cp rule asset category rels
 	 */
 	@Override
-	public List<CPRuleAssetCategoryRel> findByCPRuleId(long CPRuleId,
-		int start, int end,
+	public List<CPRuleAssetCategoryRel> findByCPRuleId(
+		long CPRuleId, int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID;
-			finderArgs = new Object[] { CPRuleId };
+			finderPath = _finderPathWithoutPaginationFindByCPRuleId;
+			finderArgs = new Object[] {CPRuleId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRULEID;
-			finderArgs = new Object[] { CPRuleId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByCPRuleId;
+			finderArgs = new Object[] {CPRuleId, start, end, orderByComparator};
 		}
 
 		List<CPRuleAssetCategoryRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : list) {
@@ -218,8 +198,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -230,11 +210,10 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			query.append(_FINDER_COLUMN_CPRULEID_CPRULEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPRuleAssetCategoryRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -252,16 +231,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(CPRuleId);
 
 				if (!pagination) {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -290,11 +269,13 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchCPRuleAssetCategoryRelException if a matching cp rule asset category rel could not be found
 	 */
 	@Override
-	public CPRuleAssetCategoryRel findByCPRuleId_First(long CPRuleId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+	public CPRuleAssetCategoryRel findByCPRuleId_First(
+			long CPRuleId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByCPRuleId_First(CPRuleId,
-				orderByComparator);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByCPRuleId_First(
+			CPRuleId, orderByComparator);
 
 		if (cpRuleAssetCategoryRel != null) {
 			return cpRuleAssetCategoryRel;
@@ -320,10 +301,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the first matching cp rule asset category rel, or <code>null</code> if a matching cp rule asset category rel could not be found
 	 */
 	@Override
-	public CPRuleAssetCategoryRel fetchByCPRuleId_First(long CPRuleId,
+	public CPRuleAssetCategoryRel fetchByCPRuleId_First(
+		long CPRuleId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
-		List<CPRuleAssetCategoryRel> list = findByCPRuleId(CPRuleId, 0, 1,
-				orderByComparator);
+
+		List<CPRuleAssetCategoryRel> list = findByCPRuleId(
+			CPRuleId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -341,11 +324,13 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchCPRuleAssetCategoryRelException if a matching cp rule asset category rel could not be found
 	 */
 	@Override
-	public CPRuleAssetCategoryRel findByCPRuleId_Last(long CPRuleId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+	public CPRuleAssetCategoryRel findByCPRuleId_Last(
+			long CPRuleId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByCPRuleId_Last(CPRuleId,
-				orderByComparator);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByCPRuleId_Last(
+			CPRuleId, orderByComparator);
 
 		if (cpRuleAssetCategoryRel != null) {
 			return cpRuleAssetCategoryRel;
@@ -371,16 +356,18 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the last matching cp rule asset category rel, or <code>null</code> if a matching cp rule asset category rel could not be found
 	 */
 	@Override
-	public CPRuleAssetCategoryRel fetchByCPRuleId_Last(long CPRuleId,
+	public CPRuleAssetCategoryRel fetchByCPRuleId_Last(
+		long CPRuleId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
+
 		int count = countByCPRuleId(CPRuleId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPRuleAssetCategoryRel> list = findByCPRuleId(CPRuleId, count - 1,
-				count, orderByComparator);
+		List<CPRuleAssetCategoryRel> list = findByCPRuleId(
+			CPRuleId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -400,10 +387,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel[] findByCPRuleId_PrevAndNext(
-		long CPRuleAssetCategoryRelId, long CPRuleId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+			long CPRuleAssetCategoryRelId, long CPRuleId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = findByPrimaryKey(CPRuleAssetCategoryRelId);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = findByPrimaryKey(
+			CPRuleAssetCategoryRelId);
 
 		Session session = null;
 
@@ -412,13 +401,15 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CPRuleAssetCategoryRel[] array = new CPRuleAssetCategoryRelImpl[3];
 
-			array[0] = getByCPRuleId_PrevAndNext(session,
-					cpRuleAssetCategoryRel, CPRuleId, orderByComparator, true);
+			array[0] = getByCPRuleId_PrevAndNext(
+				session, cpRuleAssetCategoryRel, CPRuleId, orderByComparator,
+				true);
 
 			array[1] = cpRuleAssetCategoryRel;
 
-			array[2] = getByCPRuleId_PrevAndNext(session,
-					cpRuleAssetCategoryRel, CPRuleId, orderByComparator, false);
+			array[2] = getByCPRuleId_PrevAndNext(
+				session, cpRuleAssetCategoryRel, CPRuleId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -435,11 +426,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		long CPRuleId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -451,7 +443,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		query.append(_FINDER_COLUMN_CPRULEID_CPRULEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -521,10 +514,11 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(CPRuleId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRuleAssetCategoryRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpRuleAssetCategoryRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -545,8 +539,10 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByCPRuleId(long CPRuleId) {
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : findByCPRuleId(
-				CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
+				findByCPRuleId(
+					CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(cpRuleAssetCategoryRel);
 		}
 	}
@@ -559,9 +555,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByCPRuleId(long CPRuleId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRULEID;
+		FinderPath finderPath = _finderPathCountByCPRuleId;
 
-		Object[] finderArgs = new Object[] { CPRuleId };
+		Object[] finderArgs = new Object[] {CPRuleId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -602,30 +598,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPRULEID_CPRULEID_2 = "cpRuleAssetCategoryRel.CPRuleId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ASSETCATEGORYID =
-		new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByAssetCategoryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID =
-		new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleAssetCategoryRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByAssetCategoryId",
-			new String[] { Long.class.getName() },
-			CPRuleAssetCategoryRelModelImpl.ASSETCATEGORYID_COLUMN_BITMASK |
-			CPRuleAssetCategoryRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ASSETCATEGORYID = new FinderPath(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByAssetCategoryId", new String[] { Long.class.getName() });
+	private static final String _FINDER_COLUMN_CPRULEID_CPRULEID_2 =
+		"cpRuleAssetCategoryRel.CPRuleId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByAssetCategoryId;
+	private FinderPath _finderPathWithoutPaginationFindByAssetCategoryId;
+	private FinderPath _finderPathCountByAssetCategoryId;
 
 	/**
 	 * Returns all the cp rule asset category rels where assetCategoryId = &#63;.
@@ -636,15 +614,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CPRuleAssetCategoryRel> findByAssetCategoryId(
 		long assetCategoryId) {
-		return findByAssetCategoryId(assetCategoryId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+
+		return findByAssetCategoryId(
+			assetCategoryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp rule asset category rels where assetCategoryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param assetCategoryId the asset category ID
@@ -655,6 +634,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public List<CPRuleAssetCategoryRel> findByAssetCategoryId(
 		long assetCategoryId, int start, int end) {
+
 		return findByAssetCategoryId(assetCategoryId, start, end, null);
 	}
 
@@ -662,7 +642,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the cp rule asset category rels where assetCategoryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param assetCategoryId the asset category ID
@@ -675,15 +655,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	public List<CPRuleAssetCategoryRel> findByAssetCategoryId(
 		long assetCategoryId, int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
-		return findByAssetCategoryId(assetCategoryId, start, end,
-			orderByComparator, true);
+
+		return findByAssetCategoryId(
+			assetCategoryId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the cp rule asset category rels where assetCategoryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param assetCategoryId the asset category ID
@@ -698,34 +679,36 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		long assetCategoryId, int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID;
-			finderArgs = new Object[] { assetCategoryId };
+			finderPath = _finderPathWithoutPaginationFindByAssetCategoryId;
+			finderArgs = new Object[] {assetCategoryId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ASSETCATEGORYID;
+			finderPath = _finderPathWithPaginationFindByAssetCategoryId;
 			finderArgs = new Object[] {
-					assetCategoryId,
-					
-					start, end, orderByComparator
-				};
+				assetCategoryId, start, end, orderByComparator
+			};
 		}
 
 		List<CPRuleAssetCategoryRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : list) {
-					if ((assetCategoryId != cpRuleAssetCategoryRel.getAssetCategoryId())) {
+					if ((assetCategoryId !=
+							cpRuleAssetCategoryRel.getAssetCategoryId())) {
+
 						list = null;
 
 						break;
@@ -738,8 +721,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -750,11 +733,10 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			query.append(_FINDER_COLUMN_ASSETCATEGORYID_ASSETCATEGORYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPRuleAssetCategoryRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -772,16 +754,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				qPos.add(assetCategoryId);
 
 				if (!pagination) {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -811,11 +793,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel findByAssetCategoryId_First(
-		long assetCategoryId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+			long assetCategoryId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByAssetCategoryId_First(assetCategoryId,
-				orderByComparator);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel =
+			fetchByAssetCategoryId_First(assetCategoryId, orderByComparator);
 
 		if (cpRuleAssetCategoryRel != null) {
 			return cpRuleAssetCategoryRel;
@@ -844,8 +827,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	public CPRuleAssetCategoryRel fetchByAssetCategoryId_First(
 		long assetCategoryId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
-		List<CPRuleAssetCategoryRel> list = findByAssetCategoryId(assetCategoryId,
-				0, 1, orderByComparator);
+
+		List<CPRuleAssetCategoryRel> list = findByAssetCategoryId(
+			assetCategoryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -864,11 +848,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel findByAssetCategoryId_Last(
-		long assetCategoryId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+			long assetCategoryId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByAssetCategoryId_Last(assetCategoryId,
-				orderByComparator);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel =
+			fetchByAssetCategoryId_Last(assetCategoryId, orderByComparator);
 
 		if (cpRuleAssetCategoryRel != null) {
 			return cpRuleAssetCategoryRel;
@@ -897,14 +882,15 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	public CPRuleAssetCategoryRel fetchByAssetCategoryId_Last(
 		long assetCategoryId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
+
 		int count = countByAssetCategoryId(assetCategoryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPRuleAssetCategoryRel> list = findByAssetCategoryId(assetCategoryId,
-				count - 1, count, orderByComparator);
+		List<CPRuleAssetCategoryRel> list = findByAssetCategoryId(
+			assetCategoryId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -924,10 +910,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel[] findByAssetCategoryId_PrevAndNext(
-		long CPRuleAssetCategoryRelId, long assetCategoryId,
-		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
+			long CPRuleAssetCategoryRelId, long assetCategoryId,
+			OrderByComparator<CPRuleAssetCategoryRel> orderByComparator)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = findByPrimaryKey(CPRuleAssetCategoryRelId);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = findByPrimaryKey(
+			CPRuleAssetCategoryRelId);
 
 		Session session = null;
 
@@ -936,15 +924,15 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CPRuleAssetCategoryRel[] array = new CPRuleAssetCategoryRelImpl[3];
 
-			array[0] = getByAssetCategoryId_PrevAndNext(session,
-					cpRuleAssetCategoryRel, assetCategoryId, orderByComparator,
-					true);
+			array[0] = getByAssetCategoryId_PrevAndNext(
+				session, cpRuleAssetCategoryRel, assetCategoryId,
+				orderByComparator, true);
 
 			array[1] = cpRuleAssetCategoryRel;
 
-			array[2] = getByAssetCategoryId_PrevAndNext(session,
-					cpRuleAssetCategoryRel, assetCategoryId, orderByComparator,
-					false);
+			array[2] = getByAssetCategoryId_PrevAndNext(
+				session, cpRuleAssetCategoryRel, assetCategoryId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -961,11 +949,12 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		long assetCategoryId,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -977,7 +966,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		query.append(_FINDER_COLUMN_ASSETCATEGORYID_ASSETCATEGORYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1047,10 +1037,11 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		qPos.add(assetCategoryId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRuleAssetCategoryRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpRuleAssetCategoryRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1071,8 +1062,11 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void removeByAssetCategoryId(long assetCategoryId) {
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : findByAssetCategoryId(
-				assetCategoryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
+				findByAssetCategoryId(
+					assetCategoryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(cpRuleAssetCategoryRel);
 		}
 	}
@@ -1085,9 +1079,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countByAssetCategoryId(long assetCategoryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ASSETCATEGORYID;
+		FinderPath finderPath = _finderPathCountByAssetCategoryId;
 
-		Object[] finderArgs = new Object[] { assetCategoryId };
+		Object[] finderArgs = new Object[] {assetCategoryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1128,8 +1122,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_ASSETCATEGORYID_ASSETCATEGORYID_2 =
-		"cpRuleAssetCategoryRel.assetCategoryId = ?";
+	private static final String
+		_FINDER_COLUMN_ASSETCATEGORYID_ASSETCATEGORYID_2 =
+			"cpRuleAssetCategoryRel.assetCategoryId = ?";
 
 	public CPRuleAssetCategoryRelPersistenceImpl() {
 		setModelClass(CPRuleAssetCategoryRel.class);
@@ -1142,7 +1137,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public void cacheResult(CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
-		entityCache.putResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPRuleAssetCategoryRelImpl.class,
 			cpRuleAssetCategoryRel.getPrimaryKey(), cpRuleAssetCategoryRel);
 
@@ -1157,11 +1153,15 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public void cacheResult(
 		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels) {
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : cpRuleAssetCategoryRels) {
+
+		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
+				cpRuleAssetCategoryRels) {
+
 			if (entityCache.getResult(
-						CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-						CPRuleAssetCategoryRelImpl.class,
-						cpRuleAssetCategoryRel.getPrimaryKey()) == null) {
+					CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+					CPRuleAssetCategoryRelImpl.class,
+					cpRuleAssetCategoryRel.getPrimaryKey()) == null) {
+
 				cacheResult(cpRuleAssetCategoryRel);
 			}
 			else {
@@ -1174,7 +1174,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for all cp rule asset category rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1190,12 +1190,13 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Clears the cache for the cp rule asset category rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
-		entityCache.removeResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPRuleAssetCategoryRelImpl.class,
 			cpRuleAssetCategoryRel.getPrimaryKey());
 
@@ -1204,12 +1205,17 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	}
 
 	@Override
-	public void clearCache(List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels) {
+	public void clearCache(
+		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : cpRuleAssetCategoryRels) {
-			entityCache.removeResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
+				cpRuleAssetCategoryRels) {
+
+			entityCache.removeResult(
+				CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 				CPRuleAssetCategoryRelImpl.class,
 				cpRuleAssetCategoryRel.getPrimaryKey());
 		}
@@ -1223,7 +1229,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel create(long CPRuleAssetCategoryRelId) {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = new CPRuleAssetCategoryRelImpl();
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel =
+			new CPRuleAssetCategoryRelImpl();
 
 		cpRuleAssetCategoryRel.setNew(true);
 		cpRuleAssetCategoryRel.setPrimaryKey(CPRuleAssetCategoryRelId);
@@ -1243,6 +1250,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CPRuleAssetCategoryRel remove(long CPRuleAssetCategoryRelId)
 		throws NoSuchCPRuleAssetCategoryRelException {
+
 		return remove((Serializable)CPRuleAssetCategoryRelId);
 	}
 
@@ -1256,21 +1264,23 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CPRuleAssetCategoryRel remove(Serializable primaryKey)
 		throws NoSuchCPRuleAssetCategoryRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CPRuleAssetCategoryRel cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.get(CPRuleAssetCategoryRelImpl.class,
-					primaryKey);
+			CPRuleAssetCategoryRel cpRuleAssetCategoryRel =
+				(CPRuleAssetCategoryRel)session.get(
+					CPRuleAssetCategoryRelImpl.class, primaryKey);
 
 			if (cpRuleAssetCategoryRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchCPRuleAssetCategoryRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchCPRuleAssetCategoryRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(cpRuleAssetCategoryRel);
@@ -1289,14 +1299,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	protected CPRuleAssetCategoryRel removeImpl(
 		CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(cpRuleAssetCategoryRel)) {
-				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.get(CPRuleAssetCategoryRelImpl.class,
-						cpRuleAssetCategoryRel.getPrimaryKeyObj());
+				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.get(
+					CPRuleAssetCategoryRelImpl.class,
+					cpRuleAssetCategoryRel.getPrimaryKeyObj());
 			}
 
 			if (cpRuleAssetCategoryRel != null) {
@@ -1320,27 +1332,33 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CPRuleAssetCategoryRel updateImpl(
 		CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
+
 		boolean isNew = cpRuleAssetCategoryRel.isNew();
 
-		if (!(cpRuleAssetCategoryRel instanceof CPRuleAssetCategoryRelModelImpl)) {
+		if (!(cpRuleAssetCategoryRel instanceof
+				CPRuleAssetCategoryRelModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(cpRuleAssetCategoryRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(cpRuleAssetCategoryRel);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					cpRuleAssetCategoryRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in cpRuleAssetCategoryRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CPRuleAssetCategoryRel implementation " +
-				cpRuleAssetCategoryRel.getClass());
+					cpRuleAssetCategoryRel.getClass());
 		}
 
-		CPRuleAssetCategoryRelModelImpl cpRuleAssetCategoryRelModelImpl = (CPRuleAssetCategoryRelModelImpl)cpRuleAssetCategoryRel;
+		CPRuleAssetCategoryRelModelImpl cpRuleAssetCategoryRelModelImpl =
+			(CPRuleAssetCategoryRelModelImpl)cpRuleAssetCategoryRel;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1349,8 +1367,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				cpRuleAssetCategoryRel.setCreateDate(now);
 			}
 			else {
-				cpRuleAssetCategoryRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				cpRuleAssetCategoryRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1359,8 +1377,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				cpRuleAssetCategoryRel.setModifiedDate(now);
 			}
 			else {
-				cpRuleAssetCategoryRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				cpRuleAssetCategoryRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1375,7 +1393,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				cpRuleAssetCategoryRel.setNew(false);
 			}
 			else {
-				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.merge(cpRuleAssetCategoryRel);
+				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.merge(
+					cpRuleAssetCategoryRel);
 			}
 		}
 		catch (Exception e) {
@@ -1390,72 +1409,75 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		if (!CPRuleAssetCategoryRelModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				cpRuleAssetCategoryRelModelImpl.getCPRuleId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCPRuleId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCPRuleId, args);
+
+			args = new Object[] {
+				cpRuleAssetCategoryRelModelImpl.getAssetCategoryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByAssetCategoryId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByAssetCategoryId, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((cpRuleAssetCategoryRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCPRuleId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					cpRuleAssetCategoryRelModelImpl.getOriginalCPRuleId()
+				};
+
+				finderCache.removeResult(_finderPathCountByCPRuleId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPRuleId, args);
+
+				args = new Object[] {
 					cpRuleAssetCategoryRelModelImpl.getCPRuleId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-				args);
+				finderCache.removeResult(_finderPathCountByCPRuleId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPRuleId, args);
+			}
 
-			args = new Object[] {
+			if ((cpRuleAssetCategoryRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByAssetCategoryId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					cpRuleAssetCategoryRelModelImpl.getOriginalAssetCategoryId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByAssetCategoryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByAssetCategoryId, args);
+
+				args = new Object[] {
 					cpRuleAssetCategoryRelModelImpl.getAssetCategoryId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_ASSETCATEGORYID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((cpRuleAssetCategoryRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						cpRuleAssetCategoryRelModelImpl.getOriginalCPRuleId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-					args);
-
-				args = new Object[] {
-						cpRuleAssetCategoryRelModelImpl.getCPRuleId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-					args);
-			}
-
-			if ((cpRuleAssetCategoryRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						cpRuleAssetCategoryRelModelImpl.getOriginalAssetCategoryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ASSETCATEGORYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID,
-					args);
-
-				args = new Object[] {
-						cpRuleAssetCategoryRelModelImpl.getAssetCategoryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ASSETCATEGORYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ASSETCATEGORYID,
-					args);
+				finderCache.removeResult(
+					_finderPathCountByAssetCategoryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByAssetCategoryId, args);
 			}
 		}
 
-		entityCache.putResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPRuleAssetCategoryRelImpl.class,
 			cpRuleAssetCategoryRel.getPrimaryKey(), cpRuleAssetCategoryRel,
 			false);
@@ -1466,7 +1488,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	}
 
 	/**
-	 * Returns the cp rule asset category rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the cp rule asset category rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the cp rule asset category rel
 	 * @return the cp rule asset category rel
@@ -1475,22 +1497,24 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CPRuleAssetCategoryRel findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchCPRuleAssetCategoryRelException {
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByPrimaryKey(primaryKey);
+
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByPrimaryKey(
+			primaryKey);
 
 		if (cpRuleAssetCategoryRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchCPRuleAssetCategoryRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchCPRuleAssetCategoryRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return cpRuleAssetCategoryRel;
 	}
 
 	/**
-	 * Returns the cp rule asset category rel with the primary key or throws a {@link NoSuchCPRuleAssetCategoryRelException} if it could not be found.
+	 * Returns the cp rule asset category rel with the primary key or throws a <code>NoSuchCPRuleAssetCategoryRelException</code> if it could not be found.
 	 *
 	 * @param CPRuleAssetCategoryRelId the primary key of the cp rule asset category rel
 	 * @return the cp rule asset category rel
@@ -1498,8 +1522,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel findByPrimaryKey(
-		long CPRuleAssetCategoryRelId)
+			long CPRuleAssetCategoryRelId)
 		throws NoSuchCPRuleAssetCategoryRelException {
+
 		return findByPrimaryKey((Serializable)CPRuleAssetCategoryRelId);
 	}
 
@@ -1511,14 +1536,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public CPRuleAssetCategoryRel fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-				CPRuleAssetCategoryRelImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CPRuleAssetCategoryRel cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)serializable;
+		CPRuleAssetCategoryRel cpRuleAssetCategoryRel =
+			(CPRuleAssetCategoryRel)serializable;
 
 		if (cpRuleAssetCategoryRel == null) {
 			Session session = null;
@@ -1526,19 +1553,22 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.get(CPRuleAssetCategoryRelImpl.class,
-						primaryKey);
+				cpRuleAssetCategoryRel = (CPRuleAssetCategoryRel)session.get(
+					CPRuleAssetCategoryRelImpl.class, primaryKey);
 
 				if (cpRuleAssetCategoryRel != null) {
 					cacheResult(cpRuleAssetCategoryRel);
 				}
 				else {
-					entityCache.putResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-						CPRuleAssetCategoryRelImpl.class, primaryKey, nullModel);
+					entityCache.putResult(
+						CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+						CPRuleAssetCategoryRelImpl.class, primaryKey,
+						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 					CPRuleAssetCategoryRelImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1560,24 +1590,28 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	@Override
 	public CPRuleAssetCategoryRel fetchByPrimaryKey(
 		long CPRuleAssetCategoryRelId) {
+
 		return fetchByPrimaryKey((Serializable)CPRuleAssetCategoryRelId);
 	}
 
 	@Override
 	public Map<Serializable, CPRuleAssetCategoryRel> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CPRuleAssetCategoryRel> map = new HashMap<Serializable, CPRuleAssetCategoryRel>();
+		Map<Serializable, CPRuleAssetCategoryRel> map =
+			new HashMap<Serializable, CPRuleAssetCategoryRel>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByPrimaryKey(primaryKey);
+			CPRuleAssetCategoryRel cpRuleAssetCategoryRel = fetchByPrimaryKey(
+				primaryKey);
 
 			if (cpRuleAssetCategoryRel != null) {
 				map.put(primaryKey, cpRuleAssetCategoryRel);
@@ -1589,8 +1623,9 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
-					CPRuleAssetCategoryRelImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+				CPRuleAssetCategoryRelImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1610,8 +1645,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_CPRULEASSETCATEGORYREL_WHERE_PKS_IN);
 
@@ -1634,17 +1669,22 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 
 			Query q = session.createQuery(sql);
 
-			for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel : (List<CPRuleAssetCategoryRel>)q.list()) {
-				map.put(cpRuleAssetCategoryRel.getPrimaryKeyObj(),
+			for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
+					(List<CPRuleAssetCategoryRel>)q.list()) {
+
+				map.put(
+					cpRuleAssetCategoryRel.getPrimaryKeyObj(),
 					cpRuleAssetCategoryRel);
 
 				cacheResult(cpRuleAssetCategoryRel);
 
-				uncachedPrimaryKeys.remove(cpRuleAssetCategoryRel.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					cpRuleAssetCategoryRel.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
 					CPRuleAssetCategoryRelImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -1672,7 +1712,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns a range of all the cp rule asset category rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule asset category rels
@@ -1688,7 +1728,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the cp rule asset category rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule asset category rels
@@ -1697,8 +1737,10 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of cp rule asset category rels
 	 */
 	@Override
-	public List<CPRuleAssetCategoryRel> findAll(int start, int end,
+	public List<CPRuleAssetCategoryRel> findAll(
+		int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1706,7 +1748,7 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Returns an ordered range of all the cp rule asset category rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleAssetCategoryRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleAssetCategoryRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule asset category rels
@@ -1716,29 +1758,32 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of cp rule asset category rels
 	 */
 	@Override
-	public List<CPRuleAssetCategoryRel> findAll(int start, int end,
+	public List<CPRuleAssetCategoryRel> findAll(
+		int start, int end,
 		OrderByComparator<CPRuleAssetCategoryRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPRuleAssetCategoryRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleAssetCategoryRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1746,13 +1791,13 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_CPRULEASSETCATEGORYREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1760,7 +1805,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				sql = _SQL_SELECT_CPRULEASSETCATEGORYREL;
 
 				if (pagination) {
-					sql = sql.concat(CPRuleAssetCategoryRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CPRuleAssetCategoryRelModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1772,16 +1818,16 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleAssetCategoryRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1819,8 +1865,8 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1828,16 +1874,17 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_CPRULEASSETCATEGORYREL);
+				Query q = session.createQuery(
+					_SQL_COUNT_CPRULEASSETCATEGORYREL);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1858,6 +1905,74 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 	 * Initializes the cp rule asset category rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCPRuleId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPRuleId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCPRuleId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPRuleId",
+			new String[] {Long.class.getName()},
+			CPRuleAssetCategoryRelModelImpl.CPRULEID_COLUMN_BITMASK |
+			CPRuleAssetCategoryRelModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCPRuleId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPRuleId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByAssetCategoryId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByAssetCategoryId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByAssetCategoryId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleAssetCategoryRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByAssetCategoryId",
+			new String[] {Long.class.getName()},
+			CPRuleAssetCategoryRelModelImpl.ASSETCATEGORYID_COLUMN_BITMASK |
+			CPRuleAssetCategoryRelModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByAssetCategoryId = new FinderPath(
+			CPRuleAssetCategoryRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleAssetCategoryRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByAssetCategoryId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1869,17 +1984,39 @@ public class CPRuleAssetCategoryRelPersistenceImpl extends BasePersistenceImpl<C
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_CPRULEASSETCATEGORYREL = "SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel";
-	private static final String _SQL_SELECT_CPRULEASSETCATEGORYREL_WHERE_PKS_IN = "SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE CPRuleAssetCategoryRelId IN (";
-	private static final String _SQL_SELECT_CPRULEASSETCATEGORYREL_WHERE = "SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE ";
-	private static final String _SQL_COUNT_CPRULEASSETCATEGORYREL = "SELECT COUNT(cpRuleAssetCategoryRel) FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel";
-	private static final String _SQL_COUNT_CPRULEASSETCATEGORYREL_WHERE = "SELECT COUNT(cpRuleAssetCategoryRel) FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "cpRuleAssetCategoryRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CPRuleAssetCategoryRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CPRuleAssetCategoryRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CPRuleAssetCategoryRelPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_CPRULEASSETCATEGORYREL =
+		"SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel";
+
+	private static final String
+		_SQL_SELECT_CPRULEASSETCATEGORYREL_WHERE_PKS_IN =
+			"SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE CPRuleAssetCategoryRelId IN (";
+
+	private static final String _SQL_SELECT_CPRULEASSETCATEGORYREL_WHERE =
+		"SELECT cpRuleAssetCategoryRel FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE ";
+
+	private static final String _SQL_COUNT_CPRULEASSETCATEGORYREL =
+		"SELECT COUNT(cpRuleAssetCategoryRel) FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel";
+
+	private static final String _SQL_COUNT_CPRULEASSETCATEGORYREL_WHERE =
+		"SELECT COUNT(cpRuleAssetCategoryRel) FROM CPRuleAssetCategoryRel cpRuleAssetCategoryRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"cpRuleAssetCategoryRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CPRuleAssetCategoryRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CPRuleAssetCategoryRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPRuleAssetCategoryRelPersistenceImpl.class);
+
 }

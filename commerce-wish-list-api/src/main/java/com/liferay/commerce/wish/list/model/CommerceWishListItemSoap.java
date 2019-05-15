@@ -26,13 +26,14 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.wish.list.service.http.CommerceWishListItemServiceSoap}.
  *
  * @author Andrea Di Giorgi
- * @see com.liferay.commerce.wish.list.service.http.CommerceWishListItemServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceWishListItemSoap implements Serializable {
+
 	public static CommerceWishListItemSoap toSoapModel(
 		CommerceWishListItem model) {
+
 		CommerceWishListItemSoap soapModel = new CommerceWishListItemSoap();
 
 		soapModel.setCommerceWishListItemId(model.getCommerceWishListItemId());
@@ -52,7 +53,9 @@ public class CommerceWishListItemSoap implements Serializable {
 
 	public static CommerceWishListItemSoap[] toSoapModels(
 		CommerceWishListItem[] models) {
-		CommerceWishListItemSoap[] soapModels = new CommerceWishListItemSoap[models.length];
+
+		CommerceWishListItemSoap[] soapModels =
+			new CommerceWishListItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +66,12 @@ public class CommerceWishListItemSoap implements Serializable {
 
 	public static CommerceWishListItemSoap[][] toSoapModels(
 		CommerceWishListItem[][] models) {
+
 		CommerceWishListItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceWishListItemSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceWishListItemSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceWishListItemSoap[0][0];
@@ -81,13 +86,16 @@ public class CommerceWishListItemSoap implements Serializable {
 
 	public static CommerceWishListItemSoap[] toSoapModels(
 		List<CommerceWishListItem> models) {
-		List<CommerceWishListItemSoap> soapModels = new ArrayList<CommerceWishListItemSoap>(models.size());
+
+		List<CommerceWishListItemSoap> soapModels =
+			new ArrayList<CommerceWishListItemSoap>(models.size());
 
 		for (CommerceWishListItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceWishListItemSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceWishListItemSoap[soapModels.size()]);
 	}
 
 	public CommerceWishListItemSoap() {
@@ -200,4 +208,5 @@ public class CommerceWishListItemSoap implements Serializable {
 	private String _CPInstanceUuid;
 	private long _CProductId;
 	private String _json;
+
 }

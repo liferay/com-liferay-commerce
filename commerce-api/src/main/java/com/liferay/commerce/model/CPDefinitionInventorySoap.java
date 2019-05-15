@@ -26,17 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CPDefinitionInventoryServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CPDefinitionInventoryServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionInventorySoap implements Serializable {
+
 	public static CPDefinitionInventorySoap toSoapModel(
 		CPDefinitionInventory model) {
+
 		CPDefinitionInventorySoap soapModel = new CPDefinitionInventorySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionInventoryId(model.getCPDefinitionInventoryId());
+		soapModel.setCPDefinitionInventoryId(
+			model.getCPDefinitionInventoryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -44,7 +46,8 @@ public class CPDefinitionInventorySoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPDefinitionId(model.getCPDefinitionId());
-		soapModel.setCPDefinitionInventoryEngine(model.getCPDefinitionInventoryEngine());
+		soapModel.setCPDefinitionInventoryEngine(
+			model.getCPDefinitionInventoryEngine());
 		soapModel.setLowStockActivity(model.getLowStockActivity());
 		soapModel.setDisplayAvailability(model.isDisplayAvailability());
 		soapModel.setDisplayStockQuantity(model.isDisplayStockQuantity());
@@ -60,7 +63,9 @@ public class CPDefinitionInventorySoap implements Serializable {
 
 	public static CPDefinitionInventorySoap[] toSoapModels(
 		CPDefinitionInventory[] models) {
-		CPDefinitionInventorySoap[] soapModels = new CPDefinitionInventorySoap[models.length];
+
+		CPDefinitionInventorySoap[] soapModels =
+			new CPDefinitionInventorySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +76,12 @@ public class CPDefinitionInventorySoap implements Serializable {
 
 	public static CPDefinitionInventorySoap[][] toSoapModels(
 		CPDefinitionInventory[][] models) {
+
 		CPDefinitionInventorySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionInventorySoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionInventorySoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionInventorySoap[0][0];
@@ -89,13 +96,16 @@ public class CPDefinitionInventorySoap implements Serializable {
 
 	public static CPDefinitionInventorySoap[] toSoapModels(
 		List<CPDefinitionInventory> models) {
-		List<CPDefinitionInventorySoap> soapModels = new ArrayList<CPDefinitionInventorySoap>(models.size());
+
+		List<CPDefinitionInventorySoap> soapModels =
+			new ArrayList<CPDefinitionInventorySoap>(models.size());
 
 		for (CPDefinitionInventory model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionInventorySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionInventorySoap[soapModels.size()]);
 	}
 
 	public CPDefinitionInventorySoap() {
@@ -187,6 +197,7 @@ public class CPDefinitionInventorySoap implements Serializable {
 
 	public void setCPDefinitionInventoryEngine(
 		String CPDefinitionInventoryEngine) {
+
 		_CPDefinitionInventoryEngine = CPDefinitionInventoryEngine;
 	}
 
@@ -293,4 +304,5 @@ public class CPDefinitionInventorySoap implements Serializable {
 	private int _maxOrderQuantity;
 	private String _allowedOrderQuantities;
 	private int _multipleOrderQuantity;
+
 }

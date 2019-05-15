@@ -19,7 +19,6 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddress
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelFinder;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelPersistence;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRatePersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -44,16 +43,16 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelServiceImpl
- * @see com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelServiceUtil
  * @generated
  */
 public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
-	extends BaseServiceImpl implements CommerceTaxFixedRateAddressRelService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceTaxFixedRateAddressRelService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelServiceUtil} to access the commerce tax fixed rate address rel remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceTaxFixedRateAddressRelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelServiceUtil</code>.
 	 */
 
 	/**
@@ -61,7 +60,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate local service
 	 */
-	public com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalService getCommerceTaxFixedRateLocalService() {
+	public com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateLocalService getCommerceTaxFixedRateLocalService() {
+
 		return commerceTaxFixedRateLocalService;
 	}
 
@@ -71,8 +72,11 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateLocalService the commerce tax fixed rate local service
 	 */
 	public void setCommerceTaxFixedRateLocalService(
-		com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService) {
-		this.commerceTaxFixedRateLocalService = commerceTaxFixedRateLocalService;
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService) {
+
+		this.commerceTaxFixedRateLocalService =
+			commerceTaxFixedRateLocalService;
 	}
 
 	/**
@@ -80,7 +84,10 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate remote service
 	 */
-	public com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateService getCommerceTaxFixedRateService() {
+	public
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateService getCommerceTaxFixedRateService() {
+
 		return commerceTaxFixedRateService;
 	}
 
@@ -90,7 +97,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateService the commerce tax fixed rate remote service
 	 */
 	public void setCommerceTaxFixedRateService(
-		com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateService commerceTaxFixedRateService) {
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateService commerceTaxFixedRateService) {
+
 		this.commerceTaxFixedRateService = commerceTaxFixedRateService;
 	}
 
@@ -99,7 +108,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate persistence
 	 */
-	public CommerceTaxFixedRatePersistence getCommerceTaxFixedRatePersistence() {
+	public CommerceTaxFixedRatePersistence
+		getCommerceTaxFixedRatePersistence() {
+
 		return commerceTaxFixedRatePersistence;
 	}
 
@@ -110,6 +121,7 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	public void setCommerceTaxFixedRatePersistence(
 		CommerceTaxFixedRatePersistence commerceTaxFixedRatePersistence) {
+
 		this.commerceTaxFixedRatePersistence = commerceTaxFixedRatePersistence;
 	}
 
@@ -118,7 +130,10 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel local service
 	 */
-	public com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService getCommerceTaxFixedRateAddressRelLocalService() {
+	public com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateAddressRelLocalService
+			getCommerceTaxFixedRateAddressRelLocalService() {
+
 		return commerceTaxFixedRateAddressRelLocalService;
 	}
 
@@ -128,8 +143,12 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelLocalService the commerce tax fixed rate address rel local service
 	 */
 	public void setCommerceTaxFixedRateAddressRelLocalService(
-		com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService commerceTaxFixedRateAddressRelLocalService) {
-		this.commerceTaxFixedRateAddressRelLocalService = commerceTaxFixedRateAddressRelLocalService;
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateAddressRelLocalService
+				commerceTaxFixedRateAddressRelLocalService) {
+
+		this.commerceTaxFixedRateAddressRelLocalService =
+			commerceTaxFixedRateAddressRelLocalService;
 	}
 
 	/**
@@ -137,7 +156,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel remote service
 	 */
-	public CommerceTaxFixedRateAddressRelService getCommerceTaxFixedRateAddressRelService() {
+	public CommerceTaxFixedRateAddressRelService
+		getCommerceTaxFixedRateAddressRelService() {
+
 		return commerceTaxFixedRateAddressRelService;
 	}
 
@@ -147,8 +168,11 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelService the commerce tax fixed rate address rel remote service
 	 */
 	public void setCommerceTaxFixedRateAddressRelService(
-		CommerceTaxFixedRateAddressRelService commerceTaxFixedRateAddressRelService) {
-		this.commerceTaxFixedRateAddressRelService = commerceTaxFixedRateAddressRelService;
+		CommerceTaxFixedRateAddressRelService
+			commerceTaxFixedRateAddressRelService) {
+
+		this.commerceTaxFixedRateAddressRelService =
+			commerceTaxFixedRateAddressRelService;
 	}
 
 	/**
@@ -156,7 +180,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel persistence
 	 */
-	public CommerceTaxFixedRateAddressRelPersistence getCommerceTaxFixedRateAddressRelPersistence() {
+	public CommerceTaxFixedRateAddressRelPersistence
+		getCommerceTaxFixedRateAddressRelPersistence() {
+
 		return commerceTaxFixedRateAddressRelPersistence;
 	}
 
@@ -166,8 +192,11 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelPersistence the commerce tax fixed rate address rel persistence
 	 */
 	public void setCommerceTaxFixedRateAddressRelPersistence(
-		CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence) {
-		this.commerceTaxFixedRateAddressRelPersistence = commerceTaxFixedRateAddressRelPersistence;
+		CommerceTaxFixedRateAddressRelPersistence
+			commerceTaxFixedRateAddressRelPersistence) {
+
+		this.commerceTaxFixedRateAddressRelPersistence =
+			commerceTaxFixedRateAddressRelPersistence;
 	}
 
 	/**
@@ -175,7 +204,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel finder
 	 */
-	public CommerceTaxFixedRateAddressRelFinder getCommerceTaxFixedRateAddressRelFinder() {
+	public CommerceTaxFixedRateAddressRelFinder
+		getCommerceTaxFixedRateAddressRelFinder() {
+
 		return commerceTaxFixedRateAddressRelFinder;
 	}
 
@@ -185,8 +216,11 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelFinder the commerce tax fixed rate address rel finder
 	 */
 	public void setCommerceTaxFixedRateAddressRelFinder(
-		CommerceTaxFixedRateAddressRelFinder commerceTaxFixedRateAddressRelFinder) {
-		this.commerceTaxFixedRateAddressRelFinder = commerceTaxFixedRateAddressRelFinder;
+		CommerceTaxFixedRateAddressRelFinder
+			commerceTaxFixedRateAddressRelFinder) {
+
+		this.commerceTaxFixedRateAddressRelFinder =
+			commerceTaxFixedRateAddressRelFinder;
 	}
 
 	/**
@@ -194,7 +228,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -204,7 +240,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -213,7 +251,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -223,7 +263,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -232,7 +274,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -243,6 +287,7 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -262,6 +307,7 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -270,7 +316,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -280,7 +328,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -289,7 +339,9 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -300,6 +352,7 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -319,6 +372,7 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -371,15 +425,16 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceTaxFixedRateAddressRelPersistence.getDataSource();
+			DataSource dataSource =
+				commerceTaxFixedRateAddressRelPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -388,34 +443,80 @@ public abstract class CommerceTaxFixedRateAddressRelServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalService.class)
-	protected com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService;
-	@BeanReference(type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateService.class)
-	protected com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateService commerceTaxFixedRateService;
+	@BeanReference(
+		type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalService.class
+	)
+	protected com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateService.class
+	)
+	protected
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateService commerceTaxFixedRateService;
+
 	@BeanReference(type = CommerceTaxFixedRatePersistence.class)
 	protected CommerceTaxFixedRatePersistence commerceTaxFixedRatePersistence;
-	@BeanReference(type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService.class)
-	protected com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService commerceTaxFixedRateAddressRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService.class
+	)
+	protected com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateAddressRelLocalService
+			commerceTaxFixedRateAddressRelLocalService;
+
 	@BeanReference(type = CommerceTaxFixedRateAddressRelService.class)
-	protected CommerceTaxFixedRateAddressRelService commerceTaxFixedRateAddressRelService;
+	protected CommerceTaxFixedRateAddressRelService
+		commerceTaxFixedRateAddressRelService;
+
 	@BeanReference(type = CommerceTaxFixedRateAddressRelPersistence.class)
-	protected CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence;
+	protected CommerceTaxFixedRateAddressRelPersistence
+		commerceTaxFixedRateAddressRelPersistence;
+
 	@BeanReference(type = CommerceTaxFixedRateAddressRelFinder.class)
-	protected CommerceTaxFixedRateAddressRelFinder commerceTaxFixedRateAddressRelFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceTaxFixedRateAddressRelFinder
+		commerceTaxFixedRateAddressRelFinder;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

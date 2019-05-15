@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.type.virtual.order.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.type.virtual.order.exception.NoSuchVirtualOrderItemException;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalServiceUtil;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemPersistence;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,16 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceVirtualOrderItemPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.product.type.virtual.order.service"));
 
 	@Before
@@ -82,7 +82,8 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceVirtualOrderItem> iterator = _commerceVirtualOrderItems.iterator();
+		Iterator<CommerceVirtualOrderItem> iterator =
+			_commerceVirtualOrderItems.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,7 +96,8 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceVirtualOrderItem commerceVirtualOrderItem = _persistence.create(pk);
+		CommerceVirtualOrderItem commerceVirtualOrderItem = _persistence.create(
+			pk);
 
 		Assert.assertNotNull(commerceVirtualOrderItem);
 
@@ -104,11 +106,14 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
 		_persistence.remove(newCommerceVirtualOrderItem);
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = _persistence.fetchByPrimaryKey(newCommerceVirtualOrderItem.getPrimaryKey());
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceVirtualOrderItem.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceVirtualOrderItem);
 	}
@@ -122,7 +127,8 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = _persistence.create(pk);
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			_persistence.create(pk);
 
 		newCommerceVirtualOrderItem.setUuid(RandomTestUtil.randomString());
 
@@ -138,13 +144,15 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 		newCommerceVirtualOrderItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceVirtualOrderItem.setCommerceOrderItemId(RandomTestUtil.nextLong());
+		newCommerceVirtualOrderItem.setCommerceOrderItemId(
+			RandomTestUtil.nextLong());
 
 		newCommerceVirtualOrderItem.setFileEntryId(RandomTestUtil.nextLong());
 
 		newCommerceVirtualOrderItem.setUrl(RandomTestUtil.randomString());
 
-		newCommerceVirtualOrderItem.setActivationStatus(RandomTestUtil.nextInt());
+		newCommerceVirtualOrderItem.setActivationStatus(
+			RandomTestUtil.nextInt());
 
 		newCommerceVirtualOrderItem.setDuration(RandomTestUtil.nextLong());
 
@@ -158,50 +166,71 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 		newCommerceVirtualOrderItem.setEndDate(RandomTestUtil.nextDate());
 
-		_commerceVirtualOrderItems.add(_persistence.update(
-				newCommerceVirtualOrderItem));
+		_commerceVirtualOrderItems.add(
+			_persistence.update(newCommerceVirtualOrderItem));
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = _persistence.findByPrimaryKey(newCommerceVirtualOrderItem.getPrimaryKey());
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem =
+			_persistence.findByPrimaryKey(
+				newCommerceVirtualOrderItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getUuid(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getUuid(),
 			newCommerceVirtualOrderItem.getUuid());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getCommerceVirtualOrderItemId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getCommerceVirtualOrderItemId(),
 			newCommerceVirtualOrderItem.getCommerceVirtualOrderItemId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getGroupId(),
 			newCommerceVirtualOrderItem.getGroupId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getCompanyId(),
 			newCommerceVirtualOrderItem.getCompanyId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getUserId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getUserId(),
 			newCommerceVirtualOrderItem.getUserId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getUserName(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getUserName(),
 			newCommerceVirtualOrderItem.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceVirtualOrderItem.getCreateDate()),
-			Time.getShortTimestamp(newCommerceVirtualOrderItem.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+			Time.getShortTimestamp(
+				newCommerceVirtualOrderItem.getCreateDate()));
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceVirtualOrderItem.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceVirtualOrderItem.getModifiedDate()));
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getCommerceOrderItemId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getCommerceOrderItemId(),
 			newCommerceVirtualOrderItem.getCommerceOrderItemId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getFileEntryId(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getFileEntryId(),
 			newCommerceVirtualOrderItem.getFileEntryId());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getUrl(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getUrl(),
 			newCommerceVirtualOrderItem.getUrl());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getActivationStatus(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getActivationStatus(),
 			newCommerceVirtualOrderItem.getActivationStatus());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getDuration(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getDuration(),
 			newCommerceVirtualOrderItem.getDuration());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getUsages(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getUsages(),
 			newCommerceVirtualOrderItem.getUsages());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.getMaxUsages(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.getMaxUsages(),
 			newCommerceVirtualOrderItem.getMaxUsages());
-		Assert.assertEquals(existingCommerceVirtualOrderItem.isActive(),
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem.isActive(),
 			newCommerceVirtualOrderItem.isActive());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceVirtualOrderItem.getStartDate()),
 			Time.getShortTimestamp(newCommerceVirtualOrderItem.getStartDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceVirtualOrderItem.getEndDate()),
 			Time.getShortTimestamp(newCommerceVirtualOrderItem.getEndDate()));
 	}
@@ -242,12 +271,15 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = _persistence.findByPrimaryKey(newCommerceVirtualOrderItem.getPrimaryKey());
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem =
+			_persistence.findByPrimaryKey(
+				newCommerceVirtualOrderItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceVirtualOrderItem,
-			newCommerceVirtualOrderItem);
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem, newCommerceVirtualOrderItem);
 	}
 
 	@Test(expected = NoSuchVirtualOrderItemException.class)
@@ -259,35 +291,42 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceVirtualOrderItem> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceVirtualOrderItem",
-			"uuid", true, "commerceVirtualOrderItemId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commerceOrderItemId", true,
-			"fileEntryId", true, "url", true, "activationStatus", true,
-			"duration", true, "usages", true, "maxUsages", true, "active",
-			true, "startDate", true, "endDate", true);
+	protected OrderByComparator<CommerceVirtualOrderItem>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceVirtualOrderItem", "uuid", true,
+			"commerceVirtualOrderItemId", true, "groupId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceOrderItemId", true, "fileEntryId",
+			true, "url", true, "activationStatus", true, "duration", true,
+			"usages", true, "maxUsages", true, "active", true, "startDate",
+			true, "endDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = _persistence.fetchByPrimaryKey(newCommerceVirtualOrderItem.getPrimaryKey());
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceVirtualOrderItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceVirtualOrderItem,
-			newCommerceVirtualOrderItem);
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem, newCommerceVirtualOrderItem);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceVirtualOrderItem missingCommerceVirtualOrderItem = _persistence.fetchByPrimaryKey(pk);
+		CommerceVirtualOrderItem missingCommerceVirtualOrderItem =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceVirtualOrderItem);
 	}
@@ -295,21 +334,27 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem1 = addCommerceVirtualOrderItem();
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem2 = addCommerceVirtualOrderItem();
+
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem1 =
+			addCommerceVirtualOrderItem();
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem2 =
+			addCommerceVirtualOrderItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceVirtualOrderItem1.getPrimaryKey());
 		primaryKeys.add(newCommerceVirtualOrderItem2.getPrimaryKey());
 
-		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceVirtualOrderItems.size());
-		Assert.assertEquals(newCommerceVirtualOrderItem1,
+		Assert.assertEquals(
+			newCommerceVirtualOrderItem1,
 			commerceVirtualOrderItems.get(
 				newCommerceVirtualOrderItem1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceVirtualOrderItem2,
+		Assert.assertEquals(
+			newCommerceVirtualOrderItem2,
 			commerceVirtualOrderItems.get(
 				newCommerceVirtualOrderItem2.getPrimaryKey()));
 	}
@@ -317,6 +362,7 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -326,7 +372,8 @@ public class CommerceVirtualOrderItemPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceVirtualOrderItems.isEmpty());
 	}
@@ -334,7 +381,9 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -343,37 +392,41 @@ public class CommerceVirtualOrderItemPersistenceTest {
 		primaryKeys.add(newCommerceVirtualOrderItem.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceVirtualOrderItems.size());
-		Assert.assertEquals(newCommerceVirtualOrderItem,
+		Assert.assertEquals(
+			newCommerceVirtualOrderItem,
 			commerceVirtualOrderItems.get(
 				newCommerceVirtualOrderItem.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceVirtualOrderItems.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceVirtualOrderItem.getPrimaryKey());
 
-		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceVirtualOrderItems.size());
-		Assert.assertEquals(newCommerceVirtualOrderItem,
+		Assert.assertEquals(
+			newCommerceVirtualOrderItem,
 			commerceVirtualOrderItems.get(
 				newCommerceVirtualOrderItem.getPrimaryKey()));
 	}
@@ -382,16 +435,23 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceVirtualOrderItemLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceVirtualOrderItemLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceVirtualOrderItem>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceVirtualOrderItem>() {
+
 				@Override
 				public void performAction(
 					CommerceVirtualOrderItem commerceVirtualOrderItem) {
+
 					Assert.assertNotNull(commerceVirtualOrderItem);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -400,56 +460,63 @@ public class CommerceVirtualOrderItemPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceVirtualOrderItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceVirtualOrderItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceVirtualOrderItemId",
 				newCommerceVirtualOrderItem.getCommerceVirtualOrderItemId()));
 
-		List<CommerceVirtualOrderItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceVirtualOrderItem> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = result.get(0);
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = result.get(
+			0);
 
-		Assert.assertEquals(existingCommerceVirtualOrderItem,
-			newCommerceVirtualOrderItem);
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItem, newCommerceVirtualOrderItem);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceVirtualOrderItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceVirtualOrderItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceVirtualOrderItemId", RandomTestUtil.nextLong()));
 
-		List<CommerceVirtualOrderItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceVirtualOrderItem> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceVirtualOrderItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceVirtualOrderItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceVirtualOrderItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceVirtualOrderItemId"));
 
-		Object newCommerceVirtualOrderItemId = newCommerceVirtualOrderItem.getCommerceVirtualOrderItemId();
+		Object newCommerceVirtualOrderItemId =
+			newCommerceVirtualOrderItem.getCommerceVirtualOrderItemId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceVirtualOrderItemId",
-				new Object[] { newCommerceVirtualOrderItemId }));
+				new Object[] {newCommerceVirtualOrderItemId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -457,21 +524,22 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 		Object existingCommerceVirtualOrderItemId = result.get(0);
 
-		Assert.assertEquals(existingCommerceVirtualOrderItemId,
-			newCommerceVirtualOrderItemId);
+		Assert.assertEquals(
+			existingCommerceVirtualOrderItemId, newCommerceVirtualOrderItemId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceVirtualOrderItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceVirtualOrderItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceVirtualOrderItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceVirtualOrderItemId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceVirtualOrderItemId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -480,32 +548,42 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceVirtualOrderItem newCommerceVirtualOrderItem = addCommerceVirtualOrderItem();
+		CommerceVirtualOrderItem newCommerceVirtualOrderItem =
+			addCommerceVirtualOrderItem();
 
 		_persistence.clearCache();
 
-		CommerceVirtualOrderItem existingCommerceVirtualOrderItem = _persistence.findByPrimaryKey(newCommerceVirtualOrderItem.getPrimaryKey());
+		CommerceVirtualOrderItem existingCommerceVirtualOrderItem =
+			_persistence.findByPrimaryKey(
+				newCommerceVirtualOrderItem.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceVirtualOrderItem.getUuid(),
-				ReflectionTestUtil.invoke(existingCommerceVirtualOrderItem,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceVirtualOrderItem.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceVirtualOrderItem,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCommerceVirtualOrderItem, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceVirtualOrderItem.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceVirtualOrderItem, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
+		Assert.assertEquals(
+			Long.valueOf(
 				existingCommerceVirtualOrderItem.getCommerceOrderItemId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceVirtualOrderItem,
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceVirtualOrderItem,
 				"getOriginalCommerceOrderItemId", new Class<?>[0]));
 	}
 
 	protected CommerceVirtualOrderItem addCommerceVirtualOrderItem()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceVirtualOrderItem commerceVirtualOrderItem = _persistence.create(pk);
+		CommerceVirtualOrderItem commerceVirtualOrderItem = _persistence.create(
+			pk);
 
 		commerceVirtualOrderItem.setUuid(RandomTestUtil.randomString());
 
@@ -521,7 +599,8 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 		commerceVirtualOrderItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceVirtualOrderItem.setCommerceOrderItemId(RandomTestUtil.nextLong());
+		commerceVirtualOrderItem.setCommerceOrderItemId(
+			RandomTestUtil.nextLong());
 
 		commerceVirtualOrderItem.setFileEntryId(RandomTestUtil.nextLong());
 
@@ -541,13 +620,15 @@ public class CommerceVirtualOrderItemPersistenceTest {
 
 		commerceVirtualOrderItem.setEndDate(RandomTestUtil.nextDate());
 
-		_commerceVirtualOrderItems.add(_persistence.update(
-				commerceVirtualOrderItem));
+		_commerceVirtualOrderItems.add(
+			_persistence.update(commerceVirtualOrderItem));
 
 		return commerceVirtualOrderItem;
 	}
 
-	private List<CommerceVirtualOrderItem> _commerceVirtualOrderItems = new ArrayList<CommerceVirtualOrderItem>();
+	private List<CommerceVirtualOrderItem> _commerceVirtualOrderItems =
+		new ArrayList<CommerceVirtualOrderItem>();
 	private CommerceVirtualOrderItemPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

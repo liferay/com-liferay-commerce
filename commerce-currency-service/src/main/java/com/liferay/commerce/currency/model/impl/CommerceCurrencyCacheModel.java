@@ -17,7 +17,6 @@ package com.liferay.commerce.currency.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceCurrency in entity cache.
  *
  * @author Andrea Di Giorgi
- * @see CommerceCurrency
  * @generated
  */
 @ProviderType
-public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
-	Externalizable {
+public class CommerceCurrencyCacheModel
+	implements CacheModel<CommerceCurrency>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,9 +50,12 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 			return false;
 		}
 
-		CommerceCurrencyCacheModel commerceCurrencyCacheModel = (CommerceCurrencyCacheModel)obj;
+		CommerceCurrencyCacheModel commerceCurrencyCacheModel =
+			(CommerceCurrencyCacheModel)obj;
 
-		if (commerceCurrencyId == commerceCurrencyCacheModel.commerceCurrencyId) {
+		if (commerceCurrencyId ==
+				commerceCurrencyCacheModel.commerceCurrencyId) {
+
 			return true;
 		}
 
@@ -201,6 +203,7 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		uuid = objectInput.readUTF();
 
 		commerceCurrencyId = objectInput.readLong();
@@ -232,8 +235,7 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -320,4 +322,5 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 	public double priority;
 	public boolean active;
 	public long lastPublishDate;
+
 }

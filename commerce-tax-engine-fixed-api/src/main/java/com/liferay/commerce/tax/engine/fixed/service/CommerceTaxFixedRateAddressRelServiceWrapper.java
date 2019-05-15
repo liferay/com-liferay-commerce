@@ -28,71 +28,107 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceTaxFixedRateAddressRelServiceWrapper
 	implements CommerceTaxFixedRateAddressRelService,
-		ServiceWrapper<CommerceTaxFixedRateAddressRelService> {
+			   ServiceWrapper<CommerceTaxFixedRateAddressRelService> {
+
 	public CommerceTaxFixedRateAddressRelServiceWrapper(
-		CommerceTaxFixedRateAddressRelService commerceTaxFixedRateAddressRelService) {
-		_commerceTaxFixedRateAddressRelService = commerceTaxFixedRateAddressRelService;
+		CommerceTaxFixedRateAddressRelService
+			commerceTaxFixedRateAddressRelService) {
+
+		_commerceTaxFixedRateAddressRelService =
+			commerceTaxFixedRateAddressRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel addCommerceTaxFixedRateAddressRel(
-		long commerceTaxMethodId, long cpTaxCategoryId, long commerceCountryId,
-		long commerceRegionId, String zip, double rate,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateAddressRelService.addCommerceTaxFixedRateAddressRel(commerceTaxMethodId,
-			cpTaxCategoryId, commerceCountryId, commerceRegionId, zip, rate,
-			serviceContext);
+	public
+		com.liferay.commerce.tax.engine.fixed.model.
+			CommerceTaxFixedRateAddressRel addCommerceTaxFixedRateAddressRel(
+					long commerceTaxMethodId, long cpTaxCategoryId,
+					long commerceCountryId, long commerceRegionId, String zip,
+					double rate,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTaxFixedRateAddressRelService.
+			addCommerceTaxFixedRateAddressRel(
+				commerceTaxMethodId, cpTaxCategoryId, commerceCountryId,
+				commerceRegionId, zip, rate, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId)
+			long commerceTaxFixedRateAddressRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceTaxFixedRateAddressRelService.deleteCommerceTaxFixedRateAddressRel(commerceTaxFixedRateAddressRelId);
+
+		_commerceTaxFixedRateAddressRelService.
+			deleteCommerceTaxFixedRateAddressRel(
+				commerceTaxFixedRateAddressRelId);
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel fetchCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateAddressRelService.fetchCommerceTaxFixedRateAddressRel(commerceTaxFixedRateAddressRelId);
+	public
+		com.liferay.commerce.tax.engine.fixed.model.
+			CommerceTaxFixedRateAddressRel fetchCommerceTaxFixedRateAddressRel(
+					long commerceTaxFixedRateAddressRelId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTaxFixedRateAddressRelService.
+			fetchCommerceTaxFixedRateAddressRel(
+				commerceTaxFixedRateAddressRelId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel> getCommerceTaxMethodFixedRateAddressRels(
-		long groupId, long commerceTaxMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateAddressRelService.getCommerceTaxMethodFixedRateAddressRels(groupId,
-			commerceTaxMethodId, start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.tax.engine.fixed.model.
+			CommerceTaxFixedRateAddressRel>
+					getCommerceTaxMethodFixedRateAddressRels(
+						long groupId, long commerceTaxMethodId, int start,
+						int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.tax.engine.fixed.model.
+								CommerceTaxFixedRateAddressRel>
+									orderByComparator)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTaxFixedRateAddressRelService.
+			getCommerceTaxMethodFixedRateAddressRels(
+				groupId, commerceTaxMethodId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceTaxMethodFixedRateAddressRelsCount(long groupId,
-		long commerceTaxMethodId)
+	public int getCommerceTaxMethodFixedRateAddressRelsCount(
+			long groupId, long commerceTaxMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateAddressRelService.getCommerceTaxMethodFixedRateAddressRelsCount(groupId,
-			commerceTaxMethodId);
+
+		return _commerceTaxFixedRateAddressRelService.
+			getCommerceTaxMethodFixedRateAddressRelsCount(
+				groupId, commerceTaxMethodId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceTaxFixedRateAddressRelService.getOSGiServiceIdentifier();
+		return _commerceTaxFixedRateAddressRelService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel updateCommerceTaxFixedRateAddressRel(
-		long commerceTaxFixedRateAddressRelId, long commerceCountryId,
-		long commerceRegionId, String zip, double rate)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateAddressRelService.updateCommerceTaxFixedRateAddressRel(commerceTaxFixedRateAddressRelId,
-			commerceCountryId, commerceRegionId, zip, rate);
+	public
+		com.liferay.commerce.tax.engine.fixed.model.
+			CommerceTaxFixedRateAddressRel updateCommerceTaxFixedRateAddressRel(
+					long commerceTaxFixedRateAddressRelId,
+					long commerceCountryId, long commerceRegionId, String zip,
+					double rate)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTaxFixedRateAddressRelService.
+			updateCommerceTaxFixedRateAddressRel(
+				commerceTaxFixedRateAddressRelId, commerceCountryId,
+				commerceRegionId, zip, rate);
 	}
 
 	@Override
@@ -102,9 +138,14 @@ public class CommerceTaxFixedRateAddressRelServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceTaxFixedRateAddressRelService commerceTaxFixedRateAddressRelService) {
-		_commerceTaxFixedRateAddressRelService = commerceTaxFixedRateAddressRelService;
+		CommerceTaxFixedRateAddressRelService
+			commerceTaxFixedRateAddressRelService) {
+
+		_commerceTaxFixedRateAddressRelService =
+			commerceTaxFixedRateAddressRelService;
 	}
 
-	private CommerceTaxFixedRateAddressRelService _commerceTaxFixedRateAddressRelService;
+	private CommerceTaxFixedRateAddressRelService
+		_commerceTaxFixedRateAddressRelService;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPMeasurementUnit;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,70 +40,81 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPMeasurementUnitServiceUtil
- * @see com.liferay.commerce.product.service.base.CPMeasurementUnitServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPMeasurementUnitServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPMeasurementUnit"}, service = CPMeasurementUnitService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPMeasurementUnit"
+	},
+	service = CPMeasurementUnitService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPMeasurementUnitService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPMeasurementUnitServiceUtil} to access the cp measurement unit remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPMeasurementUnitServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPMeasurementUnitServiceUtil} to access the cp measurement unit remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPMeasurementUnitServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPMeasurementUnit addCPMeasurementUnit(Map<Locale, String> nameMap,
-		String key, double rate, boolean primary, double priority, int type,
-		ServiceContext serviceContext) throws PortalException;
+	public CPMeasurementUnit addCPMeasurementUnit(
+			Map<Locale, String> nameMap, String key, double rate,
+			boolean primary, double priority, int type,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPMeasurementUnit(long cpMeasurementUnitId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(long groupId,
-		int type) throws PortalException;
+	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
+			long groupId, int type)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPMeasurementUnit getCPMeasurementUnit(long cpMeasurementUnitId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId,
-		int type, int start, int end,
-		OrderByComparator<CPMeasurementUnit> orderByComparator)
+	public List<CPMeasurementUnit> getCPMeasurementUnits(
+			long groupId, int type, int start, int end,
+			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId,
-		int start, int end,
-		OrderByComparator<CPMeasurementUnit> orderByComparator)
+	public List<CPMeasurementUnit> getCPMeasurementUnits(
+			long groupId, int start, int end,
+			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPMeasurementUnitsCount(long groupId)
-		throws PortalException;
+	public int getCPMeasurementUnitsCount(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPMeasurementUnitsCount(long groupId, int type)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPMeasurementUnit setPrimary(long cpMeasurementUnitId,
-		boolean primary) throws PortalException;
-
-	public CPMeasurementUnit updateCPMeasurementUnit(long cpMeasurementUnitId,
-		Map<Locale, String> nameMap, String key, double rate, boolean primary,
-		double priority, int type, ServiceContext serviceContext)
+	public CPMeasurementUnit setPrimary(
+			long cpMeasurementUnitId, boolean primary)
 		throws PortalException;
+
+	public CPMeasurementUnit updateCPMeasurementUnit(
+			long cpMeasurementUnitId, Map<Locale, String> nameMap, String key,
+			double rate, boolean primary, double priority, int type,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

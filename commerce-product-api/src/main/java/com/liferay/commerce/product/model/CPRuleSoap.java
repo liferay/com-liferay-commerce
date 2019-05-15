@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPRuleServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPRuleServiceSoap
  * @generated
  */
 @ProviderType
 public class CPRuleSoap implements Serializable {
+
 	public static CPRuleSoap toSoapModel(CPRule model) {
 		CPRuleSoap soapModel = new CPRuleSoap();
 
@@ -200,4 +200,5 @@ public class CPRuleSoap implements Serializable {
 	private boolean _active;
 	private String _type;
 	private String _typeSettings;
+
 }

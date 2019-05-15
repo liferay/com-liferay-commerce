@@ -25,38 +25,46 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommercePaymentMethodGroupRelModel
- * @see com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl
- * @see com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl"
+)
 @ProviderType
 public interface CommercePaymentMethodGroupRel
 	extends CommercePaymentMethodGroupRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommercePaymentMethodGroupRel, Long> COMMERCE_PAYMENT_METHOD_GROUP_REL_ID_ACCESSOR =
-		new Accessor<CommercePaymentMethodGroupRel, Long>() {
-			@Override
-			public Long get(
-				CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
-				return commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
-			}
+	public static final Accessor<CommercePaymentMethodGroupRel, Long>
+		COMMERCE_PAYMENT_METHOD_GROUP_REL_ID_ACCESSOR =
+			new Accessor<CommercePaymentMethodGroupRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommercePaymentMethodGroupRel
+						commercePaymentMethodGroupRel) {
 
-			@Override
-			public Class<CommercePaymentMethodGroupRel> getTypeClass() {
-				return CommercePaymentMethodGroupRel.class;
-			}
-		};
+					return commercePaymentMethodGroupRel.
+						getCommercePaymentMethodGroupRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommercePaymentMethodGroupRel> getTypeClass() {
+					return CommercePaymentMethodGroupRel.class;
+				}
+
+			};
 
 	public String getImageURL(
 		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay);
+
 }

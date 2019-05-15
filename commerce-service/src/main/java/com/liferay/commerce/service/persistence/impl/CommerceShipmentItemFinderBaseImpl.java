@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.service.persistence.CommerceShipmentItemPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 
@@ -24,7 +23,9 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceShipmentItemFinderBaseImpl extends BasePersistenceImpl<CommerceShipmentItem> {
+public class CommerceShipmentItemFinderBaseImpl
+	extends BasePersistenceImpl<CommerceShipmentItem> {
+
 	public CommerceShipmentItemFinderBaseImpl() {
 		setModelClass(CommerceShipmentItem.class);
 	}
@@ -34,7 +35,9 @@ public class CommerceShipmentItemFinderBaseImpl extends BasePersistenceImpl<Comm
 	 *
 	 * @return the commerce shipment item persistence
 	 */
-	public CommerceShipmentItemPersistence getCommerceShipmentItemPersistence() {
+	public CommerceShipmentItemPersistence
+		getCommerceShipmentItemPersistence() {
+
 		return commerceShipmentItemPersistence;
 	}
 
@@ -45,9 +48,11 @@ public class CommerceShipmentItemFinderBaseImpl extends BasePersistenceImpl<Comm
 	 */
 	public void setCommerceShipmentItemPersistence(
 		CommerceShipmentItemPersistence commerceShipmentItemPersistence) {
+
 		this.commerceShipmentItemPersistence = commerceShipmentItemPersistence;
 	}
 
 	@BeanReference(type = CommerceShipmentItemPersistence.class)
 	protected CommerceShipmentItemPersistence commerceShipmentItemPersistence;
+
 }

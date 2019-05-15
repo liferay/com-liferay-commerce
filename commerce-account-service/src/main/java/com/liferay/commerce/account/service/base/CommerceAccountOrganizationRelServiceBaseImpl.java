@@ -20,7 +20,6 @@ import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -45,16 +44,16 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.account.service.impl.CommerceAccountOrganizationRelServiceImpl
- * @see com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil
  * @generated
  */
 public abstract class CommerceAccountOrganizationRelServiceBaseImpl
-	extends BaseServiceImpl implements CommerceAccountOrganizationRelService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceAccountOrganizationRelService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil} to access the commerce account organization rel remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceAccountOrganizationRelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil</code>.
 	 */
 
 	/**
@@ -62,7 +61,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account local service
 	 */
-	public com.liferay.commerce.account.service.CommerceAccountLocalService getCommerceAccountLocalService() {
+	public com.liferay.commerce.account.service.CommerceAccountLocalService
+		getCommerceAccountLocalService() {
+
 		return commerceAccountLocalService;
 	}
 
@@ -72,7 +73,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountLocalService the commerce account local service
 	 */
 	public void setCommerceAccountLocalService(
-		com.liferay.commerce.account.service.CommerceAccountLocalService commerceAccountLocalService) {
+		com.liferay.commerce.account.service.CommerceAccountLocalService
+			commerceAccountLocalService) {
+
 		this.commerceAccountLocalService = commerceAccountLocalService;
 	}
 
@@ -81,7 +84,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account remote service
 	 */
-	public com.liferay.commerce.account.service.CommerceAccountService getCommerceAccountService() {
+	public com.liferay.commerce.account.service.CommerceAccountService
+		getCommerceAccountService() {
+
 		return commerceAccountService;
 	}
 
@@ -91,7 +96,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountService the commerce account remote service
 	 */
 	public void setCommerceAccountService(
-		com.liferay.commerce.account.service.CommerceAccountService commerceAccountService) {
+		com.liferay.commerce.account.service.CommerceAccountService
+			commerceAccountService) {
+
 		this.commerceAccountService = commerceAccountService;
 	}
 
@@ -111,6 +118,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setCommerceAccountPersistence(
 		CommerceAccountPersistence commerceAccountPersistence) {
+
 		this.commerceAccountPersistence = commerceAccountPersistence;
 	}
 
@@ -130,6 +138,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setCommerceAccountFinder(
 		CommerceAccountFinder commerceAccountFinder) {
+
 		this.commerceAccountFinder = commerceAccountFinder;
 	}
 
@@ -138,7 +147,10 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account organization rel local service
 	 */
-	public com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService getCommerceAccountOrganizationRelLocalService() {
+	public com.liferay.commerce.account.service.
+		CommerceAccountOrganizationRelLocalService
+			getCommerceAccountOrganizationRelLocalService() {
+
 		return commerceAccountOrganizationRelLocalService;
 	}
 
@@ -148,8 +160,12 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountOrganizationRelLocalService the commerce account organization rel local service
 	 */
 	public void setCommerceAccountOrganizationRelLocalService(
-		com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService commerceAccountOrganizationRelLocalService) {
-		this.commerceAccountOrganizationRelLocalService = commerceAccountOrganizationRelLocalService;
+		com.liferay.commerce.account.service.
+			CommerceAccountOrganizationRelLocalService
+				commerceAccountOrganizationRelLocalService) {
+
+		this.commerceAccountOrganizationRelLocalService =
+			commerceAccountOrganizationRelLocalService;
 	}
 
 	/**
@@ -157,7 +173,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account organization rel remote service
 	 */
-	public CommerceAccountOrganizationRelService getCommerceAccountOrganizationRelService() {
+	public CommerceAccountOrganizationRelService
+		getCommerceAccountOrganizationRelService() {
+
 		return commerceAccountOrganizationRelService;
 	}
 
@@ -167,8 +185,11 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountOrganizationRelService the commerce account organization rel remote service
 	 */
 	public void setCommerceAccountOrganizationRelService(
-		CommerceAccountOrganizationRelService commerceAccountOrganizationRelService) {
-		this.commerceAccountOrganizationRelService = commerceAccountOrganizationRelService;
+		CommerceAccountOrganizationRelService
+			commerceAccountOrganizationRelService) {
+
+		this.commerceAccountOrganizationRelService =
+			commerceAccountOrganizationRelService;
 	}
 
 	/**
@@ -176,7 +197,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account organization rel persistence
 	 */
-	public CommerceAccountOrganizationRelPersistence getCommerceAccountOrganizationRelPersistence() {
+	public CommerceAccountOrganizationRelPersistence
+		getCommerceAccountOrganizationRelPersistence() {
+
 		return commerceAccountOrganizationRelPersistence;
 	}
 
@@ -186,8 +209,11 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountOrganizationRelPersistence the commerce account organization rel persistence
 	 */
 	public void setCommerceAccountOrganizationRelPersistence(
-		CommerceAccountOrganizationRelPersistence commerceAccountOrganizationRelPersistence) {
-		this.commerceAccountOrganizationRelPersistence = commerceAccountOrganizationRelPersistence;
+		CommerceAccountOrganizationRelPersistence
+			commerceAccountOrganizationRelPersistence) {
+
+		this.commerceAccountOrganizationRelPersistence =
+			commerceAccountOrganizationRelPersistence;
 	}
 
 	/**
@@ -195,7 +221,10 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account user rel local service
 	 */
-	public com.liferay.commerce.account.service.CommerceAccountUserRelLocalService getCommerceAccountUserRelLocalService() {
+	public
+		com.liferay.commerce.account.service.CommerceAccountUserRelLocalService
+			getCommerceAccountUserRelLocalService() {
+
 		return commerceAccountUserRelLocalService;
 	}
 
@@ -205,8 +234,11 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountUserRelLocalService the commerce account user rel local service
 	 */
 	public void setCommerceAccountUserRelLocalService(
-		com.liferay.commerce.account.service.CommerceAccountUserRelLocalService commerceAccountUserRelLocalService) {
-		this.commerceAccountUserRelLocalService = commerceAccountUserRelLocalService;
+		com.liferay.commerce.account.service.CommerceAccountUserRelLocalService
+			commerceAccountUserRelLocalService) {
+
+		this.commerceAccountUserRelLocalService =
+			commerceAccountUserRelLocalService;
 	}
 
 	/**
@@ -214,7 +246,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account user rel remote service
 	 */
-	public com.liferay.commerce.account.service.CommerceAccountUserRelService getCommerceAccountUserRelService() {
+	public com.liferay.commerce.account.service.CommerceAccountUserRelService
+		getCommerceAccountUserRelService() {
+
 		return commerceAccountUserRelService;
 	}
 
@@ -224,7 +258,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param commerceAccountUserRelService the commerce account user rel remote service
 	 */
 	public void setCommerceAccountUserRelService(
-		com.liferay.commerce.account.service.CommerceAccountUserRelService commerceAccountUserRelService) {
+		com.liferay.commerce.account.service.CommerceAccountUserRelService
+			commerceAccountUserRelService) {
+
 		this.commerceAccountUserRelService = commerceAccountUserRelService;
 	}
 
@@ -233,7 +269,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the commerce account user rel persistence
 	 */
-	public CommerceAccountUserRelPersistence getCommerceAccountUserRelPersistence() {
+	public CommerceAccountUserRelPersistence
+		getCommerceAccountUserRelPersistence() {
+
 		return commerceAccountUserRelPersistence;
 	}
 
@@ -244,7 +282,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setCommerceAccountUserRelPersistence(
 		CommerceAccountUserRelPersistence commerceAccountUserRelPersistence) {
-		this.commerceAccountUserRelPersistence = commerceAccountUserRelPersistence;
+
+		this.commerceAccountUserRelPersistence =
+			commerceAccountUserRelPersistence;
 	}
 
 	/**
@@ -252,7 +292,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -262,7 +304,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -271,7 +315,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -281,7 +327,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -290,7 +338,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -301,6 +351,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -320,6 +371,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -328,7 +380,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -338,7 +392,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -347,7 +403,9 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -358,6 +416,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -377,6 +436,7 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -429,15 +489,16 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceAccountOrganizationRelPersistence.getDataSource();
+			DataSource dataSource =
+				commerceAccountOrganizationRelPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -446,40 +507,95 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountLocalService.class)
-	protected com.liferay.commerce.account.service.CommerceAccountLocalService commerceAccountLocalService;
-	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountService.class)
-	protected com.liferay.commerce.account.service.CommerceAccountService commerceAccountService;
+	@BeanReference(
+		type = com.liferay.commerce.account.service.CommerceAccountLocalService.class
+	)
+	protected com.liferay.commerce.account.service.CommerceAccountLocalService
+		commerceAccountLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.account.service.CommerceAccountService.class
+	)
+	protected com.liferay.commerce.account.service.CommerceAccountService
+		commerceAccountService;
+
 	@BeanReference(type = CommerceAccountPersistence.class)
 	protected CommerceAccountPersistence commerceAccountPersistence;
+
 	@BeanReference(type = CommerceAccountFinder.class)
 	protected CommerceAccountFinder commerceAccountFinder;
-	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService.class)
-	protected com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService commerceAccountOrganizationRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService.class
+	)
+	protected com.liferay.commerce.account.service.
+		CommerceAccountOrganizationRelLocalService
+			commerceAccountOrganizationRelLocalService;
+
 	@BeanReference(type = CommerceAccountOrganizationRelService.class)
-	protected CommerceAccountOrganizationRelService commerceAccountOrganizationRelService;
+	protected CommerceAccountOrganizationRelService
+		commerceAccountOrganizationRelService;
+
 	@BeanReference(type = CommerceAccountOrganizationRelPersistence.class)
-	protected CommerceAccountOrganizationRelPersistence commerceAccountOrganizationRelPersistence;
-	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountUserRelLocalService.class)
-	protected com.liferay.commerce.account.service.CommerceAccountUserRelLocalService commerceAccountUserRelLocalService;
-	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountUserRelService.class)
-	protected com.liferay.commerce.account.service.CommerceAccountUserRelService commerceAccountUserRelService;
+	protected CommerceAccountOrganizationRelPersistence
+		commerceAccountOrganizationRelPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.account.service.CommerceAccountUserRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.account.service.CommerceAccountUserRelLocalService
+			commerceAccountUserRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.account.service.CommerceAccountUserRelService.class
+	)
+	protected com.liferay.commerce.account.service.CommerceAccountUserRelService
+		commerceAccountUserRelService;
+
 	@BeanReference(type = CommerceAccountUserRelPersistence.class)
-	protected CommerceAccountUserRelPersistence commerceAccountUserRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceAccountUserRelPersistence
+		commerceAccountUserRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommercePaymentMethodGroupRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommercePaymentMethodGroupRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel}, that is translated to a
- * {@link com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel</code>, that is translated to a
+ * <code>com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,19 +59,22 @@ import java.rmi.RemoteException;
  *
  * @author Luca Pellizzon
  * @see CommercePaymentMethodGroupRelServiceHttp
- * @see com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap
- * @see CommercePaymentMethodGroupRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommercePaymentMethodGroupRelServiceSoap {
-	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		long classPK, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.model.CommerceAddressRestriction
+			addCommerceAddressRestriction(
+				long classPK, long commerceCountryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			com.liferay.commerce.model.CommerceAddressRestriction returnValue = CommercePaymentMethodGroupRelServiceUtil.addCommerceAddressRestriction(classPK,
-					commerceCountryId, serviceContext);
+			com.liferay.commerce.model.CommerceAddressRestriction returnValue =
+				CommercePaymentMethodGroupRelServiceUtil.
+					addCommerceAddressRestriction(
+						classPK, commerceCountryId, serviceContext);
 
 			return returnValue;
 		}
@@ -82,13 +85,19 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap createCommercePaymentMethodGroupRel(
-		long groupId) throws RemoteException {
-		try {
-			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.createCommercePaymentMethodGroupRel(groupId);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap
+				createCommercePaymentMethodGroupRel(long groupId)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+				returnValue =
+					CommercePaymentMethodGroupRelServiceUtil.
+						createCommercePaymentMethodGroupRel(groupId);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,9 +107,12 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId) throws RemoteException {
+			long commerceAddressRestrictionId)
+		throws RemoteException {
+
 		try {
-			CommercePaymentMethodGroupRelServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
+			CommercePaymentMethodGroupRelServiceUtil.
+				deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -110,9 +122,13 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	}
 
 	public static void deleteCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId) throws RemoteException {
+			long commercePaymentMethodGroupRelId)
+		throws RemoteException {
+
 		try {
-			CommercePaymentMethodGroupRelServiceUtil.deleteCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
+			CommercePaymentMethodGroupRelServiceUtil.
+				deleteCommercePaymentMethodGroupRel(
+					commercePaymentMethodGroupRelId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -121,16 +137,24 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[] getCommerceAddressRestrictions(
-		long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
+	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[]
+			getCommerceAddressRestrictions(
+				long classPK, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceAddressRestriction>
+						orderByComparator)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommerceAddressRestrictions(classPK,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.model.CommerceAddressRestriction>
+					returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommerceAddressRestrictions(
+								classPK, start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -141,8 +165,11 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 
 	public static int getCommerceAddressRestrictionsCount(long classPK)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommercePaymentMethodGroupRelServiceUtil.getCommerceAddressRestrictionsCount(classPK);
+			int returnValue =
+				CommercePaymentMethodGroupRelServiceUtil.
+					getCommerceAddressRestrictionsCount(classPK);
 
 			return returnValue;
 		}
@@ -153,13 +180,21 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap getCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId) throws RemoteException {
-		try {
-			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap
+				getCommercePaymentMethodGroupRel(
+					long commercePaymentMethodGroupRelId)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+				returnValue =
+					CommercePaymentMethodGroupRelServiceUtil.
+						getCommercePaymentMethodGroupRel(
+							commercePaymentMethodGroupRelId);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -168,14 +203,19 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap getCommercePaymentMethodGroupRel(
-		long groupId, String engineKey) throws RemoteException {
-		try {
-			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRel(groupId,
-					engineKey);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap
+				getCommercePaymentMethodGroupRel(long groupId, String engineKey)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+				returnValue =
+					CommercePaymentMethodGroupRelServiceUtil.
+						getCommercePaymentMethodGroupRel(groupId, engineKey);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -184,13 +224,20 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[] getCommercePaymentMethodGroupRels(
-		long groupId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel> returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRels(groupId);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(long groupId)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(groupId);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -199,14 +246,20 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[] getCommercePaymentMethodGroupRels(
-		long groupId, boolean active) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel> returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRels(groupId,
-					active);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(long groupId, boolean active)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(groupId, active);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -215,28 +268,38 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[] getCommercePaymentMethodGroupRels(
-		long groupId, long commerceCountryId, boolean active)
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(
+					long groupId, long commerceCountryId, boolean active)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(
+								groupId, commerceCountryId, active);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommercePaymentMethodGroupRelsCount(
+			long groupId, boolean active)
 		throws RemoteException {
+
 		try {
-			java.util.List<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel> returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRels(groupId,
-					commerceCountryId, active);
-
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommercePaymentMethodGroupRelsCount(long groupId,
-		boolean active) throws RemoteException {
-		try {
-			int returnValue = CommercePaymentMethodGroupRelServiceUtil.getCommercePaymentMethodGroupRelsCount(groupId,
-					active);
+			int returnValue =
+				CommercePaymentMethodGroupRelServiceUtil.
+					getCommercePaymentMethodGroupRelsCount(groupId, active);
 
 			return returnValue;
 		}
@@ -247,15 +310,19 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap setActive(
-		long commercePaymentMethodGroupRelId, boolean active)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.setActive(commercePaymentMethodGroupRelId,
-					active);
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap
+				setActive(long commercePaymentMethodGroupRelId, boolean active)
+			throws RemoteException {
 
-			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+				returnValue =
+					CommercePaymentMethodGroupRelServiceUtil.setActive(
+						commercePaymentMethodGroupRelId, active);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -264,5 +331,7 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommercePaymentMethodGroupRelServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommercePaymentMethodGroupRelServiceSoap.class);
+
 }

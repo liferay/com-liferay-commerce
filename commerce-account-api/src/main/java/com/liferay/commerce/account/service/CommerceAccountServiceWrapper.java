@@ -26,116 +26,140 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CommerceAccountServiceWrapper implements CommerceAccountService,
-	ServiceWrapper<CommerceAccountService> {
+public class CommerceAccountServiceWrapper
+	implements CommerceAccountService, ServiceWrapper<CommerceAccountService> {
+
 	public CommerceAccountServiceWrapper(
 		CommerceAccountService commerceAccountService) {
+
 		_commerceAccountService = commerceAccountService;
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount addBusinessCommerceAccount(
-		String name, long parentCommerceAccountId, String email, String taxId,
-		boolean active, String externalReferenceCode, long[] userIds,
-		String[] emailAddresses,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccount
+			addBusinessCommerceAccount(
+				String name, long parentCommerceAccountId, String email,
+				String taxId, boolean active, String externalReferenceCode,
+				long[] userIds, String[] emailAddresses,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.addBusinessCommerceAccount(name,
-			parentCommerceAccountId, email, taxId, active,
+
+		return _commerceAccountService.addBusinessCommerceAccount(
+			name, parentCommerceAccountId, email, taxId, active,
 			externalReferenceCode, userIds, emailAddresses, serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
-		String name, long parentCommerceAccountId, String email, String taxId,
-		int type, boolean active, String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccount
+			addCommerceAccount(
+				String name, long parentCommerceAccountId, String email,
+				String taxId, int type, boolean active,
+				String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.addCommerceAccount(name,
-			parentCommerceAccountId, email, taxId, type, active,
+
+		return _commerceAccountService.addCommerceAccount(
+			name, parentCommerceAccountId, email, taxId, type, active,
 			externalReferenceCode, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceAccount(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_commerceAccountService.deleteCommerceAccount(commerceAccountId);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode)
+	public com.liferay.commerce.account.model.CommerceAccount
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.fetchByExternalReferenceCode(companyId,
-			externalReferenceCode);
+
+		return _commerceAccountService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
-		long commerceAccountId)
+	public com.liferay.commerce.account.model.CommerceAccount
+			fetchCommerceAccount(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountService.fetchCommerceAccount(commerceAccountId);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount(
-		long commerceAccountId)
+	public com.liferay.commerce.account.model.CommerceAccount
+			getCommerceAccount(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountService.getCommerceAccount(commerceAccountId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAccountService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		long userId) throws com.liferay.portal.kernel.exception.PortalException {
+	public com.liferay.commerce.account.model.CommerceAccount
+			getPersonalCommerceAccount(long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountService.getPersonalCommerceAccount(userId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, long parentCommerceAccountId, int commerceSiteType,
-		String keywords, int start, int end)
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount>
+			getUserCommerceAccounts(
+				long userId, long parentCommerceAccountId, int commerceSiteType,
+				String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.getUserCommerceAccounts(userId,
-			parentCommerceAccountId, commerceSiteType, keywords, start, end);
+
+		return _commerceAccountService.getUserCommerceAccounts(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, start,
+			end);
 	}
 
 	@Override
-	public int getUserCommerceAccountsCount(long userId,
-		long parentCommerceAccountId, int commerceSiteType, String keywords)
+	public int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.getUserCommerceAccountsCount(userId,
-			parentCommerceAccountId, commerceSiteType, keywords);
+
+		return _commerceAccountService.getUserCommerceAccountsCount(
+			userId, parentCommerceAccountId, commerceSiteType, keywords);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
-		String email, String taxId, boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccount
+			updateCommerceAccount(
+				long commerceAccountId, String name, boolean logo,
+				byte[] logoBytes, String email, String taxId, boolean active,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.updateCommerceAccount(commerceAccountId,
-			name, logo, logoBytes, email, taxId, active, serviceContext);
+
+		return _commerceAccountService.updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
-		String name, long parentCommerceAccountId, boolean logo,
-		byte[] logoBytes, String email, String taxId, int type, boolean active,
-		String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccount
+			upsertCommerceAccount(
+				String name, long parentCommerceAccountId, boolean logo,
+				byte[] logoBytes, String email, String taxId, int type,
+				boolean active, String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.upsertCommerceAccount(name,
-			parentCommerceAccountId, logo, logoBytes, email, taxId, type,
+
+		return _commerceAccountService.upsertCommerceAccount(
+			name, parentCommerceAccountId, logo, logoBytes, email, taxId, type,
 			active, externalReferenceCode, serviceContext);
 	}
 
@@ -145,9 +169,12 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 	}
 
 	@Override
-	public void setWrappedService(CommerceAccountService commerceAccountService) {
+	public void setWrappedService(
+		CommerceAccountService commerceAccountService) {
+
 		_commerceAccountService = commerceAccountService;
 	}
 
 	private CommerceAccountService _commerceAccountService;
+
 }

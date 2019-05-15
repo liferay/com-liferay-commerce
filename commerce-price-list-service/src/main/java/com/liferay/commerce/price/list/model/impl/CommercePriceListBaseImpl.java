@@ -34,10 +34,11 @@ import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil
 @ProviderType
 public abstract class CommercePriceListBaseImpl
 	extends CommercePriceListModelImpl implements CommercePriceList {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce price list model instance should use the {@link CommercePriceList} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce price list model instance should use the <code>CommercePriceList</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommercePriceListBaseImpl
 			CommercePriceListLocalServiceUtil.updateCommercePriceList(this);
 		}
 	}
+
 }

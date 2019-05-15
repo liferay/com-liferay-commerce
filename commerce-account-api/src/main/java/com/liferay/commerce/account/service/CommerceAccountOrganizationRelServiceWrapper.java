@@ -28,82 +28,109 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceAccountOrganizationRelServiceWrapper
 	implements CommerceAccountOrganizationRelService,
-		ServiceWrapper<CommerceAccountOrganizationRelService> {
+			   ServiceWrapper<CommerceAccountOrganizationRelService> {
+
 	public CommerceAccountOrganizationRelServiceWrapper(
-		CommerceAccountOrganizationRelService commerceAccountOrganizationRelService) {
-		_commerceAccountOrganizationRelService = commerceAccountOrganizationRelService;
+		CommerceAccountOrganizationRelService
+			commerceAccountOrganizationRelService) {
+
+		_commerceAccountOrganizationRelService =
+			commerceAccountOrganizationRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
-		long commerceAccountId, long organizationId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+			addCommerceAccountOrganizationRel(
+				long commerceAccountId, long organizationId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountOrganizationRelService.addCommerceAccountOrganizationRel(commerceAccountId,
-			organizationId, serviceContext);
+
+		return _commerceAccountOrganizationRelService.
+			addCommerceAccountOrganizationRel(
+				commerceAccountId, organizationId, serviceContext);
 	}
 
 	@Override
-	public void addCommerceAccountOrganizationRels(long commerceAccountId,
-		long[] organizationIds,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public void addCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAccountOrganizationRelService.addCommerceAccountOrganizationRels(commerceAccountId,
-			organizationIds, serviceContext);
+
+		_commerceAccountOrganizationRelService.
+			addCommerceAccountOrganizationRels(
+				commerceAccountId, organizationIds, serviceContext);
 	}
 
 	@Override
-	public void deleteCommerceAccountOrganizationRel(long commerceAccountId,
-		long organizationId)
+	public void deleteCommerceAccountOrganizationRel(
+			long commerceAccountId, long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAccountOrganizationRelService.deleteCommerceAccountOrganizationRel(commerceAccountId,
-			organizationId);
+
+		_commerceAccountOrganizationRelService.
+			deleteCommerceAccountOrganizationRel(
+				commerceAccountId, organizationId);
 	}
 
 	@Override
-	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
-		long[] organizationIds)
+	public void deleteCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAccountOrganizationRelService.deleteCommerceAccountOrganizationRels(commerceAccountId,
-			organizationIds);
+
+		_commerceAccountOrganizationRelService.
+			deleteCommerceAccountOrganizationRels(
+				commerceAccountId, organizationIds);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
-		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+			getCommerceAccountOrganizationRel(
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountOrganizationRelPK
+						commerceAccountOrganizationRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+
+		return _commerceAccountOrganizationRelService.
+			getCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		long commerceAccountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRels(commerceAccountId);
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+				getCommerceAccountOrganizationRels(long commerceAccountId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountOrganizationRelService.
+			getCommerceAccountOrganizationRels(commerceAccountId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		long commerceAccountId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRels(commerceAccountId,
-			start, end);
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+				getCommerceAccountOrganizationRels(
+					long commerceAccountId, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountOrganizationRelService.
+			getCommerceAccountOrganizationRels(commerceAccountId, start, end);
 	}
 
 	@Override
 	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRelsCount(commerceAccountId);
+
+		return _commerceAccountOrganizationRelService.
+			getCommerceAccountOrganizationRelsCount(commerceAccountId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceAccountOrganizationRelService.getOSGiServiceIdentifier();
+		return _commerceAccountOrganizationRelService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
@@ -113,9 +140,14 @@ public class CommerceAccountOrganizationRelServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceAccountOrganizationRelService commerceAccountOrganizationRelService) {
-		_commerceAccountOrganizationRelService = commerceAccountOrganizationRelService;
+		CommerceAccountOrganizationRelService
+			commerceAccountOrganizationRelService) {
+
+		_commerceAccountOrganizationRelService =
+			commerceAccountOrganizationRelService;
 	}
 
-	private CommerceAccountOrganizationRelService _commerceAccountOrganizationRelService;
+	private CommerceAccountOrganizationRelService
+		_commerceAccountOrganizationRelService;
+
 }

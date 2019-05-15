@@ -25,20 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceCatalogModel
- * @see com.liferay.commerce.product.model.impl.CommerceCatalogImpl
- * @see com.liferay.commerce.product.model.impl.CommerceCatalogModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CommerceCatalogImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CommerceCatalogImpl"
+)
 @ProviderType
 public interface CommerceCatalog extends CommerceCatalogModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CommerceCatalogImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CommerceCatalogImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceCatalog, Long> COMMERCE_CATALOG_ID_ACCESSOR =
-		new Accessor<CommerceCatalog, Long>() {
+	public static final Accessor<CommerceCatalog, Long>
+		COMMERCE_CATALOG_ID_ACCESSOR = new Accessor<CommerceCatalog, Long>() {
+
 			@Override
 			public Long get(CommerceCatalog commerceCatalog) {
 				return commerceCatalog.getCommerceCatalogId();
@@ -53,5 +55,7 @@ public interface CommerceCatalog extends CommerceCatalogModel, PersistedModel {
 			public Class<CommerceCatalog> getTypeClass() {
 				return CommerceCatalog.class;
 			}
+
 		};
+
 }

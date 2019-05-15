@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CommerceChannel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,26 +38,34 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceChannelServiceUtil
- * @see com.liferay.commerce.product.service.base.CommerceChannelServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceChannel"}, service = CommerceChannelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceChannel"
+	},
+	service = CommerceChannelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceChannelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceChannelServiceUtil} to access the commerce channel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceChannelServiceUtil} to access the commerce channel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceChannel addCommerceChannel(String name, String filterType,
-		String type, UnicodeProperties typeSettingsProperties,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceChannel addCommerceChannel(
+			String name, String filterType, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommerceChannel deleteCommerceChannel(long commerceChannelId)
 		throws PortalException;
@@ -75,14 +82,16 @@ public interface CommerceChannelService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String filterType, String type,
-		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+	public CommerceChannel updateCommerceChannel(
+			long commerceChannelId, String name, String filterType, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

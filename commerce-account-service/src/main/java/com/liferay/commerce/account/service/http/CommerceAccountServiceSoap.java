@@ -17,7 +17,6 @@ package com.liferay.commerce.account.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceAccountServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceAccountServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.account.model.CommerceAccountSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.account.model.CommerceAccount}, that is translated to a
- * {@link com.liferay.commerce.account.model.CommerceAccountSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.account.model.CommerceAccountSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.account.model.CommerceAccount</code>, that is translated to a
+ * <code>com.liferay.commerce.account.model.CommerceAccountSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,25 +59,28 @@ import java.rmi.RemoteException;
  *
  * @author Marco Leo
  * @see CommerceAccountServiceHttp
- * @see com.liferay.commerce.account.model.CommerceAccountSoap
- * @see CommerceAccountServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAccountServiceSoap {
-	public static com.liferay.commerce.account.model.CommerceAccountSoap addBusinessCommerceAccount(
-		String name, long parentCommerceAccountId, String email, String taxId,
-		boolean active, String externalReferenceCode, long[] userIds,
-		String[] emailAddresses,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			addBusinessCommerceAccount(
+				String name, long parentCommerceAccountId, String email,
+				String taxId, boolean active, String externalReferenceCode,
+				long[] userIds, String[] emailAddresses,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.addBusinessCommerceAccount(name,
-					parentCommerceAccountId, email, taxId, active,
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.addBusinessCommerceAccount(
+					name, parentCommerceAccountId, email, taxId, active,
 					externalReferenceCode, userIds, emailAddresses,
 					serviceContext);
 
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -86,17 +89,22 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap addCommerceAccount(
-		String name, long parentCommerceAccountId, String email, String taxId,
-		int type, boolean active, String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			addCommerceAccount(
+				String name, long parentCommerceAccountId, String email,
+				String taxId, int type, boolean active,
+				String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.addCommerceAccount(name,
-					parentCommerceAccountId, email, taxId, type, active,
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.addCommerceAccount(
+					name, parentCommerceAccountId, email, taxId, type, active,
 					externalReferenceCode, serviceContext);
 
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,6 +115,7 @@ public class CommerceAccountServiceSoap {
 
 	public static void deleteCommerceAccount(long commerceAccountId)
 		throws RemoteException {
+
 		try {
 			CommerceAccountServiceUtil.deleteCommerceAccount(commerceAccountId);
 		}
@@ -117,87 +126,115 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.fetchByExternalReferenceCode(companyId,
-					externalReferenceCode);
-
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.account.model.CommerceAccountSoap fetchCommerceAccount(
-		long commerceAccountId) throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.fetchCommerceAccount(commerceAccountId);
-
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.account.model.CommerceAccountSoap getCommerceAccount(
-		long commerceAccountId) throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getCommerceAccount(commerceAccountId);
-
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.account.model.CommerceAccountSoap getPersonalCommerceAccount(
-		long userId) throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getPersonalCommerceAccount(userId);
-
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		long userId, long parentCommerceAccountId, int commerceSiteType,
-		String keywords, int start, int end) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
-				CommerceAccountServiceUtil.getUserCommerceAccounts(userId,
-					parentCommerceAccountId, commerceSiteType, keywords, start,
-					end);
-
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getUserCommerceAccountsCount(long userId,
-		long parentCommerceAccountId, int commerceSiteType, String keywords)
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(userId,
-					parentCommerceAccountId, commerceSiteType, keywords);
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.fetchByExternalReferenceCode(
+					companyId, externalReferenceCode);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			fetchCommerceAccount(long commerceAccountId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.fetchCommerceAccount(
+					commerceAccountId);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			getCommerceAccount(long commerceAccountId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.getCommerceAccount(
+					commerceAccountId);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			getPersonalCommerceAccount(long userId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.getPersonalCommerceAccount(userId);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap[]
+			getUserCommerceAccounts(
+				long userId, long parentCommerceAccountId, int commerceSiteType,
+				String keywords, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccount>
+				returnValue =
+					CommerceAccountServiceUtil.getUserCommerceAccounts(
+						userId, parentCommerceAccountId, commerceSiteType,
+						keywords, start, end);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceAccountServiceUtil.getUserCommerceAccountsCount(
+					userId, parentCommerceAccountId, commerceSiteType,
+					keywords);
 
 			return returnValue;
 		}
@@ -208,16 +245,21 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap updateCommerceAccount(
-		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
-		String email, String taxId, boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			updateCommerceAccount(
+				long commerceAccountId, String name, boolean logo,
+				byte[] logoBytes, String email, String taxId, boolean active,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.updateCommerceAccount(commerceAccountId,
-					name, logo, logoBytes, email, taxId, active, serviceContext);
 
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.updateCommerceAccount(
+					commerceAccountId, name, logo, logoBytes, email, taxId,
+					active, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -226,18 +268,22 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap upsertCommerceAccount(
-		String name, long parentCommerceAccountId, boolean logo,
-		byte[] logoBytes, String email, String taxId, int type, boolean active,
-		String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			upsertCommerceAccount(
+				String name, long parentCommerceAccountId, boolean logo,
+				byte[] logoBytes, String email, String taxId, int type,
+				boolean active, String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.upsertCommerceAccount(name,
-					parentCommerceAccountId, logo, logoBytes, email, taxId,
-					type, active, externalReferenceCode, serviceContext);
 
-			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.upsertCommerceAccount(
+					name, parentCommerceAccountId, logo, logoBytes, email,
+					taxId, type, active, externalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -246,5 +292,7 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceAccountServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceAccountServiceSoap.class);
+
 }

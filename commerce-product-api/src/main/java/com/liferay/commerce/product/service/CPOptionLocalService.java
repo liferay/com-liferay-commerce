@@ -17,9 +17,7 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOption;
-
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
@@ -58,78 +56,81 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionLocalServiceUtil
- * @see com.liferay.commerce.product.service.base.CPOptionLocalServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPOptionLocalServiceImpl
  * @generated
  */
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
-public interface CPOptionLocalService extends BaseLocalService,
-	PersistedModelLocalService {
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
+public interface CPOptionLocalService
+	extends BaseLocalService, PersistedModelLocalService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPOptionLocalServiceUtil} to access the cp option local service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPOptionLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPOptionLocalServiceUtil} to access the cp option local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPOptionLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the cp option to the database. Also notifies the appropriate model listeners.
-	*
-	* @param cpOption the cp option
-	* @return the cp option that was added
-	*/
+	 * Adds the cp option to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param cpOption the cp option
+	 * @return the cp option that was added
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOption addCPOption(CPOption cpOption);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CPOption addCPOption(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		boolean facetable, boolean required, boolean skuContributor,
-		String key, ServiceContext serviceContext) throws PortalException;
+	public CPOption addCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, ServiceContext serviceContext)
+		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CPOption addCPOption(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		boolean facetable, boolean required, boolean skuContributor,
-		String key, String externalReferenceCode, ServiceContext serviceContext)
+	public CPOption addCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
-	* Creates a new cp option with the primary key. Does not add the cp option to the database.
-	*
-	* @param CPOptionId the primary key for the new cp option
-	* @return the new cp option
-	*/
+	 * Creates a new cp option with the primary key. Does not add the cp option to the database.
+	 *
+	 * @param CPOptionId the primary key for the new cp option
+	 * @return the new cp option
+	 */
 	@Transactional(enabled = false)
 	public CPOption createCPOption(long CPOptionId);
 
 	/**
-	* Deletes the cp option from the database. Also notifies the appropriate model listeners.
-	*
-	* @param cpOption the cp option
-	* @return the cp option that was removed
-	* @throws PortalException
-	*/
+	 * Deletes the cp option from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param cpOption the cp option
+	 * @return the cp option that was removed
+	 * @throws PortalException
+	 */
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPOption deleteCPOption(CPOption cpOption) throws PortalException;
 
 	/**
-	* Deletes the cp option with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param CPOptionId the primary key of the cp option
-	* @return the cp option that was removed
-	* @throws PortalException if a cp option with the primary key could not be found
-	*/
+	 * Deletes the cp option with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param CPOptionId the primary key of the cp option
+	 * @return the cp option that was removed
+	 * @throws PortalException if a cp option with the primary key could not be found
+	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CPOption deleteCPOption(long CPOptionId) throws PortalException;
 
 	public void deleteCPOptions(long groupId) throws PortalException;
 
 	/**
-	* @throws PortalException
-	*/
+	 * @throws PortalException
+	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
@@ -138,70 +139,71 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public DynamicQuery dynamicQuery();
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end);
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode);
+	public CPOption fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption fetchCPOption(long CPOptionId);
@@ -211,23 +213,23 @@ public interface CPOptionLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the cp option with the matching external reference code and company.
-	*
-	* @param companyId the primary key of the company
-	* @param externalReferenceCode the cp option's external reference code
-	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	*/
+	 * Returns the cp option with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the cp option's external reference code
+	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOptionByReferenceCode(long companyId,
-		String externalReferenceCode);
+	public CPOption fetchCPOptionByReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	/**
-	* Returns the cp option matching the UUID and group.
-	*
-	* @param uuid the cp option's UUID
-	* @param groupId the primary key of the group
-	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	*/
+	 * Returns the cp option matching the UUID and group.
+	 *
+	 * @param uuid the cp option's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption fetchCPOptionByUuidAndGroupId(String uuid, long groupId);
 
@@ -235,12 +237,12 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	/**
-	* Returns the cp option with the primary key.
-	*
-	* @param CPOptionId the primary key of the cp option
-	* @return the cp option
-	* @throws PortalException if a cp option with the primary key could not be found
-	*/
+	 * Returns the cp option with the primary key.
+	 *
+	 * @param CPOptionId the primary key of the cp option
+	 * @return the cp option
+	 * @throws PortalException if a cp option with the primary key could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption getCPOption(long CPOptionId) throws PortalException;
 
@@ -249,28 +251,28 @@ public interface CPOptionLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the cp option matching the UUID and group.
-	*
-	* @param uuid the cp option's UUID
-	* @param groupId the primary key of the group
-	* @return the matching cp option
-	* @throws PortalException if a matching cp option could not be found
-	*/
+	 * Returns the cp option matching the UUID and group.
+	 *
+	 * @param uuid the cp option's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching cp option
+	 * @throws PortalException if a matching cp option could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption getCPOptionByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException;
 
 	/**
-	* Returns a range of all the cp options.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.model.impl.CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of cp options
-	* @param end the upper bound of the range of cp options (not inclusive)
-	* @return the range of cp options
-	*/
+	 * Returns a range of all the cp options.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.model.impl.CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of cp options
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPOption> getCPOptions(int start, int end);
 
@@ -278,40 +280,41 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public List<CPOption> getCPOptions(long groupId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end,
+	public List<CPOption> getCPOptions(
+		long groupId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator);
 
 	/**
-	* Returns all the cp options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp options
-	* @param companyId the primary key of the company
-	* @return the matching cp options, or an empty list if no matches were found
-	*/
+	 * Returns all the cp options matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the cp options
+	 * @param companyId the primary key of the company
+	 * @return the matching cp options, or an empty list if no matches were found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(String uuid,
-		long companyId);
+	public List<CPOption> getCPOptionsByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	/**
-	* Returns a range of cp options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp options
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of cp options
-	* @param end the upper bound of the range of cp options (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching cp options, or an empty list if no matches were found
-	*/
+	 * Returns a range of cp options matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the cp options
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching cp options, or an empty list if no matches were found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end,
+	public List<CPOption> getCPOptionsByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator);
 
 	/**
-	* Returns the number of cp options.
-	*
-	* @return the number of cp options
-	*/
+	 * Returns the number of cp options.
+	 *
+	 * @return the number of cp options
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPOptionsCount();
 
@@ -326,10 +329,10 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Override
@@ -341,8 +344,9 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public Hits search(SearchContext searchContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPOption> searchCPOptions(long companyId,
-		long groupId, String keywords, int start, int end, Sort sort)
+	public BaseModelSearchResult<CPOption> searchCPOptions(
+			long companyId, long groupId, String keywords, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	public CPOption setFacetable(long cpOptionId, boolean facetable)
@@ -355,24 +359,27 @@ public interface CPOptionLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Updates the cp option in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param cpOption the cp option
-	* @return the cp option that was updated
-	*/
+	 * Updates the cp option in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param cpOption the cp option
+	 * @return the cp option that was updated
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOption updateCPOption(CPOption cpOption);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CPOption updateCPOption(long cpOptionId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		String ddmFormFieldTypeName, boolean facetable, boolean required,
-		boolean skuContributor, String key, ServiceContext serviceContext)
+	public CPOption updateCPOption(
+			long cpOptionId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			boolean facetable, boolean required, boolean skuContributor,
+			String key, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CPOption upsertCPOption(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		boolean facetable, boolean required, boolean skuContributor,
-		String key, String externalReferenceCode, ServiceContext serviceContext)
+	public CPOption upsertCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

@@ -17,9 +17,7 @@ package com.liferay.commerce.product.type.virtual.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CPDefinitionVirtualSettingWrapper
 	implements CPDefinitionVirtualSetting,
-		ModelWrapper<CPDefinitionVirtualSetting> {
+			   ModelWrapper<CPDefinitionVirtualSetting> {
+
 	public CPDefinitionVirtualSettingWrapper(
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
+
 		_cpDefinitionVirtualSetting = cpDefinitionVirtualSetting;
 	}
 
@@ -63,8 +63,8 @@ public class CPDefinitionVirtualSettingWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("CPDefinitionVirtualSettingId",
-			getCPDefinitionVirtualSettingId());
+		attributes.put(
+			"CPDefinitionVirtualSettingId", getCPDefinitionVirtualSettingId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -83,7 +83,8 @@ public class CPDefinitionVirtualSettingWrapper
 		attributes.put("sampleUrl", getSampleUrl());
 		attributes.put("termsOfUseRequired", isTermsOfUseRequired());
 		attributes.put("termsOfUseContent", getTermsOfUseContent());
-		attributes.put("termsOfUseJournalArticleResourcePrimKey",
+		attributes.put(
+			"termsOfUseJournalArticleResourcePrimKey",
 			getTermsOfUseJournalArticleResourcePrimKey());
 		attributes.put("override", isOverride());
 		attributes.put("lastPublishDate", getLastPublishDate());
@@ -100,7 +101,7 @@ public class CPDefinitionVirtualSettingWrapper
 		}
 
 		Long CPDefinitionVirtualSettingId = (Long)attributes.get(
-				"CPDefinitionVirtualSettingId");
+			"CPDefinitionVirtualSettingId");
 
 		if (CPDefinitionVirtualSettingId != null) {
 			setCPDefinitionVirtualSettingId(CPDefinitionVirtualSettingId);
@@ -203,7 +204,7 @@ public class CPDefinitionVirtualSettingWrapper
 		}
 
 		Boolean termsOfUseRequired = (Boolean)attributes.get(
-				"termsOfUseRequired");
+			"termsOfUseRequired");
 
 		if (termsOfUseRequired != null) {
 			setTermsOfUseRequired(termsOfUseRequired);
@@ -216,10 +217,11 @@ public class CPDefinitionVirtualSettingWrapper
 		}
 
 		Long termsOfUseJournalArticleResourcePrimKey = (Long)attributes.get(
-				"termsOfUseJournalArticleResourcePrimKey");
+			"termsOfUseJournalArticleResourcePrimKey");
 
 		if (termsOfUseJournalArticleResourcePrimKey != null) {
-			setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
+			setTermsOfUseJournalArticleResourcePrimKey(
+				termsOfUseJournalArticleResourcePrimKey);
 		}
 
 		Boolean override = (Boolean)attributes.get("override");
@@ -237,19 +239,23 @@ public class CPDefinitionVirtualSettingWrapper
 
 	@Override
 	public Object clone() {
-		return new CPDefinitionVirtualSettingWrapper((CPDefinitionVirtualSetting)_cpDefinitionVirtualSetting.clone());
+		return new CPDefinitionVirtualSettingWrapper(
+			(CPDefinitionVirtualSetting)_cpDefinitionVirtualSetting.clone());
 	}
 
 	@Override
-	public int compareTo(CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
-		return _cpDefinitionVirtualSetting.compareTo(cpDefinitionVirtualSetting);
+	public int compareTo(
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
+
+		return _cpDefinitionVirtualSetting.compareTo(
+			cpDefinitionVirtualSetting);
 	}
 
 	/**
-	* Returns the activation status of this cp definition virtual setting.
-	*
-	* @return the activation status of this cp definition virtual setting
-	*/
+	 * Returns the activation status of this cp definition virtual setting.
+	 *
+	 * @return the activation status of this cp definition virtual setting
+	 */
 	@Override
 	public int getActivationStatus() {
 		return _cpDefinitionVirtualSetting.getActivationStatus();
@@ -261,60 +267,60 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Returns the fully qualified class name of this cp definition virtual setting.
-	*
-	* @return the fully qualified class name of this cp definition virtual setting
-	*/
+	 * Returns the fully qualified class name of this cp definition virtual setting.
+	 *
+	 * @return the fully qualified class name of this cp definition virtual setting
+	 */
 	@Override
 	public String getClassName() {
 		return _cpDefinitionVirtualSetting.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this cp definition virtual setting.
-	*
-	* @return the class name ID of this cp definition virtual setting
-	*/
+	 * Returns the class name ID of this cp definition virtual setting.
+	 *
+	 * @return the class name ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getClassNameId() {
 		return _cpDefinitionVirtualSetting.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this cp definition virtual setting.
-	*
-	* @return the class pk of this cp definition virtual setting
-	*/
+	 * Returns the class pk of this cp definition virtual setting.
+	 *
+	 * @return the class pk of this cp definition virtual setting
+	 */
 	@Override
 	public long getClassPK() {
 		return _cpDefinitionVirtualSetting.getClassPK();
 	}
 
 	/**
-	* Returns the company ID of this cp definition virtual setting.
-	*
-	* @return the company ID of this cp definition virtual setting
-	*/
+	 * Returns the company ID of this cp definition virtual setting.
+	 *
+	 * @return the company ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpDefinitionVirtualSetting.getCompanyId();
 	}
 
 	/**
-	* Returns the cp definition virtual setting ID of this cp definition virtual setting.
-	*
-	* @return the cp definition virtual setting ID of this cp definition virtual setting
-	*/
+	 * Returns the cp definition virtual setting ID of this cp definition virtual setting.
+	 *
+	 * @return the cp definition virtual setting ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getCPDefinitionVirtualSettingId() {
 		return _cpDefinitionVirtualSetting.getCPDefinitionVirtualSettingId();
 	}
 
 	/**
-	* Returns the create date of this cp definition virtual setting.
-	*
-	* @return the create date of this cp definition virtual setting
-	*/
+	 * Returns the create date of this cp definition virtual setting.
+	 *
+	 * @return the create date of this cp definition virtual setting
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpDefinitionVirtualSetting.getCreateDate();
@@ -326,10 +332,10 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Returns the duration of this cp definition virtual setting.
-	*
-	* @return the duration of this cp definition virtual setting
-	*/
+	 * Returns the duration of this cp definition virtual setting.
+	 *
+	 * @return the duration of this cp definition virtual setting
+	 */
 	@Override
 	public long getDuration() {
 		return _cpDefinitionVirtualSetting.getDuration();
@@ -343,74 +349,75 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinitionVirtualSetting.getFileEntry();
 	}
 
 	/**
-	* Returns the file entry ID of this cp definition virtual setting.
-	*
-	* @return the file entry ID of this cp definition virtual setting
-	*/
+	 * Returns the file entry ID of this cp definition virtual setting.
+	 *
+	 * @return the file entry ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getFileEntryId() {
 		return _cpDefinitionVirtualSetting.getFileEntryId();
 	}
 
 	/**
-	* Returns the group ID of this cp definition virtual setting.
-	*
-	* @return the group ID of this cp definition virtual setting
-	*/
+	 * Returns the group ID of this cp definition virtual setting.
+	 *
+	 * @return the group ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpDefinitionVirtualSetting.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this cp definition virtual setting.
-	*
-	* @return the last publish date of this cp definition virtual setting
-	*/
+	 * Returns the last publish date of this cp definition virtual setting.
+	 *
+	 * @return the last publish date of this cp definition virtual setting
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _cpDefinitionVirtualSetting.getLastPublishDate();
 	}
 
 	/**
-	* Returns the max usages of this cp definition virtual setting.
-	*
-	* @return the max usages of this cp definition virtual setting
-	*/
+	 * Returns the max usages of this cp definition virtual setting.
+	 *
+	 * @return the max usages of this cp definition virtual setting
+	 */
 	@Override
 	public int getMaxUsages() {
 		return _cpDefinitionVirtualSetting.getMaxUsages();
 	}
 
 	/**
-	* Returns the modified date of this cp definition virtual setting.
-	*
-	* @return the modified date of this cp definition virtual setting
-	*/
+	 * Returns the modified date of this cp definition virtual setting.
+	 *
+	 * @return the modified date of this cp definition virtual setting
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpDefinitionVirtualSetting.getModifiedDate();
 	}
 
 	/**
-	* Returns the override of this cp definition virtual setting.
-	*
-	* @return the override of this cp definition virtual setting
-	*/
+	 * Returns the override of this cp definition virtual setting.
+	 *
+	 * @return the override of this cp definition virtual setting
+	 */
 	@Override
 	public boolean getOverride() {
 		return _cpDefinitionVirtualSetting.getOverride();
 	}
 
 	/**
-	* Returns the primary key of this cp definition virtual setting.
-	*
-	* @return the primary key of this cp definition virtual setting
-	*/
+	 * Returns the primary key of this cp definition virtual setting.
+	 *
+	 * @return the primary key of this cp definition virtual setting
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpDefinitionVirtualSetting.getPrimaryKey();
@@ -422,93 +429,97 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	@Override
-	public com.liferay.portal.kernel.repository.model.FileEntry getSampleFileEntry()
+	public com.liferay.portal.kernel.repository.model.FileEntry
+			getSampleFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinitionVirtualSetting.getSampleFileEntry();
 	}
 
 	/**
-	* Returns the sample file entry ID of this cp definition virtual setting.
-	*
-	* @return the sample file entry ID of this cp definition virtual setting
-	*/
+	 * Returns the sample file entry ID of this cp definition virtual setting.
+	 *
+	 * @return the sample file entry ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getSampleFileEntryId() {
 		return _cpDefinitionVirtualSetting.getSampleFileEntryId();
 	}
 
 	/**
-	* Returns the sample url of this cp definition virtual setting.
-	*
-	* @return the sample url of this cp definition virtual setting
-	*/
+	 * Returns the sample url of this cp definition virtual setting.
+	 *
+	 * @return the sample url of this cp definition virtual setting
+	 */
 	@Override
 	public String getSampleUrl() {
 		return _cpDefinitionVirtualSetting.getSampleUrl();
 	}
 
 	/**
-	* Returns the terms of use content of this cp definition virtual setting.
-	*
-	* @return the terms of use content of this cp definition virtual setting
-	*/
+	 * Returns the terms of use content of this cp definition virtual setting.
+	 *
+	 * @return the terms of use content of this cp definition virtual setting
+	 */
 	@Override
 	public String getTermsOfUseContent() {
 		return _cpDefinitionVirtualSetting.getTermsOfUseContent();
 	}
 
 	/**
-	* Returns the localized terms of use content of this cp definition virtual setting in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized terms of use content of this cp definition virtual setting
-	*/
+	 * Returns the localized terms of use content of this cp definition virtual setting in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized terms of use content of this cp definition virtual setting
+	 */
 	@Override
 	public String getTermsOfUseContent(java.util.Locale locale) {
 		return _cpDefinitionVirtualSetting.getTermsOfUseContent(locale);
 	}
 
 	/**
-	* Returns the localized terms of use content of this cp definition virtual setting in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized terms of use content of this cp definition virtual setting. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized terms of use content of this cp definition virtual setting in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized terms of use content of this cp definition virtual setting. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
-	public String getTermsOfUseContent(java.util.Locale locale,
-		boolean useDefault) {
-		return _cpDefinitionVirtualSetting.getTermsOfUseContent(locale,
-			useDefault);
+	public String getTermsOfUseContent(
+		java.util.Locale locale, boolean useDefault) {
+
+		return _cpDefinitionVirtualSetting.getTermsOfUseContent(
+			locale, useDefault);
 	}
 
 	/**
-	* Returns the localized terms of use content of this cp definition virtual setting in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized terms of use content of this cp definition virtual setting
-	*/
+	 * Returns the localized terms of use content of this cp definition virtual setting in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized terms of use content of this cp definition virtual setting
+	 */
 	@Override
 	public String getTermsOfUseContent(String languageId) {
 		return _cpDefinitionVirtualSetting.getTermsOfUseContent(languageId);
 	}
 
 	/**
-	* Returns the localized terms of use content of this cp definition virtual setting in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized terms of use content of this cp definition virtual setting
-	*/
+	 * Returns the localized terms of use content of this cp definition virtual setting in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized terms of use content of this cp definition virtual setting
+	 */
 	@Override
 	public String getTermsOfUseContent(String languageId, boolean useDefault) {
-		return _cpDefinitionVirtualSetting.getTermsOfUseContent(languageId,
-			useDefault);
+		return _cpDefinitionVirtualSetting.getTermsOfUseContent(
+			languageId, useDefault);
 	}
 
 	@Override
 	public String getTermsOfUseContentCurrentLanguageId() {
-		return _cpDefinitionVirtualSetting.getTermsOfUseContentCurrentLanguageId();
+		return _cpDefinitionVirtualSetting.
+			getTermsOfUseContentCurrentLanguageId();
 	}
 
 	@Override
@@ -517,96 +528,99 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized terms of use contents of this cp definition virtual setting.
-	*
-	* @return the locales and localized terms of use contents of this cp definition virtual setting
-	*/
+	 * Returns a map of the locales and localized terms of use contents of this cp definition virtual setting.
+	 *
+	 * @return the locales and localized terms of use contents of this cp definition virtual setting
+	 */
 	@Override
 	public Map<java.util.Locale, String> getTermsOfUseContentMap() {
 		return _cpDefinitionVirtualSetting.getTermsOfUseContentMap();
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalArticle getTermsOfUseJournalArticle()
+	public com.liferay.journal.model.JournalArticle
+			getTermsOfUseJournalArticle()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinitionVirtualSetting.getTermsOfUseJournalArticle();
 	}
 
 	/**
-	* Returns the terms of use journal article resource prim key of this cp definition virtual setting.
-	*
-	* @return the terms of use journal article resource prim key of this cp definition virtual setting
-	*/
+	 * Returns the terms of use journal article resource prim key of this cp definition virtual setting.
+	 *
+	 * @return the terms of use journal article resource prim key of this cp definition virtual setting
+	 */
 	@Override
 	public long getTermsOfUseJournalArticleResourcePrimKey() {
-		return _cpDefinitionVirtualSetting.getTermsOfUseJournalArticleResourcePrimKey();
+		return _cpDefinitionVirtualSetting.
+			getTermsOfUseJournalArticleResourcePrimKey();
 	}
 
 	/**
-	* Returns the terms of use required of this cp definition virtual setting.
-	*
-	* @return the terms of use required of this cp definition virtual setting
-	*/
+	 * Returns the terms of use required of this cp definition virtual setting.
+	 *
+	 * @return the terms of use required of this cp definition virtual setting
+	 */
 	@Override
 	public boolean getTermsOfUseRequired() {
 		return _cpDefinitionVirtualSetting.getTermsOfUseRequired();
 	}
 
 	/**
-	* Returns the url of this cp definition virtual setting.
-	*
-	* @return the url of this cp definition virtual setting
-	*/
+	 * Returns the url of this cp definition virtual setting.
+	 *
+	 * @return the url of this cp definition virtual setting
+	 */
 	@Override
 	public String getUrl() {
 		return _cpDefinitionVirtualSetting.getUrl();
 	}
 
 	/**
-	* Returns the user ID of this cp definition virtual setting.
-	*
-	* @return the user ID of this cp definition virtual setting
-	*/
+	 * Returns the user ID of this cp definition virtual setting.
+	 *
+	 * @return the user ID of this cp definition virtual setting
+	 */
 	@Override
 	public long getUserId() {
 		return _cpDefinitionVirtualSetting.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp definition virtual setting.
-	*
-	* @return the user name of this cp definition virtual setting
-	*/
+	 * Returns the user name of this cp definition virtual setting.
+	 *
+	 * @return the user name of this cp definition virtual setting
+	 */
 	@Override
 	public String getUserName() {
 		return _cpDefinitionVirtualSetting.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp definition virtual setting.
-	*
-	* @return the user uuid of this cp definition virtual setting
-	*/
+	 * Returns the user uuid of this cp definition virtual setting.
+	 *
+	 * @return the user uuid of this cp definition virtual setting
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpDefinitionVirtualSetting.getUserUuid();
 	}
 
 	/**
-	* Returns the use sample of this cp definition virtual setting.
-	*
-	* @return the use sample of this cp definition virtual setting
-	*/
+	 * Returns the use sample of this cp definition virtual setting.
+	 *
+	 * @return the use sample of this cp definition virtual setting
+	 */
 	@Override
 	public boolean getUseSample() {
 		return _cpDefinitionVirtualSetting.getUseSample();
 	}
 
 	/**
-	* Returns the uuid of this cp definition virtual setting.
-	*
-	* @return the uuid of this cp definition virtual setting
-	*/
+	 * Returns the uuid of this cp definition virtual setting.
+	 *
+	 * @return the uuid of this cp definition virtual setting
+	 */
 	@Override
 	public String getUuid() {
 		return _cpDefinitionVirtualSetting.getUuid();
@@ -633,30 +647,30 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition virtual setting is override.
-	*
-	* @return <code>true</code> if this cp definition virtual setting is override; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition virtual setting is override.
+	 *
+	 * @return <code>true</code> if this cp definition virtual setting is override; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isOverride() {
 		return _cpDefinitionVirtualSetting.isOverride();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition virtual setting is terms of use required.
-	*
-	* @return <code>true</code> if this cp definition virtual setting is terms of use required; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition virtual setting is terms of use required.
+	 *
+	 * @return <code>true</code> if this cp definition virtual setting is terms of use required; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isTermsOfUseRequired() {
 		return _cpDefinitionVirtualSetting.isTermsOfUseRequired();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition virtual setting is use sample.
-	*
-	* @return <code>true</code> if this cp definition virtual setting is use sample; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition virtual setting is use sample.
+	 *
+	 * @return <code>true</code> if this cp definition virtual setting is use sample; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isUseSample() {
 		return _cpDefinitionVirtualSetting.isUseSample();
@@ -685,21 +699,24 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_cpDefinitionVirtualSetting.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_cpDefinitionVirtualSetting.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_cpDefinitionVirtualSetting.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets the activation status of this cp definition virtual setting.
-	*
-	* @param activationStatus the activation status of this cp definition virtual setting
-	*/
+	 * Sets the activation status of this cp definition virtual setting.
+	 *
+	 * @param activationStatus the activation status of this cp definition virtual setting
+	 */
 	@Override
 	public void setActivationStatus(int activationStatus) {
 		_cpDefinitionVirtualSetting.setActivationStatus(activationStatus);
@@ -716,61 +733,63 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Sets the class name ID of this cp definition virtual setting.
-	*
-	* @param classNameId the class name ID of this cp definition virtual setting
-	*/
+	 * Sets the class name ID of this cp definition virtual setting.
+	 *
+	 * @param classNameId the class name ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_cpDefinitionVirtualSetting.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this cp definition virtual setting.
-	*
-	* @param classPK the class pk of this cp definition virtual setting
-	*/
+	 * Sets the class pk of this cp definition virtual setting.
+	 *
+	 * @param classPK the class pk of this cp definition virtual setting
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_cpDefinitionVirtualSetting.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the company ID of this cp definition virtual setting.
-	*
-	* @param companyId the company ID of this cp definition virtual setting
-	*/
+	 * Sets the company ID of this cp definition virtual setting.
+	 *
+	 * @param companyId the company ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDefinitionVirtualSetting.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp definition virtual setting ID of this cp definition virtual setting.
-	*
-	* @param CPDefinitionVirtualSettingId the cp definition virtual setting ID of this cp definition virtual setting
-	*/
+	 * Sets the cp definition virtual setting ID of this cp definition virtual setting.
+	 *
+	 * @param CPDefinitionVirtualSettingId the cp definition virtual setting ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setCPDefinitionVirtualSettingId(
 		long CPDefinitionVirtualSettingId) {
-		_cpDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(CPDefinitionVirtualSettingId);
+
+		_cpDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
+			CPDefinitionVirtualSettingId);
 	}
 
 	/**
-	* Sets the create date of this cp definition virtual setting.
-	*
-	* @param createDate the create date of this cp definition virtual setting
-	*/
+	 * Sets the create date of this cp definition virtual setting.
+	 *
+	 * @param createDate the create date of this cp definition virtual setting
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpDefinitionVirtualSetting.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the duration of this cp definition virtual setting.
-	*
-	* @param duration the duration of this cp definition virtual setting
-	*/
+	 * Sets the duration of this cp definition virtual setting.
+	 *
+	 * @param duration the duration of this cp definition virtual setting
+	 */
 	@Override
 	public void setDuration(long duration) {
 		_cpDefinitionVirtualSetting.setDuration(duration);
@@ -779,6 +798,7 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpDefinitionVirtualSetting.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -793,50 +813,50 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Sets the file entry ID of this cp definition virtual setting.
-	*
-	* @param fileEntryId the file entry ID of this cp definition virtual setting
-	*/
+	 * Sets the file entry ID of this cp definition virtual setting.
+	 *
+	 * @param fileEntryId the file entry ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_cpDefinitionVirtualSetting.setFileEntryId(fileEntryId);
 	}
 
 	/**
-	* Sets the group ID of this cp definition virtual setting.
-	*
-	* @param groupId the group ID of this cp definition virtual setting
-	*/
+	 * Sets the group ID of this cp definition virtual setting.
+	 *
+	 * @param groupId the group ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDefinitionVirtualSetting.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this cp definition virtual setting.
-	*
-	* @param lastPublishDate the last publish date of this cp definition virtual setting
-	*/
+	 * Sets the last publish date of this cp definition virtual setting.
+	 *
+	 * @param lastPublishDate the last publish date of this cp definition virtual setting
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_cpDefinitionVirtualSetting.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the max usages of this cp definition virtual setting.
-	*
-	* @param maxUsages the max usages of this cp definition virtual setting
-	*/
+	 * Sets the max usages of this cp definition virtual setting.
+	 *
+	 * @param maxUsages the max usages of this cp definition virtual setting
+	 */
 	@Override
 	public void setMaxUsages(int maxUsages) {
 		_cpDefinitionVirtualSetting.setMaxUsages(maxUsages);
 	}
 
 	/**
-	* Sets the modified date of this cp definition virtual setting.
-	*
-	* @param modifiedDate the modified date of this cp definition virtual setting
-	*/
+	 * Sets the modified date of this cp definition virtual setting.
+	 *
+	 * @param modifiedDate the modified date of this cp definition virtual setting
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpDefinitionVirtualSetting.setModifiedDate(modifiedDate);
@@ -848,20 +868,20 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Sets whether this cp definition virtual setting is override.
-	*
-	* @param override the override of this cp definition virtual setting
-	*/
+	 * Sets whether this cp definition virtual setting is override.
+	 *
+	 * @param override the override of this cp definition virtual setting
+	 */
 	@Override
 	public void setOverride(boolean override) {
 		_cpDefinitionVirtualSetting.setOverride(override);
 	}
 
 	/**
-	* Sets the primary key of this cp definition virtual setting.
-	*
-	* @param primaryKey the primary key of this cp definition virtual setting
-	*/
+	 * Sets the primary key of this cp definition virtual setting.
+	 *
+	 * @param primaryKey the primary key of this cp definition virtual setting
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpDefinitionVirtualSetting.setPrimaryKey(primaryKey);
@@ -873,181 +893,193 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
-	* Sets the sample file entry ID of this cp definition virtual setting.
-	*
-	* @param sampleFileEntryId the sample file entry ID of this cp definition virtual setting
-	*/
+	 * Sets the sample file entry ID of this cp definition virtual setting.
+	 *
+	 * @param sampleFileEntryId the sample file entry ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setSampleFileEntryId(long sampleFileEntryId) {
 		_cpDefinitionVirtualSetting.setSampleFileEntryId(sampleFileEntryId);
 	}
 
 	/**
-	* Sets the sample url of this cp definition virtual setting.
-	*
-	* @param sampleUrl the sample url of this cp definition virtual setting
-	*/
+	 * Sets the sample url of this cp definition virtual setting.
+	 *
+	 * @param sampleUrl the sample url of this cp definition virtual setting
+	 */
 	@Override
 	public void setSampleUrl(String sampleUrl) {
 		_cpDefinitionVirtualSetting.setSampleUrl(sampleUrl);
 	}
 
 	/**
-	* Sets the terms of use content of this cp definition virtual setting.
-	*
-	* @param termsOfUseContent the terms of use content of this cp definition virtual setting
-	*/
+	 * Sets the terms of use content of this cp definition virtual setting.
+	 *
+	 * @param termsOfUseContent the terms of use content of this cp definition virtual setting
+	 */
 	@Override
 	public void setTermsOfUseContent(String termsOfUseContent) {
 		_cpDefinitionVirtualSetting.setTermsOfUseContent(termsOfUseContent);
 	}
 
 	/**
-	* Sets the localized terms of use content of this cp definition virtual setting in the language.
-	*
-	* @param termsOfUseContent the localized terms of use content of this cp definition virtual setting
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized terms of use content of this cp definition virtual setting in the language.
+	 *
+	 * @param termsOfUseContent the localized terms of use content of this cp definition virtual setting
+	 * @param locale the locale of the language
+	 */
 	@Override
-	public void setTermsOfUseContent(String termsOfUseContent,
-		java.util.Locale locale) {
-		_cpDefinitionVirtualSetting.setTermsOfUseContent(termsOfUseContent,
-			locale);
+	public void setTermsOfUseContent(
+		String termsOfUseContent, java.util.Locale locale) {
+
+		_cpDefinitionVirtualSetting.setTermsOfUseContent(
+			termsOfUseContent, locale);
 	}
 
 	/**
-	* Sets the localized terms of use content of this cp definition virtual setting in the language, and sets the default locale.
-	*
-	* @param termsOfUseContent the localized terms of use content of this cp definition virtual setting
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized terms of use content of this cp definition virtual setting in the language, and sets the default locale.
+	 *
+	 * @param termsOfUseContent the localized terms of use content of this cp definition virtual setting
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTermsOfUseContent(String termsOfUseContent,
-		java.util.Locale locale, java.util.Locale defaultLocale) {
-		_cpDefinitionVirtualSetting.setTermsOfUseContent(termsOfUseContent,
-			locale, defaultLocale);
+	public void setTermsOfUseContent(
+		String termsOfUseContent, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+
+		_cpDefinitionVirtualSetting.setTermsOfUseContent(
+			termsOfUseContent, locale, defaultLocale);
 	}
 
 	@Override
 	public void setTermsOfUseContentCurrentLanguageId(String languageId) {
-		_cpDefinitionVirtualSetting.setTermsOfUseContentCurrentLanguageId(languageId);
+		_cpDefinitionVirtualSetting.setTermsOfUseContentCurrentLanguageId(
+			languageId);
 	}
 
 	/**
-	* Sets the localized terms of use contents of this cp definition virtual setting from the map of locales and localized terms of use contents.
-	*
-	* @param termsOfUseContentMap the locales and localized terms of use contents of this cp definition virtual setting
-	*/
+	 * Sets the localized terms of use contents of this cp definition virtual setting from the map of locales and localized terms of use contents.
+	 *
+	 * @param termsOfUseContentMap the locales and localized terms of use contents of this cp definition virtual setting
+	 */
 	@Override
 	public void setTermsOfUseContentMap(
 		Map<java.util.Locale, String> termsOfUseContentMap) {
-		_cpDefinitionVirtualSetting.setTermsOfUseContentMap(termsOfUseContentMap);
+
+		_cpDefinitionVirtualSetting.setTermsOfUseContentMap(
+			termsOfUseContentMap);
 	}
 
 	/**
-	* Sets the localized terms of use contents of this cp definition virtual setting from the map of locales and localized terms of use contents, and sets the default locale.
-	*
-	* @param termsOfUseContentMap the locales and localized terms of use contents of this cp definition virtual setting
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized terms of use contents of this cp definition virtual setting from the map of locales and localized terms of use contents, and sets the default locale.
+	 *
+	 * @param termsOfUseContentMap the locales and localized terms of use contents of this cp definition virtual setting
+	 * @param defaultLocale the default locale
+	 */
 	@Override
 	public void setTermsOfUseContentMap(
 		Map<java.util.Locale, String> termsOfUseContentMap,
 		java.util.Locale defaultLocale) {
-		_cpDefinitionVirtualSetting.setTermsOfUseContentMap(termsOfUseContentMap,
-			defaultLocale);
+
+		_cpDefinitionVirtualSetting.setTermsOfUseContentMap(
+			termsOfUseContentMap, defaultLocale);
 	}
 
 	/**
-	* Sets the terms of use journal article resource prim key of this cp definition virtual setting.
-	*
-	* @param termsOfUseJournalArticleResourcePrimKey the terms of use journal article resource prim key of this cp definition virtual setting
-	*/
+	 * Sets the terms of use journal article resource prim key of this cp definition virtual setting.
+	 *
+	 * @param termsOfUseJournalArticleResourcePrimKey the terms of use journal article resource prim key of this cp definition virtual setting
+	 */
 	@Override
 	public void setTermsOfUseJournalArticleResourcePrimKey(
 		long termsOfUseJournalArticleResourcePrimKey) {
-		_cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
+
+		_cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(
+			termsOfUseJournalArticleResourcePrimKey);
 	}
 
 	/**
-	* Sets whether this cp definition virtual setting is terms of use required.
-	*
-	* @param termsOfUseRequired the terms of use required of this cp definition virtual setting
-	*/
+	 * Sets whether this cp definition virtual setting is terms of use required.
+	 *
+	 * @param termsOfUseRequired the terms of use required of this cp definition virtual setting
+	 */
 	@Override
 	public void setTermsOfUseRequired(boolean termsOfUseRequired) {
 		_cpDefinitionVirtualSetting.setTermsOfUseRequired(termsOfUseRequired);
 	}
 
 	/**
-	* Sets the url of this cp definition virtual setting.
-	*
-	* @param url the url of this cp definition virtual setting
-	*/
+	 * Sets the url of this cp definition virtual setting.
+	 *
+	 * @param url the url of this cp definition virtual setting
+	 */
 	@Override
 	public void setUrl(String url) {
 		_cpDefinitionVirtualSetting.setUrl(url);
 	}
 
 	/**
-	* Sets the user ID of this cp definition virtual setting.
-	*
-	* @param userId the user ID of this cp definition virtual setting
-	*/
+	 * Sets the user ID of this cp definition virtual setting.
+	 *
+	 * @param userId the user ID of this cp definition virtual setting
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpDefinitionVirtualSetting.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp definition virtual setting.
-	*
-	* @param userName the user name of this cp definition virtual setting
-	*/
+	 * Sets the user name of this cp definition virtual setting.
+	 *
+	 * @param userName the user name of this cp definition virtual setting
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpDefinitionVirtualSetting.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp definition virtual setting.
-	*
-	* @param userUuid the user uuid of this cp definition virtual setting
-	*/
+	 * Sets the user uuid of this cp definition virtual setting.
+	 *
+	 * @param userUuid the user uuid of this cp definition virtual setting
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpDefinitionVirtualSetting.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets whether this cp definition virtual setting is use sample.
-	*
-	* @param useSample the use sample of this cp definition virtual setting
-	*/
+	 * Sets whether this cp definition virtual setting is use sample.
+	 *
+	 * @param useSample the use sample of this cp definition virtual setting
+	 */
 	@Override
 	public void setUseSample(boolean useSample) {
 		_cpDefinitionVirtualSetting.setUseSample(useSample);
 	}
 
 	/**
-	* Sets the uuid of this cp definition virtual setting.
-	*
-	* @param uuid the uuid of this cp definition virtual setting
-	*/
+	 * Sets the uuid of this cp definition virtual setting.
+	 *
+	 * @param uuid the uuid of this cp definition virtual setting
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpDefinitionVirtualSetting.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDefinitionVirtualSetting> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CPDefinitionVirtualSetting> toCacheModel() {
+
 		return _cpDefinitionVirtualSetting.toCacheModel();
 	}
 
 	@Override
 	public CPDefinitionVirtualSetting toEscapedModel() {
-		return new CPDefinitionVirtualSettingWrapper(_cpDefinitionVirtualSetting.toEscapedModel());
+		return new CPDefinitionVirtualSettingWrapper(
+			_cpDefinitionVirtualSetting.toEscapedModel());
 	}
 
 	@Override
@@ -1057,7 +1089,8 @@ public class CPDefinitionVirtualSettingWrapper
 
 	@Override
 	public CPDefinitionVirtualSetting toUnescapedModel() {
-		return new CPDefinitionVirtualSettingWrapper(_cpDefinitionVirtualSetting.toUnescapedModel());
+		return new CPDefinitionVirtualSettingWrapper(
+			_cpDefinitionVirtualSetting.toUnescapedModel());
 	}
 
 	@Override
@@ -1075,10 +1108,14 @@ public class CPDefinitionVirtualSettingWrapper
 			return false;
 		}
 
-		CPDefinitionVirtualSettingWrapper cpDefinitionVirtualSettingWrapper = (CPDefinitionVirtualSettingWrapper)obj;
+		CPDefinitionVirtualSettingWrapper cpDefinitionVirtualSettingWrapper =
+			(CPDefinitionVirtualSettingWrapper)obj;
 
-		if (Objects.equals(_cpDefinitionVirtualSetting,
-					cpDefinitionVirtualSettingWrapper._cpDefinitionVirtualSetting)) {
+		if (Objects.equals(
+				_cpDefinitionVirtualSetting,
+				cpDefinitionVirtualSettingWrapper.
+					_cpDefinitionVirtualSetting)) {
+
 			return true;
 		}
 
@@ -1111,4 +1148,5 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	private final CPDefinitionVirtualSetting _cpDefinitionVirtualSetting;
+
 }

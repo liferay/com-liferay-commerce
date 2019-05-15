@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOption;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,11 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPOption in entity cache.
  *
  * @author Marco Leo
- * @see CPOption
  * @generated
  */
 @ProviderType
-public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable {
+public class CPOptionCacheModel
+	implements CacheModel<CPOption>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -222,8 +222,7 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -310,4 +309,5 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 	public boolean skuContributor;
 	public String key;
 	public long lastPublishDate;
+
 }

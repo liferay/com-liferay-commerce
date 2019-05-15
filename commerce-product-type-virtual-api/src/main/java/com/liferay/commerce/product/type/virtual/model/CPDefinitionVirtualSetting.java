@@ -25,45 +25,53 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionVirtualSettingModel
- * @see com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl
- * @see com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl"
+)
 @ProviderType
 public interface CPDefinitionVirtualSetting
 	extends CPDefinitionVirtualSettingModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionVirtualSetting, Long> CP_DEFINITION_VIRTUAL_SETTING_ID_ACCESSOR =
-		new Accessor<CPDefinitionVirtualSetting, Long>() {
-			@Override
-			public Long get(
-				CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
-				return cpDefinitionVirtualSetting.getCPDefinitionVirtualSettingId();
-			}
+	public static final Accessor<CPDefinitionVirtualSetting, Long>
+		CP_DEFINITION_VIRTUAL_SETTING_ID_ACCESSOR =
+			new Accessor<CPDefinitionVirtualSetting, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
 
-			@Override
-			public Class<CPDefinitionVirtualSetting> getTypeClass() {
-				return CPDefinitionVirtualSetting.class;
-			}
-		};
+					return cpDefinitionVirtualSetting.
+						getCPDefinitionVirtualSettingId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionVirtualSetting> getTypeClass() {
+					return CPDefinitionVirtualSetting.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.portal.kernel.repository.model.FileEntry getSampleFileEntry()
+	public com.liferay.portal.kernel.repository.model.FileEntry
+			getSampleFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.journal.model.JournalArticle getTermsOfUseJournalArticle()
+	public com.liferay.journal.model.JournalArticle
+			getTermsOfUseJournalArticle()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public boolean isUseSampleUrl();
@@ -71,4 +79,5 @@ public interface CPDefinitionVirtualSetting
 	public boolean isUseTermsOfUseJournal();
 
 	public boolean isUseUrl();
+
 }

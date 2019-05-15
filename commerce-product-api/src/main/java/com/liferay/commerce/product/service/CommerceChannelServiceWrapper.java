@@ -26,68 +26,82 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CommerceChannelServiceWrapper implements CommerceChannelService,
-	ServiceWrapper<CommerceChannelService> {
+public class CommerceChannelServiceWrapper
+	implements CommerceChannelService, ServiceWrapper<CommerceChannelService> {
+
 	public CommerceChannelServiceWrapper(
 		CommerceChannelService commerceChannelService) {
+
 		_commerceChannelService = commerceChannelService;
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CommerceChannel
+			addCommerceChannel(
+				String name, String filterType, String type,
+				com.liferay.portal.kernel.util.UnicodeProperties
+					typeSettingsProperties,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceChannelService.addCommerceChannel(name, filterType,
-			type, typeSettingsProperties, serviceContext);
+
+		return _commerceChannelService.addCommerceChannel(
+			name, filterType, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CommerceChannel deleteCommerceChannel(
-		long commerceChannelId)
+	public com.liferay.commerce.product.model.CommerceChannel
+			deleteCommerceChannel(long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceChannelService.deleteCommerceChannel(commerceChannelId);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannel(
-		long commerceChannelId) {
+	public com.liferay.commerce.product.model.CommerceChannel
+		fetchCommerceChannel(long commerceChannelId) {
+
 		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CommerceChannel getCommerceChannel(
-		long commerceChannelId)
+	public com.liferay.commerce.product.model.CommerceChannel
+			getCommerceChannel(long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceChannelService.getCommerceChannel(commerceChannelId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
-		int start, int end)
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel>
+			getCommerceChannels(int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceChannelService.getCommerceChannels(start, end);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceChannelService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CommerceChannel
+			updateCommerceChannel(
+				long commerceChannelId, String name, String filterType,
+				String type,
+				com.liferay.portal.kernel.util.UnicodeProperties
+					typeSettingsProperties,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceChannelService.updateCommerceChannel(commerceChannelId,
-			name, filterType, type, typeSettingsProperties, serviceContext);
+
+		return _commerceChannelService.updateCommerceChannel(
+			commerceChannelId, name, filterType, type, typeSettingsProperties,
+			serviceContext);
 	}
 
 	@Override
@@ -96,9 +110,12 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 	}
 
 	@Override
-	public void setWrappedService(CommerceChannelService commerceChannelService) {
+	public void setWrappedService(
+		CommerceChannelService commerceChannelService) {
+
 		_commerceChannelService = commerceChannelService;
 	}
 
 	private CommerceChannelService _commerceChannelService;
+
 }

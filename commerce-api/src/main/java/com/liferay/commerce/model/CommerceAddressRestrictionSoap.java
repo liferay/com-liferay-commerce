@@ -26,16 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceAddressRestrictionServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceAddressRestrictionServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceAddressRestrictionSoap implements Serializable {
+
 	public static CommerceAddressRestrictionSoap toSoapModel(
 		CommerceAddressRestriction model) {
-		CommerceAddressRestrictionSoap soapModel = new CommerceAddressRestrictionSoap();
 
-		soapModel.setCommerceAddressRestrictionId(model.getCommerceAddressRestrictionId());
+		CommerceAddressRestrictionSoap soapModel =
+			new CommerceAddressRestrictionSoap();
+
+		soapModel.setCommerceAddressRestrictionId(
+			model.getCommerceAddressRestrictionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -51,7 +54,9 @@ public class CommerceAddressRestrictionSoap implements Serializable {
 
 	public static CommerceAddressRestrictionSoap[] toSoapModels(
 		CommerceAddressRestriction[] models) {
-		CommerceAddressRestrictionSoap[] soapModels = new CommerceAddressRestrictionSoap[models.length];
+
+		CommerceAddressRestrictionSoap[] soapModels =
+			new CommerceAddressRestrictionSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +67,13 @@ public class CommerceAddressRestrictionSoap implements Serializable {
 
 	public static CommerceAddressRestrictionSoap[][] toSoapModels(
 		CommerceAddressRestriction[][] models) {
+
 		CommerceAddressRestrictionSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceAddressRestrictionSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceAddressRestrictionSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceAddressRestrictionSoap[0][0];
@@ -80,13 +88,16 @@ public class CommerceAddressRestrictionSoap implements Serializable {
 
 	public static CommerceAddressRestrictionSoap[] toSoapModels(
 		List<CommerceAddressRestriction> models) {
-		List<CommerceAddressRestrictionSoap> soapModels = new ArrayList<CommerceAddressRestrictionSoap>(models.size());
+
+		List<CommerceAddressRestrictionSoap> soapModels =
+			new ArrayList<CommerceAddressRestrictionSoap>(models.size());
 
 		for (CommerceAddressRestriction model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceAddressRestrictionSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceAddressRestrictionSoap[soapModels.size()]);
 	}
 
 	public CommerceAddressRestrictionSoap() {
@@ -106,6 +117,7 @@ public class CommerceAddressRestrictionSoap implements Serializable {
 
 	public void setCommerceAddressRestrictionId(
 		long commerceAddressRestrictionId) {
+
 		_commerceAddressRestrictionId = commerceAddressRestrictionId;
 	}
 
@@ -191,4 +203,5 @@ public class CommerceAddressRestrictionSoap implements Serializable {
 	private long _classNameId;
 	private long _classPK;
 	private long _commerceCountryId;
+
 }

@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -45,58 +44,71 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingMethodServiceUtil
- * @see com.liferay.commerce.service.base.CommerceShippingMethodServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceShippingMethod"}, service = CommerceShippingMethodService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceShippingMethod"
+	},
+	service = CommerceShippingMethodService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceShippingMethodService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodServiceUtil} to access the commerce shipping method remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodServiceUtil} to access the commerce shipping method remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceAddressRestriction addCommerceAddressRestriction(
-		long commerceShippingMethodId, long commerceCountryId,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceShippingMethodId, long commerceCountryId,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommerceShippingMethod addCommerceShippingMethod(
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		File imageFile, String engineKey, double priority, boolean active,
-		ServiceContext serviceContext) throws PortalException;
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			File imageFile, String engineKey, double priority, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommerceShippingMethod createCommerceShippingMethod(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId) throws PortalException;
+			long commerceAddressRestrictionId)
+		throws PortalException;
 
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceShippingMethod fetchCommerceShippingMethod(long groupId,
-		String engineKey) throws PortalException;
+	public CommerceShippingMethod fetchCommerceShippingMethod(
+			long groupId, String engineKey)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
-		long commerceShippingMethodId, int start, int end,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+			long commerceShippingMethodId, int start, int end,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingMethod getCommerceShippingMethod(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingMethod> getCommerceShippingMethods(long groupId)
@@ -104,11 +116,12 @@ public interface CommerceShippingMethodService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, boolean active) throws PortalException;
+			long groupId, boolean active)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, long commerceCountryId, boolean active)
+			long groupId, long commerceCountryId, boolean active)
 		throws PrincipalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -116,17 +129,20 @@ public interface CommerceShippingMethodService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CommerceShippingMethod setActive(long commerceShippingMethodId,
-		boolean active) throws PortalException;
+	public CommerceShippingMethod setActive(
+			long commerceShippingMethodId, boolean active)
+		throws PortalException;
 
 	public CommerceShippingMethod updateCommerceShippingMethod(
-		long commerceShippingMethodId, Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, File imageFile, double priority,
-		boolean active) throws PortalException;
+			long commerceShippingMethodId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, File imageFile, double priority,
+			boolean active)
+		throws PortalException;
+
 }

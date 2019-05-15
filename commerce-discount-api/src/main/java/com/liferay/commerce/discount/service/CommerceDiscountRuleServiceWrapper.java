@@ -28,65 +28,82 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceDiscountRuleServiceWrapper
 	implements CommerceDiscountRuleService,
-		ServiceWrapper<CommerceDiscountRuleService> {
+			   ServiceWrapper<CommerceDiscountRuleService> {
+
 	public CommerceDiscountRuleServiceWrapper(
 		CommerceDiscountRuleService commerceDiscountRuleService) {
+
 		_commerceDiscountRuleService = commerceDiscountRuleService;
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscountRule addCommerceDiscountRule(
-		long commerceDiscountId, String type, String typeSettings,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.discount.model.CommerceDiscountRule
+			addCommerceDiscountRule(
+				long commerceDiscountId, String type, String typeSettings,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRuleService.addCommerceDiscountRule(commerceDiscountId,
-			type, typeSettings, serviceContext);
+
+		return _commerceDiscountRuleService.addCommerceDiscountRule(
+			commerceDiscountId, type, typeSettings, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceDiscountRule(long commerceDiscountRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceDiscountRuleService.deleteCommerceDiscountRule(commerceDiscountRuleId);
+
+		_commerceDiscountRuleService.deleteCommerceDiscountRule(
+			commerceDiscountRuleId);
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscountRule getCommerceDiscountRule(
-		long commerceDiscountRuleId)
+	public com.liferay.commerce.discount.model.CommerceDiscountRule
+			getCommerceDiscountRule(long commerceDiscountRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRuleService.getCommerceDiscountRule(commerceDiscountRuleId);
+
+		return _commerceDiscountRuleService.getCommerceDiscountRule(
+			commerceDiscountRuleId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.discount.model.CommerceDiscountRule> getCommerceDiscountRules(
-		long commerceDiscountId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscountRule> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRuleService.getCommerceDiscountRules(commerceDiscountId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.discount.model.CommerceDiscountRule>
+				getCommerceDiscountRules(
+					long commerceDiscountId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.discount.model.
+							CommerceDiscountRule> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountRuleService.getCommerceDiscountRules(
+			commerceDiscountId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceDiscountRulesCount(long commerceDiscountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRuleService.getCommerceDiscountRulesCount(commerceDiscountId);
+
+		return _commerceDiscountRuleService.getCommerceDiscountRulesCount(
+			commerceDiscountId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceDiscountRuleService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscountRule updateCommerceDiscountRule(
-		long commerceDiscountRuleId, String type, String typeSettings)
+	public com.liferay.commerce.discount.model.CommerceDiscountRule
+			updateCommerceDiscountRule(
+				long commerceDiscountRuleId, String type, String typeSettings)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountRuleService.updateCommerceDiscountRule(commerceDiscountRuleId,
-			type, typeSettings);
+
+		return _commerceDiscountRuleService.updateCommerceDiscountRule(
+			commerceDiscountRuleId, type, typeSettings);
 	}
 
 	@Override
@@ -97,8 +114,10 @@ public class CommerceDiscountRuleServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceDiscountRuleService commerceDiscountRuleService) {
+
 		_commerceDiscountRuleService = commerceDiscountRuleService;
 	}
 
 	private CommerceDiscountRuleService _commerceDiscountRuleService;
+
 }

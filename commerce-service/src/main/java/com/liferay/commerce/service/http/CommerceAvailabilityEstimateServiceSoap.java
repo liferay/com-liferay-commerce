@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceAvailabilityEstimateServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceAvailabilityEstimateServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceAvailabilityEstimateServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.model.CommerceAvailabilityEstimateSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.model.CommerceAvailabilityEstimate}, that is translated to a
- * {@link com.liferay.commerce.model.CommerceAvailabilityEstimateSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.model.CommerceAvailabilityEstimateSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.model.CommerceAvailabilityEstimate</code>, that is translated to a
+ * <code>com.liferay.commerce.model.CommerceAvailabilityEstimateSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,24 +63,30 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAvailabilityEstimateServiceHttp
- * @see com.liferay.commerce.model.CommerceAvailabilityEstimateSoap
- * @see CommerceAvailabilityEstimateServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAvailabilityEstimateServiceSoap {
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap addCommerceAvailabilityEstimate(
-		String[] titleMapLanguageIds, String[] titleMapValues, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap
+			addCommerceAvailabilityEstimate(
+				String[] titleMapLanguageIds, String[] titleMapValues,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
 
-			com.liferay.commerce.model.CommerceAvailabilityEstimate returnValue = CommerceAvailabilityEstimateServiceUtil.addCommerceAvailabilityEstimate(titleMap,
-					priority, serviceContext);
+			com.liferay.commerce.model.CommerceAvailabilityEstimate
+				returnValue =
+					CommerceAvailabilityEstimateServiceUtil.
+						addCommerceAvailabilityEstimate(
+							titleMap, priority, serviceContext);
 
-			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -90,41 +96,60 @@ public class CommerceAvailabilityEstimateServiceSoap {
 	}
 
 	public static void deleteCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId) throws RemoteException {
-		try {
-			CommerceAvailabilityEstimateServiceUtil.deleteCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap getCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceAvailabilityEstimate returnValue = CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
-
-			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap[] getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator)
+			long commerceAvailabilityEstimateId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> returnValue =
-				CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimates(groupId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.toSoapModels(returnValue);
+		try {
+			CommerceAvailabilityEstimateServiceUtil.
+				deleteCommerceAvailabilityEstimate(
+					commerceAvailabilityEstimateId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap
+			getCommerceAvailabilityEstimate(long commerceAvailabilityEstimateId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceAvailabilityEstimate
+				returnValue =
+					CommerceAvailabilityEstimateServiceUtil.
+						getCommerceAvailabilityEstimate(
+							commerceAvailabilityEstimateId);
+
+			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap[]
+			getCommerceAvailabilityEstimates(
+				long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceAvailabilityEstimate>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.model.CommerceAvailabilityEstimate>
+					returnValue =
+						CommerceAvailabilityEstimateServiceUtil.
+							getCommerceAvailabilityEstimates(
+								groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -135,8 +160,11 @@ public class CommerceAvailabilityEstimateServiceSoap {
 
 	public static int getCommerceAvailabilityEstimatesCount(long groupId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimatesCount(groupId);
+			int returnValue =
+				CommerceAvailabilityEstimateServiceUtil.
+					getCommerceAvailabilityEstimatesCount(groupId);
 
 			return returnValue;
 		}
@@ -147,19 +175,27 @@ public class CommerceAvailabilityEstimateServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap updateCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId, String[] titleMapLanguageIds,
-		String[] titleMapValues, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap
+			updateCommerceAvailabilityEstimate(
+				long commerceAvailabilityEstimateId,
+				String[] titleMapLanguageIds, String[] titleMapValues,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
 
-			com.liferay.commerce.model.CommerceAvailabilityEstimate returnValue = CommerceAvailabilityEstimateServiceUtil.updateCommerceAvailabilityEstimate(commerceAvailabilityEstimateId,
-					titleMap, priority, serviceContext);
+			com.liferay.commerce.model.CommerceAvailabilityEstimate
+				returnValue =
+					CommerceAvailabilityEstimateServiceUtil.
+						updateCommerceAvailabilityEstimate(
+							commerceAvailabilityEstimateId, titleMap, priority,
+							serviceContext);
 
-			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -168,5 +204,7 @@ public class CommerceAvailabilityEstimateServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceAvailabilityEstimateServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceAvailabilityEstimateServiceSoap.class);
+
 }

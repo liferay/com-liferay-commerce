@@ -28,87 +28,109 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceWarehouseItemServiceWrapper
 	implements CommerceWarehouseItemService,
-		ServiceWrapper<CommerceWarehouseItemService> {
+			   ServiceWrapper<CommerceWarehouseItemService> {
+
 	public CommerceWarehouseItemServiceWrapper(
 		CommerceWarehouseItemService commerceWarehouseItemService) {
+
 		_commerceWarehouseItemService = commerceWarehouseItemService;
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId, int quantity,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceWarehouseItem
+			addCommerceWarehouseItem(
+				long commerceWarehouseId, long cpInstanceId, int quantity,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.addCommerceWarehouseItem(commerceWarehouseId,
-			cpInstanceId, quantity, serviceContext);
+
+		return _commerceWarehouseItemService.addCommerceWarehouseItem(
+			commerceWarehouseId, cpInstanceId, quantity, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceWarehouseItem(long commerceWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceWarehouseItemService.deleteCommerceWarehouseItem(commerceWarehouseItemId);
+
+		_commerceWarehouseItemService.deleteCommerceWarehouseItem(
+			commerceWarehouseItemId);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId)
+	public com.liferay.commerce.model.CommerceWarehouseItem
+			fetchCommerceWarehouseItem(
+				long commerceWarehouseId, long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.fetchCommerceWarehouseItem(commerceWarehouseId,
+
+		return _commerceWarehouseItemService.fetchCommerceWarehouseItem(
+			commerceWarehouseId, cpInstanceId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceWarehouseItem
+			getCommerceWarehouseItem(long commerceWarehouseItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceWarehouseItemService.getCommerceWarehouseItem(
+			commerceWarehouseItemId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem>
+			getCommerceWarehouseItems(long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceWarehouseItemService.getCommerceWarehouseItems(
 			cpInstanceId);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceWarehouseItem getCommerceWarehouseItem(
-		long commerceWarehouseItemId)
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem>
+			getCommerceWarehouseItems(
+				long cpInstanceId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceWarehouseItem>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.getCommerceWarehouseItem(commerceWarehouseItemId);
-	}
 
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.getCommerceWarehouseItems(cpInstanceId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.getCommerceWarehouseItems(cpInstanceId,
-			start, end, orderByComparator);
+		return _commerceWarehouseItemService.getCommerceWarehouseItems(
+			cpInstanceId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceWarehouseItemsCount(long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.getCommerceWarehouseItemsCount(cpInstanceId);
+
+		return _commerceWarehouseItemService.getCommerceWarehouseItemsCount(
+			cpInstanceId);
 	}
 
 	@Override
 	public int getCPInstanceQuantity(long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.getCPInstanceQuantity(cpInstanceId);
+
+		return _commerceWarehouseItemService.getCPInstanceQuantity(
+			cpInstanceId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceWarehouseItemService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceWarehouseItem updateCommerceWarehouseItem(
-		long commerceWarehouseItemId, int quantity,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceWarehouseItem
+			updateCommerceWarehouseItem(
+				long commerceWarehouseItemId, int quantity,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWarehouseItemService.updateCommerceWarehouseItem(commerceWarehouseItemId,
-			quantity, serviceContext);
+
+		return _commerceWarehouseItemService.updateCommerceWarehouseItem(
+			commerceWarehouseItemId, quantity, serviceContext);
 	}
 
 	@Override
@@ -119,8 +141,10 @@ public class CommerceWarehouseItemServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceWarehouseItemService commerceWarehouseItemService) {
+
 		_commerceWarehouseItemService = commerceWarehouseItemService;
 	}
 
 	private CommerceWarehouseItemService _commerceWarehouseItemService;
+
 }

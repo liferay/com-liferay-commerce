@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceUserSegmentCriterionModel
- * @see com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionImpl
- * @see com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionImpl"
+)
 @ProviderType
 public interface CommerceUserSegmentCriterion
 	extends CommerceUserSegmentCriterionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentCriterionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceUserSegmentCriterion, Long> COMMERCE_USER_SEGMENT_CRITERION_ID_ACCESSOR =
-		new Accessor<CommerceUserSegmentCriterion, Long>() {
-			@Override
-			public Long get(
-				CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
-				return commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId();
-			}
+	public static final Accessor<CommerceUserSegmentCriterion, Long>
+		COMMERCE_USER_SEGMENT_CRITERION_ID_ACCESSOR =
+			new Accessor<CommerceUserSegmentCriterion, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
 
-			@Override
-			public Class<CommerceUserSegmentCriterion> getTypeClass() {
-				return CommerceUserSegmentCriterion.class;
-			}
-		};
+					return commerceUserSegmentCriterion.
+						getCommerceUserSegmentCriterionId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceUserSegmentCriterion> getTypeClass() {
+					return CommerceUserSegmentCriterion.class;
+				}
+
+			};
+
 }

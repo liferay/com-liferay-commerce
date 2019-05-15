@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderNote;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -38,33 +37,41 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderNoteServiceUtil
- * @see com.liferay.commerce.service.base.CommerceOrderNoteServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceOrderNote"}, service = CommerceOrderNoteService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceOrderNote"
+	},
+	service = CommerceOrderNoteService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceOrderNoteService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceOrderNoteServiceUtil} to access the commerce order note remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderNoteServiceUtil} to access the commerce order note remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceOrderNote addCommerceOrderNote(long commerceOrderId,
-		String content, boolean restricted, ServiceContext serviceContext)
+	public CommerceOrderNote addCommerceOrderNote(
+			long commerceOrderId, String content, boolean restricted,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceOrderNote fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CommerceOrderNote fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote fetchCommerceOrderNote(long commerceOrderNoteId)
@@ -75,33 +82,39 @@ public interface CommerceOrderNoteService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrderNote> getCommerceOrderNotes(long commerceOrderId,
-		boolean restricted) throws PortalException;
+	public List<CommerceOrderNote> getCommerceOrderNotes(
+			long commerceOrderId, boolean restricted)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrderNote> getCommerceOrderNotes(long commerceOrderId,
-		int start, int end) throws PortalException;
+	public List<CommerceOrderNote> getCommerceOrderNotes(
+			long commerceOrderId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderNotesCount(long commerceOrderId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceOrderNotesCount(long commerceOrderId,
-		boolean restricted) throws PortalException;
+	public int getCommerceOrderNotesCount(
+			long commerceOrderId, boolean restricted)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
-		String content, boolean restricted) throws PortalException;
-
-	public CommerceOrderNote upsertCommerceOrderNote(long commerceOrderNoteId,
-		long commerceOrderId, String content, boolean restricted,
-		String externalReferenceCode, ServiceContext serviceContext)
+	public CommerceOrderNote updateCommerceOrderNote(
+			long commerceOrderNoteId, String content, boolean restricted)
 		throws PortalException;
+
+	public CommerceOrderNote upsertCommerceOrderNote(
+			long commerceOrderNoteId, long commerceOrderId, String content,
+			boolean restricted, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

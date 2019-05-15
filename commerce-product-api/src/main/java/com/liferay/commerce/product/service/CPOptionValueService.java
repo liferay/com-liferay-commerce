@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOptionValue;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -40,33 +39,41 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionValueServiceUtil
- * @see com.liferay.commerce.product.service.base.CPOptionValueServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPOptionValueServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPOptionValue"}, service = CPOptionValueService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPOptionValue"
+	},
+	service = CPOptionValueService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPOptionValueService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPOptionValueServiceUtil} to access the cp option value remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPOptionValueServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPOptionValueServiceUtil} to access the cp option value remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPOptionValueServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPOptionValue addCPOptionValue(long cpOptionId,
-		Map<Locale, String> titleMap, double priority, String key,
-		ServiceContext serviceContext) throws PortalException;
+	public CPOptionValue addCPOptionValue(
+			long cpOptionId, Map<Locale, String> titleMap, double priority,
+			String key, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPOptionValue(long cpOptionValueId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionValue fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CPOptionValue fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOptionValue fetchCPOptionValue(long cpOptionValueId)
@@ -77,26 +84,29 @@ public interface CPOptionValueService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionValue> getCPOptionValues(long cpOptionId, int start,
-		int end) throws PortalException;
+	public List<CPOptionValue> getCPOptionValues(
+			long cpOptionId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionValuesCount(long cpOptionId)
-		throws PortalException;
+	public int getCPOptionValuesCount(long cpOptionId) throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPOptionValue updateCPOptionValue(long cpOptionValueId,
-		Map<Locale, String> titleMap, double priority, String key,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CPOptionValue upsertCPOptionValue(long cpOptionId,
-		Map<Locale, String> nameMap, double priority, String key,
-		String externalReferenceCode, ServiceContext serviceContext)
+	public CPOptionValue updateCPOptionValue(
+			long cpOptionValueId, Map<Locale, String> titleMap, double priority,
+			String key, ServiceContext serviceContext)
 		throws PortalException;
+
+	public CPOptionValue upsertCPOptionValue(
+			long cpOptionId, Map<Locale, String> nameMap, double priority,
+			String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

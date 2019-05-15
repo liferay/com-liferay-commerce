@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.tax.service.http.CommerceTaxMethodServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.tax.service.http.CommerceTaxMethodServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceTaxMethodSoap implements Serializable {
+
 	public static CommerceTaxMethodSoap toSoapModel(CommerceTaxMethod model) {
 		CommerceTaxMethodSoap soapModel = new CommerceTaxMethodSoap();
 
@@ -52,7 +52,9 @@ public class CommerceTaxMethodSoap implements Serializable {
 
 	public static CommerceTaxMethodSoap[] toSoapModels(
 		CommerceTaxMethod[] models) {
-		CommerceTaxMethodSoap[] soapModels = new CommerceTaxMethodSoap[models.length];
+
+		CommerceTaxMethodSoap[] soapModels =
+			new CommerceTaxMethodSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +65,12 @@ public class CommerceTaxMethodSoap implements Serializable {
 
 	public static CommerceTaxMethodSoap[][] toSoapModels(
 		CommerceTaxMethod[][] models) {
+
 		CommerceTaxMethodSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceTaxMethodSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceTaxMethodSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceTaxMethodSoap[0][0];
@@ -81,7 +85,9 @@ public class CommerceTaxMethodSoap implements Serializable {
 
 	public static CommerceTaxMethodSoap[] toSoapModels(
 		List<CommerceTaxMethod> models) {
-		List<CommerceTaxMethodSoap> soapModels = new ArrayList<CommerceTaxMethodSoap>(models.size());
+
+		List<CommerceTaxMethodSoap> soapModels =
+			new ArrayList<CommerceTaxMethodSoap>(models.size());
 
 		for (CommerceTaxMethod model : models) {
 			soapModels.add(toSoapModel(model));
@@ -217,4 +223,5 @@ public class CommerceTaxMethodSoap implements Serializable {
 	private String _engineKey;
 	private boolean _percentage;
 	private boolean _active;
+
 }

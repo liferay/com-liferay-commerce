@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.MVCCModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -32,12 +31,12 @@ import java.io.ObjectOutput;
  * The cache model class for representing CPDefinitionLocalization in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionLocalization
  * @generated
  */
 @ProviderType
-public class CPDefinitionLocalizationCacheModel implements CacheModel<CPDefinitionLocalization>,
-	Externalizable, MVCCModel {
+public class CPDefinitionLocalizationCacheModel
+	implements CacheModel<CPDefinitionLocalization>, Externalizable, MVCCModel {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -48,10 +47,14 @@ public class CPDefinitionLocalizationCacheModel implements CacheModel<CPDefiniti
 			return false;
 		}
 
-		CPDefinitionLocalizationCacheModel cpDefinitionLocalizationCacheModel = (CPDefinitionLocalizationCacheModel)obj;
+		CPDefinitionLocalizationCacheModel cpDefinitionLocalizationCacheModel =
+			(CPDefinitionLocalizationCacheModel)obj;
 
-		if ((cpDefinitionLocalizationId == cpDefinitionLocalizationCacheModel.cpDefinitionLocalizationId) &&
-				(mvccVersion == cpDefinitionLocalizationCacheModel.mvccVersion)) {
+		if ((cpDefinitionLocalizationId ==
+				cpDefinitionLocalizationCacheModel.
+					cpDefinitionLocalizationId) &&
+			(mvccVersion == cpDefinitionLocalizationCacheModel.mvccVersion)) {
+
 			return true;
 		}
 
@@ -108,10 +111,12 @@ public class CPDefinitionLocalizationCacheModel implements CacheModel<CPDefiniti
 
 	@Override
 	public CPDefinitionLocalization toEntityModel() {
-		CPDefinitionLocalizationImpl cpDefinitionLocalizationImpl = new CPDefinitionLocalizationImpl();
+		CPDefinitionLocalizationImpl cpDefinitionLocalizationImpl =
+			new CPDefinitionLocalizationImpl();
 
 		cpDefinitionLocalizationImpl.setMvccVersion(mvccVersion);
-		cpDefinitionLocalizationImpl.setCpDefinitionLocalizationId(cpDefinitionLocalizationId);
+		cpDefinitionLocalizationImpl.setCpDefinitionLocalizationId(
+			cpDefinitionLocalizationId);
 		cpDefinitionLocalizationImpl.setCompanyId(companyId);
 		cpDefinitionLocalizationImpl.setCPDefinitionId(CPDefinitionId);
 
@@ -188,8 +193,7 @@ public class CPDefinitionLocalizationCacheModel implements CacheModel<CPDefiniti
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(mvccVersion);
 
 		objectOutput.writeLong(cpDefinitionLocalizationId);
@@ -259,4 +263,5 @@ public class CPDefinitionLocalizationCacheModel implements CacheModel<CPDefiniti
 	public String metaTitle;
 	public String metaDescription;
 	public String metaKeywords;
+
 }

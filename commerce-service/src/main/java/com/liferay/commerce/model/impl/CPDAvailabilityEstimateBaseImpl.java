@@ -33,19 +33,24 @@ import com.liferay.commerce.service.CPDAvailabilityEstimateLocalServiceUtil;
  */
 @ProviderType
 public abstract class CPDAvailabilityEstimateBaseImpl
-	extends CPDAvailabilityEstimateModelImpl implements CPDAvailabilityEstimate {
+	extends CPDAvailabilityEstimateModelImpl
+	implements CPDAvailabilityEstimate {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cpd availability estimate model instance should use the {@link CPDAvailabilityEstimate} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cpd availability estimate model instance should use the <code>CPDAvailabilityEstimate</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDAvailabilityEstimateLocalServiceUtil.addCPDAvailabilityEstimate(this);
+			CPDAvailabilityEstimateLocalServiceUtil.addCPDAvailabilityEstimate(
+				this);
 		}
 		else {
-			CPDAvailabilityEstimateLocalServiceUtil.updateCPDAvailabilityEstimate(this);
+			CPDAvailabilityEstimateLocalServiceUtil.
+				updateCPDAvailabilityEstimate(this);
 		}
 	}
+
 }

@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CPTaxCategoryLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CPTaxCategoryBaseImpl extends CPTaxCategoryModelImpl
-	implements CPTaxCategory {
+public abstract class CPTaxCategoryBaseImpl
+	extends CPTaxCategoryModelImpl implements CPTaxCategory {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp tax category model instance should use the {@link CPTaxCategory} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp tax category model instance should use the <code>CPTaxCategory</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPTaxCategoryBaseImpl extends CPTaxCategoryModelImpl
 			CPTaxCategoryLocalServiceUtil.updateCPTaxCategory(this);
 		}
 	}
+
 }

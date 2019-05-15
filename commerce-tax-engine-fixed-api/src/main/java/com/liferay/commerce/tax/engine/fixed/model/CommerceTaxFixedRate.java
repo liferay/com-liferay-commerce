@@ -25,37 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceTaxFixedRateModel
- * @see com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateImpl
- * @see com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateImpl"
+)
 @ProviderType
-public interface CommerceTaxFixedRate extends CommerceTaxFixedRateModel,
-	PersistedModel {
+public interface CommerceTaxFixedRate
+	extends CommerceTaxFixedRateModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceTaxFixedRate, Long> COMMERCE_TAX_FIXED_RATE_ID_ACCESSOR =
-		new Accessor<CommerceTaxFixedRate, Long>() {
-			@Override
-			public Long get(CommerceTaxFixedRate commerceTaxFixedRate) {
-				return commerceTaxFixedRate.getCommerceTaxFixedRateId();
-			}
+	public static final Accessor<CommerceTaxFixedRate, Long>
+		COMMERCE_TAX_FIXED_RATE_ID_ACCESSOR =
+			new Accessor<CommerceTaxFixedRate, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceTaxFixedRate commerceTaxFixedRate) {
+					return commerceTaxFixedRate.getCommerceTaxFixedRateId();
+				}
 
-			@Override
-			public Class<CommerceTaxFixedRate> getTypeClass() {
-				return CommerceTaxFixedRate.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceTaxFixedRate> getTypeClass() {
+					return CommerceTaxFixedRate.class;
+				}
+
+			};
 
 	public com.liferay.commerce.product.model.CPTaxCategory getCPTaxCategory()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

@@ -26,17 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPDefinitionOptionRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPDefinitionOptionRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionOptionRelSoap implements Serializable {
+
 	public static CPDefinitionOptionRelSoap toSoapModel(
 		CPDefinitionOptionRel model) {
+
 		CPDefinitionOptionRelSoap soapModel = new CPDefinitionOptionRelSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionOptionRelId(model.getCPDefinitionOptionRelId());
+		soapModel.setCPDefinitionOptionRelId(
+			model.getCPDefinitionOptionRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -58,7 +60,9 @@ public class CPDefinitionOptionRelSoap implements Serializable {
 
 	public static CPDefinitionOptionRelSoap[] toSoapModels(
 		CPDefinitionOptionRel[] models) {
-		CPDefinitionOptionRelSoap[] soapModels = new CPDefinitionOptionRelSoap[models.length];
+
+		CPDefinitionOptionRelSoap[] soapModels =
+			new CPDefinitionOptionRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -69,10 +73,12 @@ public class CPDefinitionOptionRelSoap implements Serializable {
 
 	public static CPDefinitionOptionRelSoap[][] toSoapModels(
 		CPDefinitionOptionRel[][] models) {
+
 		CPDefinitionOptionRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionOptionRelSoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionOptionRelSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionOptionRelSoap[0][0];
@@ -87,13 +93,16 @@ public class CPDefinitionOptionRelSoap implements Serializable {
 
 	public static CPDefinitionOptionRelSoap[] toSoapModels(
 		List<CPDefinitionOptionRel> models) {
-		List<CPDefinitionOptionRelSoap> soapModels = new ArrayList<CPDefinitionOptionRelSoap>(models.size());
+
+		List<CPDefinitionOptionRelSoap> soapModels =
+			new ArrayList<CPDefinitionOptionRelSoap>(models.size());
 
 		for (CPDefinitionOptionRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionOptionRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionOptionRelSoap[soapModels.size()]);
 	}
 
 	public CPDefinitionOptionRelSoap() {
@@ -272,4 +281,5 @@ public class CPDefinitionOptionRelSoap implements Serializable {
 	private boolean _facetable;
 	private boolean _required;
 	private boolean _skuContributor;
+
 }

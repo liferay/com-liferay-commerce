@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceRegionServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceRegionServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceRegionSoap implements Serializable {
+
 	public static CommerceRegionSoap toSoapModel(CommerceRegion model) {
 		CommerceRegionSoap soapModel = new CommerceRegionSoap();
 
@@ -62,11 +62,14 @@ public class CommerceRegionSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static CommerceRegionSoap[][] toSoapModels(CommerceRegion[][] models) {
+	public static CommerceRegionSoap[][] toSoapModels(
+		CommerceRegion[][] models) {
+
 		CommerceRegionSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceRegionSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceRegionSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceRegionSoap[0][0];
@@ -79,8 +82,11 @@ public class CommerceRegionSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static CommerceRegionSoap[] toSoapModels(List<CommerceRegion> models) {
-		List<CommerceRegionSoap> soapModels = new ArrayList<CommerceRegionSoap>(models.size());
+	public static CommerceRegionSoap[] toSoapModels(
+		List<CommerceRegion> models) {
+
+		List<CommerceRegionSoap> soapModels = new ArrayList<CommerceRegionSoap>(
+			models.size());
 
 		for (CommerceRegion model : models) {
 			soapModels.add(toSoapModel(model));
@@ -230,4 +236,5 @@ public class CommerceRegionSoap implements Serializable {
 	private double _priority;
 	private boolean _active;
 	private Date _lastPublishDate;
+
 }

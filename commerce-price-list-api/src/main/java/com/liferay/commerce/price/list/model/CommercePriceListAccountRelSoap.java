@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.price.list.service.http.CommercePriceListAccountRelServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.price.list.service.http.CommercePriceListAccountRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommercePriceListAccountRelSoap implements Serializable {
+
 	public static CommercePriceListAccountRelSoap toSoapModel(
 		CommercePriceListAccountRel model) {
-		CommercePriceListAccountRelSoap soapModel = new CommercePriceListAccountRelSoap();
+
+		CommercePriceListAccountRelSoap soapModel =
+			new CommercePriceListAccountRelSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommercePriceListAccountRelId(model.getCommercePriceListAccountRelId());
+		soapModel.setCommercePriceListAccountRelId(
+			model.getCommercePriceListAccountRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -53,7 +56,9 @@ public class CommercePriceListAccountRelSoap implements Serializable {
 
 	public static CommercePriceListAccountRelSoap[] toSoapModels(
 		CommercePriceListAccountRel[] models) {
-		CommercePriceListAccountRelSoap[] soapModels = new CommercePriceListAccountRelSoap[models.length];
+
+		CommercePriceListAccountRelSoap[] soapModels =
+			new CommercePriceListAccountRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -64,10 +69,12 @@ public class CommercePriceListAccountRelSoap implements Serializable {
 
 	public static CommercePriceListAccountRelSoap[][] toSoapModels(
 		CommercePriceListAccountRel[][] models) {
+
 		CommercePriceListAccountRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommercePriceListAccountRelSoap[models.length][models[0].length];
+			soapModels = new CommercePriceListAccountRelSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommercePriceListAccountRelSoap[0][0];
@@ -82,13 +89,16 @@ public class CommercePriceListAccountRelSoap implements Serializable {
 
 	public static CommercePriceListAccountRelSoap[] toSoapModels(
 		List<CommercePriceListAccountRel> models) {
-		List<CommercePriceListAccountRelSoap> soapModels = new ArrayList<CommercePriceListAccountRelSoap>(models.size());
+
+		List<CommercePriceListAccountRelSoap> soapModels =
+			new ArrayList<CommercePriceListAccountRelSoap>(models.size());
 
 		for (CommercePriceListAccountRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommercePriceListAccountRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommercePriceListAccountRelSoap[soapModels.size()]);
 	}
 
 	public CommercePriceListAccountRelSoap() {
@@ -116,6 +126,7 @@ public class CommercePriceListAccountRelSoap implements Serializable {
 
 	public void setCommercePriceListAccountRelId(
 		long commercePriceListAccountRelId) {
+
 		_commercePriceListAccountRelId = commercePriceListAccountRelId;
 	}
 
@@ -211,4 +222,5 @@ public class CommercePriceListAccountRelSoap implements Serializable {
 	private long _commercePriceListId;
 	private int _order;
 	private Date _lastPublishDate;
+
 }

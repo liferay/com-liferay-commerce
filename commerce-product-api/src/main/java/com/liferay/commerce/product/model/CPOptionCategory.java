@@ -25,33 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPOptionCategoryModel
- * @see com.liferay.commerce.product.model.impl.CPOptionCategoryImpl
- * @see com.liferay.commerce.product.model.impl.CPOptionCategoryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPOptionCategoryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPOptionCategoryImpl"
+)
 @ProviderType
-public interface CPOptionCategory extends CPOptionCategoryModel, PersistedModel {
+public interface CPOptionCategory
+	extends CPOptionCategoryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPOptionCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPOptionCategoryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPOptionCategory, Long> CP_OPTION_CATEGORY_ID_ACCESSOR =
-		new Accessor<CPOptionCategory, Long>() {
-			@Override
-			public Long get(CPOptionCategory cpOptionCategory) {
-				return cpOptionCategory.getCPOptionCategoryId();
-			}
+	public static final Accessor<CPOptionCategory, Long>
+		CP_OPTION_CATEGORY_ID_ACCESSOR =
+			new Accessor<CPOptionCategory, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPOptionCategory cpOptionCategory) {
+					return cpOptionCategory.getCPOptionCategoryId();
+				}
 
-			@Override
-			public Class<CPOptionCategory> getTypeClass() {
-				return CPOptionCategory.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPOptionCategory> getTypeClass() {
+					return CPOptionCategory.class;
+				}
+
+			};
+
 }

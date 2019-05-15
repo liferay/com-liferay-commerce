@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.type.virtual.service.http.CPDefinitionVirtualSettingServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.type.virtual.service.http.CPDefinitionVirtualSettingServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionVirtualSettingSoap implements Serializable {
+
 	public static CPDefinitionVirtualSettingSoap toSoapModel(
 		CPDefinitionVirtualSetting model) {
-		CPDefinitionVirtualSettingSoap soapModel = new CPDefinitionVirtualSettingSoap();
+
+		CPDefinitionVirtualSettingSoap soapModel =
+			new CPDefinitionVirtualSettingSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionVirtualSettingId(model.getCPDefinitionVirtualSettingId());
+		soapModel.setCPDefinitionVirtualSettingId(
+			model.getCPDefinitionVirtualSettingId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -55,7 +58,8 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 		soapModel.setSampleUrl(model.getSampleUrl());
 		soapModel.setTermsOfUseRequired(model.isTermsOfUseRequired());
 		soapModel.setTermsOfUseContent(model.getTermsOfUseContent());
-		soapModel.setTermsOfUseJournalArticleResourcePrimKey(model.getTermsOfUseJournalArticleResourcePrimKey());
+		soapModel.setTermsOfUseJournalArticleResourcePrimKey(
+			model.getTermsOfUseJournalArticleResourcePrimKey());
 		soapModel.setOverride(model.isOverride());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 
@@ -64,7 +68,9 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public static CPDefinitionVirtualSettingSoap[] toSoapModels(
 		CPDefinitionVirtualSetting[] models) {
-		CPDefinitionVirtualSettingSoap[] soapModels = new CPDefinitionVirtualSettingSoap[models.length];
+
+		CPDefinitionVirtualSettingSoap[] soapModels =
+			new CPDefinitionVirtualSettingSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -75,10 +81,13 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public static CPDefinitionVirtualSettingSoap[][] toSoapModels(
 		CPDefinitionVirtualSetting[][] models) {
+
 		CPDefinitionVirtualSettingSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionVirtualSettingSoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionVirtualSettingSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionVirtualSettingSoap[0][0];
@@ -93,13 +102,16 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public static CPDefinitionVirtualSettingSoap[] toSoapModels(
 		List<CPDefinitionVirtualSetting> models) {
-		List<CPDefinitionVirtualSettingSoap> soapModels = new ArrayList<CPDefinitionVirtualSettingSoap>(models.size());
+
+		List<CPDefinitionVirtualSettingSoap> soapModels =
+			new ArrayList<CPDefinitionVirtualSettingSoap>(models.size());
 
 		for (CPDefinitionVirtualSetting model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionVirtualSettingSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionVirtualSettingSoap[soapModels.size()]);
 	}
 
 	public CPDefinitionVirtualSettingSoap() {
@@ -127,6 +139,7 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public void setCPDefinitionVirtualSettingId(
 		long CPDefinitionVirtualSettingId) {
+
 		_CPDefinitionVirtualSettingId = CPDefinitionVirtualSettingId;
 	}
 
@@ -288,7 +301,9 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public void setTermsOfUseJournalArticleResourcePrimKey(
 		long termsOfUseJournalArticleResourcePrimKey) {
-		_termsOfUseJournalArticleResourcePrimKey = termsOfUseJournalArticleResourcePrimKey;
+
+		_termsOfUseJournalArticleResourcePrimKey =
+			termsOfUseJournalArticleResourcePrimKey;
 	}
 
 	public boolean getOverride() {
@@ -334,4 +349,5 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 	private long _termsOfUseJournalArticleResourcePrimKey;
 	private boolean _override;
 	private Date _lastPublishDate;
+
 }

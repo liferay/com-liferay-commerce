@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscount;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceDiscount in entity cache.
  *
  * @author Marco Leo
- * @see CommerceDiscount
  * @generated
  */
 @ProviderType
-public class CommerceDiscountCacheModel implements CacheModel<CommerceDiscount>,
-	Externalizable {
+public class CommerceDiscountCacheModel
+	implements CacheModel<CommerceDiscount>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,9 +50,12 @@ public class CommerceDiscountCacheModel implements CacheModel<CommerceDiscount>,
 			return false;
 		}
 
-		CommerceDiscountCacheModel commerceDiscountCacheModel = (CommerceDiscountCacheModel)obj;
+		CommerceDiscountCacheModel commerceDiscountCacheModel =
+			(CommerceDiscountCacheModel)obj;
 
-		if (commerceDiscountId == commerceDiscountCacheModel.commerceDiscountId) {
+		if (commerceDiscountId ==
+				commerceDiscountCacheModel.commerceDiscountId) {
+
 			return true;
 		}
 
@@ -256,6 +258,7 @@ public class CommerceDiscountCacheModel implements CacheModel<CommerceDiscount>,
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		uuid = objectInput.readUTF();
 
 		commerceDiscountId = objectInput.readLong();
@@ -299,8 +302,7 @@ public class CommerceDiscountCacheModel implements CacheModel<CommerceDiscount>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -415,4 +417,5 @@ public class CommerceDiscountCacheModel implements CacheModel<CommerceDiscount>,
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

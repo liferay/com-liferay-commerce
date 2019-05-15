@@ -16,7 +16,6 @@ package com.liferay.commerce.currency.service.persistence.impl;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.persistence.CommerceCurrencyPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,22 +31,24 @@ import java.util.Set;
  * @author Andrea Di Giorgi
  * @generated
  */
-public class CommerceCurrencyFinderBaseImpl extends BasePersistenceImpl<CommerceCurrency> {
+public class CommerceCurrencyFinderBaseImpl
+	extends BasePersistenceImpl<CommerceCurrency> {
+
 	public CommerceCurrencyFinderBaseImpl() {
 		setModelClass(CommerceCurrency.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put("code", "code_");
+		dbColumnNames.put("primary", "primary_");
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("code", "code_");
-			dbColumnNames.put("primary", "primary_");
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -79,10 +80,14 @@ public class CommerceCurrencyFinderBaseImpl extends BasePersistenceImpl<Commerce
 	 */
 	public void setCommerceCurrencyPersistence(
 		CommerceCurrencyPersistence commerceCurrencyPersistence) {
+
 		this.commerceCurrencyPersistence = commerceCurrencyPersistence;
 	}
 
 	@BeanReference(type = CommerceCurrencyPersistence.class)
 	protected CommerceCurrencyPersistence commerceCurrencyPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceCurrencyFinderBaseImpl.class);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceCurrencyFinderBaseImpl.class);
+
 }

@@ -16,7 +16,6 @@ package com.liferay.commerce.tax.engine.fixed.service.persistence.impl;
 
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,19 +33,20 @@ import java.util.Set;
  */
 public class CommerceTaxFixedRateAddressRelFinderBaseImpl
 	extends BasePersistenceImpl<CommerceTaxFixedRateAddressRel> {
+
 	public CommerceTaxFixedRateAddressRelFinderBaseImpl() {
 		setModelClass(CommerceTaxFixedRateAddressRel.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceTaxFixedRateAddressRelId", "CTaxFixedRateAddressRelId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceTaxFixedRateAddressRelId",
-				"CTaxFixedRateAddressRelId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -59,7 +59,8 @@ public class CommerceTaxFixedRateAddressRelFinderBaseImpl
 
 	@Override
 	public Set<String> getBadColumnNames() {
-		return getCommerceTaxFixedRateAddressRelPersistence().getBadColumnNames();
+		return getCommerceTaxFixedRateAddressRelPersistence().
+			getBadColumnNames();
 	}
 
 	/**
@@ -67,7 +68,9 @@ public class CommerceTaxFixedRateAddressRelFinderBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel persistence
 	 */
-	public CommerceTaxFixedRateAddressRelPersistence getCommerceTaxFixedRateAddressRelPersistence() {
+	public CommerceTaxFixedRateAddressRelPersistence
+		getCommerceTaxFixedRateAddressRelPersistence() {
+
 		return commerceTaxFixedRateAddressRelPersistence;
 	}
 
@@ -77,11 +80,18 @@ public class CommerceTaxFixedRateAddressRelFinderBaseImpl
 	 * @param commerceTaxFixedRateAddressRelPersistence the commerce tax fixed rate address rel persistence
 	 */
 	public void setCommerceTaxFixedRateAddressRelPersistence(
-		CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence) {
-		this.commerceTaxFixedRateAddressRelPersistence = commerceTaxFixedRateAddressRelPersistence;
+		CommerceTaxFixedRateAddressRelPersistence
+			commerceTaxFixedRateAddressRelPersistence) {
+
+		this.commerceTaxFixedRateAddressRelPersistence =
+			commerceTaxFixedRateAddressRelPersistence;
 	}
 
 	@BeanReference(type = CommerceTaxFixedRateAddressRelPersistence.class)
-	protected CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceTaxFixedRateAddressRelFinderBaseImpl.class);
+	protected CommerceTaxFixedRateAddressRelPersistence
+		commerceTaxFixedRateAddressRelPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceTaxFixedRateAddressRelFinderBaseImpl.class);
+
 }

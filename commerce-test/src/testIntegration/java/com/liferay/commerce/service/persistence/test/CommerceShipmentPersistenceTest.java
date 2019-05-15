@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchShipmentException;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.service.CommerceShipmentLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShipmentUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,17 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceShipmentPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -106,7 +105,8 @@ public class CommerceShipmentPersistenceTest {
 
 		_persistence.remove(newCommerceShipment);
 
-		CommerceShipment existingCommerceShipment = _persistence.fetchByPrimaryKey(newCommerceShipment.getPrimaryKey());
+		CommerceShipment existingCommerceShipment =
+			_persistence.fetchByPrimaryKey(newCommerceShipment.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceShipment);
 	}
@@ -138,9 +138,11 @@ public class CommerceShipmentPersistenceTest {
 
 		newCommerceShipment.setCommerceAddressId(RandomTestUtil.nextLong());
 
-		newCommerceShipment.setCommerceShippingMethodId(RandomTestUtil.nextLong());
+		newCommerceShipment.setCommerceShippingMethodId(
+			RandomTestUtil.nextLong());
 
-		newCommerceShipment.setShippingOptionName(RandomTestUtil.randomString());
+		newCommerceShipment.setShippingOptionName(
+			RandomTestUtil.randomString());
 
 		newCommerceShipment.setCarrier(RandomTestUtil.randomString());
 
@@ -154,43 +156,56 @@ public class CommerceShipmentPersistenceTest {
 
 		_commerceShipments.add(_persistence.update(newCommerceShipment));
 
-		CommerceShipment existingCommerceShipment = _persistence.findByPrimaryKey(newCommerceShipment.getPrimaryKey());
+		CommerceShipment existingCommerceShipment =
+			_persistence.findByPrimaryKey(newCommerceShipment.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceShipment.getCommerceShipmentId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCommerceShipmentId(),
 			newCommerceShipment.getCommerceShipmentId());
-		Assert.assertEquals(existingCommerceShipment.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getGroupId(),
 			newCommerceShipment.getGroupId());
-		Assert.assertEquals(existingCommerceShipment.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCompanyId(),
 			newCommerceShipment.getCompanyId());
-		Assert.assertEquals(existingCommerceShipment.getUserId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getUserId(),
 			newCommerceShipment.getUserId());
-		Assert.assertEquals(existingCommerceShipment.getUserName(),
+		Assert.assertEquals(
+			existingCommerceShipment.getUserName(),
 			newCommerceShipment.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceShipment.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceShipment.getCreateDate()),
 			Time.getShortTimestamp(newCommerceShipment.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceShipment.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceShipment.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceShipment.getModifiedDate()));
-		Assert.assertEquals(existingCommerceShipment.getCommerceAccountId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCommerceAccountId(),
 			newCommerceShipment.getCommerceAccountId());
-		Assert.assertEquals(existingCommerceShipment.getCommerceAddressId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCommerceAddressId(),
 			newCommerceShipment.getCommerceAddressId());
-		Assert.assertEquals(existingCommerceShipment.getCommerceShippingMethodId(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCommerceShippingMethodId(),
 			newCommerceShipment.getCommerceShippingMethodId());
-		Assert.assertEquals(existingCommerceShipment.getShippingOptionName(),
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingOptionName(),
 			newCommerceShipment.getShippingOptionName());
-		Assert.assertEquals(existingCommerceShipment.getCarrier(),
+		Assert.assertEquals(
+			existingCommerceShipment.getCarrier(),
 			newCommerceShipment.getCarrier());
-		Assert.assertEquals(existingCommerceShipment.getTrackingNumber(),
+		Assert.assertEquals(
+			existingCommerceShipment.getTrackingNumber(),
 			newCommerceShipment.getTrackingNumber());
-		Assert.assertEquals(existingCommerceShipment.getStatus(),
+		Assert.assertEquals(
+			existingCommerceShipment.getStatus(),
 			newCommerceShipment.getStatus());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceShipment.getShippingDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceShipment.getShippingDate()),
 			Time.getShortTimestamp(newCommerceShipment.getShippingDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceShipment.getExpectedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceShipment.getExpectedDate()),
 			Time.getShortTimestamp(newCommerceShipment.getExpectedDate()));
 	}
 
@@ -203,8 +218,8 @@ public class CommerceShipmentPersistenceTest {
 
 	@Test
 	public void testCountByG_S() throws Exception {
-		_persistence.countByG_S(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+		_persistence.countByG_S(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByG_S(0L, 0);
 	}
@@ -213,7 +228,8 @@ public class CommerceShipmentPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
-		CommerceShipment existingCommerceShipment = _persistence.findByPrimaryKey(newCommerceShipment.getPrimaryKey());
+		CommerceShipment existingCommerceShipment =
+			_persistence.findByPrimaryKey(newCommerceShipment.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceShipment, newCommerceShipment);
 	}
@@ -227,25 +243,26 @@ public class CommerceShipmentPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceShipment> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceShipment",
-			"commerceShipmentId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceAccountId", true,
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceShipment", "commerceShipmentId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commerceAccountId", true,
 			"commerceAddressId", true, "commerceShippingMethodId", true,
-			"shippingOptionName", true, "carrier", true, "trackingNumber",
-			true, "status", true, "shippingDate", true, "expectedDate", true);
+			"shippingOptionName", true, "carrier", true, "trackingNumber", true,
+			"status", true, "shippingDate", true, "expectedDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
-		CommerceShipment existingCommerceShipment = _persistence.fetchByPrimaryKey(newCommerceShipment.getPrimaryKey());
+		CommerceShipment existingCommerceShipment =
+			_persistence.fetchByPrimaryKey(newCommerceShipment.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceShipment, newCommerceShipment);
 	}
@@ -254,7 +271,8 @@ public class CommerceShipmentPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceShipment missingCommerceShipment = _persistence.fetchByPrimaryKey(pk);
+		CommerceShipment missingCommerceShipment =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceShipment);
 	}
@@ -262,6 +280,7 @@ public class CommerceShipmentPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CommerceShipment newCommerceShipment1 = addCommerceShipment();
 		CommerceShipment newCommerceShipment2 = addCommerceShipment();
 
@@ -270,18 +289,22 @@ public class CommerceShipmentPersistenceTest {
 		primaryKeys.add(newCommerceShipment1.getPrimaryKey());
 		primaryKeys.add(newCommerceShipment2.getPrimaryKey());
 
-		Map<Serializable, CommerceShipment> commerceShipments = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceShipment> commerceShipments =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceShipments.size());
-		Assert.assertEquals(newCommerceShipment1,
+		Assert.assertEquals(
+			newCommerceShipment1,
 			commerceShipments.get(newCommerceShipment1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceShipment2,
+		Assert.assertEquals(
+			newCommerceShipment2,
 			commerceShipments.get(newCommerceShipment2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -291,7 +314,8 @@ public class CommerceShipmentPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceShipment> commerceShipments = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceShipment> commerceShipments =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceShipments.isEmpty());
 	}
@@ -299,6 +323,7 @@ public class CommerceShipmentPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
 		long pk = RandomTestUtil.nextLong();
@@ -308,36 +333,39 @@ public class CommerceShipmentPersistenceTest {
 		primaryKeys.add(newCommerceShipment.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceShipment> commerceShipments = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceShipment> commerceShipments =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceShipments.size());
-		Assert.assertEquals(newCommerceShipment,
+		Assert.assertEquals(
+			newCommerceShipment,
 			commerceShipments.get(newCommerceShipment.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceShipment> commerceShipments = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceShipment> commerceShipments =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceShipments.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceShipment.getPrimaryKey());
 
-		Map<Serializable, CommerceShipment> commerceShipments = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceShipment> commerceShipments =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceShipments.size());
-		Assert.assertEquals(newCommerceShipment,
+		Assert.assertEquals(
+			newCommerceShipment,
 			commerceShipments.get(newCommerceShipment.getPrimaryKey()));
 	}
 
@@ -345,15 +373,19 @@ public class CommerceShipmentPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceShipmentLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceShipmentLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceShipment>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CommerceShipment>() {
+
 				@Override
 				public void performAction(CommerceShipment commerceShipment) {
 					Assert.assertNotNull(commerceShipment);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -362,17 +394,19 @@ public class CommerceShipmentPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceShipment.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceShipment.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceShipmentId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceShipmentId",
 				newCommerceShipment.getCommerceShipmentId()));
 
-		List<CommerceShipment> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceShipment> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -383,32 +417,35 @@ public class CommerceShipmentPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceShipment.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceShipment.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceShipmentId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceShipmentId", RandomTestUtil.nextLong()));
 
-		List<CommerceShipment> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceShipment> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CommerceShipment newCommerceShipment = addCommerceShipment();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceShipment.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceShipment.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceShipmentId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceShipmentId"));
 
-		Object newCommerceShipmentId = newCommerceShipment.getCommerceShipmentId();
+		Object newCommerceShipmentId =
+			newCommerceShipment.getCommerceShipmentId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceShipmentId",
-				new Object[] { newCommerceShipmentId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceShipmentId", new Object[] {newCommerceShipmentId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -421,14 +458,16 @@ public class CommerceShipmentPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceShipment.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceShipment.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceShipmentId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceShipmentId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceShipmentId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceShipmentId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -475,7 +514,9 @@ public class CommerceShipmentPersistenceTest {
 		return commerceShipment;
 	}
 
-	private List<CommerceShipment> _commerceShipments = new ArrayList<CommerceShipment>();
+	private List<CommerceShipment> _commerceShipments =
+		new ArrayList<CommerceShipment>();
 	private CommerceShipmentPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

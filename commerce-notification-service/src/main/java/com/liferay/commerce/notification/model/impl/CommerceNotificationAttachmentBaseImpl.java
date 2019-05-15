@@ -35,18 +35,22 @@ import com.liferay.commerce.notification.service.CommerceNotificationAttachmentL
 public abstract class CommerceNotificationAttachmentBaseImpl
 	extends CommerceNotificationAttachmentModelImpl
 	implements CommerceNotificationAttachment {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce notification attachment model instance should use the {@link CommerceNotificationAttachment} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce notification attachment model instance should use the <code>CommerceNotificationAttachment</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceNotificationAttachmentLocalServiceUtil.addCommerceNotificationAttachment(this);
+			CommerceNotificationAttachmentLocalServiceUtil.
+				addCommerceNotificationAttachment(this);
 		}
 		else {
-			CommerceNotificationAttachmentLocalServiceUtil.updateCommerceNotificationAttachment(this);
+			CommerceNotificationAttachmentLocalServiceUtil.
+				updateCommerceNotificationAttachment(this);
 		}
 	}
+
 }

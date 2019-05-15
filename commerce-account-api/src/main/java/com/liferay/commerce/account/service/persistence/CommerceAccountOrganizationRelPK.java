@@ -26,16 +26,18 @@ import java.io.Serializable;
  * @generated
  */
 @ProviderType
-public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAccountOrganizationRelPK>,
-	Serializable {
+public class CommerceAccountOrganizationRelPK
+	implements Comparable<CommerceAccountOrganizationRelPK>, Serializable {
+
 	public long commerceAccountId;
 	public long organizationId;
 
 	public CommerceAccountOrganizationRelPK() {
 	}
 
-	public CommerceAccountOrganizationRelPK(long commerceAccountId,
-		long organizationId) {
+	public CommerceAccountOrganizationRelPK(
+		long commerceAccountId, long organizationId) {
+
 		this.commerceAccountId = commerceAccountId;
 		this.organizationId = organizationId;
 	}
@@ -105,10 +107,12 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 			return false;
 		}
 
-		CommerceAccountOrganizationRelPK pk = (CommerceAccountOrganizationRelPK)obj;
+		CommerceAccountOrganizationRelPK pk =
+			(CommerceAccountOrganizationRelPK)obj;
 
 		if ((commerceAccountId == pk.commerceAccountId) &&
-				(organizationId == pk.organizationId)) {
+			(organizationId == pk.organizationId)) {
+
 			return true;
 		}
 		else {
@@ -143,4 +147,5 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 
 		return sb.toString();
 	}
+
 }

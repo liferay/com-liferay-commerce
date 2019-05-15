@@ -25,20 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPOptionValueModel
- * @see com.liferay.commerce.product.model.impl.CPOptionValueImpl
- * @see com.liferay.commerce.product.model.impl.CPOptionValueModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPOptionValueImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPOptionValueImpl"
+)
 @ProviderType
 public interface CPOptionValue extends CPOptionValueModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPOptionValueImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPOptionValueImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPOptionValue, Long> CP_OPTION_VALUE_ID_ACCESSOR =
-		new Accessor<CPOptionValue, Long>() {
+	public static final Accessor<CPOptionValue, Long>
+		CP_OPTION_VALUE_ID_ACCESSOR = new Accessor<CPOptionValue, Long>() {
+
 			@Override
 			public Long get(CPOptionValue cpOptionValue) {
 				return cpOptionValue.getCPOptionValueId();
@@ -53,8 +55,10 @@ public interface CPOptionValue extends CPOptionValueModel, PersistedModel {
 			public Class<CPOptionValue> getTypeClass() {
 				return CPOptionValue.class;
 			}
+
 		};
 
 	public CPOption getCPOption()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

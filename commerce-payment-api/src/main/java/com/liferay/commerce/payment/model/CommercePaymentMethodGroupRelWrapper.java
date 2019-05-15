@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,9 +39,11 @@ import java.util.Objects;
 @ProviderType
 public class CommercePaymentMethodGroupRelWrapper
 	implements CommercePaymentMethodGroupRel,
-		ModelWrapper<CommercePaymentMethodGroupRel> {
+			   ModelWrapper<CommercePaymentMethodGroupRel> {
+
 	public CommercePaymentMethodGroupRelWrapper(
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
+
 		_commercePaymentMethodGroupRel = commercePaymentMethodGroupRel;
 	}
 
@@ -60,7 +61,8 @@ public class CommercePaymentMethodGroupRelWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commercePaymentMethodGroupRelId",
+		attributes.put(
+			"commercePaymentMethodGroupRelId",
 			getCommercePaymentMethodGroupRelId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -81,7 +83,7 @@ public class CommercePaymentMethodGroupRelWrapper
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commercePaymentMethodGroupRelId = (Long)attributes.get(
-				"commercePaymentMethodGroupRelId");
+			"commercePaymentMethodGroupRelId");
 
 		if (commercePaymentMethodGroupRelId != null) {
 			setCommercePaymentMethodGroupRelId(commercePaymentMethodGroupRelId);
@@ -162,20 +164,24 @@ public class CommercePaymentMethodGroupRelWrapper
 
 	@Override
 	public Object clone() {
-		return new CommercePaymentMethodGroupRelWrapper((CommercePaymentMethodGroupRel)_commercePaymentMethodGroupRel.clone());
+		return new CommercePaymentMethodGroupRelWrapper(
+			(CommercePaymentMethodGroupRel)
+				_commercePaymentMethodGroupRel.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
-		return _commercePaymentMethodGroupRel.compareTo(commercePaymentMethodGroupRel);
+
+		return _commercePaymentMethodGroupRel.compareTo(
+			commercePaymentMethodGroupRel);
 	}
 
 	/**
-	* Returns the active of this commerce payment method group rel.
-	*
-	* @return the active of this commerce payment method group rel
-	*/
+	 * Returns the active of this commerce payment method group rel.
+	 *
+	 * @return the active of this commerce payment method group rel
+	 */
 	@Override
 	public boolean getActive() {
 		return _commercePaymentMethodGroupRel.getActive();
@@ -187,30 +193,31 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns the commerce payment method group rel ID of this commerce payment method group rel.
-	*
-	* @return the commerce payment method group rel ID of this commerce payment method group rel
-	*/
+	 * Returns the commerce payment method group rel ID of this commerce payment method group rel.
+	 *
+	 * @return the commerce payment method group rel ID of this commerce payment method group rel
+	 */
 	@Override
 	public long getCommercePaymentMethodGroupRelId() {
-		return _commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
+		return _commercePaymentMethodGroupRel.
+			getCommercePaymentMethodGroupRelId();
 	}
 
 	/**
-	* Returns the company ID of this commerce payment method group rel.
-	*
-	* @return the company ID of this commerce payment method group rel
-	*/
+	 * Returns the company ID of this commerce payment method group rel.
+	 *
+	 * @return the company ID of this commerce payment method group rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commercePaymentMethodGroupRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce payment method group rel.
-	*
-	* @return the create date of this commerce payment method group rel
-	*/
+	 * Returns the create date of this commerce payment method group rel.
+	 *
+	 * @return the create date of this commerce payment method group rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commercePaymentMethodGroupRel.getCreateDate();
@@ -222,60 +229,61 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns the description of this commerce payment method group rel.
-	*
-	* @return the description of this commerce payment method group rel
-	*/
+	 * Returns the description of this commerce payment method group rel.
+	 *
+	 * @return the description of this commerce payment method group rel
+	 */
 	@Override
 	public String getDescription() {
 		return _commercePaymentMethodGroupRel.getDescription();
 	}
 
 	/**
-	* Returns the localized description of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized description of this commerce payment method group rel
-	*/
+	 * Returns the localized description of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized description of this commerce payment method group rel
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale) {
 		return _commercePaymentMethodGroupRel.getDescription(locale);
 	}
 
 	/**
-	* Returns the localized description of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce payment method group rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized description of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce payment method group rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale, boolean useDefault) {
-		return _commercePaymentMethodGroupRel.getDescription(locale, useDefault);
+		return _commercePaymentMethodGroupRel.getDescription(
+			locale, useDefault);
 	}
 
 	/**
-	* Returns the localized description of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized description of this commerce payment method group rel
-	*/
+	 * Returns the localized description of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized description of this commerce payment method group rel
+	 */
 	@Override
 	public String getDescription(String languageId) {
 		return _commercePaymentMethodGroupRel.getDescription(languageId);
 	}
 
 	/**
-	* Returns the localized description of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce payment method group rel
-	*/
+	 * Returns the localized description of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce payment method group rel
+	 */
 	@Override
 	public String getDescription(String languageId, boolean useDefault) {
-		return _commercePaymentMethodGroupRel.getDescription(languageId,
-			useDefault);
+		return _commercePaymentMethodGroupRel.getDescription(
+			languageId, useDefault);
 	}
 
 	@Override
@@ -289,20 +297,20 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized descriptions of this commerce payment method group rel.
-	*
-	* @return the locales and localized descriptions of this commerce payment method group rel
-	*/
+	 * Returns a map of the locales and localized descriptions of this commerce payment method group rel.
+	 *
+	 * @return the locales and localized descriptions of this commerce payment method group rel
+	 */
 	@Override
 	public Map<java.util.Locale, String> getDescriptionMap() {
 		return _commercePaymentMethodGroupRel.getDescriptionMap();
 	}
 
 	/**
-	* Returns the engine key of this commerce payment method group rel.
-	*
-	* @return the engine key of this commerce payment method group rel
-	*/
+	 * Returns the engine key of this commerce payment method group rel.
+	 *
+	 * @return the engine key of this commerce payment method group rel
+	 */
 	@Override
 	public String getEngineKey() {
 		return _commercePaymentMethodGroupRel.getEngineKey();
@@ -314,20 +322,20 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce payment method group rel.
-	*
-	* @return the group ID of this commerce payment method group rel
-	*/
+	 * Returns the group ID of this commerce payment method group rel.
+	 *
+	 * @return the group ID of this commerce payment method group rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _commercePaymentMethodGroupRel.getGroupId();
 	}
 
 	/**
-	* Returns the image ID of this commerce payment method group rel.
-	*
-	* @return the image ID of this commerce payment method group rel
-	*/
+	 * Returns the image ID of this commerce payment method group rel.
+	 *
+	 * @return the image ID of this commerce payment method group rel
+	 */
 	@Override
 	public long getImageId() {
 		return _commercePaymentMethodGroupRel.getImageId();
@@ -336,70 +344,71 @@ public class CommercePaymentMethodGroupRelWrapper
 	@Override
 	public String getImageURL(
 		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay) {
+
 		return _commercePaymentMethodGroupRel.getImageURL(themeDisplay);
 	}
 
 	/**
-	* Returns the modified date of this commerce payment method group rel.
-	*
-	* @return the modified date of this commerce payment method group rel
-	*/
+	 * Returns the modified date of this commerce payment method group rel.
+	 *
+	 * @return the modified date of this commerce payment method group rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commercePaymentMethodGroupRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce payment method group rel.
-	*
-	* @return the name of this commerce payment method group rel
-	*/
+	 * Returns the name of this commerce payment method group rel.
+	 *
+	 * @return the name of this commerce payment method group rel
+	 */
 	@Override
 	public String getName() {
 		return _commercePaymentMethodGroupRel.getName();
 	}
 
 	/**
-	* Returns the localized name of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce payment method group rel
-	*/
+	 * Returns the localized name of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this commerce payment method group rel
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _commercePaymentMethodGroupRel.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce payment method group rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce payment method group rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _commercePaymentMethodGroupRel.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce payment method group rel
-	*/
+	 * Returns the localized name of this commerce payment method group rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this commerce payment method group rel
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _commercePaymentMethodGroupRel.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce payment method group rel
-	*/
+	 * Returns the localized name of this commerce payment method group rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce payment method group rel
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _commercePaymentMethodGroupRel.getName(languageId, useDefault);
@@ -416,20 +425,20 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this commerce payment method group rel.
-	*
-	* @return the locales and localized names of this commerce payment method group rel
-	*/
+	 * Returns a map of the locales and localized names of this commerce payment method group rel.
+	 *
+	 * @return the locales and localized names of this commerce payment method group rel
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _commercePaymentMethodGroupRel.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this commerce payment method group rel.
-	*
-	* @return the primary key of this commerce payment method group rel
-	*/
+	 * Returns the primary key of this commerce payment method group rel.
+	 *
+	 * @return the primary key of this commerce payment method group rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commercePaymentMethodGroupRel.getPrimaryKey();
@@ -441,40 +450,40 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns the priority of this commerce payment method group rel.
-	*
-	* @return the priority of this commerce payment method group rel
-	*/
+	 * Returns the priority of this commerce payment method group rel.
+	 *
+	 * @return the priority of this commerce payment method group rel
+	 */
 	@Override
 	public double getPriority() {
 		return _commercePaymentMethodGroupRel.getPriority();
 	}
 
 	/**
-	* Returns the user ID of this commerce payment method group rel.
-	*
-	* @return the user ID of this commerce payment method group rel
-	*/
+	 * Returns the user ID of this commerce payment method group rel.
+	 *
+	 * @return the user ID of this commerce payment method group rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commercePaymentMethodGroupRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce payment method group rel.
-	*
-	* @return the user name of this commerce payment method group rel
-	*/
+	 * Returns the user name of this commerce payment method group rel.
+	 *
+	 * @return the user name of this commerce payment method group rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commercePaymentMethodGroupRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce payment method group rel.
-	*
-	* @return the user uuid of this commerce payment method group rel
-	*/
+	 * Returns the user uuid of this commerce payment method group rel.
+	 *
+	 * @return the user uuid of this commerce payment method group rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commercePaymentMethodGroupRel.getUserUuid();
@@ -486,10 +495,10 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce payment method group rel is active.
-	*
-	* @return <code>true</code> if this commerce payment method group rel is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce payment method group rel is active.
+	 *
+	 * @return <code>true</code> if this commerce payment method group rel is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commercePaymentMethodGroupRel.isActive();
@@ -518,21 +527,24 @@ public class CommercePaymentMethodGroupRelWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commercePaymentMethodGroupRel.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commercePaymentMethodGroupRel.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commercePaymentMethodGroupRel.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets whether this commerce payment method group rel is active.
-	*
-	* @param active the active of this commerce payment method group rel
-	*/
+	 * Sets whether this commerce payment method group rel is active.
+	 *
+	 * @param active the active of this commerce payment method group rel
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commercePaymentMethodGroupRel.setActive(active);
@@ -544,105 +556,113 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Sets the commerce payment method group rel ID of this commerce payment method group rel.
-	*
-	* @param commercePaymentMethodGroupRelId the commerce payment method group rel ID of this commerce payment method group rel
-	*/
+	 * Sets the commerce payment method group rel ID of this commerce payment method group rel.
+	 *
+	 * @param commercePaymentMethodGroupRelId the commerce payment method group rel ID of this commerce payment method group rel
+	 */
 	@Override
 	public void setCommercePaymentMethodGroupRelId(
 		long commercePaymentMethodGroupRelId) {
-		_commercePaymentMethodGroupRel.setCommercePaymentMethodGroupRelId(commercePaymentMethodGroupRelId);
+
+		_commercePaymentMethodGroupRel.setCommercePaymentMethodGroupRelId(
+			commercePaymentMethodGroupRelId);
 	}
 
 	/**
-	* Sets the company ID of this commerce payment method group rel.
-	*
-	* @param companyId the company ID of this commerce payment method group rel
-	*/
+	 * Sets the company ID of this commerce payment method group rel.
+	 *
+	 * @param companyId the company ID of this commerce payment method group rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commercePaymentMethodGroupRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce payment method group rel.
-	*
-	* @param createDate the create date of this commerce payment method group rel
-	*/
+	 * Sets the create date of this commerce payment method group rel.
+	 *
+	 * @param createDate the create date of this commerce payment method group rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commercePaymentMethodGroupRel.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce payment method group rel.
-	*
-	* @param description the description of this commerce payment method group rel
-	*/
+	 * Sets the description of this commerce payment method group rel.
+	 *
+	 * @param description the description of this commerce payment method group rel
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commercePaymentMethodGroupRel.setDescription(description);
 	}
 
 	/**
-	* Sets the localized description of this commerce payment method group rel in the language.
-	*
-	* @param description the localized description of this commerce payment method group rel
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized description of this commerce payment method group rel in the language.
+	 *
+	 * @param description the localized description of this commerce payment method group rel
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setDescription(String description, java.util.Locale locale) {
 		_commercePaymentMethodGroupRel.setDescription(description, locale);
 	}
 
 	/**
-	* Sets the localized description of this commerce payment method group rel in the language, and sets the default locale.
-	*
-	* @param description the localized description of this commerce payment method group rel
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized description of this commerce payment method group rel in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this commerce payment method group rel
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setDescription(String description, java.util.Locale locale,
+	public void setDescription(
+		String description, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
-		_commercePaymentMethodGroupRel.setDescription(description, locale,
-			defaultLocale);
+
+		_commercePaymentMethodGroupRel.setDescription(
+			description, locale, defaultLocale);
 	}
 
 	@Override
 	public void setDescriptionCurrentLanguageId(String languageId) {
-		_commercePaymentMethodGroupRel.setDescriptionCurrentLanguageId(languageId);
+		_commercePaymentMethodGroupRel.setDescriptionCurrentLanguageId(
+			languageId);
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce payment method group rel from the map of locales and localized descriptions.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce payment method group rel
-	*/
+	 * Sets the localized descriptions of this commerce payment method group rel from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce payment method group rel
+	 */
 	@Override
-	public void setDescriptionMap(Map<java.util.Locale, String> descriptionMap) {
+	public void setDescriptionMap(
+		Map<java.util.Locale, String> descriptionMap) {
+
 		_commercePaymentMethodGroupRel.setDescriptionMap(descriptionMap);
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce payment method group rel from the map of locales and localized descriptions, and sets the default locale.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce payment method group rel
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized descriptions of this commerce payment method group rel from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce payment method group rel
+	 * @param defaultLocale the default locale
+	 */
 	@Override
 	public void setDescriptionMap(
 		Map<java.util.Locale, String> descriptionMap,
 		java.util.Locale defaultLocale) {
-		_commercePaymentMethodGroupRel.setDescriptionMap(descriptionMap,
-			defaultLocale);
+
+		_commercePaymentMethodGroupRel.setDescriptionMap(
+			descriptionMap, defaultLocale);
 	}
 
 	/**
-	* Sets the engine key of this commerce payment method group rel.
-	*
-	* @param engineKey the engine key of this commerce payment method group rel
-	*/
+	 * Sets the engine key of this commerce payment method group rel.
+	 *
+	 * @param engineKey the engine key of this commerce payment method group rel
+	 */
 	@Override
 	public void setEngineKey(String engineKey) {
 		_commercePaymentMethodGroupRel.setEngineKey(engineKey);
@@ -651,80 +671,84 @@ public class CommercePaymentMethodGroupRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commercePaymentMethodGroupRel.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_commercePaymentMethodGroupRel.setExpandoBridgeAttributes(expandoBridge);
+		_commercePaymentMethodGroupRel.setExpandoBridgeAttributes(
+			expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commercePaymentMethodGroupRel.setExpandoBridgeAttributes(serviceContext);
+		_commercePaymentMethodGroupRel.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the group ID of this commerce payment method group rel.
-	*
-	* @param groupId the group ID of this commerce payment method group rel
-	*/
+	 * Sets the group ID of this commerce payment method group rel.
+	 *
+	 * @param groupId the group ID of this commerce payment method group rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commercePaymentMethodGroupRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the image ID of this commerce payment method group rel.
-	*
-	* @param imageId the image ID of this commerce payment method group rel
-	*/
+	 * Sets the image ID of this commerce payment method group rel.
+	 *
+	 * @param imageId the image ID of this commerce payment method group rel
+	 */
 	@Override
 	public void setImageId(long imageId) {
 		_commercePaymentMethodGroupRel.setImageId(imageId);
 	}
 
 	/**
-	* Sets the modified date of this commerce payment method group rel.
-	*
-	* @param modifiedDate the modified date of this commerce payment method group rel
-	*/
+	 * Sets the modified date of this commerce payment method group rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce payment method group rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commercePaymentMethodGroupRel.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce payment method group rel.
-	*
-	* @param name the name of this commerce payment method group rel
-	*/
+	 * Sets the name of this commerce payment method group rel.
+	 *
+	 * @param name the name of this commerce payment method group rel
+	 */
 	@Override
 	public void setName(String name) {
 		_commercePaymentMethodGroupRel.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this commerce payment method group rel in the language.
-	*
-	* @param name the localized name of this commerce payment method group rel
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this commerce payment method group rel in the language.
+	 *
+	 * @param name the localized name of this commerce payment method group rel
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_commercePaymentMethodGroupRel.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this commerce payment method group rel in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce payment method group rel
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this commerce payment method group rel in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this commerce payment method group rel
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commercePaymentMethodGroupRel.setName(name, locale, defaultLocale);
 	}
 
@@ -734,24 +758,25 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Sets the localized names of this commerce payment method group rel from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce payment method group rel
-	*/
+	 * Sets the localized names of this commerce payment method group rel from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this commerce payment method group rel
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_commercePaymentMethodGroupRel.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this commerce payment method group rel from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce payment method group rel
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this commerce payment method group rel from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this commerce payment method group rel
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_commercePaymentMethodGroupRel.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -761,10 +786,10 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce payment method group rel.
-	*
-	* @param primaryKey the primary key of this commerce payment method group rel
-	*/
+	 * Sets the primary key of this commerce payment method group rel.
+	 *
+	 * @param primaryKey the primary key of this commerce payment method group rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commercePaymentMethodGroupRel.setPrimaryKey(primaryKey);
@@ -776,53 +801,56 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	/**
-	* Sets the priority of this commerce payment method group rel.
-	*
-	* @param priority the priority of this commerce payment method group rel
-	*/
+	 * Sets the priority of this commerce payment method group rel.
+	 *
+	 * @param priority the priority of this commerce payment method group rel
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commercePaymentMethodGroupRel.setPriority(priority);
 	}
 
 	/**
-	* Sets the user ID of this commerce payment method group rel.
-	*
-	* @param userId the user ID of this commerce payment method group rel
-	*/
+	 * Sets the user ID of this commerce payment method group rel.
+	 *
+	 * @param userId the user ID of this commerce payment method group rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commercePaymentMethodGroupRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce payment method group rel.
-	*
-	* @param userName the user name of this commerce payment method group rel
-	*/
+	 * Sets the user name of this commerce payment method group rel.
+	 *
+	 * @param userName the user name of this commerce payment method group rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commercePaymentMethodGroupRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce payment method group rel.
-	*
-	* @param userUuid the user uuid of this commerce payment method group rel
-	*/
+	 * Sets the user uuid of this commerce payment method group rel.
+	 *
+	 * @param userUuid the user uuid of this commerce payment method group rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commercePaymentMethodGroupRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommercePaymentMethodGroupRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommercePaymentMethodGroupRel> toCacheModel() {
+
 		return _commercePaymentMethodGroupRel.toCacheModel();
 	}
 
 	@Override
 	public CommercePaymentMethodGroupRel toEscapedModel() {
-		return new CommercePaymentMethodGroupRelWrapper(_commercePaymentMethodGroupRel.toEscapedModel());
+		return new CommercePaymentMethodGroupRelWrapper(
+			_commercePaymentMethodGroupRel.toEscapedModel());
 	}
 
 	@Override
@@ -832,7 +860,8 @@ public class CommercePaymentMethodGroupRelWrapper
 
 	@Override
 	public CommercePaymentMethodGroupRel toUnescapedModel() {
-		return new CommercePaymentMethodGroupRelWrapper(_commercePaymentMethodGroupRel.toUnescapedModel());
+		return new CommercePaymentMethodGroupRelWrapper(
+			_commercePaymentMethodGroupRel.toUnescapedModel());
 	}
 
 	@Override
@@ -850,11 +879,15 @@ public class CommercePaymentMethodGroupRelWrapper
 			return false;
 		}
 
-		CommercePaymentMethodGroupRelWrapper commercePaymentMethodGroupRelWrapper =
-			(CommercePaymentMethodGroupRelWrapper)obj;
+		CommercePaymentMethodGroupRelWrapper
+			commercePaymentMethodGroupRelWrapper =
+				(CommercePaymentMethodGroupRelWrapper)obj;
 
-		if (Objects.equals(_commercePaymentMethodGroupRel,
-					commercePaymentMethodGroupRelWrapper._commercePaymentMethodGroupRel)) {
+		if (Objects.equals(
+				_commercePaymentMethodGroupRel,
+				commercePaymentMethodGroupRelWrapper.
+					_commercePaymentMethodGroupRel)) {
+
 			return true;
 		}
 
@@ -882,4 +915,5 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	private final CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
+
 }

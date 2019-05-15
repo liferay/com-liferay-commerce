@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountRule;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceDiscountRule in entity cache.
  *
  * @author Marco Leo
- * @see CommerceDiscountRule
  * @generated
  */
 @ProviderType
-public class CommerceDiscountRuleCacheModel implements CacheModel<CommerceDiscountRule>,
-	Externalizable {
+public class CommerceDiscountRuleCacheModel
+	implements CacheModel<CommerceDiscountRule>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceDiscountRuleCacheModel implements CacheModel<CommerceDiscou
 			return false;
 		}
 
-		CommerceDiscountRuleCacheModel commerceDiscountRuleCacheModel = (CommerceDiscountRuleCacheModel)obj;
+		CommerceDiscountRuleCacheModel commerceDiscountRuleCacheModel =
+			(CommerceDiscountRuleCacheModel)obj;
 
-		if (commerceDiscountRuleId == commerceDiscountRuleCacheModel.commerceDiscountRuleId) {
+		if (commerceDiscountRuleId ==
+				commerceDiscountRuleCacheModel.commerceDiscountRuleId) {
+
 			return true;
 		}
 
@@ -94,9 +96,11 @@ public class CommerceDiscountRuleCacheModel implements CacheModel<CommerceDiscou
 
 	@Override
 	public CommerceDiscountRule toEntityModel() {
-		CommerceDiscountRuleImpl commerceDiscountRuleImpl = new CommerceDiscountRuleImpl();
+		CommerceDiscountRuleImpl commerceDiscountRuleImpl =
+			new CommerceDiscountRuleImpl();
 
-		commerceDiscountRuleImpl.setCommerceDiscountRuleId(commerceDiscountRuleId);
+		commerceDiscountRuleImpl.setCommerceDiscountRuleId(
+			commerceDiscountRuleId);
 		commerceDiscountRuleImpl.setGroupId(groupId);
 		commerceDiscountRuleImpl.setCompanyId(companyId);
 		commerceDiscountRuleImpl.setUserId(userId);
@@ -162,8 +166,7 @@ public class CommerceDiscountRuleCacheModel implements CacheModel<CommerceDiscou
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceDiscountRuleId);
 
 		objectOutput.writeLong(groupId);
@@ -209,4 +212,5 @@ public class CommerceDiscountRuleCacheModel implements CacheModel<CommerceDiscou
 	public long commerceDiscountId;
 	public String type;
 	public String typeSettings;
+
 }

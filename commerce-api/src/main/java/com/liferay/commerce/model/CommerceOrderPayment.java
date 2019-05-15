@@ -25,34 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderPaymentModel
- * @see com.liferay.commerce.model.impl.CommerceOrderPaymentImpl
- * @see com.liferay.commerce.model.impl.CommerceOrderPaymentModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceOrderPaymentImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceOrderPaymentImpl"
+)
 @ProviderType
-public interface CommerceOrderPayment extends CommerceOrderPaymentModel,
-	PersistedModel {
+public interface CommerceOrderPayment
+	extends CommerceOrderPaymentModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceOrderPaymentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceOrderPaymentImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceOrderPayment, Long> COMMERCE_ORDER_PAYMENT_ID_ACCESSOR =
-		new Accessor<CommerceOrderPayment, Long>() {
-			@Override
-			public Long get(CommerceOrderPayment commerceOrderPayment) {
-				return commerceOrderPayment.getCommerceOrderPaymentId();
-			}
+	public static final Accessor<CommerceOrderPayment, Long>
+		COMMERCE_ORDER_PAYMENT_ID_ACCESSOR =
+			new Accessor<CommerceOrderPayment, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceOrderPayment commerceOrderPayment) {
+					return commerceOrderPayment.getCommerceOrderPaymentId();
+				}
 
-			@Override
-			public Class<CommerceOrderPayment> getTypeClass() {
-				return CommerceOrderPayment.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceOrderPayment> getTypeClass() {
+					return CommerceOrderPayment.class;
+				}
+
+			};
+
 }

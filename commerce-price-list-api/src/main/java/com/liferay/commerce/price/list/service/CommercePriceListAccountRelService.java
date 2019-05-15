@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -38,43 +37,53 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceListAccountRelServiceUtil
- * @see com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelServiceBaseImpl
- * @see com.liferay.commerce.price.list.service.impl.CommercePriceListAccountRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommercePriceListAccountRel"}, service = CommercePriceListAccountRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommercePriceListAccountRel"
+	},
+	service = CommercePriceListAccountRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommercePriceListAccountRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommercePriceListAccountRelServiceUtil} to access the commerce price list account rel remote service. Add custom service methods to {@link com.liferay.commerce.price.list.service.impl.CommercePriceListAccountRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommercePriceListAccountRelServiceUtil} to access the commerce price list account rel remote service. Add custom service methods to <code>com.liferay.commerce.price.list.service.impl.CommercePriceListAccountRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommercePriceListAccountRel addCommercePriceListAccountRel(
-		long commercePriceListId, long commerceAccountId, int order,
-		ServiceContext serviceContext) throws PortalException;
+			long commercePriceListId, long commerceAccountId, int order,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommercePriceListAccountRel(
-		long commercePriceListAccountRelId) throws PortalException;
+			long commercePriceListAccountRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceListAccountRel fetchCommercePriceListAccountRel(
-		long commercePriceListId, long commerceAccountId)
+			long commercePriceListId, long commerceAccountId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
-		long commercePriceListId) throws PortalException;
+			long commercePriceListId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

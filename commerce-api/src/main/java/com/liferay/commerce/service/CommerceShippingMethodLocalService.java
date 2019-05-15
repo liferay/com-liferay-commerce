@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -51,81 +50,86 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingMethodLocalServiceUtil
- * @see com.liferay.commerce.service.base.CommerceShippingMethodLocalServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl
  * @generated
  */
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
-public interface CommerceShippingMethodLocalService extends BaseLocalService,
-	PersistedModelLocalService {
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
+public interface CommerceShippingMethodLocalService
+	extends BaseLocalService, PersistedModelLocalService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodLocalServiceUtil} to access the commerce shipping method local service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodLocalServiceUtil} to access the commerce shipping method local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceAddressRestriction addCommerceAddressRestriction(
-		long commerceShippingMethodId, long commerceCountryId,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceShippingMethodId, long commerceCountryId,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
-	* Adds the commerce shipping method to the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceShippingMethod the commerce shipping method
-	* @return the commerce shipping method that was added
-	*/
+	 * Adds the commerce shipping method to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceShippingMethod the commerce shipping method
+	 * @return the commerce shipping method that was added
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceShippingMethod addCommerceShippingMethod(
 		CommerceShippingMethod commerceShippingMethod);
 
 	public CommerceShippingMethod addCommerceShippingMethod(
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		File imageFile, String engineKey, double priority, boolean active,
-		ServiceContext serviceContext) throws PortalException;
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			File imageFile, String engineKey, double priority, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
-	* Creates a new commerce shipping method with the primary key. Does not add the commerce shipping method to the database.
-	*
-	* @param commerceShippingMethodId the primary key for the new commerce shipping method
-	* @return the new commerce shipping method
-	*/
+	 * Creates a new commerce shipping method with the primary key. Does not add the commerce shipping method to the database.
+	 *
+	 * @param commerceShippingMethodId the primary key for the new commerce shipping method
+	 * @return the new commerce shipping method
+	 */
 	@Transactional(enabled = false)
 	public CommerceShippingMethod createCommerceShippingMethod(
 		long commerceShippingMethodId);
 
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId) throws PortalException;
-
-	/**
-	* Deletes the commerce shipping method from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceShippingMethod the commerce shipping method
-	* @return the commerce shipping method that was removed
-	* @throws PortalException
-	*/
-	@Indexable(type = IndexableType.DELETE)
-	public CommerceShippingMethod deleteCommerceShippingMethod(
-		CommerceShippingMethod commerceShippingMethod)
+			long commerceAddressRestrictionId)
 		throws PortalException;
 
 	/**
-	* Deletes the commerce shipping method with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceShippingMethodId the primary key of the commerce shipping method
-	* @return the commerce shipping method that was removed
-	* @throws PortalException if a commerce shipping method with the primary key could not be found
-	*/
+	 * Deletes the commerce shipping method from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceShippingMethod the commerce shipping method
+	 * @return the commerce shipping method that was removed
+	 * @throws PortalException
+	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceShippingMethod deleteCommerceShippingMethod(
-		long commerceShippingMethodId) throws PortalException;
+			CommerceShippingMethod commerceShippingMethod)
+		throws PortalException;
+
+	/**
+	 * Deletes the commerce shipping method with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceShippingMethodId the primary key of the commerce shipping method
+	 * @return the commerce shipping method that was removed
+	 * @throws PortalException if a commerce shipping method with the primary key could not be found
+	 */
+	@Indexable(type = IndexableType.DELETE)
+	public CommerceShippingMethod deleteCommerceShippingMethod(
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	public void deleteCommerceShippingMethods(long groupId)
 		throws PortalException;
 
 	/**
-	* @throws PortalException
-	*/
+	 * @throws PortalException
+	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
@@ -134,74 +138,75 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	public DynamicQuery dynamicQuery();
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end);
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingMethod fetchCommerceShippingMethod(
 		long commerceShippingMethodId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceShippingMethod fetchCommerceShippingMethod(long groupId,
-		String engineKey);
+	public CommerceShippingMethod fetchCommerceShippingMethod(
+		long groupId, String engineKey);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -216,33 +221,35 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 		long commerceShippingMethodId);
 
 	/**
-	* Returns the commerce shipping method with the primary key.
-	*
-	* @param commerceShippingMethodId the primary key of the commerce shipping method
-	* @return the commerce shipping method
-	* @throws PortalException if a commerce shipping method with the primary key could not be found
-	*/
+	 * Returns the commerce shipping method with the primary key.
+	 *
+	 * @param commerceShippingMethodId the primary key of the commerce shipping method
+	 * @return the commerce shipping method
+	 * @throws PortalException if a commerce shipping method with the primary key could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingMethod getCommerceShippingMethod(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	/**
-	* Returns a range of all the commerce shipping methods.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce shipping methods
-	* @param end the upper bound of the range of commerce shipping methods (not inclusive)
-	* @return the range of commerce shipping methods
-	*/
+	 * Returns a range of all the commerce shipping methods.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce shipping methods
+	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
+	 * @return the range of commerce shipping methods
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShippingMethod> getCommerceShippingMethods(int start,
-		int end);
+	public List<CommerceShippingMethod> getCommerceShippingMethods(
+		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShippingMethod> getCommerceShippingMethods(long groupId);
+	public List<CommerceShippingMethod> getCommerceShippingMethods(
+		long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingMethod> getCommerceShippingMethods(
@@ -253,10 +260,10 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 		long groupId, long commerceCountryId, boolean active);
 
 	/**
-	* Returns the number of commerce shipping methods.
-	*
-	* @return the number of commerce shipping methods
-	*/
+	 * Returns the number of commerce shipping methods.
+	 *
+	 * @return the number of commerce shipping methods
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShippingMethodsCount();
 
@@ -267,10 +274,10 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Override
@@ -278,21 +285,24 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	public CommerceShippingMethod setActive(long commerceShippingMethodId,
-		boolean active) throws PortalException;
+	public CommerceShippingMethod setActive(
+			long commerceShippingMethodId, boolean active)
+		throws PortalException;
 
 	/**
-	* Updates the commerce shipping method in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param commerceShippingMethod the commerce shipping method
-	* @return the commerce shipping method that was updated
-	*/
+	 * Updates the commerce shipping method in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceShippingMethod the commerce shipping method
+	 * @return the commerce shipping method that was updated
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceShippingMethod updateCommerceShippingMethod(
 		CommerceShippingMethod commerceShippingMethod);
 
 	public CommerceShippingMethod updateCommerceShippingMethod(
-		long commerceShippingMethodId, Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, File imageFile, double priority,
-		boolean active) throws PortalException;
+			long commerceShippingMethodId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, File imageFile, double priority,
+			boolean active)
+		throws PortalException;
+
 }

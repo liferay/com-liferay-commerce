@@ -26,16 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.tax.engine.fixed.service.http.CommerceTaxFixedRateAddressRelServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.tax.engine.fixed.service.http.CommerceTaxFixedRateAddressRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
+
 	public static CommerceTaxFixedRateAddressRelSoap toSoapModel(
 		CommerceTaxFixedRateAddressRel model) {
-		CommerceTaxFixedRateAddressRelSoap soapModel = new CommerceTaxFixedRateAddressRelSoap();
 
-		soapModel.setCommerceTaxFixedRateAddressRelId(model.getCommerceTaxFixedRateAddressRelId());
+		CommerceTaxFixedRateAddressRelSoap soapModel =
+			new CommerceTaxFixedRateAddressRelSoap();
+
+		soapModel.setCommerceTaxFixedRateAddressRelId(
+			model.getCommerceTaxFixedRateAddressRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -54,7 +57,9 @@ public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
 
 	public static CommerceTaxFixedRateAddressRelSoap[] toSoapModels(
 		CommerceTaxFixedRateAddressRel[] models) {
-		CommerceTaxFixedRateAddressRelSoap[] soapModels = new CommerceTaxFixedRateAddressRelSoap[models.length];
+
+		CommerceTaxFixedRateAddressRelSoap[] soapModels =
+			new CommerceTaxFixedRateAddressRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -65,10 +70,12 @@ public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
 
 	public static CommerceTaxFixedRateAddressRelSoap[][] toSoapModels(
 		CommerceTaxFixedRateAddressRel[][] models) {
+
 		CommerceTaxFixedRateAddressRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceTaxFixedRateAddressRelSoap[models.length][models[0].length];
+			soapModels = new CommerceTaxFixedRateAddressRelSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceTaxFixedRateAddressRelSoap[0][0];
@@ -83,13 +90,16 @@ public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
 
 	public static CommerceTaxFixedRateAddressRelSoap[] toSoapModels(
 		List<CommerceTaxFixedRateAddressRel> models) {
-		List<CommerceTaxFixedRateAddressRelSoap> soapModels = new ArrayList<CommerceTaxFixedRateAddressRelSoap>(models.size());
+
+		List<CommerceTaxFixedRateAddressRelSoap> soapModels =
+			new ArrayList<CommerceTaxFixedRateAddressRelSoap>(models.size());
 
 		for (CommerceTaxFixedRateAddressRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceTaxFixedRateAddressRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceTaxFixedRateAddressRelSoap[soapModels.size()]);
 	}
 
 	public CommerceTaxFixedRateAddressRelSoap() {
@@ -109,6 +119,7 @@ public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
 
 	public void setCommerceTaxFixedRateAddressRelId(
 		long commerceTaxFixedRateAddressRelId) {
+
 		_commerceTaxFixedRateAddressRelId = commerceTaxFixedRateAddressRelId;
 	}
 
@@ -221,4 +232,5 @@ public class CommerceTaxFixedRateAddressRelSoap implements Serializable {
 	private long _commerceRegionId;
 	private String _zip;
 	private double _rate;
+
 }

@@ -35,18 +35,22 @@ import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryL
 public abstract class CommerceNotificationQueueEntryBaseImpl
 	extends CommerceNotificationQueueEntryModelImpl
 	implements CommerceNotificationQueueEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce notification queue entry model instance should use the {@link CommerceNotificationQueueEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce notification queue entry model instance should use the <code>CommerceNotificationQueueEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceNotificationQueueEntryLocalServiceUtil.addCommerceNotificationQueueEntry(this);
+			CommerceNotificationQueueEntryLocalServiceUtil.
+				addCommerceNotificationQueueEntry(this);
 		}
 		else {
-			CommerceNotificationQueueEntryLocalServiceUtil.updateCommerceNotificationQueueEntry(this);
+			CommerceNotificationQueueEntryLocalServiceUtil.
+				updateCommerceNotificationQueueEntry(this);
 		}
 	}
+
 }

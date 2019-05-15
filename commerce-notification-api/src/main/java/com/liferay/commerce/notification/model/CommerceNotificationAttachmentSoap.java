@@ -30,19 +30,24 @@ import java.util.List;
  */
 @ProviderType
 public class CommerceNotificationAttachmentSoap implements Serializable {
+
 	public static CommerceNotificationAttachmentSoap toSoapModel(
 		CommerceNotificationAttachment model) {
-		CommerceNotificationAttachmentSoap soapModel = new CommerceNotificationAttachmentSoap();
+
+		CommerceNotificationAttachmentSoap soapModel =
+			new CommerceNotificationAttachmentSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommerceNotificationAttachmentId(model.getCommerceNotificationAttachmentId());
+		soapModel.setCommerceNotificationAttachmentId(
+			model.getCommerceNotificationAttachmentId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceNotificationQueueEntryId(model.getCommerceNotificationQueueEntryId());
+		soapModel.setCommerceNotificationQueueEntryId(
+			model.getCommerceNotificationQueueEntryId());
 		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setDeleteOnSend(model.isDeleteOnSend());
 
@@ -51,7 +56,9 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 
 	public static CommerceNotificationAttachmentSoap[] toSoapModels(
 		CommerceNotificationAttachment[] models) {
-		CommerceNotificationAttachmentSoap[] soapModels = new CommerceNotificationAttachmentSoap[models.length];
+
+		CommerceNotificationAttachmentSoap[] soapModels =
+			new CommerceNotificationAttachmentSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +69,12 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 
 	public static CommerceNotificationAttachmentSoap[][] toSoapModels(
 		CommerceNotificationAttachment[][] models) {
+
 		CommerceNotificationAttachmentSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceNotificationAttachmentSoap[models.length][models[0].length];
+			soapModels = new CommerceNotificationAttachmentSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceNotificationAttachmentSoap[0][0];
@@ -80,13 +89,16 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 
 	public static CommerceNotificationAttachmentSoap[] toSoapModels(
 		List<CommerceNotificationAttachment> models) {
-		List<CommerceNotificationAttachmentSoap> soapModels = new ArrayList<CommerceNotificationAttachmentSoap>(models.size());
+
+		List<CommerceNotificationAttachmentSoap> soapModels =
+			new ArrayList<CommerceNotificationAttachmentSoap>(models.size());
 
 		for (CommerceNotificationAttachment model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceNotificationAttachmentSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceNotificationAttachmentSoap[soapModels.size()]);
 	}
 
 	public CommerceNotificationAttachmentSoap() {
@@ -114,6 +126,7 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 
 	public void setCommerceNotificationAttachmentId(
 		long commerceNotificationAttachmentId) {
+
 		_commerceNotificationAttachmentId = commerceNotificationAttachmentId;
 	}
 
@@ -171,6 +184,7 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 
 	public void setCommerceNotificationQueueEntryId(
 		long commerceNotificationQueueEntryId) {
+
 		_commerceNotificationQueueEntryId = commerceNotificationQueueEntryId;
 	}
 
@@ -205,4 +219,5 @@ public class CommerceNotificationAttachmentSoap implements Serializable {
 	private long _commerceNotificationQueueEntryId;
 	private long _fileEntryId;
 	private boolean _deleteOnSend;
+
 }

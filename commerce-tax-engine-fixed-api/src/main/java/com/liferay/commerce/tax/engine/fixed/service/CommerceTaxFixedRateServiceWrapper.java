@@ -28,75 +28,92 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceTaxFixedRateServiceWrapper
 	implements CommerceTaxFixedRateService,
-		ServiceWrapper<CommerceTaxFixedRateService> {
+			   ServiceWrapper<CommerceTaxFixedRateService> {
+
 	public CommerceTaxFixedRateServiceWrapper(
 		CommerceTaxFixedRateService commerceTaxFixedRateService) {
+
 		_commerceTaxFixedRateService = commerceTaxFixedRateService;
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate addCommerceTaxFixedRate(
-		long commerceTaxMethodId, long cpTaxCategoryId, double rate,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate
+			addCommerceTaxFixedRate(
+				long commerceTaxMethodId, long cpTaxCategoryId, double rate,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.addCommerceTaxFixedRate(commerceTaxMethodId,
-			cpTaxCategoryId, rate, serviceContext);
+
+		return _commerceTaxFixedRateService.addCommerceTaxFixedRate(
+			commerceTaxMethodId, cpTaxCategoryId, rate, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceTaxFixedRate(long commerceTaxFixedRateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceTaxFixedRateService.deleteCommerceTaxFixedRate(commerceTaxFixedRateId);
+
+		_commerceTaxFixedRateService.deleteCommerceTaxFixedRate(
+			commerceTaxFixedRateId);
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate fetchCommerceTaxFixedRate(
-		long commerceTaxFixedRateId)
+	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate
+			fetchCommerceTaxFixedRate(long commerceTaxFixedRateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.fetchCommerceTaxFixedRate(commerceTaxFixedRateId);
+
+		return _commerceTaxFixedRateService.fetchCommerceTaxFixedRate(
+			commerceTaxFixedRateId);
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate fetchCommerceTaxFixedRate(
-		long cpTaxCategoryId, long commerceTaxMethodId)
+	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate
+			fetchCommerceTaxFixedRate(
+				long cpTaxCategoryId, long commerceTaxMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.fetchCommerceTaxFixedRate(cpTaxCategoryId,
-			commerceTaxMethodId);
+
+		return _commerceTaxFixedRateService.fetchCommerceTaxFixedRate(
+			cpTaxCategoryId, commerceTaxMethodId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate> getCommerceTaxFixedRates(
-		long groupId, long commerceTaxMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.getCommerceTaxFixedRates(groupId,
-			commerceTaxMethodId, start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate>
+				getCommerceTaxFixedRates(
+					long groupId, long commerceTaxMethodId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.tax.engine.fixed.model.
+							CommerceTaxFixedRate> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTaxFixedRateService.getCommerceTaxFixedRates(
+			groupId, commerceTaxMethodId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceTaxFixedRatesCount(long groupId,
-		long commerceTaxMethodId)
+	public int getCommerceTaxFixedRatesCount(
+			long groupId, long commerceTaxMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.getCommerceTaxFixedRatesCount(groupId,
-			commerceTaxMethodId);
+
+		return _commerceTaxFixedRateService.getCommerceTaxFixedRatesCount(
+			groupId, commerceTaxMethodId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceTaxFixedRateService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate updateCommerceTaxFixedRate(
-		long commerceTaxFixedRateId, double rate)
+	public com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate
+			updateCommerceTaxFixedRate(long commerceTaxFixedRateId, double rate)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceTaxFixedRateService.updateCommerceTaxFixedRate(commerceTaxFixedRateId,
-			rate);
+
+		return _commerceTaxFixedRateService.updateCommerceTaxFixedRate(
+			commerceTaxFixedRateId, rate);
 	}
 
 	@Override
@@ -107,8 +124,10 @@ public class CommerceTaxFixedRateServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceTaxFixedRateService commerceTaxFixedRateService) {
+
 		_commerceTaxFixedRateService = commerceTaxFixedRateService;
 	}
 
 	private CommerceTaxFixedRateService _commerceTaxFixedRateService;
+
 }

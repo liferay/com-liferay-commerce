@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
-	ModelWrapper<CommerceShippingMethod> {
+public class CommerceShippingMethodWrapper
+	implements CommerceShippingMethod, ModelWrapper<CommerceShippingMethod> {
+
 	public CommerceShippingMethodWrapper(
 		CommerceShippingMethod commerceShippingMethod) {
+
 		_commerceShippingMethod = commerceShippingMethod;
 	}
 
@@ -59,7 +60,8 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
+		attributes.put(
+			"commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -79,7 +81,7 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceShippingMethodId = (Long)attributes.get(
-				"commerceShippingMethodId");
+			"commerceShippingMethodId");
 
 		if (commerceShippingMethodId != null) {
 			setCommerceShippingMethodId(commerceShippingMethodId);
@@ -160,7 +162,8 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 
 	@Override
 	public Object clone() {
-		return new CommerceShippingMethodWrapper((CommerceShippingMethod)_commerceShippingMethod.clone());
+		return new CommerceShippingMethodWrapper(
+			(CommerceShippingMethod)_commerceShippingMethod.clone());
 	}
 
 	@Override
@@ -169,10 +172,10 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns the active of this commerce shipping method.
-	*
-	* @return the active of this commerce shipping method
-	*/
+	 * Returns the active of this commerce shipping method.
+	 *
+	 * @return the active of this commerce shipping method
+	 */
 	@Override
 	public boolean getActive() {
 		return _commerceShippingMethod.getActive();
@@ -184,30 +187,30 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns the commerce shipping method ID of this commerce shipping method.
-	*
-	* @return the commerce shipping method ID of this commerce shipping method
-	*/
+	 * Returns the commerce shipping method ID of this commerce shipping method.
+	 *
+	 * @return the commerce shipping method ID of this commerce shipping method
+	 */
 	@Override
 	public long getCommerceShippingMethodId() {
 		return _commerceShippingMethod.getCommerceShippingMethodId();
 	}
 
 	/**
-	* Returns the company ID of this commerce shipping method.
-	*
-	* @return the company ID of this commerce shipping method
-	*/
+	 * Returns the company ID of this commerce shipping method.
+	 *
+	 * @return the company ID of this commerce shipping method
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceShippingMethod.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce shipping method.
-	*
-	* @return the create date of this commerce shipping method
-	*/
+	 * Returns the create date of this commerce shipping method.
+	 *
+	 * @return the create date of this commerce shipping method
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceShippingMethod.getCreateDate();
@@ -219,56 +222,56 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns the description of this commerce shipping method.
-	*
-	* @return the description of this commerce shipping method
-	*/
+	 * Returns the description of this commerce shipping method.
+	 *
+	 * @return the description of this commerce shipping method
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceShippingMethod.getDescription();
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized description of this commerce shipping method
-	*/
+	 * Returns the localized description of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized description of this commerce shipping method
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale) {
 		return _commerceShippingMethod.getDescription(locale);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce shipping method. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized description of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce shipping method. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale, boolean useDefault) {
 		return _commerceShippingMethod.getDescription(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized description of this commerce shipping method
-	*/
+	 * Returns the localized description of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized description of this commerce shipping method
+	 */
 	@Override
 	public String getDescription(String languageId) {
 		return _commerceShippingMethod.getDescription(languageId);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce shipping method
-	*/
+	 * Returns the localized description of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce shipping method
+	 */
 	@Override
 	public String getDescription(String languageId, boolean useDefault) {
 		return _commerceShippingMethod.getDescription(languageId, useDefault);
@@ -285,20 +288,20 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns a map of the locales and localized descriptions of this commerce shipping method.
-	*
-	* @return the locales and localized descriptions of this commerce shipping method
-	*/
+	 * Returns a map of the locales and localized descriptions of this commerce shipping method.
+	 *
+	 * @return the locales and localized descriptions of this commerce shipping method
+	 */
 	@Override
 	public Map<java.util.Locale, String> getDescriptionMap() {
 		return _commerceShippingMethod.getDescriptionMap();
 	}
 
 	/**
-	* Returns the engine key of this commerce shipping method.
-	*
-	* @return the engine key of this commerce shipping method
-	*/
+	 * Returns the engine key of this commerce shipping method.
+	 *
+	 * @return the engine key of this commerce shipping method
+	 */
 	@Override
 	public String getEngineKey() {
 		return _commerceShippingMethod.getEngineKey();
@@ -310,20 +313,20 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns the group ID of this commerce shipping method.
-	*
-	* @return the group ID of this commerce shipping method
-	*/
+	 * Returns the group ID of this commerce shipping method.
+	 *
+	 * @return the group ID of this commerce shipping method
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceShippingMethod.getGroupId();
 	}
 
 	/**
-	* Returns the image ID of this commerce shipping method.
-	*
-	* @return the image ID of this commerce shipping method
-	*/
+	 * Returns the image ID of this commerce shipping method.
+	 *
+	 * @return the image ID of this commerce shipping method
+	 */
 	@Override
 	public long getImageId() {
 		return _commerceShippingMethod.getImageId();
@@ -332,70 +335,71 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	@Override
 	public String getImageURL(
 		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay) {
+
 		return _commerceShippingMethod.getImageURL(themeDisplay);
 	}
 
 	/**
-	* Returns the modified date of this commerce shipping method.
-	*
-	* @return the modified date of this commerce shipping method
-	*/
+	 * Returns the modified date of this commerce shipping method.
+	 *
+	 * @return the modified date of this commerce shipping method
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceShippingMethod.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce shipping method.
-	*
-	* @return the name of this commerce shipping method
-	*/
+	 * Returns the name of this commerce shipping method.
+	 *
+	 * @return the name of this commerce shipping method
+	 */
 	@Override
 	public String getName() {
 		return _commerceShippingMethod.getName();
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce shipping method
-	*/
+	 * Returns the localized name of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this commerce shipping method
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _commerceShippingMethod.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce shipping method. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce shipping method. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _commerceShippingMethod.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce shipping method
-	*/
+	 * Returns the localized name of this commerce shipping method in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this commerce shipping method
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _commerceShippingMethod.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce shipping method
-	*/
+	 * Returns the localized name of this commerce shipping method in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce shipping method
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _commerceShippingMethod.getName(languageId, useDefault);
@@ -412,20 +416,20 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this commerce shipping method.
-	*
-	* @return the locales and localized names of this commerce shipping method
-	*/
+	 * Returns a map of the locales and localized names of this commerce shipping method.
+	 *
+	 * @return the locales and localized names of this commerce shipping method
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _commerceShippingMethod.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this commerce shipping method.
-	*
-	* @return the primary key of this commerce shipping method
-	*/
+	 * Returns the primary key of this commerce shipping method.
+	 *
+	 * @return the primary key of this commerce shipping method
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceShippingMethod.getPrimaryKey();
@@ -437,40 +441,40 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns the priority of this commerce shipping method.
-	*
-	* @return the priority of this commerce shipping method
-	*/
+	 * Returns the priority of this commerce shipping method.
+	 *
+	 * @return the priority of this commerce shipping method
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceShippingMethod.getPriority();
 	}
 
 	/**
-	* Returns the user ID of this commerce shipping method.
-	*
-	* @return the user ID of this commerce shipping method
-	*/
+	 * Returns the user ID of this commerce shipping method.
+	 *
+	 * @return the user ID of this commerce shipping method
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceShippingMethod.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce shipping method.
-	*
-	* @return the user name of this commerce shipping method
-	*/
+	 * Returns the user name of this commerce shipping method.
+	 *
+	 * @return the user name of this commerce shipping method
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceShippingMethod.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce shipping method.
-	*
-	* @return the user uuid of this commerce shipping method
-	*/
+	 * Returns the user uuid of this commerce shipping method.
+	 *
+	 * @return the user uuid of this commerce shipping method
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceShippingMethod.getUserUuid();
@@ -482,10 +486,10 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce shipping method is active.
-	*
-	* @return <code>true</code> if this commerce shipping method is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce shipping method is active.
+	 *
+	 * @return <code>true</code> if this commerce shipping method is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commerceShippingMethod.isActive();
@@ -514,21 +518,24 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceShippingMethod.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceShippingMethod.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commerceShippingMethod.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets whether this commerce shipping method is active.
-	*
-	* @param active the active of this commerce shipping method
-	*/
+	 * Sets whether this commerce shipping method is active.
+	 *
+	 * @param active the active of this commerce shipping method
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commerceShippingMethod.setActive(active);
@@ -540,68 +547,71 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the commerce shipping method ID of this commerce shipping method.
-	*
-	* @param commerceShippingMethodId the commerce shipping method ID of this commerce shipping method
-	*/
+	 * Sets the commerce shipping method ID of this commerce shipping method.
+	 *
+	 * @param commerceShippingMethodId the commerce shipping method ID of this commerce shipping method
+	 */
 	@Override
 	public void setCommerceShippingMethodId(long commerceShippingMethodId) {
-		_commerceShippingMethod.setCommerceShippingMethodId(commerceShippingMethodId);
+		_commerceShippingMethod.setCommerceShippingMethodId(
+			commerceShippingMethodId);
 	}
 
 	/**
-	* Sets the company ID of this commerce shipping method.
-	*
-	* @param companyId the company ID of this commerce shipping method
-	*/
+	 * Sets the company ID of this commerce shipping method.
+	 *
+	 * @param companyId the company ID of this commerce shipping method
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceShippingMethod.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce shipping method.
-	*
-	* @param createDate the create date of this commerce shipping method
-	*/
+	 * Sets the create date of this commerce shipping method.
+	 *
+	 * @param createDate the create date of this commerce shipping method
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceShippingMethod.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce shipping method.
-	*
-	* @param description the description of this commerce shipping method
-	*/
+	 * Sets the description of this commerce shipping method.
+	 *
+	 * @param description the description of this commerce shipping method
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceShippingMethod.setDescription(description);
 	}
 
 	/**
-	* Sets the localized description of this commerce shipping method in the language.
-	*
-	* @param description the localized description of this commerce shipping method
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized description of this commerce shipping method in the language.
+	 *
+	 * @param description the localized description of this commerce shipping method
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setDescription(String description, java.util.Locale locale) {
 		_commerceShippingMethod.setDescription(description, locale);
 	}
 
 	/**
-	* Sets the localized description of this commerce shipping method in the language, and sets the default locale.
-	*
-	* @param description the localized description of this commerce shipping method
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized description of this commerce shipping method in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this commerce shipping method
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setDescription(String description, java.util.Locale locale,
+	public void setDescription(
+		String description, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
-		_commerceShippingMethod.setDescription(description, locale,
-			defaultLocale);
+
+		_commerceShippingMethod.setDescription(
+			description, locale, defaultLocale);
 	}
 
 	@Override
@@ -610,33 +620,37 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce shipping method from the map of locales and localized descriptions.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce shipping method
-	*/
+	 * Sets the localized descriptions of this commerce shipping method from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce shipping method
+	 */
 	@Override
-	public void setDescriptionMap(Map<java.util.Locale, String> descriptionMap) {
+	public void setDescriptionMap(
+		Map<java.util.Locale, String> descriptionMap) {
+
 		_commerceShippingMethod.setDescriptionMap(descriptionMap);
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce shipping method from the map of locales and localized descriptions, and sets the default locale.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce shipping method
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized descriptions of this commerce shipping method from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce shipping method
+	 * @param defaultLocale the default locale
+	 */
 	@Override
 	public void setDescriptionMap(
 		Map<java.util.Locale, String> descriptionMap,
 		java.util.Locale defaultLocale) {
-		_commerceShippingMethod.setDescriptionMap(descriptionMap, defaultLocale);
+
+		_commerceShippingMethod.setDescriptionMap(
+			descriptionMap, defaultLocale);
 	}
 
 	/**
-	* Sets the engine key of this commerce shipping method.
-	*
-	* @param engineKey the engine key of this commerce shipping method
-	*/
+	 * Sets the engine key of this commerce shipping method.
+	 *
+	 * @param engineKey the engine key of this commerce shipping method
+	 */
 	@Override
 	public void setEngineKey(String engineKey) {
 		_commerceShippingMethod.setEngineKey(engineKey);
@@ -645,6 +659,7 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceShippingMethod.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -659,66 +674,67 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the group ID of this commerce shipping method.
-	*
-	* @param groupId the group ID of this commerce shipping method
-	*/
+	 * Sets the group ID of this commerce shipping method.
+	 *
+	 * @param groupId the group ID of this commerce shipping method
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceShippingMethod.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the image ID of this commerce shipping method.
-	*
-	* @param imageId the image ID of this commerce shipping method
-	*/
+	 * Sets the image ID of this commerce shipping method.
+	 *
+	 * @param imageId the image ID of this commerce shipping method
+	 */
 	@Override
 	public void setImageId(long imageId) {
 		_commerceShippingMethod.setImageId(imageId);
 	}
 
 	/**
-	* Sets the modified date of this commerce shipping method.
-	*
-	* @param modifiedDate the modified date of this commerce shipping method
-	*/
+	 * Sets the modified date of this commerce shipping method.
+	 *
+	 * @param modifiedDate the modified date of this commerce shipping method
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceShippingMethod.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce shipping method.
-	*
-	* @param name the name of this commerce shipping method
-	*/
+	 * Sets the name of this commerce shipping method.
+	 *
+	 * @param name the name of this commerce shipping method
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceShippingMethod.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this commerce shipping method in the language.
-	*
-	* @param name the localized name of this commerce shipping method
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this commerce shipping method in the language.
+	 *
+	 * @param name the localized name of this commerce shipping method
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_commerceShippingMethod.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this commerce shipping method in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce shipping method
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this commerce shipping method in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this commerce shipping method
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceShippingMethod.setName(name, locale, defaultLocale);
 	}
 
@@ -728,24 +744,25 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the localized names of this commerce shipping method from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce shipping method
-	*/
+	 * Sets the localized names of this commerce shipping method from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this commerce shipping method
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_commerceShippingMethod.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this commerce shipping method from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce shipping method
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this commerce shipping method from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this commerce shipping method
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_commerceShippingMethod.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -755,10 +772,10 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the primary key of this commerce shipping method.
-	*
-	* @param primaryKey the primary key of this commerce shipping method
-	*/
+	 * Sets the primary key of this commerce shipping method.
+	 *
+	 * @param primaryKey the primary key of this commerce shipping method
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceShippingMethod.setPrimaryKey(primaryKey);
@@ -770,53 +787,56 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	/**
-	* Sets the priority of this commerce shipping method.
-	*
-	* @param priority the priority of this commerce shipping method
-	*/
+	 * Sets the priority of this commerce shipping method.
+	 *
+	 * @param priority the priority of this commerce shipping method
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceShippingMethod.setPriority(priority);
 	}
 
 	/**
-	* Sets the user ID of this commerce shipping method.
-	*
-	* @param userId the user ID of this commerce shipping method
-	*/
+	 * Sets the user ID of this commerce shipping method.
+	 *
+	 * @param userId the user ID of this commerce shipping method
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceShippingMethod.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce shipping method.
-	*
-	* @param userName the user name of this commerce shipping method
-	*/
+	 * Sets the user name of this commerce shipping method.
+	 *
+	 * @param userName the user name of this commerce shipping method
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceShippingMethod.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce shipping method.
-	*
-	* @param userUuid the user uuid of this commerce shipping method
-	*/
+	 * Sets the user uuid of this commerce shipping method.
+	 *
+	 * @param userUuid the user uuid of this commerce shipping method
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceShippingMethod.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceShippingMethod> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceShippingMethod>
+		toCacheModel() {
+
 		return _commerceShippingMethod.toCacheModel();
 	}
 
 	@Override
 	public CommerceShippingMethod toEscapedModel() {
-		return new CommerceShippingMethodWrapper(_commerceShippingMethod.toEscapedModel());
+		return new CommerceShippingMethodWrapper(
+			_commerceShippingMethod.toEscapedModel());
 	}
 
 	@Override
@@ -826,7 +846,8 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 
 	@Override
 	public CommerceShippingMethod toUnescapedModel() {
-		return new CommerceShippingMethodWrapper(_commerceShippingMethod.toUnescapedModel());
+		return new CommerceShippingMethodWrapper(
+			_commerceShippingMethod.toUnescapedModel());
 	}
 
 	@Override
@@ -844,10 +865,13 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 			return false;
 		}
 
-		CommerceShippingMethodWrapper commerceShippingMethodWrapper = (CommerceShippingMethodWrapper)obj;
+		CommerceShippingMethodWrapper commerceShippingMethodWrapper =
+			(CommerceShippingMethodWrapper)obj;
 
-		if (Objects.equals(_commerceShippingMethod,
-					commerceShippingMethodWrapper._commerceShippingMethod)) {
+		if (Objects.equals(
+				_commerceShippingMethod,
+				commerceShippingMethodWrapper._commerceShippingMethod)) {
+
 			return true;
 		}
 
@@ -875,4 +899,5 @@ public class CommerceShippingMethodWrapper implements CommerceShippingMethod,
 	}
 
 	private final CommerceShippingMethod _commerceShippingMethod;
+
 }

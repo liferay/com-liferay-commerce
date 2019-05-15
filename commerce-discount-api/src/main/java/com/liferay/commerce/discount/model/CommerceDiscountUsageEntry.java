@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceDiscountUsageEntryModel
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl"
+)
 @ProviderType
 public interface CommerceDiscountUsageEntry
 	extends CommerceDiscountUsageEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceDiscountUsageEntry, Long> COMMERCE_DISCOUNT_USAGE_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceDiscountUsageEntry, Long>() {
-			@Override
-			public Long get(
-				CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
-				return commerceDiscountUsageEntry.getCommerceDiscountUsageEntryId();
-			}
+	public static final Accessor<CommerceDiscountUsageEntry, Long>
+		COMMERCE_DISCOUNT_USAGE_ENTRY_ID_ACCESSOR =
+			new Accessor<CommerceDiscountUsageEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
 
-			@Override
-			public Class<CommerceDiscountUsageEntry> getTypeClass() {
-				return CommerceDiscountUsageEntry.class;
-			}
-		};
+					return commerceDiscountUsageEntry.
+						getCommerceDiscountUsageEntryId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceDiscountUsageEntry> getTypeClass() {
+					return CommerceDiscountUsageEntry.class;
+				}
+
+			};
+
 }

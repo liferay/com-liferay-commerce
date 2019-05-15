@@ -26,13 +26,14 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPRuleUserSegmentRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPRuleUserSegmentRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CPRuleUserSegmentRelSoap implements Serializable {
+
 	public static CPRuleUserSegmentRelSoap toSoapModel(
 		CPRuleUserSegmentRel model) {
+
 		CPRuleUserSegmentRelSoap soapModel = new CPRuleUserSegmentRelSoap();
 
 		soapModel.setCPRuleUserSegmentRelId(model.getCPRuleUserSegmentRelId());
@@ -43,14 +44,17 @@ public class CPRuleUserSegmentRelSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPRuleId(model.getCPRuleId());
-		soapModel.setCommerceUserSegmentEntryId(model.getCommerceUserSegmentEntryId());
+		soapModel.setCommerceUserSegmentEntryId(
+			model.getCommerceUserSegmentEntryId());
 
 		return soapModel;
 	}
 
 	public static CPRuleUserSegmentRelSoap[] toSoapModels(
 		CPRuleUserSegmentRel[] models) {
-		CPRuleUserSegmentRelSoap[] soapModels = new CPRuleUserSegmentRelSoap[models.length];
+
+		CPRuleUserSegmentRelSoap[] soapModels =
+			new CPRuleUserSegmentRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +65,12 @@ public class CPRuleUserSegmentRelSoap implements Serializable {
 
 	public static CPRuleUserSegmentRelSoap[][] toSoapModels(
 		CPRuleUserSegmentRel[][] models) {
+
 		CPRuleUserSegmentRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPRuleUserSegmentRelSoap[models.length][models[0].length];
+			soapModels =
+				new CPRuleUserSegmentRelSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPRuleUserSegmentRelSoap[0][0];
@@ -79,13 +85,16 @@ public class CPRuleUserSegmentRelSoap implements Serializable {
 
 	public static CPRuleUserSegmentRelSoap[] toSoapModels(
 		List<CPRuleUserSegmentRel> models) {
-		List<CPRuleUserSegmentRelSoap> soapModels = new ArrayList<CPRuleUserSegmentRelSoap>(models.size());
+
+		List<CPRuleUserSegmentRelSoap> soapModels =
+			new ArrayList<CPRuleUserSegmentRelSoap>(models.size());
 
 		for (CPRuleUserSegmentRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPRuleUserSegmentRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPRuleUserSegmentRelSoap[soapModels.size()]);
 	}
 
 	public CPRuleUserSegmentRelSoap() {
@@ -180,4 +189,5 @@ public class CPRuleUserSegmentRelSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _CPRuleId;
 	private long _commerceUserSegmentEntryId;
+
 }

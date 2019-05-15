@@ -25,20 +25,23 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceDiscountModel
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountImpl
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.discount.model.impl.CommerceDiscountImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.discount.model.impl.CommerceDiscountImpl"
+)
 @ProviderType
-public interface CommerceDiscount extends CommerceDiscountModel, PersistedModel {
+public interface CommerceDiscount
+	extends CommerceDiscountModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.discount.model.impl.CommerceDiscountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.discount.model.impl.CommerceDiscountImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceDiscount, Long> COMMERCE_DISCOUNT_ID_ACCESSOR =
-		new Accessor<CommerceDiscount, Long>() {
+	public static final Accessor<CommerceDiscount, Long>
+		COMMERCE_DISCOUNT_ID_ACCESSOR = new Accessor<CommerceDiscount, Long>() {
+
 			@Override
 			public Long get(CommerceDiscount commerceDiscount) {
 				return commerceDiscount.getCommerceDiscountId();
@@ -53,7 +56,10 @@ public interface CommerceDiscount extends CommerceDiscountModel, PersistedModel 
 			public Class<CommerceDiscount> getTypeClass() {
 				return CommerceDiscount.class;
 			}
+
 		};
 
-	public java.util.List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels();
+	public java.util.List<CommerceDiscountUserSegmentRel>
+		getCommerceDiscountUserSegmentRels();
+
 }

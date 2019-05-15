@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceAvailabilityEstimateServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceAvailabilityEstimateServiceUtil} service utility. The
+ * <code>CommerceAvailabilityEstimateServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,24 +49,27 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAvailabilityEstimateServiceSoap
- * @see HttpPrincipal
- * @see CommerceAvailabilityEstimateServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAvailabilityEstimateServiceHttp {
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimate addCommerceAvailabilityEstimate(
-		HttpPrincipal httpPrincipal,
-		java.util.Map<java.util.Locale, String> titleMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"addCommerceAvailabilityEstimate",
-					_addCommerceAvailabilityEstimateParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					titleMap, priority, serviceContext);
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimate
+			addCommerceAvailabilityEstimate(
+				HttpPrincipal httpPrincipal,
+				java.util.Map<java.util.Locale, String> titleMap,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"addCommerceAvailabilityEstimate",
+				_addCommerceAvailabilityEstimateParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, titleMap, priority, serviceContext);
 
 			Object returnObj = null;
 
@@ -74,14 +77,19 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)returnObj;
+			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -91,25 +99,31 @@ public class CommerceAvailabilityEstimateServiceHttp {
 	}
 
 	public static void deleteCommerceAvailabilityEstimate(
-		HttpPrincipal httpPrincipal, long commerceAvailabilityEstimateId)
+			HttpPrincipal httpPrincipal, long commerceAvailabilityEstimateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"deleteCommerceAvailabilityEstimate",
-					_deleteCommerceAvailabilityEstimateParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAvailabilityEstimateId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"deleteCommerceAvailabilityEstimate",
+				_deleteCommerceAvailabilityEstimateParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAvailabilityEstimateId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -119,16 +133,20 @@ public class CommerceAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimate getCommerceAvailabilityEstimate(
-		HttpPrincipal httpPrincipal, long commerceAvailabilityEstimateId)
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimate
+			getCommerceAvailabilityEstimate(
+				HttpPrincipal httpPrincipal,
+				long commerceAvailabilityEstimateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"getCommerceAvailabilityEstimate",
-					_getCommerceAvailabilityEstimateParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAvailabilityEstimateId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"getCommerceAvailabilityEstimate",
+				_getCommerceAvailabilityEstimateParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAvailabilityEstimateId);
 
 			Object returnObj = null;
 
@@ -136,14 +154,19 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)returnObj;
+			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -152,17 +175,24 @@ public class CommerceAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"getCommerceAvailabilityEstimates",
-					_getCommerceAvailabilityEstimatesParameterTypes3);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceAvailabilityEstimate>
+				getCommerceAvailabilityEstimates(
+					HttpPrincipal httpPrincipal, long groupId, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.
+							CommerceAvailabilityEstimate> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"getCommerceAvailabilityEstimates",
+				_getCommerceAvailabilityEstimatesParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -170,14 +200,20 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.model.CommerceAvailabilityEstimate>)
+					returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -187,12 +223,14 @@ public class CommerceAvailabilityEstimateServiceHttp {
 	}
 
 	public static int getCommerceAvailabilityEstimatesCount(
-		HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"getCommerceAvailabilityEstimatesCount",
-					_getCommerceAvailabilityEstimatesCountParameterTypes4);
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"getCommerceAvailabilityEstimatesCount",
+				_getCommerceAvailabilityEstimatesCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -202,11 +240,15 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -218,19 +260,24 @@ public class CommerceAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimate updateCommerceAvailabilityEstimate(
-		HttpPrincipal httpPrincipal, long commerceAvailabilityEstimateId,
-		java.util.Map<java.util.Locale, String> titleMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimate
+			updateCommerceAvailabilityEstimate(
+				HttpPrincipal httpPrincipal,
+				long commerceAvailabilityEstimateId,
+				java.util.Map<java.util.Locale, String> titleMap,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAvailabilityEstimateServiceUtil.class,
-					"updateCommerceAvailabilityEstimate",
-					_updateCommerceAvailabilityEstimateParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAvailabilityEstimateId, titleMap, priority,
-					serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAvailabilityEstimateServiceUtil.class,
+				"updateCommerceAvailabilityEstimate",
+				_updateCommerceAvailabilityEstimateParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAvailabilityEstimateId, titleMap, priority,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -238,14 +285,19 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)returnObj;
+			return (com.liferay.commerce.model.CommerceAvailabilityEstimate)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -254,26 +306,35 @@ public class CommerceAvailabilityEstimateServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceAvailabilityEstimateServiceHttp.class);
-	private static final Class<?>[] _addCommerceAvailabilityEstimateParameterTypes0 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceAvailabilityEstimateServiceHttp.class);
+
+	private static final Class<?>[]
+		_addCommerceAvailabilityEstimateParameterTypes0 = new Class[] {
 			java.util.Map.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceAvailabilityEstimateParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceAvailabilityEstimateParameterTypes2 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceAvailabilityEstimatesParameterTypes3 =
-		new Class[] {
+	private static final Class<?>[]
+		_deleteCommerceAvailabilityEstimateParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceAvailabilityEstimateParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceAvailabilityEstimatesParameterTypes3 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceAvailabilityEstimatesCountParameterTypes4 =
-		new Class[] { long.class };
-	private static final Class<?>[] _updateCommerceAvailabilityEstimateParameterTypes5 =
-		new Class[] {
+	private static final Class<?>[]
+		_getCommerceAvailabilityEstimatesCountParameterTypes4 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_updateCommerceAvailabilityEstimateParameterTypes5 = new Class[] {
 			long.class, java.util.Map.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
+
 }

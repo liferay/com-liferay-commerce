@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.engine.fixed.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceTaxFixedRate in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceTaxFixedRate
  * @generated
  */
 @ProviderType
-public class CommerceTaxFixedRateCacheModel implements CacheModel<CommerceTaxFixedRate>,
-	Externalizable {
+public class CommerceTaxFixedRateCacheModel
+	implements CacheModel<CommerceTaxFixedRate>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceTaxFixedRateCacheModel implements CacheModel<CommerceTaxFix
 			return false;
 		}
 
-		CommerceTaxFixedRateCacheModel commerceTaxFixedRateCacheModel = (CommerceTaxFixedRateCacheModel)obj;
+		CommerceTaxFixedRateCacheModel commerceTaxFixedRateCacheModel =
+			(CommerceTaxFixedRateCacheModel)obj;
 
-		if (commerceTaxFixedRateId == commerceTaxFixedRateCacheModel.commerceTaxFixedRateId) {
+		if (commerceTaxFixedRateId ==
+				commerceTaxFixedRateCacheModel.commerceTaxFixedRateId) {
+
 			return true;
 		}
 
@@ -94,9 +96,11 @@ public class CommerceTaxFixedRateCacheModel implements CacheModel<CommerceTaxFix
 
 	@Override
 	public CommerceTaxFixedRate toEntityModel() {
-		CommerceTaxFixedRateImpl commerceTaxFixedRateImpl = new CommerceTaxFixedRateImpl();
+		CommerceTaxFixedRateImpl commerceTaxFixedRateImpl =
+			new CommerceTaxFixedRateImpl();
 
-		commerceTaxFixedRateImpl.setCommerceTaxFixedRateId(commerceTaxFixedRateId);
+		commerceTaxFixedRateImpl.setCommerceTaxFixedRateId(
+			commerceTaxFixedRateId);
 		commerceTaxFixedRateImpl.setGroupId(groupId);
 		commerceTaxFixedRateImpl.setCompanyId(companyId);
 		commerceTaxFixedRateImpl.setUserId(userId);
@@ -152,8 +156,7 @@ public class CommerceTaxFixedRateCacheModel implements CacheModel<CommerceTaxFix
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceTaxFixedRateId);
 
 		objectOutput.writeLong(groupId);
@@ -189,4 +192,5 @@ public class CommerceTaxFixedRateCacheModel implements CacheModel<CommerceTaxFix
 	public long CPTaxCategoryId;
 	public long commerceTaxMethodId;
 	public double rate;
+
 }

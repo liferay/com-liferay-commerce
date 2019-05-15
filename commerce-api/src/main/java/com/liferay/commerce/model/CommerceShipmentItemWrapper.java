@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
-	ModelWrapper<CommerceShipmentItem> {
+public class CommerceShipmentItemWrapper
+	implements CommerceShipmentItem, ModelWrapper<CommerceShipmentItem> {
+
 	public CommerceShipmentItemWrapper(
 		CommerceShipmentItem commerceShipmentItem) {
+
 		_commerceShipmentItem = commerceShipmentItem;
 	}
 
@@ -77,7 +78,7 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceShipmentItemId = (Long)attributes.get(
-				"commerceShipmentItemId");
+			"commerceShipmentItemId");
 
 		if (commerceShipmentItemId != null) {
 			setCommerceShipmentItemId(commerceShipmentItemId);
@@ -146,7 +147,8 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 
 	@Override
 	public Object clone() {
-		return new CommerceShipmentItemWrapper((CommerceShipmentItem)_commerceShipmentItem.clone());
+		return new CommerceShipmentItemWrapper(
+			(CommerceShipmentItem)_commerceShipmentItem.clone());
 	}
 
 	@Override
@@ -160,10 +162,10 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Returns the commerce order item ID of this commerce shipment item.
-	*
-	* @return the commerce order item ID of this commerce shipment item
-	*/
+	 * Returns the commerce order item ID of this commerce shipment item.
+	 *
+	 * @return the commerce order item ID of this commerce shipment item
+	 */
 	@Override
 	public long getCommerceOrderItemId() {
 		return _commerceShipmentItem.getCommerceOrderItemId();
@@ -172,54 +174,55 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public CommerceShipment getCommerceShipment()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceShipmentItem.getCommerceShipment();
 	}
 
 	/**
-	* Returns the commerce shipment ID of this commerce shipment item.
-	*
-	* @return the commerce shipment ID of this commerce shipment item
-	*/
+	 * Returns the commerce shipment ID of this commerce shipment item.
+	 *
+	 * @return the commerce shipment ID of this commerce shipment item
+	 */
 	@Override
 	public long getCommerceShipmentId() {
 		return _commerceShipmentItem.getCommerceShipmentId();
 	}
 
 	/**
-	* Returns the commerce shipment item ID of this commerce shipment item.
-	*
-	* @return the commerce shipment item ID of this commerce shipment item
-	*/
+	 * Returns the commerce shipment item ID of this commerce shipment item.
+	 *
+	 * @return the commerce shipment item ID of this commerce shipment item
+	 */
 	@Override
 	public long getCommerceShipmentItemId() {
 		return _commerceShipmentItem.getCommerceShipmentItemId();
 	}
 
 	/**
-	* Returns the commerce warehouse ID of this commerce shipment item.
-	*
-	* @return the commerce warehouse ID of this commerce shipment item
-	*/
+	 * Returns the commerce warehouse ID of this commerce shipment item.
+	 *
+	 * @return the commerce warehouse ID of this commerce shipment item
+	 */
 	@Override
 	public long getCommerceWarehouseId() {
 		return _commerceShipmentItem.getCommerceWarehouseId();
 	}
 
 	/**
-	* Returns the company ID of this commerce shipment item.
-	*
-	* @return the company ID of this commerce shipment item
-	*/
+	 * Returns the company ID of this commerce shipment item.
+	 *
+	 * @return the company ID of this commerce shipment item
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceShipmentItem.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce shipment item.
-	*
-	* @return the create date of this commerce shipment item
-	*/
+	 * Returns the create date of this commerce shipment item.
+	 *
+	 * @return the create date of this commerce shipment item
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceShipmentItem.getCreateDate();
@@ -231,30 +234,30 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Returns the group ID of this commerce shipment item.
-	*
-	* @return the group ID of this commerce shipment item
-	*/
+	 * Returns the group ID of this commerce shipment item.
+	 *
+	 * @return the group ID of this commerce shipment item
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceShipmentItem.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce shipment item.
-	*
-	* @return the modified date of this commerce shipment item
-	*/
+	 * Returns the modified date of this commerce shipment item.
+	 *
+	 * @return the modified date of this commerce shipment item
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceShipmentItem.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce shipment item.
-	*
-	* @return the primary key of this commerce shipment item
-	*/
+	 * Returns the primary key of this commerce shipment item.
+	 *
+	 * @return the primary key of this commerce shipment item
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceShipmentItem.getPrimaryKey();
@@ -266,40 +269,40 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Returns the quantity of this commerce shipment item.
-	*
-	* @return the quantity of this commerce shipment item
-	*/
+	 * Returns the quantity of this commerce shipment item.
+	 *
+	 * @return the quantity of this commerce shipment item
+	 */
 	@Override
 	public int getQuantity() {
 		return _commerceShipmentItem.getQuantity();
 	}
 
 	/**
-	* Returns the user ID of this commerce shipment item.
-	*
-	* @return the user ID of this commerce shipment item
-	*/
+	 * Returns the user ID of this commerce shipment item.
+	 *
+	 * @return the user ID of this commerce shipment item
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceShipmentItem.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce shipment item.
-	*
-	* @return the user name of this commerce shipment item
-	*/
+	 * Returns the user name of this commerce shipment item.
+	 *
+	 * @return the user name of this commerce shipment item
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceShipmentItem.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce shipment item.
-	*
-	* @return the user uuid of this commerce shipment item
-	*/
+	 * Returns the user uuid of this commerce shipment item.
+	 *
+	 * @return the user uuid of this commerce shipment item
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceShipmentItem.getUserUuid();
@@ -336,60 +339,60 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Sets the commerce order item ID of this commerce shipment item.
-	*
-	* @param commerceOrderItemId the commerce order item ID of this commerce shipment item
-	*/
+	 * Sets the commerce order item ID of this commerce shipment item.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID of this commerce shipment item
+	 */
 	@Override
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceShipmentItem.setCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	/**
-	* Sets the commerce shipment ID of this commerce shipment item.
-	*
-	* @param commerceShipmentId the commerce shipment ID of this commerce shipment item
-	*/
+	 * Sets the commerce shipment ID of this commerce shipment item.
+	 *
+	 * @param commerceShipmentId the commerce shipment ID of this commerce shipment item
+	 */
 	@Override
 	public void setCommerceShipmentId(long commerceShipmentId) {
 		_commerceShipmentItem.setCommerceShipmentId(commerceShipmentId);
 	}
 
 	/**
-	* Sets the commerce shipment item ID of this commerce shipment item.
-	*
-	* @param commerceShipmentItemId the commerce shipment item ID of this commerce shipment item
-	*/
+	 * Sets the commerce shipment item ID of this commerce shipment item.
+	 *
+	 * @param commerceShipmentItemId the commerce shipment item ID of this commerce shipment item
+	 */
 	@Override
 	public void setCommerceShipmentItemId(long commerceShipmentItemId) {
 		_commerceShipmentItem.setCommerceShipmentItemId(commerceShipmentItemId);
 	}
 
 	/**
-	* Sets the commerce warehouse ID of this commerce shipment item.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce shipment item
-	*/
+	 * Sets the commerce warehouse ID of this commerce shipment item.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID of this commerce shipment item
+	 */
 	@Override
 	public void setCommerceWarehouseId(long commerceWarehouseId) {
 		_commerceShipmentItem.setCommerceWarehouseId(commerceWarehouseId);
 	}
 
 	/**
-	* Sets the company ID of this commerce shipment item.
-	*
-	* @param companyId the company ID of this commerce shipment item
-	*/
+	 * Sets the company ID of this commerce shipment item.
+	 *
+	 * @param companyId the company ID of this commerce shipment item
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceShipmentItem.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce shipment item.
-	*
-	* @param createDate the create date of this commerce shipment item
-	*/
+	 * Sets the create date of this commerce shipment item.
+	 *
+	 * @param createDate the create date of this commerce shipment item
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceShipmentItem.setCreateDate(createDate);
@@ -398,6 +401,7 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceShipmentItem.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -412,20 +416,20 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Sets the group ID of this commerce shipment item.
-	*
-	* @param groupId the group ID of this commerce shipment item
-	*/
+	 * Sets the group ID of this commerce shipment item.
+	 *
+	 * @param groupId the group ID of this commerce shipment item
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceShipmentItem.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce shipment item.
-	*
-	* @param modifiedDate the modified date of this commerce shipment item
-	*/
+	 * Sets the modified date of this commerce shipment item.
+	 *
+	 * @param modifiedDate the modified date of this commerce shipment item
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceShipmentItem.setModifiedDate(modifiedDate);
@@ -437,10 +441,10 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Sets the primary key of this commerce shipment item.
-	*
-	* @param primaryKey the primary key of this commerce shipment item
-	*/
+	 * Sets the primary key of this commerce shipment item.
+	 *
+	 * @param primaryKey the primary key of this commerce shipment item
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceShipmentItem.setPrimaryKey(primaryKey);
@@ -452,53 +456,56 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
-	* Sets the quantity of this commerce shipment item.
-	*
-	* @param quantity the quantity of this commerce shipment item
-	*/
+	 * Sets the quantity of this commerce shipment item.
+	 *
+	 * @param quantity the quantity of this commerce shipment item
+	 */
 	@Override
 	public void setQuantity(int quantity) {
 		_commerceShipmentItem.setQuantity(quantity);
 	}
 
 	/**
-	* Sets the user ID of this commerce shipment item.
-	*
-	* @param userId the user ID of this commerce shipment item
-	*/
+	 * Sets the user ID of this commerce shipment item.
+	 *
+	 * @param userId the user ID of this commerce shipment item
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceShipmentItem.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce shipment item.
-	*
-	* @param userName the user name of this commerce shipment item
-	*/
+	 * Sets the user name of this commerce shipment item.
+	 *
+	 * @param userName the user name of this commerce shipment item
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceShipmentItem.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce shipment item.
-	*
-	* @param userUuid the user uuid of this commerce shipment item
-	*/
+	 * Sets the user uuid of this commerce shipment item.
+	 *
+	 * @param userUuid the user uuid of this commerce shipment item
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceShipmentItem.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceShipmentItem> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceShipmentItem>
+		toCacheModel() {
+
 		return _commerceShipmentItem.toCacheModel();
 	}
 
 	@Override
 	public CommerceShipmentItem toEscapedModel() {
-		return new CommerceShipmentItemWrapper(_commerceShipmentItem.toEscapedModel());
+		return new CommerceShipmentItemWrapper(
+			_commerceShipmentItem.toEscapedModel());
 	}
 
 	@Override
@@ -508,7 +515,8 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 
 	@Override
 	public CommerceShipmentItem toUnescapedModel() {
-		return new CommerceShipmentItemWrapper(_commerceShipmentItem.toUnescapedModel());
+		return new CommerceShipmentItemWrapper(
+			_commerceShipmentItem.toUnescapedModel());
 	}
 
 	@Override
@@ -526,10 +534,13 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 			return false;
 		}
 
-		CommerceShipmentItemWrapper commerceShipmentItemWrapper = (CommerceShipmentItemWrapper)obj;
+		CommerceShipmentItemWrapper commerceShipmentItemWrapper =
+			(CommerceShipmentItemWrapper)obj;
 
-		if (Objects.equals(_commerceShipmentItem,
-					commerceShipmentItemWrapper._commerceShipmentItem)) {
+		if (Objects.equals(
+				_commerceShipmentItem,
+				commerceShipmentItemWrapper._commerceShipmentItem)) {
+
 			return true;
 		}
 
@@ -557,4 +568,5 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	private final CommerceShipmentItem _commerceShipmentItem;
+
 }

@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceSubscriptionEntryServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceSubscriptionEntryServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceSubscriptionEntrySoap implements Serializable {
+
 	public static CommerceSubscriptionEntrySoap toSoapModel(
 		CommerceSubscriptionEntry model) {
-		CommerceSubscriptionEntrySoap soapModel = new CommerceSubscriptionEntrySoap();
+
+		CommerceSubscriptionEntrySoap soapModel =
+			new CommerceSubscriptionEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommerceSubscriptionEntryId(model.getCommerceSubscriptionEntryId());
+		soapModel.setCommerceSubscriptionEntryId(
+			model.getCommerceSubscriptionEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -48,7 +51,8 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
 		soapModel.setSubscriptionLength(model.getSubscriptionLength());
 		soapModel.setSubscriptionType(model.getSubscriptionType());
-		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
+		soapModel.setSubscriptionTypeSettings(
+			model.getSubscriptionTypeSettings());
 		soapModel.setCurrentCycle(model.getCurrentCycle());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
 		soapModel.setSubscriptionStatus(model.getSubscriptionStatus());
@@ -61,7 +65,9 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 
 	public static CommerceSubscriptionEntrySoap[] toSoapModels(
 		CommerceSubscriptionEntry[] models) {
-		CommerceSubscriptionEntrySoap[] soapModels = new CommerceSubscriptionEntrySoap[models.length];
+
+		CommerceSubscriptionEntrySoap[] soapModels =
+			new CommerceSubscriptionEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -72,10 +78,13 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 
 	public static CommerceSubscriptionEntrySoap[][] toSoapModels(
 		CommerceSubscriptionEntry[][] models) {
+
 		CommerceSubscriptionEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceSubscriptionEntrySoap[models.length][models[0].length];
+			soapModels =
+				new CommerceSubscriptionEntrySoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceSubscriptionEntrySoap[0][0];
@@ -90,13 +99,16 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 
 	public static CommerceSubscriptionEntrySoap[] toSoapModels(
 		List<CommerceSubscriptionEntry> models) {
-		List<CommerceSubscriptionEntrySoap> soapModels = new ArrayList<CommerceSubscriptionEntrySoap>(models.size());
+
+		List<CommerceSubscriptionEntrySoap> soapModels =
+			new ArrayList<CommerceSubscriptionEntrySoap>(models.size());
 
 		for (CommerceSubscriptionEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceSubscriptionEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceSubscriptionEntrySoap[soapModels.size()]);
 	}
 
 	public CommerceSubscriptionEntrySoap() {
@@ -122,7 +134,9 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		return _commerceSubscriptionEntryId;
 	}
 
-	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
+	public void setCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId) {
+
 		_commerceSubscriptionEntryId = commerceSubscriptionEntryId;
 	}
 
@@ -290,4 +304,5 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 	private Date _lastIterationDate;
 	private Date _nextIterationDate;
 	private Date _startDate;
+
 }

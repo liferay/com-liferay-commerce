@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPMeasurementUnit;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPMeasurementUnit in entity cache.
  *
  * @author Marco Leo
- * @see CPMeasurementUnit
  * @generated
  */
 @ProviderType
-public class CPMeasurementUnitCacheModel implements CacheModel<CPMeasurementUnit>,
-	Externalizable {
+public class CPMeasurementUnitCacheModel
+	implements CacheModel<CPMeasurementUnit>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPMeasurementUnitCacheModel implements CacheModel<CPMeasurementUnit
 			return false;
 		}
 
-		CPMeasurementUnitCacheModel cpMeasurementUnitCacheModel = (CPMeasurementUnitCacheModel)obj;
+		CPMeasurementUnitCacheModel cpMeasurementUnitCacheModel =
+			(CPMeasurementUnitCacheModel)obj;
 
-		if (CPMeasurementUnitId == cpMeasurementUnitCacheModel.CPMeasurementUnitId) {
+		if (CPMeasurementUnitId ==
+				cpMeasurementUnitCacheModel.CPMeasurementUnitId) {
+
 			return true;
 		}
 
@@ -104,7 +106,8 @@ public class CPMeasurementUnitCacheModel implements CacheModel<CPMeasurementUnit
 
 	@Override
 	public CPMeasurementUnit toEntityModel() {
-		CPMeasurementUnitImpl cpMeasurementUnitImpl = new CPMeasurementUnitImpl();
+		CPMeasurementUnitImpl cpMeasurementUnitImpl =
+			new CPMeasurementUnitImpl();
 
 		if (uuid == null) {
 			cpMeasurementUnitImpl.setUuid("");
@@ -198,8 +201,7 @@ public class CPMeasurementUnitCacheModel implements CacheModel<CPMeasurementUnit
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -264,4 +266,5 @@ public class CPMeasurementUnitCacheModel implements CacheModel<CPMeasurementUnit
 	public double priority;
 	public int type;
 	public long lastPublishDate;
+
 }

@@ -19,13 +19,11 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
-
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -68,17 +66,17 @@ import javax.sql.DataSource;
  *
  * @author Andrea Di Giorgi
  * @see com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl
- * @see com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements CPDefinitionGroupedEntryLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements CPDefinitionGroupedEntryLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil} to access the cp definition grouped entry local service.
+	 * Never modify or reference this class directly. Use <code>CPDefinitionGroupedEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -91,9 +89,11 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
+
 		cpDefinitionGroupedEntry.setNew(true);
 
-		return cpDefinitionGroupedEntryPersistence.update(cpDefinitionGroupedEntry);
+		return cpDefinitionGroupedEntryPersistence.update(
+			cpDefinitionGroupedEntry);
 	}
 
 	/**
@@ -106,7 +106,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CPDefinitionGroupedEntry createCPDefinitionGroupedEntry(
 		long CPDefinitionGroupedEntryId) {
-		return cpDefinitionGroupedEntryPersistence.create(CPDefinitionGroupedEntryId);
+
+		return cpDefinitionGroupedEntryPersistence.create(
+			CPDefinitionGroupedEntryId);
 	}
 
 	/**
@@ -119,8 +121,11 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CPDefinitionGroupedEntry deleteCPDefinitionGroupedEntry(
-		long CPDefinitionGroupedEntryId) throws PortalException {
-		return cpDefinitionGroupedEntryPersistence.remove(CPDefinitionGroupedEntryId);
+			long CPDefinitionGroupedEntryId)
+		throws PortalException {
+
+		return cpDefinitionGroupedEntryPersistence.remove(
+			CPDefinitionGroupedEntryId);
 	}
 
 	/**
@@ -133,15 +138,17 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public CPDefinitionGroupedEntry deleteCPDefinitionGroupedEntry(
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
-		return cpDefinitionGroupedEntryPersistence.remove(cpDefinitionGroupedEntry);
+
+		return cpDefinitionGroupedEntryPersistence.remove(
+			cpDefinitionGroupedEntry);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CPDefinitionGroupedEntry.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CPDefinitionGroupedEntry.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -152,14 +159,15 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(dynamicQuery);
+		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -168,17 +176,18 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -188,10 +197,12 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return cpDefinitionGroupedEntryPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -202,7 +213,8 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return cpDefinitionGroupedEntryPersistence.countWithDynamicQuery(dynamicQuery);
+		return cpDefinitionGroupedEntryPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -213,16 +225,19 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return cpDefinitionGroupedEntryPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return cpDefinitionGroupedEntryPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
 		long CPDefinitionGroupedEntryId) {
-		return cpDefinitionGroupedEntryPersistence.fetchByPrimaryKey(CPDefinitionGroupedEntryId);
+
+		return cpDefinitionGroupedEntryPersistence.fetchByPrimaryKey(
+			CPDefinitionGroupedEntryId);
 	}
 
 	/**
@@ -233,8 +248,10 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	 */
 	@Override
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CPDefinitionGroupedEntry
+		fetchCPDefinitionGroupedEntryByUuidAndGroupId(
+			String uuid, long groupId) {
+
 		return cpDefinitionGroupedEntryPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
@@ -247,15 +264,20 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public CPDefinitionGroupedEntry getCPDefinitionGroupedEntry(
-		long CPDefinitionGroupedEntryId) throws PortalException {
-		return cpDefinitionGroupedEntryPersistence.findByPrimaryKey(CPDefinitionGroupedEntryId);
+			long CPDefinitionGroupedEntryId)
+		throws PortalException {
+
+		return cpDefinitionGroupedEntryPersistence.findByPrimaryKey(
+			CPDefinitionGroupedEntryId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(cpDefinitionGroupedEntryLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			cpDefinitionGroupedEntryLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CPDefinitionGroupedEntry.class);
 
@@ -266,12 +288,17 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(cpDefinitionGroupedEntryLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			cpDefinitionGroupedEntryLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CPDefinitionGroupedEntry.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CPDefinitionGroupedEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"CPDefinitionGroupedEntryId");
@@ -281,7 +308,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(cpDefinitionGroupedEntryLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			cpDefinitionGroupedEntryLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CPDefinitionGroupedEntry.class);
 
@@ -292,50 +321,66 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) {
-		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+
+		final ExportActionableDynamicQuery exportActionableDynamicQuery =
+			new ExportActionableDynamicQuery() {
+
 				@Override
 				public long performCount() throws PortalException {
-					ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+					ManifestSummary manifestSummary =
+						portletDataContext.getManifestSummary();
 
 					StagedModelType stagedModelType = getStagedModelType();
 
 					long modelAdditionCount = super.performCount();
 
-					manifestSummary.addModelAdditionCount(stagedModelType,
-						modelAdditionCount);
+					manifestSummary.addModelAdditionCount(
+						stagedModelType, modelAdditionCount);
 
-					long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext,
-							stagedModelType);
+					long modelDeletionCount =
+						ExportImportHelperUtil.getModelDeletionCount(
+							portletDataContext, stagedModelType);
 
-					manifestSummary.addModelDeletionCount(stagedModelType,
-						modelDeletionCount);
+					manifestSummary.addModelDeletionCount(
+						stagedModelType, modelDeletionCount);
 
 					return modelAdditionCount;
 				}
+
 			};
 
 		initActionableDynamicQuery(exportActionableDynamicQuery);
 
-		exportActionableDynamicQuery.setAddCriteriaMethod(new ActionableDynamicQuery.AddCriteriaMethod() {
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					portletDataContext.addDateRangeCriteria(dynamicQuery,
-						"modifiedDate");
+					portletDataContext.addDateRangeCriteria(
+						dynamicQuery, "modifiedDate");
 				}
+
 			});
 
-		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionGroupedEntry>() {
+		exportActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDefinitionGroupedEntry>() {
+
 				@Override
 				public void performAction(
-					CPDefinitionGroupedEntry cpDefinitionGroupedEntry)
+						CPDefinitionGroupedEntry cpDefinitionGroupedEntry)
 					throws PortalException {
-					StagedModelDataHandlerUtil.exportStagedModel(portletDataContext,
-						cpDefinitionGroupedEntry);
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, cpDefinitionGroupedEntry);
 				}
+
 			});
-		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
 				PortalUtil.getClassNameId(
 					CPDefinitionGroupedEntry.class.getName())));
 
@@ -348,13 +393,18 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return cpDefinitionGroupedEntryLocalService.deleteCPDefinitionGroupedEntry((CPDefinitionGroupedEntry)persistedModel);
+
+		return cpDefinitionGroupedEntryLocalService.
+			deleteCPDefinitionGroupedEntry(
+				(CPDefinitionGroupedEntry)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return cpDefinitionGroupedEntryPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return cpDefinitionGroupedEntryPersistence.findByPrimaryKey(
+			primaryKeyObj);
 	}
 
 	/**
@@ -365,9 +415,12 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the matching cp definition grouped entries, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CPDefinitionGroupedEntry> getCPDefinitionGroupedEntriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return cpDefinitionGroupedEntryPersistence.findByUuid_C(uuid, companyId);
+	public List<CPDefinitionGroupedEntry>
+		getCPDefinitionGroupedEntriesByUuidAndCompanyId(
+			String uuid, long companyId) {
+
+		return cpDefinitionGroupedEntryPersistence.findByUuid_C(
+			uuid, companyId);
 	}
 
 	/**
@@ -381,11 +434,13 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @return the range of matching cp definition grouped entries, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CPDefinitionGroupedEntry> getCPDefinitionGroupedEntriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator) {
-		return cpDefinitionGroupedEntryPersistence.findByUuid_C(uuid,
-			companyId, start, end, orderByComparator);
+	public List<CPDefinitionGroupedEntry>
+		getCPDefinitionGroupedEntriesByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			OrderByComparator<CPDefinitionGroupedEntry> orderByComparator) {
+
+		return cpDefinitionGroupedEntryPersistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -398,7 +453,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public CPDefinitionGroupedEntry getCPDefinitionGroupedEntryByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
+			String uuid, long groupId)
+		throws PortalException {
+
 		return cpDefinitionGroupedEntryPersistence.findByUUID_G(uuid, groupId);
 	}
 
@@ -406,7 +463,7 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * Returns a range of all the cp definition grouped entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp definition grouped entries
@@ -416,6 +473,7 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public List<CPDefinitionGroupedEntry> getCPDefinitionGroupedEntries(
 		int start, int end) {
+
 		return cpDefinitionGroupedEntryPersistence.findAll(start, end);
 	}
 
@@ -439,7 +497,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	@Override
 	public CPDefinitionGroupedEntry updateCPDefinitionGroupedEntry(
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
-		return cpDefinitionGroupedEntryPersistence.update(cpDefinitionGroupedEntry);
+
+		return cpDefinitionGroupedEntryPersistence.update(
+			cpDefinitionGroupedEntry);
 	}
 
 	/**
@@ -447,7 +507,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the cp definition grouped entry local service
 	 */
-	public CPDefinitionGroupedEntryLocalService getCPDefinitionGroupedEntryLocalService() {
+	public CPDefinitionGroupedEntryLocalService
+		getCPDefinitionGroupedEntryLocalService() {
+
 		return cpDefinitionGroupedEntryLocalService;
 	}
 
@@ -457,8 +519,11 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @param cpDefinitionGroupedEntryLocalService the cp definition grouped entry local service
 	 */
 	public void setCPDefinitionGroupedEntryLocalService(
-		CPDefinitionGroupedEntryLocalService cpDefinitionGroupedEntryLocalService) {
-		this.cpDefinitionGroupedEntryLocalService = cpDefinitionGroupedEntryLocalService;
+		CPDefinitionGroupedEntryLocalService
+			cpDefinitionGroupedEntryLocalService) {
+
+		this.cpDefinitionGroupedEntryLocalService =
+			cpDefinitionGroupedEntryLocalService;
 	}
 
 	/**
@@ -466,7 +531,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the cp definition grouped entry persistence
 	 */
-	public CPDefinitionGroupedEntryPersistence getCPDefinitionGroupedEntryPersistence() {
+	public CPDefinitionGroupedEntryPersistence
+		getCPDefinitionGroupedEntryPersistence() {
+
 		return cpDefinitionGroupedEntryPersistence;
 	}
 
@@ -476,8 +543,11 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @param cpDefinitionGroupedEntryPersistence the cp definition grouped entry persistence
 	 */
 	public void setCPDefinitionGroupedEntryPersistence(
-		CPDefinitionGroupedEntryPersistence cpDefinitionGroupedEntryPersistence) {
-		this.cpDefinitionGroupedEntryPersistence = cpDefinitionGroupedEntryPersistence;
+		CPDefinitionGroupedEntryPersistence
+			cpDefinitionGroupedEntryPersistence) {
+
+		this.cpDefinitionGroupedEntryPersistence =
+			cpDefinitionGroupedEntryPersistence;
 	}
 
 	/**
@@ -485,7 +555,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -495,7 +567,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -504,7 +578,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -514,7 +590,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -534,6 +612,7 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -542,7 +621,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -552,7 +633,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -561,7 +644,9 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -572,6 +657,7 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -594,7 +680,8 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry",
 			cpDefinitionGroupedEntryLocalService);
 	}
 
@@ -628,15 +715,16 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = cpDefinitionGroupedEntryPersistence.getDataSource();
+			DataSource dataSource =
+				cpDefinitionGroupedEntryPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -646,21 +734,45 @@ public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	}
 
 	@BeanReference(type = CPDefinitionGroupedEntryLocalService.class)
-	protected CPDefinitionGroupedEntryLocalService cpDefinitionGroupedEntryLocalService;
+	protected CPDefinitionGroupedEntryLocalService
+		cpDefinitionGroupedEntryLocalService;
+
 	@BeanReference(type = CPDefinitionGroupedEntryPersistence.class)
-	protected CPDefinitionGroupedEntryPersistence cpDefinitionGroupedEntryPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CPDefinitionGroupedEntryPersistence
+		cpDefinitionGroupedEntryPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

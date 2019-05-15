@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchCPDefinitionInventoryException;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence;
 import com.liferay.commerce.service.persistence.CPDefinitionInventoryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionInventoryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -82,7 +81,8 @@ public class CPDefinitionInventoryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPDefinitionInventory> iterator = _cpDefinitionInventories.iterator();
+		Iterator<CPDefinitionInventory> iterator =
+			_cpDefinitionInventories.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -104,11 +104,14 @@ public class CPDefinitionInventoryPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
 		_persistence.remove(newCPDefinitionInventory);
 
-		CPDefinitionInventory existingCPDefinitionInventory = _persistence.fetchByPrimaryKey(newCPDefinitionInventory.getPrimaryKey());
+		CPDefinitionInventory existingCPDefinitionInventory =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionInventory.getPrimaryKey());
 
 		Assert.assertNull(existingCPDefinitionInventory);
 	}
@@ -122,7 +125,8 @@ public class CPDefinitionInventoryPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionInventory newCPDefinitionInventory = _persistence.create(pk);
+		CPDefinitionInventory newCPDefinitionInventory = _persistence.create(
+			pk);
 
 		newCPDefinitionInventory.setUuid(RandomTestUtil.randomString());
 
@@ -140,13 +144,17 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		newCPDefinitionInventory.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		newCPDefinitionInventory.setCPDefinitionInventoryEngine(RandomTestUtil.randomString());
+		newCPDefinitionInventory.setCPDefinitionInventoryEngine(
+			RandomTestUtil.randomString());
 
-		newCPDefinitionInventory.setLowStockActivity(RandomTestUtil.randomString());
+		newCPDefinitionInventory.setLowStockActivity(
+			RandomTestUtil.randomString());
 
-		newCPDefinitionInventory.setDisplayAvailability(RandomTestUtil.randomBoolean());
+		newCPDefinitionInventory.setDisplayAvailability(
+			RandomTestUtil.randomBoolean());
 
-		newCPDefinitionInventory.setDisplayStockQuantity(RandomTestUtil.randomBoolean());
+		newCPDefinitionInventory.setDisplayStockQuantity(
+			RandomTestUtil.randomBoolean());
 
 		newCPDefinitionInventory.setMinStockQuantity(RandomTestUtil.nextInt());
 
@@ -156,54 +164,77 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		newCPDefinitionInventory.setMaxOrderQuantity(RandomTestUtil.nextInt());
 
-		newCPDefinitionInventory.setAllowedOrderQuantities(RandomTestUtil.randomString());
+		newCPDefinitionInventory.setAllowedOrderQuantities(
+			RandomTestUtil.randomString());
 
-		newCPDefinitionInventory.setMultipleOrderQuantity(RandomTestUtil.nextInt());
+		newCPDefinitionInventory.setMultipleOrderQuantity(
+			RandomTestUtil.nextInt());
 
-		_cpDefinitionInventories.add(_persistence.update(
-				newCPDefinitionInventory));
+		_cpDefinitionInventories.add(
+			_persistence.update(newCPDefinitionInventory));
 
-		CPDefinitionInventory existingCPDefinitionInventory = _persistence.findByPrimaryKey(newCPDefinitionInventory.getPrimaryKey());
+		CPDefinitionInventory existingCPDefinitionInventory =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionInventory.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionInventory.getUuid(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getUuid(),
 			newCPDefinitionInventory.getUuid());
-		Assert.assertEquals(existingCPDefinitionInventory.getCPDefinitionInventoryId(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getCPDefinitionInventoryId(),
 			newCPDefinitionInventory.getCPDefinitionInventoryId());
-		Assert.assertEquals(existingCPDefinitionInventory.getGroupId(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getGroupId(),
 			newCPDefinitionInventory.getGroupId());
-		Assert.assertEquals(existingCPDefinitionInventory.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getCompanyId(),
 			newCPDefinitionInventory.getCompanyId());
-		Assert.assertEquals(existingCPDefinitionInventory.getUserId(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getUserId(),
 			newCPDefinitionInventory.getUserId());
-		Assert.assertEquals(existingCPDefinitionInventory.getUserName(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getUserName(),
 			newCPDefinitionInventory.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionInventory.getCreateDate()),
 			Time.getShortTimestamp(newCPDefinitionInventory.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionInventory.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinitionInventory.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionInventory.getCPDefinitionId(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getCPDefinitionId(),
 			newCPDefinitionInventory.getCPDefinitionId());
-		Assert.assertEquals(existingCPDefinitionInventory.getCPDefinitionInventoryEngine(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getCPDefinitionInventoryEngine(),
 			newCPDefinitionInventory.getCPDefinitionInventoryEngine());
-		Assert.assertEquals(existingCPDefinitionInventory.getLowStockActivity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getLowStockActivity(),
 			newCPDefinitionInventory.getLowStockActivity());
-		Assert.assertEquals(existingCPDefinitionInventory.isDisplayAvailability(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.isDisplayAvailability(),
 			newCPDefinitionInventory.isDisplayAvailability());
-		Assert.assertEquals(existingCPDefinitionInventory.isDisplayStockQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.isDisplayStockQuantity(),
 			newCPDefinitionInventory.isDisplayStockQuantity());
-		Assert.assertEquals(existingCPDefinitionInventory.getMinStockQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getMinStockQuantity(),
 			newCPDefinitionInventory.getMinStockQuantity());
-		Assert.assertEquals(existingCPDefinitionInventory.isBackOrders(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.isBackOrders(),
 			newCPDefinitionInventory.isBackOrders());
-		Assert.assertEquals(existingCPDefinitionInventory.getMinOrderQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getMinOrderQuantity(),
 			newCPDefinitionInventory.getMinOrderQuantity());
-		Assert.assertEquals(existingCPDefinitionInventory.getMaxOrderQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getMaxOrderQuantity(),
 			newCPDefinitionInventory.getMaxOrderQuantity());
-		Assert.assertEquals(existingCPDefinitionInventory.getAllowedOrderQuantities(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getAllowedOrderQuantities(),
 			newCPDefinitionInventory.getAllowedOrderQuantities());
-		Assert.assertEquals(existingCPDefinitionInventory.getMultipleOrderQuantity(),
+		Assert.assertEquals(
+			existingCPDefinitionInventory.getMultipleOrderQuantity(),
 			newCPDefinitionInventory.getMultipleOrderQuantity());
 	}
 
@@ -243,12 +274,15 @@ public class CPDefinitionInventoryPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
-		CPDefinitionInventory existingCPDefinitionInventory = _persistence.findByPrimaryKey(newCPDefinitionInventory.getPrimaryKey());
+		CPDefinitionInventory existingCPDefinitionInventory =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionInventory.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionInventory,
-			newCPDefinitionInventory);
+		Assert.assertEquals(
+			existingCPDefinitionInventory, newCPDefinitionInventory);
 	}
 
 	@Test(expected = NoSuchCPDefinitionInventoryException.class)
@@ -260,37 +294,42 @@ public class CPDefinitionInventoryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPDefinitionInventory> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDefinitionInventory",
-			"uuid", true, "CPDefinitionInventoryId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPDefinitionId", true,
-			"CPDefinitionInventoryEngine", true, "lowStockActivity", true,
-			"displayAvailability", true, "displayStockQuantity", true,
-			"minStockQuantity", true, "backOrders", true, "minOrderQuantity",
-			true, "maxOrderQuantity", true, "allowedOrderQuantities", true,
-			"multipleOrderQuantity", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPDefinitionInventory", "uuid", true, "CPDefinitionInventoryId",
+			true, "groupId", true, "companyId", true, "userId", true,
+			"userName", true, "createDate", true, "modifiedDate", true,
+			"CPDefinitionId", true, "CPDefinitionInventoryEngine", true,
+			"lowStockActivity", true, "displayAvailability", true,
+			"displayStockQuantity", true, "minStockQuantity", true,
+			"backOrders", true, "minOrderQuantity", true, "maxOrderQuantity",
+			true, "allowedOrderQuantities", true, "multipleOrderQuantity",
+			true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
-		CPDefinitionInventory existingCPDefinitionInventory = _persistence.fetchByPrimaryKey(newCPDefinitionInventory.getPrimaryKey());
+		CPDefinitionInventory existingCPDefinitionInventory =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionInventory.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionInventory,
-			newCPDefinitionInventory);
+		Assert.assertEquals(
+			existingCPDefinitionInventory, newCPDefinitionInventory);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionInventory missingCPDefinitionInventory = _persistence.fetchByPrimaryKey(pk);
+		CPDefinitionInventory missingCPDefinitionInventory =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDefinitionInventory);
 	}
@@ -298,21 +337,27 @@ public class CPDefinitionInventoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory1 = addCPDefinitionInventory();
-		CPDefinitionInventory newCPDefinitionInventory2 = addCPDefinitionInventory();
+
+		CPDefinitionInventory newCPDefinitionInventory1 =
+			addCPDefinitionInventory();
+		CPDefinitionInventory newCPDefinitionInventory2 =
+			addCPDefinitionInventory();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionInventory1.getPrimaryKey());
 		primaryKeys.add(newCPDefinitionInventory2.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpDefinitionInventories.size());
-		Assert.assertEquals(newCPDefinitionInventory1,
+		Assert.assertEquals(
+			newCPDefinitionInventory1,
 			cpDefinitionInventories.get(
 				newCPDefinitionInventory1.getPrimaryKey()));
-		Assert.assertEquals(newCPDefinitionInventory2,
+		Assert.assertEquals(
+			newCPDefinitionInventory2,
 			cpDefinitionInventories.get(
 				newCPDefinitionInventory2.getPrimaryKey()));
 	}
@@ -320,6 +365,7 @@ public class CPDefinitionInventoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -329,7 +375,8 @@ public class CPDefinitionInventoryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionInventories.isEmpty());
 	}
@@ -337,7 +384,9 @@ public class CPDefinitionInventoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -346,37 +395,41 @@ public class CPDefinitionInventoryPersistenceTest {
 		primaryKeys.add(newCPDefinitionInventory.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionInventories.size());
-		Assert.assertEquals(newCPDefinitionInventory,
+		Assert.assertEquals(
+			newCPDefinitionInventory,
 			cpDefinitionInventories.get(
 				newCPDefinitionInventory.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionInventories.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionInventory.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionInventory> cpDefinitionInventories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionInventories.size());
-		Assert.assertEquals(newCPDefinitionInventory,
+		Assert.assertEquals(
+			newCPDefinitionInventory,
 			cpDefinitionInventories.get(
 				newCPDefinitionInventory.getPrimaryKey()));
 	}
@@ -385,16 +438,22 @@ public class CPDefinitionInventoryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDefinitionInventoryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDefinitionInventoryLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionInventory>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDefinitionInventory>() {
+
 				@Override
 				public void performAction(
 					CPDefinitionInventory cpDefinitionInventory) {
+
 					Assert.assertNotNull(cpDefinitionInventory);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -403,54 +462,62 @@ public class CPDefinitionInventoryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionInventory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionInventory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionInventoryId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionInventoryId",
 				newCPDefinitionInventory.getCPDefinitionInventoryId()));
 
-		List<CPDefinitionInventory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionInventory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CPDefinitionInventory existingCPDefinitionInventory = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionInventory,
-			newCPDefinitionInventory);
+		Assert.assertEquals(
+			existingCPDefinitionInventory, newCPDefinitionInventory);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionInventory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionInventory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionInventoryId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionInventoryId", RandomTestUtil.nextLong()));
 
-		List<CPDefinitionInventory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionInventory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionInventory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionInventory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionInventoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionInventoryId"));
 
-		Object newCPDefinitionInventoryId = newCPDefinitionInventory.getCPDefinitionInventoryId();
+		Object newCPDefinitionInventoryId =
+			newCPDefinitionInventory.getCPDefinitionInventoryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionInventoryId",
-				new Object[] { newCPDefinitionInventoryId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionInventoryId",
+				new Object[] {newCPDefinitionInventoryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -458,20 +525,22 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		Object existingCPDefinitionInventoryId = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionInventoryId,
-			newCPDefinitionInventoryId);
+		Assert.assertEquals(
+			existingCPDefinitionInventoryId, newCPDefinitionInventoryId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionInventory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionInventory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionInventoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionInventoryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionInventoryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionInventoryId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -480,29 +549,37 @@ public class CPDefinitionInventoryPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CPDefinitionInventory newCPDefinitionInventory = addCPDefinitionInventory();
+		CPDefinitionInventory newCPDefinitionInventory =
+			addCPDefinitionInventory();
 
 		_persistence.clearCache();
 
-		CPDefinitionInventory existingCPDefinitionInventory = _persistence.findByPrimaryKey(newCPDefinitionInventory.getPrimaryKey());
+		CPDefinitionInventory existingCPDefinitionInventory =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionInventory.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPDefinitionInventory.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDefinitionInventory,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionInventory.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionInventory,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionInventory, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionInventory.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionInventory, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionInventory.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionInventory,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionInventory.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionInventory, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
 	}
 
 	protected CPDefinitionInventory addCPDefinitionInventory()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
 		CPDefinitionInventory cpDefinitionInventory = _persistence.create(pk);
@@ -523,13 +600,17 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		cpDefinitionInventory.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		cpDefinitionInventory.setCPDefinitionInventoryEngine(RandomTestUtil.randomString());
+		cpDefinitionInventory.setCPDefinitionInventoryEngine(
+			RandomTestUtil.randomString());
 
-		cpDefinitionInventory.setLowStockActivity(RandomTestUtil.randomString());
+		cpDefinitionInventory.setLowStockActivity(
+			RandomTestUtil.randomString());
 
-		cpDefinitionInventory.setDisplayAvailability(RandomTestUtil.randomBoolean());
+		cpDefinitionInventory.setDisplayAvailability(
+			RandomTestUtil.randomBoolean());
 
-		cpDefinitionInventory.setDisplayStockQuantity(RandomTestUtil.randomBoolean());
+		cpDefinitionInventory.setDisplayStockQuantity(
+			RandomTestUtil.randomBoolean());
 
 		cpDefinitionInventory.setMinStockQuantity(RandomTestUtil.nextInt());
 
@@ -539,16 +620,21 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		cpDefinitionInventory.setMaxOrderQuantity(RandomTestUtil.nextInt());
 
-		cpDefinitionInventory.setAllowedOrderQuantities(RandomTestUtil.randomString());
+		cpDefinitionInventory.setAllowedOrderQuantities(
+			RandomTestUtil.randomString());
 
-		cpDefinitionInventory.setMultipleOrderQuantity(RandomTestUtil.nextInt());
+		cpDefinitionInventory.setMultipleOrderQuantity(
+			RandomTestUtil.nextInt());
 
-		_cpDefinitionInventories.add(_persistence.update(cpDefinitionInventory));
+		_cpDefinitionInventories.add(
+			_persistence.update(cpDefinitionInventory));
 
 		return cpDefinitionInventory;
 	}
 
-	private List<CPDefinitionInventory> _cpDefinitionInventories = new ArrayList<CPDefinitionInventory>();
+	private List<CPDefinitionInventory> _cpDefinitionInventories =
+		new ArrayList<CPDefinitionInventory>();
 	private CPDefinitionInventoryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

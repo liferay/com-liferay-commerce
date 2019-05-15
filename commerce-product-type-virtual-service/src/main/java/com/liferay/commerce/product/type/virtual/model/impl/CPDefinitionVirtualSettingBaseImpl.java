@@ -35,18 +35,22 @@ import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSett
 public abstract class CPDefinitionVirtualSettingBaseImpl
 	extends CPDefinitionVirtualSettingModelImpl
 	implements CPDefinitionVirtualSetting {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition virtual setting model instance should use the {@link CPDefinitionVirtualSetting} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition virtual setting model instance should use the <code>CPDefinitionVirtualSetting</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDefinitionVirtualSettingLocalServiceUtil.addCPDefinitionVirtualSetting(this);
+			CPDefinitionVirtualSettingLocalServiceUtil.
+				addCPDefinitionVirtualSetting(this);
 		}
 		else {
-			CPDefinitionVirtualSettingLocalServiceUtil.updateCPDefinitionVirtualSetting(this);
+			CPDefinitionVirtualSettingLocalServiceUtil.
+				updateCPDefinitionVirtualSetting(this);
 		}
 	}
+
 }

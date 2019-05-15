@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,57 +38,75 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceListUserSegmentEntryRelServiceUtil
- * @see com.liferay.commerce.price.list.service.base.CommercePriceListUserSegmentEntryRelServiceBaseImpl
- * @see com.liferay.commerce.price.list.service.impl.CommercePriceListUserSegmentEntryRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommercePriceListUserSegmentEntryRel"}, service = CommercePriceListUserSegmentEntryRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommercePriceListUserSegmentEntryRel"
+	},
+	service = CommercePriceListUserSegmentEntryRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
-public interface CommercePriceListUserSegmentEntryRelService extends BaseService {
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
+public interface CommercePriceListUserSegmentEntryRelService
+	extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommercePriceListUserSegmentEntryRelServiceUtil} to access the commerce price list user segment entry rel remote service. Add custom service methods to {@link com.liferay.commerce.price.list.service.impl.CommercePriceListUserSegmentEntryRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommercePriceListUserSegmentEntryRelServiceUtil} to access the commerce price list user segment entry rel remote service. Add custom service methods to <code>com.liferay.commerce.price.list.service.impl.CommercePriceListUserSegmentEntryRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommercePriceListUserSegmentEntryRel addCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId, int order,
-		ServiceContext serviceContext) throws PortalException;
+	public CommercePriceListUserSegmentEntryRel
+			addCommercePriceListUserSegmentEntryRel(
+				long commercePriceListId, long commerceUserSegmentEntryId,
+				int order, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommercePriceListUserSegmentEntryRel(
-		long commercePriceListUserSegmentEntryRelId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceListUserSegmentEntryRel fetchCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId)
+			long commercePriceListUserSegmentEntryRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId) throws PortalException;
+	public CommercePriceListUserSegmentEntryRel
+			fetchCommercePriceListUserSegmentEntryRel(
+				long commercePriceListId, long commerceUserSegmentEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId, int start, int end,
-		OrderByComparator<CommercePriceListUserSegmentEntryRel> orderByComparator)
+	public List<CommercePriceListUserSegmentEntryRel>
+			getCommercePriceListUserSegmentEntryRels(long commercePriceListId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceListUserSegmentEntryRel>
+			getCommercePriceListUserSegmentEntryRels(
+				long commercePriceListId, int start, int end,
+				OrderByComparator<CommercePriceListUserSegmentEntryRel>
+					orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId) throws PortalException;
+			long commercePriceListId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CommercePriceListUserSegmentEntryRel updateCommercePriceListUserSegmentEntryRel(
-		long commercePriceListUserSegmentEntryRelId, int order,
-		ServiceContext serviceContext) throws PortalException;
+	public CommercePriceListUserSegmentEntryRel
+			updateCommercePriceListUserSegmentEntryRel(
+				long commercePriceListUserSegmentEntryRelId, int order,
+				ServiceContext serviceContext)
+		throws PortalException;
+
 }

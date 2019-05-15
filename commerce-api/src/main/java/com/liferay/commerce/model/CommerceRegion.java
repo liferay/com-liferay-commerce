@@ -25,20 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceRegionModel
- * @see com.liferay.commerce.model.impl.CommerceRegionImpl
- * @see com.liferay.commerce.model.impl.CommerceRegionModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.model.impl.CommerceRegionImpl")
 @ProviderType
 public interface CommerceRegion extends CommerceRegionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceRegionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceRegionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceRegion, Long> COMMERCE_REGION_ID_ACCESSOR =
-		new Accessor<CommerceRegion, Long>() {
+	public static final Accessor<CommerceRegion, Long>
+		COMMERCE_REGION_ID_ACCESSOR = new Accessor<CommerceRegion, Long>() {
+
 			@Override
 			public Long get(CommerceRegion commerceRegion) {
 				return commerceRegion.getCommerceRegionId();
@@ -53,8 +53,10 @@ public interface CommerceRegion extends CommerceRegionModel, PersistedModel {
 			public Class<CommerceRegion> getTypeClass() {
 				return CommerceRegion.class;
 			}
+
 		};
 
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

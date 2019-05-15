@@ -26,16 +26,18 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceWarehouseItemServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceWarehouseItemServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceWarehouseItemSoap implements Serializable {
+
 	public static CommerceWarehouseItemSoap toSoapModel(
 		CommerceWarehouseItem model) {
+
 		CommerceWarehouseItemSoap soapModel = new CommerceWarehouseItemSoap();
 
-		soapModel.setCommerceWarehouseItemId(model.getCommerceWarehouseItemId());
+		soapModel.setCommerceWarehouseItemId(
+			model.getCommerceWarehouseItemId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -52,7 +54,9 @@ public class CommerceWarehouseItemSoap implements Serializable {
 
 	public static CommerceWarehouseItemSoap[] toSoapModels(
 		CommerceWarehouseItem[] models) {
-		CommerceWarehouseItemSoap[] soapModels = new CommerceWarehouseItemSoap[models.length];
+
+		CommerceWarehouseItemSoap[] soapModels =
+			new CommerceWarehouseItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +67,12 @@ public class CommerceWarehouseItemSoap implements Serializable {
 
 	public static CommerceWarehouseItemSoap[][] toSoapModels(
 		CommerceWarehouseItem[][] models) {
+
 		CommerceWarehouseItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceWarehouseItemSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceWarehouseItemSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceWarehouseItemSoap[0][0];
@@ -81,13 +87,16 @@ public class CommerceWarehouseItemSoap implements Serializable {
 
 	public static CommerceWarehouseItemSoap[] toSoapModels(
 		List<CommerceWarehouseItem> models) {
-		List<CommerceWarehouseItemSoap> soapModels = new ArrayList<CommerceWarehouseItemSoap>(models.size());
+
+		List<CommerceWarehouseItemSoap> soapModels =
+			new ArrayList<CommerceWarehouseItemSoap>(models.size());
 
 		for (CommerceWarehouseItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceWarehouseItemSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceWarehouseItemSoap[soapModels.size()]);
 	}
 
 	public CommerceWarehouseItemSoap() {
@@ -200,4 +209,5 @@ public class CommerceWarehouseItemSoap implements Serializable {
 	private long _CProductId;
 	private String _CPInstanceUuid;
 	private int _quantity;
+
 }

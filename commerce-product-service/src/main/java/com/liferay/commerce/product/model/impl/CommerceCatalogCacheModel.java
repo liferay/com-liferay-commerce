@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceCatalog in entity cache.
  *
  * @author Marco Leo
- * @see CommerceCatalog
  * @generated
  */
 @ProviderType
-public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
-	Externalizable {
+public class CommerceCatalogCacheModel
+	implements CacheModel<CommerceCatalog>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 			return false;
 		}
 
-		CommerceCatalogCacheModel commerceCatalogCacheModel = (CommerceCatalogCacheModel)obj;
+		CommerceCatalogCacheModel commerceCatalogCacheModel =
+			(CommerceCatalogCacheModel)obj;
 
 		if (commerceCatalogId == commerceCatalogCacheModel.commerceCatalogId) {
 			return true;
@@ -128,7 +128,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 			commerceCatalogImpl.setCatalogDefaultLanguageId("");
 		}
 		else {
-			commerceCatalogImpl.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
+			commerceCatalogImpl.setCatalogDefaultLanguageId(
+				catalogDefaultLanguageId);
 		}
 
 		commerceCatalogImpl.resetOriginalValues();
@@ -151,8 +152,7 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceCatalogId);
 
 		objectOutput.writeLong(companyId);
@@ -192,4 +192,5 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 	public long modifiedDate;
 	public String name;
 	public String catalogDefaultLanguageId;
+
 }

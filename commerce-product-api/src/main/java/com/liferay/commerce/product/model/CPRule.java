@@ -25,19 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPRuleModel
- * @see com.liferay.commerce.product.model.impl.CPRuleImpl
- * @see com.liferay.commerce.product.model.impl.CPRuleModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.product.model.impl.CPRuleImpl")
 @ProviderType
 public interface CPRule extends CPRuleModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPRuleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPRuleImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPRule, Long> CP_RULE_ID_ACCESSOR = new Accessor<CPRule, Long>() {
+	public static final Accessor<CPRule, Long> CP_RULE_ID_ACCESSOR =
+		new Accessor<CPRule, Long>() {
+
 			@Override
 			public Long get(CPRule cpRule) {
 				return cpRule.getCPRuleId();
@@ -52,14 +53,18 @@ public interface CPRule extends CPRuleModel, PersistedModel {
 			public Class<CPRule> getTypeClass() {
 				return CPRule.class;
 			}
+
 		};
 
 	public java.util.List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels();
 
 	public java.util.List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels();
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			typeSettingsProperties);
+
 }

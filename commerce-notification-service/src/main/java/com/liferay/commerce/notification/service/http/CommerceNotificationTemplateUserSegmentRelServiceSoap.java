@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceNotificationTemplateUserSegmentRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceNotificationTemplateUserSegmentRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel}, that is translated to a
- * {@link com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel</code>, that is translated to a
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,22 +59,31 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateUserSegmentRelServiceHttp
- * @see com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap
- * @see CommerceNotificationTemplateUserSegmentRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelServiceSoap {
-	public static com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap addCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel returnValue =
-				CommerceNotificationTemplateUserSegmentRelServiceUtil.addCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateId,
-					commerceUserSegmentEntryId, serviceContext);
 
-			return com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRelSoap
+				addCommerceNotificationTemplateUserSegmentRel(
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRel returnValue =
+					CommerceNotificationTemplateUserSegmentRelServiceUtil.
+						addCommerceNotificationTemplateUserSegmentRel(
+							commerceNotificationTemplateId,
+							commerceUserSegmentEntryId, serviceContext);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRelSoap.toSoapModel(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,10 +93,13 @@ public class CommerceNotificationTemplateUserSegmentRelServiceSoap {
 	}
 
 	public static void deleteCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId)
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws RemoteException {
+
 		try {
-			CommerceNotificationTemplateUserSegmentRelServiceUtil.deleteCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateUserSegmentRelId);
+			CommerceNotificationTemplateUserSegmentRelServiceUtil.
+				deleteCommerceNotificationTemplateUserSegmentRel(
+					commerceNotificationTemplateUserSegmentRelId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -96,15 +108,24 @@ public class CommerceNotificationTemplateUserSegmentRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap fetchCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel returnValue =
-				CommerceNotificationTemplateUserSegmentRelServiceUtil.fetchCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateId,
-					commerceUserSegmentEntryId);
+	public static com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRelSoap
+				fetchCommerceNotificationTemplateUserSegmentRel(
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId)
+			throws RemoteException {
 
-			return com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRel returnValue =
+					CommerceNotificationTemplateUserSegmentRelServiceUtil.
+						fetchCommerceNotificationTemplateUserSegmentRel(
+							commerceNotificationTemplateId,
+							commerceUserSegmentEntryId);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRelSoap.toSoapModel(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -113,16 +134,28 @@ public class CommerceNotificationTemplateUserSegmentRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap[] getCommerceNotificationTemplateUserSegmentRels(
-		long commerceNotificationTemplateId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> returnValue =
-				CommerceNotificationTemplateUserSegmentRelServiceUtil.getCommerceNotificationTemplateUserSegmentRels(commerceNotificationTemplateId,
-					start, end, orderByComparator);
+	public static com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRelSoap[]
+				getCommerceNotificationTemplateUserSegmentRels(
+					long commerceNotificationTemplateId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.notification.model.
+							CommerceNotificationTemplateUserSegmentRel>
+								orderByComparator)
+			throws RemoteException {
 
-			return com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRelSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.notification.model.
+					CommerceNotificationTemplateUserSegmentRel> returnValue =
+						CommerceNotificationTemplateUserSegmentRelServiceUtil.
+							getCommerceNotificationTemplateUserSegmentRels(
+								commerceNotificationTemplateId, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRelSoap.toSoapModels(
+					returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -131,5 +164,7 @@ public class CommerceNotificationTemplateUserSegmentRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceNotificationTemplateUserSegmentRelServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationTemplateUserSegmentRelServiceSoap.class);
+
 }

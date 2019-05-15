@@ -28,66 +28,83 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceShipmentItemServiceWrapper
 	implements CommerceShipmentItemService,
-		ServiceWrapper<CommerceShipmentItemService> {
+			   ServiceWrapper<CommerceShipmentItemService> {
+
 	public CommerceShipmentItemServiceWrapper(
 		CommerceShipmentItemService commerceShipmentItemService) {
+
 		_commerceShipmentItemService = commerceShipmentItemService;
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShipmentItem addCommerceShipmentItem(
-		long commerceShipmentId, long commerceOrderItemId,
-		long commerceWarehouseId, int quantity,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceShipmentItem
+			addCommerceShipmentItem(
+				long commerceShipmentId, long commerceOrderItemId,
+				long commerceWarehouseId, int quantity,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentItemService.addCommerceShipmentItem(commerceShipmentId,
-			commerceOrderItemId, commerceWarehouseId, quantity, serviceContext);
+
+		return _commerceShipmentItemService.addCommerceShipmentItem(
+			commerceShipmentId, commerceOrderItemId, commerceWarehouseId,
+			quantity, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceShipmentItem(long commerceShipmentItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceShipmentItemService.deleteCommerceShipmentItem(commerceShipmentItemId);
+
+		_commerceShipmentItemService.deleteCommerceShipmentItem(
+			commerceShipmentItemId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem> getCommerceShipmentItems(
-		long commerceOrderItemId)
+	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem>
+			getCommerceShipmentItems(long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentItemService.getCommerceShipmentItems(commerceOrderItemId);
+
+		return _commerceShipmentItemService.getCommerceShipmentItems(
+			commerceOrderItemId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem> getCommerceShipmentItems(
-		long commerceShipmentId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipmentItem> orderByComparator)
+	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem>
+			getCommerceShipmentItems(
+				long commerceShipmentId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceShipmentItem>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentItemService.getCommerceShipmentItems(commerceShipmentId,
-			start, end, orderByComparator);
+
+		return _commerceShipmentItemService.getCommerceShipmentItems(
+			commerceShipmentId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceShipmentItemsCount(long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentItemService.getCommerceShipmentItemsCount(commerceShipmentId);
+
+		return _commerceShipmentItemService.getCommerceShipmentItemsCount(
+			commerceShipmentId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceShipmentItemService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceShipmentItem updateCommerceShipmentItem(
-		long commerceShipmentItemId, int quantity)
+	public com.liferay.commerce.model.CommerceShipmentItem
+			updateCommerceShipmentItem(
+				long commerceShipmentItemId, int quantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipmentItemService.updateCommerceShipmentItem(commerceShipmentItemId,
-			quantity);
+
+		return _commerceShipmentItemService.updateCommerceShipmentItem(
+			commerceShipmentItemId, quantity);
 	}
 
 	@Override
@@ -98,8 +115,10 @@ public class CommerceShipmentItemServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceShipmentItemService commerceShipmentItemService) {
+
 		_commerceShipmentItemService = commerceShipmentItemService;
 	}
 
 	private CommerceShipmentItemService _commerceShipmentItemService;
+
 }

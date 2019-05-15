@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPRuleServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPRuleServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPRuleServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.model.CPRuleSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.model.CPRule}, that is translated to a
- * {@link com.liferay.commerce.product.model.CPRuleSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.model.CPRuleSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.model.CPRule</code>, that is translated to a
+ * <code>com.liferay.commerce.product.model.CPRuleSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,21 +59,22 @@ import java.rmi.RemoteException;
  *
  * @author Marco Leo
  * @see CPRuleServiceHttp
- * @see com.liferay.commerce.product.model.CPRuleSoap
- * @see CPRuleServiceUtil
  * @generated
  */
 @ProviderType
 public class CPRuleServiceSoap {
-	public static com.liferay.commerce.product.model.CPRuleSoap addCPRule(
-		String name, boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPRule returnValue = CPRuleServiceUtil.addCPRule(name,
-					active, type, serviceContext);
 
-			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.product.model.CPRuleSoap addCPRule(
+			String name, boolean active, String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.product.model.CPRule returnValue =
+				CPRuleServiceUtil.addCPRule(name, active, type, serviceContext);
+
+			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,11 +95,15 @@ public class CPRuleServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPRuleSoap getCPRule(
-		long cpRuleId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPRule returnValue = CPRuleServiceUtil.getCPRule(cpRuleId);
+			long cpRuleId)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPRule returnValue =
+				CPRuleServiceUtil.getCPRule(cpRuleId);
+
+			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -108,15 +113,18 @@ public class CPRuleServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPRuleSoap[] getCPRules(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPRule> orderByComparator)
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CPRule> orderByComparator)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPRule> returnValue =
-				CPRuleServiceUtil.getCPRules(groupId, start, end,
-					orderByComparator);
 
-			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPRule>
+				returnValue = CPRuleServiceUtil.getCPRules(
+					groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModels(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -139,14 +147,17 @@ public class CPRuleServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPRuleSoap updateCPRule(
-		long cpRuleId, String name, boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long cpRuleId, String name, boolean active, String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPRule returnValue = CPRuleServiceUtil.updateCPRule(cpRuleId,
-					name, active, type, serviceContext);
 
-			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPRule returnValue =
+				CPRuleServiceUtil.updateCPRule(
+					cpRuleId, name, active, type, serviceContext);
+
+			return com.liferay.commerce.product.model.CPRuleSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -156,4 +167,5 @@ public class CPRuleServiceSoap {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CPRuleServiceSoap.class);
+
 }

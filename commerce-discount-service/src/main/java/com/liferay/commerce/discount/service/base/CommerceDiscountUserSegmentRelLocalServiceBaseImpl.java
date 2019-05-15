@@ -23,7 +23,6 @@ import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelPers
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRulePersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUserSegmentRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -65,18 +64,18 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.discount.service.impl.CommerceDiscountUserSegmentRelLocalServiceImpl
- * @see com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceDiscountUserSegmentRelLocalService,
-		IdentifiableOSGiService {
+			   IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalServiceUtil} to access the commerce discount user segment rel local service.
+	 * Never modify or reference this class directly. Use <code>CommerceDiscountUserSegmentRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -89,9 +88,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Override
 	public CommerceDiscountUserSegmentRel addCommerceDiscountUserSegmentRel(
 		CommerceDiscountUserSegmentRel commerceDiscountUserSegmentRel) {
+
 		commerceDiscountUserSegmentRel.setNew(true);
 
-		return commerceDiscountUserSegmentRelPersistence.update(commerceDiscountUserSegmentRel);
+		return commerceDiscountUserSegmentRelPersistence.update(
+			commerceDiscountUserSegmentRel);
 	}
 
 	/**
@@ -104,7 +105,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommerceDiscountUserSegmentRel createCommerceDiscountUserSegmentRel(
 		long commerceDiscountUserSegmentRelId) {
-		return commerceDiscountUserSegmentRelPersistence.create(commerceDiscountUserSegmentRelId);
+
+		return commerceDiscountUserSegmentRelPersistence.create(
+			commerceDiscountUserSegmentRelId);
 	}
 
 	/**
@@ -117,8 +120,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceDiscountUserSegmentRel deleteCommerceDiscountUserSegmentRel(
-		long commerceDiscountUserSegmentRelId) throws PortalException {
-		return commerceDiscountUserSegmentRelPersistence.remove(commerceDiscountUserSegmentRelId);
+			long commerceDiscountUserSegmentRelId)
+		throws PortalException {
+
+		return commerceDiscountUserSegmentRelPersistence.remove(
+			commerceDiscountUserSegmentRelId);
 	}
 
 	/**
@@ -131,15 +137,17 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Override
 	public CommerceDiscountUserSegmentRel deleteCommerceDiscountUserSegmentRel(
 		CommerceDiscountUserSegmentRel commerceDiscountUserSegmentRel) {
-		return commerceDiscountUserSegmentRelPersistence.remove(commerceDiscountUserSegmentRel);
+
+		return commerceDiscountUserSegmentRelPersistence.remove(
+			commerceDiscountUserSegmentRel);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceDiscountUserSegmentRel.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceDiscountUserSegmentRel.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -150,14 +158,15 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -166,17 +175,18 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -186,10 +196,12 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceDiscountUserSegmentRelPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -200,7 +212,8 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceDiscountUserSegmentRelPersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceDiscountUserSegmentRelPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -211,16 +224,19 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceDiscountUserSegmentRelPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceDiscountUserSegmentRelPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommerceDiscountUserSegmentRel fetchCommerceDiscountUserSegmentRel(
 		long commerceDiscountUserSegmentRelId) {
-		return commerceDiscountUserSegmentRelPersistence.fetchByPrimaryKey(commerceDiscountUserSegmentRelId);
+
+		return commerceDiscountUserSegmentRelPersistence.fetchByPrimaryKey(
+			commerceDiscountUserSegmentRelId);
 	}
 
 	/**
@@ -232,17 +248,23 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceDiscountUserSegmentRel getCommerceDiscountUserSegmentRel(
-		long commerceDiscountUserSegmentRelId) throws PortalException {
-		return commerceDiscountUserSegmentRelPersistence.findByPrimaryKey(commerceDiscountUserSegmentRelId);
+			long commerceDiscountUserSegmentRelId)
+		throws PortalException {
+
+		return commerceDiscountUserSegmentRelPersistence.findByPrimaryKey(
+			commerceDiscountUserSegmentRelId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceDiscountUserSegmentRelLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceDiscountUserSegmentRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceDiscountUserSegmentRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceDiscountUserSegmentRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceDiscountUserSegmentRelId");
@@ -251,12 +273,17 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceDiscountUserSegmentRelLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceDiscountUserSegmentRelLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceDiscountUserSegmentRel.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceDiscountUserSegmentRel.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceDiscountUserSegmentRelId");
@@ -266,9 +293,12 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceDiscountUserSegmentRelLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceDiscountUserSegmentRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceDiscountUserSegmentRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceDiscountUserSegmentRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceDiscountUserSegmentRelId");
@@ -280,20 +310,25 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceDiscountUserSegmentRelLocalService.deleteCommerceDiscountUserSegmentRel((CommerceDiscountUserSegmentRel)persistedModel);
+
+		return commerceDiscountUserSegmentRelLocalService.
+			deleteCommerceDiscountUserSegmentRel(
+				(CommerceDiscountUserSegmentRel)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return commerceDiscountUserSegmentRelPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return commerceDiscountUserSegmentRelPersistence.findByPrimaryKey(
+			primaryKeyObj);
 	}
 
 	/**
 	 * Returns a range of all the commerce discount user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.discount.model.impl.CommerceDiscountUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce discount user segment rels
@@ -301,8 +336,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @return the range of commerce discount user segment rels
 	 */
 	@Override
-	public List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels(
-		int start, int end) {
+	public List<CommerceDiscountUserSegmentRel>
+		getCommerceDiscountUserSegmentRels(int start, int end) {
+
 		return commerceDiscountUserSegmentRelPersistence.findAll(start, end);
 	}
 
@@ -326,7 +362,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	@Override
 	public CommerceDiscountUserSegmentRel updateCommerceDiscountUserSegmentRel(
 		CommerceDiscountUserSegmentRel commerceDiscountUserSegmentRel) {
-		return commerceDiscountUserSegmentRelPersistence.update(commerceDiscountUserSegmentRel);
+
+		return commerceDiscountUserSegmentRelPersistence.update(
+			commerceDiscountUserSegmentRel);
 	}
 
 	/**
@@ -334,7 +372,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountLocalService getCommerceDiscountLocalService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountLocalService
+		getCommerceDiscountLocalService() {
+
 		return commerceDiscountLocalService;
 	}
 
@@ -344,7 +384,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountLocalService the commerce discount local service
 	 */
 	public void setCommerceDiscountLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountLocalService commerceDiscountLocalService) {
+		com.liferay.commerce.discount.service.CommerceDiscountLocalService
+			commerceDiscountLocalService) {
+
 		this.commerceDiscountLocalService = commerceDiscountLocalService;
 	}
 
@@ -364,6 +406,7 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	public void setCommerceDiscountPersistence(
 		CommerceDiscountPersistence commerceDiscountPersistence) {
+
 		this.commerceDiscountPersistence = commerceDiscountPersistence;
 	}
 
@@ -372,7 +415,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount rel local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRelLocalService getCommerceDiscountRelLocalService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+		getCommerceDiscountRelLocalService() {
+
 		return commerceDiscountRelLocalService;
 	}
 
@@ -382,7 +427,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountRelLocalService the commerce discount rel local service
 	 */
 	public void setCommerceDiscountRelLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService commerceDiscountRelLocalService) {
+		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+			commerceDiscountRelLocalService) {
+
 		this.commerceDiscountRelLocalService = commerceDiscountRelLocalService;
 	}
 
@@ -402,6 +449,7 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	public void setCommerceDiscountRelPersistence(
 		CommerceDiscountRelPersistence commerceDiscountRelPersistence) {
+
 		this.commerceDiscountRelPersistence = commerceDiscountRelPersistence;
 	}
 
@@ -410,7 +458,10 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount rule local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService getCommerceDiscountRuleLocalService() {
+	public
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			getCommerceDiscountRuleLocalService() {
+
 		return commerceDiscountRuleLocalService;
 	}
 
@@ -420,8 +471,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountRuleLocalService the commerce discount rule local service
 	 */
 	public void setCommerceDiscountRuleLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService commerceDiscountRuleLocalService) {
-		this.commerceDiscountRuleLocalService = commerceDiscountRuleLocalService;
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			commerceDiscountRuleLocalService) {
+
+		this.commerceDiscountRuleLocalService =
+			commerceDiscountRuleLocalService;
 	}
 
 	/**
@@ -429,7 +483,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount rule persistence
 	 */
-	public CommerceDiscountRulePersistence getCommerceDiscountRulePersistence() {
+	public CommerceDiscountRulePersistence
+		getCommerceDiscountRulePersistence() {
+
 		return commerceDiscountRulePersistence;
 	}
 
@@ -440,6 +496,7 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	public void setCommerceDiscountRulePersistence(
 		CommerceDiscountRulePersistence commerceDiscountRulePersistence) {
+
 		this.commerceDiscountRulePersistence = commerceDiscountRulePersistence;
 	}
 
@@ -448,7 +505,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount usage entry local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService getCommerceDiscountUsageEntryLocalService() {
+	public
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				getCommerceDiscountUsageEntryLocalService() {
+
 		return commerceDiscountUsageEntryLocalService;
 	}
 
@@ -458,8 +519,12 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountUsageEntryLocalService the commerce discount usage entry local service
 	 */
 	public void setCommerceDiscountUsageEntryLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService commerceDiscountUsageEntryLocalService) {
-		this.commerceDiscountUsageEntryLocalService = commerceDiscountUsageEntryLocalService;
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				commerceDiscountUsageEntryLocalService) {
+
+		this.commerceDiscountUsageEntryLocalService =
+			commerceDiscountUsageEntryLocalService;
 	}
 
 	/**
@@ -467,7 +532,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount usage entry persistence
 	 */
-	public CommerceDiscountUsageEntryPersistence getCommerceDiscountUsageEntryPersistence() {
+	public CommerceDiscountUsageEntryPersistence
+		getCommerceDiscountUsageEntryPersistence() {
+
 		return commerceDiscountUsageEntryPersistence;
 	}
 
@@ -477,8 +544,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountUsageEntryPersistence the commerce discount usage entry persistence
 	 */
 	public void setCommerceDiscountUsageEntryPersistence(
-		CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence) {
-		this.commerceDiscountUsageEntryPersistence = commerceDiscountUsageEntryPersistence;
+		CommerceDiscountUsageEntryPersistence
+			commerceDiscountUsageEntryPersistence) {
+
+		this.commerceDiscountUsageEntryPersistence =
+			commerceDiscountUsageEntryPersistence;
 	}
 
 	/**
@@ -486,7 +556,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount user segment rel local service
 	 */
-	public CommerceDiscountUserSegmentRelLocalService getCommerceDiscountUserSegmentRelLocalService() {
+	public CommerceDiscountUserSegmentRelLocalService
+		getCommerceDiscountUserSegmentRelLocalService() {
+
 		return commerceDiscountUserSegmentRelLocalService;
 	}
 
@@ -496,8 +568,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountUserSegmentRelLocalService the commerce discount user segment rel local service
 	 */
 	public void setCommerceDiscountUserSegmentRelLocalService(
-		CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService) {
-		this.commerceDiscountUserSegmentRelLocalService = commerceDiscountUserSegmentRelLocalService;
+		CommerceDiscountUserSegmentRelLocalService
+			commerceDiscountUserSegmentRelLocalService) {
+
+		this.commerceDiscountUserSegmentRelLocalService =
+			commerceDiscountUserSegmentRelLocalService;
 	}
 
 	/**
@@ -505,7 +580,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the commerce discount user segment rel persistence
 	 */
-	public CommerceDiscountUserSegmentRelPersistence getCommerceDiscountUserSegmentRelPersistence() {
+	public CommerceDiscountUserSegmentRelPersistence
+		getCommerceDiscountUserSegmentRelPersistence() {
+
 		return commerceDiscountUserSegmentRelPersistence;
 	}
 
@@ -515,8 +592,11 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param commerceDiscountUserSegmentRelPersistence the commerce discount user segment rel persistence
 	 */
 	public void setCommerceDiscountUserSegmentRelPersistence(
-		CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence) {
-		this.commerceDiscountUserSegmentRelPersistence = commerceDiscountUserSegmentRelPersistence;
+		CommerceDiscountUserSegmentRelPersistence
+			commerceDiscountUserSegmentRelPersistence) {
+
+		this.commerceDiscountUserSegmentRelPersistence =
+			commerceDiscountUserSegmentRelPersistence;
 	}
 
 	/**
@@ -524,7 +604,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -534,7 +616,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -543,7 +627,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -553,7 +639,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -573,6 +661,7 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -581,7 +670,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -591,7 +682,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -600,7 +693,9 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -611,6 +706,7 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -633,7 +729,8 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel",
 			commerceDiscountUserSegmentRelLocalService);
 	}
 
@@ -667,15 +764,16 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceDiscountUserSegmentRelPersistence.getDataSource();
+			DataSource dataSource =
+				commerceDiscountUserSegmentRelPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -684,38 +782,87 @@ public abstract class CommerceDiscountUserSegmentRelLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountLocalService commerceDiscountLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountLocalService.class
+	)
+	protected com.liferay.commerce.discount.service.CommerceDiscountLocalService
+		commerceDiscountLocalService;
+
 	@BeanReference(type = CommerceDiscountPersistence.class)
 	protected CommerceDiscountPersistence commerceDiscountPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRelLocalService commerceDiscountRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+			commerceDiscountRelLocalService;
+
 	@BeanReference(type = CommerceDiscountRelPersistence.class)
 	protected CommerceDiscountRelPersistence commerceDiscountRelPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService commerceDiscountRuleLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			commerceDiscountRuleLocalService;
+
 	@BeanReference(type = CommerceDiscountRulePersistence.class)
 	protected CommerceDiscountRulePersistence commerceDiscountRulePersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService commerceDiscountUsageEntryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				commerceDiscountUsageEntryLocalService;
+
 	@BeanReference(type = CommerceDiscountUsageEntryPersistence.class)
-	protected CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence;
+	protected CommerceDiscountUsageEntryPersistence
+		commerceDiscountUsageEntryPersistence;
+
 	@BeanReference(type = CommerceDiscountUserSegmentRelLocalService.class)
-	protected CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService;
+	protected CommerceDiscountUserSegmentRelLocalService
+		commerceDiscountUserSegmentRelLocalService;
+
 	@BeanReference(type = CommerceDiscountUserSegmentRelPersistence.class)
-	protected CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CommerceDiscountUserSegmentRelPersistence
+		commerceDiscountUserSegmentRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

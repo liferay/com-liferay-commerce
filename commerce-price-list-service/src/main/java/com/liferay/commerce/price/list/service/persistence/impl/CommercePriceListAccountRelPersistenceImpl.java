@@ -21,7 +21,6 @@ import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl;
 import com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelModelImpl;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -67,57 +66,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommercePriceListAccountRelPersistence
- * @see com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelUtil
  * @generated
  */
 @ProviderType
 public class CommercePriceListAccountRelPersistenceImpl
 	extends BasePersistenceImpl<CommercePriceListAccountRel>
 	implements CommercePriceListAccountRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommercePriceListAccountRelUtil} to access the commerce price list account rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommercePriceListAccountRelUtil</code> to access the commerce price list account rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommercePriceListAccountRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid",
-			new String[] {
-				String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
-			new String[] { String.class.getName() },
-			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByUuid", new String[] { String.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommercePriceListAccountRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByUuid;
+	private FinderPath _finderPathWithoutPaginationFindByUuid;
+	private FinderPath _finderPathCountByUuid;
 
 	/**
 	 * Returns all the commerce price list account rels where uuid = &#63;.
@@ -134,7 +109,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns a range of all the commerce price list account rels where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -143,8 +118,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid(String uuid, int start,
-		int end) {
+	public List<CommercePriceListAccountRel> findByUuid(
+		String uuid, int start, int end) {
+
 		return findByUuid(uuid, start, end, null);
 	}
 
@@ -152,7 +128,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -162,9 +138,10 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid(String uuid, int start,
-		int end,
+	public List<CommercePriceListAccountRel> findByUuid(
+		String uuid, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
+
 		return findByUuid(uuid, start, end, orderByComparator, true);
 	}
 
@@ -172,7 +149,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -183,35 +160,40 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid(String uuid, int start,
-		int end,
+	public List<CommercePriceListAccountRel> findByUuid(
+		String uuid, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean retrieveFromCache) {
+
+		uuid = Objects.toString(uuid, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID;
-			finderArgs = new Object[] { uuid };
+			finderPath = _finderPathWithoutPaginationFindByUuid;
+			finderArgs = new Object[] {uuid};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID;
-			finderArgs = new Object[] { uuid, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByUuid;
+			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CommercePriceListAccountRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommercePriceListAccountRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommercePriceListAccountRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommercePriceListAccountRel commercePriceListAccountRel : list) {
-					if (!Objects.equals(uuid,
-								commercePriceListAccountRel.getUuid())) {
+				for (CommercePriceListAccountRel commercePriceListAccountRel :
+						list) {
+
+					if (!uuid.equals(commercePriceListAccountRel.getUuid())) {
 						list = null;
 
 						break;
@@ -224,8 +206,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -235,10 +217,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_UUID_3);
 			}
 			else {
@@ -248,12 +227,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -272,16 +251,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 				}
 
 				if (!pagination) {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -310,11 +289,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @throws NoSuchPriceListAccountRelException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel findByUuid_First(String uuid,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+	public CommercePriceListAccountRel findByUuid_First(
+			String uuid,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUuid_First(uuid,
-				orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByUuid_First(uuid, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -340,10 +321,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the first matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUuid_First(String uuid,
+	public CommercePriceListAccountRel fetchByUuid_First(
+		String uuid,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		List<CommercePriceListAccountRel> list = findByUuid(uuid, 0, 1,
-				orderByComparator);
+
+		List<CommercePriceListAccountRel> list = findByUuid(
+			uuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -361,11 +344,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @throws NoSuchPriceListAccountRelException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel findByUuid_Last(String uuid,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+	public CommercePriceListAccountRel findByUuid_Last(
+			String uuid,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUuid_Last(uuid,
-				orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByUuid_Last(uuid, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -391,16 +376,18 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the last matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUuid_Last(String uuid,
+	public CommercePriceListAccountRel fetchByUuid_Last(
+		String uuid,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
+
 		int count = countByUuid(uuid);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommercePriceListAccountRel> list = findByUuid(uuid, count - 1,
-				count, orderByComparator);
+		List<CommercePriceListAccountRel> list = findByUuid(
+			uuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -420,25 +407,32 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel[] findByUuid_PrevAndNext(
-		long commercePriceListAccountRelId, String uuid,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+			long commercePriceListAccountRelId, String uuid,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = findByPrimaryKey(commercePriceListAccountRelId);
+
+		uuid = Objects.toString(uuid, "");
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			findByPrimaryKey(commercePriceListAccountRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommercePriceListAccountRel[] array = new CommercePriceListAccountRelImpl[3];
+			CommercePriceListAccountRel[] array =
+				new CommercePriceListAccountRelImpl[3];
 
-			array[0] = getByUuid_PrevAndNext(session,
-					commercePriceListAccountRel, uuid, orderByComparator, true);
+			array[0] = getByUuid_PrevAndNext(
+				session, commercePriceListAccountRel, uuid, orderByComparator,
+				true);
 
 			array[1] = commercePriceListAccountRel;
 
-			array[2] = getByUuid_PrevAndNext(session,
-					commercePriceListAccountRel, uuid, orderByComparator, false);
+			array[2] = getByUuid_PrevAndNext(
+				session, commercePriceListAccountRel, uuid, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -455,11 +449,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 		CommercePriceListAccountRel commercePriceListAccountRel, String uuid,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -470,10 +465,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 		boolean bindUuid = false;
 
-		if (uuid == null) {
-			query.append(_FINDER_COLUMN_UUID_UUID_1);
-		}
-		else if (uuid.equals("")) {
+		if (uuid.isEmpty()) {
 			query.append(_FINDER_COLUMN_UUID_UUID_3);
 		}
 		else {
@@ -483,7 +475,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -555,10 +548,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commercePriceListAccountRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commercePriceListAccountRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -579,8 +573,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public void removeByUuid(String uuid) {
-		for (CommercePriceListAccountRel commercePriceListAccountRel : findByUuid(
-				uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commercePriceListAccountRel);
 		}
 	}
@@ -593,9 +588,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countByUuid(String uuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
+		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] { uuid };
+		FinderPath finderPath = _finderPathCountByUuid;
+
+		Object[] finderArgs = new Object[] {uuid};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -606,10 +603,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_UUID_3);
 			}
 			else {
@@ -650,24 +644,17 @@ public class CommercePriceListAccountRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "commercePriceListAccountRel.uuid IS NULL";
-	private static final String _FINDER_COLUMN_UUID_UUID_2 = "commercePriceListAccountRel.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() },
-			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.GROUPID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() });
+	private static final String _FINDER_COLUMN_UUID_UUID_2 =
+		"commercePriceListAccountRel.uuid = ?";
+
+	private static final String _FINDER_COLUMN_UUID_UUID_3 =
+		"(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '')";
+
+	private FinderPath _finderPathFetchByUUID_G;
+	private FinderPath _finderPathCountByUUID_G;
 
 	/**
-	 * Returns the commerce price list account rel where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchPriceListAccountRelException} if it could not be found.
+	 * Returns the commerce price list account rel where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchPriceListAccountRelException</code> if it could not be found.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
@@ -677,8 +664,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel findByUUID_G(String uuid, long groupId)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUUID_G(uuid,
-				groupId);
+
+		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUUID_G(
+			uuid, groupId);
 
 		if (commercePriceListAccountRel == null) {
 			StringBundler msg = new StringBundler(6);
@@ -711,7 +699,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUUID_G(String uuid, long groupId) {
+	public CommercePriceListAccountRel fetchByUUID_G(
+		String uuid, long groupId) {
+
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
@@ -724,22 +714,27 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { uuid, groupId };
+	public CommercePriceListAccountRel fetchByUUID_G(
+		String uuid, long groupId, boolean retrieveFromCache) {
+
+		uuid = Objects.toString(uuid, "");
+
+		Object[] finderArgs = new Object[] {uuid, groupId};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByUUID_G, finderArgs, this);
 		}
 
 		if (result instanceof CommercePriceListAccountRel) {
-			CommercePriceListAccountRel commercePriceListAccountRel = (CommercePriceListAccountRel)result;
+			CommercePriceListAccountRel commercePriceListAccountRel =
+				(CommercePriceListAccountRel)result;
 
 			if (!Objects.equals(uuid, commercePriceListAccountRel.getUuid()) ||
-					(groupId != commercePriceListAccountRel.getGroupId())) {
+				(groupId != commercePriceListAccountRel.getGroupId())) {
+
 				result = null;
 			}
 		}
@@ -751,10 +746,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 			}
 			else {
@@ -785,11 +777,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 				List<CommercePriceListAccountRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
+					finderCache.putResult(
+						_finderPathFetchByUUID_G, finderArgs, list);
 				}
 				else {
-					CommercePriceListAccountRel commercePriceListAccountRel = list.get(0);
+					CommercePriceListAccountRel commercePriceListAccountRel =
+						list.get(0);
 
 					result = commercePriceListAccountRel;
 
@@ -797,7 +790,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, finderArgs);
+				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
 
 				throw processException(e);
 			}
@@ -824,8 +817,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel removeByUUID_G(String uuid, long groupId)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = findByUUID_G(uuid,
-				groupId);
+
+		CommercePriceListAccountRel commercePriceListAccountRel = findByUUID_G(
+			uuid, groupId);
 
 		return remove(commercePriceListAccountRel);
 	}
@@ -839,9 +833,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countByUUID_G(String uuid, long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
+		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] { uuid, groupId };
+		FinderPath finderPath = _finderPathCountByUUID_G;
+
+		Object[] finderArgs = new Object[] {uuid, groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -852,10 +848,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 			}
 			else {
@@ -900,34 +893,18 @@ public class CommercePriceListAccountRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "commercePriceListAccountRel.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "commercePriceListAccountRel.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "commercePriceListAccountRel.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
-			new String[] {
-				String.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C =
-		new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid_C",
-			new String[] { String.class.getName(), Long.class.getName() },
-			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.COMPANYID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByUuid_C",
-			new String[] { String.class.getName(), Long.class.getName() });
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 =
+		"commercePriceListAccountRel.uuid = ? AND ";
+
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 =
+		"(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '') AND ";
+
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 =
+		"commercePriceListAccountRel.groupId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByUuid_C;
+	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
+	private FinderPath _finderPathCountByUuid_C;
 
 	/**
 	 * Returns all the commerce price list account rels where uuid = &#63; and companyId = &#63;.
@@ -937,17 +914,18 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid_C(String uuid,
-		long companyId) {
-		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommercePriceListAccountRel> findByUuid_C(
+		String uuid, long companyId) {
+
+		return findByUuid_C(
+			uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce price list account rels where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -957,8 +935,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid_C(String uuid,
-		long companyId, int start, int end) {
+	public List<CommercePriceListAccountRel> findByUuid_C(
+		String uuid, long companyId, int start, int end) {
+
 		return findByUuid_C(uuid, companyId, start, end, null);
 	}
 
@@ -966,7 +945,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -977,17 +956,19 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid_C(String uuid,
-		long companyId, int start, int end,
+	public List<CommercePriceListAccountRel> findByUuid_C(
+		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		return findByUuid_C(uuid, companyId, start, end, orderByComparator, true);
+
+		return findByUuid_C(
+			uuid, companyId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce price list account rels where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
@@ -999,40 +980,45 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of matching commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findByUuid_C(String uuid,
-		long companyId, int start, int end,
+	public List<CommercePriceListAccountRel> findByUuid_C(
+		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean retrieveFromCache) {
+
+		uuid = Objects.toString(uuid, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C;
-			finderArgs = new Object[] { uuid, companyId };
+			finderPath = _finderPathWithoutPaginationFindByUuid_C;
+			finderArgs = new Object[] {uuid, companyId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C;
+			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
-					uuid, companyId,
-					
-					start, end, orderByComparator
-				};
+				uuid, companyId, start, end, orderByComparator
+			};
 		}
 
 		List<CommercePriceListAccountRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommercePriceListAccountRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommercePriceListAccountRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommercePriceListAccountRel commercePriceListAccountRel : list) {
-					if (!Objects.equals(uuid,
-								commercePriceListAccountRel.getUuid()) ||
-							(companyId != commercePriceListAccountRel.getCompanyId())) {
+				for (CommercePriceListAccountRel commercePriceListAccountRel :
+						list) {
+
+					if (!uuid.equals(commercePriceListAccountRel.getUuid()) ||
+						(companyId !=
+							commercePriceListAccountRel.getCompanyId())) {
+
 						list = null;
 
 						break;
@@ -1045,8 +1031,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1056,10 +1042,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_C_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_C_UUID_3);
 			}
 			else {
@@ -1071,12 +1054,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 			query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -1097,16 +1080,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 				qPos.add(companyId);
 
 				if (!pagination) {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1136,12 +1119,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @throws NoSuchPriceListAccountRelException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel findByUuid_C_First(String uuid,
-		long companyId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+	public CommercePriceListAccountRel findByUuid_C_First(
+			String uuid, long companyId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUuid_C_First(uuid,
-				companyId, orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByUuid_C_First(uuid, companyId, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -1171,11 +1155,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the first matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUuid_C_First(String uuid,
-		long companyId,
+	public CommercePriceListAccountRel fetchByUuid_C_First(
+		String uuid, long companyId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		List<CommercePriceListAccountRel> list = findByUuid_C(uuid, companyId,
-				0, 1, orderByComparator);
+
+		List<CommercePriceListAccountRel> list = findByUuid_C(
+			uuid, companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1194,12 +1179,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @throws NoSuchPriceListAccountRelException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel findByUuid_C_Last(String uuid,
-		long companyId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+	public CommercePriceListAccountRel findByUuid_C_Last(
+			String uuid, long companyId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByUuid_C_Last(uuid,
-				companyId, orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByUuid_C_Last(uuid, companyId, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -1229,17 +1215,18 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the last matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByUuid_C_Last(String uuid,
-		long companyId,
+	public CommercePriceListAccountRel fetchByUuid_C_Last(
+		String uuid, long companyId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
+
 		int count = countByUuid_C(uuid, companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommercePriceListAccountRel> list = findByUuid_C(uuid, companyId,
-				count - 1, count, orderByComparator);
+		List<CommercePriceListAccountRel> list = findByUuid_C(
+			uuid, companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1260,27 +1247,32 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel[] findByUuid_C_PrevAndNext(
-		long commercePriceListAccountRelId, String uuid, long companyId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+			long commercePriceListAccountRelId, String uuid, long companyId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = findByPrimaryKey(commercePriceListAccountRelId);
+
+		uuid = Objects.toString(uuid, "");
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			findByPrimaryKey(commercePriceListAccountRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommercePriceListAccountRel[] array = new CommercePriceListAccountRelImpl[3];
+			CommercePriceListAccountRel[] array =
+				new CommercePriceListAccountRelImpl[3];
 
-			array[0] = getByUuid_C_PrevAndNext(session,
-					commercePriceListAccountRel, uuid, companyId,
-					orderByComparator, true);
+			array[0] = getByUuid_C_PrevAndNext(
+				session, commercePriceListAccountRel, uuid, companyId,
+				orderByComparator, true);
 
 			array[1] = commercePriceListAccountRel;
 
-			array[2] = getByUuid_C_PrevAndNext(session,
-					commercePriceListAccountRel, uuid, companyId,
-					orderByComparator, false);
+			array[2] = getByUuid_C_PrevAndNext(
+				session, commercePriceListAccountRel, uuid, companyId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1298,11 +1290,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 		long companyId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1313,10 +1306,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 		boolean bindUuid = false;
 
-		if (uuid == null) {
-			query.append(_FINDER_COLUMN_UUID_C_UUID_1);
-		}
-		else if (uuid.equals("")) {
+		if (uuid.isEmpty()) {
 			query.append(_FINDER_COLUMN_UUID_C_UUID_3);
 		}
 		else {
@@ -1328,7 +1318,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1402,10 +1393,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commercePriceListAccountRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commercePriceListAccountRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1427,8 +1419,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public void removeByUuid_C(String uuid, long companyId) {
-		for (CommercePriceListAccountRel commercePriceListAccountRel : findByUuid_C(
-				uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				findByUuid_C(
+					uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commercePriceListAccountRel);
 		}
 	}
@@ -1442,9 +1437,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countByUuid_C(String uuid, long companyId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
+		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] { uuid, companyId };
+		FinderPath finderPath = _finderPathCountByUuid_C;
+
+		Object[] finderArgs = new Object[] {uuid, companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1455,10 +1452,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			boolean bindUuid = false;
 
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_C_UUID_1);
-			}
-			else if (uuid.equals("")) {
+			if (uuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_UUID_C_UUID_3);
 			}
 			else {
@@ -1503,34 +1497,18 @@ public class CommercePriceListAccountRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "commercePriceListAccountRel.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "commercePriceListAccountRel.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "commercePriceListAccountRel.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEPRICELISTID =
-		new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommercePriceListId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID =
-		new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommercePriceListId", new String[] { Long.class.getName() },
-			CommercePriceListAccountRelModelImpl.COMMERCEPRICELISTID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEPRICELISTID = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommercePriceListId", new String[] { Long.class.getName() });
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2 =
+		"commercePriceListAccountRel.uuid = ? AND ";
+
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3 =
+		"(commercePriceListAccountRel.uuid IS NULL OR commercePriceListAccountRel.uuid = '') AND ";
+
+	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 =
+		"commercePriceListAccountRel.companyId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCommercePriceListId;
+	private FinderPath _finderPathWithoutPaginationFindByCommercePriceListId;
+	private FinderPath _finderPathCountByCommercePriceListId;
 
 	/**
 	 * Returns all the commerce price list account rels where commercePriceListId = &#63;.
@@ -1541,15 +1519,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public List<CommercePriceListAccountRel> findByCommercePriceListId(
 		long commercePriceListId) {
-		return findByCommercePriceListId(commercePriceListId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return findByCommercePriceListId(
+			commercePriceListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce price list account rels where commercePriceListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commercePriceListId the commerce price list ID
@@ -1560,6 +1539,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public List<CommercePriceListAccountRel> findByCommercePriceListId(
 		long commercePriceListId, int start, int end) {
+
 		return findByCommercePriceListId(commercePriceListId, start, end, null);
 	}
 
@@ -1567,7 +1547,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels where commercePriceListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commercePriceListId the commerce price list ID
@@ -1580,15 +1560,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 	public List<CommercePriceListAccountRel> findByCommercePriceListId(
 		long commercePriceListId, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		return findByCommercePriceListId(commercePriceListId, start, end,
-			orderByComparator, true);
+
+		return findByCommercePriceListId(
+			commercePriceListId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce price list account rels where commercePriceListId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commercePriceListId the commerce price list ID
@@ -1603,34 +1584,39 @@ public class CommercePriceListAccountRelPersistenceImpl
 		long commercePriceListId, int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID;
-			finderArgs = new Object[] { commercePriceListId };
+			finderPath = _finderPathWithoutPaginationFindByCommercePriceListId;
+			finderArgs = new Object[] {commercePriceListId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEPRICELISTID;
+			finderPath = _finderPathWithPaginationFindByCommercePriceListId;
 			finderArgs = new Object[] {
-					commercePriceListId,
-					
-					start, end, orderByComparator
-				};
+				commercePriceListId, start, end, orderByComparator
+			};
 		}
 
 		List<CommercePriceListAccountRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommercePriceListAccountRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommercePriceListAccountRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommercePriceListAccountRel commercePriceListAccountRel : list) {
-					if ((commercePriceListId != commercePriceListAccountRel.getCommercePriceListId())) {
+				for (CommercePriceListAccountRel commercePriceListAccountRel :
+						list) {
+
+					if ((commercePriceListId !=
+							commercePriceListAccountRel.
+								getCommercePriceListId())) {
+
 						list = null;
 
 						break;
@@ -1643,8 +1629,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1652,15 +1638,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -1677,16 +1664,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 				qPos.add(commercePriceListId);
 
 				if (!pagination) {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1716,11 +1703,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel findByCommercePriceListId_First(
-		long commercePriceListId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+			long commercePriceListId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByCommercePriceListId_First(commercePriceListId,
-				orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByCommercePriceListId_First(
+				commercePriceListId, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -1749,8 +1738,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	public CommercePriceListAccountRel fetchByCommercePriceListId_First(
 		long commercePriceListId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		List<CommercePriceListAccountRel> list = findByCommercePriceListId(commercePriceListId,
-				0, 1, orderByComparator);
+
+		List<CommercePriceListAccountRel> list = findByCommercePriceListId(
+			commercePriceListId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1769,11 +1759,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel findByCommercePriceListId_Last(
-		long commercePriceListId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+			long commercePriceListId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByCommercePriceListId_Last(commercePriceListId,
-				orderByComparator);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByCommercePriceListId_Last(
+				commercePriceListId, orderByComparator);
 
 		if (commercePriceListAccountRel != null) {
 			return commercePriceListAccountRel;
@@ -1802,14 +1794,15 @@ public class CommercePriceListAccountRelPersistenceImpl
 	public CommercePriceListAccountRel fetchByCommercePriceListId_Last(
 		long commercePriceListId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
+
 		int count = countByCommercePriceListId(commercePriceListId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommercePriceListAccountRel> list = findByCommercePriceListId(commercePriceListId,
-				count - 1, count, orderByComparator);
+		List<CommercePriceListAccountRel> list = findByCommercePriceListId(
+			commercePriceListId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1829,27 +1822,30 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel[] findByCommercePriceListId_PrevAndNext(
-		long commercePriceListAccountRelId, long commercePriceListId,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator)
+			long commercePriceListAccountRelId, long commercePriceListId,
+			OrderByComparator<CommercePriceListAccountRel> orderByComparator)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = findByPrimaryKey(commercePriceListAccountRelId);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			findByPrimaryKey(commercePriceListAccountRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommercePriceListAccountRel[] array = new CommercePriceListAccountRelImpl[3];
+			CommercePriceListAccountRel[] array =
+				new CommercePriceListAccountRelImpl[3];
 
-			array[0] = getByCommercePriceListId_PrevAndNext(session,
-					commercePriceListAccountRel, commercePriceListId,
-					orderByComparator, true);
+			array[0] = getByCommercePriceListId_PrevAndNext(
+				session, commercePriceListAccountRel, commercePriceListId,
+				orderByComparator, true);
 
 			array[1] = commercePriceListAccountRel;
 
-			array[2] = getByCommercePriceListId_PrevAndNext(session,
-					commercePriceListAccountRel, commercePriceListId,
-					orderByComparator, false);
+			array[2] = getByCommercePriceListId_PrevAndNext(
+				session, commercePriceListAccountRel, commercePriceListId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1867,11 +1863,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 		long commercePriceListId,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1883,7 +1880,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 		query.append(_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1953,10 +1951,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 		qPos.add(commercePriceListId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commercePriceListAccountRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commercePriceListAccountRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1977,8 +1976,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public void removeByCommercePriceListId(long commercePriceListId) {
-		for (CommercePriceListAccountRel commercePriceListAccountRel : findByCommercePriceListId(
-				commercePriceListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				findByCommercePriceListId(
+					commercePriceListId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commercePriceListAccountRel);
 		}
 	}
@@ -1991,9 +1993,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countByCommercePriceListId(long commercePriceListId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEPRICELISTID;
+		FinderPath finderPath = _finderPathCountByCommercePriceListId;
 
-		Object[] finderArgs = new Object[] { commercePriceListId };
+		Object[] finderArgs = new Object[] {commercePriceListId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2002,7 +2004,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEPRICELISTACCOUNTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2);
 
 			String sql = query.toString();
 
@@ -2034,23 +2037,15 @@ public class CommercePriceListAccountRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2 =
-		"commercePriceListAccountRel.commercePriceListId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListAccountRelImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CommercePriceListAccountRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
-			CommercePriceListAccountRelModelImpl.COMMERCEPRICELISTID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEPRICELISTID_COMMERCEPRICELISTID_2 =
+			"commercePriceListAccountRel.commercePriceListId = ?";
+
+	private FinderPath _finderPathFetchByC_C;
+	private FinderPath _finderPathCountByC_C;
 
 	/**
-	 * Returns the commerce price list account rel where commerceAccountId = &#63; and commercePriceListId = &#63; or throws a {@link NoSuchPriceListAccountRelException} if it could not be found.
+	 * Returns the commerce price list account rel where commerceAccountId = &#63; and commercePriceListId = &#63; or throws a <code>NoSuchPriceListAccountRelException</code> if it could not be found.
 	 *
 	 * @param commerceAccountId the commerce account ID
 	 * @param commercePriceListId the commerce price list ID
@@ -2058,10 +2053,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @throws NoSuchPriceListAccountRelException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel findByC_C(long commerceAccountId,
-		long commercePriceListId) throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByC_C(commerceAccountId,
-				commercePriceListId);
+	public CommercePriceListAccountRel findByC_C(
+			long commerceAccountId, long commercePriceListId)
+		throws NoSuchPriceListAccountRelException {
+
+		CommercePriceListAccountRel commercePriceListAccountRel = fetchByC_C(
+			commerceAccountId, commercePriceListId);
 
 		if (commercePriceListAccountRel == null) {
 			StringBundler msg = new StringBundler(6);
@@ -2094,8 +2091,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByC_C(long commerceAccountId,
-		long commercePriceListId) {
+	public CommercePriceListAccountRel fetchByC_C(
+		long commerceAccountId, long commercePriceListId) {
+
 		return fetchByC_C(commerceAccountId, commercePriceListId, true);
 	}
 
@@ -2108,24 +2106,30 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchByC_C(long commerceAccountId,
-		long commercePriceListId, boolean retrieveFromCache) {
+	public CommercePriceListAccountRel fetchByC_C(
+		long commerceAccountId, long commercePriceListId,
+		boolean retrieveFromCache) {
+
 		Object[] finderArgs = new Object[] {
-				commerceAccountId, commercePriceListId
-			};
+			commerceAccountId, commercePriceListId
+		};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_C, finderArgs, this);
 		}
 
 		if (result instanceof CommercePriceListAccountRel) {
-			CommercePriceListAccountRel commercePriceListAccountRel = (CommercePriceListAccountRel)result;
+			CommercePriceListAccountRel commercePriceListAccountRel =
+				(CommercePriceListAccountRel)result;
 
-			if ((commerceAccountId != commercePriceListAccountRel.getCommerceAccountId()) ||
-					(commercePriceListId != commercePriceListAccountRel.getCommercePriceListId())) {
+			if ((commerceAccountId !=
+					commercePriceListAccountRel.getCommerceAccountId()) ||
+				(commercePriceListId !=
+					commercePriceListAccountRel.getCommercePriceListId())) {
+
 				result = null;
 			}
 		}
@@ -2157,11 +2161,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 				List<CommercePriceListAccountRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByC_C, finderArgs, list);
 				}
 				else {
-					CommercePriceListAccountRel commercePriceListAccountRel = list.get(0);
+					CommercePriceListAccountRel commercePriceListAccountRel =
+						list.get(0);
 
 					result = commercePriceListAccountRel;
 
@@ -2169,7 +2174,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
 
 				throw processException(e);
 			}
@@ -2194,10 +2199,12 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the commerce price list account rel that was removed
 	 */
 	@Override
-	public CommercePriceListAccountRel removeByC_C(long commerceAccountId,
-		long commercePriceListId) throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = findByC_C(commerceAccountId,
-				commercePriceListId);
+	public CommercePriceListAccountRel removeByC_C(
+			long commerceAccountId, long commercePriceListId)
+		throws NoSuchPriceListAccountRelException {
+
+		CommercePriceListAccountRel commercePriceListAccountRel = findByC_C(
+			commerceAccountId, commercePriceListId);
 
 		return remove(commercePriceListAccountRel);
 	}
@@ -2211,11 +2218,11 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countByC_C(long commerceAccountId, long commercePriceListId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
+		FinderPath finderPath = _finderPathCountByC_C;
 
 		Object[] finderArgs = new Object[] {
-				commerceAccountId, commercePriceListId
-			};
+			commerceAccountId, commercePriceListId
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2260,22 +2267,25 @@ public class CommercePriceListAccountRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_COMMERCEACCOUNTID_2 = "commercePriceListAccountRel.commerceAccountId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_COMMERCEPRICELISTID_2 = "commercePriceListAccountRel.commercePriceListId = ?";
+	private static final String _FINDER_COLUMN_C_C_COMMERCEACCOUNTID_2 =
+		"commercePriceListAccountRel.commerceAccountId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_COMMERCEPRICELISTID_2 =
+		"commercePriceListAccountRel.commercePriceListId = ?";
 
 	public CommercePriceListAccountRelPersistenceImpl() {
 		setModelClass(CommercePriceListAccountRel.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put("order", "order_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("order", "order_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -2294,22 +2304,28 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
-		entityCache.putResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommercePriceListAccountRelImpl.class,
 			commercePriceListAccountRel.getPrimaryKey(),
 			commercePriceListAccountRel);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+		finderCache.putResult(
+			_finderPathFetchByUUID_G,
 			new Object[] {
 				commercePriceListAccountRel.getUuid(),
 				commercePriceListAccountRel.getGroupId()
-			}, commercePriceListAccountRel);
+			},
+			commercePriceListAccountRel);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C,
+		finderCache.putResult(
+			_finderPathFetchByC_C,
 			new Object[] {
 				commercePriceListAccountRel.getCommerceAccountId(),
 				commercePriceListAccountRel.getCommercePriceListId()
-			}, commercePriceListAccountRel);
+			},
+			commercePriceListAccountRel);
 
 		commercePriceListAccountRel.resetOriginalValues();
 	}
@@ -2322,11 +2338,15 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommercePriceListAccountRel> commercePriceListAccountRels) {
-		for (CommercePriceListAccountRel commercePriceListAccountRel : commercePriceListAccountRels) {
+
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				commercePriceListAccountRels) {
+
 			if (entityCache.getResult(
-						CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-						CommercePriceListAccountRelImpl.class,
-						commercePriceListAccountRel.getPrimaryKey()) == null) {
+					CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+					CommercePriceListAccountRelImpl.class,
+					commercePriceListAccountRel.getPrimaryKey()) == null) {
+
 				cacheResult(commercePriceListAccountRel);
 			}
 			else {
@@ -2339,7 +2359,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Clears the cache for all commerce price list account rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -2355,105 +2375,124 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Clears the cache for the commerce price list account rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
-		entityCache.removeResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommercePriceListAccountRelImpl.class,
 			commercePriceListAccountRel.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommercePriceListAccountRelModelImpl)commercePriceListAccountRel,
+		clearUniqueFindersCache(
+			(CommercePriceListAccountRelModelImpl)commercePriceListAccountRel,
 			true);
 	}
 
 	@Override
 	public void clearCache(
 		List<CommercePriceListAccountRel> commercePriceListAccountRels) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommercePriceListAccountRel commercePriceListAccountRel : commercePriceListAccountRels) {
-			entityCache.removeResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				commercePriceListAccountRels) {
+
+			entityCache.removeResult(
+				CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
 				CommercePriceListAccountRelImpl.class,
 				commercePriceListAccountRel.getPrimaryKey());
 
-			clearUniqueFindersCache((CommercePriceListAccountRelModelImpl)commercePriceListAccountRel,
+			clearUniqueFindersCache(
+				(CommercePriceListAccountRelModelImpl)
+					commercePriceListAccountRel,
 				true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
-		CommercePriceListAccountRelModelImpl commercePriceListAccountRelModelImpl) {
+		CommercePriceListAccountRelModelImpl
+			commercePriceListAccountRelModelImpl) {
+
 		Object[] args = new Object[] {
+			commercePriceListAccountRelModelImpl.getUuid(),
+			commercePriceListAccountRelModelImpl.getGroupId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByUUID_G, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByUUID_G, args,
+			commercePriceListAccountRelModelImpl, false);
+
+		args = new Object[] {
+			commercePriceListAccountRelModelImpl.getCommerceAccountId(),
+			commercePriceListAccountRelModelImpl.getCommercePriceListId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_C, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_C, args, commercePriceListAccountRelModelImpl,
+			false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommercePriceListAccountRelModelImpl
+			commercePriceListAccountRelModelImpl,
+		boolean clearCurrent) {
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
 				commercePriceListAccountRelModelImpl.getUuid(),
 				commercePriceListAccountRelModelImpl.getGroupId()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
-			commercePriceListAccountRelModelImpl, false);
+			finderCache.removeResult(_finderPathCountByUUID_G, args);
+			finderCache.removeResult(_finderPathFetchByUUID_G, args);
+		}
 
-		args = new Object[] {
+		if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
+			 _finderPathFetchByUUID_G.getColumnBitmask()) != 0) {
+
+			Object[] args = new Object[] {
+				commercePriceListAccountRelModelImpl.getOriginalUuid(),
+				commercePriceListAccountRelModelImpl.getOriginalGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByUUID_G, args);
+			finderCache.removeResult(_finderPathFetchByUUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
 				commercePriceListAccountRelModelImpl.getCommerceAccountId(),
 				commercePriceListAccountRelModelImpl.getCommercePriceListId()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, args,
-			commercePriceListAccountRelModelImpl, false);
-	}
-
-	protected void clearUniqueFindersCache(
-		CommercePriceListAccountRelModelImpl commercePriceListAccountRelModelImpl,
-		boolean clearCurrent) {
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					commercePriceListAccountRelModelImpl.getUuid(),
-					commercePriceListAccountRelModelImpl.getGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
 		}
 
 		if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			 _finderPathFetchByC_C.getColumnBitmask()) != 0) {
+
 			Object[] args = new Object[] {
-					commercePriceListAccountRelModelImpl.getOriginalUuid(),
-					commercePriceListAccountRelModelImpl.getOriginalGroupId()
-				};
+				commercePriceListAccountRelModelImpl.
+					getOriginalCommerceAccountId(),
+				commercePriceListAccountRelModelImpl.
+					getOriginalCommercePriceListId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-		}
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					commercePriceListAccountRelModelImpl.getCommerceAccountId(),
-					commercePriceListAccountRelModelImpl.getCommercePriceListId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
-		}
-
-		if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commercePriceListAccountRelModelImpl.getOriginalCommerceAccountId(),
-					commercePriceListAccountRelModelImpl.getOriginalCommercePriceListId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
 		}
 	}
 
@@ -2466,16 +2505,20 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel create(
 		long commercePriceListAccountRelId) {
-		CommercePriceListAccountRel commercePriceListAccountRel = new CommercePriceListAccountRelImpl();
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			new CommercePriceListAccountRelImpl();
 
 		commercePriceListAccountRel.setNew(true);
-		commercePriceListAccountRel.setPrimaryKey(commercePriceListAccountRelId);
+		commercePriceListAccountRel.setPrimaryKey(
+			commercePriceListAccountRelId);
 
 		String uuid = PortalUUIDUtil.generate();
 
 		commercePriceListAccountRel.setUuid(uuid);
 
-		commercePriceListAccountRel.setCompanyId(companyProvider.getCompanyId());
+		commercePriceListAccountRel.setCompanyId(
+			companyProvider.getCompanyId());
 
 		return commercePriceListAccountRel;
 	}
@@ -2489,8 +2532,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel remove(
-		long commercePriceListAccountRelId)
+			long commercePriceListAccountRelId)
 		throws NoSuchPriceListAccountRelException {
+
 		return remove((Serializable)commercePriceListAccountRelId);
 	}
 
@@ -2504,21 +2548,23 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel remove(Serializable primaryKey)
 		throws NoSuchPriceListAccountRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommercePriceListAccountRel commercePriceListAccountRel = (CommercePriceListAccountRel)session.get(CommercePriceListAccountRelImpl.class,
-					primaryKey);
+			CommercePriceListAccountRel commercePriceListAccountRel =
+				(CommercePriceListAccountRel)session.get(
+					CommercePriceListAccountRelImpl.class, primaryKey);
 
 			if (commercePriceListAccountRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchPriceListAccountRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchPriceListAccountRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commercePriceListAccountRel);
@@ -2537,13 +2583,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	protected CommercePriceListAccountRel removeImpl(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commercePriceListAccountRel)) {
-				commercePriceListAccountRel = (CommercePriceListAccountRel)session.get(CommercePriceListAccountRelImpl.class,
+				commercePriceListAccountRel =
+					(CommercePriceListAccountRel)session.get(
+						CommercePriceListAccountRelImpl.class,
 						commercePriceListAccountRel.getPrimaryKeyObj());
 			}
 
@@ -2568,26 +2617,34 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel updateImpl(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
+
 		boolean isNew = commercePriceListAccountRel.isNew();
 
-		if (!(commercePriceListAccountRel instanceof CommercePriceListAccountRelModelImpl)) {
+		if (!(commercePriceListAccountRel instanceof
+				CommercePriceListAccountRelModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
-			if (ProxyUtil.isProxyClass(commercePriceListAccountRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commercePriceListAccountRel);
+			if (ProxyUtil.isProxyClass(
+					commercePriceListAccountRel.getClass())) {
+
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commercePriceListAccountRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commercePriceListAccountRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommercePriceListAccountRel implementation " +
-				commercePriceListAccountRel.getClass());
+					commercePriceListAccountRel.getClass());
 		}
 
-		CommercePriceListAccountRelModelImpl commercePriceListAccountRelModelImpl =
-			(CommercePriceListAccountRelModelImpl)commercePriceListAccountRel;
+		CommercePriceListAccountRelModelImpl
+			commercePriceListAccountRelModelImpl =
+				(CommercePriceListAccountRelModelImpl)
+					commercePriceListAccountRel;
 
 		if (Validator.isNull(commercePriceListAccountRel.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
@@ -2595,7 +2652,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 			commercePriceListAccountRel.setUuid(uuid);
 		}
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -2604,8 +2662,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 				commercePriceListAccountRel.setCreateDate(now);
 			}
 			else {
-				commercePriceListAccountRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commercePriceListAccountRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -2614,8 +2672,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 				commercePriceListAccountRel.setModifiedDate(now);
 			}
 			else {
-				commercePriceListAccountRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commercePriceListAccountRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -2630,7 +2688,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 				commercePriceListAccountRel.setNew(false);
 			}
 			else {
-				commercePriceListAccountRel = (CommercePriceListAccountRel)session.merge(commercePriceListAccountRel);
+				commercePriceListAccountRel =
+					(CommercePriceListAccountRel)session.merge(
+						commercePriceListAccountRel);
 			}
 		}
 		catch (Exception e) {
@@ -2645,103 +2705,112 @@ public class CommercePriceListAccountRelPersistenceImpl
 		if (!CommercePriceListAccountRelModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commercePriceListAccountRelModelImpl.getUuid()
+			};
+
+			finderCache.removeResult(_finderPathCountByUuid, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByUuid, args);
+
+			args = new Object[] {
+				commercePriceListAccountRelModelImpl.getUuid(),
+				commercePriceListAccountRelModelImpl.getCompanyId()
+			};
+
+			finderCache.removeResult(_finderPathCountByUuid_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByUuid_C, args);
+
+			args = new Object[] {
+				commercePriceListAccountRelModelImpl.getCommercePriceListId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommercePriceListId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommercePriceListId, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByUuid.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commercePriceListAccountRelModelImpl.getOriginalUuid()
+				};
+
+				finderCache.removeResult(_finderPathCountByUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByUuid, args);
+
+				args = new Object[] {
 					commercePriceListAccountRelModelImpl.getUuid()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
-				args);
+				finderCache.removeResult(_finderPathCountByUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByUuid, args);
+			}
 
-			args = new Object[] {
+			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByUuid_C.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commercePriceListAccountRelModelImpl.getOriginalUuid(),
+					commercePriceListAccountRelModelImpl.getOriginalCompanyId()
+				};
+
+				finderCache.removeResult(_finderPathCountByUuid_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByUuid_C, args);
+
+				args = new Object[] {
 					commercePriceListAccountRelModelImpl.getUuid(),
 					commercePriceListAccountRelModelImpl.getCompanyId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
-				args);
+				finderCache.removeResult(_finderPathCountByUuid_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByUuid_C, args);
+			}
 
-			args = new Object[] {
-					commercePriceListAccountRelModelImpl.getCommercePriceListId()
+			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommercePriceListId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commercePriceListAccountRelModelImpl.
+						getOriginalCommercePriceListId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEPRICELISTID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commercePriceListAccountRelModelImpl.getOriginalUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
+				finderCache.removeResult(
+					_finderPathCountByCommercePriceListId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommercePriceListId,
 					args);
 
 				args = new Object[] {
-						commercePriceListAccountRelModelImpl.getUuid()
-					};
+					commercePriceListAccountRelModelImpl.
+						getCommercePriceListId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
-					args);
-			}
-
-			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commercePriceListAccountRelModelImpl.getOriginalUuid(),
-						commercePriceListAccountRelModelImpl.getOriginalCompanyId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
-					args);
-
-				args = new Object[] {
-						commercePriceListAccountRelModelImpl.getUuid(),
-						commercePriceListAccountRelModelImpl.getCompanyId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
-					args);
-			}
-
-			if ((commercePriceListAccountRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commercePriceListAccountRelModelImpl.getOriginalCommercePriceListId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEPRICELISTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID,
-					args);
-
-				args = new Object[] {
-						commercePriceListAccountRelModelImpl.getCommercePriceListId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEPRICELISTID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEPRICELISTID,
+				finderCache.removeResult(
+					_finderPathCountByCommercePriceListId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommercePriceListId,
 					args);
 			}
 		}
 
-		entityCache.putResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommercePriceListAccountRelImpl.class,
 			commercePriceListAccountRel.getPrimaryKey(),
 			commercePriceListAccountRel, false);
@@ -2755,7 +2824,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce price list account rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce price list account rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce price list account rel
 	 * @return the commerce price list account rel
@@ -2764,22 +2833,24 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchPriceListAccountRelException {
-		CommercePriceListAccountRel commercePriceListAccountRel = fetchByPrimaryKey(primaryKey);
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commercePriceListAccountRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchPriceListAccountRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchPriceListAccountRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commercePriceListAccountRel;
 	}
 
 	/**
-	 * Returns the commerce price list account rel with the primary key or throws a {@link NoSuchPriceListAccountRelException} if it could not be found.
+	 * Returns the commerce price list account rel with the primary key or throws a <code>NoSuchPriceListAccountRelException</code> if it could not be found.
 	 *
 	 * @param commercePriceListAccountRelId the primary key of the commerce price list account rel
 	 * @return the commerce price list account rel
@@ -2787,8 +2858,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public CommercePriceListAccountRel findByPrimaryKey(
-		long commercePriceListAccountRelId)
+			long commercePriceListAccountRelId)
 		throws NoSuchPriceListAccountRelException {
+
 		return findByPrimaryKey((Serializable)commercePriceListAccountRelId);
 	}
 
@@ -2801,14 +2873,17 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel fetchByPrimaryKey(
 		Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-				CommercePriceListAccountRelImpl.class, primaryKey);
+
+		Serializable serializable = entityCache.getResult(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommercePriceListAccountRel commercePriceListAccountRel = (CommercePriceListAccountRel)serializable;
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			(CommercePriceListAccountRel)serializable;
 
 		if (commercePriceListAccountRel == null) {
 			Session session = null;
@@ -2816,20 +2891,24 @@ public class CommercePriceListAccountRelPersistenceImpl
 			try {
 				session = openSession();
 
-				commercePriceListAccountRel = (CommercePriceListAccountRel)session.get(CommercePriceListAccountRelImpl.class,
-						primaryKey);
+				commercePriceListAccountRel =
+					(CommercePriceListAccountRel)session.get(
+						CommercePriceListAccountRelImpl.class, primaryKey);
 
 				if (commercePriceListAccountRel != null) {
 					cacheResult(commercePriceListAccountRel);
 				}
 				else {
-					entityCache.putResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommercePriceListAccountRelModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommercePriceListAccountRelImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
 					CommercePriceListAccountRelImpl.class, primaryKey);
 
 				throw processException(e);
@@ -2851,24 +2930,28 @@ public class CommercePriceListAccountRelPersistenceImpl
 	@Override
 	public CommercePriceListAccountRel fetchByPrimaryKey(
 		long commercePriceListAccountRelId) {
+
 		return fetchByPrimaryKey((Serializable)commercePriceListAccountRelId);
 	}
 
 	@Override
 	public Map<Serializable, CommercePriceListAccountRel> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommercePriceListAccountRel> map = new HashMap<Serializable, CommercePriceListAccountRel>();
+		Map<Serializable, CommercePriceListAccountRel> map =
+			new HashMap<Serializable, CommercePriceListAccountRel>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommercePriceListAccountRel commercePriceListAccountRel = fetchByPrimaryKey(primaryKey);
+			CommercePriceListAccountRel commercePriceListAccountRel =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commercePriceListAccountRel != null) {
 				map.put(primaryKey, commercePriceListAccountRel);
@@ -2880,8 +2963,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-					CommercePriceListAccountRelImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommercePriceListAccountRelImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -2892,8 +2976,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey,
-						(CommercePriceListAccountRel)serializable);
+					map.put(
+						primaryKey, (CommercePriceListAccountRel)serializable);
 				}
 			}
 		}
@@ -2902,8 +2986,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE_PKS_IN);
 
@@ -2926,18 +3010,24 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommercePriceListAccountRel commercePriceListAccountRel : (List<CommercePriceListAccountRel>)q.list()) {
-				map.put(commercePriceListAccountRel.getPrimaryKeyObj(),
+			for (CommercePriceListAccountRel commercePriceListAccountRel :
+					(List<CommercePriceListAccountRel>)q.list()) {
+
+				map.put(
+					commercePriceListAccountRel.getPrimaryKeyObj(),
 					commercePriceListAccountRel);
 
 				cacheResult(commercePriceListAccountRel);
 
-				uncachedPrimaryKeys.remove(commercePriceListAccountRel.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commercePriceListAccountRel.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
-					CommercePriceListAccountRelImpl.class, primaryKey, nullModel);
+				entityCache.putResult(
+					CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+					CommercePriceListAccountRelImpl.class, primaryKey,
+					nullModel);
 			}
 		}
 		catch (Exception e) {
@@ -2964,7 +3054,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns a range of all the commerce price list account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce price list account rels
@@ -2980,7 +3070,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce price list account rels
@@ -2989,8 +3079,10 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findAll(int start, int end,
+	public List<CommercePriceListAccountRel> findAll(
+		int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2998,7 +3090,7 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce price list account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListAccountRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce price list account rels
@@ -3008,29 +3100,32 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * @return the ordered range of commerce price list account rels
 	 */
 	@Override
-	public List<CommercePriceListAccountRel> findAll(int start, int end,
+	public List<CommercePriceListAccountRel> findAll(
+		int start, int end,
 		OrderByComparator<CommercePriceListAccountRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommercePriceListAccountRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommercePriceListAccountRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommercePriceListAccountRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -3038,13 +3133,13 @@ public class CommercePriceListAccountRelPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEPRICELISTACCOUNTREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -3052,7 +3147,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 				sql = _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL;
 
 				if (pagination) {
-					sql = sql.concat(CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommercePriceListAccountRelModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -3064,16 +3160,16 @@ public class CommercePriceListAccountRelPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommercePriceListAccountRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommercePriceListAccountRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -3099,7 +3195,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommercePriceListAccountRel commercePriceListAccountRel : findAll()) {
+		for (CommercePriceListAccountRel commercePriceListAccountRel :
+				findAll()) {
+
 			remove(commercePriceListAccountRel);
 		}
 	}
@@ -3111,8 +3209,8 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -3120,16 +3218,17 @@ public class CommercePriceListAccountRelPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEPRICELISTACCOUNTREL);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEPRICELISTACCOUNTREL);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -3155,10 +3254,141 @@ public class CommercePriceListAccountRelPersistenceImpl
 	 * Initializes the commerce price list account rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByUuid = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByUuid = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
+			new String[] {String.class.getName()},
+			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
+
+		_finderPathCountByUuid = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByUuid", new String[] {String.class.getName()});
+
+		_finderPathFetchByUUID_G = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUUID_G",
+			new String[] {String.class.getName(), Long.class.getName()},
+			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.GROUPID_COLUMN_BITMASK);
+
+		_finderPathCountByUUID_G = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByUUID_G",
+			new String[] {String.class.getName(), Long.class.getName()});
+
+		_finderPathWithPaginationFindByUuid_C = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByUuid_C = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid_C",
+			new String[] {String.class.getName(), Long.class.getName()},
+			CommercePriceListAccountRelModelImpl.UUID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
+
+		_finderPathCountByUuid_C = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByUuid_C",
+			new String[] {String.class.getName(), Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommercePriceListId = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommercePriceListId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommercePriceListId = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommercePriceListId", new String[] {Long.class.getName()},
+			CommercePriceListAccountRelModelImpl.
+				COMMERCEPRICELISTID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.ORDER_COLUMN_BITMASK);
+
+		_finderPathCountByCommercePriceListId = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommercePriceListId", new String[] {Long.class.getName()});
+
+		_finderPathFetchByC_C = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListAccountRelImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommercePriceListAccountRelModelImpl.
+				COMMERCEACCOUNTID_COLUMN_BITMASK |
+			CommercePriceListAccountRelModelImpl.
+				COMMERCEPRICELISTID_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommercePriceListAccountRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListAccountRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
 	}
 
 	public void destroy() {
-		entityCache.removeCache(CommercePriceListAccountRelImpl.class.getName());
+		entityCache.removeCache(
+			CommercePriceListAccountRelImpl.class.getName());
 		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -3166,21 +3396,42 @@ public class CommercePriceListAccountRelPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL = "SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel";
-	private static final String _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE_PKS_IN =
-		"SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE commercePriceListAccountRelId IN (";
-	private static final String _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE = "SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE ";
-	private static final String _SQL_COUNT_COMMERCEPRICELISTACCOUNTREL = "SELECT COUNT(commercePriceListAccountRel) FROM CommercePriceListAccountRel commercePriceListAccountRel";
-	private static final String _SQL_COUNT_COMMERCEPRICELISTACCOUNTREL_WHERE = "SELECT COUNT(commercePriceListAccountRel) FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commercePriceListAccountRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommercePriceListAccountRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommercePriceListAccountRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommercePriceListAccountRelPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"uuid", "order"
-			});
+
+	private static final String _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL =
+		"SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel";
+
+	private static final String
+		_SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE_PKS_IN =
+			"SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE commercePriceListAccountRelId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEPRICELISTACCOUNTREL_WHERE =
+		"SELECT commercePriceListAccountRel FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEPRICELISTACCOUNTREL =
+		"SELECT COUNT(commercePriceListAccountRel) FROM CommercePriceListAccountRel commercePriceListAccountRel";
+
+	private static final String _SQL_COUNT_COMMERCEPRICELISTACCOUNTREL_WHERE =
+		"SELECT COUNT(commercePriceListAccountRel) FROM CommercePriceListAccountRel commercePriceListAccountRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commercePriceListAccountRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommercePriceListAccountRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommercePriceListAccountRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePriceListAccountRelPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"uuid", "order"});
+
 }

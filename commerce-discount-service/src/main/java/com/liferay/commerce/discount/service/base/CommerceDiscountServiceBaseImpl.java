@@ -21,9 +21,7 @@ import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelPers
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRulePersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUserSegmentRelPersistence;
-
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -49,15 +47,16 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.discount.service.impl.CommerceDiscountServiceImpl
- * @see com.liferay.commerce.discount.service.CommerceDiscountServiceUtil
  * @generated
  */
-public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
+public abstract class CommerceDiscountServiceBaseImpl
+	extends BaseServiceImpl
 	implements CommerceDiscountService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.discount.service.CommerceDiscountServiceUtil} to access the commerce discount remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceDiscountService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.discount.service.CommerceDiscountServiceUtil</code>.
 	 */
 
 	/**
@@ -65,7 +64,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountLocalService getCommerceDiscountLocalService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountLocalService
+		getCommerceDiscountLocalService() {
+
 		return commerceDiscountLocalService;
 	}
 
@@ -75,7 +76,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountLocalService the commerce discount local service
 	 */
 	public void setCommerceDiscountLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountLocalService commerceDiscountLocalService) {
+		com.liferay.commerce.discount.service.CommerceDiscountLocalService
+			commerceDiscountLocalService) {
+
 		this.commerceDiscountLocalService = commerceDiscountLocalService;
 	}
 
@@ -95,6 +98,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setCommerceDiscountService(
 		CommerceDiscountService commerceDiscountService) {
+
 		this.commerceDiscountService = commerceDiscountService;
 	}
 
@@ -114,6 +118,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setCommerceDiscountPersistence(
 		CommerceDiscountPersistence commerceDiscountPersistence) {
+
 		this.commerceDiscountPersistence = commerceDiscountPersistence;
 	}
 
@@ -122,7 +127,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount rel local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRelLocalService getCommerceDiscountRelLocalService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+		getCommerceDiscountRelLocalService() {
+
 		return commerceDiscountRelLocalService;
 	}
 
@@ -132,7 +139,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountRelLocalService the commerce discount rel local service
 	 */
 	public void setCommerceDiscountRelLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService commerceDiscountRelLocalService) {
+		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+			commerceDiscountRelLocalService) {
+
 		this.commerceDiscountRelLocalService = commerceDiscountRelLocalService;
 	}
 
@@ -141,7 +150,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount rel remote service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRelService getCommerceDiscountRelService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountRelService
+		getCommerceDiscountRelService() {
+
 		return commerceDiscountRelService;
 	}
 
@@ -151,7 +162,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountRelService the commerce discount rel remote service
 	 */
 	public void setCommerceDiscountRelService(
-		com.liferay.commerce.discount.service.CommerceDiscountRelService commerceDiscountRelService) {
+		com.liferay.commerce.discount.service.CommerceDiscountRelService
+			commerceDiscountRelService) {
+
 		this.commerceDiscountRelService = commerceDiscountRelService;
 	}
 
@@ -171,6 +184,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setCommerceDiscountRelPersistence(
 		CommerceDiscountRelPersistence commerceDiscountRelPersistence) {
+
 		this.commerceDiscountRelPersistence = commerceDiscountRelPersistence;
 	}
 
@@ -179,7 +193,10 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount rule local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService getCommerceDiscountRuleLocalService() {
+	public
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			getCommerceDiscountRuleLocalService() {
+
 		return commerceDiscountRuleLocalService;
 	}
 
@@ -189,8 +206,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountRuleLocalService the commerce discount rule local service
 	 */
 	public void setCommerceDiscountRuleLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService commerceDiscountRuleLocalService) {
-		this.commerceDiscountRuleLocalService = commerceDiscountRuleLocalService;
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			commerceDiscountRuleLocalService) {
+
+		this.commerceDiscountRuleLocalService =
+			commerceDiscountRuleLocalService;
 	}
 
 	/**
@@ -198,7 +218,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount rule remote service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountRuleService getCommerceDiscountRuleService() {
+	public com.liferay.commerce.discount.service.CommerceDiscountRuleService
+		getCommerceDiscountRuleService() {
+
 		return commerceDiscountRuleService;
 	}
 
@@ -208,7 +230,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountRuleService the commerce discount rule remote service
 	 */
 	public void setCommerceDiscountRuleService(
-		com.liferay.commerce.discount.service.CommerceDiscountRuleService commerceDiscountRuleService) {
+		com.liferay.commerce.discount.service.CommerceDiscountRuleService
+			commerceDiscountRuleService) {
+
 		this.commerceDiscountRuleService = commerceDiscountRuleService;
 	}
 
@@ -217,7 +241,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount rule persistence
 	 */
-	public CommerceDiscountRulePersistence getCommerceDiscountRulePersistence() {
+	public CommerceDiscountRulePersistence
+		getCommerceDiscountRulePersistence() {
+
 		return commerceDiscountRulePersistence;
 	}
 
@@ -228,6 +254,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setCommerceDiscountRulePersistence(
 		CommerceDiscountRulePersistence commerceDiscountRulePersistence) {
+
 		this.commerceDiscountRulePersistence = commerceDiscountRulePersistence;
 	}
 
@@ -236,7 +263,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount usage entry local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService getCommerceDiscountUsageEntryLocalService() {
+	public
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				getCommerceDiscountUsageEntryLocalService() {
+
 		return commerceDiscountUsageEntryLocalService;
 	}
 
@@ -246,8 +277,12 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountUsageEntryLocalService the commerce discount usage entry local service
 	 */
 	public void setCommerceDiscountUsageEntryLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService commerceDiscountUsageEntryLocalService) {
-		this.commerceDiscountUsageEntryLocalService = commerceDiscountUsageEntryLocalService;
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				commerceDiscountUsageEntryLocalService) {
+
+		this.commerceDiscountUsageEntryLocalService =
+			commerceDiscountUsageEntryLocalService;
 	}
 
 	/**
@@ -255,7 +290,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount usage entry persistence
 	 */
-	public CommerceDiscountUsageEntryPersistence getCommerceDiscountUsageEntryPersistence() {
+	public CommerceDiscountUsageEntryPersistence
+		getCommerceDiscountUsageEntryPersistence() {
+
 		return commerceDiscountUsageEntryPersistence;
 	}
 
@@ -265,8 +302,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountUsageEntryPersistence the commerce discount usage entry persistence
 	 */
 	public void setCommerceDiscountUsageEntryPersistence(
-		CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence) {
-		this.commerceDiscountUsageEntryPersistence = commerceDiscountUsageEntryPersistence;
+		CommerceDiscountUsageEntryPersistence
+			commerceDiscountUsageEntryPersistence) {
+
+		this.commerceDiscountUsageEntryPersistence =
+			commerceDiscountUsageEntryPersistence;
 	}
 
 	/**
@@ -274,7 +314,10 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount user segment rel local service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService getCommerceDiscountUserSegmentRelLocalService() {
+	public com.liferay.commerce.discount.service.
+		CommerceDiscountUserSegmentRelLocalService
+			getCommerceDiscountUserSegmentRelLocalService() {
+
 		return commerceDiscountUserSegmentRelLocalService;
 	}
 
@@ -284,8 +327,12 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountUserSegmentRelLocalService the commerce discount user segment rel local service
 	 */
 	public void setCommerceDiscountUserSegmentRelLocalService(
-		com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService) {
-		this.commerceDiscountUserSegmentRelLocalService = commerceDiscountUserSegmentRelLocalService;
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUserSegmentRelLocalService
+				commerceDiscountUserSegmentRelLocalService) {
+
+		this.commerceDiscountUserSegmentRelLocalService =
+			commerceDiscountUserSegmentRelLocalService;
 	}
 
 	/**
@@ -293,7 +340,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount user segment rel remote service
 	 */
-	public com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService getCommerceDiscountUserSegmentRelService() {
+	public
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUserSegmentRelService
+				getCommerceDiscountUserSegmentRelService() {
+
 		return commerceDiscountUserSegmentRelService;
 	}
 
@@ -303,8 +354,12 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountUserSegmentRelService the commerce discount user segment rel remote service
 	 */
 	public void setCommerceDiscountUserSegmentRelService(
-		com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService commerceDiscountUserSegmentRelService) {
-		this.commerceDiscountUserSegmentRelService = commerceDiscountUserSegmentRelService;
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUserSegmentRelService
+				commerceDiscountUserSegmentRelService) {
+
+		this.commerceDiscountUserSegmentRelService =
+			commerceDiscountUserSegmentRelService;
 	}
 
 	/**
@@ -312,7 +367,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the commerce discount user segment rel persistence
 	 */
-	public CommerceDiscountUserSegmentRelPersistence getCommerceDiscountUserSegmentRelPersistence() {
+	public CommerceDiscountUserSegmentRelPersistence
+		getCommerceDiscountUserSegmentRelPersistence() {
+
 		return commerceDiscountUserSegmentRelPersistence;
 	}
 
@@ -322,8 +379,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param commerceDiscountUserSegmentRelPersistence the commerce discount user segment rel persistence
 	 */
 	public void setCommerceDiscountUserSegmentRelPersistence(
-		CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence) {
-		this.commerceDiscountUserSegmentRelPersistence = commerceDiscountUserSegmentRelPersistence;
+		CommerceDiscountUserSegmentRelPersistence
+			commerceDiscountUserSegmentRelPersistence) {
+
+		this.commerceDiscountUserSegmentRelPersistence =
+			commerceDiscountUserSegmentRelPersistence;
 	}
 
 	/**
@@ -331,7 +391,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -341,7 +403,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -350,7 +414,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -360,7 +426,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -369,7 +437,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -380,6 +450,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -399,6 +470,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -407,7 +479,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -417,7 +491,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -426,7 +502,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -437,6 +515,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -456,6 +535,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -482,7 +562,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the workflow instance link local service
 	 */
-	public com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+	public com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+		getWorkflowInstanceLinkLocalService() {
+
 		return workflowInstanceLinkLocalService;
 	}
 
@@ -492,8 +574,11 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param workflowInstanceLinkLocalService the workflow instance link local service
 	 */
 	public void setWorkflowInstanceLinkLocalService(
-		com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
-		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+		com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+			workflowInstanceLinkLocalService) {
+
+		this.workflowInstanceLinkLocalService =
+			workflowInstanceLinkLocalService;
 	}
 
 	/**
@@ -501,7 +586,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the workflow instance link persistence
 	 */
-	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+	public WorkflowInstanceLinkPersistence
+		getWorkflowInstanceLinkPersistence() {
+
 		return workflowInstanceLinkPersistence;
 	}
 
@@ -512,6 +599,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setWorkflowInstanceLinkPersistence(
 		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+
 		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
 	}
 
@@ -520,7 +608,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the expando row local service
 	 */
-	public com.liferay.expando.kernel.service.ExpandoRowLocalService getExpandoRowLocalService() {
+	public com.liferay.expando.kernel.service.ExpandoRowLocalService
+		getExpandoRowLocalService() {
+
 		return expandoRowLocalService;
 	}
 
@@ -530,7 +620,9 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 * @param expandoRowLocalService the expando row local service
 	 */
 	public void setExpandoRowLocalService(
-		com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService) {
+		com.liferay.expando.kernel.service.ExpandoRowLocalService
+			expandoRowLocalService) {
+
 		this.expandoRowLocalService = expandoRowLocalService;
 	}
 
@@ -550,6 +642,7 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setExpandoRowPersistence(
 		ExpandoRowPersistence expandoRowPersistence) {
+
 		this.expandoRowPersistence = expandoRowPersistence;
 	}
 
@@ -591,8 +684,8 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -601,56 +694,138 @@ public abstract class CommerceDiscountServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountLocalService commerceDiscountLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountLocalService.class
+	)
+	protected com.liferay.commerce.discount.service.CommerceDiscountLocalService
+		commerceDiscountLocalService;
+
 	@BeanReference(type = CommerceDiscountService.class)
 	protected CommerceDiscountService commerceDiscountService;
+
 	@BeanReference(type = CommerceDiscountPersistence.class)
 	protected CommerceDiscountPersistence commerceDiscountPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRelLocalService commerceDiscountRelLocalService;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRelService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRelService commerceDiscountRelService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.CommerceDiscountRelLocalService
+			commerceDiscountRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRelService.class
+	)
+	protected com.liferay.commerce.discount.service.CommerceDiscountRelService
+		commerceDiscountRelService;
+
 	@BeanReference(type = CommerceDiscountRelPersistence.class)
 	protected CommerceDiscountRelPersistence commerceDiscountRelPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService commerceDiscountRuleLocalService;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountRuleService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountRuleService commerceDiscountRuleService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService
+			commerceDiscountRuleLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountRuleService.class
+	)
+	protected com.liferay.commerce.discount.service.CommerceDiscountRuleService
+		commerceDiscountRuleService;
+
 	@BeanReference(type = CommerceDiscountRulePersistence.class)
 	protected CommerceDiscountRulePersistence commerceDiscountRulePersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService commerceDiscountUsageEntryLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUsageEntryLocalService
+				commerceDiscountUsageEntryLocalService;
+
 	@BeanReference(type = CommerceDiscountUsageEntryPersistence.class)
-	protected CommerceDiscountUsageEntryPersistence commerceDiscountUsageEntryPersistence;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService commerceDiscountUserSegmentRelLocalService;
-	@BeanReference(type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService.class)
-	protected com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService commerceDiscountUserSegmentRelService;
+	protected CommerceDiscountUsageEntryPersistence
+		commerceDiscountUsageEntryPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService.class
+	)
+	protected com.liferay.commerce.discount.service.
+		CommerceDiscountUserSegmentRelLocalService
+			commerceDiscountUserSegmentRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelService.class
+	)
+	protected
+		com.liferay.commerce.discount.service.
+			CommerceDiscountUserSegmentRelService
+				commerceDiscountUserSegmentRelService;
+
 	@BeanReference(type = CommerceDiscountUserSegmentRelPersistence.class)
-	protected CommerceDiscountUserSegmentRelPersistence commerceDiscountUserSegmentRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceDiscountUserSegmentRelPersistence
+		commerceDiscountUserSegmentRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService.class)
-	protected com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService
+		workflowInstanceLinkLocalService;
+
 	@ServiceReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class)
-	protected com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService;
+
+	@ServiceReference(
+		type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class
+	)
+	protected com.liferay.expando.kernel.service.ExpandoRowLocalService
+		expandoRowLocalService;
+
 	@ServiceReference(type = ExpandoRowPersistence.class)
 	protected ExpandoRowPersistence expandoRowPersistence;
+
 }

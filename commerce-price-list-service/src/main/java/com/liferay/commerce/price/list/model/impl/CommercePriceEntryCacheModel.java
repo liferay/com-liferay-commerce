@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommercePriceEntry in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommercePriceEntry
  * @generated
  */
 @ProviderType
-public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEntry>,
-	Externalizable {
+public class CommercePriceEntryCacheModel
+	implements CacheModel<CommercePriceEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,9 +50,12 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 			return false;
 		}
 
-		CommercePriceEntryCacheModel commercePriceEntryCacheModel = (CommercePriceEntryCacheModel)obj;
+		CommercePriceEntryCacheModel commercePriceEntryCacheModel =
+			(CommercePriceEntryCacheModel)obj;
 
-		if (commercePriceEntryId == commercePriceEntryCacheModel.commercePriceEntryId) {
+		if (commercePriceEntryId ==
+				commercePriceEntryCacheModel.commercePriceEntryId) {
+
 			return true;
 		}
 
@@ -108,7 +110,8 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 
 	@Override
 	public CommercePriceEntry toEntityModel() {
-		CommercePriceEntryImpl commercePriceEntryImpl = new CommercePriceEntryImpl();
+		CommercePriceEntryImpl commercePriceEntryImpl =
+			new CommercePriceEntryImpl();
 
 		if (uuid == null) {
 			commercePriceEntryImpl.setUuid("");
@@ -121,7 +124,8 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 			commercePriceEntryImpl.setExternalReferenceCode("");
 		}
 		else {
-			commercePriceEntryImpl.setExternalReferenceCode(externalReferenceCode);
+			commercePriceEntryImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
 		commercePriceEntryImpl.setCommercePriceEntryId(commercePriceEntryId);
@@ -168,7 +172,8 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 			commercePriceEntryImpl.setLastPublishDate(null);
 		}
 		else {
-			commercePriceEntryImpl.setLastPublishDate(new Date(lastPublishDate));
+			commercePriceEntryImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		commercePriceEntryImpl.resetOriginalValues();
@@ -179,6 +184,7 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		uuid = objectInput.readUTF();
 		externalReferenceCode = objectInput.readUTF();
 
@@ -205,8 +211,7 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -272,4 +277,5 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 	public BigDecimal promoPrice;
 	public boolean hasTierPrice;
 	public long lastPublishDate;
+
 }

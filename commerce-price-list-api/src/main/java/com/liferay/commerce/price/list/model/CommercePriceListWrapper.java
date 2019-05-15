@@ -17,9 +17,7 @@ package com.liferay.commerce.price.list.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommercePriceListWrapper implements CommercePriceList,
-	ModelWrapper<CommercePriceList> {
+public class CommercePriceListWrapper
+	implements CommercePriceList, ModelWrapper<CommercePriceList> {
+
 	public CommercePriceListWrapper(CommercePriceList commercePriceList) {
 		_commercePriceList = commercePriceList;
 	}
@@ -70,8 +69,8 @@ public class CommercePriceListWrapper implements CommercePriceList,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
-		attributes.put("parentCommercePriceListId",
-			getParentCommercePriceListId());
+		attributes.put(
+			"parentCommercePriceListId", getParentCommercePriceListId());
 		attributes.put("name", getName());
 		attributes.put("priority", getPriority());
 		attributes.put("displayDate", getDisplayDate());
@@ -94,7 +93,7 @@ public class CommercePriceListWrapper implements CommercePriceList,
 		}
 
 		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
+			"externalReferenceCode");
 
 		if (externalReferenceCode != null) {
 			setExternalReferenceCode(externalReferenceCode);
@@ -149,7 +148,7 @@ public class CommercePriceListWrapper implements CommercePriceList,
 		}
 
 		Long parentCommercePriceListId = (Long)attributes.get(
-				"parentCommercePriceListId");
+			"parentCommercePriceListId");
 
 		if (parentCommercePriceListId != null) {
 			setParentCommercePriceListId(parentCommercePriceListId);
@@ -212,7 +211,8 @@ public class CommercePriceListWrapper implements CommercePriceList,
 
 	@Override
 	public Object clone() {
-		return new CommercePriceListWrapper((CommercePriceList)_commercePriceList.clone());
+		return new CommercePriceListWrapper(
+			(CommercePriceList)_commercePriceList.clone());
 	}
 
 	@Override
@@ -221,56 +221,58 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	@Override
-	public com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency()
+	public com.liferay.commerce.currency.model.CommerceCurrency
+			getCommerceCurrency()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commercePriceList.getCommerceCurrency();
 	}
 
 	/**
-	* Returns the commerce currency ID of this commerce price list.
-	*
-	* @return the commerce currency ID of this commerce price list
-	*/
+	 * Returns the commerce currency ID of this commerce price list.
+	 *
+	 * @return the commerce currency ID of this commerce price list
+	 */
 	@Override
 	public long getCommerceCurrencyId() {
 		return _commercePriceList.getCommerceCurrencyId();
 	}
 
 	/**
-	* Returns the commerce price list ID of this commerce price list.
-	*
-	* @return the commerce price list ID of this commerce price list
-	*/
+	 * Returns the commerce price list ID of this commerce price list.
+	 *
+	 * @return the commerce price list ID of this commerce price list
+	 */
 	@Override
 	public long getCommercePriceListId() {
 		return _commercePriceList.getCommercePriceListId();
 	}
 
 	/**
-	* Returns the company ID of this commerce price list.
-	*
-	* @return the company ID of this commerce price list
-	*/
+	 * Returns the company ID of this commerce price list.
+	 *
+	 * @return the company ID of this commerce price list
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commercePriceList.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce price list.
-	*
-	* @return the create date of this commerce price list
-	*/
+	 * Returns the create date of this commerce price list.
+	 *
+	 * @return the create date of this commerce price list
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commercePriceList.getCreateDate();
 	}
 
 	/**
-	* Returns the display date of this commerce price list.
-	*
-	* @return the display date of this commerce price list
-	*/
+	 * Returns the display date of this commerce price list.
+	 *
+	 * @return the display date of this commerce price list
+	 */
 	@Override
 	public Date getDisplayDate() {
 		return _commercePriceList.getDisplayDate();
@@ -282,80 +284,80 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns the expiration date of this commerce price list.
-	*
-	* @return the expiration date of this commerce price list
-	*/
+	 * Returns the expiration date of this commerce price list.
+	 *
+	 * @return the expiration date of this commerce price list
+	 */
 	@Override
 	public Date getExpirationDate() {
 		return _commercePriceList.getExpirationDate();
 	}
 
 	/**
-	* Returns the external reference code of this commerce price list.
-	*
-	* @return the external reference code of this commerce price list
-	*/
+	 * Returns the external reference code of this commerce price list.
+	 *
+	 * @return the external reference code of this commerce price list
+	 */
 	@Override
 	public String getExternalReferenceCode() {
 		return _commercePriceList.getExternalReferenceCode();
 	}
 
 	/**
-	* Returns the group ID of this commerce price list.
-	*
-	* @return the group ID of this commerce price list
-	*/
+	 * Returns the group ID of this commerce price list.
+	 *
+	 * @return the group ID of this commerce price list
+	 */
 	@Override
 	public long getGroupId() {
 		return _commercePriceList.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce price list.
-	*
-	* @return the last publish date of this commerce price list
-	*/
+	 * Returns the last publish date of this commerce price list.
+	 *
+	 * @return the last publish date of this commerce price list
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commercePriceList.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this commerce price list.
-	*
-	* @return the modified date of this commerce price list
-	*/
+	 * Returns the modified date of this commerce price list.
+	 *
+	 * @return the modified date of this commerce price list
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commercePriceList.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce price list.
-	*
-	* @return the name of this commerce price list
-	*/
+	 * Returns the name of this commerce price list.
+	 *
+	 * @return the name of this commerce price list
+	 */
 	@Override
 	public String getName() {
 		return _commercePriceList.getName();
 	}
 
 	/**
-	* Returns the parent commerce price list ID of this commerce price list.
-	*
-	* @return the parent commerce price list ID of this commerce price list
-	*/
+	 * Returns the parent commerce price list ID of this commerce price list.
+	 *
+	 * @return the parent commerce price list ID of this commerce price list
+	 */
 	@Override
 	public long getParentCommercePriceListId() {
 		return _commercePriceList.getParentCommercePriceListId();
 	}
 
 	/**
-	* Returns the primary key of this commerce price list.
-	*
-	* @return the primary key of this commerce price list
-	*/
+	 * Returns the primary key of this commerce price list.
+	 *
+	 * @return the primary key of this commerce price list
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commercePriceList.getPrimaryKey();
@@ -367,100 +369,100 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns the priority of this commerce price list.
-	*
-	* @return the priority of this commerce price list
-	*/
+	 * Returns the priority of this commerce price list.
+	 *
+	 * @return the priority of this commerce price list
+	 */
 	@Override
 	public double getPriority() {
 		return _commercePriceList.getPriority();
 	}
 
 	/**
-	* Returns the status of this commerce price list.
-	*
-	* @return the status of this commerce price list
-	*/
+	 * Returns the status of this commerce price list.
+	 *
+	 * @return the status of this commerce price list
+	 */
 	@Override
 	public int getStatus() {
 		return _commercePriceList.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this commerce price list.
-	*
-	* @return the status by user ID of this commerce price list
-	*/
+	 * Returns the status by user ID of this commerce price list.
+	 *
+	 * @return the status by user ID of this commerce price list
+	 */
 	@Override
 	public long getStatusByUserId() {
 		return _commercePriceList.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this commerce price list.
-	*
-	* @return the status by user name of this commerce price list
-	*/
+	 * Returns the status by user name of this commerce price list.
+	 *
+	 * @return the status by user name of this commerce price list
+	 */
 	@Override
 	public String getStatusByUserName() {
 		return _commercePriceList.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this commerce price list.
-	*
-	* @return the status by user uuid of this commerce price list
-	*/
+	 * Returns the status by user uuid of this commerce price list.
+	 *
+	 * @return the status by user uuid of this commerce price list
+	 */
 	@Override
 	public String getStatusByUserUuid() {
 		return _commercePriceList.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this commerce price list.
-	*
-	* @return the status date of this commerce price list
-	*/
+	 * Returns the status date of this commerce price list.
+	 *
+	 * @return the status date of this commerce price list
+	 */
 	@Override
 	public Date getStatusDate() {
 		return _commercePriceList.getStatusDate();
 	}
 
 	/**
-	* Returns the user ID of this commerce price list.
-	*
-	* @return the user ID of this commerce price list
-	*/
+	 * Returns the user ID of this commerce price list.
+	 *
+	 * @return the user ID of this commerce price list
+	 */
 	@Override
 	public long getUserId() {
 		return _commercePriceList.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce price list.
-	*
-	* @return the user name of this commerce price list
-	*/
+	 * Returns the user name of this commerce price list.
+	 *
+	 * @return the user name of this commerce price list
+	 */
 	@Override
 	public String getUserName() {
 		return _commercePriceList.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce price list.
-	*
-	* @return the user uuid of this commerce price list
-	*/
+	 * Returns the user uuid of this commerce price list.
+	 *
+	 * @return the user uuid of this commerce price list
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commercePriceList.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce price list.
-	*
-	* @return the uuid of this commerce price list
-	*/
+	 * Returns the uuid of this commerce price list.
+	 *
+	 * @return the uuid of this commerce price list
+	 */
 	@Override
 	public String getUuid() {
 		return _commercePriceList.getUuid();
@@ -472,10 +474,10 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is approved.
-	*
-	* @return <code>true</code> if this commerce price list is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is approved.
+	 *
+	 * @return <code>true</code> if this commerce price list is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
 		return _commercePriceList.isApproved();
@@ -487,20 +489,20 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is denied.
-	*
-	* @return <code>true</code> if this commerce price list is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is denied.
+	 *
+	 * @return <code>true</code> if this commerce price list is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
 		return _commercePriceList.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is a draft.
-	*
-	* @return <code>true</code> if this commerce price list is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is a draft.
+	 *
+	 * @return <code>true</code> if this commerce price list is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
 		return _commercePriceList.isDraft();
@@ -512,30 +514,30 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is expired.
-	*
-	* @return <code>true</code> if this commerce price list is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is expired.
+	 *
+	 * @return <code>true</code> if this commerce price list is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
 		return _commercePriceList.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is inactive.
-	*
-	* @return <code>true</code> if this commerce price list is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is inactive.
+	 *
+	 * @return <code>true</code> if this commerce price list is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
 		return _commercePriceList.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is incomplete.
-	*
-	* @return <code>true</code> if this commerce price list is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is incomplete.
+	 *
+	 * @return <code>true</code> if this commerce price list is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
 		return _commercePriceList.isIncomplete();
@@ -547,20 +549,20 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is pending.
-	*
-	* @return <code>true</code> if this commerce price list is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is pending.
+	 *
+	 * @return <code>true</code> if this commerce price list is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
 		return _commercePriceList.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce price list is scheduled.
-	*
-	* @return <code>true</code> if this commerce price list is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce price list is scheduled.
+	 *
+	 * @return <code>true</code> if this commerce price list is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
 		return _commercePriceList.isScheduled();
@@ -577,50 +579,50 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Sets the commerce currency ID of this commerce price list.
-	*
-	* @param commerceCurrencyId the commerce currency ID of this commerce price list
-	*/
+	 * Sets the commerce currency ID of this commerce price list.
+	 *
+	 * @param commerceCurrencyId the commerce currency ID of this commerce price list
+	 */
 	@Override
 	public void setCommerceCurrencyId(long commerceCurrencyId) {
 		_commercePriceList.setCommerceCurrencyId(commerceCurrencyId);
 	}
 
 	/**
-	* Sets the commerce price list ID of this commerce price list.
-	*
-	* @param commercePriceListId the commerce price list ID of this commerce price list
-	*/
+	 * Sets the commerce price list ID of this commerce price list.
+	 *
+	 * @param commercePriceListId the commerce price list ID of this commerce price list
+	 */
 	@Override
 	public void setCommercePriceListId(long commercePriceListId) {
 		_commercePriceList.setCommercePriceListId(commercePriceListId);
 	}
 
 	/**
-	* Sets the company ID of this commerce price list.
-	*
-	* @param companyId the company ID of this commerce price list
-	*/
+	 * Sets the company ID of this commerce price list.
+	 *
+	 * @param companyId the company ID of this commerce price list
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commercePriceList.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce price list.
-	*
-	* @param createDate the create date of this commerce price list
-	*/
+	 * Sets the create date of this commerce price list.
+	 *
+	 * @param createDate the create date of this commerce price list
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commercePriceList.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the display date of this commerce price list.
-	*
-	* @param displayDate the display date of this commerce price list
-	*/
+	 * Sets the display date of this commerce price list.
+	 *
+	 * @param displayDate the display date of this commerce price list
+	 */
 	@Override
 	public void setDisplayDate(Date displayDate) {
 		_commercePriceList.setDisplayDate(displayDate);
@@ -629,6 +631,7 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commercePriceList.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -643,60 +646,60 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Sets the expiration date of this commerce price list.
-	*
-	* @param expirationDate the expiration date of this commerce price list
-	*/
+	 * Sets the expiration date of this commerce price list.
+	 *
+	 * @param expirationDate the expiration date of this commerce price list
+	 */
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_commercePriceList.setExpirationDate(expirationDate);
 	}
 
 	/**
-	* Sets the external reference code of this commerce price list.
-	*
-	* @param externalReferenceCode the external reference code of this commerce price list
-	*/
+	 * Sets the external reference code of this commerce price list.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce price list
+	 */
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commercePriceList.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
-	* Sets the group ID of this commerce price list.
-	*
-	* @param groupId the group ID of this commerce price list
-	*/
+	 * Sets the group ID of this commerce price list.
+	 *
+	 * @param groupId the group ID of this commerce price list
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commercePriceList.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce price list.
-	*
-	* @param lastPublishDate the last publish date of this commerce price list
-	*/
+	 * Sets the last publish date of this commerce price list.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce price list
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commercePriceList.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this commerce price list.
-	*
-	* @param modifiedDate the modified date of this commerce price list
-	*/
+	 * Sets the modified date of this commerce price list.
+	 *
+	 * @param modifiedDate the modified date of this commerce price list
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commercePriceList.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce price list.
-	*
-	* @param name the name of this commerce price list
-	*/
+	 * Sets the name of this commerce price list.
+	 *
+	 * @param name the name of this commerce price list
+	 */
 	@Override
 	public void setName(String name) {
 		_commercePriceList.setName(name);
@@ -708,20 +711,21 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Sets the parent commerce price list ID of this commerce price list.
-	*
-	* @param parentCommercePriceListId the parent commerce price list ID of this commerce price list
-	*/
+	 * Sets the parent commerce price list ID of this commerce price list.
+	 *
+	 * @param parentCommercePriceListId the parent commerce price list ID of this commerce price list
+	 */
 	@Override
 	public void setParentCommercePriceListId(long parentCommercePriceListId) {
-		_commercePriceList.setParentCommercePriceListId(parentCommercePriceListId);
+		_commercePriceList.setParentCommercePriceListId(
+			parentCommercePriceListId);
 	}
 
 	/**
-	* Sets the primary key of this commerce price list.
-	*
-	* @param primaryKey the primary key of this commerce price list
-	*/
+	 * Sets the primary key of this commerce price list.
+	 *
+	 * @param primaryKey the primary key of this commerce price list
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commercePriceList.setPrimaryKey(primaryKey);
@@ -733,113 +737,116 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	/**
-	* Sets the priority of this commerce price list.
-	*
-	* @param priority the priority of this commerce price list
-	*/
+	 * Sets the priority of this commerce price list.
+	 *
+	 * @param priority the priority of this commerce price list
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commercePriceList.setPriority(priority);
 	}
 
 	/**
-	* Sets the status of this commerce price list.
-	*
-	* @param status the status of this commerce price list
-	*/
+	 * Sets the status of this commerce price list.
+	 *
+	 * @param status the status of this commerce price list
+	 */
 	@Override
 	public void setStatus(int status) {
 		_commercePriceList.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this commerce price list.
-	*
-	* @param statusByUserId the status by user ID of this commerce price list
-	*/
+	 * Sets the status by user ID of this commerce price list.
+	 *
+	 * @param statusByUserId the status by user ID of this commerce price list
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_commercePriceList.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this commerce price list.
-	*
-	* @param statusByUserName the status by user name of this commerce price list
-	*/
+	 * Sets the status by user name of this commerce price list.
+	 *
+	 * @param statusByUserName the status by user name of this commerce price list
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_commercePriceList.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this commerce price list.
-	*
-	* @param statusByUserUuid the status by user uuid of this commerce price list
-	*/
+	 * Sets the status by user uuid of this commerce price list.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this commerce price list
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_commercePriceList.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this commerce price list.
-	*
-	* @param statusDate the status date of this commerce price list
-	*/
+	 * Sets the status date of this commerce price list.
+	 *
+	 * @param statusDate the status date of this commerce price list
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_commercePriceList.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets the user ID of this commerce price list.
-	*
-	* @param userId the user ID of this commerce price list
-	*/
+	 * Sets the user ID of this commerce price list.
+	 *
+	 * @param userId the user ID of this commerce price list
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commercePriceList.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce price list.
-	*
-	* @param userName the user name of this commerce price list
-	*/
+	 * Sets the user name of this commerce price list.
+	 *
+	 * @param userName the user name of this commerce price list
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commercePriceList.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce price list.
-	*
-	* @param userUuid the user uuid of this commerce price list
-	*/
+	 * Sets the user uuid of this commerce price list.
+	 *
+	 * @param userUuid the user uuid of this commerce price list
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commercePriceList.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce price list.
-	*
-	* @param uuid the uuid of this commerce price list
-	*/
+	 * Sets the uuid of this commerce price list.
+	 *
+	 * @param uuid the uuid of this commerce price list
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commercePriceList.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommercePriceList> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommercePriceList>
+		toCacheModel() {
+
 		return _commercePriceList.toCacheModel();
 	}
 
 	@Override
 	public CommercePriceList toEscapedModel() {
-		return new CommercePriceListWrapper(_commercePriceList.toEscapedModel());
+		return new CommercePriceListWrapper(
+			_commercePriceList.toEscapedModel());
 	}
 
 	@Override
@@ -849,7 +856,8 @@ public class CommercePriceListWrapper implements CommercePriceList,
 
 	@Override
 	public CommercePriceList toUnescapedModel() {
-		return new CommercePriceListWrapper(_commercePriceList.toUnescapedModel());
+		return new CommercePriceListWrapper(
+			_commercePriceList.toUnescapedModel());
 	}
 
 	@Override
@@ -867,10 +875,13 @@ public class CommercePriceListWrapper implements CommercePriceList,
 			return false;
 		}
 
-		CommercePriceListWrapper commercePriceListWrapper = (CommercePriceListWrapper)obj;
+		CommercePriceListWrapper commercePriceListWrapper =
+			(CommercePriceListWrapper)obj;
 
-		if (Objects.equals(_commercePriceList,
-					commercePriceListWrapper._commercePriceList)) {
+		if (Objects.equals(
+				_commercePriceList,
+				commercePriceListWrapper._commercePriceList)) {
+
 			return true;
 		}
 
@@ -903,4 +914,5 @@ public class CommercePriceListWrapper implements CommercePriceList,
 	}
 
 	private final CommercePriceList _commercePriceList;
+
 }

@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPRuleException;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPRulePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,17 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPRulePersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -106,7 +105,8 @@ public class CPRulePersistenceTest {
 
 		_persistence.remove(newCPRule);
 
-		CPRule existingCPRule = _persistence.fetchByPrimaryKey(newCPRule.getPrimaryKey());
+		CPRule existingCPRule = _persistence.fetchByPrimaryKey(
+			newCPRule.getPrimaryKey());
 
 		Assert.assertNull(existingCPRule);
 	}
@@ -144,27 +144,29 @@ public class CPRulePersistenceTest {
 
 		_cpRules.add(_persistence.update(newCPRule));
 
-		CPRule existingCPRule = _persistence.findByPrimaryKey(newCPRule.getPrimaryKey());
+		CPRule existingCPRule = _persistence.findByPrimaryKey(
+			newCPRule.getPrimaryKey());
 
-		Assert.assertEquals(existingCPRule.getCPRuleId(),
-			newCPRule.getCPRuleId());
-		Assert.assertEquals(existingCPRule.getGroupId(), newCPRule.getGroupId());
-		Assert.assertEquals(existingCPRule.getCompanyId(),
-			newCPRule.getCompanyId());
+		Assert.assertEquals(
+			existingCPRule.getCPRuleId(), newCPRule.getCPRuleId());
+		Assert.assertEquals(
+			existingCPRule.getGroupId(), newCPRule.getGroupId());
+		Assert.assertEquals(
+			existingCPRule.getCompanyId(), newCPRule.getCompanyId());
 		Assert.assertEquals(existingCPRule.getUserId(), newCPRule.getUserId());
-		Assert.assertEquals(existingCPRule.getUserName(),
-			newCPRule.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPRule.getCreateDate()),
+		Assert.assertEquals(
+			existingCPRule.getUserName(), newCPRule.getUserName());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPRule.getCreateDate()),
 			Time.getShortTimestamp(newCPRule.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPRule.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPRule.getModifiedDate()),
 			Time.getShortTimestamp(newCPRule.getModifiedDate()));
 		Assert.assertEquals(existingCPRule.getName(), newCPRule.getName());
 		Assert.assertEquals(existingCPRule.isActive(), newCPRule.isActive());
 		Assert.assertEquals(existingCPRule.getType(), newCPRule.getType());
-		Assert.assertEquals(existingCPRule.getTypeSettings(),
-			newCPRule.getTypeSettings());
+		Assert.assertEquals(
+			existingCPRule.getTypeSettings(), newCPRule.getTypeSettings());
 	}
 
 	@Test
@@ -178,7 +180,8 @@ public class CPRulePersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPRule newCPRule = addCPRule();
 
-		CPRule existingCPRule = _persistence.findByPrimaryKey(newCPRule.getPrimaryKey());
+		CPRule existingCPRule = _persistence.findByPrimaryKey(
+			newCPRule.getPrimaryKey());
 
 		Assert.assertEquals(existingCPRule, newCPRule);
 	}
@@ -192,28 +195,29 @@ public class CPRulePersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	@Test
 	public void testFilterFindByGroupId() throws Exception {
-		_persistence.filterFindByGroupId(0, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, getOrderByComparator());
+		_persistence.filterFindByGroupId(
+			0, QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPRule> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPRule", "CPRuleId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "name", true,
-			"active", true, "type", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPRule", "CPRuleId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "name", true, "active", true, "type", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPRule newCPRule = addCPRule();
 
-		CPRule existingCPRule = _persistence.fetchByPrimaryKey(newCPRule.getPrimaryKey());
+		CPRule existingCPRule = _persistence.fetchByPrimaryKey(
+			newCPRule.getPrimaryKey());
 
 		Assert.assertEquals(existingCPRule, newCPRule);
 	}
@@ -230,6 +234,7 @@ public class CPRulePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPRule newCPRule1 = addCPRule();
 		CPRule newCPRule2 = addCPRule();
 
@@ -238,16 +243,20 @@ public class CPRulePersistenceTest {
 		primaryKeys.add(newCPRule1.getPrimaryKey());
 		primaryKeys.add(newCPRule2.getPrimaryKey());
 
-		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(2, cpRules.size());
-		Assert.assertEquals(newCPRule1, cpRules.get(newCPRule1.getPrimaryKey()));
-		Assert.assertEquals(newCPRule2, cpRules.get(newCPRule2.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPRule1, cpRules.get(newCPRule1.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPRule2, cpRules.get(newCPRule2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -257,7 +266,8 @@ public class CPRulePersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cpRules.isEmpty());
 	}
@@ -265,6 +275,7 @@ public class CPRulePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPRule newCPRule = addCPRule();
 
 		long pk = RandomTestUtil.nextLong();
@@ -274,32 +285,33 @@ public class CPRulePersistenceTest {
 		primaryKeys.add(newCPRule.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cpRules.size());
 		Assert.assertEquals(newCPRule, cpRules.get(newCPRule.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cpRules.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPRule newCPRule = addCPRule();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPRule.getPrimaryKey());
 
-		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPRule> cpRules = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cpRules.size());
 		Assert.assertEquals(newCPRule, cpRules.get(newCPRule.getPrimaryKey()));
@@ -309,15 +321,19 @@ public class CPRulePersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPRuleLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPRuleLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPRule>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPRule>() {
+
 				@Override
 				public void performAction(CPRule cpRule) {
 					Assert.assertNotNull(cpRule);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -326,15 +342,14 @@ public class CPRulePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPRule newCPRule = addCPRule();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRule.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRule.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPRuleId",
-				newCPRule.getCPRuleId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq("CPRuleId", newCPRule.getCPRuleId()));
 
 		List<CPRule> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -347,11 +362,11 @@ public class CPRulePersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRule.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRule.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPRuleId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq("CPRuleId", RandomTestUtil.nextLong()));
 
 		List<CPRule> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -359,19 +374,18 @@ public class CPRulePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPRule newCPRule = addCPRule();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRule.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRule.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CPRuleId"));
 
 		Object newCPRuleId = newCPRule.getCPRuleId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPRuleId",
-				new Object[] { newCPRuleId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in("CPRuleId", new Object[] {newCPRuleId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -384,13 +398,14 @@ public class CPRulePersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPRule.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPRule.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CPRuleId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPRuleId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPRuleId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -430,4 +445,5 @@ public class CPRulePersistenceTest {
 	private List<CPRule> _cpRules = new ArrayList<CPRule>();
 	private CPRulePersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

@@ -17,9 +17,7 @@ package com.liferay.commerce.product.type.virtual.service.base;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
-
 import com.liferay.journal.service.persistence.JournalArticlePersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -44,16 +42,16 @@ import javax.sql.DataSource;
  *
  * @author Marco Leo
  * @see com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingServiceImpl
- * @see com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingServiceUtil
  * @generated
  */
 public abstract class CPDefinitionVirtualSettingServiceBaseImpl
-	extends BaseServiceImpl implements CPDefinitionVirtualSettingService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CPDefinitionVirtualSettingService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingServiceUtil} to access the cp definition virtual setting remote service.
+	 * Never modify or reference this class directly. Use <code>CPDefinitionVirtualSettingService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingServiceUtil</code>.
 	 */
 
 	/**
@@ -61,7 +59,10 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the cp definition virtual setting local service
 	 */
-	public com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService getCPDefinitionVirtualSettingLocalService() {
+	public com.liferay.commerce.product.type.virtual.service.
+		CPDefinitionVirtualSettingLocalService
+			getCPDefinitionVirtualSettingLocalService() {
+
 		return cpDefinitionVirtualSettingLocalService;
 	}
 
@@ -71,8 +72,12 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param cpDefinitionVirtualSettingLocalService the cp definition virtual setting local service
 	 */
 	public void setCPDefinitionVirtualSettingLocalService(
-		com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService cpDefinitionVirtualSettingLocalService) {
-		this.cpDefinitionVirtualSettingLocalService = cpDefinitionVirtualSettingLocalService;
+		com.liferay.commerce.product.type.virtual.service.
+			CPDefinitionVirtualSettingLocalService
+				cpDefinitionVirtualSettingLocalService) {
+
+		this.cpDefinitionVirtualSettingLocalService =
+			cpDefinitionVirtualSettingLocalService;
 	}
 
 	/**
@@ -80,7 +85,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the cp definition virtual setting remote service
 	 */
-	public CPDefinitionVirtualSettingService getCPDefinitionVirtualSettingService() {
+	public CPDefinitionVirtualSettingService
+		getCPDefinitionVirtualSettingService() {
+
 		return cpDefinitionVirtualSettingService;
 	}
 
@@ -91,7 +98,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setCPDefinitionVirtualSettingService(
 		CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService) {
-		this.cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
+
+		this.cpDefinitionVirtualSettingService =
+			cpDefinitionVirtualSettingService;
 	}
 
 	/**
@@ -99,7 +108,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the cp definition virtual setting persistence
 	 */
-	public CPDefinitionVirtualSettingPersistence getCPDefinitionVirtualSettingPersistence() {
+	public CPDefinitionVirtualSettingPersistence
+		getCPDefinitionVirtualSettingPersistence() {
+
 		return cpDefinitionVirtualSettingPersistence;
 	}
 
@@ -109,8 +120,11 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param cpDefinitionVirtualSettingPersistence the cp definition virtual setting persistence
 	 */
 	public void setCPDefinitionVirtualSettingPersistence(
-		CPDefinitionVirtualSettingPersistence cpDefinitionVirtualSettingPersistence) {
-		this.cpDefinitionVirtualSettingPersistence = cpDefinitionVirtualSettingPersistence;
+		CPDefinitionVirtualSettingPersistence
+			cpDefinitionVirtualSettingPersistence) {
+
+		this.cpDefinitionVirtualSettingPersistence =
+			cpDefinitionVirtualSettingPersistence;
 	}
 
 	/**
@@ -118,7 +132,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -128,7 +144,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -137,7 +155,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the journal article local service
 	 */
-	public com.liferay.journal.service.JournalArticleLocalService getJournalArticleLocalService() {
+	public com.liferay.journal.service.JournalArticleLocalService
+		getJournalArticleLocalService() {
+
 		return journalArticleLocalService;
 	}
 
@@ -147,7 +167,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param journalArticleLocalService the journal article local service
 	 */
 	public void setJournalArticleLocalService(
-		com.liferay.journal.service.JournalArticleLocalService journalArticleLocalService) {
+		com.liferay.journal.service.JournalArticleLocalService
+			journalArticleLocalService) {
+
 		this.journalArticleLocalService = journalArticleLocalService;
 	}
 
@@ -156,7 +178,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the journal article remote service
 	 */
-	public com.liferay.journal.service.JournalArticleService getJournalArticleService() {
+	public com.liferay.journal.service.JournalArticleService
+		getJournalArticleService() {
+
 		return journalArticleService;
 	}
 
@@ -166,7 +190,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param journalArticleService the journal article remote service
 	 */
 	public void setJournalArticleService(
-		com.liferay.journal.service.JournalArticleService journalArticleService) {
+		com.liferay.journal.service.JournalArticleService
+			journalArticleService) {
+
 		this.journalArticleService = journalArticleService;
 	}
 
@@ -186,6 +212,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setJournalArticlePersistence(
 		JournalArticlePersistence journalArticlePersistence) {
+
 		this.journalArticlePersistence = journalArticlePersistence;
 	}
 
@@ -194,7 +221,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -204,7 +233,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -213,7 +244,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -224,6 +257,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -243,6 +277,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -251,7 +286,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -261,7 +298,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -270,7 +309,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -281,6 +322,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -300,6 +342,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -326,7 +369,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the dl app local service
 	 */
-	public com.liferay.document.library.kernel.service.DLAppLocalService getDLAppLocalService() {
+	public com.liferay.document.library.kernel.service.DLAppLocalService
+		getDLAppLocalService() {
+
 		return dlAppLocalService;
 	}
 
@@ -336,7 +381,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 * @param dlAppLocalService the dl app local service
 	 */
 	public void setDLAppLocalService(
-		com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService) {
+		com.liferay.document.library.kernel.service.DLAppLocalService
+			dlAppLocalService) {
+
 		this.dlAppLocalService = dlAppLocalService;
 	}
 
@@ -345,7 +392,9 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 *
 	 * @return the dl app remote service
 	 */
-	public com.liferay.document.library.kernel.service.DLAppService getDLAppService() {
+	public com.liferay.document.library.kernel.service.DLAppService
+		getDLAppService() {
+
 		return dlAppService;
 	}
 
@@ -356,6 +405,7 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	public void setDLAppService(
 		com.liferay.document.library.kernel.service.DLAppService dlAppService) {
+
 		this.dlAppService = dlAppService;
 	}
 
@@ -390,15 +440,16 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = cpDefinitionVirtualSettingPersistence.getDataSource();
+			DataSource dataSource =
+				cpDefinitionVirtualSettingPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -407,36 +458,87 @@ public abstract class CPDefinitionVirtualSettingServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService.class)
-	protected com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService cpDefinitionVirtualSettingLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService.class
+	)
+	protected com.liferay.commerce.product.type.virtual.service.
+		CPDefinitionVirtualSettingLocalService
+			cpDefinitionVirtualSettingLocalService;
+
 	@BeanReference(type = CPDefinitionVirtualSettingService.class)
-	protected CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService;
+	protected CPDefinitionVirtualSettingService
+		cpDefinitionVirtualSettingService;
+
 	@BeanReference(type = CPDefinitionVirtualSettingPersistence.class)
-	protected CPDefinitionVirtualSettingPersistence cpDefinitionVirtualSettingPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.journal.service.JournalArticleLocalService.class)
-	protected com.liferay.journal.service.JournalArticleLocalService journalArticleLocalService;
-	@ServiceReference(type = com.liferay.journal.service.JournalArticleService.class)
-	protected com.liferay.journal.service.JournalArticleService journalArticleService;
+	protected CPDefinitionVirtualSettingPersistence
+		cpDefinitionVirtualSettingPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.journal.service.JournalArticleLocalService.class
+	)
+	protected com.liferay.journal.service.JournalArticleLocalService
+		journalArticleLocalService;
+
+	@ServiceReference(
+		type = com.liferay.journal.service.JournalArticleService.class
+	)
+	protected com.liferay.journal.service.JournalArticleService
+		journalArticleService;
+
 	@ServiceReference(type = JournalArticlePersistence.class)
 	protected JournalArticlePersistence journalArticlePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.document.library.kernel.service.DLAppLocalService.class)
-	protected com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService;
-	@ServiceReference(type = com.liferay.document.library.kernel.service.DLAppService.class)
-	protected com.liferay.document.library.kernel.service.DLAppService dlAppService;
+
+	@ServiceReference(
+		type = com.liferay.document.library.kernel.service.DLAppLocalService.class
+	)
+	protected com.liferay.document.library.kernel.service.DLAppLocalService
+		dlAppLocalService;
+
+	@ServiceReference(
+		type = com.liferay.document.library.kernel.service.DLAppService.class
+	)
+	protected com.liferay.document.library.kernel.service.DLAppService
+		dlAppService;
+
 }

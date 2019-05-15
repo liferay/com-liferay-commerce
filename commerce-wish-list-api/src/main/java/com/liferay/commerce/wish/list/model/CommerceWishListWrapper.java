@@ -17,9 +17,7 @@ package com.liferay.commerce.wish.list.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceWishListWrapper implements CommerceWishList,
-	ModelWrapper<CommerceWishList> {
+public class CommerceWishListWrapper
+	implements CommerceWishList, ModelWrapper<CommerceWishList> {
+
 	public CommerceWishListWrapper(CommerceWishList commerceWishList) {
 		_commerceWishList = commerceWishList;
 	}
@@ -139,7 +138,8 @@ public class CommerceWishListWrapper implements CommerceWishList,
 
 	@Override
 	public Object clone() {
-		return new CommerceWishListWrapper((CommerceWishList)_commerceWishList.clone());
+		return new CommerceWishListWrapper(
+			(CommerceWishList)_commerceWishList.clone());
 	}
 
 	@Override
@@ -148,40 +148,40 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Returns the commerce wish list ID of this commerce wish list.
-	*
-	* @return the commerce wish list ID of this commerce wish list
-	*/
+	 * Returns the commerce wish list ID of this commerce wish list.
+	 *
+	 * @return the commerce wish list ID of this commerce wish list
+	 */
 	@Override
 	public long getCommerceWishListId() {
 		return _commerceWishList.getCommerceWishListId();
 	}
 
 	/**
-	* Returns the company ID of this commerce wish list.
-	*
-	* @return the company ID of this commerce wish list
-	*/
+	 * Returns the company ID of this commerce wish list.
+	 *
+	 * @return the company ID of this commerce wish list
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceWishList.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce wish list.
-	*
-	* @return the create date of this commerce wish list
-	*/
+	 * Returns the create date of this commerce wish list.
+	 *
+	 * @return the create date of this commerce wish list
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceWishList.getCreateDate();
 	}
 
 	/**
-	* Returns the default wish list of this commerce wish list.
-	*
-	* @return the default wish list of this commerce wish list
-	*/
+	 * Returns the default wish list of this commerce wish list.
+	 *
+	 * @return the default wish list of this commerce wish list
+	 */
 	@Override
 	public boolean getDefaultWishList() {
 		return _commerceWishList.getDefaultWishList();
@@ -193,40 +193,40 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Returns the group ID of this commerce wish list.
-	*
-	* @return the group ID of this commerce wish list
-	*/
+	 * Returns the group ID of this commerce wish list.
+	 *
+	 * @return the group ID of this commerce wish list
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceWishList.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce wish list.
-	*
-	* @return the modified date of this commerce wish list
-	*/
+	 * Returns the modified date of this commerce wish list.
+	 *
+	 * @return the modified date of this commerce wish list
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceWishList.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce wish list.
-	*
-	* @return the name of this commerce wish list
-	*/
+	 * Returns the name of this commerce wish list.
+	 *
+	 * @return the name of this commerce wish list
+	 */
 	@Override
 	public String getName() {
 		return _commerceWishList.getName();
 	}
 
 	/**
-	* Returns the primary key of this commerce wish list.
-	*
-	* @return the primary key of this commerce wish list
-	*/
+	 * Returns the primary key of this commerce wish list.
+	 *
+	 * @return the primary key of this commerce wish list
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceWishList.getPrimaryKey();
@@ -238,40 +238,40 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Returns the user ID of this commerce wish list.
-	*
-	* @return the user ID of this commerce wish list
-	*/
+	 * Returns the user ID of this commerce wish list.
+	 *
+	 * @return the user ID of this commerce wish list
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceWishList.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce wish list.
-	*
-	* @return the user name of this commerce wish list
-	*/
+	 * Returns the user name of this commerce wish list.
+	 *
+	 * @return the user name of this commerce wish list
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceWishList.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce wish list.
-	*
-	* @return the user uuid of this commerce wish list
-	*/
+	 * Returns the user uuid of this commerce wish list.
+	 *
+	 * @return the user uuid of this commerce wish list
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceWishList.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce wish list.
-	*
-	* @return the uuid of this commerce wish list
-	*/
+	 * Returns the uuid of this commerce wish list.
+	 *
+	 * @return the uuid of this commerce wish list
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceWishList.getUuid();
@@ -288,10 +288,10 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce wish list is default wish list.
-	*
-	* @return <code>true</code> if this commerce wish list is default wish list; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce wish list is default wish list.
+	 *
+	 * @return <code>true</code> if this commerce wish list is default wish list; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDefaultWishList() {
 		return _commerceWishList.isDefaultWishList();
@@ -305,6 +305,7 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	@Override
 	public boolean isGuestWishList()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceWishList.isGuestWishList();
 	}
 
@@ -324,40 +325,40 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Sets the commerce wish list ID of this commerce wish list.
-	*
-	* @param commerceWishListId the commerce wish list ID of this commerce wish list
-	*/
+	 * Sets the commerce wish list ID of this commerce wish list.
+	 *
+	 * @param commerceWishListId the commerce wish list ID of this commerce wish list
+	 */
 	@Override
 	public void setCommerceWishListId(long commerceWishListId) {
 		_commerceWishList.setCommerceWishListId(commerceWishListId);
 	}
 
 	/**
-	* Sets the company ID of this commerce wish list.
-	*
-	* @param companyId the company ID of this commerce wish list
-	*/
+	 * Sets the company ID of this commerce wish list.
+	 *
+	 * @param companyId the company ID of this commerce wish list
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceWishList.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce wish list.
-	*
-	* @param createDate the create date of this commerce wish list
-	*/
+	 * Sets the create date of this commerce wish list.
+	 *
+	 * @param createDate the create date of this commerce wish list
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceWishList.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets whether this commerce wish list is default wish list.
-	*
-	* @param defaultWishList the default wish list of this commerce wish list
-	*/
+	 * Sets whether this commerce wish list is default wish list.
+	 *
+	 * @param defaultWishList the default wish list of this commerce wish list
+	 */
 	@Override
 	public void setDefaultWishList(boolean defaultWishList) {
 		_commerceWishList.setDefaultWishList(defaultWishList);
@@ -366,6 +367,7 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceWishList.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -380,30 +382,30 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Sets the group ID of this commerce wish list.
-	*
-	* @param groupId the group ID of this commerce wish list
-	*/
+	 * Sets the group ID of this commerce wish list.
+	 *
+	 * @param groupId the group ID of this commerce wish list
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceWishList.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce wish list.
-	*
-	* @param modifiedDate the modified date of this commerce wish list
-	*/
+	 * Sets the modified date of this commerce wish list.
+	 *
+	 * @param modifiedDate the modified date of this commerce wish list
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceWishList.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce wish list.
-	*
-	* @param name the name of this commerce wish list
-	*/
+	 * Sets the name of this commerce wish list.
+	 *
+	 * @param name the name of this commerce wish list
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceWishList.setName(name);
@@ -415,10 +417,10 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Sets the primary key of this commerce wish list.
-	*
-	* @param primaryKey the primary key of this commerce wish list
-	*/
+	 * Sets the primary key of this commerce wish list.
+	 *
+	 * @param primaryKey the primary key of this commerce wish list
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceWishList.setPrimaryKey(primaryKey);
@@ -430,47 +432,49 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	/**
-	* Sets the user ID of this commerce wish list.
-	*
-	* @param userId the user ID of this commerce wish list
-	*/
+	 * Sets the user ID of this commerce wish list.
+	 *
+	 * @param userId the user ID of this commerce wish list
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceWishList.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce wish list.
-	*
-	* @param userName the user name of this commerce wish list
-	*/
+	 * Sets the user name of this commerce wish list.
+	 *
+	 * @param userName the user name of this commerce wish list
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceWishList.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce wish list.
-	*
-	* @param userUuid the user uuid of this commerce wish list
-	*/
+	 * Sets the user uuid of this commerce wish list.
+	 *
+	 * @param userUuid the user uuid of this commerce wish list
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceWishList.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce wish list.
-	*
-	* @param uuid the uuid of this commerce wish list
-	*/
+	 * Sets the uuid of this commerce wish list.
+	 *
+	 * @param uuid the uuid of this commerce wish list
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceWishList.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceWishList> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceWishList>
+		toCacheModel() {
+
 		return _commerceWishList.toCacheModel();
 	}
 
@@ -486,7 +490,8 @@ public class CommerceWishListWrapper implements CommerceWishList,
 
 	@Override
 	public CommerceWishList toUnescapedModel() {
-		return new CommerceWishListWrapper(_commerceWishList.toUnescapedModel());
+		return new CommerceWishListWrapper(
+			_commerceWishList.toUnescapedModel());
 	}
 
 	@Override
@@ -504,10 +509,12 @@ public class CommerceWishListWrapper implements CommerceWishList,
 			return false;
 		}
 
-		CommerceWishListWrapper commerceWishListWrapper = (CommerceWishListWrapper)obj;
+		CommerceWishListWrapper commerceWishListWrapper =
+			(CommerceWishListWrapper)obj;
 
-		if (Objects.equals(_commerceWishList,
-					commerceWishListWrapper._commerceWishList)) {
+		if (Objects.equals(
+				_commerceWishList, commerceWishListWrapper._commerceWishList)) {
+
 			return true;
 		}
 
@@ -540,4 +547,5 @@ public class CommerceWishListWrapper implements CommerceWishList,
 	}
 
 	private final CommerceWishList _commerceWishList;
+
 }

@@ -28,65 +28,101 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelServiceWrapper
 	implements CommerceNotificationTemplateUserSegmentRelService,
-		ServiceWrapper<CommerceNotificationTemplateUserSegmentRelService> {
+			   ServiceWrapper
+				   <CommerceNotificationTemplateUserSegmentRelService> {
+
 	public CommerceNotificationTemplateUserSegmentRelServiceWrapper(
-		CommerceNotificationTemplateUserSegmentRelService commerceNotificationTemplateUserSegmentRelService) {
-		_commerceNotificationTemplateUserSegmentRelService = commerceNotificationTemplateUserSegmentRelService;
+		CommerceNotificationTemplateUserSegmentRelService
+			commerceNotificationTemplateUserSegmentRelService) {
+
+		_commerceNotificationTemplateUserSegmentRelService =
+			commerceNotificationTemplateUserSegmentRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel addCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationTemplateUserSegmentRelService.addCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateId,
-			commerceUserSegmentEntryId, serviceContext);
+	public com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRel
+				addCommerceNotificationTemplateUserSegmentRel(
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationTemplateUserSegmentRelService.
+			addCommerceNotificationTemplateUserSegmentRel(
+				commerceNotificationTemplateId, commerceUserSegmentEntryId,
+				serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId)
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceNotificationTemplateUserSegmentRelService.deleteCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateUserSegmentRelId);
+
+		_commerceNotificationTemplateUserSegmentRelService.
+			deleteCommerceNotificationTemplateUserSegmentRel(
+				commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	@Override
-	public com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel fetchCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationTemplateUserSegmentRelService.fetchCommerceNotificationTemplateUserSegmentRel(commerceNotificationTemplateId,
-			commerceUserSegmentEntryId);
+	public com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRel
+				fetchCommerceNotificationTemplateUserSegmentRel(
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationTemplateUserSegmentRelService.
+			fetchCommerceNotificationTemplateUserSegmentRel(
+				commerceNotificationTemplateId, commerceUserSegmentEntryId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> getCommerceNotificationTemplateUserSegmentRels(
-		long commerceNotificationTemplateId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceNotificationTemplateUserSegmentRelService.getCommerceNotificationTemplateUserSegmentRels(commerceNotificationTemplateId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.notification.model.
+			CommerceNotificationTemplateUserSegmentRel>
+					getCommerceNotificationTemplateUserSegmentRels(
+						long commerceNotificationTemplateId, int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.notification.model.
+								CommerceNotificationTemplateUserSegmentRel>
+									orderByComparator)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationTemplateUserSegmentRelService.
+			getCommerceNotificationTemplateUserSegmentRels(
+				commerceNotificationTemplateId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceNotificationTemplateUserSegmentRelService.getOSGiServiceIdentifier();
+		return _commerceNotificationTemplateUserSegmentRelService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public CommerceNotificationTemplateUserSegmentRelService getWrappedService() {
+	public CommerceNotificationTemplateUserSegmentRelService
+		getWrappedService() {
+
 		return _commerceNotificationTemplateUserSegmentRelService;
 	}
 
 	@Override
 	public void setWrappedService(
-		CommerceNotificationTemplateUserSegmentRelService commerceNotificationTemplateUserSegmentRelService) {
-		_commerceNotificationTemplateUserSegmentRelService = commerceNotificationTemplateUserSegmentRelService;
+		CommerceNotificationTemplateUserSegmentRelService
+			commerceNotificationTemplateUserSegmentRelService) {
+
+		_commerceNotificationTemplateUserSegmentRelService =
+			commerceNotificationTemplateUserSegmentRelService;
 	}
 
-	private CommerceNotificationTemplateUserSegmentRelService _commerceNotificationTemplateUserSegmentRelService;
+	private CommerceNotificationTemplateUserSegmentRelService
+		_commerceNotificationTemplateUserSegmentRelService;
+
 }

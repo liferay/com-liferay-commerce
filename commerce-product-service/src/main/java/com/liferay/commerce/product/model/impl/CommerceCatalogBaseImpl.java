@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceCatalogBaseImpl extends CommerceCatalogModelImpl
-	implements CommerceCatalog {
+public abstract class CommerceCatalogBaseImpl
+	extends CommerceCatalogModelImpl implements CommerceCatalog {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce catalog model instance should use the {@link CommerceCatalog} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce catalog model instance should use the <code>CommerceCatalog</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceCatalogBaseImpl extends CommerceCatalogModelImpl
 			CommerceCatalogLocalServiceUtil.updateCommerceCatalog(this);
 		}
 	}
+
 }

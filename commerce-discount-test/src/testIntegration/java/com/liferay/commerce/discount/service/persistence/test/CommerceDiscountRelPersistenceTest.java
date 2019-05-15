@@ -15,13 +15,11 @@
 package com.liferay.commerce.discount.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.discount.exception.NoSuchDiscountRelException;
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,17 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceDiscountRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.discount.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.discount.service"));
 
 	@Before
 	public void setUp() {
@@ -80,7 +79,8 @@ public class CommerceDiscountRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceDiscountRel> iterator = _commerceDiscountRels.iterator();
+		Iterator<CommerceDiscountRel> iterator =
+			_commerceDiscountRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -106,7 +106,9 @@ public class CommerceDiscountRelPersistenceTest {
 
 		_persistence.remove(newCommerceDiscountRel);
 
-		CommerceDiscountRel existingCommerceDiscountRel = _persistence.fetchByPrimaryKey(newCommerceDiscountRel.getPrimaryKey());
+		CommerceDiscountRel existingCommerceDiscountRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceDiscountRel.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceDiscountRel);
 	}
@@ -142,29 +144,40 @@ public class CommerceDiscountRelPersistenceTest {
 
 		_commerceDiscountRels.add(_persistence.update(newCommerceDiscountRel));
 
-		CommerceDiscountRel existingCommerceDiscountRel = _persistence.findByPrimaryKey(newCommerceDiscountRel.getPrimaryKey());
+		CommerceDiscountRel existingCommerceDiscountRel =
+			_persistence.findByPrimaryKey(
+				newCommerceDiscountRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceDiscountRel.getCommerceDiscountRelId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getCommerceDiscountRelId(),
 			newCommerceDiscountRel.getCommerceDiscountRelId());
-		Assert.assertEquals(existingCommerceDiscountRel.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getGroupId(),
 			newCommerceDiscountRel.getGroupId());
-		Assert.assertEquals(existingCommerceDiscountRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getCompanyId(),
 			newCommerceDiscountRel.getCompanyId());
-		Assert.assertEquals(existingCommerceDiscountRel.getUserId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getUserId(),
 			newCommerceDiscountRel.getUserId());
-		Assert.assertEquals(existingCommerceDiscountRel.getUserName(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getUserName(),
 			newCommerceDiscountRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceDiscountRel.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceDiscountRel.getCreateDate()),
 			Time.getShortTimestamp(newCommerceDiscountRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceDiscountRel.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceDiscountRel.getModifiedDate()));
-		Assert.assertEquals(existingCommerceDiscountRel.getCommerceDiscountId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getCommerceDiscountId(),
 			newCommerceDiscountRel.getCommerceDiscountId());
-		Assert.assertEquals(existingCommerceDiscountRel.getClassNameId(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getClassNameId(),
 			newCommerceDiscountRel.getClassNameId());
-		Assert.assertEquals(existingCommerceDiscountRel.getClassPK(),
+		Assert.assertEquals(
+			existingCommerceDiscountRel.getClassPK(),
 			newCommerceDiscountRel.getClassPK());
 	}
 
@@ -177,16 +190,16 @@ public class CommerceDiscountRelPersistenceTest {
 
 	@Test
 	public void testCountByCD_CN() throws Exception {
-		_persistence.countByCD_CN(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByCD_CN(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByCD_CN(0L, 0L);
 	}
 
 	@Test
 	public void testCountByCN_CPK() throws Exception {
-		_persistence.countByCN_CPK(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByCN_CPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByCN_CPK(0L, 0L);
 	}
@@ -195,9 +208,12 @@ public class CommerceDiscountRelPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
-		CommerceDiscountRel existingCommerceDiscountRel = _persistence.findByPrimaryKey(newCommerceDiscountRel.getPrimaryKey());
+		CommerceDiscountRel existingCommerceDiscountRel =
+			_persistence.findByPrimaryKey(
+				newCommerceDiscountRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceDiscountRel, newCommerceDiscountRel);
+		Assert.assertEquals(
+			existingCommerceDiscountRel, newCommerceDiscountRel);
 	}
 
 	@Test(expected = NoSuchDiscountRelException.class)
@@ -209,32 +225,36 @@ public class CommerceDiscountRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceDiscountRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceDiscountRel",
-			"commerceDiscountRelId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceDiscountId", true, "classNameId",
-			true, "classPK", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceDiscountRel", "commerceDiscountRelId", true, "groupId",
+			true, "companyId", true, "userId", true, "userName", true,
+			"createDate", true, "modifiedDate", true, "commerceDiscountId",
+			true, "classNameId", true, "classPK", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
-		CommerceDiscountRel existingCommerceDiscountRel = _persistence.fetchByPrimaryKey(newCommerceDiscountRel.getPrimaryKey());
+		CommerceDiscountRel existingCommerceDiscountRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceDiscountRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceDiscountRel, newCommerceDiscountRel);
+		Assert.assertEquals(
+			existingCommerceDiscountRel, newCommerceDiscountRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceDiscountRel missingCommerceDiscountRel = _persistence.fetchByPrimaryKey(pk);
+		CommerceDiscountRel missingCommerceDiscountRel =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceDiscountRel);
 	}
@@ -242,6 +262,7 @@ public class CommerceDiscountRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CommerceDiscountRel newCommerceDiscountRel1 = addCommerceDiscountRel();
 		CommerceDiscountRel newCommerceDiscountRel2 = addCommerceDiscountRel();
 
@@ -250,18 +271,22 @@ public class CommerceDiscountRelPersistenceTest {
 		primaryKeys.add(newCommerceDiscountRel1.getPrimaryKey());
 		primaryKeys.add(newCommerceDiscountRel2.getPrimaryKey());
 
-		Map<Serializable, CommerceDiscountRel> commerceDiscountRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceDiscountRel> commerceDiscountRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceDiscountRels.size());
-		Assert.assertEquals(newCommerceDiscountRel1,
+		Assert.assertEquals(
+			newCommerceDiscountRel1,
 			commerceDiscountRels.get(newCommerceDiscountRel1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceDiscountRel2,
+		Assert.assertEquals(
+			newCommerceDiscountRel2,
 			commerceDiscountRels.get(newCommerceDiscountRel2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -271,7 +296,8 @@ public class CommerceDiscountRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceDiscountRel> commerceDiscountRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceDiscountRel> commerceDiscountRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceDiscountRels.isEmpty());
 	}
@@ -279,6 +305,7 @@ public class CommerceDiscountRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
 		long pk = RandomTestUtil.nextLong();
@@ -288,36 +315,39 @@ public class CommerceDiscountRelPersistenceTest {
 		primaryKeys.add(newCommerceDiscountRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceDiscountRel> commerceDiscountRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceDiscountRel> commerceDiscountRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceDiscountRels.size());
-		Assert.assertEquals(newCommerceDiscountRel,
+		Assert.assertEquals(
+			newCommerceDiscountRel,
 			commerceDiscountRels.get(newCommerceDiscountRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceDiscountRel> commerceDiscountRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceDiscountRel> commerceDiscountRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceDiscountRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceDiscountRel.getPrimaryKey());
 
-		Map<Serializable, CommerceDiscountRel> commerceDiscountRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceDiscountRel> commerceDiscountRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceDiscountRels.size());
-		Assert.assertEquals(newCommerceDiscountRel,
+		Assert.assertEquals(
+			newCommerceDiscountRel,
 			commerceDiscountRels.get(newCommerceDiscountRel.getPrimaryKey()));
 	}
 
@@ -325,16 +355,22 @@ public class CommerceDiscountRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceDiscountRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceDiscountRelLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceDiscountRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceDiscountRel>() {
+
 				@Override
 				public void performAction(
 					CommerceDiscountRel commerceDiscountRel) {
+
 					Assert.assertNotNull(commerceDiscountRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -343,53 +379,60 @@ public class CommerceDiscountRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceDiscountRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceDiscountRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceDiscountRelId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceDiscountRelId",
 				newCommerceDiscountRel.getCommerceDiscountRelId()));
 
-		List<CommerceDiscountRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceDiscountRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CommerceDiscountRel existingCommerceDiscountRel = result.get(0);
 
-		Assert.assertEquals(existingCommerceDiscountRel, newCommerceDiscountRel);
+		Assert.assertEquals(
+			existingCommerceDiscountRel, newCommerceDiscountRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceDiscountRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceDiscountRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceDiscountRelId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceDiscountRelId", RandomTestUtil.nextLong()));
 
-		List<CommerceDiscountRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceDiscountRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CommerceDiscountRel newCommerceDiscountRel = addCommerceDiscountRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceDiscountRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceDiscountRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceDiscountRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceDiscountRelId"));
 
-		Object newCommerceDiscountRelId = newCommerceDiscountRel.getCommerceDiscountRelId();
+		Object newCommerceDiscountRelId =
+			newCommerceDiscountRel.getCommerceDiscountRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceDiscountRelId",
-				new Object[] { newCommerceDiscountRelId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceDiscountRelId",
+				new Object[] {newCommerceDiscountRelId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -397,28 +440,29 @@ public class CommerceDiscountRelPersistenceTest {
 
 		Object existingCommerceDiscountRelId = result.get(0);
 
-		Assert.assertEquals(existingCommerceDiscountRelId,
-			newCommerceDiscountRelId);
+		Assert.assertEquals(
+			existingCommerceDiscountRelId, newCommerceDiscountRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceDiscountRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceDiscountRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceDiscountRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceDiscountRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceDiscountRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceDiscountRelId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
-	protected CommerceDiscountRel addCommerceDiscountRel()
-		throws Exception {
+	protected CommerceDiscountRel addCommerceDiscountRel() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceDiscountRel commerceDiscountRel = _persistence.create(pk);
@@ -446,7 +490,9 @@ public class CommerceDiscountRelPersistenceTest {
 		return commerceDiscountRel;
 	}
 
-	private List<CommerceDiscountRel> _commerceDiscountRels = new ArrayList<CommerceDiscountRel>();
+	private List<CommerceDiscountRel> _commerceDiscountRels =
+		new ArrayList<CommerceDiscountRel>();
 	private CommerceDiscountRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

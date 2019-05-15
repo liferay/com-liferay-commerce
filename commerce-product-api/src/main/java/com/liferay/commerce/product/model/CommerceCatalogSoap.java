@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CommerceCatalogServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CommerceCatalogServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceCatalogSoap implements Serializable {
+
 	public static CommerceCatalogSoap toSoapModel(CommerceCatalog model) {
 		CommerceCatalogSoap soapModel = new CommerceCatalogSoap();
 
@@ -41,13 +41,15 @@ public class CommerceCatalogSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
-		soapModel.setCatalogDefaultLanguageId(model.getCatalogDefaultLanguageId());
+		soapModel.setCatalogDefaultLanguageId(
+			model.getCatalogDefaultLanguageId());
 
 		return soapModel;
 	}
 
 	public static CommerceCatalogSoap[] toSoapModels(CommerceCatalog[] models) {
-		CommerceCatalogSoap[] soapModels = new CommerceCatalogSoap[models.length];
+		CommerceCatalogSoap[] soapModels =
+			new CommerceCatalogSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -58,10 +60,12 @@ public class CommerceCatalogSoap implements Serializable {
 
 	public static CommerceCatalogSoap[][] toSoapModels(
 		CommerceCatalog[][] models) {
+
 		CommerceCatalogSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceCatalogSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceCatalogSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceCatalogSoap[0][0];
@@ -76,7 +80,9 @@ public class CommerceCatalogSoap implements Serializable {
 
 	public static CommerceCatalogSoap[] toSoapModels(
 		List<CommerceCatalog> models) {
-		List<CommerceCatalogSoap> soapModels = new ArrayList<CommerceCatalogSoap>(models.size());
+
+		List<CommerceCatalogSoap> soapModels =
+			new ArrayList<CommerceCatalogSoap>(models.size());
 
 		for (CommerceCatalog model : models) {
 			soapModels.add(toSoapModel(model));
@@ -168,4 +174,5 @@ public class CommerceCatalogSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _catalogDefaultLanguageId;
+
 }

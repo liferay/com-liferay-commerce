@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -40,30 +39,38 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CommerceTaxMethodServiceUtil
- * @see com.liferay.commerce.tax.service.base.CommerceTaxMethodServiceBaseImpl
- * @see com.liferay.commerce.tax.service.impl.CommerceTaxMethodServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceTaxMethod"}, service = CommerceTaxMethodService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceTaxMethod"
+	},
+	service = CommerceTaxMethodService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceTaxMethodService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceTaxMethodServiceUtil} to access the commerce tax method remote service. Add custom service methods to {@link com.liferay.commerce.tax.service.impl.CommerceTaxMethodServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceTaxMethodServiceUtil} to access the commerce tax method remote service. Add custom service methods to <code>com.liferay.commerce.tax.service.impl.CommerceTaxMethodServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceTaxMethod addCommerceTaxMethod(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String engineKey,
-		boolean percentage, boolean active, ServiceContext serviceContext)
+	public CommerceTaxMethod addCommerceTaxMethod(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String engineKey, boolean percentage, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceTaxMethod createCommerceTaxMethod(long groupId,
-		long commerceTaxMethodId) throws PortalException;
+	public CommerceTaxMethod createCommerceTaxMethod(
+			long groupId, long commerceTaxMethodId)
+		throws PortalException;
 
 	public void deleteCommerceTaxMethod(long commerceTaxMethodId)
 		throws PortalException;
@@ -77,20 +84,24 @@ public interface CommerceTaxMethodService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceTaxMethod> getCommerceTaxMethods(long groupId,
-		boolean active) throws PortalException;
+	public List<CommerceTaxMethod> getCommerceTaxMethods(
+			long groupId, boolean active)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceTaxMethod setActive(long commerceTaxMethodId, boolean active)
 		throws PortalException;
 
-	public CommerceTaxMethod updateCommerceTaxMethod(long commerceTaxMethodId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		boolean percentage, boolean active) throws PortalException;
+	public CommerceTaxMethod updateCommerceTaxMethod(
+			long commerceTaxMethodId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, boolean percentage,
+			boolean active)
+		throws PortalException;
+
 }

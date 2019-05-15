@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,8 +37,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceWarehouseWrapper implements CommerceWarehouse,
-	ModelWrapper<CommerceWarehouse> {
+public class CommerceWarehouseWrapper
+	implements CommerceWarehouse, ModelWrapper<CommerceWarehouse> {
+
 	public CommerceWarehouseWrapper(CommerceWarehouse commerceWarehouse) {
 		_commerceWarehouse = commerceWarehouse;
 	}
@@ -207,7 +207,8 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 
 	@Override
 	public Object clone() {
-		return new CommerceWarehouseWrapper((CommerceWarehouse)_commerceWarehouse.clone());
+		return new CommerceWarehouseWrapper(
+			(CommerceWarehouse)_commerceWarehouse.clone());
 	}
 
 	@Override
@@ -216,20 +217,20 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns the active of this commerce warehouse.
-	*
-	* @return the active of this commerce warehouse
-	*/
+	 * Returns the active of this commerce warehouse.
+	 *
+	 * @return the active of this commerce warehouse
+	 */
 	@Override
 	public boolean getActive() {
 		return _commerceWarehouse.getActive();
 	}
 
 	/**
-	* Returns the city of this commerce warehouse.
-	*
-	* @return the city of this commerce warehouse
-	*/
+	 * Returns the city of this commerce warehouse.
+	 *
+	 * @return the city of this commerce warehouse
+	 */
 	@Override
 	public String getCity() {
 		return _commerceWarehouse.getCity();
@@ -238,14 +239,15 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	@Override
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceWarehouse.getCommerceCountry();
 	}
 
 	/**
-	* Returns the commerce country ID of this commerce warehouse.
-	*
-	* @return the commerce country ID of this commerce warehouse
-	*/
+	 * Returns the commerce country ID of this commerce warehouse.
+	 *
+	 * @return the commerce country ID of this commerce warehouse
+	 */
 	@Override
 	public long getCommerceCountryId() {
 		return _commerceWarehouse.getCommerceCountryId();
@@ -254,24 +256,25 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	@Override
 	public CommerceRegion getCommerceRegion()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceWarehouse.getCommerceRegion();
 	}
 
 	/**
-	* Returns the commerce region ID of this commerce warehouse.
-	*
-	* @return the commerce region ID of this commerce warehouse
-	*/
+	 * Returns the commerce region ID of this commerce warehouse.
+	 *
+	 * @return the commerce region ID of this commerce warehouse
+	 */
 	@Override
 	public long getCommerceRegionId() {
 		return _commerceWarehouse.getCommerceRegionId();
 	}
 
 	/**
-	* Returns the commerce warehouse ID of this commerce warehouse.
-	*
-	* @return the commerce warehouse ID of this commerce warehouse
-	*/
+	 * Returns the commerce warehouse ID of this commerce warehouse.
+	 *
+	 * @return the commerce warehouse ID of this commerce warehouse
+	 */
 	@Override
 	public long getCommerceWarehouseId() {
 		return _commerceWarehouse.getCommerceWarehouseId();
@@ -283,30 +286,30 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns the company ID of this commerce warehouse.
-	*
-	* @return the company ID of this commerce warehouse
-	*/
+	 * Returns the company ID of this commerce warehouse.
+	 *
+	 * @return the company ID of this commerce warehouse
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceWarehouse.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce warehouse.
-	*
-	* @return the create date of this commerce warehouse
-	*/
+	 * Returns the create date of this commerce warehouse.
+	 *
+	 * @return the create date of this commerce warehouse
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceWarehouse.getCreateDate();
 	}
 
 	/**
-	* Returns the description of this commerce warehouse.
-	*
-	* @return the description of this commerce warehouse
-	*/
+	 * Returns the description of this commerce warehouse.
+	 *
+	 * @return the description of this commerce warehouse
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceWarehouse.getDescription();
@@ -318,70 +321,70 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns the group ID of this commerce warehouse.
-	*
-	* @return the group ID of this commerce warehouse
-	*/
+	 * Returns the group ID of this commerce warehouse.
+	 *
+	 * @return the group ID of this commerce warehouse
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceWarehouse.getGroupId();
 	}
 
 	/**
-	* Returns the latitude of this commerce warehouse.
-	*
-	* @return the latitude of this commerce warehouse
-	*/
+	 * Returns the latitude of this commerce warehouse.
+	 *
+	 * @return the latitude of this commerce warehouse
+	 */
 	@Override
 	public double getLatitude() {
 		return _commerceWarehouse.getLatitude();
 	}
 
 	/**
-	* Returns the longitude of this commerce warehouse.
-	*
-	* @return the longitude of this commerce warehouse
-	*/
+	 * Returns the longitude of this commerce warehouse.
+	 *
+	 * @return the longitude of this commerce warehouse
+	 */
 	@Override
 	public double getLongitude() {
 		return _commerceWarehouse.getLongitude();
 	}
 
 	/**
-	* Returns the modified date of this commerce warehouse.
-	*
-	* @return the modified date of this commerce warehouse
-	*/
+	 * Returns the modified date of this commerce warehouse.
+	 *
+	 * @return the modified date of this commerce warehouse
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceWarehouse.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce warehouse.
-	*
-	* @return the name of this commerce warehouse
-	*/
+	 * Returns the name of this commerce warehouse.
+	 *
+	 * @return the name of this commerce warehouse
+	 */
 	@Override
 	public String getName() {
 		return _commerceWarehouse.getName();
 	}
 
 	/**
-	* Returns the primary of this commerce warehouse.
-	*
-	* @return the primary of this commerce warehouse
-	*/
+	 * Returns the primary of this commerce warehouse.
+	 *
+	 * @return the primary of this commerce warehouse
+	 */
 	@Override
 	public boolean getPrimary() {
 		return _commerceWarehouse.getPrimary();
 	}
 
 	/**
-	* Returns the primary key of this commerce warehouse.
-	*
-	* @return the primary key of this commerce warehouse
-	*/
+	 * Returns the primary key of this commerce warehouse.
+	 *
+	 * @return the primary key of this commerce warehouse
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceWarehouse.getPrimaryKey();
@@ -393,70 +396,70 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns the street1 of this commerce warehouse.
-	*
-	* @return the street1 of this commerce warehouse
-	*/
+	 * Returns the street1 of this commerce warehouse.
+	 *
+	 * @return the street1 of this commerce warehouse
+	 */
 	@Override
 	public String getStreet1() {
 		return _commerceWarehouse.getStreet1();
 	}
 
 	/**
-	* Returns the street2 of this commerce warehouse.
-	*
-	* @return the street2 of this commerce warehouse
-	*/
+	 * Returns the street2 of this commerce warehouse.
+	 *
+	 * @return the street2 of this commerce warehouse
+	 */
 	@Override
 	public String getStreet2() {
 		return _commerceWarehouse.getStreet2();
 	}
 
 	/**
-	* Returns the street3 of this commerce warehouse.
-	*
-	* @return the street3 of this commerce warehouse
-	*/
+	 * Returns the street3 of this commerce warehouse.
+	 *
+	 * @return the street3 of this commerce warehouse
+	 */
 	@Override
 	public String getStreet3() {
 		return _commerceWarehouse.getStreet3();
 	}
 
 	/**
-	* Returns the user ID of this commerce warehouse.
-	*
-	* @return the user ID of this commerce warehouse
-	*/
+	 * Returns the user ID of this commerce warehouse.
+	 *
+	 * @return the user ID of this commerce warehouse
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceWarehouse.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce warehouse.
-	*
-	* @return the user name of this commerce warehouse
-	*/
+	 * Returns the user name of this commerce warehouse.
+	 *
+	 * @return the user name of this commerce warehouse
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceWarehouse.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce warehouse.
-	*
-	* @return the user uuid of this commerce warehouse
-	*/
+	 * Returns the user uuid of this commerce warehouse.
+	 *
+	 * @return the user uuid of this commerce warehouse
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceWarehouse.getUserUuid();
 	}
 
 	/**
-	* Returns the zip of this commerce warehouse.
-	*
-	* @return the zip of this commerce warehouse
-	*/
+	 * Returns the zip of this commerce warehouse.
+	 *
+	 * @return the zip of this commerce warehouse
+	 */
 	@Override
 	public String getZip() {
 		return _commerceWarehouse.getZip();
@@ -468,10 +471,10 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce warehouse is active.
-	*
-	* @return <code>true</code> if this commerce warehouse is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce warehouse is active.
+	 *
+	 * @return <code>true</code> if this commerce warehouse is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commerceWarehouse.isActive();
@@ -498,10 +501,10 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce warehouse is primary.
-	*
-	* @return <code>true</code> if this commerce warehouse is primary; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce warehouse is primary.
+	 *
+	 * @return <code>true</code> if this commerce warehouse is primary; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPrimary() {
 		return _commerceWarehouse.isPrimary();
@@ -513,10 +516,10 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Sets whether this commerce warehouse is active.
-	*
-	* @param active the active of this commerce warehouse
-	*/
+	 * Sets whether this commerce warehouse is active.
+	 *
+	 * @param active the active of this commerce warehouse
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commerceWarehouse.setActive(active);
@@ -528,70 +531,70 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Sets the city of this commerce warehouse.
-	*
-	* @param city the city of this commerce warehouse
-	*/
+	 * Sets the city of this commerce warehouse.
+	 *
+	 * @param city the city of this commerce warehouse
+	 */
 	@Override
 	public void setCity(String city) {
 		_commerceWarehouse.setCity(city);
 	}
 
 	/**
-	* Sets the commerce country ID of this commerce warehouse.
-	*
-	* @param commerceCountryId the commerce country ID of this commerce warehouse
-	*/
+	 * Sets the commerce country ID of this commerce warehouse.
+	 *
+	 * @param commerceCountryId the commerce country ID of this commerce warehouse
+	 */
 	@Override
 	public void setCommerceCountryId(long commerceCountryId) {
 		_commerceWarehouse.setCommerceCountryId(commerceCountryId);
 	}
 
 	/**
-	* Sets the commerce region ID of this commerce warehouse.
-	*
-	* @param commerceRegionId the commerce region ID of this commerce warehouse
-	*/
+	 * Sets the commerce region ID of this commerce warehouse.
+	 *
+	 * @param commerceRegionId the commerce region ID of this commerce warehouse
+	 */
 	@Override
 	public void setCommerceRegionId(long commerceRegionId) {
 		_commerceWarehouse.setCommerceRegionId(commerceRegionId);
 	}
 
 	/**
-	* Sets the commerce warehouse ID of this commerce warehouse.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce warehouse
-	*/
+	 * Sets the commerce warehouse ID of this commerce warehouse.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID of this commerce warehouse
+	 */
 	@Override
 	public void setCommerceWarehouseId(long commerceWarehouseId) {
 		_commerceWarehouse.setCommerceWarehouseId(commerceWarehouseId);
 	}
 
 	/**
-	* Sets the company ID of this commerce warehouse.
-	*
-	* @param companyId the company ID of this commerce warehouse
-	*/
+	 * Sets the company ID of this commerce warehouse.
+	 *
+	 * @param companyId the company ID of this commerce warehouse
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceWarehouse.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce warehouse.
-	*
-	* @param createDate the create date of this commerce warehouse
-	*/
+	 * Sets the create date of this commerce warehouse.
+	 *
+	 * @param createDate the create date of this commerce warehouse
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceWarehouse.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce warehouse.
-	*
-	* @param description the description of this commerce warehouse
-	*/
+	 * Sets the description of this commerce warehouse.
+	 *
+	 * @param description the description of this commerce warehouse
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceWarehouse.setDescription(description);
@@ -600,6 +603,7 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceWarehouse.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -614,50 +618,50 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Sets the group ID of this commerce warehouse.
-	*
-	* @param groupId the group ID of this commerce warehouse
-	*/
+	 * Sets the group ID of this commerce warehouse.
+	 *
+	 * @param groupId the group ID of this commerce warehouse
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceWarehouse.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the latitude of this commerce warehouse.
-	*
-	* @param latitude the latitude of this commerce warehouse
-	*/
+	 * Sets the latitude of this commerce warehouse.
+	 *
+	 * @param latitude the latitude of this commerce warehouse
+	 */
 	@Override
 	public void setLatitude(double latitude) {
 		_commerceWarehouse.setLatitude(latitude);
 	}
 
 	/**
-	* Sets the longitude of this commerce warehouse.
-	*
-	* @param longitude the longitude of this commerce warehouse
-	*/
+	 * Sets the longitude of this commerce warehouse.
+	 *
+	 * @param longitude the longitude of this commerce warehouse
+	 */
 	@Override
 	public void setLongitude(double longitude) {
 		_commerceWarehouse.setLongitude(longitude);
 	}
 
 	/**
-	* Sets the modified date of this commerce warehouse.
-	*
-	* @param modifiedDate the modified date of this commerce warehouse
-	*/
+	 * Sets the modified date of this commerce warehouse.
+	 *
+	 * @param modifiedDate the modified date of this commerce warehouse
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceWarehouse.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce warehouse.
-	*
-	* @param name the name of this commerce warehouse
-	*/
+	 * Sets the name of this commerce warehouse.
+	 *
+	 * @param name the name of this commerce warehouse
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceWarehouse.setName(name);
@@ -669,20 +673,20 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Sets whether this commerce warehouse is primary.
-	*
-	* @param primary the primary of this commerce warehouse
-	*/
+	 * Sets whether this commerce warehouse is primary.
+	 *
+	 * @param primary the primary of this commerce warehouse
+	 */
 	@Override
 	public void setPrimary(boolean primary) {
 		_commerceWarehouse.setPrimary(primary);
 	}
 
 	/**
-	* Sets the primary key of this commerce warehouse.
-	*
-	* @param primaryKey the primary key of this commerce warehouse
-	*/
+	 * Sets the primary key of this commerce warehouse.
+	 *
+	 * @param primaryKey the primary key of this commerce warehouse
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceWarehouse.setPrimaryKey(primaryKey);
@@ -694,83 +698,86 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	/**
-	* Sets the street1 of this commerce warehouse.
-	*
-	* @param street1 the street1 of this commerce warehouse
-	*/
+	 * Sets the street1 of this commerce warehouse.
+	 *
+	 * @param street1 the street1 of this commerce warehouse
+	 */
 	@Override
 	public void setStreet1(String street1) {
 		_commerceWarehouse.setStreet1(street1);
 	}
 
 	/**
-	* Sets the street2 of this commerce warehouse.
-	*
-	* @param street2 the street2 of this commerce warehouse
-	*/
+	 * Sets the street2 of this commerce warehouse.
+	 *
+	 * @param street2 the street2 of this commerce warehouse
+	 */
 	@Override
 	public void setStreet2(String street2) {
 		_commerceWarehouse.setStreet2(street2);
 	}
 
 	/**
-	* Sets the street3 of this commerce warehouse.
-	*
-	* @param street3 the street3 of this commerce warehouse
-	*/
+	 * Sets the street3 of this commerce warehouse.
+	 *
+	 * @param street3 the street3 of this commerce warehouse
+	 */
 	@Override
 	public void setStreet3(String street3) {
 		_commerceWarehouse.setStreet3(street3);
 	}
 
 	/**
-	* Sets the user ID of this commerce warehouse.
-	*
-	* @param userId the user ID of this commerce warehouse
-	*/
+	 * Sets the user ID of this commerce warehouse.
+	 *
+	 * @param userId the user ID of this commerce warehouse
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceWarehouse.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce warehouse.
-	*
-	* @param userName the user name of this commerce warehouse
-	*/
+	 * Sets the user name of this commerce warehouse.
+	 *
+	 * @param userName the user name of this commerce warehouse
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceWarehouse.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce warehouse.
-	*
-	* @param userUuid the user uuid of this commerce warehouse
-	*/
+	 * Sets the user uuid of this commerce warehouse.
+	 *
+	 * @param userUuid the user uuid of this commerce warehouse
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceWarehouse.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the zip of this commerce warehouse.
-	*
-	* @param zip the zip of this commerce warehouse
-	*/
+	 * Sets the zip of this commerce warehouse.
+	 *
+	 * @param zip the zip of this commerce warehouse
+	 */
 	@Override
 	public void setZip(String zip) {
 		_commerceWarehouse.setZip(zip);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceWarehouse> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceWarehouse>
+		toCacheModel() {
+
 		return _commerceWarehouse.toCacheModel();
 	}
 
 	@Override
 	public CommerceWarehouse toEscapedModel() {
-		return new CommerceWarehouseWrapper(_commerceWarehouse.toEscapedModel());
+		return new CommerceWarehouseWrapper(
+			_commerceWarehouse.toEscapedModel());
 	}
 
 	@Override
@@ -780,7 +787,8 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 
 	@Override
 	public CommerceWarehouse toUnescapedModel() {
-		return new CommerceWarehouseWrapper(_commerceWarehouse.toUnescapedModel());
+		return new CommerceWarehouseWrapper(
+			_commerceWarehouse.toUnescapedModel());
 	}
 
 	@Override
@@ -798,10 +806,13 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 			return false;
 		}
 
-		CommerceWarehouseWrapper commerceWarehouseWrapper = (CommerceWarehouseWrapper)obj;
+		CommerceWarehouseWrapper commerceWarehouseWrapper =
+			(CommerceWarehouseWrapper)obj;
 
-		if (Objects.equals(_commerceWarehouse,
-					commerceWarehouseWrapper._commerceWarehouse)) {
+		if (Objects.equals(
+				_commerceWarehouse,
+				commerceWarehouseWrapper._commerceWarehouse)) {
+
 			return true;
 		}
 
@@ -829,4 +840,5 @@ public class CommerceWarehouseWrapper implements CommerceWarehouse,
 	}
 
 	private final CommerceWarehouse _commerceWarehouse;
+
 }

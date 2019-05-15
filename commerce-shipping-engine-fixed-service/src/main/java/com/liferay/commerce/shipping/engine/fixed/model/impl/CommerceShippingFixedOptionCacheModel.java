@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceShippingFixedOption in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShippingFixedOption
  * @generated
  */
 @ProviderType
-public class CommerceShippingFixedOptionCacheModel implements CacheModel<CommerceShippingFixedOption>,
-	Externalizable {
+public class CommerceShippingFixedOptionCacheModel
+	implements CacheModel<CommerceShippingFixedOption>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,10 +50,14 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 			return false;
 		}
 
-		CommerceShippingFixedOptionCacheModel commerceShippingFixedOptionCacheModel =
-			(CommerceShippingFixedOptionCacheModel)obj;
+		CommerceShippingFixedOptionCacheModel
+			commerceShippingFixedOptionCacheModel =
+				(CommerceShippingFixedOptionCacheModel)obj;
 
-		if (commerceShippingFixedOptionId == commerceShippingFixedOptionCacheModel.commerceShippingFixedOptionId) {
+		if (commerceShippingFixedOptionId ==
+				commerceShippingFixedOptionCacheModel.
+					commerceShippingFixedOptionId) {
+
 			return true;
 		}
 
@@ -101,9 +104,11 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 
 	@Override
 	public CommerceShippingFixedOption toEntityModel() {
-		CommerceShippingFixedOptionImpl commerceShippingFixedOptionImpl = new CommerceShippingFixedOptionImpl();
+		CommerceShippingFixedOptionImpl commerceShippingFixedOptionImpl =
+			new CommerceShippingFixedOptionImpl();
 
-		commerceShippingFixedOptionImpl.setCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
+		commerceShippingFixedOptionImpl.setCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId);
 		commerceShippingFixedOptionImpl.setGroupId(groupId);
 		commerceShippingFixedOptionImpl.setCompanyId(companyId);
 		commerceShippingFixedOptionImpl.setUserId(userId);
@@ -126,11 +131,12 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 			commerceShippingFixedOptionImpl.setModifiedDate(null);
 		}
 		else {
-			commerceShippingFixedOptionImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceShippingFixedOptionImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceShippingFixedOptionImpl.setCommerceShippingMethodId(commerceShippingMethodId);
+		commerceShippingFixedOptionImpl.setCommerceShippingMethodId(
+			commerceShippingMethodId);
 
 		if (name == null) {
 			commerceShippingFixedOptionImpl.setName("");
@@ -157,6 +163,7 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		commerceShippingFixedOptionId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -177,8 +184,7 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceShippingFixedOptionId);
 
 		objectOutput.writeLong(groupId);
@@ -230,4 +236,5 @@ public class CommerceShippingFixedOptionCacheModel implements CacheModel<Commerc
 	public String description;
 	public BigDecimal amount;
 	public double priority;
+
 }

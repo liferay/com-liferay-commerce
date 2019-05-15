@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceNotificationQueueEntryServiceUtil} service utility. The
+ * <code>CommerceNotificationQueueEntryServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,32 +49,37 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationQueueEntryServiceSoap
- * @see HttpPrincipal
- * @see CommerceNotificationQueueEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationQueueEntryServiceHttp {
-	public static void deleteCommerceNotificationQueueEntry(
-		HttpPrincipal httpPrincipal, long commerceNotificationQueueEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationQueueEntryServiceUtil.class,
-					"deleteCommerceNotificationQueueEntry",
-					_deleteCommerceNotificationQueueEntryParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationQueueEntryId);
+	public static void deleteCommerceNotificationQueueEntry(
+			HttpPrincipal httpPrincipal, long commerceNotificationQueueEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationQueueEntryServiceUtil.class,
+				"deleteCommerceNotificationQueueEntry",
+				_deleteCommerceNotificationQueueEntryParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationQueueEntryId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -84,17 +89,24 @@ public class CommerceNotificationQueueEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> getCommerceNotificationQueueEntries(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationQueueEntryServiceUtil.class,
-					"getCommerceNotificationQueueEntries",
-					_getCommerceNotificationQueueEntriesParameterTypes1);
+	public static java.util.List
+		<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>
+				getCommerceNotificationQueueEntries(
+					HttpPrincipal httpPrincipal, long groupId, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.notification.model.
+							CommerceNotificationQueueEntry> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationQueueEntryServiceUtil.class,
+				"getCommerceNotificationQueueEntries",
+				_getCommerceNotificationQueueEntriesParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -102,14 +114,20 @@ public class CommerceNotificationQueueEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.notification.model.
+					CommerceNotificationQueueEntry>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -119,12 +137,14 @@ public class CommerceNotificationQueueEntryServiceHttp {
 	}
 
 	public static int getCommerceNotificationQueueEntriesCount(
-		HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationQueueEntryServiceUtil.class,
-					"getCommerceNotificationQueueEntriesCount",
-					_getCommerceNotificationQueueEntriesCountParameterTypes2);
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationQueueEntryServiceUtil.class,
+				"getCommerceNotificationQueueEntriesCount",
+				_getCommerceNotificationQueueEntriesCountParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -134,11 +154,15 @@ public class CommerceNotificationQueueEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -150,16 +174,21 @@ public class CommerceNotificationQueueEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationQueueEntry resendCommerceNotificationQueueEntry(
-		HttpPrincipal httpPrincipal, long commerceNotificationQueueEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationQueueEntryServiceUtil.class,
-					"resendCommerceNotificationQueueEntry",
-					_resendCommerceNotificationQueueEntryParameterTypes3);
+	public static
+		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
+				resendCommerceNotificationQueueEntry(
+					HttpPrincipal httpPrincipal,
+					long commerceNotificationQueueEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationQueueEntryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationQueueEntryServiceUtil.class,
+				"resendCommerceNotificationQueueEntry",
+				_resendCommerceNotificationQueueEntryParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationQueueEntryId);
 
 			Object returnObj = null;
 
@@ -167,14 +196,19 @@ public class CommerceNotificationQueueEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.notification.model.CommerceNotificationQueueEntry)returnObj;
+			return (com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntry)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -183,16 +217,25 @@ public class CommerceNotificationQueueEntryServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceNotificationQueueEntryServiceHttp.class);
-	private static final Class<?>[] _deleteCommerceNotificationQueueEntryParameterTypes0 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceNotificationQueueEntriesParameterTypes1 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationQueueEntryServiceHttp.class);
+
+	private static final Class<?>[]
+		_deleteCommerceNotificationQueueEntryParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceNotificationQueueEntriesParameterTypes1 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceNotificationQueueEntriesCountParameterTypes2 =
-		new Class[] { long.class };
-	private static final Class<?>[] _resendCommerceNotificationQueueEntryParameterTypes3 =
-		new Class[] { long.class };
+	private static final Class<?>[]
+		_getCommerceNotificationQueueEntriesCountParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_resendCommerceNotificationQueueEntryParameterTypes3 = new Class[] {
+			long.class
+		};
+
 }

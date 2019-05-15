@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPFriendlyURLEntry in entity cache.
  *
  * @author Marco Leo
- * @see CPFriendlyURLEntry
  * @generated
  */
 @ProviderType
-public class CPFriendlyURLEntryCacheModel implements CacheModel<CPFriendlyURLEntry>,
-	Externalizable {
+public class CPFriendlyURLEntryCacheModel
+	implements CacheModel<CPFriendlyURLEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPFriendlyURLEntryCacheModel implements CacheModel<CPFriendlyURLEnt
 			return false;
 		}
 
-		CPFriendlyURLEntryCacheModel cpFriendlyURLEntryCacheModel = (CPFriendlyURLEntryCacheModel)obj;
+		CPFriendlyURLEntryCacheModel cpFriendlyURLEntryCacheModel =
+			(CPFriendlyURLEntryCacheModel)obj;
 
-		if (CPFriendlyURLEntryId == cpFriendlyURLEntryCacheModel.CPFriendlyURLEntryId) {
+		if (CPFriendlyURLEntryId ==
+				cpFriendlyURLEntryCacheModel.CPFriendlyURLEntryId) {
+
 			return true;
 		}
 
@@ -100,7 +102,8 @@ public class CPFriendlyURLEntryCacheModel implements CacheModel<CPFriendlyURLEnt
 
 	@Override
 	public CPFriendlyURLEntry toEntityModel() {
-		CPFriendlyURLEntryImpl cpFriendlyURLEntryImpl = new CPFriendlyURLEntryImpl();
+		CPFriendlyURLEntryImpl cpFriendlyURLEntryImpl =
+			new CPFriendlyURLEntryImpl();
 
 		if (uuid == null) {
 			cpFriendlyURLEntryImpl.setUuid("");
@@ -184,8 +187,7 @@ public class CPFriendlyURLEntryCacheModel implements CacheModel<CPFriendlyURLEnt
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -245,4 +247,5 @@ public class CPFriendlyURLEntryCacheModel implements CacheModel<CPFriendlyURLEnt
 	public String languageId;
 	public String urlTitle;
 	public boolean main;
+
 }

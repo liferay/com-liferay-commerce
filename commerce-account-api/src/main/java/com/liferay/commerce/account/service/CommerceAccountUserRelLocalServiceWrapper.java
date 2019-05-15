@@ -28,108 +28,139 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceAccountUserRelLocalServiceWrapper
 	implements CommerceAccountUserRelLocalService,
-		ServiceWrapper<CommerceAccountUserRelLocalService> {
+			   ServiceWrapper<CommerceAccountUserRelLocalService> {
+
 	public CommerceAccountUserRelLocalServiceWrapper(
 		CommerceAccountUserRelLocalService commerceAccountUserRelLocalService) {
-		_commerceAccountUserRelLocalService = commerceAccountUserRelLocalService;
+
+		_commerceAccountUserRelLocalService =
+			commerceAccountUserRelLocalService;
 	}
 
 	/**
-	* Adds the commerce account user rel to the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceAccountUserRel the commerce account user rel
-	* @return the commerce account user rel that was added
-	*/
+	 * Adds the commerce account user rel to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceAccountUserRel the commerce account user rel
+	 * @return the commerce account user rel that was added
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
-		com.liferay.commerce.account.model.CommerceAccountUserRel commerceAccountUserRel) {
-		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(commerceAccountUserRel);
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+		addCommerceAccountUserRel(
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				commerceAccountUserRel) {
+
+		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccountUserRel);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
-		long commerceAccountId, long commerceAccountUserId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(commerceAccountId,
-			commerceAccountUserId, serviceContext);
+
+		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, serviceContext);
 	}
 
 	@Override
-	public void addCommerceAccountUserRels(long commerceAccountId,
-		long[] userIds, String[] emailAddresses, long[] roleIds,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public void addCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds, String[] emailAddresses,
+			long[] roleIds,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAccountUserRelLocalService.addCommerceAccountUserRels(commerceAccountId,
-			userIds, emailAddresses, roleIds, serviceContext);
+
+		_commerceAccountUserRelLocalService.addCommerceAccountUserRels(
+			commerceAccountId, userIds, emailAddresses, roleIds,
+			serviceContext);
 	}
 
 	/**
-	* Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
-	*
-	* @param commerceAccountUserRelPK the primary key for the new commerce account user rel
-	* @return the new commerce account user rel
-	*/
+	 * Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
+	 *
+	 * @param commerceAccountUserRelPK the primary key for the new commerce account user rel
+	 * @return the new commerce account user rel
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel createCommerceAccountUserRel(
-		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK) {
-		return _commerceAccountUserRelLocalService.createCommerceAccountUserRel(commerceAccountUserRelPK);
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+		createCommerceAccountUserRel(
+			com.liferay.commerce.account.service.persistence.
+				CommerceAccountUserRelPK commerceAccountUserRelPK) {
+
+		return _commerceAccountUserRelLocalService.createCommerceAccountUserRel(
+			commerceAccountUserRelPK);
 	}
 
 	/**
-	* Deletes the commerce account user rel from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceAccountUserRel the commerce account user rel
-	* @return the commerce account user rel that was removed
-	*/
+	 * Deletes the commerce account user rel from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceAccountUserRel the commerce account user rel
+	 * @return the commerce account user rel that was removed
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel deleteCommerceAccountUserRel(
-		com.liferay.commerce.account.model.CommerceAccountUserRel commerceAccountUserRel) {
-		return _commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(commerceAccountUserRel);
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+		deleteCommerceAccountUserRel(
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				commerceAccountUserRel) {
+
+		return _commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(
+			commerceAccountUserRel);
 	}
 
 	/**
-	* Deletes the commerce account user rel with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceAccountUserRelPK the primary key of the commerce account user rel
-	* @return the commerce account user rel that was removed
-	* @throws PortalException if a commerce account user rel with the primary key could not be found
-	*/
+	 * Deletes the commerce account user rel with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceAccountUserRelPK the primary key of the commerce account user rel
+	 * @return the commerce account user rel that was removed
+	 * @throws PortalException if a commerce account user rel with the primary key could not be found
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel deleteCommerceAccountUserRel(
-		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+			deleteCommerceAccountUserRel(
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(commerceAccountUserRelPK);
+
+		return _commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(
+			commerceAccountUserRelPK);
 	}
 
 	@Override
-	public void deleteCommerceAccountUserRels(long commerceAccountId,
-		long[] userIds)
+	public void deleteCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(commerceAccountId,
-			userIds);
+
+		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(
+			commerceAccountId, userIds);
 	}
 
 	@Override
 	public void deleteCommerceAccountUserRelsByCommerceAccountId(
 		long commerceAccountId) {
-		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
+
+		_commerceAccountUserRelLocalService.
+			deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
 	}
 
 	@Override
 	public void deleteCommerceAccountUserRelsByCommerceAccountUserId(
 		long userId) {
-		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRelsByCommerceAccountUserId(userId);
+
+		_commerceAccountUserRelLocalService.
+			deleteCommerceAccountUserRelsByCommerceAccountUserId(userId);
 	}
 
 	/**
-	* @throws PortalException
-	*/
+	 * @throws PortalException
+	 */
 	@Override
 	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+			com.liferay.portal.kernel.model.PersistedModel persistedModel)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelLocalService.deletePersistedModel(persistedModel);
+
+		return _commerceAccountUserRelLocalService.deletePersistedModel(
+			persistedModel);
 	}
 
 	@Override
@@ -138,173 +169,207 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+
 		return _commerceAccountUserRelLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) {
-		return _commerceAccountUserRelLocalService.dynamicQuery(dynamicQuery,
-			start, end);
+
+		return _commerceAccountUserRelLocalService.dynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
-		return _commerceAccountUserRelLocalService.dynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+
+		return _commerceAccountUserRelLocalService.dynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-		return _commerceAccountUserRelLocalService.dynamicQueryCount(dynamicQuery);
+
+		return _commerceAccountUserRelLocalService.dynamicQueryCount(
+			dynamicQuery);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
-		return _commerceAccountUserRelLocalService.dynamicQueryCount(dynamicQuery,
-			projection);
+
+		return _commerceAccountUserRelLocalService.dynamicQueryCount(
+			dynamicQuery, projection);
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel fetchCommerceAccountUserRel(
-		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK) {
-		return _commerceAccountUserRelLocalService.fetchCommerceAccountUserRel(commerceAccountUserRelPK);
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+		fetchCommerceAccountUserRel(
+			com.liferay.commerce.account.service.persistence.
+				CommerceAccountUserRelPK commerceAccountUserRelPK) {
+
+		return _commerceAccountUserRelLocalService.fetchCommerceAccountUserRel(
+			commerceAccountUserRelPK);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
+		getActionableDynamicQuery() {
+
 		return _commerceAccountUserRelLocalService.getActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the commerce account user rel with the primary key.
-	*
-	* @param commerceAccountUserRelPK the primary key of the commerce account user rel
-	* @return the commerce account user rel
-	* @throws PortalException if a commerce account user rel with the primary key could not be found
-	*/
+	 * Returns the commerce account user rel with the primary key.
+	 *
+	 * @param commerceAccountUserRelPK the primary key of the commerce account user rel
+	 * @return the commerce account user rel
+	 * @throws PortalException if a commerce account user rel with the primary key could not be found
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel getCommerceAccountUserRel(
-		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+			getCommerceAccountUserRel(
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRel(commerceAccountUserRelPK);
+
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRel(
+			commerceAccountUserRelPK);
 	}
 
 	/**
-	* Returns a range of all the commerce account user rels.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce account user rels
-	* @param end the upper bound of the range of commerce account user rels (not inclusive)
-	* @return the range of commerce account user rels
-	*/
+	 * Returns a range of all the commerce account user rels.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce account user rels
+	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
+	 * @return the range of commerce account user rels
+	 */
 	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
-		int start, int end) {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(start,
-			end);
-	}
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountUserRel>
+			getCommerceAccountUserRels(int start, int end) {
 
-	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
-		long commerceAccountId) {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(commerceAccountId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
-		long commerceAccountId, int start, int end) {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(commerceAccountId,
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(
 			start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
-		long commerceAccountUserId) {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsByCommerceAccountUserId(commerceAccountUserId);
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountUserRel>
+			getCommerceAccountUserRels(long commerceAccountId) {
+
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(
+			commerceAccountId);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountUserRel>
+			getCommerceAccountUserRels(
+				long commerceAccountId, int start, int end) {
+
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(
+			commerceAccountId, start, end);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountUserRel>
+			getCommerceAccountUserRelsByCommerceAccountUserId(
+				long commerceAccountUserId) {
+
+		return _commerceAccountUserRelLocalService.
+			getCommerceAccountUserRelsByCommerceAccountUserId(
+				commerceAccountUserId);
 	}
 
 	/**
-	* Returns the number of commerce account user rels.
-	*
-	* @return the number of commerce account user rels
-	*/
+	 * Returns the number of commerce account user rels.
+	 *
+	 * @return the number of commerce account user rels
+	 */
 	@Override
 	public int getCommerceAccountUserRelsCount() {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount();
+		return _commerceAccountUserRelLocalService.
+			getCommerceAccountUserRelsCount();
 	}
 
 	@Override
 	public int getCommerceAccountUserRelsCount(long commerceAccountId) {
-		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(commerceAccountId);
+		return _commerceAccountUserRelLocalService.
+			getCommerceAccountUserRelsCount(commerceAccountId);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		return _commerceAccountUserRelLocalService.getIndexableActionableDynamicQuery();
+	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
+
+		return _commerceAccountUserRelLocalService.
+			getIndexableActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAccountUserRelLocalService.getOSGiServiceIdentifier();
@@ -312,21 +377,27 @@ public class CommerceAccountUserRelLocalServiceWrapper
 
 	@Override
 	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
+			java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelLocalService.getPersistedModel(primaryKeyObj);
+
+		return _commerceAccountUserRelLocalService.getPersistedModel(
+			primaryKeyObj);
 	}
 
 	/**
-	* Updates the commerce account user rel in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param commerceAccountUserRel the commerce account user rel
-	* @return the commerce account user rel that was updated
-	*/
+	 * Updates the commerce account user rel in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceAccountUserRel the commerce account user rel
+	 * @return the commerce account user rel that was updated
+	 */
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel updateCommerceAccountUserRel(
-		com.liferay.commerce.account.model.CommerceAccountUserRel commerceAccountUserRel) {
-		return _commerceAccountUserRelLocalService.updateCommerceAccountUserRel(commerceAccountUserRel);
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+		updateCommerceAccountUserRel(
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				commerceAccountUserRel) {
+
+		return _commerceAccountUserRelLocalService.updateCommerceAccountUserRel(
+			commerceAccountUserRel);
 	}
 
 	@Override
@@ -337,8 +408,12 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceAccountUserRelLocalService commerceAccountUserRelLocalService) {
-		_commerceAccountUserRelLocalService = commerceAccountUserRelLocalService;
+
+		_commerceAccountUserRelLocalService =
+			commerceAccountUserRelLocalService;
 	}
 
-	private CommerceAccountUserRelLocalService _commerceAccountUserRelLocalService;
+	private CommerceAccountUserRelLocalService
+		_commerceAccountUserRelLocalService;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.grouped.service.base;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryService;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -42,16 +41,16 @@ import javax.sql.DataSource;
  *
  * @author Andrea Di Giorgi
  * @see com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryServiceImpl
- * @see com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryServiceUtil
  * @generated
  */
 public abstract class CPDefinitionGroupedEntryServiceBaseImpl
-	extends BaseServiceImpl implements CPDefinitionGroupedEntryService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CPDefinitionGroupedEntryService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryServiceUtil} to access the cp definition grouped entry remote service.
+	 * Never modify or reference this class directly. Use <code>CPDefinitionGroupedEntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryServiceUtil</code>.
 	 */
 
 	/**
@@ -59,7 +58,10 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the cp definition grouped entry local service
 	 */
-	public com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService getCPDefinitionGroupedEntryLocalService() {
+	public com.liferay.commerce.product.type.grouped.service.
+		CPDefinitionGroupedEntryLocalService
+			getCPDefinitionGroupedEntryLocalService() {
+
 		return cpDefinitionGroupedEntryLocalService;
 	}
 
@@ -69,8 +71,12 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 * @param cpDefinitionGroupedEntryLocalService the cp definition grouped entry local service
 	 */
 	public void setCPDefinitionGroupedEntryLocalService(
-		com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService cpDefinitionGroupedEntryLocalService) {
-		this.cpDefinitionGroupedEntryLocalService = cpDefinitionGroupedEntryLocalService;
+		com.liferay.commerce.product.type.grouped.service.
+			CPDefinitionGroupedEntryLocalService
+				cpDefinitionGroupedEntryLocalService) {
+
+		this.cpDefinitionGroupedEntryLocalService =
+			cpDefinitionGroupedEntryLocalService;
 	}
 
 	/**
@@ -78,7 +84,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the cp definition grouped entry remote service
 	 */
-	public CPDefinitionGroupedEntryService getCPDefinitionGroupedEntryService() {
+	public CPDefinitionGroupedEntryService
+		getCPDefinitionGroupedEntryService() {
+
 		return cpDefinitionGroupedEntryService;
 	}
 
@@ -89,6 +97,7 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	public void setCPDefinitionGroupedEntryService(
 		CPDefinitionGroupedEntryService cpDefinitionGroupedEntryService) {
+
 		this.cpDefinitionGroupedEntryService = cpDefinitionGroupedEntryService;
 	}
 
@@ -97,7 +106,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the cp definition grouped entry persistence
 	 */
-	public CPDefinitionGroupedEntryPersistence getCPDefinitionGroupedEntryPersistence() {
+	public CPDefinitionGroupedEntryPersistence
+		getCPDefinitionGroupedEntryPersistence() {
+
 		return cpDefinitionGroupedEntryPersistence;
 	}
 
@@ -107,8 +118,11 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 * @param cpDefinitionGroupedEntryPersistence the cp definition grouped entry persistence
 	 */
 	public void setCPDefinitionGroupedEntryPersistence(
-		CPDefinitionGroupedEntryPersistence cpDefinitionGroupedEntryPersistence) {
-		this.cpDefinitionGroupedEntryPersistence = cpDefinitionGroupedEntryPersistence;
+		CPDefinitionGroupedEntryPersistence
+			cpDefinitionGroupedEntryPersistence) {
+
+		this.cpDefinitionGroupedEntryPersistence =
+			cpDefinitionGroupedEntryPersistence;
 	}
 
 	/**
@@ -116,7 +130,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -126,7 +142,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -135,7 +153,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -145,7 +165,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -154,7 +176,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -165,6 +189,7 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -184,6 +209,7 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -192,7 +218,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -202,7 +230,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -211,7 +241,9 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -222,6 +254,7 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -241,6 +274,7 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -293,15 +327,16 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = cpDefinitionGroupedEntryPersistence.getDataSource();
+			DataSource dataSource =
+				cpDefinitionGroupedEntryPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -310,26 +345,59 @@ public abstract class CPDefinitionGroupedEntryServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService.class)
-	protected com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService cpDefinitionGroupedEntryLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService.class
+	)
+	protected com.liferay.commerce.product.type.grouped.service.
+		CPDefinitionGroupedEntryLocalService
+			cpDefinitionGroupedEntryLocalService;
+
 	@BeanReference(type = CPDefinitionGroupedEntryService.class)
 	protected CPDefinitionGroupedEntryService cpDefinitionGroupedEntryService;
+
 	@BeanReference(type = CPDefinitionGroupedEntryPersistence.class)
-	protected CPDefinitionGroupedEntryPersistence cpDefinitionGroupedEntryPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CPDefinitionGroupedEntryPersistence
+		cpDefinitionGroupedEntryPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

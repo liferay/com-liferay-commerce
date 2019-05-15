@@ -35,18 +35,22 @@ import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
 public abstract class CommerceSubscriptionEntryBaseImpl
 	extends CommerceSubscriptionEntryModelImpl
 	implements CommerceSubscriptionEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce subscription entry model instance should use the {@link CommerceSubscriptionEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce subscription entry model instance should use the <code>CommerceSubscriptionEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceSubscriptionEntryLocalServiceUtil.addCommerceSubscriptionEntry(this);
+			CommerceSubscriptionEntryLocalServiceUtil.
+				addCommerceSubscriptionEntry(this);
 		}
 		else {
-			CommerceSubscriptionEntryLocalServiceUtil.updateCommerceSubscriptionEntry(this);
+			CommerceSubscriptionEntryLocalServiceUtil.
+				updateCommerceSubscriptionEntry(this);
 		}
 	}
+
 }

@@ -17,9 +17,7 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceSubscriptionEntryWrapper
 	implements CommerceSubscriptionEntry,
-		ModelWrapper<CommerceSubscriptionEntry> {
+			   ModelWrapper<CommerceSubscriptionEntry> {
+
 	public CommerceSubscriptionEntryWrapper(
 		CommerceSubscriptionEntry commerceSubscriptionEntry) {
+
 		_commerceSubscriptionEntry = commerceSubscriptionEntry;
 	}
 
@@ -63,8 +63,8 @@ public class CommerceSubscriptionEntryWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("commerceSubscriptionEntryId",
-			getCommerceSubscriptionEntryId());
+		attributes.put(
+			"commerceSubscriptionEntryId", getCommerceSubscriptionEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -76,7 +76,8 @@ public class CommerceSubscriptionEntryWrapper
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("subscriptionLength", getSubscriptionLength());
 		attributes.put("subscriptionType", getSubscriptionType());
-		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put(
+			"subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("currentCycle", getCurrentCycle());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("subscriptionStatus", getSubscriptionStatus());
@@ -96,7 +97,7 @@ public class CommerceSubscriptionEntryWrapper
 		}
 
 		Long commerceSubscriptionEntryId = (Long)attributes.get(
-				"commerceSubscriptionEntryId");
+			"commerceSubscriptionEntryId");
 
 		if (commerceSubscriptionEntryId != null) {
 			setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
@@ -157,7 +158,7 @@ public class CommerceSubscriptionEntryWrapper
 		}
 
 		Integer subscriptionLength = (Integer)attributes.get(
-				"subscriptionLength");
+			"subscriptionLength");
 
 		if (subscriptionLength != null) {
 			setSubscriptionLength(subscriptionLength);
@@ -170,7 +171,7 @@ public class CommerceSubscriptionEntryWrapper
 		}
 
 		String subscriptionTypeSettings = (String)attributes.get(
-				"subscriptionTypeSettings");
+			"subscriptionTypeSettings");
 
 		if (subscriptionTypeSettings != null) {
 			setSubscriptionTypeSettings(subscriptionTypeSettings);
@@ -183,14 +184,14 @@ public class CommerceSubscriptionEntryWrapper
 		}
 
 		Long maxSubscriptionCycles = (Long)attributes.get(
-				"maxSubscriptionCycles");
+			"maxSubscriptionCycles");
 
 		if (maxSubscriptionCycles != null) {
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
 		Integer subscriptionStatus = (Integer)attributes.get(
-				"subscriptionStatus");
+			"subscriptionStatus");
 
 		if (subscriptionStatus != null) {
 			setSubscriptionStatus(subscriptionStatus);
@@ -217,7 +218,8 @@ public class CommerceSubscriptionEntryWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceSubscriptionEntryWrapper((CommerceSubscriptionEntry)_commerceSubscriptionEntry.clone());
+		return new CommerceSubscriptionEntryWrapper(
+			(CommerceSubscriptionEntry)_commerceSubscriptionEntry.clone());
 	}
 
 	@Override
@@ -228,12 +230,14 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public CommerceOrderItem fetchCommerceOrderItem()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceSubscriptionEntry.fetchCommerceOrderItem();
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceSubscriptionEntry.fetchCPDefinition();
 	}
 
@@ -243,30 +247,30 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the commerce order item ID of this commerce subscription entry.
-	*
-	* @return the commerce order item ID of this commerce subscription entry
-	*/
+	 * Returns the commerce order item ID of this commerce subscription entry.
+	 *
+	 * @return the commerce order item ID of this commerce subscription entry
+	 */
 	@Override
 	public long getCommerceOrderItemId() {
 		return _commerceSubscriptionEntry.getCommerceOrderItemId();
 	}
 
 	/**
-	* Returns the commerce subscription entry ID of this commerce subscription entry.
-	*
-	* @return the commerce subscription entry ID of this commerce subscription entry
-	*/
+	 * Returns the commerce subscription entry ID of this commerce subscription entry.
+	 *
+	 * @return the commerce subscription entry ID of this commerce subscription entry
+	 */
 	@Override
 	public long getCommerceSubscriptionEntryId() {
 		return _commerceSubscriptionEntry.getCommerceSubscriptionEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce subscription entry.
-	*
-	* @return the company ID of this commerce subscription entry
-	*/
+	 * Returns the company ID of this commerce subscription entry.
+	 *
+	 * @return the company ID of this commerce subscription entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceSubscriptionEntry.getCompanyId();
@@ -283,40 +287,40 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the cp instance uuid of this commerce subscription entry.
-	*
-	* @return the cp instance uuid of this commerce subscription entry
-	*/
+	 * Returns the cp instance uuid of this commerce subscription entry.
+	 *
+	 * @return the cp instance uuid of this commerce subscription entry
+	 */
 	@Override
 	public String getCPInstanceUuid() {
 		return _commerceSubscriptionEntry.getCPInstanceUuid();
 	}
 
 	/**
-	* Returns the c product ID of this commerce subscription entry.
-	*
-	* @return the c product ID of this commerce subscription entry
-	*/
+	 * Returns the c product ID of this commerce subscription entry.
+	 *
+	 * @return the c product ID of this commerce subscription entry
+	 */
 	@Override
 	public long getCProductId() {
 		return _commerceSubscriptionEntry.getCProductId();
 	}
 
 	/**
-	* Returns the create date of this commerce subscription entry.
-	*
-	* @return the create date of this commerce subscription entry
-	*/
+	 * Returns the create date of this commerce subscription entry.
+	 *
+	 * @return the create date of this commerce subscription entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceSubscriptionEntry.getCreateDate();
 	}
 
 	/**
-	* Returns the current cycle of this commerce subscription entry.
-	*
-	* @return the current cycle of this commerce subscription entry
-	*/
+	 * Returns the current cycle of this commerce subscription entry.
+	 *
+	 * @return the current cycle of this commerce subscription entry
+	 */
 	@Override
 	public long getCurrentCycle() {
 		return _commerceSubscriptionEntry.getCurrentCycle();
@@ -328,60 +332,60 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce subscription entry.
-	*
-	* @return the group ID of this commerce subscription entry
-	*/
+	 * Returns the group ID of this commerce subscription entry.
+	 *
+	 * @return the group ID of this commerce subscription entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceSubscriptionEntry.getGroupId();
 	}
 
 	/**
-	* Returns the last iteration date of this commerce subscription entry.
-	*
-	* @return the last iteration date of this commerce subscription entry
-	*/
+	 * Returns the last iteration date of this commerce subscription entry.
+	 *
+	 * @return the last iteration date of this commerce subscription entry
+	 */
 	@Override
 	public Date getLastIterationDate() {
 		return _commerceSubscriptionEntry.getLastIterationDate();
 	}
 
 	/**
-	* Returns the max subscription cycles of this commerce subscription entry.
-	*
-	* @return the max subscription cycles of this commerce subscription entry
-	*/
+	 * Returns the max subscription cycles of this commerce subscription entry.
+	 *
+	 * @return the max subscription cycles of this commerce subscription entry
+	 */
 	@Override
 	public long getMaxSubscriptionCycles() {
 		return _commerceSubscriptionEntry.getMaxSubscriptionCycles();
 	}
 
 	/**
-	* Returns the modified date of this commerce subscription entry.
-	*
-	* @return the modified date of this commerce subscription entry
-	*/
+	 * Returns the modified date of this commerce subscription entry.
+	 *
+	 * @return the modified date of this commerce subscription entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceSubscriptionEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the next iteration date of this commerce subscription entry.
-	*
-	* @return the next iteration date of this commerce subscription entry
-	*/
+	 * Returns the next iteration date of this commerce subscription entry.
+	 *
+	 * @return the next iteration date of this commerce subscription entry
+	 */
 	@Override
 	public Date getNextIterationDate() {
 		return _commerceSubscriptionEntry.getNextIterationDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce subscription entry.
-	*
-	* @return the primary key of this commerce subscription entry
-	*/
+	 * Returns the primary key of this commerce subscription entry.
+	 *
+	 * @return the primary key of this commerce subscription entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceSubscriptionEntry.getPrimaryKey();
@@ -393,95 +397,98 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the start date of this commerce subscription entry.
-	*
-	* @return the start date of this commerce subscription entry
-	*/
+	 * Returns the start date of this commerce subscription entry.
+	 *
+	 * @return the start date of this commerce subscription entry
+	 */
 	@Override
 	public Date getStartDate() {
 		return _commerceSubscriptionEntry.getStartDate();
 	}
 
 	/**
-	* Returns the subscription length of this commerce subscription entry.
-	*
-	* @return the subscription length of this commerce subscription entry
-	*/
+	 * Returns the subscription length of this commerce subscription entry.
+	 *
+	 * @return the subscription length of this commerce subscription entry
+	 */
 	@Override
 	public int getSubscriptionLength() {
 		return _commerceSubscriptionEntry.getSubscriptionLength();
 	}
 
 	/**
-	* Returns the subscription status of this commerce subscription entry.
-	*
-	* @return the subscription status of this commerce subscription entry
-	*/
+	 * Returns the subscription status of this commerce subscription entry.
+	 *
+	 * @return the subscription status of this commerce subscription entry
+	 */
 	@Override
 	public int getSubscriptionStatus() {
 		return _commerceSubscriptionEntry.getSubscriptionStatus();
 	}
 
 	/**
-	* Returns the subscription type of this commerce subscription entry.
-	*
-	* @return the subscription type of this commerce subscription entry
-	*/
+	 * Returns the subscription type of this commerce subscription entry.
+	 *
+	 * @return the subscription type of this commerce subscription entry
+	 */
 	@Override
 	public String getSubscriptionType() {
 		return _commerceSubscriptionEntry.getSubscriptionType();
 	}
 
 	/**
-	* Returns the subscription type settings of this commerce subscription entry.
-	*
-	* @return the subscription type settings of this commerce subscription entry
-	*/
+	 * Returns the subscription type settings of this commerce subscription entry.
+	 *
+	 * @return the subscription type settings of this commerce subscription entry
+	 */
 	@Override
 	public String getSubscriptionTypeSettings() {
 		return _commerceSubscriptionEntry.getSubscriptionTypeSettings();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties() {
-		return _commerceSubscriptionEntry.getSubscriptionTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getSubscriptionTypeSettingsProperties() {
+
+		return _commerceSubscriptionEntry.
+			getSubscriptionTypeSettingsProperties();
 	}
 
 	/**
-	* Returns the user ID of this commerce subscription entry.
-	*
-	* @return the user ID of this commerce subscription entry
-	*/
+	 * Returns the user ID of this commerce subscription entry.
+	 *
+	 * @return the user ID of this commerce subscription entry
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceSubscriptionEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce subscription entry.
-	*
-	* @return the user name of this commerce subscription entry
-	*/
+	 * Returns the user name of this commerce subscription entry.
+	 *
+	 * @return the user name of this commerce subscription entry
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceSubscriptionEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce subscription entry.
-	*
-	* @return the user uuid of this commerce subscription entry
-	*/
+	 * Returns the user uuid of this commerce subscription entry.
+	 *
+	 * @return the user uuid of this commerce subscription entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceSubscriptionEntry.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce subscription entry.
-	*
-	* @return the uuid of this commerce subscription entry
-	*/
+	 * Returns the uuid of this commerce subscription entry.
+	 *
+	 * @return the uuid of this commerce subscription entry
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceSubscriptionEntry.getUuid();
@@ -518,70 +525,73 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the commerce order item ID of this commerce subscription entry.
-	*
-	* @param commerceOrderItemId the commerce order item ID of this commerce subscription entry
-	*/
+	 * Sets the commerce order item ID of this commerce subscription entry.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID of this commerce subscription entry
+	 */
 	@Override
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	/**
-	* Sets the commerce subscription entry ID of this commerce subscription entry.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID of this commerce subscription entry
-	*/
+	 * Sets the commerce subscription entry ID of this commerce subscription entry.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID of this commerce subscription entry
+	 */
 	@Override
-	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
-		_commerceSubscriptionEntry.setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
+	public void setCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId) {
+
+		_commerceSubscriptionEntry.setCommerceSubscriptionEntryId(
+			commerceSubscriptionEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce subscription entry.
-	*
-	* @param companyId the company ID of this commerce subscription entry
-	*/
+	 * Sets the company ID of this commerce subscription entry.
+	 *
+	 * @param companyId the company ID of this commerce subscription entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceSubscriptionEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp instance uuid of this commerce subscription entry.
-	*
-	* @param CPInstanceUuid the cp instance uuid of this commerce subscription entry
-	*/
+	 * Sets the cp instance uuid of this commerce subscription entry.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid of this commerce subscription entry
+	 */
 	@Override
 	public void setCPInstanceUuid(String CPInstanceUuid) {
 		_commerceSubscriptionEntry.setCPInstanceUuid(CPInstanceUuid);
 	}
 
 	/**
-	* Sets the c product ID of this commerce subscription entry.
-	*
-	* @param CProductId the c product ID of this commerce subscription entry
-	*/
+	 * Sets the c product ID of this commerce subscription entry.
+	 *
+	 * @param CProductId the c product ID of this commerce subscription entry
+	 */
 	@Override
 	public void setCProductId(long CProductId) {
 		_commerceSubscriptionEntry.setCProductId(CProductId);
 	}
 
 	/**
-	* Sets the create date of this commerce subscription entry.
-	*
-	* @param createDate the create date of this commerce subscription entry
-	*/
+	 * Sets the create date of this commerce subscription entry.
+	 *
+	 * @param createDate the create date of this commerce subscription entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceSubscriptionEntry.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the current cycle of this commerce subscription entry.
-	*
-	* @param currentCycle the current cycle of this commerce subscription entry
-	*/
+	 * Sets the current cycle of this commerce subscription entry.
+	 *
+	 * @param currentCycle the current cycle of this commerce subscription entry
+	 */
 	@Override
 	public void setCurrentCycle(long currentCycle) {
 		_commerceSubscriptionEntry.setCurrentCycle(currentCycle);
@@ -590,6 +600,7 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceSubscriptionEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -604,40 +615,41 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the group ID of this commerce subscription entry.
-	*
-	* @param groupId the group ID of this commerce subscription entry
-	*/
+	 * Sets the group ID of this commerce subscription entry.
+	 *
+	 * @param groupId the group ID of this commerce subscription entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceSubscriptionEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last iteration date of this commerce subscription entry.
-	*
-	* @param lastIterationDate the last iteration date of this commerce subscription entry
-	*/
+	 * Sets the last iteration date of this commerce subscription entry.
+	 *
+	 * @param lastIterationDate the last iteration date of this commerce subscription entry
+	 */
 	@Override
 	public void setLastIterationDate(Date lastIterationDate) {
 		_commerceSubscriptionEntry.setLastIterationDate(lastIterationDate);
 	}
 
 	/**
-	* Sets the max subscription cycles of this commerce subscription entry.
-	*
-	* @param maxSubscriptionCycles the max subscription cycles of this commerce subscription entry
-	*/
+	 * Sets the max subscription cycles of this commerce subscription entry.
+	 *
+	 * @param maxSubscriptionCycles the max subscription cycles of this commerce subscription entry
+	 */
 	@Override
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
-		_commerceSubscriptionEntry.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		_commerceSubscriptionEntry.setMaxSubscriptionCycles(
+			maxSubscriptionCycles);
 	}
 
 	/**
-	* Sets the modified date of this commerce subscription entry.
-	*
-	* @param modifiedDate the modified date of this commerce subscription entry
-	*/
+	 * Sets the modified date of this commerce subscription entry.
+	 *
+	 * @param modifiedDate the modified date of this commerce subscription entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceSubscriptionEntry.setModifiedDate(modifiedDate);
@@ -649,20 +661,20 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the next iteration date of this commerce subscription entry.
-	*
-	* @param nextIterationDate the next iteration date of this commerce subscription entry
-	*/
+	 * Sets the next iteration date of this commerce subscription entry.
+	 *
+	 * @param nextIterationDate the next iteration date of this commerce subscription entry
+	 */
 	@Override
 	public void setNextIterationDate(Date nextIterationDate) {
 		_commerceSubscriptionEntry.setNextIterationDate(nextIterationDate);
 	}
 
 	/**
-	* Sets the primary key of this commerce subscription entry.
-	*
-	* @param primaryKey the primary key of this commerce subscription entry
-	*/
+	 * Sets the primary key of this commerce subscription entry.
+	 *
+	 * @param primaryKey the primary key of this commerce subscription entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceSubscriptionEntry.setPrimaryKey(primaryKey);
@@ -674,109 +686,116 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the start date of this commerce subscription entry.
-	*
-	* @param startDate the start date of this commerce subscription entry
-	*/
+	 * Sets the start date of this commerce subscription entry.
+	 *
+	 * @param startDate the start date of this commerce subscription entry
+	 */
 	@Override
 	public void setStartDate(Date startDate) {
 		_commerceSubscriptionEntry.setStartDate(startDate);
 	}
 
 	/**
-	* Sets the subscription length of this commerce subscription entry.
-	*
-	* @param subscriptionLength the subscription length of this commerce subscription entry
-	*/
+	 * Sets the subscription length of this commerce subscription entry.
+	 *
+	 * @param subscriptionLength the subscription length of this commerce subscription entry
+	 */
 	@Override
 	public void setSubscriptionLength(int subscriptionLength) {
 		_commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
 	}
 
 	/**
-	* Sets the subscription status of this commerce subscription entry.
-	*
-	* @param subscriptionStatus the subscription status of this commerce subscription entry
-	*/
+	 * Sets the subscription status of this commerce subscription entry.
+	 *
+	 * @param subscriptionStatus the subscription status of this commerce subscription entry
+	 */
 	@Override
 	public void setSubscriptionStatus(int subscriptionStatus) {
 		_commerceSubscriptionEntry.setSubscriptionStatus(subscriptionStatus);
 	}
 
 	/**
-	* Sets the subscription type of this commerce subscription entry.
-	*
-	* @param subscriptionType the subscription type of this commerce subscription entry
-	*/
+	 * Sets the subscription type of this commerce subscription entry.
+	 *
+	 * @param subscriptionType the subscription type of this commerce subscription entry
+	 */
 	@Override
 	public void setSubscriptionType(String subscriptionType) {
 		_commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
 	}
 
 	/**
-	* Sets the subscription type settings of this commerce subscription entry.
-	*
-	* @param subscriptionTypeSettings the subscription type settings of this commerce subscription entry
-	*/
+	 * Sets the subscription type settings of this commerce subscription entry.
+	 *
+	 * @param subscriptionTypeSettings the subscription type settings of this commerce subscription entry
+	 */
 	@Override
 	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
-		_commerceSubscriptionEntry.setSubscriptionTypeSettings(subscriptionTypeSettings);
+		_commerceSubscriptionEntry.setSubscriptionTypeSettings(
+			subscriptionTypeSettings);
 	}
 
 	@Override
 	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties) {
-		_commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(subscriptionTypeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			subscriptionTypeSettingsProperties) {
+
+		_commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
+			subscriptionTypeSettingsProperties);
 	}
 
 	/**
-	* Sets the user ID of this commerce subscription entry.
-	*
-	* @param userId the user ID of this commerce subscription entry
-	*/
+	 * Sets the user ID of this commerce subscription entry.
+	 *
+	 * @param userId the user ID of this commerce subscription entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceSubscriptionEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce subscription entry.
-	*
-	* @param userName the user name of this commerce subscription entry
-	*/
+	 * Sets the user name of this commerce subscription entry.
+	 *
+	 * @param userName the user name of this commerce subscription entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceSubscriptionEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce subscription entry.
-	*
-	* @param userUuid the user uuid of this commerce subscription entry
-	*/
+	 * Sets the user uuid of this commerce subscription entry.
+	 *
+	 * @param userUuid the user uuid of this commerce subscription entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceSubscriptionEntry.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce subscription entry.
-	*
-	* @param uuid the uuid of this commerce subscription entry
-	*/
+	 * Sets the uuid of this commerce subscription entry.
+	 *
+	 * @param uuid the uuid of this commerce subscription entry
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceSubscriptionEntry.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceSubscriptionEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceSubscriptionEntry>
+		toCacheModel() {
+
 		return _commerceSubscriptionEntry.toCacheModel();
 	}
 
 	@Override
 	public CommerceSubscriptionEntry toEscapedModel() {
-		return new CommerceSubscriptionEntryWrapper(_commerceSubscriptionEntry.toEscapedModel());
+		return new CommerceSubscriptionEntryWrapper(
+			_commerceSubscriptionEntry.toEscapedModel());
 	}
 
 	@Override
@@ -786,7 +805,8 @@ public class CommerceSubscriptionEntryWrapper
 
 	@Override
 	public CommerceSubscriptionEntry toUnescapedModel() {
-		return new CommerceSubscriptionEntryWrapper(_commerceSubscriptionEntry.toUnescapedModel());
+		return new CommerceSubscriptionEntryWrapper(
+			_commerceSubscriptionEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -804,10 +824,13 @@ public class CommerceSubscriptionEntryWrapper
 			return false;
 		}
 
-		CommerceSubscriptionEntryWrapper commerceSubscriptionEntryWrapper = (CommerceSubscriptionEntryWrapper)obj;
+		CommerceSubscriptionEntryWrapper commerceSubscriptionEntryWrapper =
+			(CommerceSubscriptionEntryWrapper)obj;
 
-		if (Objects.equals(_commerceSubscriptionEntry,
-					commerceSubscriptionEntryWrapper._commerceSubscriptionEntry)) {
+		if (Objects.equals(
+				_commerceSubscriptionEntry,
+				commerceSubscriptionEntryWrapper._commerceSubscriptionEntry)) {
+
 			return true;
 		}
 
@@ -840,4 +863,5 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	private final CommerceSubscriptionEntry _commerceSubscriptionEntry;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,35 +42,42 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CommerceUserSegmentEntryServiceUtil
- * @see com.liferay.commerce.user.segment.service.base.CommerceUserSegmentEntryServiceBaseImpl
- * @see com.liferay.commerce.user.segment.service.impl.CommerceUserSegmentEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceUserSegmentEntry"}, service = CommerceUserSegmentEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceUserSegmentEntry"
+	},
+	service = CommerceUserSegmentEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceUserSegmentEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceUserSegmentEntryServiceUtil} to access the commerce user segment entry remote service. Add custom service methods to {@link com.liferay.commerce.user.segment.service.impl.CommerceUserSegmentEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceUserSegmentEntryServiceUtil} to access the commerce user segment entry remote service. Add custom service methods to <code>com.liferay.commerce.user.segment.service.impl.CommerceUserSegmentEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceUserSegmentEntry addCommerceUserSegmentEntry(
-		Map<Locale, String> nameMap, String key, boolean active,
-		boolean system, double priority, ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String key, boolean active,
+			boolean system, double priority, ServiceContext serviceContext)
 		throws PortalException;
 
 	public CommerceUserSegmentEntry deleteCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId) throws PortalException;
+			long commerceUserSegmentEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceUserSegmentEntry> getCommerceUserSegmentEntries(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+			long groupId, int start, int end,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -80,22 +86,27 @@ public interface CommerceUserSegmentEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceUserSegmentEntry getCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId) throws PortalException;
+			long commerceUserSegmentEntryId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceUserSegmentEntry> searchCommerceUserSegmentEntries(
-		long companyId, long groupId, String keywords, int start, int end,
-		Sort sort) throws PortalException;
+	public BaseModelSearchResult<CommerceUserSegmentEntry>
+			searchCommerceUserSegmentEntries(
+				long companyId, long groupId, String keywords, int start,
+				int end, Sort sort)
+		throws PortalException;
 
 	public CommerceUserSegmentEntry updateCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId, Map<Locale, String> nameMap,
-		String key, boolean active, double priority,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceUserSegmentEntryId, Map<Locale, String> nameMap,
+			String key, boolean active, double priority,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

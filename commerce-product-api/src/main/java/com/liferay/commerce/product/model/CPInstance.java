@@ -25,19 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPInstanceModel
- * @see com.liferay.commerce.product.model.impl.CPInstanceImpl
- * @see com.liferay.commerce.product.model.impl.CPInstanceModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPInstanceImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPInstanceImpl"
+)
 @ProviderType
 public interface CPInstance extends CPInstanceModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPInstanceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPInstanceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPInstance, Long> CP_INSTANCE_ID_ACCESSOR = new Accessor<CPInstance, Long>() {
+	public static final Accessor<CPInstance, Long> CP_INSTANCE_ID_ACCESSOR =
+		new Accessor<CPInstance, Long>() {
+
 			@Override
 			public Long get(CPInstance cpInstance) {
 				return cpInstance.getCPInstanceId();
@@ -52,6 +55,7 @@ public interface CPInstance extends CPInstanceModel, PersistedModel {
 			public Class<CPInstance> getTypeClass() {
 				return CPInstance.class;
 			}
+
 		};
 
 	public CPDefinition getCPDefinition()
@@ -60,8 +64,11 @@ public interface CPInstance extends CPInstanceModel, PersistedModel {
 	public CPSubscriptionInfo getCPSubscriptionInfo()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getSubscriptionTypeSettingsProperties();
 
 	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			subscriptionTypeSettingsProperties);
+
 }

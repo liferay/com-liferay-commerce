@@ -25,58 +25,66 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceAccountUserRelModel
- * @see com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl
- * @see com.liferay.commerce.account.model.impl.CommerceAccountUserRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl"
+)
 @ProviderType
-public interface CommerceAccountUserRel extends CommerceAccountUserRelModel,
-	PersistedModel {
+public interface CommerceAccountUserRel
+	extends CommerceAccountUserRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAccountUserRel, Long> COMMERCE_ACCOUNT_ID_ACCESSOR =
-		new Accessor<CommerceAccountUserRel, Long>() {
-			@Override
-			public Long get(CommerceAccountUserRel commerceAccountUserRel) {
-				return commerceAccountUserRel.getCommerceAccountId();
-			}
+	public static final Accessor<CommerceAccountUserRel, Long>
+		COMMERCE_ACCOUNT_ID_ACCESSOR =
+			new Accessor<CommerceAccountUserRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceAccountUserRel commerceAccountUserRel) {
+					return commerceAccountUserRel.getCommerceAccountId();
+				}
 
-			@Override
-			public Class<CommerceAccountUserRel> getTypeClass() {
-				return CommerceAccountUserRel.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
 
-	public static final Accessor<CommerceAccountUserRel, Long> COMMERCE_ACCOUNT_USER_ID_ACCESSOR =
-		new Accessor<CommerceAccountUserRel, Long>() {
-			@Override
-			public Long get(CommerceAccountUserRel commerceAccountUserRel) {
-				return commerceAccountUserRel.getCommerceAccountUserId();
-			}
+				@Override
+				public Class<CommerceAccountUserRel> getTypeClass() {
+					return CommerceAccountUserRel.class;
+				}
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+			};
+	public static final Accessor<CommerceAccountUserRel, Long>
+		COMMERCE_ACCOUNT_USER_ID_ACCESSOR =
+			new Accessor<CommerceAccountUserRel, Long>() {
 
-			@Override
-			public Class<CommerceAccountUserRel> getTypeClass() {
-				return CommerceAccountUserRel.class;
-			}
-		};
+				@Override
+				public Long get(CommerceAccountUserRel commerceAccountUserRel) {
+					return commerceAccountUserRel.getCommerceAccountUserId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceAccountUserRel> getTypeClass() {
+					return CommerceAccountUserRel.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.model.User getUser()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole> getUserGroupRoles()
+	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole>
+			getUserGroupRoles()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

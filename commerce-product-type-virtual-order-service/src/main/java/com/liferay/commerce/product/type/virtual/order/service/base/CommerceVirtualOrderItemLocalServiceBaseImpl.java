@@ -20,13 +20,11 @@ import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrde
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemPersistence;
-
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -69,17 +67,17 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemLocalServiceImpl
- * @see com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements CommerceVirtualOrderItemLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements CommerceVirtualOrderItemLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalServiceUtil} to access the commerce virtual order item local service.
+	 * Never modify or reference this class directly. Use <code>CommerceVirtualOrderItemLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -92,9 +90,11 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public CommerceVirtualOrderItem addCommerceVirtualOrderItem(
 		CommerceVirtualOrderItem commerceVirtualOrderItem) {
+
 		commerceVirtualOrderItem.setNew(true);
 
-		return commerceVirtualOrderItemPersistence.update(commerceVirtualOrderItem);
+		return commerceVirtualOrderItemPersistence.update(
+			commerceVirtualOrderItem);
 	}
 
 	/**
@@ -107,7 +107,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommerceVirtualOrderItem createCommerceVirtualOrderItem(
 		long commerceVirtualOrderItemId) {
-		return commerceVirtualOrderItemPersistence.create(commerceVirtualOrderItemId);
+
+		return commerceVirtualOrderItemPersistence.create(
+			commerceVirtualOrderItemId);
 	}
 
 	/**
@@ -120,8 +122,11 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceVirtualOrderItem deleteCommerceVirtualOrderItem(
-		long commerceVirtualOrderItemId) throws PortalException {
-		return commerceVirtualOrderItemPersistence.remove(commerceVirtualOrderItemId);
+			long commerceVirtualOrderItemId)
+		throws PortalException {
+
+		return commerceVirtualOrderItemPersistence.remove(
+			commerceVirtualOrderItemId);
 	}
 
 	/**
@@ -134,15 +139,17 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public CommerceVirtualOrderItem deleteCommerceVirtualOrderItem(
 		CommerceVirtualOrderItem commerceVirtualOrderItem) {
-		return commerceVirtualOrderItemPersistence.remove(commerceVirtualOrderItem);
+
+		return commerceVirtualOrderItemPersistence.remove(
+			commerceVirtualOrderItem);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceVirtualOrderItem.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceVirtualOrderItem.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -153,14 +160,15 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -169,17 +177,18 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -189,10 +198,12 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceVirtualOrderItemPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -203,7 +214,8 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceVirtualOrderItemPersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceVirtualOrderItemPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -214,16 +226,19 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceVirtualOrderItemPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceVirtualOrderItemPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommerceVirtualOrderItem fetchCommerceVirtualOrderItem(
 		long commerceVirtualOrderItemId) {
-		return commerceVirtualOrderItemPersistence.fetchByPrimaryKey(commerceVirtualOrderItemId);
+
+		return commerceVirtualOrderItemPersistence.fetchByPrimaryKey(
+			commerceVirtualOrderItemId);
 	}
 
 	/**
@@ -234,8 +249,10 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the matching commerce virtual order item, or <code>null</code> if a matching commerce virtual order item could not be found
 	 */
 	@Override
-	public CommerceVirtualOrderItem fetchCommerceVirtualOrderItemByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CommerceVirtualOrderItem
+		fetchCommerceVirtualOrderItemByUuidAndGroupId(
+			String uuid, long groupId) {
+
 		return commerceVirtualOrderItemPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
@@ -248,15 +265,20 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceVirtualOrderItem getCommerceVirtualOrderItem(
-		long commerceVirtualOrderItemId) throws PortalException {
-		return commerceVirtualOrderItemPersistence.findByPrimaryKey(commerceVirtualOrderItemId);
+			long commerceVirtualOrderItemId)
+		throws PortalException {
+
+		return commerceVirtualOrderItemPersistence.findByPrimaryKey(
+			commerceVirtualOrderItemId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceVirtualOrderItemLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceVirtualOrderItemLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceVirtualOrderItem.class);
 
@@ -267,12 +289,17 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceVirtualOrderItemLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceVirtualOrderItemLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceVirtualOrderItem.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceVirtualOrderItem.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceVirtualOrderItemId");
@@ -282,7 +309,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceVirtualOrderItemLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceVirtualOrderItemLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceVirtualOrderItem.class);
 
@@ -293,50 +322,66 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) {
-		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+
+		final ExportActionableDynamicQuery exportActionableDynamicQuery =
+			new ExportActionableDynamicQuery() {
+
 				@Override
 				public long performCount() throws PortalException {
-					ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+					ManifestSummary manifestSummary =
+						portletDataContext.getManifestSummary();
 
 					StagedModelType stagedModelType = getStagedModelType();
 
 					long modelAdditionCount = super.performCount();
 
-					manifestSummary.addModelAdditionCount(stagedModelType,
-						modelAdditionCount);
+					manifestSummary.addModelAdditionCount(
+						stagedModelType, modelAdditionCount);
 
-					long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext,
-							stagedModelType);
+					long modelDeletionCount =
+						ExportImportHelperUtil.getModelDeletionCount(
+							portletDataContext, stagedModelType);
 
-					manifestSummary.addModelDeletionCount(stagedModelType,
-						modelDeletionCount);
+					manifestSummary.addModelDeletionCount(
+						stagedModelType, modelDeletionCount);
 
 					return modelAdditionCount;
 				}
+
 			};
 
 		initActionableDynamicQuery(exportActionableDynamicQuery);
 
-		exportActionableDynamicQuery.setAddCriteriaMethod(new ActionableDynamicQuery.AddCriteriaMethod() {
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					portletDataContext.addDateRangeCriteria(dynamicQuery,
-						"modifiedDate");
+					portletDataContext.addDateRangeCriteria(
+						dynamicQuery, "modifiedDate");
 				}
+
 			});
 
-		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceVirtualOrderItem>() {
+		exportActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceVirtualOrderItem>() {
+
 				@Override
 				public void performAction(
-					CommerceVirtualOrderItem commerceVirtualOrderItem)
+						CommerceVirtualOrderItem commerceVirtualOrderItem)
 					throws PortalException {
-					StagedModelDataHandlerUtil.exportStagedModel(portletDataContext,
-						commerceVirtualOrderItem);
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, commerceVirtualOrderItem);
 				}
+
 			});
-		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
 				PortalUtil.getClassNameId(
 					CommerceVirtualOrderItem.class.getName())));
 
@@ -349,13 +394,18 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceVirtualOrderItemLocalService.deleteCommerceVirtualOrderItem((CommerceVirtualOrderItem)persistedModel);
+
+		return commerceVirtualOrderItemLocalService.
+			deleteCommerceVirtualOrderItem(
+				(CommerceVirtualOrderItem)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return commerceVirtualOrderItemPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return commerceVirtualOrderItemPersistence.findByPrimaryKey(
+			primaryKeyObj);
 	}
 
 	/**
@@ -366,9 +416,12 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the matching commerce virtual order items, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItemsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return commerceVirtualOrderItemPersistence.findByUuid_C(uuid, companyId);
+	public List<CommerceVirtualOrderItem>
+		getCommerceVirtualOrderItemsByUuidAndCompanyId(
+			String uuid, long companyId) {
+
+		return commerceVirtualOrderItemPersistence.findByUuid_C(
+			uuid, companyId);
 	}
 
 	/**
@@ -382,11 +435,13 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @return the range of matching commerce virtual order items, or an empty list if no matches were found
 	 */
 	@Override
-	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItemsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-		return commerceVirtualOrderItemPersistence.findByUuid_C(uuid,
-			companyId, start, end, orderByComparator);
+	public List<CommerceVirtualOrderItem>
+		getCommerceVirtualOrderItemsByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
+
+		return commerceVirtualOrderItemPersistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -399,7 +454,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceVirtualOrderItem getCommerceVirtualOrderItemByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
+			String uuid, long groupId)
+		throws PortalException {
+
 		return commerceVirtualOrderItemPersistence.findByUUID_G(uuid, groupId);
 	}
 
@@ -407,7 +464,7 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * Returns a range of all the commerce virtual order items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce virtual order items
@@ -417,6 +474,7 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
 		int start, int end) {
+
 		return commerceVirtualOrderItemPersistence.findAll(start, end);
 	}
 
@@ -440,7 +498,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	@Override
 	public CommerceVirtualOrderItem updateCommerceVirtualOrderItem(
 		CommerceVirtualOrderItem commerceVirtualOrderItem) {
-		return commerceVirtualOrderItemPersistence.update(commerceVirtualOrderItem);
+
+		return commerceVirtualOrderItemPersistence.update(
+			commerceVirtualOrderItem);
 	}
 
 	/**
@@ -448,7 +508,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the commerce virtual order item local service
 	 */
-	public CommerceVirtualOrderItemLocalService getCommerceVirtualOrderItemLocalService() {
+	public CommerceVirtualOrderItemLocalService
+		getCommerceVirtualOrderItemLocalService() {
+
 		return commerceVirtualOrderItemLocalService;
 	}
 
@@ -458,8 +520,11 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param commerceVirtualOrderItemLocalService the commerce virtual order item local service
 	 */
 	public void setCommerceVirtualOrderItemLocalService(
-		CommerceVirtualOrderItemLocalService commerceVirtualOrderItemLocalService) {
-		this.commerceVirtualOrderItemLocalService = commerceVirtualOrderItemLocalService;
+		CommerceVirtualOrderItemLocalService
+			commerceVirtualOrderItemLocalService) {
+
+		this.commerceVirtualOrderItemLocalService =
+			commerceVirtualOrderItemLocalService;
 	}
 
 	/**
@@ -467,7 +532,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the commerce virtual order item persistence
 	 */
-	public CommerceVirtualOrderItemPersistence getCommerceVirtualOrderItemPersistence() {
+	public CommerceVirtualOrderItemPersistence
+		getCommerceVirtualOrderItemPersistence() {
+
 		return commerceVirtualOrderItemPersistence;
 	}
 
@@ -477,8 +544,11 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param commerceVirtualOrderItemPersistence the commerce virtual order item persistence
 	 */
 	public void setCommerceVirtualOrderItemPersistence(
-		CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence) {
-		this.commerceVirtualOrderItemPersistence = commerceVirtualOrderItemPersistence;
+		CommerceVirtualOrderItemPersistence
+			commerceVirtualOrderItemPersistence) {
+
+		this.commerceVirtualOrderItemPersistence =
+			commerceVirtualOrderItemPersistence;
 	}
 
 	/**
@@ -497,6 +567,7 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	public void setCommerceVirtualOrderItemFinder(
 		CommerceVirtualOrderItemFinder commerceVirtualOrderItemFinder) {
+
 		this.commerceVirtualOrderItemFinder = commerceVirtualOrderItemFinder;
 	}
 
@@ -505,7 +576,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -515,7 +588,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -524,7 +599,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -534,7 +611,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -554,6 +633,7 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -562,7 +642,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -572,7 +654,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -581,7 +665,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -592,6 +678,7 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -618,7 +705,9 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 *
 	 * @return the dl app local service
 	 */
-	public com.liferay.document.library.kernel.service.DLAppLocalService getDLAppLocalService() {
+	public com.liferay.document.library.kernel.service.DLAppLocalService
+		getDLAppLocalService() {
+
 		return dlAppLocalService;
 	}
 
@@ -628,12 +717,15 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 * @param dlAppLocalService the dl app local service
 	 */
 	public void setDLAppLocalService(
-		com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService) {
+		com.liferay.document.library.kernel.service.DLAppLocalService
+			dlAppLocalService) {
+
 		this.dlAppLocalService = dlAppLocalService;
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem",
 			commerceVirtualOrderItemLocalService);
 	}
 
@@ -667,15 +759,16 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceVirtualOrderItemPersistence.getDataSource();
+			DataSource dataSource =
+				commerceVirtualOrderItemPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -685,25 +778,54 @@ public abstract class CommerceVirtualOrderItemLocalServiceBaseImpl
 	}
 
 	@BeanReference(type = CommerceVirtualOrderItemLocalService.class)
-	protected CommerceVirtualOrderItemLocalService commerceVirtualOrderItemLocalService;
+	protected CommerceVirtualOrderItemLocalService
+		commerceVirtualOrderItemLocalService;
+
 	@BeanReference(type = CommerceVirtualOrderItemPersistence.class)
-	protected CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence;
+	protected CommerceVirtualOrderItemPersistence
+		commerceVirtualOrderItemPersistence;
+
 	@BeanReference(type = CommerceVirtualOrderItemFinder.class)
 	protected CommerceVirtualOrderItemFinder commerceVirtualOrderItemFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.document.library.kernel.service.DLAppLocalService.class)
-	protected com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService;
+
+	@ServiceReference(
+		type = com.liferay.document.library.kernel.service.DLAppLocalService.class
+	)
+	protected com.liferay.document.library.kernel.service.DLAppLocalService
+		dlAppLocalService;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

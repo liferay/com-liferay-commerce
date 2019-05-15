@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceSubscriptionEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceSubscriptionEntryServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceSubscriptionEntryServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.model.CommerceSubscriptionEntrySoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.model.CommerceSubscriptionEntry}, that is translated to a
- * {@link com.liferay.commerce.model.CommerceSubscriptionEntrySoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.model.CommerceSubscriptionEntrySoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.model.CommerceSubscriptionEntry</code>, that is translated to a
+ * <code>com.liferay.commerce.model.CommerceSubscriptionEntrySoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,48 +59,18 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceSubscriptionEntryServiceHttp
- * @see com.liferay.commerce.model.CommerceSubscriptionEntrySoap
- * @see CommerceSubscriptionEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceSubscriptionEntryServiceSoap {
+
 	public static void deleteCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId) throws RemoteException {
-		try {
-			CommerceSubscriptionEntryServiceUtil.deleteCommerceSubscriptionEntry(commerceSubscriptionEntryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap fetchCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId) throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue = CommerceSubscriptionEntryServiceUtil.fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
-
-			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[] getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
+			long commerceSubscriptionEntryId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> returnValue =
-				CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntries(groupId,
-					userId, start, end, orderByComparator);
 
-			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModels(returnValue);
+		try {
+			CommerceSubscriptionEntryServiceUtil.
+				deleteCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -109,11 +79,58 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static int getCommerceSubscriptionEntriesCount(long groupId,
-		long userId) throws RemoteException {
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap
+			fetchCommerceSubscriptionEntry(long commerceSubscriptionEntryId)
+		throws RemoteException {
+
 		try {
-			int returnValue = CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntriesCount(groupId,
-					userId);
+			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue =
+				CommerceSubscriptionEntryServiceUtil.
+					fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
+
+			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[]
+			getCommerceSubscriptionEntries(
+				long groupId, long userId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceSubscriptionEntry>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				returnValue =
+					CommerceSubscriptionEntryServiceUtil.
+						getCommerceSubscriptionEntries(
+							groupId, userId, start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceSubscriptionEntriesCount(
+			long groupId, long userId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceSubscriptionEntryServiceUtil.
+					getCommerceSubscriptionEntriesCount(groupId, userId);
 
 			return returnValue;
 		}
@@ -124,14 +141,18 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap updateSubscriptionStatus(
-		long commerceSubscriptionEntryId, int subscriptionStatus)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap
+			updateSubscriptionStatus(
+				long commerceSubscriptionEntryId, int subscriptionStatus)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue = CommerceSubscriptionEntryServiceUtil.updateSubscriptionStatus(commerceSubscriptionEntryId,
-					subscriptionStatus);
 
-			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue =
+				CommerceSubscriptionEntryServiceUtil.updateSubscriptionStatus(
+					commerceSubscriptionEntryId, subscriptionStatus);
+
+			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -140,5 +161,7 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceSubscriptionEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceSubscriptionEntryServiceSoap.class);
+
 }

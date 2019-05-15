@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.notification.service.http.CommerceNotificationTemplateServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.notification.service.http.CommerceNotificationTemplateServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateSoap implements Serializable {
+
 	public static CommerceNotificationTemplateSoap toSoapModel(
 		CommerceNotificationTemplate model) {
-		CommerceNotificationTemplateSoap soapModel = new CommerceNotificationTemplateSoap();
+
+		CommerceNotificationTemplateSoap soapModel =
+			new CommerceNotificationTemplateSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommerceNotificationTemplateId(model.getCommerceNotificationTemplateId());
+		soapModel.setCommerceNotificationTemplateId(
+			model.getCommerceNotificationTemplateId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -59,7 +62,9 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 
 	public static CommerceNotificationTemplateSoap[] toSoapModels(
 		CommerceNotificationTemplate[] models) {
-		CommerceNotificationTemplateSoap[] soapModels = new CommerceNotificationTemplateSoap[models.length];
+
+		CommerceNotificationTemplateSoap[] soapModels =
+			new CommerceNotificationTemplateSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -70,10 +75,12 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 
 	public static CommerceNotificationTemplateSoap[][] toSoapModels(
 		CommerceNotificationTemplate[][] models) {
+
 		CommerceNotificationTemplateSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceNotificationTemplateSoap[models.length][models[0].length];
+			soapModels = new CommerceNotificationTemplateSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceNotificationTemplateSoap[0][0];
@@ -88,13 +95,16 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 
 	public static CommerceNotificationTemplateSoap[] toSoapModels(
 		List<CommerceNotificationTemplate> models) {
-		List<CommerceNotificationTemplateSoap> soapModels = new ArrayList<CommerceNotificationTemplateSoap>(models.size());
+
+		List<CommerceNotificationTemplateSoap> soapModels =
+			new ArrayList<CommerceNotificationTemplateSoap>(models.size());
 
 		for (CommerceNotificationTemplate model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceNotificationTemplateSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceNotificationTemplateSoap[soapModels.size()]);
 	}
 
 	public CommerceNotificationTemplateSoap() {
@@ -122,6 +132,7 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
+
 		_commerceNotificationTemplateId = commerceNotificationTemplateId;
 	}
 
@@ -275,4 +286,5 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 	private boolean _enabled;
 	private String _subject;
 	private String _body;
+
 }

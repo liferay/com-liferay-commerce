@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,8 +37,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceCatalogWrapper implements CommerceCatalog,
-	ModelWrapper<CommerceCatalog> {
+public class CommerceCatalogWrapper
+	implements CommerceCatalog, ModelWrapper<CommerceCatalog> {
+
 	public CommerceCatalogWrapper(CommerceCatalog commerceCatalog) {
 		_commerceCatalog = commerceCatalog;
 	}
@@ -65,7 +65,8 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
-		attributes.put("catalogDefaultLanguageId", getCatalogDefaultLanguageId());
+		attributes.put(
+			"catalogDefaultLanguageId", getCatalogDefaultLanguageId());
 
 		return attributes;
 	}
@@ -115,7 +116,7 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		}
 
 		String catalogDefaultLanguageId = (String)attributes.get(
-				"catalogDefaultLanguageId");
+			"catalogDefaultLanguageId");
 
 		if (catalogDefaultLanguageId != null) {
 			setCatalogDefaultLanguageId(catalogDefaultLanguageId);
@@ -124,7 +125,8 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 
 	@Override
 	public Object clone() {
-		return new CommerceCatalogWrapper((CommerceCatalog)_commerceCatalog.clone());
+		return new CommerceCatalogWrapper(
+			(CommerceCatalog)_commerceCatalog.clone());
 	}
 
 	@Override
@@ -138,40 +140,40 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Returns the catalog default language ID of this commerce catalog.
-	*
-	* @return the catalog default language ID of this commerce catalog
-	*/
+	 * Returns the catalog default language ID of this commerce catalog.
+	 *
+	 * @return the catalog default language ID of this commerce catalog
+	 */
 	@Override
 	public String getCatalogDefaultLanguageId() {
 		return _commerceCatalog.getCatalogDefaultLanguageId();
 	}
 
 	/**
-	* Returns the commerce catalog ID of this commerce catalog.
-	*
-	* @return the commerce catalog ID of this commerce catalog
-	*/
+	 * Returns the commerce catalog ID of this commerce catalog.
+	 *
+	 * @return the commerce catalog ID of this commerce catalog
+	 */
 	@Override
 	public long getCommerceCatalogId() {
 		return _commerceCatalog.getCommerceCatalogId();
 	}
 
 	/**
-	* Returns the company ID of this commerce catalog.
-	*
-	* @return the company ID of this commerce catalog
-	*/
+	 * Returns the company ID of this commerce catalog.
+	 *
+	 * @return the company ID of this commerce catalog
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceCatalog.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce catalog.
-	*
-	* @return the create date of this commerce catalog
-	*/
+	 * Returns the create date of this commerce catalog.
+	 *
+	 * @return the create date of this commerce catalog
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceCatalog.getCreateDate();
@@ -188,66 +190,66 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Returns the modified date of this commerce catalog.
-	*
-	* @return the modified date of this commerce catalog
-	*/
+	 * Returns the modified date of this commerce catalog.
+	 *
+	 * @return the modified date of this commerce catalog
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceCatalog.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce catalog.
-	*
-	* @return the name of this commerce catalog
-	*/
+	 * Returns the name of this commerce catalog.
+	 *
+	 * @return the name of this commerce catalog
+	 */
 	@Override
 	public String getName() {
 		return _commerceCatalog.getName();
 	}
 
 	/**
-	* Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce catalog
-	*/
+	 * Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this commerce catalog
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _commerceCatalog.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce catalog. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce catalog. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _commerceCatalog.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce catalog
-	*/
+	 * Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this commerce catalog
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _commerceCatalog.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce catalog
-	*/
+	 * Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce catalog
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _commerceCatalog.getName(languageId, useDefault);
@@ -264,20 +266,20 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this commerce catalog.
-	*
-	* @return the locales and localized names of this commerce catalog
-	*/
+	 * Returns a map of the locales and localized names of this commerce catalog.
+	 *
+	 * @return the locales and localized names of this commerce catalog
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _commerceCatalog.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this commerce catalog.
-	*
-	* @return the primary key of this commerce catalog
-	*/
+	 * Returns the primary key of this commerce catalog.
+	 *
+	 * @return the primary key of this commerce catalog
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceCatalog.getPrimaryKey();
@@ -289,30 +291,30 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Returns the user ID of this commerce catalog.
-	*
-	* @return the user ID of this commerce catalog
-	*/
+	 * Returns the user ID of this commerce catalog.
+	 *
+	 * @return the user ID of this commerce catalog
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceCatalog.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce catalog.
-	*
-	* @return the user name of this commerce catalog
-	*/
+	 * Returns the user name of this commerce catalog.
+	 *
+	 * @return the user name of this commerce catalog
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceCatalog.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce catalog.
-	*
-	* @return the user uuid of this commerce catalog
-	*/
+	 * Returns the user uuid of this commerce catalog.
+	 *
+	 * @return the user uuid of this commerce catalog
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceCatalog.getUserUuid();
@@ -346,13 +348,15 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceCatalog.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceCatalog.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
@@ -362,40 +366,40 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Sets the catalog default language ID of this commerce catalog.
-	*
-	* @param catalogDefaultLanguageId the catalog default language ID of this commerce catalog
-	*/
+	 * Sets the catalog default language ID of this commerce catalog.
+	 *
+	 * @param catalogDefaultLanguageId the catalog default language ID of this commerce catalog
+	 */
 	@Override
 	public void setCatalogDefaultLanguageId(String catalogDefaultLanguageId) {
 		_commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 	}
 
 	/**
-	* Sets the commerce catalog ID of this commerce catalog.
-	*
-	* @param commerceCatalogId the commerce catalog ID of this commerce catalog
-	*/
+	 * Sets the commerce catalog ID of this commerce catalog.
+	 *
+	 * @param commerceCatalogId the commerce catalog ID of this commerce catalog
+	 */
 	@Override
 	public void setCommerceCatalogId(long commerceCatalogId) {
 		_commerceCatalog.setCommerceCatalogId(commerceCatalogId);
 	}
 
 	/**
-	* Sets the company ID of this commerce catalog.
-	*
-	* @param companyId the company ID of this commerce catalog
-	*/
+	 * Sets the company ID of this commerce catalog.
+	 *
+	 * @param companyId the company ID of this commerce catalog
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceCatalog.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce catalog.
-	*
-	* @param createDate the create date of this commerce catalog
-	*/
+	 * Sets the create date of this commerce catalog.
+	 *
+	 * @param createDate the create date of this commerce catalog
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceCatalog.setCreateDate(createDate);
@@ -404,6 +408,7 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceCatalog.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -418,46 +423,47 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Sets the modified date of this commerce catalog.
-	*
-	* @param modifiedDate the modified date of this commerce catalog
-	*/
+	 * Sets the modified date of this commerce catalog.
+	 *
+	 * @param modifiedDate the modified date of this commerce catalog
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceCatalog.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce catalog.
-	*
-	* @param name the name of this commerce catalog
-	*/
+	 * Sets the name of this commerce catalog.
+	 *
+	 * @param name the name of this commerce catalog
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceCatalog.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this commerce catalog in the language.
-	*
-	* @param name the localized name of this commerce catalog
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this commerce catalog in the language.
+	 *
+	 * @param name the localized name of this commerce catalog
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_commerceCatalog.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this commerce catalog in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce catalog
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this commerce catalog in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this commerce catalog
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceCatalog.setName(name, locale, defaultLocale);
 	}
 
@@ -467,24 +473,25 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Sets the localized names of this commerce catalog from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce catalog
-	*/
+	 * Sets the localized names of this commerce catalog from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this commerce catalog
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_commerceCatalog.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this commerce catalog from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce catalog
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this commerce catalog from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this commerce catalog
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_commerceCatalog.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -494,10 +501,10 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Sets the primary key of this commerce catalog.
-	*
-	* @param primaryKey the primary key of this commerce catalog
-	*/
+	 * Sets the primary key of this commerce catalog.
+	 *
+	 * @param primaryKey the primary key of this commerce catalog
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceCatalog.setPrimaryKey(primaryKey);
@@ -509,37 +516,39 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
-	* Sets the user ID of this commerce catalog.
-	*
-	* @param userId the user ID of this commerce catalog
-	*/
+	 * Sets the user ID of this commerce catalog.
+	 *
+	 * @param userId the user ID of this commerce catalog
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceCatalog.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce catalog.
-	*
-	* @param userName the user name of this commerce catalog
-	*/
+	 * Sets the user name of this commerce catalog.
+	 *
+	 * @param userName the user name of this commerce catalog
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceCatalog.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce catalog.
-	*
-	* @param userUuid the user uuid of this commerce catalog
-	*/
+	 * Sets the user uuid of this commerce catalog.
+	 *
+	 * @param userUuid the user uuid of this commerce catalog
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceCatalog.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceCatalog> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceCatalog>
+		toCacheModel() {
+
 		return _commerceCatalog.toCacheModel();
 	}
 
@@ -573,10 +582,12 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 			return false;
 		}
 
-		CommerceCatalogWrapper commerceCatalogWrapper = (CommerceCatalogWrapper)obj;
+		CommerceCatalogWrapper commerceCatalogWrapper =
+			(CommerceCatalogWrapper)obj;
 
-		if (Objects.equals(_commerceCatalog,
-					commerceCatalogWrapper._commerceCatalog)) {
+		if (Objects.equals(
+				_commerceCatalog, commerceCatalogWrapper._commerceCatalog)) {
+
 			return true;
 		}
 
@@ -604,4 +615,5 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	private final CommerceCatalog _commerceCatalog;
+
 }

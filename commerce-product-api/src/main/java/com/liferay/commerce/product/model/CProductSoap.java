@@ -30,6 +30,7 @@ import java.util.List;
  */
 @ProviderType
 public class CProductSoap implements Serializable {
+
 	public static CProductSoap toSoapModel(CProduct model) {
 		CProductSoap soapModel = new CProductSoap();
 
@@ -42,7 +43,8 @@ public class CProductSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setPublishedCPDefinitionId(model.getPublishedCPDefinitionId());
+		soapModel.setPublishedCPDefinitionId(
+			model.getPublishedCPDefinitionId());
 		soapModel.setLatestVersion(model.getLatestVersion());
 
 		return soapModel;
@@ -76,7 +78,8 @@ public class CProductSoap implements Serializable {
 	}
 
 	public static CProductSoap[] toSoapModels(List<CProduct> models) {
-		List<CProductSoap> soapModels = new ArrayList<CProductSoap>(models.size());
+		List<CProductSoap> soapModels = new ArrayList<CProductSoap>(
+			models.size());
 
 		for (CProduct model : models) {
 			soapModels.add(toSoapModel(model));
@@ -195,4 +198,5 @@ public class CProductSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _publishedCPDefinitionId;
 	private int _latestVersion;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderNote;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -47,65 +46,68 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderNoteLocalServiceUtil
- * @see com.liferay.commerce.service.base.CommerceOrderNoteLocalServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceOrderNoteLocalServiceImpl
  * @generated
  */
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
-public interface CommerceOrderNoteLocalService extends BaseLocalService,
-	PersistedModelLocalService {
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
+public interface CommerceOrderNoteLocalService
+	extends BaseLocalService, PersistedModelLocalService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceOrderNoteLocalServiceUtil} to access the commerce order note local service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderNoteLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderNoteLocalServiceUtil} to access the commerce order note local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderNoteLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the commerce order note to the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceOrderNote the commerce order note
-	* @return the commerce order note that was added
-	*/
+	 * Adds the commerce order note to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceOrderNote the commerce order note
+	 * @return the commerce order note that was added
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderNote addCommerceOrderNote(
 		CommerceOrderNote commerceOrderNote);
 
-	public CommerceOrderNote addCommerceOrderNote(long commerceOrderId,
-		String content, boolean restricted, ServiceContext serviceContext)
+	public CommerceOrderNote addCommerceOrderNote(
+			long commerceOrderId, String content, boolean restricted,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceOrderNote addCommerceOrderNote(long commerceOrderId,
-		String content, boolean restricted, String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceOrderNote addCommerceOrderNote(
+			long commerceOrderId, String content, boolean restricted,
+			String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
-	* Creates a new commerce order note with the primary key. Does not add the commerce order note to the database.
-	*
-	* @param commerceOrderNoteId the primary key for the new commerce order note
-	* @return the new commerce order note
-	*/
+	 * Creates a new commerce order note with the primary key. Does not add the commerce order note to the database.
+	 *
+	 * @param commerceOrderNoteId the primary key for the new commerce order note
+	 * @return the new commerce order note
+	 */
 	@Transactional(enabled = false)
 	public CommerceOrderNote createCommerceOrderNote(long commerceOrderNoteId);
 
 	/**
-	* Deletes the commerce order note from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceOrderNote the commerce order note
-	* @return the commerce order note that was removed
-	*/
+	 * Deletes the commerce order note from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceOrderNote the commerce order note
+	 * @return the commerce order note that was removed
+	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceOrderNote deleteCommerceOrderNote(
 		CommerceOrderNote commerceOrderNote);
 
 	/**
-	* Deletes the commerce order note with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceOrderNoteId the primary key of the commerce order note
-	* @return the commerce order note that was removed
-	* @throws PortalException if a commerce order note with the primary key could not be found
-	*/
+	 * Deletes the commerce order note with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceOrderNoteId the primary key of the commerce order note
+	 * @return the commerce order note that was removed
+	 * @throws PortalException if a commerce order note with the primary key could not be found
+	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceOrderNote deleteCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException;
@@ -113,8 +115,8 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 	public void deleteCommerceOrderNotes(long commerceOrderId);
 
 	/**
-	* @throws PortalException
-	*/
+	 * @throws PortalException
+	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
@@ -123,81 +125,82 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 	public DynamicQuery dynamicQuery();
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end);
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery);
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceOrderNote fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode);
+	public CommerceOrderNote fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote fetchCommerceOrderNote(long commerceOrderNoteId);
 
 	/**
-	* Returns the commerce order note with the matching external reference code and company.
-	*
-	* @param companyId the primary key of the company
-	* @param externalReferenceCode the commerce order note's external reference code
-	* @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
-	*/
+	 * Returns the commerce order note with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce order note's external reference code
+	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote fetchCommerceOrderNoteByReferenceCode(
 		long companyId, String externalReferenceCode);
@@ -206,43 +209,43 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	/**
-	* Returns the commerce order note with the primary key.
-	*
-	* @param commerceOrderNoteId the primary key of the commerce order note
-	* @return the commerce order note
-	* @throws PortalException if a commerce order note with the primary key could not be found
-	*/
+	 * Returns the commerce order note with the primary key.
+	 *
+	 * @param commerceOrderNoteId the primary key of the commerce order note
+	 * @return the commerce order note
+	 * @throws PortalException if a commerce order note with the primary key could not be found
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote getCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException;
 
 	/**
-	* Returns a range of all the commerce order notes.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce order notes
-	* @param end the upper bound of the range of commerce order notes (not inclusive)
-	* @return the range of commerce order notes
-	*/
+	 * Returns a range of all the commerce order notes.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce order notes
+	 * @param end the upper bound of the range of commerce order notes (not inclusive)
+	 * @return the range of commerce order notes
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrderNote> getCommerceOrderNotes(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrderNote> getCommerceOrderNotes(long commerceOrderId,
-		boolean restricted);
+	public List<CommerceOrderNote> getCommerceOrderNotes(
+		long commerceOrderId, boolean restricted);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrderNote> getCommerceOrderNotes(long commerceOrderId,
-		int start, int end);
+	public List<CommerceOrderNote> getCommerceOrderNotes(
+		long commerceOrderId, int start, int end);
 
 	/**
-	* Returns the number of commerce order notes.
-	*
-	* @return the number of commerce order notes
-	*/
+	 * Returns the number of commerce order notes.
+	 *
+	 * @return the number of commerce order notes
+	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderNotesCount();
 
@@ -250,17 +253,17 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 	public int getCommerceOrderNotesCount(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceOrderNotesCount(long commerceOrderId,
-		boolean restricted);
+	public int getCommerceOrderNotesCount(
+		long commerceOrderId, boolean restricted);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Override
@@ -269,24 +272,28 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Updates the commerce order note in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param commerceOrderNote the commerce order note
-	* @return the commerce order note that was updated
-	*/
+	 * Updates the commerce order note in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceOrderNote the commerce order note
+	 * @return the commerce order note that was updated
+	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderNote updateCommerceOrderNote(
 		CommerceOrderNote commerceOrderNote);
 
-	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
-		String content, boolean restricted) throws PortalException;
-
-	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
-		String content, boolean restricted, String externalReferenceCode)
+	public CommerceOrderNote updateCommerceOrderNote(
+			long commerceOrderNoteId, String content, boolean restricted)
 		throws PortalException;
 
-	public CommerceOrderNote upsertCommerceOrderNote(long commerceOrderNoteId,
-		long commerceOrderId, String content, boolean restricted,
-		String externalReferenceCode, ServiceContext serviceContext)
+	public CommerceOrderNote updateCommerceOrderNote(
+			long commerceOrderNoteId, String content, boolean restricted,
+			String externalReferenceCode)
 		throws PortalException;
+
+	public CommerceOrderNote upsertCommerceOrderNote(
+			long commerceOrderNoteId, long commerceOrderId, String content,
+			boolean restricted, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

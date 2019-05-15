@@ -34,10 +34,11 @@ import com.liferay.commerce.product.service.CPMeasurementUnitLocalServiceUtil;
 @ProviderType
 public abstract class CPMeasurementUnitBaseImpl
 	extends CPMeasurementUnitModelImpl implements CPMeasurementUnit {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp measurement unit model instance should use the {@link CPMeasurementUnit} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp measurement unit model instance should use the <code>CPMeasurementUnit</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPMeasurementUnitBaseImpl
 			CPMeasurementUnitLocalServiceUtil.updateCPMeasurementUnit(this);
 		}
 	}
+
 }

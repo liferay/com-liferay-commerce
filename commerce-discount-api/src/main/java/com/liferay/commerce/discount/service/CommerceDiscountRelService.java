@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,25 +38,32 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceDiscountRelServiceUtil
- * @see com.liferay.commerce.discount.service.base.CommerceDiscountRelServiceBaseImpl
- * @see com.liferay.commerce.discount.service.impl.CommerceDiscountRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceDiscountRel"}, service = CommerceDiscountRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceDiscountRel"
+	},
+	service = CommerceDiscountRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceDiscountRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRelServiceUtil} to access the commerce discount rel remote service. Add custom service methods to {@link com.liferay.commerce.discount.service.impl.CommerceDiscountRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRelServiceUtil} to access the commerce discount rel remote service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceDiscountRel addCommerceDiscountRel(long commerceDiscountId,
-		String className, long classPK, ServiceContext serviceContext)
+	public CommerceDiscountRel addCommerceDiscountRel(
+			long commerceDiscountId, String className, long classPK,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceDiscountRel(long commerceDiscountRelId)
@@ -69,26 +75,30 @@ public interface CommerceDiscountRelService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceDiscountRel getCommerceDiscountRel(
-		long commerceDiscountRelId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscountRel> getCommerceDiscountRels(
-		long commerceDiscountId, String className) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscountRel> getCommerceDiscountRels(
-		long commerceDiscountId, String className, int start, int end,
-		OrderByComparator<CommerceDiscountRel> orderByComparator)
+			long commerceDiscountRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountRelsCount(long commerceDiscountId,
-		String className) throws PortalException;
+	public List<CommerceDiscountRel> getCommerceDiscountRels(
+			long commerceDiscountId, String className)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceDiscountRel> getCommerceDiscountRels(
+			long commerceDiscountId, String className, int start, int end,
+			OrderByComparator<CommerceDiscountRel> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceDiscountRelsCount(
+			long commerceDiscountId, String className)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

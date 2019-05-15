@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceNotificationTemplate in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceNotificationTemplate
  * @generated
  */
 @ProviderType
-public class CommerceNotificationTemplateCacheModel implements CacheModel<CommerceNotificationTemplate>,
-	Externalizable {
+public class CommerceNotificationTemplateCacheModel
+	implements CacheModel<CommerceNotificationTemplate>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 			return false;
 		}
 
-		CommerceNotificationTemplateCacheModel commerceNotificationTemplateCacheModel =
-			(CommerceNotificationTemplateCacheModel)obj;
+		CommerceNotificationTemplateCacheModel
+			commerceNotificationTemplateCacheModel =
+				(CommerceNotificationTemplateCacheModel)obj;
 
-		if (commerceNotificationTemplateId == commerceNotificationTemplateCacheModel.commerceNotificationTemplateId) {
+		if (commerceNotificationTemplateId ==
+				commerceNotificationTemplateCacheModel.
+					commerceNotificationTemplateId) {
+
 			return true;
 		}
 
@@ -111,7 +114,8 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 
 	@Override
 	public CommerceNotificationTemplate toEntityModel() {
-		CommerceNotificationTemplateImpl commerceNotificationTemplateImpl = new CommerceNotificationTemplateImpl();
+		CommerceNotificationTemplateImpl commerceNotificationTemplateImpl =
+			new CommerceNotificationTemplateImpl();
 
 		if (uuid == null) {
 			commerceNotificationTemplateImpl.setUuid("");
@@ -120,7 +124,8 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 			commerceNotificationTemplateImpl.setUuid(uuid);
 		}
 
-		commerceNotificationTemplateImpl.setCommerceNotificationTemplateId(commerceNotificationTemplateId);
+		commerceNotificationTemplateImpl.setCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
 		commerceNotificationTemplateImpl.setGroupId(groupId);
 		commerceNotificationTemplateImpl.setCompanyId(companyId);
 		commerceNotificationTemplateImpl.setUserId(userId);
@@ -136,15 +141,16 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 			commerceNotificationTemplateImpl.setCreateDate(null);
 		}
 		else {
-			commerceNotificationTemplateImpl.setCreateDate(new Date(createDate));
+			commerceNotificationTemplateImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceNotificationTemplateImpl.setModifiedDate(null);
 		}
 		else {
-			commerceNotificationTemplateImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceNotificationTemplateImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (name == null) {
@@ -245,8 +251,7 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -356,4 +361,5 @@ public class CommerceNotificationTemplateCacheModel implements CacheModel<Commer
 	public boolean enabled;
 	public String subject;
 	public String body;
+
 }

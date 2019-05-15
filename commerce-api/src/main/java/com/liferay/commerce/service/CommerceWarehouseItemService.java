@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceWarehouseItem;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,46 +38,56 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehouseItemServiceUtil
- * @see com.liferay.commerce.service.base.CommerceWarehouseItemServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceWarehouseItemServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceWarehouseItem"}, service = CommerceWarehouseItemService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceWarehouseItem"
+	},
+	service = CommerceWarehouseItemService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceWarehouseItemService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceWarehouseItemServiceUtil} to access the commerce warehouse item remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceWarehouseItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceWarehouseItemServiceUtil} to access the commerce warehouse item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceWarehouseItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceWarehouseItem addCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId, int quantity,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceWarehouseId, long cpInstanceId, int quantity,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceWarehouseItem(long commerceWarehouseItemId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId) throws PortalException;
+			long commerceWarehouseId, long cpInstanceId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWarehouseItem getCommerceWarehouseItem(
-		long commerceWarehouseItemId) throws PortalException;
+			long commerceWarehouseItemId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId) throws PortalException;
+			long cpInstanceId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId, int start, int end,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+			long cpInstanceId, int start, int end,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -86,17 +95,18 @@ public interface CommerceWarehouseItemService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPInstanceQuantity(long cpInstanceId)
-		throws PortalException;
+	public int getCPInstanceQuantity(long cpInstanceId) throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceWarehouseItem updateCommerceWarehouseItem(
-		long commerceWarehouseItemId, int quantity,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceWarehouseItemId, int quantity,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

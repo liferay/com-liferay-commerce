@@ -25,35 +25,43 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationQueueEntryModel
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl"
+)
 @ProviderType
 public interface CommerceNotificationQueueEntry
 	extends CommerceNotificationQueueEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceNotificationQueueEntry, Long> COMMERCE_NOTIFICATION_QUEUE_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceNotificationQueueEntry, Long>() {
-			@Override
-			public Long get(
-				CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-				return commerceNotificationQueueEntry.getCommerceNotificationQueueEntryId();
-			}
+	public static final Accessor<CommerceNotificationQueueEntry, Long>
+		COMMERCE_NOTIFICATION_QUEUE_ENTRY_ID_ACCESSOR =
+			new Accessor<CommerceNotificationQueueEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry) {
 
-			@Override
-			public Class<CommerceNotificationQueueEntry> getTypeClass() {
-				return CommerceNotificationQueueEntry.class;
-			}
-		};
+					return commerceNotificationQueueEntry.
+						getCommerceNotificationQueueEntryId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceNotificationQueueEntry> getTypeClass() {
+					return CommerceNotificationQueueEntry.class;
+				}
+
+			};
+
 }

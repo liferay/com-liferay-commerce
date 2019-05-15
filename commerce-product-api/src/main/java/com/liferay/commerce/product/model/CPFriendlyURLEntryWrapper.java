@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
-	ModelWrapper<CPFriendlyURLEntry> {
+public class CPFriendlyURLEntryWrapper
+	implements CPFriendlyURLEntry, ModelWrapper<CPFriendlyURLEntry> {
+
 	public CPFriendlyURLEntryWrapper(CPFriendlyURLEntry cpFriendlyURLEntry) {
 		_cpFriendlyURLEntry = cpFriendlyURLEntry;
 	}
@@ -85,7 +84,8 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 			setUuid(uuid);
 		}
 
-		Long CPFriendlyURLEntryId = (Long)attributes.get("CPFriendlyURLEntryId");
+		Long CPFriendlyURLEntryId = (Long)attributes.get(
+			"CPFriendlyURLEntryId");
 
 		if (CPFriendlyURLEntryId != null) {
 			setCPFriendlyURLEntryId(CPFriendlyURLEntryId);
@@ -160,7 +160,8 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 
 	@Override
 	public Object clone() {
-		return new CPFriendlyURLEntryWrapper((CPFriendlyURLEntry)_cpFriendlyURLEntry.clone());
+		return new CPFriendlyURLEntryWrapper(
+			(CPFriendlyURLEntry)_cpFriendlyURLEntry.clone());
 	}
 
 	@Override
@@ -169,60 +170,60 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Returns the fully qualified class name of this cp friendly url entry.
-	*
-	* @return the fully qualified class name of this cp friendly url entry
-	*/
+	 * Returns the fully qualified class name of this cp friendly url entry.
+	 *
+	 * @return the fully qualified class name of this cp friendly url entry
+	 */
 	@Override
 	public String getClassName() {
 		return _cpFriendlyURLEntry.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this cp friendly url entry.
-	*
-	* @return the class name ID of this cp friendly url entry
-	*/
+	 * Returns the class name ID of this cp friendly url entry.
+	 *
+	 * @return the class name ID of this cp friendly url entry
+	 */
 	@Override
 	public long getClassNameId() {
 		return _cpFriendlyURLEntry.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this cp friendly url entry.
-	*
-	* @return the class pk of this cp friendly url entry
-	*/
+	 * Returns the class pk of this cp friendly url entry.
+	 *
+	 * @return the class pk of this cp friendly url entry
+	 */
 	@Override
 	public long getClassPK() {
 		return _cpFriendlyURLEntry.getClassPK();
 	}
 
 	/**
-	* Returns the company ID of this cp friendly url entry.
-	*
-	* @return the company ID of this cp friendly url entry
-	*/
+	 * Returns the company ID of this cp friendly url entry.
+	 *
+	 * @return the company ID of this cp friendly url entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpFriendlyURLEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the cp friendly url entry ID of this cp friendly url entry.
-	*
-	* @return the cp friendly url entry ID of this cp friendly url entry
-	*/
+	 * Returns the cp friendly url entry ID of this cp friendly url entry.
+	 *
+	 * @return the cp friendly url entry ID of this cp friendly url entry
+	 */
 	@Override
 	public long getCPFriendlyURLEntryId() {
 		return _cpFriendlyURLEntry.getCPFriendlyURLEntryId();
 	}
 
 	/**
-	* Returns the create date of this cp friendly url entry.
-	*
-	* @return the create date of this cp friendly url entry
-	*/
+	 * Returns the create date of this cp friendly url entry.
+	 *
+	 * @return the create date of this cp friendly url entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpFriendlyURLEntry.getCreateDate();
@@ -234,20 +235,20 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Returns the group ID of this cp friendly url entry.
-	*
-	* @return the group ID of this cp friendly url entry
-	*/
+	 * Returns the group ID of this cp friendly url entry.
+	 *
+	 * @return the group ID of this cp friendly url entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpFriendlyURLEntry.getGroupId();
 	}
 
 	/**
-	* Returns the language ID of this cp friendly url entry.
-	*
-	* @return the language ID of this cp friendly url entry
-	*/
+	 * Returns the language ID of this cp friendly url entry.
+	 *
+	 * @return the language ID of this cp friendly url entry
+	 */
 	@Override
 	public String getLanguageId() {
 		return _cpFriendlyURLEntry.getLanguageId();
@@ -259,30 +260,30 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Returns the main of this cp friendly url entry.
-	*
-	* @return the main of this cp friendly url entry
-	*/
+	 * Returns the main of this cp friendly url entry.
+	 *
+	 * @return the main of this cp friendly url entry
+	 */
 	@Override
 	public boolean getMain() {
 		return _cpFriendlyURLEntry.getMain();
 	}
 
 	/**
-	* Returns the modified date of this cp friendly url entry.
-	*
-	* @return the modified date of this cp friendly url entry
-	*/
+	 * Returns the modified date of this cp friendly url entry.
+	 *
+	 * @return the modified date of this cp friendly url entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpFriendlyURLEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp friendly url entry.
-	*
-	* @return the primary key of this cp friendly url entry
-	*/
+	 * Returns the primary key of this cp friendly url entry.
+	 *
+	 * @return the primary key of this cp friendly url entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpFriendlyURLEntry.getPrimaryKey();
@@ -294,50 +295,50 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Returns the url title of this cp friendly url entry.
-	*
-	* @return the url title of this cp friendly url entry
-	*/
+	 * Returns the url title of this cp friendly url entry.
+	 *
+	 * @return the url title of this cp friendly url entry
+	 */
 	@Override
 	public String getUrlTitle() {
 		return _cpFriendlyURLEntry.getUrlTitle();
 	}
 
 	/**
-	* Returns the user ID of this cp friendly url entry.
-	*
-	* @return the user ID of this cp friendly url entry
-	*/
+	 * Returns the user ID of this cp friendly url entry.
+	 *
+	 * @return the user ID of this cp friendly url entry
+	 */
 	@Override
 	public long getUserId() {
 		return _cpFriendlyURLEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp friendly url entry.
-	*
-	* @return the user name of this cp friendly url entry
-	*/
+	 * Returns the user name of this cp friendly url entry.
+	 *
+	 * @return the user name of this cp friendly url entry
+	 */
 	@Override
 	public String getUserName() {
 		return _cpFriendlyURLEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp friendly url entry.
-	*
-	* @return the user uuid of this cp friendly url entry
-	*/
+	 * Returns the user uuid of this cp friendly url entry.
+	 *
+	 * @return the user uuid of this cp friendly url entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpFriendlyURLEntry.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp friendly url entry.
-	*
-	* @return the uuid of this cp friendly url entry
-	*/
+	 * Returns the uuid of this cp friendly url entry.
+	 *
+	 * @return the uuid of this cp friendly url entry
+	 */
 	@Override
 	public String getUuid() {
 		return _cpFriendlyURLEntry.getUuid();
@@ -359,10 +360,10 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp friendly url entry is main.
-	*
-	* @return <code>true</code> if this cp friendly url entry is main; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp friendly url entry is main.
+	 *
+	 * @return <code>true</code> if this cp friendly url entry is main; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isMain() {
 		return _cpFriendlyURLEntry.isMain();
@@ -389,50 +390,50 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Sets the class name ID of this cp friendly url entry.
-	*
-	* @param classNameId the class name ID of this cp friendly url entry
-	*/
+	 * Sets the class name ID of this cp friendly url entry.
+	 *
+	 * @param classNameId the class name ID of this cp friendly url entry
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_cpFriendlyURLEntry.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this cp friendly url entry.
-	*
-	* @param classPK the class pk of this cp friendly url entry
-	*/
+	 * Sets the class pk of this cp friendly url entry.
+	 *
+	 * @param classPK the class pk of this cp friendly url entry
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_cpFriendlyURLEntry.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the company ID of this cp friendly url entry.
-	*
-	* @param companyId the company ID of this cp friendly url entry
-	*/
+	 * Sets the company ID of this cp friendly url entry.
+	 *
+	 * @param companyId the company ID of this cp friendly url entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpFriendlyURLEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp friendly url entry ID of this cp friendly url entry.
-	*
-	* @param CPFriendlyURLEntryId the cp friendly url entry ID of this cp friendly url entry
-	*/
+	 * Sets the cp friendly url entry ID of this cp friendly url entry.
+	 *
+	 * @param CPFriendlyURLEntryId the cp friendly url entry ID of this cp friendly url entry
+	 */
 	@Override
 	public void setCPFriendlyURLEntryId(long CPFriendlyURLEntryId) {
 		_cpFriendlyURLEntry.setCPFriendlyURLEntryId(CPFriendlyURLEntryId);
 	}
 
 	/**
-	* Sets the create date of this cp friendly url entry.
-	*
-	* @param createDate the create date of this cp friendly url entry
-	*/
+	 * Sets the create date of this cp friendly url entry.
+	 *
+	 * @param createDate the create date of this cp friendly url entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpFriendlyURLEntry.setCreateDate(createDate);
@@ -441,6 +442,7 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpFriendlyURLEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -455,40 +457,40 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Sets the group ID of this cp friendly url entry.
-	*
-	* @param groupId the group ID of this cp friendly url entry
-	*/
+	 * Sets the group ID of this cp friendly url entry.
+	 *
+	 * @param groupId the group ID of this cp friendly url entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpFriendlyURLEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the language ID of this cp friendly url entry.
-	*
-	* @param languageId the language ID of this cp friendly url entry
-	*/
+	 * Sets the language ID of this cp friendly url entry.
+	 *
+	 * @param languageId the language ID of this cp friendly url entry
+	 */
 	@Override
 	public void setLanguageId(String languageId) {
 		_cpFriendlyURLEntry.setLanguageId(languageId);
 	}
 
 	/**
-	* Sets whether this cp friendly url entry is main.
-	*
-	* @param main the main of this cp friendly url entry
-	*/
+	 * Sets whether this cp friendly url entry is main.
+	 *
+	 * @param main the main of this cp friendly url entry
+	 */
 	@Override
 	public void setMain(boolean main) {
 		_cpFriendlyURLEntry.setMain(main);
 	}
 
 	/**
-	* Sets the modified date of this cp friendly url entry.
-	*
-	* @param modifiedDate the modified date of this cp friendly url entry
-	*/
+	 * Sets the modified date of this cp friendly url entry.
+	 *
+	 * @param modifiedDate the modified date of this cp friendly url entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpFriendlyURLEntry.setModifiedDate(modifiedDate);
@@ -500,10 +502,10 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Sets the primary key of this cp friendly url entry.
-	*
-	* @param primaryKey the primary key of this cp friendly url entry
-	*/
+	 * Sets the primary key of this cp friendly url entry.
+	 *
+	 * @param primaryKey the primary key of this cp friendly url entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpFriendlyURLEntry.setPrimaryKey(primaryKey);
@@ -515,63 +517,66 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	/**
-	* Sets the url title of this cp friendly url entry.
-	*
-	* @param urlTitle the url title of this cp friendly url entry
-	*/
+	 * Sets the url title of this cp friendly url entry.
+	 *
+	 * @param urlTitle the url title of this cp friendly url entry
+	 */
 	@Override
 	public void setUrlTitle(String urlTitle) {
 		_cpFriendlyURLEntry.setUrlTitle(urlTitle);
 	}
 
 	/**
-	* Sets the user ID of this cp friendly url entry.
-	*
-	* @param userId the user ID of this cp friendly url entry
-	*/
+	 * Sets the user ID of this cp friendly url entry.
+	 *
+	 * @param userId the user ID of this cp friendly url entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpFriendlyURLEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp friendly url entry.
-	*
-	* @param userName the user name of this cp friendly url entry
-	*/
+	 * Sets the user name of this cp friendly url entry.
+	 *
+	 * @param userName the user name of this cp friendly url entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpFriendlyURLEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp friendly url entry.
-	*
-	* @param userUuid the user uuid of this cp friendly url entry
-	*/
+	 * Sets the user uuid of this cp friendly url entry.
+	 *
+	 * @param userUuid the user uuid of this cp friendly url entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpFriendlyURLEntry.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp friendly url entry.
-	*
-	* @param uuid the uuid of this cp friendly url entry
-	*/
+	 * Sets the uuid of this cp friendly url entry.
+	 *
+	 * @param uuid the uuid of this cp friendly url entry
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpFriendlyURLEntry.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPFriendlyURLEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPFriendlyURLEntry>
+		toCacheModel() {
+
 		return _cpFriendlyURLEntry.toCacheModel();
 	}
 
 	@Override
 	public CPFriendlyURLEntry toEscapedModel() {
-		return new CPFriendlyURLEntryWrapper(_cpFriendlyURLEntry.toEscapedModel());
+		return new CPFriendlyURLEntryWrapper(
+			_cpFriendlyURLEntry.toEscapedModel());
 	}
 
 	@Override
@@ -581,7 +586,8 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 
 	@Override
 	public CPFriendlyURLEntry toUnescapedModel() {
-		return new CPFriendlyURLEntryWrapper(_cpFriendlyURLEntry.toUnescapedModel());
+		return new CPFriendlyURLEntryWrapper(
+			_cpFriendlyURLEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -599,10 +605,13 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 			return false;
 		}
 
-		CPFriendlyURLEntryWrapper cpFriendlyURLEntryWrapper = (CPFriendlyURLEntryWrapper)obj;
+		CPFriendlyURLEntryWrapper cpFriendlyURLEntryWrapper =
+			(CPFriendlyURLEntryWrapper)obj;
 
-		if (Objects.equals(_cpFriendlyURLEntry,
-					cpFriendlyURLEntryWrapper._cpFriendlyURLEntry)) {
+		if (Objects.equals(
+				_cpFriendlyURLEntry,
+				cpFriendlyURLEntryWrapper._cpFriendlyURLEntry)) {
+
 			return true;
 		}
 
@@ -635,4 +644,5 @@ public class CPFriendlyURLEntryWrapper implements CPFriendlyURLEntry,
 	}
 
 	private final CPFriendlyURLEntry _cpFriendlyURLEntry;
+
 }

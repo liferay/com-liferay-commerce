@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,86 +42,101 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPAttachmentFileEntryServiceUtil
- * @see com.liferay.commerce.product.service.base.CPAttachmentFileEntryServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPAttachmentFileEntry"}, service = CPAttachmentFileEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPAttachmentFileEntry"
+	},
+	service = CPAttachmentFileEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPAttachmentFileEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPAttachmentFileEntryServiceUtil} to access the cp attachment file entry remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPAttachmentFileEntryServiceUtil} to access the cp attachment file entry remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPAttachmentFileEntry addCPAttachmentFileEntry(long classNameId,
-		long classPK, long fileEntryId, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		Map<Locale, String> titleMap, String json, double priority, int type,
-		ServiceContext serviceContext) throws PortalException;
+	public CPAttachmentFileEntry addCPAttachmentFileEntry(
+			long classNameId, long classPK, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPAttachmentFileEntry(long cpAttachmentFileEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPAttachmentFileEntry fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CPAttachmentFileEntry fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPAttachmentFileEntry fetchCPAttachmentFileEntry(
-		long cpAttachmentFileEntryId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
-		long classNameId, long classPK, int type, int status, int start, int end)
+			long cpAttachmentFileEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
-		long classNameId, long classPK, int type, int status, int start,
-		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator)
+			long classNameId, long classPK, int type, int status, int start,
+			int end)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPAttachmentFileEntriesCount(long classNameId, long classPK,
-		int type, int status) throws PortalException;
+	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+			long classNameId, long classPK, int type, int status, int start,
+			int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPAttachmentFileEntriesCount(
+			long classNameId, long classPK, int type, int status)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPAttachmentFileEntry getCPAttachmentFileEntry(
-		long cpAttachmentFileEntryId) throws PortalException;
+			long cpAttachmentFileEntryId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPAttachmentFileEntry updateCPAttachmentFileEntry(
-		long cpAttachmentFileEntryId, long fileEntryId, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		Map<Locale, String> titleMap, String json, double priority, int type,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(long classNameId,
-		long classPK, long fileEntryId, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		Map<Locale, String> titleMap, String json, double priority, int type,
-		String externalReferenceCode, ServiceContext serviceContext)
+			long cpAttachmentFileEntryId, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, ServiceContext serviceContext)
 		throws PortalException;
+
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

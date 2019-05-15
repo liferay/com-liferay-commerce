@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingFixedOptionModel
- * @see com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionImpl
- * @see com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionImpl"
+)
 @ProviderType
 public interface CommerceShippingFixedOption
 	extends CommerceShippingFixedOptionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceShippingFixedOption, Long> COMMERCE_SHIPPING_FIXED_OPTION_ID_ACCESSOR =
-		new Accessor<CommerceShippingFixedOption, Long>() {
-			@Override
-			public Long get(
-				CommerceShippingFixedOption commerceShippingFixedOption) {
-				return commerceShippingFixedOption.getCommerceShippingFixedOptionId();
-			}
+	public static final Accessor<CommerceShippingFixedOption, Long>
+		COMMERCE_SHIPPING_FIXED_OPTION_ID_ACCESSOR =
+			new Accessor<CommerceShippingFixedOption, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceShippingFixedOption commerceShippingFixedOption) {
 
-			@Override
-			public Class<CommerceShippingFixedOption> getTypeClass() {
-				return CommerceShippingFixedOption.class;
-			}
-		};
+					return commerceShippingFixedOption.
+						getCommerceShippingFixedOptionId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceShippingFixedOption> getTypeClass() {
+					return CommerceShippingFixedOption.class;
+				}
+
+			};
+
 }

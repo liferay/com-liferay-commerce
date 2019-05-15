@@ -30,6 +30,7 @@ import java.util.List;
  */
 @ProviderType
 public class CPFriendlyURLEntrySoap implements Serializable {
+
 	public static CPFriendlyURLEntrySoap toSoapModel(CPFriendlyURLEntry model) {
 		CPFriendlyURLEntrySoap soapModel = new CPFriendlyURLEntrySoap();
 
@@ -52,7 +53,9 @@ public class CPFriendlyURLEntrySoap implements Serializable {
 
 	public static CPFriendlyURLEntrySoap[] toSoapModels(
 		CPFriendlyURLEntry[] models) {
-		CPFriendlyURLEntrySoap[] soapModels = new CPFriendlyURLEntrySoap[models.length];
+
+		CPFriendlyURLEntrySoap[] soapModels =
+			new CPFriendlyURLEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +66,12 @@ public class CPFriendlyURLEntrySoap implements Serializable {
 
 	public static CPFriendlyURLEntrySoap[][] toSoapModels(
 		CPFriendlyURLEntry[][] models) {
+
 		CPFriendlyURLEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPFriendlyURLEntrySoap[models.length][models[0].length];
+			soapModels =
+				new CPFriendlyURLEntrySoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPFriendlyURLEntrySoap[0][0];
@@ -81,13 +86,16 @@ public class CPFriendlyURLEntrySoap implements Serializable {
 
 	public static CPFriendlyURLEntrySoap[] toSoapModels(
 		List<CPFriendlyURLEntry> models) {
-		List<CPFriendlyURLEntrySoap> soapModels = new ArrayList<CPFriendlyURLEntrySoap>(models.size());
+
+		List<CPFriendlyURLEntrySoap> soapModels =
+			new ArrayList<CPFriendlyURLEntrySoap>(models.size());
 
 		for (CPFriendlyURLEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPFriendlyURLEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPFriendlyURLEntrySoap[soapModels.size()]);
 	}
 
 	public CPFriendlyURLEntrySoap() {
@@ -222,4 +230,5 @@ public class CPFriendlyURLEntrySoap implements Serializable {
 	private String _languageId;
 	private String _urlTitle;
 	private boolean _main;
+
 }

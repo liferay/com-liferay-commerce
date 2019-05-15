@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CPDefinitionSpecificationOptionValueServiceUtil} service utility. The
+ * <code>CPDefinitionSpecificationOptionValueServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,26 +49,31 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Marco Leo
  * @see CPDefinitionSpecificationOptionValueServiceSoap
- * @see HttpPrincipal
- * @see CPDefinitionSpecificationOptionValueServiceUtil
  * @generated
  */
 @ProviderType
 public class CPDefinitionSpecificationOptionValueServiceHttp {
-	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue addCPDefinitionSpecificationOptionValue(
-		HttpPrincipal httpPrincipal, long cpDefinitionId,
-		long cpSpecificationOptionId, long cpOptionCategoryId,
-		java.util.Map<java.util.Locale, String> valueMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"addCPDefinitionSpecificationOptionValue",
-					_addCPDefinitionSpecificationOptionValueParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, cpSpecificationOptionId,
-					cpOptionCategoryId, valueMap, priority, serviceContext);
+	public static
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				addCPDefinitionSpecificationOptionValue(
+					HttpPrincipal httpPrincipal, long cpDefinitionId,
+					long cpSpecificationOptionId, long cpOptionCategoryId,
+					java.util.Map<java.util.Locale, String> valueMap,
+					double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"addCPDefinitionSpecificationOptionValue",
+				_addCPDefinitionSpecificationOptionValueParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionId, cpSpecificationOptionId,
+				cpOptionCategoryId, valueMap, priority, serviceContext);
 
 			Object returnObj = null;
 
@@ -76,14 +81,19 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue)returnObj;
+			return (com.liferay.commerce.product.model.
+				CPDefinitionSpecificationOptionValue)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -93,25 +103,32 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 	}
 
 	public static void deleteCPDefinitionSpecificationOptionValue(
-		HttpPrincipal httpPrincipal, long cpDefinitionSpecificationOptionValueId)
+			HttpPrincipal httpPrincipal,
+			long cpDefinitionSpecificationOptionValueId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"deleteCPDefinitionSpecificationOptionValue",
-					_deleteCPDefinitionSpecificationOptionValueParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionSpecificationOptionValueId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"deleteCPDefinitionSpecificationOptionValue",
+				_deleteCPDefinitionSpecificationOptionValueParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionSpecificationOptionValueId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -121,16 +138,21 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue fetchCPDefinitionSpecificationOptionValue(
-		HttpPrincipal httpPrincipal, long cpDefinitionSpecificationOptionValueId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"fetchCPDefinitionSpecificationOptionValue",
-					_fetchCPDefinitionSpecificationOptionValueParameterTypes2);
+	public static
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				fetchCPDefinitionSpecificationOptionValue(
+					HttpPrincipal httpPrincipal,
+					long cpDefinitionSpecificationOptionValueId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionSpecificationOptionValueId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"fetchCPDefinitionSpecificationOptionValue",
+				_fetchCPDefinitionSpecificationOptionValueParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionSpecificationOptionValueId);
 
 			Object returnObj = null;
 
@@ -138,14 +160,19 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue)returnObj;
+			return (com.liferay.commerce.product.model.
+				CPDefinitionSpecificationOptionValue)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -154,16 +181,21 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue getCPDefinitionSpecificationOptionValue(
-		HttpPrincipal httpPrincipal, long cpDefinitionSpecificationOptionValueId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"getCPDefinitionSpecificationOptionValue",
-					_getCPDefinitionSpecificationOptionValueParameterTypes3);
+	public static
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				getCPDefinitionSpecificationOptionValue(
+					HttpPrincipal httpPrincipal,
+					long cpDefinitionSpecificationOptionValueId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionSpecificationOptionValueId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValue",
+				_getCPDefinitionSpecificationOptionValueParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionSpecificationOptionValueId);
 
 			Object returnObj = null;
 
@@ -171,14 +203,19 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue)returnObj;
+			return (com.liferay.commerce.product.model.
+				CPDefinitionSpecificationOptionValue)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -187,16 +224,22 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		HttpPrincipal httpPrincipal, long cpSpecificationOptionId, int start,
-		int end) throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"getCPDefinitionSpecificationOptionValues",
-					_getCPDefinitionSpecificationOptionValuesParameterTypes4);
+	public static java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						HttpPrincipal httpPrincipal,
+						long cpSpecificationOptionId, int start, int end)
+				throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpSpecificationOptionId, start, end);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValues",
+				_getCPDefinitionSpecificationOptionValuesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpSpecificationOptionId, start, end);
 
 			Object returnObj = null;
 
@@ -204,14 +247,20 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.product.model.
+					CPDefinitionSpecificationOptionValue>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -220,17 +269,26 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		HttpPrincipal httpPrincipal, long cpDefinitionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"getCPDefinitionSpecificationOptionValues",
-					_getCPDefinitionSpecificationOptionValuesParameterTypes5);
+	public static java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						HttpPrincipal httpPrincipal, long cpDefinitionId,
+						int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.product.model.
+								CPDefinitionSpecificationOptionValue>
+									orderByComparator)
+				throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValues",
+				_getCPDefinitionSpecificationOptionValuesParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -238,14 +296,20 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.product.model.
+					CPDefinitionSpecificationOptionValue>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -254,17 +318,22 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		HttpPrincipal httpPrincipal, long cpDefinitionId,
-		long cpOptionCategoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"getCPDefinitionSpecificationOptionValues",
-					_getCPDefinitionSpecificationOptionValuesParameterTypes6);
+	public static java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						HttpPrincipal httpPrincipal, long cpDefinitionId,
+						long cpOptionCategoryId)
+				throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, cpOptionCategoryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValues",
+				_getCPDefinitionSpecificationOptionValuesParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionId, cpOptionCategoryId);
 
 			Object returnObj = null;
 
@@ -272,14 +341,20 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.product.model.
+					CPDefinitionSpecificationOptionValue>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -289,15 +364,17 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 	}
 
 	public static int getCPDefinitionSpecificationOptionValuesCount(
-		HttpPrincipal httpPrincipal, long cpSpecificationOptionId)
+			HttpPrincipal httpPrincipal, long cpSpecificationOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"getCPDefinitionSpecificationOptionValuesCount",
-					_getCPDefinitionSpecificationOptionValuesCountParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpSpecificationOptionId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValuesCount",
+				_getCPDefinitionSpecificationOptionValuesCountParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpSpecificationOptionId);
 
 			Object returnObj = null;
 
@@ -305,11 +382,15 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -321,20 +402,27 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue updateCPDefinitionSpecificationOptionValue(
-		HttpPrincipal httpPrincipal,
-		long cpDefinitionSpecificationOptionValueId, long cpOptionCategoryId,
-		java.util.Map<java.util.Locale, String> valueMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
-					"updateCPDefinitionSpecificationOptionValue",
-					_updateCPDefinitionSpecificationOptionValueParameterTypes8);
+	public static
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				updateCPDefinitionSpecificationOptionValue(
+					HttpPrincipal httpPrincipal,
+					long cpDefinitionSpecificationOptionValueId,
+					long cpOptionCategoryId,
+					java.util.Map<java.util.Locale, String> valueMap,
+					double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionSpecificationOptionValueId, cpOptionCategoryId,
-					valueMap, priority, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"updateCPDefinitionSpecificationOptionValue",
+				_updateCPDefinitionSpecificationOptionValueParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionSpecificationOptionValueId,
+				cpOptionCategoryId, valueMap, priority, serviceContext);
 
 			Object returnObj = null;
 
@@ -342,14 +430,19 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue)returnObj;
+			return (com.liferay.commerce.product.model.
+				CPDefinitionSpecificationOptionValue)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -358,32 +451,45 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPDefinitionSpecificationOptionValueServiceHttp.class);
-	private static final Class<?>[] _addCPDefinitionSpecificationOptionValueParameterTypes0 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CPDefinitionSpecificationOptionValueServiceHttp.class);
+
+	private static final Class<?>[]
+		_addCPDefinitionSpecificationOptionValueParameterTypes0 = new Class[] {
 			long.class, long.class, long.class, java.util.Map.class,
 			double.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCPDefinitionSpecificationOptionValueParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _fetchCPDefinitionSpecificationOptionValueParameterTypes2 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCPDefinitionSpecificationOptionValueParameterTypes3 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesParameterTypes4 =
-		new Class[] { long.class, int.class, int.class };
-	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesParameterTypes5 =
-		new Class[] {
+	private static final Class<?>[]
+		_deleteCPDefinitionSpecificationOptionValueParameterTypes1 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_fetchCPDefinitionSpecificationOptionValueParameterTypes2 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_getCPDefinitionSpecificationOptionValueParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCPDefinitionSpecificationOptionValuesParameterTypes4 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[]
+		_getCPDefinitionSpecificationOptionValuesParameterTypes5 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesParameterTypes6 =
-		new Class[] { long.class, long.class };
-	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesCountParameterTypes7 =
-		new Class[] { long.class };
-	private static final Class<?>[] _updateCPDefinitionSpecificationOptionValueParameterTypes8 =
-		new Class[] {
-			long.class, long.class, java.util.Map.class, double.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
+	private static final Class<?>[]
+		_getCPDefinitionSpecificationOptionValuesParameterTypes6 = new Class[] {
+			long.class, long.class
 		};
+	private static final Class<?>[]
+		_getCPDefinitionSpecificationOptionValuesCountParameterTypes7 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_updateCPDefinitionSpecificationOptionValueParameterTypes8 =
+			new Class[] {
+				long.class, long.class, java.util.Map.class, double.class,
+				com.liferay.portal.kernel.service.ServiceContext.class
+			};
+
 }

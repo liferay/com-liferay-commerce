@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceOrderItem in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceOrderItem
  * @generated
  */
 @ProviderType
-public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem>,
-	Externalizable {
+public class CommerceOrderItemCacheModel
+	implements CacheModel<CommerceOrderItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,9 +50,12 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 			return false;
 		}
 
-		CommerceOrderItemCacheModel commerceOrderItemCacheModel = (CommerceOrderItemCacheModel)obj;
+		CommerceOrderItemCacheModel commerceOrderItemCacheModel =
+			(CommerceOrderItemCacheModel)obj;
 
-		if (commerceOrderItemId == commerceOrderItemCacheModel.commerceOrderItemId) {
+		if (commerceOrderItemId ==
+				commerceOrderItemCacheModel.commerceOrderItemId) {
+
 			return true;
 		}
 
@@ -124,13 +126,15 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 
 	@Override
 	public CommerceOrderItem toEntityModel() {
-		CommerceOrderItemImpl commerceOrderItemImpl = new CommerceOrderItemImpl();
+		CommerceOrderItemImpl commerceOrderItemImpl =
+			new CommerceOrderItemImpl();
 
 		if (externalReferenceCode == null) {
 			commerceOrderItemImpl.setExternalReferenceCode("");
 		}
 		else {
-			commerceOrderItemImpl.setExternalReferenceCode(externalReferenceCode);
+			commerceOrderItemImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
 		commerceOrderItemImpl.setCommerceOrderItemId(commerceOrderItemId);
@@ -189,10 +193,14 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		commerceOrderItemImpl.setUnitPrice(unitPrice);
 		commerceOrderItemImpl.setDiscountAmount(discountAmount);
 		commerceOrderItemImpl.setFinalPrice(finalPrice);
-		commerceOrderItemImpl.setDiscountPercentageLevel1(discountPercentageLevel1);
-		commerceOrderItemImpl.setDiscountPercentageLevel2(discountPercentageLevel2);
-		commerceOrderItemImpl.setDiscountPercentageLevel3(discountPercentageLevel3);
-		commerceOrderItemImpl.setDiscountPercentageLevel4(discountPercentageLevel4);
+		commerceOrderItemImpl.setDiscountPercentageLevel1(
+			discountPercentageLevel1);
+		commerceOrderItemImpl.setDiscountPercentageLevel2(
+			discountPercentageLevel2);
+		commerceOrderItemImpl.setDiscountPercentageLevel3(
+			discountPercentageLevel3);
+		commerceOrderItemImpl.setDiscountPercentageLevel4(
+			discountPercentageLevel4);
 		commerceOrderItemImpl.setSubscription(subscription);
 
 		commerceOrderItemImpl.resetOriginalValues();
@@ -203,6 +211,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		externalReferenceCode = objectInput.readUTF();
 
 		commerceOrderItemId = objectInput.readLong();
@@ -240,8 +249,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (externalReferenceCode == null) {
 			objectOutput.writeUTF("");
 		}
@@ -333,4 +341,5 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	public BigDecimal discountPercentageLevel3;
 	public BigDecimal discountPercentageLevel4;
 	public boolean subscription;
+
 }

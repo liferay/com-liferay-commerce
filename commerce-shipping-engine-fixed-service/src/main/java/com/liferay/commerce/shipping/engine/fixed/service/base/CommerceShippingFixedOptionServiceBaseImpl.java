@@ -19,7 +19,6 @@ import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedO
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionPersistence;
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionRelFinder;
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -44,16 +43,16 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionServiceImpl
- * @see com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionServiceUtil
  * @generated
  */
 public abstract class CommerceShippingFixedOptionServiceBaseImpl
-	extends BaseServiceImpl implements CommerceShippingFixedOptionService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceShippingFixedOptionService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionServiceUtil} to access the commerce shipping fixed option remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceShippingFixedOptionService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionServiceUtil</code>.
 	 */
 
 	/**
@@ -61,7 +60,10 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option local service
 	 */
-	public com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService getCommerceShippingFixedOptionLocalService() {
+	public com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionLocalService
+			getCommerceShippingFixedOptionLocalService() {
+
 		return commerceShippingFixedOptionLocalService;
 	}
 
@@ -71,8 +73,12 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionLocalService the commerce shipping fixed option local service
 	 */
 	public void setCommerceShippingFixedOptionLocalService(
-		com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService commerceShippingFixedOptionLocalService) {
-		this.commerceShippingFixedOptionLocalService = commerceShippingFixedOptionLocalService;
+		com.liferay.commerce.shipping.engine.fixed.service.
+			CommerceShippingFixedOptionLocalService
+				commerceShippingFixedOptionLocalService) {
+
+		this.commerceShippingFixedOptionLocalService =
+			commerceShippingFixedOptionLocalService;
 	}
 
 	/**
@@ -80,7 +86,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option remote service
 	 */
-	public CommerceShippingFixedOptionService getCommerceShippingFixedOptionService() {
+	public CommerceShippingFixedOptionService
+		getCommerceShippingFixedOptionService() {
+
 		return commerceShippingFixedOptionService;
 	}
 
@@ -91,7 +99,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	public void setCommerceShippingFixedOptionService(
 		CommerceShippingFixedOptionService commerceShippingFixedOptionService) {
-		this.commerceShippingFixedOptionService = commerceShippingFixedOptionService;
+
+		this.commerceShippingFixedOptionService =
+			commerceShippingFixedOptionService;
 	}
 
 	/**
@@ -99,7 +109,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option persistence
 	 */
-	public CommerceShippingFixedOptionPersistence getCommerceShippingFixedOptionPersistence() {
+	public CommerceShippingFixedOptionPersistence
+		getCommerceShippingFixedOptionPersistence() {
+
 		return commerceShippingFixedOptionPersistence;
 	}
 
@@ -109,8 +121,11 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionPersistence the commerce shipping fixed option persistence
 	 */
 	public void setCommerceShippingFixedOptionPersistence(
-		CommerceShippingFixedOptionPersistence commerceShippingFixedOptionPersistence) {
-		this.commerceShippingFixedOptionPersistence = commerceShippingFixedOptionPersistence;
+		CommerceShippingFixedOptionPersistence
+			commerceShippingFixedOptionPersistence) {
+
+		this.commerceShippingFixedOptionPersistence =
+			commerceShippingFixedOptionPersistence;
 	}
 
 	/**
@@ -118,7 +133,10 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option rel local service
 	 */
-	public com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalService getCommerceShippingFixedOptionRelLocalService() {
+	public com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionRelLocalService
+			getCommerceShippingFixedOptionRelLocalService() {
+
 		return commerceShippingFixedOptionRelLocalService;
 	}
 
@@ -128,8 +146,12 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionRelLocalService the commerce shipping fixed option rel local service
 	 */
 	public void setCommerceShippingFixedOptionRelLocalService(
-		com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalService commerceShippingFixedOptionRelLocalService) {
-		this.commerceShippingFixedOptionRelLocalService = commerceShippingFixedOptionRelLocalService;
+		com.liferay.commerce.shipping.engine.fixed.service.
+			CommerceShippingFixedOptionRelLocalService
+				commerceShippingFixedOptionRelLocalService) {
+
+		this.commerceShippingFixedOptionRelLocalService =
+			commerceShippingFixedOptionRelLocalService;
 	}
 
 	/**
@@ -137,7 +159,10 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option rel remote service
 	 */
-	public com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelService getCommerceShippingFixedOptionRelService() {
+	public com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionRelService
+			getCommerceShippingFixedOptionRelService() {
+
 		return commerceShippingFixedOptionRelService;
 	}
 
@@ -147,8 +172,12 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionRelService the commerce shipping fixed option rel remote service
 	 */
 	public void setCommerceShippingFixedOptionRelService(
-		com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelService commerceShippingFixedOptionRelService) {
-		this.commerceShippingFixedOptionRelService = commerceShippingFixedOptionRelService;
+		com.liferay.commerce.shipping.engine.fixed.service.
+			CommerceShippingFixedOptionRelService
+				commerceShippingFixedOptionRelService) {
+
+		this.commerceShippingFixedOptionRelService =
+			commerceShippingFixedOptionRelService;
 	}
 
 	/**
@@ -156,7 +185,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option rel persistence
 	 */
-	public CommerceShippingFixedOptionRelPersistence getCommerceShippingFixedOptionRelPersistence() {
+	public CommerceShippingFixedOptionRelPersistence
+		getCommerceShippingFixedOptionRelPersistence() {
+
 		return commerceShippingFixedOptionRelPersistence;
 	}
 
@@ -166,8 +197,11 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionRelPersistence the commerce shipping fixed option rel persistence
 	 */
 	public void setCommerceShippingFixedOptionRelPersistence(
-		CommerceShippingFixedOptionRelPersistence commerceShippingFixedOptionRelPersistence) {
-		this.commerceShippingFixedOptionRelPersistence = commerceShippingFixedOptionRelPersistence;
+		CommerceShippingFixedOptionRelPersistence
+			commerceShippingFixedOptionRelPersistence) {
+
+		this.commerceShippingFixedOptionRelPersistence =
+			commerceShippingFixedOptionRelPersistence;
 	}
 
 	/**
@@ -175,7 +209,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the commerce shipping fixed option rel finder
 	 */
-	public CommerceShippingFixedOptionRelFinder getCommerceShippingFixedOptionRelFinder() {
+	public CommerceShippingFixedOptionRelFinder
+		getCommerceShippingFixedOptionRelFinder() {
+
 		return commerceShippingFixedOptionRelFinder;
 	}
 
@@ -185,8 +221,11 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param commerceShippingFixedOptionRelFinder the commerce shipping fixed option rel finder
 	 */
 	public void setCommerceShippingFixedOptionRelFinder(
-		CommerceShippingFixedOptionRelFinder commerceShippingFixedOptionRelFinder) {
-		this.commerceShippingFixedOptionRelFinder = commerceShippingFixedOptionRelFinder;
+		CommerceShippingFixedOptionRelFinder
+			commerceShippingFixedOptionRelFinder) {
+
+		this.commerceShippingFixedOptionRelFinder =
+			commerceShippingFixedOptionRelFinder;
 	}
 
 	/**
@@ -194,7 +233,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -204,7 +245,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -213,7 +256,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -223,7 +268,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -232,7 +279,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -243,6 +292,7 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -262,6 +312,7 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -270,7 +321,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -280,7 +333,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -289,7 +344,9 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -300,6 +357,7 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -319,6 +377,7 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -371,15 +430,16 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceShippingFixedOptionPersistence.getDataSource();
+			DataSource dataSource =
+				commerceShippingFixedOptionPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -388,34 +448,82 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService.class)
-	protected com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService commerceShippingFixedOptionLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService.class
+	)
+	protected com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionLocalService
+			commerceShippingFixedOptionLocalService;
+
 	@BeanReference(type = CommerceShippingFixedOptionService.class)
-	protected CommerceShippingFixedOptionService commerceShippingFixedOptionService;
+	protected CommerceShippingFixedOptionService
+		commerceShippingFixedOptionService;
+
 	@BeanReference(type = CommerceShippingFixedOptionPersistence.class)
-	protected CommerceShippingFixedOptionPersistence commerceShippingFixedOptionPersistence;
-	@BeanReference(type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalService.class)
-	protected com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalService commerceShippingFixedOptionRelLocalService;
-	@BeanReference(type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelService.class)
-	protected com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelService commerceShippingFixedOptionRelService;
+	protected CommerceShippingFixedOptionPersistence
+		commerceShippingFixedOptionPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalService.class
+	)
+	protected com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionRelLocalService
+			commerceShippingFixedOptionRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelService.class
+	)
+	protected com.liferay.commerce.shipping.engine.fixed.service.
+		CommerceShippingFixedOptionRelService
+			commerceShippingFixedOptionRelService;
+
 	@BeanReference(type = CommerceShippingFixedOptionRelPersistence.class)
-	protected CommerceShippingFixedOptionRelPersistence commerceShippingFixedOptionRelPersistence;
+	protected CommerceShippingFixedOptionRelPersistence
+		commerceShippingFixedOptionRelPersistence;
+
 	@BeanReference(type = CommerceShippingFixedOptionRelFinder.class)
-	protected CommerceShippingFixedOptionRelFinder commerceShippingFixedOptionRelFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceShippingFixedOptionRelFinder
+		commerceShippingFixedOptionRelFinder;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

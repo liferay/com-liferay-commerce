@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.model.impl.CPTaxCategoryImpl;
 import com.liferay.commerce.product.model.impl.CPTaxCategoryModelImpl;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,55 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CPTaxCategoryPersistence
- * @see com.liferay.commerce.product.service.persistence.CPTaxCategoryUtil
  * @generated
  */
 @ProviderType
-public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCategory>
+public class CPTaxCategoryPersistenceImpl
+	extends BasePersistenceImpl<CPTaxCategory>
 	implements CPTaxCategoryPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CPTaxCategoryUtil} to access the cp tax category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CPTaxCategoryUtil</code> to access the cp tax category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CPTaxCategoryImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
-			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
-			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
-			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
-			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByGroupId", new String[] { Long.class.getName() },
-			CPTaxCategoryModelImpl.GROUPID_COLUMN_BITMASK |
-			CPTaxCategoryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CPTaxCategoryImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the cp tax categories where groupId = &#63;.
@@ -120,14 +97,15 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public List<CPTaxCategory> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp tax categories where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -144,7 +122,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -154,8 +132,10 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the ordered range of matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(long groupId, int start, int end,
+	public List<CPTaxCategory> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -163,7 +143,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -174,29 +154,32 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the ordered range of matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(long groupId, int start, int end,
+	public List<CPTaxCategory> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CPTaxCategory> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPTaxCategory>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPTaxCategory>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPTaxCategory cpTaxCategory : list) {
@@ -213,8 +196,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -225,11 +208,10 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPTaxCategoryModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -247,16 +229,16 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CPTaxCategory>)QueryUtil.list(q, getDialect(),
-							start, end, false);
+					list = (List<CPTaxCategory>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPTaxCategory>)QueryUtil.list(q, getDialect(),
-							start, end);
+					list = (List<CPTaxCategory>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -285,11 +267,12 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory findByGroupId_First(long groupId,
-		OrderByComparator<CPTaxCategory> orderByComparator)
+	public CPTaxCategory findByGroupId_First(
+			long groupId, OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
-		CPTaxCategory cpTaxCategory = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CPTaxCategory cpTaxCategory = fetchByGroupId_First(
+			groupId, orderByComparator);
 
 		if (cpTaxCategory != null) {
 			return cpTaxCategory;
@@ -315,10 +298,11 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the first matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory fetchByGroupId_First(long groupId,
-		OrderByComparator<CPTaxCategory> orderByComparator) {
-		List<CPTaxCategory> list = findByGroupId(groupId, 0, 1,
-				orderByComparator);
+	public CPTaxCategory fetchByGroupId_First(
+		long groupId, OrderByComparator<CPTaxCategory> orderByComparator) {
+
+		List<CPTaxCategory> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -336,11 +320,12 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory findByGroupId_Last(long groupId,
-		OrderByComparator<CPTaxCategory> orderByComparator)
+	public CPTaxCategory findByGroupId_Last(
+			long groupId, OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
-		CPTaxCategory cpTaxCategory = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CPTaxCategory cpTaxCategory = fetchByGroupId_Last(
+			groupId, orderByComparator);
 
 		if (cpTaxCategory != null) {
 			return cpTaxCategory;
@@ -366,16 +351,17 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the last matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory fetchByGroupId_Last(long groupId,
-		OrderByComparator<CPTaxCategory> orderByComparator) {
+	public CPTaxCategory fetchByGroupId_Last(
+		long groupId, OrderByComparator<CPTaxCategory> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPTaxCategory> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
+		List<CPTaxCategory> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -394,9 +380,11 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @throws NoSuchCPTaxCategoryException if a cp tax category with the primary key could not be found
 	 */
 	@Override
-	public CPTaxCategory[] findByGroupId_PrevAndNext(long CPTaxCategoryId,
-		long groupId, OrderByComparator<CPTaxCategory> orderByComparator)
+	public CPTaxCategory[] findByGroupId_PrevAndNext(
+			long CPTaxCategoryId, long groupId,
+			OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
+
 		CPTaxCategory cpTaxCategory = findByPrimaryKey(CPTaxCategoryId);
 
 		Session session = null;
@@ -406,13 +394,13 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 
 			CPTaxCategory[] array = new CPTaxCategoryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, cpTaxCategory,
-					groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, cpTaxCategory, groupId, orderByComparator, true);
 
 			array[1] = cpTaxCategory;
 
-			array[2] = getByGroupId_PrevAndNext(session, cpTaxCategory,
-					groupId, orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, cpTaxCategory, groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -424,14 +412,15 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		}
 	}
 
-	protected CPTaxCategory getByGroupId_PrevAndNext(Session session,
-		CPTaxCategory cpTaxCategory, long groupId,
+	protected CPTaxCategory getByGroupId_PrevAndNext(
+		Session session, CPTaxCategory cpTaxCategory, long groupId,
 		OrderByComparator<CPTaxCategory> orderByComparator, boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -443,7 +432,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -513,10 +503,11 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpTaxCategory);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpTaxCategory)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -537,8 +528,10 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CPTaxCategory cpTaxCategory : findByGroupId(groupId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CPTaxCategory cpTaxCategory :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(cpTaxCategory);
 		}
 	}
@@ -551,9 +544,9 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -594,7 +587,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "cpTaxCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"cpTaxCategory.groupId = ?";
 
 	public CPTaxCategoryPersistenceImpl() {
 		setModelClass(CPTaxCategory.class);
@@ -607,7 +601,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public void cacheResult(CPTaxCategory cpTaxCategory) {
-		entityCache.putResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey(),
 			cpTaxCategory);
 
@@ -623,8 +618,10 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	public void cacheResult(List<CPTaxCategory> cpTaxCategories) {
 		for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
 			if (entityCache.getResult(
-						CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-						CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey()) == null) {
+					CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+					CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey()) ==
+						null) {
+
 				cacheResult(cpTaxCategory);
 			}
 			else {
@@ -637,7 +634,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Clears the cache for all cp tax categories.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -653,12 +650,13 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Clears the cache for the cp tax category.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CPTaxCategory cpTaxCategory) {
-		entityCache.removeResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -671,7 +669,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
-			entityCache.removeResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			entityCache.removeResult(
+				CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 				CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey());
 		}
 	}
@@ -704,6 +703,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	@Override
 	public CPTaxCategory remove(long CPTaxCategoryId)
 		throws NoSuchCPTaxCategoryException {
+
 		return remove((Serializable)CPTaxCategoryId);
 	}
 
@@ -717,21 +717,22 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	@Override
 	public CPTaxCategory remove(Serializable primaryKey)
 		throws NoSuchCPTaxCategoryException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CPTaxCategory cpTaxCategory = (CPTaxCategory)session.get(CPTaxCategoryImpl.class,
-					primaryKey);
+			CPTaxCategory cpTaxCategory = (CPTaxCategory)session.get(
+				CPTaxCategoryImpl.class, primaryKey);
 
 			if (cpTaxCategory == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchCPTaxCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchCPTaxCategoryException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(cpTaxCategory);
@@ -755,8 +756,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			session = openSession();
 
 			if (!session.contains(cpTaxCategory)) {
-				cpTaxCategory = (CPTaxCategory)session.get(CPTaxCategoryImpl.class,
-						cpTaxCategory.getPrimaryKeyObj());
+				cpTaxCategory = (CPTaxCategory)session.get(
+					CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKeyObj());
 			}
 
 			if (cpTaxCategory != null) {
@@ -785,21 +786,24 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(cpTaxCategory.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(cpTaxCategory);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					cpTaxCategory);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in cpTaxCategory proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CPTaxCategory implementation " +
-				cpTaxCategory.getClass());
+					cpTaxCategory.getClass());
 		}
 
-		CPTaxCategoryModelImpl cpTaxCategoryModelImpl = (CPTaxCategoryModelImpl)cpTaxCategory;
+		CPTaxCategoryModelImpl cpTaxCategoryModelImpl =
+			(CPTaxCategoryModelImpl)cpTaxCategory;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -817,8 +821,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 				cpTaxCategory.setModifiedDate(now);
 			}
 			else {
-				cpTaxCategory.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				cpTaxCategory.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -848,39 +852,40 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		if (!CPTaxCategoryModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
-			Object[] args = new Object[] { cpTaxCategoryModelImpl.getGroupId() };
+		else if (isNew) {
+			Object[] args = new Object[] {cpTaxCategoryModelImpl.getGroupId()};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
 
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((cpTaxCategoryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
 				Object[] args = new Object[] {
-						cpTaxCategoryModelImpl.getOriginalGroupId()
-					};
+					cpTaxCategoryModelImpl.getOriginalGroupId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
 
-				args = new Object[] { cpTaxCategoryModelImpl.getGroupId() };
+				args = new Object[] {cpTaxCategoryModelImpl.getGroupId()};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
 			}
 		}
 
-		entityCache.putResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryImpl.class, cpTaxCategory.getPrimaryKey(),
 			cpTaxCategory, false);
 
@@ -890,7 +895,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	}
 
 	/**
-	 * Returns the cp tax category with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the cp tax category with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the cp tax category
 	 * @return the cp tax category
@@ -899,6 +904,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	@Override
 	public CPTaxCategory findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchCPTaxCategoryException {
+
 		CPTaxCategory cpTaxCategory = fetchByPrimaryKey(primaryKey);
 
 		if (cpTaxCategory == null) {
@@ -906,15 +912,15 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchCPTaxCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchCPTaxCategoryException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return cpTaxCategory;
 	}
 
 	/**
-	 * Returns the cp tax category with the primary key or throws a {@link NoSuchCPTaxCategoryException} if it could not be found.
+	 * Returns the cp tax category with the primary key or throws a <code>NoSuchCPTaxCategoryException</code> if it could not be found.
 	 *
 	 * @param CPTaxCategoryId the primary key of the cp tax category
 	 * @return the cp tax category
@@ -923,6 +929,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	@Override
 	public CPTaxCategory findByPrimaryKey(long CPTaxCategoryId)
 		throws NoSuchCPTaxCategoryException {
+
 		return findByPrimaryKey((Serializable)CPTaxCategoryId);
 	}
 
@@ -934,8 +941,9 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public CPTaxCategory fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-				CPTaxCategoryImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -949,19 +957,21 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			try {
 				session = openSession();
 
-				cpTaxCategory = (CPTaxCategory)session.get(CPTaxCategoryImpl.class,
-						primaryKey);
+				cpTaxCategory = (CPTaxCategory)session.get(
+					CPTaxCategoryImpl.class, primaryKey);
 
 				if (cpTaxCategory != null) {
 					cacheResult(cpTaxCategory);
 				}
 				else {
-					entityCache.putResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 						CPTaxCategoryImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 					CPTaxCategoryImpl.class, primaryKey);
 
 				throw processException(e);
@@ -988,11 +998,13 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	@Override
 	public Map<Serializable, CPTaxCategory> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CPTaxCategory> map = new HashMap<Serializable, CPTaxCategory>();
+		Map<Serializable, CPTaxCategory> map =
+			new HashMap<Serializable, CPTaxCategory>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -1011,8 +1023,9 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
-					CPTaxCategoryImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+				CPTaxCategoryImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1032,8 +1045,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_CPTAXCATEGORY_WHERE_PKS_IN);
 
@@ -1065,7 +1078,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 					CPTaxCategoryImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -1093,7 +1107,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Returns a range of all the cp tax categories.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp tax categories
@@ -1109,7 +1123,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Returns an ordered range of all the cp tax categories.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp tax categories
@@ -1118,8 +1132,10 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the ordered range of cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findAll(int start, int end,
+	public List<CPTaxCategory> findAll(
+		int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1127,7 +1143,7 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Returns an ordered range of all the cp tax categories.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPTaxCategoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp tax categories
@@ -1137,29 +1153,31 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * @return the ordered range of cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findAll(int start, int end,
-		OrderByComparator<CPTaxCategory> orderByComparator,
+	public List<CPTaxCategory> findAll(
+		int start, int end, OrderByComparator<CPTaxCategory> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPTaxCategory> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPTaxCategory>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPTaxCategory>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1167,13 +1185,13 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_CPTAXCATEGORY);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1193,16 +1211,16 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CPTaxCategory>)QueryUtil.list(q, getDialect(),
-							start, end, false);
+					list = (List<CPTaxCategory>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPTaxCategory>)QueryUtil.list(q, getDialect(),
-							start, end);
+					list = (List<CPTaxCategory>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1240,8 +1258,8 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1253,12 +1271,12 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1279,6 +1297,47 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 	 * Initializes the cp tax category persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
+			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
+			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
+			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
+			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByGroupId", new String[] {Long.class.getName()},
+			CPTaxCategoryModelImpl.GROUPID_COLUMN_BITMASK |
+			CPTaxCategoryModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1290,17 +1349,37 @@ public class CPTaxCategoryPersistenceImpl extends BasePersistenceImpl<CPTaxCateg
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_CPTAXCATEGORY = "SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory";
-	private static final String _SQL_SELECT_CPTAXCATEGORY_WHERE_PKS_IN = "SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory WHERE CPTaxCategoryId IN (";
-	private static final String _SQL_SELECT_CPTAXCATEGORY_WHERE = "SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory WHERE ";
-	private static final String _SQL_COUNT_CPTAXCATEGORY = "SELECT COUNT(cpTaxCategory) FROM CPTaxCategory cpTaxCategory";
-	private static final String _SQL_COUNT_CPTAXCATEGORY_WHERE = "SELECT COUNT(cpTaxCategory) FROM CPTaxCategory cpTaxCategory WHERE ";
+
+	private static final String _SQL_SELECT_CPTAXCATEGORY =
+		"SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory";
+
+	private static final String _SQL_SELECT_CPTAXCATEGORY_WHERE_PKS_IN =
+		"SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory WHERE CPTaxCategoryId IN (";
+
+	private static final String _SQL_SELECT_CPTAXCATEGORY_WHERE =
+		"SELECT cpTaxCategory FROM CPTaxCategory cpTaxCategory WHERE ";
+
+	private static final String _SQL_COUNT_CPTAXCATEGORY =
+		"SELECT COUNT(cpTaxCategory) FROM CPTaxCategory cpTaxCategory";
+
+	private static final String _SQL_COUNT_CPTAXCATEGORY_WHERE =
+		"SELECT COUNT(cpTaxCategory) FROM CPTaxCategory cpTaxCategory WHERE ";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "cpTaxCategory.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CPTaxCategory exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CPTaxCategory exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CPTaxCategoryPersistenceImpl.class);
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CPTaxCategory exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CPTaxCategory exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPTaxCategoryPersistenceImpl.class);
+
 }

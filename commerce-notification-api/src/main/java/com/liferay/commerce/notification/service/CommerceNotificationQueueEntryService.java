@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -38,30 +37,39 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationQueueEntryServiceUtil
- * @see com.liferay.commerce.notification.service.base.CommerceNotificationQueueEntryServiceBaseImpl
- * @see com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceNotificationQueueEntry"}, service = CommerceNotificationQueueEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceNotificationQueueEntry"
+	},
+	service = CommerceNotificationQueueEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceNotificationQueueEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationQueueEntryServiceUtil} to access the commerce notification queue entry remote service. Add custom service methods to {@link com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationQueueEntryServiceUtil} to access the commerce notification queue entry remote service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public void deleteCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws PortalException;
+			long commerceNotificationQueueEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceNotificationQueueEntry> getCommerceNotificationQueueEntries(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public List<CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntries(
+				long groupId, int start, int end,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -69,12 +77,14 @@ public interface CommerceNotificationQueueEntryService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceNotificationQueueEntry resendCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws PortalException;
+			long commerceNotificationQueueEntryId)
+		throws PortalException;
+
 }

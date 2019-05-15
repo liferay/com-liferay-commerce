@@ -17,7 +17,6 @@ package com.liferay.commerce.account.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAccount in entity cache.
  *
  * @author Marco Leo
- * @see CommerceAccount
  * @generated
  */
 @ProviderType
-public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
-	Externalizable {
+public class CommerceAccountCacheModel
+	implements CacheModel<CommerceAccount>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 			return false;
 		}
 
-		CommerceAccountCacheModel commerceAccountCacheModel = (CommerceAccountCacheModel)obj;
+		CommerceAccountCacheModel commerceAccountCacheModel =
+			(CommerceAccountCacheModel)obj;
 
 		if (commerceAccountId == commerceAccountCacheModel.commerceAccountId) {
 			return true;
@@ -256,8 +256,7 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (externalReferenceCode == null) {
 			objectOutput.writeUTF("");
 		}
@@ -348,4 +347,5 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

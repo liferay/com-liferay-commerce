@@ -18,131 +18,145 @@ import aQute.bnd.annotation.ProviderType;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for CommerceOrderNote. This utility wraps
- * {@link com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderNoteService
- * @see com.liferay.commerce.service.base.CommerceOrderNoteServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl
  * @generated
  */
 @ProviderType
 public class CommerceOrderNoteServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderNoteServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.commerce.model.CommerceOrderNote addCommerceOrderNote(
-		long commerceOrderId, String content, boolean restricted,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			addCommerceOrderNote(
+				long commerceOrderId, String content, boolean restricted,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceOrderNote(commerceOrderId, content, restricted,
-			serviceContext);
+
+		return getService().addCommerceOrderNote(
+			commerceOrderId, content, restricted, serviceContext);
 	}
 
 	public static void deleteCommerceOrderNote(long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		getService().deleteCommerceOrderNote(commerceOrderNoteId);
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderNote fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .fetchByExternalReferenceCode(companyId,
-			externalReferenceCode);
+
+		return getService().fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderNote fetchCommerceOrderNote(
-		long commerceOrderNoteId)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			fetchCommerceOrderNote(long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().fetchCommerceOrderNote(commerceOrderNoteId);
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderNote getCommerceOrderNote(
-		long commerceOrderNoteId)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			getCommerceOrderNote(long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceOrderNote(commerceOrderNoteId);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrderNote> getCommerceOrderNotes(
-		long commerceOrderId, boolean restricted)
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderNote>
+			getCommerceOrderNotes(long commerceOrderId, boolean restricted)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceOrderNotes(commerceOrderId, restricted);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrderNote> getCommerceOrderNotes(
-		long commerceOrderId, int start, int end)
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderNote>
+			getCommerceOrderNotes(long commerceOrderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceOrderNotes(commerceOrderId, start, end);
 	}
 
 	public static int getCommerceOrderNotesCount(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceOrderNotesCount(commerceOrderId);
 	}
 
-	public static int getCommerceOrderNotesCount(long commerceOrderId,
-		boolean restricted)
+	public static int getCommerceOrderNotesCount(
+			long commerceOrderId, boolean restricted)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceOrderNotesCount(commerceOrderId, restricted);
+
+		return getService().getCommerceOrderNotesCount(
+			commerceOrderId, restricted);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderNote updateCommerceOrderNote(
-		long commerceOrderNoteId, String content, boolean restricted)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			updateCommerceOrderNote(
+				long commerceOrderNoteId, String content, boolean restricted)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .updateCommerceOrderNote(commerceOrderNoteId, content,
-			restricted);
+
+		return getService().updateCommerceOrderNote(
+			commerceOrderNoteId, content, restricted);
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderNote upsertCommerceOrderNote(
-		long commerceOrderNoteId, long commerceOrderId, String content,
-		boolean restricted, String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceOrderNote
+			upsertCommerceOrderNote(
+				long commerceOrderNoteId, long commerceOrderId, String content,
+				boolean restricted, String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .upsertCommerceOrderNote(commerceOrderNoteId,
-			commerceOrderId, content, restricted, externalReferenceCode,
-			serviceContext);
+
+		return getService().upsertCommerceOrderNote(
+			commerceOrderNoteId, commerceOrderId, content, restricted,
+			externalReferenceCode, serviceContext);
 	}
 
 	public static CommerceOrderNoteService getService() {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceOrderNoteService, CommerceOrderNoteService> _serviceTracker;
+	private static ServiceTracker
+		<CommerceOrderNoteService, CommerceOrderNoteService> _serviceTracker;
 
 	static {
 		Bundle bundle = FrameworkUtil.getBundle(CommerceOrderNoteService.class);
 
-		ServiceTracker<CommerceOrderNoteService, CommerceOrderNoteService> serviceTracker =
-			new ServiceTracker<CommerceOrderNoteService, CommerceOrderNoteService>(bundle.getBundleContext(),
-				CommerceOrderNoteService.class, null);
+		ServiceTracker<CommerceOrderNoteService, CommerceOrderNoteService>
+			serviceTracker =
+				new ServiceTracker
+					<CommerceOrderNoteService, CommerceOrderNoteService>(
+						bundle.getBundleContext(),
+						CommerceOrderNoteService.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

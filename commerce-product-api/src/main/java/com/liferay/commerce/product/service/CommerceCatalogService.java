@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -42,25 +41,32 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CommerceCatalogServiceUtil
- * @see com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceCatalog"}, service = CommerceCatalogService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceCatalog"
+	},
+	service = CommerceCatalogService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceCatalogService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceCatalogServiceUtil} to access the commerce catalog remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceCatalogServiceUtil} to access the commerce catalog remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
-		String catalogDefaultLanguageId, ServiceContext serviceContext)
+	public CommerceCatalog addCommerceCatalog(
+			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
@@ -74,10 +80,10 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -85,15 +91,17 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCatalog> searchCommerceCatalogs(long companyId,
-		String keywords, int start, int end, Sort sort)
+	public List<CommerceCatalog> searchCommerceCatalogs(
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCommerceCatalogsCount(long companyId, String keywords)
 		throws PortalException;
 
-	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceCatalog updateCommerceCatalog(
+			long commerceCatalogId, String catalogDefaultLanguageId,
+			Map<Locale, String> nameMap, ServiceContext serviceContext)
+		throws PortalException;
+
 }

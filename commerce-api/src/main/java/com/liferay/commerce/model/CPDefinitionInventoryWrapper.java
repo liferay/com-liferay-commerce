@@ -17,9 +17,7 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,10 +38,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
-	ModelWrapper<CPDefinitionInventory> {
+public class CPDefinitionInventoryWrapper
+	implements CPDefinitionInventory, ModelWrapper<CPDefinitionInventory> {
+
 	public CPDefinitionInventoryWrapper(
 		CPDefinitionInventory cpDefinitionInventory) {
+
 		_cpDefinitionInventory = cpDefinitionInventory;
 	}
 
@@ -70,8 +70,8 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
-		attributes.put("CPDefinitionInventoryEngine",
-			getCPDefinitionInventoryEngine());
+		attributes.put(
+			"CPDefinitionInventoryEngine", getCPDefinitionInventoryEngine());
 		attributes.put("lowStockActivity", getLowStockActivity());
 		attributes.put("displayAvailability", isDisplayAvailability());
 		attributes.put("displayStockQuantity", isDisplayStockQuantity());
@@ -94,7 +94,7 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		}
 
 		Long CPDefinitionInventoryId = (Long)attributes.get(
-				"CPDefinitionInventoryId");
+			"CPDefinitionInventoryId");
 
 		if (CPDefinitionInventoryId != null) {
 			setCPDefinitionInventoryId(CPDefinitionInventoryId);
@@ -143,7 +143,7 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		}
 
 		String CPDefinitionInventoryEngine = (String)attributes.get(
-				"CPDefinitionInventoryEngine");
+			"CPDefinitionInventoryEngine");
 
 		if (CPDefinitionInventoryEngine != null) {
 			setCPDefinitionInventoryEngine(CPDefinitionInventoryEngine);
@@ -156,14 +156,14 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		}
 
 		Boolean displayAvailability = (Boolean)attributes.get(
-				"displayAvailability");
+			"displayAvailability");
 
 		if (displayAvailability != null) {
 			setDisplayAvailability(displayAvailability);
 		}
 
 		Boolean displayStockQuantity = (Boolean)attributes.get(
-				"displayStockQuantity");
+			"displayStockQuantity");
 
 		if (displayStockQuantity != null) {
 			setDisplayStockQuantity(displayStockQuantity);
@@ -194,14 +194,14 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		}
 
 		String allowedOrderQuantities = (String)attributes.get(
-				"allowedOrderQuantities");
+			"allowedOrderQuantities");
 
 		if (allowedOrderQuantities != null) {
 			setAllowedOrderQuantities(allowedOrderQuantities);
 		}
 
 		Integer multipleOrderQuantity = (Integer)attributes.get(
-				"multipleOrderQuantity");
+			"multipleOrderQuantity");
 
 		if (multipleOrderQuantity != null) {
 			setMultipleOrderQuantity(multipleOrderQuantity);
@@ -210,7 +210,8 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 
 	@Override
 	public Object clone() {
-		return new CPDefinitionInventoryWrapper((CPDefinitionInventory)_cpDefinitionInventory.clone());
+		return new CPDefinitionInventoryWrapper(
+			(CPDefinitionInventory)_cpDefinitionInventory.clone());
 	}
 
 	@Override
@@ -219,10 +220,10 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns the allowed order quantities of this cp definition inventory.
-	*
-	* @return the allowed order quantities of this cp definition inventory
-	*/
+	 * Returns the allowed order quantities of this cp definition inventory.
+	 *
+	 * @return the allowed order quantities of this cp definition inventory
+	 */
 	@Override
 	public String getAllowedOrderQuantities() {
 		return _cpDefinitionInventory.getAllowedOrderQuantities();
@@ -234,80 +235,80 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns the back orders of this cp definition inventory.
-	*
-	* @return the back orders of this cp definition inventory
-	*/
+	 * Returns the back orders of this cp definition inventory.
+	 *
+	 * @return the back orders of this cp definition inventory
+	 */
 	@Override
 	public boolean getBackOrders() {
 		return _cpDefinitionInventory.getBackOrders();
 	}
 
 	/**
-	* Returns the company ID of this cp definition inventory.
-	*
-	* @return the company ID of this cp definition inventory
-	*/
+	 * Returns the company ID of this cp definition inventory.
+	 *
+	 * @return the company ID of this cp definition inventory
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpDefinitionInventory.getCompanyId();
 	}
 
 	/**
-	* Returns the cp definition ID of this cp definition inventory.
-	*
-	* @return the cp definition ID of this cp definition inventory
-	*/
+	 * Returns the cp definition ID of this cp definition inventory.
+	 *
+	 * @return the cp definition ID of this cp definition inventory
+	 */
 	@Override
 	public long getCPDefinitionId() {
 		return _cpDefinitionInventory.getCPDefinitionId();
 	}
 
 	/**
-	* Returns the cp definition inventory engine of this cp definition inventory.
-	*
-	* @return the cp definition inventory engine of this cp definition inventory
-	*/
+	 * Returns the cp definition inventory engine of this cp definition inventory.
+	 *
+	 * @return the cp definition inventory engine of this cp definition inventory
+	 */
 	@Override
 	public String getCPDefinitionInventoryEngine() {
 		return _cpDefinitionInventory.getCPDefinitionInventoryEngine();
 	}
 
 	/**
-	* Returns the cp definition inventory ID of this cp definition inventory.
-	*
-	* @return the cp definition inventory ID of this cp definition inventory
-	*/
+	 * Returns the cp definition inventory ID of this cp definition inventory.
+	 *
+	 * @return the cp definition inventory ID of this cp definition inventory
+	 */
 	@Override
 	public long getCPDefinitionInventoryId() {
 		return _cpDefinitionInventory.getCPDefinitionInventoryId();
 	}
 
 	/**
-	* Returns the create date of this cp definition inventory.
-	*
-	* @return the create date of this cp definition inventory
-	*/
+	 * Returns the create date of this cp definition inventory.
+	 *
+	 * @return the create date of this cp definition inventory
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpDefinitionInventory.getCreateDate();
 	}
 
 	/**
-	* Returns the display availability of this cp definition inventory.
-	*
-	* @return the display availability of this cp definition inventory
-	*/
+	 * Returns the display availability of this cp definition inventory.
+	 *
+	 * @return the display availability of this cp definition inventory
+	 */
 	@Override
 	public boolean getDisplayAvailability() {
 		return _cpDefinitionInventory.getDisplayAvailability();
 	}
 
 	/**
-	* Returns the display stock quantity of this cp definition inventory.
-	*
-	* @return the display stock quantity of this cp definition inventory
-	*/
+	 * Returns the display stock quantity of this cp definition inventory.
+	 *
+	 * @return the display stock quantity of this cp definition inventory
+	 */
 	@Override
 	public boolean getDisplayStockQuantity() {
 		return _cpDefinitionInventory.getDisplayStockQuantity();
@@ -319,80 +320,80 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns the group ID of this cp definition inventory.
-	*
-	* @return the group ID of this cp definition inventory
-	*/
+	 * Returns the group ID of this cp definition inventory.
+	 *
+	 * @return the group ID of this cp definition inventory
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpDefinitionInventory.getGroupId();
 	}
 
 	/**
-	* Returns the low stock activity of this cp definition inventory.
-	*
-	* @return the low stock activity of this cp definition inventory
-	*/
+	 * Returns the low stock activity of this cp definition inventory.
+	 *
+	 * @return the low stock activity of this cp definition inventory
+	 */
 	@Override
 	public String getLowStockActivity() {
 		return _cpDefinitionInventory.getLowStockActivity();
 	}
 
 	/**
-	* Returns the max order quantity of this cp definition inventory.
-	*
-	* @return the max order quantity of this cp definition inventory
-	*/
+	 * Returns the max order quantity of this cp definition inventory.
+	 *
+	 * @return the max order quantity of this cp definition inventory
+	 */
 	@Override
 	public int getMaxOrderQuantity() {
 		return _cpDefinitionInventory.getMaxOrderQuantity();
 	}
 
 	/**
-	* Returns the min order quantity of this cp definition inventory.
-	*
-	* @return the min order quantity of this cp definition inventory
-	*/
+	 * Returns the min order quantity of this cp definition inventory.
+	 *
+	 * @return the min order quantity of this cp definition inventory
+	 */
 	@Override
 	public int getMinOrderQuantity() {
 		return _cpDefinitionInventory.getMinOrderQuantity();
 	}
 
 	/**
-	* Returns the min stock quantity of this cp definition inventory.
-	*
-	* @return the min stock quantity of this cp definition inventory
-	*/
+	 * Returns the min stock quantity of this cp definition inventory.
+	 *
+	 * @return the min stock quantity of this cp definition inventory
+	 */
 	@Override
 	public int getMinStockQuantity() {
 		return _cpDefinitionInventory.getMinStockQuantity();
 	}
 
 	/**
-	* Returns the modified date of this cp definition inventory.
-	*
-	* @return the modified date of this cp definition inventory
-	*/
+	 * Returns the modified date of this cp definition inventory.
+	 *
+	 * @return the modified date of this cp definition inventory
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpDefinitionInventory.getModifiedDate();
 	}
 
 	/**
-	* Returns the multiple order quantity of this cp definition inventory.
-	*
-	* @return the multiple order quantity of this cp definition inventory
-	*/
+	 * Returns the multiple order quantity of this cp definition inventory.
+	 *
+	 * @return the multiple order quantity of this cp definition inventory
+	 */
 	@Override
 	public int getMultipleOrderQuantity() {
 		return _cpDefinitionInventory.getMultipleOrderQuantity();
 	}
 
 	/**
-	* Returns the primary key of this cp definition inventory.
-	*
-	* @return the primary key of this cp definition inventory
-	*/
+	 * Returns the primary key of this cp definition inventory.
+	 *
+	 * @return the primary key of this cp definition inventory
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpDefinitionInventory.getPrimaryKey();
@@ -404,40 +405,40 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns the user ID of this cp definition inventory.
-	*
-	* @return the user ID of this cp definition inventory
-	*/
+	 * Returns the user ID of this cp definition inventory.
+	 *
+	 * @return the user ID of this cp definition inventory
+	 */
 	@Override
 	public long getUserId() {
 		return _cpDefinitionInventory.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp definition inventory.
-	*
-	* @return the user name of this cp definition inventory
-	*/
+	 * Returns the user name of this cp definition inventory.
+	 *
+	 * @return the user name of this cp definition inventory
+	 */
 	@Override
 	public String getUserName() {
 		return _cpDefinitionInventory.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp definition inventory.
-	*
-	* @return the user uuid of this cp definition inventory
-	*/
+	 * Returns the user uuid of this cp definition inventory.
+	 *
+	 * @return the user uuid of this cp definition inventory
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpDefinitionInventory.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp definition inventory.
-	*
-	* @return the uuid of this cp definition inventory
-	*/
+	 * Returns the uuid of this cp definition inventory.
+	 *
+	 * @return the uuid of this cp definition inventory
+	 */
 	@Override
 	public String getUuid() {
 		return _cpDefinitionInventory.getUuid();
@@ -449,10 +450,10 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition inventory is back orders.
-	*
-	* @return <code>true</code> if this cp definition inventory is back orders; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition inventory is back orders.
+	 *
+	 * @return <code>true</code> if this cp definition inventory is back orders; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isBackOrders() {
 		return _cpDefinitionInventory.isBackOrders();
@@ -464,20 +465,20 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition inventory is display availability.
-	*
-	* @return <code>true</code> if this cp definition inventory is display availability; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition inventory is display availability.
+	 *
+	 * @return <code>true</code> if this cp definition inventory is display availability; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDisplayAvailability() {
 		return _cpDefinitionInventory.isDisplayAvailability();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition inventory is display stock quantity.
-	*
-	* @return <code>true</code> if this cp definition inventory is display stock quantity; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp definition inventory is display stock quantity.
+	 *
+	 * @return <code>true</code> if this cp definition inventory is display stock quantity; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDisplayStockQuantity() {
 		return _cpDefinitionInventory.isDisplayStockQuantity();
@@ -499,20 +500,21 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the allowed order quantities of this cp definition inventory.
-	*
-	* @param allowedOrderQuantities the allowed order quantities of this cp definition inventory
-	*/
+	 * Sets the allowed order quantities of this cp definition inventory.
+	 *
+	 * @param allowedOrderQuantities the allowed order quantities of this cp definition inventory
+	 */
 	@Override
 	public void setAllowedOrderQuantities(String allowedOrderQuantities) {
-		_cpDefinitionInventory.setAllowedOrderQuantities(allowedOrderQuantities);
+		_cpDefinitionInventory.setAllowedOrderQuantities(
+			allowedOrderQuantities);
 	}
 
 	/**
-	* Sets whether this cp definition inventory is back orders.
-	*
-	* @param backOrders the back orders of this cp definition inventory
-	*/
+	 * Sets whether this cp definition inventory is back orders.
+	 *
+	 * @param backOrders the back orders of this cp definition inventory
+	 */
 	@Override
 	public void setBackOrders(boolean backOrders) {
 		_cpDefinitionInventory.setBackOrders(backOrders);
@@ -524,71 +526,74 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the company ID of this cp definition inventory.
-	*
-	* @param companyId the company ID of this cp definition inventory
-	*/
+	 * Sets the company ID of this cp definition inventory.
+	 *
+	 * @param companyId the company ID of this cp definition inventory
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDefinitionInventory.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp definition ID of this cp definition inventory.
-	*
-	* @param CPDefinitionId the cp definition ID of this cp definition inventory
-	*/
+	 * Sets the cp definition ID of this cp definition inventory.
+	 *
+	 * @param CPDefinitionId the cp definition ID of this cp definition inventory
+	 */
 	@Override
 	public void setCPDefinitionId(long CPDefinitionId) {
 		_cpDefinitionInventory.setCPDefinitionId(CPDefinitionId);
 	}
 
 	/**
-	* Sets the cp definition inventory engine of this cp definition inventory.
-	*
-	* @param CPDefinitionInventoryEngine the cp definition inventory engine of this cp definition inventory
-	*/
+	 * Sets the cp definition inventory engine of this cp definition inventory.
+	 *
+	 * @param CPDefinitionInventoryEngine the cp definition inventory engine of this cp definition inventory
+	 */
 	@Override
 	public void setCPDefinitionInventoryEngine(
 		String CPDefinitionInventoryEngine) {
-		_cpDefinitionInventory.setCPDefinitionInventoryEngine(CPDefinitionInventoryEngine);
+
+		_cpDefinitionInventory.setCPDefinitionInventoryEngine(
+			CPDefinitionInventoryEngine);
 	}
 
 	/**
-	* Sets the cp definition inventory ID of this cp definition inventory.
-	*
-	* @param CPDefinitionInventoryId the cp definition inventory ID of this cp definition inventory
-	*/
+	 * Sets the cp definition inventory ID of this cp definition inventory.
+	 *
+	 * @param CPDefinitionInventoryId the cp definition inventory ID of this cp definition inventory
+	 */
 	@Override
 	public void setCPDefinitionInventoryId(long CPDefinitionInventoryId) {
-		_cpDefinitionInventory.setCPDefinitionInventoryId(CPDefinitionInventoryId);
+		_cpDefinitionInventory.setCPDefinitionInventoryId(
+			CPDefinitionInventoryId);
 	}
 
 	/**
-	* Sets the create date of this cp definition inventory.
-	*
-	* @param createDate the create date of this cp definition inventory
-	*/
+	 * Sets the create date of this cp definition inventory.
+	 *
+	 * @param createDate the create date of this cp definition inventory
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpDefinitionInventory.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets whether this cp definition inventory is display availability.
-	*
-	* @param displayAvailability the display availability of this cp definition inventory
-	*/
+	 * Sets whether this cp definition inventory is display availability.
+	 *
+	 * @param displayAvailability the display availability of this cp definition inventory
+	 */
 	@Override
 	public void setDisplayAvailability(boolean displayAvailability) {
 		_cpDefinitionInventory.setDisplayAvailability(displayAvailability);
 	}
 
 	/**
-	* Sets whether this cp definition inventory is display stock quantity.
-	*
-	* @param displayStockQuantity the display stock quantity of this cp definition inventory
-	*/
+	 * Sets whether this cp definition inventory is display stock quantity.
+	 *
+	 * @param displayStockQuantity the display stock quantity of this cp definition inventory
+	 */
 	@Override
 	public void setDisplayStockQuantity(boolean displayStockQuantity) {
 		_cpDefinitionInventory.setDisplayStockQuantity(displayStockQuantity);
@@ -597,6 +602,7 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpDefinitionInventory.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -611,70 +617,70 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the group ID of this cp definition inventory.
-	*
-	* @param groupId the group ID of this cp definition inventory
-	*/
+	 * Sets the group ID of this cp definition inventory.
+	 *
+	 * @param groupId the group ID of this cp definition inventory
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDefinitionInventory.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the low stock activity of this cp definition inventory.
-	*
-	* @param lowStockActivity the low stock activity of this cp definition inventory
-	*/
+	 * Sets the low stock activity of this cp definition inventory.
+	 *
+	 * @param lowStockActivity the low stock activity of this cp definition inventory
+	 */
 	@Override
 	public void setLowStockActivity(String lowStockActivity) {
 		_cpDefinitionInventory.setLowStockActivity(lowStockActivity);
 	}
 
 	/**
-	* Sets the max order quantity of this cp definition inventory.
-	*
-	* @param maxOrderQuantity the max order quantity of this cp definition inventory
-	*/
+	 * Sets the max order quantity of this cp definition inventory.
+	 *
+	 * @param maxOrderQuantity the max order quantity of this cp definition inventory
+	 */
 	@Override
 	public void setMaxOrderQuantity(int maxOrderQuantity) {
 		_cpDefinitionInventory.setMaxOrderQuantity(maxOrderQuantity);
 	}
 
 	/**
-	* Sets the min order quantity of this cp definition inventory.
-	*
-	* @param minOrderQuantity the min order quantity of this cp definition inventory
-	*/
+	 * Sets the min order quantity of this cp definition inventory.
+	 *
+	 * @param minOrderQuantity the min order quantity of this cp definition inventory
+	 */
 	@Override
 	public void setMinOrderQuantity(int minOrderQuantity) {
 		_cpDefinitionInventory.setMinOrderQuantity(minOrderQuantity);
 	}
 
 	/**
-	* Sets the min stock quantity of this cp definition inventory.
-	*
-	* @param minStockQuantity the min stock quantity of this cp definition inventory
-	*/
+	 * Sets the min stock quantity of this cp definition inventory.
+	 *
+	 * @param minStockQuantity the min stock quantity of this cp definition inventory
+	 */
 	@Override
 	public void setMinStockQuantity(int minStockQuantity) {
 		_cpDefinitionInventory.setMinStockQuantity(minStockQuantity);
 	}
 
 	/**
-	* Sets the modified date of this cp definition inventory.
-	*
-	* @param modifiedDate the modified date of this cp definition inventory
-	*/
+	 * Sets the modified date of this cp definition inventory.
+	 *
+	 * @param modifiedDate the modified date of this cp definition inventory
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpDefinitionInventory.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the multiple order quantity of this cp definition inventory.
-	*
-	* @param multipleOrderQuantity the multiple order quantity of this cp definition inventory
-	*/
+	 * Sets the multiple order quantity of this cp definition inventory.
+	 *
+	 * @param multipleOrderQuantity the multiple order quantity of this cp definition inventory
+	 */
 	@Override
 	public void setMultipleOrderQuantity(int multipleOrderQuantity) {
 		_cpDefinitionInventory.setMultipleOrderQuantity(multipleOrderQuantity);
@@ -686,10 +692,10 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the primary key of this cp definition inventory.
-	*
-	* @param primaryKey the primary key of this cp definition inventory
-	*/
+	 * Sets the primary key of this cp definition inventory.
+	 *
+	 * @param primaryKey the primary key of this cp definition inventory
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpDefinitionInventory.setPrimaryKey(primaryKey);
@@ -701,53 +707,56 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the user ID of this cp definition inventory.
-	*
-	* @param userId the user ID of this cp definition inventory
-	*/
+	 * Sets the user ID of this cp definition inventory.
+	 *
+	 * @param userId the user ID of this cp definition inventory
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpDefinitionInventory.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp definition inventory.
-	*
-	* @param userName the user name of this cp definition inventory
-	*/
+	 * Sets the user name of this cp definition inventory.
+	 *
+	 * @param userName the user name of this cp definition inventory
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpDefinitionInventory.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp definition inventory.
-	*
-	* @param userUuid the user uuid of this cp definition inventory
-	*/
+	 * Sets the user uuid of this cp definition inventory.
+	 *
+	 * @param userUuid the user uuid of this cp definition inventory
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpDefinitionInventory.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp definition inventory.
-	*
-	* @param uuid the uuid of this cp definition inventory
-	*/
+	 * Sets the uuid of this cp definition inventory.
+	 *
+	 * @param uuid the uuid of this cp definition inventory
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpDefinitionInventory.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDefinitionInventory> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPDefinitionInventory>
+		toCacheModel() {
+
 		return _cpDefinitionInventory.toCacheModel();
 	}
 
 	@Override
 	public CPDefinitionInventory toEscapedModel() {
-		return new CPDefinitionInventoryWrapper(_cpDefinitionInventory.toEscapedModel());
+		return new CPDefinitionInventoryWrapper(
+			_cpDefinitionInventory.toEscapedModel());
 	}
 
 	@Override
@@ -757,7 +766,8 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 
 	@Override
 	public CPDefinitionInventory toUnescapedModel() {
-		return new CPDefinitionInventoryWrapper(_cpDefinitionInventory.toUnescapedModel());
+		return new CPDefinitionInventoryWrapper(
+			_cpDefinitionInventory.toUnescapedModel());
 	}
 
 	@Override
@@ -775,10 +785,13 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 			return false;
 		}
 
-		CPDefinitionInventoryWrapper cpDefinitionInventoryWrapper = (CPDefinitionInventoryWrapper)obj;
+		CPDefinitionInventoryWrapper cpDefinitionInventoryWrapper =
+			(CPDefinitionInventoryWrapper)obj;
 
-		if (Objects.equals(_cpDefinitionInventory,
-					cpDefinitionInventoryWrapper._cpDefinitionInventory)) {
+		if (Objects.equals(
+				_cpDefinitionInventory,
+				cpDefinitionInventoryWrapper._cpDefinitionInventory)) {
+
 			return true;
 		}
 
@@ -811,4 +824,5 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	private final CPDefinitionInventory _cpDefinitionInventory;
+
 }

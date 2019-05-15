@@ -21,7 +21,6 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl;
 import com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryModelImpl;
 import com.liferay.commerce.user.segment.service.persistence.CommerceUserSegmentEntryPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -67,56 +66,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CommerceUserSegmentEntryPersistence
- * @see com.liferay.commerce.user.segment.service.persistence.CommerceUserSegmentEntryUtil
  * @generated
  */
 @ProviderType
-public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl<CommerceUserSegmentEntry>
+public class CommerceUserSegmentEntryPersistenceImpl
+	extends BasePersistenceImpl<CommerceUserSegmentEntry>
 	implements CommerceUserSegmentEntryPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceUserSegmentEntryUtil} to access the commerce user segment entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceUserSegmentEntryUtil</code> to access the commerce user segment entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceUserSegmentEntryImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceUserSegmentEntryModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceUserSegmentEntryImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the commerce user segment entries where groupId = &#63;.
@@ -126,14 +102,15 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public List<CommerceUserSegmentEntry> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce user segment entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -142,8 +119,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByGroupId(long groupId,
-		int start, int end) {
+	public List<CommerceUserSegmentEntry> findByGroupId(
+		long groupId, int start, int end) {
+
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -151,7 +129,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -161,9 +139,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceUserSegmentEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -171,7 +150,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -182,30 +161,32 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceUserSegmentEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceUserSegmentEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceUserSegmentEntry commerceUserSegmentEntry : list) {
@@ -222,8 +203,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -234,11 +215,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceUserSegmentEntryModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -256,16 +236,16 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -294,11 +274,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @throws NoSuchUserSegmentEntryException if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry findByGroupId_First(long groupId,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+	public CommerceUserSegmentEntry findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry =
+			fetchByGroupId_First(groupId, orderByComparator);
 
 		if (commerceUserSegmentEntry != null) {
 			return commerceUserSegmentEntry;
@@ -324,10 +306,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the first matching commerce user segment entry, or <code>null</code> if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry fetchByGroupId_First(long groupId,
+	public CommerceUserSegmentEntry fetchByGroupId_First(
+		long groupId,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
-		List<CommerceUserSegmentEntry> list = findByGroupId(groupId, 0, 1,
-				orderByComparator);
+
+		List<CommerceUserSegmentEntry> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -345,11 +329,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @throws NoSuchUserSegmentEntryException if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+	public CommerceUserSegmentEntry findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByGroupId_Last(
+			groupId, orderByComparator);
 
 		if (commerceUserSegmentEntry != null) {
 			return commerceUserSegmentEntry;
@@ -375,16 +361,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the last matching commerce user segment entry, or <code>null</code> if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry fetchByGroupId_Last(long groupId,
+	public CommerceUserSegmentEntry fetchByGroupId_Last(
+		long groupId,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceUserSegmentEntry> list = findByGroupId(groupId, count - 1,
-				count, orderByComparator);
+		List<CommerceUserSegmentEntry> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -404,25 +392,30 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry[] findByGroupId_PrevAndNext(
-		long commerceUserSegmentEntryId, long groupId,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+			long commerceUserSegmentEntryId, long groupId,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(commerceUserSegmentEntryId);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(
+			commerceUserSegmentEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceUserSegmentEntry[] array = new CommerceUserSegmentEntryImpl[3];
+			CommerceUserSegmentEntry[] array =
+				new CommerceUserSegmentEntryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, orderByComparator,
+				true);
 
 			array[1] = commerceUserSegmentEntry;
 
-			array[2] = getByGroupId_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -439,11 +432,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		long groupId,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -455,7 +449,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -525,10 +520,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceUserSegmentEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceUserSegmentEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -550,15 +546,15 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public List<CommerceUserSegmentEntry> filterFindByGroupId(long groupId) {
-		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return filterFindByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce user segment entries that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -567,8 +563,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the range of matching commerce user segment entries that the user has permission to view
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> filterFindByGroupId(long groupId,
-		int start, int end) {
+	public List<CommerceUserSegmentEntry> filterFindByGroupId(
+		long groupId, int start, int end) {
+
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
@@ -576,7 +573,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -586,9 +583,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries that the user has permission to view
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> filterFindByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceUserSegmentEntry> filterFindByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
@@ -596,8 +594,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(3 +
-					(orderByComparator.getOrderByFields().length * 2));
+			query = new StringBundler(
+				3 + (orderByComparator.getOrderByFields().length * 2));
 		}
 		else {
 			query = new StringBundler(4);
@@ -607,23 +605,25 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator, true);
 			}
 			else {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_TABLE, orderByComparator, true);
 			}
 		}
 		else {
@@ -635,9 +635,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -647,20 +647,20 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS,
-					CommerceUserSegmentEntryImpl.class);
+				q.addEntity(
+					_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
 			}
 			else {
-				q.addEntity(_FILTER_ENTITY_TABLE,
-					CommerceUserSegmentEntryImpl.class);
+				q.addEntity(
+					_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
 			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
 
-			return (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-				getDialect(), start, end);
+			return (List<CommerceUserSegmentEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -681,30 +681,35 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry[] filterFindByGroupId_PrevAndNext(
-		long commerceUserSegmentEntryId, long groupId,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+			long commerceUserSegmentEntryId, long groupId,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByGroupId_PrevAndNext(commerceUserSegmentEntryId,
-				groupId, orderByComparator);
+			return findByGroupId_PrevAndNext(
+				commerceUserSegmentEntryId, groupId, orderByComparator);
 		}
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(commerceUserSegmentEntryId);
+		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(
+			commerceUserSegmentEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceUserSegmentEntry[] array = new CommerceUserSegmentEntryImpl[3];
+			CommerceUserSegmentEntry[] array =
+				new CommerceUserSegmentEntryImpl[3];
 
-			array[0] = filterGetByGroupId_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, orderByComparator, true);
+			array[0] = filterGetByGroupId_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, orderByComparator,
+				true);
 
 			array[1] = commerceUserSegmentEntry;
 
-			array[2] = filterGetByGroupId_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, orderByComparator, false);
+			array[2] = filterGetByGroupId_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -721,11 +726,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		long groupId,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -736,17 +742,20 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -754,13 +763,17 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			for (int i = 0; i < orderByConditionFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByConditionFields[i],
+							true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByConditionFields[i],
+							true));
 				}
-
-				query.append(orderByConditionFields[i]);
 
 				if ((i + 1) < orderByConditionFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -786,13 +799,15 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			for (int i = 0; i < orderByFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByFields[i], true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByFields[i], true));
 				}
-
-				query.append(orderByFields[i]);
 
 				if ((i + 1) < orderByFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -821,9 +836,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -831,10 +846,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		q.setMaxResults(2);
 
 		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
+			q.addEntity(
+				_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
 		}
 		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
+			q.addEntity(
+				_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
 		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -842,10 +859,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceUserSegmentEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceUserSegmentEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -866,8 +884,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CommerceUserSegmentEntry commerceUserSegmentEntry : findByGroupId(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceUserSegmentEntry commerceUserSegmentEntry :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceUserSegmentEntry);
 		}
 	}
@@ -880,9 +900,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -941,9 +961,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -952,8 +972,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
+			q.addScalar(
+				COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -971,21 +991,14 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceUserSegmentEntry.groupId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_K = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_K",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceUserSegmentEntryModelImpl.KEY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_K = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_K",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"commerceUserSegmentEntry.groupId = ?";
+
+	private FinderPath _finderPathFetchByG_K;
+	private FinderPath _finderPathCountByG_K;
 
 	/**
-	 * Returns the commerce user segment entry where groupId = &#63; and key = &#63; or throws a {@link NoSuchUserSegmentEntryException} if it could not be found.
+	 * Returns the commerce user segment entry where groupId = &#63; and key = &#63; or throws a <code>NoSuchUserSegmentEntryException</code> if it could not be found.
 	 *
 	 * @param groupId the group ID
 	 * @param key the key
@@ -995,8 +1008,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry findByG_K(long groupId, String key)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_K(groupId,
-				key);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_K(
+			groupId, key);
 
 		if (commerceUserSegmentEntry == null) {
 			StringBundler msg = new StringBundler(6);
@@ -1042,22 +1056,27 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the matching commerce user segment entry, or <code>null</code> if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry fetchByG_K(long groupId, String key,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, key };
+	public CommerceUserSegmentEntry fetchByG_K(
+		long groupId, String key, boolean retrieveFromCache) {
+
+		key = Objects.toString(key, "");
+
+		Object[] finderArgs = new Object[] {groupId, key};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_K,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByG_K, finderArgs, this);
 		}
 
 		if (result instanceof CommerceUserSegmentEntry) {
-			CommerceUserSegmentEntry commerceUserSegmentEntry = (CommerceUserSegmentEntry)result;
+			CommerceUserSegmentEntry commerceUserSegmentEntry =
+				(CommerceUserSegmentEntry)result;
 
 			if ((groupId != commerceUserSegmentEntry.getGroupId()) ||
-					!Objects.equals(key, commerceUserSegmentEntry.getKey())) {
+				!Objects.equals(key, commerceUserSegmentEntry.getKey())) {
+
 				result = null;
 			}
 		}
@@ -1071,10 +1090,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			boolean bindKey = false;
 
-			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_KEY_1);
-			}
-			else if (key.equals("")) {
+			if (key.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_K_KEY_3);
 			}
 			else {
@@ -1103,11 +1119,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				List<CommerceUserSegmentEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_K, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByG_K, finderArgs, list);
 				}
 				else {
-					CommerceUserSegmentEntry commerceUserSegmentEntry = list.get(0);
+					CommerceUserSegmentEntry commerceUserSegmentEntry =
+						list.get(0);
 
 					result = commerceUserSegmentEntry;
 
@@ -1115,7 +1132,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, finderArgs);
+				finderCache.removeResult(_finderPathFetchByG_K, finderArgs);
 
 				throw processException(e);
 			}
@@ -1142,8 +1159,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry removeByG_K(long groupId, String key)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = findByG_K(groupId,
-				key);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = findByG_K(
+			groupId, key);
 
 		return remove(commerceUserSegmentEntry);
 	}
@@ -1157,9 +1175,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public int countByG_K(long groupId, String key) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_K;
+		key = Objects.toString(key, "");
 
-		Object[] finderArgs = new Object[] { groupId, key };
+		FinderPath finderPath = _finderPathCountByG_K;
+
+		Object[] finderArgs = new Object[] {groupId, key};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1172,10 +1192,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			boolean bindKey = false;
 
-			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_KEY_1);
-			}
-			else if (key.equals("")) {
+			if (key.isEmpty()) {
 				query.append(_FINDER_COLUMN_G_K_KEY_3);
 			}
 			else {
@@ -1218,32 +1235,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_K_GROUPID_2 = "commerceUserSegmentEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_K_KEY_1 = "commerceUserSegmentEntry.key IS NULL";
-	private static final String _FINDER_COLUMN_G_K_KEY_2 = "commerceUserSegmentEntry.key = ?";
-	private static final String _FINDER_COLUMN_G_K_KEY_3 = "(commerceUserSegmentEntry.key IS NULL OR commerceUserSegmentEntry.key = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceUserSegmentEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceUserSegmentEntryModelImpl.ACTIVE_COLUMN_BITMASK |
-			CommerceUserSegmentEntryModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+	private static final String _FINDER_COLUMN_G_K_GROUPID_2 =
+		"commerceUserSegmentEntry.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_K_KEY_2 =
+		"commerceUserSegmentEntry.key = ?";
+
+	private static final String _FINDER_COLUMN_G_K_KEY_3 =
+		"(commerceUserSegmentEntry.key IS NULL OR commerceUserSegmentEntry.key = '')";
+
+	private FinderPath _finderPathWithPaginationFindByG_A;
+	private FinderPath _finderPathWithoutPaginationFindByG_A;
+	private FinderPath _finderPathCountByG_A;
 
 	/**
 	 * Returns all the commerce user segment entries where groupId = &#63; and active = &#63;.
@@ -1253,16 +1256,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByG_A(long groupId, boolean active) {
-		return findByG_A(groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<CommerceUserSegmentEntry> findByG_A(
+		long groupId, boolean active) {
+
+		return findByG_A(
+			groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce user segment entries where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1272,8 +1277,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByG_A(long groupId,
-		boolean active, int start, int end) {
+	public List<CommerceUserSegmentEntry> findByG_A(
+		long groupId, boolean active, int start, int end) {
+
 		return findByG_A(groupId, active, start, end, null);
 	}
 
@@ -1281,7 +1287,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1292,9 +1298,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByG_A(long groupId,
-		boolean active, int start, int end,
+	public List<CommerceUserSegmentEntry> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		return findByG_A(groupId, active, start, end, orderByComparator, true);
 	}
 
@@ -1302,7 +1309,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1314,39 +1321,40 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findByG_A(long groupId,
-		boolean active, int start, int end,
+	public List<CommerceUserSegmentEntry> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A;
-			finderArgs = new Object[] { groupId, active };
+			finderPath = _finderPathWithoutPaginationFindByG_A;
+			finderArgs = new Object[] {groupId, active};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A;
+			finderPath = _finderPathWithPaginationFindByG_A;
 			finderArgs = new Object[] {
-					groupId, active,
-					
-					start, end, orderByComparator
-				};
+				groupId, active, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceUserSegmentEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceUserSegmentEntry commerceUserSegmentEntry : list) {
 					if ((groupId != commerceUserSegmentEntry.getGroupId()) ||
-							(active != commerceUserSegmentEntry.isActive())) {
+						(active != commerceUserSegmentEntry.isActive())) {
+
 						list = null;
 
 						break;
@@ -1359,8 +1367,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1373,11 +1381,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceUserSegmentEntryModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1397,16 +1404,16 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				qPos.add(active);
 
 				if (!pagination) {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1436,12 +1443,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @throws NoSuchUserSegmentEntryException if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry findByG_A_First(long groupId,
-		boolean active,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+	public CommerceUserSegmentEntry findByG_A_First(
+			long groupId, boolean active,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_A_First(groupId,
-				active, orderByComparator);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_A_First(
+			groupId, active, orderByComparator);
 
 		if (commerceUserSegmentEntry != null) {
 			return commerceUserSegmentEntry;
@@ -1471,11 +1479,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the first matching commerce user segment entry, or <code>null</code> if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry fetchByG_A_First(long groupId,
-		boolean active,
+	public CommerceUserSegmentEntry fetchByG_A_First(
+		long groupId, boolean active,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
-		List<CommerceUserSegmentEntry> list = findByG_A(groupId, active, 0, 1,
-				orderByComparator);
+
+		List<CommerceUserSegmentEntry> list = findByG_A(
+			groupId, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1494,12 +1503,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @throws NoSuchUserSegmentEntryException if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry findByG_A_Last(long groupId,
-		boolean active,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+	public CommerceUserSegmentEntry findByG_A_Last(
+			long groupId, boolean active,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_A_Last(groupId,
-				active, orderByComparator);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByG_A_Last(
+			groupId, active, orderByComparator);
 
 		if (commerceUserSegmentEntry != null) {
 			return commerceUserSegmentEntry;
@@ -1529,17 +1539,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the last matching commerce user segment entry, or <code>null</code> if a matching commerce user segment entry could not be found
 	 */
 	@Override
-	public CommerceUserSegmentEntry fetchByG_A_Last(long groupId,
-		boolean active,
+	public CommerceUserSegmentEntry fetchByG_A_Last(
+		long groupId, boolean active,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		int count = countByG_A(groupId, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceUserSegmentEntry> list = findByG_A(groupId, active,
-				count - 1, count, orderByComparator);
+		List<CommerceUserSegmentEntry> list = findByG_A(
+			groupId, active, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1560,25 +1571,30 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry[] findByG_A_PrevAndNext(
-		long commerceUserSegmentEntryId, long groupId, boolean active,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+			long commerceUserSegmentEntryId, long groupId, boolean active,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(commerceUserSegmentEntryId);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(
+			commerceUserSegmentEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceUserSegmentEntry[] array = new CommerceUserSegmentEntryImpl[3];
+			CommerceUserSegmentEntry[] array =
+				new CommerceUserSegmentEntryImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(session, commerceUserSegmentEntry,
-					groupId, active, orderByComparator, true);
+			array[0] = getByG_A_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, active,
+				orderByComparator, true);
 
 			array[1] = commerceUserSegmentEntry;
 
-			array[2] = getByG_A_PrevAndNext(session, commerceUserSegmentEntry,
-					groupId, active, orderByComparator, false);
+			array[2] = getByG_A_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, active,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1590,16 +1606,17 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	protected CommerceUserSegmentEntry getByG_A_PrevAndNext(Session session,
-		CommerceUserSegmentEntry commerceUserSegmentEntry, long groupId,
-		boolean active,
+	protected CommerceUserSegmentEntry getByG_A_PrevAndNext(
+		Session session, CommerceUserSegmentEntry commerceUserSegmentEntry,
+		long groupId, boolean active,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1613,7 +1630,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1685,10 +1703,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		qPos.add(active);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceUserSegmentEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceUserSegmentEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1710,17 +1729,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the matching commerce user segment entries that the user has permission to view
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> filterFindByG_A(long groupId,
-		boolean active) {
-		return filterFindByG_A(groupId, active, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceUserSegmentEntry> filterFindByG_A(
+		long groupId, boolean active) {
+
+		return filterFindByG_A(
+			groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce user segment entries that the user has permission to view where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1730,8 +1750,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the range of matching commerce user segment entries that the user has permission to view
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> filterFindByG_A(long groupId,
-		boolean active, int start, int end) {
+	public List<CommerceUserSegmentEntry> filterFindByG_A(
+		long groupId, boolean active, int start, int end) {
+
 		return filterFindByG_A(groupId, active, start, end, null);
 	}
 
@@ -1739,7 +1760,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries that the user has permissions to view where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -1750,9 +1771,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of matching commerce user segment entries that the user has permission to view
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> filterFindByG_A(long groupId,
-		boolean active, int start, int end,
+	public List<CommerceUserSegmentEntry> filterFindByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_A(groupId, active, start, end, orderByComparator);
 		}
@@ -1760,8 +1782,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByFields().length * 2));
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByFields().length * 2));
 		}
 		else {
 			query = new StringBundler(5);
@@ -1771,7 +1793,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
@@ -1779,17 +1802,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2_SQL);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator, true);
 			}
 			else {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_TABLE, orderByComparator, true);
 			}
 		}
 		else {
@@ -1801,9 +1825,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -1813,12 +1837,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS,
-					CommerceUserSegmentEntryImpl.class);
+				q.addEntity(
+					_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
 			}
 			else {
-				q.addEntity(_FILTER_ENTITY_TABLE,
-					CommerceUserSegmentEntryImpl.class);
+				q.addEntity(
+					_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
 			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1827,8 +1851,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			qPos.add(active);
 
-			return (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-				getDialect(), start, end);
+			return (List<CommerceUserSegmentEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1850,32 +1874,35 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry[] filterFindByG_A_PrevAndNext(
-		long commerceUserSegmentEntryId, long groupId, boolean active,
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
+			long commerceUserSegmentEntryId, long groupId, boolean active,
+			OrderByComparator<CommerceUserSegmentEntry> orderByComparator)
 		throws NoSuchUserSegmentEntryException {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_A_PrevAndNext(commerceUserSegmentEntryId, groupId,
-				active, orderByComparator);
+			return findByG_A_PrevAndNext(
+				commerceUserSegmentEntryId, groupId, active, orderByComparator);
 		}
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(commerceUserSegmentEntryId);
+		CommerceUserSegmentEntry commerceUserSegmentEntry = findByPrimaryKey(
+			commerceUserSegmentEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceUserSegmentEntry[] array = new CommerceUserSegmentEntryImpl[3];
+			CommerceUserSegmentEntry[] array =
+				new CommerceUserSegmentEntryImpl[3];
 
-			array[0] = filterGetByG_A_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, active,
-					orderByComparator, true);
+			array[0] = filterGetByG_A_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, active,
+				orderByComparator, true);
 
 			array[1] = commerceUserSegmentEntry;
 
-			array[2] = filterGetByG_A_PrevAndNext(session,
-					commerceUserSegmentEntry, groupId, active,
-					orderByComparator, false);
+			array[2] = filterGetByG_A_PrevAndNext(
+				session, commerceUserSegmentEntry, groupId, active,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1892,11 +1919,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		long groupId, boolean active,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				6 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1907,7 +1935,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
@@ -1915,11 +1944,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2_SQL);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(
+				_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1927,13 +1958,17 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			for (int i = 0; i < orderByConditionFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByConditionFields[i],
+							true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByConditionFields[i],
+							true));
 				}
-
-				query.append(orderByConditionFields[i]);
 
 				if ((i + 1) < orderByConditionFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -1959,13 +1994,15 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			for (int i = 0; i < orderByFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByFields[i], true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByFields[i], true));
 				}
-
-				query.append(orderByFields[i]);
 
 				if ((i + 1) < orderByFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -1994,9 +2031,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -2004,10 +2041,12 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		q.setMaxResults(2);
 
 		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
+			q.addEntity(
+				_FILTER_ENTITY_ALIAS, CommerceUserSegmentEntryImpl.class);
 		}
 		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
+			q.addEntity(
+				_FILTER_ENTITY_TABLE, CommerceUserSegmentEntryImpl.class);
 		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -2017,10 +2056,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		qPos.add(active);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceUserSegmentEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceUserSegmentEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2042,8 +2082,11 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public void removeByG_A(long groupId, boolean active) {
-		for (CommerceUserSegmentEntry commerceUserSegmentEntry : findByG_A(
-				groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceUserSegmentEntry commerceUserSegmentEntry :
+				findByG_A(
+					groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceUserSegmentEntry);
 		}
 	}
@@ -2057,9 +2100,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public int countByG_A(long groupId, boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
+		FinderPath finderPath = _finderPathCountByG_A;
 
-		Object[] finderArgs = new Object[] { groupId, active };
+		Object[] finderArgs = new Object[] {groupId, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2125,9 +2168,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2_SQL);
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceUserSegmentEntry.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CommerceUserSegmentEntry.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -2136,8 +2179,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
+			q.addScalar(
+				COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2157,23 +2200,28 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "commerceUserSegmentEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "commerceUserSegmentEntry.active = ?";
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2_SQL = "commerceUserSegmentEntry.active_ = ?";
+	private static final String _FINDER_COLUMN_G_A_GROUPID_2 =
+		"commerceUserSegmentEntry.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 =
+		"commerceUserSegmentEntry.active = ?";
+
+	private static final String _FINDER_COLUMN_G_A_ACTIVE_2_SQL =
+		"commerceUserSegmentEntry.active_ = ?";
 
 	public CommerceUserSegmentEntryPersistenceImpl() {
 		setModelClass(CommerceUserSegmentEntry.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("key", "key_");
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("key", "key_");
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -2191,15 +2239,18 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public void cacheResult(CommerceUserSegmentEntry commerceUserSegmentEntry) {
-		entityCache.putResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceUserSegmentEntryImpl.class,
 			commerceUserSegmentEntry.getPrimaryKey(), commerceUserSegmentEntry);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K,
+		finderCache.putResult(
+			_finderPathFetchByG_K,
 			new Object[] {
 				commerceUserSegmentEntry.getGroupId(),
 				commerceUserSegmentEntry.getKey()
-			}, commerceUserSegmentEntry);
+			},
+			commerceUserSegmentEntry);
 
 		commerceUserSegmentEntry.resetOriginalValues();
 	}
@@ -2212,11 +2263,15 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceUserSegmentEntry> commerceUserSegmentEntries) {
-		for (CommerceUserSegmentEntry commerceUserSegmentEntry : commerceUserSegmentEntries) {
+
+		for (CommerceUserSegmentEntry commerceUserSegmentEntry :
+				commerceUserSegmentEntries) {
+
 			if (entityCache.getResult(
-						CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceUserSegmentEntryImpl.class,
-						commerceUserSegmentEntry.getPrimaryKey()) == null) {
+					CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceUserSegmentEntryImpl.class,
+					commerceUserSegmentEntry.getPrimaryKey()) == null) {
+
 				cacheResult(commerceUserSegmentEntry);
 			}
 			else {
@@ -2229,7 +2284,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Clears the cache for all commerce user segment entries.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -2245,73 +2300,83 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Clears the cache for the commerce user segment entry.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceUserSegmentEntry commerceUserSegmentEntry) {
-		entityCache.removeResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceUserSegmentEntryImpl.class,
 			commerceUserSegmentEntry.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry,
-			true);
+		clearUniqueFindersCache(
+			(CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry, true);
 	}
 
 	@Override
 	public void clearCache(
 		List<CommerceUserSegmentEntry> commerceUserSegmentEntries) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceUserSegmentEntry commerceUserSegmentEntry : commerceUserSegmentEntries) {
-			entityCache.removeResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceUserSegmentEntry commerceUserSegmentEntry :
+				commerceUserSegmentEntries) {
+
+			entityCache.removeResult(
+				CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceUserSegmentEntryImpl.class,
 				commerceUserSegmentEntry.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry,
+			clearUniqueFindersCache(
+				(CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry,
 				true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceUserSegmentEntryModelImpl commerceUserSegmentEntryModelImpl) {
-		Object[] args = new Object[] {
-				commerceUserSegmentEntryModelImpl.getGroupId(),
-				commerceUserSegmentEntryModelImpl.getKey()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_K, args, Long.valueOf(1),
+		Object[] args = new Object[] {
+			commerceUserSegmentEntryModelImpl.getGroupId(),
+			commerceUserSegmentEntryModelImpl.getKey()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByG_K, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByG_K, args, commerceUserSegmentEntryModelImpl,
 			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K, args,
-			commerceUserSegmentEntryModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceUserSegmentEntryModelImpl commerceUserSegmentEntryModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceUserSegmentEntryModelImpl.getGroupId(),
-					commerceUserSegmentEntryModelImpl.getKey()
-				};
+				commerceUserSegmentEntryModelImpl.getGroupId(),
+				commerceUserSegmentEntryModelImpl.getKey()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, args);
+			finderCache.removeResult(_finderPathCountByG_K, args);
+			finderCache.removeResult(_finderPathFetchByG_K, args);
 		}
 
 		if ((commerceUserSegmentEntryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_K.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceUserSegmentEntryModelImpl.getOriginalGroupId(),
-					commerceUserSegmentEntryModelImpl.getOriginalKey()
-				};
+			 _finderPathFetchByG_K.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, args);
+			Object[] args = new Object[] {
+				commerceUserSegmentEntryModelImpl.getOriginalGroupId(),
+				commerceUserSegmentEntryModelImpl.getOriginalKey()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_K, args);
+			finderCache.removeResult(_finderPathFetchByG_K, args);
 		}
 	}
 
@@ -2323,7 +2388,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry create(long commerceUserSegmentEntryId) {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = new CommerceUserSegmentEntryImpl();
+		CommerceUserSegmentEntry commerceUserSegmentEntry =
+			new CommerceUserSegmentEntryImpl();
 
 		commerceUserSegmentEntry.setNew(true);
 		commerceUserSegmentEntry.setPrimaryKey(commerceUserSegmentEntryId);
@@ -2343,6 +2409,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry remove(long commerceUserSegmentEntryId)
 		throws NoSuchUserSegmentEntryException {
+
 		return remove((Serializable)commerceUserSegmentEntryId);
 	}
 
@@ -2356,21 +2423,23 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry remove(Serializable primaryKey)
 		throws NoSuchUserSegmentEntryException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceUserSegmentEntry commerceUserSegmentEntry = (CommerceUserSegmentEntry)session.get(CommerceUserSegmentEntryImpl.class,
-					primaryKey);
+			CommerceUserSegmentEntry commerceUserSegmentEntry =
+				(CommerceUserSegmentEntry)session.get(
+					CommerceUserSegmentEntryImpl.class, primaryKey);
 
 			if (commerceUserSegmentEntry == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchUserSegmentEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchUserSegmentEntryException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceUserSegmentEntry);
@@ -2389,13 +2458,16 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	protected CommerceUserSegmentEntry removeImpl(
 		CommerceUserSegmentEntry commerceUserSegmentEntry) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceUserSegmentEntry)) {
-				commerceUserSegmentEntry = (CommerceUserSegmentEntry)session.get(CommerceUserSegmentEntryImpl.class,
+				commerceUserSegmentEntry =
+					(CommerceUserSegmentEntry)session.get(
+						CommerceUserSegmentEntryImpl.class,
 						commerceUserSegmentEntry.getPrimaryKeyObj());
 			}
 
@@ -2420,27 +2492,33 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry updateImpl(
 		CommerceUserSegmentEntry commerceUserSegmentEntry) {
+
 		boolean isNew = commerceUserSegmentEntry.isNew();
 
-		if (!(commerceUserSegmentEntry instanceof CommerceUserSegmentEntryModelImpl)) {
+		if (!(commerceUserSegmentEntry instanceof
+				CommerceUserSegmentEntryModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceUserSegmentEntry.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceUserSegmentEntry);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceUserSegmentEntry);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceUserSegmentEntry proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceUserSegmentEntry implementation " +
-				commerceUserSegmentEntry.getClass());
+					commerceUserSegmentEntry.getClass());
 		}
 
-		CommerceUserSegmentEntryModelImpl commerceUserSegmentEntryModelImpl = (CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry;
+		CommerceUserSegmentEntryModelImpl commerceUserSegmentEntryModelImpl =
+			(CommerceUserSegmentEntryModelImpl)commerceUserSegmentEntry;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -2449,8 +2527,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				commerceUserSegmentEntry.setCreateDate(now);
 			}
 			else {
-				commerceUserSegmentEntry.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceUserSegmentEntry.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -2459,8 +2537,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				commerceUserSegmentEntry.setModifiedDate(now);
 			}
 			else {
-				commerceUserSegmentEntry.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceUserSegmentEntry.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -2475,7 +2553,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				commerceUserSegmentEntry.setNew(false);
 			}
 			else {
-				commerceUserSegmentEntry = (CommerceUserSegmentEntry)session.merge(commerceUserSegmentEntry);
+				commerceUserSegmentEntry =
+					(CommerceUserSegmentEntry)session.merge(
+						commerceUserSegmentEntry);
 			}
 		}
 		catch (Exception e) {
@@ -2490,73 +2570,76 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		if (!CommerceUserSegmentEntryModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceUserSegmentEntryModelImpl.getGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
+
+			args = new Object[] {
+				commerceUserSegmentEntryModelImpl.getGroupId(),
+				commerceUserSegmentEntryModelImpl.isActive()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_A, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_A, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceUserSegmentEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceUserSegmentEntryModelImpl.getOriginalGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+
+				args = new Object[] {
 					commerceUserSegmentEntryModelImpl.getGroupId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceUserSegmentEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_A.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceUserSegmentEntryModelImpl.getOriginalGroupId(),
+					commerceUserSegmentEntryModelImpl.getOriginalActive()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
+
+				args = new Object[] {
 					commerceUserSegmentEntryModelImpl.getGroupId(),
 					commerceUserSegmentEntryModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceUserSegmentEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceUserSegmentEntryModelImpl.getOriginalGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-
-				args = new Object[] {
-						commerceUserSegmentEntryModelImpl.getGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-			}
-
-			if ((commerceUserSegmentEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceUserSegmentEntryModelImpl.getOriginalGroupId(),
-						commerceUserSegmentEntryModelImpl.getOriginalActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
-
-				args = new Object[] {
-						commerceUserSegmentEntryModelImpl.getGroupId(),
-						commerceUserSegmentEntryModelImpl.isActive()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
-					args);
+				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_A, args);
 			}
 		}
 
-		entityCache.putResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceUserSegmentEntryImpl.class,
 			commerceUserSegmentEntry.getPrimaryKey(), commerceUserSegmentEntry,
 			false);
@@ -2570,7 +2653,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce user segment entry with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce user segment entry with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce user segment entry
 	 * @return the commerce user segment entry
@@ -2579,22 +2662,24 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchUserSegmentEntryException {
-		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByPrimaryKey(primaryKey);
+
+		CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByPrimaryKey(
+			primaryKey);
 
 		if (commerceUserSegmentEntry == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchUserSegmentEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchUserSegmentEntryException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceUserSegmentEntry;
 	}
 
 	/**
-	 * Returns the commerce user segment entry with the primary key or throws a {@link NoSuchUserSegmentEntryException} if it could not be found.
+	 * Returns the commerce user segment entry with the primary key or throws a <code>NoSuchUserSegmentEntryException</code> if it could not be found.
 	 *
 	 * @param commerceUserSegmentEntryId the primary key of the commerce user segment entry
 	 * @return the commerce user segment entry
@@ -2602,7 +2687,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry findByPrimaryKey(
-		long commerceUserSegmentEntryId) throws NoSuchUserSegmentEntryException {
+			long commerceUserSegmentEntryId)
+		throws NoSuchUserSegmentEntryException {
+
 		return findByPrimaryKey((Serializable)commerceUserSegmentEntryId);
 	}
 
@@ -2614,14 +2701,16 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public CommerceUserSegmentEntry fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceUserSegmentEntryImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceUserSegmentEntry commerceUserSegmentEntry = (CommerceUserSegmentEntry)serializable;
+		CommerceUserSegmentEntry commerceUserSegmentEntry =
+			(CommerceUserSegmentEntry)serializable;
 
 		if (commerceUserSegmentEntry == null) {
 			Session session = null;
@@ -2629,20 +2718,23 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			try {
 				session = openSession();
 
-				commerceUserSegmentEntry = (CommerceUserSegmentEntry)session.get(CommerceUserSegmentEntryImpl.class,
-						primaryKey);
+				commerceUserSegmentEntry =
+					(CommerceUserSegmentEntry)session.get(
+						CommerceUserSegmentEntryImpl.class, primaryKey);
 
 				if (commerceUserSegmentEntry != null) {
 					cacheResult(commerceUserSegmentEntry);
 				}
 				else {
-					entityCache.putResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceUserSegmentEntryImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceUserSegmentEntryImpl.class, primaryKey);
 
 				throw processException(e);
@@ -2664,24 +2756,28 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	@Override
 	public CommerceUserSegmentEntry fetchByPrimaryKey(
 		long commerceUserSegmentEntryId) {
+
 		return fetchByPrimaryKey((Serializable)commerceUserSegmentEntryId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceUserSegmentEntry> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceUserSegmentEntry> map = new HashMap<Serializable, CommerceUserSegmentEntry>();
+		Map<Serializable, CommerceUserSegmentEntry> map =
+			new HashMap<Serializable, CommerceUserSegmentEntry>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceUserSegmentEntry commerceUserSegmentEntry = fetchByPrimaryKey(primaryKey);
+			CommerceUserSegmentEntry commerceUserSegmentEntry =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceUserSegmentEntry != null) {
 				map.put(primaryKey, commerceUserSegmentEntry);
@@ -2693,8 +2789,9 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceUserSegmentEntryImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceUserSegmentEntryImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -2714,8 +2811,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE_PKS_IN);
 
@@ -2738,17 +2835,22 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceUserSegmentEntry commerceUserSegmentEntry : (List<CommerceUserSegmentEntry>)q.list()) {
-				map.put(commerceUserSegmentEntry.getPrimaryKeyObj(),
+			for (CommerceUserSegmentEntry commerceUserSegmentEntry :
+					(List<CommerceUserSegmentEntry>)q.list()) {
+
+				map.put(
+					commerceUserSegmentEntry.getPrimaryKeyObj(),
 					commerceUserSegmentEntry);
 
 				cacheResult(commerceUserSegmentEntry);
 
-				uncachedPrimaryKeys.remove(commerceUserSegmentEntry.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceUserSegmentEntry.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceUserSegmentEntryImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -2776,7 +2878,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns a range of all the commerce user segment entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce user segment entries
@@ -2792,7 +2894,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce user segment entries
@@ -2801,8 +2903,10 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findAll(int start, int end,
+	public List<CommerceUserSegmentEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2810,7 +2914,7 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Returns an ordered range of all the commerce user segment entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceUserSegmentEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceUserSegmentEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce user segment entries
@@ -2820,29 +2924,32 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * @return the ordered range of commerce user segment entries
 	 */
 	@Override
-	public List<CommerceUserSegmentEntry> findAll(int start, int end,
+	public List<CommerceUserSegmentEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceUserSegmentEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceUserSegmentEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2850,13 +2957,13 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEUSERSEGMENTENTRY);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2864,7 +2971,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				sql = _SQL_SELECT_COMMERCEUSERSEGMENTENTRY;
 
 				if (pagination) {
-					sql = sql.concat(CommerceUserSegmentEntryModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceUserSegmentEntryModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2876,16 +2984,16 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceUserSegmentEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2923,8 +3031,8 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2932,16 +3040,17 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEUSERSEGMENTENTRY);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEUSERSEGMENTENTRY);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2967,6 +3076,91 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 	 * Initializes the commerce user segment entry persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceUserSegmentEntryModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] {Long.class.getName()});
+
+		_finderPathFetchByG_K = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_K",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceUserSegmentEntryModelImpl.KEY_COLUMN_BITMASK);
+
+		_finderPathCountByG_K = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_K",
+			new String[] {Long.class.getName(), String.class.getName()});
+
+		_finderPathWithPaginationFindByG_A = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_A = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceUserSegmentEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()},
+			CommerceUserSegmentEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceUserSegmentEntryModelImpl.ACTIVE_COLUMN_BITMASK |
+			CommerceUserSegmentEntryModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByG_A = new FinderPath(
+			CommerceUserSegmentEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceUserSegmentEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
+			new String[] {Long.class.getName(), Boolean.class.getName()});
 	}
 
 	public void destroy() {
@@ -2978,33 +3172,70 @@ public class CommerceUserSegmentEntryPersistenceImpl extends BasePersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEUSERSEGMENTENTRY = "SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry";
-	private static final String _SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE_PKS_IN =
-		"SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE commerceUserSegmentEntryId IN (";
-	private static final String _SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE = "SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
-	private static final String _SQL_COUNT_COMMERCEUSERSEGMENTENTRY = "SELECT COUNT(commerceUserSegmentEntry) FROM CommerceUserSegmentEntry commerceUserSegmentEntry";
-	private static final String _SQL_COUNT_COMMERCEUSERSEGMENTENTRY_WHERE = "SELECT COUNT(commerceUserSegmentEntry) FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
-	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "commerceUserSegmentEntry.commerceUserSegmentEntryId";
-	private static final String _FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE =
-		"SELECT DISTINCT {commerceUserSegmentEntry.*} FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {CommerceUserSegmentEntry.*} FROM (SELECT DISTINCT commerceUserSegmentEntry.commerceUserSegmentEntryId FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN CommerceUserSegmentEntry ON TEMP_TABLE.commerceUserSegmentEntryId = CommerceUserSegmentEntry.commerceUserSegmentEntryId";
-	private static final String _FILTER_SQL_COUNT_COMMERCEUSERSEGMENTENTRY_WHERE =
-		"SELECT COUNT(DISTINCT commerceUserSegmentEntry.commerceUserSegmentEntryId) AS COUNT_VALUE FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
-	private static final String _FILTER_ENTITY_ALIAS = "commerceUserSegmentEntry";
-	private static final String _FILTER_ENTITY_TABLE = "CommerceUserSegmentEntry";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceUserSegmentEntry.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "CommerceUserSegmentEntry.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceUserSegmentEntry exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceUserSegmentEntry exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceUserSegmentEntryPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"key", "active"
-			});
+
+	private static final String _SQL_SELECT_COMMERCEUSERSEGMENTENTRY =
+		"SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry";
+
+	private static final String
+		_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE_PKS_IN =
+			"SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE commerceUserSegmentEntryId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE =
+		"SELECT commerceUserSegmentEntry FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEUSERSEGMENTENTRY =
+		"SELECT COUNT(commerceUserSegmentEntry) FROM CommerceUserSegmentEntry commerceUserSegmentEntry";
+
+	private static final String _SQL_COUNT_COMMERCEUSERSEGMENTENTRY_WHERE =
+		"SELECT COUNT(commerceUserSegmentEntry) FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
+
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN =
+		"commerceUserSegmentEntry.commerceUserSegmentEntryId";
+
+	private static final String
+		_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_WHERE =
+			"SELECT DISTINCT {commerceUserSegmentEntry.*} FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
+
+	private static final String
+		_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_1 =
+			"SELECT {CommerceUserSegmentEntry.*} FROM (SELECT DISTINCT commerceUserSegmentEntry.commerceUserSegmentEntryId FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
+
+	private static final String
+		_FILTER_SQL_SELECT_COMMERCEUSERSEGMENTENTRY_NO_INLINE_DISTINCT_WHERE_2 =
+			") TEMP_TABLE INNER JOIN CommerceUserSegmentEntry ON TEMP_TABLE.commerceUserSegmentEntryId = CommerceUserSegmentEntry.commerceUserSegmentEntryId";
+
+	private static final String
+		_FILTER_SQL_COUNT_COMMERCEUSERSEGMENTENTRY_WHERE =
+			"SELECT COUNT(DISTINCT commerceUserSegmentEntry.commerceUserSegmentEntryId) AS COUNT_VALUE FROM CommerceUserSegmentEntry commerceUserSegmentEntry WHERE ";
+
+	private static final String _FILTER_ENTITY_ALIAS =
+		"commerceUserSegmentEntry";
+
+	private static final String _FILTER_ENTITY_TABLE =
+		"CommerceUserSegmentEntry";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceUserSegmentEntry.";
+
+	private static final String _ORDER_BY_ENTITY_TABLE =
+		"CommerceUserSegmentEntry.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceUserSegmentEntry exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceUserSegmentEntry exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceUserSegmentEntryPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"key", "active"});
+
 }

@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateModel
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateImpl
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateImpl"
+)
 @ProviderType
 public interface CommerceNotificationTemplate
 	extends CommerceNotificationTemplateModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceNotificationTemplate, Long> COMMERCE_NOTIFICATION_TEMPLATE_ID_ACCESSOR =
-		new Accessor<CommerceNotificationTemplate, Long>() {
-			@Override
-			public Long get(
-				CommerceNotificationTemplate commerceNotificationTemplate) {
-				return commerceNotificationTemplate.getCommerceNotificationTemplateId();
-			}
+	public static final Accessor<CommerceNotificationTemplate, Long>
+		COMMERCE_NOTIFICATION_TEMPLATE_ID_ACCESSOR =
+			new Accessor<CommerceNotificationTemplate, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceNotificationTemplate commerceNotificationTemplate) {
 
-			@Override
-			public Class<CommerceNotificationTemplate> getTypeClass() {
-				return CommerceNotificationTemplate.class;
-			}
-		};
+					return commerceNotificationTemplate.
+						getCommerceNotificationTemplateId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceNotificationTemplate> getTypeClass() {
+					return CommerceNotificationTemplate.class;
+				}
+
+			};
+
 }

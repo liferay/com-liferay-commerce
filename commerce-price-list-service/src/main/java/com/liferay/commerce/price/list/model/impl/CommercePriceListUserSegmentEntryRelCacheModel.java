@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,13 @@ import java.util.Date;
  * The cache model class for representing CommercePriceListUserSegmentEntryRel in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommercePriceListUserSegmentEntryRel
  * @generated
  */
 @ProviderType
 public class CommercePriceListUserSegmentEntryRelCacheModel
-	implements CacheModel<CommercePriceListUserSegmentEntryRel>, Externalizable {
+	implements CacheModel<CommercePriceListUserSegmentEntryRel>,
+			   Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +49,14 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 			return false;
 		}
 
-		CommercePriceListUserSegmentEntryRelCacheModel commercePriceListUserSegmentEntryRelCacheModel =
-			(CommercePriceListUserSegmentEntryRelCacheModel)obj;
+		CommercePriceListUserSegmentEntryRelCacheModel
+			commercePriceListUserSegmentEntryRelCacheModel =
+				(CommercePriceListUserSegmentEntryRelCacheModel)obj;
 
-		if (commercePriceListUserSegmentEntryRelId == commercePriceListUserSegmentEntryRelCacheModel.commercePriceListUserSegmentEntryRelId) {
+		if (commercePriceListUserSegmentEntryRelId ==
+				commercePriceListUserSegmentEntryRelCacheModel.
+					commercePriceListUserSegmentEntryRelId) {
+
 			return true;
 		}
 
@@ -99,8 +103,9 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 
 	@Override
 	public CommercePriceListUserSegmentEntryRel toEntityModel() {
-		CommercePriceListUserSegmentEntryRelImpl commercePriceListUserSegmentEntryRelImpl =
-			new CommercePriceListUserSegmentEntryRelImpl();
+		CommercePriceListUserSegmentEntryRelImpl
+			commercePriceListUserSegmentEntryRelImpl =
+				new CommercePriceListUserSegmentEntryRelImpl();
 
 		if (uuid == null) {
 			commercePriceListUserSegmentEntryRelImpl.setUuid("");
@@ -109,7 +114,9 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 			commercePriceListUserSegmentEntryRelImpl.setUuid(uuid);
 		}
 
-		commercePriceListUserSegmentEntryRelImpl.setCommercePriceListUserSegmentEntryRelId(commercePriceListUserSegmentEntryRelId);
+		commercePriceListUserSegmentEntryRelImpl.
+			setCommercePriceListUserSegmentEntryRelId(
+				commercePriceListUserSegmentEntryRelId);
 		commercePriceListUserSegmentEntryRelImpl.setGroupId(groupId);
 		commercePriceListUserSegmentEntryRelImpl.setCompanyId(companyId);
 		commercePriceListUserSegmentEntryRelImpl.setUserId(userId);
@@ -125,28 +132,30 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 			commercePriceListUserSegmentEntryRelImpl.setCreateDate(null);
 		}
 		else {
-			commercePriceListUserSegmentEntryRelImpl.setCreateDate(new Date(
-					createDate));
+			commercePriceListUserSegmentEntryRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commercePriceListUserSegmentEntryRelImpl.setModifiedDate(null);
 		}
 		else {
-			commercePriceListUserSegmentEntryRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commercePriceListUserSegmentEntryRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commercePriceListUserSegmentEntryRelImpl.setCommercePriceListId(commercePriceListId);
-		commercePriceListUserSegmentEntryRelImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		commercePriceListUserSegmentEntryRelImpl.setCommercePriceListId(
+			commercePriceListId);
+		commercePriceListUserSegmentEntryRelImpl.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 		commercePriceListUserSegmentEntryRelImpl.setOrder(order);
 
 		if (lastPublishDate == Long.MIN_VALUE) {
 			commercePriceListUserSegmentEntryRelImpl.setLastPublishDate(null);
 		}
 		else {
-			commercePriceListUserSegmentEntryRelImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			commercePriceListUserSegmentEntryRelImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		commercePriceListUserSegmentEntryRelImpl.resetOriginalValues();
@@ -178,8 +187,7 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -225,4 +233,5 @@ public class CommercePriceListUserSegmentEntryRelCacheModel
 	public long commerceUserSegmentEntryId;
 	public int order;
 	public long lastPublishDate;
+
 }

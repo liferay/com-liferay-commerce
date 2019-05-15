@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -39,6 +38,7 @@ import java.util.Objects;
  */
 @ProviderType
 public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
+
 	public CPRuleWrapper(CPRule cpRule) {
 		_cpRule = cpRule;
 	}
@@ -152,20 +152,20 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns the active of this cp rule.
-	*
-	* @return the active of this cp rule
-	*/
+	 * Returns the active of this cp rule.
+	 *
+	 * @return the active of this cp rule
+	 */
 	@Override
 	public boolean getActive() {
 		return _cpRule.getActive();
 	}
 
 	/**
-	* Returns the company ID of this cp rule.
-	*
-	* @return the company ID of this cp rule
-	*/
+	 * Returns the company ID of this cp rule.
+	 *
+	 * @return the company ID of this cp rule
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpRule.getCompanyId();
@@ -177,10 +177,10 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns the cp rule ID of this cp rule.
-	*
-	* @return the cp rule ID of this cp rule
-	*/
+	 * Returns the cp rule ID of this cp rule.
+	 *
+	 * @return the cp rule ID of this cp rule
+	 */
 	@Override
 	public long getCPRuleId() {
 		return _cpRule.getCPRuleId();
@@ -192,10 +192,10 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns the create date of this cp rule.
-	*
-	* @return the create date of this cp rule
-	*/
+	 * Returns the create date of this cp rule.
+	 *
+	 * @return the create date of this cp rule
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpRule.getCreateDate();
@@ -207,40 +207,40 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns the group ID of this cp rule.
-	*
-	* @return the group ID of this cp rule
-	*/
+	 * Returns the group ID of this cp rule.
+	 *
+	 * @return the group ID of this cp rule
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpRule.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this cp rule.
-	*
-	* @return the modified date of this cp rule
-	*/
+	 * Returns the modified date of this cp rule.
+	 *
+	 * @return the modified date of this cp rule
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpRule.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this cp rule.
-	*
-	* @return the name of this cp rule
-	*/
+	 * Returns the name of this cp rule.
+	 *
+	 * @return the name of this cp rule
+	 */
 	@Override
 	public String getName() {
 		return _cpRule.getName();
 	}
 
 	/**
-	* Returns the primary key of this cp rule.
-	*
-	* @return the primary key of this cp rule
-	*/
+	 * Returns the primary key of this cp rule.
+	 *
+	 * @return the primary key of this cp rule
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpRule.getPrimaryKey();
@@ -252,55 +252,57 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns the type of this cp rule.
-	*
-	* @return the type of this cp rule
-	*/
+	 * Returns the type of this cp rule.
+	 *
+	 * @return the type of this cp rule
+	 */
 	@Override
 	public String getType() {
 		return _cpRule.getType();
 	}
 
 	/**
-	* Returns the type settings of this cp rule.
-	*
-	* @return the type settings of this cp rule
-	*/
+	 * Returns the type settings of this cp rule.
+	 *
+	 * @return the type settings of this cp rule
+	 */
 	@Override
 	public String getTypeSettings() {
 		return _cpRule.getTypeSettings();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getTypeSettingsProperties() {
+
 		return _cpRule.getTypeSettingsProperties();
 	}
 
 	/**
-	* Returns the user ID of this cp rule.
-	*
-	* @return the user ID of this cp rule
-	*/
+	 * Returns the user ID of this cp rule.
+	 *
+	 * @return the user ID of this cp rule
+	 */
 	@Override
 	public long getUserId() {
 		return _cpRule.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp rule.
-	*
-	* @return the user name of this cp rule
-	*/
+	 * Returns the user name of this cp rule.
+	 *
+	 * @return the user name of this cp rule
+	 */
 	@Override
 	public String getUserName() {
 		return _cpRule.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp rule.
-	*
-	* @return the user uuid of this cp rule
-	*/
+	 * Returns the user uuid of this cp rule.
+	 *
+	 * @return the user uuid of this cp rule
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpRule.getUserUuid();
@@ -312,10 +314,10 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Returns <code>true</code> if this cp rule is active.
-	*
-	* @return <code>true</code> if this cp rule is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp rule is active.
+	 *
+	 * @return <code>true</code> if this cp rule is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _cpRule.isActive();
@@ -342,10 +344,10 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Sets whether this cp rule is active.
-	*
-	* @param active the active of this cp rule
-	*/
+	 * Sets whether this cp rule is active.
+	 *
+	 * @param active the active of this cp rule
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_cpRule.setActive(active);
@@ -357,30 +359,30 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Sets the company ID of this cp rule.
-	*
-	* @param companyId the company ID of this cp rule
-	*/
+	 * Sets the company ID of this cp rule.
+	 *
+	 * @param companyId the company ID of this cp rule
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpRule.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp rule ID of this cp rule.
-	*
-	* @param CPRuleId the cp rule ID of this cp rule
-	*/
+	 * Sets the cp rule ID of this cp rule.
+	 *
+	 * @param CPRuleId the cp rule ID of this cp rule
+	 */
 	@Override
 	public void setCPRuleId(long CPRuleId) {
 		_cpRule.setCPRuleId(CPRuleId);
 	}
 
 	/**
-	* Sets the create date of this cp rule.
-	*
-	* @param createDate the create date of this cp rule
-	*/
+	 * Sets the create date of this cp rule.
+	 *
+	 * @param createDate the create date of this cp rule
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpRule.setCreateDate(createDate);
@@ -389,6 +391,7 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpRule.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -403,30 +406,30 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Sets the group ID of this cp rule.
-	*
-	* @param groupId the group ID of this cp rule
-	*/
+	 * Sets the group ID of this cp rule.
+	 *
+	 * @param groupId the group ID of this cp rule
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpRule.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this cp rule.
-	*
-	* @param modifiedDate the modified date of this cp rule
-	*/
+	 * Sets the modified date of this cp rule.
+	 *
+	 * @param modifiedDate the modified date of this cp rule
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpRule.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this cp rule.
-	*
-	* @param name the name of this cp rule
-	*/
+	 * Sets the name of this cp rule.
+	 *
+	 * @param name the name of this cp rule
+	 */
 	@Override
 	public void setName(String name) {
 		_cpRule.setName(name);
@@ -438,10 +441,10 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Sets the primary key of this cp rule.
-	*
-	* @param primaryKey the primary key of this cp rule
-	*/
+	 * Sets the primary key of this cp rule.
+	 *
+	 * @param primaryKey the primary key of this cp rule
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpRule.setPrimaryKey(primaryKey);
@@ -453,20 +456,20 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	/**
-	* Sets the type of this cp rule.
-	*
-	* @param type the type of this cp rule
-	*/
+	 * Sets the type of this cp rule.
+	 *
+	 * @param type the type of this cp rule
+	 */
 	@Override
 	public void setType(String type) {
 		_cpRule.setType(type);
 	}
 
 	/**
-	* Sets the type settings of this cp rule.
-	*
-	* @param typeSettings the type settings of this cp rule
-	*/
+	 * Sets the type settings of this cp rule.
+	 *
+	 * @param typeSettings the type settings of this cp rule
+	 */
 	@Override
 	public void setTypeSettings(String typeSettings) {
 		_cpRule.setTypeSettings(typeSettings);
@@ -474,35 +477,37 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 
 	@Override
 	public void setTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
+		com.liferay.portal.kernel.util.UnicodeProperties
+			typeSettingsProperties) {
+
 		_cpRule.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
 	/**
-	* Sets the user ID of this cp rule.
-	*
-	* @param userId the user ID of this cp rule
-	*/
+	 * Sets the user ID of this cp rule.
+	 *
+	 * @param userId the user ID of this cp rule
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpRule.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp rule.
-	*
-	* @param userName the user name of this cp rule
-	*/
+	 * Sets the user name of this cp rule.
+	 *
+	 * @param userName the user name of this cp rule
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpRule.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp rule.
-	*
-	* @param userUuid the user uuid of this cp rule
-	*/
+	 * Sets the user uuid of this cp rule.
+	 *
+	 * @param userUuid the user uuid of this cp rule
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpRule.setUserUuid(userUuid);
@@ -573,4 +578,5 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	}
 
 	private final CPRule _cpRule;
+
 }

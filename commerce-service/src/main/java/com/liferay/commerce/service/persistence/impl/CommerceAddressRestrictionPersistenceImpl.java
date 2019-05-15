@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.impl.CommerceAddressRestrictionImpl;
 import com.liferay.commerce.model.impl.CommerceAddressRestrictionModelImpl;
 import com.liferay.commerce.service.persistence.CommerceAddressRestrictionPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,59 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceAddressRestrictionPersistence
- * @see com.liferay.commerce.service.persistence.CommerceAddressRestrictionUtil
  * @generated
  */
 @ProviderType
 public class CommerceAddressRestrictionPersistenceImpl
 	extends BasePersistenceImpl<CommerceAddressRestriction>
 	implements CommerceAddressRestrictionPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceAddressRestrictionUtil} to access the commerce address restriction persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceAddressRestrictionUtil</code> to access the commerce address restriction persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceAddressRestrictionImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCECOUNTRYID =
-		new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceCountryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID =
-		new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceCountryId", new String[] { Long.class.getName() },
-			CommerceAddressRestrictionModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK |
-			CommerceAddressRestrictionModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceCountryId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceAddressRestrictionImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceCountryId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceCountryId;
+	private FinderPath _finderPathCountByCommerceCountryId;
 
 	/**
 	 * Returns all the commerce address restrictions where commerceCountryId = &#63;.
@@ -125,15 +98,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId) {
-		return findByCommerceCountryId(commerceCountryId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+
+		return findByCommerceCountryId(
+			commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce address restrictions where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -144,6 +118,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end) {
+
 		return findByCommerceCountryId(commerceCountryId, start, end, null);
 	}
 
@@ -151,7 +126,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Returns an ordered range of all the commerce address restrictions where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -164,15 +139,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 	public List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
-		return findByCommerceCountryId(commerceCountryId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceCountryId(
+			commerceCountryId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce address restrictions where commerceCountryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceCountryId the commerce country ID
@@ -187,34 +163,39 @@ public class CommerceAddressRestrictionPersistenceImpl
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID;
-			finderArgs = new Object[] { commerceCountryId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceCountryId;
+			finderArgs = new Object[] {commerceCountryId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCECOUNTRYID;
+			finderPath = _finderPathWithPaginationFindByCommerceCountryId;
 			finderArgs = new Object[] {
-					commerceCountryId,
-					
-					start, end, orderByComparator
-				};
+				commerceCountryId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddressRestriction> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddressRestriction>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddressRestriction>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddressRestriction commerceAddressRestriction : list) {
-					if ((commerceCountryId != commerceAddressRestriction.getCommerceCountryId())) {
+				for (CommerceAddressRestriction commerceAddressRestriction :
+						list) {
+
+					if ((commerceCountryId !=
+							commerceAddressRestriction.
+								getCommerceCountryId())) {
+
 						list = null;
 
 						break;
@@ -227,8 +208,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -239,11 +220,10 @@ public class CommerceAddressRestrictionPersistenceImpl
 			query.append(_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressRestrictionModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -261,16 +241,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 				qPos.add(commerceCountryId);
 
 				if (!pagination) {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -300,11 +280,13 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public CommerceAddressRestriction findByCommerceCountryId_First(
-		long commerceCountryId,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+			long commerceCountryId,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByCommerceCountryId_First(commerceCountryId,
-				orderByComparator);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			fetchByCommerceCountryId_First(
+				commerceCountryId, orderByComparator);
 
 		if (commerceAddressRestriction != null) {
 			return commerceAddressRestriction;
@@ -333,8 +315,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	public CommerceAddressRestriction fetchByCommerceCountryId_First(
 		long commerceCountryId,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
-		List<CommerceAddressRestriction> list = findByCommerceCountryId(commerceCountryId,
-				0, 1, orderByComparator);
+
+		List<CommerceAddressRestriction> list = findByCommerceCountryId(
+			commerceCountryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -353,11 +336,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public CommerceAddressRestriction findByCommerceCountryId_Last(
-		long commerceCountryId,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+			long commerceCountryId,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByCommerceCountryId_Last(commerceCountryId,
-				orderByComparator);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			fetchByCommerceCountryId_Last(commerceCountryId, orderByComparator);
 
 		if (commerceAddressRestriction != null) {
 			return commerceAddressRestriction;
@@ -386,14 +370,15 @@ public class CommerceAddressRestrictionPersistenceImpl
 	public CommerceAddressRestriction fetchByCommerceCountryId_Last(
 		long commerceCountryId,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
+
 		int count = countByCommerceCountryId(commerceCountryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddressRestriction> list = findByCommerceCountryId(commerceCountryId,
-				count - 1, count, orderByComparator);
+		List<CommerceAddressRestriction> list = findByCommerceCountryId(
+			commerceCountryId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -413,27 +398,30 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public CommerceAddressRestriction[] findByCommerceCountryId_PrevAndNext(
-		long commerceAddressRestrictionId, long commerceCountryId,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+			long commerceAddressRestrictionId, long commerceCountryId,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = findByPrimaryKey(commerceAddressRestrictionId);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			findByPrimaryKey(commerceAddressRestrictionId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceAddressRestriction[] array = new CommerceAddressRestrictionImpl[3];
+			CommerceAddressRestriction[] array =
+				new CommerceAddressRestrictionImpl[3];
 
-			array[0] = getByCommerceCountryId_PrevAndNext(session,
-					commerceAddressRestriction, commerceCountryId,
-					orderByComparator, true);
+			array[0] = getByCommerceCountryId_PrevAndNext(
+				session, commerceAddressRestriction, commerceCountryId,
+				orderByComparator, true);
 
 			array[1] = commerceAddressRestriction;
 
-			array[2] = getByCommerceCountryId_PrevAndNext(session,
-					commerceAddressRestriction, commerceCountryId,
-					orderByComparator, false);
+			array[2] = getByCommerceCountryId_PrevAndNext(
+				session, commerceAddressRestriction, commerceCountryId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -450,11 +438,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 		long commerceCountryId,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -466,7 +455,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 		query.append(_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -536,10 +526,11 @@ public class CommerceAddressRestrictionPersistenceImpl
 		qPos.add(commerceCountryId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddressRestriction);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddressRestriction)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -560,8 +551,11 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public void removeByCommerceCountryId(long commerceCountryId) {
-		for (CommerceAddressRestriction commerceAddressRestriction : findByCommerceCountryId(
-				commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddressRestriction commerceAddressRestriction :
+				findByCommerceCountryId(
+					commerceCountryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAddressRestriction);
 		}
 	}
@@ -574,9 +568,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public int countByCommerceCountryId(long commerceCountryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID;
+		FinderPath finderPath = _finderPathCountByCommerceCountryId;
 
-		Object[] finderArgs = new Object[] { commerceCountryId };
+		Object[] finderArgs = new Object[] {commerceCountryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -617,31 +611,13 @@ public class CommerceAddressRestrictionPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2 =
-		"commerceAddressRestriction.commerceCountryId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CommerceAddressRestrictionModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressRestrictionModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressRestrictionModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCECOUNTRYID_COMMERCECOUNTRYID_2 =
+			"commerceAddressRestriction.commerceCountryId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByC_C;
+	private FinderPath _finderPathWithoutPaginationFindByC_C;
+	private FinderPath _finderPathCountByC_C;
 
 	/**
 	 * Returns all the commerce address restrictions where classNameId = &#63; and classPK = &#63;.
@@ -651,17 +627,18 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the matching commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findByC_C(long classNameId,
-		long classPK) {
-		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceAddressRestriction> findByC_C(
+		long classNameId, long classPK) {
+
+		return findByC_C(
+			classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce address restrictions where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -671,8 +648,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the range of matching commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findByC_C(long classNameId,
-		long classPK, int start, int end) {
+	public List<CommerceAddressRestriction> findByC_C(
+		long classNameId, long classPK, int start, int end) {
+
 		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
@@ -680,7 +658,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Returns an ordered range of all the commerce address restrictions where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -691,18 +669,19 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findByC_C(long classNameId,
-		long classPK, int start, int end,
+	public List<CommerceAddressRestriction> findByC_C(
+		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
-		return findByC_C(classNameId, classPK, start, end, orderByComparator,
-			true);
+
+		return findByC_C(
+			classNameId, classPK, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce address restrictions where classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param classNameId the class name ID
@@ -714,39 +693,43 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findByC_C(long classNameId,
-		long classPK, int start, int end,
+	public List<CommerceAddressRestriction> findByC_C(
+		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C;
-			finderArgs = new Object[] { classNameId, classPK };
+			finderPath = _finderPathWithoutPaginationFindByC_C;
+			finderArgs = new Object[] {classNameId, classPK};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C;
+			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
-					classNameId, classPK,
-					
-					start, end, orderByComparator
-				};
+				classNameId, classPK, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceAddressRestriction> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddressRestriction>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddressRestriction>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddressRestriction commerceAddressRestriction : list) {
-					if ((classNameId != commerceAddressRestriction.getClassNameId()) ||
-							(classPK != commerceAddressRestriction.getClassPK())) {
+				for (CommerceAddressRestriction commerceAddressRestriction :
+						list) {
+
+					if ((classNameId !=
+							commerceAddressRestriction.getClassNameId()) ||
+						(classPK != commerceAddressRestriction.getClassPK())) {
+
 						list = null;
 
 						break;
@@ -759,8 +742,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -773,11 +756,10 @@ public class CommerceAddressRestrictionPersistenceImpl
 			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceAddressRestrictionModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -797,16 +779,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 				qPos.add(classPK);
 
 				if (!pagination) {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -836,12 +818,13 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @throws NoSuchAddressRestrictionException if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction findByC_C_First(long classNameId,
-		long classPK,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+	public CommerceAddressRestriction findByC_C_First(
+			long classNameId, long classPK,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByC_C_First(classNameId,
-				classPK, orderByComparator);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			fetchByC_C_First(classNameId, classPK, orderByComparator);
 
 		if (commerceAddressRestriction != null) {
 			return commerceAddressRestriction;
@@ -871,11 +854,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the first matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction fetchByC_C_First(long classNameId,
-		long classPK,
+	public CommerceAddressRestriction fetchByC_C_First(
+		long classNameId, long classPK,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
-		List<CommerceAddressRestriction> list = findByC_C(classNameId, classPK,
-				0, 1, orderByComparator);
+
+		List<CommerceAddressRestriction> list = findByC_C(
+			classNameId, classPK, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -894,12 +878,13 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @throws NoSuchAddressRestrictionException if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction findByC_C_Last(long classNameId,
-		long classPK,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+	public CommerceAddressRestriction findByC_C_Last(
+			long classNameId, long classPK,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByC_C_Last(classNameId,
-				classPK, orderByComparator);
+
+		CommerceAddressRestriction commerceAddressRestriction = fetchByC_C_Last(
+			classNameId, classPK, orderByComparator);
 
 		if (commerceAddressRestriction != null) {
 			return commerceAddressRestriction;
@@ -929,17 +914,18 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the last matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction fetchByC_C_Last(long classNameId,
-		long classPK,
+	public CommerceAddressRestriction fetchByC_C_Last(
+		long classNameId, long classPK,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
+
 		int count = countByC_C(classNameId, classPK);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAddressRestriction> list = findByC_C(classNameId, classPK,
-				count - 1, count, orderByComparator);
+		List<CommerceAddressRestriction> list = findByC_C(
+			classNameId, classPK, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -960,27 +946,30 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public CommerceAddressRestriction[] findByC_C_PrevAndNext(
-		long commerceAddressRestrictionId, long classNameId, long classPK,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+			long commerceAddressRestrictionId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = findByPrimaryKey(commerceAddressRestrictionId);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			findByPrimaryKey(commerceAddressRestrictionId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceAddressRestriction[] array = new CommerceAddressRestrictionImpl[3];
+			CommerceAddressRestriction[] array =
+				new CommerceAddressRestrictionImpl[3];
 
-			array[0] = getByC_C_PrevAndNext(session,
-					commerceAddressRestriction, classNameId, classPK,
-					orderByComparator, true);
+			array[0] = getByC_C_PrevAndNext(
+				session, commerceAddressRestriction, classNameId, classPK,
+				orderByComparator, true);
 
 			array[1] = commerceAddressRestriction;
 
-			array[2] = getByC_C_PrevAndNext(session,
-					commerceAddressRestriction, classNameId, classPK,
-					orderByComparator, false);
+			array[2] = getByC_C_PrevAndNext(
+				session, commerceAddressRestriction, classNameId, classPK,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -992,16 +981,17 @@ public class CommerceAddressRestrictionPersistenceImpl
 		}
 	}
 
-	protected CommerceAddressRestriction getByC_C_PrevAndNext(Session session,
-		CommerceAddressRestriction commerceAddressRestriction,
+	protected CommerceAddressRestriction getByC_C_PrevAndNext(
+		Session session, CommerceAddressRestriction commerceAddressRestriction,
 		long classNameId, long classPK,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1015,7 +1005,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 		query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1087,10 +1078,11 @@ public class CommerceAddressRestrictionPersistenceImpl
 		qPos.add(classPK);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAddressRestriction);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddressRestriction)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1112,8 +1104,11 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public void removeByC_C(long classNameId, long classPK) {
-		for (CommerceAddressRestriction commerceAddressRestriction : findByC_C(
-				classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceAddressRestriction commerceAddressRestriction :
+				findByC_C(
+					classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceAddressRestriction);
 		}
 	}
@@ -1127,9 +1122,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public int countByC_C(long classNameId, long classPK) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
+		FinderPath finderPath = _finderPathCountByC_C;
 
-		Object[] finderArgs = new Object[] { classNameId, classPK };
+		Object[] finderArgs = new Object[] {classNameId, classPK};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1174,28 +1169,17 @@ public class CommerceAddressRestrictionPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "commerceAddressRestriction.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "commerceAddressRestriction.classPK = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_C_C = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressRestrictionImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			},
-			CommerceAddressRestrictionModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressRestrictionModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressRestrictionModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C = new FinderPath(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 =
+		"commerceAddressRestriction.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 =
+		"commerceAddressRestriction.classPK = ?";
+
+	private FinderPath _finderPathFetchByC_C_C;
+	private FinderPath _finderPathCountByC_C_C;
 
 	/**
-	 * Returns the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; or throws a {@link NoSuchAddressRestrictionException} if it could not be found.
+	 * Returns the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; or throws a <code>NoSuchAddressRestrictionException</code> if it could not be found.
 	 *
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
@@ -1204,11 +1188,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @throws NoSuchAddressRestrictionException if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction findByC_C_C(long classNameId,
-		long classPK, long commerceCountryId)
+	public CommerceAddressRestriction findByC_C_C(
+			long classNameId, long classPK, long commerceCountryId)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByC_C_C(classNameId,
-				classPK, commerceCountryId);
+
+		CommerceAddressRestriction commerceAddressRestriction = fetchByC_C_C(
+			classNameId, classPK, commerceCountryId);
 
 		if (commerceAddressRestriction == null) {
 			StringBundler msg = new StringBundler(8);
@@ -1245,8 +1230,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction fetchByC_C_C(long classNameId,
-		long classPK, long commerceCountryId) {
+	public CommerceAddressRestriction fetchByC_C_C(
+		long classNameId, long classPK, long commerceCountryId) {
+
 		return fetchByC_C_C(classNameId, classPK, commerceCountryId, true);
 	}
 
@@ -1260,25 +1246,30 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction fetchByC_C_C(long classNameId,
-		long classPK, long commerceCountryId, boolean retrieveFromCache) {
+	public CommerceAddressRestriction fetchByC_C_C(
+		long classNameId, long classPK, long commerceCountryId,
+		boolean retrieveFromCache) {
+
 		Object[] finderArgs = new Object[] {
-				classNameId, classPK, commerceCountryId
-			};
+			classNameId, classPK, commerceCountryId
+		};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C_C,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_C_C, finderArgs, this);
 		}
 
 		if (result instanceof CommerceAddressRestriction) {
-			CommerceAddressRestriction commerceAddressRestriction = (CommerceAddressRestriction)result;
+			CommerceAddressRestriction commerceAddressRestriction =
+				(CommerceAddressRestriction)result;
 
 			if ((classNameId != commerceAddressRestriction.getClassNameId()) ||
-					(classPK != commerceAddressRestriction.getClassPK()) ||
-					(commerceCountryId != commerceAddressRestriction.getCommerceCountryId())) {
+				(classPK != commerceAddressRestriction.getClassPK()) ||
+				(commerceCountryId !=
+					commerceAddressRestriction.getCommerceCountryId())) {
+
 				result = null;
 			}
 		}
@@ -1314,11 +1305,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 				List<CommerceAddressRestriction> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-						finderArgs, list);
+					finderCache.putResult(
+						_finderPathFetchByC_C_C, finderArgs, list);
 				}
 				else {
-					CommerceAddressRestriction commerceAddressRestriction = list.get(0);
+					CommerceAddressRestriction commerceAddressRestriction =
+						list.get(0);
 
 					result = commerceAddressRestriction;
 
@@ -1326,7 +1318,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_C_C, finderArgs);
 
 				throw processException(e);
 			}
@@ -1352,11 +1344,12 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the commerce address restriction that was removed
 	 */
 	@Override
-	public CommerceAddressRestriction removeByC_C_C(long classNameId,
-		long classPK, long commerceCountryId)
+	public CommerceAddressRestriction removeByC_C_C(
+			long classNameId, long classPK, long commerceCountryId)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = findByC_C_C(classNameId,
-				classPK, commerceCountryId);
+
+		CommerceAddressRestriction commerceAddressRestriction = findByC_C_C(
+			classNameId, classPK, commerceCountryId);
 
 		return remove(commerceAddressRestriction);
 	}
@@ -1370,13 +1363,14 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the number of matching commerce address restrictions
 	 */
 	@Override
-	public int countByC_C_C(long classNameId, long classPK,
-		long commerceCountryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_C;
+	public int countByC_C_C(
+		long classNameId, long classPK, long commerceCountryId) {
+
+		FinderPath finderPath = _finderPathCountByC_C_C;
 
 		Object[] finderArgs = new Object[] {
-				classNameId, classPK, commerceCountryId
-			};
+			classNameId, classPK, commerceCountryId
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1425,9 +1419,14 @@ public class CommerceAddressRestrictionPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "commerceAddressRestriction.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "commerceAddressRestriction.classPK = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_C_COMMERCECOUNTRYID_2 = "commerceAddressRestriction.commerceCountryId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 =
+		"commerceAddressRestriction.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 =
+		"commerceAddressRestriction.classPK = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_C_COMMERCECOUNTRYID_2 =
+		"commerceAddressRestriction.commerceCountryId = ?";
 
 	public CommerceAddressRestrictionPersistenceImpl() {
 		setModelClass(CommerceAddressRestriction.class);
@@ -1441,17 +1440,21 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommerceAddressRestriction commerceAddressRestriction) {
-		entityCache.putResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressRestrictionImpl.class,
 			commerceAddressRestriction.getPrimaryKey(),
 			commerceAddressRestriction);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+		finderCache.putResult(
+			_finderPathFetchByC_C_C,
 			new Object[] {
 				commerceAddressRestriction.getClassNameId(),
 				commerceAddressRestriction.getClassPK(),
 				commerceAddressRestriction.getCommerceCountryId()
-			}, commerceAddressRestriction);
+			},
+			commerceAddressRestriction);
 
 		commerceAddressRestriction.resetOriginalValues();
 	}
@@ -1464,11 +1467,15 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceAddressRestriction> commerceAddressRestrictions) {
-		for (CommerceAddressRestriction commerceAddressRestriction : commerceAddressRestrictions) {
+
+		for (CommerceAddressRestriction commerceAddressRestriction :
+				commerceAddressRestrictions) {
+
 			if (entityCache.getResult(
-						CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceAddressRestrictionImpl.class,
-						commerceAddressRestriction.getPrimaryKey()) == null) {
+					CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceAddressRestrictionImpl.class,
+					commerceAddressRestriction.getPrimaryKey()) == null) {
+
 				cacheResult(commerceAddressRestriction);
 			}
 			else {
@@ -1481,7 +1488,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Clears the cache for all commerce address restrictions.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1497,77 +1504,91 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Clears the cache for the commerce address restriction.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommerceAddressRestriction commerceAddressRestriction) {
-		entityCache.removeResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressRestrictionImpl.class,
 			commerceAddressRestriction.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceAddressRestrictionModelImpl)commerceAddressRestriction,
+		clearUniqueFindersCache(
+			(CommerceAddressRestrictionModelImpl)commerceAddressRestriction,
 			true);
 	}
 
 	@Override
 	public void clearCache(
 		List<CommerceAddressRestriction> commerceAddressRestrictions) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceAddressRestriction commerceAddressRestriction : commerceAddressRestrictions) {
-			entityCache.removeResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceAddressRestriction commerceAddressRestriction :
+				commerceAddressRestrictions) {
+
+			entityCache.removeResult(
+				CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceAddressRestrictionImpl.class,
 				commerceAddressRestriction.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceAddressRestrictionModelImpl)commerceAddressRestriction,
+			clearUniqueFindersCache(
+				(CommerceAddressRestrictionModelImpl)commerceAddressRestriction,
 				true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
-		CommerceAddressRestrictionModelImpl commerceAddressRestrictionModelImpl) {
-		Object[] args = new Object[] {
-				commerceAddressRestrictionModelImpl.getClassNameId(),
-				commerceAddressRestrictionModelImpl.getClassPK(),
-				commerceAddressRestrictionModelImpl.getCommerceCountryId()
-			};
+		CommerceAddressRestrictionModelImpl
+			commerceAddressRestrictionModelImpl) {
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C_C, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C, args,
-			commerceAddressRestrictionModelImpl, false);
+		Object[] args = new Object[] {
+			commerceAddressRestrictionModelImpl.getClassNameId(),
+			commerceAddressRestrictionModelImpl.getClassPK(),
+			commerceAddressRestrictionModelImpl.getCommerceCountryId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_C_C, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_C_C, args, commerceAddressRestrictionModelImpl,
+			false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceAddressRestrictionModelImpl commerceAddressRestrictionModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceAddressRestrictionModelImpl.getClassNameId(),
-					commerceAddressRestrictionModelImpl.getClassPK(),
-					commerceAddressRestrictionModelImpl.getCommerceCountryId()
-				};
+				commerceAddressRestrictionModelImpl.getClassNameId(),
+				commerceAddressRestrictionModelImpl.getClassPK(),
+				commerceAddressRestrictionModelImpl.getCommerceCountryId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
+			finderCache.removeResult(_finderPathCountByC_C_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C_C, args);
 		}
 
 		if ((commerceAddressRestrictionModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceAddressRestrictionModelImpl.getOriginalClassNameId(),
-					commerceAddressRestrictionModelImpl.getOriginalClassPK(),
-					commerceAddressRestrictionModelImpl.getOriginalCommerceCountryId()
-				};
+			 _finderPathFetchByC_C_C.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
+			Object[] args = new Object[] {
+				commerceAddressRestrictionModelImpl.getOriginalClassNameId(),
+				commerceAddressRestrictionModelImpl.getOriginalClassPK(),
+				commerceAddressRestrictionModelImpl.
+					getOriginalCommerceCountryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C_C, args);
 		}
 	}
 
@@ -1578,8 +1599,11 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the new commerce address restriction
 	 */
 	@Override
-	public CommerceAddressRestriction create(long commerceAddressRestrictionId) {
-		CommerceAddressRestriction commerceAddressRestriction = new CommerceAddressRestrictionImpl();
+	public CommerceAddressRestriction create(
+		long commerceAddressRestrictionId) {
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			new CommerceAddressRestrictionImpl();
 
 		commerceAddressRestriction.setNew(true);
 		commerceAddressRestriction.setPrimaryKey(commerceAddressRestrictionId);
@@ -1599,6 +1623,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public CommerceAddressRestriction remove(long commerceAddressRestrictionId)
 		throws NoSuchAddressRestrictionException {
+
 		return remove((Serializable)commerceAddressRestrictionId);
 	}
 
@@ -1612,21 +1637,23 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public CommerceAddressRestriction remove(Serializable primaryKey)
 		throws NoSuchAddressRestrictionException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceAddressRestriction commerceAddressRestriction = (CommerceAddressRestriction)session.get(CommerceAddressRestrictionImpl.class,
-					primaryKey);
+			CommerceAddressRestriction commerceAddressRestriction =
+				(CommerceAddressRestriction)session.get(
+					CommerceAddressRestrictionImpl.class, primaryKey);
 
 			if (commerceAddressRestriction == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchAddressRestrictionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchAddressRestrictionException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceAddressRestriction);
@@ -1645,13 +1672,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	protected CommerceAddressRestriction removeImpl(
 		CommerceAddressRestriction commerceAddressRestriction) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceAddressRestriction)) {
-				commerceAddressRestriction = (CommerceAddressRestriction)session.get(CommerceAddressRestrictionImpl.class,
+				commerceAddressRestriction =
+					(CommerceAddressRestriction)session.get(
+						CommerceAddressRestrictionImpl.class,
 						commerceAddressRestriction.getPrimaryKeyObj());
 			}
 
@@ -1676,27 +1706,34 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public CommerceAddressRestriction updateImpl(
 		CommerceAddressRestriction commerceAddressRestriction) {
+
 		boolean isNew = commerceAddressRestriction.isNew();
 
-		if (!(commerceAddressRestriction instanceof CommerceAddressRestrictionModelImpl)) {
+		if (!(commerceAddressRestriction instanceof
+				CommerceAddressRestrictionModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceAddressRestriction.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceAddressRestriction);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceAddressRestriction);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceAddressRestriction proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceAddressRestriction implementation " +
-				commerceAddressRestriction.getClass());
+					commerceAddressRestriction.getClass());
 		}
 
-		CommerceAddressRestrictionModelImpl commerceAddressRestrictionModelImpl = (CommerceAddressRestrictionModelImpl)commerceAddressRestriction;
+		CommerceAddressRestrictionModelImpl
+			commerceAddressRestrictionModelImpl =
+				(CommerceAddressRestrictionModelImpl)commerceAddressRestriction;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1705,8 +1742,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 				commerceAddressRestriction.setCreateDate(now);
 			}
 			else {
-				commerceAddressRestriction.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceAddressRestriction.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1715,8 +1752,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 				commerceAddressRestriction.setModifiedDate(now);
 			}
 			else {
-				commerceAddressRestriction.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceAddressRestriction.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1731,7 +1768,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 				commerceAddressRestriction.setNew(false);
 			}
 			else {
-				commerceAddressRestriction = (CommerceAddressRestriction)session.merge(commerceAddressRestriction);
+				commerceAddressRestriction =
+					(CommerceAddressRestriction)session.merge(
+						commerceAddressRestriction);
 			}
 		}
 		catch (Exception e) {
@@ -1746,76 +1785,80 @@ public class CommerceAddressRestrictionPersistenceImpl
 		if (!CommerceAddressRestrictionModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceAddressRestrictionModelImpl.getCommerceCountryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCommerceCountryId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceCountryId, args);
+
+			args = new Object[] {
+				commerceAddressRestrictionModelImpl.getClassNameId(),
+				commerceAddressRestrictionModelImpl.getClassPK()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_C, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceAddressRestrictionModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceCountryId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressRestrictionModelImpl.
+						getOriginalCommerceCountryId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceCountryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceCountryId, args);
+
+				args = new Object[] {
 					commerceAddressRestrictionModelImpl.getCommerceCountryId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceCountryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceCountryId, args);
+			}
 
-			args = new Object[] {
+			if ((commerceAddressRestrictionModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_C.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressRestrictionModelImpl.
+						getOriginalClassNameId(),
+					commerceAddressRestrictionModelImpl.getOriginalClassPK()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C, args);
+
+				args = new Object[] {
 					commerceAddressRestrictionModelImpl.getClassNameId(),
 					commerceAddressRestrictionModelImpl.getClassPK()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceAddressRestrictionModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressRestrictionModelImpl.getOriginalCommerceCountryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-					args);
-
-				args = new Object[] {
-						commerceAddressRestrictionModelImpl.getCommerceCountryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCECOUNTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCECOUNTRYID,
-					args);
-			}
-
-			if ((commerceAddressRestrictionModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAddressRestrictionModelImpl.getOriginalClassNameId(),
-						commerceAddressRestrictionModelImpl.getOriginalClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-					args);
-
-				args = new Object[] {
-						commerceAddressRestrictionModelImpl.getClassNameId(),
-						commerceAddressRestrictionModelImpl.getClassPK()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-					args);
+				finderCache.removeResult(_finderPathCountByC_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C, args);
 			}
 		}
 
-		entityCache.putResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressRestrictionImpl.class,
 			commerceAddressRestriction.getPrimaryKey(),
 			commerceAddressRestriction, false);
@@ -1829,7 +1872,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce address restriction with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce address restriction with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce address restriction
 	 * @return the commerce address restriction
@@ -1838,22 +1881,24 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public CommerceAddressRestriction findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchAddressRestrictionException {
-		CommerceAddressRestriction commerceAddressRestriction = fetchByPrimaryKey(primaryKey);
+
+		CommerceAddressRestriction commerceAddressRestriction =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commerceAddressRestriction == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchAddressRestrictionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchAddressRestrictionException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceAddressRestriction;
 	}
 
 	/**
-	 * Returns the commerce address restriction with the primary key or throws a {@link NoSuchAddressRestrictionException} if it could not be found.
+	 * Returns the commerce address restriction with the primary key or throws a <code>NoSuchAddressRestrictionException</code> if it could not be found.
 	 *
 	 * @param commerceAddressRestrictionId the primary key of the commerce address restriction
 	 * @return the commerce address restriction
@@ -1861,8 +1906,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public CommerceAddressRestriction findByPrimaryKey(
-		long commerceAddressRestrictionId)
+			long commerceAddressRestrictionId)
 		throws NoSuchAddressRestrictionException {
+
 		return findByPrimaryKey((Serializable)commerceAddressRestrictionId);
 	}
 
@@ -1873,15 +1919,19 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the commerce address restriction, or <code>null</code> if a commerce address restriction with the primary key could not be found
 	 */
 	@Override
-	public CommerceAddressRestriction fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceAddressRestrictionImpl.class, primaryKey);
+	public CommerceAddressRestriction fetchByPrimaryKey(
+		Serializable primaryKey) {
+
+		Serializable serializable = entityCache.getResult(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceAddressRestriction commerceAddressRestriction = (CommerceAddressRestriction)serializable;
+		CommerceAddressRestriction commerceAddressRestriction =
+			(CommerceAddressRestriction)serializable;
 
 		if (commerceAddressRestriction == null) {
 			Session session = null;
@@ -1889,20 +1939,24 @@ public class CommerceAddressRestrictionPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceAddressRestriction = (CommerceAddressRestriction)session.get(CommerceAddressRestrictionImpl.class,
-						primaryKey);
+				commerceAddressRestriction =
+					(CommerceAddressRestriction)session.get(
+						CommerceAddressRestrictionImpl.class, primaryKey);
 
 				if (commerceAddressRestriction != null) {
 					cacheResult(commerceAddressRestriction);
 				}
 				else {
-					entityCache.putResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceAddressRestrictionModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceAddressRestrictionImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceAddressRestrictionImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1924,24 +1978,28 @@ public class CommerceAddressRestrictionPersistenceImpl
 	@Override
 	public CommerceAddressRestriction fetchByPrimaryKey(
 		long commerceAddressRestrictionId) {
+
 		return fetchByPrimaryKey((Serializable)commerceAddressRestrictionId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceAddressRestriction> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceAddressRestriction> map = new HashMap<Serializable, CommerceAddressRestriction>();
+		Map<Serializable, CommerceAddressRestriction> map =
+			new HashMap<Serializable, CommerceAddressRestriction>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceAddressRestriction commerceAddressRestriction = fetchByPrimaryKey(primaryKey);
+			CommerceAddressRestriction commerceAddressRestriction =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceAddressRestriction != null) {
 				map.put(primaryKey, commerceAddressRestriction);
@@ -1953,8 +2011,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceAddressRestrictionImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceAddressRestrictionImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1965,7 +2024,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey, (CommerceAddressRestriction)serializable);
+					map.put(
+						primaryKey, (CommerceAddressRestriction)serializable);
 				}
 			}
 		}
@@ -1974,8 +2034,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEADDRESSRESTRICTION_WHERE_PKS_IN);
 
@@ -1998,18 +2058,24 @@ public class CommerceAddressRestrictionPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceAddressRestriction commerceAddressRestriction : (List<CommerceAddressRestriction>)q.list()) {
-				map.put(commerceAddressRestriction.getPrimaryKeyObj(),
+			for (CommerceAddressRestriction commerceAddressRestriction :
+					(List<CommerceAddressRestriction>)q.list()) {
+
+				map.put(
+					commerceAddressRestriction.getPrimaryKeyObj(),
 					commerceAddressRestriction);
 
 				cacheResult(commerceAddressRestriction);
 
-				uncachedPrimaryKeys.remove(commerceAddressRestriction.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceAddressRestriction.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceAddressRestrictionImpl.class, primaryKey, nullModel);
+				entityCache.putResult(
+					CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceAddressRestrictionImpl.class, primaryKey,
+					nullModel);
 			}
 		}
 		catch (Exception e) {
@@ -2036,7 +2102,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Returns a range of all the commerce address restrictions.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce address restrictions
@@ -2052,7 +2118,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Returns an ordered range of all the commerce address restrictions.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce address restrictions
@@ -2061,8 +2127,10 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the ordered range of commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findAll(int start, int end,
+	public List<CommerceAddressRestriction> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2070,7 +2138,7 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Returns an ordered range of all the commerce address restrictions.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAddressRestrictionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce address restrictions
@@ -2080,29 +2148,32 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * @return the ordered range of commerce address restrictions
 	 */
 	@Override
-	public List<CommerceAddressRestriction> findAll(int start, int end,
+	public List<CommerceAddressRestriction> findAll(
+		int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceAddressRestriction> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceAddressRestriction>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceAddressRestriction>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2110,13 +2181,13 @@ public class CommerceAddressRestrictionPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEADDRESSRESTRICTION);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2124,7 +2195,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 				sql = _SQL_SELECT_COMMERCEADDRESSRESTRICTION;
 
 				if (pagination) {
-					sql = sql.concat(CommerceAddressRestrictionModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceAddressRestrictionModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2136,16 +2208,16 @@ public class CommerceAddressRestrictionPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceAddressRestriction>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceAddressRestriction>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2171,7 +2243,9 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceAddressRestriction commerceAddressRestriction : findAll()) {
+		for (CommerceAddressRestriction commerceAddressRestriction :
+				findAll()) {
+
 			remove(commerceAddressRestriction);
 		}
 	}
@@ -2183,8 +2257,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2192,16 +2266,17 @@ public class CommerceAddressRestrictionPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEADDRESSRESTRICTION);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEADDRESSRESTRICTION);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2222,6 +2297,99 @@ public class CommerceAddressRestrictionPersistenceImpl
 	 * Initializes the commerce address restriction persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceCountryId = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceCountryId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceCountryId = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceCountryId", new String[] {Long.class.getName()},
+			CommerceAddressRestrictionModelImpl.
+				COMMERCECOUNTRYID_COLUMN_BITMASK |
+			CommerceAddressRestrictionModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceCountryId = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceCountryId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByC_C = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_C = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceAddressRestrictionModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressRestrictionModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressRestrictionModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
+
+		_finderPathFetchByC_C_C = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressRestrictionImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			CommerceAddressRestrictionModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressRestrictionModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressRestrictionModelImpl.
+				COMMERCECOUNTRYID_COLUMN_BITMASK);
+
+		_finderPathCountByC_C_C = new FinderPath(
+			CommerceAddressRestrictionModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressRestrictionModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
 	}
 
 	public void destroy() {
@@ -2233,18 +2401,39 @@ public class CommerceAddressRestrictionPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEADDRESSRESTRICTION = "SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction";
-	private static final String _SQL_SELECT_COMMERCEADDRESSRESTRICTION_WHERE_PKS_IN =
-		"SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction WHERE commerceAddressRestrictionId IN (";
-	private static final String _SQL_SELECT_COMMERCEADDRESSRESTRICTION_WHERE = "SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction WHERE ";
-	private static final String _SQL_COUNT_COMMERCEADDRESSRESTRICTION = "SELECT COUNT(commerceAddressRestriction) FROM CommerceAddressRestriction commerceAddressRestriction";
-	private static final String _SQL_COUNT_COMMERCEADDRESSRESTRICTION_WHERE = "SELECT COUNT(commerceAddressRestriction) FROM CommerceAddressRestriction commerceAddressRestriction WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceAddressRestriction.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceAddressRestriction exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAddressRestriction exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceAddressRestrictionPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_COMMERCEADDRESSRESTRICTION =
+		"SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction";
+
+	private static final String
+		_SQL_SELECT_COMMERCEADDRESSRESTRICTION_WHERE_PKS_IN =
+			"SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction WHERE commerceAddressRestrictionId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEADDRESSRESTRICTION_WHERE =
+		"SELECT commerceAddressRestriction FROM CommerceAddressRestriction commerceAddressRestriction WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEADDRESSRESTRICTION =
+		"SELECT COUNT(commerceAddressRestriction) FROM CommerceAddressRestriction commerceAddressRestriction";
+
+	private static final String _SQL_COUNT_COMMERCEADDRESSRESTRICTION_WHERE =
+		"SELECT COUNT(commerceAddressRestriction) FROM CommerceAddressRestriction commerceAddressRestriction WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceAddressRestriction.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceAddressRestriction exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceAddressRestriction exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAddressRestrictionPersistenceImpl.class);
+
 }

@@ -24,33 +24,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionLocalizationModel
- * @see com.liferay.commerce.product.model.impl.CPDefinitionLocalizationImpl
- * @see com.liferay.commerce.product.model.impl.CPDefinitionLocalizationModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDefinitionLocalizationImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDefinitionLocalizationImpl"
+)
 @ProviderType
-public interface CPDefinitionLocalization extends CPDefinitionLocalizationModel {
+public interface CPDefinitionLocalization
+	extends CPDefinitionLocalizationModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDefinitionLocalizationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDefinitionLocalizationImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionLocalization, Long> CP_DEFINITION_LOCALIZATION_ID_ACCESSOR =
-		new Accessor<CPDefinitionLocalization, Long>() {
-			@Override
-			public Long get(CPDefinitionLocalization cpDefinitionLocalization) {
-				return cpDefinitionLocalization.getCpDefinitionLocalizationId();
-			}
+	public static final Accessor<CPDefinitionLocalization, Long>
+		CP_DEFINITION_LOCALIZATION_ID_ACCESSOR =
+			new Accessor<CPDefinitionLocalization, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CPDefinitionLocalization cpDefinitionLocalization) {
 
-			@Override
-			public Class<CPDefinitionLocalization> getTypeClass() {
-				return CPDefinitionLocalization.class;
-			}
-		};
+					return cpDefinitionLocalization.
+						getCpDefinitionLocalizationId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionLocalization> getTypeClass() {
+					return CPDefinitionLocalization.class;
+				}
+
+			};
+
 }

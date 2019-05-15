@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAvailabilityEstimate in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceAvailabilityEstimate
  * @generated
  */
 @ProviderType
-public class CommerceAvailabilityEstimateCacheModel implements CacheModel<CommerceAvailabilityEstimate>,
-	Externalizable {
+public class CommerceAvailabilityEstimateCacheModel
+	implements CacheModel<CommerceAvailabilityEstimate>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 			return false;
 		}
 
-		CommerceAvailabilityEstimateCacheModel commerceAvailabilityEstimateCacheModel =
-			(CommerceAvailabilityEstimateCacheModel)obj;
+		CommerceAvailabilityEstimateCacheModel
+			commerceAvailabilityEstimateCacheModel =
+				(CommerceAvailabilityEstimateCacheModel)obj;
 
-		if (commerceAvailabilityEstimateId == commerceAvailabilityEstimateCacheModel.commerceAvailabilityEstimateId) {
+		if (commerceAvailabilityEstimateId ==
+				commerceAvailabilityEstimateCacheModel.
+					commerceAvailabilityEstimateId) {
+
 			return true;
 		}
 
@@ -97,7 +100,8 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 
 	@Override
 	public CommerceAvailabilityEstimate toEntityModel() {
-		CommerceAvailabilityEstimateImpl commerceAvailabilityEstimateImpl = new CommerceAvailabilityEstimateImpl();
+		CommerceAvailabilityEstimateImpl commerceAvailabilityEstimateImpl =
+			new CommerceAvailabilityEstimateImpl();
 
 		if (uuid == null) {
 			commerceAvailabilityEstimateImpl.setUuid("");
@@ -106,7 +110,8 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 			commerceAvailabilityEstimateImpl.setUuid(uuid);
 		}
 
-		commerceAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+		commerceAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(
+			commerceAvailabilityEstimateId);
 		commerceAvailabilityEstimateImpl.setGroupId(groupId);
 		commerceAvailabilityEstimateImpl.setCompanyId(companyId);
 		commerceAvailabilityEstimateImpl.setUserId(userId);
@@ -122,15 +127,16 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 			commerceAvailabilityEstimateImpl.setCreateDate(null);
 		}
 		else {
-			commerceAvailabilityEstimateImpl.setCreateDate(new Date(createDate));
+			commerceAvailabilityEstimateImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceAvailabilityEstimateImpl.setModifiedDate(null);
 		}
 		else {
-			commerceAvailabilityEstimateImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceAvailabilityEstimateImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (title == null) {
@@ -146,8 +152,8 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 			commerceAvailabilityEstimateImpl.setLastPublishDate(null);
 		}
 		else {
-			commerceAvailabilityEstimateImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			commerceAvailabilityEstimateImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		commerceAvailabilityEstimateImpl.resetOriginalValues();
@@ -176,8 +182,7 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -225,4 +230,5 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 	public String title;
 	public double priority;
 	public long lastPublishDate;
+
 }

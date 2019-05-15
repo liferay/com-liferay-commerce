@@ -35,18 +35,22 @@ import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocal
 public abstract class CommerceDiscountUserSegmentRelBaseImpl
 	extends CommerceDiscountUserSegmentRelModelImpl
 	implements CommerceDiscountUserSegmentRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce discount user segment rel model instance should use the {@link CommerceDiscountUserSegmentRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce discount user segment rel model instance should use the <code>CommerceDiscountUserSegmentRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceDiscountUserSegmentRelLocalServiceUtil.addCommerceDiscountUserSegmentRel(this);
+			CommerceDiscountUserSegmentRelLocalServiceUtil.
+				addCommerceDiscountUserSegmentRel(this);
 		}
 		else {
-			CommerceDiscountUserSegmentRelLocalServiceUtil.updateCommerceDiscountUserSegmentRel(this);
+			CommerceDiscountUserSegmentRelLocalServiceUtil.
+				updateCommerceDiscountUserSegmentRel(this);
 		}
 	}
+
 }

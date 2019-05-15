@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceCountryServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceCountryServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceCountrySoap implements Serializable {
+
 	public static CommerceCountrySoap toSoapModel(CommerceCountry model) {
 		CommerceCountrySoap soapModel = new CommerceCountrySoap();
 
@@ -57,7 +57,8 @@ public class CommerceCountrySoap implements Serializable {
 	}
 
 	public static CommerceCountrySoap[] toSoapModels(CommerceCountry[] models) {
-		CommerceCountrySoap[] soapModels = new CommerceCountrySoap[models.length];
+		CommerceCountrySoap[] soapModels =
+			new CommerceCountrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -68,10 +69,12 @@ public class CommerceCountrySoap implements Serializable {
 
 	public static CommerceCountrySoap[][] toSoapModels(
 		CommerceCountry[][] models) {
+
 		CommerceCountrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceCountrySoap[models.length][models[0].length];
+			soapModels =
+				new CommerceCountrySoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceCountrySoap[0][0];
@@ -86,7 +89,9 @@ public class CommerceCountrySoap implements Serializable {
 
 	public static CommerceCountrySoap[] toSoapModels(
 		List<CommerceCountry> models) {
-		List<CommerceCountrySoap> soapModels = new ArrayList<CommerceCountrySoap>(models.size());
+
+		List<CommerceCountrySoap> soapModels =
+			new ArrayList<CommerceCountrySoap>(models.size());
 
 		for (CommerceCountry model : models) {
 			soapModels.add(toSoapModel(model));
@@ -284,4 +289,5 @@ public class CommerceCountrySoap implements Serializable {
 	private double _priority;
 	private boolean _active;
 	private Date _lastPublishDate;
+
 }

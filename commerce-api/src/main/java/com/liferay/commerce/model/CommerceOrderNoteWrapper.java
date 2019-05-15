@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,8 +37,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceOrderNoteWrapper implements CommerceOrderNote,
-	ModelWrapper<CommerceOrderNote> {
+public class CommerceOrderNoteWrapper
+	implements CommerceOrderNote, ModelWrapper<CommerceOrderNote> {
+
 	public CommerceOrderNoteWrapper(CommerceOrderNote commerceOrderNote) {
 		_commerceOrderNote = commerceOrderNote;
 	}
@@ -76,7 +76,7 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
+			"externalReferenceCode");
 
 		if (externalReferenceCode != null) {
 			setExternalReferenceCode(externalReferenceCode);
@@ -145,7 +145,8 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 
 	@Override
 	public Object clone() {
-		return new CommerceOrderNoteWrapper((CommerceOrderNote)_commerceOrderNote.clone());
+		return new CommerceOrderNoteWrapper(
+			(CommerceOrderNote)_commerceOrderNote.clone());
 	}
 
 	@Override
@@ -154,50 +155,50 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Returns the commerce order ID of this commerce order note.
-	*
-	* @return the commerce order ID of this commerce order note
-	*/
+	 * Returns the commerce order ID of this commerce order note.
+	 *
+	 * @return the commerce order ID of this commerce order note
+	 */
 	@Override
 	public long getCommerceOrderId() {
 		return _commerceOrderNote.getCommerceOrderId();
 	}
 
 	/**
-	* Returns the commerce order note ID of this commerce order note.
-	*
-	* @return the commerce order note ID of this commerce order note
-	*/
+	 * Returns the commerce order note ID of this commerce order note.
+	 *
+	 * @return the commerce order note ID of this commerce order note
+	 */
 	@Override
 	public long getCommerceOrderNoteId() {
 		return _commerceOrderNote.getCommerceOrderNoteId();
 	}
 
 	/**
-	* Returns the company ID of this commerce order note.
-	*
-	* @return the company ID of this commerce order note
-	*/
+	 * Returns the company ID of this commerce order note.
+	 *
+	 * @return the company ID of this commerce order note
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceOrderNote.getCompanyId();
 	}
 
 	/**
-	* Returns the content of this commerce order note.
-	*
-	* @return the content of this commerce order note
-	*/
+	 * Returns the content of this commerce order note.
+	 *
+	 * @return the content of this commerce order note
+	 */
 	@Override
 	public String getContent() {
 		return _commerceOrderNote.getContent();
 	}
 
 	/**
-	* Returns the create date of this commerce order note.
-	*
-	* @return the create date of this commerce order note
-	*/
+	 * Returns the create date of this commerce order note.
+	 *
+	 * @return the create date of this commerce order note
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceOrderNote.getCreateDate();
@@ -209,40 +210,40 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Returns the external reference code of this commerce order note.
-	*
-	* @return the external reference code of this commerce order note
-	*/
+	 * Returns the external reference code of this commerce order note.
+	 *
+	 * @return the external reference code of this commerce order note
+	 */
 	@Override
 	public String getExternalReferenceCode() {
 		return _commerceOrderNote.getExternalReferenceCode();
 	}
 
 	/**
-	* Returns the group ID of this commerce order note.
-	*
-	* @return the group ID of this commerce order note
-	*/
+	 * Returns the group ID of this commerce order note.
+	 *
+	 * @return the group ID of this commerce order note
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceOrderNote.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce order note.
-	*
-	* @return the modified date of this commerce order note
-	*/
+	 * Returns the modified date of this commerce order note.
+	 *
+	 * @return the modified date of this commerce order note
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceOrderNote.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce order note.
-	*
-	* @return the primary key of this commerce order note
-	*/
+	 * Returns the primary key of this commerce order note.
+	 *
+	 * @return the primary key of this commerce order note
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceOrderNote.getPrimaryKey();
@@ -254,10 +255,10 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Returns the restricted of this commerce order note.
-	*
-	* @return the restricted of this commerce order note
-	*/
+	 * Returns the restricted of this commerce order note.
+	 *
+	 * @return the restricted of this commerce order note
+	 */
 	@Override
 	public boolean getRestricted() {
 		return _commerceOrderNote.getRestricted();
@@ -269,30 +270,30 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Returns the user ID of this commerce order note.
-	*
-	* @return the user ID of this commerce order note
-	*/
+	 * Returns the user ID of this commerce order note.
+	 *
+	 * @return the user ID of this commerce order note
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceOrderNote.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce order note.
-	*
-	* @return the user name of this commerce order note
-	*/
+	 * Returns the user name of this commerce order note.
+	 *
+	 * @return the user name of this commerce order note
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceOrderNote.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce order note.
-	*
-	* @return the user uuid of this commerce order note
-	*/
+	 * Returns the user uuid of this commerce order note.
+	 *
+	 * @return the user uuid of this commerce order note
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceOrderNote.getUserUuid();
@@ -319,10 +320,10 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce order note is restricted.
-	*
-	* @return <code>true</code> if this commerce order note is restricted; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce order note is restricted.
+	 *
+	 * @return <code>true</code> if this commerce order note is restricted; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isRestricted() {
 		return _commerceOrderNote.isRestricted();
@@ -339,50 +340,50 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Sets the commerce order ID of this commerce order note.
-	*
-	* @param commerceOrderId the commerce order ID of this commerce order note
-	*/
+	 * Sets the commerce order ID of this commerce order note.
+	 *
+	 * @param commerceOrderId the commerce order ID of this commerce order note
+	 */
 	@Override
 	public void setCommerceOrderId(long commerceOrderId) {
 		_commerceOrderNote.setCommerceOrderId(commerceOrderId);
 	}
 
 	/**
-	* Sets the commerce order note ID of this commerce order note.
-	*
-	* @param commerceOrderNoteId the commerce order note ID of this commerce order note
-	*/
+	 * Sets the commerce order note ID of this commerce order note.
+	 *
+	 * @param commerceOrderNoteId the commerce order note ID of this commerce order note
+	 */
 	@Override
 	public void setCommerceOrderNoteId(long commerceOrderNoteId) {
 		_commerceOrderNote.setCommerceOrderNoteId(commerceOrderNoteId);
 	}
 
 	/**
-	* Sets the company ID of this commerce order note.
-	*
-	* @param companyId the company ID of this commerce order note
-	*/
+	 * Sets the company ID of this commerce order note.
+	 *
+	 * @param companyId the company ID of this commerce order note
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceOrderNote.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the content of this commerce order note.
-	*
-	* @param content the content of this commerce order note
-	*/
+	 * Sets the content of this commerce order note.
+	 *
+	 * @param content the content of this commerce order note
+	 */
 	@Override
 	public void setContent(String content) {
 		_commerceOrderNote.setContent(content);
 	}
 
 	/**
-	* Sets the create date of this commerce order note.
-	*
-	* @param createDate the create date of this commerce order note
-	*/
+	 * Sets the create date of this commerce order note.
+	 *
+	 * @param createDate the create date of this commerce order note
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceOrderNote.setCreateDate(createDate);
@@ -391,6 +392,7 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceOrderNote.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -405,30 +407,30 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Sets the external reference code of this commerce order note.
-	*
-	* @param externalReferenceCode the external reference code of this commerce order note
-	*/
+	 * Sets the external reference code of this commerce order note.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce order note
+	 */
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commerceOrderNote.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
-	* Sets the group ID of this commerce order note.
-	*
-	* @param groupId the group ID of this commerce order note
-	*/
+	 * Sets the group ID of this commerce order note.
+	 *
+	 * @param groupId the group ID of this commerce order note
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceOrderNote.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce order note.
-	*
-	* @param modifiedDate the modified date of this commerce order note
-	*/
+	 * Sets the modified date of this commerce order note.
+	 *
+	 * @param modifiedDate the modified date of this commerce order note
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceOrderNote.setModifiedDate(modifiedDate);
@@ -440,10 +442,10 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Sets the primary key of this commerce order note.
-	*
-	* @param primaryKey the primary key of this commerce order note
-	*/
+	 * Sets the primary key of this commerce order note.
+	 *
+	 * @param primaryKey the primary key of this commerce order note
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceOrderNote.setPrimaryKey(primaryKey);
@@ -455,53 +457,56 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	/**
-	* Sets whether this commerce order note is restricted.
-	*
-	* @param restricted the restricted of this commerce order note
-	*/
+	 * Sets whether this commerce order note is restricted.
+	 *
+	 * @param restricted the restricted of this commerce order note
+	 */
 	@Override
 	public void setRestricted(boolean restricted) {
 		_commerceOrderNote.setRestricted(restricted);
 	}
 
 	/**
-	* Sets the user ID of this commerce order note.
-	*
-	* @param userId the user ID of this commerce order note
-	*/
+	 * Sets the user ID of this commerce order note.
+	 *
+	 * @param userId the user ID of this commerce order note
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceOrderNote.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce order note.
-	*
-	* @param userName the user name of this commerce order note
-	*/
+	 * Sets the user name of this commerce order note.
+	 *
+	 * @param userName the user name of this commerce order note
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceOrderNote.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce order note.
-	*
-	* @param userUuid the user uuid of this commerce order note
-	*/
+	 * Sets the user uuid of this commerce order note.
+	 *
+	 * @param userUuid the user uuid of this commerce order note
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceOrderNote.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceOrderNote> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceOrderNote>
+		toCacheModel() {
+
 		return _commerceOrderNote.toCacheModel();
 	}
 
 	@Override
 	public CommerceOrderNote toEscapedModel() {
-		return new CommerceOrderNoteWrapper(_commerceOrderNote.toEscapedModel());
+		return new CommerceOrderNoteWrapper(
+			_commerceOrderNote.toEscapedModel());
 	}
 
 	@Override
@@ -511,7 +516,8 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 
 	@Override
 	public CommerceOrderNote toUnescapedModel() {
-		return new CommerceOrderNoteWrapper(_commerceOrderNote.toUnescapedModel());
+		return new CommerceOrderNoteWrapper(
+			_commerceOrderNote.toUnescapedModel());
 	}
 
 	@Override
@@ -529,10 +535,13 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 			return false;
 		}
 
-		CommerceOrderNoteWrapper commerceOrderNoteWrapper = (CommerceOrderNoteWrapper)obj;
+		CommerceOrderNoteWrapper commerceOrderNoteWrapper =
+			(CommerceOrderNoteWrapper)obj;
 
-		if (Objects.equals(_commerceOrderNote,
-					commerceOrderNoteWrapper._commerceOrderNote)) {
+		if (Objects.equals(
+				_commerceOrderNote,
+				commerceOrderNoteWrapper._commerceOrderNote)) {
+
 			return true;
 		}
 
@@ -560,4 +569,5 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	}
 
 	private final CommerceOrderNote _commerceOrderNote;
+
 }

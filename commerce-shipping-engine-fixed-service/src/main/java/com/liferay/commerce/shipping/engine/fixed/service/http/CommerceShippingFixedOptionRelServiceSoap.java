@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceShippingFixedOptionRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceShippingFixedOptionRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel}, that is translated to a
- * {@link com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel</code>, that is translated to a
+ * <code>com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,29 +59,36 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingFixedOptionRelServiceHttp
- * @see com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap
- * @see CommerceShippingFixedOptionRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceShippingFixedOptionRelServiceSoap {
-	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap addCommerceShippingFixedOptionRel(
-		long commerceShippingMethodId, long commerceShippingFixedOptionId,
-		long commerceWarehouseId, long commerceCountryId,
-		long commerceRegionId, String zip, double weightFrom, double weightTo,
-		java.math.BigDecimal fixedPrice,
-		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel returnValue =
-				CommerceShippingFixedOptionRelServiceUtil.addCommerceShippingFixedOptionRel(commerceShippingMethodId,
-					commerceShippingFixedOptionId, commerceWarehouseId,
-					commerceCountryId, commerceRegionId, zip, weightFrom,
-					weightTo, fixedPrice, rateUnitWeightPrice, ratePercentage,
-					serviceContext);
 
-			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.shipping.engine.fixed.model.
+		CommerceShippingFixedOptionRelSoap addCommerceShippingFixedOptionRel(
+				long commerceShippingMethodId,
+				long commerceShippingFixedOptionId, long commerceWarehouseId,
+				long commerceCountryId, long commerceRegionId, String zip,
+				double weightFrom, double weightTo,
+				java.math.BigDecimal fixedPrice,
+				java.math.BigDecimal rateUnitWeightPrice, double ratePercentage,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRel returnValue =
+					CommerceShippingFixedOptionRelServiceUtil.
+						addCommerceShippingFixedOptionRel(
+							commerceShippingMethodId,
+							commerceShippingFixedOptionId, commerceWarehouseId,
+							commerceCountryId, commerceRegionId, zip,
+							weightFrom, weightTo, fixedPrice,
+							rateUnitWeightPrice, ratePercentage,
+							serviceContext);
+
+			return com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -91,42 +98,63 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 	}
 
 	public static void deleteCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId) throws RemoteException {
-		try {
-			CommerceShippingFixedOptionRelServiceUtil.deleteCommerceShippingFixedOptionRel(commerceShippingFixedOptionRelId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap fetchCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId) throws RemoteException {
-		try {
-			com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel returnValue =
-				CommerceShippingFixedOptionRelServiceUtil.fetchCommerceShippingFixedOptionRel(commerceShippingFixedOptionRelId);
-
-			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap[] getCommerceShippingMethodFixedOptionRels(
-		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel> orderByComparator)
+			long commerceShippingFixedOptionRelId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel> returnValue =
-				CommerceShippingFixedOptionRelServiceUtil.getCommerceShippingMethodFixedOptionRels(commerceShippingMethodId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModels(returnValue);
+		try {
+			CommerceShippingFixedOptionRelServiceUtil.
+				deleteCommerceShippingFixedOptionRel(
+					commerceShippingFixedOptionRelId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.shipping.engine.fixed.model.
+		CommerceShippingFixedOptionRelSoap fetchCommerceShippingFixedOptionRel(
+				long commerceShippingFixedOptionRelId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRel returnValue =
+					CommerceShippingFixedOptionRelServiceUtil.
+						fetchCommerceShippingFixedOptionRel(
+							commerceShippingFixedOptionRelId);
+
+			return com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.shipping.engine.fixed.model.
+		CommerceShippingFixedOptionRelSoap[]
+				getCommerceShippingMethodFixedOptionRels(
+					long commerceShippingMethodId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.shipping.engine.fixed.model.
+							CommerceShippingFixedOptionRel> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.shipping.engine.fixed.model.
+					CommerceShippingFixedOptionRel> returnValue =
+						CommerceShippingFixedOptionRelServiceUtil.
+							getCommerceShippingMethodFixedOptionRels(
+								commerceShippingMethodId, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRelSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -136,9 +164,14 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 	}
 
 	public static int getCommerceShippingMethodFixedOptionRelsCount(
-		long commerceShippingMethodId) throws RemoteException {
+			long commerceShippingMethodId)
+		throws RemoteException {
+
 		try {
-			int returnValue = CommerceShippingFixedOptionRelServiceUtil.getCommerceShippingMethodFixedOptionRelsCount(commerceShippingMethodId);
+			int returnValue =
+				CommerceShippingFixedOptionRelServiceUtil.
+					getCommerceShippingMethodFixedOptionRelsCount(
+						commerceShippingMethodId);
 
 			return returnValue;
 		}
@@ -149,20 +182,27 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap updateCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-		long commerceCountryId, long commerceRegionId, String zip,
-		double weightFrom, double weightTo, java.math.BigDecimal fixedPrice,
-		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel returnValue =
-				CommerceShippingFixedOptionRelServiceUtil.updateCommerceShippingFixedOptionRel(commerceShippingFixedOptionRelId,
-					commerceWarehouseId, commerceCountryId, commerceRegionId,
-					zip, weightFrom, weightTo, fixedPrice, rateUnitWeightPrice,
-					ratePercentage);
+	public static com.liferay.commerce.shipping.engine.fixed.model.
+		CommerceShippingFixedOptionRelSoap updateCommerceShippingFixedOptionRel(
+				long commerceShippingFixedOptionRelId, long commerceWarehouseId,
+				long commerceCountryId, long commerceRegionId, String zip,
+				double weightFrom, double weightTo,
+				java.math.BigDecimal fixedPrice,
+				java.math.BigDecimal rateUnitWeightPrice, double ratePercentage)
+			throws RemoteException {
 
-			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRel returnValue =
+					CommerceShippingFixedOptionRelServiceUtil.
+						updateCommerceShippingFixedOptionRel(
+							commerceShippingFixedOptionRelId,
+							commerceWarehouseId, commerceCountryId,
+							commerceRegionId, zip, weightFrom, weightTo,
+							fixedPrice, rateUnitWeightPrice, ratePercentage);
+
+			return com.liferay.commerce.shipping.engine.fixed.model.
+				CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -171,5 +211,7 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceShippingFixedOptionRelServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceShippingFixedOptionRelServiceSoap.class);
+
 }

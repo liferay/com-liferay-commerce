@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.impl.CommerceCatalogImpl;
 import com.liferay.commerce.product.model.impl.CommerceCatalogModelImpl;
 import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,57 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CommerceCatalogPersistence
- * @see com.liferay.commerce.product.service.persistence.CommerceCatalogUtil
  * @generated
  */
 @ProviderType
-public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<CommerceCatalog>
+public class CommerceCatalogPersistenceImpl
+	extends BasePersistenceImpl<CommerceCatalog>
 	implements CommerceCatalogPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceCatalogUtil} to access the commerce catalog persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceCatalogUtil</code> to access the commerce catalog persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceCatalogImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCatalogImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCatalogImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
-		new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCatalogImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCompanyId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
-		new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCatalogImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
-			new String[] { Long.class.getName() },
-			CommerceCatalogModelImpl.COMPANYID_COLUMN_BITMASK |
-			CommerceCatalogModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceCatalogImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCompanyId;
+	private FinderPath _finderPathWithoutPaginationFindByCompanyId;
+	private FinderPath _finderPathCountByCompanyId;
 
 	/**
 	 * Returns all the commerce catalogs where companyId = &#63;.
@@ -122,15 +97,15 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public List<CommerceCatalog> findByCompanyId(long companyId) {
-		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByCompanyId(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce catalogs where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
@@ -139,8 +114,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the range of matching commerce catalogs
 	 */
 	@Override
-	public List<CommerceCatalog> findByCompanyId(long companyId, int start,
-		int end) {
+	public List<CommerceCatalog> findByCompanyId(
+		long companyId, int start, int end) {
+
 		return findByCompanyId(companyId, start, end, null);
 	}
 
@@ -148,7 +124,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce catalogs where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
@@ -158,8 +134,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	@Override
-	public List<CommerceCatalog> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator<CommerceCatalog> orderByComparator) {
+	public List<CommerceCatalog> findByCompanyId(
+		long companyId, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+
 		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
@@ -167,7 +145,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce catalogs where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
@@ -178,29 +156,34 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	@Override
-	public List<CommerceCatalog> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator<CommerceCatalog> orderByComparator,
+	public List<CommerceCatalog> findByCompanyId(
+		long companyId, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
-			finderArgs = new Object[] { companyId };
+			finderPath = _finderPathWithoutPaginationFindByCompanyId;
+			finderArgs = new Object[] {companyId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
-			finderArgs = new Object[] { companyId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByCompanyId;
+			finderArgs = new Object[] {
+				companyId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceCatalog> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceCatalog>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceCatalog>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCatalog commerceCatalog : list) {
@@ -217,8 +200,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -229,11 +212,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceCatalogModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -251,16 +233,16 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				qPos.add(companyId);
 
 				if (!pagination) {
-					list = (List<CommerceCatalog>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceCatalog>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceCatalog>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceCatalog>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -289,11 +271,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchCatalogException if a matching commerce catalog could not be found
 	 */
 	@Override
-	public CommerceCatalog findByCompanyId_First(long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator)
+	public CommerceCatalog findByCompanyId_First(
+			long companyId,
+			OrderByComparator<CommerceCatalog> orderByComparator)
 		throws NoSuchCatalogException {
-		CommerceCatalog commerceCatalog = fetchByCompanyId_First(companyId,
-				orderByComparator);
+
+		CommerceCatalog commerceCatalog = fetchByCompanyId_First(
+			companyId, orderByComparator);
 
 		if (commerceCatalog != null) {
 			return commerceCatalog;
@@ -319,10 +303,11 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the first matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
 	 */
 	@Override
-	public CommerceCatalog fetchByCompanyId_First(long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator) {
-		List<CommerceCatalog> list = findByCompanyId(companyId, 0, 1,
-				orderByComparator);
+	public CommerceCatalog fetchByCompanyId_First(
+		long companyId, OrderByComparator<CommerceCatalog> orderByComparator) {
+
+		List<CommerceCatalog> list = findByCompanyId(
+			companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -340,11 +325,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @throws NoSuchCatalogException if a matching commerce catalog could not be found
 	 */
 	@Override
-	public CommerceCatalog findByCompanyId_Last(long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator)
+	public CommerceCatalog findByCompanyId_Last(
+			long companyId,
+			OrderByComparator<CommerceCatalog> orderByComparator)
 		throws NoSuchCatalogException {
-		CommerceCatalog commerceCatalog = fetchByCompanyId_Last(companyId,
-				orderByComparator);
+
+		CommerceCatalog commerceCatalog = fetchByCompanyId_Last(
+			companyId, orderByComparator);
 
 		if (commerceCatalog != null) {
 			return commerceCatalog;
@@ -370,16 +357,17 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the last matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
 	 */
 	@Override
-	public CommerceCatalog fetchByCompanyId_Last(long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator) {
+	public CommerceCatalog fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CommerceCatalog> orderByComparator) {
+
 		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCatalog> list = findByCompanyId(companyId, count - 1,
-				count, orderByComparator);
+		List<CommerceCatalog> list = findByCompanyId(
+			companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -399,9 +387,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceCatalog[] findByCompanyId_PrevAndNext(
-		long commerceCatalogId, long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator)
+			long commerceCatalogId, long companyId,
+			OrderByComparator<CommerceCatalog> orderByComparator)
 		throws NoSuchCatalogException {
+
 		CommerceCatalog commerceCatalog = findByPrimaryKey(commerceCatalogId);
 
 		Session session = null;
@@ -411,13 +400,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			CommerceCatalog[] array = new CommerceCatalogImpl[3];
 
-			array[0] = getByCompanyId_PrevAndNext(session, commerceCatalog,
-					companyId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(
+				session, commerceCatalog, companyId, orderByComparator, true);
 
 			array[1] = commerceCatalog;
 
-			array[2] = getByCompanyId_PrevAndNext(session, commerceCatalog,
-					companyId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(
+				session, commerceCatalog, companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -429,14 +418,16 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		}
 	}
 
-	protected CommerceCatalog getByCompanyId_PrevAndNext(Session session,
-		CommerceCatalog commerceCatalog, long companyId,
-		OrderByComparator<CommerceCatalog> orderByComparator, boolean previous) {
+	protected CommerceCatalog getByCompanyId_PrevAndNext(
+		Session session, CommerceCatalog commerceCatalog, long companyId,
+		OrderByComparator<CommerceCatalog> orderByComparator,
+		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -448,7 +439,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -518,10 +510,11 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceCatalog);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceCatalog)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -542,8 +535,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void removeByCompanyId(long companyId) {
-		for (CommerceCatalog commerceCatalog : findByCompanyId(companyId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceCatalog commerceCatalog :
+				findByCompanyId(
+					companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceCatalog);
 		}
 	}
@@ -556,9 +551,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countByCompanyId(long companyId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
+		FinderPath finderPath = _finderPathCountByCompanyId;
 
-		Object[] finderArgs = new Object[] { companyId };
+		Object[] finderArgs = new Object[] {companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -599,7 +594,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceCatalog.companyId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 =
+		"commerceCatalog.companyId = ?";
 
 	public CommerceCatalogPersistenceImpl() {
 		setModelClass(CommerceCatalog.class);
@@ -612,7 +608,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public void cacheResult(CommerceCatalog commerceCatalog) {
-		entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey(),
 			commerceCatalog);
 
@@ -628,9 +625,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	public void cacheResult(List<CommerceCatalog> commerceCatalogs) {
 		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
 			if (entityCache.getResult(
-						CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceCatalogImpl.class,
-						commerceCatalog.getPrimaryKey()) == null) {
+					CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceCatalogImpl.class,
+					commerceCatalog.getPrimaryKey()) == null) {
+
 				cacheResult(commerceCatalog);
 			}
 			else {
@@ -643,7 +641,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Clears the cache for all commerce catalogs.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -659,12 +657,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Clears the cache for the commerce catalog.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceCatalog commerceCatalog) {
-		entityCache.removeResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -677,7 +676,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-			entityCache.removeResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			entityCache.removeResult(
+				CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey());
 		}
 	}
@@ -710,6 +710,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceCatalog remove(long commerceCatalogId)
 		throws NoSuchCatalogException {
+
 		return remove((Serializable)commerceCatalogId);
 	}
 
@@ -723,21 +724,22 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceCatalog remove(Serializable primaryKey)
 		throws NoSuchCatalogException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceCatalog commerceCatalog = (CommerceCatalog)session.get(CommerceCatalogImpl.class,
-					primaryKey);
+			CommerceCatalog commerceCatalog = (CommerceCatalog)session.get(
+				CommerceCatalogImpl.class, primaryKey);
 
 			if (commerceCatalog == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchCatalogException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchCatalogException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceCatalog);
@@ -761,8 +763,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			session = openSession();
 
 			if (!session.contains(commerceCatalog)) {
-				commerceCatalog = (CommerceCatalog)session.get(CommerceCatalogImpl.class,
-						commerceCatalog.getPrimaryKeyObj());
+				commerceCatalog = (CommerceCatalog)session.get(
+					CommerceCatalogImpl.class,
+					commerceCatalog.getPrimaryKeyObj());
 			}
 
 			if (commerceCatalog != null) {
@@ -791,21 +794,24 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceCatalog.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceCatalog);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceCatalog);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceCatalog proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceCatalog implementation " +
-				commerceCatalog.getClass());
+					commerceCatalog.getClass());
 		}
 
-		CommerceCatalogModelImpl commerceCatalogModelImpl = (CommerceCatalogModelImpl)commerceCatalog;
+		CommerceCatalogModelImpl commerceCatalogModelImpl =
+			(CommerceCatalogModelImpl)commerceCatalog;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -814,7 +820,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceCatalog.setCreateDate(now);
 			}
 			else {
-				commerceCatalog.setCreateDate(serviceContext.getCreateDate(now));
+				commerceCatalog.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -823,8 +830,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceCatalog.setModifiedDate(now);
 			}
 			else {
-				commerceCatalog.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceCatalog.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -839,7 +846,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				commerceCatalog.setNew(false);
 			}
 			else {
-				commerceCatalog = (CommerceCatalog)session.merge(commerceCatalog);
+				commerceCatalog = (CommerceCatalog)session.merge(
+					commerceCatalog);
 			}
 		}
 		catch (Exception e) {
@@ -854,39 +862,42 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		if (!CommerceCatalogModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
-			Object[] args = new Object[] { commerceCatalogModelImpl.getCompanyId() };
+		else if (isNew) {
+			Object[] args = new Object[] {
+				commerceCatalogModelImpl.getCompanyId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
-				args);
+			finderCache.removeResult(_finderPathCountByCompanyId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCompanyId, args);
 
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((commerceCatalogModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
+				 _finderPathWithoutPaginationFindByCompanyId.
+					 getColumnBitmask()) != 0) {
+
 				Object[] args = new Object[] {
-						commerceCatalogModelImpl.getOriginalCompanyId()
-					};
+					commerceCatalogModelImpl.getOriginalCompanyId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
-					args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCompanyId, args);
 
-				args = new Object[] { commerceCatalogModelImpl.getCompanyId() };
+				args = new Object[] {commerceCatalogModelImpl.getCompanyId()};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
-					args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCompanyId, args);
 			}
 		}
 
-		entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey(),
 			commerceCatalog, false);
 
@@ -896,7 +907,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	/**
-	 * Returns the commerce catalog with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce catalog with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce catalog
 	 * @return the commerce catalog
@@ -905,6 +916,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceCatalog findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchCatalogException {
+
 		CommerceCatalog commerceCatalog = fetchByPrimaryKey(primaryKey);
 
 		if (commerceCatalog == null) {
@@ -912,15 +924,15 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchCatalogException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchCatalogException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceCatalog;
 	}
 
 	/**
-	 * Returns the commerce catalog with the primary key or throws a {@link NoSuchCatalogException} if it could not be found.
+	 * Returns the commerce catalog with the primary key or throws a <code>NoSuchCatalogException</code> if it could not be found.
 	 *
 	 * @param commerceCatalogId the primary key of the commerce catalog
 	 * @return the commerce catalog
@@ -929,6 +941,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public CommerceCatalog findByPrimaryKey(long commerceCatalogId)
 		throws NoSuchCatalogException {
+
 		return findByPrimaryKey((Serializable)commerceCatalogId);
 	}
 
@@ -940,8 +953,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public CommerceCatalog fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceCatalogImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -955,19 +969,21 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			try {
 				session = openSession();
 
-				commerceCatalog = (CommerceCatalog)session.get(CommerceCatalogImpl.class,
-						primaryKey);
+				commerceCatalog = (CommerceCatalog)session.get(
+					CommerceCatalogImpl.class, primaryKey);
 
 				if (commerceCatalog != null) {
 					cacheResult(commerceCatalog);
 				}
 				else {
-					entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceCatalogImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceCatalogImpl.class, primaryKey);
 
 				throw processException(e);
@@ -994,11 +1010,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	@Override
 	public Map<Serializable, CommerceCatalog> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceCatalog> map = new HashMap<Serializable, CommerceCatalog>();
+		Map<Serializable, CommerceCatalog> map =
+			new HashMap<Serializable, CommerceCatalog>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -1017,8 +1035,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceCatalogImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceCatalogImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1038,8 +1057,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCECATALOG_WHERE_PKS_IN);
 
@@ -1062,7 +1081,9 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceCatalog commerceCatalog : (List<CommerceCatalog>)q.list()) {
+			for (CommerceCatalog commerceCatalog :
+					(List<CommerceCatalog>)q.list()) {
+
 				map.put(commerceCatalog.getPrimaryKeyObj(), commerceCatalog);
 
 				cacheResult(commerceCatalog);
@@ -1071,7 +1092,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceCatalogImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -1099,7 +1121,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns a range of all the commerce catalogs.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce catalogs
@@ -1115,7 +1137,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce catalogs.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce catalogs
@@ -1124,8 +1146,10 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of commerce catalogs
 	 */
 	@Override
-	public List<CommerceCatalog> findAll(int start, int end,
+	public List<CommerceCatalog> findAll(
+		int start, int end,
 		OrderByComparator<CommerceCatalog> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1133,7 +1157,7 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Returns an ordered range of all the commerce catalogs.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCatalogModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce catalogs
@@ -1143,29 +1167,32 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * @return the ordered range of commerce catalogs
 	 */
 	@Override
-	public List<CommerceCatalog> findAll(int start, int end,
+	public List<CommerceCatalog> findAll(
+		int start, int end,
 		OrderByComparator<CommerceCatalog> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceCatalog> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceCatalog>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceCatalog>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1173,13 +1200,13 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCECATALOG);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1199,16 +1226,16 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceCatalog>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceCatalog>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceCatalog>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceCatalog>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1246,8 +1273,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1259,12 +1286,12 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1285,6 +1312,49 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	 * Initializes the commerce catalog persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCompanyId = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCompanyId = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
+			new String[] {Long.class.getName()},
+			CommerceCatalogModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceCatalogModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCompanyId = new FinderPath(
+			CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1296,17 +1366,37 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCECATALOG = "SELECT commerceCatalog FROM CommerceCatalog commerceCatalog";
-	private static final String _SQL_SELECT_COMMERCECATALOG_WHERE_PKS_IN = "SELECT commerceCatalog FROM CommerceCatalog commerceCatalog WHERE commerceCatalogId IN (";
-	private static final String _SQL_SELECT_COMMERCECATALOG_WHERE = "SELECT commerceCatalog FROM CommerceCatalog commerceCatalog WHERE ";
-	private static final String _SQL_COUNT_COMMERCECATALOG = "SELECT COUNT(commerceCatalog) FROM CommerceCatalog commerceCatalog";
-	private static final String _SQL_COUNT_COMMERCECATALOG_WHERE = "SELECT COUNT(commerceCatalog) FROM CommerceCatalog commerceCatalog WHERE ";
+
+	private static final String _SQL_SELECT_COMMERCECATALOG =
+		"SELECT commerceCatalog FROM CommerceCatalog commerceCatalog";
+
+	private static final String _SQL_SELECT_COMMERCECATALOG_WHERE_PKS_IN =
+		"SELECT commerceCatalog FROM CommerceCatalog commerceCatalog WHERE commerceCatalogId IN (";
+
+	private static final String _SQL_SELECT_COMMERCECATALOG_WHERE =
+		"SELECT commerceCatalog FROM CommerceCatalog commerceCatalog WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCECATALOG =
+		"SELECT COUNT(commerceCatalog) FROM CommerceCatalog commerceCatalog";
+
+	private static final String _SQL_COUNT_COMMERCECATALOG_WHERE =
+		"SELECT COUNT(commerceCatalog) FROM CommerceCatalog commerceCatalog WHERE ";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceCatalog.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceCatalog exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceCatalog exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceCatalogPersistenceImpl.class);
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceCatalog exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceCatalog exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceCatalogPersistenceImpl.class);
+
 }

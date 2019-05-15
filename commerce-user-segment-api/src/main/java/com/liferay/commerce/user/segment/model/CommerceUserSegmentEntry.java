@@ -25,36 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceUserSegmentEntryModel
- * @see com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl
- * @see com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl"
+)
 @ProviderType
-public interface CommerceUserSegmentEntry extends CommerceUserSegmentEntryModel,
-	PersistedModel {
+public interface CommerceUserSegmentEntry
+	extends CommerceUserSegmentEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.user.segment.model.impl.CommerceUserSegmentEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceUserSegmentEntry, Long> COMMERCE_USER_SEGMENT_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceUserSegmentEntry, Long>() {
-			@Override
-			public Long get(CommerceUserSegmentEntry commerceUserSegmentEntry) {
-				return commerceUserSegmentEntry.getCommerceUserSegmentEntryId();
-			}
+	public static final Accessor<CommerceUserSegmentEntry, Long>
+		COMMERCE_USER_SEGMENT_ENTRY_ID_ACCESSOR =
+			new Accessor<CommerceUserSegmentEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceUserSegmentEntry commerceUserSegmentEntry) {
 
-			@Override
-			public Class<CommerceUserSegmentEntry> getTypeClass() {
-				return CommerceUserSegmentEntry.class;
-			}
-		};
+					return commerceUserSegmentEntry.
+						getCommerceUserSegmentEntryId();
+				}
 
-	public java.util.List<CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria();
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceUserSegmentEntry> getTypeClass() {
+					return CommerceUserSegmentEntry.class;
+				}
+
+			};
+
+	public java.util.List<CommerceUserSegmentCriterion>
+		getCommerceUserSegmentCriteria();
+
 }

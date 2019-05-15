@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceList;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommercePriceList in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommercePriceList
  * @generated
  */
 @ProviderType
-public class CommercePriceListCacheModel implements CacheModel<CommercePriceList>,
-	Externalizable {
+public class CommercePriceListCacheModel
+	implements CacheModel<CommercePriceList>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 			return false;
 		}
 
-		CommercePriceListCacheModel commercePriceListCacheModel = (CommercePriceListCacheModel)obj;
+		CommercePriceListCacheModel commercePriceListCacheModel =
+			(CommercePriceListCacheModel)obj;
 
-		if (commercePriceListId == commercePriceListCacheModel.commercePriceListId) {
+		if (commercePriceListId ==
+				commercePriceListCacheModel.commercePriceListId) {
+
 			return true;
 		}
 
@@ -114,7 +116,8 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 
 	@Override
 	public CommercePriceList toEntityModel() {
-		CommercePriceListImpl commercePriceListImpl = new CommercePriceListImpl();
+		CommercePriceListImpl commercePriceListImpl =
+			new CommercePriceListImpl();
 
 		if (uuid == null) {
 			commercePriceListImpl.setUuid("");
@@ -127,7 +130,8 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 			commercePriceListImpl.setExternalReferenceCode("");
 		}
 		else {
-			commercePriceListImpl.setExternalReferenceCode(externalReferenceCode);
+			commercePriceListImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
 		commercePriceListImpl.setCommercePriceListId(commercePriceListId);
@@ -157,7 +161,8 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 		}
 
 		commercePriceListImpl.setCommerceCurrencyId(commerceCurrencyId);
-		commercePriceListImpl.setParentCommercePriceListId(parentCommercePriceListId);
+		commercePriceListImpl.setParentCommercePriceListId(
+			parentCommercePriceListId);
 
 		if (name == null) {
 			commercePriceListImpl.setName("");
@@ -245,8 +250,7 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -329,4 +333,5 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

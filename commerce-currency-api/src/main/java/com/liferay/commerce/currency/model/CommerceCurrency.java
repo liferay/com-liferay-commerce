@@ -25,20 +25,23 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Andrea Di Giorgi
  * @see CommerceCurrencyModel
- * @see com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl
- * @see com.liferay.commerce.currency.model.impl.CommerceCurrencyModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl"
+)
 @ProviderType
-public interface CommerceCurrency extends CommerceCurrencyModel, PersistedModel {
+public interface CommerceCurrency
+	extends CommerceCurrencyModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceCurrency, Long> COMMERCE_CURRENCY_ID_ACCESSOR =
-		new Accessor<CommerceCurrency, Long>() {
+	public static final Accessor<CommerceCurrency, Long>
+		COMMERCE_CURRENCY_ID_ACCESSOR = new Accessor<CommerceCurrency, Long>() {
+
 			@Override
 			public Long get(CommerceCurrency commerceCurrency) {
 				return commerceCurrency.getCommerceCurrencyId();
@@ -53,9 +56,11 @@ public interface CommerceCurrency extends CommerceCurrencyModel, PersistedModel 
 			public Class<CommerceCurrency> getTypeClass() {
 				return CommerceCurrency.class;
 			}
+
 		};
 
 	public CommerceMoney getZero();
 
 	public java.math.BigDecimal round(java.math.BigDecimal value);
+
 }

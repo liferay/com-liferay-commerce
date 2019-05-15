@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceSubscriptionEntry in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceSubscriptionEntry
  * @generated
  */
 @ProviderType
-public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceSubscriptionEntry>,
-	Externalizable {
+public class CommerceSubscriptionEntryCacheModel
+	implements CacheModel<CommerceSubscriptionEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,14 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			return false;
 		}
 
-		CommerceSubscriptionEntryCacheModel commerceSubscriptionEntryCacheModel = (CommerceSubscriptionEntryCacheModel)obj;
+		CommerceSubscriptionEntryCacheModel
+			commerceSubscriptionEntryCacheModel =
+				(CommerceSubscriptionEntryCacheModel)obj;
 
-		if (commerceSubscriptionEntryId == commerceSubscriptionEntryCacheModel.commerceSubscriptionEntryId) {
+		if (commerceSubscriptionEntryId ==
+				commerceSubscriptionEntryCacheModel.
+					commerceSubscriptionEntryId) {
+
 			return true;
 		}
 
@@ -114,7 +118,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 	@Override
 	public CommerceSubscriptionEntry toEntityModel() {
-		CommerceSubscriptionEntryImpl commerceSubscriptionEntryImpl = new CommerceSubscriptionEntryImpl();
+		CommerceSubscriptionEntryImpl commerceSubscriptionEntryImpl =
+			new CommerceSubscriptionEntryImpl();
 
 		if (uuid == null) {
 			commerceSubscriptionEntryImpl.setUuid("");
@@ -123,7 +128,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			commerceSubscriptionEntryImpl.setUuid(uuid);
 		}
 
-		commerceSubscriptionEntryImpl.setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
+		commerceSubscriptionEntryImpl.setCommerceSubscriptionEntryId(
+			commerceSubscriptionEntryId);
 		commerceSubscriptionEntryImpl.setGroupId(groupId);
 		commerceSubscriptionEntryImpl.setCompanyId(companyId);
 		commerceSubscriptionEntryImpl.setUserId(userId);
@@ -146,7 +152,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			commerceSubscriptionEntryImpl.setModifiedDate(null);
 		}
 		else {
-			commerceSubscriptionEntryImpl.setModifiedDate(new Date(modifiedDate));
+			commerceSubscriptionEntryImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (CPInstanceUuid == null) {
@@ -157,7 +164,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		}
 
 		commerceSubscriptionEntryImpl.setCProductId(CProductId);
-		commerceSubscriptionEntryImpl.setCommerceOrderItemId(commerceOrderItemId);
+		commerceSubscriptionEntryImpl.setCommerceOrderItemId(
+			commerceOrderItemId);
 		commerceSubscriptionEntryImpl.setSubscriptionLength(subscriptionLength);
 
 		if (subscriptionType == null) {
@@ -171,27 +179,29 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings("");
 		}
 		else {
-			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
+			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings(
+				subscriptionTypeSettings);
 		}
 
 		commerceSubscriptionEntryImpl.setCurrentCycle(currentCycle);
-		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(
+			maxSubscriptionCycles);
 		commerceSubscriptionEntryImpl.setSubscriptionStatus(subscriptionStatus);
 
 		if (lastIterationDate == Long.MIN_VALUE) {
 			commerceSubscriptionEntryImpl.setLastIterationDate(null);
 		}
 		else {
-			commerceSubscriptionEntryImpl.setLastIterationDate(new Date(
-					lastIterationDate));
+			commerceSubscriptionEntryImpl.setLastIterationDate(
+				new Date(lastIterationDate));
 		}
 
 		if (nextIterationDate == Long.MIN_VALUE) {
 			commerceSubscriptionEntryImpl.setNextIterationDate(null);
 		}
 		else {
-			commerceSubscriptionEntryImpl.setNextIterationDate(new Date(
-					nextIterationDate));
+			commerceSubscriptionEntryImpl.setNextIterationDate(
+				new Date(nextIterationDate));
 		}
 
 		if (startDate == Long.MIN_VALUE) {
@@ -241,8 +251,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -325,4 +334,5 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	public long lastIterationDate;
 	public long nextIterationDate;
 	public long startDate;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceUserSegmentEntryServiceUtil} service utility. The
+ * <code>CommerceUserSegmentEntryServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,25 +49,30 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Marco Leo
  * @see CommerceUserSegmentEntryServiceSoap
- * @see HttpPrincipal
- * @see CommerceUserSegmentEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceUserSegmentEntryServiceHttp {
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry addCommerceUserSegmentEntry(
-		HttpPrincipal httpPrincipal,
-		java.util.Map<java.util.Locale, String> nameMap, String key,
-		boolean active, boolean system, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"addCommerceUserSegmentEntry",
-					_addCommerceUserSegmentEntryParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
-					key, active, system, priority, serviceContext);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				addCommerceUserSegmentEntry(
+					HttpPrincipal httpPrincipal,
+					java.util.Map<java.util.Locale, String> nameMap, String key,
+					boolean active, boolean system, double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"addCommerceUserSegmentEntry",
+				_addCommerceUserSegmentEntryParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, nameMap, key, active, system, priority,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -75,14 +80,19 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)returnObj;
+			return (com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntry)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -91,16 +101,21 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry deleteCommerceUserSegmentEntry(
-		HttpPrincipal httpPrincipal, long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"deleteCommerceUserSegmentEntry",
-					_deleteCommerceUserSegmentEntryParameterTypes1);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				deleteCommerceUserSegmentEntry(
+					HttpPrincipal httpPrincipal,
+					long commerceUserSegmentEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceUserSegmentEntryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"deleteCommerceUserSegmentEntry",
+				_deleteCommerceUserSegmentEntryParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceUserSegmentEntryId);
 
 			Object returnObj = null;
 
@@ -108,14 +123,19 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)returnObj;
+			return (com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntry)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -124,17 +144,24 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry> getCommerceUserSegmentEntries(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"getCommerceUserSegmentEntries",
-					_getCommerceUserSegmentEntriesParameterTypes2);
+	public static java.util.List
+		<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry>
+				getCommerceUserSegmentEntries(
+					HttpPrincipal httpPrincipal, long groupId, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.user.segment.model.
+							CommerceUserSegmentEntry> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"getCommerceUserSegmentEntries",
+				_getCommerceUserSegmentEntriesParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -142,14 +169,20 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.user.segment.model.
+					CommerceUserSegmentEntry>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -159,12 +192,14 @@ public class CommerceUserSegmentEntryServiceHttp {
 	}
 
 	public static int getCommerceUserSegmentEntriesCount(
-		HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"getCommerceUserSegmentEntriesCount",
-					_getCommerceUserSegmentEntriesCountParameterTypes3);
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"getCommerceUserSegmentEntriesCount",
+				_getCommerceUserSegmentEntriesCountParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -174,11 +209,15 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -190,16 +229,21 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry getCommerceUserSegmentEntry(
-		HttpPrincipal httpPrincipal, long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"getCommerceUserSegmentEntry",
-					_getCommerceUserSegmentEntryParameterTypes4);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				getCommerceUserSegmentEntry(
+					HttpPrincipal httpPrincipal,
+					long commerceUserSegmentEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceUserSegmentEntryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"getCommerceUserSegmentEntry",
+				_getCommerceUserSegmentEntryParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceUserSegmentEntryId);
 
 			Object returnObj = null;
 
@@ -207,14 +251,19 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)returnObj;
+			return (com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntry)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -223,18 +272,22 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry> searchCommerceUserSegmentEntries(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"searchCommerceUserSegmentEntries",
-					_searchCommerceUserSegmentEntriesParameterTypes5);
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry>
+				searchCommerceUserSegmentEntries(
+					HttpPrincipal httpPrincipal, long companyId, long groupId,
+					String keywords, int start, int end,
+					com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, keywords, start, end, sort);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"searchCommerceUserSegmentEntries",
+				_searchCommerceUserSegmentEntriesParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, groupId, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -242,14 +295,20 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry>)returnObj;
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult
+				<com.liferay.commerce.user.segment.model.
+					CommerceUserSegmentEntry>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -258,20 +317,26 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry updateCommerceUserSegmentEntry(
-		HttpPrincipal httpPrincipal, long commerceUserSegmentEntryId,
-		java.util.Map<java.util.Locale, String> nameMap, String key,
-		boolean active, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceUserSegmentEntryServiceUtil.class,
-					"updateCommerceUserSegmentEntry",
-					_updateCommerceUserSegmentEntryParameterTypes6);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				updateCommerceUserSegmentEntry(
+					HttpPrincipal httpPrincipal,
+					long commerceUserSegmentEntryId,
+					java.util.Map<java.util.Locale, String> nameMap, String key,
+					boolean active, double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceUserSegmentEntryId, nameMap, key, active, priority,
-					serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceUserSegmentEntryServiceUtil.class,
+				"updateCommerceUserSegmentEntry",
+				_updateCommerceUserSegmentEntryParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceUserSegmentEntryId, nameMap, key, active,
+				priority, serviceContext);
 
 			Object returnObj = null;
 
@@ -279,14 +344,19 @@ public class CommerceUserSegmentEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)returnObj;
+			return (com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntry)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -295,31 +365,38 @@ public class CommerceUserSegmentEntryServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceUserSegmentEntryServiceHttp.class);
-	private static final Class<?>[] _addCommerceUserSegmentEntryParameterTypes0 = new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceUserSegmentEntryServiceHttp.class);
+
+	private static final Class<?>[]
+		_addCommerceUserSegmentEntryParameterTypes0 = new Class[] {
 			java.util.Map.class, String.class, boolean.class, boolean.class,
 			double.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceUserSegmentEntryParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceUserSegmentEntriesParameterTypes2 =
-		new Class[] {
+	private static final Class<?>[]
+		_deleteCommerceUserSegmentEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceUserSegmentEntriesParameterTypes2 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceUserSegmentEntriesCountParameterTypes3 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceUserSegmentEntryParameterTypes4 = new Class[] {
+	private static final Class<?>[]
+		_getCommerceUserSegmentEntriesCountParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _searchCommerceUserSegmentEntriesParameterTypes5 =
-		new Class[] {
+	private static final Class<?>[]
+		_getCommerceUserSegmentEntryParameterTypes4 = new Class[] {long.class};
+	private static final Class<?>[]
+		_searchCommerceUserSegmentEntriesParameterTypes5 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommerceUserSegmentEntryParameterTypes6 =
-		new Class[] {
+	private static final Class<?>[]
+		_updateCommerceUserSegmentEntryParameterTypes6 = new Class[] {
 			long.class, java.util.Map.class, String.class, boolean.class,
 			double.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
+
 }

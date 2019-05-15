@@ -26,16 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.payment.service.http.CommercePaymentMethodGroupRelServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.payment.service.http.CommercePaymentMethodGroupRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommercePaymentMethodGroupRelSoap implements Serializable {
+
 	public static CommercePaymentMethodGroupRelSoap toSoapModel(
 		CommercePaymentMethodGroupRel model) {
-		CommercePaymentMethodGroupRelSoap soapModel = new CommercePaymentMethodGroupRelSoap();
 
-		soapModel.setCommercePaymentMethodGroupRelId(model.getCommercePaymentMethodGroupRelId());
+		CommercePaymentMethodGroupRelSoap soapModel =
+			new CommercePaymentMethodGroupRelSoap();
+
+		soapModel.setCommercePaymentMethodGroupRelId(
+			model.getCommercePaymentMethodGroupRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -54,7 +57,9 @@ public class CommercePaymentMethodGroupRelSoap implements Serializable {
 
 	public static CommercePaymentMethodGroupRelSoap[] toSoapModels(
 		CommercePaymentMethodGroupRel[] models) {
-		CommercePaymentMethodGroupRelSoap[] soapModels = new CommercePaymentMethodGroupRelSoap[models.length];
+
+		CommercePaymentMethodGroupRelSoap[] soapModels =
+			new CommercePaymentMethodGroupRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -65,10 +70,12 @@ public class CommercePaymentMethodGroupRelSoap implements Serializable {
 
 	public static CommercePaymentMethodGroupRelSoap[][] toSoapModels(
 		CommercePaymentMethodGroupRel[][] models) {
+
 		CommercePaymentMethodGroupRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommercePaymentMethodGroupRelSoap[models.length][models[0].length];
+			soapModels = new CommercePaymentMethodGroupRelSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommercePaymentMethodGroupRelSoap[0][0];
@@ -83,13 +90,16 @@ public class CommercePaymentMethodGroupRelSoap implements Serializable {
 
 	public static CommercePaymentMethodGroupRelSoap[] toSoapModels(
 		List<CommercePaymentMethodGroupRel> models) {
-		List<CommercePaymentMethodGroupRelSoap> soapModels = new ArrayList<CommercePaymentMethodGroupRelSoap>(models.size());
+
+		List<CommercePaymentMethodGroupRelSoap> soapModels =
+			new ArrayList<CommercePaymentMethodGroupRelSoap>(models.size());
 
 		for (CommercePaymentMethodGroupRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommercePaymentMethodGroupRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommercePaymentMethodGroupRelSoap[soapModels.size()]);
 	}
 
 	public CommercePaymentMethodGroupRelSoap() {
@@ -109,6 +119,7 @@ public class CommercePaymentMethodGroupRelSoap implements Serializable {
 
 	public void setCommercePaymentMethodGroupRelId(
 		long commercePaymentMethodGroupRelId) {
+
 		_commercePaymentMethodGroupRelId = commercePaymentMethodGroupRelId;
 	}
 
@@ -225,4 +236,5 @@ public class CommercePaymentMethodGroupRelSoap implements Serializable {
 	private String _engineKey;
 	private double _priority;
 	private boolean _active;
+
 }

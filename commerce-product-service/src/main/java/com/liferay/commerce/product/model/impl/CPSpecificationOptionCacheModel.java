@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPSpecificationOption;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPSpecificationOption in entity cache.
  *
  * @author Marco Leo
- * @see CPSpecificationOption
  * @generated
  */
 @ProviderType
-public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificationOption>,
-	Externalizable {
+public class CPSpecificationOptionCacheModel
+	implements CacheModel<CPSpecificationOption>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 			return false;
 		}
 
-		CPSpecificationOptionCacheModel cpSpecificationOptionCacheModel = (CPSpecificationOptionCacheModel)obj;
+		CPSpecificationOptionCacheModel cpSpecificationOptionCacheModel =
+			(CPSpecificationOptionCacheModel)obj;
 
-		if (CPSpecificationOptionId == cpSpecificationOptionCacheModel.CPSpecificationOptionId) {
+		if (CPSpecificationOptionId ==
+				cpSpecificationOptionCacheModel.CPSpecificationOptionId) {
+
 			return true;
 		}
 
@@ -102,7 +104,8 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 
 	@Override
 	public CPSpecificationOption toEntityModel() {
-		CPSpecificationOptionImpl cpSpecificationOptionImpl = new CPSpecificationOptionImpl();
+		CPSpecificationOptionImpl cpSpecificationOptionImpl =
+			new CPSpecificationOptionImpl();
 
 		if (uuid == null) {
 			cpSpecificationOptionImpl.setUuid("");
@@ -111,7 +114,8 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 			cpSpecificationOptionImpl.setUuid(uuid);
 		}
 
-		cpSpecificationOptionImpl.setCPSpecificationOptionId(CPSpecificationOptionId);
+		cpSpecificationOptionImpl.setCPSpecificationOptionId(
+			CPSpecificationOptionId);
 		cpSpecificationOptionImpl.setGroupId(groupId);
 		cpSpecificationOptionImpl.setCompanyId(companyId);
 		cpSpecificationOptionImpl.setUserId(userId);
@@ -166,8 +170,8 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 			cpSpecificationOptionImpl.setLastPublishDate(null);
 		}
 		else {
-			cpSpecificationOptionImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			cpSpecificationOptionImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		cpSpecificationOptionImpl.resetOriginalValues();
@@ -200,8 +204,7 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -269,4 +272,5 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 	public boolean facetable;
 	public String key;
 	public long lastPublishDate;
+
 }
