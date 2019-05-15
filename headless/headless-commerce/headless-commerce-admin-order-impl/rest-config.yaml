@@ -1,0 +1,7 @@
+apiDir: "../headless-commerce-admin-order-api/src/main/java"
+apiPackagePath: "com.liferay.headless.commerce.admin.order"
+application:
+    baseURI: "/headless-commerce-admin-order"
+    className: "HeadlessCommerceAdminOrderApplication"
+    name: "Liferay.Headless.Commerce.Admin.Order"
+author: "Alessio Antonio Rendina"
