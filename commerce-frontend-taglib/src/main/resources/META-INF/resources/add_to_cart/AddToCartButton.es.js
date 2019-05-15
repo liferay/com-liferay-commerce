@@ -151,7 +151,10 @@ class AddToCartButton extends Component {
 			this._enableEditMode();
 		}
 		else if (!this.accountId || this.disabled) {
-			showNotification('No account selected.', 'danger');
+			const message = Liferay.Language.get('no-account-selected'),
+				type = 'danger';
+
+			showNotification(message, type);
 		}
 	}
 
