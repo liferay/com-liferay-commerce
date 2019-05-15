@@ -139,6 +139,7 @@ PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 								rowURL.setParameter("mvcRenderCommandName", "editCPDefinitionLink");
 								rowURL.setParameter("cpDefinitionLinkId", String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()));
 								rowURL.setParameter("type", String.valueOf(cpDefinitionLink.getType()));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 
 								CProduct cProduct = cpDefinitionLink.getCProduct();
 

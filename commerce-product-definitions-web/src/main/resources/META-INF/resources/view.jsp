@@ -28,6 +28,16 @@ PortletURL portletURL = cpDefinitionsDisplayContext.getPortletURL();
 portletURL.setParameter("searchContainerId", "cpDefinitions");
 
 request.setAttribute("view.jsp-portletURL", portletURL);
+
+String title = LanguageUtil.get(request, "products");
+
+Map<String, Object> data = new HashMap<>();
+
+data.put("direction-right", StringPool.TRUE);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "catalogs"), viewCatalogURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(), editCatalogURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 %>
 
 <c:if test="<%= cpDefinitionsDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
@@ -35,6 +45,8 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 		inverted="<%= true %>"
 		navigationItems="<%= CPNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"
 	/>
+
+	<%@ include file="/breadcrumb.jspf" %>
 
 	<%@ include file="/navbar_definitions.jspf" %>
 
@@ -89,7 +101,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 								rowURL.setParameter("redirect", currentURL);
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 								rowURL.setParameter("screenNavigationCategoryKey", CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS);
-								rowURL.setParameter("commerceCatalogId", ParamUtil.getString(request, "commerceCatalogId"));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 
 								CPType cpType = cpDefinitionsDisplayContext.getCPType(cpDefinition.getProductTypeName());
 								%>

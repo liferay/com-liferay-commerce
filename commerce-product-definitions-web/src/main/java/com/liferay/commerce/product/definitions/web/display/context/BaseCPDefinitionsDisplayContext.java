@@ -108,6 +108,13 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		portletURL.setParameter(
 			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
 
+		String commerceCatalogId = ParamUtil.getString(
+			httpServletRequest, "commerceCatalogId");
+
+		if (Validator.isNotNull(commerceCatalogId)) {
+			portletURL.setParameter("commerceCatalogId", commerceCatalogId);
+		}
+
 		return portletURL;
 	}
 
@@ -125,6 +132,13 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		if (cpDefinition != null) {
 			portletURL.setParameter(
 				"cpDefinitionId", String.valueOf(getCPDefinitionId()));
+		}
+
+		String commerceCatalogId = ParamUtil.getString(
+			httpServletRequest, "commerceCatalogId");
+
+		if (Validator.isNotNull(commerceCatalogId)) {
+			portletURL.setParameter("commerceCatalogId", commerceCatalogId);
 		}
 
 		return portletURL;

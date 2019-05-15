@@ -36,6 +36,8 @@ data.put("direction-right", StringPool.TRUE);
 
 String selectedScreenNavigationCategoryKey = cpDefinitionsDisplayContext.getSelectedScreenNavigationCategoryKey();
 
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "catalogs"), viewCatalogURL.toString(), data);
+PortalUtil.addPortletBreadcrumbEntry(request, commerceCatalog.getName(), editCatalogURL.toString(), data);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "products"), catalogURL, data);
 PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, selectedScreenNavigationCategoryKey), StringPool.BLANK, data);

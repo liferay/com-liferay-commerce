@@ -163,6 +163,7 @@ String displayStyle = cpInstanceDisplayContext.getDisplayStyle();
 								rowURL.setParameter("mvcRenderCommandName", "editProductInstance");
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinitionId));
 								rowURL.setParameter("cpInstanceId", String.valueOf(cpInstance.getCPInstanceId()));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 								%>
 
 								<c:choose>
