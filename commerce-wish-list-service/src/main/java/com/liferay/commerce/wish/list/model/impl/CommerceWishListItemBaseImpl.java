@@ -34,10 +34,11 @@ import com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUt
 @ProviderType
 public abstract class CommerceWishListItemBaseImpl
 	extends CommerceWishListItemModelImpl implements CommerceWishListItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce wish list item model instance should use the {@link CommerceWishListItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce wish list item model instance should use the <code>CommerceWishListItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -45,7 +46,9 @@ public abstract class CommerceWishListItemBaseImpl
 			CommerceWishListItemLocalServiceUtil.addCommerceWishListItem(this);
 		}
 		else {
-			CommerceWishListItemLocalServiceUtil.updateCommerceWishListItem(this);
+			CommerceWishListItemLocalServiceUtil.updateCommerceWishListItem(
+				this);
 		}
 	}
+
 }

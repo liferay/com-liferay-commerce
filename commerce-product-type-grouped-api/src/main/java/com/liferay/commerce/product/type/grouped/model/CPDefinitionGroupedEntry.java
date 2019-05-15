@@ -25,41 +25,49 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Andrea Di Giorgi
  * @see CPDefinitionGroupedEntryModel
- * @see com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl
- * @see com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl"
+)
 @ProviderType
-public interface CPDefinitionGroupedEntry extends CPDefinitionGroupedEntryModel,
-	PersistedModel {
+public interface CPDefinitionGroupedEntry
+	extends CPDefinitionGroupedEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionGroupedEntry, Long> CP_DEFINITION_GROUPED_ENTRY_ID_ACCESSOR =
-		new Accessor<CPDefinitionGroupedEntry, Long>() {
-			@Override
-			public Long get(CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
-				return cpDefinitionGroupedEntry.getCPDefinitionGroupedEntryId();
-			}
+	public static final Accessor<CPDefinitionGroupedEntry, Long>
+		CP_DEFINITION_GROUPED_ENTRY_ID_ACCESSOR =
+			new Accessor<CPDefinitionGroupedEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CPDefinitionGroupedEntry cpDefinitionGroupedEntry) {
 
-			@Override
-			public Class<CPDefinitionGroupedEntry> getTypeClass() {
-				return CPDefinitionGroupedEntry.class;
-			}
-		};
+					return cpDefinitionGroupedEntry.
+						getCPDefinitionGroupedEntryId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionGroupedEntry> getTypeClass() {
+					return CPDefinitionGroupedEntry.class;
+				}
+
+			};
 
 	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.product.model.CPDefinition getEntryCPDefinition()
+	public com.liferay.commerce.product.model.CPDefinition
+			getEntryCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public long getEntryCPDefinitionId()
@@ -67,4 +75,5 @@ public interface CPDefinitionGroupedEntry extends CPDefinitionGroupedEntryModel,
 
 	public com.liferay.commerce.product.model.CProduct getEntryCProduct()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

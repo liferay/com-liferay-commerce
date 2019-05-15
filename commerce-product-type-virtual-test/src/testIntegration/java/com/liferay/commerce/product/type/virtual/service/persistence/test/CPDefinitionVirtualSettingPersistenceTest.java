@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.type.virtual.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.type.virtual.exception.NoSuchCPDefinitionVirtualSettingException;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,16 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionVirtualSettingPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.product.type.virtual.service"));
 
 	@Before
@@ -82,7 +82,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPDefinitionVirtualSetting> iterator = _cpDefinitionVirtualSettings.iterator();
+		Iterator<CPDefinitionVirtualSetting> iterator =
+			_cpDefinitionVirtualSettings.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,7 +96,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = _persistence.create(pk);
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(cpDefinitionVirtualSetting);
 
@@ -104,11 +106,14 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
 		_persistence.remove(newCPDefinitionVirtualSetting);
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = _persistence.fetchByPrimaryKey(newCPDefinitionVirtualSetting.getPrimaryKey());
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionVirtualSetting.getPrimaryKey());
 
 		Assert.assertNull(existingCPDefinitionVirtualSetting);
 	}
@@ -122,7 +127,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = _persistence.create(pk);
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			_persistence.create(pk);
 
 		newCPDefinitionVirtualSetting.setUuid(RandomTestUtil.randomString());
 
@@ -132,11 +138,13 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		newCPDefinitionVirtualSetting.setUserId(RandomTestUtil.nextLong());
 
-		newCPDefinitionVirtualSetting.setUserName(RandomTestUtil.randomString());
+		newCPDefinitionVirtualSetting.setUserName(
+			RandomTestUtil.randomString());
 
 		newCPDefinitionVirtualSetting.setCreateDate(RandomTestUtil.nextDate());
 
-		newCPDefinitionVirtualSetting.setModifiedDate(RandomTestUtil.nextDate());
+		newCPDefinitionVirtualSetting.setModifiedDate(
+			RandomTestUtil.nextDate());
 
 		newCPDefinitionVirtualSetting.setClassNameId(RandomTestUtil.nextLong());
 
@@ -146,82 +154,120 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		newCPDefinitionVirtualSetting.setUrl(RandomTestUtil.randomString());
 
-		newCPDefinitionVirtualSetting.setActivationStatus(RandomTestUtil.nextInt());
+		newCPDefinitionVirtualSetting.setActivationStatus(
+			RandomTestUtil.nextInt());
 
 		newCPDefinitionVirtualSetting.setDuration(RandomTestUtil.nextLong());
 
 		newCPDefinitionVirtualSetting.setMaxUsages(RandomTestUtil.nextInt());
 
-		newCPDefinitionVirtualSetting.setUseSample(RandomTestUtil.randomBoolean());
+		newCPDefinitionVirtualSetting.setUseSample(
+			RandomTestUtil.randomBoolean());
 
-		newCPDefinitionVirtualSetting.setSampleFileEntryId(RandomTestUtil.nextLong());
+		newCPDefinitionVirtualSetting.setSampleFileEntryId(
+			RandomTestUtil.nextLong());
 
-		newCPDefinitionVirtualSetting.setSampleUrl(RandomTestUtil.randomString());
+		newCPDefinitionVirtualSetting.setSampleUrl(
+			RandomTestUtil.randomString());
 
-		newCPDefinitionVirtualSetting.setTermsOfUseRequired(RandomTestUtil.randomBoolean());
+		newCPDefinitionVirtualSetting.setTermsOfUseRequired(
+			RandomTestUtil.randomBoolean());
 
-		newCPDefinitionVirtualSetting.setTermsOfUseContent(RandomTestUtil.randomString());
+		newCPDefinitionVirtualSetting.setTermsOfUseContent(
+			RandomTestUtil.randomString());
 
-		newCPDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(RandomTestUtil.nextLong());
+		newCPDefinitionVirtualSetting.
+			setTermsOfUseJournalArticleResourcePrimKey(
+				RandomTestUtil.nextLong());
 
-		newCPDefinitionVirtualSetting.setOverride(RandomTestUtil.randomBoolean());
+		newCPDefinitionVirtualSetting.setOverride(
+			RandomTestUtil.randomBoolean());
 
-		newCPDefinitionVirtualSetting.setLastPublishDate(RandomTestUtil.nextDate());
+		newCPDefinitionVirtualSetting.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_cpDefinitionVirtualSettings.add(_persistence.update(
-				newCPDefinitionVirtualSetting));
+		_cpDefinitionVirtualSettings.add(
+			_persistence.update(newCPDefinitionVirtualSetting));
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = _persistence.findByPrimaryKey(newCPDefinitionVirtualSetting.getPrimaryKey());
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionVirtualSetting.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getUuid(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getUuid(),
 			newCPDefinitionVirtualSetting.getUuid());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getCPDefinitionVirtualSettingId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.
+				getCPDefinitionVirtualSettingId(),
 			newCPDefinitionVirtualSetting.getCPDefinitionVirtualSettingId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getGroupId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getGroupId(),
 			newCPDefinitionVirtualSetting.getGroupId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getCompanyId(),
 			newCPDefinitionVirtualSetting.getCompanyId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getUserId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getUserId(),
 			newCPDefinitionVirtualSetting.getUserId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getUserName(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getUserName(),
 			newCPDefinitionVirtualSetting.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionVirtualSetting.getCreateDate()),
 			Time.getShortTimestamp(
 				newCPDefinitionVirtualSetting.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionVirtualSetting.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCPDefinitionVirtualSetting.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getClassNameId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getClassNameId(),
 			newCPDefinitionVirtualSetting.getClassNameId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getClassPK(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getClassPK(),
 			newCPDefinitionVirtualSetting.getClassPK());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getFileEntryId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getFileEntryId(),
 			newCPDefinitionVirtualSetting.getFileEntryId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getUrl(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getUrl(),
 			newCPDefinitionVirtualSetting.getUrl());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getActivationStatus(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getActivationStatus(),
 			newCPDefinitionVirtualSetting.getActivationStatus());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getDuration(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getDuration(),
 			newCPDefinitionVirtualSetting.getDuration());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getMaxUsages(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getMaxUsages(),
 			newCPDefinitionVirtualSetting.getMaxUsages());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.isUseSample(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.isUseSample(),
 			newCPDefinitionVirtualSetting.isUseSample());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getSampleFileEntryId(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getSampleFileEntryId(),
 			newCPDefinitionVirtualSetting.getSampleFileEntryId());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getSampleUrl(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getSampleUrl(),
 			newCPDefinitionVirtualSetting.getSampleUrl());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.isTermsOfUseRequired(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.isTermsOfUseRequired(),
 			newCPDefinitionVirtualSetting.isTermsOfUseRequired());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getTermsOfUseContent(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.getTermsOfUseContent(),
 			newCPDefinitionVirtualSetting.getTermsOfUseContent());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getTermsOfUseJournalArticleResourcePrimKey(),
-			newCPDefinitionVirtualSetting.getTermsOfUseJournalArticleResourcePrimKey());
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.isOverride(),
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.
+				getTermsOfUseJournalArticleResourcePrimKey(),
+			newCPDefinitionVirtualSetting.
+				getTermsOfUseJournalArticleResourcePrimKey());
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting.isOverride(),
 			newCPDefinitionVirtualSetting.isOverride());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDefinitionVirtualSetting.getLastPublishDate()),
 			Time.getShortTimestamp(
 				newCPDefinitionVirtualSetting.getLastPublishDate()));
@@ -256,20 +302,23 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = _persistence.findByPrimaryKey(newCPDefinitionVirtualSetting.getPrimaryKey());
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionVirtualSetting.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionVirtualSetting,
-			newCPDefinitionVirtualSetting);
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting, newCPDefinitionVirtualSetting);
 	}
 
 	@Test(expected = NoSuchCPDefinitionVirtualSettingException.class)
@@ -281,38 +330,45 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CPDefinitionVirtualSetting> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDefinitionVirtualSetting",
-			"uuid", true, "CPDefinitionVirtualSettingId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "classNameId", true,
-			"classPK", true, "fileEntryId", true, "url", true,
-			"activationStatus", true, "duration", true, "maxUsages", true,
-			"useSample", true, "sampleFileEntryId", true, "sampleUrl", true,
-			"termsOfUseRequired", true, "termsOfUseContent", true,
+	protected OrderByComparator<CPDefinitionVirtualSetting>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CPDefinitionVirtualSetting", "uuid", true,
+			"CPDefinitionVirtualSettingId", true, "groupId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "classNameId", true, "classPK", true,
+			"fileEntryId", true, "url", true, "activationStatus", true,
+			"duration", true, "maxUsages", true, "useSample", true,
+			"sampleFileEntryId", true, "sampleUrl", true, "termsOfUseRequired",
+			true, "termsOfUseContent", true,
 			"termsOfUseJournalArticleResourcePrimKey", true, "override", true,
 			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = _persistence.fetchByPrimaryKey(newCPDefinitionVirtualSetting.getPrimaryKey());
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			_persistence.fetchByPrimaryKey(
+				newCPDefinitionVirtualSetting.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionVirtualSetting,
-			newCPDefinitionVirtualSetting);
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting, newCPDefinitionVirtualSetting);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionVirtualSetting missingCPDefinitionVirtualSetting = _persistence.fetchByPrimaryKey(pk);
+		CPDefinitionVirtualSetting missingCPDefinitionVirtualSetting =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDefinitionVirtualSetting);
 	}
@@ -320,22 +376,28 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting1 = addCPDefinitionVirtualSetting();
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting2 = addCPDefinitionVirtualSetting();
+
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting1 =
+			addCPDefinitionVirtualSetting();
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting2 =
+			addCPDefinitionVirtualSetting();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionVirtualSetting1.getPrimaryKey());
 		primaryKeys.add(newCPDefinitionVirtualSetting2.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionVirtualSetting> cpDefinitionVirtualSettings =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionVirtualSetting>
+			cpDefinitionVirtualSettings = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, cpDefinitionVirtualSettings.size());
-		Assert.assertEquals(newCPDefinitionVirtualSetting1,
+		Assert.assertEquals(
+			newCPDefinitionVirtualSetting1,
 			cpDefinitionVirtualSettings.get(
 				newCPDefinitionVirtualSetting1.getPrimaryKey()));
-		Assert.assertEquals(newCPDefinitionVirtualSetting2,
+		Assert.assertEquals(
+			newCPDefinitionVirtualSetting2,
 			cpDefinitionVirtualSettings.get(
 				newCPDefinitionVirtualSetting2.getPrimaryKey()));
 	}
@@ -343,6 +405,7 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -352,8 +415,9 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDefinitionVirtualSetting> cpDefinitionVirtualSettings =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionVirtualSetting>
+			cpDefinitionVirtualSettings = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(cpDefinitionVirtualSettings.isEmpty());
 	}
@@ -361,7 +425,9 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -370,40 +436,44 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 		primaryKeys.add(newCPDefinitionVirtualSetting.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDefinitionVirtualSetting> cpDefinitionVirtualSettings =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionVirtualSetting>
+			cpDefinitionVirtualSettings = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionVirtualSettings.size());
-		Assert.assertEquals(newCPDefinitionVirtualSetting,
+		Assert.assertEquals(
+			newCPDefinitionVirtualSetting,
 			cpDefinitionVirtualSettings.get(
 				newCPDefinitionVirtualSetting.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDefinitionVirtualSetting> cpDefinitionVirtualSettings =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionVirtualSetting>
+			cpDefinitionVirtualSettings = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(cpDefinitionVirtualSettings.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionVirtualSetting.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionVirtualSetting> cpDefinitionVirtualSettings =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionVirtualSetting>
+			cpDefinitionVirtualSettings = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionVirtualSettings.size());
-		Assert.assertEquals(newCPDefinitionVirtualSetting,
+		Assert.assertEquals(
+			newCPDefinitionVirtualSetting,
 			cpDefinitionVirtualSettings.get(
 				newCPDefinitionVirtualSetting.getPrimaryKey()));
 	}
@@ -412,16 +482,23 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDefinitionVirtualSettingLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDefinitionVirtualSettingLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionVirtualSetting>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDefinitionVirtualSetting>() {
+
 				@Override
 				public void performAction(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting) {
+
 					Assert.assertNotNull(cpDefinitionVirtualSetting);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -430,56 +507,64 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionVirtualSetting.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionVirtualSetting.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDefinitionVirtualSettingId",
-				newCPDefinitionVirtualSetting.getCPDefinitionVirtualSettingId()));
+				newCPDefinitionVirtualSetting.
+					getCPDefinitionVirtualSettingId()));
 
-		List<CPDefinitionVirtualSetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionVirtualSetting> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = result.get(0);
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionVirtualSetting,
-			newCPDefinitionVirtualSetting);
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSetting, newCPDefinitionVirtualSetting);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionVirtualSetting.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionVirtualSetting.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDefinitionVirtualSettingId", RandomTestUtil.nextLong()));
 
-		List<CPDefinitionVirtualSetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionVirtualSetting> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionVirtualSetting.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionVirtualSetting.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionVirtualSettingId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionVirtualSettingId"));
 
-		Object newCPDefinitionVirtualSettingId = newCPDefinitionVirtualSetting.getCPDefinitionVirtualSettingId();
+		Object newCPDefinitionVirtualSettingId =
+			newCPDefinitionVirtualSetting.getCPDefinitionVirtualSettingId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDefinitionVirtualSettingId",
-				new Object[] { newCPDefinitionVirtualSettingId }));
+				new Object[] {newCPDefinitionVirtualSettingId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -487,21 +572,23 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		Object existingCPDefinitionVirtualSettingId = result.get(0);
 
-		Assert.assertEquals(existingCPDefinitionVirtualSettingId,
+		Assert.assertEquals(
+			existingCPDefinitionVirtualSettingId,
 			newCPDefinitionVirtualSettingId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionVirtualSetting.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionVirtualSetting.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionVirtualSettingId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionVirtualSettingId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDefinitionVirtualSettingId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -510,29 +597,34 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting = addCPDefinitionVirtualSetting();
+		CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+			addCPDefinitionVirtualSetting();
 
 		_persistence.clearCache();
 
-		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting = _persistence.findByPrimaryKey(newCPDefinitionVirtualSetting.getPrimaryKey());
+		CPDefinitionVirtualSetting existingCPDefinitionVirtualSetting =
+			_persistence.findByPrimaryKey(
+				newCPDefinitionVirtualSetting.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPDefinitionVirtualSetting.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDefinitionVirtualSetting,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionVirtualSetting.getGroupId()),
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionVirtualSetting, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionVirtualSetting.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCPDefinitionVirtualSetting, "getOriginalGroupId",
 				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionVirtualSetting.getClassNameId()),
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionVirtualSetting.getClassNameId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCPDefinitionVirtualSetting, "getOriginalClassNameId",
 				new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionVirtualSetting.getClassPK()),
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionVirtualSetting.getClassPK()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCPDefinitionVirtualSetting, "getOriginalClassPK",
 				new Class<?>[0]));
@@ -540,9 +632,11 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 	protected CPDefinitionVirtualSetting addCPDefinitionVirtualSetting()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = _persistence.create(pk);
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			_persistence.create(pk);
 
 		cpDefinitionVirtualSetting.setUuid(RandomTestUtil.randomString());
 
@@ -566,7 +660,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		cpDefinitionVirtualSetting.setUrl(RandomTestUtil.randomString());
 
-		cpDefinitionVirtualSetting.setActivationStatus(RandomTestUtil.nextInt());
+		cpDefinitionVirtualSetting.setActivationStatus(
+			RandomTestUtil.nextInt());
 
 		cpDefinitionVirtualSetting.setDuration(RandomTestUtil.nextLong());
 
@@ -574,27 +669,34 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		cpDefinitionVirtualSetting.setUseSample(RandomTestUtil.randomBoolean());
 
-		cpDefinitionVirtualSetting.setSampleFileEntryId(RandomTestUtil.nextLong());
+		cpDefinitionVirtualSetting.setSampleFileEntryId(
+			RandomTestUtil.nextLong());
 
 		cpDefinitionVirtualSetting.setSampleUrl(RandomTestUtil.randomString());
 
-		cpDefinitionVirtualSetting.setTermsOfUseRequired(RandomTestUtil.randomBoolean());
+		cpDefinitionVirtualSetting.setTermsOfUseRequired(
+			RandomTestUtil.randomBoolean());
 
-		cpDefinitionVirtualSetting.setTermsOfUseContent(RandomTestUtil.randomString());
+		cpDefinitionVirtualSetting.setTermsOfUseContent(
+			RandomTestUtil.randomString());
 
-		cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(RandomTestUtil.nextLong());
+		cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(
+			RandomTestUtil.nextLong());
 
 		cpDefinitionVirtualSetting.setOverride(RandomTestUtil.randomBoolean());
 
-		cpDefinitionVirtualSetting.setLastPublishDate(RandomTestUtil.nextDate());
+		cpDefinitionVirtualSetting.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_cpDefinitionVirtualSettings.add(_persistence.update(
-				cpDefinitionVirtualSetting));
+		_cpDefinitionVirtualSettings.add(
+			_persistence.update(cpDefinitionVirtualSetting));
 
 		return cpDefinitionVirtualSetting;
 	}
 
-	private List<CPDefinitionVirtualSetting> _cpDefinitionVirtualSettings = new ArrayList<CPDefinitionVirtualSetting>();
+	private List<CPDefinitionVirtualSetting> _cpDefinitionVirtualSettings =
+		new ArrayList<CPDefinitionVirtualSetting>();
 	private CPDefinitionVirtualSettingPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceOrderNoteServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceOrderNoteServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceOrderNoteSoap implements Serializable {
+
 	public static CommerceOrderNoteSoap toSoapModel(CommerceOrderNote model) {
 		CommerceOrderNoteSoap soapModel = new CommerceOrderNoteSoap();
 
@@ -51,7 +51,9 @@ public class CommerceOrderNoteSoap implements Serializable {
 
 	public static CommerceOrderNoteSoap[] toSoapModels(
 		CommerceOrderNote[] models) {
-		CommerceOrderNoteSoap[] soapModels = new CommerceOrderNoteSoap[models.length];
+
+		CommerceOrderNoteSoap[] soapModels =
+			new CommerceOrderNoteSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +64,12 @@ public class CommerceOrderNoteSoap implements Serializable {
 
 	public static CommerceOrderNoteSoap[][] toSoapModels(
 		CommerceOrderNote[][] models) {
+
 		CommerceOrderNoteSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceOrderNoteSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceOrderNoteSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceOrderNoteSoap[0][0];
@@ -80,7 +84,9 @@ public class CommerceOrderNoteSoap implements Serializable {
 
 	public static CommerceOrderNoteSoap[] toSoapModels(
 		List<CommerceOrderNote> models) {
-		List<CommerceOrderNoteSoap> soapModels = new ArrayList<CommerceOrderNoteSoap>(models.size());
+
+		List<CommerceOrderNoteSoap> soapModels =
+			new ArrayList<CommerceOrderNoteSoap>(models.size());
 
 		for (CommerceOrderNote model : models) {
 			soapModels.add(toSoapModel(model));
@@ -203,4 +209,5 @@ public class CommerceOrderNoteSoap implements Serializable {
 	private long _commerceOrderId;
 	private String _content;
 	private boolean _restricted;
+
 }

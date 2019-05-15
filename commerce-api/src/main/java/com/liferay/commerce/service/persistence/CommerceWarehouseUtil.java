@@ -17,20 +17,22 @@ package com.liferay.commerce.service.persistence;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceWarehouse;
-
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-
-import org.osgi.util.tracker.ServiceTracker;
+import java.io.Serializable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * The persistence utility for the commerce warehouse service. This utility wraps {@link com.liferay.commerce.service.persistence.impl.CommerceWarehousePersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the commerce warehouse service. This utility wraps <code>com.liferay.commerce.service.persistence.impl.CommerceWarehousePersistenceImpl</code> and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -38,11 +40,11 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehousePersistence
- * @see com.liferay.commerce.service.persistence.impl.CommerceWarehousePersistenceImpl
  * @generated
  */
 @ProviderType
 public class CommerceWarehouseUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -71,10 +73,20 @@ public class CommerceWarehouseUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#fetchByPrimaryKeys(Set)
+	 */
+	public static Map<Serializable, CommerceWarehouse> fetchByPrimaryKeys(
+		Set<Serializable> primaryKeys) {
+
+		return getPersistence().fetchByPrimaryKeys(primaryKeys);
+	}
+
+	/**
 	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
 	public static List<CommerceWarehouse> findWithDynamicQuery(
 		DynamicQuery dynamicQuery) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -83,6 +95,7 @@ public class CommerceWarehouseUtil {
 	 */
 	public static List<CommerceWarehouse> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -92,15 +105,17 @@ public class CommerceWarehouseUtil {
 	public static List<CommerceWarehouse> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findWithDynamicQuery(dynamicQuery, start, end,
-			orderByComparator);
+
+		return getPersistence().findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
 	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#update(com.liferay.portal.kernel.model.BaseModel)
 	 */
-	public static CommerceWarehouse update(CommerceWarehouse commerceWarehouse) {
+	public static CommerceWarehouse update(
+		CommerceWarehouse commerceWarehouse) {
+
 		return getPersistence().update(commerceWarehouse);
 	}
 
@@ -109,1657 +124,1736 @@ public class CommerceWarehouseUtil {
 	 */
 	public static CommerceWarehouse update(
 		CommerceWarehouse commerceWarehouse, ServiceContext serviceContext) {
+
 		return getPersistence().update(commerceWarehouse, serviceContext);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the matching commerce warehouses
-	*/
+	 * Returns all the commerce warehouses where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching commerce warehouses
+	 */
 	public static List<CommerceWarehouse> findByGroupId(long groupId) {
 		return getPersistence().findByGroupId(groupId);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByGroupId(long groupId,
-		int start, int end) {
+	 * Returns a range of all the commerce warehouses where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByGroupId(
+		long groupId, int start, int end) {
+
 		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByGroupId(long groupId,
-		int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator);
+
+		return getPersistence().findByGroupId(
+			groupId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByGroupId(long groupId,
-		int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator,
-			retrieveFromCache);
+
+		return getPersistence().findByGroupId(
+			groupId, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByGroupId_First(long groupId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
+
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByGroupId_First(long groupId,
-		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByGroupId_First(
+		long groupId, OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().fetchByGroupId_First(
+			groupId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
+
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByGroupId_Last(long groupId,
-		OrderByComparator<CommerceWarehouse> orderByComparator) {
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByGroupId_Last(
+		long groupId, OrderByComparator<CommerceWarehouse> orderByComparator) {
+
 		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByGroupId_PrevAndNext(
-		long commerceWarehouseId, long groupId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByGroupId_PrevAndNext(commerceWarehouseId, groupId,
-			orderByComparator);
+
+		return getPersistence().findByGroupId_PrevAndNext(
+			commerceWarehouseId, groupId, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	*/
+	 * Removes all the commerce warehouses where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 */
 	public static void removeByGroupId(long groupId) {
 		getPersistence().removeByGroupId(groupId);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the number of matching commerce warehouses
-	*/
+	 * Returns the number of commerce warehouses where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching commerce warehouses
+	 */
 	public static int countByGroupId(long groupId) {
 		return getPersistence().countByGroupId(groupId);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A(long groupId, boolean active) {
+	 * Returns all the commerce warehouses where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A(
+		long groupId, boolean active) {
+
 		return getPersistence().findByG_A(groupId, active);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A(long groupId,
-		boolean active, int start, int end) {
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A(
+		long groupId, boolean active, int start, int end) {
+
 		return getPersistence().findByG_A(groupId, active, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A(long groupId,
-		boolean active, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_A(groupId, active, start, end, orderByComparator);
+
+		return getPersistence().findByG_A(
+			groupId, active, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A(long groupId,
-		boolean active, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A(
+		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_A(groupId, active, start, end, orderByComparator,
-			retrieveFromCache);
+
+		return getPersistence().findByG_A(
+			groupId, active, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_First(long groupId,
-		boolean active, OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_First(
+			long groupId, boolean active,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_First(groupId, active, orderByComparator);
+
+		return getPersistence().findByG_A_First(
+			groupId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_First(long groupId,
-		boolean active, OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_First(groupId, active, orderByComparator);
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_First(
+		long groupId, boolean active,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().fetchByG_A_First(
+			groupId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_Last(long groupId,
-		boolean active, OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_Last(
+			long groupId, boolean active,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_Last(groupId, active, orderByComparator);
+
+		return getPersistence().findByG_A_Last(
+			groupId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_Last(long groupId,
-		boolean active, OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_Last(groupId, active, orderByComparator);
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_Last(
+		long groupId, boolean active,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().fetchByG_A_Last(
+			groupId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_A_PrevAndNext(
-		long commerceWarehouseId, long groupId, boolean active,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, boolean active,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_PrevAndNext(commerceWarehouseId, groupId, active,
-			orderByComparator);
+
+		return getPersistence().findByG_A_PrevAndNext(
+			commerceWarehouseId, groupId, active, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and active = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	*/
+	 * Removes all the commerce warehouses where groupId = &#63; and active = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 */
 	public static void removeByG_A(long groupId, boolean active) {
 		getPersistence().removeByG_A(groupId, active);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and active = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @return the number of matching commerce warehouses
-	*/
+	 * Returns the number of commerce warehouses where groupId = &#63; and active = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @return the number of matching commerce warehouses
+	 */
 	public static int countByG_A(long groupId, boolean active) {
 		return getPersistence().countByG_A(groupId, active);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C(long groupId,
-		long commerceCountryId) {
+	 * Returns all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C(
+		long groupId, long commerceCountryId) {
+
 		return getPersistence().findByG_C(groupId, commerceCountryId);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C(long groupId,
-		long commerceCountryId, int start, int end) {
-		return getPersistence().findByG_C(groupId, commerceCountryId, start, end);
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C(
+		long groupId, long commerceCountryId, int start, int end) {
+
+		return getPersistence().findByG_C(
+			groupId, commerceCountryId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C(long groupId,
-		long commerceCountryId, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C(
+		long groupId, long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_C(groupId, commerceCountryId, start, end,
-			orderByComparator);
+
+		return getPersistence().findByG_C(
+			groupId, commerceCountryId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C(long groupId,
-		long commerceCountryId, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C(
+		long groupId, long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_C(groupId, commerceCountryId, start, end,
-			orderByComparator, retrieveFromCache);
+
+		return getPersistence().findByG_C(
+			groupId, commerceCountryId, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_C_First(long groupId,
-		long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_C_First(
+			long groupId, long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_First(groupId, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().findByG_C_First(
+			groupId, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_C_First(long groupId,
-		long commerceCountryId,
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_C_First(
+		long groupId, long commerceCountryId,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_C_First(groupId, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().fetchByG_C_First(
+			groupId, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_C_Last(long groupId,
-		long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_C_Last(
+			long groupId, long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_Last(groupId, commerceCountryId, orderByComparator);
+
+		return getPersistence().findByG_C_Last(
+			groupId, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_C_Last(long groupId,
-		long commerceCountryId,
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_C_Last(
+		long groupId, long commerceCountryId,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_C_Last(groupId, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().fetchByG_C_Last(
+			groupId, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_C_PrevAndNext(
-		long commerceWarehouseId, long groupId, long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_PrevAndNext(commerceWarehouseId, groupId,
-			commerceCountryId, orderByComparator);
+
+		return getPersistence().findByG_C_PrevAndNext(
+			commerceWarehouseId, groupId, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	*/
+	 * Removes all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 */
 	public static void removeByG_C(long groupId, long commerceCountryId) {
 		getPersistence().removeByG_C(groupId, commerceCountryId);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @return the number of matching commerce warehouses
-	*/
+	 * Returns the number of commerce warehouses where groupId = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @return the number of matching commerce warehouses
+	 */
 	public static int countByG_C(long groupId, long commerceCountryId) {
 		return getPersistence().countByG_C(groupId, commerceCountryId);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_P(long groupId,
-		boolean primary) {
+	 * Returns all the commerce warehouses where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_P(
+		long groupId, boolean primary) {
+
 		return getPersistence().findByG_P(groupId, primary);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_P(long groupId,
-		boolean primary, int start, int end) {
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_P(
+		long groupId, boolean primary, int start, int end) {
+
 		return getPersistence().findByG_P(groupId, primary, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_P(long groupId,
-		boolean primary, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_P(
+		long groupId, boolean primary, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_P(groupId, primary, start, end, orderByComparator);
+
+		return getPersistence().findByG_P(
+			groupId, primary, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_P(long groupId,
-		boolean primary, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_P(
+		long groupId, boolean primary, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_P(groupId, primary, start, end, orderByComparator,
-			retrieveFromCache);
+
+		return getPersistence().findByG_P(
+			groupId, primary, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_P_First(long groupId,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_P_First(
+			long groupId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_P_First(groupId, primary, orderByComparator);
+
+		return getPersistence().findByG_P_First(
+			groupId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_P_First(long groupId,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_P_First(groupId, primary, orderByComparator);
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_P_First(
+		long groupId, boolean primary,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().fetchByG_P_First(
+			groupId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_P_Last(long groupId,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_P_Last(
+			long groupId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_P_Last(groupId, primary, orderByComparator);
+
+		return getPersistence().findByG_P_Last(
+			groupId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_P_Last(long groupId,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_P_Last(groupId, primary, orderByComparator);
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_P_Last(
+		long groupId, boolean primary,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().fetchByG_P_Last(
+			groupId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_P_PrevAndNext(
-		long commerceWarehouseId, long groupId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_P_PrevAndNext(commerceWarehouseId, groupId,
-			primary, orderByComparator);
+
+		return getPersistence().findByG_P_PrevAndNext(
+			commerceWarehouseId, groupId, primary, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and primary = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	*/
+	 * Removes all the commerce warehouses where groupId = &#63; and primary = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 */
 	public static void removeByG_P(long groupId, boolean primary) {
 		getPersistence().removeByG_P(groupId, primary);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param primary the primary
-	* @return the number of matching commerce warehouses
-	*/
+	 * Returns the number of commerce warehouses where groupId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param primary the primary
+	 * @return the number of matching commerce warehouses
+	 */
 	public static int countByG_P(long groupId, boolean primary) {
 		return getPersistence().countByG_P(groupId, primary);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C(long groupId,
-		boolean active, long commerceCountryId) {
+	 * Returns all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C(
+		long groupId, boolean active, long commerceCountryId) {
+
 		return getPersistence().findByG_A_C(groupId, active, commerceCountryId);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C(long groupId,
-		boolean active, long commerceCountryId, int start, int end) {
-		return getPersistence()
-				   .findByG_A_C(groupId, active, commerceCountryId, start, end);
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C(
+		long groupId, boolean active, long commerceCountryId, int start,
+		int end) {
+
+		return getPersistence().findByG_A_C(
+			groupId, active, commerceCountryId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C(long groupId,
-		boolean active, long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_A_C(groupId, active, commerceCountryId, start, end,
-			orderByComparator);
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C(
+		long groupId, boolean active, long commerceCountryId, int start,
+		int end, OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().findByG_A_C(
+			groupId, active, commerceCountryId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C(long groupId,
-		boolean active, long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C(
+		long groupId, boolean active, long commerceCountryId, int start,
+		int end, OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_A_C(groupId, active, commerceCountryId, start, end,
-			orderByComparator, retrieveFromCache);
+
+		return getPersistence().findByG_A_C(
+			groupId, active, commerceCountryId, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_C_First(long groupId,
-		boolean active, long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_C_First(
+			long groupId, boolean active, long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_First(groupId, active, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().findByG_A_C_First(
+			groupId, active, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_C_First(long groupId,
-		boolean active, long commerceCountryId,
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_C_First(
+		long groupId, boolean active, long commerceCountryId,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_C_First(groupId, active, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().fetchByG_A_C_First(
+			groupId, active, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_C_Last(long groupId,
-		boolean active, long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_C_Last(
+			long groupId, boolean active, long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_Last(groupId, active, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().findByG_A_C_Last(
+			groupId, active, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_C_Last(long groupId,
-		boolean active, long commerceCountryId,
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_C_Last(
+		long groupId, boolean active, long commerceCountryId,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_C_Last(groupId, active, commerceCountryId,
-			orderByComparator);
+
+		return getPersistence().fetchByG_A_C_Last(
+			groupId, active, commerceCountryId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_A_C_PrevAndNext(
-		long commerceWarehouseId, long groupId, boolean active,
-		long commerceCountryId,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, boolean active,
+			long commerceCountryId,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_PrevAndNext(commerceWarehouseId, groupId,
-			active, commerceCountryId, orderByComparator);
+
+		return getPersistence().findByG_A_C_PrevAndNext(
+			commerceWarehouseId, groupId, active, commerceCountryId,
+			orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	*/
-	public static void removeByG_A_C(long groupId, boolean active,
-		long commerceCountryId) {
+	 * Removes all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 */
+	public static void removeByG_A_C(
+		long groupId, boolean active, long commerceCountryId) {
+
 		getPersistence().removeByG_A_C(groupId, active, commerceCountryId);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @return the number of matching commerce warehouses
-	*/
-	public static int countByG_A_C(long groupId, boolean active,
-		long commerceCountryId) {
-		return getPersistence().countByG_A_C(groupId, active, commerceCountryId);
+	 * Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @return the number of matching commerce warehouses
+	 */
+	public static int countByG_A_C(
+		long groupId, boolean active, long commerceCountryId) {
+
+		return getPersistence().countByG_A_C(
+			groupId, active, commerceCountryId);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_P(long groupId,
-		boolean active, boolean primary) {
+	 * Returns all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_P(
+		long groupId, boolean active, boolean primary) {
+
 		return getPersistence().findByG_A_P(groupId, active, primary);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_P(long groupId,
-		boolean active, boolean primary, int start, int end) {
-		return getPersistence().findByG_A_P(groupId, active, primary, start, end);
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_P(
+		long groupId, boolean active, boolean primary, int start, int end) {
+
+		return getPersistence().findByG_A_P(
+			groupId, active, primary, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_P(long groupId,
-		boolean active, boolean primary, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_P(
+		long groupId, boolean active, boolean primary, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_A_P(groupId, active, primary, start, end,
-			orderByComparator);
+
+		return getPersistence().findByG_A_P(
+			groupId, active, primary, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_P(long groupId,
-		boolean active, boolean primary, int start, int end,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_P(
+		long groupId, boolean active, boolean primary, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_A_P(groupId, active, primary, start, end,
-			orderByComparator, retrieveFromCache);
+
+		return getPersistence().findByG_A_P(
+			groupId, active, primary, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_P_First(long groupId,
-		boolean active, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_P_First(
+			long groupId, boolean active, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_P_First(groupId, active, primary,
-			orderByComparator);
+
+		return getPersistence().findByG_A_P_First(
+			groupId, active, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_P_First(long groupId,
-		boolean active, boolean primary,
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_P_First(
+		long groupId, boolean active, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_P_First(groupId, active, primary,
-			orderByComparator);
+
+		return getPersistence().fetchByG_A_P_First(
+			groupId, active, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_P_Last(long groupId,
-		boolean active, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_P_Last(
+			long groupId, boolean active, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_P_Last(groupId, active, primary, orderByComparator);
+
+		return getPersistence().findByG_A_P_Last(
+			groupId, active, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_P_Last(long groupId,
-		boolean active, boolean primary,
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_P_Last(
+		long groupId, boolean active, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_P_Last(groupId, active, primary,
-			orderByComparator);
+
+		return getPersistence().fetchByG_A_P_Last(
+			groupId, active, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_A_P_PrevAndNext(
-		long commerceWarehouseId, long groupId, boolean active,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, boolean active,
+			boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_P_PrevAndNext(commerceWarehouseId, groupId,
-			active, primary, orderByComparator);
+
+		return getPersistence().findByG_A_P_PrevAndNext(
+			commerceWarehouseId, groupId, active, primary, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	*/
-	public static void removeByG_A_P(long groupId, boolean active,
-		boolean primary) {
+	 * Removes all the commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 */
+	public static void removeByG_A_P(
+		long groupId, boolean active, boolean primary) {
+
 		getPersistence().removeByG_A_P(groupId, active, primary);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param primary the primary
-	* @return the number of matching commerce warehouses
-	*/
-	public static int countByG_A_P(long groupId, boolean active, boolean primary) {
+	 * Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param primary the primary
+	 * @return the number of matching commerce warehouses
+	 */
+	public static int countByG_A_P(
+		long groupId, boolean active, boolean primary) {
+
 		return getPersistence().countByG_A_P(groupId, active, primary);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C_P(long groupId,
-		long commerceCountryId, boolean primary) {
-		return getPersistence().findByG_C_P(groupId, commerceCountryId, primary);
+	 * Returns all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C_P(
+		long groupId, long commerceCountryId, boolean primary) {
+
+		return getPersistence().findByG_C_P(
+			groupId, commerceCountryId, primary);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C_P(long groupId,
-		long commerceCountryId, boolean primary, int start, int end) {
-		return getPersistence()
-				   .findByG_C_P(groupId, commerceCountryId, primary, start, end);
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C_P(
+		long groupId, long commerceCountryId, boolean primary, int start,
+		int end) {
+
+		return getPersistence().findByG_C_P(
+			groupId, commerceCountryId, primary, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C_P(long groupId,
-		long commerceCountryId, boolean primary, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_C_P(groupId, commerceCountryId, primary, start,
-			end, orderByComparator);
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C_P(
+		long groupId, long commerceCountryId, boolean primary, int start,
+		int end, OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().findByG_C_P(
+			groupId, commerceCountryId, primary, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_C_P(long groupId,
-		long commerceCountryId, boolean primary, int start, int end,
-		OrderByComparator<CommerceWarehouse> orderByComparator,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_C_P(
+		long groupId, long commerceCountryId, boolean primary, int start,
+		int end, OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_C_P(groupId, commerceCountryId, primary, start,
-			end, orderByComparator, retrieveFromCache);
+
+		return getPersistence().findByG_C_P(
+			groupId, commerceCountryId, primary, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_C_P_First(long groupId,
-		long commerceCountryId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_C_P_First(
+			long groupId, long commerceCountryId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_P_First(groupId, commerceCountryId, primary,
-			orderByComparator);
+
+		return getPersistence().findByG_C_P_First(
+			groupId, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_C_P_First(long groupId,
-		long commerceCountryId, boolean primary,
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_C_P_First(
+		long groupId, long commerceCountryId, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_C_P_First(groupId, commerceCountryId, primary,
-			orderByComparator);
+
+		return getPersistence().fetchByG_C_P_First(
+			groupId, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_C_P_Last(long groupId,
-		long commerceCountryId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_C_P_Last(
+			long groupId, long commerceCountryId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_P_Last(groupId, commerceCountryId, primary,
-			orderByComparator);
+
+		return getPersistence().findByG_C_P_Last(
+			groupId, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_C_P_Last(long groupId,
-		long commerceCountryId, boolean primary,
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_C_P_Last(
+		long groupId, long commerceCountryId, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_C_P_Last(groupId, commerceCountryId, primary,
-			orderByComparator);
+
+		return getPersistence().fetchByG_C_P_Last(
+			groupId, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_C_P_PrevAndNext(
-		long commerceWarehouseId, long groupId, long commerceCountryId,
-		boolean primary, OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, long commerceCountryId,
+			boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_C_P_PrevAndNext(commerceWarehouseId, groupId,
-			commerceCountryId, primary, orderByComparator);
+
+		return getPersistence().findByG_C_P_PrevAndNext(
+			commerceWarehouseId, groupId, commerceCountryId, primary,
+			orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	*/
-	public static void removeByG_C_P(long groupId, long commerceCountryId,
-		boolean primary) {
+	 * Removes all the commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 */
+	public static void removeByG_C_P(
+		long groupId, long commerceCountryId, boolean primary) {
+
 		getPersistence().removeByG_C_P(groupId, commerceCountryId, primary);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @return the number of matching commerce warehouses
-	*/
-	public static int countByG_C_P(long groupId, long commerceCountryId,
-		boolean primary) {
-		return getPersistence().countByG_C_P(groupId, commerceCountryId, primary);
+	 * Returns the number of commerce warehouses where groupId = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @return the number of matching commerce warehouses
+	 */
+	public static int countByG_C_P(
+		long groupId, long commerceCountryId, boolean primary) {
+
+		return getPersistence().countByG_C_P(
+			groupId, commerceCountryId, primary);
 	}
 
 	/**
-	* Returns all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @return the matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C_P(long groupId,
-		boolean active, long commerceCountryId, boolean primary) {
-		return getPersistence()
-				   .findByG_A_C_P(groupId, active, commerceCountryId, primary);
+	 * Returns all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @return the matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary) {
+
+		return getPersistence().findByG_A_C_P(
+			groupId, active, commerceCountryId, primary);
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C_P(long groupId,
-		boolean active, long commerceCountryId, boolean primary, int start,
-		int end) {
-		return getPersistence()
-				   .findByG_A_C_P(groupId, active, commerceCountryId, primary,
-			start, end);
+	 * Returns a range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
+		int start, int end) {
+
+		return getPersistence().findByG_A_C_P(
+			groupId, active, commerceCountryId, primary, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C_P(long groupId,
-		boolean active, long commerceCountryId, boolean primary, int start,
-		int end, OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findByG_A_C_P(groupId, active, commerceCountryId, primary,
-			start, end, orderByComparator);
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
+		int start, int end,
+		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
+		return getPersistence().findByG_A_C_P(
+			groupId, active, commerceCountryId, primary, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findByG_A_C_P(long groupId,
-		boolean active, long commerceCountryId, boolean primary, int start,
-		int end, OrderByComparator<CommerceWarehouse> orderByComparator,
+	 * Returns an ordered range of all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
+		int start, int end,
+		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByG_A_C_P(groupId, active, commerceCountryId, primary,
-			start, end, orderByComparator, retrieveFromCache);
+
+		return getPersistence().findByG_A_C_P(
+			groupId, active, commerceCountryId, primary, start, end,
+			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_C_P_First(long groupId,
-		boolean active, long commerceCountryId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_C_P_First(
+			long groupId, boolean active, long commerceCountryId,
+			boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_P_First(groupId, active, commerceCountryId,
-			primary, orderByComparator);
+
+		return getPersistence().findByG_A_C_P_First(
+			groupId, active, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_C_P_First(long groupId,
-		boolean active, long commerceCountryId, boolean primary,
+	 * Returns the first commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_C_P_First(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_C_P_First(groupId, active, commerceCountryId,
-			primary, orderByComparator);
+
+		return getPersistence().fetchByG_A_C_P_First(
+			groupId, active, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse
-	* @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse findByG_A_C_P_Last(long groupId,
-		boolean active, long commerceCountryId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse
+	 * @throws NoSuchWarehouseException if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse findByG_A_C_P_Last(
+			long groupId, boolean active, long commerceCountryId,
+			boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_P_Last(groupId, active, commerceCountryId,
-			primary, orderByComparator);
+
+		return getPersistence().findByG_A_C_P_Last(
+			groupId, active, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
-	*/
-	public static CommerceWarehouse fetchByG_A_C_P_Last(long groupId,
-		boolean active, long commerceCountryId, boolean primary,
+	 * Returns the last commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce warehouse, or <code>null</code> if a matching commerce warehouse could not be found
+	 */
+	public static CommerceWarehouse fetchByG_A_C_P_Last(
+		long groupId, boolean active, long commerceCountryId, boolean primary,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
-		return getPersistence()
-				   .fetchByG_A_C_P_Last(groupId, active, commerceCountryId,
-			primary, orderByComparator);
+
+		return getPersistence().fetchByG_A_C_P_Last(
+			groupId, active, commerceCountryId, primary, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param commerceWarehouseId the primary key of the current commerce warehouse
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouses before and after the current commerce warehouse in the ordered set where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param commerceWarehouseId the primary key of the current commerce warehouse
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse[] findByG_A_C_P_PrevAndNext(
-		long commerceWarehouseId, long groupId, boolean active,
-		long commerceCountryId, boolean primary,
-		OrderByComparator<CommerceWarehouse> orderByComparator)
+			long commerceWarehouseId, long groupId, boolean active,
+			long commerceCountryId, boolean primary,
+			OrderByComparator<CommerceWarehouse> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
-		return getPersistence()
-				   .findByG_A_C_P_PrevAndNext(commerceWarehouseId, groupId,
-			active, commerceCountryId, primary, orderByComparator);
+
+		return getPersistence().findByG_A_C_P_PrevAndNext(
+			commerceWarehouseId, groupId, active, commerceCountryId, primary,
+			orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	*/
-	public static void removeByG_A_C_P(long groupId, boolean active,
-		long commerceCountryId, boolean primary) {
-		getPersistence()
-			.removeByG_A_C_P(groupId, active, commerceCountryId, primary);
+	 * Removes all the commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 */
+	public static void removeByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary) {
+
+		getPersistence().removeByG_A_C_P(
+			groupId, active, commerceCountryId, primary);
 	}
 
 	/**
-	* Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
-	*
-	* @param groupId the group ID
-	* @param active the active
-	* @param commerceCountryId the commerce country ID
-	* @param primary the primary
-	* @return the number of matching commerce warehouses
-	*/
-	public static int countByG_A_C_P(long groupId, boolean active,
-		long commerceCountryId, boolean primary) {
-		return getPersistence()
-				   .countByG_A_C_P(groupId, active, commerceCountryId, primary);
+	 * Returns the number of commerce warehouses where groupId = &#63; and active = &#63; and commerceCountryId = &#63; and primary = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param commerceCountryId the commerce country ID
+	 * @param primary the primary
+	 * @return the number of matching commerce warehouses
+	 */
+	public static int countByG_A_C_P(
+		long groupId, boolean active, long commerceCountryId, boolean primary) {
+
+		return getPersistence().countByG_A_C_P(
+			groupId, active, commerceCountryId, primary);
 	}
 
 	/**
-	* Caches the commerce warehouse in the entity cache if it is enabled.
-	*
-	* @param commerceWarehouse the commerce warehouse
-	*/
+	 * Caches the commerce warehouse in the entity cache if it is enabled.
+	 *
+	 * @param commerceWarehouse the commerce warehouse
+	 */
 	public static void cacheResult(CommerceWarehouse commerceWarehouse) {
 		getPersistence().cacheResult(commerceWarehouse);
 	}
 
 	/**
-	* Caches the commerce warehouses in the entity cache if it is enabled.
-	*
-	* @param commerceWarehouses the commerce warehouses
-	*/
+	 * Caches the commerce warehouses in the entity cache if it is enabled.
+	 *
+	 * @param commerceWarehouses the commerce warehouses
+	 */
 	public static void cacheResult(List<CommerceWarehouse> commerceWarehouses) {
 		getPersistence().cacheResult(commerceWarehouses);
 	}
 
 	/**
-	* Creates a new commerce warehouse with the primary key. Does not add the commerce warehouse to the database.
-	*
-	* @param commerceWarehouseId the primary key for the new commerce warehouse
-	* @return the new commerce warehouse
-	*/
+	 * Creates a new commerce warehouse with the primary key. Does not add the commerce warehouse to the database.
+	 *
+	 * @param commerceWarehouseId the primary key for the new commerce warehouse
+	 * @return the new commerce warehouse
+	 */
 	public static CommerceWarehouse create(long commerceWarehouseId) {
 		return getPersistence().create(commerceWarehouseId);
 	}
 
 	/**
-	* Removes the commerce warehouse with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceWarehouseId the primary key of the commerce warehouse
-	* @return the commerce warehouse that was removed
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Removes the commerce warehouse with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceWarehouseId the primary key of the commerce warehouse
+	 * @return the commerce warehouse that was removed
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse remove(long commerceWarehouseId)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
+
 		return getPersistence().remove(commerceWarehouseId);
 	}
 
 	public static CommerceWarehouse updateImpl(
 		CommerceWarehouse commerceWarehouse) {
+
 		return getPersistence().updateImpl(commerceWarehouse);
 	}
 
 	/**
-	* Returns the commerce warehouse with the primary key or throws a {@link NoSuchWarehouseException} if it could not be found.
-	*
-	* @param commerceWarehouseId the primary key of the commerce warehouse
-	* @return the commerce warehouse
-	* @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
-	*/
+	 * Returns the commerce warehouse with the primary key or throws a <code>NoSuchWarehouseException</code> if it could not be found.
+	 *
+	 * @param commerceWarehouseId the primary key of the commerce warehouse
+	 * @return the commerce warehouse
+	 * @throws NoSuchWarehouseException if a commerce warehouse with the primary key could not be found
+	 */
 	public static CommerceWarehouse findByPrimaryKey(long commerceWarehouseId)
 		throws com.liferay.commerce.exception.NoSuchWarehouseException {
+
 		return getPersistence().findByPrimaryKey(commerceWarehouseId);
 	}
 
 	/**
-	* Returns the commerce warehouse with the primary key or returns <code>null</code> if it could not be found.
-	*
-	* @param commerceWarehouseId the primary key of the commerce warehouse
-	* @return the commerce warehouse, or <code>null</code> if a commerce warehouse with the primary key could not be found
-	*/
-	public static CommerceWarehouse fetchByPrimaryKey(long commerceWarehouseId) {
+	 * Returns the commerce warehouse with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param commerceWarehouseId the primary key of the commerce warehouse
+	 * @return the commerce warehouse, or <code>null</code> if a commerce warehouse with the primary key could not be found
+	 */
+	public static CommerceWarehouse fetchByPrimaryKey(
+		long commerceWarehouseId) {
+
 		return getPersistence().fetchByPrimaryKey(commerceWarehouseId);
 	}
 
-	public static java.util.Map<java.io.Serializable, CommerceWarehouse> fetchByPrimaryKeys(
-		java.util.Set<java.io.Serializable> primaryKeys) {
-		return getPersistence().fetchByPrimaryKeys(primaryKeys);
-	}
-
 	/**
-	* Returns all the commerce warehouses.
-	*
-	* @return the commerce warehouses
-	*/
+	 * Returns all the commerce warehouses.
+	 *
+	 * @return the commerce warehouses
+	 */
 	public static List<CommerceWarehouse> findAll() {
 		return getPersistence().findAll();
 	}
 
 	/**
-	* Returns a range of all the commerce warehouses.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @return the range of commerce warehouses
-	*/
+	 * Returns a range of all the commerce warehouses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @return the range of commerce warehouses
+	 */
 	public static List<CommerceWarehouse> findAll(int start, int end) {
 		return getPersistence().findAll(start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findAll(int start, int end,
+	 * Returns an ordered range of all the commerce warehouses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {
+
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce warehouses.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce warehouses
-	* @param end the upper bound of the range of commerce warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of commerce warehouses
-	*/
-	public static List<CommerceWarehouse> findAll(int start, int end,
+	 * Returns an ordered range of all the commerce warehouses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce warehouses
+	 * @param end the upper bound of the range of commerce warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of commerce warehouses
+	 */
+	public static List<CommerceWarehouse> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findAll(start, end, orderByComparator, retrieveFromCache);
+
+		return getPersistence().findAll(
+			start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Removes all the commerce warehouses from the database.
-	*/
+	 * Removes all the commerce warehouses from the database.
+	 */
 	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
 	/**
-	* Returns the number of commerce warehouses.
-	*
-	* @return the number of commerce warehouses
-	*/
+	 * Returns the number of commerce warehouses.
+	 *
+	 * @return the number of commerce warehouses
+	 */
 	public static int countAll() {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<String> getBadColumnNames() {
+	public static Set<String> getBadColumnNames() {
 		return getPersistence().getBadColumnNames();
 	}
 
@@ -1767,17 +1861,26 @@ public class CommerceWarehouseUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceWarehousePersistence, CommerceWarehousePersistence> _serviceTracker;
+	private static ServiceTracker
+		<CommerceWarehousePersistence, CommerceWarehousePersistence>
+			_serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceWarehousePersistence.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceWarehousePersistence.class);
 
-		ServiceTracker<CommerceWarehousePersistence, CommerceWarehousePersistence> serviceTracker =
-			new ServiceTracker<CommerceWarehousePersistence, CommerceWarehousePersistence>(bundle.getBundleContext(),
-				CommerceWarehousePersistence.class, null);
+		ServiceTracker
+			<CommerceWarehousePersistence, CommerceWarehousePersistence>
+				serviceTracker =
+					new ServiceTracker
+						<CommerceWarehousePersistence,
+						 CommerceWarehousePersistence>(
+							 bundle.getBundleContext(),
+							 CommerceWarehousePersistence.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

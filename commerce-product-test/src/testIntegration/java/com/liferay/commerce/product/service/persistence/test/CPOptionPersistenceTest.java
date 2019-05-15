@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPOptionException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPOptionLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPOptionPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -108,7 +107,8 @@ public class CPOptionPersistenceTest {
 
 		_persistence.remove(newCPOption);
 
-		CPOption existingCPOption = _persistence.fetchByPrimaryKey(newCPOption.getPrimaryKey());
+		CPOption existingCPOption = _persistence.fetchByPrimaryKey(
+			newCPOption.getPrimaryKey());
 
 		Assert.assertNull(existingCPOption);
 	}
@@ -158,41 +158,45 @@ public class CPOptionPersistenceTest {
 
 		_cpOptions.add(_persistence.update(newCPOption));
 
-		CPOption existingCPOption = _persistence.findByPrimaryKey(newCPOption.getPrimaryKey());
+		CPOption existingCPOption = _persistence.findByPrimaryKey(
+			newCPOption.getPrimaryKey());
 
 		Assert.assertEquals(existingCPOption.getUuid(), newCPOption.getUuid());
-		Assert.assertEquals(existingCPOption.getExternalReferenceCode(),
+		Assert.assertEquals(
+			existingCPOption.getExternalReferenceCode(),
 			newCPOption.getExternalReferenceCode());
-		Assert.assertEquals(existingCPOption.getCPOptionId(),
-			newCPOption.getCPOptionId());
-		Assert.assertEquals(existingCPOption.getGroupId(),
-			newCPOption.getGroupId());
-		Assert.assertEquals(existingCPOption.getCompanyId(),
-			newCPOption.getCompanyId());
-		Assert.assertEquals(existingCPOption.getUserId(),
-			newCPOption.getUserId());
-		Assert.assertEquals(existingCPOption.getUserName(),
-			newCPOption.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPOption.getCreateDate()),
+		Assert.assertEquals(
+			existingCPOption.getCPOptionId(), newCPOption.getCPOptionId());
+		Assert.assertEquals(
+			existingCPOption.getGroupId(), newCPOption.getGroupId());
+		Assert.assertEquals(
+			existingCPOption.getCompanyId(), newCPOption.getCompanyId());
+		Assert.assertEquals(
+			existingCPOption.getUserId(), newCPOption.getUserId());
+		Assert.assertEquals(
+			existingCPOption.getUserName(), newCPOption.getUserName());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPOption.getCreateDate()),
 			Time.getShortTimestamp(newCPOption.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPOption.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPOption.getModifiedDate()),
 			Time.getShortTimestamp(newCPOption.getModifiedDate()));
 		Assert.assertEquals(existingCPOption.getName(), newCPOption.getName());
-		Assert.assertEquals(existingCPOption.getDescription(),
-			newCPOption.getDescription());
-		Assert.assertEquals(existingCPOption.getDDMFormFieldTypeName(),
+		Assert.assertEquals(
+			existingCPOption.getDescription(), newCPOption.getDescription());
+		Assert.assertEquals(
+			existingCPOption.getDDMFormFieldTypeName(),
 			newCPOption.getDDMFormFieldTypeName());
-		Assert.assertEquals(existingCPOption.isFacetable(),
-			newCPOption.isFacetable());
-		Assert.assertEquals(existingCPOption.isRequired(),
-			newCPOption.isRequired());
-		Assert.assertEquals(existingCPOption.isSkuContributor(),
+		Assert.assertEquals(
+			existingCPOption.isFacetable(), newCPOption.isFacetable());
+		Assert.assertEquals(
+			existingCPOption.isRequired(), newCPOption.isRequired());
+		Assert.assertEquals(
+			existingCPOption.isSkuContributor(),
 			newCPOption.isSkuContributor());
 		Assert.assertEquals(existingCPOption.getKey(), newCPOption.getKey());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPOption.getLastPublishDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPOption.getLastPublishDate()),
 			Time.getShortTimestamp(newCPOption.getLastPublishDate()));
 	}
 
@@ -252,7 +256,8 @@ public class CPOptionPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPOption newCPOption = addCPOption();
 
-		CPOption existingCPOption = _persistence.findByPrimaryKey(newCPOption.getPrimaryKey());
+		CPOption existingCPOption = _persistence.findByPrimaryKey(
+			newCPOption.getPrimaryKey());
 
 		Assert.assertEquals(existingCPOption, newCPOption);
 	}
@@ -266,24 +271,26 @@ public class CPOptionPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPOption> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPOption", "uuid", true,
-			"externalReferenceCode", true, "CPOptionId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "name", true, "description", true,
-			"DDMFormFieldTypeName", true, "facetable", true, "required", true,
-			"skuContributor", true, "key", true, "lastPublishDate", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPOption", "uuid", true, "externalReferenceCode", true,
+			"CPOptionId", true, "groupId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"name", true, "description", true, "DDMFormFieldTypeName", true,
+			"facetable", true, "required", true, "skuContributor", true, "key",
+			true, "lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPOption newCPOption = addCPOption();
 
-		CPOption existingCPOption = _persistence.fetchByPrimaryKey(newCPOption.getPrimaryKey());
+		CPOption existingCPOption = _persistence.fetchByPrimaryKey(
+			newCPOption.getPrimaryKey());
 
 		Assert.assertEquals(existingCPOption, newCPOption);
 	}
@@ -300,6 +307,7 @@ public class CPOptionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPOption newCPOption1 = addCPOption();
 		CPOption newCPOption2 = addCPOption();
 
@@ -308,18 +316,20 @@ public class CPOptionPersistenceTest {
 		primaryKeys.add(newCPOption1.getPrimaryKey());
 		primaryKeys.add(newCPOption2.getPrimaryKey());
 
-		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(2, cpOptions.size());
-		Assert.assertEquals(newCPOption1,
-			cpOptions.get(newCPOption1.getPrimaryKey()));
-		Assert.assertEquals(newCPOption2,
-			cpOptions.get(newCPOption2.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPOption1, cpOptions.get(newCPOption1.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPOption2, cpOptions.get(newCPOption2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -329,7 +339,8 @@ public class CPOptionPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cpOptions.isEmpty());
 	}
@@ -337,6 +348,7 @@ public class CPOptionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPOption newCPOption = addCPOption();
 
 		long pk = RandomTestUtil.nextLong();
@@ -346,52 +358,57 @@ public class CPOptionPersistenceTest {
 		primaryKeys.add(newCPOption.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cpOptions.size());
-		Assert.assertEquals(newCPOption,
-			cpOptions.get(newCPOption.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPOption, cpOptions.get(newCPOption.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cpOptions.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPOption newCPOption = addCPOption();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPOption.getPrimaryKey());
 
-		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPOption> cpOptions = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cpOptions.size());
-		Assert.assertEquals(newCPOption,
-			cpOptions.get(newCPOption.getPrimaryKey()));
+		Assert.assertEquals(
+			newCPOption, cpOptions.get(newCPOption.getPrimaryKey()));
 	}
 
 	@Test
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPOptionLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPOptionLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPOption>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPOption>() {
+
 				@Override
 				public void performAction(CPOption cpOption) {
 					Assert.assertNotNull(cpOption);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -400,15 +417,15 @@ public class CPOptionPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPOption newCPOption = addCPOption();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOption.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOption.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPOptionId",
-				newCPOption.getCPOptionId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPOptionId", newCPOption.getCPOptionId()));
 
 		List<CPOption> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -421,11 +438,12 @@ public class CPOptionPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOption.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOption.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPOptionId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPOptionId", RandomTestUtil.nextLong()));
 
 		List<CPOption> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -433,19 +451,20 @@ public class CPOptionPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPOption newCPOption = addCPOption();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOption.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOption.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CPOptionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPOptionId"));
 
 		Object newCPOptionId = newCPOption.getCPOptionId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPOptionId",
-				new Object[] { newCPOptionId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPOptionId", new Object[] {newCPOptionId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -458,13 +477,15 @@ public class CPOptionPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPOption.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPOption.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CPOptionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPOptionId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPOptionId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPOptionId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -477,29 +498,39 @@ public class CPOptionPersistenceTest {
 
 		_persistence.clearCache();
 
-		CPOption existingCPOption = _persistence.findByPrimaryKey(newCPOption.getPrimaryKey());
+		CPOption existingCPOption = _persistence.findByPrimaryKey(
+			newCPOption.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPOption.getUuid(),
-				ReflectionTestUtil.invoke(existingCPOption, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPOption.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPOption,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPOption.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPOption, "getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPOption.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPOption, "getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCPOption.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPOption,
-				"getOriginalGroupId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCPOption.getKey(),
-				ReflectionTestUtil.invoke(existingCPOption, "getOriginalKey",
-					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPOption.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPOption, "getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPOption.getKey(),
+				ReflectionTestUtil.invoke(
+					existingCPOption, "getOriginalKey", new Class<?>[0])));
 
-		Assert.assertEquals(Long.valueOf(existingCPOption.getCompanyId()),
-			ReflectionTestUtil.<Long>invoke(existingCPOption,
-				"getOriginalCompanyId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCPOption.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPOption, "getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPOption.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCPOption,
-					"getOriginalExternalReferenceCode", new Class<?>[0])));
+				ReflectionTestUtil.invoke(
+					existingCPOption, "getOriginalExternalReferenceCode",
+					new Class<?>[0])));
 	}
 
 	protected CPOption addCPOption() throws Exception {
@@ -547,4 +578,5 @@ public class CPOptionPersistenceTest {
 	private List<CPOption> _cpOptions = new ArrayList<CPOption>();
 	private CPOptionPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

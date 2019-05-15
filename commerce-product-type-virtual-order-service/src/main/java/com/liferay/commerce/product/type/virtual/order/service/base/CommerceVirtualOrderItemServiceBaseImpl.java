@@ -18,7 +18,6 @@ import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrde
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemService;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder;
 import com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -43,16 +42,16 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemServiceImpl
- * @see com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil
  * @generated
  */
 public abstract class CommerceVirtualOrderItemServiceBaseImpl
-	extends BaseServiceImpl implements CommerceVirtualOrderItemService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceVirtualOrderItemService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil} to access the commerce virtual order item remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceVirtualOrderItemService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil</code>.
 	 */
 
 	/**
@@ -60,7 +59,10 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the commerce virtual order item local service
 	 */
-	public com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService getCommerceVirtualOrderItemLocalService() {
+	public com.liferay.commerce.product.type.virtual.order.service.
+		CommerceVirtualOrderItemLocalService
+			getCommerceVirtualOrderItemLocalService() {
+
 		return commerceVirtualOrderItemLocalService;
 	}
 
@@ -70,8 +72,12 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param commerceVirtualOrderItemLocalService the commerce virtual order item local service
 	 */
 	public void setCommerceVirtualOrderItemLocalService(
-		com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService commerceVirtualOrderItemLocalService) {
-		this.commerceVirtualOrderItemLocalService = commerceVirtualOrderItemLocalService;
+		com.liferay.commerce.product.type.virtual.order.service.
+			CommerceVirtualOrderItemLocalService
+				commerceVirtualOrderItemLocalService) {
+
+		this.commerceVirtualOrderItemLocalService =
+			commerceVirtualOrderItemLocalService;
 	}
 
 	/**
@@ -79,7 +85,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the commerce virtual order item remote service
 	 */
-	public CommerceVirtualOrderItemService getCommerceVirtualOrderItemService() {
+	public CommerceVirtualOrderItemService
+		getCommerceVirtualOrderItemService() {
+
 		return commerceVirtualOrderItemService;
 	}
 
@@ -90,6 +98,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setCommerceVirtualOrderItemService(
 		CommerceVirtualOrderItemService commerceVirtualOrderItemService) {
+
 		this.commerceVirtualOrderItemService = commerceVirtualOrderItemService;
 	}
 
@@ -98,7 +107,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the commerce virtual order item persistence
 	 */
-	public CommerceVirtualOrderItemPersistence getCommerceVirtualOrderItemPersistence() {
+	public CommerceVirtualOrderItemPersistence
+		getCommerceVirtualOrderItemPersistence() {
+
 		return commerceVirtualOrderItemPersistence;
 	}
 
@@ -108,8 +119,11 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param commerceVirtualOrderItemPersistence the commerce virtual order item persistence
 	 */
 	public void setCommerceVirtualOrderItemPersistence(
-		CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence) {
-		this.commerceVirtualOrderItemPersistence = commerceVirtualOrderItemPersistence;
+		CommerceVirtualOrderItemPersistence
+			commerceVirtualOrderItemPersistence) {
+
+		this.commerceVirtualOrderItemPersistence =
+			commerceVirtualOrderItemPersistence;
 	}
 
 	/**
@@ -128,6 +142,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setCommerceVirtualOrderItemFinder(
 		CommerceVirtualOrderItemFinder commerceVirtualOrderItemFinder) {
+
 		this.commerceVirtualOrderItemFinder = commerceVirtualOrderItemFinder;
 	}
 
@@ -136,7 +151,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -146,7 +163,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -155,7 +174,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -165,7 +186,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -174,7 +197,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -185,6 +210,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -204,6 +230,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -212,7 +239,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -222,7 +251,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -231,7 +262,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -242,6 +275,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -261,6 +295,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -287,7 +322,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the dl app local service
 	 */
-	public com.liferay.document.library.kernel.service.DLAppLocalService getDLAppLocalService() {
+	public com.liferay.document.library.kernel.service.DLAppLocalService
+		getDLAppLocalService() {
+
 		return dlAppLocalService;
 	}
 
@@ -297,7 +334,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 * @param dlAppLocalService the dl app local service
 	 */
 	public void setDLAppLocalService(
-		com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService) {
+		com.liferay.document.library.kernel.service.DLAppLocalService
+			dlAppLocalService) {
+
 		this.dlAppLocalService = dlAppLocalService;
 	}
 
@@ -306,7 +345,9 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 *
 	 * @return the dl app remote service
 	 */
-	public com.liferay.document.library.kernel.service.DLAppService getDLAppService() {
+	public com.liferay.document.library.kernel.service.DLAppService
+		getDLAppService() {
+
 		return dlAppService;
 	}
 
@@ -317,6 +358,7 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	public void setDLAppService(
 		com.liferay.document.library.kernel.service.DLAppService dlAppService) {
+
 		this.dlAppService = dlAppService;
 	}
 
@@ -351,15 +393,16 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceVirtualOrderItemPersistence.getDataSource();
+			DataSource dataSource =
+				commerceVirtualOrderItemPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -368,32 +411,74 @@ public abstract class CommerceVirtualOrderItemServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService.class)
-	protected com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService commerceVirtualOrderItemLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService.class
+	)
+	protected com.liferay.commerce.product.type.virtual.order.service.
+		CommerceVirtualOrderItemLocalService
+			commerceVirtualOrderItemLocalService;
+
 	@BeanReference(type = CommerceVirtualOrderItemService.class)
 	protected CommerceVirtualOrderItemService commerceVirtualOrderItemService;
+
 	@BeanReference(type = CommerceVirtualOrderItemPersistence.class)
-	protected CommerceVirtualOrderItemPersistence commerceVirtualOrderItemPersistence;
+	protected CommerceVirtualOrderItemPersistence
+		commerceVirtualOrderItemPersistence;
+
 	@BeanReference(type = CommerceVirtualOrderItemFinder.class)
 	protected CommerceVirtualOrderItemFinder commerceVirtualOrderItemFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@ServiceReference(type = com.liferay.document.library.kernel.service.DLAppLocalService.class)
-	protected com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService;
-	@ServiceReference(type = com.liferay.document.library.kernel.service.DLAppService.class)
-	protected com.liferay.document.library.kernel.service.DLAppService dlAppService;
+
+	@ServiceReference(
+		type = com.liferay.document.library.kernel.service.DLAppLocalService.class
+	)
+	protected com.liferay.document.library.kernel.service.DLAppLocalService
+		dlAppLocalService;
+
+	@ServiceReference(
+		type = com.liferay.document.library.kernel.service.DLAppService.class
+	)
+	protected com.liferay.document.library.kernel.service.DLAppService
+		dlAppService;
+
 }

@@ -26,23 +26,27 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.user.segment.service.http.CommerceUserSegmentCriterionServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.user.segment.service.http.CommerceUserSegmentCriterionServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceUserSegmentCriterionSoap implements Serializable {
+
 	public static CommerceUserSegmentCriterionSoap toSoapModel(
 		CommerceUserSegmentCriterion model) {
-		CommerceUserSegmentCriterionSoap soapModel = new CommerceUserSegmentCriterionSoap();
 
-		soapModel.setCommerceUserSegmentCriterionId(model.getCommerceUserSegmentCriterionId());
+		CommerceUserSegmentCriterionSoap soapModel =
+			new CommerceUserSegmentCriterionSoap();
+
+		soapModel.setCommerceUserSegmentCriterionId(
+			model.getCommerceUserSegmentCriterionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceUserSegmentEntryId(model.getCommerceUserSegmentEntryId());
+		soapModel.setCommerceUserSegmentEntryId(
+			model.getCommerceUserSegmentEntryId());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setPriority(model.getPriority());
@@ -52,7 +56,9 @@ public class CommerceUserSegmentCriterionSoap implements Serializable {
 
 	public static CommerceUserSegmentCriterionSoap[] toSoapModels(
 		CommerceUserSegmentCriterion[] models) {
-		CommerceUserSegmentCriterionSoap[] soapModels = new CommerceUserSegmentCriterionSoap[models.length];
+
+		CommerceUserSegmentCriterionSoap[] soapModels =
+			new CommerceUserSegmentCriterionSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -63,10 +69,12 @@ public class CommerceUserSegmentCriterionSoap implements Serializable {
 
 	public static CommerceUserSegmentCriterionSoap[][] toSoapModels(
 		CommerceUserSegmentCriterion[][] models) {
+
 		CommerceUserSegmentCriterionSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceUserSegmentCriterionSoap[models.length][models[0].length];
+			soapModels = new CommerceUserSegmentCriterionSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceUserSegmentCriterionSoap[0][0];
@@ -81,13 +89,16 @@ public class CommerceUserSegmentCriterionSoap implements Serializable {
 
 	public static CommerceUserSegmentCriterionSoap[] toSoapModels(
 		List<CommerceUserSegmentCriterion> models) {
-		List<CommerceUserSegmentCriterionSoap> soapModels = new ArrayList<CommerceUserSegmentCriterionSoap>(models.size());
+
+		List<CommerceUserSegmentCriterionSoap> soapModels =
+			new ArrayList<CommerceUserSegmentCriterionSoap>(models.size());
 
 		for (CommerceUserSegmentCriterion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceUserSegmentCriterionSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceUserSegmentCriterionSoap[soapModels.size()]);
 	}
 
 	public CommerceUserSegmentCriterionSoap() {
@@ -107,6 +118,7 @@ public class CommerceUserSegmentCriterionSoap implements Serializable {
 
 	public void setCommerceUserSegmentCriterionId(
 		long commerceUserSegmentCriterionId) {
+
 		_commerceUserSegmentCriterionId = commerceUserSegmentCriterionId;
 	}
 
@@ -201,4 +213,5 @@ public class CommerceUserSegmentCriterionSoap implements Serializable {
 	private String _type;
 	private String _typeSettings;
 	private double _priority;
+
 }

@@ -25,36 +25,40 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Andrea Di Giorgi
  * @see CommerceWishListItemModel
- * @see com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl
- * @see com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl"
+)
 @ProviderType
-public interface CommerceWishListItem extends CommerceWishListItemModel,
-	PersistedModel {
+public interface CommerceWishListItem
+	extends CommerceWishListItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceWishListItem, Long> COMMERCE_WISH_LIST_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceWishListItem, Long>() {
-			@Override
-			public Long get(CommerceWishListItem commerceWishListItem) {
-				return commerceWishListItem.getCommerceWishListItemId();
-			}
+	public static final Accessor<CommerceWishListItem, Long>
+		COMMERCE_WISH_LIST_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceWishListItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceWishListItem commerceWishListItem) {
+					return commerceWishListItem.getCommerceWishListItemId();
+				}
 
-			@Override
-			public Class<CommerceWishListItem> getTypeClass() {
-				return CommerceWishListItem.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceWishListItem> getTypeClass() {
+					return CommerceWishListItem.class;
+				}
+
+			};
 
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -70,4 +74,5 @@ public interface CommerceWishListItem extends CommerceWishListItemModel,
 
 	public boolean isIgnoreSKUCombinations()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

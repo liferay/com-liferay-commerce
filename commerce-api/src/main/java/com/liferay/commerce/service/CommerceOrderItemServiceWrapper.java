@@ -26,154 +26,184 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService,
-	ServiceWrapper<CommerceOrderItemService> {
+public class CommerceOrderItemServiceWrapper
+	implements CommerceOrderItemService,
+			   ServiceWrapper<CommerceOrderItemService> {
+
 	public CommerceOrderItemServiceWrapper(
 		CommerceOrderItemService commerceOrderItemService) {
+
 		_commerceOrderItemService = commerceOrderItemService;
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem addCommerceOrderItem(
-		long commerceOrderId, long cpInstanceId, int quantity,
-		int shippedQuantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json,
+			com.liferay.commerce.context.CommerceContext commerceContext,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.addCommerceOrderItem(commerceOrderId,
-			cpInstanceId, quantity, shippedQuantity, json, commerceContext,
-			serviceContext);
+
+		return _commerceOrderItemService.addCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, shippedQuantity, json,
+			commerceContext, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceOrderItem(long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_commerceOrderItemService.deleteCommerceOrderItem(commerceOrderItemId);
 	}
 
 	@Override
-	public void deleteCommerceOrderItem(long commerceOrderItemId,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+	public void deleteCommerceOrderItem(
+			long commerceOrderItemId,
+			com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceOrderItemService.deleteCommerceOrderItem(commerceOrderItemId,
-			commerceContext);
+
+		_commerceOrderItemService.deleteCommerceOrderItem(
+			commerceOrderItemId, commerceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceOrderItem fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode)
+	public com.liferay.commerce.model.CommerceOrderItem
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.fetchByExternalReferenceCode(companyId,
-			externalReferenceCode);
+
+		return _commerceOrderItemService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItem(
-		long commerceOrderItemId)
+			long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.fetchCommerceOrderItem(commerceOrderItemId);
+
+		return _commerceOrderItemService.fetchCommerceOrderItem(
+			commerceOrderItemId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceOrderItem> getAvailableForShipmentCommerceOrderItems(
-		long commerceOrderId)
+	public java.util.List<com.liferay.commerce.model.CommerceOrderItem>
+			getAvailableForShipmentCommerceOrderItems(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getAvailableForShipmentCommerceOrderItems(commerceOrderId);
+
+		return _commerceOrderItemService.
+			getAvailableForShipmentCommerceOrderItems(commerceOrderId);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem getCommerceOrderItem(
-		long commerceOrderItemId)
+			long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceOrderItem(commerceOrderItemId);
+
+		return _commerceOrderItemService.getCommerceOrderItem(
+			commerceOrderItemId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceOrderItem> getCommerceOrderItems(
-		long commerceOrderId, int start, int end)
+	public java.util.List<com.liferay.commerce.model.CommerceOrderItem>
+			getCommerceOrderItems(long commerceOrderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceOrderItems(commerceOrderId,
-			start, end);
+
+		return _commerceOrderItemService.getCommerceOrderItems(
+			commerceOrderId, start, end);
 	}
 
 	@Override
 	public int getCommerceOrderItemsCount(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceOrderItemsCount(commerceOrderId);
+
+		return _commerceOrderItemService.getCommerceOrderItemsCount(
+			commerceOrderId);
 	}
 
 	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceOrderItemsQuantity(commerceOrderId);
+
+		return _commerceOrderItemService.getCommerceOrderItemsQuantity(
+			commerceOrderId);
 	}
 
 	@Override
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId)
+	public int getCommerceWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceWarehouseId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceWarehouseItemQuantity(commerceOrderItemId,
-			commerceWarehouseId);
+
+		return _commerceOrderItemService.getCommerceWarehouseItemQuantity(
+			commerceOrderItemId, commerceWarehouseId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceOrderItemService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrderItem> search(
-		long commerceOrderId, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.search(commerceOrderId, keywords,
-			start, end, sort);
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceOrderItem> search(
+				long commerceOrderId, String keywords, int start, int end,
+				com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemService.search(
+			commerceOrderId, keywords, start, end, sort);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrderItem> search(
-		long commerceOrderId, String sku, String name, boolean andOperator,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.search(commerceOrderId, sku, name,
-			andOperator, start, end, sort);
-	}
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceOrderItem> search(
+				long commerceOrderId, String sku, String name,
+				boolean andOperator, int start, int end,
+				com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-	@Override
-	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
-		long commerceOrderItemId, int quantity,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.updateCommerceOrderItem(commerceOrderItemId,
-			quantity, commerceContext, serviceContext);
+		return _commerceOrderItemService.search(
+			commerceOrderId, sku, name, andOperator, start, end, sort);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
-		long commerceOrderItemId, int quantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long commerceOrderItemId, int quantity,
+			com.liferay.commerce.context.CommerceContext commerceContext,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.updateCommerceOrderItem(commerceOrderItemId,
-			quantity, json, commerceContext, serviceContext);
+
+		return _commerceOrderItemService.updateCommerceOrderItem(
+			commerceOrderItemId, quantity, commerceContext, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity, String json,
+			com.liferay.commerce.context.CommerceContext commerceContext,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemService.updateCommerceOrderItem(
+			commerceOrderItemId, quantity, json, commerceContext,
+			serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
-		long commerceOrderId, long cpInstanceId, int quantity,
-		int shippedQuantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json,
+			com.liferay.commerce.context.CommerceContext commerceContext,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.upsertCommerceOrderItem(commerceOrderId,
-			cpInstanceId, quantity, shippedQuantity, json, commerceContext,
-			serviceContext);
+
+		return _commerceOrderItemService.upsertCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, shippedQuantity, json,
+			commerceContext, serviceContext);
 	}
 
 	@Override
@@ -184,8 +214,10 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	@Override
 	public void setWrappedService(
 		CommerceOrderItemService commerceOrderItemService) {
+
 		_commerceOrderItemService = commerceOrderItemService;
 	}
 
 	private CommerceOrderItemService _commerceOrderItemService;
+
 }

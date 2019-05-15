@@ -25,33 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPMeasurementUnitModel
- * @see com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl
- * @see com.liferay.commerce.product.model.impl.CPMeasurementUnitModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl"
+)
 @ProviderType
-public interface CPMeasurementUnit extends CPMeasurementUnitModel, PersistedModel {
+public interface CPMeasurementUnit
+	extends CPMeasurementUnitModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPMeasurementUnit, Long> CP_MEASUREMENT_UNIT_ID_ACCESSOR =
-		new Accessor<CPMeasurementUnit, Long>() {
-			@Override
-			public Long get(CPMeasurementUnit cpMeasurementUnit) {
-				return cpMeasurementUnit.getCPMeasurementUnitId();
-			}
+	public static final Accessor<CPMeasurementUnit, Long>
+		CP_MEASUREMENT_UNIT_ID_ACCESSOR =
+			new Accessor<CPMeasurementUnit, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPMeasurementUnit cpMeasurementUnit) {
+					return cpMeasurementUnit.getCPMeasurementUnitId();
+				}
 
-			@Override
-			public Class<CPMeasurementUnit> getTypeClass() {
-				return CPMeasurementUnit.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPMeasurementUnit> getTypeClass() {
+					return CPMeasurementUnit.class;
+				}
+
+			};
+
 }

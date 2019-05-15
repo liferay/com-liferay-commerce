@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.impl.CPRuleImpl;
 import com.liferay.commerce.product.model.impl.CPRuleModelImpl;
 import com.liferay.commerce.product.service.persistence.CPRulePersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -66,52 +65,32 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CPRulePersistence
- * @see com.liferay.commerce.product.service.persistence.CPRuleUtil
  * @generated
  */
 @ProviderType
-public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
-	implements CPRulePersistence {
+public class CPRulePersistenceImpl
+	extends BasePersistenceImpl<CPRule> implements CPRulePersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CPRuleUtil} to access the cp rule persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CPRuleUtil</code> to access the cp rule persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CPRuleImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CPRuleModelImpl.GROUPID_COLUMN_BITMASK |
-			CPRuleModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CPRuleImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the cp rules where groupId = &#63;.
@@ -121,14 +100,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public List<CPRule> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp rules where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -145,7 +125,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns an ordered range of all the cp rules where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -155,8 +135,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the ordered range of matching cp rules
 	 */
 	@Override
-	public List<CPRule> findByGroupId(long groupId, int start, int end,
+	public List<CPRule> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPRule> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -164,7 +146,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns an ordered range of all the cp rules where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -175,28 +157,32 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the ordered range of matching cp rules
 	 */
 	@Override
-	public List<CPRule> findByGroupId(long groupId, int start, int end,
-		OrderByComparator<CPRule> orderByComparator, boolean retrieveFromCache) {
+	public List<CPRule> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CPRule> orderByComparator,
+		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CPRule> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRule>)finderCache.getResult(finderPath, finderArgs,
-					this);
+			list = (List<CPRule>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPRule cpRule : list) {
@@ -213,8 +199,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -225,11 +211,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPRuleModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -247,16 +232,16 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CPRule>)QueryUtil.list(q, getDialect(), start,
-							end, false);
+					list = (List<CPRule>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRule>)QueryUtil.list(q, getDialect(), start,
-							end);
+					list = (List<CPRule>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -285,9 +270,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @throws NoSuchCPRuleException if a matching cp rule could not be found
 	 */
 	@Override
-	public CPRule findByGroupId_First(long groupId,
-		OrderByComparator<CPRule> orderByComparator)
+	public CPRule findByGroupId_First(
+			long groupId, OrderByComparator<CPRule> orderByComparator)
 		throws NoSuchCPRuleException {
+
 		CPRule cpRule = fetchByGroupId_First(groupId, orderByComparator);
 
 		if (cpRule != null) {
@@ -314,8 +300,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the first matching cp rule, or <code>null</code> if a matching cp rule could not be found
 	 */
 	@Override
-	public CPRule fetchByGroupId_First(long groupId,
-		OrderByComparator<CPRule> orderByComparator) {
+	public CPRule fetchByGroupId_First(
+		long groupId, OrderByComparator<CPRule> orderByComparator) {
+
 		List<CPRule> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -334,9 +321,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @throws NoSuchCPRuleException if a matching cp rule could not be found
 	 */
 	@Override
-	public CPRule findByGroupId_Last(long groupId,
-		OrderByComparator<CPRule> orderByComparator)
+	public CPRule findByGroupId_Last(
+			long groupId, OrderByComparator<CPRule> orderByComparator)
 		throws NoSuchCPRuleException {
+
 		CPRule cpRule = fetchByGroupId_Last(groupId, orderByComparator);
 
 		if (cpRule != null) {
@@ -363,16 +351,17 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the last matching cp rule, or <code>null</code> if a matching cp rule could not be found
 	 */
 	@Override
-	public CPRule fetchByGroupId_Last(long groupId,
-		OrderByComparator<CPRule> orderByComparator) {
+	public CPRule fetchByGroupId_Last(
+		long groupId, OrderByComparator<CPRule> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPRule> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
+		List<CPRule> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -391,9 +380,11 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @throws NoSuchCPRuleException if a cp rule with the primary key could not be found
 	 */
 	@Override
-	public CPRule[] findByGroupId_PrevAndNext(long CPRuleId, long groupId,
-		OrderByComparator<CPRule> orderByComparator)
+	public CPRule[] findByGroupId_PrevAndNext(
+			long CPRuleId, long groupId,
+			OrderByComparator<CPRule> orderByComparator)
 		throws NoSuchCPRuleException {
+
 		CPRule cpRule = findByPrimaryKey(CPRuleId);
 
 		Session session = null;
@@ -403,13 +394,13 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 			CPRule[] array = new CPRuleImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, cpRule, groupId,
-					orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, cpRule, groupId, orderByComparator, true);
 
 			array[1] = cpRule;
 
-			array[2] = getByGroupId_PrevAndNext(session, cpRule, groupId,
-					orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, cpRule, groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -421,14 +412,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		}
 	}
 
-	protected CPRule getByGroupId_PrevAndNext(Session session, CPRule cpRule,
-		long groupId, OrderByComparator<CPRule> orderByComparator,
-		boolean previous) {
+	protected CPRule getByGroupId_PrevAndNext(
+		Session session, CPRule cpRule, long groupId,
+		OrderByComparator<CPRule> orderByComparator, boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -440,7 +432,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -510,10 +503,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRule);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(cpRule)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -535,15 +528,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public List<CPRule> filterFindByGroupId(long groupId) {
-		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return filterFindByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp rules that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -560,7 +553,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns an ordered range of all the cp rules that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -570,8 +563,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the ordered range of matching cp rules that the user has permission to view
 	 */
 	@Override
-	public List<CPRule> filterFindByGroupId(long groupId, int start, int end,
+	public List<CPRule> filterFindByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPRule> orderByComparator) {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
@@ -579,8 +574,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(3 +
-					(orderByComparator.getOrderByFields().length * 2));
+			query = new StringBundler(
+				3 + (orderByComparator.getOrderByFields().length * 2));
 		}
 		else {
 			query = new StringBundler(4);
@@ -601,12 +596,12 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator, true);
 			}
 			else {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
-					orderByComparator, true);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_TABLE, orderByComparator, true);
 			}
 		}
 		else {
@@ -618,9 +613,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CPRule.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
-				groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CPRule.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -660,12 +655,14 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @throws NoSuchCPRuleException if a cp rule with the primary key could not be found
 	 */
 	@Override
-	public CPRule[] filterFindByGroupId_PrevAndNext(long CPRuleId,
-		long groupId, OrderByComparator<CPRule> orderByComparator)
+	public CPRule[] filterFindByGroupId_PrevAndNext(
+			long CPRuleId, long groupId,
+			OrderByComparator<CPRule> orderByComparator)
 		throws NoSuchCPRuleException {
+
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByGroupId_PrevAndNext(CPRuleId, groupId,
-				orderByComparator);
+			return findByGroupId_PrevAndNext(
+				CPRuleId, groupId, orderByComparator);
 		}
 
 		CPRule cpRule = findByPrimaryKey(CPRuleId);
@@ -677,13 +674,13 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 			CPRule[] array = new CPRuleImpl[3];
 
-			array[0] = filterGetByGroupId_PrevAndNext(session, cpRule, groupId,
-					orderByComparator, true);
+			array[0] = filterGetByGroupId_PrevAndNext(
+				session, cpRule, groupId, orderByComparator, true);
 
 			array[1] = cpRule;
 
-			array[2] = filterGetByGroupId_PrevAndNext(session, cpRule, groupId,
-					orderByComparator, false);
+			array[2] = filterGetByGroupId_PrevAndNext(
+				session, cpRule, groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -695,14 +692,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		}
 	}
 
-	protected CPRule filterGetByGroupId_PrevAndNext(Session session,
-		CPRule cpRule, long groupId,
+	protected CPRule filterGetByGroupId_PrevAndNext(
+		Session session, CPRule cpRule, long groupId,
 		OrderByComparator<CPRule> orderByComparator, boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -723,7 +721,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -731,13 +730,17 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 			for (int i = 0; i < orderByConditionFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByConditionFields[i],
+							true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByConditionFields[i],
+							true));
 				}
-
-				query.append(orderByConditionFields[i]);
 
 				if ((i + 1) < orderByConditionFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -763,13 +766,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 			for (int i = 0; i < orderByFields.length; i++) {
 				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_ALIAS, orderByFields[i], true));
 				}
 				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
+					query.append(
+						getColumnName(
+							_ORDER_BY_ENTITY_TABLE, orderByFields[i], true));
 				}
-
-				query.append(orderByFields[i]);
 
 				if ((i + 1) < orderByFields.length) {
 					if (orderByComparator.isAscending() ^ previous) {
@@ -798,9 +803,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			}
 		}
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CPRule.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
-				groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CPRule.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -819,10 +824,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRule);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(cpRule)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -843,8 +848,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CPRule cpRule : findByGroupId(groupId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (CPRule cpRule :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(cpRule);
 		}
 	}
@@ -857,9 +864,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -918,9 +925,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CPRule.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
-				groupId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(
+			query.toString(), CPRule.class.getName(),
+			_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
 
 		Session session = null;
 
@@ -929,8 +936,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
+			q.addScalar(
+				COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -948,21 +955,22 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "cpRule.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"cpRule.groupId = ?";
 
 	public CPRulePersistenceImpl() {
 		setModelClass(CPRule.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("active", "active_");
+		dbColumnNames.put("type", "type_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("active", "active_");
-			dbColumnNames.put("type", "type_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -980,8 +988,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public void cacheResult(CPRule cpRule) {
-		entityCache.putResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleImpl.class, cpRule.getPrimaryKey(), cpRule);
+		entityCache.putResult(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+			cpRule.getPrimaryKey(), cpRule);
 
 		cpRule.resetOriginalValues();
 	}
@@ -994,8 +1003,10 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	@Override
 	public void cacheResult(List<CPRule> cpRules) {
 		for (CPRule cpRule : cpRules) {
-			if (entityCache.getResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-						CPRuleImpl.class, cpRule.getPrimaryKey()) == null) {
+			if (entityCache.getResult(
+					CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+					cpRule.getPrimaryKey()) == null) {
+
 				cacheResult(cpRule);
 			}
 			else {
@@ -1008,7 +1019,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Clears the cache for all cp rules.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1024,13 +1035,14 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Clears the cache for the cp rule.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CPRule cpRule) {
-		entityCache.removeResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleImpl.class, cpRule.getPrimaryKey());
+		entityCache.removeResult(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+			cpRule.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -1042,8 +1054,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (CPRule cpRule : cpRules) {
-			entityCache.removeResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-				CPRuleImpl.class, cpRule.getPrimaryKey());
+			entityCache.removeResult(
+				CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+				cpRule.getPrimaryKey());
 		}
 	}
 
@@ -1098,8 +1111,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchCPRuleException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchCPRuleException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(cpRule);
@@ -1123,8 +1136,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			session = openSession();
 
 			if (!session.contains(cpRule)) {
-				cpRule = (CPRule)session.get(CPRuleImpl.class,
-						cpRule.getPrimaryKeyObj());
+				cpRule = (CPRule)session.get(
+					CPRuleImpl.class, cpRule.getPrimaryKeyObj());
 			}
 
 			if (cpRule != null) {
@@ -1157,17 +1170,18 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in cpRule proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CPRule implementation " +
-				cpRule.getClass());
+					cpRule.getClass());
 		}
 
 		CPRuleModelImpl cpRuleModelImpl = (CPRuleModelImpl)cpRule;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1215,40 +1229,41 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		if (!CPRuleModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
-			Object[] args = new Object[] { cpRuleModelImpl.getGroupId() };
+		else if (isNew) {
+			Object[] args = new Object[] {cpRuleModelImpl.getGroupId()};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
 
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((cpRuleModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
 				Object[] args = new Object[] {
-						cpRuleModelImpl.getOriginalGroupId()
-					};
+					cpRuleModelImpl.getOriginalGroupId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
 
-				args = new Object[] { cpRuleModelImpl.getGroupId() };
+				args = new Object[] {cpRuleModelImpl.getGroupId()};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
 			}
 		}
 
-		entityCache.putResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleImpl.class, cpRule.getPrimaryKey(), cpRule, false);
+		entityCache.putResult(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+			cpRule.getPrimaryKey(), cpRule, false);
 
 		cpRule.resetOriginalValues();
 
@@ -1256,7 +1271,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	}
 
 	/**
-	 * Returns the cp rule with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the cp rule with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the cp rule
 	 * @return the cp rule
@@ -1265,6 +1280,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	@Override
 	public CPRule findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchCPRuleException {
+
 		CPRule cpRule = fetchByPrimaryKey(primaryKey);
 
 		if (cpRule == null) {
@@ -1272,15 +1288,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchCPRuleException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchCPRuleException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return cpRule;
 	}
 
 	/**
-	 * Returns the cp rule with the primary key or throws a {@link NoSuchCPRuleException} if it could not be found.
+	 * Returns the cp rule with the primary key or throws a <code>NoSuchCPRuleException</code> if it could not be found.
 	 *
 	 * @param CPRuleId the primary key of the cp rule
 	 * @return the cp rule
@@ -1299,8 +1315,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public CPRule fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-				CPRuleImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
@@ -1320,13 +1336,15 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 					cacheResult(cpRule);
 				}
 				else {
-					entityCache.putResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-						CPRuleImpl.class, primaryKey, nullModel);
+					entityCache.putResult(
+						CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+						primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-					CPRuleImpl.class, primaryKey);
+				entityCache.removeResult(
+					CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+					primaryKey);
 
 				throw processException(e);
 			}
@@ -1352,6 +1370,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	@Override
 	public Map<Serializable, CPRule> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
@@ -1375,8 +1394,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-					CPRuleImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+				primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1396,8 +1416,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_CPRULE_WHERE_PKS_IN);
 
@@ -1429,8 +1449,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CPRuleModelImpl.ENTITY_CACHE_ENABLED,
-					CPRuleImpl.class, primaryKey, nullModel);
+				entityCache.putResult(
+					CPRuleModelImpl.ENTITY_CACHE_ENABLED, CPRuleImpl.class,
+					primaryKey, nullModel);
 			}
 		}
 		catch (Exception e) {
@@ -1457,7 +1478,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns a range of all the cp rules.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rules
@@ -1473,7 +1494,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns an ordered range of all the cp rules.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rules
@@ -1482,8 +1503,9 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the ordered range of cp rules
 	 */
 	@Override
-	public List<CPRule> findAll(int start, int end,
-		OrderByComparator<CPRule> orderByComparator) {
+	public List<CPRule> findAll(
+		int start, int end, OrderByComparator<CPRule> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1491,7 +1513,7 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Returns an ordered range of all the cp rules.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rules
@@ -1501,28 +1523,31 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * @return the ordered range of cp rules
 	 */
 	@Override
-	public List<CPRule> findAll(int start, int end,
-		OrderByComparator<CPRule> orderByComparator, boolean retrieveFromCache) {
+	public List<CPRule> findAll(
+		int start, int end, OrderByComparator<CPRule> orderByComparator,
+		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPRule> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRule>)finderCache.getResult(finderPath, finderArgs,
-					this);
+			list = (List<CPRule>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1530,13 +1555,13 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_CPRULE);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1556,16 +1581,16 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CPRule>)QueryUtil.list(q, getDialect(), start,
-							end, false);
+					list = (List<CPRule>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRule>)QueryUtil.list(q, getDialect(), start,
-							end);
+					list = (List<CPRule>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1603,8 +1628,8 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1616,12 +1641,12 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1647,6 +1672,45 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 	 * Initializes the cp rule persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, CPRuleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CPRuleModelImpl.GROUPID_COLUMN_BITMASK |
+			CPRuleModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CPRuleModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1658,30 +1722,63 @@ public class CPRulePersistenceImpl extends BasePersistenceImpl<CPRule>
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_CPRULE = "SELECT cpRule FROM CPRule cpRule";
-	private static final String _SQL_SELECT_CPRULE_WHERE_PKS_IN = "SELECT cpRule FROM CPRule cpRule WHERE CPRuleId IN (";
-	private static final String _SQL_SELECT_CPRULE_WHERE = "SELECT cpRule FROM CPRule cpRule WHERE ";
-	private static final String _SQL_COUNT_CPRULE = "SELECT COUNT(cpRule) FROM CPRule cpRule";
-	private static final String _SQL_COUNT_CPRULE_WHERE = "SELECT COUNT(cpRule) FROM CPRule cpRule WHERE ";
-	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "cpRule.CPRuleId";
-	private static final String _FILTER_SQL_SELECT_CPRULE_WHERE = "SELECT DISTINCT {cpRule.*} FROM CPRule cpRule WHERE ";
-	private static final String _FILTER_SQL_SELECT_CPRULE_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {CPRule.*} FROM (SELECT DISTINCT cpRule.CPRuleId FROM CPRule cpRule WHERE ";
-	private static final String _FILTER_SQL_SELECT_CPRULE_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN CPRule ON TEMP_TABLE.CPRuleId = CPRule.CPRuleId";
-	private static final String _FILTER_SQL_COUNT_CPRULE_WHERE = "SELECT COUNT(DISTINCT cpRule.CPRuleId) AS COUNT_VALUE FROM CPRule cpRule WHERE ";
+
+	private static final String _SQL_SELECT_CPRULE =
+		"SELECT cpRule FROM CPRule cpRule";
+
+	private static final String _SQL_SELECT_CPRULE_WHERE_PKS_IN =
+		"SELECT cpRule FROM CPRule cpRule WHERE CPRuleId IN (";
+
+	private static final String _SQL_SELECT_CPRULE_WHERE =
+		"SELECT cpRule FROM CPRule cpRule WHERE ";
+
+	private static final String _SQL_COUNT_CPRULE =
+		"SELECT COUNT(cpRule) FROM CPRule cpRule";
+
+	private static final String _SQL_COUNT_CPRULE_WHERE =
+		"SELECT COUNT(cpRule) FROM CPRule cpRule WHERE ";
+
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN =
+		"cpRule.CPRuleId";
+
+	private static final String _FILTER_SQL_SELECT_CPRULE_WHERE =
+		"SELECT DISTINCT {cpRule.*} FROM CPRule cpRule WHERE ";
+
+	private static final String
+		_FILTER_SQL_SELECT_CPRULE_NO_INLINE_DISTINCT_WHERE_1 =
+			"SELECT {CPRule.*} FROM (SELECT DISTINCT cpRule.CPRuleId FROM CPRule cpRule WHERE ";
+
+	private static final String
+		_FILTER_SQL_SELECT_CPRULE_NO_INLINE_DISTINCT_WHERE_2 =
+			") TEMP_TABLE INNER JOIN CPRule ON TEMP_TABLE.CPRuleId = CPRule.CPRuleId";
+
+	private static final String _FILTER_SQL_COUNT_CPRULE_WHERE =
+		"SELECT COUNT(DISTINCT cpRule.CPRuleId) AS COUNT_VALUE FROM CPRule cpRule WHERE ";
+
 	private static final String _FILTER_ENTITY_ALIAS = "cpRule";
+
 	private static final String _FILTER_ENTITY_TABLE = "CPRule";
+
 	private static final String _ORDER_BY_ENTITY_ALIAS = "cpRule.";
+
 	private static final String _ORDER_BY_ENTITY_TABLE = "CPRule.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CPRule exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CPRule exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CPRulePersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"active", "type"
-			});
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CPRule exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CPRule exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPRulePersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"active", "type"});
+
 }

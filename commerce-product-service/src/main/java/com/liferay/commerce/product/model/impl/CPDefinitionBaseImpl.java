@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CPDefinitionBaseImpl extends CPDefinitionModelImpl
-	implements CPDefinition {
+public abstract class CPDefinitionBaseImpl
+	extends CPDefinitionModelImpl implements CPDefinition {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition model instance should use the {@link CPDefinition} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition model instance should use the <code>CPDefinition</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPDefinitionBaseImpl extends CPDefinitionModelImpl
 			CPDefinitionLocalServiceUtil.updateCPDefinition(this);
 		}
 	}
+
 }

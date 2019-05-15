@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPOptionServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPOptionServiceSoap
  * @generated
  */
 @ProviderType
 public class CPOptionSoap implements Serializable {
+
 	public static CPOptionSoap toSoapModel(CPOption model) {
 		CPOptionSoap soapModel = new CPOptionSoap();
 
@@ -83,7 +83,8 @@ public class CPOptionSoap implements Serializable {
 	}
 
 	public static CPOptionSoap[] toSoapModels(List<CPOption> models) {
-		List<CPOptionSoap> soapModels = new ArrayList<CPOptionSoap>(models.size());
+		List<CPOptionSoap> soapModels = new ArrayList<CPOptionSoap>(
+			models.size());
 
 		for (CPOption model : models) {
 			soapModels.add(toSoapModel(model));
@@ -268,4 +269,5 @@ public class CPOptionSoap implements Serializable {
 	private boolean _skuContributor;
 	private String _key;
 	private Date _lastPublishDate;
+
 }

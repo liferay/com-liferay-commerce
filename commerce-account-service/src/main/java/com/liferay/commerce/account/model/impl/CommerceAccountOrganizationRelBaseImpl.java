@@ -35,18 +35,22 @@ import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalS
 public abstract class CommerceAccountOrganizationRelBaseImpl
 	extends CommerceAccountOrganizationRelModelImpl
 	implements CommerceAccountOrganizationRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce account organization rel model instance should use the {@link CommerceAccountOrganizationRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce account organization rel model instance should use the <code>CommerceAccountOrganizationRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceAccountOrganizationRelLocalServiceUtil.addCommerceAccountOrganizationRel(this);
+			CommerceAccountOrganizationRelLocalServiceUtil.
+				addCommerceAccountOrganizationRel(this);
 		}
 		else {
-			CommerceAccountOrganizationRelLocalServiceUtil.updateCommerceAccountOrganizationRel(this);
+			CommerceAccountOrganizationRelLocalServiceUtil.
+				updateCommerceAccountOrganizationRel(this);
 		}
 	}
+
 }

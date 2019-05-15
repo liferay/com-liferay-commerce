@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,13 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionSpecificationOptionValue in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionSpecificationOptionValue
  * @generated
  */
 @ProviderType
 public class CPDefinitionSpecificationOptionValueCacheModel
-	implements CacheModel<CPDefinitionSpecificationOptionValue>, Externalizable {
+	implements CacheModel<CPDefinitionSpecificationOptionValue>,
+			   Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +49,14 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 			return false;
 		}
 
-		CPDefinitionSpecificationOptionValueCacheModel cpDefinitionSpecificationOptionValueCacheModel =
-			(CPDefinitionSpecificationOptionValueCacheModel)obj;
+		CPDefinitionSpecificationOptionValueCacheModel
+			cpDefinitionSpecificationOptionValueCacheModel =
+				(CPDefinitionSpecificationOptionValueCacheModel)obj;
 
-		if (CPDefinitionSpecificationOptionValueId == cpDefinitionSpecificationOptionValueCacheModel.CPDefinitionSpecificationOptionValueId) {
+		if (CPDefinitionSpecificationOptionValueId ==
+				cpDefinitionSpecificationOptionValueCacheModel.
+					CPDefinitionSpecificationOptionValueId) {
+
 			return true;
 		}
 
@@ -103,8 +107,9 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 
 	@Override
 	public CPDefinitionSpecificationOptionValue toEntityModel() {
-		CPDefinitionSpecificationOptionValueImpl cpDefinitionSpecificationOptionValueImpl =
-			new CPDefinitionSpecificationOptionValueImpl();
+		CPDefinitionSpecificationOptionValueImpl
+			cpDefinitionSpecificationOptionValueImpl =
+				new CPDefinitionSpecificationOptionValueImpl();
 
 		if (uuid == null) {
 			cpDefinitionSpecificationOptionValueImpl.setUuid("");
@@ -113,7 +118,9 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 			cpDefinitionSpecificationOptionValueImpl.setUuid(uuid);
 		}
 
-		cpDefinitionSpecificationOptionValueImpl.setCPDefinitionSpecificationOptionValueId(CPDefinitionSpecificationOptionValueId);
+		cpDefinitionSpecificationOptionValueImpl.
+			setCPDefinitionSpecificationOptionValueId(
+				CPDefinitionSpecificationOptionValueId);
 		cpDefinitionSpecificationOptionValueImpl.setGroupId(groupId);
 		cpDefinitionSpecificationOptionValueImpl.setCompanyId(companyId);
 		cpDefinitionSpecificationOptionValueImpl.setUserId(userId);
@@ -129,21 +136,24 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 			cpDefinitionSpecificationOptionValueImpl.setCreateDate(null);
 		}
 		else {
-			cpDefinitionSpecificationOptionValueImpl.setCreateDate(new Date(
-					createDate));
+			cpDefinitionSpecificationOptionValueImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			cpDefinitionSpecificationOptionValueImpl.setModifiedDate(null);
 		}
 		else {
-			cpDefinitionSpecificationOptionValueImpl.setModifiedDate(new Date(
-					modifiedDate));
+			cpDefinitionSpecificationOptionValueImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		cpDefinitionSpecificationOptionValueImpl.setCPDefinitionId(CPDefinitionId);
-		cpDefinitionSpecificationOptionValueImpl.setCPSpecificationOptionId(CPSpecificationOptionId);
-		cpDefinitionSpecificationOptionValueImpl.setCPOptionCategoryId(CPOptionCategoryId);
+		cpDefinitionSpecificationOptionValueImpl.setCPDefinitionId(
+			CPDefinitionId);
+		cpDefinitionSpecificationOptionValueImpl.setCPSpecificationOptionId(
+			CPSpecificationOptionId);
+		cpDefinitionSpecificationOptionValueImpl.setCPOptionCategoryId(
+			CPOptionCategoryId);
 
 		if (value == null) {
 			cpDefinitionSpecificationOptionValueImpl.setValue("");
@@ -158,8 +168,8 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 			cpDefinitionSpecificationOptionValueImpl.setLastPublishDate(null);
 		}
 		else {
-			cpDefinitionSpecificationOptionValueImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			cpDefinitionSpecificationOptionValueImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		cpDefinitionSpecificationOptionValueImpl.resetOriginalValues();
@@ -194,8 +204,7 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -252,4 +261,5 @@ public class CPDefinitionSpecificationOptionValueCacheModel
 	public String value;
 	public double priority;
 	public long lastPublishDate;
+
 }

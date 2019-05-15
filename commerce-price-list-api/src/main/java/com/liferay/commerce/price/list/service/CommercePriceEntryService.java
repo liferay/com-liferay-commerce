@@ -17,7 +17,6 @@ package com.liferay.commerce.price.list.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,38 +42,47 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceEntryServiceUtil
- * @see com.liferay.commerce.price.list.service.base.CommercePriceEntryServiceBaseImpl
- * @see com.liferay.commerce.price.list.service.impl.CommercePriceEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommercePriceEntry"}, service = CommercePriceEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommercePriceEntry"
+	},
+	service = CommercePriceEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommercePriceEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommercePriceEntryServiceUtil} to access the commerce price entry remote service. Add custom service methods to {@link com.liferay.commerce.price.list.service.impl.CommercePriceEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommercePriceEntryServiceUtil} to access the commerce price entry remote service. Add custom service methods to <code>com.liferay.commerce.price.list.service.impl.CommercePriceEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommercePriceEntry addCommercePriceEntry(long cpInstanceId,
-		long commercePriceListId, BigDecimal price, BigDecimal promoPrice,
-		ServiceContext serviceContext) throws PortalException;
+	public CommercePriceEntry addCommercePriceEntry(
+			long cpInstanceId, long commercePriceListId, BigDecimal price,
+			BigDecimal promoPrice, ServiceContext serviceContext)
+		throws PortalException;
 
-	public CommercePriceEntry addCommercePriceEntry(long cpInstanceId,
-		long commercePriceListId, String externalReferenceCode,
-		BigDecimal price, BigDecimal promoPrice, ServiceContext serviceContext)
+	public CommercePriceEntry addCommercePriceEntry(
+			long cpInstanceId, long commercePriceListId,
+			String externalReferenceCode, BigDecimal price,
+			BigDecimal promoPrice, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommercePriceEntry(long commercePriceEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceEntry fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CommercePriceEntry fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long commercePriceEntryId)
@@ -82,17 +90,19 @@ public interface CommercePriceEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getCommercePriceEntries(
-		long commercePriceListId, int start, int end) throws PortalException;
+			long commercePriceListId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getCommercePriceEntries(
-		long commercePriceListId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
+			long commercePriceListId, int start, int end,
+			OrderByComparator<CommercePriceEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getCommercePriceEntriesByGroupId(
-		long groupId, int start, int end) throws PortalException;
+			long groupId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommercePriceEntriesCount(long commercePriceListId)
@@ -104,12 +114,13 @@ public interface CommercePriceEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end) throws PortalException;
+			long cpInstanceId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
+			long cpInstanceId, int start, int end,
+			OrderByComparator<CommercePriceEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -117,29 +128,33 @@ public interface CommercePriceEntryService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommercePriceEntry> searchCommercePriceEntries(
-		long companyId, long groupId, long commercePriceListId,
-		String keywords, int start, int end, Sort sort)
+			long companyId, long groupId, long commercePriceListId,
+			String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	public CommercePriceEntry updateCommercePriceEntry(
-		long commercePriceEntryId, BigDecimal price, BigDecimal promoPrice,
-		ServiceContext serviceContext) throws PortalException;
+			long commercePriceEntryId, BigDecimal price, BigDecimal promoPrice,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommercePriceEntry updateExternalReferenceCode(
-		CommercePriceEntry commercePriceEntry, long groupId,
-		String externalReferenceCode) throws PortalException;
+			CommercePriceEntry commercePriceEntry, long groupId,
+			String externalReferenceCode)
+		throws PortalException;
 
 	public CommercePriceEntry upsertCommercePriceEntry(
-		long commercePriceEntryId, long cpInstanceId, long commercePriceListId,
-		String externalReferenceCode, BigDecimal price, BigDecimal promoPrice,
-		String skuExternalReferenceCode, ServiceContext serviceContext)
+			long commercePriceEntryId, long cpInstanceId,
+			long commercePriceListId, String externalReferenceCode,
+			BigDecimal price, BigDecimal promoPrice,
+			String skuExternalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
+
 }

@@ -26,99 +26,123 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CommerceWishListServiceWrapper implements CommerceWishListService,
-	ServiceWrapper<CommerceWishListService> {
+public class CommerceWishListServiceWrapper
+	implements CommerceWishListService,
+			   ServiceWrapper<CommerceWishListService> {
+
 	public CommerceWishListServiceWrapper(
 		CommerceWishListService commerceWishListService) {
+
 		_commerceWishListService = commerceWishListService;
 	}
 
 	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishList addCommerceWishList(
-		String name, boolean defaultWishList,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.wish.list.model.CommerceWishList
+			addCommerceWishList(
+				String name, boolean defaultWishList,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.addCommerceWishList(name,
-			defaultWishList, serviceContext);
+
+		return _commerceWishListService.addCommerceWishList(
+			name, defaultWishList, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceWishList(long commerceWishListId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_commerceWishListService.deleteCommerceWishList(commerceWishListId);
 	}
 
 	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishList fetchCommerceWishList(
-		long groupId, long userId, boolean defaultWishList,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishList> orderByComparator)
+	public com.liferay.commerce.wish.list.model.CommerceWishList
+			fetchCommerceWishList(
+				long groupId, long userId, boolean defaultWishList,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.wish.list.model.CommerceWishList>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.fetchCommerceWishList(groupId, userId,
-			defaultWishList, orderByComparator);
+
+		return _commerceWishListService.fetchCommerceWishList(
+			groupId, userId, defaultWishList, orderByComparator);
 	}
 
 	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishList getCommerceWishList(
-		long commerceWishListId)
+	public com.liferay.commerce.wish.list.model.CommerceWishList
+			getCommerceWishList(long commerceWishListId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceWishListService.getCommerceWishList(commerceWishListId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.wish.list.model.CommerceWishList> getCommerceWishLists(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishList> orderByComparator)
+	public java.util.List<com.liferay.commerce.wish.list.model.CommerceWishList>
+			getCommerceWishLists(
+				long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.wish.list.model.CommerceWishList>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.getCommerceWishLists(groupId, start,
-			end, orderByComparator);
+
+		return _commerceWishListService.getCommerceWishLists(
+			groupId, start, end, orderByComparator);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.wish.list.model.CommerceWishList> getCommerceWishLists(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishList> orderByComparator)
+	public java.util.List<com.liferay.commerce.wish.list.model.CommerceWishList>
+			getCommerceWishLists(
+				long groupId, long userId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.wish.list.model.CommerceWishList>
+						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.getCommerceWishLists(groupId, userId,
-			start, end, orderByComparator);
+
+		return _commerceWishListService.getCommerceWishLists(
+			groupId, userId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceWishListsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceWishListService.getCommerceWishListsCount(groupId);
 	}
 
 	@Override
 	public int getCommerceWishListsCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.getCommerceWishListsCount(groupId,
-			userId);
+
+		return _commerceWishListService.getCommerceWishListsCount(
+			groupId, userId);
 	}
 
 	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishList getDefaultCommerceWishList(
-		long groupId, long userId)
+	public com.liferay.commerce.wish.list.model.CommerceWishList
+			getDefaultCommerceWishList(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.getDefaultCommerceWishList(groupId,
-			userId);
+
+		return _commerceWishListService.getDefaultCommerceWishList(
+			groupId, userId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceWishListService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishList updateCommerceWishList(
-		long commerceWishListId, String name, boolean defaultWishList)
+	public com.liferay.commerce.wish.list.model.CommerceWishList
+			updateCommerceWishList(
+				long commerceWishListId, String name, boolean defaultWishList)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListService.updateCommerceWishList(commerceWishListId,
-			name, defaultWishList);
+
+		return _commerceWishListService.updateCommerceWishList(
+			commerceWishListId, name, defaultWishList);
 	}
 
 	@Override
@@ -129,8 +153,10 @@ public class CommerceWishListServiceWrapper implements CommerceWishListService,
 	@Override
 	public void setWrappedService(
 		CommerceWishListService commerceWishListService) {
+
 		_commerceWishListService = commerceWishListService;
 	}
 
 	private CommerceWishListService _commerceWishListService;
+
 }

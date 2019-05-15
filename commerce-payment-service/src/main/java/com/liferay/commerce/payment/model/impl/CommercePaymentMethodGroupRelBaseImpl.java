@@ -35,18 +35,22 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalSe
 public abstract class CommercePaymentMethodGroupRelBaseImpl
 	extends CommercePaymentMethodGroupRelModelImpl
 	implements CommercePaymentMethodGroupRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce payment method group rel model instance should use the {@link CommercePaymentMethodGroupRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce payment method group rel model instance should use the <code>CommercePaymentMethodGroupRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommercePaymentMethodGroupRelLocalServiceUtil.addCommercePaymentMethodGroupRel(this);
+			CommercePaymentMethodGroupRelLocalServiceUtil.
+				addCommercePaymentMethodGroupRel(this);
 		}
 		else {
-			CommercePaymentMethodGroupRelLocalServiceUtil.updateCommercePaymentMethodGroupRel(this);
+			CommercePaymentMethodGroupRelLocalServiceUtil.
+				updateCommercePaymentMethodGroupRel(this);
 		}
 	}
+
 }

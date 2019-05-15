@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceNotificationTemplateUserSegmentRelServiceUtil} service utility. The
+ * <code>CommerceNotificationTemplateUserSegmentRelServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,25 +49,30 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateUserSegmentRelServiceSoap
- * @see HttpPrincipal
- * @see CommerceNotificationTemplateUserSegmentRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
-	public static com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel addCommerceNotificationTemplateUserSegmentRel(
-		HttpPrincipal httpPrincipal, long commerceNotificationTemplateId,
-		long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
-					"addCommerceNotificationTemplateUserSegmentRel",
-					_addCommerceNotificationTemplateUserSegmentRelParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationTemplateId, commerceUserSegmentEntryId,
-					serviceContext);
+	public static com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRel
+				addCommerceNotificationTemplateUserSegmentRel(
+					HttpPrincipal httpPrincipal,
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
+				"addCommerceNotificationTemplateUserSegmentRel",
+				_addCommerceNotificationTemplateUserSegmentRelParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationTemplateId,
+				commerceUserSegmentEntryId, serviceContext);
 
 			Object returnObj = null;
 
@@ -75,14 +80,19 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel)returnObj;
+			return (com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -92,26 +102,32 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 	}
 
 	public static void deleteCommerceNotificationTemplateUserSegmentRel(
-		HttpPrincipal httpPrincipal,
-		long commerceNotificationTemplateUserSegmentRelId)
+			HttpPrincipal httpPrincipal,
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
-					"deleteCommerceNotificationTemplateUserSegmentRel",
-					_deleteCommerceNotificationTemplateUserSegmentRelParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationTemplateUserSegmentRelId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
+				"deleteCommerceNotificationTemplateUserSegmentRel",
+				_deleteCommerceNotificationTemplateUserSegmentRelParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationTemplateUserSegmentRelId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -121,17 +137,23 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel fetchCommerceNotificationTemplateUserSegmentRel(
-		HttpPrincipal httpPrincipal, long commerceNotificationTemplateId,
-		long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
-					"fetchCommerceNotificationTemplateUserSegmentRel",
-					_fetchCommerceNotificationTemplateUserSegmentRelParameterTypes2);
+	public static com.liferay.commerce.notification.model.
+		CommerceNotificationTemplateUserSegmentRel
+				fetchCommerceNotificationTemplateUserSegmentRel(
+					HttpPrincipal httpPrincipal,
+					long commerceNotificationTemplateId,
+					long commerceUserSegmentEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationTemplateId, commerceUserSegmentEntryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
+				"fetchCommerceNotificationTemplateUserSegmentRel",
+				_fetchCommerceNotificationTemplateUserSegmentRelParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationTemplateId,
+				commerceUserSegmentEntryId);
 
 			Object returnObj = null;
 
@@ -139,14 +161,19 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel)returnObj;
+			return (com.liferay.commerce.notification.model.
+				CommerceNotificationTemplateUserSegmentRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -155,19 +182,27 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> getCommerceNotificationTemplateUserSegmentRels(
-		HttpPrincipal httpPrincipal, long commerceNotificationTemplateId,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
-					"getCommerceNotificationTemplateUserSegmentRels",
-					_getCommerceNotificationTemplateUserSegmentRelsParameterTypes3);
+	public static java.util.List
+		<com.liferay.commerce.notification.model.
+			CommerceNotificationTemplateUserSegmentRel>
+					getCommerceNotificationTemplateUserSegmentRels(
+						HttpPrincipal httpPrincipal,
+						long commerceNotificationTemplateId, int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.notification.model.
+								CommerceNotificationTemplateUserSegmentRel>
+									orderByComparator)
+				throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceNotificationTemplateId, start, end,
-					orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceNotificationTemplateUserSegmentRelServiceUtil.class,
+				"getCommerceNotificationTemplateUserSegmentRels",
+				_getCommerceNotificationTemplateUserSegmentRelsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceNotificationTemplateId, start, end,
+				orderByComparator);
 
 			Object returnObj = null;
 
@@ -175,14 +210,20 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.notification.model.
+					CommerceNotificationTemplateUserSegmentRel>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -191,19 +232,26 @@ public class CommerceNotificationTemplateUserSegmentRelServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceNotificationTemplateUserSegmentRelServiceHttp.class);
-	private static final Class<?>[] _addCommerceNotificationTemplateUserSegmentRelParameterTypes0 =
-		new Class[] {
-			long.class, long.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
-	private static final Class<?>[] _deleteCommerceNotificationTemplateUserSegmentRelParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _fetchCommerceNotificationTemplateUserSegmentRelParameterTypes2 =
-		new Class[] { long.class, long.class };
-	private static final Class<?>[] _getCommerceNotificationTemplateUserSegmentRelsParameterTypes3 =
-		new Class[] {
-			long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
-		};
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationTemplateUserSegmentRelServiceHttp.class);
+
+	private static final Class<?>[]
+		_addCommerceNotificationTemplateUserSegmentRelParameterTypes0 =
+			new Class[] {
+				long.class, long.class,
+				com.liferay.portal.kernel.service.ServiceContext.class
+			};
+	private static final Class<?>[]
+		_deleteCommerceNotificationTemplateUserSegmentRelParameterTypes1 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_fetchCommerceNotificationTemplateUserSegmentRelParameterTypes2 =
+			new Class[] {long.class, long.class};
+	private static final Class<?>[]
+		_getCommerceNotificationTemplateUserSegmentRelsParameterTypes3 =
+			new Class[] {
+				long.class, int.class, int.class,
+				com.liferay.portal.kernel.util.OrderByComparator.class
+			};
+
 }

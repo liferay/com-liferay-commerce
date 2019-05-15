@@ -15,13 +15,11 @@
 package com.liferay.commerce.notification.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.notification.exception.NoSuchNotificationTemplateUserSegmentRelException;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalServiceUtil;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -58,21 +47,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.notification.service"));
 
 	@Before
 	public void setUp() {
-		_persistence = CommerceNotificationTemplateUserSegmentRelUtil.getPersistence();
+		_persistence =
+			CommerceNotificationTemplateUserSegmentRelUtil.getPersistence();
 
 		Class<?> clazz = _persistence.getClass();
 
@@ -81,7 +82,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceNotificationTemplateUserSegmentRel> iterator = _commerceNotificationTemplateUserSegmentRels.iterator();
+		Iterator<CommerceNotificationTemplateUserSegmentRel> iterator =
+			_commerceNotificationTemplateUserSegmentRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -94,24 +96,29 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			_persistence.create(pk);
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = _persistence.create(
+				pk);
 
 		Assert.assertNotNull(commerceNotificationTemplateUserSegmentRel);
 
-		Assert.assertEquals(commerceNotificationTemplateUserSegmentRel.getPrimaryKey(),
-			pk);
+		Assert.assertEquals(
+			commerceNotificationTemplateUserSegmentRel.getPrimaryKey(), pk);
 	}
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
 		_persistence.remove(newCommerceNotificationTemplateUserSegmentRel);
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.fetchByPrimaryKey(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.fetchByPrimaryKey(
+					newCommerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey());
 
 		Assert.assertNull(existingCommerceNotificationTemplateUserSegmentRel);
 	}
@@ -125,88 +132,123 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			_persistence.create(pk);
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel = _persistence.create(
+				pk);
 
-		newCommerceNotificationTemplateUserSegmentRel.setGroupId(RandomTestUtil.nextLong());
+		newCommerceNotificationTemplateUserSegmentRel.setGroupId(
+			RandomTestUtil.nextLong());
 
-		newCommerceNotificationTemplateUserSegmentRel.setCompanyId(RandomTestUtil.nextLong());
+		newCommerceNotificationTemplateUserSegmentRel.setCompanyId(
+			RandomTestUtil.nextLong());
 
-		newCommerceNotificationTemplateUserSegmentRel.setUserId(RandomTestUtil.nextLong());
+		newCommerceNotificationTemplateUserSegmentRel.setUserId(
+			RandomTestUtil.nextLong());
 
-		newCommerceNotificationTemplateUserSegmentRel.setUserName(RandomTestUtil.randomString());
+		newCommerceNotificationTemplateUserSegmentRel.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceNotificationTemplateUserSegmentRel.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceNotificationTemplateUserSegmentRel.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceNotificationTemplateUserSegmentRel.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceNotificationTemplateUserSegmentRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceNotificationTemplateUserSegmentRel.setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+		newCommerceNotificationTemplateUserSegmentRel.
+			setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
 
-		newCommerceNotificationTemplateUserSegmentRel.setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
+		newCommerceNotificationTemplateUserSegmentRel.
+			setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
 
-		_commerceNotificationTemplateUserSegmentRels.add(_persistence.update(
-				newCommerceNotificationTemplateUserSegmentRel));
+		_commerceNotificationTemplateUserSegmentRels.add(
+			_persistence.update(newCommerceNotificationTemplateUserSegmentRel));
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.findByPrimaryKey(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.findByPrimaryKey(
+					newCommerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId(),
-			newCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId());
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.
+				getCommerceNotificationTemplateUserSegmentRelId(),
+			newCommerceNotificationTemplateUserSegmentRel.
+				getCommerceNotificationTemplateUserSegmentRelId());
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.getGroupId(),
 			newCommerceNotificationTemplateUserSegmentRel.getGroupId());
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.getCompanyId(),
 			newCommerceNotificationTemplateUserSegmentRel.getCompanyId());
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getUserId(),
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.getUserId(),
 			newCommerceNotificationTemplateUserSegmentRel.getUserId());
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getUserName(),
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.getUserName(),
 			newCommerceNotificationTemplateUserSegmentRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceNotificationTemplateUserSegmentRel.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(
+				existingCommerceNotificationTemplateUserSegmentRel.
+					getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceNotificationTemplateUserSegmentRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceNotificationTemplateUserSegmentRel.getModifiedDate()),
+		Assert.assertEquals(
 			Time.getShortTimestamp(
-				newCommerceNotificationTemplateUserSegmentRel.getModifiedDate()));
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId(),
-			newCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId());
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId(),
-			newCommerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId());
+				existingCommerceNotificationTemplateUserSegmentRel.
+					getModifiedDate()),
+			Time.getShortTimestamp(
+				newCommerceNotificationTemplateUserSegmentRel.
+					getModifiedDate()));
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.
+				getCommerceNotificationTemplateId(),
+			newCommerceNotificationTemplateUserSegmentRel.
+				getCommerceNotificationTemplateId());
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel.
+				getCommerceUserSegmentEntryId(),
+			newCommerceNotificationTemplateUserSegmentRel.
+				getCommerceUserSegmentEntryId());
 	}
 
 	@Test
-	public void testCountByCommerceUserSegmentEntryId()
-		throws Exception {
-		_persistence.countByCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
+	public void testCountByCommerceUserSegmentEntryId() throws Exception {
+		_persistence.countByCommerceUserSegmentEntryId(
+			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceUserSegmentEntryId(0L);
 	}
 
 	@Test
-	public void testCountByCommerceNotificationTemplateId()
-		throws Exception {
-		_persistence.countByCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+	public void testCountByCommerceNotificationTemplateId() throws Exception {
+		_persistence.countByCommerceNotificationTemplateId(
+			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceNotificationTemplateId(0L);
 	}
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.findByPrimaryKey(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.findByPrimaryKey(
+					newCommerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel,
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel,
 			newCommerceNotificationTemplateUserSegmentRel);
 	}
 
@@ -219,12 +261,15 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceNotificationTemplateUserSegmentRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CNTemplateUserSegmentRel",
+	protected OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CNTemplateUserSegmentRel",
 			"commerceNotificationTemplateUserSegmentRelId", true, "groupId",
 			true, "companyId", true, "userId", true, "userName", true,
 			"createDate", true, "modifiedDate", true,
@@ -234,13 +279,18 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.fetchByPrimaryKey(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.fetchByPrimaryKey(
+					newCommerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel,
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel,
 			newCommerceNotificationTemplateUserSegmentRel);
 	}
 
@@ -248,8 +298,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationTemplateUserSegmentRel missingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.fetchByPrimaryKey(pk);
+		CommerceNotificationTemplateUserSegmentRel
+			missingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceNotificationTemplateUserSegmentRel);
 	}
@@ -257,32 +308,43 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel1 =
-			addCommerceNotificationTemplateUserSegmentRel();
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel2 =
-			addCommerceNotificationTemplateUserSegmentRel();
+
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel1 =
+				addCommerceNotificationTemplateUserSegmentRel();
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel2 =
+				addCommerceNotificationTemplateUserSegmentRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommerceNotificationTemplateUserSegmentRel1.getPrimaryKey());
-		primaryKeys.add(newCommerceNotificationTemplateUserSegmentRel2.getPrimaryKey());
+		primaryKeys.add(
+			newCommerceNotificationTemplateUserSegmentRel1.getPrimaryKey());
+		primaryKeys.add(
+			newCommerceNotificationTemplateUserSegmentRel2.getPrimaryKey());
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(2,
-			commerceNotificationTemplateUserSegmentRels.size());
-		Assert.assertEquals(newCommerceNotificationTemplateUserSegmentRel1,
+		Assert.assertEquals(
+			2, commerceNotificationTemplateUserSegmentRels.size());
+		Assert.assertEquals(
+			newCommerceNotificationTemplateUserSegmentRel1,
 			commerceNotificationTemplateUserSegmentRels.get(
-				newCommerceNotificationTemplateUserSegmentRel1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceNotificationTemplateUserSegmentRel2,
+				newCommerceNotificationTemplateUserSegmentRel1.
+					getPrimaryKey()));
+		Assert.assertEquals(
+			newCommerceNotificationTemplateUserSegmentRel2,
 			commerceNotificationTemplateUserSegmentRels.get(
-				newCommerceNotificationTemplateUserSegmentRel2.getPrimaryKey()));
+				newCommerceNotificationTemplateUserSegmentRel2.
+					getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -292,62 +354,73 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertTrue(commerceNotificationTemplateUserSegmentRels.isEmpty());
+		Assert.assertTrue(
+			commerceNotificationTemplateUserSegmentRels.isEmpty());
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
 		long pk = RandomTestUtil.nextLong();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		primaryKeys.add(
+			newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(1,
-			commerceNotificationTemplateUserSegmentRels.size());
-		Assert.assertEquals(newCommerceNotificationTemplateUserSegmentRel,
+		Assert.assertEquals(
+			1, commerceNotificationTemplateUserSegmentRels.size());
+		Assert.assertEquals(
+			newCommerceNotificationTemplateUserSegmentRel,
 			commerceNotificationTemplateUserSegmentRels.get(
 				newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertTrue(commerceNotificationTemplateUserSegmentRels.isEmpty());
+		Assert.assertTrue(
+			commerceNotificationTemplateUserSegmentRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		primaryKeys.add(
+			newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(1,
-			commerceNotificationTemplateUserSegmentRels.size());
-		Assert.assertEquals(newCommerceNotificationTemplateUserSegmentRel,
+		Assert.assertEquals(
+			1, commerceNotificationTemplateUserSegmentRels.size());
+		Assert.assertEquals(
+			newCommerceNotificationTemplateUserSegmentRel,
 			commerceNotificationTemplateUserSegmentRels.get(
 				newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey()));
 	}
@@ -356,16 +429,25 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceNotificationTemplateUserSegmentRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceNotificationTemplateUserSegmentRel>() {
+
 				@Override
 				public void performAction(
-					CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-					Assert.assertNotNull(commerceNotificationTemplateUserSegmentRel);
+					CommerceNotificationTemplateUserSegmentRel
+						commerceNotificationTemplateUserSegmentRel) {
+
+					Assert.assertNotNull(
+						commerceNotificationTemplateUserSegmentRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -374,82 +456,102 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationTemplateUserSegmentRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationTemplateUserSegmentRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceNotificationTemplateUserSegmentRelId",
-				newCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId()));
+				newCommerceNotificationTemplateUserSegmentRel.
+					getCommerceNotificationTemplateUserSegmentRelId()));
 
-		List<CommerceNotificationTemplateUserSegmentRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceNotificationTemplateUserSegmentRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			result.get(0);
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel = result.get(0);
 
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRel,
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRel,
 			newCommerceNotificationTemplateUserSegmentRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationTemplateUserSegmentRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationTemplateUserSegmentRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceNotificationTemplateUserSegmentRelId",
 				RandomTestUtil.nextLong()));
 
-		List<CommerceNotificationTemplateUserSegmentRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceNotificationTemplateUserSegmentRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationTemplateUserSegmentRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationTemplateUserSegmentRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commerceNotificationTemplateUserSegmentRelId"));
 
-		Object newCommerceNotificationTemplateUserSegmentRelId = newCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateUserSegmentRelId();
+		Object newCommerceNotificationTemplateUserSegmentRelId =
+			newCommerceNotificationTemplateUserSegmentRel.
+				getCommerceNotificationTemplateUserSegmentRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceNotificationTemplateUserSegmentRelId",
-				new Object[] { newCommerceNotificationTemplateUserSegmentRelId }));
+				new Object[] {
+					newCommerceNotificationTemplateUserSegmentRelId
+				}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingCommerceNotificationTemplateUserSegmentRelId = result.get(0);
+		Object existingCommerceNotificationTemplateUserSegmentRelId =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceNotificationTemplateUserSegmentRelId,
+		Assert.assertEquals(
+			existingCommerceNotificationTemplateUserSegmentRelId,
 			newCommerceNotificationTemplateUserSegmentRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationTemplateUserSegmentRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationTemplateUserSegmentRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commerceNotificationTemplateUserSegmentRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceNotificationTemplateUserSegmentRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -458,57 +560,78 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceNotificationTemplateUserSegmentRel newCommerceNotificationTemplateUserSegmentRel =
-			addCommerceNotificationTemplateUserSegmentRel();
+		CommerceNotificationTemplateUserSegmentRel
+			newCommerceNotificationTemplateUserSegmentRel =
+				addCommerceNotificationTemplateUserSegmentRel();
 
 		_persistence.clearCache();
 
-		CommerceNotificationTemplateUserSegmentRel existingCommerceNotificationTemplateUserSegmentRel =
-			_persistence.findByPrimaryKey(newCommerceNotificationTemplateUserSegmentRel.getPrimaryKey());
+		CommerceNotificationTemplateUserSegmentRel
+			existingCommerceNotificationTemplateUserSegmentRel =
+				_persistence.findByPrimaryKey(
+					newCommerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId()),
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceNotificationTemplateUserSegmentRel.
+					getCommerceNotificationTemplateId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceNotificationTemplateUserSegmentRel,
 				"getOriginalCommerceNotificationTemplateId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId()),
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceNotificationTemplateUserSegmentRel.
+					getCommerceUserSegmentEntryId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceNotificationTemplateUserSegmentRel,
 				"getOriginalCommerceUserSegmentEntryId", new Class<?>[0]));
 	}
 
-	protected CommerceNotificationTemplateUserSegmentRel addCommerceNotificationTemplateUserSegmentRel()
+	protected CommerceNotificationTemplateUserSegmentRel
+			addCommerceNotificationTemplateUserSegmentRel()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			_persistence.create(pk);
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = _persistence.create(
+				pk);
 
-		commerceNotificationTemplateUserSegmentRel.setGroupId(RandomTestUtil.nextLong());
+		commerceNotificationTemplateUserSegmentRel.setGroupId(
+			RandomTestUtil.nextLong());
 
-		commerceNotificationTemplateUserSegmentRel.setCompanyId(RandomTestUtil.nextLong());
+		commerceNotificationTemplateUserSegmentRel.setCompanyId(
+			RandomTestUtil.nextLong());
 
-		commerceNotificationTemplateUserSegmentRel.setUserId(RandomTestUtil.nextLong());
+		commerceNotificationTemplateUserSegmentRel.setUserId(
+			RandomTestUtil.nextLong());
 
-		commerceNotificationTemplateUserSegmentRel.setUserName(RandomTestUtil.randomString());
+		commerceNotificationTemplateUserSegmentRel.setUserName(
+			RandomTestUtil.randomString());
 
-		commerceNotificationTemplateUserSegmentRel.setCreateDate(RandomTestUtil.nextDate());
+		commerceNotificationTemplateUserSegmentRel.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		commerceNotificationTemplateUserSegmentRel.setModifiedDate(RandomTestUtil.nextDate());
+		commerceNotificationTemplateUserSegmentRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		commerceNotificationTemplateUserSegmentRel.setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+		commerceNotificationTemplateUserSegmentRel.
+			setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
 
-		commerceNotificationTemplateUserSegmentRel.setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
+		commerceNotificationTemplateUserSegmentRel.
+			setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
 
-		_commerceNotificationTemplateUserSegmentRels.add(_persistence.update(
-				commerceNotificationTemplateUserSegmentRel));
+		_commerceNotificationTemplateUserSegmentRels.add(
+			_persistence.update(commerceNotificationTemplateUserSegmentRel));
 
 		return commerceNotificationTemplateUserSegmentRel;
 	}
 
-	private List<CommerceNotificationTemplateUserSegmentRel> _commerceNotificationTemplateUserSegmentRels =
-		new ArrayList<CommerceNotificationTemplateUserSegmentRel>();
+	private List<CommerceNotificationTemplateUserSegmentRel>
+		_commerceNotificationTemplateUserSegmentRels =
+			new ArrayList<CommerceNotificationTemplateUserSegmentRel>();
 	private CommerceNotificationTemplateUserSegmentRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

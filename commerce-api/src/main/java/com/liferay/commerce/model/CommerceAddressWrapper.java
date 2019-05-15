@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,8 +37,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceAddressWrapper implements CommerceAddress,
-	ModelWrapper<CommerceAddress> {
+public class CommerceAddressWrapper
+	implements CommerceAddress, ModelWrapper<CommerceAddress> {
+
 	public CommerceAddressWrapper(CommerceAddress commerceAddress) {
 		_commerceAddress = commerceAddress;
 	}
@@ -228,7 +228,8 @@ public class CommerceAddressWrapper implements CommerceAddress,
 
 	@Override
 	public Object clone() {
-		return new CommerceAddressWrapper((CommerceAddress)_commerceAddress.clone());
+		return new CommerceAddressWrapper(
+			(CommerceAddress)_commerceAddress.clone());
 	}
 
 	@Override
@@ -242,50 +243,50 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Returns the city of this commerce address.
-	*
-	* @return the city of this commerce address
-	*/
+	 * Returns the city of this commerce address.
+	 *
+	 * @return the city of this commerce address
+	 */
 	@Override
 	public String getCity() {
 		return _commerceAddress.getCity();
 	}
 
 	/**
-	* Returns the fully qualified class name of this commerce address.
-	*
-	* @return the fully qualified class name of this commerce address
-	*/
+	 * Returns the fully qualified class name of this commerce address.
+	 *
+	 * @return the fully qualified class name of this commerce address
+	 */
 	@Override
 	public String getClassName() {
 		return _commerceAddress.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this commerce address.
-	*
-	* @return the class name ID of this commerce address
-	*/
+	 * Returns the class name ID of this commerce address.
+	 *
+	 * @return the class name ID of this commerce address
+	 */
 	@Override
 	public long getClassNameId() {
 		return _commerceAddress.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this commerce address.
-	*
-	* @return the class pk of this commerce address
-	*/
+	 * Returns the class pk of this commerce address.
+	 *
+	 * @return the class pk of this commerce address
+	 */
 	@Override
 	public long getClassPK() {
 		return _commerceAddress.getClassPK();
 	}
 
 	/**
-	* Returns the commerce address ID of this commerce address.
-	*
-	* @return the commerce address ID of this commerce address
-	*/
+	 * Returns the commerce address ID of this commerce address.
+	 *
+	 * @return the commerce address ID of this commerce address
+	 */
 	@Override
 	public long getCommerceAddressId() {
 		return _commerceAddress.getCommerceAddressId();
@@ -294,14 +295,15 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	@Override
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAddress.getCommerceCountry();
 	}
 
 	/**
-	* Returns the commerce country ID of this commerce address.
-	*
-	* @return the commerce country ID of this commerce address
-	*/
+	 * Returns the commerce country ID of this commerce address.
+	 *
+	 * @return the commerce country ID of this commerce address
+	 */
 	@Override
 	public long getCommerceCountryId() {
 		return _commerceAddress.getCommerceCountryId();
@@ -310,64 +312,65 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	@Override
 	public CommerceRegion getCommerceRegion()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAddress.getCommerceRegion();
 	}
 
 	/**
-	* Returns the commerce region ID of this commerce address.
-	*
-	* @return the commerce region ID of this commerce address
-	*/
+	 * Returns the commerce region ID of this commerce address.
+	 *
+	 * @return the commerce region ID of this commerce address
+	 */
 	@Override
 	public long getCommerceRegionId() {
 		return _commerceAddress.getCommerceRegionId();
 	}
 
 	/**
-	* Returns the company ID of this commerce address.
-	*
-	* @return the company ID of this commerce address
-	*/
+	 * Returns the company ID of this commerce address.
+	 *
+	 * @return the company ID of this commerce address
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceAddress.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce address.
-	*
-	* @return the create date of this commerce address
-	*/
+	 * Returns the create date of this commerce address.
+	 *
+	 * @return the create date of this commerce address
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceAddress.getCreateDate();
 	}
 
 	/**
-	* Returns the default billing of this commerce address.
-	*
-	* @return the default billing of this commerce address
-	*/
+	 * Returns the default billing of this commerce address.
+	 *
+	 * @return the default billing of this commerce address
+	 */
 	@Override
 	public boolean getDefaultBilling() {
 		return _commerceAddress.getDefaultBilling();
 	}
 
 	/**
-	* Returns the default shipping of this commerce address.
-	*
-	* @return the default shipping of this commerce address
-	*/
+	 * Returns the default shipping of this commerce address.
+	 *
+	 * @return the default shipping of this commerce address
+	 */
 	@Override
 	public boolean getDefaultShipping() {
 		return _commerceAddress.getDefaultShipping();
 	}
 
 	/**
-	* Returns the description of this commerce address.
-	*
-	* @return the description of this commerce address
-	*/
+	 * Returns the description of this commerce address.
+	 *
+	 * @return the description of this commerce address
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceAddress.getDescription();
@@ -379,70 +382,70 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Returns the group ID of this commerce address.
-	*
-	* @return the group ID of this commerce address
-	*/
+	 * Returns the group ID of this commerce address.
+	 *
+	 * @return the group ID of this commerce address
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceAddress.getGroupId();
 	}
 
 	/**
-	* Returns the latitude of this commerce address.
-	*
-	* @return the latitude of this commerce address
-	*/
+	 * Returns the latitude of this commerce address.
+	 *
+	 * @return the latitude of this commerce address
+	 */
 	@Override
 	public double getLatitude() {
 		return _commerceAddress.getLatitude();
 	}
 
 	/**
-	* Returns the longitude of this commerce address.
-	*
-	* @return the longitude of this commerce address
-	*/
+	 * Returns the longitude of this commerce address.
+	 *
+	 * @return the longitude of this commerce address
+	 */
 	@Override
 	public double getLongitude() {
 		return _commerceAddress.getLongitude();
 	}
 
 	/**
-	* Returns the modified date of this commerce address.
-	*
-	* @return the modified date of this commerce address
-	*/
+	 * Returns the modified date of this commerce address.
+	 *
+	 * @return the modified date of this commerce address
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceAddress.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce address.
-	*
-	* @return the name of this commerce address
-	*/
+	 * Returns the name of this commerce address.
+	 *
+	 * @return the name of this commerce address
+	 */
 	@Override
 	public String getName() {
 		return _commerceAddress.getName();
 	}
 
 	/**
-	* Returns the phone number of this commerce address.
-	*
-	* @return the phone number of this commerce address
-	*/
+	 * Returns the phone number of this commerce address.
+	 *
+	 * @return the phone number of this commerce address
+	 */
 	@Override
 	public String getPhoneNumber() {
 		return _commerceAddress.getPhoneNumber();
 	}
 
 	/**
-	* Returns the primary key of this commerce address.
-	*
-	* @return the primary key of this commerce address
-	*/
+	 * Returns the primary key of this commerce address.
+	 *
+	 * @return the primary key of this commerce address
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceAddress.getPrimaryKey();
@@ -454,70 +457,70 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Returns the street1 of this commerce address.
-	*
-	* @return the street1 of this commerce address
-	*/
+	 * Returns the street1 of this commerce address.
+	 *
+	 * @return the street1 of this commerce address
+	 */
 	@Override
 	public String getStreet1() {
 		return _commerceAddress.getStreet1();
 	}
 
 	/**
-	* Returns the street2 of this commerce address.
-	*
-	* @return the street2 of this commerce address
-	*/
+	 * Returns the street2 of this commerce address.
+	 *
+	 * @return the street2 of this commerce address
+	 */
 	@Override
 	public String getStreet2() {
 		return _commerceAddress.getStreet2();
 	}
 
 	/**
-	* Returns the street3 of this commerce address.
-	*
-	* @return the street3 of this commerce address
-	*/
+	 * Returns the street3 of this commerce address.
+	 *
+	 * @return the street3 of this commerce address
+	 */
 	@Override
 	public String getStreet3() {
 		return _commerceAddress.getStreet3();
 	}
 
 	/**
-	* Returns the user ID of this commerce address.
-	*
-	* @return the user ID of this commerce address
-	*/
+	 * Returns the user ID of this commerce address.
+	 *
+	 * @return the user ID of this commerce address
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceAddress.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce address.
-	*
-	* @return the user name of this commerce address
-	*/
+	 * Returns the user name of this commerce address.
+	 *
+	 * @return the user name of this commerce address
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceAddress.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce address.
-	*
-	* @return the user uuid of this commerce address
-	*/
+	 * Returns the user uuid of this commerce address.
+	 *
+	 * @return the user uuid of this commerce address
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceAddress.getUserUuid();
 	}
 
 	/**
-	* Returns the zip of this commerce address.
-	*
-	* @return the zip of this commerce address
-	*/
+	 * Returns the zip of this commerce address.
+	 *
+	 * @return the zip of this commerce address
+	 */
 	@Override
 	public String getZip() {
 		return _commerceAddress.getZip();
@@ -534,20 +537,20 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce address is default billing.
-	*
-	* @return <code>true</code> if this commerce address is default billing; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce address is default billing.
+	 *
+	 * @return <code>true</code> if this commerce address is default billing; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDefaultBilling() {
 		return _commerceAddress.isDefaultBilling();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce address is default shipping.
-	*
-	* @return <code>true</code> if this commerce address is default shipping; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce address is default shipping.
+	 *
+	 * @return <code>true</code> if this commerce address is default shipping; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDefaultShipping() {
 		return _commerceAddress.isDefaultShipping();
@@ -584,10 +587,10 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Sets the city of this commerce address.
-	*
-	* @param city the city of this commerce address
-	*/
+	 * Sets the city of this commerce address.
+	 *
+	 * @param city the city of this commerce address
+	 */
 	@Override
 	public void setCity(String city) {
 		_commerceAddress.setCity(city);
@@ -599,100 +602,100 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Sets the class name ID of this commerce address.
-	*
-	* @param classNameId the class name ID of this commerce address
-	*/
+	 * Sets the class name ID of this commerce address.
+	 *
+	 * @param classNameId the class name ID of this commerce address
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_commerceAddress.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this commerce address.
-	*
-	* @param classPK the class pk of this commerce address
-	*/
+	 * Sets the class pk of this commerce address.
+	 *
+	 * @param classPK the class pk of this commerce address
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_commerceAddress.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the commerce address ID of this commerce address.
-	*
-	* @param commerceAddressId the commerce address ID of this commerce address
-	*/
+	 * Sets the commerce address ID of this commerce address.
+	 *
+	 * @param commerceAddressId the commerce address ID of this commerce address
+	 */
 	@Override
 	public void setCommerceAddressId(long commerceAddressId) {
 		_commerceAddress.setCommerceAddressId(commerceAddressId);
 	}
 
 	/**
-	* Sets the commerce country ID of this commerce address.
-	*
-	* @param commerceCountryId the commerce country ID of this commerce address
-	*/
+	 * Sets the commerce country ID of this commerce address.
+	 *
+	 * @param commerceCountryId the commerce country ID of this commerce address
+	 */
 	@Override
 	public void setCommerceCountryId(long commerceCountryId) {
 		_commerceAddress.setCommerceCountryId(commerceCountryId);
 	}
 
 	/**
-	* Sets the commerce region ID of this commerce address.
-	*
-	* @param commerceRegionId the commerce region ID of this commerce address
-	*/
+	 * Sets the commerce region ID of this commerce address.
+	 *
+	 * @param commerceRegionId the commerce region ID of this commerce address
+	 */
 	@Override
 	public void setCommerceRegionId(long commerceRegionId) {
 		_commerceAddress.setCommerceRegionId(commerceRegionId);
 	}
 
 	/**
-	* Sets the company ID of this commerce address.
-	*
-	* @param companyId the company ID of this commerce address
-	*/
+	 * Sets the company ID of this commerce address.
+	 *
+	 * @param companyId the company ID of this commerce address
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceAddress.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce address.
-	*
-	* @param createDate the create date of this commerce address
-	*/
+	 * Sets the create date of this commerce address.
+	 *
+	 * @param createDate the create date of this commerce address
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceAddress.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets whether this commerce address is default billing.
-	*
-	* @param defaultBilling the default billing of this commerce address
-	*/
+	 * Sets whether this commerce address is default billing.
+	 *
+	 * @param defaultBilling the default billing of this commerce address
+	 */
 	@Override
 	public void setDefaultBilling(boolean defaultBilling) {
 		_commerceAddress.setDefaultBilling(defaultBilling);
 	}
 
 	/**
-	* Sets whether this commerce address is default shipping.
-	*
-	* @param defaultShipping the default shipping of this commerce address
-	*/
+	 * Sets whether this commerce address is default shipping.
+	 *
+	 * @param defaultShipping the default shipping of this commerce address
+	 */
 	@Override
 	public void setDefaultShipping(boolean defaultShipping) {
 		_commerceAddress.setDefaultShipping(defaultShipping);
 	}
 
 	/**
-	* Sets the description of this commerce address.
-	*
-	* @param description the description of this commerce address
-	*/
+	 * Sets the description of this commerce address.
+	 *
+	 * @param description the description of this commerce address
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceAddress.setDescription(description);
@@ -701,6 +704,7 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceAddress.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -715,50 +719,50 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Sets the group ID of this commerce address.
-	*
-	* @param groupId the group ID of this commerce address
-	*/
+	 * Sets the group ID of this commerce address.
+	 *
+	 * @param groupId the group ID of this commerce address
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceAddress.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the latitude of this commerce address.
-	*
-	* @param latitude the latitude of this commerce address
-	*/
+	 * Sets the latitude of this commerce address.
+	 *
+	 * @param latitude the latitude of this commerce address
+	 */
 	@Override
 	public void setLatitude(double latitude) {
 		_commerceAddress.setLatitude(latitude);
 	}
 
 	/**
-	* Sets the longitude of this commerce address.
-	*
-	* @param longitude the longitude of this commerce address
-	*/
+	 * Sets the longitude of this commerce address.
+	 *
+	 * @param longitude the longitude of this commerce address
+	 */
 	@Override
 	public void setLongitude(double longitude) {
 		_commerceAddress.setLongitude(longitude);
 	}
 
 	/**
-	* Sets the modified date of this commerce address.
-	*
-	* @param modifiedDate the modified date of this commerce address
-	*/
+	 * Sets the modified date of this commerce address.
+	 *
+	 * @param modifiedDate the modified date of this commerce address
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceAddress.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce address.
-	*
-	* @param name the name of this commerce address
-	*/
+	 * Sets the name of this commerce address.
+	 *
+	 * @param name the name of this commerce address
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceAddress.setName(name);
@@ -770,20 +774,20 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Sets the phone number of this commerce address.
-	*
-	* @param phoneNumber the phone number of this commerce address
-	*/
+	 * Sets the phone number of this commerce address.
+	 *
+	 * @param phoneNumber the phone number of this commerce address
+	 */
 	@Override
 	public void setPhoneNumber(String phoneNumber) {
 		_commerceAddress.setPhoneNumber(phoneNumber);
 	}
 
 	/**
-	* Sets the primary key of this commerce address.
-	*
-	* @param primaryKey the primary key of this commerce address
-	*/
+	 * Sets the primary key of this commerce address.
+	 *
+	 * @param primaryKey the primary key of this commerce address
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceAddress.setPrimaryKey(primaryKey);
@@ -795,77 +799,79 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	/**
-	* Sets the street1 of this commerce address.
-	*
-	* @param street1 the street1 of this commerce address
-	*/
+	 * Sets the street1 of this commerce address.
+	 *
+	 * @param street1 the street1 of this commerce address
+	 */
 	@Override
 	public void setStreet1(String street1) {
 		_commerceAddress.setStreet1(street1);
 	}
 
 	/**
-	* Sets the street2 of this commerce address.
-	*
-	* @param street2 the street2 of this commerce address
-	*/
+	 * Sets the street2 of this commerce address.
+	 *
+	 * @param street2 the street2 of this commerce address
+	 */
 	@Override
 	public void setStreet2(String street2) {
 		_commerceAddress.setStreet2(street2);
 	}
 
 	/**
-	* Sets the street3 of this commerce address.
-	*
-	* @param street3 the street3 of this commerce address
-	*/
+	 * Sets the street3 of this commerce address.
+	 *
+	 * @param street3 the street3 of this commerce address
+	 */
 	@Override
 	public void setStreet3(String street3) {
 		_commerceAddress.setStreet3(street3);
 	}
 
 	/**
-	* Sets the user ID of this commerce address.
-	*
-	* @param userId the user ID of this commerce address
-	*/
+	 * Sets the user ID of this commerce address.
+	 *
+	 * @param userId the user ID of this commerce address
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceAddress.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce address.
-	*
-	* @param userName the user name of this commerce address
-	*/
+	 * Sets the user name of this commerce address.
+	 *
+	 * @param userName the user name of this commerce address
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceAddress.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce address.
-	*
-	* @param userUuid the user uuid of this commerce address
-	*/
+	 * Sets the user uuid of this commerce address.
+	 *
+	 * @param userUuid the user uuid of this commerce address
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceAddress.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the zip of this commerce address.
-	*
-	* @param zip the zip of this commerce address
-	*/
+	 * Sets the zip of this commerce address.
+	 *
+	 * @param zip the zip of this commerce address
+	 */
 	@Override
 	public void setZip(String zip) {
 		_commerceAddress.setZip(zip);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceAddress> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceAddress>
+		toCacheModel() {
+
 		return _commerceAddress.toCacheModel();
 	}
 
@@ -899,10 +905,12 @@ public class CommerceAddressWrapper implements CommerceAddress,
 			return false;
 		}
 
-		CommerceAddressWrapper commerceAddressWrapper = (CommerceAddressWrapper)obj;
+		CommerceAddressWrapper commerceAddressWrapper =
+			(CommerceAddressWrapper)obj;
 
-		if (Objects.equals(_commerceAddress,
-					commerceAddressWrapper._commerceAddress)) {
+		if (Objects.equals(
+				_commerceAddress, commerceAddressWrapper._commerceAddress)) {
+
 			return true;
 		}
 
@@ -930,4 +938,5 @@ public class CommerceAddressWrapper implements CommerceAddress,
 	}
 
 	private final CommerceAddress _commerceAddress;
+
 }

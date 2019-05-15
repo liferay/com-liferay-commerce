@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.persistence.CommerceOrderPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,35 +31,45 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceOrderFinderBaseImpl extends BasePersistenceImpl<CommerceOrder> {
+public class CommerceOrderFinderBaseImpl
+	extends BasePersistenceImpl<CommerceOrder> {
+
 	public CommerceOrderFinderBaseImpl() {
 		setModelClass(CommerceOrder.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put(
+			"subtotalDiscountPercentageLevel1",
+			"subtotalDiscountPercentLevel1");
+		dbColumnNames.put(
+			"subtotalDiscountPercentageLevel2",
+			"subtotalDiscountPercentLevel2");
+		dbColumnNames.put(
+			"subtotalDiscountPercentageLevel3",
+			"subtotalDiscountPercentLevel3");
+		dbColumnNames.put(
+			"subtotalDiscountPercentageLevel4",
+			"subtotalDiscountPercentLevel4");
+		dbColumnNames.put(
+			"shippingDiscountPercentageLevel1",
+			"shippingDiscountPercentLevel1");
+		dbColumnNames.put(
+			"shippingDiscountPercentageLevel2",
+			"shippingDiscountPercentLevel2");
+		dbColumnNames.put(
+			"shippingDiscountPercentageLevel3",
+			"shippingDiscountPercentLevel3");
+		dbColumnNames.put(
+			"shippingDiscountPercentageLevel4",
+			"shippingDiscountPercentLevel4");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("subtotalDiscountPercentageLevel1",
-				"subtotalDiscountPercentLevel1");
-			dbColumnNames.put("subtotalDiscountPercentageLevel2",
-				"subtotalDiscountPercentLevel2");
-			dbColumnNames.put("subtotalDiscountPercentageLevel3",
-				"subtotalDiscountPercentLevel3");
-			dbColumnNames.put("subtotalDiscountPercentageLevel4",
-				"subtotalDiscountPercentLevel4");
-			dbColumnNames.put("shippingDiscountPercentageLevel1",
-				"shippingDiscountPercentLevel1");
-			dbColumnNames.put("shippingDiscountPercentageLevel2",
-				"shippingDiscountPercentLevel2");
-			dbColumnNames.put("shippingDiscountPercentageLevel3",
-				"shippingDiscountPercentLevel3");
-			dbColumnNames.put("shippingDiscountPercentageLevel4",
-				"shippingDiscountPercentLevel4");
 
 			field.set(this, dbColumnNames);
 		}
@@ -92,10 +101,14 @@ public class CommerceOrderFinderBaseImpl extends BasePersistenceImpl<CommerceOrd
 	 */
 	public void setCommerceOrderPersistence(
 		CommerceOrderPersistence commerceOrderPersistence) {
+
 		this.commerceOrderPersistence = commerceOrderPersistence;
 	}
 
 	@BeanReference(type = CommerceOrderPersistence.class)
 	protected CommerceOrderPersistence commerceOrderPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceOrderFinderBaseImpl.class);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderFinderBaseImpl.class);
+
 }

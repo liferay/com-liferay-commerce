@@ -32,12 +32,13 @@ import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceRegionBaseImpl extends CommerceRegionModelImpl
-	implements CommerceRegion {
+public abstract class CommerceRegionBaseImpl
+	extends CommerceRegionModelImpl implements CommerceRegion {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce region model instance should use the {@link CommerceRegion} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce region model instance should use the <code>CommerceRegion</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceRegionBaseImpl extends CommerceRegionModelImpl
 			CommerceRegionLocalServiceUtil.updateCommerceRegion(this);
 		}
 	}
+
 }

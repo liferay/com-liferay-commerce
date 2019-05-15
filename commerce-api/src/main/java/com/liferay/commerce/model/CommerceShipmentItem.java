@@ -25,39 +25,44 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShipmentItemModel
- * @see com.liferay.commerce.model.impl.CommerceShipmentItemImpl
- * @see com.liferay.commerce.model.impl.CommerceShipmentItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceShipmentItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceShipmentItemImpl"
+)
 @ProviderType
-public interface CommerceShipmentItem extends CommerceShipmentItemModel,
-	PersistedModel {
+public interface CommerceShipmentItem
+	extends CommerceShipmentItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceShipmentItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceShipmentItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceShipmentItem, Long> COMMERCE_SHIPMENT_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceShipmentItem, Long>() {
-			@Override
-			public Long get(CommerceShipmentItem commerceShipmentItem) {
-				return commerceShipmentItem.getCommerceShipmentItemId();
-			}
+	public static final Accessor<CommerceShipmentItem, Long>
+		COMMERCE_SHIPMENT_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceShipmentItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceShipmentItem commerceShipmentItem) {
+					return commerceShipmentItem.getCommerceShipmentItemId();
+				}
 
-			@Override
-			public Class<CommerceShipmentItem> getTypeClass() {
-				return CommerceShipmentItem.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceShipmentItem> getTypeClass() {
+					return CommerceShipmentItem.class;
+				}
+
+			};
 
 	public CommerceOrderItem fetchCommerceOrderItem();
 
 	public CommerceShipment getCommerceShipment()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

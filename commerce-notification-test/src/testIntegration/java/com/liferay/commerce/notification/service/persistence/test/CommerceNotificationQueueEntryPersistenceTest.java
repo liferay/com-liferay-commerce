@@ -15,13 +15,11 @@
 package com.liferay.commerce.notification.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.notification.exception.NoSuchNotificationQueueEntryException;
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalServiceUtil;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -58,16 +47,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceNotificationQueueEntryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.notification.service"));
 
 	@Before
@@ -81,7 +81,8 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceNotificationQueueEntry> iterator = _commerceNotificationQueueEntries.iterator();
+		Iterator<CommerceNotificationQueueEntry> iterator =
+			_commerceNotificationQueueEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -94,7 +95,8 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = _persistence.create(pk);
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceNotificationQueueEntry);
 
@@ -103,11 +105,14 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
 		_persistence.remove(newCommerceNotificationQueueEntry);
 
-		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry = _persistence.fetchByPrimaryKey(newCommerceNotificationQueueEntry.getPrimaryKey());
+		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceNotificationQueueEntry.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceNotificationQueueEntry);
 	}
@@ -121,90 +126,129 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = _persistence.create(pk);
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			_persistence.create(pk);
 
 		newCommerceNotificationQueueEntry.setGroupId(RandomTestUtil.nextLong());
 
-		newCommerceNotificationQueueEntry.setCompanyId(RandomTestUtil.nextLong());
+		newCommerceNotificationQueueEntry.setCompanyId(
+			RandomTestUtil.nextLong());
 
 		newCommerceNotificationQueueEntry.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceNotificationQueueEntry.setUserName(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceNotificationQueueEntry.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceNotificationQueueEntry.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceNotificationQueueEntry.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceNotificationQueueEntry.setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+		newCommerceNotificationQueueEntry.setCommerceNotificationTemplateId(
+			RandomTestUtil.nextLong());
 
-		newCommerceNotificationQueueEntry.setFrom(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setFrom(
+			RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setFromName(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setFromName(
+			RandomTestUtil.randomString());
 
 		newCommerceNotificationQueueEntry.setTo(RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setToName(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setToName(
+			RandomTestUtil.randomString());
 
 		newCommerceNotificationQueueEntry.setCc(RandomTestUtil.randomString());
 
 		newCommerceNotificationQueueEntry.setBcc(RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setSubject(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setSubject(
+			RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setBody(RandomTestUtil.randomString());
+		newCommerceNotificationQueueEntry.setBody(
+			RandomTestUtil.randomString());
 
-		newCommerceNotificationQueueEntry.setPriority(RandomTestUtil.nextDouble());
+		newCommerceNotificationQueueEntry.setPriority(
+			RandomTestUtil.nextDouble());
 
-		newCommerceNotificationQueueEntry.setSent(RandomTestUtil.randomBoolean());
+		newCommerceNotificationQueueEntry.setSent(
+			RandomTestUtil.randomBoolean());
 
-		newCommerceNotificationQueueEntry.setSentDate(RandomTestUtil.nextDate());
+		newCommerceNotificationQueueEntry.setSentDate(
+			RandomTestUtil.nextDate());
 
-		_commerceNotificationQueueEntries.add(_persistence.update(
-				newCommerceNotificationQueueEntry));
+		_commerceNotificationQueueEntries.add(
+			_persistence.update(newCommerceNotificationQueueEntry));
 
-		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry = _persistence.findByPrimaryKey(newCommerceNotificationQueueEntry.getPrimaryKey());
+		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceNotificationQueueEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getCommerceNotificationQueueEntryId(),
-			newCommerceNotificationQueueEntry.getCommerceNotificationQueueEntryId());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.
+				getCommerceNotificationQueueEntryId(),
+			newCommerceNotificationQueueEntry.
+				getCommerceNotificationQueueEntryId());
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getGroupId(),
 			newCommerceNotificationQueueEntry.getGroupId());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getCompanyId(),
 			newCommerceNotificationQueueEntry.getCompanyId());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getUserId(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getUserId(),
 			newCommerceNotificationQueueEntry.getUserId());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getUserName(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getUserName(),
 			newCommerceNotificationQueueEntry.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceNotificationQueueEntry.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceNotificationQueueEntry.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceNotificationQueueEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceNotificationQueueEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getCommerceNotificationTemplateId(),
-			newCommerceNotificationQueueEntry.getCommerceNotificationTemplateId());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getFrom(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.
+				getCommerceNotificationTemplateId(),
+			newCommerceNotificationQueueEntry.
+				getCommerceNotificationTemplateId());
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getFrom(),
 			newCommerceNotificationQueueEntry.getFrom());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getFromName(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getFromName(),
 			newCommerceNotificationQueueEntry.getFromName());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getTo(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getTo(),
 			newCommerceNotificationQueueEntry.getTo());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getToName(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getToName(),
 			newCommerceNotificationQueueEntry.getToName());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getCc(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getCc(),
 			newCommerceNotificationQueueEntry.getCc());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getBcc(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getBcc(),
 			newCommerceNotificationQueueEntry.getBcc());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getSubject(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getSubject(),
 			newCommerceNotificationQueueEntry.getSubject());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.getBody(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getBody(),
 			newCommerceNotificationQueueEntry.getBody());
-		AssertUtils.assertEquals(existingCommerceNotificationQueueEntry.getPriority(),
+		AssertUtils.assertEquals(
+			existingCommerceNotificationQueueEntry.getPriority(),
 			newCommerceNotificationQueueEntry.getPriority());
-		Assert.assertEquals(existingCommerceNotificationQueueEntry.isSent(),
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.isSent(),
 			newCommerceNotificationQueueEntry.isSent());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceNotificationQueueEntry.getSentDate()),
 			Time.getShortTimestamp(
 				newCommerceNotificationQueueEntry.getSentDate()));
@@ -218,9 +262,9 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCommerceNotificationTemplateId()
-		throws Exception {
-		_persistence.countByCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+	public void testCountByCommerceNotificationTemplateId() throws Exception {
+		_persistence.countByCommerceNotificationTemplateId(
+			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceNotificationTemplateId(0L);
 	}
@@ -241,11 +285,15 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
-		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry = _persistence.findByPrimaryKey(newCommerceNotificationQueueEntry.getPrimaryKey());
+		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceNotificationQueueEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationQueueEntry,
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry,
 			newCommerceNotificationQueueEntry);
 	}
 
@@ -258,12 +306,15 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceNotificationQueueEntry> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceNotificationQueueEntry",
+	protected OrderByComparator<CommerceNotificationQueueEntry>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceNotificationQueueEntry",
 			"commerceNotificationQueueEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "commerceNotificationTemplateId", true,
@@ -274,11 +325,15 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
-		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry = _persistence.fetchByPrimaryKey(newCommerceNotificationQueueEntry.getPrimaryKey());
+		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceNotificationQueueEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceNotificationQueueEntry,
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry,
 			newCommerceNotificationQueueEntry);
 	}
 
@@ -286,7 +341,8 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationQueueEntry missingCommerceNotificationQueueEntry = _persistence.fetchByPrimaryKey(pk);
+		CommerceNotificationQueueEntry missingCommerceNotificationQueueEntry =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceNotificationQueueEntry);
 	}
@@ -294,22 +350,28 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry1 = addCommerceNotificationQueueEntry();
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry2 = addCommerceNotificationQueueEntry();
+
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry1 =
+			addCommerceNotificationQueueEntry();
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry2 =
+			addCommerceNotificationQueueEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceNotificationQueueEntry1.getPrimaryKey());
 		primaryKeys.add(newCommerceNotificationQueueEntry2.getPrimaryKey());
 
-		Map<Serializable, CommerceNotificationQueueEntry> commerceNotificationQueueEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationQueueEntry>
+			commerceNotificationQueueEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceNotificationQueueEntries.size());
-		Assert.assertEquals(newCommerceNotificationQueueEntry1,
+		Assert.assertEquals(
+			newCommerceNotificationQueueEntry1,
 			commerceNotificationQueueEntries.get(
 				newCommerceNotificationQueueEntry1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceNotificationQueueEntry2,
+		Assert.assertEquals(
+			newCommerceNotificationQueueEntry2,
 			commerceNotificationQueueEntries.get(
 				newCommerceNotificationQueueEntry2.getPrimaryKey()));
 	}
@@ -317,6 +379,7 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -326,8 +389,9 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceNotificationQueueEntry> commerceNotificationQueueEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationQueueEntry>
+			commerceNotificationQueueEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceNotificationQueueEntries.isEmpty());
 	}
@@ -335,7 +399,9 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -344,40 +410,44 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 		primaryKeys.add(newCommerceNotificationQueueEntry.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceNotificationQueueEntry> commerceNotificationQueueEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationQueueEntry>
+			commerceNotificationQueueEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceNotificationQueueEntries.size());
-		Assert.assertEquals(newCommerceNotificationQueueEntry,
+		Assert.assertEquals(
+			newCommerceNotificationQueueEntry,
 			commerceNotificationQueueEntries.get(
 				newCommerceNotificationQueueEntry.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceNotificationQueueEntry> commerceNotificationQueueEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationQueueEntry>
+			commerceNotificationQueueEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceNotificationQueueEntries.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceNotificationQueueEntry.getPrimaryKey());
 
-		Map<Serializable, CommerceNotificationQueueEntry> commerceNotificationQueueEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceNotificationQueueEntry>
+			commerceNotificationQueueEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceNotificationQueueEntries.size());
-		Assert.assertEquals(newCommerceNotificationQueueEntry,
+		Assert.assertEquals(
+			newCommerceNotificationQueueEntry,
 			commerceNotificationQueueEntries.get(
 				newCommerceNotificationQueueEntry.getPrimaryKey()));
 	}
@@ -386,16 +456,24 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceNotificationQueueEntryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceNotificationQueueEntryLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceNotificationQueueEntry>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceNotificationQueueEntry>() {
+
 				@Override
 				public void performAction(
-					CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry) {
+
 					Assert.assertNotNull(commerceNotificationQueueEntry);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -404,56 +482,66 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationQueueEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationQueueEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceNotificationQueueEntryId",
-				newCommerceNotificationQueueEntry.getCommerceNotificationQueueEntryId()));
+				newCommerceNotificationQueueEntry.
+					getCommerceNotificationQueueEntryId()));
 
-		List<CommerceNotificationQueueEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceNotificationQueueEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry = result.get(0);
+		CommerceNotificationQueueEntry existingCommerceNotificationQueueEntry =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceNotificationQueueEntry,
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry,
 			newCommerceNotificationQueueEntry);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationQueueEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationQueueEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceNotificationQueueEntryId", RandomTestUtil.nextLong()));
 
-		List<CommerceNotificationQueueEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceNotificationQueueEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry = addCommerceNotificationQueueEntry();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
+			addCommerceNotificationQueueEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationQueueEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationQueueEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceNotificationQueueEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceNotificationQueueEntryId"));
 
-		Object newCommerceNotificationQueueEntryId = newCommerceNotificationQueueEntry.getCommerceNotificationQueueEntryId();
+		Object newCommerceNotificationQueueEntryId =
+			newCommerceNotificationQueueEntry.
+				getCommerceNotificationQueueEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceNotificationQueueEntryId",
-				new Object[] { newCommerceNotificationQueueEntryId }));
+				new Object[] {newCommerceNotificationQueueEntryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -461,21 +549,23 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 		Object existingCommerceNotificationQueueEntryId = result.get(0);
 
-		Assert.assertEquals(existingCommerceNotificationQueueEntryId,
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntryId,
 			newCommerceNotificationQueueEntryId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceNotificationQueueEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationQueueEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceNotificationQueueEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceNotificationQueueEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceNotificationQueueEntryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -484,9 +574,11 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 	protected CommerceNotificationQueueEntry addCommerceNotificationQueueEntry()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = _persistence.create(pk);
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			_persistence.create(pk);
 
 		commerceNotificationQueueEntry.setGroupId(RandomTestUtil.nextLong());
 
@@ -494,17 +586,21 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 		commerceNotificationQueueEntry.setUserId(RandomTestUtil.nextLong());
 
-		commerceNotificationQueueEntry.setUserName(RandomTestUtil.randomString());
+		commerceNotificationQueueEntry.setUserName(
+			RandomTestUtil.randomString());
 
 		commerceNotificationQueueEntry.setCreateDate(RandomTestUtil.nextDate());
 
-		commerceNotificationQueueEntry.setModifiedDate(RandomTestUtil.nextDate());
+		commerceNotificationQueueEntry.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		commerceNotificationQueueEntry.setCommerceNotificationTemplateId(RandomTestUtil.nextLong());
+		commerceNotificationQueueEntry.setCommerceNotificationTemplateId(
+			RandomTestUtil.nextLong());
 
 		commerceNotificationQueueEntry.setFrom(RandomTestUtil.randomString());
 
-		commerceNotificationQueueEntry.setFromName(RandomTestUtil.randomString());
+		commerceNotificationQueueEntry.setFromName(
+			RandomTestUtil.randomString());
 
 		commerceNotificationQueueEntry.setTo(RandomTestUtil.randomString());
 
@@ -514,7 +610,8 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 		commerceNotificationQueueEntry.setBcc(RandomTestUtil.randomString());
 
-		commerceNotificationQueueEntry.setSubject(RandomTestUtil.randomString());
+		commerceNotificationQueueEntry.setSubject(
+			RandomTestUtil.randomString());
 
 		commerceNotificationQueueEntry.setBody(RandomTestUtil.randomString());
 
@@ -524,14 +621,16 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 		commerceNotificationQueueEntry.setSentDate(RandomTestUtil.nextDate());
 
-		_commerceNotificationQueueEntries.add(_persistence.update(
-				commerceNotificationQueueEntry));
+		_commerceNotificationQueueEntries.add(
+			_persistence.update(commerceNotificationQueueEntry));
 
 		return commerceNotificationQueueEntry;
 	}
 
-	private List<CommerceNotificationQueueEntry> _commerceNotificationQueueEntries =
-		new ArrayList<CommerceNotificationQueueEntry>();
+	private List<CommerceNotificationQueueEntry>
+		_commerceNotificationQueueEntries =
+			new ArrayList<CommerceNotificationQueueEntry>();
 	private CommerceNotificationQueueEntryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

@@ -28,95 +28,148 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CPDefinitionSpecificationOptionValueServiceWrapper
 	implements CPDefinitionSpecificationOptionValueService,
-		ServiceWrapper<CPDefinitionSpecificationOptionValueService> {
+			   ServiceWrapper<CPDefinitionSpecificationOptionValueService> {
+
 	public CPDefinitionSpecificationOptionValueServiceWrapper(
-		CPDefinitionSpecificationOptionValueService cpDefinitionSpecificationOptionValueService) {
-		_cpDefinitionSpecificationOptionValueService = cpDefinitionSpecificationOptionValueService;
+		CPDefinitionSpecificationOptionValueService
+			cpDefinitionSpecificationOptionValueService) {
+
+		_cpDefinitionSpecificationOptionValueService =
+			cpDefinitionSpecificationOptionValueService;
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue addCPDefinitionSpecificationOptionValue(
-		long cpDefinitionId, long cpSpecificationOptionId,
-		long cpOptionCategoryId,
-		java.util.Map<java.util.Locale, String> valueMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.addCPDefinitionSpecificationOptionValue(cpDefinitionId,
-			cpSpecificationOptionId, cpOptionCategoryId, valueMap, priority,
-			serviceContext);
+	public
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				addCPDefinitionSpecificationOptionValue(
+					long cpDefinitionId, long cpSpecificationOptionId,
+					long cpOptionCategoryId,
+					java.util.Map<java.util.Locale, String> valueMap,
+					double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			addCPDefinitionSpecificationOptionValue(
+				cpDefinitionId, cpSpecificationOptionId, cpOptionCategoryId,
+				valueMap, priority, serviceContext);
 	}
 
 	@Override
 	public void deleteCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId)
+			long cpDefinitionSpecificationOptionValueId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpDefinitionSpecificationOptionValueService.deleteCPDefinitionSpecificationOptionValue(cpDefinitionSpecificationOptionValueId);
+
+		_cpDefinitionSpecificationOptionValueService.
+			deleteCPDefinitionSpecificationOptionValue(
+				cpDefinitionSpecificationOptionValueId);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue fetchCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.fetchCPDefinitionSpecificationOptionValue(cpDefinitionSpecificationOptionValueId);
+	public
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				fetchCPDefinitionSpecificationOptionValue(
+					long cpDefinitionSpecificationOptionValueId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			fetchCPDefinitionSpecificationOptionValue(
+				cpDefinitionSpecificationOptionValueId);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue getCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValue(cpDefinitionSpecificationOptionValueId);
+	public
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				getCPDefinitionSpecificationOptionValue(
+					long cpDefinitionSpecificationOptionValueId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			getCPDefinitionSpecificationOptionValue(
+				cpDefinitionSpecificationOptionValueId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpSpecificationOptionId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValues(cpSpecificationOptionId,
-			start, end);
+	public java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						long cpSpecificationOptionId, int start, int end)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			getCPDefinitionSpecificationOptionValues(
+				cpSpecificationOptionId, start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValues(cpDefinitionId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						long cpDefinitionId, int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.product.model.
+								CPDefinitionSpecificationOptionValue>
+									orderByComparator)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			getCPDefinitionSpecificationOptionValues(
+				cpDefinitionId, start, end, orderByComparator);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId, long cpOptionCategoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValues(cpDefinitionId,
-			cpOptionCategoryId);
+	public java.util.List
+		<com.liferay.commerce.product.model.
+			CPDefinitionSpecificationOptionValue>
+					getCPDefinitionSpecificationOptionValues(
+						long cpDefinitionId, long cpOptionCategoryId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			getCPDefinitionSpecificationOptionValues(
+				cpDefinitionId, cpOptionCategoryId);
 	}
 
 	@Override
 	public int getCPDefinitionSpecificationOptionValuesCount(
-		long cpSpecificationOptionId)
+			long cpSpecificationOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValuesCount(cpSpecificationOptionId);
+
+		return _cpDefinitionSpecificationOptionValueService.
+			getCPDefinitionSpecificationOptionValuesCount(
+				cpSpecificationOptionId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _cpDefinitionSpecificationOptionValueService.getOSGiServiceIdentifier();
+		return _cpDefinitionSpecificationOptionValueService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue updateCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId, long cpOptionCategoryId,
-		java.util.Map<java.util.Locale, String> valueMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.updateCPDefinitionSpecificationOptionValue(cpDefinitionSpecificationOptionValueId,
-			cpOptionCategoryId, valueMap, priority, serviceContext);
+	public
+		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
+				updateCPDefinitionSpecificationOptionValue(
+					long cpDefinitionSpecificationOptionValueId,
+					long cpOptionCategoryId,
+					java.util.Map<java.util.Locale, String> valueMap,
+					double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDefinitionSpecificationOptionValueService.
+			updateCPDefinitionSpecificationOptionValue(
+				cpDefinitionSpecificationOptionValueId, cpOptionCategoryId,
+				valueMap, priority, serviceContext);
 	}
 
 	@Override
@@ -126,9 +179,14 @@ public class CPDefinitionSpecificationOptionValueServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CPDefinitionSpecificationOptionValueService cpDefinitionSpecificationOptionValueService) {
-		_cpDefinitionSpecificationOptionValueService = cpDefinitionSpecificationOptionValueService;
+		CPDefinitionSpecificationOptionValueService
+			cpDefinitionSpecificationOptionValueService) {
+
+		_cpDefinitionSpecificationOptionValueService =
+			cpDefinitionSpecificationOptionValueService;
 	}
 
-	private CPDefinitionSpecificationOptionValueService _cpDefinitionSpecificationOptionValueService;
+	private CPDefinitionSpecificationOptionValueService
+		_cpDefinitionSpecificationOptionValueService;
+
 }

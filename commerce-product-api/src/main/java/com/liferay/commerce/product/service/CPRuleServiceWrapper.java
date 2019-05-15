@@ -26,92 +26,108 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @generated
  */
 @ProviderType
-public class CPRuleServiceWrapper implements CPRuleService,
-	ServiceWrapper<CPRuleService> {
+public class CPRuleServiceWrapper
+	implements CPRuleService, ServiceWrapper<CPRuleService> {
+
 	public CPRuleServiceWrapper(CPRuleService cpRuleService) {
 		_cpRuleService = cpRuleService;
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPRule addCPRule(String name,
-		boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CPRule addCPRule(
+			String name, boolean active, String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleService.addCPRule(name, active, type, serviceContext);
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPRule addCPRule(String name,
-		boolean active, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CPRule addCPRule(
+			String name, boolean active, String type,
+			com.liferay.portal.kernel.util.UnicodeProperties
+				typeSettingsProperties,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleService.addCPRule(name, active, type,
-			typeSettingsProperties, serviceContext);
+
+		return _cpRuleService.addCPRule(
+			name, active, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
 	public void deleteCPRule(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_cpRuleService.deleteCPRule(cpRuleId);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CPRule getCPRule(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleService.getCPRule(cpRuleId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPRule> getCPRules(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPRule> orderByComparator)
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CPRule> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleService.getCPRules(groupId, start, end, orderByComparator);
+
+		return _cpRuleService.getCPRules(
+			groupId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPRulesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleService.getCPRulesCount(groupId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpRuleService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(
-		long companyId, long groupId, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleService.searchCPRules(companyId, groupId, keywords,
-			start, end, sort);
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPRule> searchCPRules(
+				long companyId, long groupId, String keywords, int start,
+				int end, com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpRuleService.searchCPRules(
+			companyId, groupId, keywords, start, end, sort);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CPRule updateCPRule(
-		long cpRuleId, String name, boolean active, String type,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			long cpRuleId, String name, boolean active, String type,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleService.updateCPRule(cpRuleId, name, active, type,
+
+		return _cpRuleService.updateCPRule(
+			cpRuleId, name, active, type, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPRule updateCPRule(
+			long cpRuleId, String name, boolean active, String type,
+			com.liferay.portal.kernel.util.UnicodeProperties
+				typeSettingsProperties,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpRuleService.updateCPRule(
+			cpRuleId, name, active, type, typeSettingsProperties,
 			serviceContext);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPRule updateCPRule(
-		long cpRuleId, String name, boolean active, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleService.updateCPRule(cpRuleId, name, active, type,
-			typeSettingsProperties, serviceContext);
 	}
 
 	@Override
@@ -125,4 +141,5 @@ public class CPRuleServiceWrapper implements CPRuleService,
 	}
 
 	private CPRuleService _cpRuleService;
+
 }

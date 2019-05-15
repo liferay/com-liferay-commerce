@@ -25,35 +25,40 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderItemModel
- * @see com.liferay.commerce.model.impl.CommerceOrderItemImpl
- * @see com.liferay.commerce.model.impl.CommerceOrderItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceOrderItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceOrderItemImpl"
+)
 @ProviderType
-public interface CommerceOrderItem extends CommerceOrderItemModel, PersistedModel {
+public interface CommerceOrderItem
+	extends CommerceOrderItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceOrderItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceOrderItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceOrderItem, Long> COMMERCE_ORDER_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceOrderItem, Long>() {
-			@Override
-			public Long get(CommerceOrderItem commerceOrderItem) {
-				return commerceOrderItem.getCommerceOrderItemId();
-			}
+	public static final Accessor<CommerceOrderItem, Long>
+		COMMERCE_ORDER_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceOrderItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceOrderItem commerceOrderItem) {
+					return commerceOrderItem.getCommerceOrderItemId();
+				}
 
-			@Override
-			public Class<CommerceOrderItem> getTypeClass() {
-				return CommerceOrderItem.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceOrderItem> getTypeClass() {
+					return CommerceOrderItem.class;
+				}
+
+			};
 
 	public CommerceOrder getCommerceOrder()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -70,9 +75,11 @@ public interface CommerceOrderItem extends CommerceOrderItemModel, PersistedMode
 	public com.liferay.commerce.product.model.CProduct getCProduct()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.currency.model.CommerceMoney getFinalPriceMoney()
+	public com.liferay.commerce.currency.model.CommerceMoney
+			getFinalPriceMoney()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getUnitPriceMoney()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

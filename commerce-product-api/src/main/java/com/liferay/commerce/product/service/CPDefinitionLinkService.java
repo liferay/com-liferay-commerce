@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionLink;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,26 +38,33 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CPDefinitionLinkServiceUtil
- * @see com.liferay.commerce.product.service.base.CPDefinitionLinkServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPDefinitionLink"}, service = CPDefinitionLinkService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPDefinitionLink"
+	},
+	service = CPDefinitionLinkService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPDefinitionLinkService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPDefinitionLinkServiceUtil} to access the cp definition link remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionLinkServiceUtil} to access the cp definition link remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPDefinitionLink addCPDefinitionLink(long cpDefinitionId,
-		long cProductId, double priority, String type,
-		ServiceContext serviceContext) throws PortalException;
+	public CPDefinitionLink addCPDefinitionLink(
+			long cpDefinitionId, long cProductId, double priority, String type,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPDefinitionLink(long cpDefinitionLinkId)
 		throws PortalException;
@@ -76,17 +82,19 @@ public interface CPDefinitionLinkService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
-		int start, int end) throws PortalException;
+	public List<CPDefinitionLink> getCPDefinitionLinks(
+			long cpDefinitionId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
-		String type) throws PortalException;
+	public List<CPDefinitionLink> getCPDefinitionLinks(
+			long cpDefinitionId, String type)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
-		String type, int start, int end,
-		OrderByComparator<CPDefinitionLink> orderByComparator)
+	public List<CPDefinitionLink> getCPDefinitionLinks(
+			long cpDefinitionId, String type, int start, int end,
+			OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -98,17 +106,20 @@ public interface CPDefinitionLinkService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPDefinitionLink updateCPDefinitionLink(long cpDefinitionLinkId,
-		double priority, ServiceContext serviceContext)
+	public CPDefinitionLink updateCPDefinitionLink(
+			long cpDefinitionLinkId, double priority,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public void updateCPDefinitionLinks(long cpDefinitionId,
-		long[] cpDefinitionIds2, String type, ServiceContext serviceContext)
+	public void updateCPDefinitionLinks(
+			long cpDefinitionId, long[] cpDefinitionIds2, String type,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

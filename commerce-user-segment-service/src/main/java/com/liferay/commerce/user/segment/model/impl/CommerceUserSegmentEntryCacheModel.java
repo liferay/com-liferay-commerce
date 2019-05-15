@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceUserSegmentEntry in entity cache.
  *
  * @author Marco Leo
- * @see CommerceUserSegmentEntry
  * @generated
  */
 @ProviderType
-public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUserSegmentEntry>,
-	Externalizable {
+public class CommerceUserSegmentEntryCacheModel
+	implements CacheModel<CommerceUserSegmentEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUs
 			return false;
 		}
 
-		CommerceUserSegmentEntryCacheModel commerceUserSegmentEntryCacheModel = (CommerceUserSegmentEntryCacheModel)obj;
+		CommerceUserSegmentEntryCacheModel commerceUserSegmentEntryCacheModel =
+			(CommerceUserSegmentEntryCacheModel)obj;
 
-		if (commerceUserSegmentEntryId == commerceUserSegmentEntryCacheModel.commerceUserSegmentEntryId) {
+		if (commerceUserSegmentEntryId ==
+				commerceUserSegmentEntryCacheModel.commerceUserSegmentEntryId) {
+
 			return true;
 		}
 
@@ -98,9 +100,11 @@ public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUs
 
 	@Override
 	public CommerceUserSegmentEntry toEntityModel() {
-		CommerceUserSegmentEntryImpl commerceUserSegmentEntryImpl = new CommerceUserSegmentEntryImpl();
+		CommerceUserSegmentEntryImpl commerceUserSegmentEntryImpl =
+			new CommerceUserSegmentEntryImpl();
 
-		commerceUserSegmentEntryImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		commerceUserSegmentEntryImpl.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 		commerceUserSegmentEntryImpl.setGroupId(groupId);
 		commerceUserSegmentEntryImpl.setCompanyId(companyId);
 		commerceUserSegmentEntryImpl.setUserId(userId);
@@ -123,7 +127,8 @@ public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUs
 			commerceUserSegmentEntryImpl.setModifiedDate(null);
 		}
 		else {
-			commerceUserSegmentEntryImpl.setModifiedDate(new Date(modifiedDate));
+			commerceUserSegmentEntryImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (name == null) {
@@ -172,8 +177,7 @@ public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUs
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceUserSegmentEntryId);
 
 		objectOutput.writeLong(groupId);
@@ -225,4 +229,5 @@ public class CommerceUserSegmentEntryCacheModel implements CacheModel<CommerceUs
 	public boolean active;
 	public boolean system;
 	public double priority;
+
 }

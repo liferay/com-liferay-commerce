@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceShipment;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceShipment in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShipment
  * @generated
  */
 @ProviderType
-public class CommerceShipmentCacheModel implements CacheModel<CommerceShipment>,
-	Externalizable {
+public class CommerceShipmentCacheModel
+	implements CacheModel<CommerceShipment>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceShipmentCacheModel implements CacheModel<CommerceShipment>,
 			return false;
 		}
 
-		CommerceShipmentCacheModel commerceShipmentCacheModel = (CommerceShipmentCacheModel)obj;
+		CommerceShipmentCacheModel commerceShipmentCacheModel =
+			(CommerceShipmentCacheModel)obj;
 
-		if (commerceShipmentId == commerceShipmentCacheModel.commerceShipmentId) {
+		if (commerceShipmentId ==
+				commerceShipmentCacheModel.commerceShipmentId) {
+
 			return true;
 		}
 
@@ -136,7 +138,8 @@ public class CommerceShipmentCacheModel implements CacheModel<CommerceShipment>,
 
 		commerceShipmentImpl.setCommerceAccountId(commerceAccountId);
 		commerceShipmentImpl.setCommerceAddressId(commerceAddressId);
-		commerceShipmentImpl.setCommerceShippingMethodId(commerceShippingMethodId);
+		commerceShipmentImpl.setCommerceShippingMethodId(
+			commerceShippingMethodId);
 
 		if (shippingOptionName == null) {
 			commerceShipmentImpl.setShippingOptionName("");
@@ -208,8 +211,7 @@ public class CommerceShipmentCacheModel implements CacheModel<CommerceShipment>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceShipmentId);
 
 		objectOutput.writeLong(groupId);
@@ -276,4 +278,5 @@ public class CommerceShipmentCacheModel implements CacheModel<CommerceShipment>,
 	public int status;
 	public long shippingDate;
 	public long expectedDate;
+
 }

@@ -17,9 +17,7 @@ package com.liferay.commerce.price.list.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,10 +40,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
-	ModelWrapper<CommerceTierPriceEntry> {
+public class CommerceTierPriceEntryWrapper
+	implements CommerceTierPriceEntry, ModelWrapper<CommerceTierPriceEntry> {
+
 	public CommerceTierPriceEntryWrapper(
 		CommerceTierPriceEntry commerceTierPriceEntry) {
+
 		_commerceTierPriceEntry = commerceTierPriceEntry;
 	}
 
@@ -65,7 +65,8 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
-		attributes.put("commerceTierPriceEntryId", getCommerceTierPriceEntryId());
+		attributes.put(
+			"commerceTierPriceEntryId", getCommerceTierPriceEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -90,14 +91,14 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 		}
 
 		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
+			"externalReferenceCode");
 
 		if (externalReferenceCode != null) {
 			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commerceTierPriceEntryId = (Long)attributes.get(
-				"commerceTierPriceEntryId");
+			"commerceTierPriceEntryId");
 
 		if (commerceTierPriceEntryId != null) {
 			setCommerceTierPriceEntryId(commerceTierPriceEntryId);
@@ -139,7 +140,8 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commercePriceEntryId = (Long)attributes.get("commercePriceEntryId");
+		Long commercePriceEntryId = (Long)attributes.get(
+			"commercePriceEntryId");
 
 		if (commercePriceEntryId != null) {
 			setCommercePriceEntryId(commercePriceEntryId);
@@ -172,7 +174,8 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 
 	@Override
 	public Object clone() {
-		return new CommerceTierPriceEntryWrapper((CommerceTierPriceEntry)_commerceTierPriceEntry.clone());
+		return new CommerceTierPriceEntryWrapper(
+			(CommerceTierPriceEntry)_commerceTierPriceEntry.clone());
 	}
 
 	@Override
@@ -183,44 +186,45 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	@Override
 	public CommercePriceEntry getCommercePriceEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceTierPriceEntry.getCommercePriceEntry();
 	}
 
 	/**
-	* Returns the commerce price entry ID of this commerce tier price entry.
-	*
-	* @return the commerce price entry ID of this commerce tier price entry
-	*/
+	 * Returns the commerce price entry ID of this commerce tier price entry.
+	 *
+	 * @return the commerce price entry ID of this commerce tier price entry
+	 */
 	@Override
 	public long getCommercePriceEntryId() {
 		return _commerceTierPriceEntry.getCommercePriceEntryId();
 	}
 
 	/**
-	* Returns the commerce tier price entry ID of this commerce tier price entry.
-	*
-	* @return the commerce tier price entry ID of this commerce tier price entry
-	*/
+	 * Returns the commerce tier price entry ID of this commerce tier price entry.
+	 *
+	 * @return the commerce tier price entry ID of this commerce tier price entry
+	 */
 	@Override
 	public long getCommerceTierPriceEntryId() {
 		return _commerceTierPriceEntry.getCommerceTierPriceEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce tier price entry.
-	*
-	* @return the company ID of this commerce tier price entry
-	*/
+	 * Returns the company ID of this commerce tier price entry.
+	 *
+	 * @return the company ID of this commerce tier price entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceTierPriceEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce tier price entry.
-	*
-	* @return the create date of this commerce tier price entry
-	*/
+	 * Returns the create date of this commerce tier price entry.
+	 *
+	 * @return the create date of this commerce tier price entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceTierPriceEntry.getCreateDate();
@@ -232,60 +236,60 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Returns the external reference code of this commerce tier price entry.
-	*
-	* @return the external reference code of this commerce tier price entry
-	*/
+	 * Returns the external reference code of this commerce tier price entry.
+	 *
+	 * @return the external reference code of this commerce tier price entry
+	 */
 	@Override
 	public String getExternalReferenceCode() {
 		return _commerceTierPriceEntry.getExternalReferenceCode();
 	}
 
 	/**
-	* Returns the group ID of this commerce tier price entry.
-	*
-	* @return the group ID of this commerce tier price entry
-	*/
+	 * Returns the group ID of this commerce tier price entry.
+	 *
+	 * @return the group ID of this commerce tier price entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceTierPriceEntry.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce tier price entry.
-	*
-	* @return the last publish date of this commerce tier price entry
-	*/
+	 * Returns the last publish date of this commerce tier price entry.
+	 *
+	 * @return the last publish date of this commerce tier price entry
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commerceTierPriceEntry.getLastPublishDate();
 	}
 
 	/**
-	* Returns the min quantity of this commerce tier price entry.
-	*
-	* @return the min quantity of this commerce tier price entry
-	*/
+	 * Returns the min quantity of this commerce tier price entry.
+	 *
+	 * @return the min quantity of this commerce tier price entry
+	 */
 	@Override
 	public int getMinQuantity() {
 		return _commerceTierPriceEntry.getMinQuantity();
 	}
 
 	/**
-	* Returns the modified date of this commerce tier price entry.
-	*
-	* @return the modified date of this commerce tier price entry
-	*/
+	 * Returns the modified date of this commerce tier price entry.
+	 *
+	 * @return the modified date of this commerce tier price entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceTierPriceEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the price of this commerce tier price entry.
-	*
-	* @return the price of this commerce tier price entry
-	*/
+	 * Returns the price of this commerce tier price entry.
+	 *
+	 * @return the price of this commerce tier price entry
+	 */
 	@Override
 	public BigDecimal getPrice() {
 		return _commerceTierPriceEntry.getPrice();
@@ -293,16 +297,17 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceMoney getPriceMoney(
-		long commerceCurrencyId)
+			long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceTierPriceEntry.getPriceMoney(commerceCurrencyId);
 	}
 
 	/**
-	* Returns the primary key of this commerce tier price entry.
-	*
-	* @return the primary key of this commerce tier price entry
-	*/
+	 * Returns the primary key of this commerce tier price entry.
+	 *
+	 * @return the primary key of this commerce tier price entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceTierPriceEntry.getPrimaryKey();
@@ -314,10 +319,10 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Returns the promo price of this commerce tier price entry.
-	*
-	* @return the promo price of this commerce tier price entry
-	*/
+	 * Returns the promo price of this commerce tier price entry.
+	 *
+	 * @return the promo price of this commerce tier price entry
+	 */
 	@Override
 	public BigDecimal getPromoPrice() {
 		return _commerceTierPriceEntry.getPromoPrice();
@@ -325,46 +330,47 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceMoney getPromoPriceMoney(
-		long commerceCurrencyId)
+			long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceTierPriceEntry.getPromoPriceMoney(commerceCurrencyId);
 	}
 
 	/**
-	* Returns the user ID of this commerce tier price entry.
-	*
-	* @return the user ID of this commerce tier price entry
-	*/
+	 * Returns the user ID of this commerce tier price entry.
+	 *
+	 * @return the user ID of this commerce tier price entry
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceTierPriceEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce tier price entry.
-	*
-	* @return the user name of this commerce tier price entry
-	*/
+	 * Returns the user name of this commerce tier price entry.
+	 *
+	 * @return the user name of this commerce tier price entry
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceTierPriceEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce tier price entry.
-	*
-	* @return the user uuid of this commerce tier price entry
-	*/
+	 * Returns the user uuid of this commerce tier price entry.
+	 *
+	 * @return the user uuid of this commerce tier price entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceTierPriceEntry.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce tier price entry.
-	*
-	* @return the uuid of this commerce tier price entry
-	*/
+	 * Returns the uuid of this commerce tier price entry.
+	 *
+	 * @return the uuid of this commerce tier price entry
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceTierPriceEntry.getUuid();
@@ -401,40 +407,41 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Sets the commerce price entry ID of this commerce tier price entry.
-	*
-	* @param commercePriceEntryId the commerce price entry ID of this commerce tier price entry
-	*/
+	 * Sets the commerce price entry ID of this commerce tier price entry.
+	 *
+	 * @param commercePriceEntryId the commerce price entry ID of this commerce tier price entry
+	 */
 	@Override
 	public void setCommercePriceEntryId(long commercePriceEntryId) {
 		_commerceTierPriceEntry.setCommercePriceEntryId(commercePriceEntryId);
 	}
 
 	/**
-	* Sets the commerce tier price entry ID of this commerce tier price entry.
-	*
-	* @param commerceTierPriceEntryId the commerce tier price entry ID of this commerce tier price entry
-	*/
+	 * Sets the commerce tier price entry ID of this commerce tier price entry.
+	 *
+	 * @param commerceTierPriceEntryId the commerce tier price entry ID of this commerce tier price entry
+	 */
 	@Override
 	public void setCommerceTierPriceEntryId(long commerceTierPriceEntryId) {
-		_commerceTierPriceEntry.setCommerceTierPriceEntryId(commerceTierPriceEntryId);
+		_commerceTierPriceEntry.setCommerceTierPriceEntryId(
+			commerceTierPriceEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce tier price entry.
-	*
-	* @param companyId the company ID of this commerce tier price entry
-	*/
+	 * Sets the company ID of this commerce tier price entry.
+	 *
+	 * @param companyId the company ID of this commerce tier price entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceTierPriceEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce tier price entry.
-	*
-	* @param createDate the create date of this commerce tier price entry
-	*/
+	 * Sets the create date of this commerce tier price entry.
+	 *
+	 * @param createDate the create date of this commerce tier price entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceTierPriceEntry.setCreateDate(createDate);
@@ -443,6 +450,7 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceTierPriceEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -457,50 +465,50 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Sets the external reference code of this commerce tier price entry.
-	*
-	* @param externalReferenceCode the external reference code of this commerce tier price entry
-	*/
+	 * Sets the external reference code of this commerce tier price entry.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce tier price entry
+	 */
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commerceTierPriceEntry.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
-	* Sets the group ID of this commerce tier price entry.
-	*
-	* @param groupId the group ID of this commerce tier price entry
-	*/
+	 * Sets the group ID of this commerce tier price entry.
+	 *
+	 * @param groupId the group ID of this commerce tier price entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceTierPriceEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce tier price entry.
-	*
-	* @param lastPublishDate the last publish date of this commerce tier price entry
-	*/
+	 * Sets the last publish date of this commerce tier price entry.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce tier price entry
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commerceTierPriceEntry.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the min quantity of this commerce tier price entry.
-	*
-	* @param minQuantity the min quantity of this commerce tier price entry
-	*/
+	 * Sets the min quantity of this commerce tier price entry.
+	 *
+	 * @param minQuantity the min quantity of this commerce tier price entry
+	 */
 	@Override
 	public void setMinQuantity(int minQuantity) {
 		_commerceTierPriceEntry.setMinQuantity(minQuantity);
 	}
 
 	/**
-	* Sets the modified date of this commerce tier price entry.
-	*
-	* @param modifiedDate the modified date of this commerce tier price entry
-	*/
+	 * Sets the modified date of this commerce tier price entry.
+	 *
+	 * @param modifiedDate the modified date of this commerce tier price entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceTierPriceEntry.setModifiedDate(modifiedDate);
@@ -512,20 +520,20 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Sets the price of this commerce tier price entry.
-	*
-	* @param price the price of this commerce tier price entry
-	*/
+	 * Sets the price of this commerce tier price entry.
+	 *
+	 * @param price the price of this commerce tier price entry
+	 */
 	@Override
 	public void setPrice(BigDecimal price) {
 		_commerceTierPriceEntry.setPrice(price);
 	}
 
 	/**
-	* Sets the primary key of this commerce tier price entry.
-	*
-	* @param primaryKey the primary key of this commerce tier price entry
-	*/
+	 * Sets the primary key of this commerce tier price entry.
+	 *
+	 * @param primaryKey the primary key of this commerce tier price entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceTierPriceEntry.setPrimaryKey(primaryKey);
@@ -537,63 +545,66 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	/**
-	* Sets the promo price of this commerce tier price entry.
-	*
-	* @param promoPrice the promo price of this commerce tier price entry
-	*/
+	 * Sets the promo price of this commerce tier price entry.
+	 *
+	 * @param promoPrice the promo price of this commerce tier price entry
+	 */
 	@Override
 	public void setPromoPrice(BigDecimal promoPrice) {
 		_commerceTierPriceEntry.setPromoPrice(promoPrice);
 	}
 
 	/**
-	* Sets the user ID of this commerce tier price entry.
-	*
-	* @param userId the user ID of this commerce tier price entry
-	*/
+	 * Sets the user ID of this commerce tier price entry.
+	 *
+	 * @param userId the user ID of this commerce tier price entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceTierPriceEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce tier price entry.
-	*
-	* @param userName the user name of this commerce tier price entry
-	*/
+	 * Sets the user name of this commerce tier price entry.
+	 *
+	 * @param userName the user name of this commerce tier price entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceTierPriceEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce tier price entry.
-	*
-	* @param userUuid the user uuid of this commerce tier price entry
-	*/
+	 * Sets the user uuid of this commerce tier price entry.
+	 *
+	 * @param userUuid the user uuid of this commerce tier price entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceTierPriceEntry.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce tier price entry.
-	*
-	* @param uuid the uuid of this commerce tier price entry
-	*/
+	 * Sets the uuid of this commerce tier price entry.
+	 *
+	 * @param uuid the uuid of this commerce tier price entry
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceTierPriceEntry.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceTierPriceEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceTierPriceEntry>
+		toCacheModel() {
+
 		return _commerceTierPriceEntry.toCacheModel();
 	}
 
 	@Override
 	public CommerceTierPriceEntry toEscapedModel() {
-		return new CommerceTierPriceEntryWrapper(_commerceTierPriceEntry.toEscapedModel());
+		return new CommerceTierPriceEntryWrapper(
+			_commerceTierPriceEntry.toEscapedModel());
 	}
 
 	@Override
@@ -603,7 +614,8 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 
 	@Override
 	public CommerceTierPriceEntry toUnescapedModel() {
-		return new CommerceTierPriceEntryWrapper(_commerceTierPriceEntry.toUnescapedModel());
+		return new CommerceTierPriceEntryWrapper(
+			_commerceTierPriceEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -621,10 +633,13 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 			return false;
 		}
 
-		CommerceTierPriceEntryWrapper commerceTierPriceEntryWrapper = (CommerceTierPriceEntryWrapper)obj;
+		CommerceTierPriceEntryWrapper commerceTierPriceEntryWrapper =
+			(CommerceTierPriceEntryWrapper)obj;
 
-		if (Objects.equals(_commerceTierPriceEntry,
-					commerceTierPriceEntryWrapper._commerceTierPriceEntry)) {
+		if (Objects.equals(
+				_commerceTierPriceEntry,
+				commerceTierPriceEntryWrapper._commerceTierPriceEntry)) {
+
 			return true;
 		}
 
@@ -657,4 +672,5 @@ public class CommerceTierPriceEntryWrapper implements CommerceTierPriceEntry,
 	}
 
 	private final CommerceTierPriceEntry _commerceTierPriceEntry;
+
 }

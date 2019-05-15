@@ -29,12 +29,16 @@ import java.util.List;
  */
 @ProviderType
 public class CPDefinitionLocalizationSoap implements Serializable {
+
 	public static CPDefinitionLocalizationSoap toSoapModel(
 		CPDefinitionLocalization model) {
-		CPDefinitionLocalizationSoap soapModel = new CPDefinitionLocalizationSoap();
+
+		CPDefinitionLocalizationSoap soapModel =
+			new CPDefinitionLocalizationSoap();
 
 		soapModel.setMvccVersion(model.getMvccVersion());
-		soapModel.setCpDefinitionLocalizationId(model.getCpDefinitionLocalizationId());
+		soapModel.setCpDefinitionLocalizationId(
+			model.getCpDefinitionLocalizationId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCPDefinitionId(model.getCPDefinitionId());
 		soapModel.setLanguageId(model.getLanguageId());
@@ -50,7 +54,9 @@ public class CPDefinitionLocalizationSoap implements Serializable {
 
 	public static CPDefinitionLocalizationSoap[] toSoapModels(
 		CPDefinitionLocalization[] models) {
-		CPDefinitionLocalizationSoap[] soapModels = new CPDefinitionLocalizationSoap[models.length];
+
+		CPDefinitionLocalizationSoap[] soapModels =
+			new CPDefinitionLocalizationSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +67,13 @@ public class CPDefinitionLocalizationSoap implements Serializable {
 
 	public static CPDefinitionLocalizationSoap[][] toSoapModels(
 		CPDefinitionLocalization[][] models) {
+
 		CPDefinitionLocalizationSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionLocalizationSoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionLocalizationSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionLocalizationSoap[0][0];
@@ -79,13 +88,16 @@ public class CPDefinitionLocalizationSoap implements Serializable {
 
 	public static CPDefinitionLocalizationSoap[] toSoapModels(
 		List<CPDefinitionLocalization> models) {
-		List<CPDefinitionLocalizationSoap> soapModels = new ArrayList<CPDefinitionLocalizationSoap>(models.size());
+
+		List<CPDefinitionLocalizationSoap> soapModels =
+			new ArrayList<CPDefinitionLocalizationSoap>(models.size());
 
 		for (CPDefinitionLocalization model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionLocalizationSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionLocalizationSoap[soapModels.size()]);
 	}
 
 	public CPDefinitionLocalizationSoap() {
@@ -198,4 +210,5 @@ public class CPDefinitionLocalizationSoap implements Serializable {
 	private String _metaTitle;
 	private String _metaDescription;
 	private String _metaKeywords;
+
 }

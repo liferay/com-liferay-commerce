@@ -35,18 +35,22 @@ import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedO
 public abstract class CommerceShippingFixedOptionBaseImpl
 	extends CommerceShippingFixedOptionModelImpl
 	implements CommerceShippingFixedOption {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce shipping fixed option model instance should use the {@link CommerceShippingFixedOption} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce shipping fixed option model instance should use the <code>CommerceShippingFixedOption</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceShippingFixedOptionLocalServiceUtil.addCommerceShippingFixedOption(this);
+			CommerceShippingFixedOptionLocalServiceUtil.
+				addCommerceShippingFixedOption(this);
 		}
 		else {
-			CommerceShippingFixedOptionLocalServiceUtil.updateCommerceShippingFixedOption(this);
+			CommerceShippingFixedOptionLocalServiceUtil.
+				updateCommerceShippingFixedOption(this);
 		}
 	}
+
 }

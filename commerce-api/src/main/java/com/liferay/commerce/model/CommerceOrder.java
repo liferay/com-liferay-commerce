@@ -25,20 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderModel
- * @see com.liferay.commerce.model.impl.CommerceOrderImpl
- * @see com.liferay.commerce.model.impl.CommerceOrderModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.model.impl.CommerceOrderImpl")
 @ProviderType
 public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceOrderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceOrderImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceOrder, Long> COMMERCE_ORDER_ID_ACCESSOR =
-		new Accessor<CommerceOrder, Long>() {
+	public static final Accessor<CommerceOrder, Long>
+		COMMERCE_ORDER_ID_ACCESSOR = new Accessor<CommerceOrder, Long>() {
+
 			@Override
 			public Long get(CommerceOrder commerceOrder) {
 				return commerceOrder.getCommerceOrderId();
@@ -53,18 +53,21 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 			public Class<CommerceOrder> getTypeClass() {
 				return CommerceOrder.class;
 			}
+
 		};
 
 	public CommerceAddress getBillingAddress()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount()
+	public com.liferay.commerce.account.model.CommerceAccount
+			getCommerceAccount()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public String getCommerceAccountName()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency()
+	public com.liferay.commerce.currency.model.CommerceCurrency
+			getCommerceCurrency()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public java.util.List<CommerceOrderItem> getCommerceOrderItems();
@@ -105,11 +108,15 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 	public boolean isSubscriptionOrder();
 
 	public void setShippingDiscounts(
-		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+		com.liferay.commerce.discount.CommerceDiscountValue
+			commerceDiscountValue);
 
 	public void setSubtotalDiscounts(
-		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+		com.liferay.commerce.discount.CommerceDiscountValue
+			commerceDiscountValue);
 
 	public void setTotalDiscounts(
-		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+		com.liferay.commerce.discount.CommerceDiscountValue
+			commerceDiscountValue);
+
 }

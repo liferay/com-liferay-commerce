@@ -17,9 +17,7 @@ package com.liferay.commerce.price.list.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CommercePriceListAccountRelWrapper
 	implements CommercePriceListAccountRel,
-		ModelWrapper<CommercePriceListAccountRel> {
+			   ModelWrapper<CommercePriceListAccountRel> {
+
 	public CommercePriceListAccountRelWrapper(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
+
 		_commercePriceListAccountRel = commercePriceListAccountRel;
 	}
 
@@ -63,7 +63,8 @@ public class CommercePriceListAccountRelWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("commercePriceListAccountRelId",
+		attributes.put(
+			"commercePriceListAccountRelId",
 			getCommercePriceListAccountRelId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -88,7 +89,7 @@ public class CommercePriceListAccountRelWrapper
 		}
 
 		Long commercePriceListAccountRelId = (Long)attributes.get(
-				"commercePriceListAccountRelId");
+			"commercePriceListAccountRelId");
 
 		if (commercePriceListAccountRelId != null) {
 			setCommercePriceListAccountRelId(commercePriceListAccountRelId);
@@ -157,60 +158,63 @@ public class CommercePriceListAccountRelWrapper
 
 	@Override
 	public Object clone() {
-		return new CommercePriceListAccountRelWrapper((CommercePriceListAccountRel)_commercePriceListAccountRel.clone());
+		return new CommercePriceListAccountRelWrapper(
+			(CommercePriceListAccountRel)_commercePriceListAccountRel.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommercePriceListAccountRel commercePriceListAccountRel) {
-		return _commercePriceListAccountRel.compareTo(commercePriceListAccountRel);
+
+		return _commercePriceListAccountRel.compareTo(
+			commercePriceListAccountRel);
 	}
 
 	/**
-	* Returns the commerce account ID of this commerce price list account rel.
-	*
-	* @return the commerce account ID of this commerce price list account rel
-	*/
+	 * Returns the commerce account ID of this commerce price list account rel.
+	 *
+	 * @return the commerce account ID of this commerce price list account rel
+	 */
 	@Override
 	public long getCommerceAccountId() {
 		return _commercePriceListAccountRel.getCommerceAccountId();
 	}
 
 	/**
-	* Returns the commerce price list account rel ID of this commerce price list account rel.
-	*
-	* @return the commerce price list account rel ID of this commerce price list account rel
-	*/
+	 * Returns the commerce price list account rel ID of this commerce price list account rel.
+	 *
+	 * @return the commerce price list account rel ID of this commerce price list account rel
+	 */
 	@Override
 	public long getCommercePriceListAccountRelId() {
 		return _commercePriceListAccountRel.getCommercePriceListAccountRelId();
 	}
 
 	/**
-	* Returns the commerce price list ID of this commerce price list account rel.
-	*
-	* @return the commerce price list ID of this commerce price list account rel
-	*/
+	 * Returns the commerce price list ID of this commerce price list account rel.
+	 *
+	 * @return the commerce price list ID of this commerce price list account rel
+	 */
 	@Override
 	public long getCommercePriceListId() {
 		return _commercePriceListAccountRel.getCommercePriceListId();
 	}
 
 	/**
-	* Returns the company ID of this commerce price list account rel.
-	*
-	* @return the company ID of this commerce price list account rel
-	*/
+	 * Returns the company ID of this commerce price list account rel.
+	 *
+	 * @return the company ID of this commerce price list account rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commercePriceListAccountRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce price list account rel.
-	*
-	* @return the create date of this commerce price list account rel
-	*/
+	 * Returns the create date of this commerce price list account rel.
+	 *
+	 * @return the create date of this commerce price list account rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commercePriceListAccountRel.getCreateDate();
@@ -222,50 +226,50 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce price list account rel.
-	*
-	* @return the group ID of this commerce price list account rel
-	*/
+	 * Returns the group ID of this commerce price list account rel.
+	 *
+	 * @return the group ID of this commerce price list account rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _commercePriceListAccountRel.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce price list account rel.
-	*
-	* @return the last publish date of this commerce price list account rel
-	*/
+	 * Returns the last publish date of this commerce price list account rel.
+	 *
+	 * @return the last publish date of this commerce price list account rel
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commercePriceListAccountRel.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this commerce price list account rel.
-	*
-	* @return the modified date of this commerce price list account rel
-	*/
+	 * Returns the modified date of this commerce price list account rel.
+	 *
+	 * @return the modified date of this commerce price list account rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commercePriceListAccountRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the order of this commerce price list account rel.
-	*
-	* @return the order of this commerce price list account rel
-	*/
+	 * Returns the order of this commerce price list account rel.
+	 *
+	 * @return the order of this commerce price list account rel
+	 */
 	@Override
 	public int getOrder() {
 		return _commercePriceListAccountRel.getOrder();
 	}
 
 	/**
-	* Returns the primary key of this commerce price list account rel.
-	*
-	* @return the primary key of this commerce price list account rel
-	*/
+	 * Returns the primary key of this commerce price list account rel.
+	 *
+	 * @return the primary key of this commerce price list account rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commercePriceListAccountRel.getPrimaryKey();
@@ -277,40 +281,40 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Returns the user ID of this commerce price list account rel.
-	*
-	* @return the user ID of this commerce price list account rel
-	*/
+	 * Returns the user ID of this commerce price list account rel.
+	 *
+	 * @return the user ID of this commerce price list account rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commercePriceListAccountRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce price list account rel.
-	*
-	* @return the user name of this commerce price list account rel
-	*/
+	 * Returns the user name of this commerce price list account rel.
+	 *
+	 * @return the user name of this commerce price list account rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commercePriceListAccountRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce price list account rel.
-	*
-	* @return the user uuid of this commerce price list account rel
-	*/
+	 * Returns the user uuid of this commerce price list account rel.
+	 *
+	 * @return the user uuid of this commerce price list account rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commercePriceListAccountRel.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce price list account rel.
-	*
-	* @return the uuid of this commerce price list account rel
-	*/
+	 * Returns the uuid of this commerce price list account rel.
+	 *
+	 * @return the uuid of this commerce price list account rel
+	 */
 	@Override
 	public String getUuid() {
 		return _commercePriceListAccountRel.getUuid();
@@ -347,51 +351,54 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Sets the commerce account ID of this commerce price list account rel.
-	*
-	* @param commerceAccountId the commerce account ID of this commerce price list account rel
-	*/
+	 * Sets the commerce account ID of this commerce price list account rel.
+	 *
+	 * @param commerceAccountId the commerce account ID of this commerce price list account rel
+	 */
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commercePriceListAccountRel.setCommerceAccountId(commerceAccountId);
 	}
 
 	/**
-	* Sets the commerce price list account rel ID of this commerce price list account rel.
-	*
-	* @param commercePriceListAccountRelId the commerce price list account rel ID of this commerce price list account rel
-	*/
+	 * Sets the commerce price list account rel ID of this commerce price list account rel.
+	 *
+	 * @param commercePriceListAccountRelId the commerce price list account rel ID of this commerce price list account rel
+	 */
 	@Override
 	public void setCommercePriceListAccountRelId(
 		long commercePriceListAccountRelId) {
-		_commercePriceListAccountRel.setCommercePriceListAccountRelId(commercePriceListAccountRelId);
+
+		_commercePriceListAccountRel.setCommercePriceListAccountRelId(
+			commercePriceListAccountRelId);
 	}
 
 	/**
-	* Sets the commerce price list ID of this commerce price list account rel.
-	*
-	* @param commercePriceListId the commerce price list ID of this commerce price list account rel
-	*/
+	 * Sets the commerce price list ID of this commerce price list account rel.
+	 *
+	 * @param commercePriceListId the commerce price list ID of this commerce price list account rel
+	 */
 	@Override
 	public void setCommercePriceListId(long commercePriceListId) {
-		_commercePriceListAccountRel.setCommercePriceListId(commercePriceListId);
+		_commercePriceListAccountRel.setCommercePriceListId(
+			commercePriceListId);
 	}
 
 	/**
-	* Sets the company ID of this commerce price list account rel.
-	*
-	* @param companyId the company ID of this commerce price list account rel
-	*/
+	 * Sets the company ID of this commerce price list account rel.
+	 *
+	 * @param companyId the company ID of this commerce price list account rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commercePriceListAccountRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce price list account rel.
-	*
-	* @param createDate the create date of this commerce price list account rel
-	*/
+	 * Sets the create date of this commerce price list account rel.
+	 *
+	 * @param createDate the create date of this commerce price list account rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commercePriceListAccountRel.setCreateDate(createDate);
@@ -400,6 +407,7 @@ public class CommercePriceListAccountRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commercePriceListAccountRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -414,30 +422,30 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Sets the group ID of this commerce price list account rel.
-	*
-	* @param groupId the group ID of this commerce price list account rel
-	*/
+	 * Sets the group ID of this commerce price list account rel.
+	 *
+	 * @param groupId the group ID of this commerce price list account rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commercePriceListAccountRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce price list account rel.
-	*
-	* @param lastPublishDate the last publish date of this commerce price list account rel
-	*/
+	 * Sets the last publish date of this commerce price list account rel.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce price list account rel
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commercePriceListAccountRel.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this commerce price list account rel.
-	*
-	* @param modifiedDate the modified date of this commerce price list account rel
-	*/
+	 * Sets the modified date of this commerce price list account rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce price list account rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commercePriceListAccountRel.setModifiedDate(modifiedDate);
@@ -449,20 +457,20 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Sets the order of this commerce price list account rel.
-	*
-	* @param order the order of this commerce price list account rel
-	*/
+	 * Sets the order of this commerce price list account rel.
+	 *
+	 * @param order the order of this commerce price list account rel
+	 */
 	@Override
 	public void setOrder(int order) {
 		_commercePriceListAccountRel.setOrder(order);
 	}
 
 	/**
-	* Sets the primary key of this commerce price list account rel.
-	*
-	* @param primaryKey the primary key of this commerce price list account rel
-	*/
+	 * Sets the primary key of this commerce price list account rel.
+	 *
+	 * @param primaryKey the primary key of this commerce price list account rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commercePriceListAccountRel.setPrimaryKey(primaryKey);
@@ -474,53 +482,56 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	/**
-	* Sets the user ID of this commerce price list account rel.
-	*
-	* @param userId the user ID of this commerce price list account rel
-	*/
+	 * Sets the user ID of this commerce price list account rel.
+	 *
+	 * @param userId the user ID of this commerce price list account rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commercePriceListAccountRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce price list account rel.
-	*
-	* @param userName the user name of this commerce price list account rel
-	*/
+	 * Sets the user name of this commerce price list account rel.
+	 *
+	 * @param userName the user name of this commerce price list account rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commercePriceListAccountRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce price list account rel.
-	*
-	* @param userUuid the user uuid of this commerce price list account rel
-	*/
+	 * Sets the user uuid of this commerce price list account rel.
+	 *
+	 * @param userUuid the user uuid of this commerce price list account rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commercePriceListAccountRel.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce price list account rel.
-	*
-	* @param uuid the uuid of this commerce price list account rel
-	*/
+	 * Sets the uuid of this commerce price list account rel.
+	 *
+	 * @param uuid the uuid of this commerce price list account rel
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commercePriceListAccountRel.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommercePriceListAccountRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommercePriceListAccountRel> toCacheModel() {
+
 		return _commercePriceListAccountRel.toCacheModel();
 	}
 
 	@Override
 	public CommercePriceListAccountRel toEscapedModel() {
-		return new CommercePriceListAccountRelWrapper(_commercePriceListAccountRel.toEscapedModel());
+		return new CommercePriceListAccountRelWrapper(
+			_commercePriceListAccountRel.toEscapedModel());
 	}
 
 	@Override
@@ -530,7 +541,8 @@ public class CommercePriceListAccountRelWrapper
 
 	@Override
 	public CommercePriceListAccountRel toUnescapedModel() {
-		return new CommercePriceListAccountRelWrapper(_commercePriceListAccountRel.toUnescapedModel());
+		return new CommercePriceListAccountRelWrapper(
+			_commercePriceListAccountRel.toUnescapedModel());
 	}
 
 	@Override
@@ -548,10 +560,14 @@ public class CommercePriceListAccountRelWrapper
 			return false;
 		}
 
-		CommercePriceListAccountRelWrapper commercePriceListAccountRelWrapper = (CommercePriceListAccountRelWrapper)obj;
+		CommercePriceListAccountRelWrapper commercePriceListAccountRelWrapper =
+			(CommercePriceListAccountRelWrapper)obj;
 
-		if (Objects.equals(_commercePriceListAccountRel,
-					commercePriceListAccountRelWrapper._commercePriceListAccountRel)) {
+		if (Objects.equals(
+				_commercePriceListAccountRel,
+				commercePriceListAccountRelWrapper.
+					_commercePriceListAccountRel)) {
+
 			return true;
 		}
 
@@ -584,4 +600,5 @@ public class CommercePriceListAccountRelWrapper
 	}
 
 	private final CommercePriceListAccountRel _commercePriceListAccountRel;
+
 }

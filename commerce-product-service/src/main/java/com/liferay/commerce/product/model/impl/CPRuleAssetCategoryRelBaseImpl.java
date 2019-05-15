@@ -34,18 +34,22 @@ import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalServiceUt
 @ProviderType
 public abstract class CPRuleAssetCategoryRelBaseImpl
 	extends CPRuleAssetCategoryRelModelImpl implements CPRuleAssetCategoryRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp rule asset category rel model instance should use the {@link CPRuleAssetCategoryRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp rule asset category rel model instance should use the <code>CPRuleAssetCategoryRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPRuleAssetCategoryRelLocalServiceUtil.addCPRuleAssetCategoryRel(this);
+			CPRuleAssetCategoryRelLocalServiceUtil.addCPRuleAssetCategoryRel(
+				this);
 		}
 		else {
-			CPRuleAssetCategoryRelLocalServiceUtil.updateCPRuleAssetCategoryRel(this);
+			CPRuleAssetCategoryRelLocalServiceUtil.updateCPRuleAssetCategoryRel(
+				this);
 		}
 	}
+
 }

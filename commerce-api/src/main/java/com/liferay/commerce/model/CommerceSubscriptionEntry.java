@@ -25,36 +25,43 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceSubscriptionEntryModel
- * @see com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl
- * @see com.liferay.commerce.model.impl.CommerceSubscriptionEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl"
+)
 @ProviderType
 public interface CommerceSubscriptionEntry
 	extends CommerceSubscriptionEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceSubscriptionEntry, Long> COMMERCE_SUBSCRIPTION_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceSubscriptionEntry, Long>() {
-			@Override
-			public Long get(CommerceSubscriptionEntry commerceSubscriptionEntry) {
-				return commerceSubscriptionEntry.getCommerceSubscriptionEntryId();
-			}
+	public static final Accessor<CommerceSubscriptionEntry, Long>
+		COMMERCE_SUBSCRIPTION_ENTRY_ID_ACCESSOR =
+			new Accessor<CommerceSubscriptionEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceSubscriptionEntry commerceSubscriptionEntry) {
 
-			@Override
-			public Class<CommerceSubscriptionEntry> getTypeClass() {
-				return CommerceSubscriptionEntry.class;
-			}
-		};
+					return commerceSubscriptionEntry.
+						getCommerceSubscriptionEntryId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceSubscriptionEntry> getTypeClass() {
+					return CommerceSubscriptionEntry.class;
+				}
+
+			};
 
 	public CommerceOrderItem fetchCommerceOrderItem()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -68,8 +75,11 @@ public interface CommerceSubscriptionEntry
 
 	public long getCPInstanceId();
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getSubscriptionTypeSettingsProperties();
 
 	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			subscriptionTypeSettingsProperties);
+
 }

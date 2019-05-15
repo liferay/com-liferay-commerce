@@ -32,12 +32,13 @@ import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceAddressBaseImpl extends CommerceAddressModelImpl
-	implements CommerceAddress {
+public abstract class CommerceAddressBaseImpl
+	extends CommerceAddressModelImpl implements CommerceAddress {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce address model instance should use the {@link CommerceAddress} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce address model instance should use the <code>CommerceAddress</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceAddressBaseImpl extends CommerceAddressModelImpl
 			CommerceAddressLocalServiceUtil.updateCommerceAddress(this);
 		}
 	}
+
 }

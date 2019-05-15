@@ -18,166 +18,196 @@ import aQute.bnd.annotation.ProviderType;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for CommerceShippingMethod. This utility wraps
- * {@link com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingMethodService
- * @see com.liferay.commerce.service.base.CommerceShippingMethodServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl
  * @generated
  */
 @ProviderType
 public class CommerceShippingMethodServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		long commerceShippingMethodId, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceAddressRestriction
+			addCommerceAddressRestriction(
+				long commerceShippingMethodId, long commerceCountryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceAddressRestriction(commerceShippingMethodId,
-			commerceCountryId, serviceContext);
+
+		return getService().addCommerceAddressRestriction(
+			commerceShippingMethodId, commerceCountryId, serviceContext);
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethod addCommerceShippingMethod(
-		java.util.Map<java.util.Locale, String> nameMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		java.io.File imageFile, String engineKey, double priority,
-		boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceShippingMethod
+			addCommerceShippingMethod(
+				java.util.Map<java.util.Locale, String> nameMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				java.io.File imageFile, String engineKey, double priority,
+				boolean active,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceShippingMethod(nameMap, descriptionMap,
-			imageFile, engineKey, priority, active, serviceContext);
+
+		return getService().addCommerceShippingMethod(
+			nameMap, descriptionMap, imageFile, engineKey, priority, active,
+			serviceContext);
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethod createCommerceShippingMethod(
-		long commerceShippingMethodId)
+	public static com.liferay.commerce.model.CommerceShippingMethod
+			createCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .createCommerceShippingMethod(commerceShippingMethodId);
+
+		return getService().createCommerceShippingMethod(
+			commerceShippingMethodId);
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId)
+			long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService()
-			.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
+
+		getService().deleteCommerceAddressRestriction(
+			commerceAddressRestrictionId);
 	}
 
 	public static void deleteCommerceShippingMethod(
-		long commerceShippingMethodId)
+			long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		getService().deleteCommerceShippingMethod(commerceShippingMethodId);
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethod fetchCommerceShippingMethod(
-		long groupId, String engineKey)
+	public static com.liferay.commerce.model.CommerceShippingMethod
+			fetchCommerceShippingMethod(long groupId, String engineKey)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().fetchCommerceShippingMethod(groupId, engineKey);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
-		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceAddressRestrictions(commerceShippingMethodId,
-			start, end, orderByComparator);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceAddressRestriction>
+				getCommerceAddressRestrictions(
+					long commerceShippingMethodId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.CommerceAddressRestriction>
+							orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceAddressRestrictions(
+			commerceShippingMethodId, start, end, orderByComparator);
 	}
 
 	public static int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId)
+			long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceAddressRestrictionsCount(commerceShippingMethodId);
+
+		return getService().getCommerceAddressRestrictionsCount(
+			commerceShippingMethodId);
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod(
-		long commerceShippingMethodId)
+	public static com.liferay.commerce.model.CommerceShippingMethod
+			getCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceShippingMethod(commerceShippingMethodId);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceShippingMethod>
+				getCommerceShippingMethods(long groupId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceShippingMethods(groupId);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, boolean active)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceShippingMethod>
+				getCommerceShippingMethods(long groupId, boolean active)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceShippingMethods(groupId, active);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceShippingMethod> getCommerceShippingMethods(
-		long groupId, long commerceCountryId, boolean active)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
-		return getService()
-				   .getCommerceShippingMethods(groupId, commerceCountryId,
-			active);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceShippingMethod>
+				getCommerceShippingMethods(
+					long groupId, long commerceCountryId, boolean active)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().getCommerceShippingMethods(
+			groupId, commerceCountryId, active);
 	}
 
-	public static int getCommerceShippingMethodsCount(long groupId,
-		boolean active)
+	public static int getCommerceShippingMethodsCount(
+			long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceShippingMethodsCount(groupId, active);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 
 	public static com.liferay.commerce.model.CommerceShippingMethod setActive(
-		long commerceShippingMethodId, boolean active)
+			long commerceShippingMethodId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().setActive(commerceShippingMethodId, active);
 	}
 
-	public static com.liferay.commerce.model.CommerceShippingMethod updateCommerceShippingMethod(
-		long commerceShippingMethodId,
-		java.util.Map<java.util.Locale, String> nameMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		java.io.File imageFile, double priority, boolean active)
+	public static com.liferay.commerce.model.CommerceShippingMethod
+			updateCommerceShippingMethod(
+				long commerceShippingMethodId,
+				java.util.Map<java.util.Locale, String> nameMap,
+				java.util.Map<java.util.Locale, String> descriptionMap,
+				java.io.File imageFile, double priority, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .updateCommerceShippingMethod(commerceShippingMethodId,
-			nameMap, descriptionMap, imageFile, priority, active);
+
+		return getService().updateCommerceShippingMethod(
+			commerceShippingMethodId, nameMap, descriptionMap, imageFile,
+			priority, active);
 	}
 
 	public static CommerceShippingMethodService getService() {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceShippingMethodService, CommerceShippingMethodService> _serviceTracker;
+	private static ServiceTracker
+		<CommerceShippingMethodService, CommerceShippingMethodService>
+			_serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceShippingMethodService.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceShippingMethodService.class);
 
-		ServiceTracker<CommerceShippingMethodService, CommerceShippingMethodService> serviceTracker =
-			new ServiceTracker<CommerceShippingMethodService, CommerceShippingMethodService>(bundle.getBundleContext(),
-				CommerceShippingMethodService.class, null);
+		ServiceTracker
+			<CommerceShippingMethodService, CommerceShippingMethodService>
+				serviceTracker =
+					new ServiceTracker
+						<CommerceShippingMethodService,
+						 CommerceShippingMethodService>(
+							 bundle.getBundleContext(),
+							 CommerceShippingMethodService.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

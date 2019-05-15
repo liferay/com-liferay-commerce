@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceCountry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceCountry in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceCountry
  * @generated
  */
 @ProviderType
-public class CommerceCountryCacheModel implements CacheModel<CommerceCountry>,
-	Externalizable {
+public class CommerceCountryCacheModel
+	implements CacheModel<CommerceCountry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CommerceCountryCacheModel implements CacheModel<CommerceCountry>,
 			return false;
 		}
 
-		CommerceCountryCacheModel commerceCountryCacheModel = (CommerceCountryCacheModel)obj;
+		CommerceCountryCacheModel commerceCountryCacheModel =
+			(CommerceCountryCacheModel)obj;
 
 		if (commerceCountryId == commerceCountryCacheModel.commerceCountryId) {
 			return true;
@@ -219,8 +219,7 @@ public class CommerceCountryCacheModel implements CacheModel<CommerceCountry>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -299,4 +298,5 @@ public class CommerceCountryCacheModel implements CacheModel<CommerceCountry>,
 	public double priority;
 	public boolean active;
 	public long lastPublishDate;
+
 }

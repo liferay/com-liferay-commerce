@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CommerceShippingFixedOptionRel in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShippingFixedOptionRel
  * @generated
  */
 @ProviderType
-public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<CommerceShippingFixedOptionRel>,
-	Externalizable {
+public class CommerceShippingFixedOptionRelCacheModel
+	implements CacheModel<CommerceShippingFixedOptionRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -51,10 +50,14 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 			return false;
 		}
 
-		CommerceShippingFixedOptionRelCacheModel commerceShippingFixedOptionRelCacheModel =
-			(CommerceShippingFixedOptionRelCacheModel)obj;
+		CommerceShippingFixedOptionRelCacheModel
+			commerceShippingFixedOptionRelCacheModel =
+				(CommerceShippingFixedOptionRelCacheModel)obj;
 
-		if (commerceShippingFixedOptionRelId == commerceShippingFixedOptionRelCacheModel.commerceShippingFixedOptionRelId) {
+		if (commerceShippingFixedOptionRelId ==
+				commerceShippingFixedOptionRelCacheModel.
+					commerceShippingFixedOptionRelId) {
+
 			return true;
 		}
 
@@ -113,9 +116,11 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 
 	@Override
 	public CommerceShippingFixedOptionRel toEntityModel() {
-		CommerceShippingFixedOptionRelImpl commerceShippingFixedOptionRelImpl = new CommerceShippingFixedOptionRelImpl();
+		CommerceShippingFixedOptionRelImpl commerceShippingFixedOptionRelImpl =
+			new CommerceShippingFixedOptionRelImpl();
 
-		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionRelId(commerceShippingFixedOptionRelId);
+		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionRelId(
+			commerceShippingFixedOptionRelId);
 		commerceShippingFixedOptionRelImpl.setGroupId(groupId);
 		commerceShippingFixedOptionRelImpl.setCompanyId(companyId);
 		commerceShippingFixedOptionRelImpl.setUserId(userId);
@@ -131,23 +136,28 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 			commerceShippingFixedOptionRelImpl.setCreateDate(null);
 		}
 		else {
-			commerceShippingFixedOptionRelImpl.setCreateDate(new Date(
-					createDate));
+			commerceShippingFixedOptionRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceShippingFixedOptionRelImpl.setModifiedDate(null);
 		}
 		else {
-			commerceShippingFixedOptionRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceShippingFixedOptionRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceShippingFixedOptionRelImpl.setCommerceShippingMethodId(commerceShippingMethodId);
-		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
-		commerceShippingFixedOptionRelImpl.setCommerceWarehouseId(commerceWarehouseId);
-		commerceShippingFixedOptionRelImpl.setCommerceCountryId(commerceCountryId);
-		commerceShippingFixedOptionRelImpl.setCommerceRegionId(commerceRegionId);
+		commerceShippingFixedOptionRelImpl.setCommerceShippingMethodId(
+			commerceShippingMethodId);
+		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId);
+		commerceShippingFixedOptionRelImpl.setCommerceWarehouseId(
+			commerceWarehouseId);
+		commerceShippingFixedOptionRelImpl.setCommerceCountryId(
+			commerceCountryId);
+		commerceShippingFixedOptionRelImpl.setCommerceRegionId(
+			commerceRegionId);
 
 		if (zip == null) {
 			commerceShippingFixedOptionRelImpl.setZip("");
@@ -159,7 +169,8 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 		commerceShippingFixedOptionRelImpl.setWeightFrom(weightFrom);
 		commerceShippingFixedOptionRelImpl.setWeightTo(weightTo);
 		commerceShippingFixedOptionRelImpl.setFixedPrice(fixedPrice);
-		commerceShippingFixedOptionRelImpl.setRateUnitWeightPrice(rateUnitWeightPrice);
+		commerceShippingFixedOptionRelImpl.setRateUnitWeightPrice(
+			rateUnitWeightPrice);
 		commerceShippingFixedOptionRelImpl.setRatePercentage(ratePercentage);
 
 		commerceShippingFixedOptionRelImpl.resetOriginalValues();
@@ -170,6 +181,7 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		commerceShippingFixedOptionRelId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -202,8 +214,7 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceShippingFixedOptionRelId);
 
 		objectOutput.writeLong(groupId);
@@ -266,4 +277,5 @@ public class CommerceShippingFixedOptionRelCacheModel implements CacheModel<Comm
 	public BigDecimal fixedPrice;
 	public BigDecimal rateUnitWeightPrice;
 	public double ratePercentage;
+
 }

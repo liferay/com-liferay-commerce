@@ -26,16 +26,18 @@ import java.io.Serializable;
  * @generated
  */
 @ProviderType
-public class CommerceAccountUserRelPK implements Comparable<CommerceAccountUserRelPK>,
-	Serializable {
+public class CommerceAccountUserRelPK
+	implements Comparable<CommerceAccountUserRelPK>, Serializable {
+
 	public long commerceAccountId;
 	public long commerceAccountUserId;
 
 	public CommerceAccountUserRelPK() {
 	}
 
-	public CommerceAccountUserRelPK(long commerceAccountId,
-		long commerceAccountUserId) {
+	public CommerceAccountUserRelPK(
+		long commerceAccountId, long commerceAccountUserId) {
+
 		this.commerceAccountId = commerceAccountId;
 		this.commerceAccountUserId = commerceAccountUserId;
 	}
@@ -108,7 +110,8 @@ public class CommerceAccountUserRelPK implements Comparable<CommerceAccountUserR
 		CommerceAccountUserRelPK pk = (CommerceAccountUserRelPK)obj;
 
 		if ((commerceAccountId == pk.commerceAccountId) &&
-				(commerceAccountUserId == pk.commerceAccountUserId)) {
+			(commerceAccountUserId == pk.commerceAccountUserId)) {
+
 			return true;
 		}
 		else {
@@ -143,4 +146,5 @@ public class CommerceAccountUserRelPK implements Comparable<CommerceAccountUserR
 
 		return sb.toString();
 	}
+
 }

@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,19 +31,21 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceSubscriptionEntryFinderBaseImpl extends BasePersistenceImpl<CommerceSubscriptionEntry> {
+public class CommerceSubscriptionEntryFinderBaseImpl
+	extends BasePersistenceImpl<CommerceSubscriptionEntry> {
+
 	public CommerceSubscriptionEntryFinderBaseImpl() {
 		setModelClass(CommerceSubscriptionEntry.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -65,7 +66,9 @@ public class CommerceSubscriptionEntryFinderBaseImpl extends BasePersistenceImpl
 	 *
 	 * @return the commerce subscription entry persistence
 	 */
-	public CommerceSubscriptionEntryPersistence getCommerceSubscriptionEntryPersistence() {
+	public CommerceSubscriptionEntryPersistence
+		getCommerceSubscriptionEntryPersistence() {
+
 		return commerceSubscriptionEntryPersistence;
 	}
 
@@ -75,11 +78,18 @@ public class CommerceSubscriptionEntryFinderBaseImpl extends BasePersistenceImpl
 	 * @param commerceSubscriptionEntryPersistence the commerce subscription entry persistence
 	 */
 	public void setCommerceSubscriptionEntryPersistence(
-		CommerceSubscriptionEntryPersistence commerceSubscriptionEntryPersistence) {
-		this.commerceSubscriptionEntryPersistence = commerceSubscriptionEntryPersistence;
+		CommerceSubscriptionEntryPersistence
+			commerceSubscriptionEntryPersistence) {
+
+		this.commerceSubscriptionEntryPersistence =
+			commerceSubscriptionEntryPersistence;
 	}
 
 	@BeanReference(type = CommerceSubscriptionEntryPersistence.class)
-	protected CommerceSubscriptionEntryPersistence commerceSubscriptionEntryPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceSubscriptionEntryFinderBaseImpl.class);
+	protected CommerceSubscriptionEntryPersistence
+		commerceSubscriptionEntryPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceSubscriptionEntryFinderBaseImpl.class);
+
 }

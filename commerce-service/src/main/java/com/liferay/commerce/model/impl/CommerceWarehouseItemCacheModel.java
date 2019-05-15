@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceWarehouseItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceWarehouseItem in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceWarehouseItem
  * @generated
  */
 @ProviderType
-public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWarehouseItem>,
-	Externalizable {
+public class CommerceWarehouseItemCacheModel
+	implements CacheModel<CommerceWarehouseItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 			return false;
 		}
 
-		CommerceWarehouseItemCacheModel commerceWarehouseItemCacheModel = (CommerceWarehouseItemCacheModel)obj;
+		CommerceWarehouseItemCacheModel commerceWarehouseItemCacheModel =
+			(CommerceWarehouseItemCacheModel)obj;
 
-		if (commerceWarehouseItemId == commerceWarehouseItemCacheModel.commerceWarehouseItemId) {
+		if (commerceWarehouseItemId ==
+				commerceWarehouseItemCacheModel.commerceWarehouseItemId) {
+
 			return true;
 		}
 
@@ -96,9 +98,11 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 
 	@Override
 	public CommerceWarehouseItem toEntityModel() {
-		CommerceWarehouseItemImpl commerceWarehouseItemImpl = new CommerceWarehouseItemImpl();
+		CommerceWarehouseItemImpl commerceWarehouseItemImpl =
+			new CommerceWarehouseItemImpl();
 
-		commerceWarehouseItemImpl.setCommerceWarehouseItemId(commerceWarehouseItemId);
+		commerceWarehouseItemImpl.setCommerceWarehouseItemId(
+			commerceWarehouseItemId);
 		commerceWarehouseItemImpl.setGroupId(groupId);
 		commerceWarehouseItemImpl.setCompanyId(companyId);
 		commerceWarehouseItemImpl.setUserId(userId);
@@ -163,8 +167,7 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceWarehouseItemId);
 
 		objectOutput.writeLong(groupId);
@@ -208,4 +211,5 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 	public long CProductId;
 	public String CPInstanceUuid;
 	public int quantity;
+
 }

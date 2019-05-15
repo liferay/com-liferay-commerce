@@ -34,10 +34,11 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalSe
 @ProviderType
 public abstract class CommerceTaxFixedRateBaseImpl
 	extends CommerceTaxFixedRateModelImpl implements CommerceTaxFixedRate {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate model instance should use the {@link CommerceTaxFixedRate} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate model instance should use the <code>CommerceTaxFixedRate</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -45,7 +46,9 @@ public abstract class CommerceTaxFixedRateBaseImpl
 			CommerceTaxFixedRateLocalServiceUtil.addCommerceTaxFixedRate(this);
 		}
 		else {
-			CommerceTaxFixedRateLocalServiceUtil.updateCommerceTaxFixedRate(this);
+			CommerceTaxFixedRateLocalServiceUtil.updateCommerceTaxFixedRate(
+				this);
 		}
 	}
+
 }

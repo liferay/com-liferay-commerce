@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceUserSegmentCriterion in entity cache.
  *
  * @author Marco Leo
- * @see CommerceUserSegmentCriterion
  * @generated
  */
 @ProviderType
-public class CommerceUserSegmentCriterionCacheModel implements CacheModel<CommerceUserSegmentCriterion>,
-	Externalizable {
+public class CommerceUserSegmentCriterionCacheModel
+	implements CacheModel<CommerceUserSegmentCriterion>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceUserSegmentCriterionCacheModel implements CacheModel<Commer
 			return false;
 		}
 
-		CommerceUserSegmentCriterionCacheModel commerceUserSegmentCriterionCacheModel =
-			(CommerceUserSegmentCriterionCacheModel)obj;
+		CommerceUserSegmentCriterionCacheModel
+			commerceUserSegmentCriterionCacheModel =
+				(CommerceUserSegmentCriterionCacheModel)obj;
 
-		if (commerceUserSegmentCriterionId == commerceUserSegmentCriterionCacheModel.commerceUserSegmentCriterionId) {
+		if (commerceUserSegmentCriterionId ==
+				commerceUserSegmentCriterionCacheModel.
+					commerceUserSegmentCriterionId) {
+
 			return true;
 		}
 
@@ -97,9 +100,11 @@ public class CommerceUserSegmentCriterionCacheModel implements CacheModel<Commer
 
 	@Override
 	public CommerceUserSegmentCriterion toEntityModel() {
-		CommerceUserSegmentCriterionImpl commerceUserSegmentCriterionImpl = new CommerceUserSegmentCriterionImpl();
+		CommerceUserSegmentCriterionImpl commerceUserSegmentCriterionImpl =
+			new CommerceUserSegmentCriterionImpl();
 
-		commerceUserSegmentCriterionImpl.setCommerceUserSegmentCriterionId(commerceUserSegmentCriterionId);
+		commerceUserSegmentCriterionImpl.setCommerceUserSegmentCriterionId(
+			commerceUserSegmentCriterionId);
 		commerceUserSegmentCriterionImpl.setGroupId(groupId);
 		commerceUserSegmentCriterionImpl.setCompanyId(companyId);
 		commerceUserSegmentCriterionImpl.setUserId(userId);
@@ -115,18 +120,20 @@ public class CommerceUserSegmentCriterionCacheModel implements CacheModel<Commer
 			commerceUserSegmentCriterionImpl.setCreateDate(null);
 		}
 		else {
-			commerceUserSegmentCriterionImpl.setCreateDate(new Date(createDate));
+			commerceUserSegmentCriterionImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceUserSegmentCriterionImpl.setModifiedDate(null);
 		}
 		else {
-			commerceUserSegmentCriterionImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceUserSegmentCriterionImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceUserSegmentCriterionImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		commerceUserSegmentCriterionImpl.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 
 		if (type == null) {
 			commerceUserSegmentCriterionImpl.setType("");
@@ -170,8 +177,7 @@ public class CommerceUserSegmentCriterionCacheModel implements CacheModel<Commer
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceUserSegmentCriterionId);
 
 		objectOutput.writeLong(groupId);
@@ -220,4 +226,5 @@ public class CommerceUserSegmentCriterionCacheModel implements CacheModel<Commer
 	public String type;
 	public String typeSettings;
 	public double priority;
+
 }

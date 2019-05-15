@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.virtual.order.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceVirtualOrderItem in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceVirtualOrderItem
  * @generated
  */
 @ProviderType
-public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVirtualOrderItem>,
-	Externalizable {
+public class CommerceVirtualOrderItemCacheModel
+	implements CacheModel<CommerceVirtualOrderItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 			return false;
 		}
 
-		CommerceVirtualOrderItemCacheModel commerceVirtualOrderItemCacheModel = (CommerceVirtualOrderItemCacheModel)obj;
+		CommerceVirtualOrderItemCacheModel commerceVirtualOrderItemCacheModel =
+			(CommerceVirtualOrderItemCacheModel)obj;
 
-		if (commerceVirtualOrderItemId == commerceVirtualOrderItemCacheModel.commerceVirtualOrderItemId) {
+		if (commerceVirtualOrderItemId ==
+				commerceVirtualOrderItemCacheModel.commerceVirtualOrderItemId) {
+
 			return true;
 		}
 
@@ -110,7 +112,8 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 
 	@Override
 	public CommerceVirtualOrderItem toEntityModel() {
-		CommerceVirtualOrderItemImpl commerceVirtualOrderItemImpl = new CommerceVirtualOrderItemImpl();
+		CommerceVirtualOrderItemImpl commerceVirtualOrderItemImpl =
+			new CommerceVirtualOrderItemImpl();
 
 		if (uuid == null) {
 			commerceVirtualOrderItemImpl.setUuid("");
@@ -119,7 +122,8 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 			commerceVirtualOrderItemImpl.setUuid(uuid);
 		}
 
-		commerceVirtualOrderItemImpl.setCommerceVirtualOrderItemId(commerceVirtualOrderItemId);
+		commerceVirtualOrderItemImpl.setCommerceVirtualOrderItemId(
+			commerceVirtualOrderItemId);
 		commerceVirtualOrderItemImpl.setGroupId(groupId);
 		commerceVirtualOrderItemImpl.setCompanyId(companyId);
 		commerceVirtualOrderItemImpl.setUserId(userId);
@@ -142,10 +146,12 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 			commerceVirtualOrderItemImpl.setModifiedDate(null);
 		}
 		else {
-			commerceVirtualOrderItemImpl.setModifiedDate(new Date(modifiedDate));
+			commerceVirtualOrderItemImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceVirtualOrderItemImpl.setCommerceOrderItemId(commerceOrderItemId);
+		commerceVirtualOrderItemImpl.setCommerceOrderItemId(
+			commerceOrderItemId);
 		commerceVirtualOrderItemImpl.setFileEntryId(fileEntryId);
 
 		if (url == null) {
@@ -214,8 +220,7 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -283,4 +288,5 @@ public class CommerceVirtualOrderItemCacheModel implements CacheModel<CommerceVi
 	public boolean active;
 	public long startDate;
 	public long endDate;
+
 }

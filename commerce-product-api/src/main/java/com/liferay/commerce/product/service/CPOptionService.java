@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOption;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,33 +42,41 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionServiceUtil
- * @see com.liferay.commerce.product.service.base.CPOptionServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPOptionServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPOption"}, service = CPOptionService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPOption"
+	},
+	service = CPOptionService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPOptionService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPOptionServiceUtil} to access the cp option remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPOptionServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPOptionServiceUtil} to access the cp option remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPOptionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPOption addCPOption(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		boolean facetable, boolean required, boolean skuContributor,
-		String key, ServiceContext serviceContext) throws PortalException;
+	public CPOption addCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPOption(long cpOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
+	public CPOption fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption fetchCPOption(long cpOptionId) throws PortalException;
@@ -82,34 +89,39 @@ public interface CPOptionService extends BaseService {
 	public CPOption getCPOption(long cpOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator)
+	public List<CPOption> getCPOptions(
+			long groupId, int start, int end,
+			OrderByComparator<CPOption> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPOptionsCount(long groupId) throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPOption> searchCPOptions(long companyId,
-		long groupId, String keywords, int start, int end, Sort sort)
+	public BaseModelSearchResult<CPOption> searchCPOptions(
+			long companyId, long groupId, String keywords, int start, int end,
+			Sort sort)
 		throws PortalException;
 
-	public CPOption updateCPOption(long cpOptionId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		String ddmFormFieldTypeName, boolean facetable, boolean required,
-		boolean skuContributor, String key, ServiceContext serviceContext)
+	public CPOption updateCPOption(
+			long cpOptionId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			boolean facetable, boolean required, boolean skuContributor,
+			String key, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CPOption upsertCPOption(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		boolean facetable, boolean required, boolean skuContributor,
-		String key, String externalReferenceCode, ServiceContext serviceContext)
+	public CPOption upsertCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

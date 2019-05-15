@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchAddressRestrictionException;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.service.CommerceAddressRestrictionLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceAddressRestrictionPersistence;
 import com.liferay.commerce.service.persistence.CommerceAddressRestrictionUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -58,17 +47,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceAddressRestrictionPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -81,7 +80,8 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceAddressRestriction> iterator = _commerceAddressRestrictions.iterator();
+		Iterator<CommerceAddressRestriction> iterator =
+			_commerceAddressRestrictions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -94,7 +94,8 @@ public class CommerceAddressRestrictionPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAddressRestriction commerceAddressRestriction = _persistence.create(pk);
+		CommerceAddressRestriction commerceAddressRestriction =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceAddressRestriction);
 
@@ -103,11 +104,14 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
 		_persistence.remove(newCommerceAddressRestriction);
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = _persistence.fetchByPrimaryKey(newCommerceAddressRestriction.getPrimaryKey());
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAddressRestriction.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceAddressRestriction);
 	}
@@ -121,7 +125,8 @@ public class CommerceAddressRestrictionPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAddressRestriction newCommerceAddressRestriction = _persistence.create(pk);
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			_persistence.create(pk);
 
 		newCommerceAddressRestriction.setGroupId(RandomTestUtil.nextLong());
 
@@ -129,46 +134,62 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 		newCommerceAddressRestriction.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceAddressRestriction.setUserName(RandomTestUtil.randomString());
+		newCommerceAddressRestriction.setUserName(
+			RandomTestUtil.randomString());
 
 		newCommerceAddressRestriction.setCreateDate(RandomTestUtil.nextDate());
 
-		newCommerceAddressRestriction.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceAddressRestriction.setModifiedDate(
+			RandomTestUtil.nextDate());
 
 		newCommerceAddressRestriction.setClassNameId(RandomTestUtil.nextLong());
 
 		newCommerceAddressRestriction.setClassPK(RandomTestUtil.nextLong());
 
-		newCommerceAddressRestriction.setCommerceCountryId(RandomTestUtil.nextLong());
+		newCommerceAddressRestriction.setCommerceCountryId(
+			RandomTestUtil.nextLong());
 
-		_commerceAddressRestrictions.add(_persistence.update(
-				newCommerceAddressRestriction));
+		_commerceAddressRestrictions.add(
+			_persistence.update(newCommerceAddressRestriction));
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = _persistence.findByPrimaryKey(newCommerceAddressRestriction.getPrimaryKey());
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			_persistence.findByPrimaryKey(
+				newCommerceAddressRestriction.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAddressRestriction.getCommerceAddressRestrictionId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.
+				getCommerceAddressRestrictionId(),
 			newCommerceAddressRestriction.getCommerceAddressRestrictionId());
-		Assert.assertEquals(existingCommerceAddressRestriction.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getGroupId(),
 			newCommerceAddressRestriction.getGroupId());
-		Assert.assertEquals(existingCommerceAddressRestriction.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getCompanyId(),
 			newCommerceAddressRestriction.getCompanyId());
-		Assert.assertEquals(existingCommerceAddressRestriction.getUserId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getUserId(),
 			newCommerceAddressRestriction.getUserId());
-		Assert.assertEquals(existingCommerceAddressRestriction.getUserName(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getUserName(),
 			newCommerceAddressRestriction.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAddressRestriction.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceAddressRestriction.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAddressRestriction.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceAddressRestriction.getModifiedDate()));
-		Assert.assertEquals(existingCommerceAddressRestriction.getClassNameId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getClassNameId(),
 			newCommerceAddressRestriction.getClassNameId());
-		Assert.assertEquals(existingCommerceAddressRestriction.getClassPK(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getClassPK(),
 			newCommerceAddressRestriction.getClassPK());
-		Assert.assertEquals(existingCommerceAddressRestriction.getCommerceCountryId(),
+		Assert.assertEquals(
+			existingCommerceAddressRestriction.getCommerceCountryId(),
 			newCommerceAddressRestriction.getCommerceCountryId());
 	}
 
@@ -181,28 +202,32 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
 	public void testCountByC_C_C() throws Exception {
-		_persistence.countByC_C_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+		_persistence.countByC_C_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
 
 		_persistence.countByC_C_C(0L, 0L, 0L);
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = _persistence.findByPrimaryKey(newCommerceAddressRestriction.getPrimaryKey());
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			_persistence.findByPrimaryKey(
+				newCommerceAddressRestriction.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAddressRestriction,
-			newCommerceAddressRestriction);
+		Assert.assertEquals(
+			existingCommerceAddressRestriction, newCommerceAddressRestriction);
 	}
 
 	@Test(expected = NoSuchAddressRestrictionException.class)
@@ -214,33 +239,39 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceAddressRestriction> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceAddressRestriction",
-			"commerceAddressRestrictionId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "classNameId", true, "classPK", true,
-			"commerceCountryId", true);
+	protected OrderByComparator<CommerceAddressRestriction>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceAddressRestriction", "commerceAddressRestrictionId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "classNameId", true,
+			"classPK", true, "commerceCountryId", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = _persistence.fetchByPrimaryKey(newCommerceAddressRestriction.getPrimaryKey());
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAddressRestriction.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAddressRestriction,
-			newCommerceAddressRestriction);
+		Assert.assertEquals(
+			existingCommerceAddressRestriction, newCommerceAddressRestriction);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAddressRestriction missingCommerceAddressRestriction = _persistence.fetchByPrimaryKey(pk);
+		CommerceAddressRestriction missingCommerceAddressRestriction =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceAddressRestriction);
 	}
@@ -248,22 +279,28 @@ public class CommerceAddressRestrictionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction1 = addCommerceAddressRestriction();
-		CommerceAddressRestriction newCommerceAddressRestriction2 = addCommerceAddressRestriction();
+
+		CommerceAddressRestriction newCommerceAddressRestriction1 =
+			addCommerceAddressRestriction();
+		CommerceAddressRestriction newCommerceAddressRestriction2 =
+			addCommerceAddressRestriction();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAddressRestriction1.getPrimaryKey());
 		primaryKeys.add(newCommerceAddressRestriction2.getPrimaryKey());
 
-		Map<Serializable, CommerceAddressRestriction> commerceAddressRestrictions =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAddressRestriction>
+			commerceAddressRestrictions = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceAddressRestrictions.size());
-		Assert.assertEquals(newCommerceAddressRestriction1,
+		Assert.assertEquals(
+			newCommerceAddressRestriction1,
 			commerceAddressRestrictions.get(
 				newCommerceAddressRestriction1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceAddressRestriction2,
+		Assert.assertEquals(
+			newCommerceAddressRestriction2,
 			commerceAddressRestrictions.get(
 				newCommerceAddressRestriction2.getPrimaryKey()));
 	}
@@ -271,6 +308,7 @@ public class CommerceAddressRestrictionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -280,8 +318,9 @@ public class CommerceAddressRestrictionPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceAddressRestriction> commerceAddressRestrictions =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAddressRestriction>
+			commerceAddressRestrictions = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceAddressRestrictions.isEmpty());
 	}
@@ -289,7 +328,9 @@ public class CommerceAddressRestrictionPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -298,40 +339,44 @@ public class CommerceAddressRestrictionPersistenceTest {
 		primaryKeys.add(newCommerceAddressRestriction.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceAddressRestriction> commerceAddressRestrictions =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAddressRestriction>
+			commerceAddressRestrictions = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceAddressRestrictions.size());
-		Assert.assertEquals(newCommerceAddressRestriction,
+		Assert.assertEquals(
+			newCommerceAddressRestriction,
 			commerceAddressRestrictions.get(
 				newCommerceAddressRestriction.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceAddressRestriction> commerceAddressRestrictions =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAddressRestriction>
+			commerceAddressRestrictions = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceAddressRestrictions.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAddressRestriction.getPrimaryKey());
 
-		Map<Serializable, CommerceAddressRestriction> commerceAddressRestrictions =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAddressRestriction>
+			commerceAddressRestrictions = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceAddressRestrictions.size());
-		Assert.assertEquals(newCommerceAddressRestriction,
+		Assert.assertEquals(
+			newCommerceAddressRestriction,
 			commerceAddressRestrictions.get(
 				newCommerceAddressRestriction.getPrimaryKey()));
 	}
@@ -340,16 +385,23 @@ public class CommerceAddressRestrictionPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceAddressRestrictionLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceAddressRestrictionLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceAddressRestriction>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceAddressRestriction>() {
+
 				@Override
 				public void performAction(
 					CommerceAddressRestriction commerceAddressRestriction) {
+
 					Assert.assertNotNull(commerceAddressRestriction);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -358,56 +410,64 @@ public class CommerceAddressRestrictionPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAddressRestriction.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAddressRestriction.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceAddressRestrictionId",
-				newCommerceAddressRestriction.getCommerceAddressRestrictionId()));
+				newCommerceAddressRestriction.
+					getCommerceAddressRestrictionId()));
 
-		List<CommerceAddressRestriction> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAddressRestriction> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = result.get(0);
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceAddressRestriction,
-			newCommerceAddressRestriction);
+		Assert.assertEquals(
+			existingCommerceAddressRestriction, newCommerceAddressRestriction);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAddressRestriction.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAddressRestriction.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceAddressRestrictionId", RandomTestUtil.nextLong()));
 
-		List<CommerceAddressRestriction> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAddressRestriction> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAddressRestriction.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAddressRestriction.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceAddressRestrictionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceAddressRestrictionId"));
 
-		Object newCommerceAddressRestrictionId = newCommerceAddressRestriction.getCommerceAddressRestrictionId();
+		Object newCommerceAddressRestrictionId =
+			newCommerceAddressRestriction.getCommerceAddressRestrictionId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceAddressRestrictionId",
-				new Object[] { newCommerceAddressRestrictionId }));
+				new Object[] {newCommerceAddressRestrictionId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -415,21 +475,23 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 		Object existingCommerceAddressRestrictionId = result.get(0);
 
-		Assert.assertEquals(existingCommerceAddressRestrictionId,
+		Assert.assertEquals(
+			existingCommerceAddressRestrictionId,
 			newCommerceAddressRestrictionId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAddressRestriction.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAddressRestriction.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceAddressRestrictionId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceAddressRestrictionId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceAddressRestrictionId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -438,23 +500,27 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceAddressRestriction newCommerceAddressRestriction = addCommerceAddressRestriction();
+		CommerceAddressRestriction newCommerceAddressRestriction =
+			addCommerceAddressRestriction();
 
 		_persistence.clearCache();
 
-		CommerceAddressRestriction existingCommerceAddressRestriction = _persistence.findByPrimaryKey(newCommerceAddressRestriction.getPrimaryKey());
+		CommerceAddressRestriction existingCommerceAddressRestriction =
+			_persistence.findByPrimaryKey(
+				newCommerceAddressRestriction.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceAddressRestriction.getClassNameId()),
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceAddressRestriction.getClassNameId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceAddressRestriction, "getOriginalClassNameId",
 				new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceAddressRestriction.getClassPK()),
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceAddressRestriction.getClassPK()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceAddressRestriction, "getOriginalClassPK",
 				new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
+		Assert.assertEquals(
+			Long.valueOf(
 				existingCommerceAddressRestriction.getCommerceCountryId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceAddressRestriction,
@@ -463,9 +529,11 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 	protected CommerceAddressRestriction addCommerceAddressRestriction()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAddressRestriction commerceAddressRestriction = _persistence.create(pk);
+		CommerceAddressRestriction commerceAddressRestriction =
+			_persistence.create(pk);
 
 		commerceAddressRestriction.setGroupId(RandomTestUtil.nextLong());
 
@@ -483,15 +551,18 @@ public class CommerceAddressRestrictionPersistenceTest {
 
 		commerceAddressRestriction.setClassPK(RandomTestUtil.nextLong());
 
-		commerceAddressRestriction.setCommerceCountryId(RandomTestUtil.nextLong());
+		commerceAddressRestriction.setCommerceCountryId(
+			RandomTestUtil.nextLong());
 
-		_commerceAddressRestrictions.add(_persistence.update(
-				commerceAddressRestriction));
+		_commerceAddressRestrictions.add(
+			_persistence.update(commerceAddressRestriction));
 
 		return commerceAddressRestriction;
 	}
 
-	private List<CommerceAddressRestriction> _commerceAddressRestrictions = new ArrayList<CommerceAddressRestriction>();
+	private List<CommerceAddressRestriction> _commerceAddressRestrictions =
+		new ArrayList<CommerceAddressRestriction>();
 	private CommerceAddressRestrictionPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

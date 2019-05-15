@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.type.grouped.service.http.CPDefinitionGroupedEntryServiceSoap}.
  *
  * @author Andrea Di Giorgi
- * @see com.liferay.commerce.product.type.grouped.service.http.CPDefinitionGroupedEntryServiceSoap
  * @generated
  */
 @ProviderType
 public class CPDefinitionGroupedEntrySoap implements Serializable {
+
 	public static CPDefinitionGroupedEntrySoap toSoapModel(
 		CPDefinitionGroupedEntry model) {
-		CPDefinitionGroupedEntrySoap soapModel = new CPDefinitionGroupedEntrySoap();
+
+		CPDefinitionGroupedEntrySoap soapModel =
+			new CPDefinitionGroupedEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCPDefinitionGroupedEntryId(model.getCPDefinitionGroupedEntryId());
+		soapModel.setCPDefinitionGroupedEntryId(
+			model.getCPDefinitionGroupedEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -53,7 +56,9 @@ public class CPDefinitionGroupedEntrySoap implements Serializable {
 
 	public static CPDefinitionGroupedEntrySoap[] toSoapModels(
 		CPDefinitionGroupedEntry[] models) {
-		CPDefinitionGroupedEntrySoap[] soapModels = new CPDefinitionGroupedEntrySoap[models.length];
+
+		CPDefinitionGroupedEntrySoap[] soapModels =
+			new CPDefinitionGroupedEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -64,10 +69,13 @@ public class CPDefinitionGroupedEntrySoap implements Serializable {
 
 	public static CPDefinitionGroupedEntrySoap[][] toSoapModels(
 		CPDefinitionGroupedEntry[][] models) {
+
 		CPDefinitionGroupedEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPDefinitionGroupedEntrySoap[models.length][models[0].length];
+			soapModels =
+				new CPDefinitionGroupedEntrySoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPDefinitionGroupedEntrySoap[0][0];
@@ -82,13 +90,16 @@ public class CPDefinitionGroupedEntrySoap implements Serializable {
 
 	public static CPDefinitionGroupedEntrySoap[] toSoapModels(
 		List<CPDefinitionGroupedEntry> models) {
-		List<CPDefinitionGroupedEntrySoap> soapModels = new ArrayList<CPDefinitionGroupedEntrySoap>(models.size());
+
+		List<CPDefinitionGroupedEntrySoap> soapModels =
+			new ArrayList<CPDefinitionGroupedEntrySoap>(models.size());
 
 		for (CPDefinitionGroupedEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPDefinitionGroupedEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPDefinitionGroupedEntrySoap[soapModels.size()]);
 	}
 
 	public CPDefinitionGroupedEntrySoap() {
@@ -210,4 +221,5 @@ public class CPDefinitionGroupedEntrySoap implements Serializable {
 	private long _entryCProductId;
 	private double _priority;
 	private int _quantity;
+
 }

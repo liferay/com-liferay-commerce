@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,34 +38,41 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CPRuleUserSegmentRelServiceUtil
- * @see com.liferay.commerce.product.service.base.CPRuleUserSegmentRelServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPRuleUserSegmentRel"}, service = CPRuleUserSegmentRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPRuleUserSegmentRel"
+	},
+	service = CPRuleUserSegmentRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPRuleUserSegmentRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPRuleUserSegmentRelServiceUtil} to access the cp rule user segment rel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPRuleUserSegmentRelServiceUtil} to access the cp rule user segment rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPRuleUserSegmentRel addCPRuleUserSegmentRel(long cpRuleId,
-		long commerceUserSegmentEntryId, ServiceContext serviceContext)
+	public CPRuleUserSegmentRel addCPRuleUserSegmentRel(
+			long cpRuleId, long commerceUserSegmentEntryId,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCPRuleUserSegmentRel(long cpRuleUserSegmentRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels(long cpRuleId,
-		int start, int end,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+	public List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels(
+			long cpRuleId, int start, int end,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -74,9 +80,10 @@ public interface CPRuleUserSegmentRelService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

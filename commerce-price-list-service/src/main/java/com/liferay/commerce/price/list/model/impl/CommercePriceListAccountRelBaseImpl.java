@@ -35,18 +35,22 @@ import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalS
 public abstract class CommercePriceListAccountRelBaseImpl
 	extends CommercePriceListAccountRelModelImpl
 	implements CommercePriceListAccountRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce price list account rel model instance should use the {@link CommercePriceListAccountRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce price list account rel model instance should use the <code>CommercePriceListAccountRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommercePriceListAccountRelLocalServiceUtil.addCommercePriceListAccountRel(this);
+			CommercePriceListAccountRelLocalServiceUtil.
+				addCommercePriceListAccountRel(this);
 		}
 		else {
-			CommercePriceListAccountRelLocalServiceUtil.updateCommercePriceListAccountRel(this);
+			CommercePriceListAccountRelLocalServiceUtil.
+				updateCommercePriceListAccountRel(this);
 		}
 	}
+
 }

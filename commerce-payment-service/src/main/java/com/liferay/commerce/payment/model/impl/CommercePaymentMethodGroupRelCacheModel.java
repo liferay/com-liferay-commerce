@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommercePaymentMethodGroupRel in entity cache.
  *
  * @author Luca Pellizzon
- * @see CommercePaymentMethodGroupRel
  * @generated
  */
 @ProviderType
-public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<CommercePaymentMethodGroupRel>,
-	Externalizable {
+public class CommercePaymentMethodGroupRelCacheModel
+	implements CacheModel<CommercePaymentMethodGroupRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<Comme
 			return false;
 		}
 
-		CommercePaymentMethodGroupRelCacheModel commercePaymentMethodGroupRelCacheModel =
-			(CommercePaymentMethodGroupRelCacheModel)obj;
+		CommercePaymentMethodGroupRelCacheModel
+			commercePaymentMethodGroupRelCacheModel =
+				(CommercePaymentMethodGroupRelCacheModel)obj;
 
-		if (commercePaymentMethodGroupRelId == commercePaymentMethodGroupRelCacheModel.commercePaymentMethodGroupRelId) {
+		if (commercePaymentMethodGroupRelId ==
+				commercePaymentMethodGroupRelCacheModel.
+					commercePaymentMethodGroupRelId) {
+
 			return true;
 		}
 
@@ -101,9 +104,11 @@ public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<Comme
 
 	@Override
 	public CommercePaymentMethodGroupRel toEntityModel() {
-		CommercePaymentMethodGroupRelImpl commercePaymentMethodGroupRelImpl = new CommercePaymentMethodGroupRelImpl();
+		CommercePaymentMethodGroupRelImpl commercePaymentMethodGroupRelImpl =
+			new CommercePaymentMethodGroupRelImpl();
 
-		commercePaymentMethodGroupRelImpl.setCommercePaymentMethodGroupRelId(commercePaymentMethodGroupRelId);
+		commercePaymentMethodGroupRelImpl.setCommercePaymentMethodGroupRelId(
+			commercePaymentMethodGroupRelId);
 		commercePaymentMethodGroupRelImpl.setGroupId(groupId);
 		commercePaymentMethodGroupRelImpl.setCompanyId(companyId);
 		commercePaymentMethodGroupRelImpl.setUserId(userId);
@@ -119,15 +124,16 @@ public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<Comme
 			commercePaymentMethodGroupRelImpl.setCreateDate(null);
 		}
 		else {
-			commercePaymentMethodGroupRelImpl.setCreateDate(new Date(createDate));
+			commercePaymentMethodGroupRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commercePaymentMethodGroupRelImpl.setModifiedDate(null);
 		}
 		else {
-			commercePaymentMethodGroupRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commercePaymentMethodGroupRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (name == null) {
@@ -185,8 +191,7 @@ public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<Comme
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commercePaymentMethodGroupRelId);
 
 		objectOutput.writeLong(groupId);
@@ -246,4 +251,5 @@ public class CommercePaymentMethodGroupRelCacheModel implements CacheModel<Comme
 	public String engineKey;
 	public double priority;
 	public boolean active;
+
 }

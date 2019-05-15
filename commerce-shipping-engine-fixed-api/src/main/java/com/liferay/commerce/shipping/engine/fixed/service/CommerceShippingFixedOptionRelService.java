@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,59 +40,72 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingFixedOptionRelServiceUtil
- * @see com.liferay.commerce.shipping.engine.fixed.service.base.CommerceShippingFixedOptionRelServiceBaseImpl
- * @see com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceShippingFixedOptionRel"}, service = CommerceShippingFixedOptionRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceShippingFixedOptionRel"
+	},
+	service = CommerceShippingFixedOptionRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceShippingFixedOptionRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionRelServiceUtil} to access the commerce shipping fixed option rel remote service. Add custom service methods to {@link com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionRelServiceUtil} to access the commerce shipping fixed option rel remote service. Add custom service methods to <code>com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceShippingFixedOptionRel addCommerceShippingFixedOptionRel(
-		long commerceShippingMethodId, long commerceShippingFixedOptionId,
-		long commerceWarehouseId, long commerceCountryId,
-		long commerceRegionId, String zip, double weightFrom, double weightTo,
-		BigDecimal fixedPrice, BigDecimal rateUnitWeightPrice,
-		double ratePercentage, ServiceContext serviceContext)
+			long commerceShippingMethodId, long commerceShippingFixedOptionId,
+			long commerceWarehouseId, long commerceCountryId,
+			long commerceRegionId, String zip, double weightFrom,
+			double weightTo, BigDecimal fixedPrice,
+			BigDecimal rateUnitWeightPrice, double ratePercentage,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId) throws PortalException;
+			long commerceShippingFixedOptionRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingFixedOptionRel fetchCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId) throws PortalException;
+			long commerceShippingFixedOptionRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShippingFixedOptionRel> getCommerceShippingMethodFixedOptionRels(
-		long commerceShippingMethodId, int start, int end,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+	public List<CommerceShippingFixedOptionRel>
+			getCommerceShippingMethodFixedOptionRels(
+				long commerceShippingMethodId, int start, int end,
+				OrderByComparator<CommerceShippingFixedOptionRel>
+					orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShippingMethodFixedOptionRelsCount(
-		long commerceShippingMethodId) throws PortalException;
+			long commerceShippingMethodId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceShippingFixedOptionRel updateCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-		long commerceCountryId, long commerceRegionId, String zip,
-		double weightFrom, double weightTo, BigDecimal fixedPrice,
-		BigDecimal rateUnitWeightPrice, double ratePercentage)
+			long commerceShippingFixedOptionRelId, long commerceWarehouseId,
+			long commerceCountryId, long commerceRegionId, String zip,
+			double weightFrom, double weightTo, BigDecimal fixedPrice,
+			BigDecimal rateUnitWeightPrice, double ratePercentage)
 		throws PortalException;
+
 }

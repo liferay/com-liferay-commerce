@@ -33,10 +33,11 @@ import com.liferay.commerce.product.service.CPRuleLocalServiceUtil;
  */
 @ProviderType
 public abstract class CPRuleBaseImpl extends CPRuleModelImpl implements CPRule {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp rule model instance should use the {@link CPRule} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp rule model instance should use the <code>CPRule</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -47,4 +48,5 @@ public abstract class CPRuleBaseImpl extends CPRuleModelImpl implements CPRule {
 			CPRuleLocalServiceUtil.updateCPRule(this);
 		}
 	}
+
 }

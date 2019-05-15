@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,32 +42,39 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPDefinitionOptionRelServiceUtil
- * @see com.liferay.commerce.product.service.base.CPDefinitionOptionRelServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPDefinitionOptionRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPDefinitionOptionRel"}, service = CPDefinitionOptionRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPDefinitionOptionRel"
+	},
+	service = CPDefinitionOptionRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPDefinitionOptionRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPDefinitionOptionRelServiceUtil} to access the cp definition option rel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPDefinitionOptionRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionOptionRelServiceUtil} to access the cp definition option rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionOptionRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPDefinitionOptionRel addCPDefinitionOptionRel(long cpDefinitionId,
-		long cpOptionId, Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
-		double priority, boolean facetable, boolean required,
-		boolean skuContributor, boolean importOptionValue,
-		ServiceContext serviceContext) throws PortalException;
+	public CPDefinitionOptionRel addCPDefinitionOptionRel(
+			long cpDefinitionId, long cpOptionId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			double priority, boolean facetable, boolean required,
+			boolean skuContributor, boolean importOptionValue,
+			ServiceContext serviceContext)
+		throws PortalException;
 
-	public CPDefinitionOptionRel addCPDefinitionOptionRel(long cpDefinitionId,
-		long cpOptionId, ServiceContext serviceContext)
+	public CPDefinitionOptionRel addCPDefinitionOptionRel(
+			long cpDefinitionId, long cpOptionId, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCPDefinitionOptionRel(long cpDefinitionOptionRelId)
@@ -76,28 +82,33 @@ public interface CPDefinitionOptionRelService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionOptionRel fetchCPDefinitionOptionRel(
-		long cpDefinitionOptionRelId) throws PortalException;
+			long cpDefinitionOptionRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionOptionRel fetchCPDefinitionOptionRel(
-		long cpDefinitionId, long cpOptionId) throws PortalException;
+			long cpDefinitionId, long cpOptionId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionOptionRel getCPDefinitionOptionRel(
-		long cpDefinitionOptionRelId) throws PortalException;
+			long cpDefinitionOptionRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels(
-		long cpDefinitionId, boolean skuContributor) throws PortalException;
+			long cpDefinitionId, boolean skuContributor)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels(
-		long cpDefinitionId, int start, int end) throws PortalException;
+			long cpDefinitionId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels(
-		long cpDefinitionId, int start, int end,
-		OrderByComparator<CPDefinitionOptionRel> orderByComparator)
+			long cpDefinitionId, int start, int end,
+			OrderByComparator<CPDefinitionOptionRel> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -105,25 +116,30 @@ public interface CPDefinitionOptionRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionOptionRelsCount(long cpDefinitionId,
-		boolean skuContributor) throws PortalException;
+	public int getCPDefinitionOptionRelsCount(
+			long cpDefinitionId, boolean skuContributor)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPDefinitionOptionRel> searchCPDefinitionOptionRels(
-		long companyId, long groupId, long cpDefinitionId, String keywords,
-		int start, int end, Sort sort) throws PortalException;
+	public BaseModelSearchResult<CPDefinitionOptionRel>
+			searchCPDefinitionOptionRels(
+				long companyId, long groupId, long cpDefinitionId,
+				String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	public CPDefinitionOptionRel updateCPDefinitionOptionRel(
-		long cpDefinitionOptionRelId, long cpOptionId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		String ddmFormFieldTypeName, double priority, boolean facetable,
-		boolean required, boolean skuContributor, ServiceContext serviceContext)
+			long cpDefinitionOptionRelId, long cpOptionId,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, double priority, boolean facetable,
+			boolean required, boolean skuContributor,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

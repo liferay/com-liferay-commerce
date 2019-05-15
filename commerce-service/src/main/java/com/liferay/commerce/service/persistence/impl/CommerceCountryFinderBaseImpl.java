@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.persistence.CommerceCountryPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,20 +31,22 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommerceCountryFinderBaseImpl extends BasePersistenceImpl<CommerceCountry> {
+public class CommerceCountryFinderBaseImpl
+	extends BasePersistenceImpl<CommerceCountry> {
+
 	public CommerceCountryFinderBaseImpl() {
 		setModelClass(CommerceCountry.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put("active", "active_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -77,10 +78,14 @@ public class CommerceCountryFinderBaseImpl extends BasePersistenceImpl<CommerceC
 	 */
 	public void setCommerceCountryPersistence(
 		CommerceCountryPersistence commerceCountryPersistence) {
+
 		this.commerceCountryPersistence = commerceCountryPersistence;
 	}
 
 	@BeanReference(type = CommerceCountryPersistence.class)
 	protected CommerceCountryPersistence commerceCountryPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceCountryFinderBaseImpl.class);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceCountryFinderBaseImpl.class);
+
 }

@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.model.impl.CommerceWarehouseItemImpl;
 import com.liferay.commerce.model.impl.CommerceWarehouseItemModelImpl;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -63,57 +62,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceWarehouseItemPersistence
- * @see com.liferay.commerce.service.persistence.CommerceWarehouseItemUtil
  * @generated
  */
 @ProviderType
-public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<CommerceWarehouseItem>
+public class CommerceWarehouseItemPersistenceImpl
+	extends BasePersistenceImpl<CommerceWarehouseItem>
 	implements CommerceWarehouseItemPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceWarehouseItemUtil} to access the commerce warehouse item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceWarehouseItemUtil</code> to access the commerce warehouse item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceWarehouseItemImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID =
-		new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceWarehouseId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID =
-		new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceWarehouseId", new String[] { Long.class.getName() },
-			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceWarehouseId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceWarehouseItemImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceWarehouseId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceWarehouseId;
+	private FinderPath _finderPathCountByCommerceWarehouseId;
 
 	/**
 	 * Returns all the commerce warehouse items where commerceWarehouseId = &#63;.
@@ -124,15 +99,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public List<CommerceWarehouseItem> findByCommerceWarehouseId(
 		long commerceWarehouseId) {
-		return findByCommerceWarehouseId(commerceWarehouseId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return findByCommerceWarehouseId(
+			commerceWarehouseId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce warehouse items where commerceWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWarehouseId the commerce warehouse ID
@@ -143,6 +119,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public List<CommerceWarehouseItem> findByCommerceWarehouseId(
 		long commerceWarehouseId, int start, int end) {
+
 		return findByCommerceWarehouseId(commerceWarehouseId, start, end, null);
 	}
 
@@ -150,7 +127,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Returns an ordered range of all the commerce warehouse items where commerceWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWarehouseId the commerce warehouse ID
@@ -163,15 +140,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	public List<CommerceWarehouseItem> findByCommerceWarehouseId(
 		long commerceWarehouseId, int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		return findByCommerceWarehouseId(commerceWarehouseId, start, end,
-			orderByComparator, true);
+
+		return findByCommerceWarehouseId(
+			commerceWarehouseId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce warehouse items where commerceWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceWarehouseId the commerce warehouse ID
@@ -186,34 +164,36 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		long commerceWarehouseId, int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID;
-			finderArgs = new Object[] { commerceWarehouseId };
+			finderPath = _finderPathWithoutPaginationFindByCommerceWarehouseId;
+			finderArgs = new Object[] {commerceWarehouseId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID;
+			finderPath = _finderPathWithPaginationFindByCommerceWarehouseId;
 			finderArgs = new Object[] {
-					commerceWarehouseId,
-					
-					start, end, orderByComparator
-				};
+				commerceWarehouseId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWarehouseItem commerceWarehouseItem : list) {
-					if ((commerceWarehouseId != commerceWarehouseItem.getCommerceWarehouseId())) {
+					if ((commerceWarehouseId !=
+							commerceWarehouseItem.getCommerceWarehouseId())) {
+
 						list = null;
 
 						break;
@@ -226,8 +206,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -235,14 +215,14 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			query.append(_SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWarehouseItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -260,16 +240,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				qPos.add(commerceWarehouseId);
 
 				if (!pagination) {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -299,11 +279,13 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem findByCommerceWarehouseId_First(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+			long commerceWarehouseId,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCommerceWarehouseId_First(commerceWarehouseId,
-				orderByComparator);
+
+		CommerceWarehouseItem commerceWarehouseItem =
+			fetchByCommerceWarehouseId_First(
+				commerceWarehouseId, orderByComparator);
 
 		if (commerceWarehouseItem != null) {
 			return commerceWarehouseItem;
@@ -332,8 +314,9 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	public CommerceWarehouseItem fetchByCommerceWarehouseId_First(
 		long commerceWarehouseId,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		List<CommerceWarehouseItem> list = findByCommerceWarehouseId(commerceWarehouseId,
-				0, 1, orderByComparator);
+
+		List<CommerceWarehouseItem> list = findByCommerceWarehouseId(
+			commerceWarehouseId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -352,11 +335,13 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem findByCommerceWarehouseId_Last(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+			long commerceWarehouseId,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCommerceWarehouseId_Last(commerceWarehouseId,
-				orderByComparator);
+
+		CommerceWarehouseItem commerceWarehouseItem =
+			fetchByCommerceWarehouseId_Last(
+				commerceWarehouseId, orderByComparator);
 
 		if (commerceWarehouseItem != null) {
 			return commerceWarehouseItem;
@@ -385,14 +370,15 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	public CommerceWarehouseItem fetchByCommerceWarehouseId_Last(
 		long commerceWarehouseId,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+
 		int count = countByCommerceWarehouseId(commerceWarehouseId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWarehouseItem> list = findByCommerceWarehouseId(commerceWarehouseId,
-				count - 1, count, orderByComparator);
+		List<CommerceWarehouseItem> list = findByCommerceWarehouseId(
+			commerceWarehouseId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -412,10 +398,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem[] findByCommerceWarehouseId_PrevAndNext(
-		long commerceWarehouseItemId, long commerceWarehouseId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+			long commerceWarehouseItemId, long commerceWarehouseId,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = findByPrimaryKey(commerceWarehouseItemId);
+
+		CommerceWarehouseItem commerceWarehouseItem = findByPrimaryKey(
+			commerceWarehouseItemId);
 
 		Session session = null;
 
@@ -424,15 +412,15 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			CommerceWarehouseItem[] array = new CommerceWarehouseItemImpl[3];
 
-			array[0] = getByCommerceWarehouseId_PrevAndNext(session,
-					commerceWarehouseItem, commerceWarehouseId,
-					orderByComparator, true);
+			array[0] = getByCommerceWarehouseId_PrevAndNext(
+				session, commerceWarehouseItem, commerceWarehouseId,
+				orderByComparator, true);
 
 			array[1] = commerceWarehouseItem;
 
-			array[2] = getByCommerceWarehouseId_PrevAndNext(session,
-					commerceWarehouseItem, commerceWarehouseId,
-					orderByComparator, false);
+			array[2] = getByCommerceWarehouseId_PrevAndNext(
+				session, commerceWarehouseItem, commerceWarehouseId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -449,11 +437,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		long commerceWarehouseId,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -465,7 +454,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -535,10 +525,11 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		qPos.add(commerceWarehouseId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWarehouseItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWarehouseItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -559,8 +550,11 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public void removeByCommerceWarehouseId(long commerceWarehouseId) {
-		for (CommerceWarehouseItem commerceWarehouseItem : findByCommerceWarehouseId(
-				commerceWarehouseId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceWarehouseItem commerceWarehouseItem :
+				findByCommerceWarehouseId(
+					commerceWarehouseId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
 			remove(commerceWarehouseItem);
 		}
 	}
@@ -573,9 +567,9 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public int countByCommerceWarehouseId(long commerceWarehouseId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID;
+		FinderPath finderPath = _finderPathCountByCommerceWarehouseId;
 
-		Object[] finderArgs = new Object[] { commerceWarehouseId };
+		Object[] finderArgs = new Object[] {commerceWarehouseId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -584,7 +578,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			query.append(_SQL_COUNT_COMMERCEWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
 
 			String sql = query.toString();
 
@@ -616,22 +611,15 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2 =
-		"commerceWarehouseItem.commerceWarehouseId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCWI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK |
-			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCWI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2 =
+			"commerceWarehouseItem.commerceWarehouseId = ?";
+
+	private FinderPath _finderPathFetchByCWI_CPIU;
+	private FinderPath _finderPathCountByCWI_CPIU;
 
 	/**
-	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
+	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a <code>NoSuchWarehouseItemException</code> if it could not be found.
 	 *
 	 * @param commerceWarehouseId the commerce warehouse ID
 	 * @param CPInstanceUuid the cp instance uuid
@@ -639,10 +627,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem findByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCWI_CPIU(commerceWarehouseId,
-				CPInstanceUuid);
+	public CommerceWarehouseItem findByCWI_CPIU(
+			long commerceWarehouseId, String CPInstanceUuid)
+		throws NoSuchWarehouseItemException {
+
+		CommerceWarehouseItem commerceWarehouseItem = fetchByCWI_CPIU(
+			commerceWarehouseId, CPInstanceUuid);
 
 		if (commerceWarehouseItem == null) {
 			StringBundler msg = new StringBundler(6);
@@ -675,8 +665,9 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) {
+	public CommerceWarehouseItem fetchByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid) {
+
 		return fetchByCWI_CPIU(commerceWarehouseId, CPInstanceUuid, true);
 	}
 
@@ -689,23 +680,33 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
+	public CommerceWarehouseItem fetchByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid,
+		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		Object[] finderArgs = new Object[] {
+			commerceWarehouseId, CPInstanceUuid
+		};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByCWI_CPIU, finderArgs, this);
 		}
 
 		if (result instanceof CommerceWarehouseItem) {
-			CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)result;
+			CommerceWarehouseItem commerceWarehouseItem =
+				(CommerceWarehouseItem)result;
 
-			if ((commerceWarehouseId != commerceWarehouseItem.getCommerceWarehouseId()) ||
-					!Objects.equals(CPInstanceUuid,
-						commerceWarehouseItem.getCPInstanceUuid())) {
+			if ((commerceWarehouseId !=
+					commerceWarehouseItem.getCommerceWarehouseId()) ||
+				!Objects.equals(
+					CPInstanceUuid,
+					commerceWarehouseItem.getCPInstanceUuid())) {
+
 				result = null;
 			}
 		}
@@ -719,10 +720,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
 			}
 			else {
@@ -751,8 +749,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				List<CommerceWarehouseItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-						finderArgs, list);
+					finderCache.putResult(
+						_finderPathFetchByCWI_CPIU, finderArgs, list);
 				}
 				else {
 					CommerceWarehouseItem commerceWarehouseItem = list.get(0);
@@ -763,8 +761,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-					finderArgs);
+				finderCache.removeResult(
+					_finderPathFetchByCWI_CPIU, finderArgs);
 
 				throw processException(e);
 			}
@@ -789,10 +787,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the commerce warehouse item that was removed
 	 */
 	@Override
-	public CommerceWarehouseItem removeByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = findByCWI_CPIU(commerceWarehouseId,
-				CPInstanceUuid);
+	public CommerceWarehouseItem removeByCWI_CPIU(
+			long commerceWarehouseId, String CPInstanceUuid)
+		throws NoSuchWarehouseItemException {
+
+		CommerceWarehouseItem commerceWarehouseItem = findByCWI_CPIU(
+			commerceWarehouseId, CPInstanceUuid);
 
 		return remove(commerceWarehouseItem);
 	}
@@ -805,10 +805,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the number of matching commerce warehouse items
 	 */
 	@Override
-	public int countByCWI_CPIU(long commerceWarehouseId, String CPInstanceUuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CWI_CPIU;
+	public int countByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid) {
 
-		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		FinderPath finderPath = _finderPathCountByCWI_CPIU;
+
+		Object[] finderArgs = new Object[] {
+			commerceWarehouseId, CPInstanceUuid
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -821,10 +827,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
 			}
 			else {
@@ -867,32 +870,18 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2 = "commerceWarehouseItem.commerceWarehouseId = ? AND ";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1 = "commerceWarehouseItem.CPInstanceUuid IS NULL";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2 = "commerceWarehouseItem.CPInstanceUuid = ?";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3 = "(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPI_CPIU",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU =
-		new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceWarehouseItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
-			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2 =
+		"commerceWarehouseItem.commerceWarehouseId = ? AND ";
+
+	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2 =
+		"commerceWarehouseItem.CPInstanceUuid = ?";
+
+	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3 =
+		"(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
+
+	private FinderPath _finderPathWithPaginationFindByCPI_CPIU;
+	private FinderPath _finderPathWithoutPaginationFindByCPI_CPIU;
+	private FinderPath _finderPathCountByCPI_CPIU;
 
 	/**
 	 * Returns all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
@@ -902,17 +891,19 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the matching commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
-		String CPInstanceUuid) {
-		return findByCPI_CPIU(CProductId, CPInstanceUuid, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<CommerceWarehouseItem> findByCPI_CPIU(
+		long CProductId, String CPInstanceUuid) {
+
+		return findByCPI_CPIU(
+			CProductId, CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -922,8 +913,9 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the range of matching commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
-		String CPInstanceUuid, int start, int end) {
+	public List<CommerceWarehouseItem> findByCPI_CPIU(
+		long CProductId, String CPInstanceUuid, int start, int end) {
+
 		return findByCPI_CPIU(CProductId, CPInstanceUuid, start, end, null);
 	}
 
@@ -931,7 +923,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Returns an ordered range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -942,18 +934,19 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the ordered range of matching commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
-		String CPInstanceUuid, int start, int end,
+	public List<CommerceWarehouseItem> findByCPI_CPIU(
+		long CProductId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		return findByCPI_CPIU(CProductId, CPInstanceUuid, start, end,
-			orderByComparator, true);
+
+		return findByCPI_CPIU(
+			CProductId, CPInstanceUuid, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CProductId the c product ID
@@ -965,40 +958,43 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the ordered range of matching commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
-		String CPInstanceUuid, int start, int end,
+	public List<CommerceWarehouseItem> findByCPI_CPIU(
+		long CProductId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU;
-			finderArgs = new Object[] { CProductId, CPInstanceUuid };
+			finderPath = _finderPathWithoutPaginationFindByCPI_CPIU;
+			finderArgs = new Object[] {CProductId, CPInstanceUuid};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPI_CPIU;
+			finderPath = _finderPathWithPaginationFindByCPI_CPIU;
 			finderArgs = new Object[] {
-					CProductId, CPInstanceUuid,
-					
-					start, end, orderByComparator
-				};
+				CProductId, CPInstanceUuid, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWarehouseItem commerceWarehouseItem : list) {
 					if ((CProductId != commerceWarehouseItem.getCProductId()) ||
-							!Objects.equals(CPInstanceUuid,
-								commerceWarehouseItem.getCPInstanceUuid())) {
+						!CPInstanceUuid.equals(
+							commerceWarehouseItem.getCPInstanceUuid())) {
+
 						list = null;
 
 						break;
@@ -1011,8 +1007,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1024,10 +1020,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3);
 			}
 			else {
@@ -1037,11 +1030,10 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceWarehouseItemModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1063,16 +1055,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				}
 
 				if (!pagination) {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1102,12 +1094,13 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem findByCPI_CPIU_First(long CProductId,
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+	public CommerceWarehouseItem findByCPI_CPIU_First(
+			long CProductId, String CPInstanceUuid,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCPI_CPIU_First(CProductId,
-				CPInstanceUuid, orderByComparator);
+
+		CommerceWarehouseItem commerceWarehouseItem = fetchByCPI_CPIU_First(
+			CProductId, CPInstanceUuid, orderByComparator);
 
 		if (commerceWarehouseItem != null) {
 			return commerceWarehouseItem;
@@ -1137,11 +1130,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the first matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem fetchByCPI_CPIU_First(long CProductId,
-		String CPInstanceUuid,
+	public CommerceWarehouseItem fetchByCPI_CPIU_First(
+		long CProductId, String CPInstanceUuid,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		List<CommerceWarehouseItem> list = findByCPI_CPIU(CProductId,
-				CPInstanceUuid, 0, 1, orderByComparator);
+
+		List<CommerceWarehouseItem> list = findByCPI_CPIU(
+			CProductId, CPInstanceUuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1160,12 +1154,13 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem findByCPI_CPIU_Last(long CProductId,
-		String CPInstanceUuid,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+	public CommerceWarehouseItem findByCPI_CPIU_Last(
+			long CProductId, String CPInstanceUuid,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCPI_CPIU_Last(CProductId,
-				CPInstanceUuid, orderByComparator);
+
+		CommerceWarehouseItem commerceWarehouseItem = fetchByCPI_CPIU_Last(
+			CProductId, CPInstanceUuid, orderByComparator);
 
 		if (commerceWarehouseItem != null) {
 			return commerceWarehouseItem;
@@ -1195,17 +1190,18 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the last matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem fetchByCPI_CPIU_Last(long CProductId,
-		String CPInstanceUuid,
+	public CommerceWarehouseItem fetchByCPI_CPIU_Last(
+		long CProductId, String CPInstanceUuid,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+
 		int count = countByCPI_CPIU(CProductId, CPInstanceUuid);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceWarehouseItem> list = findByCPI_CPIU(CProductId,
-				CPInstanceUuid, count - 1, count, orderByComparator);
+		List<CommerceWarehouseItem> list = findByCPI_CPIU(
+			CProductId, CPInstanceUuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1226,10 +1222,15 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem[] findByCPI_CPIU_PrevAndNext(
-		long commerceWarehouseItemId, long CProductId, String CPInstanceUuid,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+			long commerceWarehouseItemId, long CProductId,
+			String CPInstanceUuid,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = findByPrimaryKey(commerceWarehouseItemId);
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		CommerceWarehouseItem commerceWarehouseItem = findByPrimaryKey(
+			commerceWarehouseItemId);
 
 		Session session = null;
 
@@ -1238,15 +1239,15 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			CommerceWarehouseItem[] array = new CommerceWarehouseItemImpl[3];
 
-			array[0] = getByCPI_CPIU_PrevAndNext(session,
-					commerceWarehouseItem, CProductId, CPInstanceUuid,
-					orderByComparator, true);
+			array[0] = getByCPI_CPIU_PrevAndNext(
+				session, commerceWarehouseItem, CProductId, CPInstanceUuid,
+				orderByComparator, true);
 
 			array[1] = commerceWarehouseItem;
 
-			array[2] = getByCPI_CPIU_PrevAndNext(session,
-					commerceWarehouseItem, CProductId, CPInstanceUuid,
-					orderByComparator, false);
+			array[2] = getByCPI_CPIU_PrevAndNext(
+				session, commerceWarehouseItem, CProductId, CPInstanceUuid,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1258,16 +1259,17 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		}
 	}
 
-	protected CommerceWarehouseItem getByCPI_CPIU_PrevAndNext(Session session,
-		CommerceWarehouseItem commerceWarehouseItem, long CProductId,
-		String CPInstanceUuid,
+	protected CommerceWarehouseItem getByCPI_CPIU_PrevAndNext(
+		Session session, CommerceWarehouseItem commerceWarehouseItem,
+		long CProductId, String CPInstanceUuid,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1280,10 +1282,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 		boolean bindCPInstanceUuid = false;
 
-		if (CPInstanceUuid == null) {
-			query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_1);
-		}
-		else if (CPInstanceUuid.equals("")) {
+		if (CPInstanceUuid.isEmpty()) {
 			query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3);
 		}
 		else {
@@ -1293,7 +1292,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1367,10 +1367,11 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceWarehouseItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceWarehouseItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1392,9 +1393,11 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public void removeByCPI_CPIU(long CProductId, String CPInstanceUuid) {
-		for (CommerceWarehouseItem commerceWarehouseItem : findByCPI_CPIU(
-				CProductId, CPInstanceUuid, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (CommerceWarehouseItem commerceWarehouseItem :
+				findByCPI_CPIU(
+					CProductId, CPInstanceUuid, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceWarehouseItem);
 		}
 	}
@@ -1408,9 +1411,11 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public int countByCPI_CPIU(long CProductId, String CPInstanceUuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPI_CPIU;
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
-		Object[] finderArgs = new Object[] { CProductId, CPInstanceUuid };
+		FinderPath finderPath = _finderPathCountByCPI_CPIU;
+
+		Object[] finderArgs = new Object[] {CProductId, CPInstanceUuid};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1423,10 +1428,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			boolean bindCPInstanceUuid = false;
 
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
+			if (CPInstanceUuid.isEmpty()) {
 				query.append(_FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3);
 			}
 			else {
@@ -1469,10 +1471,14 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPI_CPIU_CPRODUCTID_2 = "commerceWarehouseItem.CProductId = ? AND ";
-	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_1 = "commerceWarehouseItem.CPInstanceUuid IS NULL";
-	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_2 = "commerceWarehouseItem.CPInstanceUuid = ?";
-	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3 = "(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
+	private static final String _FINDER_COLUMN_CPI_CPIU_CPRODUCTID_2 =
+		"commerceWarehouseItem.CProductId = ? AND ";
+
+	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_2 =
+		"commerceWarehouseItem.CPInstanceUuid = ?";
+
+	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3 =
+		"(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
 
 	public CommerceWarehouseItemPersistenceImpl() {
 		setModelClass(CommerceWarehouseItem.class);
@@ -1485,15 +1491,18 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public void cacheResult(CommerceWarehouseItem commerceWarehouseItem) {
-		entityCache.putResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWarehouseItemImpl.class,
 			commerceWarehouseItem.getPrimaryKey(), commerceWarehouseItem);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
+		finderCache.putResult(
+			_finderPathFetchByCWI_CPIU,
 			new Object[] {
 				commerceWarehouseItem.getCommerceWarehouseId(),
 				commerceWarehouseItem.getCPInstanceUuid()
-			}, commerceWarehouseItem);
+			},
+			commerceWarehouseItem);
 
 		commerceWarehouseItem.resetOriginalValues();
 	}
@@ -1504,12 +1513,17 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @param commerceWarehouseItems the commerce warehouse items
 	 */
 	@Override
-	public void cacheResult(List<CommerceWarehouseItem> commerceWarehouseItems) {
-		for (CommerceWarehouseItem commerceWarehouseItem : commerceWarehouseItems) {
+	public void cacheResult(
+		List<CommerceWarehouseItem> commerceWarehouseItems) {
+
+		for (CommerceWarehouseItem commerceWarehouseItem :
+				commerceWarehouseItems) {
+
 			if (entityCache.getResult(
-						CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceWarehouseItemImpl.class,
-						commerceWarehouseItem.getPrimaryKey()) == null) {
+					CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceWarehouseItemImpl.class,
+					commerceWarehouseItem.getPrimaryKey()) == null) {
+
 				cacheResult(commerceWarehouseItem);
 			}
 			else {
@@ -1522,7 +1536,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Clears the cache for all commerce warehouse items.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1538,20 +1552,21 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Clears the cache for the commerce warehouse item.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CommerceWarehouseItem commerceWarehouseItem) {
-		entityCache.removeResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.removeResult(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWarehouseItemImpl.class,
 			commerceWarehouseItem.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceWarehouseItemModelImpl)commerceWarehouseItem,
-			true);
+		clearUniqueFindersCache(
+			(CommerceWarehouseItemModelImpl)commerceWarehouseItem, true);
 	}
 
 	@Override
@@ -1559,51 +1574,58 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceWarehouseItem commerceWarehouseItem : commerceWarehouseItems) {
-			entityCache.removeResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceWarehouseItem commerceWarehouseItem :
+				commerceWarehouseItems) {
+
+			entityCache.removeResult(
+				CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceWarehouseItemImpl.class,
 				commerceWarehouseItem.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceWarehouseItemModelImpl)commerceWarehouseItem,
-				true);
+			clearUniqueFindersCache(
+				(CommerceWarehouseItemModelImpl)commerceWarehouseItem, true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
 		CommerceWarehouseItemModelImpl commerceWarehouseItemModelImpl) {
-		Object[] args = new Object[] {
-				commerceWarehouseItemModelImpl.getCommerceWarehouseId(),
-				commerceWarehouseItemModelImpl.getCPInstanceUuid()
-			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_CWI_CPIU, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CWI_CPIU, args,
-			commerceWarehouseItemModelImpl, false);
+		Object[] args = new Object[] {
+			commerceWarehouseItemModelImpl.getCommerceWarehouseId(),
+			commerceWarehouseItemModelImpl.getCPInstanceUuid()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByCWI_CPIU, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByCWI_CPIU, args, commerceWarehouseItemModelImpl,
+			false);
 	}
 
 	protected void clearUniqueFindersCache(
 		CommerceWarehouseItemModelImpl commerceWarehouseItemModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceWarehouseItemModelImpl.getCommerceWarehouseId(),
-					commerceWarehouseItemModelImpl.getCPInstanceUuid()
-				};
+				commerceWarehouseItemModelImpl.getCommerceWarehouseId(),
+				commerceWarehouseItemModelImpl.getCPInstanceUuid()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CWI_CPIU, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CWI_CPIU, args);
+			finderCache.removeResult(_finderPathCountByCWI_CPIU, args);
+			finderCache.removeResult(_finderPathFetchByCWI_CPIU, args);
 		}
 
 		if ((commerceWarehouseItemModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CWI_CPIU.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceWarehouseItemModelImpl.getOriginalCommerceWarehouseId(),
-					commerceWarehouseItemModelImpl.getOriginalCPInstanceUuid()
-				};
+			 _finderPathFetchByCWI_CPIU.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CWI_CPIU, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CWI_CPIU, args);
+			Object[] args = new Object[] {
+				commerceWarehouseItemModelImpl.getOriginalCommerceWarehouseId(),
+				commerceWarehouseItemModelImpl.getOriginalCPInstanceUuid()
+			};
+
+			finderCache.removeResult(_finderPathCountByCWI_CPIU, args);
+			finderCache.removeResult(_finderPathFetchByCWI_CPIU, args);
 		}
 	}
 
@@ -1615,7 +1637,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem create(long commerceWarehouseItemId) {
-		CommerceWarehouseItem commerceWarehouseItem = new CommerceWarehouseItemImpl();
+		CommerceWarehouseItem commerceWarehouseItem =
+			new CommerceWarehouseItemImpl();
 
 		commerceWarehouseItem.setNew(true);
 		commerceWarehouseItem.setPrimaryKey(commerceWarehouseItemId);
@@ -1635,6 +1658,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public CommerceWarehouseItem remove(long commerceWarehouseItemId)
 		throws NoSuchWarehouseItemException {
+
 		return remove((Serializable)commerceWarehouseItemId);
 	}
 
@@ -1648,21 +1672,23 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public CommerceWarehouseItem remove(Serializable primaryKey)
 		throws NoSuchWarehouseItemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)session.get(CommerceWarehouseItemImpl.class,
-					primaryKey);
+			CommerceWarehouseItem commerceWarehouseItem =
+				(CommerceWarehouseItem)session.get(
+					CommerceWarehouseItemImpl.class, primaryKey);
 
 			if (commerceWarehouseItem == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchWarehouseItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchWarehouseItemException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceWarehouseItem);
@@ -1681,14 +1707,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	protected CommerceWarehouseItem removeImpl(
 		CommerceWarehouseItem commerceWarehouseItem) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceWarehouseItem)) {
-				commerceWarehouseItem = (CommerceWarehouseItem)session.get(CommerceWarehouseItemImpl.class,
-						commerceWarehouseItem.getPrimaryKeyObj());
+				commerceWarehouseItem = (CommerceWarehouseItem)session.get(
+					CommerceWarehouseItemImpl.class,
+					commerceWarehouseItem.getPrimaryKeyObj());
 			}
 
 			if (commerceWarehouseItem != null) {
@@ -1712,27 +1740,33 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public CommerceWarehouseItem updateImpl(
 		CommerceWarehouseItem commerceWarehouseItem) {
+
 		boolean isNew = commerceWarehouseItem.isNew();
 
-		if (!(commerceWarehouseItem instanceof CommerceWarehouseItemModelImpl)) {
+		if (!(commerceWarehouseItem instanceof
+				CommerceWarehouseItemModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceWarehouseItem.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceWarehouseItem);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceWarehouseItem);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceWarehouseItem proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceWarehouseItem implementation " +
-				commerceWarehouseItem.getClass());
+					commerceWarehouseItem.getClass());
 		}
 
-		CommerceWarehouseItemModelImpl commerceWarehouseItemModelImpl = (CommerceWarehouseItemModelImpl)commerceWarehouseItem;
+		CommerceWarehouseItemModelImpl commerceWarehouseItemModelImpl =
+			(CommerceWarehouseItemModelImpl)commerceWarehouseItem;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1741,8 +1775,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				commerceWarehouseItem.setCreateDate(now);
 			}
 			else {
-				commerceWarehouseItem.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceWarehouseItem.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1751,8 +1785,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				commerceWarehouseItem.setModifiedDate(now);
 			}
 			else {
-				commerceWarehouseItem.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceWarehouseItem.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1767,7 +1801,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				commerceWarehouseItem.setNew(false);
 			}
 			else {
-				commerceWarehouseItem = (CommerceWarehouseItem)session.merge(commerceWarehouseItem);
+				commerceWarehouseItem = (CommerceWarehouseItem)session.merge(
+					commerceWarehouseItem);
 			}
 		}
 		catch (Exception e) {
@@ -1782,78 +1817,85 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		if (!CommerceWarehouseItemModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceWarehouseItemModelImpl.getCommerceWarehouseId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceWarehouseId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceWarehouseId, args);
+
+			args = new Object[] {
+				commerceWarehouseItemModelImpl.getCProductId(),
+				commerceWarehouseItemModelImpl.getCPInstanceUuid()
+			};
+
+			finderCache.removeResult(_finderPathCountByCPI_CPIU, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCPI_CPIU, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceWarehouseItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceWarehouseId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceWarehouseItemModelImpl.
+						getOriginalCommerceWarehouseId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceWarehouseId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceWarehouseId,
+					args);
+
+				args = new Object[] {
 					commerceWarehouseItemModelImpl.getCommerceWarehouseId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
-				args);
+				finderCache.removeResult(
+					_finderPathCountByCommerceWarehouseId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceWarehouseId,
+					args);
+			}
 
-			args = new Object[] {
+			if ((commerceWarehouseItemModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCPI_CPIU.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceWarehouseItemModelImpl.getOriginalCProductId(),
+					commerceWarehouseItemModelImpl.getOriginalCPInstanceUuid()
+				};
+
+				finderCache.removeResult(_finderPathCountByCPI_CPIU, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPI_CPIU, args);
+
+				args = new Object[] {
 					commerceWarehouseItemModelImpl.getCProductId(),
 					commerceWarehouseItemModelImpl.getCPInstanceUuid()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPI_CPIU, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceWarehouseItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWarehouseItemModelImpl.getOriginalCommerceWarehouseId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
-					args);
-
-				args = new Object[] {
-						commerceWarehouseItemModelImpl.getCommerceWarehouseId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
-					args);
-			}
-
-			if ((commerceWarehouseItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceWarehouseItemModelImpl.getOriginalCProductId(),
-						commerceWarehouseItemModelImpl.getOriginalCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPI_CPIU, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU,
-					args);
-
-				args = new Object[] {
-						commerceWarehouseItemModelImpl.getCProductId(),
-						commerceWarehouseItemModelImpl.getCPInstanceUuid()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPI_CPIU, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPI_CPIU,
-					args);
+				finderCache.removeResult(_finderPathCountByCPI_CPIU, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPI_CPIU, args);
 			}
 		}
 
-		entityCache.putResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWarehouseItemImpl.class,
-			commerceWarehouseItem.getPrimaryKey(), commerceWarehouseItem, false);
+			commerceWarehouseItem.getPrimaryKey(), commerceWarehouseItem,
+			false);
 
 		clearUniqueFindersCache(commerceWarehouseItemModelImpl, false);
 		cacheUniqueFindersCache(commerceWarehouseItemModelImpl);
@@ -1864,7 +1906,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	}
 
 	/**
-	 * Returns the commerce warehouse item with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce warehouse item with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce warehouse item
 	 * @return the commerce warehouse item
@@ -1873,22 +1915,24 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public CommerceWarehouseItem findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByPrimaryKey(primaryKey);
+
+		CommerceWarehouseItem commerceWarehouseItem = fetchByPrimaryKey(
+			primaryKey);
 
 		if (commerceWarehouseItem == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchWarehouseItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchWarehouseItemException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceWarehouseItem;
 	}
 
 	/**
-	 * Returns the commerce warehouse item with the primary key or throws a {@link NoSuchWarehouseItemException} if it could not be found.
+	 * Returns the commerce warehouse item with the primary key or throws a <code>NoSuchWarehouseItemException</code> if it could not be found.
 	 *
 	 * @param commerceWarehouseItemId the primary key of the commerce warehouse item
 	 * @return the commerce warehouse item
@@ -1897,6 +1941,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	@Override
 	public CommerceWarehouseItem findByPrimaryKey(long commerceWarehouseItemId)
 		throws NoSuchWarehouseItemException {
+
 		return findByPrimaryKey((Serializable)commerceWarehouseItemId);
 	}
 
@@ -1908,14 +1953,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public CommerceWarehouseItem fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceWarehouseItemImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)serializable;
+		CommerceWarehouseItem commerceWarehouseItem =
+			(CommerceWarehouseItem)serializable;
 
 		if (commerceWarehouseItem == null) {
 			Session session = null;
@@ -1923,19 +1970,21 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			try {
 				session = openSession();
 
-				commerceWarehouseItem = (CommerceWarehouseItem)session.get(CommerceWarehouseItemImpl.class,
-						primaryKey);
+				commerceWarehouseItem = (CommerceWarehouseItem)session.get(
+					CommerceWarehouseItemImpl.class, primaryKey);
 
 				if (commerceWarehouseItem != null) {
 					cacheResult(commerceWarehouseItem);
 				}
 				else {
-					entityCache.putResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 						CommerceWarehouseItemImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceWarehouseItemImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1955,25 +2004,30 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the commerce warehouse item, or <code>null</code> if a commerce warehouse item with the primary key could not be found
 	 */
 	@Override
-	public CommerceWarehouseItem fetchByPrimaryKey(long commerceWarehouseItemId) {
+	public CommerceWarehouseItem fetchByPrimaryKey(
+		long commerceWarehouseItemId) {
+
 		return fetchByPrimaryKey((Serializable)commerceWarehouseItemId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceWarehouseItem> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceWarehouseItem> map = new HashMap<Serializable, CommerceWarehouseItem>();
+		Map<Serializable, CommerceWarehouseItem> map =
+			new HashMap<Serializable, CommerceWarehouseItem>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceWarehouseItem commerceWarehouseItem = fetchByPrimaryKey(primaryKey);
+			CommerceWarehouseItem commerceWarehouseItem = fetchByPrimaryKey(
+				primaryKey);
 
 			if (commerceWarehouseItem != null) {
 				map.put(primaryKey, commerceWarehouseItem);
@@ -1985,8 +2039,9 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceWarehouseItemImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceWarehouseItemImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -2006,8 +2061,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE_PKS_IN);
 
@@ -2030,17 +2085,22 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceWarehouseItem commerceWarehouseItem : (List<CommerceWarehouseItem>)q.list()) {
-				map.put(commerceWarehouseItem.getPrimaryKeyObj(),
+			for (CommerceWarehouseItem commerceWarehouseItem :
+					(List<CommerceWarehouseItem>)q.list()) {
+
+				map.put(
+					commerceWarehouseItem.getPrimaryKeyObj(),
 					commerceWarehouseItem);
 
 				cacheResult(commerceWarehouseItem);
 
-				uncachedPrimaryKeys.remove(commerceWarehouseItem.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceWarehouseItem.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceWarehouseItemImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -2068,7 +2128,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Returns a range of all the commerce warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce warehouse items
@@ -2084,7 +2144,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Returns an ordered range of all the commerce warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce warehouse items
@@ -2093,8 +2153,10 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the ordered range of commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findAll(int start, int end,
+	public List<CommerceWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2102,7 +2164,7 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Returns an ordered range of all the commerce warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce warehouse items
@@ -2112,29 +2174,32 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * @return the ordered range of commerce warehouse items
 	 */
 	@Override
-	public List<CommerceWarehouseItem> findAll(int start, int end,
+	public List<CommerceWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2142,13 +2207,13 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEWAREHOUSEITEM);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2156,7 +2221,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				sql = _SQL_SELECT_COMMERCEWAREHOUSEITEM;
 
 				if (pagination) {
-					sql = sql.concat(CommerceWarehouseItemModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceWarehouseItemModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2168,16 +2234,16 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2215,8 +2281,8 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2228,12 +2294,12 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2254,6 +2320,89 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	 * Initializes the commerce warehouse item persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceWarehouseId = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceWarehouseId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceWarehouseId = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceWarehouseId", new String[] {Long.class.getName()},
+			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceWarehouseId = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceWarehouseId", new String[] {Long.class.getName()});
+
+		_finderPathFetchByCWI_CPIU = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByCWI_CPIU",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK |
+			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
+
+		_finderPathCountByCWI_CPIU = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCWI_CPIU",
+			new String[] {Long.class.getName(), String.class.getName()});
+
+		_finderPathWithPaginationFindByCPI_CPIU = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPI_CPIU",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCPI_CPIU = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPI_CPIU",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceWarehouseItemModelImpl.CPRODUCTID_COLUMN_BITMASK |
+			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
+
+		_finderPathCountByCPI_CPIU = new FinderPath(
+			CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPI_CPIU",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {
@@ -2265,17 +2414,38 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM = "SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem";
-	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE_PKS_IN = "SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem WHERE commerceWarehouseItemId IN (";
-	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE = "SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem WHERE ";
-	private static final String _SQL_COUNT_COMMERCEWAREHOUSEITEM = "SELECT COUNT(commerceWarehouseItem) FROM CommerceWarehouseItem commerceWarehouseItem";
-	private static final String _SQL_COUNT_COMMERCEWAREHOUSEITEM_WHERE = "SELECT COUNT(commerceWarehouseItem) FROM CommerceWarehouseItem commerceWarehouseItem WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceWarehouseItem.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceWarehouseItem exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceWarehouseItem exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceWarehouseItemPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM =
+		"SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem";
+
+	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE_PKS_IN =
+		"SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem WHERE commerceWarehouseItemId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE =
+		"SELECT commerceWarehouseItem FROM CommerceWarehouseItem commerceWarehouseItem WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEWAREHOUSEITEM =
+		"SELECT COUNT(commerceWarehouseItem) FROM CommerceWarehouseItem commerceWarehouseItem";
+
+	private static final String _SQL_COUNT_COMMERCEWAREHOUSEITEM_WHERE =
+		"SELECT COUNT(commerceWarehouseItem) FROM CommerceWarehouseItem commerceWarehouseItem WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceWarehouseItem.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceWarehouseItem exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceWarehouseItem exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceWarehouseItemPersistenceImpl.class);
+
 }

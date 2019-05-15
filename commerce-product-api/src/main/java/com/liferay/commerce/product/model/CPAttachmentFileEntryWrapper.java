@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,10 +38,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
-	ModelWrapper<CPAttachmentFileEntry> {
+public class CPAttachmentFileEntryWrapper
+	implements CPAttachmentFileEntry, ModelWrapper<CPAttachmentFileEntry> {
+
 	public CPAttachmentFileEntryWrapper(
 		CPAttachmentFileEntry cpAttachmentFileEntry) {
+
 		_cpAttachmentFileEntry = cpAttachmentFileEntry;
 	}
 
@@ -97,14 +97,14 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 		}
 
 		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
+			"externalReferenceCode");
 
 		if (externalReferenceCode != null) {
 			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPAttachmentFileEntryId = (Long)attributes.get(
-				"CPAttachmentFileEntryId");
+			"CPAttachmentFileEntryId");
 
 		if (CPAttachmentFileEntryId != null) {
 			setCPAttachmentFileEntryId(CPAttachmentFileEntryId);
@@ -233,7 +233,8 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 
 	@Override
 	public Object clone() {
-		return new CPAttachmentFileEntryWrapper((CPAttachmentFileEntry)_cpAttachmentFileEntry.clone());
+		return new CPAttachmentFileEntryWrapper(
+			(CPAttachmentFileEntry)_cpAttachmentFileEntry.clone());
 	}
 
 	@Override
@@ -247,60 +248,60 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns the fully qualified class name of this cp attachment file entry.
-	*
-	* @return the fully qualified class name of this cp attachment file entry
-	*/
+	 * Returns the fully qualified class name of this cp attachment file entry.
+	 *
+	 * @return the fully qualified class name of this cp attachment file entry
+	 */
 	@Override
 	public String getClassName() {
 		return _cpAttachmentFileEntry.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this cp attachment file entry.
-	*
-	* @return the class name ID of this cp attachment file entry
-	*/
+	 * Returns the class name ID of this cp attachment file entry.
+	 *
+	 * @return the class name ID of this cp attachment file entry
+	 */
 	@Override
 	public long getClassNameId() {
 		return _cpAttachmentFileEntry.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this cp attachment file entry.
-	*
-	* @return the class pk of this cp attachment file entry
-	*/
+	 * Returns the class pk of this cp attachment file entry.
+	 *
+	 * @return the class pk of this cp attachment file entry
+	 */
 	@Override
 	public long getClassPK() {
 		return _cpAttachmentFileEntry.getClassPK();
 	}
 
 	/**
-	* Returns the company ID of this cp attachment file entry.
-	*
-	* @return the company ID of this cp attachment file entry
-	*/
+	 * Returns the company ID of this cp attachment file entry.
+	 *
+	 * @return the company ID of this cp attachment file entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpAttachmentFileEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the cp attachment file entry ID of this cp attachment file entry.
-	*
-	* @return the cp attachment file entry ID of this cp attachment file entry
-	*/
+	 * Returns the cp attachment file entry ID of this cp attachment file entry.
+	 *
+	 * @return the cp attachment file entry ID of this cp attachment file entry
+	 */
 	@Override
 	public long getCPAttachmentFileEntryId() {
 		return _cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 	}
 
 	/**
-	* Returns the create date of this cp attachment file entry.
-	*
-	* @return the create date of this cp attachment file entry
-	*/
+	 * Returns the create date of this cp attachment file entry.
+	 *
+	 * @return the create date of this cp attachment file entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpAttachmentFileEntry.getCreateDate();
@@ -312,10 +313,10 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns the display date of this cp attachment file entry.
-	*
-	* @return the display date of this cp attachment file entry
-	*/
+	 * Returns the display date of this cp attachment file entry.
+	 *
+	 * @return the display date of this cp attachment file entry
+	 */
 	@Override
 	public Date getDisplayDate() {
 		return _cpAttachmentFileEntry.getDisplayDate();
@@ -327,20 +328,20 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns the expiration date of this cp attachment file entry.
-	*
-	* @return the expiration date of this cp attachment file entry
-	*/
+	 * Returns the expiration date of this cp attachment file entry.
+	 *
+	 * @return the expiration date of this cp attachment file entry
+	 */
 	@Override
 	public Date getExpirationDate() {
 		return _cpAttachmentFileEntry.getExpirationDate();
 	}
 
 	/**
-	* Returns the external reference code of this cp attachment file entry.
-	*
-	* @return the external reference code of this cp attachment file entry
-	*/
+	 * Returns the external reference code of this cp attachment file entry.
+	 *
+	 * @return the external reference code of this cp attachment file entry
+	 */
 	@Override
 	public String getExternalReferenceCode() {
 		return _cpAttachmentFileEntry.getExternalReferenceCode();
@@ -349,64 +350,65 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpAttachmentFileEntry.getFileEntry();
 	}
 
 	/**
-	* Returns the file entry ID of this cp attachment file entry.
-	*
-	* @return the file entry ID of this cp attachment file entry
-	*/
+	 * Returns the file entry ID of this cp attachment file entry.
+	 *
+	 * @return the file entry ID of this cp attachment file entry
+	 */
 	@Override
 	public long getFileEntryId() {
 		return _cpAttachmentFileEntry.getFileEntryId();
 	}
 
 	/**
-	* Returns the group ID of this cp attachment file entry.
-	*
-	* @return the group ID of this cp attachment file entry
-	*/
+	 * Returns the group ID of this cp attachment file entry.
+	 *
+	 * @return the group ID of this cp attachment file entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpAttachmentFileEntry.getGroupId();
 	}
 
 	/**
-	* Returns the json of this cp attachment file entry.
-	*
-	* @return the json of this cp attachment file entry
-	*/
+	 * Returns the json of this cp attachment file entry.
+	 *
+	 * @return the json of this cp attachment file entry
+	 */
 	@Override
 	public String getJson() {
 		return _cpAttachmentFileEntry.getJson();
 	}
 
 	/**
-	* Returns the last publish date of this cp attachment file entry.
-	*
-	* @return the last publish date of this cp attachment file entry
-	*/
+	 * Returns the last publish date of this cp attachment file entry.
+	 *
+	 * @return the last publish date of this cp attachment file entry
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _cpAttachmentFileEntry.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this cp attachment file entry.
-	*
-	* @return the modified date of this cp attachment file entry
-	*/
+	 * Returns the modified date of this cp attachment file entry.
+	 *
+	 * @return the modified date of this cp attachment file entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpAttachmentFileEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp attachment file entry.
-	*
-	* @return the primary key of this cp attachment file entry
-	*/
+	 * Returns the primary key of this cp attachment file entry.
+	 *
+	 * @return the primary key of this cp attachment file entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpAttachmentFileEntry.getPrimaryKey();
@@ -418,116 +420,116 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns the priority of this cp attachment file entry.
-	*
-	* @return the priority of this cp attachment file entry
-	*/
+	 * Returns the priority of this cp attachment file entry.
+	 *
+	 * @return the priority of this cp attachment file entry
+	 */
 	@Override
 	public double getPriority() {
 		return _cpAttachmentFileEntry.getPriority();
 	}
 
 	/**
-	* Returns the status of this cp attachment file entry.
-	*
-	* @return the status of this cp attachment file entry
-	*/
+	 * Returns the status of this cp attachment file entry.
+	 *
+	 * @return the status of this cp attachment file entry
+	 */
 	@Override
 	public int getStatus() {
 		return _cpAttachmentFileEntry.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this cp attachment file entry.
-	*
-	* @return the status by user ID of this cp attachment file entry
-	*/
+	 * Returns the status by user ID of this cp attachment file entry.
+	 *
+	 * @return the status by user ID of this cp attachment file entry
+	 */
 	@Override
 	public long getStatusByUserId() {
 		return _cpAttachmentFileEntry.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this cp attachment file entry.
-	*
-	* @return the status by user name of this cp attachment file entry
-	*/
+	 * Returns the status by user name of this cp attachment file entry.
+	 *
+	 * @return the status by user name of this cp attachment file entry
+	 */
 	@Override
 	public String getStatusByUserName() {
 		return _cpAttachmentFileEntry.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this cp attachment file entry.
-	*
-	* @return the status by user uuid of this cp attachment file entry
-	*/
+	 * Returns the status by user uuid of this cp attachment file entry.
+	 *
+	 * @return the status by user uuid of this cp attachment file entry
+	 */
 	@Override
 	public String getStatusByUserUuid() {
 		return _cpAttachmentFileEntry.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this cp attachment file entry.
-	*
-	* @return the status date of this cp attachment file entry
-	*/
+	 * Returns the status date of this cp attachment file entry.
+	 *
+	 * @return the status date of this cp attachment file entry
+	 */
 	@Override
 	public Date getStatusDate() {
 		return _cpAttachmentFileEntry.getStatusDate();
 	}
 
 	/**
-	* Returns the title of this cp attachment file entry.
-	*
-	* @return the title of this cp attachment file entry
-	*/
+	 * Returns the title of this cp attachment file entry.
+	 *
+	 * @return the title of this cp attachment file entry
+	 */
 	@Override
 	public String getTitle() {
 		return _cpAttachmentFileEntry.getTitle();
 	}
 
 	/**
-	* Returns the localized title of this cp attachment file entry in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized title of this cp attachment file entry
-	*/
+	 * Returns the localized title of this cp attachment file entry in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized title of this cp attachment file entry
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale) {
 		return _cpAttachmentFileEntry.getTitle(locale);
 	}
 
 	/**
-	* Returns the localized title of this cp attachment file entry in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this cp attachment file entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized title of this cp attachment file entry in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this cp attachment file entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale, boolean useDefault) {
 		return _cpAttachmentFileEntry.getTitle(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized title of this cp attachment file entry in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized title of this cp attachment file entry
-	*/
+	 * Returns the localized title of this cp attachment file entry in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized title of this cp attachment file entry
+	 */
 	@Override
 	public String getTitle(String languageId) {
 		return _cpAttachmentFileEntry.getTitle(languageId);
 	}
 
 	/**
-	* Returns the localized title of this cp attachment file entry in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this cp attachment file entry
-	*/
+	 * Returns the localized title of this cp attachment file entry in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this cp attachment file entry
+	 */
 	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		return _cpAttachmentFileEntry.getTitle(languageId, useDefault);
@@ -544,60 +546,60 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns a map of the locales and localized titles of this cp attachment file entry.
-	*
-	* @return the locales and localized titles of this cp attachment file entry
-	*/
+	 * Returns a map of the locales and localized titles of this cp attachment file entry.
+	 *
+	 * @return the locales and localized titles of this cp attachment file entry
+	 */
 	@Override
 	public Map<java.util.Locale, String> getTitleMap() {
 		return _cpAttachmentFileEntry.getTitleMap();
 	}
 
 	/**
-	* Returns the type of this cp attachment file entry.
-	*
-	* @return the type of this cp attachment file entry
-	*/
+	 * Returns the type of this cp attachment file entry.
+	 *
+	 * @return the type of this cp attachment file entry
+	 */
 	@Override
 	public int getType() {
 		return _cpAttachmentFileEntry.getType();
 	}
 
 	/**
-	* Returns the user ID of this cp attachment file entry.
-	*
-	* @return the user ID of this cp attachment file entry
-	*/
+	 * Returns the user ID of this cp attachment file entry.
+	 *
+	 * @return the user ID of this cp attachment file entry
+	 */
 	@Override
 	public long getUserId() {
 		return _cpAttachmentFileEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp attachment file entry.
-	*
-	* @return the user name of this cp attachment file entry
-	*/
+	 * Returns the user name of this cp attachment file entry.
+	 *
+	 * @return the user name of this cp attachment file entry
+	 */
 	@Override
 	public String getUserName() {
 		return _cpAttachmentFileEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp attachment file entry.
-	*
-	* @return the user uuid of this cp attachment file entry
-	*/
+	 * Returns the user uuid of this cp attachment file entry.
+	 *
+	 * @return the user uuid of this cp attachment file entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpAttachmentFileEntry.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp attachment file entry.
-	*
-	* @return the uuid of this cp attachment file entry
-	*/
+	 * Returns the uuid of this cp attachment file entry.
+	 *
+	 * @return the uuid of this cp attachment file entry
+	 */
 	@Override
 	public String getUuid() {
 		return _cpAttachmentFileEntry.getUuid();
@@ -609,10 +611,10 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is approved.
-	*
-	* @return <code>true</code> if this cp attachment file entry is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is approved.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
 		return _cpAttachmentFileEntry.isApproved();
@@ -624,20 +626,20 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is denied.
-	*
-	* @return <code>true</code> if this cp attachment file entry is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is denied.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
 		return _cpAttachmentFileEntry.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is a draft.
-	*
-	* @return <code>true</code> if this cp attachment file entry is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is a draft.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
 		return _cpAttachmentFileEntry.isDraft();
@@ -649,30 +651,30 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is expired.
-	*
-	* @return <code>true</code> if this cp attachment file entry is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is expired.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
 		return _cpAttachmentFileEntry.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is inactive.
-	*
-	* @return <code>true</code> if this cp attachment file entry is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is inactive.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
 		return _cpAttachmentFileEntry.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is incomplete.
-	*
-	* @return <code>true</code> if this cp attachment file entry is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is incomplete.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
 		return _cpAttachmentFileEntry.isIncomplete();
@@ -684,20 +686,20 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is pending.
-	*
-	* @return <code>true</code> if this cp attachment file entry is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is pending.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
 		return _cpAttachmentFileEntry.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this cp attachment file entry is scheduled.
-	*
-	* @return <code>true</code> if this cp attachment file entry is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this cp attachment file entry is scheduled.
+	 *
+	 * @return <code>true</code> if this cp attachment file entry is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
 		return _cpAttachmentFileEntry.isScheduled();
@@ -711,14 +713,17 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_cpAttachmentFileEntry.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_cpAttachmentFileEntry.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_cpAttachmentFileEntry.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	@Override
@@ -732,60 +737,61 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Sets the class name ID of this cp attachment file entry.
-	*
-	* @param classNameId the class name ID of this cp attachment file entry
-	*/
+	 * Sets the class name ID of this cp attachment file entry.
+	 *
+	 * @param classNameId the class name ID of this cp attachment file entry
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_cpAttachmentFileEntry.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this cp attachment file entry.
-	*
-	* @param classPK the class pk of this cp attachment file entry
-	*/
+	 * Sets the class pk of this cp attachment file entry.
+	 *
+	 * @param classPK the class pk of this cp attachment file entry
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_cpAttachmentFileEntry.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the company ID of this cp attachment file entry.
-	*
-	* @param companyId the company ID of this cp attachment file entry
-	*/
+	 * Sets the company ID of this cp attachment file entry.
+	 *
+	 * @param companyId the company ID of this cp attachment file entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpAttachmentFileEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp attachment file entry ID of this cp attachment file entry.
-	*
-	* @param CPAttachmentFileEntryId the cp attachment file entry ID of this cp attachment file entry
-	*/
+	 * Sets the cp attachment file entry ID of this cp attachment file entry.
+	 *
+	 * @param CPAttachmentFileEntryId the cp attachment file entry ID of this cp attachment file entry
+	 */
 	@Override
 	public void setCPAttachmentFileEntryId(long CPAttachmentFileEntryId) {
-		_cpAttachmentFileEntry.setCPAttachmentFileEntryId(CPAttachmentFileEntryId);
+		_cpAttachmentFileEntry.setCPAttachmentFileEntryId(
+			CPAttachmentFileEntryId);
 	}
 
 	/**
-	* Sets the create date of this cp attachment file entry.
-	*
-	* @param createDate the create date of this cp attachment file entry
-	*/
+	 * Sets the create date of this cp attachment file entry.
+	 *
+	 * @param createDate the create date of this cp attachment file entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpAttachmentFileEntry.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the display date of this cp attachment file entry.
-	*
-	* @param displayDate the display date of this cp attachment file entry
-	*/
+	 * Sets the display date of this cp attachment file entry.
+	 *
+	 * @param displayDate the display date of this cp attachment file entry
+	 */
 	@Override
 	public void setDisplayDate(Date displayDate) {
 		_cpAttachmentFileEntry.setDisplayDate(displayDate);
@@ -794,6 +800,7 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpAttachmentFileEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -808,70 +815,70 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Sets the expiration date of this cp attachment file entry.
-	*
-	* @param expirationDate the expiration date of this cp attachment file entry
-	*/
+	 * Sets the expiration date of this cp attachment file entry.
+	 *
+	 * @param expirationDate the expiration date of this cp attachment file entry
+	 */
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_cpAttachmentFileEntry.setExpirationDate(expirationDate);
 	}
 
 	/**
-	* Sets the external reference code of this cp attachment file entry.
-	*
-	* @param externalReferenceCode the external reference code of this cp attachment file entry
-	*/
+	 * Sets the external reference code of this cp attachment file entry.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp attachment file entry
+	 */
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_cpAttachmentFileEntry.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
-	* Sets the file entry ID of this cp attachment file entry.
-	*
-	* @param fileEntryId the file entry ID of this cp attachment file entry
-	*/
+	 * Sets the file entry ID of this cp attachment file entry.
+	 *
+	 * @param fileEntryId the file entry ID of this cp attachment file entry
+	 */
 	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_cpAttachmentFileEntry.setFileEntryId(fileEntryId);
 	}
 
 	/**
-	* Sets the group ID of this cp attachment file entry.
-	*
-	* @param groupId the group ID of this cp attachment file entry
-	*/
+	 * Sets the group ID of this cp attachment file entry.
+	 *
+	 * @param groupId the group ID of this cp attachment file entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpAttachmentFileEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the json of this cp attachment file entry.
-	*
-	* @param json the json of this cp attachment file entry
-	*/
+	 * Sets the json of this cp attachment file entry.
+	 *
+	 * @param json the json of this cp attachment file entry
+	 */
 	@Override
 	public void setJson(String json) {
 		_cpAttachmentFileEntry.setJson(json);
 	}
 
 	/**
-	* Sets the last publish date of this cp attachment file entry.
-	*
-	* @param lastPublishDate the last publish date of this cp attachment file entry
-	*/
+	 * Sets the last publish date of this cp attachment file entry.
+	 *
+	 * @param lastPublishDate the last publish date of this cp attachment file entry
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_cpAttachmentFileEntry.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this cp attachment file entry.
-	*
-	* @param modifiedDate the modified date of this cp attachment file entry
-	*/
+	 * Sets the modified date of this cp attachment file entry.
+	 *
+	 * @param modifiedDate the modified date of this cp attachment file entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpAttachmentFileEntry.setModifiedDate(modifiedDate);
@@ -883,10 +890,10 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Sets the primary key of this cp attachment file entry.
-	*
-	* @param primaryKey the primary key of this cp attachment file entry
-	*/
+	 * Sets the primary key of this cp attachment file entry.
+	 *
+	 * @param primaryKey the primary key of this cp attachment file entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpAttachmentFileEntry.setPrimaryKey(primaryKey);
@@ -898,96 +905,97 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Sets the priority of this cp attachment file entry.
-	*
-	* @param priority the priority of this cp attachment file entry
-	*/
+	 * Sets the priority of this cp attachment file entry.
+	 *
+	 * @param priority the priority of this cp attachment file entry
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_cpAttachmentFileEntry.setPriority(priority);
 	}
 
 	/**
-	* Sets the status of this cp attachment file entry.
-	*
-	* @param status the status of this cp attachment file entry
-	*/
+	 * Sets the status of this cp attachment file entry.
+	 *
+	 * @param status the status of this cp attachment file entry
+	 */
 	@Override
 	public void setStatus(int status) {
 		_cpAttachmentFileEntry.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this cp attachment file entry.
-	*
-	* @param statusByUserId the status by user ID of this cp attachment file entry
-	*/
+	 * Sets the status by user ID of this cp attachment file entry.
+	 *
+	 * @param statusByUserId the status by user ID of this cp attachment file entry
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_cpAttachmentFileEntry.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this cp attachment file entry.
-	*
-	* @param statusByUserName the status by user name of this cp attachment file entry
-	*/
+	 * Sets the status by user name of this cp attachment file entry.
+	 *
+	 * @param statusByUserName the status by user name of this cp attachment file entry
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_cpAttachmentFileEntry.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this cp attachment file entry.
-	*
-	* @param statusByUserUuid the status by user uuid of this cp attachment file entry
-	*/
+	 * Sets the status by user uuid of this cp attachment file entry.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this cp attachment file entry
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_cpAttachmentFileEntry.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this cp attachment file entry.
-	*
-	* @param statusDate the status date of this cp attachment file entry
-	*/
+	 * Sets the status date of this cp attachment file entry.
+	 *
+	 * @param statusDate the status date of this cp attachment file entry
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_cpAttachmentFileEntry.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets the title of this cp attachment file entry.
-	*
-	* @param title the title of this cp attachment file entry
-	*/
+	 * Sets the title of this cp attachment file entry.
+	 *
+	 * @param title the title of this cp attachment file entry
+	 */
 	@Override
 	public void setTitle(String title) {
 		_cpAttachmentFileEntry.setTitle(title);
 	}
 
 	/**
-	* Sets the localized title of this cp attachment file entry in the language.
-	*
-	* @param title the localized title of this cp attachment file entry
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized title of this cp attachment file entry in the language.
+	 *
+	 * @param title the localized title of this cp attachment file entry
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setTitle(String title, java.util.Locale locale) {
 		_cpAttachmentFileEntry.setTitle(title, locale);
 	}
 
 	/**
-	* Sets the localized title of this cp attachment file entry in the language, and sets the default locale.
-	*
-	* @param title the localized title of this cp attachment file entry
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized title of this cp attachment file entry in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this cp attachment file entry
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitle(String title, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setTitle(
+		String title, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_cpAttachmentFileEntry.setTitle(title, locale, defaultLocale);
 	}
 
@@ -997,85 +1005,90 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	/**
-	* Sets the localized titles of this cp attachment file entry from the map of locales and localized titles.
-	*
-	* @param titleMap the locales and localized titles of this cp attachment file entry
-	*/
+	 * Sets the localized titles of this cp attachment file entry from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this cp attachment file entry
+	 */
 	@Override
 	public void setTitleMap(Map<java.util.Locale, String> titleMap) {
 		_cpAttachmentFileEntry.setTitleMap(titleMap);
 	}
 
 	/**
-	* Sets the localized titles of this cp attachment file entry from the map of locales and localized titles, and sets the default locale.
-	*
-	* @param titleMap the locales and localized titles of this cp attachment file entry
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized titles of this cp attachment file entry from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this cp attachment file entry
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitleMap(Map<java.util.Locale, String> titleMap,
+	public void setTitleMap(
+		Map<java.util.Locale, String> titleMap,
 		java.util.Locale defaultLocale) {
+
 		_cpAttachmentFileEntry.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
-	* Sets the type of this cp attachment file entry.
-	*
-	* @param type the type of this cp attachment file entry
-	*/
+	 * Sets the type of this cp attachment file entry.
+	 *
+	 * @param type the type of this cp attachment file entry
+	 */
 	@Override
 	public void setType(int type) {
 		_cpAttachmentFileEntry.setType(type);
 	}
 
 	/**
-	* Sets the user ID of this cp attachment file entry.
-	*
-	* @param userId the user ID of this cp attachment file entry
-	*/
+	 * Sets the user ID of this cp attachment file entry.
+	 *
+	 * @param userId the user ID of this cp attachment file entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpAttachmentFileEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp attachment file entry.
-	*
-	* @param userName the user name of this cp attachment file entry
-	*/
+	 * Sets the user name of this cp attachment file entry.
+	 *
+	 * @param userName the user name of this cp attachment file entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpAttachmentFileEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp attachment file entry.
-	*
-	* @param userUuid the user uuid of this cp attachment file entry
-	*/
+	 * Sets the user uuid of this cp attachment file entry.
+	 *
+	 * @param userUuid the user uuid of this cp attachment file entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpAttachmentFileEntry.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp attachment file entry.
-	*
-	* @param uuid the uuid of this cp attachment file entry
-	*/
+	 * Sets the uuid of this cp attachment file entry.
+	 *
+	 * @param uuid the uuid of this cp attachment file entry
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpAttachmentFileEntry.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPAttachmentFileEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPAttachmentFileEntry>
+		toCacheModel() {
+
 		return _cpAttachmentFileEntry.toCacheModel();
 	}
 
 	@Override
 	public CPAttachmentFileEntry toEscapedModel() {
-		return new CPAttachmentFileEntryWrapper(_cpAttachmentFileEntry.toEscapedModel());
+		return new CPAttachmentFileEntryWrapper(
+			_cpAttachmentFileEntry.toEscapedModel());
 	}
 
 	@Override
@@ -1085,7 +1098,8 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 
 	@Override
 	public CPAttachmentFileEntry toUnescapedModel() {
-		return new CPAttachmentFileEntryWrapper(_cpAttachmentFileEntry.toUnescapedModel());
+		return new CPAttachmentFileEntryWrapper(
+			_cpAttachmentFileEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -1103,10 +1117,13 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 			return false;
 		}
 
-		CPAttachmentFileEntryWrapper cpAttachmentFileEntryWrapper = (CPAttachmentFileEntryWrapper)obj;
+		CPAttachmentFileEntryWrapper cpAttachmentFileEntryWrapper =
+			(CPAttachmentFileEntryWrapper)obj;
 
-		if (Objects.equals(_cpAttachmentFileEntry,
-					cpAttachmentFileEntryWrapper._cpAttachmentFileEntry)) {
+		if (Objects.equals(
+				_cpAttachmentFileEntry,
+				cpAttachmentFileEntryWrapper._cpAttachmentFileEntry)) {
+
 			return true;
 		}
 
@@ -1139,4 +1156,5 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	}
 
 	private final CPAttachmentFileEntry _cpAttachmentFileEntry;
+
 }

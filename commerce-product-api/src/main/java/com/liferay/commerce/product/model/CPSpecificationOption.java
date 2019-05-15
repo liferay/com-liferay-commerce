@@ -25,37 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPSpecificationOptionModel
- * @see com.liferay.commerce.product.model.impl.CPSpecificationOptionImpl
- * @see com.liferay.commerce.product.model.impl.CPSpecificationOptionModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPSpecificationOptionImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPSpecificationOptionImpl"
+)
 @ProviderType
-public interface CPSpecificationOption extends CPSpecificationOptionModel,
-	PersistedModel {
+public interface CPSpecificationOption
+	extends CPSpecificationOptionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPSpecificationOptionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPSpecificationOptionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPSpecificationOption, Long> CP_SPECIFICATION_OPTION_ID_ACCESSOR =
-		new Accessor<CPSpecificationOption, Long>() {
-			@Override
-			public Long get(CPSpecificationOption cpSpecificationOption) {
-				return cpSpecificationOption.getCPSpecificationOptionId();
-			}
+	public static final Accessor<CPSpecificationOption, Long>
+		CP_SPECIFICATION_OPTION_ID_ACCESSOR =
+			new Accessor<CPSpecificationOption, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPSpecificationOption cpSpecificationOption) {
+					return cpSpecificationOption.getCPSpecificationOptionId();
+				}
 
-			@Override
-			public Class<CPSpecificationOption> getTypeClass() {
-				return CPSpecificationOption.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPSpecificationOption> getTypeClass() {
+					return CPSpecificationOption.class;
+				}
+
+			};
 
 	public CPOptionCategory getCPOptionCategory()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

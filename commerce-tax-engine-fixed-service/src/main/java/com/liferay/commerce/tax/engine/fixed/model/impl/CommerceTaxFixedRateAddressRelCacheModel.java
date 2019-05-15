@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.engine.fixed.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceTaxFixedRateAddressRel in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceTaxFixedRateAddressRel
  * @generated
  */
 @ProviderType
-public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<CommerceTaxFixedRateAddressRel>,
-	Externalizable {
+public class CommerceTaxFixedRateAddressRelCacheModel
+	implements CacheModel<CommerceTaxFixedRateAddressRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<Comm
 			return false;
 		}
 
-		CommerceTaxFixedRateAddressRelCacheModel commerceTaxFixedRateAddressRelCacheModel =
-			(CommerceTaxFixedRateAddressRelCacheModel)obj;
+		CommerceTaxFixedRateAddressRelCacheModel
+			commerceTaxFixedRateAddressRelCacheModel =
+				(CommerceTaxFixedRateAddressRelCacheModel)obj;
 
-		if (commerceTaxFixedRateAddressRelId == commerceTaxFixedRateAddressRelCacheModel.commerceTaxFixedRateAddressRelId) {
+		if (commerceTaxFixedRateAddressRelId ==
+				commerceTaxFixedRateAddressRelCacheModel.
+					commerceTaxFixedRateAddressRelId) {
+
 			return true;
 		}
 
@@ -101,9 +104,11 @@ public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<Comm
 
 	@Override
 	public CommerceTaxFixedRateAddressRel toEntityModel() {
-		CommerceTaxFixedRateAddressRelImpl commerceTaxFixedRateAddressRelImpl = new CommerceTaxFixedRateAddressRelImpl();
+		CommerceTaxFixedRateAddressRelImpl commerceTaxFixedRateAddressRelImpl =
+			new CommerceTaxFixedRateAddressRelImpl();
 
-		commerceTaxFixedRateAddressRelImpl.setCommerceTaxFixedRateAddressRelId(commerceTaxFixedRateAddressRelId);
+		commerceTaxFixedRateAddressRelImpl.setCommerceTaxFixedRateAddressRelId(
+			commerceTaxFixedRateAddressRelId);
 		commerceTaxFixedRateAddressRelImpl.setGroupId(groupId);
 		commerceTaxFixedRateAddressRelImpl.setCompanyId(companyId);
 		commerceTaxFixedRateAddressRelImpl.setUserId(userId);
@@ -119,22 +124,25 @@ public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<Comm
 			commerceTaxFixedRateAddressRelImpl.setCreateDate(null);
 		}
 		else {
-			commerceTaxFixedRateAddressRelImpl.setCreateDate(new Date(
-					createDate));
+			commerceTaxFixedRateAddressRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceTaxFixedRateAddressRelImpl.setModifiedDate(null);
 		}
 		else {
-			commerceTaxFixedRateAddressRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceTaxFixedRateAddressRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceTaxFixedRateAddressRelImpl.setCommerceTaxMethodId(commerceTaxMethodId);
+		commerceTaxFixedRateAddressRelImpl.setCommerceTaxMethodId(
+			commerceTaxMethodId);
 		commerceTaxFixedRateAddressRelImpl.setCPTaxCategoryId(CPTaxCategoryId);
-		commerceTaxFixedRateAddressRelImpl.setCommerceCountryId(commerceCountryId);
-		commerceTaxFixedRateAddressRelImpl.setCommerceRegionId(commerceRegionId);
+		commerceTaxFixedRateAddressRelImpl.setCommerceCountryId(
+			commerceCountryId);
+		commerceTaxFixedRateAddressRelImpl.setCommerceRegionId(
+			commerceRegionId);
 
 		if (zip == null) {
 			commerceTaxFixedRateAddressRelImpl.setZip("");
@@ -176,8 +184,7 @@ public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<Comm
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceTaxFixedRateAddressRelId);
 
 		objectOutput.writeLong(groupId);
@@ -227,4 +234,5 @@ public class CommerceTaxFixedRateAddressRelCacheModel implements CacheModel<Comm
 	public long commerceRegionId;
 	public String zip;
 	public double rate;
+
 }

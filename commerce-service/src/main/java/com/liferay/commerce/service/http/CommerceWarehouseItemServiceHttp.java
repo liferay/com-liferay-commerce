@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceWarehouseItemServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceWarehouseItemServiceUtil} service utility. The
+ * <code>CommerceWarehouseItemServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,24 +49,27 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehouseItemServiceSoap
- * @see HttpPrincipal
- * @see CommerceWarehouseItemServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceWarehouseItemServiceHttp {
-	public static com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
-		HttpPrincipal httpPrincipal, long commerceWarehouseId,
-		long cpInstanceId, int quantity,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"addCommerceWarehouseItem",
-					_addCommerceWarehouseItemParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWarehouseId, cpInstanceId, quantity, serviceContext);
+	public static com.liferay.commerce.model.CommerceWarehouseItem
+			addCommerceWarehouseItem(
+				HttpPrincipal httpPrincipal, long commerceWarehouseId,
+				long cpInstanceId, int quantity,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"addCommerceWarehouseItem",
+				_addCommerceWarehouseItemParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceWarehouseId, cpInstanceId, quantity,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -74,11 +77,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceWarehouseItem)returnObj;
@@ -91,25 +98,31 @@ public class CommerceWarehouseItemServiceHttp {
 	}
 
 	public static void deleteCommerceWarehouseItem(
-		HttpPrincipal httpPrincipal, long commerceWarehouseItemId)
+			HttpPrincipal httpPrincipal, long commerceWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"deleteCommerceWarehouseItem",
-					_deleteCommerceWarehouseItemParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWarehouseItemId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"deleteCommerceWarehouseItem",
+				_deleteCommerceWarehouseItemParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceWarehouseItemId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -119,16 +132,20 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
-		HttpPrincipal httpPrincipal, long commerceWarehouseId, long cpInstanceId)
+	public static com.liferay.commerce.model.CommerceWarehouseItem
+			fetchCommerceWarehouseItem(
+				HttpPrincipal httpPrincipal, long commerceWarehouseId,
+				long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"fetchCommerceWarehouseItem",
-					_fetchCommerceWarehouseItemParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWarehouseId, cpInstanceId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"fetchCommerceWarehouseItem",
+				_fetchCommerceWarehouseItemParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceWarehouseId, cpInstanceId);
 
 			Object returnObj = null;
 
@@ -136,11 +153,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceWarehouseItem)returnObj;
@@ -152,16 +173,19 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceWarehouseItem getCommerceWarehouseItem(
-		HttpPrincipal httpPrincipal, long commerceWarehouseItemId)
+	public static com.liferay.commerce.model.CommerceWarehouseItem
+			getCommerceWarehouseItem(
+				HttpPrincipal httpPrincipal, long commerceWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"getCommerceWarehouseItem",
-					_getCommerceWarehouseItemParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWarehouseItemId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"getCommerceWarehouseItem",
+				_getCommerceWarehouseItemParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceWarehouseItemId);
 
 			Object returnObj = null;
 
@@ -169,11 +193,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceWarehouseItem)returnObj;
@@ -185,16 +213,20 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		HttpPrincipal httpPrincipal, long cpInstanceId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"getCommerceWarehouseItems",
-					_getCommerceWarehouseItemsParameterTypes4);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceWarehouseItem>
+				getCommerceWarehouseItems(
+					HttpPrincipal httpPrincipal, long cpInstanceId)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpInstanceId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"getCommerceWarehouseItems",
+				_getCommerceWarehouseItemsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpInstanceId);
 
 			Object returnObj = null;
 
@@ -202,14 +234,19 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceWarehouseItem>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.model.CommerceWarehouseItem>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -218,17 +255,24 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		HttpPrincipal httpPrincipal, long cpInstanceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"getCommerceWarehouseItems",
-					_getCommerceWarehouseItemsParameterTypes5);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceWarehouseItem>
+				getCommerceWarehouseItems(
+					HttpPrincipal httpPrincipal, long cpInstanceId, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.CommerceWarehouseItem>
+							orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpInstanceId, start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"getCommerceWarehouseItems",
+				_getCommerceWarehouseItemsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpInstanceId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -236,14 +280,19 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceWarehouseItem>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.model.CommerceWarehouseItem>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -253,15 +302,17 @@ public class CommerceWarehouseItemServiceHttp {
 	}
 
 	public static int getCommerceWarehouseItemsCount(
-		HttpPrincipal httpPrincipal, long cpInstanceId)
+			HttpPrincipal httpPrincipal, long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"getCommerceWarehouseItemsCount",
-					_getCommerceWarehouseItemsCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpInstanceId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"getCommerceWarehouseItemsCount",
+				_getCommerceWarehouseItemsCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpInstanceId);
 
 			Object returnObj = null;
 
@@ -269,11 +320,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -285,16 +340,17 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static int getCPInstanceQuantity(HttpPrincipal httpPrincipal,
-		long cpInstanceId)
+	public static int getCPInstanceQuantity(
+			HttpPrincipal httpPrincipal, long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"getCPInstanceQuantity",
-					_getCPInstanceQuantityParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpInstanceId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class, "getCPInstanceQuantity",
+				_getCPInstanceQuantityParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpInstanceId);
 
 			Object returnObj = null;
 
@@ -302,11 +358,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -318,18 +378,21 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceWarehouseItem updateCommerceWarehouseItem(
-		HttpPrincipal httpPrincipal, long commerceWarehouseItemId,
-		int quantity,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.model.CommerceWarehouseItem
+			updateCommerceWarehouseItem(
+				HttpPrincipal httpPrincipal, long commerceWarehouseItemId,
+				int quantity,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceWarehouseItemServiceUtil.class,
-					"updateCommerceWarehouseItem",
-					_updateCommerceWarehouseItemParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWarehouseItemId, quantity, serviceContext);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceWarehouseItemServiceUtil.class,
+				"updateCommerceWarehouseItem",
+				_updateCommerceWarehouseItemParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceWarehouseItemId, quantity, serviceContext);
 
 			Object returnObj = null;
 
@@ -337,11 +400,15 @@ public class CommerceWarehouseItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (com.liferay.commerce.model.CommerceWarehouseItem)returnObj;
@@ -353,34 +420,37 @@ public class CommerceWarehouseItemServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceWarehouseItemServiceHttp.class);
-	private static final Class<?>[] _addCommerceWarehouseItemParameterTypes0 = new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceWarehouseItemServiceHttp.class);
+
+	private static final Class<?>[] _addCommerceWarehouseItemParameterTypes0 =
+		new Class[] {
 			long.class, long.class, int.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceWarehouseItemParameterTypes1 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _fetchCommerceWarehouseItemParameterTypes2 = new Class[] {
-			long.class, long.class
-		};
-	private static final Class<?>[] _getCommerceWarehouseItemParameterTypes3 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCommerceWarehouseItemsParameterTypes4 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCommerceWarehouseItemsParameterTypes5 = new Class[] {
+	private static final Class<?>[]
+		_deleteCommerceWarehouseItemParameterTypes1 = new Class[] {long.class};
+	private static final Class<?>[] _fetchCommerceWarehouseItemParameterTypes2 =
+		new Class[] {long.class, long.class};
+	private static final Class<?>[] _getCommerceWarehouseItemParameterTypes3 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceWarehouseItemsParameterTypes4 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceWarehouseItemsParameterTypes5 =
+		new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceWarehouseItemsCountParameterTypes6 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCPInstanceQuantityParameterTypes7 = new Class[] {
+	private static final Class<?>[]
+		_getCommerceWarehouseItemsCountParameterTypes6 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateCommerceWarehouseItemParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getCPInstanceQuantityParameterTypes7 =
+		new Class[] {long.class};
+	private static final Class<?>[]
+		_updateCommerceWarehouseItemParameterTypes8 = new Class[] {
 			long.class, int.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
+
 }

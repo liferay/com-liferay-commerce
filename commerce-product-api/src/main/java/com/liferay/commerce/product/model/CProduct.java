@@ -25,19 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CProductModel
- * @see com.liferay.commerce.product.model.impl.CProductImpl
- * @see com.liferay.commerce.product.model.impl.CProductModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.product.model.impl.CProductImpl")
 @ProviderType
 public interface CProduct extends CProductModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CProductImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CProductImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CProduct, Long> C_PRODUCT_ID_ACCESSOR = new Accessor<CProduct, Long>() {
+	public static final Accessor<CProduct, Long> C_PRODUCT_ID_ACCESSOR =
+		new Accessor<CProduct, Long>() {
+
 			@Override
 			public Long get(CProduct cProduct) {
 				return cProduct.getCProductId();
@@ -52,5 +53,7 @@ public interface CProduct extends CProductModel, PersistedModel {
 			public Class<CProduct> getTypeClass() {
 				return CProduct.class;
 			}
+
 		};
+
 }

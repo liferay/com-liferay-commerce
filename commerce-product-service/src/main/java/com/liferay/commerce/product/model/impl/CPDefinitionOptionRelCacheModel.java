@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionOptionRel in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionOptionRel
  * @generated
  */
 @ProviderType
-public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionOptionRel>,
-	Externalizable {
+public class CPDefinitionOptionRelCacheModel
+	implements CacheModel<CPDefinitionOptionRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 			return false;
 		}
 
-		CPDefinitionOptionRelCacheModel cpDefinitionOptionRelCacheModel = (CPDefinitionOptionRelCacheModel)obj;
+		CPDefinitionOptionRelCacheModel cpDefinitionOptionRelCacheModel =
+			(CPDefinitionOptionRelCacheModel)obj;
 
-		if (CPDefinitionOptionRelId == cpDefinitionOptionRelCacheModel.CPDefinitionOptionRelId) {
+		if (CPDefinitionOptionRelId ==
+				cpDefinitionOptionRelCacheModel.CPDefinitionOptionRelId) {
+
 			return true;
 		}
 
@@ -108,7 +110,8 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 
 	@Override
 	public CPDefinitionOptionRel toEntityModel() {
-		CPDefinitionOptionRelImpl cpDefinitionOptionRelImpl = new CPDefinitionOptionRelImpl();
+		CPDefinitionOptionRelImpl cpDefinitionOptionRelImpl =
+			new CPDefinitionOptionRelImpl();
 
 		if (uuid == null) {
 			cpDefinitionOptionRelImpl.setUuid("");
@@ -117,7 +120,8 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 			cpDefinitionOptionRelImpl.setUuid(uuid);
 		}
 
-		cpDefinitionOptionRelImpl.setCPDefinitionOptionRelId(CPDefinitionOptionRelId);
+		cpDefinitionOptionRelImpl.setCPDefinitionOptionRelId(
+			CPDefinitionOptionRelId);
 		cpDefinitionOptionRelImpl.setGroupId(groupId);
 		cpDefinitionOptionRelImpl.setCompanyId(companyId);
 		cpDefinitionOptionRelImpl.setUserId(userId);
@@ -164,7 +168,8 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 			cpDefinitionOptionRelImpl.setDDMFormFieldTypeName("");
 		}
 		else {
-			cpDefinitionOptionRelImpl.setDDMFormFieldTypeName(DDMFormFieldTypeName);
+			cpDefinitionOptionRelImpl.setDDMFormFieldTypeName(
+				DDMFormFieldTypeName);
 		}
 
 		cpDefinitionOptionRelImpl.setPriority(priority);
@@ -209,8 +214,7 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -287,4 +291,5 @@ public class CPDefinitionOptionRelCacheModel implements CacheModel<CPDefinitionO
 	public boolean facetable;
 	public boolean required;
 	public boolean skuContributor;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.grouped.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,34 +38,42 @@ import java.util.List;
  *
  * @author Andrea Di Giorgi
  * @see CPDefinitionGroupedEntryServiceUtil
- * @see com.liferay.commerce.product.type.grouped.service.base.CPDefinitionGroupedEntryServiceBaseImpl
- * @see com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPDefinitionGroupedEntry"}, service = CPDefinitionGroupedEntryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPDefinitionGroupedEntry"
+	},
+	service = CPDefinitionGroupedEntryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPDefinitionGroupedEntryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPDefinitionGroupedEntryServiceUtil} to access the cp definition grouped entry remote service. Add custom service methods to {@link com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionGroupedEntryServiceUtil} to access the cp definition grouped entry remote service. Add custom service methods to <code>com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCPDefinitionIds, ServiceContext serviceContext)
+	public void addCPDefinitionGroupedEntries(
+			long cpDefinitionId, long[] entryCPDefinitionIds,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public CPDefinitionGroupedEntry deleteCPDefinitionGroupedEntry(
-		long cpDefinitionGroupedEntryId) throws PortalException;
+			long cpDefinitionGroupedEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionGroupedEntry> getCPDefinitionGroupedEntries(
-		long cpDefinitionId, int start, int end,
-		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator)
+			long cpDefinitionId, int start, int end,
+			OrderByComparator<CPDefinitionGroupedEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -75,16 +82,18 @@ public interface CPDefinitionGroupedEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionGroupedEntry getCPDefinitionGroupedEntry(
-		long cpDefinitionGroupedEntryId) throws PortalException;
+			long cpDefinitionGroupedEntryId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CPDefinitionGroupedEntry updateCPDefinitionGroupedEntry(
-		long cpDefinitionGroupedEntryId, double priority, int quantity)
+			long cpDefinitionGroupedEntryId, double priority, int quantity)
 		throws PortalException;
+
 }

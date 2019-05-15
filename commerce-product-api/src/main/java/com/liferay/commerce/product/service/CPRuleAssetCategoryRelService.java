@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -38,25 +37,31 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CPRuleAssetCategoryRelServiceUtil
- * @see com.liferay.commerce.product.service.base.CPRuleAssetCategoryRelServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPRuleAssetCategoryRel"}, service = CPRuleAssetCategoryRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPRuleAssetCategoryRel"
+	},
+	service = CPRuleAssetCategoryRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPRuleAssetCategoryRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPRuleAssetCategoryRelServiceUtil} to access the cp rule asset category rel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPRuleAssetCategoryRelServiceUtil} to access the cp rule asset category rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPRuleAssetCategoryRel addCPRuleAssetCategoryRel(long cpRuleId,
-		long assetCategoryId, ServiceContext serviceContext)
+	public CPRuleAssetCategoryRel addCPRuleAssetCategoryRel(
+			long cpRuleId, long assetCategoryId, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCPRuleAssetCategoryRel(long cpRuleAssetCategoryRelId)
@@ -67,20 +72,23 @@ public interface CPRuleAssetCategoryRelService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
-		long cpRuleId) throws PortalException;
+			long cpRuleId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
-		long cpRuleId, int start, int end) throws PortalException;
+			long cpRuleId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPRuleAssetCategoryRelsCount(long cpRuleId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

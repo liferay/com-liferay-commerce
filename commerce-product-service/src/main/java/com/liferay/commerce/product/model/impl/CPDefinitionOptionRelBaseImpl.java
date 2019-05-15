@@ -34,18 +34,22 @@ import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUti
 @ProviderType
 public abstract class CPDefinitionOptionRelBaseImpl
 	extends CPDefinitionOptionRelModelImpl implements CPDefinitionOptionRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition option rel model instance should use the {@link CPDefinitionOptionRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition option rel model instance should use the <code>CPDefinitionOptionRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDefinitionOptionRelLocalServiceUtil.addCPDefinitionOptionRel(this);
+			CPDefinitionOptionRelLocalServiceUtil.addCPDefinitionOptionRel(
+				this);
 		}
 		else {
-			CPDefinitionOptionRelLocalServiceUtil.updateCPDefinitionOptionRel(this);
+			CPDefinitionOptionRelLocalServiceUtil.updateCPDefinitionOptionRel(
+				this);
 		}
 	}
+
 }

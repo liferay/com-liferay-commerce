@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
-	ModelWrapper<CPRuleUserSegmentRel> {
+public class CPRuleUserSegmentRelWrapper
+	implements CPRuleUserSegmentRel, ModelWrapper<CPRuleUserSegmentRel> {
+
 	public CPRuleUserSegmentRelWrapper(
 		CPRuleUserSegmentRel cpRuleUserSegmentRel) {
+
 		_cpRuleUserSegmentRel = cpRuleUserSegmentRel;
 	}
 
@@ -67,8 +68,8 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPRuleId", getCPRuleId());
-		attributes.put("commerceUserSegmentEntryId",
-			getCommerceUserSegmentEntryId());
+		attributes.put(
+			"commerceUserSegmentEntryId", getCommerceUserSegmentEntryId());
 
 		return attributes;
 	}
@@ -76,7 +77,7 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long CPRuleUserSegmentRelId = (Long)attributes.get(
-				"CPRuleUserSegmentRelId");
+			"CPRuleUserSegmentRelId");
 
 		if (CPRuleUserSegmentRelId != null) {
 			setCPRuleUserSegmentRelId(CPRuleUserSegmentRelId);
@@ -125,7 +126,7 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 		}
 
 		Long commerceUserSegmentEntryId = (Long)attributes.get(
-				"commerceUserSegmentEntryId");
+			"commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId != null) {
 			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
@@ -134,7 +135,8 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 
 	@Override
 	public Object clone() {
-		return new CPRuleUserSegmentRelWrapper((CPRuleUserSegmentRel)_cpRuleUserSegmentRel.clone());
+		return new CPRuleUserSegmentRelWrapper(
+			(CPRuleUserSegmentRel)_cpRuleUserSegmentRel.clone());
 	}
 
 	@Override
@@ -143,56 +145,58 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	@Override
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry getCommerceUserSegmentEntry()
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+			getCommerceUserSegmentEntry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleUserSegmentRel.getCommerceUserSegmentEntry();
 	}
 
 	/**
-	* Returns the commerce user segment entry ID of this cp rule user segment rel.
-	*
-	* @return the commerce user segment entry ID of this cp rule user segment rel
-	*/
+	 * Returns the commerce user segment entry ID of this cp rule user segment rel.
+	 *
+	 * @return the commerce user segment entry ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getCommerceUserSegmentEntryId() {
 		return _cpRuleUserSegmentRel.getCommerceUserSegmentEntryId();
 	}
 
 	/**
-	* Returns the company ID of this cp rule user segment rel.
-	*
-	* @return the company ID of this cp rule user segment rel
-	*/
+	 * Returns the company ID of this cp rule user segment rel.
+	 *
+	 * @return the company ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpRuleUserSegmentRel.getCompanyId();
 	}
 
 	/**
-	* Returns the cp rule ID of this cp rule user segment rel.
-	*
-	* @return the cp rule ID of this cp rule user segment rel
-	*/
+	 * Returns the cp rule ID of this cp rule user segment rel.
+	 *
+	 * @return the cp rule ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getCPRuleId() {
 		return _cpRuleUserSegmentRel.getCPRuleId();
 	}
 
 	/**
-	* Returns the cp rule user segment rel ID of this cp rule user segment rel.
-	*
-	* @return the cp rule user segment rel ID of this cp rule user segment rel
-	*/
+	 * Returns the cp rule user segment rel ID of this cp rule user segment rel.
+	 *
+	 * @return the cp rule user segment rel ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getCPRuleUserSegmentRelId() {
 		return _cpRuleUserSegmentRel.getCPRuleUserSegmentRelId();
 	}
 
 	/**
-	* Returns the create date of this cp rule user segment rel.
-	*
-	* @return the create date of this cp rule user segment rel
-	*/
+	 * Returns the create date of this cp rule user segment rel.
+	 *
+	 * @return the create date of this cp rule user segment rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpRuleUserSegmentRel.getCreateDate();
@@ -204,30 +208,30 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Returns the group ID of this cp rule user segment rel.
-	*
-	* @return the group ID of this cp rule user segment rel
-	*/
+	 * Returns the group ID of this cp rule user segment rel.
+	 *
+	 * @return the group ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpRuleUserSegmentRel.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this cp rule user segment rel.
-	*
-	* @return the modified date of this cp rule user segment rel
-	*/
+	 * Returns the modified date of this cp rule user segment rel.
+	 *
+	 * @return the modified date of this cp rule user segment rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpRuleUserSegmentRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp rule user segment rel.
-	*
-	* @return the primary key of this cp rule user segment rel
-	*/
+	 * Returns the primary key of this cp rule user segment rel.
+	 *
+	 * @return the primary key of this cp rule user segment rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpRuleUserSegmentRel.getPrimaryKey();
@@ -239,30 +243,30 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Returns the user ID of this cp rule user segment rel.
-	*
-	* @return the user ID of this cp rule user segment rel
-	*/
+	 * Returns the user ID of this cp rule user segment rel.
+	 *
+	 * @return the user ID of this cp rule user segment rel
+	 */
 	@Override
 	public long getUserId() {
 		return _cpRuleUserSegmentRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp rule user segment rel.
-	*
-	* @return the user name of this cp rule user segment rel
-	*/
+	 * Returns the user name of this cp rule user segment rel.
+	 *
+	 * @return the user name of this cp rule user segment rel
+	 */
 	@Override
 	public String getUserName() {
 		return _cpRuleUserSegmentRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp rule user segment rel.
-	*
-	* @return the user uuid of this cp rule user segment rel
-	*/
+	 * Returns the user uuid of this cp rule user segment rel.
+	 *
+	 * @return the user uuid of this cp rule user segment rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpRuleUserSegmentRel.getUserUuid();
@@ -299,50 +303,51 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Sets the commerce user segment entry ID of this cp rule user segment rel.
-	*
-	* @param commerceUserSegmentEntryId the commerce user segment entry ID of this cp rule user segment rel
-	*/
+	 * Sets the commerce user segment entry ID of this cp rule user segment rel.
+	 *
+	 * @param commerceUserSegmentEntryId the commerce user segment entry ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setCommerceUserSegmentEntryId(long commerceUserSegmentEntryId) {
-		_cpRuleUserSegmentRel.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		_cpRuleUserSegmentRel.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 	}
 
 	/**
-	* Sets the company ID of this cp rule user segment rel.
-	*
-	* @param companyId the company ID of this cp rule user segment rel
-	*/
+	 * Sets the company ID of this cp rule user segment rel.
+	 *
+	 * @param companyId the company ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpRuleUserSegmentRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp rule ID of this cp rule user segment rel.
-	*
-	* @param CPRuleId the cp rule ID of this cp rule user segment rel
-	*/
+	 * Sets the cp rule ID of this cp rule user segment rel.
+	 *
+	 * @param CPRuleId the cp rule ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setCPRuleId(long CPRuleId) {
 		_cpRuleUserSegmentRel.setCPRuleId(CPRuleId);
 	}
 
 	/**
-	* Sets the cp rule user segment rel ID of this cp rule user segment rel.
-	*
-	* @param CPRuleUserSegmentRelId the cp rule user segment rel ID of this cp rule user segment rel
-	*/
+	 * Sets the cp rule user segment rel ID of this cp rule user segment rel.
+	 *
+	 * @param CPRuleUserSegmentRelId the cp rule user segment rel ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setCPRuleUserSegmentRelId(long CPRuleUserSegmentRelId) {
 		_cpRuleUserSegmentRel.setCPRuleUserSegmentRelId(CPRuleUserSegmentRelId);
 	}
 
 	/**
-	* Sets the create date of this cp rule user segment rel.
-	*
-	* @param createDate the create date of this cp rule user segment rel
-	*/
+	 * Sets the create date of this cp rule user segment rel.
+	 *
+	 * @param createDate the create date of this cp rule user segment rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpRuleUserSegmentRel.setCreateDate(createDate);
@@ -351,6 +356,7 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpRuleUserSegmentRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -365,20 +371,20 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Sets the group ID of this cp rule user segment rel.
-	*
-	* @param groupId the group ID of this cp rule user segment rel
-	*/
+	 * Sets the group ID of this cp rule user segment rel.
+	 *
+	 * @param groupId the group ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpRuleUserSegmentRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this cp rule user segment rel.
-	*
-	* @param modifiedDate the modified date of this cp rule user segment rel
-	*/
+	 * Sets the modified date of this cp rule user segment rel.
+	 *
+	 * @param modifiedDate the modified date of this cp rule user segment rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpRuleUserSegmentRel.setModifiedDate(modifiedDate);
@@ -390,10 +396,10 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Sets the primary key of this cp rule user segment rel.
-	*
-	* @param primaryKey the primary key of this cp rule user segment rel
-	*/
+	 * Sets the primary key of this cp rule user segment rel.
+	 *
+	 * @param primaryKey the primary key of this cp rule user segment rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpRuleUserSegmentRel.setPrimaryKey(primaryKey);
@@ -405,43 +411,46 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	/**
-	* Sets the user ID of this cp rule user segment rel.
-	*
-	* @param userId the user ID of this cp rule user segment rel
-	*/
+	 * Sets the user ID of this cp rule user segment rel.
+	 *
+	 * @param userId the user ID of this cp rule user segment rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpRuleUserSegmentRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp rule user segment rel.
-	*
-	* @param userName the user name of this cp rule user segment rel
-	*/
+	 * Sets the user name of this cp rule user segment rel.
+	 *
+	 * @param userName the user name of this cp rule user segment rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpRuleUserSegmentRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp rule user segment rel.
-	*
-	* @param userUuid the user uuid of this cp rule user segment rel
-	*/
+	 * Sets the user uuid of this cp rule user segment rel.
+	 *
+	 * @param userUuid the user uuid of this cp rule user segment rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpRuleUserSegmentRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPRuleUserSegmentRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPRuleUserSegmentRel>
+		toCacheModel() {
+
 		return _cpRuleUserSegmentRel.toCacheModel();
 	}
 
 	@Override
 	public CPRuleUserSegmentRel toEscapedModel() {
-		return new CPRuleUserSegmentRelWrapper(_cpRuleUserSegmentRel.toEscapedModel());
+		return new CPRuleUserSegmentRelWrapper(
+			_cpRuleUserSegmentRel.toEscapedModel());
 	}
 
 	@Override
@@ -451,7 +460,8 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 
 	@Override
 	public CPRuleUserSegmentRel toUnescapedModel() {
-		return new CPRuleUserSegmentRelWrapper(_cpRuleUserSegmentRel.toUnescapedModel());
+		return new CPRuleUserSegmentRelWrapper(
+			_cpRuleUserSegmentRel.toUnescapedModel());
 	}
 
 	@Override
@@ -469,10 +479,13 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 			return false;
 		}
 
-		CPRuleUserSegmentRelWrapper cpRuleUserSegmentRelWrapper = (CPRuleUserSegmentRelWrapper)obj;
+		CPRuleUserSegmentRelWrapper cpRuleUserSegmentRelWrapper =
+			(CPRuleUserSegmentRelWrapper)obj;
 
-		if (Objects.equals(_cpRuleUserSegmentRel,
-					cpRuleUserSegmentRelWrapper._cpRuleUserSegmentRel)) {
+		if (Objects.equals(
+				_cpRuleUserSegmentRel,
+				cpRuleUserSegmentRelWrapper._cpRuleUserSegmentRel)) {
+
 			return true;
 		}
 
@@ -500,4 +513,5 @@ public class CPRuleUserSegmentRelWrapper implements CPRuleUserSegmentRel,
 	}
 
 	private final CPRuleUserSegmentRel _cpRuleUserSegmentRel;
+
 }

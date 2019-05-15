@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceShippingMethod;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceShippingMethod in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShippingMethod
  * @generated
  */
 @ProviderType
-public class CommerceShippingMethodCacheModel implements CacheModel<CommerceShippingMethod>,
-	Externalizable {
+public class CommerceShippingMethodCacheModel
+	implements CacheModel<CommerceShippingMethod>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceShippingMethodCacheModel implements CacheModel<CommerceShip
 			return false;
 		}
 
-		CommerceShippingMethodCacheModel commerceShippingMethodCacheModel = (CommerceShippingMethodCacheModel)obj;
+		CommerceShippingMethodCacheModel commerceShippingMethodCacheModel =
+			(CommerceShippingMethodCacheModel)obj;
 
-		if (commerceShippingMethodId == commerceShippingMethodCacheModel.commerceShippingMethodId) {
+		if (commerceShippingMethodId ==
+				commerceShippingMethodCacheModel.commerceShippingMethodId) {
+
 			return true;
 		}
 
@@ -100,9 +102,11 @@ public class CommerceShippingMethodCacheModel implements CacheModel<CommerceShip
 
 	@Override
 	public CommerceShippingMethod toEntityModel() {
-		CommerceShippingMethodImpl commerceShippingMethodImpl = new CommerceShippingMethodImpl();
+		CommerceShippingMethodImpl commerceShippingMethodImpl =
+			new CommerceShippingMethodImpl();
 
-		commerceShippingMethodImpl.setCommerceShippingMethodId(commerceShippingMethodId);
+		commerceShippingMethodImpl.setCommerceShippingMethodId(
+			commerceShippingMethodId);
 		commerceShippingMethodImpl.setGroupId(groupId);
 		commerceShippingMethodImpl.setCompanyId(companyId);
 		commerceShippingMethodImpl.setUserId(userId);
@@ -183,8 +187,7 @@ public class CommerceShippingMethodCacheModel implements CacheModel<CommerceShip
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceShippingMethodId);
 
 		objectOutput.writeLong(groupId);
@@ -244,4 +247,5 @@ public class CommerceShippingMethodCacheModel implements CacheModel<CommerceShip
 	public String engineKey;
 	public double priority;
 	public boolean active;
+
 }

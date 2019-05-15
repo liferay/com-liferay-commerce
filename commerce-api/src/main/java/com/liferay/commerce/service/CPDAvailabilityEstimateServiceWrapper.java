@@ -28,37 +28,44 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CPDAvailabilityEstimateServiceWrapper
 	implements CPDAvailabilityEstimateService,
-		ServiceWrapper<CPDAvailabilityEstimateService> {
+			   ServiceWrapper<CPDAvailabilityEstimateService> {
+
 	public CPDAvailabilityEstimateServiceWrapper(
 		CPDAvailabilityEstimateService cpdAvailabilityEstimateService) {
+
 		_cpdAvailabilityEstimateService = cpdAvailabilityEstimateService;
 	}
 
 	@Override
-	public com.liferay.commerce.model.CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId)
+	public com.liferay.commerce.model.CPDAvailabilityEstimate
+			fetchCPDAvailabilityEstimateByCPDefinitionId(long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpdAvailabilityEstimateService.fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+
+		return _cpdAvailabilityEstimateService.
+			fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpdAvailabilityEstimateService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.model.CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
-		long cpdAvailabilityEstimateId, long cpDefinitionId,
-		long commerceAvailabilityEstimateId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CPDAvailabilityEstimate
+			updateCPDAvailabilityEstimate(
+				long cpdAvailabilityEstimateId, long cpDefinitionId,
+				long commerceAvailabilityEstimateId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpdAvailabilityEstimateService.updateCPDAvailabilityEstimate(cpdAvailabilityEstimateId,
-			cpDefinitionId, commerceAvailabilityEstimateId, serviceContext);
+
+		return _cpdAvailabilityEstimateService.updateCPDAvailabilityEstimate(
+			cpdAvailabilityEstimateId, cpDefinitionId,
+			commerceAvailabilityEstimateId, serviceContext);
 	}
 
 	@Override
@@ -69,8 +76,10 @@ public class CPDAvailabilityEstimateServiceWrapper
 	@Override
 	public void setWrappedService(
 		CPDAvailabilityEstimateService cpdAvailabilityEstimateService) {
+
 		_cpdAvailabilityEstimateService = cpdAvailabilityEstimateService;
 	}
 
 	private CPDAvailabilityEstimateService _cpdAvailabilityEstimateService;
+
 }

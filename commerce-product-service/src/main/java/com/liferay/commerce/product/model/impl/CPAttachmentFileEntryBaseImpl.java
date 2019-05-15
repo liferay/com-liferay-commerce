@@ -34,18 +34,22 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalServiceUti
 @ProviderType
 public abstract class CPAttachmentFileEntryBaseImpl
 	extends CPAttachmentFileEntryModelImpl implements CPAttachmentFileEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp attachment file entry model instance should use the {@link CPAttachmentFileEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp attachment file entry model instance should use the <code>CPAttachmentFileEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPAttachmentFileEntryLocalServiceUtil.addCPAttachmentFileEntry(this);
+			CPAttachmentFileEntryLocalServiceUtil.addCPAttachmentFileEntry(
+				this);
 		}
 		else {
-			CPAttachmentFileEntryLocalServiceUtil.updateCPAttachmentFileEntry(this);
+			CPAttachmentFileEntryLocalServiceUtil.updateCPAttachmentFileEntry(
+				this);
 		}
 	}
+
 }

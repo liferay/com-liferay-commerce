@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPTaxCategory;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPTaxCategory in entity cache.
  *
  * @author Marco Leo
- * @see CPTaxCategory
  * @generated
  */
 @ProviderType
-public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
-	Externalizable {
+public class CPTaxCategoryCacheModel
+	implements CacheModel<CPTaxCategory>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 			return false;
 		}
 
-		CPTaxCategoryCacheModel cpTaxCategoryCacheModel = (CPTaxCategoryCacheModel)obj;
+		CPTaxCategoryCacheModel cpTaxCategoryCacheModel =
+			(CPTaxCategoryCacheModel)obj;
 
 		if (CPTaxCategoryId == cpTaxCategoryCacheModel.CPTaxCategoryId) {
 			return true;
@@ -156,8 +156,7 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(CPTaxCategoryId);
 
 		objectOutput.writeLong(groupId);
@@ -200,4 +199,5 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 	public long modifiedDate;
 	public String name;
 	public String description;
+
 }

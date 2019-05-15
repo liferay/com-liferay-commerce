@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPTaxCategory;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,25 +40,32 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPTaxCategoryServiceUtil
- * @see com.liferay.commerce.product.service.base.CPTaxCategoryServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPTaxCategoryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPTaxCategory"}, service = CPTaxCategoryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPTaxCategory"
+	},
+	service = CPTaxCategoryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPTaxCategoryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPTaxCategoryServiceUtil} to access the cp tax category remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPTaxCategoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPTaxCategoryServiceUtil} to access the cp tax category remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPTaxCategoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPTaxCategory addCPTaxCategory(Map<Locale, String> nameMap,
-		Map<Locale, String> descriptionMap, ServiceContext serviceContext)
+	public CPTaxCategory addCPTaxCategory(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCPTaxCategory(long cpTaxCategoryId)
@@ -70,8 +76,9 @@ public interface CPTaxCategoryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPTaxCategory> getCPTaxCategories(long groupId, int start,
-		int end, OrderByComparator<CPTaxCategory> orderByComparator)
+	public List<CPTaxCategory> getCPTaxCategories(
+			long groupId, int start, int end,
+			OrderByComparator<CPTaxCategory> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -82,13 +89,15 @@ public interface CPTaxCategoryService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPTaxCategory updateCPTaxCategory(long cpTaxCategoryId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap)
+	public CPTaxCategory updateCPTaxCategory(
+			long cpTaxCategoryId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap)
 		throws PortalException;
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPInstance;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -44,53 +43,63 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CPInstanceServiceUtil
- * @see com.liferay.commerce.product.service.base.CPInstanceServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPInstanceServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPInstance"}, service = CPInstanceService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPInstance"
+	},
+	service = CPInstanceService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPInstanceService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPInstanceServiceUtil} to access the cp instance remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPInstanceServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPInstanceServiceUtil} to access the cp instance remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPInstanceServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPInstance addCPInstance(long cpDefinitionId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		String json, boolean published, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		ServiceContext serviceContext) throws PortalException;
+	public CPInstance addCPInstance(
+			long cpDefinitionId, String sku, String gtin,
+			String manufacturerPartNumber, boolean purchasable, String json,
+			boolean published, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			ServiceContext serviceContext)
+		throws PortalException;
 
-	public void buildCPInstances(long cpDefinitionId,
-		ServiceContext serviceContext) throws PortalException;
+	public void buildCPInstances(
+			long cpDefinitionId, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPInstance(long cpInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance fetchByExternalReferenceCode(long companyId,
-		String externalReferenceCode) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance fetchCPInstance(long cpInstanceId)
+	public CPInstance fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance fetchCProductInstance(long cProductId,
-		String cpInstanceUuid) throws PortalException;
+	public CPInstance fetchCPInstance(long cpInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPInstance> getCPDefinitionInstances(long cpDefinitionId,
-		int status, int start, int end,
-		OrderByComparator<CPInstance> orderByComparator)
+	public CPInstance fetchCProductInstance(
+			long cProductId, String cpInstanceUuid)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPInstance> getCPDefinitionInstances(
+			long cpDefinitionId, int status, int start, int end,
+			OrderByComparator<CPInstance> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -98,12 +107,12 @@ public interface CPInstanceService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance getCPInstance(long cpInstanceId)
-		throws PortalException;
+	public CPInstance getCPInstance(long cpInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPInstance> getCPInstances(long groupId, int status, int start,
-		int end, OrderByComparator<CPInstance> orderByComparator)
+	public List<CPInstance> getCPInstances(
+			long groupId, int status, int start, int end,
+			OrderByComparator<CPInstance> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -111,53 +120,64 @@ public interface CPInstanceService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-		long companyId, long groupId, long cpDefinitionId, String keywords,
-		int status, int start, int end, Sort sort) throws PortalException;
+			long companyId, long groupId, long cpDefinitionId, String keywords,
+			int status, int start, int end, Sort sort)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPInstance> searchCPInstances(long companyId,
-		long groupId, String keywords, int status, int start, int end, Sort sort)
+	public BaseModelSearchResult<CPInstance> searchCPInstances(
+			long companyId, long groupId, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException;
 
-	public CPInstance updateCPInstance(long cpInstanceId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		boolean published, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CPInstance updatePricingInfo(long cpInstanceId, BigDecimal price,
-		BigDecimal promoPrice, BigDecimal cost, ServiceContext serviceContext)
+	public CPInstance updateCPInstance(
+			long cpInstanceId, String sku, String gtin,
+			String manufacturerPartNumber, boolean purchasable,
+			boolean published, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public CPInstance updateShippingInfo(long cpInstanceId, double width,
-		double height, double depth, double weight,
-		ServiceContext serviceContext) throws PortalException;
-
-	public CPInstance updateSubscriptionInfo(long cpInstanceId,
-		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		int subscriptionLength, String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, ServiceContext serviceContext)
+	public CPInstance updatePricingInfo(
+			long cpInstanceId, BigDecimal price, BigDecimal promoPrice,
+			BigDecimal cost, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CPInstance upsertCPInstance(long cpDefinitionId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		String json, double width, double height, double depth, double weight,
-		BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
-		boolean published, String externalReferenceCode, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
-		ServiceContext serviceContext) throws PortalException;
+	public CPInstance updateShippingInfo(
+			long cpInstanceId, double width, double height, double depth,
+			double weight, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPInstance updateSubscriptionInfo(
+			long cpInstanceId, boolean overrideSubscriptionInfo,
+			boolean subscriptionEnabled, int subscriptionLength,
+			String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPInstance upsertCPInstance(
+			long cpDefinitionId, String sku, String gtin,
+			String manufacturerPartNumber, boolean purchasable, String json,
+			double width, double height, double depth, double weight,
+			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
+			boolean published, String externalReferenceCode,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, ServiceContext serviceContext)
+		throws PortalException;
+
 }

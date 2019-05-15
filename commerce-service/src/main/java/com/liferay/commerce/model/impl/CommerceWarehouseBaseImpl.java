@@ -34,10 +34,11 @@ import com.liferay.commerce.service.CommerceWarehouseLocalServiceUtil;
 @ProviderType
 public abstract class CommerceWarehouseBaseImpl
 	extends CommerceWarehouseModelImpl implements CommerceWarehouse {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce warehouse model instance should use the {@link CommerceWarehouse} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce warehouse model instance should use the <code>CommerceWarehouse</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceWarehouseBaseImpl
 			CommerceWarehouseLocalServiceUtil.updateCommerceWarehouse(this);
 		}
 	}
+
 }

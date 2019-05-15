@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceUserSegmentEntryServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceUserSegmentEntryServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry}, that is translated to a
- * {@link com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry</code>, that is translated to a
+ * <code>com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,26 +63,33 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CommerceUserSegmentEntryServiceHttp
- * @see com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap
- * @see CommerceUserSegmentEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceUserSegmentEntryServiceSoap {
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap addCommerceUserSegmentEntry(
-		String[] nameMapLanguageIds, String[] nameMapValues, String key,
-		boolean active, boolean system, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
+
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap
+				addCommerceUserSegmentEntry(
+					String[] nameMapLanguageIds, String[] nameMapValues,
+					String key, boolean active, boolean system, double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
 
-			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry returnValue =
-				CommerceUserSegmentEntryServiceUtil.addCommerceUserSegmentEntry(nameMap,
-					key, active, system, priority, serviceContext);
+			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				returnValue =
+					CommerceUserSegmentEntryServiceUtil.
+						addCommerceUserSegmentEntry(
+							nameMap, key, active, system, priority,
+							serviceContext);
 
-			return com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -91,13 +98,20 @@ public class CommerceUserSegmentEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap deleteCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId) throws RemoteException {
-		try {
-			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry returnValue =
-				CommerceUserSegmentEntryServiceUtil.deleteCommerceUserSegmentEntry(commerceUserSegmentEntryId);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap
+				deleteCommerceUserSegmentEntry(long commerceUserSegmentEntryId)
+			throws RemoteException {
 
-			return com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				returnValue =
+					CommerceUserSegmentEntryServiceUtil.
+						deleteCommerceUserSegmentEntry(
+							commerceUserSegmentEntryId);
+
+			return com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -106,16 +120,25 @@ public class CommerceUserSegmentEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap[] getCommerceUserSegmentEntries(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry> returnValue =
-				CommerceUserSegmentEntryServiceUtil.getCommerceUserSegmentEntries(groupId,
-					start, end, orderByComparator);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap[]
+				getCommerceUserSegmentEntries(
+					long groupId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.user.segment.model.
+							CommerceUserSegmentEntry> orderByComparator)
+			throws RemoteException {
 
-			return com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.user.segment.model.
+					CommerceUserSegmentEntry> returnValue =
+						CommerceUserSegmentEntryServiceUtil.
+							getCommerceUserSegmentEntries(
+								groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -126,8 +149,11 @@ public class CommerceUserSegmentEntryServiceSoap {
 
 	public static int getCommerceUserSegmentEntriesCount(long groupId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceUserSegmentEntryServiceUtil.getCommerceUserSegmentEntriesCount(groupId);
+			int returnValue =
+				CommerceUserSegmentEntryServiceUtil.
+					getCommerceUserSegmentEntriesCount(groupId);
 
 			return returnValue;
 		}
@@ -138,13 +164,19 @@ public class CommerceUserSegmentEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap getCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId) throws RemoteException {
-		try {
-			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry returnValue =
-				CommerceUserSegmentEntryServiceUtil.getCommerceUserSegmentEntry(commerceUserSegmentEntryId);
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap
+				getCommerceUserSegmentEntry(long commerceUserSegmentEntryId)
+			throws RemoteException {
 
-			return com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				returnValue =
+					CommerceUserSegmentEntryServiceUtil.
+						getCommerceUserSegmentEntry(commerceUserSegmentEntryId);
+
+			return com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -153,20 +185,29 @@ public class CommerceUserSegmentEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap updateCommerceUserSegmentEntry(
-		long commerceUserSegmentEntryId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String key, boolean active, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
+	public static
+		com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap
+				updateCommerceUserSegmentEntry(
+					long commerceUserSegmentEntryId,
+					String[] nameMapLanguageIds, String[] nameMapValues,
+					String key, boolean active, double priority,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
 
-			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry returnValue =
-				CommerceUserSegmentEntryServiceUtil.updateCommerceUserSegmentEntry(commerceUserSegmentEntryId,
-					nameMap, key, active, priority, serviceContext);
+			com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+				returnValue =
+					CommerceUserSegmentEntryServiceUtil.
+						updateCommerceUserSegmentEntry(
+							commerceUserSegmentEntryId, nameMap, key, active,
+							priority, serviceContext);
 
-			return com.liferay.commerce.user.segment.model.CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.user.segment.model.
+				CommerceUserSegmentEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -175,5 +216,7 @@ public class CommerceUserSegmentEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceUserSegmentEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceUserSegmentEntryServiceSoap.class);
+
 }

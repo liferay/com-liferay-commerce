@@ -34,18 +34,22 @@ import com.liferay.commerce.service.CommerceWarehouseItemLocalServiceUtil;
 @ProviderType
 public abstract class CommerceWarehouseItemBaseImpl
 	extends CommerceWarehouseItemModelImpl implements CommerceWarehouseItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce warehouse item model instance should use the {@link CommerceWarehouseItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce warehouse item model instance should use the <code>CommerceWarehouseItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceWarehouseItemLocalServiceUtil.addCommerceWarehouseItem(this);
+			CommerceWarehouseItemLocalServiceUtil.addCommerceWarehouseItem(
+				this);
 		}
 		else {
-			CommerceWarehouseItemLocalServiceUtil.updateCommerceWarehouseItem(this);
+			CommerceWarehouseItemLocalServiceUtil.updateCommerceWarehouseItem(
+				this);
 		}
 	}
+
 }

@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPOptionCategoryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPOptionCategoryServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPOptionCategoryServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.model.CPOptionCategorySoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.model.CPOptionCategory}, that is translated to a
- * {@link com.liferay.commerce.product.model.CPOptionCategorySoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.model.CPOptionCategorySoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.model.CPOptionCategory</code>, that is translated to a
+ * <code>com.liferay.commerce.product.model.CPOptionCategorySoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,28 +63,32 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionCategoryServiceHttp
- * @see com.liferay.commerce.product.model.CPOptionCategorySoap
- * @see CPOptionCategoryServiceUtil
  * @generated
  */
 @ProviderType
 public class CPOptionCategoryServiceSoap {
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap addCPOptionCategory(
-		String[] titleMapLanguageIds, String[] titleMapValues,
-		String[] descriptionMapLanguageIds, String[] descriptionMapValues,
-		double priority, String key,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap
+			addCPOptionCategory(
+				String[] titleMapLanguageIds, String[] titleMapValues,
+				String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues, double priority, String key,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
 
-			com.liferay.commerce.product.model.CPOptionCategory returnValue = CPOptionCategoryServiceUtil.addCPOptionCategory(titleMap,
-					descriptionMap, priority, key, serviceContext);
+			com.liferay.commerce.product.model.CPOptionCategory returnValue =
+				CPOptionCategoryServiceUtil.addCPOptionCategory(
+					titleMap, descriptionMap, priority, key, serviceContext);
 
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -95,8 +99,10 @@ public class CPOptionCategoryServiceSoap {
 
 	public static void deleteCPOptionCategory(long cpOptionCategoryId)
 		throws RemoteException {
+
 		try {
-			CPOptionCategoryServiceUtil.deleteCPOptionCategory(cpOptionCategoryId);
+			CPOptionCategoryServiceUtil.deleteCPOptionCategory(
+				cpOptionCategoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -105,46 +111,59 @@ public class CPOptionCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap fetchCPOptionCategory(
-		long cpOptionCategoryId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOptionCategory returnValue = CPOptionCategoryServiceUtil.fetchCPOptionCategory(cpOptionCategoryId);
-
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap[] getCPOptionCategories(
-		long groupId, int start, int end) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPOptionCategory> returnValue =
-				CPOptionCategoryServiceUtil.getCPOptionCategories(groupId,
-					start, end);
-
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap[] getCPOptionCategories(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap
+			fetchCPOptionCategory(long cpOptionCategoryId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPOptionCategory> returnValue =
-				CPOptionCategoryServiceUtil.getCPOptionCategories(groupId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModels(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPOptionCategory returnValue =
+				CPOptionCategoryServiceUtil.fetchCPOptionCategory(
+					cpOptionCategoryId);
+
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap[]
+			getCPOptionCategories(long groupId, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
+				returnValue = CPOptionCategoryServiceUtil.getCPOptionCategories(
+					groupId, start, end);
+
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap[]
+			getCPOptionCategories(
+				long groupId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CPOptionCategory>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
+				returnValue = CPOptionCategoryServiceUtil.getCPOptionCategories(
+					groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -155,8 +174,10 @@ public class CPOptionCategoryServiceSoap {
 
 	public static int getCPOptionCategoriesCount(long groupId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CPOptionCategoryServiceUtil.getCPOptionCategoriesCount(groupId);
+			int returnValue =
+				CPOptionCategoryServiceUtil.getCPOptionCategoriesCount(groupId);
 
 			return returnValue;
 		}
@@ -167,36 +188,17 @@ public class CPOptionCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap getCPOptionCategory(
-		long cpOptionCategoryId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOptionCategory returnValue = CPOptionCategoryServiceUtil.getCPOptionCategory(cpOptionCategoryId);
-
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionCategorySoap updateCPOptionCategory(
-		long cpOptionCategoryId, String[] titleMapLanguageIds,
-		String[] titleMapValues, String[] descriptionMapLanguageIds,
-		String[] descriptionMapValues, double priority, String key,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap
+			getCPOptionCategory(long cpOptionCategoryId)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
-			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
-					descriptionMapValues);
+			com.liferay.commerce.product.model.CPOptionCategory returnValue =
+				CPOptionCategoryServiceUtil.getCPOptionCategory(
+					cpOptionCategoryId);
 
-			com.liferay.commerce.product.model.CPOptionCategory returnValue = CPOptionCategoryServiceUtil.updateCPOptionCategory(cpOptionCategoryId,
-					titleMap, descriptionMap, priority, key, serviceContext);
-
-			return com.liferay.commerce.product.model.CPOptionCategorySoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -205,5 +207,37 @@ public class CPOptionCategoryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPOptionCategoryServiceSoap.class);
+	public static com.liferay.commerce.product.model.CPOptionCategorySoap
+			updateCPOptionCategory(
+				long cpOptionCategoryId, String[] titleMapLanguageIds,
+				String[] titleMapValues, String[] descriptionMapLanguageIds,
+				String[] descriptionMapValues, double priority, String key,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
+			Map<Locale, String> descriptionMap =
+				LocalizationUtil.getLocalizationMap(
+					descriptionMapLanguageIds, descriptionMapValues);
+
+			com.liferay.commerce.product.model.CPOptionCategory returnValue =
+				CPOptionCategoryServiceUtil.updateCPOptionCategory(
+					cpOptionCategoryId, titleMap, descriptionMap, priority, key,
+					serviceContext);
+
+			return com.liferay.commerce.product.model.CPOptionCategorySoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CPOptionCategoryServiceSoap.class);
+
 }

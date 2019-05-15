@@ -34,10 +34,11 @@ import com.liferay.commerce.tax.service.CommerceTaxMethodLocalServiceUtil;
 @ProviderType
 public abstract class CommerceTaxMethodBaseImpl
 	extends CommerceTaxMethodModelImpl implements CommerceTaxMethod {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce tax method model instance should use the {@link CommerceTaxMethod} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce tax method model instance should use the <code>CommerceTaxMethod</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceTaxMethodBaseImpl
 			CommerceTaxMethodLocalServiceUtil.updateCommerceTaxMethod(this);
 		}
 	}
+
 }

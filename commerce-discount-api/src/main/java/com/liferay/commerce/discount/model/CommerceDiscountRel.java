@@ -25,34 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceDiscountRelModel
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl
- * @see com.liferay.commerce.discount.model.impl.CommerceDiscountRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl"
+)
 @ProviderType
-public interface CommerceDiscountRel extends CommerceDiscountRelModel,
-	PersistedModel {
+public interface CommerceDiscountRel
+	extends CommerceDiscountRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceDiscountRel, Long> COMMERCE_DISCOUNT_REL_ID_ACCESSOR =
-		new Accessor<CommerceDiscountRel, Long>() {
-			@Override
-			public Long get(CommerceDiscountRel commerceDiscountRel) {
-				return commerceDiscountRel.getCommerceDiscountRelId();
-			}
+	public static final Accessor<CommerceDiscountRel, Long>
+		COMMERCE_DISCOUNT_REL_ID_ACCESSOR =
+			new Accessor<CommerceDiscountRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceDiscountRel commerceDiscountRel) {
+					return commerceDiscountRel.getCommerceDiscountRelId();
+				}
 
-			@Override
-			public Class<CommerceDiscountRel> getTypeClass() {
-				return CommerceDiscountRel.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceDiscountRel> getTypeClass() {
+					return CommerceDiscountRel.class;
+				}
+
+			};
+
 }

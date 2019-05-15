@@ -28,68 +28,92 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceAvailabilityEstimateServiceWrapper
 	implements CommerceAvailabilityEstimateService,
-		ServiceWrapper<CommerceAvailabilityEstimateService> {
+			   ServiceWrapper<CommerceAvailabilityEstimateService> {
+
 	public CommerceAvailabilityEstimateServiceWrapper(
-		CommerceAvailabilityEstimateService commerceAvailabilityEstimateService) {
-		_commerceAvailabilityEstimateService = commerceAvailabilityEstimateService;
+		CommerceAvailabilityEstimateService
+			commerceAvailabilityEstimateService) {
+
+		_commerceAvailabilityEstimateService =
+			commerceAvailabilityEstimateService;
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceAvailabilityEstimate addCommerceAvailabilityEstimate(
-		java.util.Map<java.util.Locale, String> titleMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceAvailabilityEstimate
+			addCommerceAvailabilityEstimate(
+				java.util.Map<java.util.Locale, String> titleMap,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.addCommerceAvailabilityEstimate(titleMap,
-			priority, serviceContext);
+
+		return _commerceAvailabilityEstimateService.
+			addCommerceAvailabilityEstimate(titleMap, priority, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId)
+			long commerceAvailabilityEstimateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAvailabilityEstimateService.deleteCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
+
+		_commerceAvailabilityEstimateService.deleteCommerceAvailabilityEstimate(
+			commerceAvailabilityEstimateId);
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceAvailabilityEstimate getCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId)
+	public com.liferay.commerce.model.CommerceAvailabilityEstimate
+			getCommerceAvailabilityEstimate(long commerceAvailabilityEstimateId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
+
+		return _commerceAvailabilityEstimateService.
+			getCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimates(groupId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.model.CommerceAvailabilityEstimate>
+				getCommerceAvailabilityEstimates(
+					long groupId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.
+							CommerceAvailabilityEstimate> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAvailabilityEstimateService.
+			getCommerceAvailabilityEstimates(
+				groupId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceAvailabilityEstimatesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimatesCount(groupId);
+
+		return _commerceAvailabilityEstimateService.
+			getCommerceAvailabilityEstimatesCount(groupId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAvailabilityEstimateService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceAvailabilityEstimate updateCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId,
-		java.util.Map<java.util.Locale, String> titleMap, double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceAvailabilityEstimate
+			updateCommerceAvailabilityEstimate(
+				long commerceAvailabilityEstimateId,
+				java.util.Map<java.util.Locale, String> titleMap,
+				double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.updateCommerceAvailabilityEstimate(commerceAvailabilityEstimateId,
-			titleMap, priority, serviceContext);
+
+		return _commerceAvailabilityEstimateService.
+			updateCommerceAvailabilityEstimate(
+				commerceAvailabilityEstimateId, titleMap, priority,
+				serviceContext);
 	}
 
 	@Override
@@ -99,9 +123,14 @@ public class CommerceAvailabilityEstimateServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceAvailabilityEstimateService commerceAvailabilityEstimateService) {
-		_commerceAvailabilityEstimateService = commerceAvailabilityEstimateService;
+		CommerceAvailabilityEstimateService
+			commerceAvailabilityEstimateService) {
+
+		_commerceAvailabilityEstimateService =
+			commerceAvailabilityEstimateService;
 	}
 
-	private CommerceAvailabilityEstimateService _commerceAvailabilityEstimateService;
+	private CommerceAvailabilityEstimateService
+		_commerceAvailabilityEstimateService;
+
 }

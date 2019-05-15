@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -36,36 +35,44 @@ import com.liferay.portal.kernel.transaction.Transactional;
  *
  * @author Alessio Antonio Rendina
  * @see CPDAvailabilityEstimateServiceUtil
- * @see com.liferay.commerce.service.base.CPDAvailabilityEstimateServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CPDAvailabilityEstimateServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPDAvailabilityEstimate"}, service = CPDAvailabilityEstimateService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPDAvailabilityEstimate"
+	},
+	service = CPDAvailabilityEstimateService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPDAvailabilityEstimateService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPDAvailabilityEstimateServiceUtil} to access the cpd availability estimate remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CPDAvailabilityEstimateServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPDAvailabilityEstimateServiceUtil} to access the cpd availability estimate remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CPDAvailabilityEstimateServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId) throws PortalException;
+			long cpDefinitionId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
-		long cpdAvailabilityEstimateId, long cpDefinitionId,
-		long commerceAvailabilityEstimateId, ServiceContext serviceContext)
+			long cpdAvailabilityEstimateId, long cpDefinitionId,
+			long commerceAvailabilityEstimateId, ServiceContext serviceContext)
 		throws PortalException;
+
 }

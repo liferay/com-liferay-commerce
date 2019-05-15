@@ -21,7 +21,6 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalSe
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelFinder;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelPersistence;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRatePersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -63,17 +62,17 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateLocalServiceImpl
- * @see com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements CommerceTaxFixedRateLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements CommerceTaxFixedRateLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalServiceUtil} to access the commerce tax fixed rate local service.
+	 * Never modify or reference this class directly. Use <code>CommerceTaxFixedRateLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -86,6 +85,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Override
 	public CommerceTaxFixedRate addCommerceTaxFixedRate(
 		CommerceTaxFixedRate commerceTaxFixedRate) {
+
 		commerceTaxFixedRate.setNew(true);
 
 		return commerceTaxFixedRatePersistence.update(commerceTaxFixedRate);
@@ -101,6 +101,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommerceTaxFixedRate createCommerceTaxFixedRate(
 		long commerceTaxFixedRateId) {
+
 		return commerceTaxFixedRatePersistence.create(commerceTaxFixedRateId);
 	}
 
@@ -114,7 +115,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceTaxFixedRate deleteCommerceTaxFixedRate(
-		long commerceTaxFixedRateId) throws PortalException {
+			long commerceTaxFixedRateId)
+		throws PortalException {
+
 		return commerceTaxFixedRatePersistence.remove(commerceTaxFixedRateId);
 	}
 
@@ -128,6 +131,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Override
 	public CommerceTaxFixedRate deleteCommerceTaxFixedRate(
 		CommerceTaxFixedRate commerceTaxFixedRate) {
+
 		return commerceTaxFixedRatePersistence.remove(commerceTaxFixedRate);
 	}
 
@@ -135,8 +139,8 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceTaxFixedRate.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceTaxFixedRate.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -147,14 +151,15 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceTaxFixedRatePersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceTaxFixedRatePersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -163,17 +168,18 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceTaxFixedRatePersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceTaxFixedRatePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -183,10 +189,12 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceTaxFixedRatePersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceTaxFixedRatePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -197,7 +205,8 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceTaxFixedRatePersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceTaxFixedRatePersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -208,16 +217,19 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceTaxFixedRatePersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceTaxFixedRatePersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommerceTaxFixedRate fetchCommerceTaxFixedRate(
 		long commerceTaxFixedRateId) {
-		return commerceTaxFixedRatePersistence.fetchByPrimaryKey(commerceTaxFixedRateId);
+
+		return commerceTaxFixedRatePersistence.fetchByPrimaryKey(
+			commerceTaxFixedRateId);
 	}
 
 	/**
@@ -229,15 +241,20 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceTaxFixedRate getCommerceTaxFixedRate(
-		long commerceTaxFixedRateId) throws PortalException {
-		return commerceTaxFixedRatePersistence.findByPrimaryKey(commerceTaxFixedRateId);
+			long commerceTaxFixedRateId)
+		throws PortalException {
+
+		return commerceTaxFixedRatePersistence.findByPrimaryKey(
+			commerceTaxFixedRateId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceTaxFixedRateLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceTaxFixedRateLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceTaxFixedRate.class);
 
@@ -248,12 +265,17 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceTaxFixedRateLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceTaxFixedRateLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceTaxFixedRate.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceTaxFixedRate.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceTaxFixedRateId");
@@ -263,7 +285,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceTaxFixedRateLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceTaxFixedRateLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceTaxFixedRate.class);
 
@@ -277,12 +301,15 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceTaxFixedRateLocalService.deleteCommerceTaxFixedRate((CommerceTaxFixedRate)persistedModel);
+
+		return commerceTaxFixedRateLocalService.deleteCommerceTaxFixedRate(
+			(CommerceTaxFixedRate)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
+
 		return commerceTaxFixedRatePersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -290,7 +317,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * Returns a range of all the commerce tax fixed rates.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce tax fixed rates
@@ -298,8 +325,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @return the range of commerce tax fixed rates
 	 */
 	@Override
-	public List<CommerceTaxFixedRate> getCommerceTaxFixedRates(int start,
-		int end) {
+	public List<CommerceTaxFixedRate> getCommerceTaxFixedRates(
+		int start, int end) {
+
 		return commerceTaxFixedRatePersistence.findAll(start, end);
 	}
 
@@ -323,6 +351,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	@Override
 	public CommerceTaxFixedRate updateCommerceTaxFixedRate(
 		CommerceTaxFixedRate commerceTaxFixedRate) {
+
 		return commerceTaxFixedRatePersistence.update(commerceTaxFixedRate);
 	}
 
@@ -331,7 +360,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate local service
 	 */
-	public CommerceTaxFixedRateLocalService getCommerceTaxFixedRateLocalService() {
+	public CommerceTaxFixedRateLocalService
+		getCommerceTaxFixedRateLocalService() {
+
 		return commerceTaxFixedRateLocalService;
 	}
 
@@ -342,7 +373,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	public void setCommerceTaxFixedRateLocalService(
 		CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService) {
-		this.commerceTaxFixedRateLocalService = commerceTaxFixedRateLocalService;
+
+		this.commerceTaxFixedRateLocalService =
+			commerceTaxFixedRateLocalService;
 	}
 
 	/**
@@ -350,7 +383,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate persistence
 	 */
-	public CommerceTaxFixedRatePersistence getCommerceTaxFixedRatePersistence() {
+	public CommerceTaxFixedRatePersistence
+		getCommerceTaxFixedRatePersistence() {
+
 		return commerceTaxFixedRatePersistence;
 	}
 
@@ -361,6 +396,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	public void setCommerceTaxFixedRatePersistence(
 		CommerceTaxFixedRatePersistence commerceTaxFixedRatePersistence) {
+
 		this.commerceTaxFixedRatePersistence = commerceTaxFixedRatePersistence;
 	}
 
@@ -369,7 +405,10 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel local service
 	 */
-	public com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService getCommerceTaxFixedRateAddressRelLocalService() {
+	public com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateAddressRelLocalService
+			getCommerceTaxFixedRateAddressRelLocalService() {
+
 		return commerceTaxFixedRateAddressRelLocalService;
 	}
 
@@ -379,8 +418,12 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelLocalService the commerce tax fixed rate address rel local service
 	 */
 	public void setCommerceTaxFixedRateAddressRelLocalService(
-		com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService commerceTaxFixedRateAddressRelLocalService) {
-		this.commerceTaxFixedRateAddressRelLocalService = commerceTaxFixedRateAddressRelLocalService;
+		com.liferay.commerce.tax.engine.fixed.service.
+			CommerceTaxFixedRateAddressRelLocalService
+				commerceTaxFixedRateAddressRelLocalService) {
+
+		this.commerceTaxFixedRateAddressRelLocalService =
+			commerceTaxFixedRateAddressRelLocalService;
 	}
 
 	/**
@@ -388,7 +431,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel persistence
 	 */
-	public CommerceTaxFixedRateAddressRelPersistence getCommerceTaxFixedRateAddressRelPersistence() {
+	public CommerceTaxFixedRateAddressRelPersistence
+		getCommerceTaxFixedRateAddressRelPersistence() {
+
 		return commerceTaxFixedRateAddressRelPersistence;
 	}
 
@@ -398,8 +443,11 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelPersistence the commerce tax fixed rate address rel persistence
 	 */
 	public void setCommerceTaxFixedRateAddressRelPersistence(
-		CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence) {
-		this.commerceTaxFixedRateAddressRelPersistence = commerceTaxFixedRateAddressRelPersistence;
+		CommerceTaxFixedRateAddressRelPersistence
+			commerceTaxFixedRateAddressRelPersistence) {
+
+		this.commerceTaxFixedRateAddressRelPersistence =
+			commerceTaxFixedRateAddressRelPersistence;
 	}
 
 	/**
@@ -407,7 +455,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the commerce tax fixed rate address rel finder
 	 */
-	public CommerceTaxFixedRateAddressRelFinder getCommerceTaxFixedRateAddressRelFinder() {
+	public CommerceTaxFixedRateAddressRelFinder
+		getCommerceTaxFixedRateAddressRelFinder() {
+
 		return commerceTaxFixedRateAddressRelFinder;
 	}
 
@@ -417,8 +467,11 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param commerceTaxFixedRateAddressRelFinder the commerce tax fixed rate address rel finder
 	 */
 	public void setCommerceTaxFixedRateAddressRelFinder(
-		CommerceTaxFixedRateAddressRelFinder commerceTaxFixedRateAddressRelFinder) {
-		this.commerceTaxFixedRateAddressRelFinder = commerceTaxFixedRateAddressRelFinder;
+		CommerceTaxFixedRateAddressRelFinder
+			commerceTaxFixedRateAddressRelFinder) {
+
+		this.commerceTaxFixedRateAddressRelFinder =
+			commerceTaxFixedRateAddressRelFinder;
 	}
 
 	/**
@@ -426,7 +479,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -436,7 +491,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -445,7 +502,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -455,7 +514,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -475,6 +536,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -483,7 +545,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -493,7 +557,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -502,7 +568,9 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -513,6 +581,7 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -535,7 +604,8 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate",
 			commerceTaxFixedRateLocalService);
 	}
 
@@ -569,15 +639,16 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceTaxFixedRatePersistence.getDataSource();
+			DataSource dataSource =
+				commerceTaxFixedRatePersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -588,26 +659,57 @@ public abstract class CommerceTaxFixedRateLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceTaxFixedRateLocalService.class)
 	protected CommerceTaxFixedRateLocalService commerceTaxFixedRateLocalService;
+
 	@BeanReference(type = CommerceTaxFixedRatePersistence.class)
 	protected CommerceTaxFixedRatePersistence commerceTaxFixedRatePersistence;
-	@BeanReference(type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService.class)
-	protected com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService commerceTaxFixedRateAddressRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService.class
+	)
+	protected com.liferay.commerce.tax.engine.fixed.service.
+		CommerceTaxFixedRateAddressRelLocalService
+			commerceTaxFixedRateAddressRelLocalService;
+
 	@BeanReference(type = CommerceTaxFixedRateAddressRelPersistence.class)
-	protected CommerceTaxFixedRateAddressRelPersistence commerceTaxFixedRateAddressRelPersistence;
+	protected CommerceTaxFixedRateAddressRelPersistence
+		commerceTaxFixedRateAddressRelPersistence;
+
 	@BeanReference(type = CommerceTaxFixedRateAddressRelFinder.class)
-	protected CommerceTaxFixedRateAddressRelFinder commerceTaxFixedRateAddressRelFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CommerceTaxFixedRateAddressRelFinder
+		commerceTaxFixedRateAddressRelFinder;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

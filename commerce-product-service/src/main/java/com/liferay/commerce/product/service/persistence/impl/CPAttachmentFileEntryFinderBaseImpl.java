@@ -16,7 +16,6 @@ package com.liferay.commerce.product.service.persistence.impl;
 
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,20 +31,22 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-public class CPAttachmentFileEntryFinderBaseImpl extends BasePersistenceImpl<CPAttachmentFileEntry> {
+public class CPAttachmentFileEntryFinderBaseImpl
+	extends BasePersistenceImpl<CPAttachmentFileEntry> {
+
 	public CPAttachmentFileEntryFinderBaseImpl() {
 		setModelClass(CPAttachmentFileEntry.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+		dbColumnNames.put("type", "type_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("type", "type_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -66,7 +67,9 @@ public class CPAttachmentFileEntryFinderBaseImpl extends BasePersistenceImpl<CPA
 	 *
 	 * @return the cp attachment file entry persistence
 	 */
-	public CPAttachmentFileEntryPersistence getCPAttachmentFileEntryPersistence() {
+	public CPAttachmentFileEntryPersistence
+		getCPAttachmentFileEntryPersistence() {
+
 		return cpAttachmentFileEntryPersistence;
 	}
 
@@ -77,10 +80,15 @@ public class CPAttachmentFileEntryFinderBaseImpl extends BasePersistenceImpl<CPA
 	 */
 	public void setCPAttachmentFileEntryPersistence(
 		CPAttachmentFileEntryPersistence cpAttachmentFileEntryPersistence) {
-		this.cpAttachmentFileEntryPersistence = cpAttachmentFileEntryPersistence;
+
+		this.cpAttachmentFileEntryPersistence =
+			cpAttachmentFileEntryPersistence;
 	}
 
 	@BeanReference(type = CPAttachmentFileEntryPersistence.class)
 	protected CPAttachmentFileEntryPersistence cpAttachmentFileEntryPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CPAttachmentFileEntryFinderBaseImpl.class);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPAttachmentFileEntryFinderBaseImpl.class);
+
 }

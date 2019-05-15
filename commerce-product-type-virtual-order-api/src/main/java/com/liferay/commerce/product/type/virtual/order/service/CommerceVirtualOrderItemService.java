@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.virtual.order.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -37,36 +36,43 @@ import java.io.File;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceVirtualOrderItemServiceUtil
- * @see com.liferay.commerce.product.type.virtual.order.service.base.CommerceVirtualOrderItemServiceBaseImpl
- * @see com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceVirtualOrderItem"}, service = CommerceVirtualOrderItemService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceVirtualOrderItem"
+	},
+	service = CommerceVirtualOrderItemService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceVirtualOrderItemService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceVirtualOrderItemServiceUtil} to access the commerce virtual order item remote service. Add custom service methods to {@link com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceVirtualOrderItemServiceUtil} to access the commerce virtual order item remote service. Add custom service methods to <code>com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public File getFile(long commerceVirtualOrderItemId)
-		throws Exception;
+	public File getFile(long commerceVirtualOrderItemId) throws Exception;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceVirtualOrderItem updateCommerceVirtualOrderItem(
-		long commerceVirtualOrderItemId, long fileEntryId, String url,
-		int activationStatus, long duration, int usages, int maxUsages,
-		boolean active) throws PortalException;
+			long commerceVirtualOrderItemId, long fileEntryId, String url,
+			int activationStatus, long duration, int usages, int maxUsages,
+			boolean active)
+		throws PortalException;
+
 }

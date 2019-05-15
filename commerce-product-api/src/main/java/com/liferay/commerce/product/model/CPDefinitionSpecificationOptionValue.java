@@ -25,37 +25,46 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionSpecificationOptionValueModel
- * @see com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl
- * @see com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl"
+)
 @ProviderType
 public interface CPDefinitionSpecificationOptionValue
 	extends CPDefinitionSpecificationOptionValueModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionSpecificationOptionValue, Long> CP_DEFINITION_SPECIFICATION_OPTION_VALUE_ID_ACCESSOR =
-		new Accessor<CPDefinitionSpecificationOptionValue, Long>() {
-			@Override
-			public Long get(
-				CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue) {
-				return cpDefinitionSpecificationOptionValue.getCPDefinitionSpecificationOptionValueId();
-			}
+	public static final Accessor<CPDefinitionSpecificationOptionValue, Long>
+		CP_DEFINITION_SPECIFICATION_OPTION_VALUE_ID_ACCESSOR =
+			new Accessor<CPDefinitionSpecificationOptionValue, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CPDefinitionSpecificationOptionValue
+						cpDefinitionSpecificationOptionValue) {
 
-			@Override
-			public Class<CPDefinitionSpecificationOptionValue> getTypeClass() {
-				return CPDefinitionSpecificationOptionValue.class;
-			}
-		};
+					return cpDefinitionSpecificationOptionValue.
+						getCPDefinitionSpecificationOptionValueId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionSpecificationOptionValue>
+					getTypeClass() {
+
+					return CPDefinitionSpecificationOptionValue.class;
+				}
+
+			};
 
 	public CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -65,4 +74,5 @@ public interface CPDefinitionSpecificationOptionValue
 
 	public CPSpecificationOption getCPSpecificationOption()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

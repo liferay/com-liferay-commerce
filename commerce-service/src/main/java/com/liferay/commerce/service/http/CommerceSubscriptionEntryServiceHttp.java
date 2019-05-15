@@ -17,7 +17,6 @@ package com.liferay.commerce.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.service.CommerceSubscriptionEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
@@ -27,10 +26,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link CommerceSubscriptionEntryServiceUtil} service utility. The
+ * <code>CommerceSubscriptionEntryServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,32 +49,37 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceSubscriptionEntryServiceSoap
- * @see HttpPrincipal
- * @see CommerceSubscriptionEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceSubscriptionEntryServiceHttp {
-	public static void deleteCommerceSubscriptionEntry(
-		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"deleteCommerceSubscriptionEntry",
-					_deleteCommerceSubscriptionEntryParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId);
+	public static void deleteCommerceSubscriptionEntry(
+			HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"deleteCommerceSubscriptionEntry",
+				_deleteCommerceSubscriptionEntryParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceSubscriptionEntryId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
@@ -84,16 +89,19 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
-		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry
+			fetchCommerceSubscriptionEntry(
+				HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"fetchCommerceSubscriptionEntry",
-					_fetchCommerceSubscriptionEntryParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"fetchCommerceSubscriptionEntry",
+				_fetchCommerceSubscriptionEntryParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceSubscriptionEntryId);
 
 			Object returnObj = null;
 
@@ -101,14 +109,19 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceSubscriptionEntry)returnObj;
+			return (com.liferay.commerce.model.CommerceSubscriptionEntry)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -117,18 +130,24 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"getCommerceSubscriptionEntries",
-					_getCommerceSubscriptionEntriesParameterTypes2);
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				getCommerceSubscriptionEntries(
+					HttpPrincipal httpPrincipal, long groupId, long userId,
+					int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.CommerceSubscriptionEntry>
+							orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId, start, end, orderByComparator);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"getCommerceSubscriptionEntries",
+				_getCommerceSubscriptionEntriesParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, userId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -136,14 +155,20 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry>)returnObj;
+			return (java.util.List
+				<com.liferay.commerce.model.CommerceSubscriptionEntry>)
+					returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -153,15 +178,17 @@ public class CommerceSubscriptionEntryServiceHttp {
 	}
 
 	public static int getCommerceSubscriptionEntriesCount(
-		HttpPrincipal httpPrincipal, long groupId, long userId)
+			HttpPrincipal httpPrincipal, long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"getCommerceSubscriptionEntriesCount",
-					_getCommerceSubscriptionEntriesCountParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"getCommerceSubscriptionEntriesCount",
+				_getCommerceSubscriptionEntriesCountParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, userId);
 
 			Object returnObj = null;
 
@@ -169,11 +196,15 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return ((Integer)returnObj).intValue();
@@ -185,20 +216,24 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		Long maxSubscriptionCycles, Integer subscriptionStatus,
-		String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"searchCommerceSubscriptionEntries",
-					_searchCommerceSubscriptionEntriesParameterTypes4);
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				searchCommerceSubscriptionEntries(
+					HttpPrincipal httpPrincipal, long companyId, long groupId,
+					Long maxSubscriptionCycles, Integer subscriptionStatus,
+					String keywords, int start, int end,
+					com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, maxSubscriptionCycles,
-					subscriptionStatus, keywords, start, end, sort);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"searchCommerceSubscriptionEntries",
+				_searchCommerceSubscriptionEntriesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, groupId, maxSubscriptionCycles,
+				subscriptionStatus, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -206,14 +241,20 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry>)returnObj;
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult
+				<com.liferay.commerce.model.CommerceSubscriptionEntry>)
+					returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -222,29 +263,34 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
-		int subscriptionLength, String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, int subscriptionStatus, int startDateMonth,
-		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextIterationDateMonth,
-		int nextIterationDateDay, int nextIterationDateYear,
-		int nextIterationDateHour, int nextIterationDateMinute)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry
+			updateCommerceSubscriptionEntry(
+				HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
+				int subscriptionLength, String subscriptionType,
+				com.liferay.portal.kernel.util.UnicodeProperties
+					subscriptionTypeSettingsProperties,
+				long maxSubscriptionCycles, int subscriptionStatus,
+				int startDateMonth, int startDateDay, int startDateYear,
+				int startDateHour, int startDateMinute,
+				int nextIterationDateMonth, int nextIterationDateDay,
+				int nextIterationDateYear, int nextIterationDateHour,
+				int nextIterationDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"updateCommerceSubscriptionEntry",
-					_updateCommerceSubscriptionEntryParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId, subscriptionLength,
-					subscriptionType, subscriptionTypeSettingsProperties,
-					maxSubscriptionCycles, subscriptionStatus, startDateMonth,
-					startDateDay, startDateYear, startDateHour,
-					startDateMinute, nextIterationDateMonth,
-					nextIterationDateDay, nextIterationDateYear,
-					nextIterationDateHour, nextIterationDateMinute);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"updateCommerceSubscriptionEntry",
+				_updateCommerceSubscriptionEntryParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceSubscriptionEntryId, subscriptionLength,
+				subscriptionType, subscriptionTypeSettingsProperties,
+				maxSubscriptionCycles, subscriptionStatus, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
+				nextIterationDateMonth, nextIterationDateDay,
+				nextIterationDateYear, nextIterationDateHour,
+				nextIterationDateMinute);
 
 			Object returnObj = null;
 
@@ -252,14 +298,19 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceSubscriptionEntry)returnObj;
+			return (com.liferay.commerce.model.CommerceSubscriptionEntry)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -268,17 +319,20 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateSubscriptionStatus(
-		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
-		int subscriptionStatus)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry
+			updateSubscriptionStatus(
+				HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
+				int subscriptionStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"updateSubscriptionStatus",
-					_updateSubscriptionStatusParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId, subscriptionStatus);
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceSubscriptionEntryServiceUtil.class,
+				"updateSubscriptionStatus",
+				_updateSubscriptionStatusParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceSubscriptionEntryId, subscriptionStatus);
 
 			Object returnObj = null;
 
@@ -286,14 +340,19 @@ public class CommerceSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
-			return (com.liferay.commerce.model.CommerceSubscriptionEntry)returnObj;
+			return (com.liferay.commerce.model.CommerceSubscriptionEntry)
+				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -302,31 +361,39 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceSubscriptionEntryServiceHttp.class);
-	private static final Class<?>[] _deleteCommerceSubscriptionEntryParameterTypes0 =
-		new Class[] { long.class };
-	private static final Class<?>[] _fetchCommerceSubscriptionEntryParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes2 =
-		new Class[] {
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceSubscriptionEntryServiceHttp.class);
+
+	private static final Class<?>[]
+		_deleteCommerceSubscriptionEntryParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_fetchCommerceSubscriptionEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_getCommerceSubscriptionEntriesParameterTypes2 = new Class[] {
 			long.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceSubscriptionEntriesCountParameterTypes3 =
-		new Class[] { long.class, long.class };
-	private static final Class<?>[] _searchCommerceSubscriptionEntriesParameterTypes4 =
-		new Class[] {
+	private static final Class<?>[]
+		_getCommerceSubscriptionEntriesCountParameterTypes3 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[]
+		_searchCommerceSubscriptionEntriesParameterTypes4 = new Class[] {
 			long.class, long.class, Long.class, Integer.class, String.class,
 			int.class, int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommerceSubscriptionEntryParameterTypes5 =
-		new Class[] {
+	private static final Class<?>[]
+		_updateCommerceSubscriptionEntryParameterTypes5 = new Class[] {
 			long.class, int.class, String.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class
 		};
-	private static final Class<?>[] _updateSubscriptionStatusParameterTypes6 = new Class[] {
-			long.class, int.class
-		};
+	private static final Class<?>[] _updateSubscriptionStatusParameterTypes6 =
+		new Class[] {long.class, int.class};
+
 }

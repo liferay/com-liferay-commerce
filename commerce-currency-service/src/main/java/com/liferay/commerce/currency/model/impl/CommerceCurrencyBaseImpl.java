@@ -32,12 +32,13 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceCurrencyBaseImpl extends CommerceCurrencyModelImpl
-	implements CommerceCurrency {
+public abstract class CommerceCurrencyBaseImpl
+	extends CommerceCurrencyModelImpl implements CommerceCurrency {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce currency model instance should use the {@link CommerceCurrency} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce currency model instance should use the <code>CommerceCurrency</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceCurrencyBaseImpl extends CommerceCurrencyModelImpl
 			CommerceCurrencyLocalServiceUtil.updateCommerceCurrency(this);
 		}
 	}
+
 }

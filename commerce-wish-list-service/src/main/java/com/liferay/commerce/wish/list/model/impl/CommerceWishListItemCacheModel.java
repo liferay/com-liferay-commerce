@@ -17,7 +17,6 @@ package com.liferay.commerce.wish.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceWishListItem in entity cache.
  *
  * @author Andrea Di Giorgi
- * @see CommerceWishListItem
  * @generated
  */
 @ProviderType
-public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishListItem>,
-	Externalizable {
+public class CommerceWishListItemCacheModel
+	implements CacheModel<CommerceWishListItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 			return false;
 		}
 
-		CommerceWishListItemCacheModel commerceWishListItemCacheModel = (CommerceWishListItemCacheModel)obj;
+		CommerceWishListItemCacheModel commerceWishListItemCacheModel =
+			(CommerceWishListItemCacheModel)obj;
 
-		if (commerceWishListItemId == commerceWishListItemCacheModel.commerceWishListItemId) {
+		if (commerceWishListItemId ==
+				commerceWishListItemCacheModel.commerceWishListItemId) {
+
 			return true;
 		}
 
@@ -96,9 +98,11 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 
 	@Override
 	public CommerceWishListItem toEntityModel() {
-		CommerceWishListItemImpl commerceWishListItemImpl = new CommerceWishListItemImpl();
+		CommerceWishListItemImpl commerceWishListItemImpl =
+			new CommerceWishListItemImpl();
 
-		commerceWishListItemImpl.setCommerceWishListItemId(commerceWishListItemId);
+		commerceWishListItemImpl.setCommerceWishListItemId(
+			commerceWishListItemId);
 		commerceWishListItemImpl.setGroupId(groupId);
 		commerceWishListItemImpl.setCompanyId(companyId);
 		commerceWishListItemImpl.setUserId(userId);
@@ -168,8 +172,7 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceWishListItemId);
 
 		objectOutput.writeLong(groupId);
@@ -218,4 +221,5 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 	public String CPInstanceUuid;
 	public long CProductId;
 	public String json;
+
 }

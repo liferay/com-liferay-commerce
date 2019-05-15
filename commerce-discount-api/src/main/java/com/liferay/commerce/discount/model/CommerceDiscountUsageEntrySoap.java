@@ -30,11 +30,15 @@ import java.util.List;
  */
 @ProviderType
 public class CommerceDiscountUsageEntrySoap implements Serializable {
+
 	public static CommerceDiscountUsageEntrySoap toSoapModel(
 		CommerceDiscountUsageEntry model) {
-		CommerceDiscountUsageEntrySoap soapModel = new CommerceDiscountUsageEntrySoap();
 
-		soapModel.setCommerceDiscountUsageEntryId(model.getCommerceDiscountUsageEntryId());
+		CommerceDiscountUsageEntrySoap soapModel =
+			new CommerceDiscountUsageEntrySoap();
+
+		soapModel.setCommerceDiscountUsageEntryId(
+			model.getCommerceDiscountUsageEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -50,7 +54,9 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 
 	public static CommerceDiscountUsageEntrySoap[] toSoapModels(
 		CommerceDiscountUsageEntry[] models) {
-		CommerceDiscountUsageEntrySoap[] soapModels = new CommerceDiscountUsageEntrySoap[models.length];
+
+		CommerceDiscountUsageEntrySoap[] soapModels =
+			new CommerceDiscountUsageEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +67,13 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 
 	public static CommerceDiscountUsageEntrySoap[][] toSoapModels(
 		CommerceDiscountUsageEntry[][] models) {
+
 		CommerceDiscountUsageEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceDiscountUsageEntrySoap[models.length][models[0].length];
+			soapModels =
+				new CommerceDiscountUsageEntrySoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceDiscountUsageEntrySoap[0][0];
@@ -79,13 +88,16 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 
 	public static CommerceDiscountUsageEntrySoap[] toSoapModels(
 		List<CommerceDiscountUsageEntry> models) {
-		List<CommerceDiscountUsageEntrySoap> soapModels = new ArrayList<CommerceDiscountUsageEntrySoap>(models.size());
+
+		List<CommerceDiscountUsageEntrySoap> soapModels =
+			new ArrayList<CommerceDiscountUsageEntrySoap>(models.size());
 
 		for (CommerceDiscountUsageEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceDiscountUsageEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceDiscountUsageEntrySoap[soapModels.size()]);
 	}
 
 	public CommerceDiscountUsageEntrySoap() {
@@ -105,6 +117,7 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 
 	public void setCommerceDiscountUsageEntryId(
 		long commerceDiscountUsageEntryId) {
+
 		_commerceDiscountUsageEntryId = commerceDiscountUsageEntryId;
 	}
 
@@ -190,4 +203,5 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 	private long _commerceAccountId;
 	private long _commerceOrderId;
 	private long _commerceDiscountId;
+
 }

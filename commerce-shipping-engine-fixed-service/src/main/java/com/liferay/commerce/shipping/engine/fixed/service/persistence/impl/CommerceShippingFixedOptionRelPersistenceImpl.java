@@ -21,7 +21,6 @@ import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOpt
 import com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl;
 import com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelModelImpl;
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -64,63 +63,34 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShippingFixedOptionRelPersistence
- * @see com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionRelUtil
  * @generated
  */
 @ProviderType
 public class CommerceShippingFixedOptionRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceShippingFixedOptionRel>
 	implements CommerceShippingFixedOptionRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceShippingFixedOptionRelUtil} to access the commerce shipping fixed option rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceShippingFixedOptionRelUtil</code> to access the commerce shipping fixed option rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceShippingFixedOptionRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceShippingMethodId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceShippingMethodId",
-			new String[] { Long.class.getName() },
-			CommerceShippingFixedOptionRelModelImpl.COMMERCESHIPPINGMETHODID_COLUMN_BITMASK |
-			CommerceShippingFixedOptionRelModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCESHIPPINGMETHODID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceShippingMethodId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceShippingFixedOptionRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCommerceShippingMethodId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceShippingMethodId;
+	private FinderPath _finderPathCountByCommerceShippingMethodId;
 
 	/**
 	 * Returns all the commerce shipping fixed option rels where commerceShippingMethodId = &#63;.
@@ -131,15 +101,17 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public List<CommerceShippingFixedOptionRel> findByCommerceShippingMethodId(
 		long commerceShippingMethodId) {
-		return findByCommerceShippingMethodId(commerceShippingMethodId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return findByCommerceShippingMethodId(
+			commerceShippingMethodId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce shipping fixed option rels where commerceShippingMethodId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingMethodId the commerce shipping method ID
@@ -150,15 +122,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public List<CommerceShippingFixedOptionRel> findByCommerceShippingMethodId(
 		long commerceShippingMethodId, int start, int end) {
-		return findByCommerceShippingMethodId(commerceShippingMethodId, start,
-			end, null);
+
+		return findByCommerceShippingMethodId(
+			commerceShippingMethodId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce shipping fixed option rels where commerceShippingMethodId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingMethodId the commerce shipping method ID
@@ -171,15 +144,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	public List<CommerceShippingFixedOptionRel> findByCommerceShippingMethodId(
 		long commerceShippingMethodId, int start, int end,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
-		return findByCommerceShippingMethodId(commerceShippingMethodId, start,
-			end, orderByComparator, true);
+
+		return findByCommerceShippingMethodId(
+			commerceShippingMethodId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce shipping fixed option rels where commerceShippingMethodId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingMethodId the commerce shipping method ID
@@ -194,34 +168,41 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		long commerceShippingMethodId, int start, int end,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID;
-			finderArgs = new Object[] { commerceShippingMethodId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceShippingMethodId;
+			finderArgs = new Object[] {commerceShippingMethodId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceShippingMethodId;
 			finderArgs = new Object[] {
-					commerceShippingMethodId,
-					
-					start, end, orderByComparator
-				};
+				commerceShippingMethodId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceShippingFixedOptionRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : list) {
-					if ((commerceShippingMethodId != commerceShippingFixedOptionRel.getCommerceShippingMethodId())) {
+				for (CommerceShippingFixedOptionRel
+						commerceShippingFixedOptionRel : list) {
+
+					if ((commerceShippingMethodId !=
+							commerceShippingFixedOptionRel.
+								getCommerceShippingMethodId())) {
+
 						list = null;
 
 						break;
@@ -234,8 +215,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -243,15 +224,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -268,16 +250,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				qPos.add(commerceShippingMethodId);
 
 				if (!pagination) {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -307,11 +289,13 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public CommerceShippingFixedOptionRel findByCommerceShippingMethodId_First(
-		long commerceShippingMethodId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+			long commerceShippingMethodId,
+			OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByCommerceShippingMethodId_First(commerceShippingMethodId,
-				orderByComparator);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			fetchByCommerceShippingMethodId_First(
+				commerceShippingMethodId, orderByComparator);
 
 		if (commerceShippingFixedOptionRel != null) {
 			return commerceShippingFixedOptionRel;
@@ -340,8 +324,10 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	public CommerceShippingFixedOptionRel fetchByCommerceShippingMethodId_First(
 		long commerceShippingMethodId,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
-		List<CommerceShippingFixedOptionRel> list = findByCommerceShippingMethodId(commerceShippingMethodId,
-				0, 1, orderByComparator);
+
+		List<CommerceShippingFixedOptionRel> list =
+			findByCommerceShippingMethodId(
+				commerceShippingMethodId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -360,11 +346,13 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public CommerceShippingFixedOptionRel findByCommerceShippingMethodId_Last(
-		long commerceShippingMethodId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+			long commerceShippingMethodId,
+			OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByCommerceShippingMethodId_Last(commerceShippingMethodId,
-				orderByComparator);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			fetchByCommerceShippingMethodId_Last(
+				commerceShippingMethodId, orderByComparator);
 
 		if (commerceShippingFixedOptionRel != null) {
 			return commerceShippingFixedOptionRel;
@@ -393,14 +381,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	public CommerceShippingFixedOptionRel fetchByCommerceShippingMethodId_Last(
 		long commerceShippingMethodId,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
+
 		int count = countByCommerceShippingMethodId(commerceShippingMethodId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceShippingFixedOptionRel> list = findByCommerceShippingMethodId(commerceShippingMethodId,
-				count - 1, count, orderByComparator);
+		List<CommerceShippingFixedOptionRel> list =
+			findByCommerceShippingMethodId(
+				commerceShippingMethodId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -419,28 +409,34 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @throws NoSuchShippingFixedOptionRelException if a commerce shipping fixed option rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel[] findByCommerceShippingMethodId_PrevAndNext(
-		long commerceShippingFixedOptionRelId, long commerceShippingMethodId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+	public CommerceShippingFixedOptionRel[]
+			findByCommerceShippingMethodId_PrevAndNext(
+				long commerceShippingFixedOptionRelId,
+				long commerceShippingMethodId,
+				OrderByComparator<CommerceShippingFixedOptionRel>
+					orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = findByPrimaryKey(commerceShippingFixedOptionRelId);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			findByPrimaryKey(commerceShippingFixedOptionRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceShippingFixedOptionRel[] array = new CommerceShippingFixedOptionRelImpl[3];
+			CommerceShippingFixedOptionRel[] array =
+				new CommerceShippingFixedOptionRelImpl[3];
 
-			array[0] = getByCommerceShippingMethodId_PrevAndNext(session,
-					commerceShippingFixedOptionRel, commerceShippingMethodId,
-					orderByComparator, true);
+			array[0] = getByCommerceShippingMethodId_PrevAndNext(
+				session, commerceShippingFixedOptionRel,
+				commerceShippingMethodId, orderByComparator, true);
 
 			array[1] = commerceShippingFixedOptionRel;
 
-			array[2] = getByCommerceShippingMethodId_PrevAndNext(session,
-					commerceShippingFixedOptionRel, commerceShippingMethodId,
-					orderByComparator, false);
+			array[2] = getByCommerceShippingMethodId_PrevAndNext(
+				session, commerceShippingFixedOptionRel,
+				commerceShippingMethodId, orderByComparator, false);
 
 			return array;
 		}
@@ -452,17 +448,19 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		}
 	}
 
-	protected CommerceShippingFixedOptionRel getByCommerceShippingMethodId_PrevAndNext(
-		Session session,
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel,
-		long commerceShippingMethodId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
-		boolean previous) {
+	protected CommerceShippingFixedOptionRel
+		getByCommerceShippingMethodId_PrevAndNext(
+			Session session,
+			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel,
+			long commerceShippingMethodId,
+			OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -471,10 +469,12 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -544,10 +544,11 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		qPos.add(commerceShippingMethodId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceShippingFixedOptionRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceShippingFixedOptionRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -567,10 +568,14 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @param commerceShippingMethodId the commerce shipping method ID
 	 */
 	@Override
-	public void removeByCommerceShippingMethodId(long commerceShippingMethodId) {
-		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : findByCommerceShippingMethodId(
-				commerceShippingMethodId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null)) {
+	public void removeByCommerceShippingMethodId(
+		long commerceShippingMethodId) {
+
+		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+				findByCommerceShippingMethodId(
+					commerceShippingMethodId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceShippingFixedOptionRel);
 		}
 	}
@@ -583,9 +588,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public int countByCommerceShippingMethodId(long commerceShippingMethodId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCESHIPPINGMETHODID;
+		FinderPath finderPath = _finderPathCountByCommerceShippingMethodId;
 
-		Object[] finderArgs = new Object[] { commerceShippingMethodId };
+		Object[] finderArgs = new Object[] {commerceShippingMethodId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -594,7 +599,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2);
 
 			String sql = query.toString();
 
@@ -626,35 +632,15 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2 =
-		"commerceShippingFixedOptionRel.commerceShippingMethodId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceShippingFixedOptionId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceShippingFixedOptionId",
-			new String[] { Long.class.getName() },
-			CommerceShippingFixedOptionRelModelImpl.COMMERCESHIPPINGFIXEDOPTIONID_COLUMN_BITMASK |
-			CommerceShippingFixedOptionRelModelImpl.COMMERCECOUNTRYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCESHIPPINGFIXEDOPTIONID =
-		new FinderPath(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceShippingFixedOptionId",
-			new String[] { Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCESHIPPINGMETHODID_COMMERCESHIPPINGMETHODID_2 =
+			"commerceShippingFixedOptionRel.commerceShippingMethodId = ?";
+
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceShippingFixedOptionId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId;
+	private FinderPath _finderPathCountByCommerceShippingFixedOptionId;
 
 	/**
 	 * Returns all the commerce shipping fixed option rels where commerceShippingFixedOptionId = &#63;.
@@ -663,17 +649,20 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the matching commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findByCommerceShippingFixedOptionId(
-		long commerceShippingFixedOptionId) {
-		return findByCommerceShippingFixedOptionId(commerceShippingFixedOptionId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceShippingFixedOptionRel>
+		findByCommerceShippingFixedOptionId(
+			long commerceShippingFixedOptionId) {
+
+		return findByCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce shipping fixed option rels where commerceShippingFixedOptionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingFixedOptionId the commerce shipping fixed option ID
@@ -682,17 +671,19 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the range of matching commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findByCommerceShippingFixedOptionId(
-		long commerceShippingFixedOptionId, int start, int end) {
-		return findByCommerceShippingFixedOptionId(commerceShippingFixedOptionId,
-			start, end, null);
+	public List<CommerceShippingFixedOptionRel>
+		findByCommerceShippingFixedOptionId(
+			long commerceShippingFixedOptionId, int start, int end) {
+
+		return findByCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce shipping fixed option rels where commerceShippingFixedOptionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingFixedOptionId the commerce shipping fixed option ID
@@ -702,18 +693,21 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the ordered range of matching commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findByCommerceShippingFixedOptionId(
-		long commerceShippingFixedOptionId, int start, int end,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
-		return findByCommerceShippingFixedOptionId(commerceShippingFixedOptionId,
-			start, end, orderByComparator, true);
+	public List<CommerceShippingFixedOptionRel>
+		findByCommerceShippingFixedOptionId(
+			long commerceShippingFixedOptionId, int start, int end,
+			OrderByComparator<CommerceShippingFixedOptionRel>
+				orderByComparator) {
+
+		return findByCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce shipping fixed option rels where commerceShippingFixedOptionId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceShippingFixedOptionId the commerce shipping fixed option ID
@@ -724,38 +718,46 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the ordered range of matching commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findByCommerceShippingFixedOptionId(
-		long commerceShippingFixedOptionId, int start, int end,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+	public List<CommerceShippingFixedOptionRel>
+		findByCommerceShippingFixedOptionId(
+			long commerceShippingFixedOptionId, int start, int end,
+			OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
+			boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID;
-			finderArgs = new Object[] { commerceShippingFixedOptionId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId;
+			finderArgs = new Object[] {commerceShippingFixedOptionId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceShippingFixedOptionId;
 			finderArgs = new Object[] {
-					commerceShippingFixedOptionId,
-					
-					start, end, orderByComparator
-				};
+				commerceShippingFixedOptionId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceShippingFixedOptionRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : list) {
-					if ((commerceShippingFixedOptionId != commerceShippingFixedOptionRel.getCommerceShippingFixedOptionId())) {
+				for (CommerceShippingFixedOptionRel
+						commerceShippingFixedOptionRel : list) {
+
+					if ((commerceShippingFixedOptionId !=
+							commerceShippingFixedOptionRel.
+								getCommerceShippingFixedOptionId())) {
+
 						list = null;
 
 						break;
@@ -768,8 +770,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -777,15 +779,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -802,16 +805,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				qPos.add(commerceShippingFixedOptionId);
 
 				if (!pagination) {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -840,12 +843,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @throws NoSuchShippingFixedOptionRelException if a matching commerce shipping fixed option rel could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel findByCommerceShippingFixedOptionId_First(
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+	public CommerceShippingFixedOptionRel
+			findByCommerceShippingFixedOptionId_First(
+				long commerceShippingFixedOptionId,
+				OrderByComparator<CommerceShippingFixedOptionRel>
+					orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByCommerceShippingFixedOptionId_First(commerceShippingFixedOptionId,
-				orderByComparator);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			fetchByCommerceShippingFixedOptionId_First(
+				commerceShippingFixedOptionId, orderByComparator);
 
 		if (commerceShippingFixedOptionRel != null) {
 			return commerceShippingFixedOptionRel;
@@ -871,11 +878,15 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the first matching commerce shipping fixed option rel, or <code>null</code> if a matching commerce shipping fixed option rel could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel fetchByCommerceShippingFixedOptionId_First(
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
-		List<CommerceShippingFixedOptionRel> list = findByCommerceShippingFixedOptionId(commerceShippingFixedOptionId,
-				0, 1, orderByComparator);
+	public CommerceShippingFixedOptionRel
+		fetchByCommerceShippingFixedOptionId_First(
+			long commerceShippingFixedOptionId,
+			OrderByComparator<CommerceShippingFixedOptionRel>
+				orderByComparator) {
+
+		List<CommerceShippingFixedOptionRel> list =
+			findByCommerceShippingFixedOptionId(
+				commerceShippingFixedOptionId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -893,12 +904,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @throws NoSuchShippingFixedOptionRelException if a matching commerce shipping fixed option rel could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel findByCommerceShippingFixedOptionId_Last(
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+	public CommerceShippingFixedOptionRel
+			findByCommerceShippingFixedOptionId_Last(
+				long commerceShippingFixedOptionId,
+				OrderByComparator<CommerceShippingFixedOptionRel>
+					orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByCommerceShippingFixedOptionId_Last(commerceShippingFixedOptionId,
-				orderByComparator);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			fetchByCommerceShippingFixedOptionId_Last(
+				commerceShippingFixedOptionId, orderByComparator);
 
 		if (commerceShippingFixedOptionRel != null) {
 			return commerceShippingFixedOptionRel;
@@ -924,17 +939,23 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the last matching commerce shipping fixed option rel, or <code>null</code> if a matching commerce shipping fixed option rel could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel fetchByCommerceShippingFixedOptionId_Last(
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
-		int count = countByCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
+	public CommerceShippingFixedOptionRel
+		fetchByCommerceShippingFixedOptionId_Last(
+			long commerceShippingFixedOptionId,
+			OrderByComparator<CommerceShippingFixedOptionRel>
+				orderByComparator) {
+
+		int count = countByCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceShippingFixedOptionRel> list = findByCommerceShippingFixedOptionId(commerceShippingFixedOptionId,
-				count - 1, count, orderByComparator);
+		List<CommerceShippingFixedOptionRel> list =
+			findByCommerceShippingFixedOptionId(
+				commerceShippingFixedOptionId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -953,29 +974,34 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @throws NoSuchShippingFixedOptionRelException if a commerce shipping fixed option rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceShippingFixedOptionRel[] findByCommerceShippingFixedOptionId_PrevAndNext(
-		long commerceShippingFixedOptionRelId,
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator)
+	public CommerceShippingFixedOptionRel[]
+			findByCommerceShippingFixedOptionId_PrevAndNext(
+				long commerceShippingFixedOptionRelId,
+				long commerceShippingFixedOptionId,
+				OrderByComparator<CommerceShippingFixedOptionRel>
+					orderByComparator)
 		throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = findByPrimaryKey(commerceShippingFixedOptionRelId);
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			findByPrimaryKey(commerceShippingFixedOptionRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceShippingFixedOptionRel[] array = new CommerceShippingFixedOptionRelImpl[3];
+			CommerceShippingFixedOptionRel[] array =
+				new CommerceShippingFixedOptionRelImpl[3];
 
-			array[0] = getByCommerceShippingFixedOptionId_PrevAndNext(session,
-					commerceShippingFixedOptionRel,
-					commerceShippingFixedOptionId, orderByComparator, true);
+			array[0] = getByCommerceShippingFixedOptionId_PrevAndNext(
+				session, commerceShippingFixedOptionRel,
+				commerceShippingFixedOptionId, orderByComparator, true);
 
 			array[1] = commerceShippingFixedOptionRel;
 
-			array[2] = getByCommerceShippingFixedOptionId_PrevAndNext(session,
-					commerceShippingFixedOptionRel,
-					commerceShippingFixedOptionId, orderByComparator, false);
+			array[2] = getByCommerceShippingFixedOptionId_PrevAndNext(
+				session, commerceShippingFixedOptionRel,
+				commerceShippingFixedOptionId, orderByComparator, false);
 
 			return array;
 		}
@@ -987,17 +1013,19 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		}
 	}
 
-	protected CommerceShippingFixedOptionRel getByCommerceShippingFixedOptionId_PrevAndNext(
-		Session session,
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel,
-		long commerceShippingFixedOptionId,
-		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
-		boolean previous) {
+	protected CommerceShippingFixedOptionRel
+		getByCommerceShippingFixedOptionId_PrevAndNext(
+			Session session,
+			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel,
+			long commerceShippingFixedOptionId,
+			OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1006,10 +1034,12 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1079,10 +1109,11 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		qPos.add(commerceShippingFixedOptionId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceShippingFixedOptionRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceShippingFixedOptionRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1104,9 +1135,12 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public void removeByCommerceShippingFixedOptionId(
 		long commerceShippingFixedOptionId) {
-		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : findByCommerceShippingFixedOptionId(
-				commerceShippingFixedOptionId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+
+		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+				findByCommerceShippingFixedOptionId(
+					commerceShippingFixedOptionId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceShippingFixedOptionRel);
 		}
 	}
@@ -1120,9 +1154,10 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public int countByCommerceShippingFixedOptionId(
 		long commerceShippingFixedOptionId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCESHIPPINGFIXEDOPTIONID;
 
-		Object[] finderArgs = new Object[] { commerceShippingFixedOptionId };
+		FinderPath finderPath = _finderPathCountByCommerceShippingFixedOptionId;
+
+		Object[] finderArgs = new Object[] {commerceShippingFixedOptionId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1131,7 +1166,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2);
 
 			String sql = query.toString();
 
@@ -1163,22 +1199,23 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2 =
-		"commerceShippingFixedOptionRel.commerceShippingFixedOptionId = ?";
+	private static final String
+		_FINDER_COLUMN_COMMERCESHIPPINGFIXEDOPTIONID_COMMERCESHIPPINGFIXEDOPTIONID_2 =
+			"commerceShippingFixedOptionRel.commerceShippingFixedOptionId = ?";
 
 	public CommerceShippingFixedOptionRelPersistenceImpl() {
 		setModelClass(CommerceShippingFixedOptionRel.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceShippingFixedOptionRelId", "CShippingFixedOptionRelId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceShippingFixedOptionRelId",
-				"CShippingFixedOptionRelId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -1197,7 +1234,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel) {
-		entityCache.putResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingFixedOptionRelImpl.class,
 			commerceShippingFixedOptionRel.getPrimaryKey(),
 			commerceShippingFixedOptionRel);
@@ -1213,11 +1252,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceShippingFixedOptionRel> commerceShippingFixedOptionRels) {
-		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : commerceShippingFixedOptionRels) {
+
+		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+				commerceShippingFixedOptionRels) {
+
 			if (entityCache.getResult(
-						CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceShippingFixedOptionRelImpl.class,
-						commerceShippingFixedOptionRel.getPrimaryKey()) == null) {
+					CommerceShippingFixedOptionRelModelImpl.
+						ENTITY_CACHE_ENABLED,
+					CommerceShippingFixedOptionRelImpl.class,
+					commerceShippingFixedOptionRel.getPrimaryKey()) == null) {
+
 				cacheResult(commerceShippingFixedOptionRel);
 			}
 			else {
@@ -1230,7 +1274,7 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Clears the cache for all commerce shipping fixed option rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1246,13 +1290,15 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Clears the cache for the commerce shipping fixed option rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel) {
-		entityCache.removeResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingFixedOptionRelImpl.class,
 			commerceShippingFixedOptionRel.getPrimaryKey());
 
@@ -1263,11 +1309,15 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public void clearCache(
 		List<CommerceShippingFixedOptionRel> commerceShippingFixedOptionRels) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : commerceShippingFixedOptionRels) {
-			entityCache.removeResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+				commerceShippingFixedOptionRels) {
+
+			entityCache.removeResult(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceShippingFixedOptionRelImpl.class,
 				commerceShippingFixedOptionRel.getPrimaryKey());
 		}
@@ -1282,12 +1332,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public CommerceShippingFixedOptionRel create(
 		long commerceShippingFixedOptionRelId) {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = new CommerceShippingFixedOptionRelImpl();
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			new CommerceShippingFixedOptionRelImpl();
 
 		commerceShippingFixedOptionRel.setNew(true);
-		commerceShippingFixedOptionRel.setPrimaryKey(commerceShippingFixedOptionRelId);
+		commerceShippingFixedOptionRel.setPrimaryKey(
+			commerceShippingFixedOptionRelId);
 
-		commerceShippingFixedOptionRel.setCompanyId(companyProvider.getCompanyId());
+		commerceShippingFixedOptionRel.setCompanyId(
+			companyProvider.getCompanyId());
 
 		return commerceShippingFixedOptionRel;
 	}
@@ -1301,8 +1355,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public CommerceShippingFixedOptionRel remove(
-		long commerceShippingFixedOptionRelId)
+			long commerceShippingFixedOptionRelId)
 		throws NoSuchShippingFixedOptionRelException {
+
 		return remove((Serializable)commerceShippingFixedOptionRelId);
 	}
 
@@ -1316,21 +1371,23 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public CommerceShippingFixedOptionRel remove(Serializable primaryKey)
 		throws NoSuchShippingFixedOptionRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = (CommerceShippingFixedOptionRel)session.get(CommerceShippingFixedOptionRelImpl.class,
-					primaryKey);
+			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+				(CommerceShippingFixedOptionRel)session.get(
+					CommerceShippingFixedOptionRelImpl.class, primaryKey);
 
 			if (commerceShippingFixedOptionRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchShippingFixedOptionRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchShippingFixedOptionRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceShippingFixedOptionRel);
@@ -1349,13 +1406,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	protected CommerceShippingFixedOptionRel removeImpl(
 		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceShippingFixedOptionRel)) {
-				commerceShippingFixedOptionRel = (CommerceShippingFixedOptionRel)session.get(CommerceShippingFixedOptionRelImpl.class,
+				commerceShippingFixedOptionRel =
+					(CommerceShippingFixedOptionRel)session.get(
+						CommerceShippingFixedOptionRelImpl.class,
 						commerceShippingFixedOptionRel.getPrimaryKeyObj());
 			}
 
@@ -1380,29 +1440,37 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public CommerceShippingFixedOptionRel updateImpl(
 		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel) {
+
 		boolean isNew = commerceShippingFixedOptionRel.isNew();
 
-		if (!(commerceShippingFixedOptionRel instanceof CommerceShippingFixedOptionRelModelImpl)) {
+		if (!(commerceShippingFixedOptionRel instanceof
+				CommerceShippingFixedOptionRelModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(
-						commerceShippingFixedOptionRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceShippingFixedOptionRel);
+					commerceShippingFixedOptionRel.getClass())) {
+
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceShippingFixedOptionRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceShippingFixedOptionRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceShippingFixedOptionRel implementation " +
-				commerceShippingFixedOptionRel.getClass());
+					commerceShippingFixedOptionRel.getClass());
 		}
 
-		CommerceShippingFixedOptionRelModelImpl commerceShippingFixedOptionRelModelImpl =
-			(CommerceShippingFixedOptionRelModelImpl)commerceShippingFixedOptionRel;
+		CommerceShippingFixedOptionRelModelImpl
+			commerceShippingFixedOptionRelModelImpl =
+				(CommerceShippingFixedOptionRelModelImpl)
+					commerceShippingFixedOptionRel;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1411,8 +1479,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				commerceShippingFixedOptionRel.setCreateDate(now);
 			}
 			else {
-				commerceShippingFixedOptionRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceShippingFixedOptionRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1421,8 +1489,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				commerceShippingFixedOptionRel.setModifiedDate(now);
 			}
 			else {
-				commerceShippingFixedOptionRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceShippingFixedOptionRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1437,7 +1505,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				commerceShippingFixedOptionRel.setNew(false);
 			}
 			else {
-				commerceShippingFixedOptionRel = (CommerceShippingFixedOptionRel)session.merge(commerceShippingFixedOptionRel);
+				commerceShippingFixedOptionRel =
+					(CommerceShippingFixedOptionRel)session.merge(
+						commerceShippingFixedOptionRel);
 			}
 		}
 		catch (Exception e) {
@@ -1452,76 +1522,91 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		if (!CommerceShippingFixedOptionRelModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
-					commerceShippingFixedOptionRelModelImpl.getCommerceShippingMethodId()
-				};
+				commerceShippingFixedOptionRelModelImpl.
+					getCommerceShippingMethodId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGMETHODID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID,
+			finderCache.removeResult(
+				_finderPathCountByCommerceShippingMethodId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceShippingMethodId,
 				args);
 
 			args = new Object[] {
-					commerceShippingFixedOptionRelModelImpl.getCommerceShippingFixedOptionId()
-				};
+				commerceShippingFixedOptionRelModelImpl.
+					getCommerceShippingFixedOptionId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGFIXEDOPTIONID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID,
+			finderCache.removeResult(
+				_finderPathCountByCommerceShippingFixedOptionId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId,
 				args);
 
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((commerceShippingFixedOptionRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceShippingFixedOptionRelModelImpl.getOriginalCommerceShippingMethodId()
-					};
+				 _finderPathWithoutPaginationFindByCommerceShippingMethodId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGMETHODID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID,
+				Object[] args = new Object[] {
+					commerceShippingFixedOptionRelModelImpl.
+						getOriginalCommerceShippingMethodId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceShippingMethodId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceShippingMethodId,
 					args);
 
 				args = new Object[] {
-						commerceShippingFixedOptionRelModelImpl.getCommerceShippingMethodId()
-					};
+					commerceShippingFixedOptionRelModelImpl.
+						getCommerceShippingMethodId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGMETHODID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGMETHODID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceShippingMethodId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceShippingMethodId,
 					args);
 			}
 
 			if ((commerceShippingFixedOptionRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceShippingFixedOptionRelModelImpl.getOriginalCommerceShippingFixedOptionId()
-					};
+				 _finderPathWithoutPaginationFindByCommerceShippingFixedOptionId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGFIXEDOPTIONID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID,
+				Object[] args = new Object[] {
+					commerceShippingFixedOptionRelModelImpl.
+						getOriginalCommerceShippingFixedOptionId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceShippingFixedOptionId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId,
 					args);
 
 				args = new Object[] {
-						commerceShippingFixedOptionRelModelImpl.getCommerceShippingFixedOptionId()
-					};
+					commerceShippingFixedOptionRelModelImpl.
+						getCommerceShippingFixedOptionId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCESHIPPINGFIXEDOPTIONID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESHIPPINGFIXEDOPTIONID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceShippingFixedOptionId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId,
 					args);
 			}
 		}
 
-		entityCache.putResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceShippingFixedOptionRelImpl.class,
 			commerceShippingFixedOptionRel.getPrimaryKey(),
 			commerceShippingFixedOptionRel, false);
@@ -1532,7 +1617,7 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce shipping fixed option rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce shipping fixed option rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce shipping fixed option rel
 	 * @return the commerce shipping fixed option rel
@@ -1540,23 +1625,26 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public CommerceShippingFixedOptionRel findByPrimaryKey(
-		Serializable primaryKey) throws NoSuchShippingFixedOptionRelException {
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByPrimaryKey(primaryKey);
+			Serializable primaryKey)
+		throws NoSuchShippingFixedOptionRelException {
+
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commerceShippingFixedOptionRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchShippingFixedOptionRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchShippingFixedOptionRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceShippingFixedOptionRel;
 	}
 
 	/**
-	 * Returns the commerce shipping fixed option rel with the primary key or throws a {@link NoSuchShippingFixedOptionRelException} if it could not be found.
+	 * Returns the commerce shipping fixed option rel with the primary key or throws a <code>NoSuchShippingFixedOptionRelException</code> if it could not be found.
 	 *
 	 * @param commerceShippingFixedOptionRelId the primary key of the commerce shipping fixed option rel
 	 * @return the commerce shipping fixed option rel
@@ -1564,8 +1652,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public CommerceShippingFixedOptionRel findByPrimaryKey(
-		long commerceShippingFixedOptionRelId)
+			long commerceShippingFixedOptionRelId)
 		throws NoSuchShippingFixedOptionRelException {
+
 		return findByPrimaryKey((Serializable)commerceShippingFixedOptionRelId);
 	}
 
@@ -1578,14 +1667,17 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public CommerceShippingFixedOptionRel fetchByPrimaryKey(
 		Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceShippingFixedOptionRelImpl.class, primaryKey);
+
+		Serializable serializable = entityCache.getResult(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = (CommerceShippingFixedOptionRel)serializable;
+		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+			(CommerceShippingFixedOptionRel)serializable;
 
 		if (commerceShippingFixedOptionRel == null) {
 			Session session = null;
@@ -1593,20 +1685,25 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceShippingFixedOptionRel = (CommerceShippingFixedOptionRel)session.get(CommerceShippingFixedOptionRelImpl.class,
-						primaryKey);
+				commerceShippingFixedOptionRel =
+					(CommerceShippingFixedOptionRel)session.get(
+						CommerceShippingFixedOptionRelImpl.class, primaryKey);
 
 				if (commerceShippingFixedOptionRel != null) {
 					cacheResult(commerceShippingFixedOptionRel);
 				}
 				else {
-					entityCache.putResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceShippingFixedOptionRelModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceShippingFixedOptionRelImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceShippingFixedOptionRelModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceShippingFixedOptionRelImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1628,24 +1725,29 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	@Override
 	public CommerceShippingFixedOptionRel fetchByPrimaryKey(
 		long commerceShippingFixedOptionRelId) {
-		return fetchByPrimaryKey((Serializable)commerceShippingFixedOptionRelId);
+
+		return fetchByPrimaryKey(
+			(Serializable)commerceShippingFixedOptionRelId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceShippingFixedOptionRel> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceShippingFixedOptionRel> map = new HashMap<Serializable, CommerceShippingFixedOptionRel>();
+		Map<Serializable, CommerceShippingFixedOptionRel> map =
+			new HashMap<Serializable, CommerceShippingFixedOptionRel>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel = fetchByPrimaryKey(primaryKey);
+			CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceShippingFixedOptionRel != null) {
 				map.put(primaryKey, commerceShippingFixedOptionRel);
@@ -1657,8 +1759,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceShippingFixedOptionRelImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1669,7 +1772,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey,
+					map.put(
+						primaryKey,
 						(CommerceShippingFixedOptionRel)serializable);
 				}
 			}
@@ -1679,8 +1783,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE_PKS_IN);
 
@@ -1703,17 +1807,23 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : (List<CommerceShippingFixedOptionRel>)q.list()) {
-				map.put(commerceShippingFixedOptionRel.getPrimaryKeyObj(),
+			for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+					(List<CommerceShippingFixedOptionRel>)q.list()) {
+
+				map.put(
+					commerceShippingFixedOptionRel.getPrimaryKeyObj(),
 					commerceShippingFixedOptionRel);
 
 				cacheResult(commerceShippingFixedOptionRel);
 
-				uncachedPrimaryKeys.remove(commerceShippingFixedOptionRel.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceShippingFixedOptionRel.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceShippingFixedOptionRelModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceShippingFixedOptionRelImpl.class, primaryKey,
 					nullModel);
 			}
@@ -1742,7 +1852,7 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Returns a range of all the commerce shipping fixed option rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
@@ -1758,7 +1868,7 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Returns an ordered range of all the commerce shipping fixed option rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
@@ -1767,8 +1877,10 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the ordered range of commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findAll(int start, int end,
+	public List<CommerceShippingFixedOptionRel> findAll(
+		int start, int end,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1776,7 +1888,7 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Returns an ordered range of all the commerce shipping fixed option rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceShippingFixedOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingFixedOptionRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
@@ -1786,29 +1898,32 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * @return the ordered range of commerce shipping fixed option rels
 	 */
 	@Override
-	public List<CommerceShippingFixedOptionRel> findAll(int start, int end,
+	public List<CommerceShippingFixedOptionRel> findAll(
+		int start, int end,
 		OrderByComparator<CommerceShippingFixedOptionRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceShippingFixedOptionRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceShippingFixedOptionRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1816,13 +1931,13 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1830,7 +1945,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				sql = _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL;
 
 				if (pagination) {
-					sql = sql.concat(CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceShippingFixedOptionRelModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1842,16 +1958,16 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceShippingFixedOptionRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1877,7 +1993,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel : findAll()) {
+		for (CommerceShippingFixedOptionRel commerceShippingFixedOptionRel :
+				findAll()) {
+
 			remove(commerceShippingFixedOptionRel);
 		}
 	}
@@ -1889,8 +2007,8 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1898,16 +2016,17 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1933,10 +2052,93 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 	 * Initializes the commerce shipping fixed option rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceShippingMethodId =
+			new FinderPath(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceShippingMethodId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceShippingMethodId =
+			new FinderPath(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceShippingMethodId",
+				new String[] {Long.class.getName()},
+				CommerceShippingFixedOptionRelModelImpl.
+					COMMERCESHIPPINGMETHODID_COLUMN_BITMASK |
+				CommerceShippingFixedOptionRelModelImpl.
+					COMMERCECOUNTRYID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceShippingMethodId = new FinderPath(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceShippingMethodId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceShippingFixedOptionId =
+			new FinderPath(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceShippingFixedOptionId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceShippingFixedOptionId =
+			new FinderPath(
+				CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+				CommerceShippingFixedOptionRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceShippingFixedOptionId",
+				new String[] {Long.class.getName()},
+				CommerceShippingFixedOptionRelModelImpl.
+					COMMERCESHIPPINGFIXEDOPTIONID_COLUMN_BITMASK |
+				CommerceShippingFixedOptionRelModelImpl.
+					COMMERCECOUNTRYID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceShippingFixedOptionId = new FinderPath(
+			CommerceShippingFixedOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceShippingFixedOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceShippingFixedOptionId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
-		entityCache.removeCache(CommerceShippingFixedOptionRelImpl.class.getName());
+		entityCache.removeCache(
+			CommerceShippingFixedOptionRelImpl.class.getName());
 		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -1944,22 +2146,44 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL = "SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel";
-	private static final String _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE_PKS_IN =
-		"SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE CShippingFixedOptionRelId IN (";
-	private static final String _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE =
-		"SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE ";
-	private static final String _SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL = "SELECT COUNT(commerceShippingFixedOptionRel) FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel";
-	private static final String _SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE = "SELECT COUNT(commerceShippingFixedOptionRel) FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceShippingFixedOptionRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceShippingFixedOptionRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceShippingFixedOptionRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceShippingFixedOptionRelPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"commerceShippingFixedOptionRelId"
-			});
+
+	private static final String _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL =
+		"SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel";
+
+	private static final String
+		_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE_PKS_IN =
+			"SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE CShippingFixedOptionRelId IN (";
+
+	private static final String
+		_SQL_SELECT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE =
+			"SELECT commerceShippingFixedOptionRel FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL =
+		"SELECT COUNT(commerceShippingFixedOptionRel) FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel";
+
+	private static final String
+		_SQL_COUNT_COMMERCESHIPPINGFIXEDOPTIONREL_WHERE =
+			"SELECT COUNT(commerceShippingFixedOptionRel) FROM CommerceShippingFixedOptionRel commerceShippingFixedOptionRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceShippingFixedOptionRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceShippingFixedOptionRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceShippingFixedOptionRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceShippingFixedOptionRelPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"commerceShippingFixedOptionRelId"});
+
 }

@@ -35,18 +35,22 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddress
 public abstract class CommerceTaxFixedRateAddressRelBaseImpl
 	extends CommerceTaxFixedRateAddressRelModelImpl
 	implements CommerceTaxFixedRateAddressRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate address rel model instance should use the {@link CommerceTaxFixedRateAddressRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate address rel model instance should use the <code>CommerceTaxFixedRateAddressRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceTaxFixedRateAddressRelLocalServiceUtil.addCommerceTaxFixedRateAddressRel(this);
+			CommerceTaxFixedRateAddressRelLocalServiceUtil.
+				addCommerceTaxFixedRateAddressRel(this);
 		}
 		else {
-			CommerceTaxFixedRateAddressRelLocalServiceUtil.updateCommerceTaxFixedRateAddressRel(this);
+			CommerceTaxFixedRateAddressRelLocalServiceUtil.
+				updateCommerceTaxFixedRateAddressRel(this);
 		}
 	}
+
 }

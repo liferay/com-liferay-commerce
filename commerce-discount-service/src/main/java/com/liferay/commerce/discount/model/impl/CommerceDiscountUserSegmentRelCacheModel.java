@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceDiscountUserSegmentRel in entity cache.
  *
  * @author Marco Leo
- * @see CommerceDiscountUserSegmentRel
  * @generated
  */
 @ProviderType
-public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<CommerceDiscountUserSegmentRel>,
-	Externalizable {
+public class CommerceDiscountUserSegmentRelCacheModel
+	implements CacheModel<CommerceDiscountUserSegmentRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<Comm
 			return false;
 		}
 
-		CommerceDiscountUserSegmentRelCacheModel commerceDiscountUserSegmentRelCacheModel =
-			(CommerceDiscountUserSegmentRelCacheModel)obj;
+		CommerceDiscountUserSegmentRelCacheModel
+			commerceDiscountUserSegmentRelCacheModel =
+				(CommerceDiscountUserSegmentRelCacheModel)obj;
 
-		if (commerceDiscountUserSegmentRelId == commerceDiscountUserSegmentRelCacheModel.commerceDiscountUserSegmentRelId) {
+		if (commerceDiscountUserSegmentRelId ==
+				commerceDiscountUserSegmentRelCacheModel.
+					commerceDiscountUserSegmentRelId) {
+
 			return true;
 		}
 
@@ -93,9 +96,11 @@ public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<Comm
 
 	@Override
 	public CommerceDiscountUserSegmentRel toEntityModel() {
-		CommerceDiscountUserSegmentRelImpl commerceDiscountUserSegmentRelImpl = new CommerceDiscountUserSegmentRelImpl();
+		CommerceDiscountUserSegmentRelImpl commerceDiscountUserSegmentRelImpl =
+			new CommerceDiscountUserSegmentRelImpl();
 
-		commerceDiscountUserSegmentRelImpl.setCommerceDiscountUserSegmentRelId(commerceDiscountUserSegmentRelId);
+		commerceDiscountUserSegmentRelImpl.setCommerceDiscountUserSegmentRelId(
+			commerceDiscountUserSegmentRelId);
 		commerceDiscountUserSegmentRelImpl.setGroupId(groupId);
 		commerceDiscountUserSegmentRelImpl.setCompanyId(companyId);
 		commerceDiscountUserSegmentRelImpl.setUserId(userId);
@@ -111,20 +116,22 @@ public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<Comm
 			commerceDiscountUserSegmentRelImpl.setCreateDate(null);
 		}
 		else {
-			commerceDiscountUserSegmentRelImpl.setCreateDate(new Date(
-					createDate));
+			commerceDiscountUserSegmentRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceDiscountUserSegmentRelImpl.setModifiedDate(null);
 		}
 		else {
-			commerceDiscountUserSegmentRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceDiscountUserSegmentRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceDiscountUserSegmentRelImpl.setCommerceDiscountId(commerceDiscountId);
-		commerceDiscountUserSegmentRelImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		commerceDiscountUserSegmentRelImpl.setCommerceDiscountId(
+			commerceDiscountId);
+		commerceDiscountUserSegmentRelImpl.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 
 		commerceDiscountUserSegmentRelImpl.resetOriginalValues();
 
@@ -150,8 +157,7 @@ public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<Comm
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceDiscountUserSegmentRelId);
 
 		objectOutput.writeLong(groupId);
@@ -184,4 +190,5 @@ public class CommerceDiscountUserSegmentRelCacheModel implements CacheModel<Comm
 	public long modifiedDate;
 	public long commerceDiscountId;
 	public long commerceUserSegmentEntryId;
+
 }

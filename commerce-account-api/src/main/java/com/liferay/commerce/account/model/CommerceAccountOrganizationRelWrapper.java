@@ -17,7 +17,6 @@ package com.liferay.commerce.account.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,9 +39,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceAccountOrganizationRelWrapper
 	implements CommerceAccountOrganizationRel,
-		ModelWrapper<CommerceAccountOrganizationRel> {
+			   ModelWrapper<CommerceAccountOrganizationRel> {
+
 	public CommerceAccountOrganizationRelWrapper(
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
+
 		_commerceAccountOrganizationRel = commerceAccountOrganizationRel;
 	}
 
@@ -118,40 +119,44 @@ public class CommerceAccountOrganizationRelWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceAccountOrganizationRelWrapper((CommerceAccountOrganizationRel)_commerceAccountOrganizationRel.clone());
+		return new CommerceAccountOrganizationRelWrapper(
+			(CommerceAccountOrganizationRel)
+				_commerceAccountOrganizationRel.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
-		return _commerceAccountOrganizationRel.compareTo(commerceAccountOrganizationRel);
+
+		return _commerceAccountOrganizationRel.compareTo(
+			commerceAccountOrganizationRel);
 	}
 
 	/**
-	* Returns the commerce account ID of this commerce account organization rel.
-	*
-	* @return the commerce account ID of this commerce account organization rel
-	*/
+	 * Returns the commerce account ID of this commerce account organization rel.
+	 *
+	 * @return the commerce account ID of this commerce account organization rel
+	 */
 	@Override
 	public long getCommerceAccountId() {
 		return _commerceAccountOrganizationRel.getCommerceAccountId();
 	}
 
 	/**
-	* Returns the company ID of this commerce account organization rel.
-	*
-	* @return the company ID of this commerce account organization rel
-	*/
+	 * Returns the company ID of this commerce account organization rel.
+	 *
+	 * @return the company ID of this commerce account organization rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceAccountOrganizationRel.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce account organization rel.
-	*
-	* @return the create date of this commerce account organization rel
-	*/
+	 * Returns the create date of this commerce account organization rel.
+	 *
+	 * @return the create date of this commerce account organization rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceAccountOrganizationRel.getCreateDate();
@@ -163,10 +168,10 @@ public class CommerceAccountOrganizationRelWrapper
 	}
 
 	/**
-	* Returns the modified date of this commerce account organization rel.
-	*
-	* @return the modified date of this commerce account organization rel
-	*/
+	 * Returns the modified date of this commerce account organization rel.
+	 *
+	 * @return the modified date of this commerce account organization rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceAccountOrganizationRel.getModifiedDate();
@@ -175,26 +180,29 @@ public class CommerceAccountOrganizationRelWrapper
 	@Override
 	public com.liferay.portal.kernel.model.Organization getOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceAccountOrganizationRel.getOrganization();
 	}
 
 	/**
-	* Returns the organization ID of this commerce account organization rel.
-	*
-	* @return the organization ID of this commerce account organization rel
-	*/
+	 * Returns the organization ID of this commerce account organization rel.
+	 *
+	 * @return the organization ID of this commerce account organization rel
+	 */
 	@Override
 	public long getOrganizationId() {
 		return _commerceAccountOrganizationRel.getOrganizationId();
 	}
 
 	/**
-	* Returns the primary key of this commerce account organization rel.
-	*
-	* @return the primary key of this commerce account organization rel
-	*/
+	 * Returns the primary key of this commerce account organization rel.
+	 *
+	 * @return the primary key of this commerce account organization rel
+	 */
 	@Override
-	public com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK getPrimaryKey() {
+	public com.liferay.commerce.account.service.persistence.
+		CommerceAccountOrganizationRelPK getPrimaryKey() {
+
 		return _commerceAccountOrganizationRel.getPrimaryKey();
 	}
 
@@ -204,30 +212,30 @@ public class CommerceAccountOrganizationRelWrapper
 	}
 
 	/**
-	* Returns the user ID of this commerce account organization rel.
-	*
-	* @return the user ID of this commerce account organization rel
-	*/
+	 * Returns the user ID of this commerce account organization rel.
+	 *
+	 * @return the user ID of this commerce account organization rel
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceAccountOrganizationRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce account organization rel.
-	*
-	* @return the user name of this commerce account organization rel
-	*/
+	 * Returns the user name of this commerce account organization rel.
+	 *
+	 * @return the user name of this commerce account organization rel
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceAccountOrganizationRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce account organization rel.
-	*
-	* @return the user uuid of this commerce account organization rel
-	*/
+	 * Returns the user uuid of this commerce account organization rel.
+	 *
+	 * @return the user uuid of this commerce account organization rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceAccountOrganizationRel.getUserUuid();
@@ -264,30 +272,30 @@ public class CommerceAccountOrganizationRelWrapper
 	}
 
 	/**
-	* Sets the commerce account ID of this commerce account organization rel.
-	*
-	* @param commerceAccountId the commerce account ID of this commerce account organization rel
-	*/
+	 * Sets the commerce account ID of this commerce account organization rel.
+	 *
+	 * @param commerceAccountId the commerce account ID of this commerce account organization rel
+	 */
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commerceAccountOrganizationRel.setCommerceAccountId(commerceAccountId);
 	}
 
 	/**
-	* Sets the company ID of this commerce account organization rel.
-	*
-	* @param companyId the company ID of this commerce account organization rel
-	*/
+	 * Sets the company ID of this commerce account organization rel.
+	 *
+	 * @param companyId the company ID of this commerce account organization rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceAccountOrganizationRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce account organization rel.
-	*
-	* @param createDate the create date of this commerce account organization rel
-	*/
+	 * Sets the create date of this commerce account organization rel.
+	 *
+	 * @param createDate the create date of this commerce account organization rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceAccountOrganizationRel.setCreateDate(createDate);
@@ -296,24 +304,27 @@ public class CommerceAccountOrganizationRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceAccountOrganizationRel.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_commerceAccountOrganizationRel.setExpandoBridgeAttributes(expandoBridge);
+		_commerceAccountOrganizationRel.setExpandoBridgeAttributes(
+			expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceAccountOrganizationRel.setExpandoBridgeAttributes(serviceContext);
+		_commerceAccountOrganizationRel.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the modified date of this commerce account organization rel.
-	*
-	* @param modifiedDate the modified date of this commerce account organization rel
-	*/
+	 * Sets the modified date of this commerce account organization rel.
+	 *
+	 * @param modifiedDate the modified date of this commerce account organization rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceAccountOrganizationRel.setModifiedDate(modifiedDate);
@@ -325,23 +336,25 @@ public class CommerceAccountOrganizationRelWrapper
 	}
 
 	/**
-	* Sets the organization ID of this commerce account organization rel.
-	*
-	* @param organizationId the organization ID of this commerce account organization rel
-	*/
+	 * Sets the organization ID of this commerce account organization rel.
+	 *
+	 * @param organizationId the organization ID of this commerce account organization rel
+	 */
 	@Override
 	public void setOrganizationId(long organizationId) {
 		_commerceAccountOrganizationRel.setOrganizationId(organizationId);
 	}
 
 	/**
-	* Sets the primary key of this commerce account organization rel.
-	*
-	* @param primaryKey the primary key of this commerce account organization rel
-	*/
+	 * Sets the primary key of this commerce account organization rel.
+	 *
+	 * @param primaryKey the primary key of this commerce account organization rel
+	 */
 	@Override
 	public void setPrimaryKey(
-		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK primaryKey) {
+		com.liferay.commerce.account.service.persistence.
+			CommerceAccountOrganizationRelPK primaryKey) {
+
 		_commerceAccountOrganizationRel.setPrimaryKey(primaryKey);
 	}
 
@@ -351,43 +364,46 @@ public class CommerceAccountOrganizationRelWrapper
 	}
 
 	/**
-	* Sets the user ID of this commerce account organization rel.
-	*
-	* @param userId the user ID of this commerce account organization rel
-	*/
+	 * Sets the user ID of this commerce account organization rel.
+	 *
+	 * @param userId the user ID of this commerce account organization rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceAccountOrganizationRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce account organization rel.
-	*
-	* @param userName the user name of this commerce account organization rel
-	*/
+	 * Sets the user name of this commerce account organization rel.
+	 *
+	 * @param userName the user name of this commerce account organization rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceAccountOrganizationRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce account organization rel.
-	*
-	* @param userUuid the user uuid of this commerce account organization rel
-	*/
+	 * Sets the user uuid of this commerce account organization rel.
+	 *
+	 * @param userUuid the user uuid of this commerce account organization rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceAccountOrganizationRel.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceAccountOrganizationRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceAccountOrganizationRel> toCacheModel() {
+
 		return _commerceAccountOrganizationRel.toCacheModel();
 	}
 
 	@Override
 	public CommerceAccountOrganizationRel toEscapedModel() {
-		return new CommerceAccountOrganizationRelWrapper(_commerceAccountOrganizationRel.toEscapedModel());
+		return new CommerceAccountOrganizationRelWrapper(
+			_commerceAccountOrganizationRel.toEscapedModel());
 	}
 
 	@Override
@@ -397,7 +413,8 @@ public class CommerceAccountOrganizationRelWrapper
 
 	@Override
 	public CommerceAccountOrganizationRel toUnescapedModel() {
-		return new CommerceAccountOrganizationRelWrapper(_commerceAccountOrganizationRel.toUnescapedModel());
+		return new CommerceAccountOrganizationRelWrapper(
+			_commerceAccountOrganizationRel.toUnescapedModel());
 	}
 
 	@Override
@@ -415,11 +432,15 @@ public class CommerceAccountOrganizationRelWrapper
 			return false;
 		}
 
-		CommerceAccountOrganizationRelWrapper commerceAccountOrganizationRelWrapper =
-			(CommerceAccountOrganizationRelWrapper)obj;
+		CommerceAccountOrganizationRelWrapper
+			commerceAccountOrganizationRelWrapper =
+				(CommerceAccountOrganizationRelWrapper)obj;
 
-		if (Objects.equals(_commerceAccountOrganizationRel,
-					commerceAccountOrganizationRelWrapper._commerceAccountOrganizationRel)) {
+		if (Objects.equals(
+				_commerceAccountOrganizationRel,
+				commerceAccountOrganizationRelWrapper.
+					_commerceAccountOrganizationRel)) {
+
 			return true;
 		}
 
@@ -446,5 +467,7 @@ public class CommerceAccountOrganizationRelWrapper
 		_commerceAccountOrganizationRel.resetOriginalValues();
 	}
 
-	private final CommerceAccountOrganizationRel _commerceAccountOrganizationRel;
+	private final CommerceAccountOrganizationRel
+		_commerceAccountOrganizationRel;
+
 }

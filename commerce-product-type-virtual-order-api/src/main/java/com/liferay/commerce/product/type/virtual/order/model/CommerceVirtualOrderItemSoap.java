@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.type.virtual.order.service.http.CommerceVirtualOrderItemServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.product.type.virtual.order.service.http.CommerceVirtualOrderItemServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceVirtualOrderItemSoap implements Serializable {
+
 	public static CommerceVirtualOrderItemSoap toSoapModel(
 		CommerceVirtualOrderItem model) {
-		CommerceVirtualOrderItemSoap soapModel = new CommerceVirtualOrderItemSoap();
+
+		CommerceVirtualOrderItemSoap soapModel =
+			new CommerceVirtualOrderItemSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommerceVirtualOrderItemId(model.getCommerceVirtualOrderItemId());
+		soapModel.setCommerceVirtualOrderItemId(
+			model.getCommerceVirtualOrderItemId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -59,7 +62,9 @@ public class CommerceVirtualOrderItemSoap implements Serializable {
 
 	public static CommerceVirtualOrderItemSoap[] toSoapModels(
 		CommerceVirtualOrderItem[] models) {
-		CommerceVirtualOrderItemSoap[] soapModels = new CommerceVirtualOrderItemSoap[models.length];
+
+		CommerceVirtualOrderItemSoap[] soapModels =
+			new CommerceVirtualOrderItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -70,10 +75,13 @@ public class CommerceVirtualOrderItemSoap implements Serializable {
 
 	public static CommerceVirtualOrderItemSoap[][] toSoapModels(
 		CommerceVirtualOrderItem[][] models) {
+
 		CommerceVirtualOrderItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceVirtualOrderItemSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceVirtualOrderItemSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceVirtualOrderItemSoap[0][0];
@@ -88,13 +96,16 @@ public class CommerceVirtualOrderItemSoap implements Serializable {
 
 	public static CommerceVirtualOrderItemSoap[] toSoapModels(
 		List<CommerceVirtualOrderItem> models) {
-		List<CommerceVirtualOrderItemSoap> soapModels = new ArrayList<CommerceVirtualOrderItemSoap>(models.size());
+
+		List<CommerceVirtualOrderItemSoap> soapModels =
+			new ArrayList<CommerceVirtualOrderItemSoap>(models.size());
 
 		for (CommerceVirtualOrderItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceVirtualOrderItemSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceVirtualOrderItemSoap[soapModels.size()]);
 	}
 
 	public CommerceVirtualOrderItemSoap() {
@@ -274,4 +285,5 @@ public class CommerceVirtualOrderItemSoap implements Serializable {
 	private boolean _active;
 	private Date _startDate;
 	private Date _endDate;
+
 }

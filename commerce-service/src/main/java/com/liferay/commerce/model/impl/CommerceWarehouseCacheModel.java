@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceWarehouse;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceWarehouse in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceWarehouse
  * @generated
  */
 @ProviderType
-public class CommerceWarehouseCacheModel implements CacheModel<CommerceWarehouse>,
-	Externalizable {
+public class CommerceWarehouseCacheModel
+	implements CacheModel<CommerceWarehouse>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceWarehouseCacheModel implements CacheModel<CommerceWarehouse
 			return false;
 		}
 
-		CommerceWarehouseCacheModel commerceWarehouseCacheModel = (CommerceWarehouseCacheModel)obj;
+		CommerceWarehouseCacheModel commerceWarehouseCacheModel =
+			(CommerceWarehouseCacheModel)obj;
 
-		if (commerceWarehouseId == commerceWarehouseCacheModel.commerceWarehouseId) {
+		if (commerceWarehouseId ==
+				commerceWarehouseCacheModel.commerceWarehouseId) {
+
 			return true;
 		}
 
@@ -114,7 +116,8 @@ public class CommerceWarehouseCacheModel implements CacheModel<CommerceWarehouse
 
 	@Override
 	public CommerceWarehouse toEntityModel() {
-		CommerceWarehouseImpl commerceWarehouseImpl = new CommerceWarehouseImpl();
+		CommerceWarehouseImpl commerceWarehouseImpl =
+			new CommerceWarehouseImpl();
 
 		commerceWarehouseImpl.setCommerceWarehouseId(commerceWarehouseId);
 		commerceWarehouseImpl.setGroupId(groupId);
@@ -238,8 +241,7 @@ public class CommerceWarehouseCacheModel implements CacheModel<CommerceWarehouse
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceWarehouseId);
 
 		objectOutput.writeLong(groupId);
@@ -340,4 +342,5 @@ public class CommerceWarehouseCacheModel implements CacheModel<CommerceWarehouse
 	public double latitude;
 	public double longitude;
 	public boolean primary;
+
 }

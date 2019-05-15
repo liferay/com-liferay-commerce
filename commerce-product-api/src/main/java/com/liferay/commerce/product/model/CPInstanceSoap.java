@@ -28,11 +28,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPInstanceServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPInstanceServiceSoap
  * @generated
  */
 @ProviderType
 public class CPInstanceSoap implements Serializable {
+
 	public static CPInstanceSoap toSoapModel(CPInstance model) {
 		CPInstanceSoap soapModel = new CPInstanceSoap();
 
@@ -63,11 +63,13 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
-		soapModel.setOverrideSubscriptionInfo(model.isOverrideSubscriptionInfo());
+		soapModel.setOverrideSubscriptionInfo(
+			model.isOverrideSubscriptionInfo());
 		soapModel.setSubscriptionEnabled(model.isSubscriptionEnabled());
 		soapModel.setSubscriptionLength(model.getSubscriptionLength());
 		soapModel.setSubscriptionType(model.getSubscriptionType());
-		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
+		soapModel.setSubscriptionTypeSettings(
+			model.getSubscriptionTypeSettings());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
@@ -105,7 +107,8 @@ public class CPInstanceSoap implements Serializable {
 	}
 
 	public static CPInstanceSoap[] toSoapModels(List<CPInstance> models) {
-		List<CPInstanceSoap> soapModels = new ArrayList<CPInstanceSoap>(models.size());
+		List<CPInstanceSoap> soapModels = new ArrayList<CPInstanceSoap>(
+			models.size());
 
 		for (CPInstance model : models) {
 			soapModels.add(toSoapModel(model));
@@ -474,4 +477,5 @@ public class CPInstanceSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

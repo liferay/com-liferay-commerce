@@ -22,7 +22,6 @@ import com.liferay.commerce.notification.service.persistence.CommerceNotificatio
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplatePersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -64,18 +63,19 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateUserSegmentRelLocalServiceImpl
- * @see com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalServiceUtil
  * @generated
  */
 @ProviderType
-public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBaseImpl
-	extends BaseLocalServiceImpl
-	implements CommerceNotificationTemplateUserSegmentRelLocalService,
-		IdentifiableOSGiService {
+public abstract class
+	CommerceNotificationTemplateUserSegmentRelLocalServiceBaseImpl
+		extends BaseLocalServiceImpl
+		implements CommerceNotificationTemplateUserSegmentRelLocalService,
+				   IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalServiceUtil} to access the commerce notification template user segment rel local service.
+	 * Never modify or reference this class directly. Use <code>CommerceNotificationTemplateUserSegmentRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -86,11 +86,15 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel addCommerceNotificationTemplateUserSegmentRel(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
+	public CommerceNotificationTemplateUserSegmentRel
+		addCommerceNotificationTemplateUserSegmentRel(
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel) {
+
 		commerceNotificationTemplateUserSegmentRel.setNew(true);
 
-		return commerceNotificationTemplateUserSegmentRelPersistence.update(commerceNotificationTemplateUserSegmentRel);
+		return commerceNotificationTemplateUserSegmentRelPersistence.update(
+			commerceNotificationTemplateUserSegmentRel);
 	}
 
 	/**
@@ -101,9 +105,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Override
 	@Transactional(enabled = false)
-	public CommerceNotificationTemplateUserSegmentRel createCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.create(commerceNotificationTemplateUserSegmentRelId);
+	public CommerceNotificationTemplateUserSegmentRel
+		createCommerceNotificationTemplateUserSegmentRel(
+			long commerceNotificationTemplateUserSegmentRelId) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.create(
+			commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
@@ -115,10 +122,13 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel deleteCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId)
+	public CommerceNotificationTemplateUserSegmentRel
+			deleteCommerceNotificationTemplateUserSegmentRel(
+				long commerceNotificationTemplateUserSegmentRelId)
 		throws PortalException {
-		return commerceNotificationTemplateUserSegmentRelPersistence.remove(commerceNotificationTemplateUserSegmentRelId);
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.remove(
+			commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
@@ -129,16 +139,21 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel deleteCommerceNotificationTemplateUserSegmentRel(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.remove(commerceNotificationTemplateUserSegmentRel);
+	public CommerceNotificationTemplateUserSegmentRel
+		deleteCommerceNotificationTemplateUserSegmentRel(
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.remove(
+			commerceNotificationTemplateUserSegmentRel);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceNotificationTemplateUserSegmentRel.class,
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationTemplateUserSegmentRel.class,
 			clazz.getClassLoader());
 	}
 
@@ -150,14 +165,15 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			findWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -166,17 +182,18 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -186,10 +203,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -200,7 +219,8 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
@@ -211,16 +231,20 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			countWithDynamicQuery(dynamicQuery, projection);
 	}
 
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel fetchCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.fetchByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
+	public CommerceNotificationTemplateUserSegmentRel
+		fetchCommerceNotificationTemplateUserSegmentRel(
+			long commerceNotificationTemplateUserSegmentRelId) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			fetchByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
@@ -231,19 +255,25 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @throws PortalException if a commerce notification template user segment rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel getCommerceNotificationTemplateUserSegmentRel(
-		long commerceNotificationTemplateUserSegmentRelId)
+	public CommerceNotificationTemplateUserSegmentRel
+			getCommerceNotificationTemplateUserSegmentRel(
+				long commerceNotificationTemplateUserSegmentRelId)
 		throws PortalException {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			findByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceNotificationTemplateUserSegmentRelLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceNotificationTemplateUserSegmentRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceNotificationTemplateUserSegmentRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceNotificationTemplateUserSegmentRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationTemplateUserSegmentRelId");
@@ -252,12 +282,17 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceNotificationTemplateUserSegmentRelLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceNotificationTemplateUserSegmentRelLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceNotificationTemplateUserSegmentRel.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceNotificationTemplateUserSegmentRel.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationTemplateUserSegmentRelId");
@@ -267,9 +302,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceNotificationTemplateUserSegmentRelLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceNotificationTemplateUserSegmentRelLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceNotificationTemplateUserSegmentRel.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceNotificationTemplateUserSegmentRel.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationTemplateUserSegmentRelId");
@@ -281,20 +319,25 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceNotificationTemplateUserSegmentRelLocalService.deleteCommerceNotificationTemplateUserSegmentRel((CommerceNotificationTemplateUserSegmentRel)persistedModel);
+
+		return commerceNotificationTemplateUserSegmentRelLocalService.
+			deleteCommerceNotificationTemplateUserSegmentRel(
+				(CommerceNotificationTemplateUserSegmentRel)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.
+			findByPrimaryKey(primaryKeyObj);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification template user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification template user segment rels
@@ -302,10 +345,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @return the range of commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> getCommerceNotificationTemplateUserSegmentRels(
-		int start, int end) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.findAll(start,
-			end);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		getCommerceNotificationTemplateUserSegmentRels(int start, int end) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.findAll(
+			start, end);
 	}
 
 	/**
@@ -326,9 +370,13 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel updateCommerceNotificationTemplateUserSegmentRel(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		return commerceNotificationTemplateUserSegmentRelPersistence.update(commerceNotificationTemplateUserSegmentRel);
+	public CommerceNotificationTemplateUserSegmentRel
+		updateCommerceNotificationTemplateUserSegmentRel(
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel) {
+
+		return commerceNotificationTemplateUserSegmentRelPersistence.update(
+			commerceNotificationTemplateUserSegmentRel);
 	}
 
 	/**
@@ -336,7 +384,10 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification attachment local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService getCommerceNotificationAttachmentLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationAttachmentLocalService
+			getCommerceNotificationAttachmentLocalService() {
+
 		return commerceNotificationAttachmentLocalService;
 	}
 
@@ -346,8 +397,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationAttachmentLocalService the commerce notification attachment local service
 	 */
 	public void setCommerceNotificationAttachmentLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService commerceNotificationAttachmentLocalService) {
-		this.commerceNotificationAttachmentLocalService = commerceNotificationAttachmentLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationAttachmentLocalService
+				commerceNotificationAttachmentLocalService) {
+
+		this.commerceNotificationAttachmentLocalService =
+			commerceNotificationAttachmentLocalService;
 	}
 
 	/**
@@ -355,7 +410,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification attachment persistence
 	 */
-	public CommerceNotificationAttachmentPersistence getCommerceNotificationAttachmentPersistence() {
+	public CommerceNotificationAttachmentPersistence
+		getCommerceNotificationAttachmentPersistence() {
+
 		return commerceNotificationAttachmentPersistence;
 	}
 
@@ -365,8 +422,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationAttachmentPersistence the commerce notification attachment persistence
 	 */
 	public void setCommerceNotificationAttachmentPersistence(
-		CommerceNotificationAttachmentPersistence commerceNotificationAttachmentPersistence) {
-		this.commerceNotificationAttachmentPersistence = commerceNotificationAttachmentPersistence;
+		CommerceNotificationAttachmentPersistence
+			commerceNotificationAttachmentPersistence) {
+
+		this.commerceNotificationAttachmentPersistence =
+			commerceNotificationAttachmentPersistence;
 	}
 
 	/**
@@ -374,7 +434,10 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification queue entry local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService getCommerceNotificationQueueEntryLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationQueueEntryLocalService
+			getCommerceNotificationQueueEntryLocalService() {
+
 		return commerceNotificationQueueEntryLocalService;
 	}
 
@@ -384,8 +447,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationQueueEntryLocalService the commerce notification queue entry local service
 	 */
 	public void setCommerceNotificationQueueEntryLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService commerceNotificationQueueEntryLocalService) {
-		this.commerceNotificationQueueEntryLocalService = commerceNotificationQueueEntryLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationQueueEntryLocalService
+				commerceNotificationQueueEntryLocalService) {
+
+		this.commerceNotificationQueueEntryLocalService =
+			commerceNotificationQueueEntryLocalService;
 	}
 
 	/**
@@ -393,7 +460,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification queue entry persistence
 	 */
-	public CommerceNotificationQueueEntryPersistence getCommerceNotificationQueueEntryPersistence() {
+	public CommerceNotificationQueueEntryPersistence
+		getCommerceNotificationQueueEntryPersistence() {
+
 		return commerceNotificationQueueEntryPersistence;
 	}
 
@@ -403,8 +472,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationQueueEntryPersistence the commerce notification queue entry persistence
 	 */
 	public void setCommerceNotificationQueueEntryPersistence(
-		CommerceNotificationQueueEntryPersistence commerceNotificationQueueEntryPersistence) {
-		this.commerceNotificationQueueEntryPersistence = commerceNotificationQueueEntryPersistence;
+		CommerceNotificationQueueEntryPersistence
+			commerceNotificationQueueEntryPersistence) {
+
+		this.commerceNotificationQueueEntryPersistence =
+			commerceNotificationQueueEntryPersistence;
 	}
 
 	/**
@@ -412,7 +484,10 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification template local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService getCommerceNotificationTemplateLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateLocalService
+			getCommerceNotificationTemplateLocalService() {
+
 		return commerceNotificationTemplateLocalService;
 	}
 
@@ -422,8 +497,12 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationTemplateLocalService the commerce notification template local service
 	 */
 	public void setCommerceNotificationTemplateLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService commerceNotificationTemplateLocalService) {
-		this.commerceNotificationTemplateLocalService = commerceNotificationTemplateLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationTemplateLocalService
+				commerceNotificationTemplateLocalService) {
+
+		this.commerceNotificationTemplateLocalService =
+			commerceNotificationTemplateLocalService;
 	}
 
 	/**
@@ -431,7 +510,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification template persistence
 	 */
-	public CommerceNotificationTemplatePersistence getCommerceNotificationTemplatePersistence() {
+	public CommerceNotificationTemplatePersistence
+		getCommerceNotificationTemplatePersistence() {
+
 		return commerceNotificationTemplatePersistence;
 	}
 
@@ -441,8 +522,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationTemplatePersistence the commerce notification template persistence
 	 */
 	public void setCommerceNotificationTemplatePersistence(
-		CommerceNotificationTemplatePersistence commerceNotificationTemplatePersistence) {
-		this.commerceNotificationTemplatePersistence = commerceNotificationTemplatePersistence;
+		CommerceNotificationTemplatePersistence
+			commerceNotificationTemplatePersistence) {
+
+		this.commerceNotificationTemplatePersistence =
+			commerceNotificationTemplatePersistence;
 	}
 
 	/**
@@ -450,7 +534,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification template user segment rel local service
 	 */
-	public CommerceNotificationTemplateUserSegmentRelLocalService getCommerceNotificationTemplateUserSegmentRelLocalService() {
+	public CommerceNotificationTemplateUserSegmentRelLocalService
+		getCommerceNotificationTemplateUserSegmentRelLocalService() {
+
 		return commerceNotificationTemplateUserSegmentRelLocalService;
 	}
 
@@ -460,8 +546,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationTemplateUserSegmentRelLocalService the commerce notification template user segment rel local service
 	 */
 	public void setCommerceNotificationTemplateUserSegmentRelLocalService(
-		CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService) {
-		this.commerceNotificationTemplateUserSegmentRelLocalService = commerceNotificationTemplateUserSegmentRelLocalService;
+		CommerceNotificationTemplateUserSegmentRelLocalService
+			commerceNotificationTemplateUserSegmentRelLocalService) {
+
+		this.commerceNotificationTemplateUserSegmentRelLocalService =
+			commerceNotificationTemplateUserSegmentRelLocalService;
 	}
 
 	/**
@@ -469,7 +558,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the commerce notification template user segment rel persistence
 	 */
-	public CommerceNotificationTemplateUserSegmentRelPersistence getCommerceNotificationTemplateUserSegmentRelPersistence() {
+	public CommerceNotificationTemplateUserSegmentRelPersistence
+		getCommerceNotificationTemplateUserSegmentRelPersistence() {
+
 		return commerceNotificationTemplateUserSegmentRelPersistence;
 	}
 
@@ -479,8 +570,11 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param commerceNotificationTemplateUserSegmentRelPersistence the commerce notification template user segment rel persistence
 	 */
 	public void setCommerceNotificationTemplateUserSegmentRelPersistence(
-		CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence) {
-		this.commerceNotificationTemplateUserSegmentRelPersistence = commerceNotificationTemplateUserSegmentRelPersistence;
+		CommerceNotificationTemplateUserSegmentRelPersistence
+			commerceNotificationTemplateUserSegmentRelPersistence) {
+
+		this.commerceNotificationTemplateUserSegmentRelPersistence =
+			commerceNotificationTemplateUserSegmentRelPersistence;
 	}
 
 	/**
@@ -488,7 +582,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -498,7 +594,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -507,7 +605,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -517,7 +617,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -537,6 +639,7 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -545,7 +648,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -555,7 +660,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -564,7 +671,9 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -575,6 +684,7 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -597,7 +707,8 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel",
 			commerceNotificationTemplateUserSegmentRelLocalService);
 	}
 
@@ -613,7 +724,8 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return CommerceNotificationTemplateUserSegmentRelLocalService.class.getName();
+		return CommerceNotificationTemplateUserSegmentRelLocalService.class.
+			getName();
 	}
 
 	protected Class<?> getModelClass() {
@@ -631,15 +743,17 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceNotificationTemplateUserSegmentRelPersistence.getDataSource();
+			DataSource dataSource =
+				commerceNotificationTemplateUserSegmentRelPersistence.
+					getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -648,34 +762,83 @@ public abstract class CommerceNotificationTemplateUserSegmentRelLocalServiceBase
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService commerceNotificationAttachmentLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationAttachmentLocalService
+			commerceNotificationAttachmentLocalService;
+
 	@BeanReference(type = CommerceNotificationAttachmentPersistence.class)
-	protected CommerceNotificationAttachmentPersistence commerceNotificationAttachmentPersistence;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService commerceNotificationQueueEntryLocalService;
+	protected CommerceNotificationAttachmentPersistence
+		commerceNotificationAttachmentPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationQueueEntryLocalService
+			commerceNotificationQueueEntryLocalService;
+
 	@BeanReference(type = CommerceNotificationQueueEntryPersistence.class)
-	protected CommerceNotificationQueueEntryPersistence commerceNotificationQueueEntryPersistence;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService commerceNotificationTemplateLocalService;
+	protected CommerceNotificationQueueEntryPersistence
+		commerceNotificationQueueEntryPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateLocalService
+			commerceNotificationTemplateLocalService;
+
 	@BeanReference(type = CommerceNotificationTemplatePersistence.class)
-	protected CommerceNotificationTemplatePersistence commerceNotificationTemplatePersistence;
-	@BeanReference(type = CommerceNotificationTemplateUserSegmentRelLocalService.class)
-	protected CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService;
-	@BeanReference(type = CommerceNotificationTemplateUserSegmentRelPersistence.class)
-	protected CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CommerceNotificationTemplatePersistence
+		commerceNotificationTemplatePersistence;
+
+	@BeanReference(
+		type = CommerceNotificationTemplateUserSegmentRelLocalService.class
+	)
+	protected CommerceNotificationTemplateUserSegmentRelLocalService
+		commerceNotificationTemplateUserSegmentRelLocalService;
+
+	@BeanReference(
+		type = CommerceNotificationTemplateUserSegmentRelPersistence.class
+	)
+	protected CommerceNotificationTemplateUserSegmentRelPersistence
+		commerceNotificationTemplateUserSegmentRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

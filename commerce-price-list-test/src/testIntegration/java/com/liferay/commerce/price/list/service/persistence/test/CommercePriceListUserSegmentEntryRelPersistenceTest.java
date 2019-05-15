@@ -15,13 +15,11 @@
 package com.liferay.commerce.price.list.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.price.list.exception.NoSuchPriceListUserSegmentEntryRelException;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalServiceUtil;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,21 +48,33 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommercePriceListUserSegmentEntryRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.price.list.service"));
 
 	@Before
 	public void setUp() {
-		_persistence = CommercePriceListUserSegmentEntryRelUtil.getPersistence();
+		_persistence =
+			CommercePriceListUserSegmentEntryRelUtil.getPersistence();
 
 		Class<?> clazz = _persistence.getClass();
 
@@ -82,7 +83,8 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommercePriceListUserSegmentEntryRel> iterator = _commercePriceListUserSegmentEntryRels.iterator();
+		Iterator<CommercePriceListUserSegmentEntryRel> iterator =
+			_commercePriceListUserSegmentEntryRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,24 +97,27 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePriceListUserSegmentEntryRel commercePriceListUserSegmentEntryRel =
-			_persistence.create(pk);
+		CommercePriceListUserSegmentEntryRel
+			commercePriceListUserSegmentEntryRel = _persistence.create(pk);
 
 		Assert.assertNotNull(commercePriceListUserSegmentEntryRel);
 
-		Assert.assertEquals(commercePriceListUserSegmentEntryRel.getPrimaryKey(),
-			pk);
+		Assert.assertEquals(
+			commercePriceListUserSegmentEntryRel.getPrimaryKey(), pk);
 	}
 
 	@Test
 	public void testRemove() throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
 		_persistence.remove(newCommercePriceListUserSegmentEntryRel);
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			_persistence.fetchByPrimaryKey(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel =
+				_persistence.fetchByPrimaryKey(
+					newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
 		Assert.assertNull(existingCommercePriceListUserSegmentEntryRel);
 	}
@@ -126,65 +131,96 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			_persistence.create(pk);
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel = _persistence.create(pk);
 
-		newCommercePriceListUserSegmentEntryRel.setUuid(RandomTestUtil.randomString());
+		newCommercePriceListUserSegmentEntryRel.setUuid(
+			RandomTestUtil.randomString());
 
-		newCommercePriceListUserSegmentEntryRel.setGroupId(RandomTestUtil.nextLong());
+		newCommercePriceListUserSegmentEntryRel.setGroupId(
+			RandomTestUtil.nextLong());
 
-		newCommercePriceListUserSegmentEntryRel.setCompanyId(RandomTestUtil.nextLong());
+		newCommercePriceListUserSegmentEntryRel.setCompanyId(
+			RandomTestUtil.nextLong());
 
-		newCommercePriceListUserSegmentEntryRel.setUserId(RandomTestUtil.nextLong());
+		newCommercePriceListUserSegmentEntryRel.setUserId(
+			RandomTestUtil.nextLong());
 
-		newCommercePriceListUserSegmentEntryRel.setUserName(RandomTestUtil.randomString());
+		newCommercePriceListUserSegmentEntryRel.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommercePriceListUserSegmentEntryRel.setCreateDate(RandomTestUtil.nextDate());
+		newCommercePriceListUserSegmentEntryRel.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommercePriceListUserSegmentEntryRel.setModifiedDate(RandomTestUtil.nextDate());
+		newCommercePriceListUserSegmentEntryRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommercePriceListUserSegmentEntryRel.setCommercePriceListId(RandomTestUtil.nextLong());
+		newCommercePriceListUserSegmentEntryRel.setCommercePriceListId(
+			RandomTestUtil.nextLong());
 
-		newCommercePriceListUserSegmentEntryRel.setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
+		newCommercePriceListUserSegmentEntryRel.setCommerceUserSegmentEntryId(
+			RandomTestUtil.nextLong());
 
-		newCommercePriceListUserSegmentEntryRel.setOrder(RandomTestUtil.nextInt());
+		newCommercePriceListUserSegmentEntryRel.setOrder(
+			RandomTestUtil.nextInt());
 
-		newCommercePriceListUserSegmentEntryRel.setLastPublishDate(RandomTestUtil.nextDate());
+		newCommercePriceListUserSegmentEntryRel.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_commercePriceListUserSegmentEntryRels.add(_persistence.update(
-				newCommercePriceListUserSegmentEntryRel));
+		_commercePriceListUserSegmentEntryRels.add(
+			_persistence.update(newCommercePriceListUserSegmentEntryRel));
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			_persistence.findByPrimaryKey(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel =
+				_persistence.findByPrimaryKey(
+					newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getUuid(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getUuid(),
 			newCommercePriceListUserSegmentEntryRel.getUuid());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId(),
-			newCommercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getGroupId(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.
+				getCommercePriceListUserSegmentEntryRelId(),
+			newCommercePriceListUserSegmentEntryRel.
+				getCommercePriceListUserSegmentEntryRelId());
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getGroupId(),
 			newCommercePriceListUserSegmentEntryRel.getGroupId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getCompanyId(),
 			newCommercePriceListUserSegmentEntryRel.getCompanyId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getUserId(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getUserId(),
 			newCommercePriceListUserSegmentEntryRel.getUserId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getUserName(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getUserName(),
 			newCommercePriceListUserSegmentEntryRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommercePriceListUserSegmentEntryRel.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommercePriceListUserSegmentEntryRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommercePriceListUserSegmentEntryRel.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommercePriceListUserSegmentEntryRel.getModifiedDate()));
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getCommercePriceListId(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.
+				getCommercePriceListId(),
 			newCommercePriceListUserSegmentEntryRel.getCommercePriceListId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getCommerceUserSegmentEntryId(),
-			newCommercePriceListUserSegmentEntryRel.getCommerceUserSegmentEntryId());
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel.getOrder(),
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.
+				getCommerceUserSegmentEntryId(),
+			newCommercePriceListUserSegmentEntryRel.
+				getCommerceUserSegmentEntryId());
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel.getOrder(),
 			newCommercePriceListUserSegmentEntryRel.getOrder());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommercePriceListUserSegmentEntryRel.getLastPublishDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(
+				existingCommercePriceListUserSegmentEntryRel.
+					getLastPublishDate()),
 			Time.getShortTimestamp(
 				newCommercePriceListUserSegmentEntryRel.getLastPublishDate()));
 	}
@@ -225,21 +261,25 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			_persistence.findByPrimaryKey(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel =
+				_persistence.findByPrimaryKey(
+					newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel,
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel,
 			newCommercePriceListUserSegmentEntryRel);
 	}
 
@@ -252,28 +292,35 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommercePriceListUserSegmentEntryRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPLUserSegmentEntryRel",
-			"uuid", true, "commercePriceListUserSegmentEntryRelId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true,
-			"commercePriceListId", true, "commerceUserSegmentEntryId", true,
-			"order", true, "lastPublishDate", true);
+	protected OrderByComparator<CommercePriceListUserSegmentEntryRel>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CPLUserSegmentEntryRel", "uuid", true,
+			"commercePriceListUserSegmentEntryRelId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commercePriceListId", true,
+			"commerceUserSegmentEntryId", true, "order", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			_persistence.fetchByPrimaryKey(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel =
+				_persistence.fetchByPrimaryKey(
+					newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel,
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel,
 			newCommercePriceListUserSegmentEntryRel);
 	}
 
@@ -281,8 +328,9 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePriceListUserSegmentEntryRel missingCommercePriceListUserSegmentEntryRel =
-			_persistence.fetchByPrimaryKey(pk);
+		CommercePriceListUserSegmentEntryRel
+			missingCommercePriceListUserSegmentEntryRel =
+				_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommercePriceListUserSegmentEntryRel);
 	}
@@ -290,24 +338,32 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel1 =
-			addCommercePriceListUserSegmentEntryRel();
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel2 =
-			addCommercePriceListUserSegmentEntryRel();
+
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel1 =
+				addCommercePriceListUserSegmentEntryRel();
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel2 =
+				addCommercePriceListUserSegmentEntryRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePriceListUserSegmentEntryRel1.getPrimaryKey());
-		primaryKeys.add(newCommercePriceListUserSegmentEntryRel2.getPrimaryKey());
+		primaryKeys.add(
+			newCommercePriceListUserSegmentEntryRel1.getPrimaryKey());
+		primaryKeys.add(
+			newCommercePriceListUserSegmentEntryRel2.getPrimaryKey());
 
-		Map<Serializable, CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commercePriceListUserSegmentEntryRels.size());
-		Assert.assertEquals(newCommercePriceListUserSegmentEntryRel1,
+		Assert.assertEquals(
+			newCommercePriceListUserSegmentEntryRel1,
 			commercePriceListUserSegmentEntryRels.get(
 				newCommercePriceListUserSegmentEntryRel1.getPrimaryKey()));
-		Assert.assertEquals(newCommercePriceListUserSegmentEntryRel2,
+		Assert.assertEquals(
+			newCommercePriceListUserSegmentEntryRel2,
 			commercePriceListUserSegmentEntryRels.get(
 				newCommercePriceListUserSegmentEntryRel2.getPrimaryKey()));
 	}
@@ -315,6 +371,7 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -324,8 +381,9 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commercePriceListUserSegmentEntryRels.isEmpty());
 	}
@@ -333,51 +391,59 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
 		long pk = RandomTestUtil.nextLong();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		primaryKeys.add(
+			newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commercePriceListUserSegmentEntryRels.size());
-		Assert.assertEquals(newCommercePriceListUserSegmentEntryRel,
+		Assert.assertEquals(
+			newCommercePriceListUserSegmentEntryRel,
 			commercePriceListUserSegmentEntryRels.get(
 				newCommercePriceListUserSegmentEntryRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commercePriceListUserSegmentEntryRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		primaryKeys.add(
+			newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
-		Map<Serializable, CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRels =
+				_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commercePriceListUserSegmentEntryRels.size());
-		Assert.assertEquals(newCommercePriceListUserSegmentEntryRel,
+		Assert.assertEquals(
+			newCommercePriceListUserSegmentEntryRel,
 			commercePriceListUserSegmentEntryRels.get(
 				newCommercePriceListUserSegmentEntryRel.getPrimaryKey()));
 	}
@@ -386,16 +452,24 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommercePriceListUserSegmentEntryRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommercePriceListUserSegmentEntryRelLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommercePriceListUserSegmentEntryRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommercePriceListUserSegmentEntryRel>() {
+
 				@Override
 				public void performAction(
-					CommercePriceListUserSegmentEntryRel commercePriceListUserSegmentEntryRel) {
+					CommercePriceListUserSegmentEntryRel
+						commercePriceListUserSegmentEntryRel) {
+
 					Assert.assertNotNull(commercePriceListUserSegmentEntryRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -404,60 +478,73 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePriceListUserSegmentEntryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommercePriceListUserSegmentEntryRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commercePriceListUserSegmentEntryRelId",
-				newCommercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId()));
+				newCommercePriceListUserSegmentEntryRel.
+					getCommercePriceListUserSegmentEntryRelId()));
 
-		List<CommercePriceListUserSegmentEntryRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommercePriceListUserSegmentEntryRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			result.get(0);
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel = result.get(0);
 
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRel,
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRel,
 			newCommercePriceListUserSegmentEntryRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePriceListUserSegmentEntryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommercePriceListUserSegmentEntryRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commercePriceListUserSegmentEntryRelId",
 				RandomTestUtil.nextLong()));
 
-		List<CommercePriceListUserSegmentEntryRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommercePriceListUserSegmentEntryRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePriceListUserSegmentEntryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommercePriceListUserSegmentEntryRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commercePriceListUserSegmentEntryRelId"));
 
-		Object newCommercePriceListUserSegmentEntryRelId = newCommercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId();
+		Object newCommercePriceListUserSegmentEntryRelId =
+			newCommercePriceListUserSegmentEntryRel.
+				getCommercePriceListUserSegmentEntryRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commercePriceListUserSegmentEntryRelId",
-				new Object[] { newCommercePriceListUserSegmentEntryRelId }));
+				new Object[] {newCommercePriceListUserSegmentEntryRelId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -465,21 +552,25 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 
 		Object existingCommercePriceListUserSegmentEntryRelId = result.get(0);
 
-		Assert.assertEquals(existingCommercePriceListUserSegmentEntryRelId,
+		Assert.assertEquals(
+			existingCommercePriceListUserSegmentEntryRelId,
 			newCommercePriceListUserSegmentEntryRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePriceListUserSegmentEntryRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommercePriceListUserSegmentEntryRel.class,
+			_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commercePriceListUserSegmentEntryRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commercePriceListUserSegmentEntryRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -488,74 +579,97 @@ public class CommercePriceListUserSegmentEntryRelPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommercePriceListUserSegmentEntryRel newCommercePriceListUserSegmentEntryRel =
-			addCommercePriceListUserSegmentEntryRel();
+		CommercePriceListUserSegmentEntryRel
+			newCommercePriceListUserSegmentEntryRel =
+				addCommercePriceListUserSegmentEntryRel();
 
 		_persistence.clearCache();
 
-		CommercePriceListUserSegmentEntryRel existingCommercePriceListUserSegmentEntryRel =
-			_persistence.findByPrimaryKey(newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
+		CommercePriceListUserSegmentEntryRel
+			existingCommercePriceListUserSegmentEntryRel =
+				_persistence.findByPrimaryKey(
+					newCommercePriceListUserSegmentEntryRel.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommercePriceListUserSegmentEntryRel.getUuid(),
 				ReflectionTestUtil.invoke(
 					existingCommercePriceListUserSegmentEntryRel,
 					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
+		Assert.assertEquals(
+			Long.valueOf(
 				existingCommercePriceListUserSegmentEntryRel.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommercePriceListUserSegmentEntryRel,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommercePriceListUserSegmentEntryRel.getCommercePriceListId()),
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommercePriceListUserSegmentEntryRel.
+					getCommercePriceListId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommercePriceListUserSegmentEntryRel,
 				"getOriginalCommercePriceListId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCommercePriceListUserSegmentEntryRel.getCommerceUserSegmentEntryId()),
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommercePriceListUserSegmentEntryRel.
+					getCommerceUserSegmentEntryId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommercePriceListUserSegmentEntryRel,
 				"getOriginalCommerceUserSegmentEntryId", new Class<?>[0]));
 	}
 
-	protected CommercePriceListUserSegmentEntryRel addCommercePriceListUserSegmentEntryRel()
+	protected CommercePriceListUserSegmentEntryRel
+			addCommercePriceListUserSegmentEntryRel()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePriceListUserSegmentEntryRel commercePriceListUserSegmentEntryRel =
-			_persistence.create(pk);
+		CommercePriceListUserSegmentEntryRel
+			commercePriceListUserSegmentEntryRel = _persistence.create(pk);
 
-		commercePriceListUserSegmentEntryRel.setUuid(RandomTestUtil.randomString());
+		commercePriceListUserSegmentEntryRel.setUuid(
+			RandomTestUtil.randomString());
 
-		commercePriceListUserSegmentEntryRel.setGroupId(RandomTestUtil.nextLong());
+		commercePriceListUserSegmentEntryRel.setGroupId(
+			RandomTestUtil.nextLong());
 
-		commercePriceListUserSegmentEntryRel.setCompanyId(RandomTestUtil.nextLong());
+		commercePriceListUserSegmentEntryRel.setCompanyId(
+			RandomTestUtil.nextLong());
 
-		commercePriceListUserSegmentEntryRel.setUserId(RandomTestUtil.nextLong());
+		commercePriceListUserSegmentEntryRel.setUserId(
+			RandomTestUtil.nextLong());
 
-		commercePriceListUserSegmentEntryRel.setUserName(RandomTestUtil.randomString());
+		commercePriceListUserSegmentEntryRel.setUserName(
+			RandomTestUtil.randomString());
 
-		commercePriceListUserSegmentEntryRel.setCreateDate(RandomTestUtil.nextDate());
+		commercePriceListUserSegmentEntryRel.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		commercePriceListUserSegmentEntryRel.setModifiedDate(RandomTestUtil.nextDate());
+		commercePriceListUserSegmentEntryRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		commercePriceListUserSegmentEntryRel.setCommercePriceListId(RandomTestUtil.nextLong());
+		commercePriceListUserSegmentEntryRel.setCommercePriceListId(
+			RandomTestUtil.nextLong());
 
-		commercePriceListUserSegmentEntryRel.setCommerceUserSegmentEntryId(RandomTestUtil.nextLong());
+		commercePriceListUserSegmentEntryRel.setCommerceUserSegmentEntryId(
+			RandomTestUtil.nextLong());
 
 		commercePriceListUserSegmentEntryRel.setOrder(RandomTestUtil.nextInt());
 
-		commercePriceListUserSegmentEntryRel.setLastPublishDate(RandomTestUtil.nextDate());
+		commercePriceListUserSegmentEntryRel.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_commercePriceListUserSegmentEntryRels.add(_persistence.update(
-				commercePriceListUserSegmentEntryRel));
+		_commercePriceListUserSegmentEntryRels.add(
+			_persistence.update(commercePriceListUserSegmentEntryRel));
 
 		return commercePriceListUserSegmentEntryRel;
 	}
 
-	private List<CommercePriceListUserSegmentEntryRel> _commercePriceListUserSegmentEntryRels =
-		new ArrayList<CommercePriceListUserSegmentEntryRel>();
+	private List<CommercePriceListUserSegmentEntryRel>
+		_commercePriceListUserSegmentEntryRels =
+			new ArrayList<CommercePriceListUserSegmentEntryRel>();
 	private CommercePriceListUserSegmentEntryRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

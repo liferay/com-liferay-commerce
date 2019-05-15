@@ -35,18 +35,22 @@ import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalSe
 public abstract class CommerceUserSegmentEntryBaseImpl
 	extends CommerceUserSegmentEntryModelImpl
 	implements CommerceUserSegmentEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce user segment entry model instance should use the {@link CommerceUserSegmentEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce user segment entry model instance should use the <code>CommerceUserSegmentEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceUserSegmentEntryLocalServiceUtil.addCommerceUserSegmentEntry(this);
+			CommerceUserSegmentEntryLocalServiceUtil.
+				addCommerceUserSegmentEntry(this);
 		}
 		else {
-			CommerceUserSegmentEntryLocalServiceUtil.updateCommerceUserSegmentEntry(this);
+			CommerceUserSegmentEntryLocalServiceUtil.
+				updateCommerceUserSegmentEntry(this);
 		}
 	}
+
 }

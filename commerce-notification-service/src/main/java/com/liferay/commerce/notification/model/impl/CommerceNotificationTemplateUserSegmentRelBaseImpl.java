@@ -35,18 +35,22 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateUse
 public abstract class CommerceNotificationTemplateUserSegmentRelBaseImpl
 	extends CommerceNotificationTemplateUserSegmentRelModelImpl
 	implements CommerceNotificationTemplateUserSegmentRel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce notification template user segment rel model instance should use the {@link CommerceNotificationTemplateUserSegmentRel} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce notification template user segment rel model instance should use the <code>CommerceNotificationTemplateUserSegmentRel</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.addCommerceNotificationTemplateUserSegmentRel(this);
+			CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.
+				addCommerceNotificationTemplateUserSegmentRel(this);
 		}
 		else {
-			CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.updateCommerceNotificationTemplateUserSegmentRel(this);
+			CommerceNotificationTemplateUserSegmentRelLocalServiceUtil.
+				updateCommerceNotificationTemplateUserSegmentRel(this);
 		}
 	}
+
 }

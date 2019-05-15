@@ -32,12 +32,13 @@ import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceOrderBaseImpl extends CommerceOrderModelImpl
-	implements CommerceOrder {
+public abstract class CommerceOrderBaseImpl
+	extends CommerceOrderModelImpl implements CommerceOrder {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce order model instance should use the {@link CommerceOrder} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce order model instance should use the <code>CommerceOrder</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceOrderBaseImpl extends CommerceOrderModelImpl
 			CommerceOrderLocalServiceUtil.updateCommerceOrder(this);
 		}
 	}
+
 }

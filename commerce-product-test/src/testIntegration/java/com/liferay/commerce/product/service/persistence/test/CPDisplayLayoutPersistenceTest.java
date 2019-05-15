@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPDisplayLayoutException;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.CPDisplayLayoutLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPDisplayLayoutPersistence;
 import com.liferay.commerce.product.service.persistence.CPDisplayLayoutUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDisplayLayoutPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -108,7 +107,8 @@ public class CPDisplayLayoutPersistenceTest {
 
 		_persistence.remove(newCPDisplayLayout);
 
-		CPDisplayLayout existingCPDisplayLayout = _persistence.fetchByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
+		CPDisplayLayout existingCPDisplayLayout =
+			_persistence.fetchByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
 
 		Assert.assertNull(existingCPDisplayLayout);
 	}
@@ -146,31 +146,40 @@ public class CPDisplayLayoutPersistenceTest {
 
 		_cpDisplayLayouts.add(_persistence.update(newCPDisplayLayout));
 
-		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
+		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(
+			newCPDisplayLayout.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDisplayLayout.getUuid(),
-			newCPDisplayLayout.getUuid());
-		Assert.assertEquals(existingCPDisplayLayout.getCPDisplayLayoutId(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getUuid(), newCPDisplayLayout.getUuid());
+		Assert.assertEquals(
+			existingCPDisplayLayout.getCPDisplayLayoutId(),
 			newCPDisplayLayout.getCPDisplayLayoutId());
-		Assert.assertEquals(existingCPDisplayLayout.getGroupId(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getGroupId(),
 			newCPDisplayLayout.getGroupId());
-		Assert.assertEquals(existingCPDisplayLayout.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getCompanyId(),
 			newCPDisplayLayout.getCompanyId());
-		Assert.assertEquals(existingCPDisplayLayout.getUserId(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getUserId(),
 			newCPDisplayLayout.getUserId());
-		Assert.assertEquals(existingCPDisplayLayout.getUserName(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getUserName(),
 			newCPDisplayLayout.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPDisplayLayout.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPDisplayLayout.getCreateDate()),
 			Time.getShortTimestamp(newCPDisplayLayout.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPDisplayLayout.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPDisplayLayout.getModifiedDate()),
 			Time.getShortTimestamp(newCPDisplayLayout.getModifiedDate()));
-		Assert.assertEquals(existingCPDisplayLayout.getClassNameId(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getClassNameId(),
 			newCPDisplayLayout.getClassNameId());
-		Assert.assertEquals(existingCPDisplayLayout.getClassPK(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getClassPK(),
 			newCPDisplayLayout.getClassPK());
-		Assert.assertEquals(existingCPDisplayLayout.getLayoutUuid(),
+		Assert.assertEquals(
+			existingCPDisplayLayout.getLayoutUuid(),
 			newCPDisplayLayout.getLayoutUuid());
 	}
 
@@ -203,8 +212,8 @@ public class CPDisplayLayoutPersistenceTest {
 
 	@Test
 	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
 	}
@@ -213,7 +222,8 @@ public class CPDisplayLayoutPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
-		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
+		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(
+			newCPDisplayLayout.getPrimaryKey());
 
 		Assert.assertEquals(existingCPDisplayLayout, newCPDisplayLayout);
 	}
@@ -227,23 +237,24 @@ public class CPDisplayLayoutPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPDisplayLayout> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDisplayLayout", "uuid",
-			true, "CPDisplayLayoutId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "classNameId", true, "classPK", true,
-			"layoutUuid", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPDisplayLayout", "uuid", true, "CPDisplayLayoutId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "classNameId", true,
+			"classPK", true, "layoutUuid", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
-		CPDisplayLayout existingCPDisplayLayout = _persistence.fetchByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
+		CPDisplayLayout existingCPDisplayLayout =
+			_persistence.fetchByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
 
 		Assert.assertEquals(existingCPDisplayLayout, newCPDisplayLayout);
 	}
@@ -252,7 +263,8 @@ public class CPDisplayLayoutPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDisplayLayout missingCPDisplayLayout = _persistence.fetchByPrimaryKey(pk);
+		CPDisplayLayout missingCPDisplayLayout = _persistence.fetchByPrimaryKey(
+			pk);
 
 		Assert.assertNull(missingCPDisplayLayout);
 	}
@@ -260,6 +272,7 @@ public class CPDisplayLayoutPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPDisplayLayout newCPDisplayLayout1 = addCPDisplayLayout();
 		CPDisplayLayout newCPDisplayLayout2 = addCPDisplayLayout();
 
@@ -268,18 +281,22 @@ public class CPDisplayLayoutPersistenceTest {
 		primaryKeys.add(newCPDisplayLayout1.getPrimaryKey());
 		primaryKeys.add(newCPDisplayLayout2.getPrimaryKey());
 
-		Map<Serializable, CPDisplayLayout> cpDisplayLayouts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDisplayLayout> cpDisplayLayouts =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpDisplayLayouts.size());
-		Assert.assertEquals(newCPDisplayLayout1,
+		Assert.assertEquals(
+			newCPDisplayLayout1,
 			cpDisplayLayouts.get(newCPDisplayLayout1.getPrimaryKey()));
-		Assert.assertEquals(newCPDisplayLayout2,
+		Assert.assertEquals(
+			newCPDisplayLayout2,
 			cpDisplayLayouts.get(newCPDisplayLayout2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -289,7 +306,8 @@ public class CPDisplayLayoutPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDisplayLayout> cpDisplayLayouts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDisplayLayout> cpDisplayLayouts =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDisplayLayouts.isEmpty());
 	}
@@ -297,6 +315,7 @@ public class CPDisplayLayoutPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
 		long pk = RandomTestUtil.nextLong();
@@ -306,36 +325,39 @@ public class CPDisplayLayoutPersistenceTest {
 		primaryKeys.add(newCPDisplayLayout.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDisplayLayout> cpDisplayLayouts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDisplayLayout> cpDisplayLayouts =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDisplayLayouts.size());
-		Assert.assertEquals(newCPDisplayLayout,
+		Assert.assertEquals(
+			newCPDisplayLayout,
 			cpDisplayLayouts.get(newCPDisplayLayout.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDisplayLayout> cpDisplayLayouts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDisplayLayout> cpDisplayLayouts =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDisplayLayouts.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDisplayLayout.getPrimaryKey());
 
-		Map<Serializable, CPDisplayLayout> cpDisplayLayouts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDisplayLayout> cpDisplayLayouts =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDisplayLayouts.size());
-		Assert.assertEquals(newCPDisplayLayout,
+		Assert.assertEquals(
+			newCPDisplayLayout,
 			cpDisplayLayouts.get(newCPDisplayLayout.getPrimaryKey()));
 	}
 
@@ -343,15 +365,19 @@ public class CPDisplayLayoutPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDisplayLayoutLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDisplayLayoutLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDisplayLayout>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPDisplayLayout>() {
+
 				@Override
 				public void performAction(CPDisplayLayout cpDisplayLayout) {
 					Assert.assertNotNull(cpDisplayLayout);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -360,17 +386,19 @@ public class CPDisplayLayoutPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDisplayLayout.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDisplayLayout.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDisplayLayoutId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDisplayLayoutId",
 				newCPDisplayLayout.getCPDisplayLayoutId()));
 
-		List<CPDisplayLayout> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDisplayLayout> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -381,32 +409,34 @@ public class CPDisplayLayoutPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDisplayLayout.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDisplayLayout.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDisplayLayoutId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDisplayLayoutId", RandomTestUtil.nextLong()));
 
-		List<CPDisplayLayout> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDisplayLayout> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPDisplayLayout newCPDisplayLayout = addCPDisplayLayout();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDisplayLayout.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDisplayLayout.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDisplayLayoutId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDisplayLayoutId"));
 
 		Object newCPDisplayLayoutId = newCPDisplayLayout.getCPDisplayLayoutId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDisplayLayoutId",
-				new Object[] { newCPDisplayLayoutId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDisplayLayoutId", new Object[] {newCPDisplayLayoutId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -419,14 +449,15 @@ public class CPDisplayLayoutPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDisplayLayout.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDisplayLayout.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDisplayLayoutId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDisplayLayoutId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDisplayLayoutId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDisplayLayoutId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -439,22 +470,31 @@ public class CPDisplayLayoutPersistenceTest {
 
 		_persistence.clearCache();
 
-		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(newCPDisplayLayout.getPrimaryKey());
+		CPDisplayLayout existingCPDisplayLayout = _persistence.findByPrimaryKey(
+			newCPDisplayLayout.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPDisplayLayout.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDisplayLayout,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPDisplayLayout.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDisplayLayout,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPDisplayLayout.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPDisplayLayout, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDisplayLayout.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDisplayLayout, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDisplayLayout.getClassNameId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDisplayLayout,
-				"getOriginalClassNameId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(existingCPDisplayLayout.getClassPK()),
-			ReflectionTestUtil.<Long>invoke(existingCPDisplayLayout,
-				"getOriginalClassPK", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDisplayLayout.getClassNameId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDisplayLayout, "getOriginalClassNameId",
+				new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDisplayLayout.getClassPK()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDisplayLayout, "getOriginalClassPK",
+				new Class<?>[0]));
 	}
 
 	protected CPDisplayLayout addCPDisplayLayout() throws Exception {
@@ -487,7 +527,9 @@ public class CPDisplayLayoutPersistenceTest {
 		return cpDisplayLayout;
 	}
 
-	private List<CPDisplayLayout> _cpDisplayLayouts = new ArrayList<CPDisplayLayout>();
+	private List<CPDisplayLayout> _cpDisplayLayouts =
+		new ArrayList<CPDisplayLayout>();
 	private CPDisplayLayoutPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

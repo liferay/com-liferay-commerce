@@ -17,9 +17,7 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceRegionWrapper implements CommerceRegion,
-	ModelWrapper<CommerceRegion> {
+public class CommerceRegionWrapper
+	implements CommerceRegion, ModelWrapper<CommerceRegion> {
+
 	public CommerceRegionWrapper(CommerceRegion commerceRegion) {
 		_commerceRegion = commerceRegion;
 	}
@@ -167,7 +166,8 @@ public class CommerceRegionWrapper implements CommerceRegion,
 
 	@Override
 	public Object clone() {
-		return new CommerceRegionWrapper((CommerceRegion)_commerceRegion.clone());
+		return new CommerceRegionWrapper(
+			(CommerceRegion)_commerceRegion.clone());
 	}
 
 	@Override
@@ -176,20 +176,20 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Returns the active of this commerce region.
-	*
-	* @return the active of this commerce region
-	*/
+	 * Returns the active of this commerce region.
+	 *
+	 * @return the active of this commerce region
+	 */
 	@Override
 	public boolean getActive() {
 		return _commerceRegion.getActive();
 	}
 
 	/**
-	* Returns the code of this commerce region.
-	*
-	* @return the code of this commerce region
-	*/
+	 * Returns the code of this commerce region.
+	 *
+	 * @return the code of this commerce region
+	 */
 	@Override
 	public String getCode() {
 		return _commerceRegion.getCode();
@@ -198,44 +198,45 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	@Override
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _commerceRegion.getCommerceCountry();
 	}
 
 	/**
-	* Returns the commerce country ID of this commerce region.
-	*
-	* @return the commerce country ID of this commerce region
-	*/
+	 * Returns the commerce country ID of this commerce region.
+	 *
+	 * @return the commerce country ID of this commerce region
+	 */
 	@Override
 	public long getCommerceCountryId() {
 		return _commerceRegion.getCommerceCountryId();
 	}
 
 	/**
-	* Returns the commerce region ID of this commerce region.
-	*
-	* @return the commerce region ID of this commerce region
-	*/
+	 * Returns the commerce region ID of this commerce region.
+	 *
+	 * @return the commerce region ID of this commerce region
+	 */
 	@Override
 	public long getCommerceRegionId() {
 		return _commerceRegion.getCommerceRegionId();
 	}
 
 	/**
-	* Returns the company ID of this commerce region.
-	*
-	* @return the company ID of this commerce region
-	*/
+	 * Returns the company ID of this commerce region.
+	 *
+	 * @return the company ID of this commerce region
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceRegion.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce region.
-	*
-	* @return the create date of this commerce region
-	*/
+	 * Returns the create date of this commerce region.
+	 *
+	 * @return the create date of this commerce region
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceRegion.getCreateDate();
@@ -247,50 +248,50 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Returns the group ID of this commerce region.
-	*
-	* @return the group ID of this commerce region
-	*/
+	 * Returns the group ID of this commerce region.
+	 *
+	 * @return the group ID of this commerce region
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceRegion.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce region.
-	*
-	* @return the last publish date of this commerce region
-	*/
+	 * Returns the last publish date of this commerce region.
+	 *
+	 * @return the last publish date of this commerce region
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commerceRegion.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this commerce region.
-	*
-	* @return the modified date of this commerce region
-	*/
+	 * Returns the modified date of this commerce region.
+	 *
+	 * @return the modified date of this commerce region
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceRegion.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce region.
-	*
-	* @return the name of this commerce region
-	*/
+	 * Returns the name of this commerce region.
+	 *
+	 * @return the name of this commerce region
+	 */
 	@Override
 	public String getName() {
 		return _commerceRegion.getName();
 	}
 
 	/**
-	* Returns the primary key of this commerce region.
-	*
-	* @return the primary key of this commerce region
-	*/
+	 * Returns the primary key of this commerce region.
+	 *
+	 * @return the primary key of this commerce region
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceRegion.getPrimaryKey();
@@ -302,50 +303,50 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Returns the priority of this commerce region.
-	*
-	* @return the priority of this commerce region
-	*/
+	 * Returns the priority of this commerce region.
+	 *
+	 * @return the priority of this commerce region
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceRegion.getPriority();
 	}
 
 	/**
-	* Returns the user ID of this commerce region.
-	*
-	* @return the user ID of this commerce region
-	*/
+	 * Returns the user ID of this commerce region.
+	 *
+	 * @return the user ID of this commerce region
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceRegion.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce region.
-	*
-	* @return the user name of this commerce region
-	*/
+	 * Returns the user name of this commerce region.
+	 *
+	 * @return the user name of this commerce region
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceRegion.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce region.
-	*
-	* @return the user uuid of this commerce region
-	*/
+	 * Returns the user uuid of this commerce region.
+	 *
+	 * @return the user uuid of this commerce region
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceRegion.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce region.
-	*
-	* @return the uuid of this commerce region
-	*/
+	 * Returns the uuid of this commerce region.
+	 *
+	 * @return the uuid of this commerce region
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceRegion.getUuid();
@@ -357,10 +358,10 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce region is active.
-	*
-	* @return <code>true</code> if this commerce region is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce region is active.
+	 *
+	 * @return <code>true</code> if this commerce region is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commerceRegion.isActive();
@@ -387,10 +388,10 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Sets whether this commerce region is active.
-	*
-	* @param active the active of this commerce region
-	*/
+	 * Sets whether this commerce region is active.
+	 *
+	 * @param active the active of this commerce region
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commerceRegion.setActive(active);
@@ -402,50 +403,50 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Sets the code of this commerce region.
-	*
-	* @param code the code of this commerce region
-	*/
+	 * Sets the code of this commerce region.
+	 *
+	 * @param code the code of this commerce region
+	 */
 	@Override
 	public void setCode(String code) {
 		_commerceRegion.setCode(code);
 	}
 
 	/**
-	* Sets the commerce country ID of this commerce region.
-	*
-	* @param commerceCountryId the commerce country ID of this commerce region
-	*/
+	 * Sets the commerce country ID of this commerce region.
+	 *
+	 * @param commerceCountryId the commerce country ID of this commerce region
+	 */
 	@Override
 	public void setCommerceCountryId(long commerceCountryId) {
 		_commerceRegion.setCommerceCountryId(commerceCountryId);
 	}
 
 	/**
-	* Sets the commerce region ID of this commerce region.
-	*
-	* @param commerceRegionId the commerce region ID of this commerce region
-	*/
+	 * Sets the commerce region ID of this commerce region.
+	 *
+	 * @param commerceRegionId the commerce region ID of this commerce region
+	 */
 	@Override
 	public void setCommerceRegionId(long commerceRegionId) {
 		_commerceRegion.setCommerceRegionId(commerceRegionId);
 	}
 
 	/**
-	* Sets the company ID of this commerce region.
-	*
-	* @param companyId the company ID of this commerce region
-	*/
+	 * Sets the company ID of this commerce region.
+	 *
+	 * @param companyId the company ID of this commerce region
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceRegion.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce region.
-	*
-	* @param createDate the create date of this commerce region
-	*/
+	 * Sets the create date of this commerce region.
+	 *
+	 * @param createDate the create date of this commerce region
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceRegion.setCreateDate(createDate);
@@ -454,6 +455,7 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceRegion.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -468,40 +470,40 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Sets the group ID of this commerce region.
-	*
-	* @param groupId the group ID of this commerce region
-	*/
+	 * Sets the group ID of this commerce region.
+	 *
+	 * @param groupId the group ID of this commerce region
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceRegion.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce region.
-	*
-	* @param lastPublishDate the last publish date of this commerce region
-	*/
+	 * Sets the last publish date of this commerce region.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce region
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commerceRegion.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this commerce region.
-	*
-	* @param modifiedDate the modified date of this commerce region
-	*/
+	 * Sets the modified date of this commerce region.
+	 *
+	 * @param modifiedDate the modified date of this commerce region
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceRegion.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce region.
-	*
-	* @param name the name of this commerce region
-	*/
+	 * Sets the name of this commerce region.
+	 *
+	 * @param name the name of this commerce region
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceRegion.setName(name);
@@ -513,10 +515,10 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Sets the primary key of this commerce region.
-	*
-	* @param primaryKey the primary key of this commerce region
-	*/
+	 * Sets the primary key of this commerce region.
+	 *
+	 * @param primaryKey the primary key of this commerce region
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceRegion.setPrimaryKey(primaryKey);
@@ -528,57 +530,59 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	/**
-	* Sets the priority of this commerce region.
-	*
-	* @param priority the priority of this commerce region
-	*/
+	 * Sets the priority of this commerce region.
+	 *
+	 * @param priority the priority of this commerce region
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceRegion.setPriority(priority);
 	}
 
 	/**
-	* Sets the user ID of this commerce region.
-	*
-	* @param userId the user ID of this commerce region
-	*/
+	 * Sets the user ID of this commerce region.
+	 *
+	 * @param userId the user ID of this commerce region
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceRegion.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce region.
-	*
-	* @param userName the user name of this commerce region
-	*/
+	 * Sets the user name of this commerce region.
+	 *
+	 * @param userName the user name of this commerce region
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceRegion.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce region.
-	*
-	* @param userUuid the user uuid of this commerce region
-	*/
+	 * Sets the user uuid of this commerce region.
+	 *
+	 * @param userUuid the user uuid of this commerce region
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceRegion.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce region.
-	*
-	* @param uuid the uuid of this commerce region
-	*/
+	 * Sets the uuid of this commerce region.
+	 *
+	 * @param uuid the uuid of this commerce region
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceRegion.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceRegion> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceRegion>
+		toCacheModel() {
+
 		return _commerceRegion.toCacheModel();
 	}
 
@@ -612,10 +616,12 @@ public class CommerceRegionWrapper implements CommerceRegion,
 			return false;
 		}
 
-		CommerceRegionWrapper commerceRegionWrapper = (CommerceRegionWrapper)obj;
+		CommerceRegionWrapper commerceRegionWrapper =
+			(CommerceRegionWrapper)obj;
 
-		if (Objects.equals(_commerceRegion,
-					commerceRegionWrapper._commerceRegion)) {
+		if (Objects.equals(
+				_commerceRegion, commerceRegionWrapper._commerceRegion)) {
+
 			return true;
 		}
 
@@ -648,4 +654,5 @@ public class CommerceRegionWrapper implements CommerceRegion,
 	}
 
 	private final CommerceRegion _commerceRegion;
+
 }

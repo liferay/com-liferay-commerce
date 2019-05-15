@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,40 +38,51 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceDiscountUserSegmentRelServiceUtil
- * @see com.liferay.commerce.discount.service.base.CommerceDiscountUserSegmentRelServiceBaseImpl
- * @see com.liferay.commerce.discount.service.impl.CommerceDiscountUserSegmentRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceDiscountUserSegmentRel"}, service = CommerceDiscountUserSegmentRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceDiscountUserSegmentRel"
+	},
+	service = CommerceDiscountUserSegmentRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceDiscountUserSegmentRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountUserSegmentRelServiceUtil} to access the commerce discount user segment rel remote service. Add custom service methods to {@link com.liferay.commerce.discount.service.impl.CommerceDiscountUserSegmentRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountUserSegmentRelServiceUtil} to access the commerce discount user segment rel remote service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountUserSegmentRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceDiscountUserSegmentRel addCommerceDiscountUserSegmentRel(
-		long commerceDiscountId, long commerceUserSegmentEntryId,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceDiscountId, long commerceUserSegmentEntryId,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceDiscountUserSegmentRel(
-		long commerceDiscountUserSegmentRelId) throws PortalException;
+			long commerceDiscountUserSegmentRelId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels(
-		long commerceDiscountId, int start, int end,
-		OrderByComparator<CommerceDiscountUserSegmentRel> orderByComparator)
+	public List<CommerceDiscountUserSegmentRel>
+			getCommerceDiscountUserSegmentRels(
+				long commerceDiscountId, int start, int end,
+				OrderByComparator<CommerceDiscountUserSegmentRel>
+					orderByComparator)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -34,12 +33,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAccountOrganizationRel in entity cache.
  *
  * @author Marco Leo
- * @see CommerceAccountOrganizationRel
  * @generated
  */
 @ProviderType
-public class CommerceAccountOrganizationRelCacheModel implements CacheModel<CommerceAccountOrganizationRel>,
-	Externalizable {
+public class CommerceAccountOrganizationRelCacheModel
+	implements CacheModel<CommerceAccountOrganizationRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -50,11 +49,14 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 			return false;
 		}
 
-		CommerceAccountOrganizationRelCacheModel commerceAccountOrganizationRelCacheModel =
-			(CommerceAccountOrganizationRelCacheModel)obj;
+		CommerceAccountOrganizationRelCacheModel
+			commerceAccountOrganizationRelCacheModel =
+				(CommerceAccountOrganizationRelCacheModel)obj;
 
 		if (commerceAccountOrganizationRelPK.equals(
-					commerceAccountOrganizationRelCacheModel.commerceAccountOrganizationRelPK)) {
+				commerceAccountOrganizationRelCacheModel.
+					commerceAccountOrganizationRelPK)) {
+
 			return true;
 		}
 
@@ -91,9 +93,11 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 
 	@Override
 	public CommerceAccountOrganizationRel toEntityModel() {
-		CommerceAccountOrganizationRelImpl commerceAccountOrganizationRelImpl = new CommerceAccountOrganizationRelImpl();
+		CommerceAccountOrganizationRelImpl commerceAccountOrganizationRelImpl =
+			new CommerceAccountOrganizationRelImpl();
 
-		commerceAccountOrganizationRelImpl.setCommerceAccountId(commerceAccountId);
+		commerceAccountOrganizationRelImpl.setCommerceAccountId(
+			commerceAccountId);
 		commerceAccountOrganizationRelImpl.setOrganizationId(organizationId);
 		commerceAccountOrganizationRelImpl.setCompanyId(companyId);
 		commerceAccountOrganizationRelImpl.setUserId(userId);
@@ -109,16 +113,16 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 			commerceAccountOrganizationRelImpl.setCreateDate(null);
 		}
 		else {
-			commerceAccountOrganizationRelImpl.setCreateDate(new Date(
-					createDate));
+			commerceAccountOrganizationRelImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceAccountOrganizationRelImpl.setModifiedDate(null);
 		}
 		else {
-			commerceAccountOrganizationRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceAccountOrganizationRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		commerceAccountOrganizationRelImpl.resetOriginalValues();
@@ -139,13 +143,12 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceAccountOrganizationRelPK = new CommerceAccountOrganizationRelPK(commerceAccountId,
-				organizationId);
+		commerceAccountOrganizationRelPK = new CommerceAccountOrganizationRelPK(
+			commerceAccountId, organizationId);
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceAccountId);
 
 		objectOutput.writeLong(organizationId);
@@ -172,5 +175,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public transient CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK;
+	public transient CommerceAccountOrganizationRelPK
+		commerceAccountOrganizationRelPK;
+
 }

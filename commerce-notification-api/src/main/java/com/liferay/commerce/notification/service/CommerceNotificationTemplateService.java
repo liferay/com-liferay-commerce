@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,47 +40,55 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationTemplateServiceUtil
- * @see com.liferay.commerce.notification.service.base.CommerceNotificationTemplateServiceBaseImpl
- * @see com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceNotificationTemplate"}, service = CommerceNotificationTemplateService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceNotificationTemplate"
+	},
+	service = CommerceNotificationTemplateService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceNotificationTemplateService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateServiceUtil} to access the commerce notification template remote service. Add custom service methods to {@link com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateServiceUtil} to access the commerce notification template remote service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceNotificationTemplate addCommerceNotificationTemplate(
-		String name, String description, String from,
-		Map<Locale, String> fromNameMap, String cc, String bcc, String type,
-		boolean enabled, Map<Locale, String> subjectMap,
-		Map<Locale, String> bodyMap, ServiceContext serviceContext)
+			String name, String description, String from,
+			Map<Locale, String> fromNameMap, String cc, String bcc, String type,
+			boolean enabled, Map<Locale, String> subjectMap,
+			Map<Locale, String> bodyMap, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceNotificationTemplate(
-		long commerceNotificationTemplateId) throws PortalException;
+			long commerceNotificationTemplateId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceNotificationTemplate getCommerceNotificationTemplate(
-		long commerceNotificationTemplateId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceNotificationTemplate> getCommerceNotificationTemplates(
-		long groupId, boolean enabled, int start, int end,
-		OrderByComparator<CommerceNotificationTemplate> orderByComparator)
+			long commerceNotificationTemplateId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceNotificationTemplate> getCommerceNotificationTemplates(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplate> orderByComparator)
+			long groupId, boolean enabled, int start, int end,
+			OrderByComparator<CommerceNotificationTemplate> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceNotificationTemplate> getCommerceNotificationTemplates(
+			long groupId, int start, int end,
+			OrderByComparator<CommerceNotificationTemplate> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -89,20 +96,23 @@ public interface CommerceNotificationTemplateService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceNotificationTemplatesCount(long groupId,
-		boolean enabled) throws PortalException;
+	public int getCommerceNotificationTemplatesCount(
+			long groupId, boolean enabled)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceNotificationTemplate updateCommerceNotificationTemplate(
-		long commerceNotificationTemplateId, String name, String description,
-		String from, Map<Locale, String> fromNameMap, String cc, String bcc,
-		String type, boolean enabled, Map<Locale, String> subjectMap,
-		Map<Locale, String> bodyMap, ServiceContext serviceContext)
+			long commerceNotificationTemplateId, String name,
+			String description, String from, Map<Locale, String> fromNameMap,
+			String cc, String bcc, String type, boolean enabled,
+			Map<Locale, String> subjectMap, Map<Locale, String> bodyMap,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

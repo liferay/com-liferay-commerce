@@ -22,7 +22,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommercePriceListFinder {
-	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceList> findByExpirationDate(
-		java.util.Date expirationDate,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.price.list.model.CommercePriceList> queryDefinition);
+
+	public java.util.List
+		<com.liferay.commerce.price.list.model.CommercePriceList>
+			findByExpirationDate(
+				java.util.Date expirationDate,
+				com.liferay.portal.kernel.dao.orm.QueryDefinition
+					<com.liferay.commerce.price.list.model.CommercePriceList>
+						queryDefinition);
+
 }

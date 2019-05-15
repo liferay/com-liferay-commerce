@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceShipmentServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceShipmentServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceShipmentSoap implements Serializable {
+
 	public static CommerceShipmentSoap toSoapModel(CommerceShipment model) {
 		CommerceShipmentSoap soapModel = new CommerceShipmentSoap();
 
@@ -43,7 +43,8 @@ public class CommerceShipmentSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceAccountId(model.getCommerceAccountId());
 		soapModel.setCommerceAddressId(model.getCommerceAddressId());
-		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
+		soapModel.setCommerceShippingMethodId(
+			model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
 		soapModel.setCarrier(model.getCarrier());
 		soapModel.setTrackingNumber(model.getTrackingNumber());
@@ -54,8 +55,11 @@ public class CommerceShipmentSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CommerceShipmentSoap[] toSoapModels(CommerceShipment[] models) {
-		CommerceShipmentSoap[] soapModels = new CommerceShipmentSoap[models.length];
+	public static CommerceShipmentSoap[] toSoapModels(
+		CommerceShipment[] models) {
+
+		CommerceShipmentSoap[] soapModels =
+			new CommerceShipmentSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -66,10 +70,12 @@ public class CommerceShipmentSoap implements Serializable {
 
 	public static CommerceShipmentSoap[][] toSoapModels(
 		CommerceShipment[][] models) {
+
 		CommerceShipmentSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceShipmentSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceShipmentSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceShipmentSoap[0][0];
@@ -84,7 +90,9 @@ public class CommerceShipmentSoap implements Serializable {
 
 	public static CommerceShipmentSoap[] toSoapModels(
 		List<CommerceShipment> models) {
-		List<CommerceShipmentSoap> soapModels = new ArrayList<CommerceShipmentSoap>(models.size());
+
+		List<CommerceShipmentSoap> soapModels =
+			new ArrayList<CommerceShipmentSoap>(models.size());
 
 		for (CommerceShipment model : models) {
 			soapModels.add(toSoapModel(model));
@@ -248,4 +256,5 @@ public class CommerceShipmentSoap implements Serializable {
 	private int _status;
 	private Date _shippingDate;
 	private Date _expectedDate;
+
 }

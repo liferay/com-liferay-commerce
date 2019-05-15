@@ -22,7 +22,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CPAttachmentFileEntryFinder {
-	public java.util.List<com.liferay.commerce.product.model.CPAttachmentFileEntry> findByExpirationDate(
-		java.util.Date expirationDate,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.product.model.CPAttachmentFileEntry> queryDefinition);
+
+	public java.util.List
+		<com.liferay.commerce.product.model.CPAttachmentFileEntry>
+			findByExpirationDate(
+				java.util.Date expirationDate,
+				com.liferay.portal.kernel.dao.orm.QueryDefinition
+					<com.liferay.commerce.product.model.CPAttachmentFileEntry>
+						queryDefinition);
+
 }

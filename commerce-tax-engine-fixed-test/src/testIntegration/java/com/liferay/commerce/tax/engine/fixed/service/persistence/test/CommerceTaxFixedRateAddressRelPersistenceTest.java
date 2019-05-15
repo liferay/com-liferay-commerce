@@ -15,13 +15,11 @@
 package com.liferay.commerce.tax.engine.fixed.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.tax.engine.fixed.exception.NoSuchTaxFixedRateAddressRelException;
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalServiceUtil;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelPersistence;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -58,16 +47,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceTaxFixedRateAddressRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.tax.engine.fixed.service"));
 
 	@Before
@@ -81,7 +81,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceTaxFixedRateAddressRel> iterator = _commerceTaxFixedRateAddressRels.iterator();
+		Iterator<CommerceTaxFixedRateAddressRel> iterator =
+			_commerceTaxFixedRateAddressRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -94,7 +95,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel = _persistence.create(pk);
+		CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceTaxFixedRateAddressRel);
 
@@ -103,11 +105,14 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
 		_persistence.remove(newCommerceTaxFixedRateAddressRel);
 
-		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel = _persistence.fetchByPrimaryKey(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
+		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceTaxFixedRateAddressRel);
 	}
@@ -121,66 +126,92 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = _persistence.create(pk);
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			_persistence.create(pk);
 
 		newCommerceTaxFixedRateAddressRel.setGroupId(RandomTestUtil.nextLong());
 
-		newCommerceTaxFixedRateAddressRel.setCompanyId(RandomTestUtil.nextLong());
+		newCommerceTaxFixedRateAddressRel.setCompanyId(
+			RandomTestUtil.nextLong());
 
 		newCommerceTaxFixedRateAddressRel.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceTaxFixedRateAddressRel.setUserName(RandomTestUtil.randomString());
+		newCommerceTaxFixedRateAddressRel.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceTaxFixedRateAddressRel.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceTaxFixedRateAddressRel.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceTaxFixedRateAddressRel.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceTaxFixedRateAddressRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceTaxFixedRateAddressRel.setCommerceTaxMethodId(RandomTestUtil.nextLong());
+		newCommerceTaxFixedRateAddressRel.setCommerceTaxMethodId(
+			RandomTestUtil.nextLong());
 
-		newCommerceTaxFixedRateAddressRel.setCPTaxCategoryId(RandomTestUtil.nextLong());
+		newCommerceTaxFixedRateAddressRel.setCPTaxCategoryId(
+			RandomTestUtil.nextLong());
 
-		newCommerceTaxFixedRateAddressRel.setCommerceCountryId(RandomTestUtil.nextLong());
+		newCommerceTaxFixedRateAddressRel.setCommerceCountryId(
+			RandomTestUtil.nextLong());
 
-		newCommerceTaxFixedRateAddressRel.setCommerceRegionId(RandomTestUtil.nextLong());
+		newCommerceTaxFixedRateAddressRel.setCommerceRegionId(
+			RandomTestUtil.nextLong());
 
 		newCommerceTaxFixedRateAddressRel.setZip(RandomTestUtil.randomString());
 
 		newCommerceTaxFixedRateAddressRel.setRate(RandomTestUtil.nextDouble());
 
-		_commerceTaxFixedRateAddressRels.add(_persistence.update(
-				newCommerceTaxFixedRateAddressRel));
+		_commerceTaxFixedRateAddressRels.add(
+			_persistence.update(newCommerceTaxFixedRateAddressRel));
 
-		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel = _persistence.findByPrimaryKey(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
+		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel =
+			_persistence.findByPrimaryKey(
+				newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCommerceTaxFixedRateAddressRelId(),
-			newCommerceTaxFixedRateAddressRel.getCommerceTaxFixedRateAddressRelId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.
+				getCommerceTaxFixedRateAddressRelId(),
+			newCommerceTaxFixedRateAddressRel.
+				getCommerceTaxFixedRateAddressRelId());
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getGroupId(),
 			newCommerceTaxFixedRateAddressRel.getGroupId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getCompanyId(),
 			newCommerceTaxFixedRateAddressRel.getCompanyId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getUserId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getUserId(),
 			newCommerceTaxFixedRateAddressRel.getUserId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getUserName(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getUserName(),
 			newCommerceTaxFixedRateAddressRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceTaxFixedRateAddressRel.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceTaxFixedRateAddressRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceTaxFixedRateAddressRel.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceTaxFixedRateAddressRel.getModifiedDate()));
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCommerceTaxMethodId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getCommerceTaxMethodId(),
 			newCommerceTaxFixedRateAddressRel.getCommerceTaxMethodId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCPTaxCategoryId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getCPTaxCategoryId(),
 			newCommerceTaxFixedRateAddressRel.getCPTaxCategoryId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCommerceCountryId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getCommerceCountryId(),
 			newCommerceTaxFixedRateAddressRel.getCommerceCountryId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getCommerceRegionId(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getCommerceRegionId(),
 			newCommerceTaxFixedRateAddressRel.getCommerceRegionId());
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel.getZip(),
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getZip(),
 			newCommerceTaxFixedRateAddressRel.getZip());
-		AssertUtils.assertEquals(existingCommerceTaxFixedRateAddressRel.getRate(),
+		AssertUtils.assertEquals(
+			existingCommerceTaxFixedRateAddressRel.getRate(),
 			newCommerceTaxFixedRateAddressRel.getRate());
 	}
 
@@ -200,11 +231,15 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
-		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel = _persistence.findByPrimaryKey(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
+		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel =
+			_persistence.findByPrimaryKey(
+				newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel,
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel,
 			newCommerceTaxFixedRateAddressRel);
 	}
 
@@ -217,12 +252,15 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceTaxFixedRateAddressRel> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceTaxFixedRateAddressRel",
+	protected OrderByComparator<CommerceTaxFixedRateAddressRel>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceTaxFixedRateAddressRel",
 			"commerceTaxFixedRateAddressRelId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "commerceTaxMethodId", true,
@@ -232,11 +270,15 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
-		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel = _persistence.fetchByPrimaryKey(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
+		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel,
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel,
 			newCommerceTaxFixedRateAddressRel);
 	}
 
@@ -244,7 +286,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTaxFixedRateAddressRel missingCommerceTaxFixedRateAddressRel = _persistence.fetchByPrimaryKey(pk);
+		CommerceTaxFixedRateAddressRel missingCommerceTaxFixedRateAddressRel =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceTaxFixedRateAddressRel);
 	}
@@ -252,22 +295,28 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel1 = addCommerceTaxFixedRateAddressRel();
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel2 = addCommerceTaxFixedRateAddressRel();
+
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel1 =
+			addCommerceTaxFixedRateAddressRel();
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel2 =
+			addCommerceTaxFixedRateAddressRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceTaxFixedRateAddressRel1.getPrimaryKey());
 		primaryKeys.add(newCommerceTaxFixedRateAddressRel2.getPrimaryKey());
 
-		Map<Serializable, CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTaxFixedRateAddressRel>
+			commerceTaxFixedRateAddressRels = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceTaxFixedRateAddressRels.size());
-		Assert.assertEquals(newCommerceTaxFixedRateAddressRel1,
+		Assert.assertEquals(
+			newCommerceTaxFixedRateAddressRel1,
 			commerceTaxFixedRateAddressRels.get(
 				newCommerceTaxFixedRateAddressRel1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceTaxFixedRateAddressRel2,
+		Assert.assertEquals(
+			newCommerceTaxFixedRateAddressRel2,
 			commerceTaxFixedRateAddressRels.get(
 				newCommerceTaxFixedRateAddressRel2.getPrimaryKey()));
 	}
@@ -275,6 +324,7 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -284,8 +334,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTaxFixedRateAddressRel>
+			commerceTaxFixedRateAddressRels = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceTaxFixedRateAddressRels.isEmpty());
 	}
@@ -293,7 +344,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -302,40 +355,44 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 		primaryKeys.add(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTaxFixedRateAddressRel>
+			commerceTaxFixedRateAddressRels = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceTaxFixedRateAddressRels.size());
-		Assert.assertEquals(newCommerceTaxFixedRateAddressRel,
+		Assert.assertEquals(
+			newCommerceTaxFixedRateAddressRel,
 			commerceTaxFixedRateAddressRels.get(
 				newCommerceTaxFixedRateAddressRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTaxFixedRateAddressRel>
+			commerceTaxFixedRateAddressRels = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceTaxFixedRateAddressRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceTaxFixedRateAddressRel.getPrimaryKey());
 
-		Map<Serializable, CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRels =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceTaxFixedRateAddressRel>
+			commerceTaxFixedRateAddressRels = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceTaxFixedRateAddressRels.size());
-		Assert.assertEquals(newCommerceTaxFixedRateAddressRel,
+		Assert.assertEquals(
+			newCommerceTaxFixedRateAddressRel,
 			commerceTaxFixedRateAddressRels.get(
 				newCommerceTaxFixedRateAddressRel.getPrimaryKey()));
 	}
@@ -344,16 +401,24 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceTaxFixedRateAddressRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceTaxFixedRateAddressRelLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceTaxFixedRateAddressRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceTaxFixedRateAddressRel>() {
+
 				@Override
 				public void performAction(
-					CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel) {
+					CommerceTaxFixedRateAddressRel
+						commerceTaxFixedRateAddressRel) {
+
 					Assert.assertNotNull(commerceTaxFixedRateAddressRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -362,56 +427,66 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTaxFixedRateAddressRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTaxFixedRateAddressRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceTaxFixedRateAddressRelId",
-				newCommerceTaxFixedRateAddressRel.getCommerceTaxFixedRateAddressRelId()));
+				newCommerceTaxFixedRateAddressRel.
+					getCommerceTaxFixedRateAddressRelId()));
 
-		List<CommerceTaxFixedRateAddressRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceTaxFixedRateAddressRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel = result.get(0);
+		CommerceTaxFixedRateAddressRel existingCommerceTaxFixedRateAddressRel =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRel,
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRel,
 			newCommerceTaxFixedRateAddressRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTaxFixedRateAddressRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTaxFixedRateAddressRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceTaxFixedRateAddressRelId", RandomTestUtil.nextLong()));
 
-		List<CommerceTaxFixedRateAddressRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceTaxFixedRateAddressRel> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel = addCommerceTaxFixedRateAddressRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceTaxFixedRateAddressRel newCommerceTaxFixedRateAddressRel =
+			addCommerceTaxFixedRateAddressRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTaxFixedRateAddressRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTaxFixedRateAddressRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceTaxFixedRateAddressRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceTaxFixedRateAddressRelId"));
 
-		Object newCommerceTaxFixedRateAddressRelId = newCommerceTaxFixedRateAddressRel.getCommerceTaxFixedRateAddressRelId();
+		Object newCommerceTaxFixedRateAddressRelId =
+			newCommerceTaxFixedRateAddressRel.
+				getCommerceTaxFixedRateAddressRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceTaxFixedRateAddressRelId",
-				new Object[] { newCommerceTaxFixedRateAddressRelId }));
+				new Object[] {newCommerceTaxFixedRateAddressRelId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -419,21 +494,23 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 		Object existingCommerceTaxFixedRateAddressRelId = result.get(0);
 
-		Assert.assertEquals(existingCommerceTaxFixedRateAddressRelId,
+		Assert.assertEquals(
+			existingCommerceTaxFixedRateAddressRelId,
 			newCommerceTaxFixedRateAddressRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceTaxFixedRateAddressRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceTaxFixedRateAddressRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceTaxFixedRateAddressRelId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceTaxFixedRateAddressRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceTaxFixedRateAddressRelId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -442,9 +519,11 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 	protected CommerceTaxFixedRateAddressRel addCommerceTaxFixedRateAddressRel()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel = _persistence.create(pk);
+		CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel =
+			_persistence.create(pk);
 
 		commerceTaxFixedRateAddressRel.setGroupId(RandomTestUtil.nextLong());
 
@@ -452,32 +531,40 @@ public class CommerceTaxFixedRateAddressRelPersistenceTest {
 
 		commerceTaxFixedRateAddressRel.setUserId(RandomTestUtil.nextLong());
 
-		commerceTaxFixedRateAddressRel.setUserName(RandomTestUtil.randomString());
+		commerceTaxFixedRateAddressRel.setUserName(
+			RandomTestUtil.randomString());
 
 		commerceTaxFixedRateAddressRel.setCreateDate(RandomTestUtil.nextDate());
 
-		commerceTaxFixedRateAddressRel.setModifiedDate(RandomTestUtil.nextDate());
+		commerceTaxFixedRateAddressRel.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		commerceTaxFixedRateAddressRel.setCommerceTaxMethodId(RandomTestUtil.nextLong());
+		commerceTaxFixedRateAddressRel.setCommerceTaxMethodId(
+			RandomTestUtil.nextLong());
 
-		commerceTaxFixedRateAddressRel.setCPTaxCategoryId(RandomTestUtil.nextLong());
+		commerceTaxFixedRateAddressRel.setCPTaxCategoryId(
+			RandomTestUtil.nextLong());
 
-		commerceTaxFixedRateAddressRel.setCommerceCountryId(RandomTestUtil.nextLong());
+		commerceTaxFixedRateAddressRel.setCommerceCountryId(
+			RandomTestUtil.nextLong());
 
-		commerceTaxFixedRateAddressRel.setCommerceRegionId(RandomTestUtil.nextLong());
+		commerceTaxFixedRateAddressRel.setCommerceRegionId(
+			RandomTestUtil.nextLong());
 
 		commerceTaxFixedRateAddressRel.setZip(RandomTestUtil.randomString());
 
 		commerceTaxFixedRateAddressRel.setRate(RandomTestUtil.nextDouble());
 
-		_commerceTaxFixedRateAddressRels.add(_persistence.update(
-				commerceTaxFixedRateAddressRel));
+		_commerceTaxFixedRateAddressRels.add(
+			_persistence.update(commerceTaxFixedRateAddressRel));
 
 		return commerceTaxFixedRateAddressRel;
 	}
 
-	private List<CommerceTaxFixedRateAddressRel> _commerceTaxFixedRateAddressRels =
-		new ArrayList<CommerceTaxFixedRateAddressRel>();
+	private List<CommerceTaxFixedRateAddressRel>
+		_commerceTaxFixedRateAddressRels =
+			new ArrayList<CommerceTaxFixedRateAddressRel>();
 	private CommerceTaxFixedRateAddressRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

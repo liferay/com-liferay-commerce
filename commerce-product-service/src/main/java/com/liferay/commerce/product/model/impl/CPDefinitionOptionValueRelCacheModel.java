@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionOptionValueRel in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionOptionValueRel
  * @generated
  */
 @ProviderType
-public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefinitionOptionValueRel>,
-	Externalizable {
+public class CPDefinitionOptionValueRelCacheModel
+	implements CacheModel<CPDefinitionOptionValueRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 			return false;
 		}
 
-		CPDefinitionOptionValueRelCacheModel cpDefinitionOptionValueRelCacheModel =
-			(CPDefinitionOptionValueRelCacheModel)obj;
+		CPDefinitionOptionValueRelCacheModel
+			cpDefinitionOptionValueRelCacheModel =
+				(CPDefinitionOptionValueRelCacheModel)obj;
 
-		if (CPDefinitionOptionValueRelId == cpDefinitionOptionValueRelCacheModel.CPDefinitionOptionValueRelId) {
+		if (CPDefinitionOptionValueRelId ==
+				cpDefinitionOptionValueRelCacheModel.
+					CPDefinitionOptionValueRelId) {
+
 			return true;
 		}
 
@@ -99,7 +102,8 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 
 	@Override
 	public CPDefinitionOptionValueRel toEntityModel() {
-		CPDefinitionOptionValueRelImpl cpDefinitionOptionValueRelImpl = new CPDefinitionOptionValueRelImpl();
+		CPDefinitionOptionValueRelImpl cpDefinitionOptionValueRelImpl =
+			new CPDefinitionOptionValueRelImpl();
 
 		if (uuid == null) {
 			cpDefinitionOptionValueRelImpl.setUuid("");
@@ -108,7 +112,8 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 			cpDefinitionOptionValueRelImpl.setUuid(uuid);
 		}
 
-		cpDefinitionOptionValueRelImpl.setCPDefinitionOptionValueRelId(CPDefinitionOptionValueRelId);
+		cpDefinitionOptionValueRelImpl.setCPDefinitionOptionValueRelId(
+			CPDefinitionOptionValueRelId);
 		cpDefinitionOptionValueRelImpl.setGroupId(groupId);
 		cpDefinitionOptionValueRelImpl.setCompanyId(companyId);
 		cpDefinitionOptionValueRelImpl.setUserId(userId);
@@ -131,11 +136,12 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 			cpDefinitionOptionValueRelImpl.setModifiedDate(null);
 		}
 		else {
-			cpDefinitionOptionValueRelImpl.setModifiedDate(new Date(
-					modifiedDate));
+			cpDefinitionOptionValueRelImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		cpDefinitionOptionValueRelImpl.setCPDefinitionOptionRelId(CPDefinitionOptionRelId);
+		cpDefinitionOptionValueRelImpl.setCPDefinitionOptionRelId(
+			CPDefinitionOptionRelId);
 
 		if (name == null) {
 			cpDefinitionOptionValueRelImpl.setName("");
@@ -181,8 +187,7 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -239,4 +244,5 @@ public class CPDefinitionOptionValueRelCacheModel implements CacheModel<CPDefini
 	public String name;
 	public double priority;
 	public String key;
+
 }

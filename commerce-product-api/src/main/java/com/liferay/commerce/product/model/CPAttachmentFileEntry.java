@@ -25,37 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPAttachmentFileEntryModel
- * @see com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl
- * @see com.liferay.commerce.product.model.impl.CPAttachmentFileEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl"
+)
 @ProviderType
-public interface CPAttachmentFileEntry extends CPAttachmentFileEntryModel,
-	PersistedModel {
+public interface CPAttachmentFileEntry
+	extends CPAttachmentFileEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPAttachmentFileEntry, Long> CP_ATTACHMENT_FILE_ENTRY_ID_ACCESSOR =
-		new Accessor<CPAttachmentFileEntry, Long>() {
-			@Override
-			public Long get(CPAttachmentFileEntry cpAttachmentFileEntry) {
-				return cpAttachmentFileEntry.getCPAttachmentFileEntryId();
-			}
+	public static final Accessor<CPAttachmentFileEntry, Long>
+		CP_ATTACHMENT_FILE_ENTRY_ID_ACCESSOR =
+			new Accessor<CPAttachmentFileEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPAttachmentFileEntry cpAttachmentFileEntry) {
+					return cpAttachmentFileEntry.getCPAttachmentFileEntryId();
+				}
 
-			@Override
-			public Class<CPAttachmentFileEntry> getTypeClass() {
-				return CPAttachmentFileEntry.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPAttachmentFileEntry> getTypeClass() {
+					return CPAttachmentFileEntry.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

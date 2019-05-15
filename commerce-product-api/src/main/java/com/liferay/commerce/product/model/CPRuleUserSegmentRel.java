@@ -25,37 +25,43 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPRuleUserSegmentRelModel
- * @see com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl
- * @see com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl"
+)
 @ProviderType
-public interface CPRuleUserSegmentRel extends CPRuleUserSegmentRelModel,
-	PersistedModel {
+public interface CPRuleUserSegmentRel
+	extends CPRuleUserSegmentRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPRuleUserSegmentRel, Long> CP_RULE_USER_SEGMENT_REL_ID_ACCESSOR =
-		new Accessor<CPRuleUserSegmentRel, Long>() {
-			@Override
-			public Long get(CPRuleUserSegmentRel cpRuleUserSegmentRel) {
-				return cpRuleUserSegmentRel.getCPRuleUserSegmentRelId();
-			}
+	public static final Accessor<CPRuleUserSegmentRel, Long>
+		CP_RULE_USER_SEGMENT_REL_ID_ACCESSOR =
+			new Accessor<CPRuleUserSegmentRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPRuleUserSegmentRel cpRuleUserSegmentRel) {
+					return cpRuleUserSegmentRel.getCPRuleUserSegmentRelId();
+				}
 
-			@Override
-			public Class<CPRuleUserSegmentRel> getTypeClass() {
-				return CPRuleUserSegmentRel.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
 
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry getCommerceUserSegmentEntry()
+				@Override
+				public Class<CPRuleUserSegmentRel> getTypeClass() {
+					return CPRuleUserSegmentRel.class;
+				}
+
+			};
+
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry
+			getCommerceUserSegmentEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

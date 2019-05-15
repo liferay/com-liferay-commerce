@@ -21,7 +21,6 @@ import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryModelImpl;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,58 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CommerceDiscountUsageEntryPersistence
- * @see com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryUtil
  * @generated
  */
 @ProviderType
 public class CommerceDiscountUsageEntryPersistenceImpl
 	extends BasePersistenceImpl<CommerceDiscountUsageEntry>
 	implements CommerceDiscountUsageEntryPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceDiscountUsageEntryUtil} to access the commerce discount usage entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceDiscountUsageEntryUtil</code> to access the commerce discount usage entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceDiscountUsageEntryImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceDiscountUsageEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceDiscountUsageEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceDiscountUsageEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceDiscountUsageEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CommerceDiscountUsageEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceDiscountUsageEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByGroupId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceDiscountUsageEntryImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the commerce discount usage entries where groupId = &#63;.
@@ -123,14 +97,15 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public List<CommerceDiscountUsageEntry> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce discount usage entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -139,8 +114,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the range of matching commerce discount usage entries
 	 */
 	@Override
-	public List<CommerceDiscountUsageEntry> findByGroupId(long groupId,
-		int start, int end) {
+	public List<CommerceDiscountUsageEntry> findByGroupId(
+		long groupId, int start, int end) {
+
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -148,7 +124,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce discount usage entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -158,9 +134,10 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the ordered range of matching commerce discount usage entries
 	 */
 	@Override
-	public List<CommerceDiscountUsageEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceDiscountUsageEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -168,7 +145,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce discount usage entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -179,33 +156,37 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the ordered range of matching commerce discount usage entries
 	 */
 	@Override
-	public List<CommerceDiscountUsageEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceDiscountUsageEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceDiscountUsageEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceDiscountUsageEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceDiscountUsageEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : list) {
+				for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+						list) {
+
 					if ((groupId != commerceDiscountUsageEntry.getGroupId())) {
 						list = null;
 
@@ -219,8 +200,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -231,11 +212,10 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CommerceDiscountUsageEntryModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -253,16 +233,16 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -291,11 +271,13 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @throws NoSuchDiscountUsageEntryException if a matching commerce discount usage entry could not be found
 	 */
 	@Override
-	public CommerceDiscountUsageEntry findByGroupId_First(long groupId,
-		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
+	public CommerceDiscountUsageEntry findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
 		throws NoSuchDiscountUsageEntryException {
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			fetchByGroupId_First(groupId, orderByComparator);
 
 		if (commerceDiscountUsageEntry != null) {
 			return commerceDiscountUsageEntry;
@@ -321,10 +303,12 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the first matching commerce discount usage entry, or <code>null</code> if a matching commerce discount usage entry could not be found
 	 */
 	@Override
-	public CommerceDiscountUsageEntry fetchByGroupId_First(long groupId,
+	public CommerceDiscountUsageEntry fetchByGroupId_First(
+		long groupId,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator) {
-		List<CommerceDiscountUsageEntry> list = findByGroupId(groupId, 0, 1,
-				orderByComparator);
+
+		List<CommerceDiscountUsageEntry> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -342,11 +326,13 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @throws NoSuchDiscountUsageEntryException if a matching commerce discount usage entry could not be found
 	 */
 	@Override
-	public CommerceDiscountUsageEntry findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
+	public CommerceDiscountUsageEntry findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
 		throws NoSuchDiscountUsageEntryException {
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			fetchByGroupId_Last(groupId, orderByComparator);
 
 		if (commerceDiscountUsageEntry != null) {
 			return commerceDiscountUsageEntry;
@@ -372,16 +358,18 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the last matching commerce discount usage entry, or <code>null</code> if a matching commerce discount usage entry could not be found
 	 */
 	@Override
-	public CommerceDiscountUsageEntry fetchByGroupId_Last(long groupId,
+	public CommerceDiscountUsageEntry fetchByGroupId_Last(
+		long groupId,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceDiscountUsageEntry> list = findByGroupId(groupId,
-				count - 1, count, orderByComparator);
+		List<CommerceDiscountUsageEntry> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -401,26 +389,30 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceDiscountUsageEntry[] findByGroupId_PrevAndNext(
-		long commerceDiscountUsageEntryId, long groupId,
-		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
+			long commerceDiscountUsageEntryId, long groupId,
+			OrderByComparator<CommerceDiscountUsageEntry> orderByComparator)
 		throws NoSuchDiscountUsageEntryException {
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = findByPrimaryKey(commerceDiscountUsageEntryId);
+
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			findByPrimaryKey(commerceDiscountUsageEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceDiscountUsageEntry[] array = new CommerceDiscountUsageEntryImpl[3];
+			CommerceDiscountUsageEntry[] array =
+				new CommerceDiscountUsageEntryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session,
-					commerceDiscountUsageEntry, groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, commerceDiscountUsageEntry, groupId, orderByComparator,
+				true);
 
 			array[1] = commerceDiscountUsageEntry;
 
-			array[2] = getByGroupId_PrevAndNext(session,
-					commerceDiscountUsageEntry, groupId, orderByComparator,
-					false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, commerceDiscountUsageEntry, groupId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -437,11 +429,12 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		long groupId,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -453,7 +446,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -523,10 +517,11 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceDiscountUsageEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceDiscountUsageEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -547,8 +542,10 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : findByGroupId(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceDiscountUsageEntry);
 		}
 	}
@@ -561,9 +558,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -604,7 +601,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceDiscountUsageEntry.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"commerceDiscountUsageEntry.groupId = ?";
 
 	public CommerceDiscountUsageEntryPersistenceImpl() {
 		setModelClass(CommerceDiscountUsageEntry.class);
@@ -618,7 +616,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
-		entityCache.putResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceDiscountUsageEntryImpl.class,
 			commerceDiscountUsageEntry.getPrimaryKey(),
 			commerceDiscountUsageEntry);
@@ -634,11 +634,15 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceDiscountUsageEntry> commerceDiscountUsageEntries) {
-		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : commerceDiscountUsageEntries) {
+
+		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+				commerceDiscountUsageEntries) {
+
 			if (entityCache.getResult(
-						CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceDiscountUsageEntryImpl.class,
-						commerceDiscountUsageEntry.getPrimaryKey()) == null) {
+					CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceDiscountUsageEntryImpl.class,
+					commerceDiscountUsageEntry.getPrimaryKey()) == null) {
+
 				cacheResult(commerceDiscountUsageEntry);
 			}
 			else {
@@ -651,7 +655,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Clears the cache for all commerce discount usage entries.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -667,13 +671,15 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Clears the cache for the commerce discount usage entry.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
-		entityCache.removeResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceDiscountUsageEntryImpl.class,
 			commerceDiscountUsageEntry.getPrimaryKey());
 
@@ -684,11 +690,15 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public void clearCache(
 		List<CommerceDiscountUsageEntry> commerceDiscountUsageEntries) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : commerceDiscountUsageEntries) {
-			entityCache.removeResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+				commerceDiscountUsageEntries) {
+
+			entityCache.removeResult(
+				CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceDiscountUsageEntryImpl.class,
 				commerceDiscountUsageEntry.getPrimaryKey());
 		}
@@ -701,8 +711,11 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the new commerce discount usage entry
 	 */
 	@Override
-	public CommerceDiscountUsageEntry create(long commerceDiscountUsageEntryId) {
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = new CommerceDiscountUsageEntryImpl();
+	public CommerceDiscountUsageEntry create(
+		long commerceDiscountUsageEntryId) {
+
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			new CommerceDiscountUsageEntryImpl();
 
 		commerceDiscountUsageEntry.setNew(true);
 		commerceDiscountUsageEntry.setPrimaryKey(commerceDiscountUsageEntryId);
@@ -722,6 +735,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public CommerceDiscountUsageEntry remove(long commerceDiscountUsageEntryId)
 		throws NoSuchDiscountUsageEntryException {
+
 		return remove((Serializable)commerceDiscountUsageEntryId);
 	}
 
@@ -735,21 +749,23 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public CommerceDiscountUsageEntry remove(Serializable primaryKey)
 		throws NoSuchDiscountUsageEntryException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceDiscountUsageEntry commerceDiscountUsageEntry = (CommerceDiscountUsageEntry)session.get(CommerceDiscountUsageEntryImpl.class,
-					primaryKey);
+			CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+				(CommerceDiscountUsageEntry)session.get(
+					CommerceDiscountUsageEntryImpl.class, primaryKey);
 
 			if (commerceDiscountUsageEntry == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchDiscountUsageEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchDiscountUsageEntryException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceDiscountUsageEntry);
@@ -768,13 +784,16 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	protected CommerceDiscountUsageEntry removeImpl(
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceDiscountUsageEntry)) {
-				commerceDiscountUsageEntry = (CommerceDiscountUsageEntry)session.get(CommerceDiscountUsageEntryImpl.class,
+				commerceDiscountUsageEntry =
+					(CommerceDiscountUsageEntry)session.get(
+						CommerceDiscountUsageEntryImpl.class,
 						commerceDiscountUsageEntry.getPrimaryKeyObj());
 			}
 
@@ -799,27 +818,34 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public CommerceDiscountUsageEntry updateImpl(
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
+
 		boolean isNew = commerceDiscountUsageEntry.isNew();
 
-		if (!(commerceDiscountUsageEntry instanceof CommerceDiscountUsageEntryModelImpl)) {
+		if (!(commerceDiscountUsageEntry instanceof
+				CommerceDiscountUsageEntryModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(commerceDiscountUsageEntry.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceDiscountUsageEntry);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceDiscountUsageEntry);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceDiscountUsageEntry proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceDiscountUsageEntry implementation " +
-				commerceDiscountUsageEntry.getClass());
+					commerceDiscountUsageEntry.getClass());
 		}
 
-		CommerceDiscountUsageEntryModelImpl commerceDiscountUsageEntryModelImpl = (CommerceDiscountUsageEntryModelImpl)commerceDiscountUsageEntry;
+		CommerceDiscountUsageEntryModelImpl
+			commerceDiscountUsageEntryModelImpl =
+				(CommerceDiscountUsageEntryModelImpl)commerceDiscountUsageEntry;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -828,8 +854,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				commerceDiscountUsageEntry.setCreateDate(now);
 			}
 			else {
-				commerceDiscountUsageEntry.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceDiscountUsageEntry.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -838,8 +864,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				commerceDiscountUsageEntry.setModifiedDate(now);
 			}
 			else {
-				commerceDiscountUsageEntry.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceDiscountUsageEntry.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -854,7 +880,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				commerceDiscountUsageEntry.setNew(false);
 			}
 			else {
-				commerceDiscountUsageEntry = (CommerceDiscountUsageEntry)session.merge(commerceDiscountUsageEntry);
+				commerceDiscountUsageEntry =
+					(CommerceDiscountUsageEntry)session.merge(
+						commerceDiscountUsageEntry);
 			}
 		}
 		catch (Exception e) {
@@ -869,43 +897,44 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		if (!CommerceDiscountUsageEntryModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				commerceDiscountUsageEntryModelImpl.getGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceDiscountUsageEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceDiscountUsageEntryModelImpl.getOriginalGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+
+				args = new Object[] {
 					commerceDiscountUsageEntryModelImpl.getGroupId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceDiscountUsageEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceDiscountUsageEntryModelImpl.getOriginalGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-
-				args = new Object[] {
-						commerceDiscountUsageEntryModelImpl.getGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
 			}
 		}
 
-		entityCache.putResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceDiscountUsageEntryImpl.class,
 			commerceDiscountUsageEntry.getPrimaryKey(),
 			commerceDiscountUsageEntry, false);
@@ -916,7 +945,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce discount usage entry with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce discount usage entry with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce discount usage entry
 	 * @return the commerce discount usage entry
@@ -925,22 +954,24 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public CommerceDiscountUsageEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchDiscountUsageEntryException {
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = fetchByPrimaryKey(primaryKey);
+
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commerceDiscountUsageEntry == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchDiscountUsageEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchDiscountUsageEntryException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceDiscountUsageEntry;
 	}
 
 	/**
-	 * Returns the commerce discount usage entry with the primary key or throws a {@link NoSuchDiscountUsageEntryException} if it could not be found.
+	 * Returns the commerce discount usage entry with the primary key or throws a <code>NoSuchDiscountUsageEntryException</code> if it could not be found.
 	 *
 	 * @param commerceDiscountUsageEntryId the primary key of the commerce discount usage entry
 	 * @return the commerce discount usage entry
@@ -948,8 +979,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceDiscountUsageEntry findByPrimaryKey(
-		long commerceDiscountUsageEntryId)
+			long commerceDiscountUsageEntryId)
 		throws NoSuchDiscountUsageEntryException {
+
 		return findByPrimaryKey((Serializable)commerceDiscountUsageEntryId);
 	}
 
@@ -960,15 +992,19 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the commerce discount usage entry, or <code>null</code> if a commerce discount usage entry with the primary key could not be found
 	 */
 	@Override
-	public CommerceDiscountUsageEntry fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceDiscountUsageEntryImpl.class, primaryKey);
+	public CommerceDiscountUsageEntry fetchByPrimaryKey(
+		Serializable primaryKey) {
+
+		Serializable serializable = entityCache.getResult(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceDiscountUsageEntry commerceDiscountUsageEntry = (CommerceDiscountUsageEntry)serializable;
+		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+			(CommerceDiscountUsageEntry)serializable;
 
 		if (commerceDiscountUsageEntry == null) {
 			Session session = null;
@@ -976,20 +1012,24 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceDiscountUsageEntry = (CommerceDiscountUsageEntry)session.get(CommerceDiscountUsageEntryImpl.class,
-						primaryKey);
+				commerceDiscountUsageEntry =
+					(CommerceDiscountUsageEntry)session.get(
+						CommerceDiscountUsageEntryImpl.class, primaryKey);
 
 				if (commerceDiscountUsageEntry != null) {
 					cacheResult(commerceDiscountUsageEntry);
 				}
 				else {
-					entityCache.putResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceDiscountUsageEntryModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceDiscountUsageEntryImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
 					CommerceDiscountUsageEntryImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1011,24 +1051,28 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	@Override
 	public CommerceDiscountUsageEntry fetchByPrimaryKey(
 		long commerceDiscountUsageEntryId) {
+
 		return fetchByPrimaryKey((Serializable)commerceDiscountUsageEntryId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceDiscountUsageEntry> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceDiscountUsageEntry> map = new HashMap<Serializable, CommerceDiscountUsageEntry>();
+		Map<Serializable, CommerceDiscountUsageEntry> map =
+			new HashMap<Serializable, CommerceDiscountUsageEntry>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceDiscountUsageEntry commerceDiscountUsageEntry = fetchByPrimaryKey(primaryKey);
+			CommerceDiscountUsageEntry commerceDiscountUsageEntry =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceDiscountUsageEntry != null) {
 				map.put(primaryKey, commerceDiscountUsageEntry);
@@ -1040,8 +1084,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceDiscountUsageEntryImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceDiscountUsageEntryImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1052,7 +1097,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey, (CommerceDiscountUsageEntry)serializable);
+					map.put(
+						primaryKey, (CommerceDiscountUsageEntry)serializable);
 				}
 			}
 		}
@@ -1061,8 +1107,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY_WHERE_PKS_IN);
 
@@ -1085,18 +1131,24 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : (List<CommerceDiscountUsageEntry>)q.list()) {
-				map.put(commerceDiscountUsageEntry.getPrimaryKeyObj(),
+			for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+					(List<CommerceDiscountUsageEntry>)q.list()) {
+
+				map.put(
+					commerceDiscountUsageEntry.getPrimaryKeyObj(),
 					commerceDiscountUsageEntry);
 
 				cacheResult(commerceDiscountUsageEntry);
 
-				uncachedPrimaryKeys.remove(commerceDiscountUsageEntry.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceDiscountUsageEntry.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceDiscountUsageEntryImpl.class, primaryKey, nullModel);
+				entityCache.putResult(
+					CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+					CommerceDiscountUsageEntryImpl.class, primaryKey,
+					nullModel);
 			}
 		}
 		catch (Exception e) {
@@ -1123,7 +1175,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Returns a range of all the commerce discount usage entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce discount usage entries
@@ -1139,7 +1191,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce discount usage entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce discount usage entries
@@ -1148,8 +1200,10 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the ordered range of commerce discount usage entries
 	 */
 	@Override
-	public List<CommerceDiscountUsageEntry> findAll(int start, int end,
+	public List<CommerceDiscountUsageEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1157,7 +1211,7 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce discount usage entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountUsageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceDiscountUsageEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce discount usage entries
@@ -1167,29 +1221,32 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * @return the ordered range of commerce discount usage entries
 	 */
 	@Override
-	public List<CommerceDiscountUsageEntry> findAll(int start, int end,
+	public List<CommerceDiscountUsageEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceDiscountUsageEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceDiscountUsageEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceDiscountUsageEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1197,13 +1254,13 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1211,7 +1268,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				sql = _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY;
 
 				if (pagination) {
-					sql = sql.concat(CommerceDiscountUsageEntryModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceDiscountUsageEntryModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1223,16 +1281,16 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1258,7 +1316,9 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry : findAll()) {
+		for (CommerceDiscountUsageEntry commerceDiscountUsageEntry :
+				findAll()) {
+
 			remove(commerceDiscountUsageEntry);
 		}
 	}
@@ -1270,8 +1330,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1279,16 +1339,17 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1309,6 +1370,49 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 	 * Initializes the commerce discount usage entry persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceDiscountUsageEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceDiscountUsageEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceDiscountUsageEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceDiscountUsageEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CommerceDiscountUsageEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceDiscountUsageEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CommerceDiscountUsageEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountUsageEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByGroupId", new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1320,18 +1424,39 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY = "SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry";
-	private static final String _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY_WHERE_PKS_IN =
-		"SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE commerceDiscountUsageEntryId IN (";
-	private static final String _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY_WHERE = "SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE ";
-	private static final String _SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY = "SELECT COUNT(commerceDiscountUsageEntry) FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry";
-	private static final String _SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY_WHERE = "SELECT COUNT(commerceDiscountUsageEntry) FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceDiscountUsageEntry.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceDiscountUsageEntry exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceDiscountUsageEntry exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceDiscountUsageEntryPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY =
+		"SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry";
+
+	private static final String
+		_SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY_WHERE_PKS_IN =
+			"SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE commerceDiscountUsageEntryId IN (";
+
+	private static final String _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY_WHERE =
+		"SELECT commerceDiscountUsageEntry FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY =
+		"SELECT COUNT(commerceDiscountUsageEntry) FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry";
+
+	private static final String _SQL_COUNT_COMMERCEDISCOUNTUSAGEENTRY_WHERE =
+		"SELECT COUNT(commerceDiscountUsageEntry) FROM CommerceDiscountUsageEntry commerceDiscountUsageEntry WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceDiscountUsageEntry.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceDiscountUsageEntry exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceDiscountUsageEntry exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceDiscountUsageEntryPersistenceImpl.class);
+
 }

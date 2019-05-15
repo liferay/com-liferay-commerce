@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommercePriceListAccountRelModel
- * @see com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl
- * @see com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl"
+)
 @ProviderType
 public interface CommercePriceListAccountRel
 	extends CommercePriceListAccountRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.price.list.model.impl.CommercePriceListAccountRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommercePriceListAccountRel, Long> COMMERCE_PRICE_LIST_ACCOUNT_REL_ID_ACCESSOR =
-		new Accessor<CommercePriceListAccountRel, Long>() {
-			@Override
-			public Long get(
-				CommercePriceListAccountRel commercePriceListAccountRel) {
-				return commercePriceListAccountRel.getCommercePriceListAccountRelId();
-			}
+	public static final Accessor<CommercePriceListAccountRel, Long>
+		COMMERCE_PRICE_LIST_ACCOUNT_REL_ID_ACCESSOR =
+			new Accessor<CommercePriceListAccountRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommercePriceListAccountRel commercePriceListAccountRel) {
 
-			@Override
-			public Class<CommercePriceListAccountRel> getTypeClass() {
-				return CommercePriceListAccountRel.class;
-			}
-		};
+					return commercePriceListAccountRel.
+						getCommercePriceListAccountRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommercePriceListAccountRel> getTypeClass() {
+					return CommercePriceListAccountRel.class;
+				}
+
+			};
+
 }

@@ -28,11 +28,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.discount.service.http.CommerceDiscountServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.discount.service.http.CommerceDiscountServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceDiscountSoap implements Serializable {
+
 	public static CommerceDiscountSoap toSoapModel(CommerceDiscount model) {
 		CommerceDiscountSoap soapModel = new CommerceDiscountSoap();
 
@@ -69,8 +69,11 @@ public class CommerceDiscountSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CommerceDiscountSoap[] toSoapModels(CommerceDiscount[] models) {
-		CommerceDiscountSoap[] soapModels = new CommerceDiscountSoap[models.length];
+	public static CommerceDiscountSoap[] toSoapModels(
+		CommerceDiscount[] models) {
+
+		CommerceDiscountSoap[] soapModels =
+			new CommerceDiscountSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -81,10 +84,12 @@ public class CommerceDiscountSoap implements Serializable {
 
 	public static CommerceDiscountSoap[][] toSoapModels(
 		CommerceDiscount[][] models) {
+
 		CommerceDiscountSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceDiscountSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceDiscountSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceDiscountSoap[0][0];
@@ -99,7 +104,9 @@ public class CommerceDiscountSoap implements Serializable {
 
 	public static CommerceDiscountSoap[] toSoapModels(
 		List<CommerceDiscount> models) {
-		List<CommerceDiscountSoap> soapModels = new ArrayList<CommerceDiscountSoap>(models.size());
+
+		List<CommerceDiscountSoap> soapModels =
+			new ArrayList<CommerceDiscountSoap>(models.size());
 
 		for (CommerceDiscount model : models) {
 			soapModels.add(toSoapModel(model));
@@ -392,4 +399,5 @@ public class CommerceDiscountSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

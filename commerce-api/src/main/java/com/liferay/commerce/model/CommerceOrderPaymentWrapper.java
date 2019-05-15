@@ -17,7 +17,6 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
-	ModelWrapper<CommerceOrderPayment> {
+public class CommerceOrderPaymentWrapper
+	implements CommerceOrderPayment, ModelWrapper<CommerceOrderPayment> {
+
 	public CommerceOrderPaymentWrapper(
 		CommerceOrderPayment commerceOrderPayment) {
+
 		_commerceOrderPayment = commerceOrderPayment;
 	}
 
@@ -67,7 +68,8 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
-		attributes.put("commercePaymentMethodKey", getCommercePaymentMethodKey());
+		attributes.put(
+			"commercePaymentMethodKey", getCommercePaymentMethodKey());
 		attributes.put("content", getContent());
 		attributes.put("status", getStatus());
 
@@ -77,7 +79,7 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceOrderPaymentId = (Long)attributes.get(
-				"commerceOrderPaymentId");
+			"commerceOrderPaymentId");
 
 		if (commerceOrderPaymentId != null) {
 			setCommerceOrderPaymentId(commerceOrderPaymentId);
@@ -126,7 +128,7 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 		}
 
 		String commercePaymentMethodKey = (String)attributes.get(
-				"commercePaymentMethodKey");
+			"commercePaymentMethodKey");
 
 		if (commercePaymentMethodKey != null) {
 			setCommercePaymentMethodKey(commercePaymentMethodKey);
@@ -147,7 +149,8 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 
 	@Override
 	public Object clone() {
-		return new CommerceOrderPaymentWrapper((CommerceOrderPayment)_commerceOrderPayment.clone());
+		return new CommerceOrderPaymentWrapper(
+			(CommerceOrderPayment)_commerceOrderPayment.clone());
 	}
 
 	@Override
@@ -156,60 +159,60 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Returns the commerce order ID of this commerce order payment.
-	*
-	* @return the commerce order ID of this commerce order payment
-	*/
+	 * Returns the commerce order ID of this commerce order payment.
+	 *
+	 * @return the commerce order ID of this commerce order payment
+	 */
 	@Override
 	public long getCommerceOrderId() {
 		return _commerceOrderPayment.getCommerceOrderId();
 	}
 
 	/**
-	* Returns the commerce order payment ID of this commerce order payment.
-	*
-	* @return the commerce order payment ID of this commerce order payment
-	*/
+	 * Returns the commerce order payment ID of this commerce order payment.
+	 *
+	 * @return the commerce order payment ID of this commerce order payment
+	 */
 	@Override
 	public long getCommerceOrderPaymentId() {
 		return _commerceOrderPayment.getCommerceOrderPaymentId();
 	}
 
 	/**
-	* Returns the commerce payment method key of this commerce order payment.
-	*
-	* @return the commerce payment method key of this commerce order payment
-	*/
+	 * Returns the commerce payment method key of this commerce order payment.
+	 *
+	 * @return the commerce payment method key of this commerce order payment
+	 */
 	@Override
 	public String getCommercePaymentMethodKey() {
 		return _commerceOrderPayment.getCommercePaymentMethodKey();
 	}
 
 	/**
-	* Returns the company ID of this commerce order payment.
-	*
-	* @return the company ID of this commerce order payment
-	*/
+	 * Returns the company ID of this commerce order payment.
+	 *
+	 * @return the company ID of this commerce order payment
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceOrderPayment.getCompanyId();
 	}
 
 	/**
-	* Returns the content of this commerce order payment.
-	*
-	* @return the content of this commerce order payment
-	*/
+	 * Returns the content of this commerce order payment.
+	 *
+	 * @return the content of this commerce order payment
+	 */
 	@Override
 	public String getContent() {
 		return _commerceOrderPayment.getContent();
 	}
 
 	/**
-	* Returns the create date of this commerce order payment.
-	*
-	* @return the create date of this commerce order payment
-	*/
+	 * Returns the create date of this commerce order payment.
+	 *
+	 * @return the create date of this commerce order payment
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceOrderPayment.getCreateDate();
@@ -221,30 +224,30 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Returns the group ID of this commerce order payment.
-	*
-	* @return the group ID of this commerce order payment
-	*/
+	 * Returns the group ID of this commerce order payment.
+	 *
+	 * @return the group ID of this commerce order payment
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceOrderPayment.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce order payment.
-	*
-	* @return the modified date of this commerce order payment
-	*/
+	 * Returns the modified date of this commerce order payment.
+	 *
+	 * @return the modified date of this commerce order payment
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceOrderPayment.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce order payment.
-	*
-	* @return the primary key of this commerce order payment
-	*/
+	 * Returns the primary key of this commerce order payment.
+	 *
+	 * @return the primary key of this commerce order payment
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceOrderPayment.getPrimaryKey();
@@ -256,40 +259,40 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Returns the status of this commerce order payment.
-	*
-	* @return the status of this commerce order payment
-	*/
+	 * Returns the status of this commerce order payment.
+	 *
+	 * @return the status of this commerce order payment
+	 */
 	@Override
 	public int getStatus() {
 		return _commerceOrderPayment.getStatus();
 	}
 
 	/**
-	* Returns the user ID of this commerce order payment.
-	*
-	* @return the user ID of this commerce order payment
-	*/
+	 * Returns the user ID of this commerce order payment.
+	 *
+	 * @return the user ID of this commerce order payment
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceOrderPayment.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce order payment.
-	*
-	* @return the user name of this commerce order payment
-	*/
+	 * Returns the user name of this commerce order payment.
+	 *
+	 * @return the user name of this commerce order payment
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceOrderPayment.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce order payment.
-	*
-	* @return the user uuid of this commerce order payment
-	*/
+	 * Returns the user uuid of this commerce order payment.
+	 *
+	 * @return the user uuid of this commerce order payment
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceOrderPayment.getUserUuid();
@@ -326,60 +329,61 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Sets the commerce order ID of this commerce order payment.
-	*
-	* @param commerceOrderId the commerce order ID of this commerce order payment
-	*/
+	 * Sets the commerce order ID of this commerce order payment.
+	 *
+	 * @param commerceOrderId the commerce order ID of this commerce order payment
+	 */
 	@Override
 	public void setCommerceOrderId(long commerceOrderId) {
 		_commerceOrderPayment.setCommerceOrderId(commerceOrderId);
 	}
 
 	/**
-	* Sets the commerce order payment ID of this commerce order payment.
-	*
-	* @param commerceOrderPaymentId the commerce order payment ID of this commerce order payment
-	*/
+	 * Sets the commerce order payment ID of this commerce order payment.
+	 *
+	 * @param commerceOrderPaymentId the commerce order payment ID of this commerce order payment
+	 */
 	@Override
 	public void setCommerceOrderPaymentId(long commerceOrderPaymentId) {
 		_commerceOrderPayment.setCommerceOrderPaymentId(commerceOrderPaymentId);
 	}
 
 	/**
-	* Sets the commerce payment method key of this commerce order payment.
-	*
-	* @param commercePaymentMethodKey the commerce payment method key of this commerce order payment
-	*/
+	 * Sets the commerce payment method key of this commerce order payment.
+	 *
+	 * @param commercePaymentMethodKey the commerce payment method key of this commerce order payment
+	 */
 	@Override
 	public void setCommercePaymentMethodKey(String commercePaymentMethodKey) {
-		_commerceOrderPayment.setCommercePaymentMethodKey(commercePaymentMethodKey);
+		_commerceOrderPayment.setCommercePaymentMethodKey(
+			commercePaymentMethodKey);
 	}
 
 	/**
-	* Sets the company ID of this commerce order payment.
-	*
-	* @param companyId the company ID of this commerce order payment
-	*/
+	 * Sets the company ID of this commerce order payment.
+	 *
+	 * @param companyId the company ID of this commerce order payment
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceOrderPayment.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the content of this commerce order payment.
-	*
-	* @param content the content of this commerce order payment
-	*/
+	 * Sets the content of this commerce order payment.
+	 *
+	 * @param content the content of this commerce order payment
+	 */
 	@Override
 	public void setContent(String content) {
 		_commerceOrderPayment.setContent(content);
 	}
 
 	/**
-	* Sets the create date of this commerce order payment.
-	*
-	* @param createDate the create date of this commerce order payment
-	*/
+	 * Sets the create date of this commerce order payment.
+	 *
+	 * @param createDate the create date of this commerce order payment
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceOrderPayment.setCreateDate(createDate);
@@ -388,6 +392,7 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceOrderPayment.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -402,20 +407,20 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Sets the group ID of this commerce order payment.
-	*
-	* @param groupId the group ID of this commerce order payment
-	*/
+	 * Sets the group ID of this commerce order payment.
+	 *
+	 * @param groupId the group ID of this commerce order payment
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceOrderPayment.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce order payment.
-	*
-	* @param modifiedDate the modified date of this commerce order payment
-	*/
+	 * Sets the modified date of this commerce order payment.
+	 *
+	 * @param modifiedDate the modified date of this commerce order payment
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceOrderPayment.setModifiedDate(modifiedDate);
@@ -427,10 +432,10 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Sets the primary key of this commerce order payment.
-	*
-	* @param primaryKey the primary key of this commerce order payment
-	*/
+	 * Sets the primary key of this commerce order payment.
+	 *
+	 * @param primaryKey the primary key of this commerce order payment
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceOrderPayment.setPrimaryKey(primaryKey);
@@ -442,53 +447,56 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Sets the status of this commerce order payment.
-	*
-	* @param status the status of this commerce order payment
-	*/
+	 * Sets the status of this commerce order payment.
+	 *
+	 * @param status the status of this commerce order payment
+	 */
 	@Override
 	public void setStatus(int status) {
 		_commerceOrderPayment.setStatus(status);
 	}
 
 	/**
-	* Sets the user ID of this commerce order payment.
-	*
-	* @param userId the user ID of this commerce order payment
-	*/
+	 * Sets the user ID of this commerce order payment.
+	 *
+	 * @param userId the user ID of this commerce order payment
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceOrderPayment.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce order payment.
-	*
-	* @param userName the user name of this commerce order payment
-	*/
+	 * Sets the user name of this commerce order payment.
+	 *
+	 * @param userName the user name of this commerce order payment
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceOrderPayment.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce order payment.
-	*
-	* @param userUuid the user uuid of this commerce order payment
-	*/
+	 * Sets the user uuid of this commerce order payment.
+	 *
+	 * @param userUuid the user uuid of this commerce order payment
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceOrderPayment.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceOrderPayment> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceOrderPayment>
+		toCacheModel() {
+
 		return _commerceOrderPayment.toCacheModel();
 	}
 
 	@Override
 	public CommerceOrderPayment toEscapedModel() {
-		return new CommerceOrderPaymentWrapper(_commerceOrderPayment.toEscapedModel());
+		return new CommerceOrderPaymentWrapper(
+			_commerceOrderPayment.toEscapedModel());
 	}
 
 	@Override
@@ -498,7 +506,8 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 
 	@Override
 	public CommerceOrderPayment toUnescapedModel() {
-		return new CommerceOrderPaymentWrapper(_commerceOrderPayment.toUnescapedModel());
+		return new CommerceOrderPaymentWrapper(
+			_commerceOrderPayment.toUnescapedModel());
 	}
 
 	@Override
@@ -516,10 +525,13 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 			return false;
 		}
 
-		CommerceOrderPaymentWrapper commerceOrderPaymentWrapper = (CommerceOrderPaymentWrapper)obj;
+		CommerceOrderPaymentWrapper commerceOrderPaymentWrapper =
+			(CommerceOrderPaymentWrapper)obj;
 
-		if (Objects.equals(_commerceOrderPayment,
-					commerceOrderPaymentWrapper._commerceOrderPayment)) {
+		if (Objects.equals(
+				_commerceOrderPayment,
+				commerceOrderPaymentWrapper._commerceOrderPayment)) {
+
 			return true;
 		}
 
@@ -547,4 +559,5 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	private final CommerceOrderPayment _commerceOrderPayment;
+
 }

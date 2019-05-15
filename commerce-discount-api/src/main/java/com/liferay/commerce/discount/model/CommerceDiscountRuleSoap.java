@@ -26,13 +26,14 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.discount.service.http.CommerceDiscountRuleServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.discount.service.http.CommerceDiscountRuleServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceDiscountRuleSoap implements Serializable {
+
 	public static CommerceDiscountRuleSoap toSoapModel(
 		CommerceDiscountRule model) {
+
 		CommerceDiscountRuleSoap soapModel = new CommerceDiscountRuleSoap();
 
 		soapModel.setCommerceDiscountRuleId(model.getCommerceDiscountRuleId());
@@ -51,7 +52,9 @@ public class CommerceDiscountRuleSoap implements Serializable {
 
 	public static CommerceDiscountRuleSoap[] toSoapModels(
 		CommerceDiscountRule[] models) {
-		CommerceDiscountRuleSoap[] soapModels = new CommerceDiscountRuleSoap[models.length];
+
+		CommerceDiscountRuleSoap[] soapModels =
+			new CommerceDiscountRuleSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +65,12 @@ public class CommerceDiscountRuleSoap implements Serializable {
 
 	public static CommerceDiscountRuleSoap[][] toSoapModels(
 		CommerceDiscountRule[][] models) {
+
 		CommerceDiscountRuleSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceDiscountRuleSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceDiscountRuleSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceDiscountRuleSoap[0][0];
@@ -80,13 +85,16 @@ public class CommerceDiscountRuleSoap implements Serializable {
 
 	public static CommerceDiscountRuleSoap[] toSoapModels(
 		List<CommerceDiscountRule> models) {
-		List<CommerceDiscountRuleSoap> soapModels = new ArrayList<CommerceDiscountRuleSoap>(models.size());
+
+		List<CommerceDiscountRuleSoap> soapModels =
+			new ArrayList<CommerceDiscountRuleSoap>(models.size());
 
 		for (CommerceDiscountRule model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceDiscountRuleSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceDiscountRuleSoap[soapModels.size()]);
 	}
 
 	public CommerceDiscountRuleSoap() {
@@ -190,4 +198,5 @@ public class CommerceDiscountRuleSoap implements Serializable {
 	private long _commerceDiscountId;
 	private String _type;
 	private String _typeSettings;
+
 }

@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.service.http.CommerceWarehouseServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.service.http.CommerceWarehouseServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceWarehouseSoap implements Serializable {
+
 	public static CommerceWarehouseSoap toSoapModel(CommerceWarehouse model) {
 		CommerceWarehouseSoap soapModel = new CommerceWarehouseSoap();
 
@@ -60,7 +60,9 @@ public class CommerceWarehouseSoap implements Serializable {
 
 	public static CommerceWarehouseSoap[] toSoapModels(
 		CommerceWarehouse[] models) {
-		CommerceWarehouseSoap[] soapModels = new CommerceWarehouseSoap[models.length];
+
+		CommerceWarehouseSoap[] soapModels =
+			new CommerceWarehouseSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +73,12 @@ public class CommerceWarehouseSoap implements Serializable {
 
 	public static CommerceWarehouseSoap[][] toSoapModels(
 		CommerceWarehouse[][] models) {
+
 		CommerceWarehouseSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceWarehouseSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceWarehouseSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceWarehouseSoap[0][0];
@@ -89,7 +93,9 @@ public class CommerceWarehouseSoap implements Serializable {
 
 	public static CommerceWarehouseSoap[] toSoapModels(
 		List<CommerceWarehouse> models) {
-		List<CommerceWarehouseSoap> soapModels = new ArrayList<CommerceWarehouseSoap>(models.size());
+
+		List<CommerceWarehouseSoap> soapModels =
+			new ArrayList<CommerceWarehouseSoap>(models.size());
 
 		for (CommerceWarehouse model : models) {
 			soapModels.add(toSoapModel(model));
@@ -297,4 +303,5 @@ public class CommerceWarehouseSoap implements Serializable {
 	private double _latitude;
 	private double _longitude;
 	private boolean _primary;
+
 }

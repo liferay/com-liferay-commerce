@@ -25,38 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionOptionValueRelModel
- * @see com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl
- * @see com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl"
+)
 @ProviderType
 public interface CPDefinitionOptionValueRel
 	extends CPDefinitionOptionValueRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDefinitionOptionValueRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinitionOptionValueRel, Long> CP_DEFINITION_OPTION_VALUE_REL_ID_ACCESSOR =
-		new Accessor<CPDefinitionOptionValueRel, Long>() {
-			@Override
-			public Long get(
-				CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
-				return cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId();
-			}
+	public static final Accessor<CPDefinitionOptionValueRel, Long>
+		CP_DEFINITION_OPTION_VALUE_REL_ID_ACCESSOR =
+			new Accessor<CPDefinitionOptionValueRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
 
-			@Override
-			public Class<CPDefinitionOptionValueRel> getTypeClass() {
-				return CPDefinitionOptionValueRel.class;
-			}
-		};
+					return cpDefinitionOptionValueRel.
+						getCPDefinitionOptionValueRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPDefinitionOptionValueRel> getTypeClass() {
+					return CPDefinitionOptionValueRel.class;
+				}
+
+			};
 
 	public CPDefinitionOptionRel getCPDefinitionOptionRel()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

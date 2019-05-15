@@ -20,7 +20,6 @@ import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemLocalService;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemPersistence;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -62,17 +61,17 @@ import javax.sql.DataSource;
  *
  * @author Andrea Di Giorgi
  * @see com.liferay.commerce.wish.list.service.impl.CommerceWishListItemLocalServiceImpl
- * @see com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommerceWishListItemLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements CommerceWishListItemLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements CommerceWishListItemLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUtil} to access the commerce wish list item local service.
+	 * Never modify or reference this class directly. Use <code>CommerceWishListItemLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -85,6 +84,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Override
 	public CommerceWishListItem addCommerceWishListItem(
 		CommerceWishListItem commerceWishListItem) {
+
 		commerceWishListItem.setNew(true);
 
 		return commerceWishListItemPersistence.update(commerceWishListItem);
@@ -100,6 +100,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommerceWishListItem createCommerceWishListItem(
 		long commerceWishListItemId) {
+
 		return commerceWishListItemPersistence.create(commerceWishListItemId);
 	}
 
@@ -113,7 +114,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceWishListItem deleteCommerceWishListItem(
-		long commerceWishListItemId) throws PortalException {
+			long commerceWishListItemId)
+		throws PortalException {
+
 		return commerceWishListItemPersistence.remove(commerceWishListItemId);
 	}
 
@@ -127,6 +130,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Override
 	public CommerceWishListItem deleteCommerceWishListItem(
 		CommerceWishListItem commerceWishListItem) {
+
 		return commerceWishListItemPersistence.remove(commerceWishListItem);
 	}
 
@@ -134,8 +138,8 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceWishListItem.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceWishListItem.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -146,14 +150,15 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceWishListItemPersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceWishListItemPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -162,17 +167,18 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceWishListItemPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceWishListItemPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -182,10 +188,12 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceWishListItemPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceWishListItemPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -196,7 +204,8 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceWishListItemPersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceWishListItemPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -207,16 +216,19 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceWishListItemPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceWishListItemPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommerceWishListItem fetchCommerceWishListItem(
 		long commerceWishListItemId) {
-		return commerceWishListItemPersistence.fetchByPrimaryKey(commerceWishListItemId);
+
+		return commerceWishListItemPersistence.fetchByPrimaryKey(
+			commerceWishListItemId);
 	}
 
 	/**
@@ -228,15 +240,20 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceWishListItem getCommerceWishListItem(
-		long commerceWishListItemId) throws PortalException {
-		return commerceWishListItemPersistence.findByPrimaryKey(commerceWishListItemId);
+			long commerceWishListItemId)
+		throws PortalException {
+
+		return commerceWishListItemPersistence.findByPrimaryKey(
+			commerceWishListItemId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceWishListItemLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceWishListItemLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceWishListItem.class);
 
@@ -247,12 +264,17 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceWishListItemLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceWishListItemLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceWishListItem.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceWishListItem.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceWishListItemId");
@@ -262,7 +284,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceWishListItemLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceWishListItemLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CommerceWishListItem.class);
 
@@ -276,12 +300,15 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceWishListItemLocalService.deleteCommerceWishListItem((CommerceWishListItem)persistedModel);
+
+		return commerceWishListItemLocalService.deleteCommerceWishListItem(
+			(CommerceWishListItem)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
+
 		return commerceWishListItemPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -289,7 +316,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * Returns a range of all the commerce wish list items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.wish.list.model.impl.CommerceWishListItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce wish list items
@@ -297,8 +324,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @return the range of commerce wish list items
 	 */
 	@Override
-	public List<CommerceWishListItem> getCommerceWishListItems(int start,
-		int end) {
+	public List<CommerceWishListItem> getCommerceWishListItems(
+		int start, int end) {
+
 		return commerceWishListItemPersistence.findAll(start, end);
 	}
 
@@ -322,6 +350,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	@Override
 	public CommerceWishListItem updateCommerceWishListItem(
 		CommerceWishListItem commerceWishListItem) {
+
 		return commerceWishListItemPersistence.update(commerceWishListItem);
 	}
 
@@ -330,7 +359,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the commerce wish list local service
 	 */
-	public com.liferay.commerce.wish.list.service.CommerceWishListLocalService getCommerceWishListLocalService() {
+	public com.liferay.commerce.wish.list.service.CommerceWishListLocalService
+		getCommerceWishListLocalService() {
+
 		return commerceWishListLocalService;
 	}
 
@@ -340,7 +371,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @param commerceWishListLocalService the commerce wish list local service
 	 */
 	public void setCommerceWishListLocalService(
-		com.liferay.commerce.wish.list.service.CommerceWishListLocalService commerceWishListLocalService) {
+		com.liferay.commerce.wish.list.service.CommerceWishListLocalService
+			commerceWishListLocalService) {
+
 		this.commerceWishListLocalService = commerceWishListLocalService;
 	}
 
@@ -360,6 +393,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	public void setCommerceWishListPersistence(
 		CommerceWishListPersistence commerceWishListPersistence) {
+
 		this.commerceWishListPersistence = commerceWishListPersistence;
 	}
 
@@ -368,7 +402,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the commerce wish list item local service
 	 */
-	public CommerceWishListItemLocalService getCommerceWishListItemLocalService() {
+	public CommerceWishListItemLocalService
+		getCommerceWishListItemLocalService() {
+
 		return commerceWishListItemLocalService;
 	}
 
@@ -379,7 +415,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	public void setCommerceWishListItemLocalService(
 		CommerceWishListItemLocalService commerceWishListItemLocalService) {
-		this.commerceWishListItemLocalService = commerceWishListItemLocalService;
+
+		this.commerceWishListItemLocalService =
+			commerceWishListItemLocalService;
 	}
 
 	/**
@@ -387,7 +425,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the commerce wish list item persistence
 	 */
-	public CommerceWishListItemPersistence getCommerceWishListItemPersistence() {
+	public CommerceWishListItemPersistence
+		getCommerceWishListItemPersistence() {
+
 		return commerceWishListItemPersistence;
 	}
 
@@ -398,6 +438,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	public void setCommerceWishListItemPersistence(
 		CommerceWishListItemPersistence commerceWishListItemPersistence) {
+
 		this.commerceWishListItemPersistence = commerceWishListItemPersistence;
 	}
 
@@ -406,7 +447,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -416,7 +459,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -425,7 +470,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -435,7 +482,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -455,6 +504,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -463,7 +513,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -473,7 +525,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -482,7 +536,9 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -493,6 +549,7 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -515,7 +572,8 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.wish.list.model.CommerceWishListItem",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.wish.list.model.CommerceWishListItem",
 			commerceWishListItemLocalService);
 	}
 
@@ -549,15 +607,16 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceWishListItemPersistence.getDataSource();
+			DataSource dataSource =
+				commerceWishListItemPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -566,26 +625,54 @@ public abstract class CommerceWishListItemLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.wish.list.service.CommerceWishListLocalService.class)
-	protected com.liferay.commerce.wish.list.service.CommerceWishListLocalService commerceWishListLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.wish.list.service.CommerceWishListLocalService.class
+	)
+	protected
+		com.liferay.commerce.wish.list.service.CommerceWishListLocalService
+			commerceWishListLocalService;
+
 	@BeanReference(type = CommerceWishListPersistence.class)
 	protected CommerceWishListPersistence commerceWishListPersistence;
+
 	@BeanReference(type = CommerceWishListItemLocalService.class)
 	protected CommerceWishListItemLocalService commerceWishListItemLocalService;
+
 	@BeanReference(type = CommerceWishListItemPersistence.class)
 	protected CommerceWishListItemPersistence commerceWishListItemPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

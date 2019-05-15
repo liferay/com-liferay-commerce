@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceShipmentItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceShipmentItem in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceShipmentItem
  * @generated
  */
 @ProviderType
-public class CommerceShipmentItemCacheModel implements CacheModel<CommerceShipmentItem>,
-	Externalizable {
+public class CommerceShipmentItemCacheModel
+	implements CacheModel<CommerceShipmentItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceShipmentItemCacheModel implements CacheModel<CommerceShipme
 			return false;
 		}
 
-		CommerceShipmentItemCacheModel commerceShipmentItemCacheModel = (CommerceShipmentItemCacheModel)obj;
+		CommerceShipmentItemCacheModel commerceShipmentItemCacheModel =
+			(CommerceShipmentItemCacheModel)obj;
 
-		if (commerceShipmentItemId == commerceShipmentItemCacheModel.commerceShipmentItemId) {
+		if (commerceShipmentItemId ==
+				commerceShipmentItemCacheModel.commerceShipmentItemId) {
+
 			return true;
 		}
 
@@ -96,9 +98,11 @@ public class CommerceShipmentItemCacheModel implements CacheModel<CommerceShipme
 
 	@Override
 	public CommerceShipmentItem toEntityModel() {
-		CommerceShipmentItemImpl commerceShipmentItemImpl = new CommerceShipmentItemImpl();
+		CommerceShipmentItemImpl commerceShipmentItemImpl =
+			new CommerceShipmentItemImpl();
 
-		commerceShipmentItemImpl.setCommerceShipmentItemId(commerceShipmentItemId);
+		commerceShipmentItemImpl.setCommerceShipmentItemId(
+			commerceShipmentItemId);
 		commerceShipmentItemImpl.setGroupId(groupId);
 		commerceShipmentItemImpl.setCompanyId(companyId);
 		commerceShipmentItemImpl.setUserId(userId);
@@ -157,8 +161,7 @@ public class CommerceShipmentItemCacheModel implements CacheModel<CommerceShipme
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceShipmentItemId);
 
 		objectOutput.writeLong(groupId);
@@ -197,4 +200,5 @@ public class CommerceShipmentItemCacheModel implements CacheModel<CommerceShipme
 	public long commerceOrderItemId;
 	public long commerceWarehouseId;
 	public int quantity;
+
 }

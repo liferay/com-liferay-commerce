@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRule;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -42,28 +41,38 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CPRuleServiceUtil
- * @see com.liferay.commerce.product.service.base.CPRuleServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPRuleServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPRule"}, service = CPRuleService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPRule"
+	},
+	service = CPRuleService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPRuleService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPRuleServiceUtil} to access the cp rule remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPRuleServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPRuleServiceUtil} to access the cp rule remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPRuleServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPRule addCPRule(String name, boolean active, String type,
-		ServiceContext serviceContext) throws PortalException;
+	public CPRule addCPRule(
+			String name, boolean active, String type,
+			ServiceContext serviceContext)
+		throws PortalException;
 
-	public CPRule addCPRule(String name, boolean active, String type,
-		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+	public CPRule addCPRule(
+			String name, boolean active, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCPRule(long cpRuleId) throws PortalException;
@@ -72,28 +81,36 @@ public interface CPRuleService extends BaseService {
 	public CPRule getCPRule(long cpRuleId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPRule> getCPRules(long groupId, int start, int end,
-		OrderByComparator<CPRule> orderByComparator) throws PortalException;
+	public List<CPRule> getCPRules(
+			long groupId, int start, int end,
+			OrderByComparator<CPRule> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPRulesCount(long groupId) throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPRule> searchCPRules(long companyId,
-		long groupId, String keywords, int start, int end, Sort sort)
+	public BaseModelSearchResult<CPRule> searchCPRules(
+			long companyId, long groupId, String keywords, int start, int end,
+			Sort sort)
 		throws PortalException;
 
-	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
-		String type, ServiceContext serviceContext) throws PortalException;
+	public CPRule updateCPRule(
+			long cpRuleId, String name, boolean active, String type,
+			ServiceContext serviceContext)
+		throws PortalException;
 
-	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
-		String type, UnicodeProperties typeSettingsProperties,
-		ServiceContext serviceContext) throws PortalException;
+	public CPRule updateCPRule(
+			long cpRuleId, String name, boolean active, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

@@ -28,11 +28,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.currency.service.http.CommerceCurrencyServiceSoap}.
  *
  * @author Andrea Di Giorgi
- * @see com.liferay.commerce.currency.service.http.CommerceCurrencyServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceCurrencySoap implements Serializable {
+
 	public static CommerceCurrencySoap toSoapModel(CommerceCurrency model) {
 		CommerceCurrencySoap soapModel = new CommerceCurrencySoap();
 
@@ -59,8 +59,11 @@ public class CommerceCurrencySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CommerceCurrencySoap[] toSoapModels(CommerceCurrency[] models) {
-		CommerceCurrencySoap[] soapModels = new CommerceCurrencySoap[models.length];
+	public static CommerceCurrencySoap[] toSoapModels(
+		CommerceCurrency[] models) {
+
+		CommerceCurrencySoap[] soapModels =
+			new CommerceCurrencySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +74,12 @@ public class CommerceCurrencySoap implements Serializable {
 
 	public static CommerceCurrencySoap[][] toSoapModels(
 		CommerceCurrency[][] models) {
+
 		CommerceCurrencySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceCurrencySoap[models.length][models[0].length];
+			soapModels =
+				new CommerceCurrencySoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceCurrencySoap[0][0];
@@ -89,7 +94,9 @@ public class CommerceCurrencySoap implements Serializable {
 
 	public static CommerceCurrencySoap[] toSoapModels(
 		List<CommerceCurrency> models) {
-		List<CommerceCurrencySoap> soapModels = new ArrayList<CommerceCurrencySoap>(models.size());
+
+		List<CommerceCurrencySoap> soapModels =
+			new ArrayList<CommerceCurrencySoap>(models.size());
 
 		for (CommerceCurrency model : models) {
 			soapModels.add(toSoapModel(model));
@@ -288,4 +295,5 @@ public class CommerceCurrencySoap implements Serializable {
 	private double _priority;
 	private boolean _active;
 	private Date _lastPublishDate;
+
 }

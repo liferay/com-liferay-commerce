@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,9 +39,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceNotificationQueueEntryWrapper
 	implements CommerceNotificationQueueEntry,
-		ModelWrapper<CommerceNotificationQueueEntry> {
+			   ModelWrapper<CommerceNotificationQueueEntry> {
+
 	public CommerceNotificationQueueEntryWrapper(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
+
 		_commerceNotificationQueueEntry = commerceNotificationQueueEntry;
 	}
 
@@ -60,7 +61,8 @@ public class CommerceNotificationQueueEntryWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceNotificationQueueEntryId",
+		attributes.put(
+			"commerceNotificationQueueEntryId",
 			getCommerceNotificationQueueEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -68,7 +70,8 @@ public class CommerceNotificationQueueEntryWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceNotificationTemplateId",
+		attributes.put(
+			"commerceNotificationTemplateId",
 			getCommerceNotificationTemplateId());
 		attributes.put("from", getFrom());
 		attributes.put("fromName", getFromName());
@@ -88,10 +91,11 @@ public class CommerceNotificationQueueEntryWrapper
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceNotificationQueueEntryId = (Long)attributes.get(
-				"commerceNotificationQueueEntryId");
+			"commerceNotificationQueueEntryId");
 
 		if (commerceNotificationQueueEntryId != null) {
-			setCommerceNotificationQueueEntryId(commerceNotificationQueueEntryId);
+			setCommerceNotificationQueueEntryId(
+				commerceNotificationQueueEntryId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -131,7 +135,7 @@ public class CommerceNotificationQueueEntryWrapper
 		}
 
 		Long commerceNotificationTemplateId = (Long)attributes.get(
-				"commerceNotificationTemplateId");
+			"commerceNotificationTemplateId");
 
 		if (commerceNotificationTemplateId != null) {
 			setCommerceNotificationTemplateId(commerceNotificationTemplateId);
@@ -206,80 +210,86 @@ public class CommerceNotificationQueueEntryWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceNotificationQueueEntryWrapper((CommerceNotificationQueueEntry)_commerceNotificationQueueEntry.clone());
+		return new CommerceNotificationQueueEntryWrapper(
+			(CommerceNotificationQueueEntry)
+				_commerceNotificationQueueEntry.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-		return _commerceNotificationQueueEntry.compareTo(commerceNotificationQueueEntry);
+
+		return _commerceNotificationQueueEntry.compareTo(
+			commerceNotificationQueueEntry);
 	}
 
 	/**
-	* Returns the bcc of this commerce notification queue entry.
-	*
-	* @return the bcc of this commerce notification queue entry
-	*/
+	 * Returns the bcc of this commerce notification queue entry.
+	 *
+	 * @return the bcc of this commerce notification queue entry
+	 */
 	@Override
 	public String getBcc() {
 		return _commerceNotificationQueueEntry.getBcc();
 	}
 
 	/**
-	* Returns the body of this commerce notification queue entry.
-	*
-	* @return the body of this commerce notification queue entry
-	*/
+	 * Returns the body of this commerce notification queue entry.
+	 *
+	 * @return the body of this commerce notification queue entry
+	 */
 	@Override
 	public String getBody() {
 		return _commerceNotificationQueueEntry.getBody();
 	}
 
 	/**
-	* Returns the cc of this commerce notification queue entry.
-	*
-	* @return the cc of this commerce notification queue entry
-	*/
+	 * Returns the cc of this commerce notification queue entry.
+	 *
+	 * @return the cc of this commerce notification queue entry
+	 */
 	@Override
 	public String getCc() {
 		return _commerceNotificationQueueEntry.getCc();
 	}
 
 	/**
-	* Returns the commerce notification queue entry ID of this commerce notification queue entry.
-	*
-	* @return the commerce notification queue entry ID of this commerce notification queue entry
-	*/
+	 * Returns the commerce notification queue entry ID of this commerce notification queue entry.
+	 *
+	 * @return the commerce notification queue entry ID of this commerce notification queue entry
+	 */
 	@Override
 	public long getCommerceNotificationQueueEntryId() {
-		return _commerceNotificationQueueEntry.getCommerceNotificationQueueEntryId();
+		return _commerceNotificationQueueEntry.
+			getCommerceNotificationQueueEntryId();
 	}
 
 	/**
-	* Returns the commerce notification template ID of this commerce notification queue entry.
-	*
-	* @return the commerce notification template ID of this commerce notification queue entry
-	*/
+	 * Returns the commerce notification template ID of this commerce notification queue entry.
+	 *
+	 * @return the commerce notification template ID of this commerce notification queue entry
+	 */
 	@Override
 	public long getCommerceNotificationTemplateId() {
-		return _commerceNotificationQueueEntry.getCommerceNotificationTemplateId();
+		return _commerceNotificationQueueEntry.
+			getCommerceNotificationTemplateId();
 	}
 
 	/**
-	* Returns the company ID of this commerce notification queue entry.
-	*
-	* @return the company ID of this commerce notification queue entry
-	*/
+	 * Returns the company ID of this commerce notification queue entry.
+	 *
+	 * @return the company ID of this commerce notification queue entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceNotificationQueueEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce notification queue entry.
-	*
-	* @return the create date of this commerce notification queue entry
-	*/
+	 * Returns the create date of this commerce notification queue entry.
+	 *
+	 * @return the create date of this commerce notification queue entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceNotificationQueueEntry.getCreateDate();
@@ -291,50 +301,50 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Returns the from of this commerce notification queue entry.
-	*
-	* @return the from of this commerce notification queue entry
-	*/
+	 * Returns the from of this commerce notification queue entry.
+	 *
+	 * @return the from of this commerce notification queue entry
+	 */
 	@Override
 	public String getFrom() {
 		return _commerceNotificationQueueEntry.getFrom();
 	}
 
 	/**
-	* Returns the from name of this commerce notification queue entry.
-	*
-	* @return the from name of this commerce notification queue entry
-	*/
+	 * Returns the from name of this commerce notification queue entry.
+	 *
+	 * @return the from name of this commerce notification queue entry
+	 */
 	@Override
 	public String getFromName() {
 		return _commerceNotificationQueueEntry.getFromName();
 	}
 
 	/**
-	* Returns the group ID of this commerce notification queue entry.
-	*
-	* @return the group ID of this commerce notification queue entry
-	*/
+	 * Returns the group ID of this commerce notification queue entry.
+	 *
+	 * @return the group ID of this commerce notification queue entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceNotificationQueueEntry.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce notification queue entry.
-	*
-	* @return the modified date of this commerce notification queue entry
-	*/
+	 * Returns the modified date of this commerce notification queue entry.
+	 *
+	 * @return the modified date of this commerce notification queue entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceNotificationQueueEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce notification queue entry.
-	*
-	* @return the primary key of this commerce notification queue entry
-	*/
+	 * Returns the primary key of this commerce notification queue entry.
+	 *
+	 * @return the primary key of this commerce notification queue entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceNotificationQueueEntry.getPrimaryKey();
@@ -346,90 +356,90 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Returns the priority of this commerce notification queue entry.
-	*
-	* @return the priority of this commerce notification queue entry
-	*/
+	 * Returns the priority of this commerce notification queue entry.
+	 *
+	 * @return the priority of this commerce notification queue entry
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceNotificationQueueEntry.getPriority();
 	}
 
 	/**
-	* Returns the sent of this commerce notification queue entry.
-	*
-	* @return the sent of this commerce notification queue entry
-	*/
+	 * Returns the sent of this commerce notification queue entry.
+	 *
+	 * @return the sent of this commerce notification queue entry
+	 */
 	@Override
 	public boolean getSent() {
 		return _commerceNotificationQueueEntry.getSent();
 	}
 
 	/**
-	* Returns the sent date of this commerce notification queue entry.
-	*
-	* @return the sent date of this commerce notification queue entry
-	*/
+	 * Returns the sent date of this commerce notification queue entry.
+	 *
+	 * @return the sent date of this commerce notification queue entry
+	 */
 	@Override
 	public Date getSentDate() {
 		return _commerceNotificationQueueEntry.getSentDate();
 	}
 
 	/**
-	* Returns the subject of this commerce notification queue entry.
-	*
-	* @return the subject of this commerce notification queue entry
-	*/
+	 * Returns the subject of this commerce notification queue entry.
+	 *
+	 * @return the subject of this commerce notification queue entry
+	 */
 	@Override
 	public String getSubject() {
 		return _commerceNotificationQueueEntry.getSubject();
 	}
 
 	/**
-	* Returns the to of this commerce notification queue entry.
-	*
-	* @return the to of this commerce notification queue entry
-	*/
+	 * Returns the to of this commerce notification queue entry.
+	 *
+	 * @return the to of this commerce notification queue entry
+	 */
 	@Override
 	public String getTo() {
 		return _commerceNotificationQueueEntry.getTo();
 	}
 
 	/**
-	* Returns the to name of this commerce notification queue entry.
-	*
-	* @return the to name of this commerce notification queue entry
-	*/
+	 * Returns the to name of this commerce notification queue entry.
+	 *
+	 * @return the to name of this commerce notification queue entry
+	 */
 	@Override
 	public String getToName() {
 		return _commerceNotificationQueueEntry.getToName();
 	}
 
 	/**
-	* Returns the user ID of this commerce notification queue entry.
-	*
-	* @return the user ID of this commerce notification queue entry
-	*/
+	 * Returns the user ID of this commerce notification queue entry.
+	 *
+	 * @return the user ID of this commerce notification queue entry
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceNotificationQueueEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce notification queue entry.
-	*
-	* @return the user name of this commerce notification queue entry
-	*/
+	 * Returns the user name of this commerce notification queue entry.
+	 *
+	 * @return the user name of this commerce notification queue entry
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceNotificationQueueEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce notification queue entry.
-	*
-	* @return the user uuid of this commerce notification queue entry
-	*/
+	 * Returns the user uuid of this commerce notification queue entry.
+	 *
+	 * @return the user uuid of this commerce notification queue entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceNotificationQueueEntry.getUserUuid();
@@ -456,10 +466,10 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce notification queue entry is sent.
-	*
-	* @return <code>true</code> if this commerce notification queue entry is sent; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce notification queue entry is sent.
+	 *
+	 * @return <code>true</code> if this commerce notification queue entry is sent; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isSent() {
 		return _commerceNotificationQueueEntry.isSent();
@@ -471,20 +481,20 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Sets the bcc of this commerce notification queue entry.
-	*
-	* @param bcc the bcc of this commerce notification queue entry
-	*/
+	 * Sets the bcc of this commerce notification queue entry.
+	 *
+	 * @param bcc the bcc of this commerce notification queue entry
+	 */
 	@Override
 	public void setBcc(String bcc) {
 		_commerceNotificationQueueEntry.setBcc(bcc);
 	}
 
 	/**
-	* Sets the body of this commerce notification queue entry.
-	*
-	* @param body the body of this commerce notification queue entry
-	*/
+	 * Sets the body of this commerce notification queue entry.
+	 *
+	 * @param body the body of this commerce notification queue entry
+	 */
 	@Override
 	public void setBody(String body) {
 		_commerceNotificationQueueEntry.setBody(body);
@@ -496,52 +506,56 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Sets the cc of this commerce notification queue entry.
-	*
-	* @param cc the cc of this commerce notification queue entry
-	*/
+	 * Sets the cc of this commerce notification queue entry.
+	 *
+	 * @param cc the cc of this commerce notification queue entry
+	 */
 	@Override
 	public void setCc(String cc) {
 		_commerceNotificationQueueEntry.setCc(cc);
 	}
 
 	/**
-	* Sets the commerce notification queue entry ID of this commerce notification queue entry.
-	*
-	* @param commerceNotificationQueueEntryId the commerce notification queue entry ID of this commerce notification queue entry
-	*/
+	 * Sets the commerce notification queue entry ID of this commerce notification queue entry.
+	 *
+	 * @param commerceNotificationQueueEntryId the commerce notification queue entry ID of this commerce notification queue entry
+	 */
 	@Override
 	public void setCommerceNotificationQueueEntryId(
 		long commerceNotificationQueueEntryId) {
-		_commerceNotificationQueueEntry.setCommerceNotificationQueueEntryId(commerceNotificationQueueEntryId);
+
+		_commerceNotificationQueueEntry.setCommerceNotificationQueueEntryId(
+			commerceNotificationQueueEntryId);
 	}
 
 	/**
-	* Sets the commerce notification template ID of this commerce notification queue entry.
-	*
-	* @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification queue entry
-	*/
+	 * Sets the commerce notification template ID of this commerce notification queue entry.
+	 *
+	 * @param commerceNotificationTemplateId the commerce notification template ID of this commerce notification queue entry
+	 */
 	@Override
 	public void setCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		_commerceNotificationQueueEntry.setCommerceNotificationTemplateId(commerceNotificationTemplateId);
+
+		_commerceNotificationQueueEntry.setCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
 	}
 
 	/**
-	* Sets the company ID of this commerce notification queue entry.
-	*
-	* @param companyId the company ID of this commerce notification queue entry
-	*/
+	 * Sets the company ID of this commerce notification queue entry.
+	 *
+	 * @param companyId the company ID of this commerce notification queue entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceNotificationQueueEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce notification queue entry.
-	*
-	* @param createDate the create date of this commerce notification queue entry
-	*/
+	 * Sets the create date of this commerce notification queue entry.
+	 *
+	 * @param createDate the create date of this commerce notification queue entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceNotificationQueueEntry.setCreateDate(createDate);
@@ -550,54 +564,57 @@ public class CommerceNotificationQueueEntryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceNotificationQueueEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_commerceNotificationQueueEntry.setExpandoBridgeAttributes(expandoBridge);
+		_commerceNotificationQueueEntry.setExpandoBridgeAttributes(
+			expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceNotificationQueueEntry.setExpandoBridgeAttributes(serviceContext);
+		_commerceNotificationQueueEntry.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the from of this commerce notification queue entry.
-	*
-	* @param from the from of this commerce notification queue entry
-	*/
+	 * Sets the from of this commerce notification queue entry.
+	 *
+	 * @param from the from of this commerce notification queue entry
+	 */
 	@Override
 	public void setFrom(String from) {
 		_commerceNotificationQueueEntry.setFrom(from);
 	}
 
 	/**
-	* Sets the from name of this commerce notification queue entry.
-	*
-	* @param fromName the from name of this commerce notification queue entry
-	*/
+	 * Sets the from name of this commerce notification queue entry.
+	 *
+	 * @param fromName the from name of this commerce notification queue entry
+	 */
 	@Override
 	public void setFromName(String fromName) {
 		_commerceNotificationQueueEntry.setFromName(fromName);
 	}
 
 	/**
-	* Sets the group ID of this commerce notification queue entry.
-	*
-	* @param groupId the group ID of this commerce notification queue entry
-	*/
+	 * Sets the group ID of this commerce notification queue entry.
+	 *
+	 * @param groupId the group ID of this commerce notification queue entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceNotificationQueueEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce notification queue entry.
-	*
-	* @param modifiedDate the modified date of this commerce notification queue entry
-	*/
+	 * Sets the modified date of this commerce notification queue entry.
+	 *
+	 * @param modifiedDate the modified date of this commerce notification queue entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceNotificationQueueEntry.setModifiedDate(modifiedDate);
@@ -609,10 +626,10 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce notification queue entry.
-	*
-	* @param primaryKey the primary key of this commerce notification queue entry
-	*/
+	 * Sets the primary key of this commerce notification queue entry.
+	 *
+	 * @param primaryKey the primary key of this commerce notification queue entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceNotificationQueueEntry.setPrimaryKey(primaryKey);
@@ -624,103 +641,106 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
-	* Sets the priority of this commerce notification queue entry.
-	*
-	* @param priority the priority of this commerce notification queue entry
-	*/
+	 * Sets the priority of this commerce notification queue entry.
+	 *
+	 * @param priority the priority of this commerce notification queue entry
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceNotificationQueueEntry.setPriority(priority);
 	}
 
 	/**
-	* Sets whether this commerce notification queue entry is sent.
-	*
-	* @param sent the sent of this commerce notification queue entry
-	*/
+	 * Sets whether this commerce notification queue entry is sent.
+	 *
+	 * @param sent the sent of this commerce notification queue entry
+	 */
 	@Override
 	public void setSent(boolean sent) {
 		_commerceNotificationQueueEntry.setSent(sent);
 	}
 
 	/**
-	* Sets the sent date of this commerce notification queue entry.
-	*
-	* @param sentDate the sent date of this commerce notification queue entry
-	*/
+	 * Sets the sent date of this commerce notification queue entry.
+	 *
+	 * @param sentDate the sent date of this commerce notification queue entry
+	 */
 	@Override
 	public void setSentDate(Date sentDate) {
 		_commerceNotificationQueueEntry.setSentDate(sentDate);
 	}
 
 	/**
-	* Sets the subject of this commerce notification queue entry.
-	*
-	* @param subject the subject of this commerce notification queue entry
-	*/
+	 * Sets the subject of this commerce notification queue entry.
+	 *
+	 * @param subject the subject of this commerce notification queue entry
+	 */
 	@Override
 	public void setSubject(String subject) {
 		_commerceNotificationQueueEntry.setSubject(subject);
 	}
 
 	/**
-	* Sets the to of this commerce notification queue entry.
-	*
-	* @param to the to of this commerce notification queue entry
-	*/
+	 * Sets the to of this commerce notification queue entry.
+	 *
+	 * @param to the to of this commerce notification queue entry
+	 */
 	@Override
 	public void setTo(String to) {
 		_commerceNotificationQueueEntry.setTo(to);
 	}
 
 	/**
-	* Sets the to name of this commerce notification queue entry.
-	*
-	* @param toName the to name of this commerce notification queue entry
-	*/
+	 * Sets the to name of this commerce notification queue entry.
+	 *
+	 * @param toName the to name of this commerce notification queue entry
+	 */
 	@Override
 	public void setToName(String toName) {
 		_commerceNotificationQueueEntry.setToName(toName);
 	}
 
 	/**
-	* Sets the user ID of this commerce notification queue entry.
-	*
-	* @param userId the user ID of this commerce notification queue entry
-	*/
+	 * Sets the user ID of this commerce notification queue entry.
+	 *
+	 * @param userId the user ID of this commerce notification queue entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceNotificationQueueEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce notification queue entry.
-	*
-	* @param userName the user name of this commerce notification queue entry
-	*/
+	 * Sets the user name of this commerce notification queue entry.
+	 *
+	 * @param userName the user name of this commerce notification queue entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceNotificationQueueEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce notification queue entry.
-	*
-	* @param userUuid the user uuid of this commerce notification queue entry
-	*/
+	 * Sets the user uuid of this commerce notification queue entry.
+	 *
+	 * @param userUuid the user uuid of this commerce notification queue entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceNotificationQueueEntry.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceNotificationQueueEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceNotificationQueueEntry> toCacheModel() {
+
 		return _commerceNotificationQueueEntry.toCacheModel();
 	}
 
 	@Override
 	public CommerceNotificationQueueEntry toEscapedModel() {
-		return new CommerceNotificationQueueEntryWrapper(_commerceNotificationQueueEntry.toEscapedModel());
+		return new CommerceNotificationQueueEntryWrapper(
+			_commerceNotificationQueueEntry.toEscapedModel());
 	}
 
 	@Override
@@ -730,7 +750,8 @@ public class CommerceNotificationQueueEntryWrapper
 
 	@Override
 	public CommerceNotificationQueueEntry toUnescapedModel() {
-		return new CommerceNotificationQueueEntryWrapper(_commerceNotificationQueueEntry.toUnescapedModel());
+		return new CommerceNotificationQueueEntryWrapper(
+			_commerceNotificationQueueEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -748,11 +769,15 @@ public class CommerceNotificationQueueEntryWrapper
 			return false;
 		}
 
-		CommerceNotificationQueueEntryWrapper commerceNotificationQueueEntryWrapper =
-			(CommerceNotificationQueueEntryWrapper)obj;
+		CommerceNotificationQueueEntryWrapper
+			commerceNotificationQueueEntryWrapper =
+				(CommerceNotificationQueueEntryWrapper)obj;
 
-		if (Objects.equals(_commerceNotificationQueueEntry,
-					commerceNotificationQueueEntryWrapper._commerceNotificationQueueEntry)) {
+		if (Objects.equals(
+				_commerceNotificationQueueEntry,
+				commerceNotificationQueueEntryWrapper.
+					_commerceNotificationQueueEntry)) {
+
 			return true;
 		}
 
@@ -779,5 +804,7 @@ public class CommerceNotificationQueueEntryWrapper
 		_commerceNotificationQueueEntry.resetOriginalValues();
 	}
 
-	private final CommerceNotificationQueueEntry _commerceNotificationQueueEntry;
+	private final CommerceNotificationQueueEntry
+		_commerceNotificationQueueEntry;
+
 }

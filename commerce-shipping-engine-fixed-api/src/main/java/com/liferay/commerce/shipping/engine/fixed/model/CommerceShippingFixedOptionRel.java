@@ -25,37 +25,44 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingFixedOptionRelModel
- * @see com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl
- * @see com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl"
+)
 @ProviderType
 public interface CommerceShippingFixedOptionRel
 	extends CommerceShippingFixedOptionRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.shipping.engine.fixed.model.impl.CommerceShippingFixedOptionRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceShippingFixedOptionRel, Long> COMMERCE_SHIPPING_FIXED_OPTION_REL_ID_ACCESSOR =
-		new Accessor<CommerceShippingFixedOptionRel, Long>() {
-			@Override
-			public Long get(
-				CommerceShippingFixedOptionRel commerceShippingFixedOptionRel) {
-				return commerceShippingFixedOptionRel.getCommerceShippingFixedOptionRelId();
-			}
+	public static final Accessor<CommerceShippingFixedOptionRel, Long>
+		COMMERCE_SHIPPING_FIXED_OPTION_REL_ID_ACCESSOR =
+			new Accessor<CommerceShippingFixedOptionRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceShippingFixedOptionRel
+						commerceShippingFixedOptionRel) {
 
-			@Override
-			public Class<CommerceShippingFixedOptionRel> getTypeClass() {
-				return CommerceShippingFixedOptionRel.class;
-			}
-		};
+					return commerceShippingFixedOptionRel.
+						getCommerceShippingFixedOptionRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceShippingFixedOptionRel> getTypeClass() {
+					return CommerceShippingFixedOptionRel.class;
+				}
+
+			};
 
 	public com.liferay.commerce.model.CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -66,9 +73,11 @@ public interface CommerceShippingFixedOptionRel
 	public CommerceShippingFixedOption getCommerceShippingFixedOption()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod()
+	public com.liferay.commerce.model.CommerceShippingMethod
+			getCommerceShippingMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.model.CommerceWarehouse getCommerceWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

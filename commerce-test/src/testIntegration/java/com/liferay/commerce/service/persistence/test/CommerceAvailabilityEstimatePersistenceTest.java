@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchAvailabilityEstimateException;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceAvailabilityEstimatePersistence;
 import com.liferay.commerce.service.persistence.CommerceAvailabilityEstimateUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceAvailabilityEstimatePersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -83,7 +82,8 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceAvailabilityEstimate> iterator = _commerceAvailabilityEstimates.iterator();
+		Iterator<CommerceAvailabilityEstimate> iterator =
+			_commerceAvailabilityEstimates.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -96,7 +96,8 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate = _persistence.create(pk);
+		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceAvailabilityEstimate);
 
@@ -105,11 +106,14 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
 		_persistence.remove(newCommerceAvailabilityEstimate);
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = _persistence.fetchByPrimaryKey(newCommerceAvailabilityEstimate.getPrimaryKey());
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAvailabilityEstimate.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceAvailabilityEstimate);
 	}
@@ -123,7 +127,8 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = _persistence.create(pk);
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			_persistence.create(pk);
 
 		newCommerceAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
@@ -133,48 +138,68 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 		newCommerceAvailabilityEstimate.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceAvailabilityEstimate.setUserName(RandomTestUtil.randomString());
+		newCommerceAvailabilityEstimate.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceAvailabilityEstimate.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceAvailabilityEstimate.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceAvailabilityEstimate.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceAvailabilityEstimate.setModifiedDate(
+			RandomTestUtil.nextDate());
 
 		newCommerceAvailabilityEstimate.setTitle(RandomTestUtil.randomString());
 
-		newCommerceAvailabilityEstimate.setPriority(RandomTestUtil.nextDouble());
+		newCommerceAvailabilityEstimate.setPriority(
+			RandomTestUtil.nextDouble());
 
-		newCommerceAvailabilityEstimate.setLastPublishDate(RandomTestUtil.nextDate());
+		newCommerceAvailabilityEstimate.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_commerceAvailabilityEstimates.add(_persistence.update(
-				newCommerceAvailabilityEstimate));
+		_commerceAvailabilityEstimates.add(
+			_persistence.update(newCommerceAvailabilityEstimate));
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = _persistence.findByPrimaryKey(newCommerceAvailabilityEstimate.getPrimaryKey());
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCommerceAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getUuid(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getUuid(),
 			newCommerceAvailabilityEstimate.getUuid());
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getCommerceAvailabilityEstimateId(),
-			newCommerceAvailabilityEstimate.getCommerceAvailabilityEstimateId());
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.
+				getCommerceAvailabilityEstimateId(),
+			newCommerceAvailabilityEstimate.
+				getCommerceAvailabilityEstimateId());
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getGroupId(),
 			newCommerceAvailabilityEstimate.getGroupId());
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getCompanyId(),
 			newCommerceAvailabilityEstimate.getCompanyId());
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getUserId(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getUserId(),
 			newCommerceAvailabilityEstimate.getUserId());
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getUserName(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getUserName(),
 			newCommerceAvailabilityEstimate.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAvailabilityEstimate.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceAvailabilityEstimate.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAvailabilityEstimate.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceAvailabilityEstimate.getModifiedDate()));
-		Assert.assertEquals(existingCommerceAvailabilityEstimate.getTitle(),
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate.getTitle(),
 			newCommerceAvailabilityEstimate.getTitle());
-		AssertUtils.assertEquals(existingCommerceAvailabilityEstimate.getPriority(),
+		AssertUtils.assertEquals(
+			existingCommerceAvailabilityEstimate.getPriority(),
 			newCommerceAvailabilityEstimate.getPriority());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAvailabilityEstimate.getLastPublishDate()),
 			Time.getShortTimestamp(
 				newCommerceAvailabilityEstimate.getLastPublishDate()));
@@ -216,11 +241,15 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = _persistence.findByPrimaryKey(newCommerceAvailabilityEstimate.getPrimaryKey());
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCommerceAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAvailabilityEstimate,
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate,
 			newCommerceAvailabilityEstimate);
 	}
 
@@ -233,25 +262,32 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceAvailabilityEstimate> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceAvailabilityEstimate",
-			"uuid", true, "commerceAvailabilityEstimateId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "title", true,
-			"priority", true, "lastPublishDate", true);
+	protected OrderByComparator<CommerceAvailabilityEstimate>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceAvailabilityEstimate", "uuid", true,
+			"commerceAvailabilityEstimateId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "title", true, "priority", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = _persistence.fetchByPrimaryKey(newCommerceAvailabilityEstimate.getPrimaryKey());
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAvailabilityEstimate,
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate,
 			newCommerceAvailabilityEstimate);
 	}
 
@@ -259,7 +295,8 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAvailabilityEstimate missingCommerceAvailabilityEstimate = _persistence.fetchByPrimaryKey(pk);
+		CommerceAvailabilityEstimate missingCommerceAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceAvailabilityEstimate);
 	}
@@ -267,22 +304,28 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate1 = addCommerceAvailabilityEstimate();
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate2 = addCommerceAvailabilityEstimate();
+
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate1 =
+			addCommerceAvailabilityEstimate();
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate2 =
+			addCommerceAvailabilityEstimate();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAvailabilityEstimate1.getPrimaryKey());
 		primaryKeys.add(newCommerceAvailabilityEstimate2.getPrimaryKey());
 
-		Map<Serializable, CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAvailabilityEstimate>
+			commerceAvailabilityEstimates = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceAvailabilityEstimates.size());
-		Assert.assertEquals(newCommerceAvailabilityEstimate1,
+		Assert.assertEquals(
+			newCommerceAvailabilityEstimate1,
 			commerceAvailabilityEstimates.get(
 				newCommerceAvailabilityEstimate1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceAvailabilityEstimate2,
+		Assert.assertEquals(
+			newCommerceAvailabilityEstimate2,
 			commerceAvailabilityEstimates.get(
 				newCommerceAvailabilityEstimate2.getPrimaryKey()));
 	}
@@ -290,6 +333,7 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -299,8 +343,9 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAvailabilityEstimate>
+			commerceAvailabilityEstimates = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceAvailabilityEstimates.isEmpty());
 	}
@@ -308,7 +353,9 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -317,40 +364,44 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 		primaryKeys.add(newCommerceAvailabilityEstimate.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAvailabilityEstimate>
+			commerceAvailabilityEstimates = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceAvailabilityEstimates.size());
-		Assert.assertEquals(newCommerceAvailabilityEstimate,
+		Assert.assertEquals(
+			newCommerceAvailabilityEstimate,
 			commerceAvailabilityEstimates.get(
 				newCommerceAvailabilityEstimate.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAvailabilityEstimate>
+			commerceAvailabilityEstimates = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceAvailabilityEstimates.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAvailabilityEstimate.getPrimaryKey());
 
-		Map<Serializable, CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAvailabilityEstimate>
+			commerceAvailabilityEstimates = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceAvailabilityEstimates.size());
-		Assert.assertEquals(newCommerceAvailabilityEstimate,
+		Assert.assertEquals(
+			newCommerceAvailabilityEstimate,
 			commerceAvailabilityEstimates.get(
 				newCommerceAvailabilityEstimate.getPrimaryKey()));
 	}
@@ -359,16 +410,23 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceAvailabilityEstimateLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceAvailabilityEstimateLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceAvailabilityEstimate>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceAvailabilityEstimate>() {
+
 				@Override
 				public void performAction(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
+
 					Assert.assertNotNull(commerceAvailabilityEstimate);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -377,56 +435,65 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceAvailabilityEstimateId",
-				newCommerceAvailabilityEstimate.getCommerceAvailabilityEstimateId()));
+				newCommerceAvailabilityEstimate.
+					getCommerceAvailabilityEstimateId()));
 
-		List<CommerceAvailabilityEstimate> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAvailabilityEstimate> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = result.get(0);
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceAvailabilityEstimate,
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimate,
 			newCommerceAvailabilityEstimate);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceAvailabilityEstimateId", RandomTestUtil.nextLong()));
 
-		List<CommerceAvailabilityEstimate> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAvailabilityEstimate> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceAvailabilityEstimateId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceAvailabilityEstimateId"));
 
-		Object newCommerceAvailabilityEstimateId = newCommerceAvailabilityEstimate.getCommerceAvailabilityEstimateId();
+		Object newCommerceAvailabilityEstimateId =
+			newCommerceAvailabilityEstimate.getCommerceAvailabilityEstimateId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceAvailabilityEstimateId",
-				new Object[] { newCommerceAvailabilityEstimateId }));
+				new Object[] {newCommerceAvailabilityEstimateId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -434,21 +501,23 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 		Object existingCommerceAvailabilityEstimateId = result.get(0);
 
-		Assert.assertEquals(existingCommerceAvailabilityEstimateId,
+		Assert.assertEquals(
+			existingCommerceAvailabilityEstimateId,
 			newCommerceAvailabilityEstimateId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceAvailabilityEstimateId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceAvailabilityEstimateId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceAvailabilityEstimateId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -457,19 +526,23 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate = addCommerceAvailabilityEstimate();
+		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
+			addCommerceAvailabilityEstimate();
 
 		_persistence.clearCache();
 
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate = _persistence.findByPrimaryKey(newCommerceAvailabilityEstimate.getPrimaryKey());
+		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCommerceAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceAvailabilityEstimate.getUuid(),
 				ReflectionTestUtil.invoke(
 					existingCommerceAvailabilityEstimate, "getOriginalUuid",
 					new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceAvailabilityEstimate.getGroupId()),
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceAvailabilityEstimate.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceAvailabilityEstimate, "getOriginalGroupId",
 				new Class<?>[0]));
@@ -477,9 +550,11 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 	protected CommerceAvailabilityEstimate addCommerceAvailabilityEstimate()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate = _persistence.create(pk);
+		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
+			_persistence.create(pk);
 
 		commerceAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
@@ -499,15 +574,18 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 		commerceAvailabilityEstimate.setPriority(RandomTestUtil.nextDouble());
 
-		commerceAvailabilityEstimate.setLastPublishDate(RandomTestUtil.nextDate());
+		commerceAvailabilityEstimate.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_commerceAvailabilityEstimates.add(_persistence.update(
-				commerceAvailabilityEstimate));
+		_commerceAvailabilityEstimates.add(
+			_persistence.update(commerceAvailabilityEstimate));
 
 		return commerceAvailabilityEstimate;
 	}
 
-	private List<CommerceAvailabilityEstimate> _commerceAvailabilityEstimates = new ArrayList<CommerceAvailabilityEstimate>();
+	private List<CommerceAvailabilityEstimate> _commerceAvailabilityEstimates =
+		new ArrayList<CommerceAvailabilityEstimate>();
 	private CommerceAvailabilityEstimatePersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

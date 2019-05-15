@@ -25,20 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDisplayLayoutModel
- * @see com.liferay.commerce.product.model.impl.CPDisplayLayoutImpl
- * @see com.liferay.commerce.product.model.impl.CPDisplayLayoutModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDisplayLayoutImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDisplayLayoutImpl"
+)
 @ProviderType
 public interface CPDisplayLayout extends CPDisplayLayoutModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDisplayLayoutImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDisplayLayoutImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDisplayLayout, Long> CP_DISPLAY_LAYOUT_ID_ACCESSOR =
-		new Accessor<CPDisplayLayout, Long>() {
+	public static final Accessor<CPDisplayLayout, Long>
+		CP_DISPLAY_LAYOUT_ID_ACCESSOR = new Accessor<CPDisplayLayout, Long>() {
+
 			@Override
 			public Long get(CPDisplayLayout cpDisplayLayout) {
 				return cpDisplayLayout.getCPDisplayLayoutId();
@@ -53,5 +55,7 @@ public interface CPDisplayLayout extends CPDisplayLayoutModel, PersistedModel {
 			public Class<CPDisplayLayout> getTypeClass() {
 				return CPDisplayLayout.class;
 			}
+
 		};
+
 }

@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CPOptionValueLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CPOptionValueBaseImpl extends CPOptionValueModelImpl
-	implements CPOptionValue {
+public abstract class CPOptionValueBaseImpl
+	extends CPOptionValueModelImpl implements CPOptionValue {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp option value model instance should use the {@link CPOptionValue} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp option value model instance should use the <code>CPOptionValue</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPOptionValueBaseImpl extends CPOptionValueModelImpl
 			CPOptionValueLocalServiceUtil.updateCPOptionValue(this);
 		}
 	}
+
 }

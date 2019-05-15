@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderPayment;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceOrderPayment in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceOrderPayment
  * @generated
  */
 @ProviderType
-public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderPayment>,
-	Externalizable {
+public class CommerceOrderPaymentCacheModel
+	implements CacheModel<CommerceOrderPayment>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 			return false;
 		}
 
-		CommerceOrderPaymentCacheModel commerceOrderPaymentCacheModel = (CommerceOrderPaymentCacheModel)obj;
+		CommerceOrderPaymentCacheModel commerceOrderPaymentCacheModel =
+			(CommerceOrderPaymentCacheModel)obj;
 
-		if (commerceOrderPaymentId == commerceOrderPaymentCacheModel.commerceOrderPaymentId) {
+		if (commerceOrderPaymentId ==
+				commerceOrderPaymentCacheModel.commerceOrderPaymentId) {
+
 			return true;
 		}
 
@@ -96,9 +98,11 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 
 	@Override
 	public CommerceOrderPayment toEntityModel() {
-		CommerceOrderPaymentImpl commerceOrderPaymentImpl = new CommerceOrderPaymentImpl();
+		CommerceOrderPaymentImpl commerceOrderPaymentImpl =
+			new CommerceOrderPaymentImpl();
 
-		commerceOrderPaymentImpl.setCommerceOrderPaymentId(commerceOrderPaymentId);
+		commerceOrderPaymentImpl.setCommerceOrderPaymentId(
+			commerceOrderPaymentId);
 		commerceOrderPaymentImpl.setGroupId(groupId);
 		commerceOrderPaymentImpl.setCompanyId(companyId);
 		commerceOrderPaymentImpl.setUserId(userId);
@@ -130,7 +134,8 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 			commerceOrderPaymentImpl.setCommercePaymentMethodKey("");
 		}
 		else {
-			commerceOrderPaymentImpl.setCommercePaymentMethodKey(commercePaymentMethodKey);
+			commerceOrderPaymentImpl.setCommercePaymentMethodKey(
+				commercePaymentMethodKey);
 		}
 
 		if (content == null) {
@@ -168,8 +173,7 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceOrderPaymentId);
 
 		objectOutput.writeLong(groupId);
@@ -218,4 +222,5 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 	public String commercePaymentMethodKey;
 	public String content;
 	public int status;
+
 }

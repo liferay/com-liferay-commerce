@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceDiscountUsageEntry in entity cache.
  *
  * @author Marco Leo
- * @see CommerceDiscountUsageEntry
  * @generated
  */
 @ProviderType
-public class CommerceDiscountUsageEntryCacheModel implements CacheModel<CommerceDiscountUsageEntry>,
-	Externalizable {
+public class CommerceDiscountUsageEntryCacheModel
+	implements CacheModel<CommerceDiscountUsageEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 			return false;
 		}
 
-		CommerceDiscountUsageEntryCacheModel commerceDiscountUsageEntryCacheModel =
-			(CommerceDiscountUsageEntryCacheModel)obj;
+		CommerceDiscountUsageEntryCacheModel
+			commerceDiscountUsageEntryCacheModel =
+				(CommerceDiscountUsageEntryCacheModel)obj;
 
-		if (commerceDiscountUsageEntryId == commerceDiscountUsageEntryCacheModel.commerceDiscountUsageEntryId) {
+		if (commerceDiscountUsageEntryId ==
+				commerceDiscountUsageEntryCacheModel.
+					commerceDiscountUsageEntryId) {
+
 			return true;
 		}
 
@@ -95,9 +98,11 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 
 	@Override
 	public CommerceDiscountUsageEntry toEntityModel() {
-		CommerceDiscountUsageEntryImpl commerceDiscountUsageEntryImpl = new CommerceDiscountUsageEntryImpl();
+		CommerceDiscountUsageEntryImpl commerceDiscountUsageEntryImpl =
+			new CommerceDiscountUsageEntryImpl();
 
-		commerceDiscountUsageEntryImpl.setCommerceDiscountUsageEntryId(commerceDiscountUsageEntryId);
+		commerceDiscountUsageEntryImpl.setCommerceDiscountUsageEntryId(
+			commerceDiscountUsageEntryId);
 		commerceDiscountUsageEntryImpl.setGroupId(groupId);
 		commerceDiscountUsageEntryImpl.setCompanyId(companyId);
 		commerceDiscountUsageEntryImpl.setUserId(userId);
@@ -120,13 +125,14 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 			commerceDiscountUsageEntryImpl.setModifiedDate(null);
 		}
 		else {
-			commerceDiscountUsageEntryImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceDiscountUsageEntryImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		commerceDiscountUsageEntryImpl.setCommerceAccountId(commerceAccountId);
 		commerceDiscountUsageEntryImpl.setCommerceOrderId(commerceOrderId);
-		commerceDiscountUsageEntryImpl.setCommerceDiscountId(commerceDiscountId);
+		commerceDiscountUsageEntryImpl.setCommerceDiscountId(
+			commerceDiscountId);
 
 		commerceDiscountUsageEntryImpl.resetOriginalValues();
 
@@ -154,8 +160,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceDiscountUsageEntryId);
 
 		objectOutput.writeLong(groupId);
@@ -191,4 +196,5 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 	public long commerceAccountId;
 	public long commerceOrderId;
 	public long commerceDiscountId;
+
 }

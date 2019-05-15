@@ -25,37 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShippingMethodModel
- * @see com.liferay.commerce.model.impl.CommerceShippingMethodImpl
- * @see com.liferay.commerce.model.impl.CommerceShippingMethodModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceShippingMethodImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceShippingMethodImpl"
+)
 @ProviderType
-public interface CommerceShippingMethod extends CommerceShippingMethodModel,
-	PersistedModel {
+public interface CommerceShippingMethod
+	extends CommerceShippingMethodModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceShippingMethodImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceShippingMethodImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceShippingMethod, Long> COMMERCE_SHIPPING_METHOD_ID_ACCESSOR =
-		new Accessor<CommerceShippingMethod, Long>() {
-			@Override
-			public Long get(CommerceShippingMethod commerceShippingMethod) {
-				return commerceShippingMethod.getCommerceShippingMethodId();
-			}
+	public static final Accessor<CommerceShippingMethod, Long>
+		COMMERCE_SHIPPING_METHOD_ID_ACCESSOR =
+			new Accessor<CommerceShippingMethod, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceShippingMethod commerceShippingMethod) {
+					return commerceShippingMethod.getCommerceShippingMethodId();
+				}
 
-			@Override
-			public Class<CommerceShippingMethod> getTypeClass() {
-				return CommerceShippingMethod.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceShippingMethod> getTypeClass() {
+					return CommerceShippingMethod.class;
+				}
+
+			};
 
 	public String getImageURL(
 		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay);
+
 }

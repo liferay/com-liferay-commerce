@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPTaxCategoryServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPTaxCategoryServiceSoap
  * @generated
  */
 @ProviderType
 public class CPTaxCategorySoap implements Serializable {
+
 	public static CPTaxCategorySoap toSoapModel(CPTaxCategory model) {
 		CPTaxCategorySoap soapModel = new CPTaxCategorySoap();
 
@@ -75,7 +75,8 @@ public class CPTaxCategorySoap implements Serializable {
 	}
 
 	public static CPTaxCategorySoap[] toSoapModels(List<CPTaxCategory> models) {
-		List<CPTaxCategorySoap> soapModels = new ArrayList<CPTaxCategorySoap>(models.size());
+		List<CPTaxCategorySoap> soapModels = new ArrayList<CPTaxCategorySoap>(
+			models.size());
 
 		for (CPTaxCategory model : models) {
 			soapModels.add(toSoapModel(model));
@@ -176,4 +177,5 @@ public class CPTaxCategorySoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _description;
+
 }

@@ -17,9 +17,7 @@ package com.liferay.commerce.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,10 +38,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
-	ModelWrapper<CPDAvailabilityEstimate> {
+public class CPDAvailabilityEstimateWrapper
+	implements CPDAvailabilityEstimate, ModelWrapper<CPDAvailabilityEstimate> {
+
 	public CPDAvailabilityEstimateWrapper(
 		CPDAvailabilityEstimate cpdAvailabilityEstimate) {
+
 		_cpdAvailabilityEstimate = cpdAvailabilityEstimate;
 	}
 
@@ -62,15 +62,16 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("CPDAvailabilityEstimateId",
-			getCPDAvailabilityEstimateId());
+		attributes.put(
+			"CPDAvailabilityEstimateId", getCPDAvailabilityEstimateId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceAvailabilityEstimateId",
+		attributes.put(
+			"commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
 		attributes.put("CProductId", getCProductId());
 		attributes.put("lastPublishDate", getLastPublishDate());
@@ -87,7 +88,7 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 		}
 
 		Long CPDAvailabilityEstimateId = (Long)attributes.get(
-				"CPDAvailabilityEstimateId");
+			"CPDAvailabilityEstimateId");
 
 		if (CPDAvailabilityEstimateId != null) {
 			setCPDAvailabilityEstimateId(CPDAvailabilityEstimateId);
@@ -130,7 +131,7 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 		}
 
 		Long commerceAvailabilityEstimateId = (Long)attributes.get(
-				"commerceAvailabilityEstimateId");
+			"commerceAvailabilityEstimateId");
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
@@ -151,7 +152,8 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 
 	@Override
 	public Object clone() {
-		return new CPDAvailabilityEstimateWrapper((CPDAvailabilityEstimate)_cpdAvailabilityEstimate.clone());
+		return new CPDAvailabilityEstimateWrapper(
+			(CPDAvailabilityEstimate)_cpdAvailabilityEstimate.clone());
 	}
 
 	@Override
@@ -162,54 +164,55 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	@Override
 	public CommerceAvailabilityEstimate getCommerceAvailabilityEstimate()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpdAvailabilityEstimate.getCommerceAvailabilityEstimate();
 	}
 
 	/**
-	* Returns the commerce availability estimate ID of this cpd availability estimate.
-	*
-	* @return the commerce availability estimate ID of this cpd availability estimate
-	*/
+	 * Returns the commerce availability estimate ID of this cpd availability estimate.
+	 *
+	 * @return the commerce availability estimate ID of this cpd availability estimate
+	 */
 	@Override
 	public long getCommerceAvailabilityEstimateId() {
 		return _cpdAvailabilityEstimate.getCommerceAvailabilityEstimateId();
 	}
 
 	/**
-	* Returns the company ID of this cpd availability estimate.
-	*
-	* @return the company ID of this cpd availability estimate
-	*/
+	 * Returns the company ID of this cpd availability estimate.
+	 *
+	 * @return the company ID of this cpd availability estimate
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpdAvailabilityEstimate.getCompanyId();
 	}
 
 	/**
-	* Returns the cpd availability estimate ID of this cpd availability estimate.
-	*
-	* @return the cpd availability estimate ID of this cpd availability estimate
-	*/
+	 * Returns the cpd availability estimate ID of this cpd availability estimate.
+	 *
+	 * @return the cpd availability estimate ID of this cpd availability estimate
+	 */
 	@Override
 	public long getCPDAvailabilityEstimateId() {
 		return _cpdAvailabilityEstimate.getCPDAvailabilityEstimateId();
 	}
 
 	/**
-	* Returns the c product ID of this cpd availability estimate.
-	*
-	* @return the c product ID of this cpd availability estimate
-	*/
+	 * Returns the c product ID of this cpd availability estimate.
+	 *
+	 * @return the c product ID of this cpd availability estimate
+	 */
 	@Override
 	public long getCProductId() {
 		return _cpdAvailabilityEstimate.getCProductId();
 	}
 
 	/**
-	* Returns the create date of this cpd availability estimate.
-	*
-	* @return the create date of this cpd availability estimate
-	*/
+	 * Returns the create date of this cpd availability estimate.
+	 *
+	 * @return the create date of this cpd availability estimate
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpdAvailabilityEstimate.getCreateDate();
@@ -221,40 +224,40 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Returns the group ID of this cpd availability estimate.
-	*
-	* @return the group ID of this cpd availability estimate
-	*/
+	 * Returns the group ID of this cpd availability estimate.
+	 *
+	 * @return the group ID of this cpd availability estimate
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpdAvailabilityEstimate.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this cpd availability estimate.
-	*
-	* @return the last publish date of this cpd availability estimate
-	*/
+	 * Returns the last publish date of this cpd availability estimate.
+	 *
+	 * @return the last publish date of this cpd availability estimate
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _cpdAvailabilityEstimate.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this cpd availability estimate.
-	*
-	* @return the modified date of this cpd availability estimate
-	*/
+	 * Returns the modified date of this cpd availability estimate.
+	 *
+	 * @return the modified date of this cpd availability estimate
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpdAvailabilityEstimate.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cpd availability estimate.
-	*
-	* @return the primary key of this cpd availability estimate
-	*/
+	 * Returns the primary key of this cpd availability estimate.
+	 *
+	 * @return the primary key of this cpd availability estimate
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpdAvailabilityEstimate.getPrimaryKey();
@@ -266,40 +269,40 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Returns the user ID of this cpd availability estimate.
-	*
-	* @return the user ID of this cpd availability estimate
-	*/
+	 * Returns the user ID of this cpd availability estimate.
+	 *
+	 * @return the user ID of this cpd availability estimate
+	 */
 	@Override
 	public long getUserId() {
 		return _cpdAvailabilityEstimate.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cpd availability estimate.
-	*
-	* @return the user name of this cpd availability estimate
-	*/
+	 * Returns the user name of this cpd availability estimate.
+	 *
+	 * @return the user name of this cpd availability estimate
+	 */
 	@Override
 	public String getUserName() {
 		return _cpdAvailabilityEstimate.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cpd availability estimate.
-	*
-	* @return the user uuid of this cpd availability estimate
-	*/
+	 * Returns the user uuid of this cpd availability estimate.
+	 *
+	 * @return the user uuid of this cpd availability estimate
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpdAvailabilityEstimate.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cpd availability estimate.
-	*
-	* @return the uuid of this cpd availability estimate
-	*/
+	 * Returns the uuid of this cpd availability estimate.
+	 *
+	 * @return the uuid of this cpd availability estimate
+	 */
 	@Override
 	public String getUuid() {
 		return _cpdAvailabilityEstimate.getUuid();
@@ -336,51 +339,54 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Sets the commerce availability estimate ID of this cpd availability estimate.
-	*
-	* @param commerceAvailabilityEstimateId the commerce availability estimate ID of this cpd availability estimate
-	*/
+	 * Sets the commerce availability estimate ID of this cpd availability estimate.
+	 *
+	 * @param commerceAvailabilityEstimateId the commerce availability estimate ID of this cpd availability estimate
+	 */
 	@Override
 	public void setCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId) {
-		_cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+
+		_cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
+			commerceAvailabilityEstimateId);
 	}
 
 	/**
-	* Sets the company ID of this cpd availability estimate.
-	*
-	* @param companyId the company ID of this cpd availability estimate
-	*/
+	 * Sets the company ID of this cpd availability estimate.
+	 *
+	 * @param companyId the company ID of this cpd availability estimate
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpdAvailabilityEstimate.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cpd availability estimate ID of this cpd availability estimate.
-	*
-	* @param CPDAvailabilityEstimateId the cpd availability estimate ID of this cpd availability estimate
-	*/
+	 * Sets the cpd availability estimate ID of this cpd availability estimate.
+	 *
+	 * @param CPDAvailabilityEstimateId the cpd availability estimate ID of this cpd availability estimate
+	 */
 	@Override
 	public void setCPDAvailabilityEstimateId(long CPDAvailabilityEstimateId) {
-		_cpdAvailabilityEstimate.setCPDAvailabilityEstimateId(CPDAvailabilityEstimateId);
+		_cpdAvailabilityEstimate.setCPDAvailabilityEstimateId(
+			CPDAvailabilityEstimateId);
 	}
 
 	/**
-	* Sets the c product ID of this cpd availability estimate.
-	*
-	* @param CProductId the c product ID of this cpd availability estimate
-	*/
+	 * Sets the c product ID of this cpd availability estimate.
+	 *
+	 * @param CProductId the c product ID of this cpd availability estimate
+	 */
 	@Override
 	public void setCProductId(long CProductId) {
 		_cpdAvailabilityEstimate.setCProductId(CProductId);
 	}
 
 	/**
-	* Sets the create date of this cpd availability estimate.
-	*
-	* @param createDate the create date of this cpd availability estimate
-	*/
+	 * Sets the create date of this cpd availability estimate.
+	 *
+	 * @param createDate the create date of this cpd availability estimate
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpdAvailabilityEstimate.setCreateDate(createDate);
@@ -389,6 +395,7 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpdAvailabilityEstimate.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -403,30 +410,30 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Sets the group ID of this cpd availability estimate.
-	*
-	* @param groupId the group ID of this cpd availability estimate
-	*/
+	 * Sets the group ID of this cpd availability estimate.
+	 *
+	 * @param groupId the group ID of this cpd availability estimate
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpdAvailabilityEstimate.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this cpd availability estimate.
-	*
-	* @param lastPublishDate the last publish date of this cpd availability estimate
-	*/
+	 * Sets the last publish date of this cpd availability estimate.
+	 *
+	 * @param lastPublishDate the last publish date of this cpd availability estimate
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_cpdAvailabilityEstimate.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this cpd availability estimate.
-	*
-	* @param modifiedDate the modified date of this cpd availability estimate
-	*/
+	 * Sets the modified date of this cpd availability estimate.
+	 *
+	 * @param modifiedDate the modified date of this cpd availability estimate
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpdAvailabilityEstimate.setModifiedDate(modifiedDate);
@@ -438,10 +445,10 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Sets the primary key of this cpd availability estimate.
-	*
-	* @param primaryKey the primary key of this cpd availability estimate
-	*/
+	 * Sets the primary key of this cpd availability estimate.
+	 *
+	 * @param primaryKey the primary key of this cpd availability estimate
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpdAvailabilityEstimate.setPrimaryKey(primaryKey);
@@ -453,53 +460,56 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Sets the user ID of this cpd availability estimate.
-	*
-	* @param userId the user ID of this cpd availability estimate
-	*/
+	 * Sets the user ID of this cpd availability estimate.
+	 *
+	 * @param userId the user ID of this cpd availability estimate
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpdAvailabilityEstimate.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cpd availability estimate.
-	*
-	* @param userName the user name of this cpd availability estimate
-	*/
+	 * Sets the user name of this cpd availability estimate.
+	 *
+	 * @param userName the user name of this cpd availability estimate
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpdAvailabilityEstimate.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cpd availability estimate.
-	*
-	* @param userUuid the user uuid of this cpd availability estimate
-	*/
+	 * Sets the user uuid of this cpd availability estimate.
+	 *
+	 * @param userUuid the user uuid of this cpd availability estimate
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpdAvailabilityEstimate.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cpd availability estimate.
-	*
-	* @param uuid the uuid of this cpd availability estimate
-	*/
+	 * Sets the uuid of this cpd availability estimate.
+	 *
+	 * @param uuid the uuid of this cpd availability estimate
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpdAvailabilityEstimate.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDAvailabilityEstimate> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPDAvailabilityEstimate>
+		toCacheModel() {
+
 		return _cpdAvailabilityEstimate.toCacheModel();
 	}
 
 	@Override
 	public CPDAvailabilityEstimate toEscapedModel() {
-		return new CPDAvailabilityEstimateWrapper(_cpdAvailabilityEstimate.toEscapedModel());
+		return new CPDAvailabilityEstimateWrapper(
+			_cpdAvailabilityEstimate.toEscapedModel());
 	}
 
 	@Override
@@ -509,7 +519,8 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 
 	@Override
 	public CPDAvailabilityEstimate toUnescapedModel() {
-		return new CPDAvailabilityEstimateWrapper(_cpdAvailabilityEstimate.toUnescapedModel());
+		return new CPDAvailabilityEstimateWrapper(
+			_cpdAvailabilityEstimate.toUnescapedModel());
 	}
 
 	@Override
@@ -527,10 +538,13 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 			return false;
 		}
 
-		CPDAvailabilityEstimateWrapper cpdAvailabilityEstimateWrapper = (CPDAvailabilityEstimateWrapper)obj;
+		CPDAvailabilityEstimateWrapper cpdAvailabilityEstimateWrapper =
+			(CPDAvailabilityEstimateWrapper)obj;
 
-		if (Objects.equals(_cpdAvailabilityEstimate,
-					cpdAvailabilityEstimateWrapper._cpdAvailabilityEstimate)) {
+		if (Objects.equals(
+				_cpdAvailabilityEstimate,
+				cpdAvailabilityEstimateWrapper._cpdAvailabilityEstimate)) {
+
 			return true;
 		}
 
@@ -563,4 +577,5 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	private final CPDAvailabilityEstimate _cpdAvailabilityEstimate;
+
 }

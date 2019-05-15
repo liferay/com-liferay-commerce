@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,9 +39,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceUserSegmentCriterionWrapper
 	implements CommerceUserSegmentCriterion,
-		ModelWrapper<CommerceUserSegmentCriterion> {
+			   ModelWrapper<CommerceUserSegmentCriterion> {
+
 	public CommerceUserSegmentCriterionWrapper(
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
+
 		_commerceUserSegmentCriterion = commerceUserSegmentCriterion;
 	}
 
@@ -60,7 +61,8 @@ public class CommerceUserSegmentCriterionWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceUserSegmentCriterionId",
+		attributes.put(
+			"commerceUserSegmentCriterionId",
 			getCommerceUserSegmentCriterionId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -68,8 +70,8 @@ public class CommerceUserSegmentCriterionWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceUserSegmentEntryId",
-			getCommerceUserSegmentEntryId());
+		attributes.put(
+			"commerceUserSegmentEntryId", getCommerceUserSegmentEntryId());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 		attributes.put("priority", getPriority());
@@ -80,7 +82,7 @@ public class CommerceUserSegmentCriterionWrapper
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceUserSegmentCriterionId = (Long)attributes.get(
-				"commerceUserSegmentCriterionId");
+			"commerceUserSegmentCriterionId");
 
 		if (commerceUserSegmentCriterionId != null) {
 			setCommerceUserSegmentCriterionId(commerceUserSegmentCriterionId);
@@ -123,7 +125,7 @@ public class CommerceUserSegmentCriterionWrapper
 		}
 
 		Long commerceUserSegmentEntryId = (Long)attributes.get(
-				"commerceUserSegmentEntryId");
+			"commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId != null) {
 			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
@@ -150,50 +152,55 @@ public class CommerceUserSegmentCriterionWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceUserSegmentCriterionWrapper((CommerceUserSegmentCriterion)_commerceUserSegmentCriterion.clone());
+		return new CommerceUserSegmentCriterionWrapper(
+			(CommerceUserSegmentCriterion)
+				_commerceUserSegmentCriterion.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
-		return _commerceUserSegmentCriterion.compareTo(commerceUserSegmentCriterion);
+
+		return _commerceUserSegmentCriterion.compareTo(
+			commerceUserSegmentCriterion);
 	}
 
 	/**
-	* Returns the commerce user segment criterion ID of this commerce user segment criterion.
-	*
-	* @return the commerce user segment criterion ID of this commerce user segment criterion
-	*/
+	 * Returns the commerce user segment criterion ID of this commerce user segment criterion.
+	 *
+	 * @return the commerce user segment criterion ID of this commerce user segment criterion
+	 */
 	@Override
 	public long getCommerceUserSegmentCriterionId() {
-		return _commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId();
+		return _commerceUserSegmentCriterion.
+			getCommerceUserSegmentCriterionId();
 	}
 
 	/**
-	* Returns the commerce user segment entry ID of this commerce user segment criterion.
-	*
-	* @return the commerce user segment entry ID of this commerce user segment criterion
-	*/
+	 * Returns the commerce user segment entry ID of this commerce user segment criterion.
+	 *
+	 * @return the commerce user segment entry ID of this commerce user segment criterion
+	 */
 	@Override
 	public long getCommerceUserSegmentEntryId() {
 		return _commerceUserSegmentCriterion.getCommerceUserSegmentEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce user segment criterion.
-	*
-	* @return the company ID of this commerce user segment criterion
-	*/
+	 * Returns the company ID of this commerce user segment criterion.
+	 *
+	 * @return the company ID of this commerce user segment criterion
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceUserSegmentCriterion.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce user segment criterion.
-	*
-	* @return the create date of this commerce user segment criterion
-	*/
+	 * Returns the create date of this commerce user segment criterion.
+	 *
+	 * @return the create date of this commerce user segment criterion
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceUserSegmentCriterion.getCreateDate();
@@ -205,30 +212,30 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce user segment criterion.
-	*
-	* @return the group ID of this commerce user segment criterion
-	*/
+	 * Returns the group ID of this commerce user segment criterion.
+	 *
+	 * @return the group ID of this commerce user segment criterion
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceUserSegmentCriterion.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce user segment criterion.
-	*
-	* @return the modified date of this commerce user segment criterion
-	*/
+	 * Returns the modified date of this commerce user segment criterion.
+	 *
+	 * @return the modified date of this commerce user segment criterion
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceUserSegmentCriterion.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce user segment criterion.
-	*
-	* @return the primary key of this commerce user segment criterion
-	*/
+	 * Returns the primary key of this commerce user segment criterion.
+	 *
+	 * @return the primary key of this commerce user segment criterion
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceUserSegmentCriterion.getPrimaryKey();
@@ -240,60 +247,60 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	/**
-	* Returns the priority of this commerce user segment criterion.
-	*
-	* @return the priority of this commerce user segment criterion
-	*/
+	 * Returns the priority of this commerce user segment criterion.
+	 *
+	 * @return the priority of this commerce user segment criterion
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceUserSegmentCriterion.getPriority();
 	}
 
 	/**
-	* Returns the type of this commerce user segment criterion.
-	*
-	* @return the type of this commerce user segment criterion
-	*/
+	 * Returns the type of this commerce user segment criterion.
+	 *
+	 * @return the type of this commerce user segment criterion
+	 */
 	@Override
 	public String getType() {
 		return _commerceUserSegmentCriterion.getType();
 	}
 
 	/**
-	* Returns the type settings of this commerce user segment criterion.
-	*
-	* @return the type settings of this commerce user segment criterion
-	*/
+	 * Returns the type settings of this commerce user segment criterion.
+	 *
+	 * @return the type settings of this commerce user segment criterion
+	 */
 	@Override
 	public String getTypeSettings() {
 		return _commerceUserSegmentCriterion.getTypeSettings();
 	}
 
 	/**
-	* Returns the user ID of this commerce user segment criterion.
-	*
-	* @return the user ID of this commerce user segment criterion
-	*/
+	 * Returns the user ID of this commerce user segment criterion.
+	 *
+	 * @return the user ID of this commerce user segment criterion
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceUserSegmentCriterion.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce user segment criterion.
-	*
-	* @return the user name of this commerce user segment criterion
-	*/
+	 * Returns the user name of this commerce user segment criterion.
+	 *
+	 * @return the user name of this commerce user segment criterion
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceUserSegmentCriterion.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce user segment criterion.
-	*
-	* @return the user uuid of this commerce user segment criterion
-	*/
+	 * Returns the user uuid of this commerce user segment criterion.
+	 *
+	 * @return the user uuid of this commerce user segment criterion
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceUserSegmentCriterion.getUserUuid();
@@ -330,41 +337,44 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	/**
-	* Sets the commerce user segment criterion ID of this commerce user segment criterion.
-	*
-	* @param commerceUserSegmentCriterionId the commerce user segment criterion ID of this commerce user segment criterion
-	*/
+	 * Sets the commerce user segment criterion ID of this commerce user segment criterion.
+	 *
+	 * @param commerceUserSegmentCriterionId the commerce user segment criterion ID of this commerce user segment criterion
+	 */
 	@Override
 	public void setCommerceUserSegmentCriterionId(
 		long commerceUserSegmentCriterionId) {
-		_commerceUserSegmentCriterion.setCommerceUserSegmentCriterionId(commerceUserSegmentCriterionId);
+
+		_commerceUserSegmentCriterion.setCommerceUserSegmentCriterionId(
+			commerceUserSegmentCriterionId);
 	}
 
 	/**
-	* Sets the commerce user segment entry ID of this commerce user segment criterion.
-	*
-	* @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce user segment criterion
-	*/
+	 * Sets the commerce user segment entry ID of this commerce user segment criterion.
+	 *
+	 * @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce user segment criterion
+	 */
 	@Override
 	public void setCommerceUserSegmentEntryId(long commerceUserSegmentEntryId) {
-		_commerceUserSegmentCriterion.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		_commerceUserSegmentCriterion.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce user segment criterion.
-	*
-	* @param companyId the company ID of this commerce user segment criterion
-	*/
+	 * Sets the company ID of this commerce user segment criterion.
+	 *
+	 * @param companyId the company ID of this commerce user segment criterion
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceUserSegmentCriterion.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce user segment criterion.
-	*
-	* @param createDate the create date of this commerce user segment criterion
-	*/
+	 * Sets the create date of this commerce user segment criterion.
+	 *
+	 * @param createDate the create date of this commerce user segment criterion
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceUserSegmentCriterion.setCreateDate(createDate);
@@ -373,6 +383,7 @@ public class CommerceUserSegmentCriterionWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceUserSegmentCriterion.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -383,24 +394,25 @@ public class CommerceUserSegmentCriterionWrapper
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_commerceUserSegmentCriterion.setExpandoBridgeAttributes(serviceContext);
+		_commerceUserSegmentCriterion.setExpandoBridgeAttributes(
+			serviceContext);
 	}
 
 	/**
-	* Sets the group ID of this commerce user segment criterion.
-	*
-	* @param groupId the group ID of this commerce user segment criterion
-	*/
+	 * Sets the group ID of this commerce user segment criterion.
+	 *
+	 * @param groupId the group ID of this commerce user segment criterion
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceUserSegmentCriterion.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce user segment criterion.
-	*
-	* @param modifiedDate the modified date of this commerce user segment criterion
-	*/
+	 * Sets the modified date of this commerce user segment criterion.
+	 *
+	 * @param modifiedDate the modified date of this commerce user segment criterion
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceUserSegmentCriterion.setModifiedDate(modifiedDate);
@@ -412,10 +424,10 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce user segment criterion.
-	*
-	* @param primaryKey the primary key of this commerce user segment criterion
-	*/
+	 * Sets the primary key of this commerce user segment criterion.
+	 *
+	 * @param primaryKey the primary key of this commerce user segment criterion
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceUserSegmentCriterion.setPrimaryKey(primaryKey);
@@ -427,73 +439,76 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	/**
-	* Sets the priority of this commerce user segment criterion.
-	*
-	* @param priority the priority of this commerce user segment criterion
-	*/
+	 * Sets the priority of this commerce user segment criterion.
+	 *
+	 * @param priority the priority of this commerce user segment criterion
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceUserSegmentCriterion.setPriority(priority);
 	}
 
 	/**
-	* Sets the type of this commerce user segment criterion.
-	*
-	* @param type the type of this commerce user segment criterion
-	*/
+	 * Sets the type of this commerce user segment criterion.
+	 *
+	 * @param type the type of this commerce user segment criterion
+	 */
 	@Override
 	public void setType(String type) {
 		_commerceUserSegmentCriterion.setType(type);
 	}
 
 	/**
-	* Sets the type settings of this commerce user segment criterion.
-	*
-	* @param typeSettings the type settings of this commerce user segment criterion
-	*/
+	 * Sets the type settings of this commerce user segment criterion.
+	 *
+	 * @param typeSettings the type settings of this commerce user segment criterion
+	 */
 	@Override
 	public void setTypeSettings(String typeSettings) {
 		_commerceUserSegmentCriterion.setTypeSettings(typeSettings);
 	}
 
 	/**
-	* Sets the user ID of this commerce user segment criterion.
-	*
-	* @param userId the user ID of this commerce user segment criterion
-	*/
+	 * Sets the user ID of this commerce user segment criterion.
+	 *
+	 * @param userId the user ID of this commerce user segment criterion
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceUserSegmentCriterion.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce user segment criterion.
-	*
-	* @param userName the user name of this commerce user segment criterion
-	*/
+	 * Sets the user name of this commerce user segment criterion.
+	 *
+	 * @param userName the user name of this commerce user segment criterion
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceUserSegmentCriterion.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce user segment criterion.
-	*
-	* @param userUuid the user uuid of this commerce user segment criterion
-	*/
+	 * Sets the user uuid of this commerce user segment criterion.
+	 *
+	 * @param userUuid the user uuid of this commerce user segment criterion
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceUserSegmentCriterion.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceUserSegmentCriterion> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceUserSegmentCriterion> toCacheModel() {
+
 		return _commerceUserSegmentCriterion.toCacheModel();
 	}
 
 	@Override
 	public CommerceUserSegmentCriterion toEscapedModel() {
-		return new CommerceUserSegmentCriterionWrapper(_commerceUserSegmentCriterion.toEscapedModel());
+		return new CommerceUserSegmentCriterionWrapper(
+			_commerceUserSegmentCriterion.toEscapedModel());
 	}
 
 	@Override
@@ -503,7 +518,8 @@ public class CommerceUserSegmentCriterionWrapper
 
 	@Override
 	public CommerceUserSegmentCriterion toUnescapedModel() {
-		return new CommerceUserSegmentCriterionWrapper(_commerceUserSegmentCriterion.toUnescapedModel());
+		return new CommerceUserSegmentCriterionWrapper(
+			_commerceUserSegmentCriterion.toUnescapedModel());
 	}
 
 	@Override
@@ -521,10 +537,15 @@ public class CommerceUserSegmentCriterionWrapper
 			return false;
 		}
 
-		CommerceUserSegmentCriterionWrapper commerceUserSegmentCriterionWrapper = (CommerceUserSegmentCriterionWrapper)obj;
+		CommerceUserSegmentCriterionWrapper
+			commerceUserSegmentCriterionWrapper =
+				(CommerceUserSegmentCriterionWrapper)obj;
 
-		if (Objects.equals(_commerceUserSegmentCriterion,
-					commerceUserSegmentCriterionWrapper._commerceUserSegmentCriterion)) {
+		if (Objects.equals(
+				_commerceUserSegmentCriterion,
+				commerceUserSegmentCriterionWrapper.
+					_commerceUserSegmentCriterion)) {
+
 			return true;
 		}
 
@@ -552,4 +573,5 @@ public class CommerceUserSegmentCriterionWrapper
 	}
 
 	private final CommerceUserSegmentCriterion _commerceUserSegmentCriterion;
+
 }

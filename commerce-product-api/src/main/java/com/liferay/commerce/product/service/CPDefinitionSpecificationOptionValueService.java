@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,67 +40,90 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPDefinitionSpecificationOptionValueServiceUtil
- * @see com.liferay.commerce.product.service.base.CPDefinitionSpecificationOptionValueServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPDefinitionSpecificationOptionValueServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPDefinitionSpecificationOptionValue"}, service = CPDefinitionSpecificationOptionValueService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPDefinitionSpecificationOptionValue"
+	},
+	service = CPDefinitionSpecificationOptionValueService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
-public interface CPDefinitionSpecificationOptionValueService extends BaseService {
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
+public interface CPDefinitionSpecificationOptionValueService
+	extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPDefinitionSpecificationOptionValueServiceUtil} to access the cp definition specification option value remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPDefinitionSpecificationOptionValueServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionSpecificationOptionValueServiceUtil} to access the cp definition specification option value remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionSpecificationOptionValueServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPDefinitionSpecificationOptionValue addCPDefinitionSpecificationOptionValue(
-		long cpDefinitionId, long cpSpecificationOptionId,
-		long cpOptionCategoryId, Map<Locale, String> valueMap, double priority,
-		ServiceContext serviceContext) throws PortalException;
+	public CPDefinitionSpecificationOptionValue
+			addCPDefinitionSpecificationOptionValue(
+				long cpDefinitionId, long cpSpecificationOptionId,
+				long cpOptionCategoryId, Map<Locale, String> valueMap,
+				double priority, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionSpecificationOptionValue fetchCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionSpecificationOptionValue getCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpSpecificationOptionId, int start, int end)
+			long cpDefinitionSpecificationOptionValueId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId, int start, int end,
-		OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator)
+	public CPDefinitionSpecificationOptionValue
+			fetchCPDefinitionSpecificationOptionValue(
+				long cpDefinitionSpecificationOptionValueId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId, long cpOptionCategoryId) throws PortalException;
+	public CPDefinitionSpecificationOptionValue
+			getCPDefinitionSpecificationOptionValue(
+				long cpDefinitionSpecificationOptionValueId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionSpecificationOptionValue>
+			getCPDefinitionSpecificationOptionValues(
+				long cpSpecificationOptionId, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionSpecificationOptionValue>
+			getCPDefinitionSpecificationOptionValues(
+				long cpDefinitionId, int start, int end,
+				OrderByComparator<CPDefinitionSpecificationOptionValue>
+					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionSpecificationOptionValue>
+			getCPDefinitionSpecificationOptionValues(
+				long cpDefinitionId, long cpOptionCategoryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPDefinitionSpecificationOptionValuesCount(
-		long cpSpecificationOptionId) throws PortalException;
+			long cpSpecificationOptionId)
+		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPDefinitionSpecificationOptionValue updateCPDefinitionSpecificationOptionValue(
-		long cpDefinitionSpecificationOptionValueId, long cpOptionCategoryId,
-		Map<Locale, String> valueMap, double priority,
-		ServiceContext serviceContext) throws PortalException;
+	public CPDefinitionSpecificationOptionValue
+			updateCPDefinitionSpecificationOptionValue(
+				long cpDefinitionSpecificationOptionValueId,
+				long cpOptionCategoryId, Map<Locale, String> valueMap,
+				double priority, ServiceContext serviceContext)
+		throws PortalException;
+
 }

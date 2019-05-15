@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,58 +38,72 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceAccountOrganizationRelServiceUtil
- * @see com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.impl.CommerceAccountOrganizationRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAccountOrganizationRel"}, service = CommerceAccountOrganizationRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceAccountOrganizationRel"
+	},
+	service = CommerceAccountOrganizationRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceAccountOrganizationRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAccountOrganizationRelServiceUtil} to access the commerce account organization rel remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountOrganizationRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountOrganizationRelServiceUtil} to access the commerce account organization rel remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountOrganizationRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
-		long commerceAccountId, long organizationId,
-		ServiceContext serviceContext) throws PortalException;
-
-	public void addCommerceAccountOrganizationRels(long commerceAccountId,
-		long[] organizationIds, ServiceContext serviceContext)
+			long commerceAccountId, long organizationId,
+			ServiceContext serviceContext)
 		throws PortalException;
 
-	public void deleteCommerceAccountOrganizationRel(long commerceAccountId,
-		long organizationId) throws PortalException;
+	public void addCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds,
+			ServiceContext serviceContext)
+		throws PortalException;
 
-	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
-		long[] organizationIds) throws PortalException;
+	public void deleteCommerceAccountOrganizationRel(
+			long commerceAccountId, long organizationId)
+		throws PortalException;
+
+	public void deleteCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
-		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		long commerceAccountId) throws PortalException;
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRels(long commerceAccountId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		long commerceAccountId, int start, int end) throws PortalException;
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRels(
+				long commerceAccountId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

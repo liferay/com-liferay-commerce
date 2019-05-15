@@ -28,14 +28,16 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.account.service.http.CommerceAccountOrganizationRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.account.service.http.CommerceAccountOrganizationRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceAccountOrganizationRelSoap implements Serializable {
+
 	public static CommerceAccountOrganizationRelSoap toSoapModel(
 		CommerceAccountOrganizationRel model) {
-		CommerceAccountOrganizationRelSoap soapModel = new CommerceAccountOrganizationRelSoap();
+
+		CommerceAccountOrganizationRelSoap soapModel =
+			new CommerceAccountOrganizationRelSoap();
 
 		soapModel.setCommerceAccountId(model.getCommerceAccountId());
 		soapModel.setOrganizationId(model.getOrganizationId());
@@ -50,7 +52,9 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 
 	public static CommerceAccountOrganizationRelSoap[] toSoapModels(
 		CommerceAccountOrganizationRel[] models) {
-		CommerceAccountOrganizationRelSoap[] soapModels = new CommerceAccountOrganizationRelSoap[models.length];
+
+		CommerceAccountOrganizationRelSoap[] soapModels =
+			new CommerceAccountOrganizationRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +65,12 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 
 	public static CommerceAccountOrganizationRelSoap[][] toSoapModels(
 		CommerceAccountOrganizationRel[][] models) {
+
 		CommerceAccountOrganizationRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceAccountOrganizationRelSoap[models.length][models[0].length];
+			soapModels = new CommerceAccountOrganizationRelSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceAccountOrganizationRelSoap[0][0];
@@ -79,21 +85,24 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 
 	public static CommerceAccountOrganizationRelSoap[] toSoapModels(
 		List<CommerceAccountOrganizationRel> models) {
-		List<CommerceAccountOrganizationRelSoap> soapModels = new ArrayList<CommerceAccountOrganizationRelSoap>(models.size());
+
+		List<CommerceAccountOrganizationRelSoap> soapModels =
+			new ArrayList<CommerceAccountOrganizationRelSoap>(models.size());
 
 		for (CommerceAccountOrganizationRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceAccountOrganizationRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceAccountOrganizationRelSoap[soapModels.size()]);
 	}
 
 	public CommerceAccountOrganizationRelSoap() {
 	}
 
 	public CommerceAccountOrganizationRelPK getPrimaryKey() {
-		return new CommerceAccountOrganizationRelPK(_commerceAccountId,
-			_organizationId);
+		return new CommerceAccountOrganizationRelPK(
+			_commerceAccountId, _organizationId);
 	}
 
 	public void setPrimaryKey(CommerceAccountOrganizationRelPK pk) {
@@ -164,4 +173,5 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+
 }

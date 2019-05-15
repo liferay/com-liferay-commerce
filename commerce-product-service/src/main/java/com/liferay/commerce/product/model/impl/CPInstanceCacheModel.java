@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPInstance;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,12 +34,12 @@ import java.util.Date;
  * The cache model class for representing CPInstance in entity cache.
  *
  * @author Marco Leo
- * @see CPInstance
  * @generated
  */
 @ProviderType
-public class CPInstanceCacheModel implements CacheModel<CPInstance>,
-	Externalizable {
+public class CPInstanceCacheModel
+	implements CacheModel<CPInstance>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -276,7 +275,8 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 			cpInstanceImpl.setSubscriptionTypeSettings("");
 		}
 		else {
-			cpInstanceImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
+			cpInstanceImpl.setSubscriptionTypeSettings(
+				subscriptionTypeSettings);
 		}
 
 		cpInstanceImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
@@ -305,6 +305,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+
 		uuid = objectInput.readUTF();
 		externalReferenceCode = objectInput.readUTF();
 
@@ -362,8 +363,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -524,4 +524,5 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+
 }

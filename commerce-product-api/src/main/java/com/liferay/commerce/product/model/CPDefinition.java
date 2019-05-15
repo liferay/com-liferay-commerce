@@ -25,19 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPDefinitionModel
- * @see com.liferay.commerce.product.model.impl.CPDefinitionImpl
- * @see com.liferay.commerce.product.model.impl.CPDefinitionModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPDefinitionImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPDefinitionImpl"
+)
 @ProviderType
 public interface CPDefinition extends CPDefinitionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPDefinitionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPDefinitionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPDefinition, Long> CP_DEFINITION_ID_ACCESSOR = new Accessor<CPDefinition, Long>() {
+	public static final Accessor<CPDefinition, Long> CP_DEFINITION_ID_ACCESSOR =
+		new Accessor<CPDefinition, Long>() {
+
 			@Override
 			public Long get(CPDefinition cpDefinition) {
 				return cpDefinition.getCPDefinitionId();
@@ -52,18 +55,20 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 			public Class<CPDefinition> getTypeClass() {
 				return CPDefinition.class;
 			}
+
 		};
 
 	@Override
 	public boolean equals(Object object);
 
 	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
-		int type, int status)
+			int type, int status)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public java.util.List<CPDefinitionOptionRel> getCPDefinitionOptionRels();
 
-	public java.util.List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues();
+	public java.util.List<CPDefinitionSpecificationOptionValue>
+		getCPDefinitionSpecificationOptionValues();
 
 	public java.util.List<CPInstance> getCPInstances();
 
@@ -94,7 +99,8 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 
 	public java.util.Map<java.util.Locale, String> getShortDescriptionMap();
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties
+		getSubscriptionTypeSettingsProperties();
 
 	public String getURL(String languageId);
 
@@ -111,8 +117,10 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 		java.util.Map<java.util.Locale, String> shortDescriptionMap);
 
 	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties
+			subscriptionTypeSettingsProperties);
 
 	public void setUrlTitleMap(
 		java.util.Map<java.util.Locale, String> urlTitleMap);
+
 }

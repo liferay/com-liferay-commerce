@@ -25,35 +25,41 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceOrderNoteModel
- * @see com.liferay.commerce.model.impl.CommerceOrderNoteImpl
- * @see com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceOrderNoteImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceOrderNoteImpl"
+)
 @ProviderType
-public interface CommerceOrderNote extends CommerceOrderNoteModel, PersistedModel {
+public interface CommerceOrderNote
+	extends CommerceOrderNoteModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceOrderNoteImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceOrderNoteImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceOrderNote, Long> COMMERCE_ORDER_NOTE_ID_ACCESSOR =
-		new Accessor<CommerceOrderNote, Long>() {
-			@Override
-			public Long get(CommerceOrderNote commerceOrderNote) {
-				return commerceOrderNote.getCommerceOrderNoteId();
-			}
+	public static final Accessor<CommerceOrderNote, Long>
+		COMMERCE_ORDER_NOTE_ID_ACCESSOR =
+			new Accessor<CommerceOrderNote, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceOrderNote commerceOrderNote) {
+					return commerceOrderNote.getCommerceOrderNoteId();
+				}
 
-			@Override
-			public Class<CommerceOrderNote> getTypeClass() {
-				return CommerceOrderNote.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceOrderNote> getTypeClass() {
+					return CommerceOrderNote.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.model.User getUser();
+
 }

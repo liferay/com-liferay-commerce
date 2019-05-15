@@ -25,20 +25,21 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceShipmentModel
- * @see com.liferay.commerce.model.impl.CommerceShipmentImpl
- * @see com.liferay.commerce.model.impl.CommerceShipmentModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.model.impl.CommerceShipmentImpl")
 @ProviderType
-public interface CommerceShipment extends CommerceShipmentModel, PersistedModel {
+public interface CommerceShipment
+	extends CommerceShipmentModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceShipmentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceShipmentImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceShipment, Long> COMMERCE_SHIPMENT_ID_ACCESSOR =
-		new Accessor<CommerceShipment, Long>() {
+	public static final Accessor<CommerceShipment, Long>
+		COMMERCE_SHIPMENT_ID_ACCESSOR = new Accessor<CommerceShipment, Long>() {
+
 			@Override
 			public Long get(CommerceShipment commerceShipment) {
 				return commerceShipment.getCommerceShipmentId();
@@ -53,13 +54,15 @@ public interface CommerceShipment extends CommerceShipmentModel, PersistedModel 
 			public Class<CommerceShipment> getTypeClass() {
 				return CommerceShipment.class;
 			}
+
 		};
 
 	public CommerceAddress fetchCommerceAddress();
 
 	public CommerceShippingMethod fetchCommerceShippingMethod();
 
-	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount()
+	public com.liferay.commerce.account.model.CommerceAccount
+			getCommerceAccount()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public String getCommerceAccountName()
@@ -67,4 +70,5 @@ public interface CommerceShipment extends CommerceShipmentModel, PersistedModel 
 
 	public CommerceShippingMethod getCommerceShippingMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

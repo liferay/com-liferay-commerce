@@ -25,38 +25,46 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationAttachmentModel
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl
- * @see com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl"
+)
 @ProviderType
 public interface CommerceNotificationAttachment
 	extends CommerceNotificationAttachmentModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceNotificationAttachment, Long> COMMERCE_NOTIFICATION_ATTACHMENT_ID_ACCESSOR =
-		new Accessor<CommerceNotificationAttachment, Long>() {
-			@Override
-			public Long get(
-				CommerceNotificationAttachment commerceNotificationAttachment) {
-				return commerceNotificationAttachment.getCommerceNotificationAttachmentId();
-			}
+	public static final Accessor<CommerceNotificationAttachment, Long>
+		COMMERCE_NOTIFICATION_ATTACHMENT_ID_ACCESSOR =
+			new Accessor<CommerceNotificationAttachment, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceNotificationAttachment
+						commerceNotificationAttachment) {
 
-			@Override
-			public Class<CommerceNotificationAttachment> getTypeClass() {
-				return CommerceNotificationAttachment.class;
-			}
-		};
+					return commerceNotificationAttachment.
+						getCommerceNotificationAttachmentId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceNotificationAttachment> getTypeClass() {
+					return CommerceNotificationAttachment.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

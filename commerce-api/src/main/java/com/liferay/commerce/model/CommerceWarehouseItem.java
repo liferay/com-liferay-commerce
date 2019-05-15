@@ -25,40 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehouseItemModel
- * @see com.liferay.commerce.model.impl.CommerceWarehouseItemImpl
- * @see com.liferay.commerce.model.impl.CommerceWarehouseItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceWarehouseItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceWarehouseItemImpl"
+)
 @ProviderType
-public interface CommerceWarehouseItem extends CommerceWarehouseItemModel,
-	PersistedModel {
+public interface CommerceWarehouseItem
+	extends CommerceWarehouseItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceWarehouseItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceWarehouseItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceWarehouseItem, Long> COMMERCE_WAREHOUSE_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceWarehouseItem, Long>() {
-			@Override
-			public Long get(CommerceWarehouseItem commerceWarehouseItem) {
-				return commerceWarehouseItem.getCommerceWarehouseItemId();
-			}
+	public static final Accessor<CommerceWarehouseItem, Long>
+		COMMERCE_WAREHOUSE_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceWarehouseItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceWarehouseItem commerceWarehouseItem) {
+					return commerceWarehouseItem.getCommerceWarehouseItemId();
+				}
 
-			@Override
-			public Class<CommerceWarehouseItem> getTypeClass() {
-				return CommerceWarehouseItem.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceWarehouseItem> getTypeClass() {
+					return CommerceWarehouseItem.class;
+				}
+
+			};
 
 	public CommerceWarehouse getCommerceWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.product.model.CPInstance getCPInstance()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

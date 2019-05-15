@@ -35,18 +35,22 @@ import com.liferay.commerce.service.CommerceAddressRestrictionLocalServiceUtil;
 public abstract class CommerceAddressRestrictionBaseImpl
 	extends CommerceAddressRestrictionModelImpl
 	implements CommerceAddressRestriction {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce address restriction model instance should use the {@link CommerceAddressRestriction} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce address restriction model instance should use the <code>CommerceAddressRestriction</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceAddressRestrictionLocalServiceUtil.addCommerceAddressRestriction(this);
+			CommerceAddressRestrictionLocalServiceUtil.
+				addCommerceAddressRestriction(this);
 		}
 		else {
-			CommerceAddressRestrictionLocalServiceUtil.updateCommerceAddressRestriction(this);
+			CommerceAddressRestrictionLocalServiceUtil.
+				updateCommerceAddressRestriction(this);
 		}
 	}
+
 }

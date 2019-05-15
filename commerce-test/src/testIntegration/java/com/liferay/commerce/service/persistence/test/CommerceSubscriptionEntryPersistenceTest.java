@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchSubscriptionEntryException;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceSubscriptionEntryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -82,7 +81,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceSubscriptionEntry> iterator = _commerceSubscriptionEntries.iterator();
+		Iterator<CommerceSubscriptionEntry> iterator =
+			_commerceSubscriptionEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,7 +95,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceSubscriptionEntry commerceSubscriptionEntry = _persistence.create(pk);
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceSubscriptionEntry);
 
@@ -104,11 +105,14 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
 		_persistence.remove(newCommerceSubscriptionEntry);
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = _persistence.fetchByPrimaryKey(newCommerceSubscriptionEntry.getPrimaryKey());
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceSubscriptionEntry.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceSubscriptionEntry);
 	}
@@ -122,7 +126,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = _persistence.create(pk);
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			_persistence.create(pk);
 
 		newCommerceSubscriptionEntry.setUuid(RandomTestUtil.randomString());
 
@@ -138,83 +143,116 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		newCommerceSubscriptionEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceSubscriptionEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+		newCommerceSubscriptionEntry.setCPInstanceUuid(
+			RandomTestUtil.randomString());
 
 		newCommerceSubscriptionEntry.setCProductId(RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
+		newCommerceSubscriptionEntry.setCommerceOrderItemId(
+			RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setSubscriptionLength(RandomTestUtil.nextInt());
+		newCommerceSubscriptionEntry.setSubscriptionLength(
+			RandomTestUtil.nextInt());
 
-		newCommerceSubscriptionEntry.setSubscriptionType(RandomTestUtil.randomString());
+		newCommerceSubscriptionEntry.setSubscriptionType(
+			RandomTestUtil.randomString());
 
-		newCommerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+		newCommerceSubscriptionEntry.setSubscriptionTypeSettings(
+			RandomTestUtil.randomString());
 
 		newCommerceSubscriptionEntry.setCurrentCycle(RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
+		newCommerceSubscriptionEntry.setMaxSubscriptionCycles(
+			RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setSubscriptionStatus(RandomTestUtil.nextInt());
+		newCommerceSubscriptionEntry.setSubscriptionStatus(
+			RandomTestUtil.nextInt());
 
-		newCommerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
+		newCommerceSubscriptionEntry.setLastIterationDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceSubscriptionEntry.setNextIterationDate(RandomTestUtil.nextDate());
+		newCommerceSubscriptionEntry.setNextIterationDate(
+			RandomTestUtil.nextDate());
 
 		newCommerceSubscriptionEntry.setStartDate(RandomTestUtil.nextDate());
 
-		_commerceSubscriptionEntries.add(_persistence.update(
-				newCommerceSubscriptionEntry));
+		_commerceSubscriptionEntries.add(
+			_persistence.update(newCommerceSubscriptionEntry));
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = _persistence.findByPrimaryKey(newCommerceSubscriptionEntry.getPrimaryKey());
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceSubscriptionEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getUuid(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getUuid(),
 			newCommerceSubscriptionEntry.getUuid());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
 			newCommerceSubscriptionEntry.getCommerceSubscriptionEntryId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getGroupId(),
 			newCommerceSubscriptionEntry.getGroupId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCompanyId(),
 			newCommerceSubscriptionEntry.getCompanyId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getUserId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getUserId(),
 			newCommerceSubscriptionEntry.getUserId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getUserName(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getUserName(),
 			newCommerceSubscriptionEntry.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getCreateDate()),
-			Time.getShortTimestamp(newCommerceSubscriptionEntry.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+			Time.getShortTimestamp(
+				newCommerceSubscriptionEntry.getCreateDate()));
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCPInstanceUuid(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCPInstanceUuid(),
 			newCommerceSubscriptionEntry.getCPInstanceUuid());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCProductId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCProductId(),
 			newCommerceSubscriptionEntry.getCProductId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCommerceOrderItemId(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCommerceOrderItemId(),
 			newCommerceSubscriptionEntry.getCommerceOrderItemId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionLength(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getSubscriptionLength(),
 			newCommerceSubscriptionEntry.getSubscriptionLength());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionType(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getSubscriptionType(),
 			newCommerceSubscriptionEntry.getSubscriptionType());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionTypeSettings(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getSubscriptionTypeSettings(),
 			newCommerceSubscriptionEntry.getSubscriptionTypeSettings());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCurrentCycle(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getCurrentCycle(),
 			newCommerceSubscriptionEntry.getCurrentCycle());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getMaxSubscriptionCycles(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getMaxSubscriptionCycles(),
 			newCommerceSubscriptionEntry.getMaxSubscriptionCycles());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionStatus(),
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry.getSubscriptionStatus(),
 			newCommerceSubscriptionEntry.getSubscriptionStatus());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getLastIterationDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionEntry.getLastIterationDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getNextIterationDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionEntry.getNextIterationDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getStartDate()),
-			Time.getShortTimestamp(newCommerceSubscriptionEntry.getStartDate()));
+			Time.getShortTimestamp(
+				newCommerceSubscriptionEntry.getStartDate()));
 	}
 
 	@Test
@@ -260,16 +298,16 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testCountByG_U() throws Exception {
-		_persistence.countByG_U(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByG_U(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByG_U(0L, 0L);
 	}
 
 	@Test
 	public void testCountByC_C_C() throws Exception {
-		_persistence.countByC_C_C("", RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+		_persistence.countByC_C_C(
+			"", RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByC_C_C("null", 0L, 0L);
 
@@ -278,12 +316,15 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = _persistence.findByPrimaryKey(newCommerceSubscriptionEntry.getPrimaryKey());
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceSubscriptionEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceSubscriptionEntry,
-			newCommerceSubscriptionEntry);
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry, newCommerceSubscriptionEntry);
 	}
 
 	@Test(expected = NoSuchSubscriptionEntryException.class)
@@ -295,16 +336,19 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceSubscriptionEntry> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceSubscriptionEntry",
-			"uuid", true, "commerceSubscriptionEntryId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPInstanceUuid", true, "CProductId",
-			true, "commerceOrderItemId", true, "subscriptionLength", true,
+	protected OrderByComparator<CommerceSubscriptionEntry>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceSubscriptionEntry", "uuid", true,
+			"commerceSubscriptionEntryId", true, "groupId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "CPInstanceUuid", true, "CProductId", true,
+			"commerceOrderItemId", true, "subscriptionLength", true,
 			"subscriptionType", true, "currentCycle", true,
 			"maxSubscriptionCycles", true, "subscriptionStatus", true,
 			"lastIterationDate", true, "nextIterationDate", true, "startDate",
@@ -313,19 +357,23 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = _persistence.fetchByPrimaryKey(newCommerceSubscriptionEntry.getPrimaryKey());
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			_persistence.fetchByPrimaryKey(
+				newCommerceSubscriptionEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceSubscriptionEntry,
-			newCommerceSubscriptionEntry);
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry, newCommerceSubscriptionEntry);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceSubscriptionEntry missingCommerceSubscriptionEntry = _persistence.fetchByPrimaryKey(pk);
+		CommerceSubscriptionEntry missingCommerceSubscriptionEntry =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceSubscriptionEntry);
 	}
@@ -333,22 +381,28 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry1 = addCommerceSubscriptionEntry();
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry2 = addCommerceSubscriptionEntry();
+
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry1 =
+			addCommerceSubscriptionEntry();
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry2 =
+			addCommerceSubscriptionEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceSubscriptionEntry1.getPrimaryKey());
 		primaryKeys.add(newCommerceSubscriptionEntry2.getPrimaryKey());
 
-		Map<Serializable, CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceSubscriptionEntry>
+			commerceSubscriptionEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceSubscriptionEntries.size());
-		Assert.assertEquals(newCommerceSubscriptionEntry1,
+		Assert.assertEquals(
+			newCommerceSubscriptionEntry1,
 			commerceSubscriptionEntries.get(
 				newCommerceSubscriptionEntry1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceSubscriptionEntry2,
+		Assert.assertEquals(
+			newCommerceSubscriptionEntry2,
 			commerceSubscriptionEntries.get(
 				newCommerceSubscriptionEntry2.getPrimaryKey()));
 	}
@@ -356,6 +410,7 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -365,8 +420,9 @@ public class CommerceSubscriptionEntryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceSubscriptionEntry>
+			commerceSubscriptionEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceSubscriptionEntries.isEmpty());
 	}
@@ -374,7 +430,9 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -383,40 +441,44 @@ public class CommerceSubscriptionEntryPersistenceTest {
 		primaryKeys.add(newCommerceSubscriptionEntry.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceSubscriptionEntry>
+			commerceSubscriptionEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceSubscriptionEntries.size());
-		Assert.assertEquals(newCommerceSubscriptionEntry,
+		Assert.assertEquals(
+			newCommerceSubscriptionEntry,
 			commerceSubscriptionEntries.get(
 				newCommerceSubscriptionEntry.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceSubscriptionEntry>
+			commerceSubscriptionEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceSubscriptionEntries.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceSubscriptionEntry.getPrimaryKey());
 
-		Map<Serializable, CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceSubscriptionEntry>
+			commerceSubscriptionEntries = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceSubscriptionEntries.size());
-		Assert.assertEquals(newCommerceSubscriptionEntry,
+		Assert.assertEquals(
+			newCommerceSubscriptionEntry,
 			commerceSubscriptionEntries.get(
 				newCommerceSubscriptionEntry.getPrimaryKey()));
 	}
@@ -425,16 +487,23 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceSubscriptionEntryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceSubscriptionEntryLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceSubscriptionEntry>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceSubscriptionEntry>() {
+
 				@Override
 				public void performAction(
 					CommerceSubscriptionEntry commerceSubscriptionEntry) {
+
 					Assert.assertNotNull(commerceSubscriptionEntry);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -443,56 +512,63 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceSubscriptionEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceSubscriptionEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceSubscriptionEntryId",
 				newCommerceSubscriptionEntry.getCommerceSubscriptionEntryId()));
 
-		List<CommerceSubscriptionEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceSubscriptionEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = result.get(0);
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceSubscriptionEntry,
-			newCommerceSubscriptionEntry);
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntry, newCommerceSubscriptionEntry);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceSubscriptionEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceSubscriptionEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceSubscriptionEntryId", RandomTestUtil.nextLong()));
 
-		List<CommerceSubscriptionEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceSubscriptionEntry> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceSubscriptionEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceSubscriptionEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceSubscriptionEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceSubscriptionEntryId"));
 
-		Object newCommerceSubscriptionEntryId = newCommerceSubscriptionEntry.getCommerceSubscriptionEntryId();
+		Object newCommerceSubscriptionEntryId =
+			newCommerceSubscriptionEntry.getCommerceSubscriptionEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceSubscriptionEntryId",
-				new Object[] { newCommerceSubscriptionEntryId }));
+				new Object[] {newCommerceSubscriptionEntryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -500,21 +576,23 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		Object existingCommerceSubscriptionEntryId = result.get(0);
 
-		Assert.assertEquals(existingCommerceSubscriptionEntryId,
+		Assert.assertEquals(
+			existingCommerceSubscriptionEntryId,
 			newCommerceSubscriptionEntryId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceSubscriptionEntry.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceSubscriptionEntry.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceSubscriptionEntryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceSubscriptionEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceSubscriptionEntryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -523,40 +601,53 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
+		CommerceSubscriptionEntry newCommerceSubscriptionEntry =
+			addCommerceSubscriptionEntry();
 
 		_persistence.clearCache();
 
-		CommerceSubscriptionEntry existingCommerceSubscriptionEntry = _persistence.findByPrimaryKey(newCommerceSubscriptionEntry.getPrimaryKey());
+		CommerceSubscriptionEntry existingCommerceSubscriptionEntry =
+			_persistence.findByPrimaryKey(
+				newCommerceSubscriptionEntry.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceSubscriptionEntry.getUuid(),
-				ReflectionTestUtil.invoke(existingCommerceSubscriptionEntry,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceSubscriptionEntry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCommerceSubscriptionEntry, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceSubscriptionEntry.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceSubscriptionEntry, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceSubscriptionEntry.getCPInstanceUuid(),
-				ReflectionTestUtil.invoke(existingCommerceSubscriptionEntry,
+				ReflectionTestUtil.invoke(
+					existingCommerceSubscriptionEntry,
 					"getOriginalCPInstanceUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceSubscriptionEntry.getCProductId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
-				"getOriginalCProductId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceSubscriptionEntry.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceSubscriptionEntry, "getOriginalCProductId",
+				new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(
 				existingCommerceSubscriptionEntry.getCommerceOrderItemId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceSubscriptionEntry,
 				"getOriginalCommerceOrderItemId", new Class<?>[0]));
 	}
 
 	protected CommerceSubscriptionEntry addCommerceSubscriptionEntry()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceSubscriptionEntry commerceSubscriptionEntry = _persistence.create(pk);
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			_persistence.create(pk);
 
 		commerceSubscriptionEntry.setUuid(RandomTestUtil.randomString());
 
@@ -572,37 +663,48 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		commerceSubscriptionEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceSubscriptionEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+		commerceSubscriptionEntry.setCPInstanceUuid(
+			RandomTestUtil.randomString());
 
 		commerceSubscriptionEntry.setCProductId(RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
+		commerceSubscriptionEntry.setCommerceOrderItemId(
+			RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setSubscriptionLength(RandomTestUtil.nextInt());
+		commerceSubscriptionEntry.setSubscriptionLength(
+			RandomTestUtil.nextInt());
 
-		commerceSubscriptionEntry.setSubscriptionType(RandomTestUtil.randomString());
+		commerceSubscriptionEntry.setSubscriptionType(
+			RandomTestUtil.randomString());
 
-		commerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+		commerceSubscriptionEntry.setSubscriptionTypeSettings(
+			RandomTestUtil.randomString());
 
 		commerceSubscriptionEntry.setCurrentCycle(RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
+		commerceSubscriptionEntry.setMaxSubscriptionCycles(
+			RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setSubscriptionStatus(RandomTestUtil.nextInt());
+		commerceSubscriptionEntry.setSubscriptionStatus(
+			RandomTestUtil.nextInt());
 
-		commerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
+		commerceSubscriptionEntry.setLastIterationDate(
+			RandomTestUtil.nextDate());
 
-		commerceSubscriptionEntry.setNextIterationDate(RandomTestUtil.nextDate());
+		commerceSubscriptionEntry.setNextIterationDate(
+			RandomTestUtil.nextDate());
 
 		commerceSubscriptionEntry.setStartDate(RandomTestUtil.nextDate());
 
-		_commerceSubscriptionEntries.add(_persistence.update(
-				commerceSubscriptionEntry));
+		_commerceSubscriptionEntries.add(
+			_persistence.update(commerceSubscriptionEntry));
 
 		return commerceSubscriptionEntry;
 	}
 
-	private List<CommerceSubscriptionEntry> _commerceSubscriptionEntries = new ArrayList<CommerceSubscriptionEntry>();
+	private List<CommerceSubscriptionEntry> _commerceSubscriptionEntries =
+		new ArrayList<CommerceSubscriptionEntry>();
 	private CommerceSubscriptionEntryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

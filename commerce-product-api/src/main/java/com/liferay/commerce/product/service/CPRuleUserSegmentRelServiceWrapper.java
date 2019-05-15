@@ -28,47 +28,60 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CPRuleUserSegmentRelServiceWrapper
 	implements CPRuleUserSegmentRelService,
-		ServiceWrapper<CPRuleUserSegmentRelService> {
+			   ServiceWrapper<CPRuleUserSegmentRelService> {
+
 	public CPRuleUserSegmentRelServiceWrapper(
 		CPRuleUserSegmentRelService cpRuleUserSegmentRelService) {
+
 		_cpRuleUserSegmentRelService = cpRuleUserSegmentRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPRuleUserSegmentRel addCPRuleUserSegmentRel(
-		long cpRuleId, long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CPRuleUserSegmentRel
+			addCPRuleUserSegmentRel(
+				long cpRuleId, long commerceUserSegmentEntryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleUserSegmentRelService.addCPRuleUserSegmentRel(cpRuleId,
-			commerceUserSegmentEntryId, serviceContext);
+
+		return _cpRuleUserSegmentRelService.addCPRuleUserSegmentRel(
+			cpRuleId, commerceUserSegmentEntryId, serviceContext);
 	}
 
 	@Override
 	public void deleteCPRuleUserSegmentRel(long cpRuleUserSegmentRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpRuleUserSegmentRelService.deleteCPRuleUserSegmentRel(cpRuleUserSegmentRelId);
+
+		_cpRuleUserSegmentRelService.deleteCPRuleUserSegmentRel(
+			cpRuleUserSegmentRelId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPRuleUserSegmentRel> getCPRuleUserSegmentRels(
-		long cpRuleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPRuleUserSegmentRel> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleUserSegmentRelService.getCPRuleUserSegmentRels(cpRuleId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.product.model.CPRuleUserSegmentRel>
+				getCPRuleUserSegmentRels(
+					long cpRuleId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.product.model.
+							CPRuleUserSegmentRel> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpRuleUserSegmentRelService.getCPRuleUserSegmentRels(
+			cpRuleId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPRuleUserSegmentRelsCount(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleUserSegmentRelService.getCPRuleUserSegmentRelsCount(cpRuleId);
+
+		return _cpRuleUserSegmentRelService.getCPRuleUserSegmentRelsCount(
+			cpRuleId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpRuleUserSegmentRelService.getOSGiServiceIdentifier();
@@ -82,8 +95,10 @@ public class CPRuleUserSegmentRelServiceWrapper
 	@Override
 	public void setWrappedService(
 		CPRuleUserSegmentRelService cpRuleUserSegmentRelService) {
+
 		_cpRuleUserSegmentRelService = cpRuleUserSegmentRelService;
 	}
 
 	private CPRuleUserSegmentRelService _cpRuleUserSegmentRelService;
+
 }

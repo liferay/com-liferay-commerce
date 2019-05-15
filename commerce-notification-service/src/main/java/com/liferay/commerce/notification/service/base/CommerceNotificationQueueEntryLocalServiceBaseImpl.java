@@ -22,7 +22,6 @@ import com.liferay.commerce.notification.service.persistence.CommerceNotificatio
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplatePersistence;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -64,18 +63,18 @@ import javax.sql.DataSource;
  *
  * @author Alessio Antonio Rendina
  * @see com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryLocalServiceImpl
- * @see com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalServiceUtil
  * @generated
  */
 @ProviderType
 public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceNotificationQueueEntryLocalService,
-		IdentifiableOSGiService {
+			   IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalServiceUtil} to access the commerce notification queue entry local service.
+	 * Never modify or reference this class directly. Use <code>CommerceNotificationQueueEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalServiceUtil</code>.
 	 */
 
 	/**
@@ -88,9 +87,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Override
 	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
+
 		commerceNotificationQueueEntry.setNew(true);
 
-		return commerceNotificationQueueEntryPersistence.update(commerceNotificationQueueEntry);
+		return commerceNotificationQueueEntryPersistence.update(
+			commerceNotificationQueueEntry);
 	}
 
 	/**
@@ -103,7 +104,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Transactional(enabled = false)
 	public CommerceNotificationQueueEntry createCommerceNotificationQueueEntry(
 		long commerceNotificationQueueEntryId) {
-		return commerceNotificationQueueEntryPersistence.create(commerceNotificationQueueEntryId);
+
+		return commerceNotificationQueueEntryPersistence.create(
+			commerceNotificationQueueEntryId);
 	}
 
 	/**
@@ -116,8 +119,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceNotificationQueueEntry deleteCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws PortalException {
-		return commerceNotificationQueueEntryPersistence.remove(commerceNotificationQueueEntryId);
+			long commerceNotificationQueueEntryId)
+		throws PortalException {
+
+		return commerceNotificationQueueEntryPersistence.remove(
+			commerceNotificationQueueEntryId);
 	}
 
 	/**
@@ -130,15 +136,17 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Override
 	public CommerceNotificationQueueEntry deleteCommerceNotificationQueueEntry(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-		return commerceNotificationQueueEntryPersistence.remove(commerceNotificationQueueEntry);
+
+		return commerceNotificationQueueEntryPersistence.remove(
+			commerceNotificationQueueEntry);
 	}
 
 	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(CommerceNotificationQueueEntry.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			CommerceNotificationQueueEntry.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -149,14 +157,15 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(dynamicQuery);
+		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -165,17 +174,18 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -185,10 +195,12 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return commerceNotificationQueueEntryPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -199,7 +211,8 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-		return commerceNotificationQueueEntryPersistence.countWithDynamicQuery(dynamicQuery);
+		return commerceNotificationQueueEntryPersistence.countWithDynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
@@ -210,16 +223,19 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return commerceNotificationQueueEntryPersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return commerceNotificationQueueEntryPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
 	public CommerceNotificationQueueEntry fetchCommerceNotificationQueueEntry(
 		long commerceNotificationQueueEntryId) {
-		return commerceNotificationQueueEntryPersistence.fetchByPrimaryKey(commerceNotificationQueueEntryId);
+
+		return commerceNotificationQueueEntryPersistence.fetchByPrimaryKey(
+			commerceNotificationQueueEntryId);
 	}
 
 	/**
@@ -231,17 +247,23 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry getCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws PortalException {
-		return commerceNotificationQueueEntryPersistence.findByPrimaryKey(commerceNotificationQueueEntryId);
+			long commerceNotificationQueueEntryId)
+		throws PortalException {
+
+		return commerceNotificationQueueEntryPersistence.findByPrimaryKey(
+			commerceNotificationQueueEntryId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(commerceNotificationQueueEntryLocalService);
+		actionableDynamicQuery.setBaseLocalService(
+			commerceNotificationQueueEntryLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceNotificationQueueEntry.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceNotificationQueueEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationQueueEntryId");
@@ -250,12 +272,17 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(commerceNotificationQueueEntryLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			commerceNotificationQueueEntryLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-		indexableActionableDynamicQuery.setModelClass(CommerceNotificationQueueEntry.class);
+		indexableActionableDynamicQuery.setModelClass(
+			CommerceNotificationQueueEntry.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationQueueEntryId");
@@ -265,9 +292,12 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(commerceNotificationQueueEntryLocalService);
+
+		actionableDynamicQuery.setBaseLocalService(
+			commerceNotificationQueueEntryLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
-		actionableDynamicQuery.setModelClass(CommerceNotificationQueueEntry.class);
+		actionableDynamicQuery.setModelClass(
+			CommerceNotificationQueueEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
 			"commerceNotificationQueueEntryId");
@@ -279,20 +309,25 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return commerceNotificationQueueEntryLocalService.deleteCommerceNotificationQueueEntry((CommerceNotificationQueueEntry)persistedModel);
+
+		return commerceNotificationQueueEntryLocalService.
+			deleteCommerceNotificationQueueEntry(
+				(CommerceNotificationQueueEntry)persistedModel);
 	}
 
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
-		return commerceNotificationQueueEntryPersistence.findByPrimaryKey(primaryKeyObj);
+
+		return commerceNotificationQueueEntryPersistence.findByPrimaryKey(
+			primaryKeyObj);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification queue entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification queue entries
@@ -300,8 +335,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @return the range of commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> getCommerceNotificationQueueEntries(
-		int start, int end) {
+	public List<CommerceNotificationQueueEntry>
+		getCommerceNotificationQueueEntries(int start, int end) {
+
 		return commerceNotificationQueueEntryPersistence.findAll(start, end);
 	}
 
@@ -325,7 +361,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	@Override
 	public CommerceNotificationQueueEntry updateCommerceNotificationQueueEntry(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-		return commerceNotificationQueueEntryPersistence.update(commerceNotificationQueueEntry);
+
+		return commerceNotificationQueueEntryPersistence.update(
+			commerceNotificationQueueEntry);
 	}
 
 	/**
@@ -333,7 +371,10 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification attachment local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService getCommerceNotificationAttachmentLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationAttachmentLocalService
+			getCommerceNotificationAttachmentLocalService() {
+
 		return commerceNotificationAttachmentLocalService;
 	}
 
@@ -343,8 +384,12 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationAttachmentLocalService the commerce notification attachment local service
 	 */
 	public void setCommerceNotificationAttachmentLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService commerceNotificationAttachmentLocalService) {
-		this.commerceNotificationAttachmentLocalService = commerceNotificationAttachmentLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationAttachmentLocalService
+				commerceNotificationAttachmentLocalService) {
+
+		this.commerceNotificationAttachmentLocalService =
+			commerceNotificationAttachmentLocalService;
 	}
 
 	/**
@@ -352,7 +397,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification attachment persistence
 	 */
-	public CommerceNotificationAttachmentPersistence getCommerceNotificationAttachmentPersistence() {
+	public CommerceNotificationAttachmentPersistence
+		getCommerceNotificationAttachmentPersistence() {
+
 		return commerceNotificationAttachmentPersistence;
 	}
 
@@ -362,8 +409,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationAttachmentPersistence the commerce notification attachment persistence
 	 */
 	public void setCommerceNotificationAttachmentPersistence(
-		CommerceNotificationAttachmentPersistence commerceNotificationAttachmentPersistence) {
-		this.commerceNotificationAttachmentPersistence = commerceNotificationAttachmentPersistence;
+		CommerceNotificationAttachmentPersistence
+			commerceNotificationAttachmentPersistence) {
+
+		this.commerceNotificationAttachmentPersistence =
+			commerceNotificationAttachmentPersistence;
 	}
 
 	/**
@@ -371,7 +421,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification queue entry local service
 	 */
-	public CommerceNotificationQueueEntryLocalService getCommerceNotificationQueueEntryLocalService() {
+	public CommerceNotificationQueueEntryLocalService
+		getCommerceNotificationQueueEntryLocalService() {
+
 		return commerceNotificationQueueEntryLocalService;
 	}
 
@@ -381,8 +433,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationQueueEntryLocalService the commerce notification queue entry local service
 	 */
 	public void setCommerceNotificationQueueEntryLocalService(
-		CommerceNotificationQueueEntryLocalService commerceNotificationQueueEntryLocalService) {
-		this.commerceNotificationQueueEntryLocalService = commerceNotificationQueueEntryLocalService;
+		CommerceNotificationQueueEntryLocalService
+			commerceNotificationQueueEntryLocalService) {
+
+		this.commerceNotificationQueueEntryLocalService =
+			commerceNotificationQueueEntryLocalService;
 	}
 
 	/**
@@ -390,7 +445,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification queue entry persistence
 	 */
-	public CommerceNotificationQueueEntryPersistence getCommerceNotificationQueueEntryPersistence() {
+	public CommerceNotificationQueueEntryPersistence
+		getCommerceNotificationQueueEntryPersistence() {
+
 		return commerceNotificationQueueEntryPersistence;
 	}
 
@@ -400,8 +457,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationQueueEntryPersistence the commerce notification queue entry persistence
 	 */
 	public void setCommerceNotificationQueueEntryPersistence(
-		CommerceNotificationQueueEntryPersistence commerceNotificationQueueEntryPersistence) {
-		this.commerceNotificationQueueEntryPersistence = commerceNotificationQueueEntryPersistence;
+		CommerceNotificationQueueEntryPersistence
+			commerceNotificationQueueEntryPersistence) {
+
+		this.commerceNotificationQueueEntryPersistence =
+			commerceNotificationQueueEntryPersistence;
 	}
 
 	/**
@@ -409,7 +469,10 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification template local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService getCommerceNotificationTemplateLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateLocalService
+			getCommerceNotificationTemplateLocalService() {
+
 		return commerceNotificationTemplateLocalService;
 	}
 
@@ -419,8 +482,12 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationTemplateLocalService the commerce notification template local service
 	 */
 	public void setCommerceNotificationTemplateLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService commerceNotificationTemplateLocalService) {
-		this.commerceNotificationTemplateLocalService = commerceNotificationTemplateLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationTemplateLocalService
+				commerceNotificationTemplateLocalService) {
+
+		this.commerceNotificationTemplateLocalService =
+			commerceNotificationTemplateLocalService;
 	}
 
 	/**
@@ -428,7 +495,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification template persistence
 	 */
-	public CommerceNotificationTemplatePersistence getCommerceNotificationTemplatePersistence() {
+	public CommerceNotificationTemplatePersistence
+		getCommerceNotificationTemplatePersistence() {
+
 		return commerceNotificationTemplatePersistence;
 	}
 
@@ -438,8 +507,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationTemplatePersistence the commerce notification template persistence
 	 */
 	public void setCommerceNotificationTemplatePersistence(
-		CommerceNotificationTemplatePersistence commerceNotificationTemplatePersistence) {
-		this.commerceNotificationTemplatePersistence = commerceNotificationTemplatePersistence;
+		CommerceNotificationTemplatePersistence
+			commerceNotificationTemplatePersistence) {
+
+		this.commerceNotificationTemplatePersistence =
+			commerceNotificationTemplatePersistence;
 	}
 
 	/**
@@ -447,7 +519,10 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification template user segment rel local service
 	 */
-	public com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService getCommerceNotificationTemplateUserSegmentRelLocalService() {
+	public com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateUserSegmentRelLocalService
+			getCommerceNotificationTemplateUserSegmentRelLocalService() {
+
 		return commerceNotificationTemplateUserSegmentRelLocalService;
 	}
 
@@ -457,8 +532,12 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationTemplateUserSegmentRelLocalService the commerce notification template user segment rel local service
 	 */
 	public void setCommerceNotificationTemplateUserSegmentRelLocalService(
-		com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService) {
-		this.commerceNotificationTemplateUserSegmentRelLocalService = commerceNotificationTemplateUserSegmentRelLocalService;
+		com.liferay.commerce.notification.service.
+			CommerceNotificationTemplateUserSegmentRelLocalService
+				commerceNotificationTemplateUserSegmentRelLocalService) {
+
+		this.commerceNotificationTemplateUserSegmentRelLocalService =
+			commerceNotificationTemplateUserSegmentRelLocalService;
 	}
 
 	/**
@@ -466,7 +545,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the commerce notification template user segment rel persistence
 	 */
-	public CommerceNotificationTemplateUserSegmentRelPersistence getCommerceNotificationTemplateUserSegmentRelPersistence() {
+	public CommerceNotificationTemplateUserSegmentRelPersistence
+		getCommerceNotificationTemplateUserSegmentRelPersistence() {
+
 		return commerceNotificationTemplateUserSegmentRelPersistence;
 	}
 
@@ -476,8 +557,11 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param commerceNotificationTemplateUserSegmentRelPersistence the commerce notification template user segment rel persistence
 	 */
 	public void setCommerceNotificationTemplateUserSegmentRelPersistence(
-		CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence) {
-		this.commerceNotificationTemplateUserSegmentRelPersistence = commerceNotificationTemplateUserSegmentRelPersistence;
+		CommerceNotificationTemplateUserSegmentRelPersistence
+			commerceNotificationTemplateUserSegmentRelPersistence) {
+
+		this.commerceNotificationTemplateUserSegmentRelPersistence =
+			commerceNotificationTemplateUserSegmentRelPersistence;
 	}
 
 	/**
@@ -485,7 +569,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -495,7 +581,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -504,7 +592,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -514,7 +604,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -534,6 +626,7 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -542,7 +635,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -552,7 +647,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -561,7 +658,9 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -572,6 +671,7 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -594,7 +694,8 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.liferay.commerce.notification.model.CommerceNotificationQueueEntry",
+		persistedModelLocalServiceRegistry.register(
+			"com.liferay.commerce.notification.model.CommerceNotificationQueueEntry",
 			commerceNotificationQueueEntryLocalService);
 	}
 
@@ -628,15 +729,16 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceNotificationQueueEntryPersistence.getDataSource();
+			DataSource dataSource =
+				commerceNotificationQueueEntryPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -645,34 +747,81 @@ public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService commerceNotificationAttachmentLocalService;
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationAttachmentLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationAttachmentLocalService
+			commerceNotificationAttachmentLocalService;
+
 	@BeanReference(type = CommerceNotificationAttachmentPersistence.class)
-	protected CommerceNotificationAttachmentPersistence commerceNotificationAttachmentPersistence;
+	protected CommerceNotificationAttachmentPersistence
+		commerceNotificationAttachmentPersistence;
+
 	@BeanReference(type = CommerceNotificationQueueEntryLocalService.class)
-	protected CommerceNotificationQueueEntryLocalService commerceNotificationQueueEntryLocalService;
+	protected CommerceNotificationQueueEntryLocalService
+		commerceNotificationQueueEntryLocalService;
+
 	@BeanReference(type = CommerceNotificationQueueEntryPersistence.class)
-	protected CommerceNotificationQueueEntryPersistence commerceNotificationQueueEntryPersistence;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService commerceNotificationTemplateLocalService;
+	protected CommerceNotificationQueueEntryPersistence
+		commerceNotificationQueueEntryPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateLocalService
+			commerceNotificationTemplateLocalService;
+
 	@BeanReference(type = CommerceNotificationTemplatePersistence.class)
-	protected CommerceNotificationTemplatePersistence commerceNotificationTemplatePersistence;
-	@BeanReference(type = com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService.class)
-	protected com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService commerceNotificationTemplateUserSegmentRelLocalService;
-	@BeanReference(type = CommerceNotificationTemplateUserSegmentRelPersistence.class)
-	protected CommerceNotificationTemplateUserSegmentRelPersistence commerceNotificationTemplateUserSegmentRelPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	protected CommerceNotificationTemplatePersistence
+		commerceNotificationTemplatePersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.notification.service.CommerceNotificationTemplateUserSegmentRelLocalService.class
+	)
+	protected com.liferay.commerce.notification.service.
+		CommerceNotificationTemplateUserSegmentRelLocalService
+			commerceNotificationTemplateUserSegmentRelLocalService;
+
+	@BeanReference(
+		type = CommerceNotificationTemplateUserSegmentRelPersistence.class
+	)
+	protected CommerceNotificationTemplateUserSegmentRelPersistence
+		commerceNotificationTemplateUserSegmentRelPersistence;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }

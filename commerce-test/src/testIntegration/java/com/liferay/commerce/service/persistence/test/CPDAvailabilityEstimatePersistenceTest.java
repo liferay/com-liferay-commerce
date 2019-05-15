@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchCPDAvailabilityEstimateException;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimateUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDAvailabilityEstimatePersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -82,7 +81,8 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CPDAvailabilityEstimate> iterator = _cpdAvailabilityEstimates.iterator();
+		Iterator<CPDAvailabilityEstimate> iterator =
+			_cpdAvailabilityEstimates.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,7 +95,8 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = _persistence.create(pk);
+		CPDAvailabilityEstimate cpdAvailabilityEstimate = _persistence.create(
+			pk);
 
 		Assert.assertNotNull(cpdAvailabilityEstimate);
 
@@ -104,11 +105,14 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
 		_persistence.remove(newCPDAvailabilityEstimate);
 
-		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.fetchByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
+		CPDAvailabilityEstimate existingCPDAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(
+				newCPDAvailabilityEstimate.getPrimaryKey());
 
 		Assert.assertNull(existingCPDAvailabilityEstimate);
 	}
@@ -122,7 +126,8 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = _persistence.create(pk);
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			_persistence.create(pk);
 
 		newCPDAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
@@ -138,40 +143,56 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 		newCPDAvailabilityEstimate.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCPDAvailabilityEstimate.setCommerceAvailabilityEstimateId(RandomTestUtil.nextLong());
+		newCPDAvailabilityEstimate.setCommerceAvailabilityEstimateId(
+			RandomTestUtil.nextLong());
 
 		newCPDAvailabilityEstimate.setCProductId(RandomTestUtil.nextLong());
 
-		newCPDAvailabilityEstimate.setLastPublishDate(RandomTestUtil.nextDate());
+		newCPDAvailabilityEstimate.setLastPublishDate(
+			RandomTestUtil.nextDate());
 
-		_cpdAvailabilityEstimates.add(_persistence.update(
-				newCPDAvailabilityEstimate));
+		_cpdAvailabilityEstimates.add(
+			_persistence.update(newCPDAvailabilityEstimate));
 
-		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.findByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
+		CPDAvailabilityEstimate existingCPDAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getUuid(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getUuid(),
 			newCPDAvailabilityEstimate.getUuid());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getCPDAvailabilityEstimateId(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getCPDAvailabilityEstimateId(),
 			newCPDAvailabilityEstimate.getCPDAvailabilityEstimateId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getGroupId(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getGroupId(),
 			newCPDAvailabilityEstimate.getGroupId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getCompanyId(),
 			newCPDAvailabilityEstimate.getCompanyId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getUserId(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getUserId(),
 			newCPDAvailabilityEstimate.getUserId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getUserName(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getUserName(),
 			newCPDAvailabilityEstimate.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDAvailabilityEstimate.getCreateDate()),
 			Time.getShortTimestamp(newCPDAvailabilityEstimate.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDAvailabilityEstimate.getModifiedDate()),
-			Time.getShortTimestamp(newCPDAvailabilityEstimate.getModifiedDate()));
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getCommerceAvailabilityEstimateId(),
+			Time.getShortTimestamp(
+				newCPDAvailabilityEstimate.getModifiedDate()));
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getCommerceAvailabilityEstimateId(),
 			newCPDAvailabilityEstimate.getCommerceAvailabilityEstimateId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getCProductId(),
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate.getCProductId(),
 			newCPDAvailabilityEstimate.getCProductId());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCPDAvailabilityEstimate.getLastPublishDate()),
 			Time.getShortTimestamp(
 				newCPDAvailabilityEstimate.getLastPublishDate()));
@@ -205,9 +226,9 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testCountByCommerceAvailabilityEstimateId()
-		throws Exception {
-		_persistence.countByCommerceAvailabilityEstimateId(RandomTestUtil.nextLong());
+	public void testCountByCommerceAvailabilityEstimateId() throws Exception {
+		_persistence.countByCommerceAvailabilityEstimateId(
+			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceAvailabilityEstimateId(0L);
 	}
@@ -221,12 +242,15 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
-		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.findByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
+		CPDAvailabilityEstimate existingCPDAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDAvailabilityEstimate,
-			newCPDAvailabilityEstimate);
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate, newCPDAvailabilityEstimate);
 	}
 
 	@Test(expected = NoSuchCPDAvailabilityEstimateException.class)
@@ -238,33 +262,40 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CPDAvailabilityEstimate> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDAvailabilityEstimate",
-			"uuid", true, "CPDAvailabilityEstimateId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commerceAvailabilityEstimateId", true,
+	protected OrderByComparator<CPDAvailabilityEstimate>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CPDAvailabilityEstimate", "uuid", true,
+			"CPDAvailabilityEstimateId", true, "groupId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceAvailabilityEstimateId", true,
 			"CProductId", true, "lastPublishDate", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
-		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.fetchByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
+		CPDAvailabilityEstimate existingCPDAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(
+				newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDAvailabilityEstimate,
-			newCPDAvailabilityEstimate);
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate, newCPDAvailabilityEstimate);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDAvailabilityEstimate missingCPDAvailabilityEstimate = _persistence.fetchByPrimaryKey(pk);
+		CPDAvailabilityEstimate missingCPDAvailabilityEstimate =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDAvailabilityEstimate);
 	}
@@ -272,21 +303,27 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate1 = addCPDAvailabilityEstimate();
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate2 = addCPDAvailabilityEstimate();
+
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate1 =
+			addCPDAvailabilityEstimate();
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate2 =
+			addCPDAvailabilityEstimate();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDAvailabilityEstimate1.getPrimaryKey());
 		primaryKeys.add(newCPDAvailabilityEstimate2.getPrimaryKey());
 
-		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpdAvailabilityEstimates.size());
-		Assert.assertEquals(newCPDAvailabilityEstimate1,
+		Assert.assertEquals(
+			newCPDAvailabilityEstimate1,
 			cpdAvailabilityEstimates.get(
 				newCPDAvailabilityEstimate1.getPrimaryKey()));
-		Assert.assertEquals(newCPDAvailabilityEstimate2,
+		Assert.assertEquals(
+			newCPDAvailabilityEstimate2,
 			cpdAvailabilityEstimates.get(
 				newCPDAvailabilityEstimate2.getPrimaryKey()));
 	}
@@ -294,6 +331,7 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -303,7 +341,8 @@ public class CPDAvailabilityEstimatePersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpdAvailabilityEstimates.isEmpty());
 	}
@@ -311,7 +350,9 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -320,37 +361,41 @@ public class CPDAvailabilityEstimatePersistenceTest {
 		primaryKeys.add(newCPDAvailabilityEstimate.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpdAvailabilityEstimates.size());
-		Assert.assertEquals(newCPDAvailabilityEstimate,
+		Assert.assertEquals(
+			newCPDAvailabilityEstimate,
 			cpdAvailabilityEstimates.get(
 				newCPDAvailabilityEstimate.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpdAvailabilityEstimates.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDAvailabilityEstimate> cpdAvailabilityEstimates =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpdAvailabilityEstimates.size());
-		Assert.assertEquals(newCPDAvailabilityEstimate,
+		Assert.assertEquals(
+			newCPDAvailabilityEstimate,
 			cpdAvailabilityEstimates.get(
 				newCPDAvailabilityEstimate.getPrimaryKey()));
 	}
@@ -359,16 +404,22 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDAvailabilityEstimateLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDAvailabilityEstimateLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDAvailabilityEstimate>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CPDAvailabilityEstimate>() {
+
 				@Override
 				public void performAction(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate) {
+
 					Assert.assertNotNull(cpdAvailabilityEstimate);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -377,56 +428,62 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDAvailabilityEstimateId",
 				newCPDAvailabilityEstimate.getCPDAvailabilityEstimateId()));
 
-		List<CPDAvailabilityEstimate> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDAvailabilityEstimate> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = result.get(0);
 
-		Assert.assertEquals(existingCPDAvailabilityEstimate,
-			newCPDAvailabilityEstimate);
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimate, newCPDAvailabilityEstimate);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"CPDAvailabilityEstimateId", RandomTestUtil.nextLong()));
 
-		List<CPDAvailabilityEstimate> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDAvailabilityEstimate> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDAvailabilityEstimateId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDAvailabilityEstimateId"));
 
-		Object newCPDAvailabilityEstimateId = newCPDAvailabilityEstimate.getCPDAvailabilityEstimateId();
+		Object newCPDAvailabilityEstimateId =
+			newCPDAvailabilityEstimate.getCPDAvailabilityEstimateId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDAvailabilityEstimateId",
-				new Object[] { newCPDAvailabilityEstimateId }));
+				new Object[] {newCPDAvailabilityEstimateId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -434,21 +491,22 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 		Object existingCPDAvailabilityEstimateId = result.get(0);
 
-		Assert.assertEquals(existingCPDAvailabilityEstimateId,
-			newCPDAvailabilityEstimateId);
+		Assert.assertEquals(
+			existingCPDAvailabilityEstimateId, newCPDAvailabilityEstimateId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDAvailabilityEstimate.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDAvailabilityEstimate.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDAvailabilityEstimateId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDAvailabilityEstimateId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"CPDAvailabilityEstimateId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -457,32 +515,41 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CPDAvailabilityEstimate newCPDAvailabilityEstimate = addCPDAvailabilityEstimate();
+		CPDAvailabilityEstimate newCPDAvailabilityEstimate =
+			addCPDAvailabilityEstimate();
 
 		_persistence.clearCache();
 
-		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.findByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
+		CPDAvailabilityEstimate existingCPDAvailabilityEstimate =
+			_persistence.findByPrimaryKey(
+				newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
+		Assert.assertTrue(
+			Objects.equals(
 				existingCPDAvailabilityEstimate.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDAvailabilityEstimate,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDAvailabilityEstimate.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDAvailabilityEstimate,
-				"getOriginalGroupId", new Class<?>[0]));
+				ReflectionTestUtil.invoke(
+					existingCPDAvailabilityEstimate, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDAvailabilityEstimate.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDAvailabilityEstimate, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDAvailabilityEstimate.getCProductId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDAvailabilityEstimate,
-				"getOriginalCProductId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDAvailabilityEstimate.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDAvailabilityEstimate, "getOriginalCProductId",
+				new Class<?>[0]));
 	}
 
 	protected CPDAvailabilityEstimate addCPDAvailabilityEstimate()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = _persistence.create(pk);
+		CPDAvailabilityEstimate cpdAvailabilityEstimate = _persistence.create(
+			pk);
 
 		cpdAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
@@ -498,19 +565,22 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 		cpdAvailabilityEstimate.setModifiedDate(RandomTestUtil.nextDate());
 
-		cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(RandomTestUtil.nextLong());
+		cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
+			RandomTestUtil.nextLong());
 
 		cpdAvailabilityEstimate.setCProductId(RandomTestUtil.nextLong());
 
 		cpdAvailabilityEstimate.setLastPublishDate(RandomTestUtil.nextDate());
 
-		_cpdAvailabilityEstimates.add(_persistence.update(
-				cpdAvailabilityEstimate));
+		_cpdAvailabilityEstimates.add(
+			_persistence.update(cpdAvailabilityEstimate));
 
 		return cpdAvailabilityEstimate;
 	}
 
-	private List<CPDAvailabilityEstimate> _cpdAvailabilityEstimates = new ArrayList<CPDAvailabilityEstimate>();
+	private List<CPDAvailabilityEstimate> _cpdAvailabilityEstimates =
+		new ArrayList<CPDAvailabilityEstimate>();
 	private CPDAvailabilityEstimatePersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

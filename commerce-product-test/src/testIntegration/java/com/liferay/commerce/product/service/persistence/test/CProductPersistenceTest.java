@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCProductException;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
 import com.liferay.commerce.product.service.persistence.CProductUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CProductPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -108,7 +107,8 @@ public class CProductPersistenceTest {
 
 		_persistence.remove(newCProduct);
 
-		CProduct existingCProduct = _persistence.fetchByPrimaryKey(newCProduct.getPrimaryKey());
+		CProduct existingCProduct = _persistence.fetchByPrimaryKey(
+			newCProduct.getPrimaryKey());
 
 		Assert.assertNull(existingCProduct);
 	}
@@ -146,30 +146,34 @@ public class CProductPersistenceTest {
 
 		_cProducts.add(_persistence.update(newCProduct));
 
-		CProduct existingCProduct = _persistence.findByPrimaryKey(newCProduct.getPrimaryKey());
+		CProduct existingCProduct = _persistence.findByPrimaryKey(
+			newCProduct.getPrimaryKey());
 
 		Assert.assertEquals(existingCProduct.getUuid(), newCProduct.getUuid());
-		Assert.assertEquals(existingCProduct.getExternalReferenceCode(),
+		Assert.assertEquals(
+			existingCProduct.getExternalReferenceCode(),
 			newCProduct.getExternalReferenceCode());
-		Assert.assertEquals(existingCProduct.getCProductId(),
-			newCProduct.getCProductId());
-		Assert.assertEquals(existingCProduct.getGroupId(),
-			newCProduct.getGroupId());
-		Assert.assertEquals(existingCProduct.getCompanyId(),
-			newCProduct.getCompanyId());
-		Assert.assertEquals(existingCProduct.getUserId(),
-			newCProduct.getUserId());
-		Assert.assertEquals(existingCProduct.getUserName(),
-			newCProduct.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCProduct.getCreateDate()),
+		Assert.assertEquals(
+			existingCProduct.getCProductId(), newCProduct.getCProductId());
+		Assert.assertEquals(
+			existingCProduct.getGroupId(), newCProduct.getGroupId());
+		Assert.assertEquals(
+			existingCProduct.getCompanyId(), newCProduct.getCompanyId());
+		Assert.assertEquals(
+			existingCProduct.getUserId(), newCProduct.getUserId());
+		Assert.assertEquals(
+			existingCProduct.getUserName(), newCProduct.getUserName());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCProduct.getCreateDate()),
 			Time.getShortTimestamp(newCProduct.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCProduct.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCProduct.getModifiedDate()),
 			Time.getShortTimestamp(newCProduct.getModifiedDate()));
-		Assert.assertEquals(existingCProduct.getPublishedCPDefinitionId(),
+		Assert.assertEquals(
+			existingCProduct.getPublishedCPDefinitionId(),
 			newCProduct.getPublishedCPDefinitionId());
-		Assert.assertEquals(existingCProduct.getLatestVersion(),
+		Assert.assertEquals(
+			existingCProduct.getLatestVersion(),
 			newCProduct.getLatestVersion());
 	}
 
@@ -220,7 +224,8 @@ public class CProductPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CProduct newCProduct = addCProduct();
 
-		CProduct existingCProduct = _persistence.findByPrimaryKey(newCProduct.getPrimaryKey());
+		CProduct existingCProduct = _persistence.findByPrimaryKey(
+			newCProduct.getPrimaryKey());
 
 		Assert.assertEquals(existingCProduct, newCProduct);
 	}
@@ -234,23 +239,24 @@ public class CProductPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CProduct> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CProduct", "uuid", true,
-			"externalReferenceCode", true, "CProductId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "publishedCPDefinitionId", true,
-			"latestVersion", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CProduct", "uuid", true, "externalReferenceCode", true,
+			"CProductId", true, "groupId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"publishedCPDefinitionId", true, "latestVersion", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CProduct newCProduct = addCProduct();
 
-		CProduct existingCProduct = _persistence.fetchByPrimaryKey(newCProduct.getPrimaryKey());
+		CProduct existingCProduct = _persistence.fetchByPrimaryKey(
+			newCProduct.getPrimaryKey());
 
 		Assert.assertEquals(existingCProduct, newCProduct);
 	}
@@ -267,6 +273,7 @@ public class CProductPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CProduct newCProduct1 = addCProduct();
 		CProduct newCProduct2 = addCProduct();
 
@@ -275,18 +282,20 @@ public class CProductPersistenceTest {
 		primaryKeys.add(newCProduct1.getPrimaryKey());
 		primaryKeys.add(newCProduct2.getPrimaryKey());
 
-		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(2, cProducts.size());
-		Assert.assertEquals(newCProduct1,
-			cProducts.get(newCProduct1.getPrimaryKey()));
-		Assert.assertEquals(newCProduct2,
-			cProducts.get(newCProduct2.getPrimaryKey()));
+		Assert.assertEquals(
+			newCProduct1, cProducts.get(newCProduct1.getPrimaryKey()));
+		Assert.assertEquals(
+			newCProduct2, cProducts.get(newCProduct2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -296,7 +305,8 @@ public class CProductPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cProducts.isEmpty());
 	}
@@ -304,6 +314,7 @@ public class CProductPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CProduct newCProduct = addCProduct();
 
 		long pk = RandomTestUtil.nextLong();
@@ -313,52 +324,57 @@ public class CProductPersistenceTest {
 		primaryKeys.add(newCProduct.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cProducts.size());
-		Assert.assertEquals(newCProduct,
-			cProducts.get(newCProduct.getPrimaryKey()));
+		Assert.assertEquals(
+			newCProduct, cProducts.get(newCProduct.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertTrue(cProducts.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CProduct newCProduct = addCProduct();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCProduct.getPrimaryKey());
 
-		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CProduct> cProducts = _persistence.fetchByPrimaryKeys(
+			primaryKeys);
 
 		Assert.assertEquals(1, cProducts.size());
-		Assert.assertEquals(newCProduct,
-			cProducts.get(newCProduct.getPrimaryKey()));
+		Assert.assertEquals(
+			newCProduct, cProducts.get(newCProduct.getPrimaryKey()));
 	}
 
 	@Test
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CProductLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CProductLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CProduct>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CProduct>() {
+
 				@Override
 				public void performAction(CProduct cProduct) {
 					Assert.assertNotNull(cProduct);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -367,15 +383,15 @@ public class CProductPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CProduct newCProduct = addCProduct();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CProduct.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CProduct.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CProductId",
-				newCProduct.getCProductId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CProductId", newCProduct.getCProductId()));
 
 		List<CProduct> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -388,11 +404,12 @@ public class CProductPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CProduct.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CProduct.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CProductId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CProductId", RandomTestUtil.nextLong()));
 
 		List<CProduct> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -400,19 +417,20 @@ public class CProductPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CProduct newCProduct = addCProduct();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CProduct.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CProduct.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CProductId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CProductId"));
 
 		Object newCProductId = newCProduct.getCProductId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CProductId",
-				new Object[] { newCProductId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CProductId", new Object[] {newCProductId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -425,13 +443,15 @@ public class CProductPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CProduct.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CProduct.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("CProductId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CProductId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CProductId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CProductId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -444,22 +464,29 @@ public class CProductPersistenceTest {
 
 		_persistence.clearCache();
 
-		CProduct existingCProduct = _persistence.findByPrimaryKey(newCProduct.getPrimaryKey());
+		CProduct existingCProduct = _persistence.findByPrimaryKey(
+			newCProduct.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCProduct.getUuid(),
-				ReflectionTestUtil.invoke(existingCProduct, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCProduct.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCProduct,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCProduct.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCProduct, "getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCProduct.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCProduct, "getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCProduct.getCompanyId()),
-			ReflectionTestUtil.<Long>invoke(existingCProduct,
-				"getOriginalCompanyId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCProduct.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCProduct, "getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCProduct.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCProduct,
-					"getOriginalExternalReferenceCode", new Class<?>[0])));
+				ReflectionTestUtil.invoke(
+					existingCProduct, "getOriginalExternalReferenceCode",
+					new Class<?>[0])));
 	}
 
 	protected CProduct addCProduct() throws Exception {
@@ -495,4 +522,5 @@ public class CProductPersistenceTest {
 	private List<CProduct> _cProducts = new ArrayList<CProduct>();
 	private CProductPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

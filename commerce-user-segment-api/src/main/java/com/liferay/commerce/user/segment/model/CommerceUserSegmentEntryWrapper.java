@@ -17,7 +17,6 @@ package com.liferay.commerce.user.segment.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,13 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry,
-	ModelWrapper<CommerceUserSegmentEntry> {
+public class CommerceUserSegmentEntryWrapper
+	implements CommerceUserSegmentEntry,
+			   ModelWrapper<CommerceUserSegmentEntry> {
+
 	public CommerceUserSegmentEntryWrapper(
 		CommerceUserSegmentEntry commerceUserSegmentEntry) {
+
 		_commerceUserSegmentEntry = commerceUserSegmentEntry;
 	}
 
@@ -59,8 +61,8 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceUserSegmentEntryId",
-			getCommerceUserSegmentEntryId());
+		attributes.put(
+			"commerceUserSegmentEntryId", getCommerceUserSegmentEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -79,7 +81,7 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceUserSegmentEntryId = (Long)attributes.get(
-				"commerceUserSegmentEntryId");
+			"commerceUserSegmentEntryId");
 
 		if (commerceUserSegmentEntryId != null) {
 			setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
@@ -154,7 +156,8 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 
 	@Override
 	public Object clone() {
-		return new CommerceUserSegmentEntryWrapper((CommerceUserSegmentEntry)_commerceUserSegmentEntry.clone());
+		return new CommerceUserSegmentEntryWrapper(
+			(CommerceUserSegmentEntry)_commerceUserSegmentEntry.clone());
 	}
 
 	@Override
@@ -163,10 +166,10 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns the active of this commerce user segment entry.
-	*
-	* @return the active of this commerce user segment entry
-	*/
+	 * Returns the active of this commerce user segment entry.
+	 *
+	 * @return the active of this commerce user segment entry
+	 */
 	@Override
 	public boolean getActive() {
 		return _commerceUserSegmentEntry.getActive();
@@ -178,35 +181,37 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	@Override
-	public java.util.List<CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria() {
+	public java.util.List<CommerceUserSegmentCriterion>
+		getCommerceUserSegmentCriteria() {
+
 		return _commerceUserSegmentEntry.getCommerceUserSegmentCriteria();
 	}
 
 	/**
-	* Returns the commerce user segment entry ID of this commerce user segment entry.
-	*
-	* @return the commerce user segment entry ID of this commerce user segment entry
-	*/
+	 * Returns the commerce user segment entry ID of this commerce user segment entry.
+	 *
+	 * @return the commerce user segment entry ID of this commerce user segment entry
+	 */
 	@Override
 	public long getCommerceUserSegmentEntryId() {
 		return _commerceUserSegmentEntry.getCommerceUserSegmentEntryId();
 	}
 
 	/**
-	* Returns the company ID of this commerce user segment entry.
-	*
-	* @return the company ID of this commerce user segment entry
-	*/
+	 * Returns the company ID of this commerce user segment entry.
+	 *
+	 * @return the company ID of this commerce user segment entry
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceUserSegmentEntry.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce user segment entry.
-	*
-	* @return the create date of this commerce user segment entry
-	*/
+	 * Returns the create date of this commerce user segment entry.
+	 *
+	 * @return the create date of this commerce user segment entry
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceUserSegmentEntry.getCreateDate();
@@ -223,86 +228,86 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns the group ID of this commerce user segment entry.
-	*
-	* @return the group ID of this commerce user segment entry
-	*/
+	 * Returns the group ID of this commerce user segment entry.
+	 *
+	 * @return the group ID of this commerce user segment entry
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceUserSegmentEntry.getGroupId();
 	}
 
 	/**
-	* Returns the key of this commerce user segment entry.
-	*
-	* @return the key of this commerce user segment entry
-	*/
+	 * Returns the key of this commerce user segment entry.
+	 *
+	 * @return the key of this commerce user segment entry
+	 */
 	@Override
 	public String getKey() {
 		return _commerceUserSegmentEntry.getKey();
 	}
 
 	/**
-	* Returns the modified date of this commerce user segment entry.
-	*
-	* @return the modified date of this commerce user segment entry
-	*/
+	 * Returns the modified date of this commerce user segment entry.
+	 *
+	 * @return the modified date of this commerce user segment entry
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceUserSegmentEntry.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce user segment entry.
-	*
-	* @return the name of this commerce user segment entry
-	*/
+	 * Returns the name of this commerce user segment entry.
+	 *
+	 * @return the name of this commerce user segment entry
+	 */
 	@Override
 	public String getName() {
 		return _commerceUserSegmentEntry.getName();
 	}
 
 	/**
-	* Returns the localized name of this commerce user segment entry in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce user segment entry
-	*/
+	 * Returns the localized name of this commerce user segment entry in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this commerce user segment entry
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _commerceUserSegmentEntry.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this commerce user segment entry in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce user segment entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this commerce user segment entry in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce user segment entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _commerceUserSegmentEntry.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this commerce user segment entry in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce user segment entry
-	*/
+	 * Returns the localized name of this commerce user segment entry in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this commerce user segment entry
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _commerceUserSegmentEntry.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this commerce user segment entry in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce user segment entry
-	*/
+	 * Returns the localized name of this commerce user segment entry in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce user segment entry
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _commerceUserSegmentEntry.getName(languageId, useDefault);
@@ -319,20 +324,20 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this commerce user segment entry.
-	*
-	* @return the locales and localized names of this commerce user segment entry
-	*/
+	 * Returns a map of the locales and localized names of this commerce user segment entry.
+	 *
+	 * @return the locales and localized names of this commerce user segment entry
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _commerceUserSegmentEntry.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this commerce user segment entry.
-	*
-	* @return the primary key of this commerce user segment entry
-	*/
+	 * Returns the primary key of this commerce user segment entry.
+	 *
+	 * @return the primary key of this commerce user segment entry
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceUserSegmentEntry.getPrimaryKey();
@@ -344,50 +349,50 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns the priority of this commerce user segment entry.
-	*
-	* @return the priority of this commerce user segment entry
-	*/
+	 * Returns the priority of this commerce user segment entry.
+	 *
+	 * @return the priority of this commerce user segment entry
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceUserSegmentEntry.getPriority();
 	}
 
 	/**
-	* Returns the system of this commerce user segment entry.
-	*
-	* @return the system of this commerce user segment entry
-	*/
+	 * Returns the system of this commerce user segment entry.
+	 *
+	 * @return the system of this commerce user segment entry
+	 */
 	@Override
 	public boolean getSystem() {
 		return _commerceUserSegmentEntry.getSystem();
 	}
 
 	/**
-	* Returns the user ID of this commerce user segment entry.
-	*
-	* @return the user ID of this commerce user segment entry
-	*/
+	 * Returns the user ID of this commerce user segment entry.
+	 *
+	 * @return the user ID of this commerce user segment entry
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceUserSegmentEntry.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce user segment entry.
-	*
-	* @return the user name of this commerce user segment entry
-	*/
+	 * Returns the user name of this commerce user segment entry.
+	 *
+	 * @return the user name of this commerce user segment entry
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceUserSegmentEntry.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce user segment entry.
-	*
-	* @return the user uuid of this commerce user segment entry
-	*/
+	 * Returns the user uuid of this commerce user segment entry.
+	 *
+	 * @return the user uuid of this commerce user segment entry
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceUserSegmentEntry.getUserUuid();
@@ -399,10 +404,10 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce user segment entry is active.
-	*
-	* @return <code>true</code> if this commerce user segment entry is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce user segment entry is active.
+	 *
+	 * @return <code>true</code> if this commerce user segment entry is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commerceUserSegmentEntry.isActive();
@@ -424,10 +429,10 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce user segment entry is system.
-	*
-	* @return <code>true</code> if this commerce user segment entry is system; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce user segment entry is system.
+	 *
+	 * @return <code>true</code> if this commerce user segment entry is system; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isSystem() {
 		return _commerceUserSegmentEntry.isSystem();
@@ -441,21 +446,24 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceUserSegmentEntry.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceUserSegmentEntry.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commerceUserSegmentEntry.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets whether this commerce user segment entry is active.
-	*
-	* @param active the active of this commerce user segment entry
-	*/
+	 * Sets whether this commerce user segment entry is active.
+	 *
+	 * @param active the active of this commerce user segment entry
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commerceUserSegmentEntry.setActive(active);
@@ -467,30 +475,31 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Sets the commerce user segment entry ID of this commerce user segment entry.
-	*
-	* @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce user segment entry
-	*/
+	 * Sets the commerce user segment entry ID of this commerce user segment entry.
+	 *
+	 * @param commerceUserSegmentEntryId the commerce user segment entry ID of this commerce user segment entry
+	 */
 	@Override
 	public void setCommerceUserSegmentEntryId(long commerceUserSegmentEntryId) {
-		_commerceUserSegmentEntry.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		_commerceUserSegmentEntry.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 	}
 
 	/**
-	* Sets the company ID of this commerce user segment entry.
-	*
-	* @param companyId the company ID of this commerce user segment entry
-	*/
+	 * Sets the company ID of this commerce user segment entry.
+	 *
+	 * @param companyId the company ID of this commerce user segment entry
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceUserSegmentEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce user segment entry.
-	*
-	* @param createDate the create date of this commerce user segment entry
-	*/
+	 * Sets the create date of this commerce user segment entry.
+	 *
+	 * @param createDate the create date of this commerce user segment entry
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceUserSegmentEntry.setCreateDate(createDate);
@@ -499,6 +508,7 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceUserSegmentEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -513,66 +523,67 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Sets the group ID of this commerce user segment entry.
-	*
-	* @param groupId the group ID of this commerce user segment entry
-	*/
+	 * Sets the group ID of this commerce user segment entry.
+	 *
+	 * @param groupId the group ID of this commerce user segment entry
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceUserSegmentEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the key of this commerce user segment entry.
-	*
-	* @param key the key of this commerce user segment entry
-	*/
+	 * Sets the key of this commerce user segment entry.
+	 *
+	 * @param key the key of this commerce user segment entry
+	 */
 	@Override
 	public void setKey(String key) {
 		_commerceUserSegmentEntry.setKey(key);
 	}
 
 	/**
-	* Sets the modified date of this commerce user segment entry.
-	*
-	* @param modifiedDate the modified date of this commerce user segment entry
-	*/
+	 * Sets the modified date of this commerce user segment entry.
+	 *
+	 * @param modifiedDate the modified date of this commerce user segment entry
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceUserSegmentEntry.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce user segment entry.
-	*
-	* @param name the name of this commerce user segment entry
-	*/
+	 * Sets the name of this commerce user segment entry.
+	 *
+	 * @param name the name of this commerce user segment entry
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceUserSegmentEntry.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this commerce user segment entry in the language.
-	*
-	* @param name the localized name of this commerce user segment entry
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this commerce user segment entry in the language.
+	 *
+	 * @param name the localized name of this commerce user segment entry
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_commerceUserSegmentEntry.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this commerce user segment entry in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce user segment entry
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this commerce user segment entry in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this commerce user segment entry
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceUserSegmentEntry.setName(name, locale, defaultLocale);
 	}
 
@@ -582,24 +593,25 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Sets the localized names of this commerce user segment entry from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce user segment entry
-	*/
+	 * Sets the localized names of this commerce user segment entry from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this commerce user segment entry
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_commerceUserSegmentEntry.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this commerce user segment entry from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce user segment entry
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this commerce user segment entry from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this commerce user segment entry
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_commerceUserSegmentEntry.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -609,10 +621,10 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Sets the primary key of this commerce user segment entry.
-	*
-	* @param primaryKey the primary key of this commerce user segment entry
-	*/
+	 * Sets the primary key of this commerce user segment entry.
+	 *
+	 * @param primaryKey the primary key of this commerce user segment entry
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceUserSegmentEntry.setPrimaryKey(primaryKey);
@@ -624,63 +636,66 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	/**
-	* Sets the priority of this commerce user segment entry.
-	*
-	* @param priority the priority of this commerce user segment entry
-	*/
+	 * Sets the priority of this commerce user segment entry.
+	 *
+	 * @param priority the priority of this commerce user segment entry
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceUserSegmentEntry.setPriority(priority);
 	}
 
 	/**
-	* Sets whether this commerce user segment entry is system.
-	*
-	* @param system the system of this commerce user segment entry
-	*/
+	 * Sets whether this commerce user segment entry is system.
+	 *
+	 * @param system the system of this commerce user segment entry
+	 */
 	@Override
 	public void setSystem(boolean system) {
 		_commerceUserSegmentEntry.setSystem(system);
 	}
 
 	/**
-	* Sets the user ID of this commerce user segment entry.
-	*
-	* @param userId the user ID of this commerce user segment entry
-	*/
+	 * Sets the user ID of this commerce user segment entry.
+	 *
+	 * @param userId the user ID of this commerce user segment entry
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceUserSegmentEntry.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce user segment entry.
-	*
-	* @param userName the user name of this commerce user segment entry
-	*/
+	 * Sets the user name of this commerce user segment entry.
+	 *
+	 * @param userName the user name of this commerce user segment entry
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceUserSegmentEntry.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce user segment entry.
-	*
-	* @param userUuid the user uuid of this commerce user segment entry
-	*/
+	 * Sets the user uuid of this commerce user segment entry.
+	 *
+	 * @param userUuid the user uuid of this commerce user segment entry
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceUserSegmentEntry.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceUserSegmentEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceUserSegmentEntry>
+		toCacheModel() {
+
 		return _commerceUserSegmentEntry.toCacheModel();
 	}
 
 	@Override
 	public CommerceUserSegmentEntry toEscapedModel() {
-		return new CommerceUserSegmentEntryWrapper(_commerceUserSegmentEntry.toEscapedModel());
+		return new CommerceUserSegmentEntryWrapper(
+			_commerceUserSegmentEntry.toEscapedModel());
 	}
 
 	@Override
@@ -690,7 +705,8 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 
 	@Override
 	public CommerceUserSegmentEntry toUnescapedModel() {
-		return new CommerceUserSegmentEntryWrapper(_commerceUserSegmentEntry.toUnescapedModel());
+		return new CommerceUserSegmentEntryWrapper(
+			_commerceUserSegmentEntry.toUnescapedModel());
 	}
 
 	@Override
@@ -708,10 +724,13 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 			return false;
 		}
 
-		CommerceUserSegmentEntryWrapper commerceUserSegmentEntryWrapper = (CommerceUserSegmentEntryWrapper)obj;
+		CommerceUserSegmentEntryWrapper commerceUserSegmentEntryWrapper =
+			(CommerceUserSegmentEntryWrapper)obj;
 
-		if (Objects.equals(_commerceUserSegmentEntry,
-					commerceUserSegmentEntryWrapper._commerceUserSegmentEntry)) {
+		if (Objects.equals(
+				_commerceUserSegmentEntry,
+				commerceUserSegmentEntryWrapper._commerceUserSegmentEntry)) {
+
 			return true;
 		}
 
@@ -739,4 +758,5 @@ public class CommerceUserSegmentEntryWrapper implements CommerceUserSegmentEntry
 	}
 
 	private final CommerceUserSegmentEntry _commerceUserSegmentEntry;
+
 }

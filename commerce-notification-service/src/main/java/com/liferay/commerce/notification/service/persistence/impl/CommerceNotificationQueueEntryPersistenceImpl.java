@@ -21,7 +21,6 @@ import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl;
 import com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -66,58 +65,33 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceNotificationQueueEntryPersistence
- * @see com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationQueueEntryPersistenceImpl
 	extends BasePersistenceImpl<CommerceNotificationQueueEntry>
 	implements CommerceNotificationQueueEntryPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceNotificationQueueEntryUtil} to access the commerce notification queue entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceNotificationQueueEntryUtil</code> to access the commerce notification queue entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceNotificationQueueEntryImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CommerceNotificationQueueEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByGroupId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceNotificationQueueEntryImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByGroupId;
+	private FinderPath _finderPathCountByGroupId;
 
 	/**
 	 * Returns all the commerce notification queue entries where groupId = &#63;.
@@ -127,14 +101,15 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public List<CommerceNotificationQueueEntry> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByGroupId(
+			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification queue entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -143,8 +118,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByGroupId(long groupId,
-		int start, int end) {
+	public List<CommerceNotificationQueueEntry> findByGroupId(
+		long groupId, int start, int end) {
+
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -152,7 +128,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -162,9 +138,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
@@ -172,7 +149,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
@@ -183,34 +160,40 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByGroupId(long groupId,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findByGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = _finderPathWithoutPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByGroupId;
+			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationQueueEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : list) {
-					if ((groupId != commerceNotificationQueueEntry.getGroupId())) {
+				for (CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry : list) {
+
+					if ((groupId !=
+							commerceNotificationQueueEntry.getGroupId())) {
+
 						list = null;
 
 						break;
@@ -223,8 +206,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -235,12 +218,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -257,16 +240,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				qPos.add(groupId);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -295,11 +278,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByGroupId_First(long groupId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByGroupId_First(groupId,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByGroupId_First(groupId, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -325,10 +310,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByGroupId_First(long groupId,
+	public CommerceNotificationQueueEntry fetchByGroupId_First(
+		long groupId,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		List<CommerceNotificationQueueEntry> list = findByGroupId(groupId, 0,
-				1, orderByComparator);
+
+		List<CommerceNotificationQueueEntry> list = findByGroupId(
+			groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -346,11 +333,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByGroupId_Last(long groupId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByGroupId_Last(groupId,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByGroupId_Last(groupId, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -376,16 +365,18 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByGroupId_Last(long groupId,
+	public CommerceNotificationQueueEntry fetchByGroupId_Last(
+		long groupId,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationQueueEntry> list = findByGroupId(groupId,
-				count - 1, count, orderByComparator);
+		List<CommerceNotificationQueueEntry> list = findByGroupId(
+			groupId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -405,27 +396,30 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry[] findByGroupId_PrevAndNext(
-		long commerceNotificationQueueEntryId, long groupId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+			long commerceNotificationQueueEntryId, long groupId,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = findByPrimaryKey(commerceNotificationQueueEntryId);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			findByPrimaryKey(commerceNotificationQueueEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationQueueEntry[] array = new CommerceNotificationQueueEntryImpl[3];
+			CommerceNotificationQueueEntry[] array =
+				new CommerceNotificationQueueEntryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session,
-					commerceNotificationQueueEntry, groupId, orderByComparator,
-					true);
+			array[0] = getByGroupId_PrevAndNext(
+				session, commerceNotificationQueueEntry, groupId,
+				orderByComparator, true);
 
 			array[1] = commerceNotificationQueueEntry;
 
-			array[2] = getByGroupId_PrevAndNext(session,
-					commerceNotificationQueueEntry, groupId, orderByComparator,
-					false);
+			array[2] = getByGroupId_PrevAndNext(
+				session, commerceNotificationQueueEntry, groupId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -443,11 +437,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		long groupId,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -459,7 +454,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -529,10 +525,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationQueueEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationQueueEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -553,8 +550,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : findByGroupId(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findByGroupId(
+					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationQueueEntry);
 		}
 	}
@@ -567,9 +566,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+		FinderPath finderPath = _finderPathCountByGroupId;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] {groupId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -610,34 +609,14 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceNotificationQueueEntry.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceNotificationTemplateId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceNotificationTemplateId",
-			new String[] { Long.class.getName() },
-			CommerceNotificationQueueEntryModelImpl.COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
-			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceNotificationTemplateId",
-			new String[] { Long.class.getName() });
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
+		"commerceNotificationQueueEntry.groupId = ?";
+
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceNotificationTemplateId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceNotificationTemplateId;
+	private FinderPath _finderPathCountByCommerceNotificationTemplateId;
 
 	/**
 	 * Returns all the commerce notification queue entries where commerceNotificationTemplateId = &#63;.
@@ -646,17 +625,20 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceNotificationQueueEntry>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification queue entries where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -665,17 +647,19 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			start, end, null);
+	public List<CommerceNotificationQueueEntry>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification queue entries where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -685,18 +669,22 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			start, end, orderByComparator, true);
+	public List<CommerceNotificationQueueEntry>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end,
+			OrderByComparator<CommerceNotificationQueueEntry>
+				orderByComparator) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, start, end, orderByComparator,
+			true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification queue entries where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -707,38 +695,46 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache) {
+	public List<CommerceNotificationQueueEntry>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
+			boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID;
-			finderArgs = new Object[] { commerceNotificationTemplateId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceNotificationTemplateId;
+			finderArgs = new Object[] {commerceNotificationTemplateId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceNotificationTemplateId;
 			finderArgs = new Object[] {
-					commerceNotificationTemplateId,
-					
-					start, end, orderByComparator
-				};
+				commerceNotificationTemplateId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceNotificationQueueEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : list) {
-					if ((commerceNotificationTemplateId != commerceNotificationQueueEntry.getCommerceNotificationTemplateId())) {
+				for (CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry : list) {
+
+					if ((commerceNotificationTemplateId !=
+							commerceNotificationQueueEntry.
+								getCommerceNotificationTemplateId())) {
+
 						list = null;
 
 						break;
@@ -751,8 +747,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -760,15 +756,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -785,16 +782,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				qPos.add(commerceNotificationTemplateId);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -823,12 +820,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByCommerceNotificationTemplateId_First(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry
+			findByCommerceNotificationTemplateId_First(
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByCommerceNotificationTemplateId_First(commerceNotificationTemplateId,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByCommerceNotificationTemplateId_First(
+				commerceNotificationTemplateId, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -854,11 +855,15 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByCommerceNotificationTemplateId_First(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		List<CommerceNotificationQueueEntry> list = findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-				0, 1, orderByComparator);
+	public CommerceNotificationQueueEntry
+		fetchByCommerceNotificationTemplateId_First(
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationQueueEntry>
+				orderByComparator) {
+
+		List<CommerceNotificationQueueEntry> list =
+			findByCommerceNotificationTemplateId(
+				commerceNotificationTemplateId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -876,12 +881,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByCommerceNotificationTemplateId_Last(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry
+			findByCommerceNotificationTemplateId_Last(
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByCommerceNotificationTemplateId_Last(commerceNotificationTemplateId,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByCommerceNotificationTemplateId_Last(
+				commerceNotificationTemplateId, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -907,17 +916,23 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByCommerceNotificationTemplateId_Last(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		int count = countByCommerceNotificationTemplateId(commerceNotificationTemplateId);
+	public CommerceNotificationQueueEntry
+		fetchByCommerceNotificationTemplateId_Last(
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationQueueEntry>
+				orderByComparator) {
+
+		int count = countByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationQueueEntry> list = findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-				count - 1, count, orderByComparator);
+		List<CommerceNotificationQueueEntry> list =
+			findByCommerceNotificationTemplateId(
+				commerceNotificationTemplateId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -936,29 +951,34 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a commerce notification queue entry with the primary key could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry[] findByCommerceNotificationTemplateId_PrevAndNext(
-		long commerceNotificationQueueEntryId,
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry[]
+			findByCommerceNotificationTemplateId_PrevAndNext(
+				long commerceNotificationQueueEntryId,
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = findByPrimaryKey(commerceNotificationQueueEntryId);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			findByPrimaryKey(commerceNotificationQueueEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationQueueEntry[] array = new CommerceNotificationQueueEntryImpl[3];
+			CommerceNotificationQueueEntry[] array =
+				new CommerceNotificationQueueEntryImpl[3];
 
-			array[0] = getByCommerceNotificationTemplateId_PrevAndNext(session,
-					commerceNotificationQueueEntry,
-					commerceNotificationTemplateId, orderByComparator, true);
+			array[0] = getByCommerceNotificationTemplateId_PrevAndNext(
+				session, commerceNotificationQueueEntry,
+				commerceNotificationTemplateId, orderByComparator, true);
 
 			array[1] = commerceNotificationQueueEntry;
 
-			array[2] = getByCommerceNotificationTemplateId_PrevAndNext(session,
-					commerceNotificationQueueEntry,
-					commerceNotificationTemplateId, orderByComparator, false);
+			array[2] = getByCommerceNotificationTemplateId_PrevAndNext(
+				session, commerceNotificationQueueEntry,
+				commerceNotificationTemplateId, orderByComparator, false);
 
 			return array;
 		}
@@ -970,17 +990,19 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		}
 	}
 
-	protected CommerceNotificationQueueEntry getByCommerceNotificationTemplateId_PrevAndNext(
-		Session session,
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry,
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean previous) {
+	protected CommerceNotificationQueueEntry
+		getByCommerceNotificationTemplateId_PrevAndNext(
+			Session session,
+			CommerceNotificationQueueEntry commerceNotificationQueueEntry,
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -989,10 +1011,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1062,10 +1086,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		qPos.add(commerceNotificationTemplateId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationQueueEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationQueueEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1087,9 +1112,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public void removeByCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : findByCommerceNotificationTemplateId(
-				commerceNotificationTemplateId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findByCommerceNotificationTemplateId(
+					commerceNotificationTemplateId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationQueueEntry);
 		}
 	}
@@ -1103,9 +1131,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public int countByCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID;
 
-		Object[] finderArgs = new Object[] { commerceNotificationTemplateId };
+		FinderPath finderPath =
+			_finderPathCountByCommerceNotificationTemplateId;
+
+		Object[] finderArgs = new Object[] {commerceNotificationTemplateId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1114,7 +1144,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 			String sql = query.toString();
 
@@ -1146,29 +1177,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2 =
-		"commerceNotificationQueueEntry.commerceNotificationTemplateId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SENT = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySent",
-			new String[] {
-				Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySent",
-			new String[] { Boolean.class.getName() },
-			CommerceNotificationQueueEntryModelImpl.SENT_COLUMN_BITMASK |
-			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_SENT = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBySent", new String[] { Boolean.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2 =
+			"commerceNotificationQueueEntry.commerceNotificationTemplateId = ?";
+
+	private FinderPath _finderPathWithPaginationFindBySent;
+	private FinderPath _finderPathWithoutPaginationFindBySent;
+	private FinderPath _finderPathCountBySent;
 
 	/**
 	 * Returns all the commerce notification queue entries where sent = &#63;.
@@ -1185,7 +1200,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns a range of all the commerce notification queue entries where sent = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sent the sent
@@ -1194,8 +1209,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findBySent(boolean sent,
-		int start, int end) {
+	public List<CommerceNotificationQueueEntry> findBySent(
+		boolean sent, int start, int end) {
+
 		return findBySent(sent, start, end, null);
 	}
 
@@ -1203,7 +1219,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where sent = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sent the sent
@@ -1213,9 +1229,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findBySent(boolean sent,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findBySent(
+		boolean sent, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		return findBySent(sent, start, end, orderByComparator, true);
 	}
 
@@ -1223,7 +1240,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where sent = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sent the sent
@@ -1234,33 +1251,37 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findBySent(boolean sent,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findBySent(
+		boolean sent, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT;
-			finderArgs = new Object[] { sent };
+			finderPath = _finderPathWithoutPaginationFindBySent;
+			finderArgs = new Object[] {sent};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SENT;
-			finderArgs = new Object[] { sent, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindBySent;
+			finderArgs = new Object[] {sent, start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationQueueEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : list) {
+				for (CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry : list) {
+
 					if ((sent != commerceNotificationQueueEntry.isSent())) {
 						list = null;
 
@@ -1274,8 +1295,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1286,12 +1307,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			query.append(_FINDER_COLUMN_SENT_SENT_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -1308,16 +1329,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				qPos.add(sent);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1346,11 +1367,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findBySent_First(boolean sent,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findBySent_First(
+			boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchBySent_First(sent,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchBySent_First(sent, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -1376,10 +1399,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchBySent_First(boolean sent,
+	public CommerceNotificationQueueEntry fetchBySent_First(
+		boolean sent,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		List<CommerceNotificationQueueEntry> list = findBySent(sent, 0, 1,
-				orderByComparator);
+
+		List<CommerceNotificationQueueEntry> list = findBySent(
+			sent, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1397,11 +1422,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findBySent_Last(boolean sent,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findBySent_Last(
+			boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchBySent_Last(sent,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchBySent_Last(sent, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -1427,16 +1454,18 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchBySent_Last(boolean sent,
+	public CommerceNotificationQueueEntry fetchBySent_Last(
+		boolean sent,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		int count = countBySent(sent);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationQueueEntry> list = findBySent(sent, count - 1,
-				count, orderByComparator);
+		List<CommerceNotificationQueueEntry> list = findBySent(
+			sent, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1456,27 +1485,30 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry[] findBySent_PrevAndNext(
-		long commerceNotificationQueueEntryId, boolean sent,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+			long commerceNotificationQueueEntryId, boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = findByPrimaryKey(commerceNotificationQueueEntryId);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			findByPrimaryKey(commerceNotificationQueueEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationQueueEntry[] array = new CommerceNotificationQueueEntryImpl[3];
+			CommerceNotificationQueueEntry[] array =
+				new CommerceNotificationQueueEntryImpl[3];
 
-			array[0] = getBySent_PrevAndNext(session,
-					commerceNotificationQueueEntry, sent, orderByComparator,
-					true);
+			array[0] = getBySent_PrevAndNext(
+				session, commerceNotificationQueueEntry, sent,
+				orderByComparator, true);
 
 			array[1] = commerceNotificationQueueEntry;
 
-			array[2] = getBySent_PrevAndNext(session,
-					commerceNotificationQueueEntry, sent, orderByComparator,
-					false);
+			array[2] = getBySent_PrevAndNext(
+				session, commerceNotificationQueueEntry, sent,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1494,11 +1526,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		boolean sent,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -1510,7 +1543,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		query.append(_FINDER_COLUMN_SENT_SENT_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1580,10 +1614,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		qPos.add(sent);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationQueueEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationQueueEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1604,8 +1639,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public void removeBySent(boolean sent) {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : findBySent(
-				sent, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findBySent(sent, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationQueueEntry);
 		}
 	}
@@ -1618,9 +1654,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public int countBySent(boolean sent) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_SENT;
+		FinderPath finderPath = _finderPathCountBySent;
 
-		Object[] finderArgs = new Object[] { sent };
+		Object[] finderArgs = new Object[] {sent};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1661,21 +1697,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_SENT_SENT_2 = "commerceNotificationQueueEntry.sent = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LTS = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationQueueEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByLtS",
-			new String[] {
-				Date.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTS = new FinderPath(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtS",
-			new String[] { Date.class.getName() });
+	private static final String _FINDER_COLUMN_SENT_SENT_2 =
+		"commerceNotificationQueueEntry.sent = ?";
+
+	private FinderPath _finderPathWithPaginationFindByLtS;
+	private FinderPath _finderPathWithPaginationCountByLtS;
 
 	/**
 	 * Returns all the commerce notification queue entries where sentDate &lt; &#63;.
@@ -1692,7 +1718,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns a range of all the commerce notification queue entries where sentDate &lt; &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sentDate the sent date
@@ -1701,8 +1727,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByLtS(Date sentDate,
-		int start, int end) {
+	public List<CommerceNotificationQueueEntry> findByLtS(
+		Date sentDate, int start, int end) {
+
 		return findByLtS(sentDate, start, end, null);
 	}
 
@@ -1710,7 +1737,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where sentDate &lt; &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sentDate the sent date
@@ -1720,9 +1747,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByLtS(Date sentDate,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findByLtS(
+		Date sentDate, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		return findByLtS(sentDate, start, end, orderByComparator, true);
 	}
 
@@ -1730,7 +1758,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries where sentDate &lt; &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sentDate the sent date
@@ -1741,31 +1769,34 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findByLtS(Date sentDate,
-		int start, int end,
+	public List<CommerceNotificationQueueEntry> findByLtS(
+		Date sentDate, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_LTS;
+		finderPath = _finderPathWithPaginationFindByLtS;
 		finderArgs = new Object[] {
-				_getTime(sentDate),
-				
-				start, end, orderByComparator
-			};
+			_getTime(sentDate), start, end, orderByComparator
+		};
 
 		List<CommerceNotificationQueueEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : list) {
-					if ((sentDate.getTime() <= commerceNotificationQueueEntry.getSentDate()
-																				 .getTime())) {
+				for (CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry : list) {
+
+					if ((sentDate.getTime() <=
+							commerceNotificationQueueEntry.
+								getSentDate().getTime())) {
+
 						list = null;
 
 						break;
@@ -1778,8 +1809,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1799,12 +1830,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -1823,16 +1854,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				}
 
 				if (!pagination) {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1861,11 +1892,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByLtS_First(Date sentDate,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findByLtS_First(
+			Date sentDate,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByLtS_First(sentDate,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByLtS_First(sentDate, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -1891,10 +1924,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByLtS_First(Date sentDate,
+	public CommerceNotificationQueueEntry fetchByLtS_First(
+		Date sentDate,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
-		List<CommerceNotificationQueueEntry> list = findByLtS(sentDate, 0, 1,
-				orderByComparator);
+
+		List<CommerceNotificationQueueEntry> list = findByLtS(
+			sentDate, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1912,11 +1947,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry findByLtS_Last(Date sentDate,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+	public CommerceNotificationQueueEntry findByLtS_Last(
+			Date sentDate,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByLtS_Last(sentDate,
-				orderByComparator);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByLtS_Last(sentDate, orderByComparator);
 
 		if (commerceNotificationQueueEntry != null) {
 			return commerceNotificationQueueEntry;
@@ -1942,16 +1979,18 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
 	 */
 	@Override
-	public CommerceNotificationQueueEntry fetchByLtS_Last(Date sentDate,
+	public CommerceNotificationQueueEntry fetchByLtS_Last(
+		Date sentDate,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		int count = countByLtS(sentDate);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationQueueEntry> list = findByLtS(sentDate,
-				count - 1, count, orderByComparator);
+		List<CommerceNotificationQueueEntry> list = findByLtS(
+			sentDate, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1971,27 +2010,30 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry[] findByLtS_PrevAndNext(
-		long commerceNotificationQueueEntryId, Date sentDate,
-		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+			long commerceNotificationQueueEntryId, Date sentDate,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
 		throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = findByPrimaryKey(commerceNotificationQueueEntryId);
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			findByPrimaryKey(commerceNotificationQueueEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationQueueEntry[] array = new CommerceNotificationQueueEntryImpl[3];
+			CommerceNotificationQueueEntry[] array =
+				new CommerceNotificationQueueEntryImpl[3];
 
-			array[0] = getByLtS_PrevAndNext(session,
-					commerceNotificationQueueEntry, sentDate,
-					orderByComparator, true);
+			array[0] = getByLtS_PrevAndNext(
+				session, commerceNotificationQueueEntry, sentDate,
+				orderByComparator, true);
 
 			array[1] = commerceNotificationQueueEntry;
 
-			array[2] = getByLtS_PrevAndNext(session,
-					commerceNotificationQueueEntry, sentDate,
-					orderByComparator, false);
+			array[2] = getByLtS_PrevAndNext(
+				session, commerceNotificationQueueEntry, sentDate,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -2009,11 +2051,12 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		Date sentDate,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -2034,7 +2077,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -2106,10 +2150,11 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationQueueEntry);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationQueueEntry)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -2130,8 +2175,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public void removeByLtS(Date sentDate) {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : findByLtS(
-				sentDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findByLtS(
+					sentDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationQueueEntry);
 		}
 	}
@@ -2144,9 +2191,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public int countByLtS(Date sentDate) {
-		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTS;
+		FinderPath finderPath = _finderPathWithPaginationCountByLtS;
 
-		Object[] finderArgs = new Object[] { _getTime(sentDate) };
+		Object[] finderArgs = new Object[] {_getTime(sentDate)};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2198,24 +2245,27 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_LTS_SENTDATE_1 = "commerceNotificationQueueEntry.sentDate IS NULL";
-	private static final String _FINDER_COLUMN_LTS_SENTDATE_2 = "commerceNotificationQueueEntry.sentDate < ?";
+	private static final String _FINDER_COLUMN_LTS_SENTDATE_1 =
+		"commerceNotificationQueueEntry.sentDate IS NULL";
+
+	private static final String _FINDER_COLUMN_LTS_SENTDATE_2 =
+		"commerceNotificationQueueEntry.sentDate < ?";
 
 	public CommerceNotificationQueueEntryPersistenceImpl() {
 		setModelClass(CommerceNotificationQueueEntry.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceNotificationQueueEntryId", "CNotificationQueueEntryId");
+		dbColumnNames.put("from", "from_");
+		dbColumnNames.put("to", "to_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceNotificationQueueEntryId",
-				"CNotificationQueueEntryId");
-			dbColumnNames.put("from", "from_");
-			dbColumnNames.put("to", "to_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -2234,7 +2284,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-		entityCache.putResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceNotificationQueueEntryImpl.class,
 			commerceNotificationQueueEntry.getPrimaryKey(),
 			commerceNotificationQueueEntry);
@@ -2250,11 +2302,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceNotificationQueueEntry> commerceNotificationQueueEntries) {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : commerceNotificationQueueEntries) {
+
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				commerceNotificationQueueEntries) {
+
 			if (entityCache.getResult(
-						CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceNotificationQueueEntryImpl.class,
-						commerceNotificationQueueEntry.getPrimaryKey()) == null) {
+					CommerceNotificationQueueEntryModelImpl.
+						ENTITY_CACHE_ENABLED,
+					CommerceNotificationQueueEntryImpl.class,
+					commerceNotificationQueueEntry.getPrimaryKey()) == null) {
+
 				cacheResult(commerceNotificationQueueEntry);
 			}
 			else {
@@ -2267,7 +2324,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Clears the cache for all commerce notification queue entries.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -2283,13 +2340,15 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Clears the cache for the commerce notification queue entry.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
-		entityCache.removeResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceNotificationQueueEntryImpl.class,
 			commerceNotificationQueueEntry.getPrimaryKey());
 
@@ -2300,11 +2359,15 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public void clearCache(
 		List<CommerceNotificationQueueEntry> commerceNotificationQueueEntries) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : commerceNotificationQueueEntries) {
-			entityCache.removeResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				commerceNotificationQueueEntries) {
+
+			entityCache.removeResult(
+				CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceNotificationQueueEntryImpl.class,
 				commerceNotificationQueueEntry.getPrimaryKey());
 		}
@@ -2319,12 +2382,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public CommerceNotificationQueueEntry create(
 		long commerceNotificationQueueEntryId) {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = new CommerceNotificationQueueEntryImpl();
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			new CommerceNotificationQueueEntryImpl();
 
 		commerceNotificationQueueEntry.setNew(true);
-		commerceNotificationQueueEntry.setPrimaryKey(commerceNotificationQueueEntryId);
+		commerceNotificationQueueEntry.setPrimaryKey(
+			commerceNotificationQueueEntryId);
 
-		commerceNotificationQueueEntry.setCompanyId(companyProvider.getCompanyId());
+		commerceNotificationQueueEntry.setCompanyId(
+			companyProvider.getCompanyId());
 
 		return commerceNotificationQueueEntry;
 	}
@@ -2338,8 +2405,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry remove(
-		long commerceNotificationQueueEntryId)
+			long commerceNotificationQueueEntryId)
 		throws NoSuchNotificationQueueEntryException {
+
 		return remove((Serializable)commerceNotificationQueueEntryId);
 	}
 
@@ -2353,21 +2421,23 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public CommerceNotificationQueueEntry remove(Serializable primaryKey)
 		throws NoSuchNotificationQueueEntryException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationQueueEntry commerceNotificationQueueEntry = (CommerceNotificationQueueEntry)session.get(CommerceNotificationQueueEntryImpl.class,
-					primaryKey);
+			CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+				(CommerceNotificationQueueEntry)session.get(
+					CommerceNotificationQueueEntryImpl.class, primaryKey);
 
 			if (commerceNotificationQueueEntry == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchNotificationQueueEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchNotificationQueueEntryException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceNotificationQueueEntry);
@@ -2386,13 +2456,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	protected CommerceNotificationQueueEntry removeImpl(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceNotificationQueueEntry)) {
-				commerceNotificationQueueEntry = (CommerceNotificationQueueEntry)session.get(CommerceNotificationQueueEntryImpl.class,
+				commerceNotificationQueueEntry =
+					(CommerceNotificationQueueEntry)session.get(
+						CommerceNotificationQueueEntryImpl.class,
 						commerceNotificationQueueEntry.getPrimaryKeyObj());
 			}
 
@@ -2417,29 +2490,37 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public CommerceNotificationQueueEntry updateImpl(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry) {
+
 		boolean isNew = commerceNotificationQueueEntry.isNew();
 
-		if (!(commerceNotificationQueueEntry instanceof CommerceNotificationQueueEntryModelImpl)) {
+		if (!(commerceNotificationQueueEntry instanceof
+				CommerceNotificationQueueEntryModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(
-						commerceNotificationQueueEntry.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceNotificationQueueEntry);
+					commerceNotificationQueueEntry.getClass())) {
+
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceNotificationQueueEntry);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceNotificationQueueEntry proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceNotificationQueueEntry implementation " +
-				commerceNotificationQueueEntry.getClass());
+					commerceNotificationQueueEntry.getClass());
 		}
 
-		CommerceNotificationQueueEntryModelImpl commerceNotificationQueueEntryModelImpl =
-			(CommerceNotificationQueueEntryModelImpl)commerceNotificationQueueEntry;
+		CommerceNotificationQueueEntryModelImpl
+			commerceNotificationQueueEntryModelImpl =
+				(CommerceNotificationQueueEntryModelImpl)
+					commerceNotificationQueueEntry;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -2448,8 +2529,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				commerceNotificationQueueEntry.setCreateDate(now);
 			}
 			else {
-				commerceNotificationQueueEntry.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceNotificationQueueEntry.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -2458,8 +2539,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				commerceNotificationQueueEntry.setModifiedDate(now);
 			}
 			else {
-				commerceNotificationQueueEntry.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceNotificationQueueEntry.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -2474,7 +2555,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				commerceNotificationQueueEntry.setNew(false);
 			}
 			else {
-				commerceNotificationQueueEntry = (CommerceNotificationQueueEntry)session.merge(commerceNotificationQueueEntry);
+				commerceNotificationQueueEntry =
+					(CommerceNotificationQueueEntry)session.merge(
+						commerceNotificationQueueEntry);
 			}
 		}
 		catch (Exception e) {
@@ -2489,98 +2572,111 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		if (!CommerceNotificationQueueEntryModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
-					commerceNotificationQueueEntryModelImpl.getGroupId()
-				};
+				commerceNotificationQueueEntryModelImpl.getGroupId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByGroupId, args);
+
+			args = new Object[] {
+				commerceNotificationQueueEntryModelImpl.
+					getCommerceNotificationTemplateId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceNotificationTemplateId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 				args);
 
 			args = new Object[] {
-					commerceNotificationQueueEntryModelImpl.getCommerceNotificationTemplateId()
-				};
+				commerceNotificationQueueEntryModelImpl.isSent()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
-				args);
+			finderCache.removeResult(_finderPathCountBySent, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindBySent, args);
 
-			args = new Object[] { commerceNotificationQueueEntryModelImpl.isSent() };
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_SENT, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((commerceNotificationQueueEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.getOriginalGroupId()
-					};
+				 _finderPathWithoutPaginationFindByGroupId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				Object[] args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.getOriginalGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+
+				args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.getGroupId()
+				};
+
+				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByGroupId, args);
+			}
+
+			if ((commerceNotificationQueueEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceNotificationTemplateId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.
+						getOriginalCommerceNotificationTemplateId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceNotificationTemplateId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 					args);
 
 				args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.getGroupId()
-					};
+					commerceNotificationQueueEntryModelImpl.
+						getCommerceNotificationTemplateId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceNotificationTemplateId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 					args);
 			}
 
 			if ((commerceNotificationQueueEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.getOriginalCommerceNotificationTemplateId()
-					};
+				 _finderPathWithoutPaginationFindBySent.getColumnBitmask()) !=
+					 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
+				Object[] args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.getOriginalSent()
+				};
+
+				finderCache.removeResult(_finderPathCountBySent, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindBySent, args);
 
 				args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.getCommerceNotificationTemplateId()
-					};
+					commerceNotificationQueueEntryModelImpl.isSent()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
-			}
-
-			if ((commerceNotificationQueueEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.getOriginalSent()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_SENT, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT,
-					args);
-
-				args = new Object[] {
-						commerceNotificationQueueEntryModelImpl.isSent()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_SENT, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SENT,
-					args);
+				finderCache.removeResult(_finderPathCountBySent, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindBySent, args);
 			}
 		}
 
-		entityCache.putResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceNotificationQueueEntryImpl.class,
 			commerceNotificationQueueEntry.getPrimaryKey(),
 			commerceNotificationQueueEntry, false);
@@ -2591,7 +2687,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce notification queue entry with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce notification queue entry with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce notification queue entry
 	 * @return the commerce notification queue entry
@@ -2599,23 +2695,26 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry findByPrimaryKey(
-		Serializable primaryKey) throws NoSuchNotificationQueueEntryException {
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByPrimaryKey(primaryKey);
+			Serializable primaryKey)
+		throws NoSuchNotificationQueueEntryException {
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commerceNotificationQueueEntry == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchNotificationQueueEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchNotificationQueueEntryException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceNotificationQueueEntry;
 	}
 
 	/**
-	 * Returns the commerce notification queue entry with the primary key or throws a {@link NoSuchNotificationQueueEntryException} if it could not be found.
+	 * Returns the commerce notification queue entry with the primary key or throws a <code>NoSuchNotificationQueueEntryException</code> if it could not be found.
 	 *
 	 * @param commerceNotificationQueueEntryId the primary key of the commerce notification queue entry
 	 * @return the commerce notification queue entry
@@ -2623,8 +2722,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationQueueEntry findByPrimaryKey(
-		long commerceNotificationQueueEntryId)
+			long commerceNotificationQueueEntryId)
 		throws NoSuchNotificationQueueEntryException {
+
 		return findByPrimaryKey((Serializable)commerceNotificationQueueEntryId);
 	}
 
@@ -2637,14 +2737,17 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public CommerceNotificationQueueEntry fetchByPrimaryKey(
 		Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceNotificationQueueEntryImpl.class, primaryKey);
+
+		Serializable serializable = entityCache.getResult(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceNotificationQueueEntry commerceNotificationQueueEntry = (CommerceNotificationQueueEntry)serializable;
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			(CommerceNotificationQueueEntry)serializable;
 
 		if (commerceNotificationQueueEntry == null) {
 			Session session = null;
@@ -2652,20 +2755,25 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceNotificationQueueEntry = (CommerceNotificationQueueEntry)session.get(CommerceNotificationQueueEntryImpl.class,
-						primaryKey);
+				commerceNotificationQueueEntry =
+					(CommerceNotificationQueueEntry)session.get(
+						CommerceNotificationQueueEntryImpl.class, primaryKey);
 
 				if (commerceNotificationQueueEntry != null) {
 					cacheResult(commerceNotificationQueueEntry);
 				}
 				else {
-					entityCache.putResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceNotificationQueueEntryModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceNotificationQueueEntryImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceNotificationQueueEntryModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceNotificationQueueEntryImpl.class, primaryKey);
 
 				throw processException(e);
@@ -2687,24 +2795,29 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	@Override
 	public CommerceNotificationQueueEntry fetchByPrimaryKey(
 		long commerceNotificationQueueEntryId) {
-		return fetchByPrimaryKey((Serializable)commerceNotificationQueueEntryId);
+
+		return fetchByPrimaryKey(
+			(Serializable)commerceNotificationQueueEntryId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceNotificationQueueEntry> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceNotificationQueueEntry> map = new HashMap<Serializable, CommerceNotificationQueueEntry>();
+		Map<Serializable, CommerceNotificationQueueEntry> map =
+			new HashMap<Serializable, CommerceNotificationQueueEntry>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceNotificationQueueEntry commerceNotificationQueueEntry = fetchByPrimaryKey(primaryKey);
+			CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceNotificationQueueEntry != null) {
 				map.put(primaryKey, commerceNotificationQueueEntry);
@@ -2716,8 +2829,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceNotificationQueueEntryImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceNotificationQueueEntryImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -2728,7 +2842,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey,
+					map.put(
+						primaryKey,
 						(CommerceNotificationQueueEntry)serializable);
 				}
 			}
@@ -2738,8 +2853,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE_PKS_IN);
 
@@ -2762,17 +2877,23 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : (List<CommerceNotificationQueueEntry>)q.list()) {
-				map.put(commerceNotificationQueueEntry.getPrimaryKeyObj(),
+			for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+					(List<CommerceNotificationQueueEntry>)q.list()) {
+
+				map.put(
+					commerceNotificationQueueEntry.getPrimaryKeyObj(),
 					commerceNotificationQueueEntry);
 
 				cacheResult(commerceNotificationQueueEntry);
 
-				uncachedPrimaryKeys.remove(commerceNotificationQueueEntry.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceNotificationQueueEntry.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceNotificationQueueEntryModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceNotificationQueueEntryImpl.class, primaryKey,
 					nullModel);
 			}
@@ -2801,7 +2922,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns a range of all the commerce notification queue entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification queue entries
@@ -2817,7 +2938,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification queue entries
@@ -2826,8 +2947,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findAll(int start, int end,
+	public List<CommerceNotificationQueueEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2835,7 +2958,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Returns an ordered range of all the commerce notification queue entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationQueueEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification queue entries
@@ -2845,29 +2968,32 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * @return the ordered range of commerce notification queue entries
 	 */
 	@Override
-	public List<CommerceNotificationQueueEntry> findAll(int start, int end,
+	public List<CommerceNotificationQueueEntry> findAll(
+		int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationQueueEntry> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2875,13 +3001,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2889,7 +3015,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				sql = _SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY;
 
 				if (pagination) {
-					sql = sql.concat(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2901,16 +3028,16 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2936,7 +3063,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry : findAll()) {
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findAll()) {
+
 			remove(commerceNotificationQueueEntry);
 		}
 	}
@@ -2948,8 +3077,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2957,16 +3086,17 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2992,10 +3122,127 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	 * Initializes the commerce notification queue entry persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByGroupId = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] {Long.class.getName()},
+			CommerceNotificationQueueEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByGroupId = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByGroupId", new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceNotificationTemplateId =
+			new FinderPath(
+				CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+				CommerceNotificationQueueEntryImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceNotificationTemplateId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceNotificationTemplateId =
+			new FinderPath(
+				CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+				CommerceNotificationQueueEntryImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceNotificationTemplateId",
+				new String[] {Long.class.getName()},
+				CommerceNotificationQueueEntryModelImpl.
+					COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
+				CommerceNotificationQueueEntryModelImpl.
+					PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceNotificationTemplateId = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceNotificationTemplateId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindBySent = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySent",
+			new String[] {
+				Boolean.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindBySent = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySent",
+			new String[] {Boolean.class.getName()},
+			CommerceNotificationQueueEntryModelImpl.SENT_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountBySent = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBySent", new String[] {Boolean.class.getName()});
+
+		_finderPathWithPaginationFindByLtS = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByLtS",
+			new String[] {
+				Date.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithPaginationCountByLtS = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtS",
+			new String[] {Date.class.getName()});
 	}
 
 	public void destroy() {
-		entityCache.removeCache(CommerceNotificationQueueEntryImpl.class.getName());
+		entityCache.removeCache(
+			CommerceNotificationQueueEntryImpl.class.getName());
 		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -3003,8 +3250,10 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 
@@ -3016,18 +3265,37 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 		return date.getTime();
 	}
 
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY = "SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry";
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE_PKS_IN =
-		"SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE CNotificationQueueEntryId IN (";
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE =
-		"SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE ";
-	private static final String _SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY = "SELECT COUNT(commerceNotificationQueueEntry) FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry";
-	private static final String _SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE = "SELECT COUNT(commerceNotificationQueueEntry) FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceNotificationQueueEntry.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceNotificationQueueEntry exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceNotificationQueueEntry exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceNotificationQueueEntryPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"commerceNotificationQueueEntryId", "from", "to"
-			});
+	private static final String _SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY =
+		"SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry";
+
+	private static final String
+		_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE_PKS_IN =
+			"SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE CNotificationQueueEntryId IN (";
+
+	private static final String
+		_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE =
+			"SELECT commerceNotificationQueueEntry FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY =
+		"SELECT COUNT(commerceNotificationQueueEntry) FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry";
+
+	private static final String
+		_SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE =
+			"SELECT COUNT(commerceNotificationQueueEntry) FROM CommerceNotificationQueueEntry commerceNotificationQueueEntry WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceNotificationQueueEntry.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceNotificationQueueEntry exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceNotificationQueueEntry exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationQueueEntryPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"commerceNotificationQueueEntryId", "from", "to"});
+
 }

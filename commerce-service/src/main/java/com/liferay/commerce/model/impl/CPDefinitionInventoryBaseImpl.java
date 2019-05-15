@@ -34,18 +34,22 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 @ProviderType
 public abstract class CPDefinitionInventoryBaseImpl
 	extends CPDefinitionInventoryModelImpl implements CPDefinitionInventory {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition inventory model instance should use the {@link CPDefinitionInventory} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition inventory model instance should use the <code>CPDefinitionInventory</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDefinitionInventoryLocalServiceUtil.addCPDefinitionInventory(this);
+			CPDefinitionInventoryLocalServiceUtil.addCPDefinitionInventory(
+				this);
 		}
 		else {
-			CPDefinitionInventoryLocalServiceUtil.updateCPDefinitionInventory(this);
+			CPDefinitionInventoryLocalServiceUtil.updateCPDefinitionInventory(
+				this);
 		}
 	}
+
 }

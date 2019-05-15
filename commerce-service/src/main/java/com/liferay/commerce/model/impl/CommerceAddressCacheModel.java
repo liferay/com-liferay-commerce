@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAddress;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceAddress in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CommerceAddress
  * @generated
  */
 @ProviderType
-public class CommerceAddressCacheModel implements CacheModel<CommerceAddress>,
-	Externalizable {
+public class CommerceAddressCacheModel
+	implements CacheModel<CommerceAddress>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,7 +48,8 @@ public class CommerceAddressCacheModel implements CacheModel<CommerceAddress>,
 			return false;
 		}
 
-		CommerceAddressCacheModel commerceAddressCacheModel = (CommerceAddressCacheModel)obj;
+		CommerceAddressCacheModel commerceAddressCacheModel =
+			(CommerceAddressCacheModel)obj;
 
 		if (commerceAddressId == commerceAddressCacheModel.commerceAddressId) {
 			return true;
@@ -259,8 +259,7 @@ public class CommerceAddressCacheModel implements CacheModel<CommerceAddress>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceAddressId);
 
 		objectOutput.writeLong(groupId);
@@ -375,4 +374,5 @@ public class CommerceAddressCacheModel implements CacheModel<CommerceAddress>,
 	public String phoneNumber;
 	public boolean defaultBilling;
 	public boolean defaultShipping;
+
 }

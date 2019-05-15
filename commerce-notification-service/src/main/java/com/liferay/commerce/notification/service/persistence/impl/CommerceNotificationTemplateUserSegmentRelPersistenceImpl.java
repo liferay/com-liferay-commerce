@@ -21,7 +21,6 @@ import com.liferay.commerce.notification.model.CommerceNotificationTemplateUserS
 import com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl;
 import com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelModelImpl;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -64,63 +63,35 @@ import java.util.Set;
  * </p>
  *
  * @author Alessio Antonio Rendina
- * @see CommerceNotificationTemplateUserSegmentRelPersistence
- * @see com.liferay.commerce.notification.service.persistence.CommerceNotificationTemplateUserSegmentRelUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceNotificationTemplateUserSegmentRel>
 	implements CommerceNotificationTemplateUserSegmentRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceNotificationTemplateUserSegmentRelUtil} to access the commerce notification template user segment rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceNotificationTemplateUserSegmentRelUtil</code> to access the commerce notification template user segment rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceNotificationTemplateUserSegmentRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceUserSegmentEntryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceUserSegmentEntryId",
-			new String[] { Long.class.getName() },
-			CommerceNotificationTemplateUserSegmentRelModelImpl.COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK |
-			CommerceNotificationTemplateUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceUserSegmentEntryId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceNotificationTemplateUserSegmentRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceUserSegmentEntryId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId;
+	private FinderPath _finderPathCountByCommerceUserSegmentEntryId;
 
 	/**
 	 * Returns all the commerce notification template user segment rels where commerceUserSegmentEntryId = &#63;.
@@ -129,17 +100,19 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceUserSegmentEntryId(long commerceUserSegmentEntryId) {
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification template user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -148,17 +121,19 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId, int start, int end) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			start, end, null);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceUserSegmentEntryId(
+			long commerceUserSegmentEntryId, int start, int end) {
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification template user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -168,18 +143,21 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			start, end, orderByComparator, true);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceUserSegmentEntryId(
+			long commerceUserSegmentEntryId, int start, int end,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification template user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -190,38 +168,48 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator,
-		boolean retrieveFromCache) {
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceUserSegmentEntryId(
+			long commerceUserSegmentEntryId, int start, int end,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator,
+			boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID;
-			finderArgs = new Object[] { commerceUserSegmentEntryId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId;
+			finderArgs = new Object[] {commerceUserSegmentEntryId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceUserSegmentEntryId;
 			finderArgs = new Object[] {
-					commerceUserSegmentEntryId,
-					
-					start, end, orderByComparator
-				};
+				commerceUserSegmentEntryId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceNotificationTemplateUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationTemplateUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list =
+				(List<CommerceNotificationTemplateUserSegmentRel>)
+					finderCache.getResult(finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : list) {
-					if ((commerceUserSegmentEntryId != commerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId())) {
+				for (CommerceNotificationTemplateUserSegmentRel
+						commerceNotificationTemplateUserSegmentRel : list) {
+
+					if ((commerceUserSegmentEntryId !=
+							commerceNotificationTemplateUserSegmentRel.
+								getCommerceUserSegmentEntryId())) {
+
 						list = null;
 
 						break;
@@ -234,24 +222,27 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationTemplateUserSegmentRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationTemplateUserSegmentRelModelImpl.
+						ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -268,16 +259,18 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				qPos.add(commerceUserSegmentEntryId);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -306,13 +299,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel findByCommerceUserSegmentEntryId_First(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel
+			findByCommerceUserSegmentEntryId_First(
+				long commerceUserSegmentEntryId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByCommerceUserSegmentEntryId_First(commerceUserSegmentEntryId,
-				orderByComparator);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				fetchByCommerceUserSegmentEntryId_First(
+					commerceUserSegmentEntryId, orderByComparator);
 
 		if (commerceNotificationTemplateUserSegmentRel != null) {
 			return commerceNotificationTemplateUserSegmentRel;
@@ -327,7 +324,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 		msg.append("}");
 
-		throw new NoSuchNotificationTemplateUserSegmentRelException(msg.toString());
+		throw new NoSuchNotificationTemplateUserSegmentRelException(
+			msg.toString());
 	}
 
 	/**
@@ -338,11 +336,15 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the first matching commerce notification template user segment rel, or <code>null</code> if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel fetchByCommerceUserSegmentEntryId_First(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		List<CommerceNotificationTemplateUserSegmentRel> list = findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-				0, 1, orderByComparator);
+	public CommerceNotificationTemplateUserSegmentRel
+		fetchByCommerceUserSegmentEntryId_First(
+			long commerceUserSegmentEntryId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		List<CommerceNotificationTemplateUserSegmentRel> list =
+			findByCommerceUserSegmentEntryId(
+				commerceUserSegmentEntryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -360,13 +362,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel findByCommerceUserSegmentEntryId_Last(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel
+			findByCommerceUserSegmentEntryId_Last(
+				long commerceUserSegmentEntryId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByCommerceUserSegmentEntryId_Last(commerceUserSegmentEntryId,
-				orderByComparator);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				fetchByCommerceUserSegmentEntryId_Last(
+					commerceUserSegmentEntryId, orderByComparator);
 
 		if (commerceNotificationTemplateUserSegmentRel != null) {
 			return commerceNotificationTemplateUserSegmentRel;
@@ -381,7 +387,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 		msg.append("}");
 
-		throw new NoSuchNotificationTemplateUserSegmentRelException(msg.toString());
+		throw new NoSuchNotificationTemplateUserSegmentRelException(
+			msg.toString());
 	}
 
 	/**
@@ -392,17 +399,23 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the last matching commerce notification template user segment rel, or <code>null</code> if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel fetchByCommerceUserSegmentEntryId_Last(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		int count = countByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+	public CommerceNotificationTemplateUserSegmentRel
+		fetchByCommerceUserSegmentEntryId_Last(
+			long commerceUserSegmentEntryId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		int count = countByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationTemplateUserSegmentRel> list = findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-				count - 1, count, orderByComparator);
+		List<CommerceNotificationTemplateUserSegmentRel> list =
+			findByCommerceUserSegmentEntryId(
+				commerceUserSegmentEntryId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -421,30 +434,35 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a commerce notification template user segment rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel[] findByCommerceUserSegmentEntryId_PrevAndNext(
-		long commerceNotificationTemplateUserSegmentRelId,
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel[]
+			findByCommerceUserSegmentEntryId_PrevAndNext(
+				long commerceNotificationTemplateUserSegmentRelId,
+				long commerceUserSegmentEntryId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			findByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = findByPrimaryKey(
+				commerceNotificationTemplateUserSegmentRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationTemplateUserSegmentRel[] array = new CommerceNotificationTemplateUserSegmentRelImpl[3];
+			CommerceNotificationTemplateUserSegmentRel[] array =
+				new CommerceNotificationTemplateUserSegmentRelImpl[3];
 
-			array[0] = getByCommerceUserSegmentEntryId_PrevAndNext(session,
-					commerceNotificationTemplateUserSegmentRel,
-					commerceUserSegmentEntryId, orderByComparator, true);
+			array[0] = getByCommerceUserSegmentEntryId_PrevAndNext(
+				session, commerceNotificationTemplateUserSegmentRel,
+				commerceUserSegmentEntryId, orderByComparator, true);
 
 			array[1] = commerceNotificationTemplateUserSegmentRel;
 
-			array[2] = getByCommerceUserSegmentEntryId_PrevAndNext(session,
-					commerceNotificationTemplateUserSegmentRel,
-					commerceUserSegmentEntryId, orderByComparator, false);
+			array[2] = getByCommerceUserSegmentEntryId_PrevAndNext(
+				session, commerceNotificationTemplateUserSegmentRel,
+				commerceUserSegmentEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -456,29 +474,36 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		}
 	}
 
-	protected CommerceNotificationTemplateUserSegmentRel getByCommerceUserSegmentEntryId_PrevAndNext(
-		Session session,
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel,
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator,
-		boolean previous) {
+	protected CommerceNotificationTemplateUserSegmentRel
+		getByCommerceUserSegmentEntryId_PrevAndNext(
+			Session session,
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel,
+			long commerceUserSegmentEntryId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+		query.append(
+			_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -533,7 +558,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			}
 		}
 		else {
-			query.append(CommerceNotificationTemplateUserSegmentRelModelImpl.ORDER_BY_JPQL);
+			query.append(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -548,10 +575,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		qPos.add(commerceUserSegmentEntryId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationTemplateUserSegmentRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationTemplateUserSegmentRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -573,9 +601,13 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public void removeByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId) {
-		for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : findByCommerceUserSegmentEntryId(
-				commerceUserSegmentEntryId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+
+		for (CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel :
+					findByCommerceUserSegmentEntryId(
+						commerceUserSegmentEntryId, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationTemplateUserSegmentRel);
 		}
 	}
@@ -589,18 +621,21 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public int countByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID;
 
-		Object[] finderArgs = new Object[] { commerceUserSegmentEntryId };
+		FinderPath finderPath = _finderPathCountByCommerceUserSegmentEntryId;
+
+		Object[] finderArgs = new Object[] {commerceUserSegmentEntryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 			String sql = query.toString();
 
@@ -632,35 +667,15 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2 =
-		"commerceNotificationTemplateUserSegmentRel.commerceUserSegmentEntryId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceNotificationTemplateId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceNotificationTemplateId",
-			new String[] { Long.class.getName() },
-			CommerceNotificationTemplateUserSegmentRelModelImpl.COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
-			CommerceNotificationTemplateUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID =
-		new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceNotificationTemplateId",
-			new String[] { Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2 =
+			"commerceNotificationTemplateUserSegmentRel.commerceUserSegmentEntryId = ?";
+
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceNotificationTemplateId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceNotificationTemplateId;
+	private FinderPath _finderPathCountByCommerceNotificationTemplateId;
 
 	/**
 	 * Returns all the commerce notification template user segment rels where commerceNotificationTemplateId = &#63;.
@@ -669,17 +684,20 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce notification template user segment rels where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -688,17 +706,19 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			start, end, null);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification template user segment rels where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -708,18 +728,22 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		return findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-			start, end, orderByComparator, true);
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		return findByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId, start, end, orderByComparator,
+			true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce notification template user segment rels where commerceNotificationTemplateId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -730,38 +754,48 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of matching commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findByCommerceNotificationTemplateId(
-		long commerceNotificationTemplateId, int start, int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator,
-		boolean retrieveFromCache) {
+	public List<CommerceNotificationTemplateUserSegmentRel>
+		findByCommerceNotificationTemplateId(
+			long commerceNotificationTemplateId, int start, int end,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator,
+			boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID;
-			finderArgs = new Object[] { commerceNotificationTemplateId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceNotificationTemplateId;
+			finderArgs = new Object[] {commerceNotificationTemplateId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceNotificationTemplateId;
 			finderArgs = new Object[] {
-					commerceNotificationTemplateId,
-					
-					start, end, orderByComparator
-				};
+				commerceNotificationTemplateId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceNotificationTemplateUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationTemplateUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list =
+				(List<CommerceNotificationTemplateUserSegmentRel>)
+					finderCache.getResult(finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : list) {
-					if ((commerceNotificationTemplateId != commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId())) {
+				for (CommerceNotificationTemplateUserSegmentRel
+						commerceNotificationTemplateUserSegmentRel : list) {
+
+					if ((commerceNotificationTemplateId !=
+							commerceNotificationTemplateUserSegmentRel.
+								getCommerceNotificationTemplateId())) {
+
 						list = null;
 
 						break;
@@ -774,24 +808,27 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceNotificationTemplateUserSegmentRelModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceNotificationTemplateUserSegmentRelModelImpl.
+						ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -808,16 +845,18 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				qPos.add(commerceNotificationTemplateId);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -846,13 +885,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel findByCommerceNotificationTemplateId_First(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel
+			findByCommerceNotificationTemplateId_First(
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByCommerceNotificationTemplateId_First(commerceNotificationTemplateId,
-				orderByComparator);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				fetchByCommerceNotificationTemplateId_First(
+					commerceNotificationTemplateId, orderByComparator);
 
 		if (commerceNotificationTemplateUserSegmentRel != null) {
 			return commerceNotificationTemplateUserSegmentRel;
@@ -867,7 +910,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 		msg.append("}");
 
-		throw new NoSuchNotificationTemplateUserSegmentRelException(msg.toString());
+		throw new NoSuchNotificationTemplateUserSegmentRelException(
+			msg.toString());
 	}
 
 	/**
@@ -878,11 +922,15 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the first matching commerce notification template user segment rel, or <code>null</code> if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel fetchByCommerceNotificationTemplateId_First(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		List<CommerceNotificationTemplateUserSegmentRel> list = findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-				0, 1, orderByComparator);
+	public CommerceNotificationTemplateUserSegmentRel
+		fetchByCommerceNotificationTemplateId_First(
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		List<CommerceNotificationTemplateUserSegmentRel> list =
+			findByCommerceNotificationTemplateId(
+				commerceNotificationTemplateId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -900,13 +948,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel findByCommerceNotificationTemplateId_Last(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel
+			findByCommerceNotificationTemplateId_Last(
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByCommerceNotificationTemplateId_Last(commerceNotificationTemplateId,
-				orderByComparator);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				fetchByCommerceNotificationTemplateId_Last(
+					commerceNotificationTemplateId, orderByComparator);
 
 		if (commerceNotificationTemplateUserSegmentRel != null) {
 			return commerceNotificationTemplateUserSegmentRel;
@@ -921,7 +973,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 		msg.append("}");
 
-		throw new NoSuchNotificationTemplateUserSegmentRelException(msg.toString());
+		throw new NoSuchNotificationTemplateUserSegmentRelException(
+			msg.toString());
 	}
 
 	/**
@@ -932,17 +985,23 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the last matching commerce notification template user segment rel, or <code>null</code> if a matching commerce notification template user segment rel could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel fetchByCommerceNotificationTemplateId_Last(
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
-		int count = countByCommerceNotificationTemplateId(commerceNotificationTemplateId);
+	public CommerceNotificationTemplateUserSegmentRel
+		fetchByCommerceNotificationTemplateId_Last(
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator) {
+
+		int count = countByCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceNotificationTemplateUserSegmentRel> list = findByCommerceNotificationTemplateId(commerceNotificationTemplateId,
-				count - 1, count, orderByComparator);
+		List<CommerceNotificationTemplateUserSegmentRel> list =
+			findByCommerceNotificationTemplateId(
+				commerceNotificationTemplateId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -961,30 +1020,35 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @throws NoSuchNotificationTemplateUserSegmentRelException if a commerce notification template user segment rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceNotificationTemplateUserSegmentRel[] findByCommerceNotificationTemplateId_PrevAndNext(
-		long commerceNotificationTemplateUserSegmentRelId,
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator)
+	public CommerceNotificationTemplateUserSegmentRel[]
+			findByCommerceNotificationTemplateId_PrevAndNext(
+				long commerceNotificationTemplateUserSegmentRelId,
+				long commerceNotificationTemplateId,
+				OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+					orderByComparator)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			findByPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = findByPrimaryKey(
+				commerceNotificationTemplateUserSegmentRelId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationTemplateUserSegmentRel[] array = new CommerceNotificationTemplateUserSegmentRelImpl[3];
+			CommerceNotificationTemplateUserSegmentRel[] array =
+				new CommerceNotificationTemplateUserSegmentRelImpl[3];
 
-			array[0] = getByCommerceNotificationTemplateId_PrevAndNext(session,
-					commerceNotificationTemplateUserSegmentRel,
-					commerceNotificationTemplateId, orderByComparator, true);
+			array[0] = getByCommerceNotificationTemplateId_PrevAndNext(
+				session, commerceNotificationTemplateUserSegmentRel,
+				commerceNotificationTemplateId, orderByComparator, true);
 
 			array[1] = commerceNotificationTemplateUserSegmentRel;
 
-			array[2] = getByCommerceNotificationTemplateId_PrevAndNext(session,
-					commerceNotificationTemplateUserSegmentRel,
-					commerceNotificationTemplateId, orderByComparator, false);
+			array[2] = getByCommerceNotificationTemplateId_PrevAndNext(
+				session, commerceNotificationTemplateUserSegmentRel,
+				commerceNotificationTemplateId, orderByComparator, false);
 
 			return array;
 		}
@@ -996,29 +1060,36 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		}
 	}
 
-	protected CommerceNotificationTemplateUserSegmentRel getByCommerceNotificationTemplateId_PrevAndNext(
-		Session session,
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel,
-		long commerceNotificationTemplateId,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator,
-		boolean previous) {
+	protected CommerceNotificationTemplateUserSegmentRel
+		getByCommerceNotificationTemplateId_PrevAndNext(
+			Session session,
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel,
+			long commerceNotificationTemplateId,
+			OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+				orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+		query.append(
+			_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1073,7 +1144,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			}
 		}
 		else {
-			query.append(CommerceNotificationTemplateUserSegmentRelModelImpl.ORDER_BY_JPQL);
+			query.append(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -1088,10 +1161,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		qPos.add(commerceNotificationTemplateId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceNotificationTemplateUserSegmentRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationTemplateUserSegmentRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1113,9 +1187,13 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public void removeByCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : findByCommerceNotificationTemplateId(
-				commerceNotificationTemplateId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+
+		for (CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel :
+					findByCommerceNotificationTemplateId(
+						commerceNotificationTemplateId, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null)) {
+
 			remove(commerceNotificationTemplateUserSegmentRel);
 		}
 	}
@@ -1129,18 +1207,22 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public int countByCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID;
 
-		Object[] finderArgs = new Object[] { commerceNotificationTemplateId };
+		FinderPath finderPath =
+			_finderPathCountByCommerceNotificationTemplateId;
+
+		Object[] finderArgs = new Object[] {commerceNotificationTemplateId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2);
 
 			String sql = query.toString();
 
@@ -1172,23 +1254,15 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2 =
-		"commerceNotificationTemplateUserSegmentRel.commerceNotificationTemplateId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CommerceNotificationTemplateUserSegmentRelModelImpl.COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
-			CommerceNotificationTemplateUserSegmentRelModelImpl.COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2 =
+			"commerceNotificationTemplateUserSegmentRel.commerceNotificationTemplateId = ?";
+
+	private FinderPath _finderPathFetchByC_C;
+	private FinderPath _finderPathCountByC_C;
 
 	/**
-	 * Returns the commerce notification template user segment rel where commerceNotificationTemplateId = &#63; and commerceUserSegmentEntryId = &#63; or throws a {@link NoSuchNotificationTemplateUserSegmentRelException} if it could not be found.
+	 * Returns the commerce notification template user segment rel where commerceNotificationTemplateId = &#63; and commerceUserSegmentEntryId = &#63; or throws a <code>NoSuchNotificationTemplateUserSegmentRelException</code> if it could not be found.
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -1197,11 +1271,13 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel findByC_C(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId)
+			long commerceNotificationTemplateId,
+			long commerceUserSegmentEntryId)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByC_C(commerceNotificationTemplateId,
-				commerceUserSegmentEntryId);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = fetchByC_C(
+				commerceNotificationTemplateId, commerceUserSegmentEntryId);
 
 		if (commerceNotificationTemplateUserSegmentRel == null) {
 			StringBundler msg = new StringBundler(6);
@@ -1220,7 +1296,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				_log.debug(msg.toString());
 			}
 
-			throw new NoSuchNotificationTemplateUserSegmentRelException(msg.toString());
+			throw new NoSuchNotificationTemplateUserSegmentRelException(
+				msg.toString());
 		}
 
 		return commerceNotificationTemplateUserSegmentRel;
@@ -1236,8 +1313,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel fetchByC_C(
 		long commerceNotificationTemplateId, long commerceUserSegmentEntryId) {
-		return fetchByC_C(commerceNotificationTemplateId,
-			commerceUserSegmentEntryId, true);
+
+		return fetchByC_C(
+			commerceNotificationTemplateId, commerceUserSegmentEntryId, true);
 	}
 
 	/**
@@ -1252,23 +1330,30 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	public CommerceNotificationTemplateUserSegmentRel fetchByC_C(
 		long commerceNotificationTemplateId, long commerceUserSegmentEntryId,
 		boolean retrieveFromCache) {
+
 		Object[] finderArgs = new Object[] {
-				commerceNotificationTemplateId, commerceUserSegmentEntryId
-			};
+			commerceNotificationTemplateId, commerceUserSegmentEntryId
+		};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_C, finderArgs, this);
 		}
 
 		if (result instanceof CommerceNotificationTemplateUserSegmentRel) {
-			CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-				(CommerceNotificationTemplateUserSegmentRel)result;
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel =
+					(CommerceNotificationTemplateUserSegmentRel)result;
 
-			if ((commerceNotificationTemplateId != commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId()) ||
-					(commerceUserSegmentEntryId != commerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId())) {
+			if ((commerceNotificationTemplateId !=
+					commerceNotificationTemplateUserSegmentRel.
+						getCommerceNotificationTemplateId()) ||
+				(commerceUserSegmentEntryId !=
+					commerceNotificationTemplateUserSegmentRel.
+						getCommerceUserSegmentEntryId())) {
+
 				result = null;
 			}
 		}
@@ -1276,7 +1361,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		if (result == null) {
 			StringBundler query = new StringBundler(4);
 
-			query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
 			query.append(_FINDER_COLUMN_C_C_COMMERCENOTIFICATIONTEMPLATEID_2);
 
@@ -1297,15 +1383,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 				qPos.add(commerceUserSegmentEntryId);
 
-				List<CommerceNotificationTemplateUserSegmentRel> list = q.list();
+				List<CommerceNotificationTemplateUserSegmentRel> list =
+					q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByC_C, finderArgs, list);
 				}
 				else {
-					CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-						list.get(0);
+					CommerceNotificationTemplateUserSegmentRel
+						commerceNotificationTemplateUserSegmentRel = list.get(
+							0);
 
 					result = commerceNotificationTemplateUserSegmentRel;
 
@@ -1313,7 +1401,7 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
 
 				throw processException(e);
 			}
@@ -1339,10 +1427,13 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel removeByC_C(
-		long commerceNotificationTemplateId, long commerceUserSegmentEntryId)
+			long commerceNotificationTemplateId,
+			long commerceUserSegmentEntryId)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			findByC_C(commerceNotificationTemplateId, commerceUserSegmentEntryId);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = findByC_C(
+				commerceNotificationTemplateId, commerceUserSegmentEntryId);
 
 		return remove(commerceNotificationTemplateUserSegmentRel);
 	}
@@ -1355,20 +1446,22 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the number of matching commerce notification template user segment rels
 	 */
 	@Override
-	public int countByC_C(long commerceNotificationTemplateId,
-		long commerceUserSegmentEntryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
+	public int countByC_C(
+		long commerceNotificationTemplateId, long commerceUserSegmentEntryId) {
+
+		FinderPath finderPath = _finderPathCountByC_C;
 
 		Object[] finderArgs = new Object[] {
-				commerceNotificationTemplateId, commerceUserSegmentEntryId
-			};
+			commerceNotificationTemplateId, commerceUserSegmentEntryId
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
+			query.append(
+				_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE);
 
 			query.append(_FINDER_COLUMN_C_C_COMMERCENOTIFICATIONTEMPLATEID_2);
 
@@ -1406,23 +1499,28 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_COMMERCENOTIFICATIONTEMPLATEID_2 =
-		"commerceNotificationTemplateUserSegmentRel.commerceNotificationTemplateId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_COMMERCEUSERSEGMENTENTRYID_2 = "commerceNotificationTemplateUserSegmentRel.commerceUserSegmentEntryId = ?";
+	private static final String
+		_FINDER_COLUMN_C_C_COMMERCENOTIFICATIONTEMPLATEID_2 =
+			"commerceNotificationTemplateUserSegmentRel.commerceNotificationTemplateId = ? AND ";
+
+	private static final String
+		_FINDER_COLUMN_C_C_COMMERCEUSERSEGMENTENTRYID_2 =
+			"commerceNotificationTemplateUserSegmentRel.commerceUserSegmentEntryId = ?";
 
 	public CommerceNotificationTemplateUserSegmentRelPersistenceImpl() {
 		setModelClass(CommerceNotificationTemplateUserSegmentRel.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceNotificationTemplateUserSegmentRelId",
+			"CNTemplateUserSegmentRelId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceNotificationTemplateUserSegmentRelId",
-				"CNTemplateUserSegmentRelId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -1440,17 +1538,25 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		entityCache.putResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
+		entityCache.putResult(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
 			CommerceNotificationTemplateUserSegmentRelImpl.class,
 			commerceNotificationTemplateUserSegmentRel.getPrimaryKey(),
 			commerceNotificationTemplateUserSegmentRel);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C,
+		finderCache.putResult(
+			_finderPathFetchByC_C,
 			new Object[] {
-				commerceNotificationTemplateUserSegmentRel.getCommerceNotificationTemplateId(),
-				commerceNotificationTemplateUserSegmentRel.getCommerceUserSegmentEntryId()
-			}, commerceNotificationTemplateUserSegmentRel);
+				commerceNotificationTemplateUserSegmentRel.
+					getCommerceNotificationTemplateId(),
+				commerceNotificationTemplateUserSegmentRel.
+					getCommerceUserSegmentEntryId()
+			},
+			commerceNotificationTemplateUserSegmentRel);
 
 		commerceNotificationTemplateUserSegmentRel.resetOriginalValues();
 	}
@@ -1462,16 +1568,25 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(
-		List<CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels) {
-		for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : commerceNotificationTemplateUserSegmentRels) {
+		List<CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels) {
+
+		for (CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel :
+					commerceNotificationTemplateUserSegmentRels) {
+
 			if (entityCache.getResult(
-						CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceNotificationTemplateUserSegmentRelImpl.class,
-						commerceNotificationTemplateUserSegmentRel.getPrimaryKey()) == null) {
+					CommerceNotificationTemplateUserSegmentRelModelImpl.
+						ENTITY_CACHE_ENABLED,
+					CommerceNotificationTemplateUserSegmentRelImpl.class,
+					commerceNotificationTemplateUserSegmentRel.
+						getPrimaryKey()) == null) {
+
 				cacheResult(commerceNotificationTemplateUserSegmentRel);
 			}
 			else {
-				commerceNotificationTemplateUserSegmentRel.resetOriginalValues();
+				commerceNotificationTemplateUserSegmentRel.
+					resetOriginalValues();
 			}
 		}
 	}
@@ -1480,12 +1595,13 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * Clears the cache for all commerce notification template user segment rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache() {
-		entityCache.clearCache(CommerceNotificationTemplateUserSegmentRelImpl.class);
+		entityCache.clearCache(
+			CommerceNotificationTemplateUserSegmentRelImpl.class);
 
 		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -1496,74 +1612,102 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * Clears the cache for the commerce notification template user segment rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
-		entityCache.removeResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
+		entityCache.removeResult(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
 			CommerceNotificationTemplateUserSegmentRelImpl.class,
 			commerceNotificationTemplateUserSegmentRel.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceNotificationTemplateUserSegmentRelModelImpl)commerceNotificationTemplateUserSegmentRel,
+		clearUniqueFindersCache(
+			(CommerceNotificationTemplateUserSegmentRelModelImpl)
+				commerceNotificationTemplateUserSegmentRel,
 			true);
 	}
 
 	@Override
 	public void clearCache(
-		List<CommerceNotificationTemplateUserSegmentRel> commerceNotificationTemplateUserSegmentRels) {
+		List<CommerceNotificationTemplateUserSegmentRel>
+			commerceNotificationTemplateUserSegmentRels) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : commerceNotificationTemplateUserSegmentRels) {
-			entityCache.removeResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel :
+					commerceNotificationTemplateUserSegmentRels) {
+
+			entityCache.removeResult(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
 				CommerceNotificationTemplateUserSegmentRelImpl.class,
 				commerceNotificationTemplateUserSegmentRel.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceNotificationTemplateUserSegmentRelModelImpl)commerceNotificationTemplateUserSegmentRel,
+			clearUniqueFindersCache(
+				(CommerceNotificationTemplateUserSegmentRelModelImpl)
+					commerceNotificationTemplateUserSegmentRel,
 				true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
-		CommerceNotificationTemplateUserSegmentRelModelImpl commerceNotificationTemplateUserSegmentRelModelImpl) {
-		Object[] args = new Object[] {
-				commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceNotificationTemplateId(),
-				commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-			};
+		CommerceNotificationTemplateUserSegmentRelModelImpl
+			commerceNotificationTemplateUserSegmentRelModelImpl) {
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, args,
+		Object[] args = new Object[] {
+			commerceNotificationTemplateUserSegmentRelModelImpl.
+				getCommerceNotificationTemplateId(),
+			commerceNotificationTemplateUserSegmentRelModelImpl.
+				getCommerceUserSegmentEntryId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_C, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_C, args,
 			commerceNotificationTemplateUserSegmentRelModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
-		CommerceNotificationTemplateUserSegmentRelModelImpl commerceNotificationTemplateUserSegmentRelModelImpl,
+		CommerceNotificationTemplateUserSegmentRelModelImpl
+			commerceNotificationTemplateUserSegmentRelModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceNotificationTemplateId(),
-					commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-				};
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getCommerceNotificationTemplateId(),
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getCommerceUserSegmentEntryId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
 		}
 
-		if ((commerceNotificationTemplateUserSegmentRelModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceNotificationTemplateUserSegmentRelModelImpl.getOriginalCommerceNotificationTemplateId(),
-					commerceNotificationTemplateUserSegmentRelModelImpl.getOriginalCommerceUserSegmentEntryId()
-				};
+		if ((commerceNotificationTemplateUserSegmentRelModelImpl.
+				getColumnBitmask() &
+			 _finderPathFetchByC_C.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+			Object[] args = new Object[] {
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getOriginalCommerceNotificationTemplateId(),
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getOriginalCommerceUserSegmentEntryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
 		}
 	}
 
@@ -1576,13 +1720,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel create(
 		long commerceNotificationTemplateUserSegmentRelId) {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			new CommerceNotificationTemplateUserSegmentRelImpl();
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				new CommerceNotificationTemplateUserSegmentRelImpl();
 
 		commerceNotificationTemplateUserSegmentRel.setNew(true);
-		commerceNotificationTemplateUserSegmentRel.setPrimaryKey(commerceNotificationTemplateUserSegmentRelId);
+		commerceNotificationTemplateUserSegmentRel.setPrimaryKey(
+			commerceNotificationTemplateUserSegmentRelId);
 
-		commerceNotificationTemplateUserSegmentRel.setCompanyId(companyProvider.getCompanyId());
+		commerceNotificationTemplateUserSegmentRel.setCompanyId(
+			companyProvider.getCompanyId());
 
 		return commerceNotificationTemplateUserSegmentRel;
 	}
@@ -1596,9 +1744,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel remove(
-		long commerceNotificationTemplateUserSegmentRelId)
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		return remove((Serializable)commerceNotificationTemplateUserSegmentRelId);
+
+		return remove(
+			(Serializable)commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
@@ -1610,24 +1760,27 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel remove(
-		Serializable primaryKey)
+			Serializable primaryKey)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-				(CommerceNotificationTemplateUserSegmentRel)session.get(CommerceNotificationTemplateUserSegmentRelImpl.class,
-					primaryKey);
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel =
+					(CommerceNotificationTemplateUserSegmentRel)session.get(
+						CommerceNotificationTemplateUserSegmentRelImpl.class,
+						primaryKey);
 
 			if (commerceNotificationTemplateUserSegmentRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchNotificationTemplateUserSegmentRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchNotificationTemplateUserSegmentRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceNotificationTemplateUserSegmentRel);
@@ -1645,15 +1798,20 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 	@Override
 	protected CommerceNotificationTemplateUserSegmentRel removeImpl(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceNotificationTemplateUserSegmentRel)) {
-				commerceNotificationTemplateUserSegmentRel = (CommerceNotificationTemplateUserSegmentRel)session.get(CommerceNotificationTemplateUserSegmentRelImpl.class,
-						commerceNotificationTemplateUserSegmentRel.getPrimaryKeyObj());
+				commerceNotificationTemplateUserSegmentRel =
+					(CommerceNotificationTemplateUserSegmentRel)session.get(
+						CommerceNotificationTemplateUserSegmentRelImpl.class,
+						commerceNotificationTemplateUserSegmentRel.
+							getPrimaryKeyObj());
 			}
 
 			if (commerceNotificationTemplateUserSegmentRel != null) {
@@ -1676,51 +1834,64 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel updateImpl(
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel) {
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel) {
+
 		boolean isNew = commerceNotificationTemplateUserSegmentRel.isNew();
 
-		if (!(commerceNotificationTemplateUserSegmentRel instanceof CommerceNotificationTemplateUserSegmentRelModelImpl)) {
+		if (!(commerceNotificationTemplateUserSegmentRel instanceof
+				CommerceNotificationTemplateUserSegmentRelModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(
-						commerceNotificationTemplateUserSegmentRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceNotificationTemplateUserSegmentRel);
+					commerceNotificationTemplateUserSegmentRel.getClass())) {
+
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceNotificationTemplateUserSegmentRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceNotificationTemplateUserSegmentRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceNotificationTemplateUserSegmentRel implementation " +
-				commerceNotificationTemplateUserSegmentRel.getClass());
+					commerceNotificationTemplateUserSegmentRel.getClass());
 		}
 
-		CommerceNotificationTemplateUserSegmentRelModelImpl commerceNotificationTemplateUserSegmentRelModelImpl =
-			(CommerceNotificationTemplateUserSegmentRelModelImpl)commerceNotificationTemplateUserSegmentRel;
+		CommerceNotificationTemplateUserSegmentRelModelImpl
+			commerceNotificationTemplateUserSegmentRelModelImpl =
+				(CommerceNotificationTemplateUserSegmentRelModelImpl)
+					commerceNotificationTemplateUserSegmentRel;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
 		if (isNew &&
-				(commerceNotificationTemplateUserSegmentRel.getCreateDate() == null)) {
+			(commerceNotificationTemplateUserSegmentRel.getCreateDate() ==
+				null)) {
+
 			if (serviceContext == null) {
 				commerceNotificationTemplateUserSegmentRel.setCreateDate(now);
 			}
 			else {
-				commerceNotificationTemplateUserSegmentRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceNotificationTemplateUserSegmentRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
-		if (!commerceNotificationTemplateUserSegmentRelModelImpl.hasSetModifiedDate()) {
+		if (!commerceNotificationTemplateUserSegmentRelModelImpl.
+				hasSetModifiedDate()) {
+
 			if (serviceContext == null) {
 				commerceNotificationTemplateUserSegmentRel.setModifiedDate(now);
 			}
 			else {
-				commerceNotificationTemplateUserSegmentRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceNotificationTemplateUserSegmentRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1735,7 +1906,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				commerceNotificationTemplateUserSegmentRel.setNew(false);
 			}
 			else {
-				commerceNotificationTemplateUserSegmentRel = (CommerceNotificationTemplateUserSegmentRel)session.merge(commerceNotificationTemplateUserSegmentRel);
+				commerceNotificationTemplateUserSegmentRel =
+					(CommerceNotificationTemplateUserSegmentRel)session.merge(
+						commerceNotificationTemplateUserSegmentRel);
 			}
 		}
 		catch (Exception e) {
@@ -1747,86 +1920,107 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (!CommerceNotificationTemplateUserSegmentRelModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (!CommerceNotificationTemplateUserSegmentRelModelImpl.
+				COLUMN_BITMASK_ENABLED) {
+
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
-					commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-				};
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getCommerceUserSegmentEntryId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
+			finderCache.removeResult(
+				_finderPathCountByCommerceUserSegmentEntryId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
 				args);
 
 			args = new Object[] {
-					commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceNotificationTemplateId()
+				commerceNotificationTemplateUserSegmentRelModelImpl.
+					getCommerceNotificationTemplateId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceNotificationTemplateId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
+				args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((commerceNotificationTemplateUserSegmentRelModelImpl.
+					getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceUserSegmentEntryId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceNotificationTemplateUserSegmentRelModelImpl.
+						getOriginalCommerceUserSegmentEntryId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((commerceNotificationTemplateUserSegmentRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceNotificationTemplateUserSegmentRelModelImpl.getOriginalCommerceUserSegmentEntryId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceUserSegmentEntryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
 					args);
 
 				args = new Object[] {
-						commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-					};
+					commerceNotificationTemplateUserSegmentRelModelImpl.
+						getCommerceUserSegmentEntryId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceUserSegmentEntryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
 					args);
 			}
 
-			if ((commerceNotificationTemplateUserSegmentRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceNotificationTemplateUserSegmentRelModelImpl.getOriginalCommerceNotificationTemplateId()
-					};
+			if ((commerceNotificationTemplateUserSegmentRelModelImpl.
+					getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceNotificationTemplateId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
+				Object[] args = new Object[] {
+					commerceNotificationTemplateUserSegmentRelModelImpl.
+						getOriginalCommerceNotificationTemplateId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceNotificationTemplateId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 					args);
 
 				args = new Object[] {
-						commerceNotificationTemplateUserSegmentRelModelImpl.getCommerceNotificationTemplateId()
-					};
+					commerceNotificationTemplateUserSegmentRelModelImpl.
+						getCommerceNotificationTemplateId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCENOTIFICATIONTEMPLATEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCENOTIFICATIONTEMPLATEID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceNotificationTemplateId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 					args);
 			}
 		}
 
-		entityCache.putResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
 			CommerceNotificationTemplateUserSegmentRelImpl.class,
 			commerceNotificationTemplateUserSegmentRel.getPrimaryKey(),
 			commerceNotificationTemplateUserSegmentRel, false);
 
-		clearUniqueFindersCache(commerceNotificationTemplateUserSegmentRelModelImpl,
-			false);
-		cacheUniqueFindersCache(commerceNotificationTemplateUserSegmentRelModelImpl);
+		clearUniqueFindersCache(
+			commerceNotificationTemplateUserSegmentRelModelImpl, false);
+		cacheUniqueFindersCache(
+			commerceNotificationTemplateUserSegmentRelModelImpl);
 
 		commerceNotificationTemplateUserSegmentRel.resetOriginalValues();
 
@@ -1834,7 +2028,7 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce notification template user segment rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce notification template user segment rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce notification template user segment rel
 	 * @return the commerce notification template user segment rel
@@ -1842,25 +2036,27 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel findByPrimaryKey(
-		Serializable primaryKey)
+			Serializable primaryKey)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			fetchByPrimaryKey(primaryKey);
+
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel = fetchByPrimaryKey(
+				primaryKey);
 
 		if (commerceNotificationTemplateUserSegmentRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchNotificationTemplateUserSegmentRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchNotificationTemplateUserSegmentRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceNotificationTemplateUserSegmentRel;
 	}
 
 	/**
-	 * Returns the commerce notification template user segment rel with the primary key or throws a {@link NoSuchNotificationTemplateUserSegmentRelException} if it could not be found.
+	 * Returns the commerce notification template user segment rel with the primary key or throws a <code>NoSuchNotificationTemplateUserSegmentRelException</code> if it could not be found.
 	 *
 	 * @param commerceNotificationTemplateUserSegmentRelId the primary key of the commerce notification template user segment rel
 	 * @return the commerce notification template user segment rel
@@ -1868,9 +2064,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel findByPrimaryKey(
-		long commerceNotificationTemplateUserSegmentRelId)
+			long commerceNotificationTemplateUserSegmentRelId)
 		throws NoSuchNotificationTemplateUserSegmentRelException {
-		return findByPrimaryKey((Serializable)commerceNotificationTemplateUserSegmentRelId);
+
+		return findByPrimaryKey(
+			(Serializable)commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	/**
@@ -1882,15 +2080,19 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel fetchByPrimaryKey(
 		Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceNotificationTemplateUserSegmentRelImpl.class, primaryKey);
+
+		Serializable serializable = entityCache.getResult(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-			(CommerceNotificationTemplateUserSegmentRel)serializable;
+		CommerceNotificationTemplateUserSegmentRel
+			commerceNotificationTemplateUserSegmentRel =
+				(CommerceNotificationTemplateUserSegmentRel)serializable;
 
 		if (commerceNotificationTemplateUserSegmentRel == null) {
 			Session session = null;
@@ -1898,20 +2100,26 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceNotificationTemplateUserSegmentRel = (CommerceNotificationTemplateUserSegmentRel)session.get(CommerceNotificationTemplateUserSegmentRelImpl.class,
+				commerceNotificationTemplateUserSegmentRel =
+					(CommerceNotificationTemplateUserSegmentRel)session.get(
+						CommerceNotificationTemplateUserSegmentRelImpl.class,
 						primaryKey);
 
 				if (commerceNotificationTemplateUserSegmentRel != null) {
 					cacheResult(commerceNotificationTemplateUserSegmentRel);
 				}
 				else {
-					entityCache.putResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceNotificationTemplateUserSegmentRelModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceNotificationTemplateUserSegmentRelImpl.class,
 						primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceNotificationTemplateUserSegmentRelModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceNotificationTemplateUserSegmentRelImpl.class,
 					primaryKey);
 
@@ -1934,25 +2142,31 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	@Override
 	public CommerceNotificationTemplateUserSegmentRel fetchByPrimaryKey(
 		long commerceNotificationTemplateUserSegmentRelId) {
-		return fetchByPrimaryKey((Serializable)commerceNotificationTemplateUserSegmentRelId);
+
+		return fetchByPrimaryKey(
+			(Serializable)commerceNotificationTemplateUserSegmentRelId);
 	}
 
 	@Override
-	public Map<Serializable, CommerceNotificationTemplateUserSegmentRel> fetchByPrimaryKeys(
-		Set<Serializable> primaryKeys) {
+	public Map<Serializable, CommerceNotificationTemplateUserSegmentRel>
+		fetchByPrimaryKeys(Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> map = new HashMap<Serializable, CommerceNotificationTemplateUserSegmentRel>();
+		Map<Serializable, CommerceNotificationTemplateUserSegmentRel> map =
+			new HashMap
+				<Serializable, CommerceNotificationTemplateUserSegmentRel>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel =
-				fetchByPrimaryKey(primaryKey);
+			CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel = fetchByPrimaryKey(
+					primaryKey);
 
 			if (commerceNotificationTemplateUserSegmentRel != null) {
 				map.put(primaryKey, commerceNotificationTemplateUserSegmentRel);
@@ -1964,9 +2178,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceNotificationTemplateUserSegmentRelImpl.class,
-					primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelImpl.class,
+				primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1977,8 +2193,10 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey,
-						(CommerceNotificationTemplateUserSegmentRel)serializable);
+					map.put(
+						primaryKey,
+						(CommerceNotificationTemplateUserSegmentRel)
+							serializable);
 				}
 			}
 		}
@@ -1987,10 +2205,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
-		query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE_PKS_IN);
+		query.append(
+			_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
 			query.append((long)primaryKey);
@@ -2011,17 +2230,27 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : (List<CommerceNotificationTemplateUserSegmentRel>)q.list()) {
-				map.put(commerceNotificationTemplateUserSegmentRel.getPrimaryKeyObj(),
+			for (CommerceNotificationTemplateUserSegmentRel
+					commerceNotificationTemplateUserSegmentRel :
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							q.list()) {
+
+				map.put(
+					commerceNotificationTemplateUserSegmentRel.
+						getPrimaryKeyObj(),
 					commerceNotificationTemplateUserSegmentRel);
 
 				cacheResult(commerceNotificationTemplateUserSegmentRel);
 
-				uncachedPrimaryKeys.remove(commerceNotificationTemplateUserSegmentRel.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceNotificationTemplateUserSegmentRel.
+						getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceNotificationTemplateUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceNotificationTemplateUserSegmentRelModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceNotificationTemplateUserSegmentRelImpl.class,
 					primaryKey, nullModel);
 			}
@@ -2050,7 +2279,7 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * Returns a range of all the commerce notification template user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification template user segment rels
@@ -2058,8 +2287,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the range of commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findAll(int start,
-		int end) {
+	public List<CommerceNotificationTemplateUserSegmentRel> findAll(
+		int start, int end) {
+
 		return findAll(start, end, null);
 	}
 
@@ -2067,7 +2297,7 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * Returns an ordered range of all the commerce notification template user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification template user segment rels
@@ -2076,9 +2306,11 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findAll(int start,
-		int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator) {
+	public List<CommerceNotificationTemplateUserSegmentRel> findAll(
+		int start, int end,
+		OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+			orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2086,7 +2318,7 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * Returns an ordered range of all the commerce notification template user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceNotificationTemplateUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce notification template user segment rels
@@ -2096,30 +2328,34 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 * @return the ordered range of commerce notification template user segment rels
 	 */
 	@Override
-	public List<CommerceNotificationTemplateUserSegmentRel> findAll(int start,
-		int end,
-		OrderByComparator<CommerceNotificationTemplateUserSegmentRel> orderByComparator,
+	public List<CommerceNotificationTemplateUserSegmentRel> findAll(
+		int start, int end,
+		OrderByComparator<CommerceNotificationTemplateUserSegmentRel>
+			orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationTemplateUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceNotificationTemplateUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list =
+				(List<CommerceNotificationTemplateUserSegmentRel>)
+					finderCache.getResult(finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2127,13 +2363,14 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
-				query.append(_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL);
+				query.append(
+					_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2141,7 +2378,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				sql = _SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL;
 
 				if (pagination) {
-					sql = sql.concat(CommerceNotificationTemplateUserSegmentRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceNotificationTemplateUserSegmentRelModelImpl.
+							ORDER_BY_JPQL);
 				}
 			}
 
@@ -2153,16 +2392,18 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceNotificationTemplateUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list =
+						(List<CommerceNotificationTemplateUserSegmentRel>)
+							QueryUtil.list(q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2188,7 +2429,9 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel : findAll()) {
+		for (CommerceNotificationTemplateUserSegmentRel
+				commerceNotificationTemplateUserSegmentRel : findAll()) {
+
 			remove(commerceNotificationTemplateUserSegmentRel);
 		}
 	}
@@ -2200,8 +2443,8 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2209,16 +2452,17 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2237,17 +2481,140 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
-		return CommerceNotificationTemplateUserSegmentRelModelImpl.TABLE_COLUMNS_MAP;
+		return CommerceNotificationTemplateUserSegmentRelModelImpl.
+			TABLE_COLUMNS_MAP;
 	}
 
 	/**
 	 * Initializes the commerce notification template user segment rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceUserSegmentEntryId =
+			new FinderPath(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					FINDER_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceUserSegmentEntryId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId =
+			new FinderPath(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					FINDER_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceUserSegmentEntryId",
+				new String[] {Long.class.getName()},
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK |
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceUserSegmentEntryId = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceUserSegmentEntryId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceNotificationTemplateId =
+			new FinderPath(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					FINDER_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceNotificationTemplateId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceNotificationTemplateId =
+			new FinderPath(
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					FINDER_CACHE_ENABLED,
+				CommerceNotificationTemplateUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceNotificationTemplateId",
+				new String[] {Long.class.getName()},
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
+				CommerceNotificationTemplateUserSegmentRelModelImpl.
+					CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceNotificationTemplateId = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceNotificationTemplateId",
+			new String[] {Long.class.getName()});
+
+		_finderPathFetchByC_C = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK |
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateUserSegmentRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
 	}
 
 	public void destroy() {
-		entityCache.removeCache(CommerceNotificationTemplateUserSegmentRelImpl.class.getName());
+		entityCache.removeCache(
+			CommerceNotificationTemplateUserSegmentRelImpl.class.getName());
 		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -2255,25 +2622,46 @@ public class CommerceNotificationTemplateUserSegmentRelPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL =
-		"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel";
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE_PKS_IN =
-		"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE CNTemplateUserSegmentRelId IN (";
-	private static final String _SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE =
-		"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE ";
-	private static final String _SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL =
-		"SELECT COUNT(commerceNotificationTemplateUserSegmentRel) FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel";
-	private static final String _SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE =
-		"SELECT COUNT(commerceNotificationTemplateUserSegmentRel) FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceNotificationTemplateUserSegmentRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceNotificationTemplateUserSegmentRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceNotificationTemplateUserSegmentRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceNotificationTemplateUserSegmentRelPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"commerceNotificationTemplateUserSegmentRelId"
-			});
+
+	private static final String
+		_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL =
+			"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel";
+
+	private static final String
+		_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE_PKS_IN =
+			"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE CNTemplateUserSegmentRelId IN (";
+
+	private static final String
+		_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE =
+			"SELECT commerceNotificationTemplateUserSegmentRel FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE ";
+
+	private static final String
+		_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL =
+			"SELECT COUNT(commerceNotificationTemplateUserSegmentRel) FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel";
+
+	private static final String
+		_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATEUSERSEGMENTREL_WHERE =
+			"SELECT COUNT(commerceNotificationTemplateUserSegmentRel) FROM CommerceNotificationTemplateUserSegmentRel commerceNotificationTemplateUserSegmentRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceNotificationTemplateUserSegmentRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceNotificationTemplateUserSegmentRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceNotificationTemplateUserSegmentRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationTemplateUserSegmentRelPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"commerceNotificationTemplateUserSegmentRelId"});
+
 }

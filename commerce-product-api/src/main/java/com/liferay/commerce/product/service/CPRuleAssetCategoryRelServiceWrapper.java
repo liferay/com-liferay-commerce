@@ -28,59 +28,73 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CPRuleAssetCategoryRelServiceWrapper
 	implements CPRuleAssetCategoryRelService,
-		ServiceWrapper<CPRuleAssetCategoryRelService> {
+			   ServiceWrapper<CPRuleAssetCategoryRelService> {
+
 	public CPRuleAssetCategoryRelServiceWrapper(
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService) {
+
 		_cpRuleAssetCategoryRelService = cpRuleAssetCategoryRelService;
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPRuleAssetCategoryRel addCPRuleAssetCategoryRel(
-		long cpRuleId, long assetCategoryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.product.model.CPRuleAssetCategoryRel
+			addCPRuleAssetCategoryRel(
+				long cpRuleId, long assetCategoryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleAssetCategoryRelService.addCPRuleAssetCategoryRel(cpRuleId,
-			assetCategoryId, serviceContext);
+
+		return _cpRuleAssetCategoryRelService.addCPRuleAssetCategoryRel(
+			cpRuleId, assetCategoryId, serviceContext);
 	}
 
 	@Override
 	public void deleteCPRuleAssetCategoryRel(long cpRuleAssetCategoryRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpRuleAssetCategoryRelService.deleteCPRuleAssetCategoryRel(cpRuleAssetCategoryRelId);
+
+		_cpRuleAssetCategoryRelService.deleteCPRuleAssetCategoryRel(
+			cpRuleAssetCategoryRelId);
 	}
 
 	@Override
 	public long[] getAssetCategoryIds(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpRuleAssetCategoryRelService.getAssetCategoryIds(cpRuleId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
-		long cpRuleId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(cpRuleId);
+	public java.util.List
+		<com.liferay.commerce.product.model.CPRuleAssetCategoryRel>
+				getCPRuleAssetCategoryRels(long cpRuleId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(
+			cpRuleId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPRuleAssetCategoryRel> getCPRuleAssetCategoryRels(
-		long cpRuleId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(cpRuleId,
-			start, end);
+	public java.util.List
+		<com.liferay.commerce.product.model.CPRuleAssetCategoryRel>
+				getCPRuleAssetCategoryRels(long cpRuleId, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(
+			cpRuleId, start, end);
 	}
 
 	@Override
 	public int getCPRuleAssetCategoryRelsCount(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRelsCount(cpRuleId);
+
+		return _cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRelsCount(
+			cpRuleId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpRuleAssetCategoryRelService.getOSGiServiceIdentifier();
@@ -94,8 +108,10 @@ public class CPRuleAssetCategoryRelServiceWrapper
 	@Override
 	public void setWrappedService(
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService) {
+
 		_cpRuleAssetCategoryRelService = cpRuleAssetCategoryRelService;
 	}
 
 	private CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
+
 }

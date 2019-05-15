@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,38 +40,47 @@ import java.util.Map;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAvailabilityEstimateServiceUtil
- * @see com.liferay.commerce.service.base.CommerceAvailabilityEstimateServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceAvailabilityEstimateServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAvailabilityEstimate"}, service = CommerceAvailabilityEstimateService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceAvailabilityEstimate"
+	},
+	service = CommerceAvailabilityEstimateService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceAvailabilityEstimateService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAvailabilityEstimateServiceUtil} to access the commerce availability estimate remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceAvailabilityEstimateServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAvailabilityEstimateServiceUtil} to access the commerce availability estimate remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAvailabilityEstimateServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceAvailabilityEstimate addCommerceAvailabilityEstimate(
-		Map<Locale, String> titleMap, double priority,
-		ServiceContext serviceContext) throws PortalException;
+			Map<Locale, String> titleMap, double priority,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId) throws PortalException;
+			long commerceAvailabilityEstimateId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAvailabilityEstimate getCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId) throws PortalException;
+			long commerceAvailabilityEstimateId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
+			long groupId, int start, int end,
+			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -80,14 +88,15 @@ public interface CommerceAvailabilityEstimateService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	public CommerceAvailabilityEstimate updateCommerceAvailabilityEstimate(
-		long commerceAvailabilityEstimateId, Map<Locale, String> titleMap,
-		double priority, ServiceContext serviceContext)
+			long commerceAvailabilityEstimateId, Map<Locale, String> titleMap,
+			double priority, ServiceContext serviceContext)
 		throws PortalException;
+
 }

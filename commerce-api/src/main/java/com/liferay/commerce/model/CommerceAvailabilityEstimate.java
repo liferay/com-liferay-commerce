@@ -25,35 +25,42 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAvailabilityEstimateModel
- * @see com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl
- * @see com.liferay.commerce.model.impl.CommerceAvailabilityEstimateModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl"
+)
 @ProviderType
 public interface CommerceAvailabilityEstimate
 	extends CommerceAvailabilityEstimateModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAvailabilityEstimate, Long> COMMERCE_AVAILABILITY_ESTIMATE_ID_ACCESSOR =
-		new Accessor<CommerceAvailabilityEstimate, Long>() {
-			@Override
-			public Long get(
-				CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
-				return commerceAvailabilityEstimate.getCommerceAvailabilityEstimateId();
-			}
+	public static final Accessor<CommerceAvailabilityEstimate, Long>
+		COMMERCE_AVAILABILITY_ESTIMATE_ID_ACCESSOR =
+			new Accessor<CommerceAvailabilityEstimate, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
 
-			@Override
-			public Class<CommerceAvailabilityEstimate> getTypeClass() {
-				return CommerceAvailabilityEstimate.class;
-			}
-		};
+					return commerceAvailabilityEstimate.
+						getCommerceAvailabilityEstimateId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceAvailabilityEstimate> getTypeClass() {
+					return CommerceAvailabilityEstimate.class;
+				}
+
+			};
+
 }

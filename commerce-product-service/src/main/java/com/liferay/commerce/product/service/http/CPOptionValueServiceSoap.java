@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPOptionValueServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -29,19 +28,20 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPOptionValueServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPOptionValueServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.model.CPOptionValueSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.model.CPOptionValue}, that is translated to a
- * {@link com.liferay.commerce.product.model.CPOptionValueSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.model.CPOptionValueSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.model.CPOptionValue</code>, that is translated to a
+ * <code>com.liferay.commerce.product.model.CPOptionValueSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -63,25 +63,28 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionValueServiceHttp
- * @see com.liferay.commerce.product.model.CPOptionValueSoap
- * @see CPOptionValueServiceUtil
  * @generated
  */
 @ProviderType
 public class CPOptionValueServiceSoap {
-	public static com.liferay.commerce.product.model.CPOptionValueSoap addCPOptionValue(
-		long cpOptionId, String[] titleMapLanguageIds, String[] titleMapValues,
-		double priority, String key,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			addCPOptionValue(
+				long cpOptionId, String[] titleMapLanguageIds,
+				String[] titleMapValues, double priority, String key,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
 
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.addCPOptionValue(cpOptionId,
-					titleMap, priority, key, serviceContext);
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.addCPOptionValue(
+					cpOptionId, titleMap, priority, key, serviceContext);
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -92,6 +95,7 @@ public class CPOptionValueServiceSoap {
 
 	public static void deleteCPOptionValue(long cpOptionValueId)
 		throws RemoteException {
+
 		try {
 			CPOptionValueServiceUtil.deleteCPOptionValue(cpOptionValueId);
 		}
@@ -102,13 +106,18 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.fetchByExternalReferenceCode(companyId,
-					externalReferenceCode);
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.fetchByExternalReferenceCode(
+					companyId, externalReferenceCode);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -117,12 +126,16 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap fetchCPOptionValue(
-		long cpOptionValueId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.fetchCPOptionValue(cpOptionValueId);
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			fetchCPOptionValue(long cpOptionValueId)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.fetchCPOptionValue(cpOptionValueId);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -131,12 +144,16 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap getCPOptionValue(
-		long cpOptionValueId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.getCPOptionValue(cpOptionValueId);
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			getCPOptionValue(long cpOptionValueId)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.getCPOptionValue(cpOptionValueId);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -145,14 +162,17 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap[] getCPOptionValues(
-		long cpOptionId, int start, int end) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPOptionValue> returnValue =
-				CPOptionValueServiceUtil.getCPOptionValues(cpOptionId, start,
-					end);
+	public static com.liferay.commerce.product.model.CPOptionValueSoap[]
+			getCPOptionValues(long cpOptionId, int start, int end)
+		throws RemoteException {
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModels(returnValue);
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPOptionValue>
+				returnValue = CPOptionValueServiceUtil.getCPOptionValues(
+					cpOptionId, start, end);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -163,8 +183,10 @@ public class CPOptionValueServiceSoap {
 
 	public static int getCPOptionValuesCount(long cpOptionId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CPOptionValueServiceUtil.getCPOptionValuesCount(cpOptionId);
+			int returnValue = CPOptionValueServiceUtil.getCPOptionValuesCount(
+				cpOptionId);
 
 			return returnValue;
 		}
@@ -175,19 +197,23 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap updateCPOptionValue(
-		long cpOptionValueId, String[] titleMapLanguageIds,
-		String[] titleMapValues, double priority, String key,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			updateCPOptionValue(
+				long cpOptionValueId, String[] titleMapLanguageIds,
+				String[] titleMapValues, double priority, String key,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
+
 		try {
-			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
-					titleMapValues);
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
 
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.updateCPOptionValue(cpOptionValueId,
-					titleMap, priority, key, serviceContext);
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.updateCPOptionValue(
+					cpOptionValueId, titleMap, priority, key, serviceContext);
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -196,20 +222,25 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionValueSoap upsertCPOptionValue(
-		long cpOptionId, String[] nameMapLanguageIds, String[] nameMapValues,
-		double priority, String key, String externalReferenceCode,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.product.model.CPOptionValueSoap
+			upsertCPOptionValue(
+				long cpOptionId, String[] nameMapLanguageIds,
+				String[] nameMapValues, double priority, String key,
+				String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
-		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
 
-			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.upsertCPOptionValue(cpOptionId,
-					nameMap, priority, key, externalReferenceCode,
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+				nameMapLanguageIds, nameMapValues);
+
+			com.liferay.commerce.product.model.CPOptionValue returnValue =
+				CPOptionValueServiceUtil.upsertCPOptionValue(
+					cpOptionId, nameMap, priority, key, externalReferenceCode,
 					serviceContext);
 
-			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.product.model.CPOptionValueSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -218,5 +249,7 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPOptionValueServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CPOptionValueServiceSoap.class);
+
 }

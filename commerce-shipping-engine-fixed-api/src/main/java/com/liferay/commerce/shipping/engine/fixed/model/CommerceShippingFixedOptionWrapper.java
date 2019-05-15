@@ -17,7 +17,6 @@ package com.liferay.commerce.shipping.engine.fixed.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +41,11 @@ import java.util.Objects;
 @ProviderType
 public class CommerceShippingFixedOptionWrapper
 	implements CommerceShippingFixedOption,
-		ModelWrapper<CommerceShippingFixedOption> {
+			   ModelWrapper<CommerceShippingFixedOption> {
+
 	public CommerceShippingFixedOptionWrapper(
 		CommerceShippingFixedOption commerceShippingFixedOption) {
+
 		_commerceShippingFixedOption = commerceShippingFixedOption;
 	}
 
@@ -62,7 +63,8 @@ public class CommerceShippingFixedOptionWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceShippingFixedOptionId",
+		attributes.put(
+			"commerceShippingFixedOptionId",
 			getCommerceShippingFixedOptionId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -70,7 +72,8 @@ public class CommerceShippingFixedOptionWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
+		attributes.put(
+			"commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("amount", getAmount());
@@ -82,7 +85,7 @@ public class CommerceShippingFixedOptionWrapper
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceShippingFixedOptionId = (Long)attributes.get(
-				"commerceShippingFixedOptionId");
+			"commerceShippingFixedOptionId");
 
 		if (commerceShippingFixedOptionId != null) {
 			setCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
@@ -125,7 +128,7 @@ public class CommerceShippingFixedOptionWrapper
 		}
 
 		Long commerceShippingMethodId = (Long)attributes.get(
-				"commerceShippingMethodId");
+			"commerceShippingMethodId");
 
 		if (commerceShippingMethodId != null) {
 			setCommerceShippingMethodId(commerceShippingMethodId);
@@ -158,20 +161,23 @@ public class CommerceShippingFixedOptionWrapper
 
 	@Override
 	public Object clone() {
-		return new CommerceShippingFixedOptionWrapper((CommerceShippingFixedOption)_commerceShippingFixedOption.clone());
+		return new CommerceShippingFixedOptionWrapper(
+			(CommerceShippingFixedOption)_commerceShippingFixedOption.clone());
 	}
 
 	@Override
 	public int compareTo(
 		CommerceShippingFixedOption commerceShippingFixedOption) {
-		return _commerceShippingFixedOption.compareTo(commerceShippingFixedOption);
+
+		return _commerceShippingFixedOption.compareTo(
+			commerceShippingFixedOption);
 	}
 
 	/**
-	* Returns the amount of this commerce shipping fixed option.
-	*
-	* @return the amount of this commerce shipping fixed option
-	*/
+	 * Returns the amount of this commerce shipping fixed option.
+	 *
+	 * @return the amount of this commerce shipping fixed option
+	 */
 	@Override
 	public BigDecimal getAmount() {
 		return _commerceShippingFixedOption.getAmount();
@@ -183,40 +189,40 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns the commerce shipping fixed option ID of this commerce shipping fixed option.
-	*
-	* @return the commerce shipping fixed option ID of this commerce shipping fixed option
-	*/
+	 * Returns the commerce shipping fixed option ID of this commerce shipping fixed option.
+	 *
+	 * @return the commerce shipping fixed option ID of this commerce shipping fixed option
+	 */
 	@Override
 	public long getCommerceShippingFixedOptionId() {
 		return _commerceShippingFixedOption.getCommerceShippingFixedOptionId();
 	}
 
 	/**
-	* Returns the commerce shipping method ID of this commerce shipping fixed option.
-	*
-	* @return the commerce shipping method ID of this commerce shipping fixed option
-	*/
+	 * Returns the commerce shipping method ID of this commerce shipping fixed option.
+	 *
+	 * @return the commerce shipping method ID of this commerce shipping fixed option
+	 */
 	@Override
 	public long getCommerceShippingMethodId() {
 		return _commerceShippingFixedOption.getCommerceShippingMethodId();
 	}
 
 	/**
-	* Returns the company ID of this commerce shipping fixed option.
-	*
-	* @return the company ID of this commerce shipping fixed option
-	*/
+	 * Returns the company ID of this commerce shipping fixed option.
+	 *
+	 * @return the company ID of this commerce shipping fixed option
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceShippingFixedOption.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce shipping fixed option.
-	*
-	* @return the create date of this commerce shipping fixed option
-	*/
+	 * Returns the create date of this commerce shipping fixed option.
+	 *
+	 * @return the create date of this commerce shipping fixed option
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceShippingFixedOption.getCreateDate();
@@ -228,60 +234,60 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns the description of this commerce shipping fixed option.
-	*
-	* @return the description of this commerce shipping fixed option
-	*/
+	 * Returns the description of this commerce shipping fixed option.
+	 *
+	 * @return the description of this commerce shipping fixed option
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceShippingFixedOption.getDescription();
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized description of this commerce shipping fixed option
-	*/
+	 * Returns the localized description of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized description of this commerce shipping fixed option
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale) {
 		return _commerceShippingFixedOption.getDescription(locale);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce shipping fixed option. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized description of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce shipping fixed option. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale, boolean useDefault) {
 		return _commerceShippingFixedOption.getDescription(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized description of this commerce shipping fixed option
-	*/
+	 * Returns the localized description of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized description of this commerce shipping fixed option
+	 */
 	@Override
 	public String getDescription(String languageId) {
 		return _commerceShippingFixedOption.getDescription(languageId);
 	}
 
 	/**
-	* Returns the localized description of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this commerce shipping fixed option
-	*/
+	 * Returns the localized description of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this commerce shipping fixed option
+	 */
 	@Override
 	public String getDescription(String languageId, boolean useDefault) {
-		return _commerceShippingFixedOption.getDescription(languageId,
-			useDefault);
+		return _commerceShippingFixedOption.getDescription(
+			languageId, useDefault);
 	}
 
 	@Override
@@ -295,10 +301,10 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized descriptions of this commerce shipping fixed option.
-	*
-	* @return the locales and localized descriptions of this commerce shipping fixed option
-	*/
+	 * Returns a map of the locales and localized descriptions of this commerce shipping fixed option.
+	 *
+	 * @return the locales and localized descriptions of this commerce shipping fixed option
+	 */
 	@Override
 	public Map<java.util.Locale, String> getDescriptionMap() {
 		return _commerceShippingFixedOption.getDescriptionMap();
@@ -310,76 +316,76 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns the group ID of this commerce shipping fixed option.
-	*
-	* @return the group ID of this commerce shipping fixed option
-	*/
+	 * Returns the group ID of this commerce shipping fixed option.
+	 *
+	 * @return the group ID of this commerce shipping fixed option
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceShippingFixedOption.getGroupId();
 	}
 
 	/**
-	* Returns the modified date of this commerce shipping fixed option.
-	*
-	* @return the modified date of this commerce shipping fixed option
-	*/
+	 * Returns the modified date of this commerce shipping fixed option.
+	 *
+	 * @return the modified date of this commerce shipping fixed option
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceShippingFixedOption.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this commerce shipping fixed option.
-	*
-	* @return the name of this commerce shipping fixed option
-	*/
+	 * Returns the name of this commerce shipping fixed option.
+	 *
+	 * @return the name of this commerce shipping fixed option
+	 */
 	@Override
 	public String getName() {
 		return _commerceShippingFixedOption.getName();
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce shipping fixed option
-	*/
+	 * Returns the localized name of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this commerce shipping fixed option
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _commerceShippingFixedOption.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce shipping fixed option. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce shipping fixed option. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _commerceShippingFixedOption.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce shipping fixed option
-	*/
+	 * Returns the localized name of this commerce shipping fixed option in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this commerce shipping fixed option
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _commerceShippingFixedOption.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce shipping fixed option
-	*/
+	 * Returns the localized name of this commerce shipping fixed option in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this commerce shipping fixed option
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _commerceShippingFixedOption.getName(languageId, useDefault);
@@ -396,20 +402,20 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this commerce shipping fixed option.
-	*
-	* @return the locales and localized names of this commerce shipping fixed option
-	*/
+	 * Returns a map of the locales and localized names of this commerce shipping fixed option.
+	 *
+	 * @return the locales and localized names of this commerce shipping fixed option
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _commerceShippingFixedOption.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this commerce shipping fixed option.
-	*
-	* @return the primary key of this commerce shipping fixed option
-	*/
+	 * Returns the primary key of this commerce shipping fixed option.
+	 *
+	 * @return the primary key of this commerce shipping fixed option
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceShippingFixedOption.getPrimaryKey();
@@ -421,40 +427,40 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Returns the priority of this commerce shipping fixed option.
-	*
-	* @return the priority of this commerce shipping fixed option
-	*/
+	 * Returns the priority of this commerce shipping fixed option.
+	 *
+	 * @return the priority of this commerce shipping fixed option
+	 */
 	@Override
 	public double getPriority() {
 		return _commerceShippingFixedOption.getPriority();
 	}
 
 	/**
-	* Returns the user ID of this commerce shipping fixed option.
-	*
-	* @return the user ID of this commerce shipping fixed option
-	*/
+	 * Returns the user ID of this commerce shipping fixed option.
+	 *
+	 * @return the user ID of this commerce shipping fixed option
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceShippingFixedOption.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce shipping fixed option.
-	*
-	* @return the user name of this commerce shipping fixed option
-	*/
+	 * Returns the user name of this commerce shipping fixed option.
+	 *
+	 * @return the user name of this commerce shipping fixed option
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceShippingFixedOption.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce shipping fixed option.
-	*
-	* @return the user uuid of this commerce shipping fixed option
-	*/
+	 * Returns the user uuid of this commerce shipping fixed option.
+	 *
+	 * @return the user uuid of this commerce shipping fixed option
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceShippingFixedOption.getUserUuid();
@@ -488,21 +494,24 @@ public class CommerceShippingFixedOptionWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_commerceShippingFixedOption.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceShippingFixedOption.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_commerceShippingFixedOption.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	/**
-	* Sets the amount of this commerce shipping fixed option.
-	*
-	* @param amount the amount of this commerce shipping fixed option
-	*/
+	 * Sets the amount of this commerce shipping fixed option.
+	 *
+	 * @param amount the amount of this commerce shipping fixed option
+	 */
 	@Override
 	public void setAmount(BigDecimal amount) {
 		_commerceShippingFixedOption.setAmount(amount);
@@ -514,113 +523,123 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Sets the commerce shipping fixed option ID of this commerce shipping fixed option.
-	*
-	* @param commerceShippingFixedOptionId the commerce shipping fixed option ID of this commerce shipping fixed option
-	*/
+	 * Sets the commerce shipping fixed option ID of this commerce shipping fixed option.
+	 *
+	 * @param commerceShippingFixedOptionId the commerce shipping fixed option ID of this commerce shipping fixed option
+	 */
 	@Override
 	public void setCommerceShippingFixedOptionId(
 		long commerceShippingFixedOptionId) {
-		_commerceShippingFixedOption.setCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
+
+		_commerceShippingFixedOption.setCommerceShippingFixedOptionId(
+			commerceShippingFixedOptionId);
 	}
 
 	/**
-	* Sets the commerce shipping method ID of this commerce shipping fixed option.
-	*
-	* @param commerceShippingMethodId the commerce shipping method ID of this commerce shipping fixed option
-	*/
+	 * Sets the commerce shipping method ID of this commerce shipping fixed option.
+	 *
+	 * @param commerceShippingMethodId the commerce shipping method ID of this commerce shipping fixed option
+	 */
 	@Override
 	public void setCommerceShippingMethodId(long commerceShippingMethodId) {
-		_commerceShippingFixedOption.setCommerceShippingMethodId(commerceShippingMethodId);
+		_commerceShippingFixedOption.setCommerceShippingMethodId(
+			commerceShippingMethodId);
 	}
 
 	/**
-	* Sets the company ID of this commerce shipping fixed option.
-	*
-	* @param companyId the company ID of this commerce shipping fixed option
-	*/
+	 * Sets the company ID of this commerce shipping fixed option.
+	 *
+	 * @param companyId the company ID of this commerce shipping fixed option
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceShippingFixedOption.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce shipping fixed option.
-	*
-	* @param createDate the create date of this commerce shipping fixed option
-	*/
+	 * Sets the create date of this commerce shipping fixed option.
+	 *
+	 * @param createDate the create date of this commerce shipping fixed option
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceShippingFixedOption.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce shipping fixed option.
-	*
-	* @param description the description of this commerce shipping fixed option
-	*/
+	 * Sets the description of this commerce shipping fixed option.
+	 *
+	 * @param description the description of this commerce shipping fixed option
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceShippingFixedOption.setDescription(description);
 	}
 
 	/**
-	* Sets the localized description of this commerce shipping fixed option in the language.
-	*
-	* @param description the localized description of this commerce shipping fixed option
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized description of this commerce shipping fixed option in the language.
+	 *
+	 * @param description the localized description of this commerce shipping fixed option
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setDescription(String description, java.util.Locale locale) {
 		_commerceShippingFixedOption.setDescription(description, locale);
 	}
 
 	/**
-	* Sets the localized description of this commerce shipping fixed option in the language, and sets the default locale.
-	*
-	* @param description the localized description of this commerce shipping fixed option
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized description of this commerce shipping fixed option in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this commerce shipping fixed option
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setDescription(String description, java.util.Locale locale,
+	public void setDescription(
+		String description, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
-		_commerceShippingFixedOption.setDescription(description, locale,
-			defaultLocale);
+
+		_commerceShippingFixedOption.setDescription(
+			description, locale, defaultLocale);
 	}
 
 	@Override
 	public void setDescriptionCurrentLanguageId(String languageId) {
-		_commerceShippingFixedOption.setDescriptionCurrentLanguageId(languageId);
+		_commerceShippingFixedOption.setDescriptionCurrentLanguageId(
+			languageId);
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce shipping fixed option from the map of locales and localized descriptions.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce shipping fixed option
-	*/
+	 * Sets the localized descriptions of this commerce shipping fixed option from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce shipping fixed option
+	 */
 	@Override
-	public void setDescriptionMap(Map<java.util.Locale, String> descriptionMap) {
+	public void setDescriptionMap(
+		Map<java.util.Locale, String> descriptionMap) {
+
 		_commerceShippingFixedOption.setDescriptionMap(descriptionMap);
 	}
 
 	/**
-	* Sets the localized descriptions of this commerce shipping fixed option from the map of locales and localized descriptions, and sets the default locale.
-	*
-	* @param descriptionMap the locales and localized descriptions of this commerce shipping fixed option
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized descriptions of this commerce shipping fixed option from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this commerce shipping fixed option
+	 * @param defaultLocale the default locale
+	 */
 	@Override
 	public void setDescriptionMap(
 		Map<java.util.Locale, String> descriptionMap,
 		java.util.Locale defaultLocale) {
-		_commerceShippingFixedOption.setDescriptionMap(descriptionMap,
-			defaultLocale);
+
+		_commerceShippingFixedOption.setDescriptionMap(
+			descriptionMap, defaultLocale);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceShippingFixedOption.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -635,56 +654,57 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Sets the group ID of this commerce shipping fixed option.
-	*
-	* @param groupId the group ID of this commerce shipping fixed option
-	*/
+	 * Sets the group ID of this commerce shipping fixed option.
+	 *
+	 * @param groupId the group ID of this commerce shipping fixed option
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceShippingFixedOption.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the modified date of this commerce shipping fixed option.
-	*
-	* @param modifiedDate the modified date of this commerce shipping fixed option
-	*/
+	 * Sets the modified date of this commerce shipping fixed option.
+	 *
+	 * @param modifiedDate the modified date of this commerce shipping fixed option
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceShippingFixedOption.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this commerce shipping fixed option.
-	*
-	* @param name the name of this commerce shipping fixed option
-	*/
+	 * Sets the name of this commerce shipping fixed option.
+	 *
+	 * @param name the name of this commerce shipping fixed option
+	 */
 	@Override
 	public void setName(String name) {
 		_commerceShippingFixedOption.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this commerce shipping fixed option in the language.
-	*
-	* @param name the localized name of this commerce shipping fixed option
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this commerce shipping fixed option in the language.
+	 *
+	 * @param name the localized name of this commerce shipping fixed option
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_commerceShippingFixedOption.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this commerce shipping fixed option in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce shipping fixed option
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this commerce shipping fixed option in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this commerce shipping fixed option
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_commerceShippingFixedOption.setName(name, locale, defaultLocale);
 	}
 
@@ -694,24 +714,25 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Sets the localized names of this commerce shipping fixed option from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce shipping fixed option
-	*/
+	 * Sets the localized names of this commerce shipping fixed option from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this commerce shipping fixed option
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_commerceShippingFixedOption.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this commerce shipping fixed option from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce shipping fixed option
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this commerce shipping fixed option from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this commerce shipping fixed option
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_commerceShippingFixedOption.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -721,10 +742,10 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Sets the primary key of this commerce shipping fixed option.
-	*
-	* @param primaryKey the primary key of this commerce shipping fixed option
-	*/
+	 * Sets the primary key of this commerce shipping fixed option.
+	 *
+	 * @param primaryKey the primary key of this commerce shipping fixed option
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceShippingFixedOption.setPrimaryKey(primaryKey);
@@ -736,53 +757,56 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	/**
-	* Sets the priority of this commerce shipping fixed option.
-	*
-	* @param priority the priority of this commerce shipping fixed option
-	*/
+	 * Sets the priority of this commerce shipping fixed option.
+	 *
+	 * @param priority the priority of this commerce shipping fixed option
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_commerceShippingFixedOption.setPriority(priority);
 	}
 
 	/**
-	* Sets the user ID of this commerce shipping fixed option.
-	*
-	* @param userId the user ID of this commerce shipping fixed option
-	*/
+	 * Sets the user ID of this commerce shipping fixed option.
+	 *
+	 * @param userId the user ID of this commerce shipping fixed option
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceShippingFixedOption.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce shipping fixed option.
-	*
-	* @param userName the user name of this commerce shipping fixed option
-	*/
+	 * Sets the user name of this commerce shipping fixed option.
+	 *
+	 * @param userName the user name of this commerce shipping fixed option
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceShippingFixedOption.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce shipping fixed option.
-	*
-	* @param userUuid the user uuid of this commerce shipping fixed option
-	*/
+	 * Sets the user uuid of this commerce shipping fixed option.
+	 *
+	 * @param userUuid the user uuid of this commerce shipping fixed option
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceShippingFixedOption.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceShippingFixedOption> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CommerceShippingFixedOption> toCacheModel() {
+
 		return _commerceShippingFixedOption.toCacheModel();
 	}
 
 	@Override
 	public CommerceShippingFixedOption toEscapedModel() {
-		return new CommerceShippingFixedOptionWrapper(_commerceShippingFixedOption.toEscapedModel());
+		return new CommerceShippingFixedOptionWrapper(
+			_commerceShippingFixedOption.toEscapedModel());
 	}
 
 	@Override
@@ -792,7 +816,8 @@ public class CommerceShippingFixedOptionWrapper
 
 	@Override
 	public CommerceShippingFixedOption toUnescapedModel() {
-		return new CommerceShippingFixedOptionWrapper(_commerceShippingFixedOption.toUnescapedModel());
+		return new CommerceShippingFixedOptionWrapper(
+			_commerceShippingFixedOption.toUnescapedModel());
 	}
 
 	@Override
@@ -810,10 +835,14 @@ public class CommerceShippingFixedOptionWrapper
 			return false;
 		}
 
-		CommerceShippingFixedOptionWrapper commerceShippingFixedOptionWrapper = (CommerceShippingFixedOptionWrapper)obj;
+		CommerceShippingFixedOptionWrapper commerceShippingFixedOptionWrapper =
+			(CommerceShippingFixedOptionWrapper)obj;
 
-		if (Objects.equals(_commerceShippingFixedOption,
-					commerceShippingFixedOptionWrapper._commerceShippingFixedOption)) {
+		if (Objects.equals(
+				_commerceShippingFixedOption,
+				commerceShippingFixedOptionWrapper.
+					_commerceShippingFixedOption)) {
+
 			return true;
 		}
 
@@ -841,4 +870,5 @@ public class CommerceShippingFixedOptionWrapper
 	}
 
 	private final CommerceShippingFixedOption _commerceShippingFixedOption;
+
 }

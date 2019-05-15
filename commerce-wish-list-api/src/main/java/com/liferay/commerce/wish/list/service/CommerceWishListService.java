@@ -17,7 +17,6 @@ package com.liferay.commerce.wish.list.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.wish.list.model.CommerceWishList;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,34 +38,40 @@ import java.util.List;
  *
  * @author Andrea Di Giorgi
  * @see CommerceWishListServiceUtil
- * @see com.liferay.commerce.wish.list.service.base.CommerceWishListServiceBaseImpl
- * @see com.liferay.commerce.wish.list.service.impl.CommerceWishListServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceWishList"}, service = CommerceWishListService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceWishList"
+	},
+	service = CommerceWishListService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceWishListService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceWishListServiceUtil} to access the commerce wish list remote service. Add custom service methods to {@link com.liferay.commerce.wish.list.service.impl.CommerceWishListServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceWishListServiceUtil} to access the commerce wish list remote service. Add custom service methods to <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceWishList addCommerceWishList(String name,
-		boolean defaultWishList, ServiceContext serviceContext)
+	public CommerceWishList addCommerceWishList(
+			String name, boolean defaultWishList, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceWishList(long commerceWishListId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceWishList fetchCommerceWishList(long groupId, long userId,
-		boolean defaultWishList,
-		OrderByComparator<CommerceWishList> orderByComparator)
+	public CommerceWishList fetchCommerceWishList(
+			long groupId, long userId, boolean defaultWishList,
+			OrderByComparator<CommerceWishList> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -74,35 +79,38 @@ public interface CommerceWishListService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWishList> getCommerceWishLists(long groupId, int start,
-		int end, OrderByComparator<CommerceWishList> orderByComparator)
+	public List<CommerceWishList> getCommerceWishLists(
+			long groupId, int start, int end,
+			OrderByComparator<CommerceWishList> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceWishList> getCommerceWishLists(long groupId,
-		long userId, int start, int end,
-		OrderByComparator<CommerceWishList> orderByComparator)
+	public List<CommerceWishList> getCommerceWishLists(
+			long groupId, long userId, int start, int end,
+			OrderByComparator<CommerceWishList> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWishListsCount(long groupId)
-		throws PortalException;
+	public int getCommerceWishListsCount(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWishListsCount(long groupId, long userId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceWishList getDefaultCommerceWishList(long groupId, long userId)
+	public CommerceWishList getDefaultCommerceWishList(
+			long groupId, long userId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CommerceWishList updateCommerceWishList(long commerceWishListId,
-		String name, boolean defaultWishList) throws PortalException;
+	public CommerceWishList updateCommerceWishList(
+			long commerceWishListId, String name, boolean defaultWishList)
+		throws PortalException;
+
 }

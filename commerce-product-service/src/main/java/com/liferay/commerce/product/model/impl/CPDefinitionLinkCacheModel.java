@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinitionLink;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionLink in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionLink
  * @generated
  */
 @ProviderType
-public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
-	Externalizable {
+public class CPDefinitionLinkCacheModel
+	implements CacheModel<CPDefinitionLink>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 			return false;
 		}
 
-		CPDefinitionLinkCacheModel cpDefinitionLinkCacheModel = (CPDefinitionLinkCacheModel)obj;
+		CPDefinitionLinkCacheModel cpDefinitionLinkCacheModel =
+			(CPDefinitionLinkCacheModel)obj;
 
-		if (CPDefinitionLinkId == cpDefinitionLinkCacheModel.CPDefinitionLinkId) {
+		if (CPDefinitionLinkId ==
+				cpDefinitionLinkCacheModel.CPDefinitionLinkId) {
+
 			return true;
 		}
 
@@ -173,8 +175,7 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -226,4 +227,5 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 	public long CProductId;
 	public double priority;
 	public String type;
+
 }

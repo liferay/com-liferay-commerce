@@ -25,45 +25,50 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceTierPriceEntryModel
- * @see com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryImpl
- * @see com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryImpl"
+)
 @ProviderType
-public interface CommerceTierPriceEntry extends CommerceTierPriceEntryModel,
-	PersistedModel {
+public interface CommerceTierPriceEntry
+	extends CommerceTierPriceEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceTierPriceEntry, Long> COMMERCE_TIER_PRICE_ENTRY_ID_ACCESSOR =
-		new Accessor<CommerceTierPriceEntry, Long>() {
-			@Override
-			public Long get(CommerceTierPriceEntry commerceTierPriceEntry) {
-				return commerceTierPriceEntry.getCommerceTierPriceEntryId();
-			}
+	public static final Accessor<CommerceTierPriceEntry, Long>
+		COMMERCE_TIER_PRICE_ENTRY_ID_ACCESSOR =
+			new Accessor<CommerceTierPriceEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceTierPriceEntry commerceTierPriceEntry) {
+					return commerceTierPriceEntry.getCommerceTierPriceEntryId();
+				}
 
-			@Override
-			public Class<CommerceTierPriceEntry> getTypeClass() {
-				return CommerceTierPriceEntry.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceTierPriceEntry> getTypeClass() {
+					return CommerceTierPriceEntry.class;
+				}
+
+			};
 
 	public CommercePriceEntry getCommercePriceEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getPriceMoney(
-		long commerceCurrencyId)
+			long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getPromoPriceMoney(
-		long commerceCurrencyId)
+			long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

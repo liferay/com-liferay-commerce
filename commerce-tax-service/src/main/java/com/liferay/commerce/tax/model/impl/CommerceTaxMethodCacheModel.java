@@ -17,7 +17,6 @@ package com.liferay.commerce.tax.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceTaxMethod in entity cache.
  *
  * @author Marco Leo
- * @see CommerceTaxMethod
  * @generated
  */
 @ProviderType
-public class CommerceTaxMethodCacheModel implements CacheModel<CommerceTaxMethod>,
-	Externalizable {
+public class CommerceTaxMethodCacheModel
+	implements CacheModel<CommerceTaxMethod>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceTaxMethodCacheModel implements CacheModel<CommerceTaxMethod
 			return false;
 		}
 
-		CommerceTaxMethodCacheModel commerceTaxMethodCacheModel = (CommerceTaxMethodCacheModel)obj;
+		CommerceTaxMethodCacheModel commerceTaxMethodCacheModel =
+			(CommerceTaxMethodCacheModel)obj;
 
-		if (commerceTaxMethodId == commerceTaxMethodCacheModel.commerceTaxMethodId) {
+		if (commerceTaxMethodId ==
+				commerceTaxMethodCacheModel.commerceTaxMethodId) {
+
 			return true;
 		}
 
@@ -98,7 +100,8 @@ public class CommerceTaxMethodCacheModel implements CacheModel<CommerceTaxMethod
 
 	@Override
 	public CommerceTaxMethod toEntityModel() {
-		CommerceTaxMethodImpl commerceTaxMethodImpl = new CommerceTaxMethodImpl();
+		CommerceTaxMethodImpl commerceTaxMethodImpl =
+			new CommerceTaxMethodImpl();
 
 		commerceTaxMethodImpl.setCommerceTaxMethodId(commerceTaxMethodId);
 		commerceTaxMethodImpl.setGroupId(groupId);
@@ -177,8 +180,7 @@ public class CommerceTaxMethodCacheModel implements CacheModel<CommerceTaxMethod
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceTaxMethodId);
 
 		objectOutput.writeLong(groupId);
@@ -235,4 +237,5 @@ public class CommerceTaxMethodCacheModel implements CacheModel<CommerceTaxMethod
 	public String engineKey;
 	public boolean percentage;
 	public boolean active;
+
 }

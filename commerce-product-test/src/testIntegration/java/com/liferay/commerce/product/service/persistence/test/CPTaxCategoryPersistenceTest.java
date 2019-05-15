@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPTaxCategoryException;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.service.CPTaxCategoryLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,17 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPTaxCategoryPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -106,7 +105,8 @@ public class CPTaxCategoryPersistenceTest {
 
 		_persistence.remove(newCPTaxCategory);
 
-		CPTaxCategory existingCPTaxCategory = _persistence.fetchByPrimaryKey(newCPTaxCategory.getPrimaryKey());
+		CPTaxCategory existingCPTaxCategory = _persistence.fetchByPrimaryKey(
+			newCPTaxCategory.getPrimaryKey());
 
 		Assert.assertNull(existingCPTaxCategory);
 	}
@@ -140,27 +140,32 @@ public class CPTaxCategoryPersistenceTest {
 
 		_cpTaxCategories.add(_persistence.update(newCPTaxCategory));
 
-		CPTaxCategory existingCPTaxCategory = _persistence.findByPrimaryKey(newCPTaxCategory.getPrimaryKey());
+		CPTaxCategory existingCPTaxCategory = _persistence.findByPrimaryKey(
+			newCPTaxCategory.getPrimaryKey());
 
-		Assert.assertEquals(existingCPTaxCategory.getCPTaxCategoryId(),
+		Assert.assertEquals(
+			existingCPTaxCategory.getCPTaxCategoryId(),
 			newCPTaxCategory.getCPTaxCategoryId());
-		Assert.assertEquals(existingCPTaxCategory.getGroupId(),
-			newCPTaxCategory.getGroupId());
-		Assert.assertEquals(existingCPTaxCategory.getCompanyId(),
+		Assert.assertEquals(
+			existingCPTaxCategory.getGroupId(), newCPTaxCategory.getGroupId());
+		Assert.assertEquals(
+			existingCPTaxCategory.getCompanyId(),
 			newCPTaxCategory.getCompanyId());
-		Assert.assertEquals(existingCPTaxCategory.getUserId(),
-			newCPTaxCategory.getUserId());
-		Assert.assertEquals(existingCPTaxCategory.getUserName(),
+		Assert.assertEquals(
+			existingCPTaxCategory.getUserId(), newCPTaxCategory.getUserId());
+		Assert.assertEquals(
+			existingCPTaxCategory.getUserName(),
 			newCPTaxCategory.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPTaxCategory.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPTaxCategory.getCreateDate()),
 			Time.getShortTimestamp(newCPTaxCategory.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPTaxCategory.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPTaxCategory.getModifiedDate()),
 			Time.getShortTimestamp(newCPTaxCategory.getModifiedDate()));
-		Assert.assertEquals(existingCPTaxCategory.getName(),
-			newCPTaxCategory.getName());
-		Assert.assertEquals(existingCPTaxCategory.getDescription(),
+		Assert.assertEquals(
+			existingCPTaxCategory.getName(), newCPTaxCategory.getName());
+		Assert.assertEquals(
+			existingCPTaxCategory.getDescription(),
 			newCPTaxCategory.getDescription());
 	}
 
@@ -175,7 +180,8 @@ public class CPTaxCategoryPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
-		CPTaxCategory existingCPTaxCategory = _persistence.findByPrimaryKey(newCPTaxCategory.getPrimaryKey());
+		CPTaxCategory existingCPTaxCategory = _persistence.findByPrimaryKey(
+			newCPTaxCategory.getPrimaryKey());
 
 		Assert.assertEquals(existingCPTaxCategory, newCPTaxCategory);
 	}
@@ -189,22 +195,23 @@ public class CPTaxCategoryPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPTaxCategory> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPTaxCategory",
-			"CPTaxCategoryId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "name", true, "description", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPTaxCategory", "CPTaxCategoryId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true, "description", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
-		CPTaxCategory existingCPTaxCategory = _persistence.fetchByPrimaryKey(newCPTaxCategory.getPrimaryKey());
+		CPTaxCategory existingCPTaxCategory = _persistence.fetchByPrimaryKey(
+			newCPTaxCategory.getPrimaryKey());
 
 		Assert.assertEquals(existingCPTaxCategory, newCPTaxCategory);
 	}
@@ -221,6 +228,7 @@ public class CPTaxCategoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPTaxCategory newCPTaxCategory1 = addCPTaxCategory();
 		CPTaxCategory newCPTaxCategory2 = addCPTaxCategory();
 
@@ -229,18 +237,22 @@ public class CPTaxCategoryPersistenceTest {
 		primaryKeys.add(newCPTaxCategory1.getPrimaryKey());
 		primaryKeys.add(newCPTaxCategory2.getPrimaryKey());
 
-		Map<Serializable, CPTaxCategory> cpTaxCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPTaxCategory> cpTaxCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpTaxCategories.size());
-		Assert.assertEquals(newCPTaxCategory1,
+		Assert.assertEquals(
+			newCPTaxCategory1,
 			cpTaxCategories.get(newCPTaxCategory1.getPrimaryKey()));
-		Assert.assertEquals(newCPTaxCategory2,
+		Assert.assertEquals(
+			newCPTaxCategory2,
 			cpTaxCategories.get(newCPTaxCategory2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -250,7 +262,8 @@ public class CPTaxCategoryPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPTaxCategory> cpTaxCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPTaxCategory> cpTaxCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpTaxCategories.isEmpty());
 	}
@@ -258,6 +271,7 @@ public class CPTaxCategoryPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
 		long pk = RandomTestUtil.nextLong();
@@ -267,36 +281,39 @@ public class CPTaxCategoryPersistenceTest {
 		primaryKeys.add(newCPTaxCategory.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPTaxCategory> cpTaxCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPTaxCategory> cpTaxCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpTaxCategories.size());
-		Assert.assertEquals(newCPTaxCategory,
+		Assert.assertEquals(
+			newCPTaxCategory,
 			cpTaxCategories.get(newCPTaxCategory.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPTaxCategory> cpTaxCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPTaxCategory> cpTaxCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpTaxCategories.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPTaxCategory.getPrimaryKey());
 
-		Map<Serializable, CPTaxCategory> cpTaxCategories = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPTaxCategory> cpTaxCategories =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpTaxCategories.size());
-		Assert.assertEquals(newCPTaxCategory,
+		Assert.assertEquals(
+			newCPTaxCategory,
 			cpTaxCategories.get(newCPTaxCategory.getPrimaryKey()));
 	}
 
@@ -304,15 +321,19 @@ public class CPTaxCategoryPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPTaxCategoryLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPTaxCategoryLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPTaxCategory>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPTaxCategory>() {
+
 				@Override
 				public void performAction(CPTaxCategory cpTaxCategory) {
 					Assert.assertNotNull(cpTaxCategory);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -321,17 +342,18 @@ public class CPTaxCategoryPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPTaxCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPTaxCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPTaxCategoryId",
-				newCPTaxCategory.getCPTaxCategoryId()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPTaxCategoryId", newCPTaxCategory.getCPTaxCategoryId()));
 
-		List<CPTaxCategory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPTaxCategory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -342,32 +364,34 @@ public class CPTaxCategoryPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPTaxCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPTaxCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPTaxCategoryId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPTaxCategoryId", RandomTestUtil.nextLong()));
 
-		List<CPTaxCategory> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPTaxCategory> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPTaxCategory newCPTaxCategory = addCPTaxCategory();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPTaxCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPTaxCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPTaxCategoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPTaxCategoryId"));
 
 		Object newCPTaxCategoryId = newCPTaxCategory.getCPTaxCategoryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPTaxCategoryId",
-				new Object[] { newCPTaxCategoryId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPTaxCategoryId", new Object[] {newCPTaxCategoryId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -380,14 +404,15 @@ public class CPTaxCategoryPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPTaxCategory.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPTaxCategory.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPTaxCategoryId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPTaxCategoryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPTaxCategoryId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPTaxCategoryId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -420,7 +445,9 @@ public class CPTaxCategoryPersistenceTest {
 		return cpTaxCategory;
 	}
 
-	private List<CPTaxCategory> _cpTaxCategories = new ArrayList<CPTaxCategory>();
+	private List<CPTaxCategory> _cpTaxCategories =
+		new ArrayList<CPTaxCategory>();
 	private CPTaxCategoryPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

@@ -35,18 +35,22 @@ import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntr
 public abstract class CPDefinitionGroupedEntryBaseImpl
 	extends CPDefinitionGroupedEntryModelImpl
 	implements CPDefinitionGroupedEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp definition grouped entry model instance should use the {@link CPDefinitionGroupedEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp definition grouped entry model instance should use the <code>CPDefinitionGroupedEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CPDefinitionGroupedEntryLocalServiceUtil.addCPDefinitionGroupedEntry(this);
+			CPDefinitionGroupedEntryLocalServiceUtil.
+				addCPDefinitionGroupedEntry(this);
 		}
 		else {
-			CPDefinitionGroupedEntryLocalServiceUtil.updateCPDefinitionGroupedEntry(this);
+			CPDefinitionGroupedEntryLocalServiceUtil.
+				updateCPDefinitionGroupedEntry(this);
 		}
 	}
+
 }

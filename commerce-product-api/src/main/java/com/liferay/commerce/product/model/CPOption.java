@@ -25,19 +25,20 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPOptionModel
- * @see com.liferay.commerce.product.model.impl.CPOptionImpl
- * @see com.liferay.commerce.product.model.impl.CPOptionModelImpl
  * @generated
  */
 @ImplementationClassName("com.liferay.commerce.product.model.impl.CPOptionImpl")
 @ProviderType
 public interface CPOption extends CPOptionModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPOptionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPOptionImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPOption, Long> CP_OPTION_ID_ACCESSOR = new Accessor<CPOption, Long>() {
+	public static final Accessor<CPOption, Long> CP_OPTION_ID_ACCESSOR =
+		new Accessor<CPOption, Long>() {
+
 			@Override
 			public Long get(CPOption cpOption) {
 				return cpOption.getCPOptionId();
@@ -52,7 +53,9 @@ public interface CPOption extends CPOptionModel, PersistedModel {
 			public Class<CPOption> getTypeClass() {
 				return CPOption.class;
 			}
+
 		};
 
 	public java.util.List<CPOptionValue> getCPOptionValues();
+
 }

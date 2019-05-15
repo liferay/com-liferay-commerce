@@ -35,18 +35,22 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateLoc
 public abstract class CommerceNotificationTemplateBaseImpl
 	extends CommerceNotificationTemplateModelImpl
 	implements CommerceNotificationTemplate {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce notification template model instance should use the {@link CommerceNotificationTemplate} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce notification template model instance should use the <code>CommerceNotificationTemplate</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceNotificationTemplateLocalServiceUtil.addCommerceNotificationTemplate(this);
+			CommerceNotificationTemplateLocalServiceUtil.
+				addCommerceNotificationTemplate(this);
 		}
 		else {
-			CommerceNotificationTemplateLocalServiceUtil.updateCommerceNotificationTemplate(this);
+			CommerceNotificationTemplateLocalServiceUtil.
+				updateCommerceNotificationTemplate(this);
 		}
 	}
+
 }

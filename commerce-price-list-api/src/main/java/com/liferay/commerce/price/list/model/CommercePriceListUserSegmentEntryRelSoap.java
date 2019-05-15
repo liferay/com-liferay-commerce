@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.price.list.service.http.CommercePriceListUserSegmentEntryRelServiceSoap}.
  *
  * @author Alessio Antonio Rendina
- * @see com.liferay.commerce.price.list.service.http.CommercePriceListUserSegmentEntryRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
+
 	public static CommercePriceListUserSegmentEntryRelSoap toSoapModel(
 		CommercePriceListUserSegmentEntryRel model) {
-		CommercePriceListUserSegmentEntryRelSoap soapModel = new CommercePriceListUserSegmentEntryRelSoap();
+
+		CommercePriceListUserSegmentEntryRelSoap soapModel =
+			new CommercePriceListUserSegmentEntryRelSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setCommercePriceListUserSegmentEntryRelId(model.getCommercePriceListUserSegmentEntryRelId());
+		soapModel.setCommercePriceListUserSegmentEntryRelId(
+			model.getCommercePriceListUserSegmentEntryRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -44,7 +47,8 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommercePriceListId(model.getCommercePriceListId());
-		soapModel.setCommerceUserSegmentEntryId(model.getCommerceUserSegmentEntryId());
+		soapModel.setCommerceUserSegmentEntryId(
+			model.getCommerceUserSegmentEntryId());
 		soapModel.setOrder(model.getOrder());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 
@@ -53,7 +57,9 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 
 	public static CommercePriceListUserSegmentEntryRelSoap[] toSoapModels(
 		CommercePriceListUserSegmentEntryRel[] models) {
-		CommercePriceListUserSegmentEntryRelSoap[] soapModels = new CommercePriceListUserSegmentEntryRelSoap[models.length];
+
+		CommercePriceListUserSegmentEntryRelSoap[] soapModels =
+			new CommercePriceListUserSegmentEntryRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -64,10 +70,12 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 
 	public static CommercePriceListUserSegmentEntryRelSoap[][] toSoapModels(
 		CommercePriceListUserSegmentEntryRel[][] models) {
+
 		CommercePriceListUserSegmentEntryRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommercePriceListUserSegmentEntryRelSoap[models.length][models[0].length];
+			soapModels = new CommercePriceListUserSegmentEntryRelSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommercePriceListUserSegmentEntryRelSoap[0][0];
@@ -82,13 +90,17 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 
 	public static CommercePriceListUserSegmentEntryRelSoap[] toSoapModels(
 		List<CommercePriceListUserSegmentEntryRel> models) {
-		List<CommercePriceListUserSegmentEntryRelSoap> soapModels = new ArrayList<CommercePriceListUserSegmentEntryRelSoap>(models.size());
+
+		List<CommercePriceListUserSegmentEntryRelSoap> soapModels =
+			new ArrayList<CommercePriceListUserSegmentEntryRelSoap>(
+				models.size());
 
 		for (CommercePriceListUserSegmentEntryRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommercePriceListUserSegmentEntryRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommercePriceListUserSegmentEntryRelSoap[soapModels.size()]);
 	}
 
 	public CommercePriceListUserSegmentEntryRelSoap() {
@@ -116,7 +128,9 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 
 	public void setCommercePriceListUserSegmentEntryRelId(
 		long commercePriceListUserSegmentEntryRelId) {
-		_commercePriceListUserSegmentEntryRelId = commercePriceListUserSegmentEntryRelId;
+
+		_commercePriceListUserSegmentEntryRelId =
+			commercePriceListUserSegmentEntryRelId;
 	}
 
 	public long getGroupId() {
@@ -211,4 +225,5 @@ public class CommercePriceListUserSegmentEntryRelSoap implements Serializable {
 	private long _commerceUserSegmentEntryId;
 	private int _order;
 	private Date _lastPublishDate;
+
 }

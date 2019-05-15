@@ -25,20 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceAccountModel
- * @see com.liferay.commerce.account.model.impl.CommerceAccountImpl
- * @see com.liferay.commerce.account.model.impl.CommerceAccountModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.account.model.impl.CommerceAccountImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.account.model.impl.CommerceAccountImpl"
+)
 @ProviderType
 public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.account.model.impl.CommerceAccountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.account.model.impl.CommerceAccountImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAccount, Long> COMMERCE_ACCOUNT_ID_ACCESSOR =
-		new Accessor<CommerceAccount, Long>() {
+	public static final Accessor<CommerceAccount, Long>
+		COMMERCE_ACCOUNT_ID_ACCESSOR = new Accessor<CommerceAccount, Long>() {
+
 			@Override
 			public Long get(CommerceAccount commerceAccount) {
 				return commerceAccount.getCommerceAccountId();
@@ -53,9 +55,11 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 			public Class<CommerceAccount> getTypeClass() {
 				return CommerceAccount.class;
 			}
-		};
 
-	public static final Accessor<CommerceAccount, String> NAME_ACCESSOR = new Accessor<CommerceAccount, String>() {
+		};
+	public static final Accessor<CommerceAccount, String> NAME_ACCESSOR =
+		new Accessor<CommerceAccount, String>() {
+
 			@Override
 			public String get(CommerceAccount commerceAccount) {
 				return commerceAccount.getName();
@@ -70,6 +74,7 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 			public Class<CommerceAccount> getTypeClass() {
 				return CommerceAccount.class;
 			}
+
 		};
 
 	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup()
@@ -78,7 +83,8 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 	public long getCommerceAccountGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public java.util.List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels();
+	public java.util.List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRels();
 
 	public java.util.List<CommerceAccountUserRel> getCommerceAccountUserRels();
 
@@ -90,4 +96,5 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 	public boolean isPersonalAccount();
 
 	public boolean isRoot();
+
 }

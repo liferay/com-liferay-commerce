@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPRuleUserSegmentRel in entity cache.
  *
  * @author Marco Leo
- * @see CPRuleUserSegmentRel
  * @generated
  */
 @ProviderType
-public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegmentRel>,
-	Externalizable {
+public class CPRuleUserSegmentRelCacheModel
+	implements CacheModel<CPRuleUserSegmentRel>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegm
 			return false;
 		}
 
-		CPRuleUserSegmentRelCacheModel cpRuleUserSegmentRelCacheModel = (CPRuleUserSegmentRelCacheModel)obj;
+		CPRuleUserSegmentRelCacheModel cpRuleUserSegmentRelCacheModel =
+			(CPRuleUserSegmentRelCacheModel)obj;
 
-		if (CPRuleUserSegmentRelId == cpRuleUserSegmentRelCacheModel.CPRuleUserSegmentRelId) {
+		if (CPRuleUserSegmentRelId ==
+				cpRuleUserSegmentRelCacheModel.CPRuleUserSegmentRelId) {
+
 			return true;
 		}
 
@@ -92,9 +94,11 @@ public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegm
 
 	@Override
 	public CPRuleUserSegmentRel toEntityModel() {
-		CPRuleUserSegmentRelImpl cpRuleUserSegmentRelImpl = new CPRuleUserSegmentRelImpl();
+		CPRuleUserSegmentRelImpl cpRuleUserSegmentRelImpl =
+			new CPRuleUserSegmentRelImpl();
 
-		cpRuleUserSegmentRelImpl.setCPRuleUserSegmentRelId(CPRuleUserSegmentRelId);
+		cpRuleUserSegmentRelImpl.setCPRuleUserSegmentRelId(
+			CPRuleUserSegmentRelId);
 		cpRuleUserSegmentRelImpl.setGroupId(groupId);
 		cpRuleUserSegmentRelImpl.setCompanyId(companyId);
 		cpRuleUserSegmentRelImpl.setUserId(userId);
@@ -121,7 +125,8 @@ public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegm
 		}
 
 		cpRuleUserSegmentRelImpl.setCPRuleId(CPRuleId);
-		cpRuleUserSegmentRelImpl.setCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+		cpRuleUserSegmentRelImpl.setCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 
 		cpRuleUserSegmentRelImpl.resetOriginalValues();
 
@@ -147,8 +152,7 @@ public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegm
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(CPRuleUserSegmentRelId);
 
 		objectOutput.writeLong(groupId);
@@ -181,4 +185,5 @@ public class CPRuleUserSegmentRelCacheModel implements CacheModel<CPRuleUserSegm
 	public long modifiedDate;
 	public long CPRuleId;
 	public long commerceUserSegmentEntryId;
+
 }

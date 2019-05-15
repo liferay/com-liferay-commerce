@@ -34,10 +34,11 @@ import com.liferay.commerce.service.CommerceOrderPaymentLocalServiceUtil;
 @ProviderType
 public abstract class CommerceOrderPaymentBaseImpl
 	extends CommerceOrderPaymentModelImpl implements CommerceOrderPayment {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce order payment model instance should use the {@link CommerceOrderPayment} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce order payment model instance should use the <code>CommerceOrderPayment</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -45,7 +46,9 @@ public abstract class CommerceOrderPaymentBaseImpl
 			CommerceOrderPaymentLocalServiceUtil.addCommerceOrderPayment(this);
 		}
 		else {
-			CommerceOrderPaymentLocalServiceUtil.updateCommerceOrderPayment(this);
+			CommerceOrderPaymentLocalServiceUtil.updateCommerceOrderPayment(
+				this);
 		}
 	}
+
 }

@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
 import com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelImpl;
 import com.liferay.commerce.product.model.impl.CPRuleUserSegmentRelModelImpl;
 import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -62,56 +61,33 @@ import java.util.Set;
  * </p>
  *
  * @author Marco Leo
- * @see CPRuleUserSegmentRelPersistence
- * @see com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelUtil
  * @generated
  */
 @ProviderType
-public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPRuleUserSegmentRel>
+public class CPRuleUserSegmentRelPersistenceImpl
+	extends BasePersistenceImpl<CPRuleUserSegmentRel>
 	implements CPRuleUserSegmentRelPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CPRuleUserSegmentRelUtil} to access the cp rule user segment rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CPRuleUserSegmentRelUtil</code> to access the cp rule user segment rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CPRuleUserSegmentRelImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRULEID = new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPRuleId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID =
-		new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPRuleId",
-			new String[] { Long.class.getName() },
-			CPRuleUserSegmentRelModelImpl.CPRULEID_COLUMN_BITMASK |
-			CPRuleUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPRULEID = new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPRuleId",
-			new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CPRuleUserSegmentRelImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByCPRuleId;
+	private FinderPath _finderPathWithoutPaginationFindByCPRuleId;
+	private FinderPath _finderPathCountByCPRuleId;
 
 	/**
 	 * Returns all the cp rule user segment rels where CPRuleId = &#63;.
@@ -121,15 +97,15 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public List<CPRuleUserSegmentRel> findByCPRuleId(long CPRuleId) {
-		return findByCPRuleId(CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByCPRuleId(
+			CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the cp rule user segment rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -138,8 +114,9 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the range of matching cp rule user segment rels
 	 */
 	@Override
-	public List<CPRuleUserSegmentRel> findByCPRuleId(long CPRuleId, int start,
-		int end) {
+	public List<CPRuleUserSegmentRel> findByCPRuleId(
+		long CPRuleId, int start, int end) {
+
 		return findByCPRuleId(CPRuleId, start, end, null);
 	}
 
@@ -147,7 +124,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Returns an ordered range of all the cp rule user segment rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -157,8 +134,10 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the ordered range of matching cp rule user segment rels
 	 */
 	@Override
-	public List<CPRuleUserSegmentRel> findByCPRuleId(long CPRuleId, int start,
-		int end, OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
+	public List<CPRuleUserSegmentRel> findByCPRuleId(
+		long CPRuleId, int start, int end,
+		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
+
 		return findByCPRuleId(CPRuleId, start, end, orderByComparator, true);
 	}
 
@@ -166,7 +145,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Returns an ordered range of all the cp rule user segment rels where CPRuleId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param CPRuleId the cp rule ID
@@ -177,29 +156,32 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the ordered range of matching cp rule user segment rels
 	 */
 	@Override
-	public List<CPRuleUserSegmentRel> findByCPRuleId(long CPRuleId, int start,
-		int end, OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
+	public List<CPRuleUserSegmentRel> findByCPRuleId(
+		long CPRuleId, int start, int end,
+		OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID;
-			finderArgs = new Object[] { CPRuleId };
+			finderPath = _finderPathWithoutPaginationFindByCPRuleId;
+			finderArgs = new Object[] {CPRuleId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRULEID;
-			finderArgs = new Object[] { CPRuleId, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindByCPRuleId;
+			finderArgs = new Object[] {CPRuleId, start, end, orderByComparator};
 		}
 
 		List<CPRuleUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPRuleUserSegmentRel cpRuleUserSegmentRel : list) {
@@ -216,8 +198,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -228,11 +210,10 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			query.append(_FINDER_COLUMN_CPRULEID_CPRULEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPRuleUserSegmentRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -250,16 +231,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				qPos.add(CPRuleId);
 
 				if (!pagination) {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -288,11 +269,13 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @throws NoSuchCPRuleUserSegmentRelException if a matching cp rule user segment rel could not be found
 	 */
 	@Override
-	public CPRuleUserSegmentRel findByCPRuleId_First(long CPRuleId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+	public CPRuleUserSegmentRel findByCPRuleId_First(
+			long CPRuleId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCPRuleId_First(CPRuleId,
-				orderByComparator);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCPRuleId_First(
+			CPRuleId, orderByComparator);
 
 		if (cpRuleUserSegmentRel != null) {
 			return cpRuleUserSegmentRel;
@@ -318,10 +301,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the first matching cp rule user segment rel, or <code>null</code> if a matching cp rule user segment rel could not be found
 	 */
 	@Override
-	public CPRuleUserSegmentRel fetchByCPRuleId_First(long CPRuleId,
+	public CPRuleUserSegmentRel fetchByCPRuleId_First(
+		long CPRuleId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
-		List<CPRuleUserSegmentRel> list = findByCPRuleId(CPRuleId, 0, 1,
-				orderByComparator);
+
+		List<CPRuleUserSegmentRel> list = findByCPRuleId(
+			CPRuleId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -339,11 +324,13 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @throws NoSuchCPRuleUserSegmentRelException if a matching cp rule user segment rel could not be found
 	 */
 	@Override
-	public CPRuleUserSegmentRel findByCPRuleId_Last(long CPRuleId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+	public CPRuleUserSegmentRel findByCPRuleId_Last(
+			long CPRuleId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCPRuleId_Last(CPRuleId,
-				orderByComparator);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCPRuleId_Last(
+			CPRuleId, orderByComparator);
 
 		if (cpRuleUserSegmentRel != null) {
 			return cpRuleUserSegmentRel;
@@ -369,16 +356,18 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the last matching cp rule user segment rel, or <code>null</code> if a matching cp rule user segment rel could not be found
 	 */
 	@Override
-	public CPRuleUserSegmentRel fetchByCPRuleId_Last(long CPRuleId,
+	public CPRuleUserSegmentRel fetchByCPRuleId_Last(
+		long CPRuleId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
+
 		int count = countByCPRuleId(CPRuleId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPRuleUserSegmentRel> list = findByCPRuleId(CPRuleId, count - 1,
-				count, orderByComparator);
+		List<CPRuleUserSegmentRel> list = findByCPRuleId(
+			CPRuleId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -398,10 +387,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel[] findByCPRuleId_PrevAndNext(
-		long CPRuleUserSegmentRelId, long CPRuleId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+			long CPRuleUserSegmentRelId, long CPRuleId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = findByPrimaryKey(CPRuleUserSegmentRelId);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel = findByPrimaryKey(
+			CPRuleUserSegmentRelId);
 
 		Session session = null;
 
@@ -410,13 +401,15 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 			CPRuleUserSegmentRel[] array = new CPRuleUserSegmentRelImpl[3];
 
-			array[0] = getByCPRuleId_PrevAndNext(session, cpRuleUserSegmentRel,
-					CPRuleId, orderByComparator, true);
+			array[0] = getByCPRuleId_PrevAndNext(
+				session, cpRuleUserSegmentRel, CPRuleId, orderByComparator,
+				true);
 
 			array[1] = cpRuleUserSegmentRel;
 
-			array[2] = getByCPRuleId_PrevAndNext(session, cpRuleUserSegmentRel,
-					CPRuleId, orderByComparator, false);
+			array[2] = getByCPRuleId_PrevAndNext(
+				session, cpRuleUserSegmentRel, CPRuleId, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -428,15 +421,17 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		}
 	}
 
-	protected CPRuleUserSegmentRel getByCPRuleId_PrevAndNext(Session session,
-		CPRuleUserSegmentRel cpRuleUserSegmentRel, long CPRuleId,
+	protected CPRuleUserSegmentRel getByCPRuleId_PrevAndNext(
+		Session session, CPRuleUserSegmentRel cpRuleUserSegmentRel,
+		long CPRuleId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -448,7 +443,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		query.append(_FINDER_COLUMN_CPRULEID_CPRULEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -518,10 +514,11 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		qPos.add(CPRuleId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRuleUserSegmentRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpRuleUserSegmentRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -542,8 +539,10 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public void removeByCPRuleId(long CPRuleId) {
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel : findByCPRuleId(
-				CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
+				findByCPRuleId(
+					CPRuleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(cpRuleUserSegmentRel);
 		}
 	}
@@ -556,9 +555,9 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public int countByCPRuleId(long CPRuleId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRULEID;
+		FinderPath finderPath = _finderPathCountByCPRuleId;
 
-		Object[] finderArgs = new Object[] { CPRuleId };
+		Object[] finderArgs = new Object[] {CPRuleId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -599,34 +598,14 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPRULEID_CPRULEID_2 = "cpRuleUserSegmentRel.CPRuleId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceUserSegmentEntryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceUserSegmentEntryId",
-			new String[] { Long.class.getName() },
-			CPRuleUserSegmentRelModelImpl.COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK |
-			CPRuleUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID =
-		new FinderPath(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceUserSegmentEntryId",
-			new String[] { Long.class.getName() });
+	private static final String _FINDER_COLUMN_CPRULEID_CPRULEID_2 =
+		"cpRuleUserSegmentRel.CPRuleId = ?";
+
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceUserSegmentEntryId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId;
+	private FinderPath _finderPathCountByCommerceUserSegmentEntryId;
 
 	/**
 	 * Returns all the cp rule user segment rels where commerceUserSegmentEntryId = &#63;.
@@ -637,15 +616,17 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public List<CPRuleUserSegmentRel> findByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
 	 * Returns a range of all the cp rule user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -656,15 +637,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public List<CPRuleUserSegmentRel> findByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId, int start, int end) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			start, end, null);
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the cp rule user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -677,15 +659,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	public List<CPRuleUserSegmentRel> findByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId, int start, int end,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
-		return findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-			start, end, orderByComparator, true);
+
+		return findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the cp rule user segment rels where commerceUserSegmentEntryId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param commerceUserSegmentEntryId the commerce user segment entry ID
@@ -700,34 +683,39 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		long commerceUserSegmentEntryId, int start, int end,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID;
-			finderArgs = new Object[] { commerceUserSegmentEntryId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId;
+			finderArgs = new Object[] {commerceUserSegmentEntryId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceUserSegmentEntryId;
 			finderArgs = new Object[] {
-					commerceUserSegmentEntryId,
-					
-					start, end, orderByComparator
-				};
+				commerceUserSegmentEntryId, start, end, orderByComparator
+			};
 		}
 
 		List<CPRuleUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPRuleUserSegmentRel cpRuleUserSegmentRel : list) {
-					if ((commerceUserSegmentEntryId != cpRuleUserSegmentRel.getCommerceUserSegmentEntryId())) {
+					if ((commerceUserSegmentEntryId !=
+							cpRuleUserSegmentRel.
+								getCommerceUserSegmentEntryId())) {
+
 						list = null;
 
 						break;
@@ -740,8 +728,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -749,14 +737,14 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 			query.append(_SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
+			else if (pagination) {
 				query.append(CPRuleUserSegmentRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -774,16 +762,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				qPos.add(commerceUserSegmentEntryId);
 
 				if (!pagination) {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -813,11 +801,13 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel findByCommerceUserSegmentEntryId_First(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+			long commerceUserSegmentEntryId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCommerceUserSegmentEntryId_First(commerceUserSegmentEntryId,
-				orderByComparator);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel =
+			fetchByCommerceUserSegmentEntryId_First(
+				commerceUserSegmentEntryId, orderByComparator);
 
 		if (cpRuleUserSegmentRel != null) {
 			return cpRuleUserSegmentRel;
@@ -846,8 +836,9 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	public CPRuleUserSegmentRel fetchByCommerceUserSegmentEntryId_First(
 		long commerceUserSegmentEntryId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
-		List<CPRuleUserSegmentRel> list = findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-				0, 1, orderByComparator);
+
+		List<CPRuleUserSegmentRel> list = findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -866,11 +857,13 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel findByCommerceUserSegmentEntryId_Last(
-		long commerceUserSegmentEntryId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+			long commerceUserSegmentEntryId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByCommerceUserSegmentEntryId_Last(commerceUserSegmentEntryId,
-				orderByComparator);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel =
+			fetchByCommerceUserSegmentEntryId_Last(
+				commerceUserSegmentEntryId, orderByComparator);
 
 		if (cpRuleUserSegmentRel != null) {
 			return cpRuleUserSegmentRel;
@@ -899,14 +892,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	public CPRuleUserSegmentRel fetchByCommerceUserSegmentEntryId_Last(
 		long commerceUserSegmentEntryId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
-		int count = countByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
+
+		int count = countByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPRuleUserSegmentRel> list = findByCommerceUserSegmentEntryId(commerceUserSegmentEntryId,
-				count - 1, count, orderByComparator);
+		List<CPRuleUserSegmentRel> list = findByCommerceUserSegmentEntryId(
+			commerceUserSegmentEntryId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -926,10 +921,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel[] findByCommerceUserSegmentEntryId_PrevAndNext(
-		long CPRuleUserSegmentRelId, long commerceUserSegmentEntryId,
-		OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
+			long CPRuleUserSegmentRelId, long commerceUserSegmentEntryId,
+			OrderByComparator<CPRuleUserSegmentRel> orderByComparator)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = findByPrimaryKey(CPRuleUserSegmentRelId);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel = findByPrimaryKey(
+			CPRuleUserSegmentRelId);
 
 		Session session = null;
 
@@ -938,15 +935,15 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 			CPRuleUserSegmentRel[] array = new CPRuleUserSegmentRelImpl[3];
 
-			array[0] = getByCommerceUserSegmentEntryId_PrevAndNext(session,
-					cpRuleUserSegmentRel, commerceUserSegmentEntryId,
-					orderByComparator, true);
+			array[0] = getByCommerceUserSegmentEntryId_PrevAndNext(
+				session, cpRuleUserSegmentRel, commerceUserSegmentEntryId,
+				orderByComparator, true);
 
 			array[1] = cpRuleUserSegmentRel;
 
-			array[2] = getByCommerceUserSegmentEntryId_PrevAndNext(session,
-					cpRuleUserSegmentRel, commerceUserSegmentEntryId,
-					orderByComparator, false);
+			array[2] = getByCommerceUserSegmentEntryId_PrevAndNext(
+				session, cpRuleUserSegmentRel, commerceUserSegmentEntryId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -963,11 +960,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		long commerceUserSegmentEntryId,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -976,10 +974,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 		query.append(_SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1049,10 +1049,11 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		qPos.add(commerceUserSegmentEntryId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpRuleUserSegmentRel);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpRuleUserSegmentRel)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1074,9 +1075,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public void removeByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId) {
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel : findByCommerceUserSegmentEntryId(
-				commerceUserSegmentEntryId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+
+		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
+				findByCommerceUserSegmentEntryId(
+					commerceUserSegmentEntryId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(cpRuleUserSegmentRel);
 		}
 	}
@@ -1090,9 +1094,10 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public int countByCommerceUserSegmentEntryId(
 		long commerceUserSegmentEntryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID;
 
-		Object[] finderArgs = new Object[] { commerceUserSegmentEntryId };
+		FinderPath finderPath = _finderPathCountByCommerceUserSegmentEntryId;
+
+		Object[] finderArgs = new Object[] {commerceUserSegmentEntryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1101,7 +1106,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 			query.append(_SQL_COUNT_CPRULEUSERSEGMENTREL_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1133,8 +1139,9 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2 =
-		"cpRuleUserSegmentRel.commerceUserSegmentEntryId = ?";
+	private static final String
+		_FINDER_COLUMN_COMMERCEUSERSEGMENTENTRYID_COMMERCEUSERSEGMENTENTRYID_2 =
+			"cpRuleUserSegmentRel.commerceUserSegmentEntryId = ?";
 
 	public CPRuleUserSegmentRelPersistenceImpl() {
 		setModelClass(CPRuleUserSegmentRel.class);
@@ -1147,7 +1154,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public void cacheResult(CPRuleUserSegmentRel cpRuleUserSegmentRel) {
-		entityCache.putResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPRuleUserSegmentRelImpl.class,
 			cpRuleUserSegmentRel.getPrimaryKey(), cpRuleUserSegmentRel);
 
@@ -1161,11 +1169,14 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public void cacheResult(List<CPRuleUserSegmentRel> cpRuleUserSegmentRels) {
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel : cpRuleUserSegmentRels) {
+		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
+				cpRuleUserSegmentRels) {
+
 			if (entityCache.getResult(
-						CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-						CPRuleUserSegmentRelImpl.class,
-						cpRuleUserSegmentRel.getPrimaryKey()) == null) {
+					CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+					CPRuleUserSegmentRelImpl.class,
+					cpRuleUserSegmentRel.getPrimaryKey()) == null) {
+
 				cacheResult(cpRuleUserSegmentRel);
 			}
 			else {
@@ -1178,7 +1189,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Clears the cache for all cp rule user segment rels.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1194,13 +1205,15 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Clears the cache for the cp rule user segment rel.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(CPRuleUserSegmentRel cpRuleUserSegmentRel) {
-		entityCache.removeResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPRuleUserSegmentRelImpl.class, cpRuleUserSegmentRel.getPrimaryKey());
+		entityCache.removeResult(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class,
+			cpRuleUserSegmentRel.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -1211,8 +1224,11 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel : cpRuleUserSegmentRels) {
-			entityCache.removeResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
+				cpRuleUserSegmentRels) {
+
+			entityCache.removeResult(
+				CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 				CPRuleUserSegmentRelImpl.class,
 				cpRuleUserSegmentRel.getPrimaryKey());
 		}
@@ -1226,7 +1242,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel create(long CPRuleUserSegmentRelId) {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = new CPRuleUserSegmentRelImpl();
+		CPRuleUserSegmentRel cpRuleUserSegmentRel =
+			new CPRuleUserSegmentRelImpl();
 
 		cpRuleUserSegmentRel.setNew(true);
 		cpRuleUserSegmentRel.setPrimaryKey(CPRuleUserSegmentRelId);
@@ -1246,6 +1263,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public CPRuleUserSegmentRel remove(long CPRuleUserSegmentRelId)
 		throws NoSuchCPRuleUserSegmentRelException {
+
 		return remove((Serializable)CPRuleUserSegmentRelId);
 	}
 
@@ -1259,21 +1277,23 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public CPRuleUserSegmentRel remove(Serializable primaryKey)
 		throws NoSuchCPRuleUserSegmentRelException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CPRuleUserSegmentRel cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.get(CPRuleUserSegmentRelImpl.class,
-					primaryKey);
+			CPRuleUserSegmentRel cpRuleUserSegmentRel =
+				(CPRuleUserSegmentRel)session.get(
+					CPRuleUserSegmentRelImpl.class, primaryKey);
 
 			if (cpRuleUserSegmentRel == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchCPRuleUserSegmentRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchCPRuleUserSegmentRelException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(cpRuleUserSegmentRel);
@@ -1292,14 +1312,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	protected CPRuleUserSegmentRel removeImpl(
 		CPRuleUserSegmentRel cpRuleUserSegmentRel) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(cpRuleUserSegmentRel)) {
-				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.get(CPRuleUserSegmentRelImpl.class,
-						cpRuleUserSegmentRel.getPrimaryKeyObj());
+				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.get(
+					CPRuleUserSegmentRelImpl.class,
+					cpRuleUserSegmentRel.getPrimaryKeyObj());
 			}
 
 			if (cpRuleUserSegmentRel != null) {
@@ -1323,27 +1345,31 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public CPRuleUserSegmentRel updateImpl(
 		CPRuleUserSegmentRel cpRuleUserSegmentRel) {
+
 		boolean isNew = cpRuleUserSegmentRel.isNew();
 
 		if (!(cpRuleUserSegmentRel instanceof CPRuleUserSegmentRelModelImpl)) {
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(cpRuleUserSegmentRel.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(cpRuleUserSegmentRel);
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					cpRuleUserSegmentRel);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in cpRuleUserSegmentRel proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CPRuleUserSegmentRel implementation " +
-				cpRuleUserSegmentRel.getClass());
+					cpRuleUserSegmentRel.getClass());
 		}
 
-		CPRuleUserSegmentRelModelImpl cpRuleUserSegmentRelModelImpl = (CPRuleUserSegmentRelModelImpl)cpRuleUserSegmentRel;
+		CPRuleUserSegmentRelModelImpl cpRuleUserSegmentRelModelImpl =
+			(CPRuleUserSegmentRelModelImpl)cpRuleUserSegmentRel;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1352,8 +1378,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				cpRuleUserSegmentRel.setCreateDate(now);
 			}
 			else {
-				cpRuleUserSegmentRel.setCreateDate(serviceContext.getCreateDate(
-						now));
+				cpRuleUserSegmentRel.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1362,8 +1388,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				cpRuleUserSegmentRel.setModifiedDate(now);
 			}
 			else {
-				cpRuleUserSegmentRel.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				cpRuleUserSegmentRel.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1378,7 +1404,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				cpRuleUserSegmentRel.setNew(false);
 			}
 			else {
-				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.merge(cpRuleUserSegmentRel);
+				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.merge(
+					cpRuleUserSegmentRel);
 			}
 		}
 		catch (Exception e) {
@@ -1393,71 +1420,81 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		if (!CPRuleUserSegmentRelModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
+				cpRuleUserSegmentRelModelImpl.getCPRuleId()
+			};
+
+			finderCache.removeResult(_finderPathCountByCPRuleId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCPRuleId, args);
+
+			args = new Object[] {
+				cpRuleUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceUserSegmentEntryId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
+				args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+		}
+		else {
+			if ((cpRuleUserSegmentRelModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCPRuleId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					cpRuleUserSegmentRelModelImpl.getOriginalCPRuleId()
+				};
+
+				finderCache.removeResult(_finderPathCountByCPRuleId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPRuleId, args);
+
+				args = new Object[] {
 					cpRuleUserSegmentRelModelImpl.getCPRuleId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-				args);
-
-			args = new Object[] {
-					cpRuleUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
-				args);
-
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
-		}
-
-		else {
-			if ((cpRuleUserSegmentRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						cpRuleUserSegmentRelModelImpl.getOriginalCPRuleId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-					args);
-
-				args = new Object[] { cpRuleUserSegmentRelModelImpl.getCPRuleId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRULEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRULEID,
-					args);
+				finderCache.removeResult(_finderPathCountByCPRuleId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPRuleId, args);
 			}
 
 			if ((cpRuleUserSegmentRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						cpRuleUserSegmentRelModelImpl.getOriginalCommerceUserSegmentEntryId()
-					};
+				 _finderPathWithoutPaginationFindByCommerceUserSegmentEntryId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
+				Object[] args = new Object[] {
+					cpRuleUserSegmentRelModelImpl.
+						getOriginalCommerceUserSegmentEntryId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceUserSegmentEntryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
 					args);
 
 				args = new Object[] {
-						cpRuleUserSegmentRelModelImpl.getCommerceUserSegmentEntryId()
-					};
+					cpRuleUserSegmentRelModelImpl.
+						getCommerceUserSegmentEntryId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEUSERSEGMENTENTRYID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEUSERSEGMENTENTRYID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceUserSegmentEntryId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId,
 					args);
 			}
 		}
 
-		entityCache.putResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPRuleUserSegmentRelImpl.class,
 			cpRuleUserSegmentRel.getPrimaryKey(), cpRuleUserSegmentRel, false);
 
@@ -1467,7 +1504,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	}
 
 	/**
-	 * Returns the cp rule user segment rel with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the cp rule user segment rel with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the cp rule user segment rel
 	 * @return the cp rule user segment rel
@@ -1476,22 +1513,24 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public CPRuleUserSegmentRel findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchCPRuleUserSegmentRelException {
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByPrimaryKey(primaryKey);
+
+		CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByPrimaryKey(
+			primaryKey);
 
 		if (cpRuleUserSegmentRel == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchCPRuleUserSegmentRelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchCPRuleUserSegmentRelException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return cpRuleUserSegmentRel;
 	}
 
 	/**
-	 * Returns the cp rule user segment rel with the primary key or throws a {@link NoSuchCPRuleUserSegmentRelException} if it could not be found.
+	 * Returns the cp rule user segment rel with the primary key or throws a <code>NoSuchCPRuleUserSegmentRelException</code> if it could not be found.
 	 *
 	 * @param CPRuleUserSegmentRelId the primary key of the cp rule user segment rel
 	 * @return the cp rule user segment rel
@@ -1500,6 +1539,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public CPRuleUserSegmentRel findByPrimaryKey(long CPRuleUserSegmentRelId)
 		throws NoSuchCPRuleUserSegmentRelException {
+
 		return findByPrimaryKey((Serializable)CPRuleUserSegmentRelId);
 	}
 
@@ -1511,14 +1551,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public CPRuleUserSegmentRel fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-				CPRuleUserSegmentRelImpl.class, primaryKey);
+		Serializable serializable = entityCache.getResult(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CPRuleUserSegmentRel cpRuleUserSegmentRel = (CPRuleUserSegmentRel)serializable;
+		CPRuleUserSegmentRel cpRuleUserSegmentRel =
+			(CPRuleUserSegmentRel)serializable;
 
 		if (cpRuleUserSegmentRel == null) {
 			Session session = null;
@@ -1526,19 +1568,21 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			try {
 				session = openSession();
 
-				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.get(CPRuleUserSegmentRelImpl.class,
-						primaryKey);
+				cpRuleUserSegmentRel = (CPRuleUserSegmentRel)session.get(
+					CPRuleUserSegmentRelImpl.class, primaryKey);
 
 				if (cpRuleUserSegmentRel != null) {
 					cacheResult(cpRuleUserSegmentRel);
 				}
 				else {
-					entityCache.putResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 						CPRuleUserSegmentRelImpl.class, primaryKey, nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 					CPRuleUserSegmentRelImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1565,18 +1609,21 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	@Override
 	public Map<Serializable, CPRuleUserSegmentRel> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CPRuleUserSegmentRel> map = new HashMap<Serializable, CPRuleUserSegmentRel>();
+		Map<Serializable, CPRuleUserSegmentRel> map =
+			new HashMap<Serializable, CPRuleUserSegmentRel>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByPrimaryKey(primaryKey);
+			CPRuleUserSegmentRel cpRuleUserSegmentRel = fetchByPrimaryKey(
+				primaryKey);
 
 			if (cpRuleUserSegmentRel != null) {
 				map.put(primaryKey, cpRuleUserSegmentRel);
@@ -1588,8 +1635,9 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
-					CPRuleUserSegmentRelImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				CPRuleUserSegmentRelImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1609,8 +1657,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE_PKS_IN);
 
@@ -1633,17 +1681,22 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 			Query q = session.createQuery(sql);
 
-			for (CPRuleUserSegmentRel cpRuleUserSegmentRel : (List<CPRuleUserSegmentRel>)q.list()) {
-				map.put(cpRuleUserSegmentRel.getPrimaryKeyObj(),
+			for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
+					(List<CPRuleUserSegmentRel>)q.list()) {
+
+				map.put(
+					cpRuleUserSegmentRel.getPrimaryKeyObj(),
 					cpRuleUserSegmentRel);
 
 				cacheResult(cpRuleUserSegmentRel);
 
-				uncachedPrimaryKeys.remove(cpRuleUserSegmentRel.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					cpRuleUserSegmentRel.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
 					CPRuleUserSegmentRelImpl.class, primaryKey, nullModel);
 			}
 		}
@@ -1671,7 +1724,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Returns a range of all the cp rule user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule user segment rels
@@ -1687,7 +1740,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Returns an ordered range of all the cp rule user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule user segment rels
@@ -1696,8 +1749,10 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the ordered range of cp rule user segment rels
 	 */
 	@Override
-	public List<CPRuleUserSegmentRel> findAll(int start, int end,
+	public List<CPRuleUserSegmentRel> findAll(
+		int start, int end,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -1705,7 +1760,7 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Returns an ordered range of all the cp rule user segment rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPRuleUserSegmentRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPRuleUserSegmentRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of cp rule user segment rels
@@ -1715,29 +1770,32 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * @return the ordered range of cp rule user segment rels
 	 */
 	@Override
-	public List<CPRuleUserSegmentRel> findAll(int start, int end,
+	public List<CPRuleUserSegmentRel> findAll(
+		int start, int end,
 		OrderByComparator<CPRuleUserSegmentRel> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPRuleUserSegmentRel> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CPRuleUserSegmentRel>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -1745,13 +1803,13 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_CPRULEUSERSEGMENTREL);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -1759,7 +1817,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				sql = _SQL_SELECT_CPRULEUSERSEGMENTREL;
 
 				if (pagination) {
-					sql = sql.concat(CPRuleUserSegmentRelModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CPRuleUserSegmentRelModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1771,16 +1830,16 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CPRuleUserSegmentRel>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -1818,8 +1877,8 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -1831,12 +1890,12 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -1857,6 +1916,80 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 	 * Initializes the cp rule user segment rel persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCPRuleId = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPRuleId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCPRuleId = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+			CPRuleUserSegmentRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPRuleId",
+			new String[] {Long.class.getName()},
+			CPRuleUserSegmentRelModelImpl.CPRULEID_COLUMN_BITMASK |
+			CPRuleUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCPRuleId = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPRuleId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceUserSegmentEntryId =
+			new FinderPath(
+				CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+				CPRuleUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceUserSegmentEntryId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceUserSegmentEntryId =
+			new FinderPath(
+				CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+				CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED,
+				CPRuleUserSegmentRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceUserSegmentEntryId",
+				new String[] {Long.class.getName()},
+				CPRuleUserSegmentRelModelImpl.
+					COMMERCEUSERSEGMENTENTRYID_COLUMN_BITMASK |
+				CPRuleUserSegmentRelModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceUserSegmentEntryId = new FinderPath(
+			CPRuleUserSegmentRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPRuleUserSegmentRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceUserSegmentEntryId",
+			new String[] {Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -1868,17 +2001,38 @@ public class CPRuleUserSegmentRelPersistenceImpl extends BasePersistenceImpl<CPR
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL = "SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel";
-	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE_PKS_IN = "SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE CPRuleUserSegmentRelId IN (";
-	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE = "SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE ";
-	private static final String _SQL_COUNT_CPRULEUSERSEGMENTREL = "SELECT COUNT(cpRuleUserSegmentRel) FROM CPRuleUserSegmentRel cpRuleUserSegmentRel";
-	private static final String _SQL_COUNT_CPRULEUSERSEGMENTREL_WHERE = "SELECT COUNT(cpRuleUserSegmentRel) FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "cpRuleUserSegmentRel.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CPRuleUserSegmentRel exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CPRuleUserSegmentRel exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CPRuleUserSegmentRelPersistenceImpl.class);
+
+	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL =
+		"SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel";
+
+	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE_PKS_IN =
+		"SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE CPRuleUserSegmentRelId IN (";
+
+	private static final String _SQL_SELECT_CPRULEUSERSEGMENTREL_WHERE =
+		"SELECT cpRuleUserSegmentRel FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE ";
+
+	private static final String _SQL_COUNT_CPRULEUSERSEGMENTREL =
+		"SELECT COUNT(cpRuleUserSegmentRel) FROM CPRuleUserSegmentRel cpRuleUserSegmentRel";
+
+	private static final String _SQL_COUNT_CPRULEUSERSEGMENTREL_WHERE =
+		"SELECT COUNT(cpRuleUserSegmentRel) FROM CPRuleUserSegmentRel cpRuleUserSegmentRel WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"cpRuleUserSegmentRel.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CPRuleUserSegmentRel exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CPRuleUserSegmentRel exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPRuleUserSegmentRelPersistenceImpl.class);
+
 }

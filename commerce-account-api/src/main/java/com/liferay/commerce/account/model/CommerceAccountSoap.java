@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.account.service.http.CommerceAccountServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.account.service.http.CommerceAccountServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceAccountSoap implements Serializable {
+
 	public static CommerceAccountSoap toSoapModel(CommerceAccount model) {
 		CommerceAccountSoap soapModel = new CommerceAccountSoap();
 
@@ -41,7 +41,8 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setParentCommerceAccountId(model.getParentCommerceAccountId());
+		soapModel.setParentCommerceAccountId(
+			model.getParentCommerceAccountId());
 		soapModel.setName(model.getName());
 		soapModel.setLogoId(model.getLogoId());
 		soapModel.setEmail(model.getEmail());
@@ -60,7 +61,8 @@ public class CommerceAccountSoap implements Serializable {
 	}
 
 	public static CommerceAccountSoap[] toSoapModels(CommerceAccount[] models) {
-		CommerceAccountSoap[] soapModels = new CommerceAccountSoap[models.length];
+		CommerceAccountSoap[] soapModels =
+			new CommerceAccountSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -71,10 +73,12 @@ public class CommerceAccountSoap implements Serializable {
 
 	public static CommerceAccountSoap[][] toSoapModels(
 		CommerceAccount[][] models) {
+
 		CommerceAccountSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceAccountSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceAccountSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceAccountSoap[0][0];
@@ -89,7 +93,9 @@ public class CommerceAccountSoap implements Serializable {
 
 	public static CommerceAccountSoap[] toSoapModels(
 		List<CommerceAccount> models) {
-		List<CommerceAccountSoap> soapModels = new ArrayList<CommerceAccountSoap>(models.size());
+
+		List<CommerceAccountSoap> soapModels =
+			new ArrayList<CommerceAccountSoap>(models.size());
 
 		for (CommerceAccount model : models) {
 			soapModels.add(toSoapModel(model));
@@ -302,4 +308,5 @@ public class CommerceAccountSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+
 }

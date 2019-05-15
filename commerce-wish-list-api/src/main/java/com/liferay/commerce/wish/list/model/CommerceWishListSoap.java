@@ -26,11 +26,11 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.wish.list.service.http.CommerceWishListServiceSoap}.
  *
  * @author Andrea Di Giorgi
- * @see com.liferay.commerce.wish.list.service.http.CommerceWishListServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceWishListSoap implements Serializable {
+
 	public static CommerceWishListSoap toSoapModel(CommerceWishList model) {
 		CommerceWishListSoap soapModel = new CommerceWishListSoap();
 
@@ -48,8 +48,11 @@ public class CommerceWishListSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CommerceWishListSoap[] toSoapModels(CommerceWishList[] models) {
-		CommerceWishListSoap[] soapModels = new CommerceWishListSoap[models.length];
+	public static CommerceWishListSoap[] toSoapModels(
+		CommerceWishList[] models) {
+
+		CommerceWishListSoap[] soapModels =
+			new CommerceWishListSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -60,10 +63,12 @@ public class CommerceWishListSoap implements Serializable {
 
 	public static CommerceWishListSoap[][] toSoapModels(
 		CommerceWishList[][] models) {
+
 		CommerceWishListSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceWishListSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceWishListSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceWishListSoap[0][0];
@@ -78,7 +83,9 @@ public class CommerceWishListSoap implements Serializable {
 
 	public static CommerceWishListSoap[] toSoapModels(
 		List<CommerceWishList> models) {
-		List<CommerceWishListSoap> soapModels = new ArrayList<CommerceWishListSoap>(models.size());
+
+		List<CommerceWishListSoap> soapModels =
+			new ArrayList<CommerceWishListSoap>(models.size());
 
 		for (CommerceWishList model : models) {
 			soapModels.add(toSoapModel(model));
@@ -192,4 +199,5 @@ public class CommerceWishListSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private boolean _defaultWishList;
+
 }

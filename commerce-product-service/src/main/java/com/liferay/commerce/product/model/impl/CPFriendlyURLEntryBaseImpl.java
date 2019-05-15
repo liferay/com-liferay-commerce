@@ -34,10 +34,11 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 @ProviderType
 public abstract class CPFriendlyURLEntryBaseImpl
 	extends CPFriendlyURLEntryModelImpl implements CPFriendlyURLEntry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp friendly url entry model instance should use the {@link CPFriendlyURLEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp friendly url entry model instance should use the <code>CPFriendlyURLEntry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPFriendlyURLEntryBaseImpl
 			CPFriendlyURLEntryLocalServiceUtil.updateCPFriendlyURLEntry(this);
 		}
 	}
+
 }

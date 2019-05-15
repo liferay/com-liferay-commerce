@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.service.CommerceDiscountRuleServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceDiscountRuleServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceDiscountRuleServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.discount.model.CommerceDiscountRuleSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.discount.model.CommerceDiscountRule}, that is translated to a
- * {@link com.liferay.commerce.discount.model.CommerceDiscountRuleSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountRuleSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountRule</code>, that is translated to a
+ * <code>com.liferay.commerce.discount.model.CommerceDiscountRuleSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,22 +59,25 @@ import java.rmi.RemoteException;
  *
  * @author Marco Leo
  * @see CommerceDiscountRuleServiceHttp
- * @see com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
- * @see CommerceDiscountRuleServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceDiscountRuleServiceSoap {
-	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap addCommerceDiscountRule(
-		long commerceDiscountId, String type, String typeSettings,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.discount.model.CommerceDiscountRule returnValue =
-				CommerceDiscountRuleServiceUtil.addCommerceDiscountRule(commerceDiscountId,
-					type, typeSettings, serviceContext);
 
-			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
+			addCommerceDiscountRule(
+				long commerceDiscountId, String type, String typeSettings,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountRule
+				returnValue =
+					CommerceDiscountRuleServiceUtil.addCommerceDiscountRule(
+						commerceDiscountId, type, typeSettings, serviceContext);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -85,8 +88,10 @@ public class CommerceDiscountRuleServiceSoap {
 
 	public static void deleteCommerceDiscountRule(long commerceDiscountRuleId)
 		throws RemoteException {
+
 		try {
-			CommerceDiscountRuleServiceUtil.deleteCommerceDiscountRule(commerceDiscountRuleId);
+			CommerceDiscountRuleServiceUtil.deleteCommerceDiscountRule(
+				commerceDiscountRuleId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -95,31 +100,45 @@ public class CommerceDiscountRuleServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap getCommerceDiscountRule(
-		long commerceDiscountRuleId) throws RemoteException {
-		try {
-			com.liferay.commerce.discount.model.CommerceDiscountRule returnValue =
-				CommerceDiscountRuleServiceUtil.getCommerceDiscountRule(commerceDiscountRuleId);
-
-			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap[] getCommerceDiscountRules(
-		long commerceDiscountId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscountRule> orderByComparator)
+	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
+			getCommerceDiscountRule(long commerceDiscountRuleId)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.discount.model.CommerceDiscountRule> returnValue =
-				CommerceDiscountRuleServiceUtil.getCommerceDiscountRules(commerceDiscountId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.toSoapModels(returnValue);
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountRule
+				returnValue =
+					CommerceDiscountRuleServiceUtil.getCommerceDiscountRule(
+						commerceDiscountRuleId);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap[]
+			getCommerceDiscountRules(
+				long commerceDiscountId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.discount.model.CommerceDiscountRule>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.discount.model.CommerceDiscountRule>
+					returnValue =
+						CommerceDiscountRuleServiceUtil.
+							getCommerceDiscountRules(
+								commerceDiscountId, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -130,8 +149,11 @@ public class CommerceDiscountRuleServiceSoap {
 
 	public static int getCommerceDiscountRulesCount(long commerceDiscountId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceDiscountRuleServiceUtil.getCommerceDiscountRulesCount(commerceDiscountId);
+			int returnValue =
+				CommerceDiscountRuleServiceUtil.getCommerceDiscountRulesCount(
+					commerceDiscountId);
 
 			return returnValue;
 		}
@@ -142,15 +164,19 @@ public class CommerceDiscountRuleServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap updateCommerceDiscountRule(
-		long commerceDiscountRuleId, String type, String typeSettings)
+	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
+			updateCommerceDiscountRule(
+				long commerceDiscountRuleId, String type, String typeSettings)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.discount.model.CommerceDiscountRule returnValue =
-				CommerceDiscountRuleServiceUtil.updateCommerceDiscountRule(commerceDiscountRuleId,
-					type, typeSettings);
 
-			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountRule
+				returnValue =
+					CommerceDiscountRuleServiceUtil.updateCommerceDiscountRule(
+						commerceDiscountRuleId, type, typeSettings);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -159,5 +185,7 @@ public class CommerceDiscountRuleServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceDiscountRuleServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceDiscountRuleServiceSoap.class);
+
 }

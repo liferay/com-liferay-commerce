@@ -28,70 +28,94 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceUserSegmentCriterionServiceWrapper
 	implements CommerceUserSegmentCriterionService,
-		ServiceWrapper<CommerceUserSegmentCriterionService> {
+			   ServiceWrapper<CommerceUserSegmentCriterionService> {
+
 	public CommerceUserSegmentCriterionServiceWrapper(
-		CommerceUserSegmentCriterionService commerceUserSegmentCriterionService) {
-		_commerceUserSegmentCriterionService = commerceUserSegmentCriterionService;
+		CommerceUserSegmentCriterionService
+			commerceUserSegmentCriterionService) {
+
+		_commerceUserSegmentCriterionService =
+			commerceUserSegmentCriterionService;
 	}
 
 	@Override
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion addCommerceUserSegmentCriterion(
-		long commerceUserSegmentEntryId, String type, String typeSettings,
-		double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion
+			addCommerceUserSegmentCriterion(
+				long commerceUserSegmentEntryId, String type,
+				String typeSettings, double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceUserSegmentCriterionService.addCommerceUserSegmentCriterion(commerceUserSegmentEntryId,
-			type, typeSettings, priority, serviceContext);
+
+		return _commerceUserSegmentCriterionService.
+			addCommerceUserSegmentCriterion(
+				commerceUserSegmentEntryId, type, typeSettings, priority,
+				serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceUserSegmentCriterion(
-		long commerceUserSegmentCriterionId)
+			long commerceUserSegmentCriterionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceUserSegmentCriterionService.deleteCommerceUserSegmentCriterion(commerceUserSegmentCriterionId);
+
+		_commerceUserSegmentCriterionService.deleteCommerceUserSegmentCriterion(
+			commerceUserSegmentCriterionId);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion> getCommerceUserSegmentCriteria(
-		long commerceUserSegmentEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceUserSegmentCriterionService.getCommerceUserSegmentCriteria(commerceUserSegmentEntryId,
-			start, end, orderByComparator);
+	public java.util.List
+		<com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion>
+				getCommerceUserSegmentCriteria(
+					long commerceUserSegmentEntryId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.user.segment.model.
+							CommerceUserSegmentCriterion> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceUserSegmentCriterionService.
+			getCommerceUserSegmentCriteria(
+				commerceUserSegmentEntryId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceUserSegmentCriteriaCount(
-		long commerceUserSegmentEntryId)
+			long commerceUserSegmentEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceUserSegmentCriterionService.getCommerceUserSegmentCriteriaCount(commerceUserSegmentEntryId);
+
+		return _commerceUserSegmentCriterionService.
+			getCommerceUserSegmentCriteriaCount(commerceUserSegmentEntryId);
 	}
 
 	@Override
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion getCommerceUserSegmentCriterion(
-		long commerceUserSegmentCriterionId)
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion
+			getCommerceUserSegmentCriterion(long commerceUserSegmentCriterionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceUserSegmentCriterionService.getCommerceUserSegmentCriterion(commerceUserSegmentCriterionId);
+
+		return _commerceUserSegmentCriterionService.
+			getCommerceUserSegmentCriterion(commerceUserSegmentCriterionId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceUserSegmentCriterionService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion updateCommerceUserSegmentCriterion(
-		long commerceUserSegmentCriterionId, String type, String typeSettings,
-		double priority,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion
+			updateCommerceUserSegmentCriterion(
+				long commerceUserSegmentCriterionId, String type,
+				String typeSettings, double priority,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceUserSegmentCriterionService.updateCommerceUserSegmentCriterion(commerceUserSegmentCriterionId,
-			type, typeSettings, priority, serviceContext);
+
+		return _commerceUserSegmentCriterionService.
+			updateCommerceUserSegmentCriterion(
+				commerceUserSegmentCriterionId, type, typeSettings, priority,
+				serviceContext);
 	}
 
 	@Override
@@ -101,9 +125,14 @@ public class CommerceUserSegmentCriterionServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceUserSegmentCriterionService commerceUserSegmentCriterionService) {
-		_commerceUserSegmentCriterionService = commerceUserSegmentCriterionService;
+		CommerceUserSegmentCriterionService
+			commerceUserSegmentCriterionService) {
+
+		_commerceUserSegmentCriterionService =
+			commerceUserSegmentCriterionService;
 	}
 
-	private CommerceUserSegmentCriterionService _commerceUserSegmentCriterionService;
+	private CommerceUserSegmentCriterionService
+		_commerceUserSegmentCriterionService;
+
 }

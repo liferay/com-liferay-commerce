@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.exception.NoSuchOrderNoteException;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.service.CommerceOrderNoteLocalServiceUtil;
 import com.liferay.commerce.service.persistence.CommerceOrderNotePersistence;
 import com.liferay.commerce.service.persistence.CommerceOrderNoteUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,17 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceOrderNotePersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.service"));
 
 	@Before
 	public void setUp() {
@@ -108,7 +107,9 @@ public class CommerceOrderNotePersistenceTest {
 
 		_persistence.remove(newCommerceOrderNote);
 
-		CommerceOrderNote existingCommerceOrderNote = _persistence.fetchByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+		CommerceOrderNote existingCommerceOrderNote =
+			_persistence.fetchByPrimaryKey(
+				newCommerceOrderNote.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceOrderNote);
 	}
@@ -124,7 +125,8 @@ public class CommerceOrderNotePersistenceTest {
 
 		CommerceOrderNote newCommerceOrderNote = _persistence.create(pk);
 
-		newCommerceOrderNote.setExternalReferenceCode(RandomTestUtil.randomString());
+		newCommerceOrderNote.setExternalReferenceCode(
+			RandomTestUtil.randomString());
 
 		newCommerceOrderNote.setGroupId(RandomTestUtil.nextLong());
 
@@ -146,31 +148,41 @@ public class CommerceOrderNotePersistenceTest {
 
 		_commerceOrderNotes.add(_persistence.update(newCommerceOrderNote));
 
-		CommerceOrderNote existingCommerceOrderNote = _persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+		CommerceOrderNote existingCommerceOrderNote =
+			_persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceOrderNote.getExternalReferenceCode(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getExternalReferenceCode(),
 			newCommerceOrderNote.getExternalReferenceCode());
-		Assert.assertEquals(existingCommerceOrderNote.getCommerceOrderNoteId(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getCommerceOrderNoteId(),
 			newCommerceOrderNote.getCommerceOrderNoteId());
-		Assert.assertEquals(existingCommerceOrderNote.getGroupId(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getGroupId(),
 			newCommerceOrderNote.getGroupId());
-		Assert.assertEquals(existingCommerceOrderNote.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getCompanyId(),
 			newCommerceOrderNote.getCompanyId());
-		Assert.assertEquals(existingCommerceOrderNote.getUserId(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getUserId(),
 			newCommerceOrderNote.getUserId());
-		Assert.assertEquals(existingCommerceOrderNote.getUserName(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getUserName(),
 			newCommerceOrderNote.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceOrderNote.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceOrderNote.getCreateDate()),
 			Time.getShortTimestamp(newCommerceOrderNote.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceOrderNote.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceOrderNote.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceOrderNote.getModifiedDate()));
-		Assert.assertEquals(existingCommerceOrderNote.getCommerceOrderId(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getCommerceOrderId(),
 			newCommerceOrderNote.getCommerceOrderId());
-		Assert.assertEquals(existingCommerceOrderNote.getContent(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.getContent(),
 			newCommerceOrderNote.getContent());
-		Assert.assertEquals(existingCommerceOrderNote.isRestricted(),
+		Assert.assertEquals(
+			existingCommerceOrderNote.isRestricted(),
 			newCommerceOrderNote.isRestricted());
 	}
 
@@ -183,8 +195,8 @@ public class CommerceOrderNotePersistenceTest {
 
 	@Test
 	public void testCountByC_R() throws Exception {
-		_persistence.countByC_R(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean());
+		_persistence.countByC_R(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
 		_persistence.countByC_R(0L, RandomTestUtil.randomBoolean());
 	}
@@ -202,7 +214,8 @@ public class CommerceOrderNotePersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
-		CommerceOrderNote existingCommerceOrderNote = _persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+		CommerceOrderNote existingCommerceOrderNote =
+			_persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceOrderNote, newCommerceOrderNote);
 	}
@@ -216,23 +229,26 @@ public class CommerceOrderNotePersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceOrderNote> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommerceOrderNote",
-			"externalReferenceCode", true, "commerceOrderNoteId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "commerceOrderId",
-			true, "content", true, "restricted", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceOrderNote", "externalReferenceCode", true,
+			"commerceOrderNoteId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceOrderId", true, "content", true,
+			"restricted", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
-		CommerceOrderNote existingCommerceOrderNote = _persistence.fetchByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+		CommerceOrderNote existingCommerceOrderNote =
+			_persistence.fetchByPrimaryKey(
+				newCommerceOrderNote.getPrimaryKey());
 
 		Assert.assertEquals(existingCommerceOrderNote, newCommerceOrderNote);
 	}
@@ -241,7 +257,8 @@ public class CommerceOrderNotePersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceOrderNote missingCommerceOrderNote = _persistence.fetchByPrimaryKey(pk);
+		CommerceOrderNote missingCommerceOrderNote =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceOrderNote);
 	}
@@ -249,6 +266,7 @@ public class CommerceOrderNotePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CommerceOrderNote newCommerceOrderNote1 = addCommerceOrderNote();
 		CommerceOrderNote newCommerceOrderNote2 = addCommerceOrderNote();
 
@@ -257,18 +275,22 @@ public class CommerceOrderNotePersistenceTest {
 		primaryKeys.add(newCommerceOrderNote1.getPrimaryKey());
 		primaryKeys.add(newCommerceOrderNote2.getPrimaryKey());
 
-		Map<Serializable, CommerceOrderNote> commerceOrderNotes = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceOrderNote> commerceOrderNotes =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceOrderNotes.size());
-		Assert.assertEquals(newCommerceOrderNote1,
+		Assert.assertEquals(
+			newCommerceOrderNote1,
 			commerceOrderNotes.get(newCommerceOrderNote1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceOrderNote2,
+		Assert.assertEquals(
+			newCommerceOrderNote2,
 			commerceOrderNotes.get(newCommerceOrderNote2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -278,7 +300,8 @@ public class CommerceOrderNotePersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceOrderNote> commerceOrderNotes = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceOrderNote> commerceOrderNotes =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceOrderNotes.isEmpty());
 	}
@@ -286,6 +309,7 @@ public class CommerceOrderNotePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
 		long pk = RandomTestUtil.nextLong();
@@ -295,36 +319,39 @@ public class CommerceOrderNotePersistenceTest {
 		primaryKeys.add(newCommerceOrderNote.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceOrderNote> commerceOrderNotes = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceOrderNote> commerceOrderNotes =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceOrderNotes.size());
-		Assert.assertEquals(newCommerceOrderNote,
+		Assert.assertEquals(
+			newCommerceOrderNote,
 			commerceOrderNotes.get(newCommerceOrderNote.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceOrderNote> commerceOrderNotes = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceOrderNote> commerceOrderNotes =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceOrderNotes.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceOrderNote.getPrimaryKey());
 
-		Map<Serializable, CommerceOrderNote> commerceOrderNotes = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceOrderNote> commerceOrderNotes =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceOrderNotes.size());
-		Assert.assertEquals(newCommerceOrderNote,
+		Assert.assertEquals(
+			newCommerceOrderNote,
 			commerceOrderNotes.get(newCommerceOrderNote.getPrimaryKey()));
 	}
 
@@ -332,15 +359,20 @@ public class CommerceOrderNotePersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceOrderNoteLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceOrderNoteLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceOrderNote>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceOrderNote>() {
+
 				@Override
 				public void performAction(CommerceOrderNote commerceOrderNote) {
 					Assert.assertNotNull(commerceOrderNote);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -349,17 +381,19 @@ public class CommerceOrderNotePersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceOrderNote.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceOrderNote.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceOrderNoteId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceOrderNoteId",
 				newCommerceOrderNote.getCommerceOrderNoteId()));
 
-		List<CommerceOrderNote> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceOrderNote> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -370,32 +404,35 @@ public class CommerceOrderNotePersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceOrderNote.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceOrderNote.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commerceOrderNoteId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceOrderNoteId", RandomTestUtil.nextLong()));
 
-		List<CommerceOrderNote> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceOrderNote> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceOrderNote.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceOrderNote.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceOrderNoteId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceOrderNoteId"));
 
-		Object newCommerceOrderNoteId = newCommerceOrderNote.getCommerceOrderNoteId();
+		Object newCommerceOrderNoteId =
+			newCommerceOrderNote.getCommerceOrderNoteId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceOrderNoteId",
-				new Object[] { newCommerceOrderNoteId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceOrderNoteId", new Object[] {newCommerceOrderNoteId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -403,19 +440,22 @@ public class CommerceOrderNotePersistenceTest {
 
 		Object existingCommerceOrderNoteId = result.get(0);
 
-		Assert.assertEquals(existingCommerceOrderNoteId, newCommerceOrderNoteId);
+		Assert.assertEquals(
+			existingCommerceOrderNoteId, newCommerceOrderNoteId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceOrderNote.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceOrderNote.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceOrderNoteId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceOrderNoteId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commerceOrderNoteId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"commerceOrderNoteId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -428,25 +468,29 @@ public class CommerceOrderNotePersistenceTest {
 
 		_persistence.clearCache();
 
-		CommerceOrderNote existingCommerceOrderNote = _persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+		CommerceOrderNote existingCommerceOrderNote =
+			_persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceOrderNote.getCompanyId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceOrderNote,
-				"getOriginalCompanyId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceOrderNote.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceOrderNote, "getOriginalCompanyId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceOrderNote.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCommerceOrderNote,
+				ReflectionTestUtil.invoke(
+					existingCommerceOrderNote,
 					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
-	protected CommerceOrderNote addCommerceOrderNote()
-		throws Exception {
+	protected CommerceOrderNote addCommerceOrderNote() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceOrderNote commerceOrderNote = _persistence.create(pk);
 
-		commerceOrderNote.setExternalReferenceCode(RandomTestUtil.randomString());
+		commerceOrderNote.setExternalReferenceCode(
+			RandomTestUtil.randomString());
 
 		commerceOrderNote.setGroupId(RandomTestUtil.nextLong());
 
@@ -471,7 +515,9 @@ public class CommerceOrderNotePersistenceTest {
 		return commerceOrderNote;
 	}
 
-	private List<CommerceOrderNote> _commerceOrderNotes = new ArrayList<CommerceOrderNote>();
+	private List<CommerceOrderNote> _commerceOrderNotes =
+		new ArrayList<CommerceOrderNote>();
 	private CommerceOrderNotePersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

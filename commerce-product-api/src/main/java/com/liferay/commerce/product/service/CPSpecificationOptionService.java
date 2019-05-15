@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPSpecificationOption;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -43,39 +42,47 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPSpecificationOptionServiceUtil
- * @see com.liferay.commerce.product.service.base.CPSpecificationOptionServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPSpecificationOption"}, service = CPSpecificationOptionService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPSpecificationOption"
+	},
+	service = CPSpecificationOptionService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPSpecificationOptionService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPSpecificationOptionServiceUtil} to access the cp specification option remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPSpecificationOptionServiceUtil} to access the cp specification option remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CPSpecificationOption addCPSpecificationOption(
-		long cpOptionCategoryId, Map<Locale, String> titleMap,
-		Map<Locale, String> descriptionMap, boolean facetable, String key,
-		ServiceContext serviceContext) throws PortalException;
+			long cpOptionCategoryId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, boolean facetable, String key,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPSpecificationOption(long cpSpecificationOptionId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPSpecificationOption getCPSpecificationOption(
-		long cpSpecificationOptionId) throws PortalException;
+			long cpSpecificationOptionId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptions(long groupId,
-		int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
+	public List<CPSpecificationOption> getCPSpecificationOptions(
+			long groupId, int start, int end,
+			OrderByComparator<CPSpecificationOption> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -83,20 +90,23 @@ public interface CPSpecificationOptionService extends BaseService {
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPSpecificationOption> searchCPSpecificationOptions(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, Sort sort) throws PortalException;
+	public BaseModelSearchResult<CPSpecificationOption>
+			searchCPSpecificationOptions(
+				long companyId, long groupId, Boolean facetable,
+				String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	public CPSpecificationOption updateCPSpecificationOption(
-		long cpSpecificationOptionId, long cpOptionCategoryId,
-		Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-		boolean facetable, String key, ServiceContext serviceContext)
+			long cpSpecificationOptionId, long cpOptionCategoryId,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			boolean facetable, String key, ServiceContext serviceContext)
 		throws PortalException;
+
 }

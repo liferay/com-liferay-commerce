@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CPDefinitionInventory;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionInventory in entity cache.
  *
  * @author Alessio Antonio Rendina
- * @see CPDefinitionInventory
  * @generated
  */
 @ProviderType
-public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionInventory>,
-	Externalizable {
+public class CPDefinitionInventoryCacheModel
+	implements CacheModel<CPDefinitionInventory>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 			return false;
 		}
 
-		CPDefinitionInventoryCacheModel cpDefinitionInventoryCacheModel = (CPDefinitionInventoryCacheModel)obj;
+		CPDefinitionInventoryCacheModel cpDefinitionInventoryCacheModel =
+			(CPDefinitionInventoryCacheModel)obj;
 
-		if (CPDefinitionInventoryId == cpDefinitionInventoryCacheModel.CPDefinitionInventoryId) {
+		if (CPDefinitionInventoryId ==
+				cpDefinitionInventoryCacheModel.CPDefinitionInventoryId) {
+
 			return true;
 		}
 
@@ -112,7 +114,8 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 
 	@Override
 	public CPDefinitionInventory toEntityModel() {
-		CPDefinitionInventoryImpl cpDefinitionInventoryImpl = new CPDefinitionInventoryImpl();
+		CPDefinitionInventoryImpl cpDefinitionInventoryImpl =
+			new CPDefinitionInventoryImpl();
 
 		if (uuid == null) {
 			cpDefinitionInventoryImpl.setUuid("");
@@ -121,7 +124,8 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 			cpDefinitionInventoryImpl.setUuid(uuid);
 		}
 
-		cpDefinitionInventoryImpl.setCPDefinitionInventoryId(CPDefinitionInventoryId);
+		cpDefinitionInventoryImpl.setCPDefinitionInventoryId(
+			CPDefinitionInventoryId);
 		cpDefinitionInventoryImpl.setGroupId(groupId);
 		cpDefinitionInventoryImpl.setCompanyId(companyId);
 		cpDefinitionInventoryImpl.setUserId(userId);
@@ -153,7 +157,8 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 			cpDefinitionInventoryImpl.setCPDefinitionInventoryEngine("");
 		}
 		else {
-			cpDefinitionInventoryImpl.setCPDefinitionInventoryEngine(CPDefinitionInventoryEngine);
+			cpDefinitionInventoryImpl.setCPDefinitionInventoryEngine(
+				CPDefinitionInventoryEngine);
 		}
 
 		if (lowStockActivity == null) {
@@ -174,10 +179,12 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 			cpDefinitionInventoryImpl.setAllowedOrderQuantities("");
 		}
 		else {
-			cpDefinitionInventoryImpl.setAllowedOrderQuantities(allowedOrderQuantities);
+			cpDefinitionInventoryImpl.setAllowedOrderQuantities(
+				allowedOrderQuantities);
 		}
 
-		cpDefinitionInventoryImpl.setMultipleOrderQuantity(multipleOrderQuantity);
+		cpDefinitionInventoryImpl.setMultipleOrderQuantity(
+			multipleOrderQuantity);
 
 		cpDefinitionInventoryImpl.resetOriginalValues();
 
@@ -220,8 +227,7 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -304,4 +310,5 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 	public int maxOrderQuantity;
 	public String allowedOrderQuantities;
 	public int multipleOrderQuantity;
+
 }

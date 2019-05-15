@@ -26,16 +26,18 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.product.service.http.CPRuleAssetCategoryRelServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.product.service.http.CPRuleAssetCategoryRelServiceSoap
  * @generated
  */
 @ProviderType
 public class CPRuleAssetCategoryRelSoap implements Serializable {
+
 	public static CPRuleAssetCategoryRelSoap toSoapModel(
 		CPRuleAssetCategoryRel model) {
+
 		CPRuleAssetCategoryRelSoap soapModel = new CPRuleAssetCategoryRelSoap();
 
-		soapModel.setCPRuleAssetCategoryRelId(model.getCPRuleAssetCategoryRelId());
+		soapModel.setCPRuleAssetCategoryRelId(
+			model.getCPRuleAssetCategoryRelId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -50,7 +52,9 @@ public class CPRuleAssetCategoryRelSoap implements Serializable {
 
 	public static CPRuleAssetCategoryRelSoap[] toSoapModels(
 		CPRuleAssetCategoryRel[] models) {
-		CPRuleAssetCategoryRelSoap[] soapModels = new CPRuleAssetCategoryRelSoap[models.length];
+
+		CPRuleAssetCategoryRelSoap[] soapModels =
+			new CPRuleAssetCategoryRelSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +65,12 @@ public class CPRuleAssetCategoryRelSoap implements Serializable {
 
 	public static CPRuleAssetCategoryRelSoap[][] toSoapModels(
 		CPRuleAssetCategoryRel[][] models) {
+
 		CPRuleAssetCategoryRelSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CPRuleAssetCategoryRelSoap[models.length][models[0].length];
+			soapModels =
+				new CPRuleAssetCategoryRelSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CPRuleAssetCategoryRelSoap[0][0];
@@ -79,13 +85,16 @@ public class CPRuleAssetCategoryRelSoap implements Serializable {
 
 	public static CPRuleAssetCategoryRelSoap[] toSoapModels(
 		List<CPRuleAssetCategoryRel> models) {
-		List<CPRuleAssetCategoryRelSoap> soapModels = new ArrayList<CPRuleAssetCategoryRelSoap>(models.size());
+
+		List<CPRuleAssetCategoryRelSoap> soapModels =
+			new ArrayList<CPRuleAssetCategoryRelSoap>(models.size());
 
 		for (CPRuleAssetCategoryRel model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CPRuleAssetCategoryRelSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CPRuleAssetCategoryRelSoap[soapModels.size()]);
 	}
 
 	public CPRuleAssetCategoryRelSoap() {
@@ -180,4 +189,5 @@ public class CPRuleAssetCategoryRelSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _CPRuleId;
 	private long _assetCategoryId;
+
 }

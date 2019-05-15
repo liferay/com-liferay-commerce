@@ -15,14 +15,12 @@
 package com.liferay.commerce.account.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.account.exception.NoSuchAccountUserRelException;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -37,15 +35,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -55,17 +44,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceAccountUserRelPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.account.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.account.service"));
 
 	@Before
 	public void setUp() {
@@ -78,7 +77,8 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceAccountUserRel> iterator = _commerceAccountUserRels.iterator();
+		Iterator<CommerceAccountUserRel> iterator =
+			_commerceAccountUserRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -89,8 +89,8 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@Test
 	public void testCreate() throws Exception {
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		CommerceAccountUserRel commerceAccountUserRel = _persistence.create(pk);
 
@@ -101,11 +101,14 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
 		_persistence.remove(newCommerceAccountUserRel);
 
-		CommerceAccountUserRel existingCommerceAccountUserRel = _persistence.fetchByPrimaryKey(newCommerceAccountUserRel.getPrimaryKey());
+		CommerceAccountUserRel existingCommerceAccountUserRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAccountUserRel.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceAccountUserRel);
 	}
@@ -117,10 +120,11 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@Test
 	public void testUpdateExisting() throws Exception {
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		CommerceAccountUserRel newCommerceAccountUserRel = _persistence.create(pk);
+		CommerceAccountUserRel newCommerceAccountUserRel = _persistence.create(
+			pk);
 
 		newCommerceAccountUserRel.setCompanyId(RandomTestUtil.nextLong());
 
@@ -132,27 +136,37 @@ public class CommerceAccountUserRelPersistenceTest {
 
 		newCommerceAccountUserRel.setModifiedDate(RandomTestUtil.nextDate());
 
-		_commerceAccountUserRels.add(_persistence.update(
-				newCommerceAccountUserRel));
+		_commerceAccountUserRels.add(
+			_persistence.update(newCommerceAccountUserRel));
 
-		CommerceAccountUserRel existingCommerceAccountUserRel = _persistence.findByPrimaryKey(newCommerceAccountUserRel.getPrimaryKey());
+		CommerceAccountUserRel existingCommerceAccountUserRel =
+			_persistence.findByPrimaryKey(
+				newCommerceAccountUserRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAccountUserRel.getCommerceAccountId(),
+		Assert.assertEquals(
+			existingCommerceAccountUserRel.getCommerceAccountId(),
 			newCommerceAccountUserRel.getCommerceAccountId());
-		Assert.assertEquals(existingCommerceAccountUserRel.getCommerceAccountUserId(),
+		Assert.assertEquals(
+			existingCommerceAccountUserRel.getCommerceAccountUserId(),
 			newCommerceAccountUserRel.getCommerceAccountUserId());
-		Assert.assertEquals(existingCommerceAccountUserRel.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceAccountUserRel.getCompanyId(),
 			newCommerceAccountUserRel.getCompanyId());
-		Assert.assertEquals(existingCommerceAccountUserRel.getUserId(),
+		Assert.assertEquals(
+			existingCommerceAccountUserRel.getUserId(),
 			newCommerceAccountUserRel.getUserId());
-		Assert.assertEquals(existingCommerceAccountUserRel.getUserName(),
+		Assert.assertEquals(
+			existingCommerceAccountUserRel.getUserName(),
 			newCommerceAccountUserRel.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAccountUserRel.getCreateDate()),
 			Time.getShortTimestamp(newCommerceAccountUserRel.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceAccountUserRel.getModifiedDate()),
-			Time.getShortTimestamp(newCommerceAccountUserRel.getModifiedDate()));
+			Time.getShortTimestamp(
+				newCommerceAccountUserRel.getModifiedDate()));
 	}
 
 	@Test
@@ -171,38 +185,45 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
-		CommerceAccountUserRel existingCommerceAccountUserRel = _persistence.findByPrimaryKey(newCommerceAccountUserRel.getPrimaryKey());
+		CommerceAccountUserRel existingCommerceAccountUserRel =
+			_persistence.findByPrimaryKey(
+				newCommerceAccountUserRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAccountUserRel,
-			newCommerceAccountUserRel);
+		Assert.assertEquals(
+			existingCommerceAccountUserRel, newCommerceAccountUserRel);
 	}
 
 	@Test(expected = NoSuchAccountUserRelException.class)
 	public void testFindByPrimaryKeyMissing() throws Exception {
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.findByPrimaryKey(pk);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
-		CommerceAccountUserRel existingCommerceAccountUserRel = _persistence.fetchByPrimaryKey(newCommerceAccountUserRel.getPrimaryKey());
+		CommerceAccountUserRel existingCommerceAccountUserRel =
+			_persistence.fetchByPrimaryKey(
+				newCommerceAccountUserRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceAccountUserRel,
-			newCommerceAccountUserRel);
+		Assert.assertEquals(
+			existingCommerceAccountUserRel, newCommerceAccountUserRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		CommerceAccountUserRel missingCommerceAccountUserRel = _persistence.fetchByPrimaryKey(pk);
+		CommerceAccountUserRel missingCommerceAccountUserRel =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceAccountUserRel);
 	}
@@ -210,21 +231,27 @@ public class CommerceAccountUserRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel1 = addCommerceAccountUserRel();
-		CommerceAccountUserRel newCommerceAccountUserRel2 = addCommerceAccountUserRel();
+
+		CommerceAccountUserRel newCommerceAccountUserRel1 =
+			addCommerceAccountUserRel();
+		CommerceAccountUserRel newCommerceAccountUserRel2 =
+			addCommerceAccountUserRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAccountUserRel1.getPrimaryKey());
 		primaryKeys.add(newCommerceAccountUserRel2.getPrimaryKey());
 
-		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceAccountUserRels.size());
-		Assert.assertEquals(newCommerceAccountUserRel1,
+		Assert.assertEquals(
+			newCommerceAccountUserRel1,
 			commerceAccountUserRels.get(
 				newCommerceAccountUserRel1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceAccountUserRel2,
+		Assert.assertEquals(
+			newCommerceAccountUserRel2,
 			commerceAccountUserRels.get(
 				newCommerceAccountUserRel2.getPrimaryKey()));
 	}
@@ -232,18 +259,20 @@ public class CommerceAccountUserRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
-		CommerceAccountUserRelPK pk1 = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
 
-		CommerceAccountUserRelPK pk2 = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRelPK pk1 = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+
+		CommerceAccountUserRelPK pk2 = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceAccountUserRels.isEmpty());
 	}
@@ -251,47 +280,53 @@ public class CommerceAccountUserRelPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
 
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
+
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAccountUserRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceAccountUserRels.size());
-		Assert.assertEquals(newCommerceAccountUserRel,
+		Assert.assertEquals(
+			newCommerceAccountUserRel,
 			commerceAccountUserRels.get(
 				newCommerceAccountUserRel.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceAccountUserRels.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceAccountUserRel.getPrimaryKey());
 
-		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceAccountUserRel> commerceAccountUserRels =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceAccountUserRels.size());
-		Assert.assertEquals(newCommerceAccountUserRel,
+		Assert.assertEquals(
+			newCommerceAccountUserRel,
 			commerceAccountUserRels.get(
 				newCommerceAccountUserRel.getPrimaryKey()));
 	}
@@ -300,16 +335,22 @@ public class CommerceAccountUserRelPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceAccountUserRelLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceAccountUserRelLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceAccountUserRel>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceAccountUserRel>() {
+
 				@Override
 				public void performAction(
 					CommerceAccountUserRel commerceAccountUserRel) {
+
 					Assert.assertNotNull(commerceAccountUserRel);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -318,59 +359,68 @@ public class CommerceAccountUserRelPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAccountUserRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAccountUserRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"id.commerceAccountId",
 				newCommerceAccountUserRel.getCommerceAccountId()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"id.commerceAccountUserId",
 				newCommerceAccountUserRel.getCommerceAccountUserId()));
 
-		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CommerceAccountUserRel existingCommerceAccountUserRel = result.get(0);
 
-		Assert.assertEquals(existingCommerceAccountUserRel,
-			newCommerceAccountUserRel);
+		Assert.assertEquals(
+			existingCommerceAccountUserRel, newCommerceAccountUserRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAccountUserRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAccountUserRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
-				RandomTestUtil.nextLong()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"id.commerceAccountId", RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"id.commerceAccountUserId", RandomTestUtil.nextLong()));
 
-		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceAccountUserRel newCommerceAccountUserRel = addCommerceAccountUserRel();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceAccountUserRel newCommerceAccountUserRel =
+			addCommerceAccountUserRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAccountUserRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAccountUserRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"id.commerceAccountId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("id.commerceAccountId"));
 
-		Object newCommerceAccountId = newCommerceAccountUserRel.getCommerceAccountId();
+		Object newCommerceAccountId =
+			newCommerceAccountUserRel.getCommerceAccountId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("id.commerceAccountId",
-				new Object[] { newCommerceAccountId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"id.commerceAccountId", new Object[] {newCommerceAccountId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -383,14 +433,16 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceAccountUserRel.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceAccountUserRel.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"id.commerceAccountId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("id.commerceAccountId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("id.commerceAccountId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"id.commerceAccountId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -399,8 +451,9 @@ public class CommerceAccountUserRelPersistenceTest {
 
 	protected CommerceAccountUserRel addCommerceAccountUserRel()
 		throws Exception {
-		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(RandomTestUtil.nextLong(),
-				RandomTestUtil.nextLong());
+
+		CommerceAccountUserRelPK pk = new CommerceAccountUserRelPK(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		CommerceAccountUserRel commerceAccountUserRel = _persistence.create(pk);
 
@@ -414,12 +467,15 @@ public class CommerceAccountUserRelPersistenceTest {
 
 		commerceAccountUserRel.setModifiedDate(RandomTestUtil.nextDate());
 
-		_commerceAccountUserRels.add(_persistence.update(commerceAccountUserRel));
+		_commerceAccountUserRels.add(
+			_persistence.update(commerceAccountUserRel));
 
 		return commerceAccountUserRel;
 	}
 
-	private List<CommerceAccountUserRel> _commerceAccountUserRels = new ArrayList<CommerceAccountUserRel>();
+	private List<CommerceAccountUserRel> _commerceAccountUserRels =
+		new ArrayList<CommerceAccountUserRel>();
 	private CommerceAccountUserRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

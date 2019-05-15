@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalServiceUtil;
 import com.liferay.commerce.product.service.persistence.CPDefinitionLinkPersistence;
 import com.liferay.commerce.product.service.persistence.CPDefinitionLinkUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,15 +39,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -60,17 +49,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionLinkPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
-				"com.liferay.commerce.product.service"));
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED, "com.liferay.commerce.product.service"));
 
 	@Before
 	public void setUp() {
@@ -109,7 +108,8 @@ public class CPDefinitionLinkPersistenceTest {
 
 		_persistence.remove(newCPDefinitionLink);
 
-		CPDefinitionLink existingCPDefinitionLink = _persistence.fetchByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
+		CPDefinitionLink existingCPDefinitionLink =
+			_persistence.fetchByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
 
 		Assert.assertNull(existingCPDefinitionLink);
 	}
@@ -149,34 +149,43 @@ public class CPDefinitionLinkPersistenceTest {
 
 		_cpDefinitionLinks.add(_persistence.update(newCPDefinitionLink));
 
-		CPDefinitionLink existingCPDefinitionLink = _persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
+		CPDefinitionLink existingCPDefinitionLink =
+			_persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
 
-		Assert.assertEquals(existingCPDefinitionLink.getUuid(),
-			newCPDefinitionLink.getUuid());
-		Assert.assertEquals(existingCPDefinitionLink.getCPDefinitionLinkId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getUuid(), newCPDefinitionLink.getUuid());
+		Assert.assertEquals(
+			existingCPDefinitionLink.getCPDefinitionLinkId(),
 			newCPDefinitionLink.getCPDefinitionLinkId());
-		Assert.assertEquals(existingCPDefinitionLink.getGroupId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getGroupId(),
 			newCPDefinitionLink.getGroupId());
-		Assert.assertEquals(existingCPDefinitionLink.getCompanyId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getCompanyId(),
 			newCPDefinitionLink.getCompanyId());
-		Assert.assertEquals(existingCPDefinitionLink.getUserId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getUserId(),
 			newCPDefinitionLink.getUserId());
-		Assert.assertEquals(existingCPDefinitionLink.getUserName(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getUserName(),
 			newCPDefinitionLink.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPDefinitionLink.getCreateDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPDefinitionLink.getCreateDate()),
 			Time.getShortTimestamp(newCPDefinitionLink.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCPDefinitionLink.getModifiedDate()),
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCPDefinitionLink.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinitionLink.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionLink.getCPDefinitionId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getCPDefinitionId(),
 			newCPDefinitionLink.getCPDefinitionId());
-		Assert.assertEquals(existingCPDefinitionLink.getCProductId(),
+		Assert.assertEquals(
+			existingCPDefinitionLink.getCProductId(),
 			newCPDefinitionLink.getCProductId());
-		AssertUtils.assertEquals(existingCPDefinitionLink.getPriority(),
+		AssertUtils.assertEquals(
+			existingCPDefinitionLink.getPriority(),
 			newCPDefinitionLink.getPriority());
-		Assert.assertEquals(existingCPDefinitionLink.getType(),
-			newCPDefinitionLink.getType());
+		Assert.assertEquals(
+			existingCPDefinitionLink.getType(), newCPDefinitionLink.getType());
 	}
 
 	@Test
@@ -240,8 +249,8 @@ public class CPDefinitionLinkPersistenceTest {
 
 	@Test
 	public void testCountByC_C_T() throws Exception {
-		_persistence.countByC_C_T(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), "");
+		_persistence.countByC_C_T(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(), "");
 
 		_persistence.countByC_C_T(0L, 0L, "null");
 
@@ -252,7 +261,8 @@ public class CPDefinitionLinkPersistenceTest {
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
-		CPDefinitionLink existingCPDefinitionLink = _persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
+		CPDefinitionLink existingCPDefinitionLink =
+			_persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
 
 		Assert.assertEquals(existingCPDefinitionLink, newCPDefinitionLink);
 	}
@@ -266,23 +276,24 @@ public class CPDefinitionLinkPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CPDefinitionLink> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CPDefinitionLink", "uuid",
-			true, "CPDefinitionLinkId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "CPDefinitionId", true, "CProductId", true,
-			"priority", true, "type", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CPDefinitionLink", "uuid", true, "CPDefinitionLinkId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "CPDefinitionId",
+			true, "CProductId", true, "priority", true, "type", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
-		CPDefinitionLink existingCPDefinitionLink = _persistence.fetchByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
+		CPDefinitionLink existingCPDefinitionLink =
+			_persistence.fetchByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
 
 		Assert.assertEquals(existingCPDefinitionLink, newCPDefinitionLink);
 	}
@@ -291,7 +302,8 @@ public class CPDefinitionLinkPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CPDefinitionLink missingCPDefinitionLink = _persistence.fetchByPrimaryKey(pk);
+		CPDefinitionLink missingCPDefinitionLink =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCPDefinitionLink);
 	}
@@ -299,6 +311,7 @@ public class CPDefinitionLinkPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
+
 		CPDefinitionLink newCPDefinitionLink1 = addCPDefinitionLink();
 		CPDefinitionLink newCPDefinitionLink2 = addCPDefinitionLink();
 
@@ -307,18 +320,22 @@ public class CPDefinitionLinkPersistenceTest {
 		primaryKeys.add(newCPDefinitionLink1.getPrimaryKey());
 		primaryKeys.add(newCPDefinitionLink2.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionLink> cpDefinitionLinks = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionLink> cpDefinitionLinks =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, cpDefinitionLinks.size());
-		Assert.assertEquals(newCPDefinitionLink1,
+		Assert.assertEquals(
+			newCPDefinitionLink1,
 			cpDefinitionLinks.get(newCPDefinitionLink1.getPrimaryKey()));
-		Assert.assertEquals(newCPDefinitionLink2,
+		Assert.assertEquals(
+			newCPDefinitionLink2,
 			cpDefinitionLinks.get(newCPDefinitionLink2.getPrimaryKey()));
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -328,7 +345,8 @@ public class CPDefinitionLinkPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CPDefinitionLink> cpDefinitionLinks = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionLink> cpDefinitionLinks =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionLinks.isEmpty());
 	}
@@ -336,6 +354,7 @@ public class CPDefinitionLinkPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
+
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
 		long pk = RandomTestUtil.nextLong();
@@ -345,36 +364,39 @@ public class CPDefinitionLinkPersistenceTest {
 		primaryKeys.add(newCPDefinitionLink.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CPDefinitionLink> cpDefinitionLinks = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionLink> cpDefinitionLinks =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionLinks.size());
-		Assert.assertEquals(newCPDefinitionLink,
+		Assert.assertEquals(
+			newCPDefinitionLink,
 			cpDefinitionLinks.get(newCPDefinitionLink.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CPDefinitionLink> cpDefinitionLinks = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionLink> cpDefinitionLinks =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(cpDefinitionLinks.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCPDefinitionLink.getPrimaryKey());
 
-		Map<Serializable, CPDefinitionLink> cpDefinitionLinks = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CPDefinitionLink> cpDefinitionLinks =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, cpDefinitionLinks.size());
-		Assert.assertEquals(newCPDefinitionLink,
+		Assert.assertEquals(
+			newCPDefinitionLink,
 			cpDefinitionLinks.get(newCPDefinitionLink.getPrimaryKey()));
 	}
 
@@ -382,15 +404,19 @@ public class CPDefinitionLinkPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CPDefinitionLinkLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CPDefinitionLinkLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDefinitionLink>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<CPDefinitionLink>() {
+
 				@Override
 				public void performAction(CPDefinitionLink cpDefinitionLink) {
 					Assert.assertNotNull(cpDefinitionLink);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -399,17 +425,19 @@ public class CPDefinitionLinkPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionLink.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionLink.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionLinkId",
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionLinkId",
 				newCPDefinitionLink.getCPDefinitionLinkId()));
 
-		List<CPDefinitionLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionLink> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
@@ -420,32 +448,35 @@ public class CPDefinitionLinkPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionLink.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionLink.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("CPDefinitionLinkId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"CPDefinitionLinkId", RandomTestUtil.nextLong()));
 
-		List<CPDefinitionLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CPDefinitionLink> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
+	public void testDynamicQueryByProjectionExisting() throws Exception {
 		CPDefinitionLink newCPDefinitionLink = addCPDefinitionLink();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionLink.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionLink.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionLinkId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionLinkId"));
 
-		Object newCPDefinitionLinkId = newCPDefinitionLink.getCPDefinitionLinkId();
+		Object newCPDefinitionLinkId =
+			newCPDefinitionLink.getCPDefinitionLinkId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionLinkId",
-				new Object[] { newCPDefinitionLinkId }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionLinkId", new Object[] {newCPDefinitionLinkId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -458,14 +489,16 @@ public class CPDefinitionLinkPersistenceTest {
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CPDefinitionLink.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CPDefinitionLink.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"CPDefinitionLinkId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("CPDefinitionLinkId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("CPDefinitionLinkId",
-				new Object[] { RandomTestUtil.nextLong() }));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
+				"CPDefinitionLinkId",
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -478,26 +511,37 @@ public class CPDefinitionLinkPersistenceTest {
 
 		_persistence.clearCache();
 
-		CPDefinitionLink existingCPDefinitionLink = _persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
+		CPDefinitionLink existingCPDefinitionLink =
+			_persistence.findByPrimaryKey(newCPDefinitionLink.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCPDefinitionLink.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDefinitionLink,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCPDefinitionLink.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionLink,
-				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPDefinitionLink.getUuid(),
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionLink, "getOriginalUuid",
+					new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionLink.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionLink, "getOriginalGroupId",
+				new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionLink.getCPDefinitionId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionLink,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionLink.getCProductId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDefinitionLink,
-				"getOriginalCProductId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(existingCPDefinitionLink.getType(),
-				ReflectionTestUtil.invoke(existingCPDefinitionLink,
-					"getOriginalType", new Class<?>[0])));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionLink.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionLink, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionLink.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionLink, "getOriginalCProductId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPDefinitionLink.getType(),
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionLink, "getOriginalType",
+					new Class<?>[0])));
 	}
 
 	protected CPDefinitionLink addCPDefinitionLink() throws Exception {
@@ -532,7 +576,9 @@ public class CPDefinitionLinkPersistenceTest {
 		return cpDefinitionLink;
 	}
 
-	private List<CPDefinitionLink> _cpDefinitionLinks = new ArrayList<CPDefinitionLink>();
+	private List<CPDefinitionLink> _cpDefinitionLinks =
+		new ArrayList<CPDefinitionLink>();
 	private CPDefinitionLinkPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

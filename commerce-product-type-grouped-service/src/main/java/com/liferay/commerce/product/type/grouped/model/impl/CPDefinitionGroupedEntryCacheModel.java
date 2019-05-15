@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.grouped.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionGroupedEntry in entity cache.
  *
  * @author Andrea Di Giorgi
- * @see CPDefinitionGroupedEntry
  * @generated
  */
 @ProviderType
-public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefinitionGroupedEntry>,
-	Externalizable {
+public class CPDefinitionGroupedEntryCacheModel
+	implements CacheModel<CPDefinitionGroupedEntry>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 			return false;
 		}
 
-		CPDefinitionGroupedEntryCacheModel cpDefinitionGroupedEntryCacheModel = (CPDefinitionGroupedEntryCacheModel)obj;
+		CPDefinitionGroupedEntryCacheModel cpDefinitionGroupedEntryCacheModel =
+			(CPDefinitionGroupedEntryCacheModel)obj;
 
-		if (CPDefinitionGroupedEntryId == cpDefinitionGroupedEntryCacheModel.CPDefinitionGroupedEntryId) {
+		if (CPDefinitionGroupedEntryId ==
+				cpDefinitionGroupedEntryCacheModel.CPDefinitionGroupedEntryId) {
+
 			return true;
 		}
 
@@ -98,7 +100,8 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 
 	@Override
 	public CPDefinitionGroupedEntry toEntityModel() {
-		CPDefinitionGroupedEntryImpl cpDefinitionGroupedEntryImpl = new CPDefinitionGroupedEntryImpl();
+		CPDefinitionGroupedEntryImpl cpDefinitionGroupedEntryImpl =
+			new CPDefinitionGroupedEntryImpl();
 
 		if (uuid == null) {
 			cpDefinitionGroupedEntryImpl.setUuid("");
@@ -107,7 +110,8 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 			cpDefinitionGroupedEntryImpl.setUuid(uuid);
 		}
 
-		cpDefinitionGroupedEntryImpl.setCPDefinitionGroupedEntryId(CPDefinitionGroupedEntryId);
+		cpDefinitionGroupedEntryImpl.setCPDefinitionGroupedEntryId(
+			CPDefinitionGroupedEntryId);
 		cpDefinitionGroupedEntryImpl.setGroupId(groupId);
 		cpDefinitionGroupedEntryImpl.setCompanyId(companyId);
 		cpDefinitionGroupedEntryImpl.setUserId(userId);
@@ -130,7 +134,8 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 			cpDefinitionGroupedEntryImpl.setModifiedDate(null);
 		}
 		else {
-			cpDefinitionGroupedEntryImpl.setModifiedDate(new Date(modifiedDate));
+			cpDefinitionGroupedEntryImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		cpDefinitionGroupedEntryImpl.setCPDefinitionId(CPDefinitionId);
@@ -168,8 +173,7 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -216,4 +220,5 @@ public class CPDefinitionGroupedEntryCacheModel implements CacheModel<CPDefiniti
 	public long entryCProductId;
 	public double priority;
 	public int quantity;
+
 }

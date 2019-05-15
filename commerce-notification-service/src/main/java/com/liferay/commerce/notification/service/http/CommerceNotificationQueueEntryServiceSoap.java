@@ -17,7 +17,6 @@ package com.liferay.commerce.notification.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceNotificationQueueEntryServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceNotificationQueueEntryServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.notification.model.CommerceNotificationQueueEntry}, that is translated to a
- * {@link com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationQueueEntry</code>, that is translated to a
+ * <code>com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,16 +59,19 @@ import java.rmi.RemoteException;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceNotificationQueueEntryServiceHttp
- * @see com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap
- * @see CommerceNotificationQueueEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceNotificationQueueEntryServiceSoap {
+
 	public static void deleteCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws RemoteException {
+			long commerceNotificationQueueEntryId)
+		throws RemoteException {
+
 		try {
-			CommerceNotificationQueueEntryServiceUtil.deleteCommerceNotificationQueueEntry(commerceNotificationQueueEntryId);
+			CommerceNotificationQueueEntryServiceUtil.
+				deleteCommerceNotificationQueueEntry(
+					commerceNotificationQueueEntryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -77,16 +80,27 @@ public class CommerceNotificationQueueEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap[] getCommerceNotificationQueueEntries(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry> returnValue =
-				CommerceNotificationQueueEntryServiceUtil.getCommerceNotificationQueueEntries(groupId,
-					start, end, orderByComparator);
+	public static
+		com.liferay.commerce.notification.model.
+			CommerceNotificationQueueEntrySoap[]
+					getCommerceNotificationQueueEntries(
+						long groupId, int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.notification.model.
+								CommerceNotificationQueueEntry>
+									orderByComparator)
+				throws RemoteException {
 
-			return com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.notification.model.
+					CommerceNotificationQueueEntry> returnValue =
+						CommerceNotificationQueueEntryServiceUtil.
+							getCommerceNotificationQueueEntries(
+								groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -97,8 +111,11 @@ public class CommerceNotificationQueueEntryServiceSoap {
 
 	public static int getCommerceNotificationQueueEntriesCount(long groupId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CommerceNotificationQueueEntryServiceUtil.getCommerceNotificationQueueEntriesCount(groupId);
+			int returnValue =
+				CommerceNotificationQueueEntryServiceUtil.
+					getCommerceNotificationQueueEntriesCount(groupId);
 
 			return returnValue;
 		}
@@ -109,13 +126,22 @@ public class CommerceNotificationQueueEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap resendCommerceNotificationQueueEntry(
-		long commerceNotificationQueueEntryId) throws RemoteException {
-		try {
-			com.liferay.commerce.notification.model.CommerceNotificationQueueEntry returnValue =
-				CommerceNotificationQueueEntryServiceUtil.resendCommerceNotificationQueueEntry(commerceNotificationQueueEntryId);
+	public static
+		com.liferay.commerce.notification.model.
+			CommerceNotificationQueueEntrySoap
+					resendCommerceNotificationQueueEntry(
+						long commerceNotificationQueueEntryId)
+				throws RemoteException {
 
-			return com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntry returnValue =
+					CommerceNotificationQueueEntryServiceUtil.
+						resendCommerceNotificationQueueEntry(
+							commerceNotificationQueueEntryId);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -124,5 +150,7 @@ public class CommerceNotificationQueueEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CommerceNotificationQueueEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceNotificationQueueEntryServiceSoap.class);
+
 }

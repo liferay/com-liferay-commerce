@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CPRuleUserSegmentRelServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CPRuleUserSegmentRelServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CPRuleUserSegmentRelServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.product.model.CPRuleUserSegmentRel}, that is translated to a
- * {@link com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.product.model.CPRuleUserSegmentRel</code>, that is translated to a
+ * <code>com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,21 +59,25 @@ import java.rmi.RemoteException;
  *
  * @author Marco Leo
  * @see CPRuleUserSegmentRelServiceHttp
- * @see com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap
- * @see CPRuleUserSegmentRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CPRuleUserSegmentRelServiceSoap {
-	public static com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap addCPRuleUserSegmentRel(
-		long cpRuleId, long commerceUserSegmentEntryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPRuleUserSegmentRel returnValue = CPRuleUserSegmentRelServiceUtil.addCPRuleUserSegmentRel(cpRuleId,
-					commerceUserSegmentEntryId, serviceContext);
 
-			return com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap.toSoapModel(returnValue);
+	public static com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap
+			addCPRuleUserSegmentRel(
+				long cpRuleId, long commerceUserSegmentEntryId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.product.model.CPRuleUserSegmentRel
+				returnValue =
+					CPRuleUserSegmentRelServiceUtil.addCPRuleUserSegmentRel(
+						cpRuleId, commerceUserSegmentEntryId, serviceContext);
+
+			return com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,8 +88,10 @@ public class CPRuleUserSegmentRelServiceSoap {
 
 	public static void deleteCPRuleUserSegmentRel(long cpRuleUserSegmentRelId)
 		throws RemoteException {
+
 		try {
-			CPRuleUserSegmentRelServiceUtil.deleteCPRuleUserSegmentRel(cpRuleUserSegmentRelId);
+			CPRuleUserSegmentRelServiceUtil.deleteCPRuleUserSegmentRel(
+				cpRuleUserSegmentRelId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,16 +100,24 @@ public class CPRuleUserSegmentRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap[] getCPRuleUserSegmentRels(
-		long cpRuleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPRuleUserSegmentRel> orderByComparator)
+	public static com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap[]
+			getCPRuleUserSegmentRels(
+				long cpRuleId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CPRuleUserSegmentRel>
+						orderByComparator)
 		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPRuleUserSegmentRel> returnValue =
-				CPRuleUserSegmentRelServiceUtil.getCPRuleUserSegmentRels(cpRuleId,
-					start, end, orderByComparator);
 
-			return com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap.toSoapModels(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.product.model.CPRuleUserSegmentRel>
+					returnValue =
+						CPRuleUserSegmentRelServiceUtil.
+							getCPRuleUserSegmentRels(
+								cpRuleId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPRuleUserSegmentRelSoap.
+				toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -114,8 +128,11 @@ public class CPRuleUserSegmentRelServiceSoap {
 
 	public static int getCPRuleUserSegmentRelsCount(long cpRuleId)
 		throws RemoteException {
+
 		try {
-			int returnValue = CPRuleUserSegmentRelServiceUtil.getCPRuleUserSegmentRelsCount(cpRuleId);
+			int returnValue =
+				CPRuleUserSegmentRelServiceUtil.getCPRuleUserSegmentRelsCount(
+					cpRuleId);
 
 			return returnValue;
 		}
@@ -126,5 +143,7 @@ public class CPRuleUserSegmentRelServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CPRuleUserSegmentRelServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CPRuleUserSegmentRelServiceSoap.class);
+
 }

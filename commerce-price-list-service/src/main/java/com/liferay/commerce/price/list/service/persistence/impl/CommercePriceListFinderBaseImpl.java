@@ -16,7 +16,6 @@ package com.liferay.commerce.price.list.service.persistence.impl;
 
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,19 +31,21 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-public class CommercePriceListFinderBaseImpl extends BasePersistenceImpl<CommercePriceList> {
+public class CommercePriceListFinderBaseImpl
+	extends BasePersistenceImpl<CommercePriceList> {
+
 	public CommercePriceListFinderBaseImpl() {
 		setModelClass(CommercePriceList.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("uuid", "uuid_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("uuid", "uuid_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -76,10 +77,14 @@ public class CommercePriceListFinderBaseImpl extends BasePersistenceImpl<Commerc
 	 */
 	public void setCommercePriceListPersistence(
 		CommercePriceListPersistence commercePriceListPersistence) {
+
 		this.commercePriceListPersistence = commercePriceListPersistence;
 	}
 
 	@BeanReference(type = CommercePriceListPersistence.class)
 	protected CommercePriceListPersistence commercePriceListPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommercePriceListFinderBaseImpl.class);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePriceListFinderBaseImpl.class);
+
 }

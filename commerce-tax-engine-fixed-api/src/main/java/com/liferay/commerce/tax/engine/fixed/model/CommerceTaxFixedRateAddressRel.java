@@ -25,37 +25,44 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceTaxFixedRateAddressRelModel
- * @see com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelImpl
- * @see com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelImpl"
+)
 @ProviderType
 public interface CommerceTaxFixedRateAddressRel
 	extends CommerceTaxFixedRateAddressRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.tax.engine.fixed.model.impl.CommerceTaxFixedRateAddressRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceTaxFixedRateAddressRel, Long> COMMERCE_TAX_FIXED_RATE_ADDRESS_REL_ID_ACCESSOR =
-		new Accessor<CommerceTaxFixedRateAddressRel, Long>() {
-			@Override
-			public Long get(
-				CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel) {
-				return commerceTaxFixedRateAddressRel.getCommerceTaxFixedRateAddressRelId();
-			}
+	public static final Accessor<CommerceTaxFixedRateAddressRel, Long>
+		COMMERCE_TAX_FIXED_RATE_ADDRESS_REL_ID_ACCESSOR =
+			new Accessor<CommerceTaxFixedRateAddressRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceTaxFixedRateAddressRel
+						commerceTaxFixedRateAddressRel) {
 
-			@Override
-			public Class<CommerceTaxFixedRateAddressRel> getTypeClass() {
-				return CommerceTaxFixedRateAddressRel.class;
-			}
-		};
+					return commerceTaxFixedRateAddressRel.
+						getCommerceTaxFixedRateAddressRelId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceTaxFixedRateAddressRel> getTypeClass() {
+					return CommerceTaxFixedRateAddressRel.class;
+				}
+
+			};
 
 	public com.liferay.commerce.model.CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -63,9 +70,11 @@ public interface CommerceTaxFixedRateAddressRel
 	public com.liferay.commerce.model.CommerceRegion getCommerceRegion()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.tax.model.CommerceTaxMethod getCommerceTaxMethod()
+	public com.liferay.commerce.tax.model.CommerceTaxMethod
+			getCommerceTaxMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.product.model.CPTaxCategory getCPTaxCategory()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

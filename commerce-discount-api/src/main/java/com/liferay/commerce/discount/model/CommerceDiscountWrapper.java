@@ -17,9 +17,7 @@ package com.liferay.commerce.discount.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,8 +40,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceDiscountWrapper implements CommerceDiscount,
-	ModelWrapper<CommerceDiscount> {
+public class CommerceDiscountWrapper
+	implements CommerceDiscount, ModelWrapper<CommerceDiscount> {
+
 	public CommerceDiscountWrapper(CommerceDiscount commerceDiscount) {
 		_commerceDiscount = commerceDiscount;
 	}
@@ -176,7 +175,7 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 		}
 
 		BigDecimal maximumDiscountAmount = (BigDecimal)attributes.get(
-				"maximumDiscountAmount");
+			"maximumDiscountAmount");
 
 		if (maximumDiscountAmount != null) {
 			setMaximumDiscountAmount(maximumDiscountAmount);
@@ -275,7 +274,8 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 
 	@Override
 	public Object clone() {
-		return new CommerceDiscountWrapper((CommerceDiscount)_commerceDiscount.clone());
+		return new CommerceDiscountWrapper(
+			(CommerceDiscount)_commerceDiscount.clone());
 	}
 
 	@Override
@@ -284,65 +284,67 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns the active of this commerce discount.
-	*
-	* @return the active of this commerce discount
-	*/
+	 * Returns the active of this commerce discount.
+	 *
+	 * @return the active of this commerce discount
+	 */
 	@Override
 	public boolean getActive() {
 		return _commerceDiscount.getActive();
 	}
 
 	/**
-	* Returns the commerce discount ID of this commerce discount.
-	*
-	* @return the commerce discount ID of this commerce discount
-	*/
+	 * Returns the commerce discount ID of this commerce discount.
+	 *
+	 * @return the commerce discount ID of this commerce discount
+	 */
 	@Override
 	public long getCommerceDiscountId() {
 		return _commerceDiscount.getCommerceDiscountId();
 	}
 
 	@Override
-	public java.util.List<CommerceDiscountUserSegmentRel> getCommerceDiscountUserSegmentRels() {
+	public java.util.List<CommerceDiscountUserSegmentRel>
+		getCommerceDiscountUserSegmentRels() {
+
 		return _commerceDiscount.getCommerceDiscountUserSegmentRels();
 	}
 
 	/**
-	* Returns the company ID of this commerce discount.
-	*
-	* @return the company ID of this commerce discount
-	*/
+	 * Returns the company ID of this commerce discount.
+	 *
+	 * @return the company ID of this commerce discount
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceDiscount.getCompanyId();
 	}
 
 	/**
-	* Returns the coupon code of this commerce discount.
-	*
-	* @return the coupon code of this commerce discount
-	*/
+	 * Returns the coupon code of this commerce discount.
+	 *
+	 * @return the coupon code of this commerce discount
+	 */
 	@Override
 	public String getCouponCode() {
 		return _commerceDiscount.getCouponCode();
 	}
 
 	/**
-	* Returns the create date of this commerce discount.
-	*
-	* @return the create date of this commerce discount
-	*/
+	 * Returns the create date of this commerce discount.
+	 *
+	 * @return the create date of this commerce discount
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceDiscount.getCreateDate();
 	}
 
 	/**
-	* Returns the display date of this commerce discount.
-	*
-	* @return the display date of this commerce discount
-	*/
+	 * Returns the display date of this commerce discount.
+	 *
+	 * @return the display date of this commerce discount
+	 */
 	@Override
 	public Date getDisplayDate() {
 		return _commerceDiscount.getDisplayDate();
@@ -354,130 +356,130 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns the expiration date of this commerce discount.
-	*
-	* @return the expiration date of this commerce discount
-	*/
+	 * Returns the expiration date of this commerce discount.
+	 *
+	 * @return the expiration date of this commerce discount
+	 */
 	@Override
 	public Date getExpirationDate() {
 		return _commerceDiscount.getExpirationDate();
 	}
 
 	/**
-	* Returns the group ID of this commerce discount.
-	*
-	* @return the group ID of this commerce discount
-	*/
+	 * Returns the group ID of this commerce discount.
+	 *
+	 * @return the group ID of this commerce discount
+	 */
 	@Override
 	public long getGroupId() {
 		return _commerceDiscount.getGroupId();
 	}
 
 	/**
-	* Returns the last publish date of this commerce discount.
-	*
-	* @return the last publish date of this commerce discount
-	*/
+	 * Returns the last publish date of this commerce discount.
+	 *
+	 * @return the last publish date of this commerce discount
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _commerceDiscount.getLastPublishDate();
 	}
 
 	/**
-	* Returns the level1 of this commerce discount.
-	*
-	* @return the level1 of this commerce discount
-	*/
+	 * Returns the level1 of this commerce discount.
+	 *
+	 * @return the level1 of this commerce discount
+	 */
 	@Override
 	public BigDecimal getLevel1() {
 		return _commerceDiscount.getLevel1();
 	}
 
 	/**
-	* Returns the level2 of this commerce discount.
-	*
-	* @return the level2 of this commerce discount
-	*/
+	 * Returns the level2 of this commerce discount.
+	 *
+	 * @return the level2 of this commerce discount
+	 */
 	@Override
 	public BigDecimal getLevel2() {
 		return _commerceDiscount.getLevel2();
 	}
 
 	/**
-	* Returns the level3 of this commerce discount.
-	*
-	* @return the level3 of this commerce discount
-	*/
+	 * Returns the level3 of this commerce discount.
+	 *
+	 * @return the level3 of this commerce discount
+	 */
 	@Override
 	public BigDecimal getLevel3() {
 		return _commerceDiscount.getLevel3();
 	}
 
 	/**
-	* Returns the level4 of this commerce discount.
-	*
-	* @return the level4 of this commerce discount
-	*/
+	 * Returns the level4 of this commerce discount.
+	 *
+	 * @return the level4 of this commerce discount
+	 */
 	@Override
 	public BigDecimal getLevel4() {
 		return _commerceDiscount.getLevel4();
 	}
 
 	/**
-	* Returns the limitation times of this commerce discount.
-	*
-	* @return the limitation times of this commerce discount
-	*/
+	 * Returns the limitation times of this commerce discount.
+	 *
+	 * @return the limitation times of this commerce discount
+	 */
 	@Override
 	public int getLimitationTimes() {
 		return _commerceDiscount.getLimitationTimes();
 	}
 
 	/**
-	* Returns the limitation type of this commerce discount.
-	*
-	* @return the limitation type of this commerce discount
-	*/
+	 * Returns the limitation type of this commerce discount.
+	 *
+	 * @return the limitation type of this commerce discount
+	 */
 	@Override
 	public String getLimitationType() {
 		return _commerceDiscount.getLimitationType();
 	}
 
 	/**
-	* Returns the maximum discount amount of this commerce discount.
-	*
-	* @return the maximum discount amount of this commerce discount
-	*/
+	 * Returns the maximum discount amount of this commerce discount.
+	 *
+	 * @return the maximum discount amount of this commerce discount
+	 */
 	@Override
 	public BigDecimal getMaximumDiscountAmount() {
 		return _commerceDiscount.getMaximumDiscountAmount();
 	}
 
 	/**
-	* Returns the modified date of this commerce discount.
-	*
-	* @return the modified date of this commerce discount
-	*/
+	 * Returns the modified date of this commerce discount.
+	 *
+	 * @return the modified date of this commerce discount
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceDiscount.getModifiedDate();
 	}
 
 	/**
-	* Returns the number of use of this commerce discount.
-	*
-	* @return the number of use of this commerce discount
-	*/
+	 * Returns the number of use of this commerce discount.
+	 *
+	 * @return the number of use of this commerce discount
+	 */
 	@Override
 	public int getNumberOfUse() {
 		return _commerceDiscount.getNumberOfUse();
 	}
 
 	/**
-	* Returns the primary key of this commerce discount.
-	*
-	* @return the primary key of this commerce discount
-	*/
+	 * Returns the primary key of this commerce discount.
+	 *
+	 * @return the primary key of this commerce discount
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceDiscount.getPrimaryKey();
@@ -489,130 +491,130 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns the status of this commerce discount.
-	*
-	* @return the status of this commerce discount
-	*/
+	 * Returns the status of this commerce discount.
+	 *
+	 * @return the status of this commerce discount
+	 */
 	@Override
 	public int getStatus() {
 		return _commerceDiscount.getStatus();
 	}
 
 	/**
-	* Returns the status by user ID of this commerce discount.
-	*
-	* @return the status by user ID of this commerce discount
-	*/
+	 * Returns the status by user ID of this commerce discount.
+	 *
+	 * @return the status by user ID of this commerce discount
+	 */
 	@Override
 	public long getStatusByUserId() {
 		return _commerceDiscount.getStatusByUserId();
 	}
 
 	/**
-	* Returns the status by user name of this commerce discount.
-	*
-	* @return the status by user name of this commerce discount
-	*/
+	 * Returns the status by user name of this commerce discount.
+	 *
+	 * @return the status by user name of this commerce discount
+	 */
 	@Override
 	public String getStatusByUserName() {
 		return _commerceDiscount.getStatusByUserName();
 	}
 
 	/**
-	* Returns the status by user uuid of this commerce discount.
-	*
-	* @return the status by user uuid of this commerce discount
-	*/
+	 * Returns the status by user uuid of this commerce discount.
+	 *
+	 * @return the status by user uuid of this commerce discount
+	 */
 	@Override
 	public String getStatusByUserUuid() {
 		return _commerceDiscount.getStatusByUserUuid();
 	}
 
 	/**
-	* Returns the status date of this commerce discount.
-	*
-	* @return the status date of this commerce discount
-	*/
+	 * Returns the status date of this commerce discount.
+	 *
+	 * @return the status date of this commerce discount
+	 */
 	@Override
 	public Date getStatusDate() {
 		return _commerceDiscount.getStatusDate();
 	}
 
 	/**
-	* Returns the target of this commerce discount.
-	*
-	* @return the target of this commerce discount
-	*/
+	 * Returns the target of this commerce discount.
+	 *
+	 * @return the target of this commerce discount
+	 */
 	@Override
 	public String getTarget() {
 		return _commerceDiscount.getTarget();
 	}
 
 	/**
-	* Returns the title of this commerce discount.
-	*
-	* @return the title of this commerce discount
-	*/
+	 * Returns the title of this commerce discount.
+	 *
+	 * @return the title of this commerce discount
+	 */
 	@Override
 	public String getTitle() {
 		return _commerceDiscount.getTitle();
 	}
 
 	/**
-	* Returns the use coupon code of this commerce discount.
-	*
-	* @return the use coupon code of this commerce discount
-	*/
+	 * Returns the use coupon code of this commerce discount.
+	 *
+	 * @return the use coupon code of this commerce discount
+	 */
 	@Override
 	public boolean getUseCouponCode() {
 		return _commerceDiscount.getUseCouponCode();
 	}
 
 	/**
-	* Returns the use percentage of this commerce discount.
-	*
-	* @return the use percentage of this commerce discount
-	*/
+	 * Returns the use percentage of this commerce discount.
+	 *
+	 * @return the use percentage of this commerce discount
+	 */
 	@Override
 	public boolean getUsePercentage() {
 		return _commerceDiscount.getUsePercentage();
 	}
 
 	/**
-	* Returns the user ID of this commerce discount.
-	*
-	* @return the user ID of this commerce discount
-	*/
+	 * Returns the user ID of this commerce discount.
+	 *
+	 * @return the user ID of this commerce discount
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceDiscount.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce discount.
-	*
-	* @return the user name of this commerce discount
-	*/
+	 * Returns the user name of this commerce discount.
+	 *
+	 * @return the user name of this commerce discount
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceDiscount.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce discount.
-	*
-	* @return the user uuid of this commerce discount
-	*/
+	 * Returns the user uuid of this commerce discount.
+	 *
+	 * @return the user uuid of this commerce discount
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceDiscount.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this commerce discount.
-	*
-	* @return the uuid of this commerce discount
-	*/
+	 * Returns the uuid of this commerce discount.
+	 *
+	 * @return the uuid of this commerce discount
+	 */
 	@Override
 	public String getUuid() {
 		return _commerceDiscount.getUuid();
@@ -624,20 +626,20 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is active.
-	*
-	* @return <code>true</code> if this commerce discount is active; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is active.
+	 *
+	 * @return <code>true</code> if this commerce discount is active; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isActive() {
 		return _commerceDiscount.isActive();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is approved.
-	*
-	* @return <code>true</code> if this commerce discount is approved; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is approved.
+	 *
+	 * @return <code>true</code> if this commerce discount is approved; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isApproved() {
 		return _commerceDiscount.isApproved();
@@ -649,20 +651,20 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is denied.
-	*
-	* @return <code>true</code> if this commerce discount is denied; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is denied.
+	 *
+	 * @return <code>true</code> if this commerce discount is denied; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDenied() {
 		return _commerceDiscount.isDenied();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is a draft.
-	*
-	* @return <code>true</code> if this commerce discount is a draft; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is a draft.
+	 *
+	 * @return <code>true</code> if this commerce discount is a draft; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isDraft() {
 		return _commerceDiscount.isDraft();
@@ -674,30 +676,30 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is expired.
-	*
-	* @return <code>true</code> if this commerce discount is expired; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is expired.
+	 *
+	 * @return <code>true</code> if this commerce discount is expired; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isExpired() {
 		return _commerceDiscount.isExpired();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is inactive.
-	*
-	* @return <code>true</code> if this commerce discount is inactive; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is inactive.
+	 *
+	 * @return <code>true</code> if this commerce discount is inactive; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isInactive() {
 		return _commerceDiscount.isInactive();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is incomplete.
-	*
-	* @return <code>true</code> if this commerce discount is incomplete; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is incomplete.
+	 *
+	 * @return <code>true</code> if this commerce discount is incomplete; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isIncomplete() {
 		return _commerceDiscount.isIncomplete();
@@ -709,40 +711,40 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is pending.
-	*
-	* @return <code>true</code> if this commerce discount is pending; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is pending.
+	 *
+	 * @return <code>true</code> if this commerce discount is pending; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isPending() {
 		return _commerceDiscount.isPending();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is scheduled.
-	*
-	* @return <code>true</code> if this commerce discount is scheduled; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is scheduled.
+	 *
+	 * @return <code>true</code> if this commerce discount is scheduled; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isScheduled() {
 		return _commerceDiscount.isScheduled();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is use coupon code.
-	*
-	* @return <code>true</code> if this commerce discount is use coupon code; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is use coupon code.
+	 *
+	 * @return <code>true</code> if this commerce discount is use coupon code; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isUseCouponCode() {
 		return _commerceDiscount.isUseCouponCode();
 	}
 
 	/**
-	* Returns <code>true</code> if this commerce discount is use percentage.
-	*
-	* @return <code>true</code> if this commerce discount is use percentage; <code>false</code> otherwise
-	*/
+	 * Returns <code>true</code> if this commerce discount is use percentage.
+	 *
+	 * @return <code>true</code> if this commerce discount is use percentage; <code>false</code> otherwise
+	 */
 	@Override
 	public boolean isUsePercentage() {
 		return _commerceDiscount.isUsePercentage();
@@ -754,10 +756,10 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Sets whether this commerce discount is active.
-	*
-	* @param active the active of this commerce discount
-	*/
+	 * Sets whether this commerce discount is active.
+	 *
+	 * @param active the active of this commerce discount
+	 */
 	@Override
 	public void setActive(boolean active) {
 		_commerceDiscount.setActive(active);
@@ -769,50 +771,50 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Sets the commerce discount ID of this commerce discount.
-	*
-	* @param commerceDiscountId the commerce discount ID of this commerce discount
-	*/
+	 * Sets the commerce discount ID of this commerce discount.
+	 *
+	 * @param commerceDiscountId the commerce discount ID of this commerce discount
+	 */
 	@Override
 	public void setCommerceDiscountId(long commerceDiscountId) {
 		_commerceDiscount.setCommerceDiscountId(commerceDiscountId);
 	}
 
 	/**
-	* Sets the company ID of this commerce discount.
-	*
-	* @param companyId the company ID of this commerce discount
-	*/
+	 * Sets the company ID of this commerce discount.
+	 *
+	 * @param companyId the company ID of this commerce discount
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceDiscount.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the coupon code of this commerce discount.
-	*
-	* @param couponCode the coupon code of this commerce discount
-	*/
+	 * Sets the coupon code of this commerce discount.
+	 *
+	 * @param couponCode the coupon code of this commerce discount
+	 */
 	@Override
 	public void setCouponCode(String couponCode) {
 		_commerceDiscount.setCouponCode(couponCode);
 	}
 
 	/**
-	* Sets the create date of this commerce discount.
-	*
-	* @param createDate the create date of this commerce discount
-	*/
+	 * Sets the create date of this commerce discount.
+	 *
+	 * @param createDate the create date of this commerce discount
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceDiscount.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the display date of this commerce discount.
-	*
-	* @param displayDate the display date of this commerce discount
-	*/
+	 * Sets the display date of this commerce discount.
+	 *
+	 * @param displayDate the display date of this commerce discount
+	 */
 	@Override
 	public void setDisplayDate(Date displayDate) {
 		_commerceDiscount.setDisplayDate(displayDate);
@@ -821,6 +823,7 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceDiscount.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -835,110 +838,110 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Sets the expiration date of this commerce discount.
-	*
-	* @param expirationDate the expiration date of this commerce discount
-	*/
+	 * Sets the expiration date of this commerce discount.
+	 *
+	 * @param expirationDate the expiration date of this commerce discount
+	 */
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_commerceDiscount.setExpirationDate(expirationDate);
 	}
 
 	/**
-	* Sets the group ID of this commerce discount.
-	*
-	* @param groupId the group ID of this commerce discount
-	*/
+	 * Sets the group ID of this commerce discount.
+	 *
+	 * @param groupId the group ID of this commerce discount
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_commerceDiscount.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the last publish date of this commerce discount.
-	*
-	* @param lastPublishDate the last publish date of this commerce discount
-	*/
+	 * Sets the last publish date of this commerce discount.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce discount
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_commerceDiscount.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the level1 of this commerce discount.
-	*
-	* @param level1 the level1 of this commerce discount
-	*/
+	 * Sets the level1 of this commerce discount.
+	 *
+	 * @param level1 the level1 of this commerce discount
+	 */
 	@Override
 	public void setLevel1(BigDecimal level1) {
 		_commerceDiscount.setLevel1(level1);
 	}
 
 	/**
-	* Sets the level2 of this commerce discount.
-	*
-	* @param level2 the level2 of this commerce discount
-	*/
+	 * Sets the level2 of this commerce discount.
+	 *
+	 * @param level2 the level2 of this commerce discount
+	 */
 	@Override
 	public void setLevel2(BigDecimal level2) {
 		_commerceDiscount.setLevel2(level2);
 	}
 
 	/**
-	* Sets the level3 of this commerce discount.
-	*
-	* @param level3 the level3 of this commerce discount
-	*/
+	 * Sets the level3 of this commerce discount.
+	 *
+	 * @param level3 the level3 of this commerce discount
+	 */
 	@Override
 	public void setLevel3(BigDecimal level3) {
 		_commerceDiscount.setLevel3(level3);
 	}
 
 	/**
-	* Sets the level4 of this commerce discount.
-	*
-	* @param level4 the level4 of this commerce discount
-	*/
+	 * Sets the level4 of this commerce discount.
+	 *
+	 * @param level4 the level4 of this commerce discount
+	 */
 	@Override
 	public void setLevel4(BigDecimal level4) {
 		_commerceDiscount.setLevel4(level4);
 	}
 
 	/**
-	* Sets the limitation times of this commerce discount.
-	*
-	* @param limitationTimes the limitation times of this commerce discount
-	*/
+	 * Sets the limitation times of this commerce discount.
+	 *
+	 * @param limitationTimes the limitation times of this commerce discount
+	 */
 	@Override
 	public void setLimitationTimes(int limitationTimes) {
 		_commerceDiscount.setLimitationTimes(limitationTimes);
 	}
 
 	/**
-	* Sets the limitation type of this commerce discount.
-	*
-	* @param limitationType the limitation type of this commerce discount
-	*/
+	 * Sets the limitation type of this commerce discount.
+	 *
+	 * @param limitationType the limitation type of this commerce discount
+	 */
 	@Override
 	public void setLimitationType(String limitationType) {
 		_commerceDiscount.setLimitationType(limitationType);
 	}
 
 	/**
-	* Sets the maximum discount amount of this commerce discount.
-	*
-	* @param maximumDiscountAmount the maximum discount amount of this commerce discount
-	*/
+	 * Sets the maximum discount amount of this commerce discount.
+	 *
+	 * @param maximumDiscountAmount the maximum discount amount of this commerce discount
+	 */
 	@Override
 	public void setMaximumDiscountAmount(BigDecimal maximumDiscountAmount) {
 		_commerceDiscount.setMaximumDiscountAmount(maximumDiscountAmount);
 	}
 
 	/**
-	* Sets the modified date of this commerce discount.
-	*
-	* @param modifiedDate the modified date of this commerce discount
-	*/
+	 * Sets the modified date of this commerce discount.
+	 *
+	 * @param modifiedDate the modified date of this commerce discount
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceDiscount.setModifiedDate(modifiedDate);
@@ -950,20 +953,20 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Sets the number of use of this commerce discount.
-	*
-	* @param numberOfUse the number of use of this commerce discount
-	*/
+	 * Sets the number of use of this commerce discount.
+	 *
+	 * @param numberOfUse the number of use of this commerce discount
+	 */
 	@Override
 	public void setNumberOfUse(int numberOfUse) {
 		_commerceDiscount.setNumberOfUse(numberOfUse);
 	}
 
 	/**
-	* Sets the primary key of this commerce discount.
-	*
-	* @param primaryKey the primary key of this commerce discount
-	*/
+	 * Sets the primary key of this commerce discount.
+	 *
+	 * @param primaryKey the primary key of this commerce discount
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceDiscount.setPrimaryKey(primaryKey);
@@ -975,137 +978,139 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	/**
-	* Sets the status of this commerce discount.
-	*
-	* @param status the status of this commerce discount
-	*/
+	 * Sets the status of this commerce discount.
+	 *
+	 * @param status the status of this commerce discount
+	 */
 	@Override
 	public void setStatus(int status) {
 		_commerceDiscount.setStatus(status);
 	}
 
 	/**
-	* Sets the status by user ID of this commerce discount.
-	*
-	* @param statusByUserId the status by user ID of this commerce discount
-	*/
+	 * Sets the status by user ID of this commerce discount.
+	 *
+	 * @param statusByUserId the status by user ID of this commerce discount
+	 */
 	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_commerceDiscount.setStatusByUserId(statusByUserId);
 	}
 
 	/**
-	* Sets the status by user name of this commerce discount.
-	*
-	* @param statusByUserName the status by user name of this commerce discount
-	*/
+	 * Sets the status by user name of this commerce discount.
+	 *
+	 * @param statusByUserName the status by user name of this commerce discount
+	 */
 	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_commerceDiscount.setStatusByUserName(statusByUserName);
 	}
 
 	/**
-	* Sets the status by user uuid of this commerce discount.
-	*
-	* @param statusByUserUuid the status by user uuid of this commerce discount
-	*/
+	 * Sets the status by user uuid of this commerce discount.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this commerce discount
+	 */
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_commerceDiscount.setStatusByUserUuid(statusByUserUuid);
 	}
 
 	/**
-	* Sets the status date of this commerce discount.
-	*
-	* @param statusDate the status date of this commerce discount
-	*/
+	 * Sets the status date of this commerce discount.
+	 *
+	 * @param statusDate the status date of this commerce discount
+	 */
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_commerceDiscount.setStatusDate(statusDate);
 	}
 
 	/**
-	* Sets the target of this commerce discount.
-	*
-	* @param target the target of this commerce discount
-	*/
+	 * Sets the target of this commerce discount.
+	 *
+	 * @param target the target of this commerce discount
+	 */
 	@Override
 	public void setTarget(String target) {
 		_commerceDiscount.setTarget(target);
 	}
 
 	/**
-	* Sets the title of this commerce discount.
-	*
-	* @param title the title of this commerce discount
-	*/
+	 * Sets the title of this commerce discount.
+	 *
+	 * @param title the title of this commerce discount
+	 */
 	@Override
 	public void setTitle(String title) {
 		_commerceDiscount.setTitle(title);
 	}
 
 	/**
-	* Sets whether this commerce discount is use coupon code.
-	*
-	* @param useCouponCode the use coupon code of this commerce discount
-	*/
+	 * Sets whether this commerce discount is use coupon code.
+	 *
+	 * @param useCouponCode the use coupon code of this commerce discount
+	 */
 	@Override
 	public void setUseCouponCode(boolean useCouponCode) {
 		_commerceDiscount.setUseCouponCode(useCouponCode);
 	}
 
 	/**
-	* Sets whether this commerce discount is use percentage.
-	*
-	* @param usePercentage the use percentage of this commerce discount
-	*/
+	 * Sets whether this commerce discount is use percentage.
+	 *
+	 * @param usePercentage the use percentage of this commerce discount
+	 */
 	@Override
 	public void setUsePercentage(boolean usePercentage) {
 		_commerceDiscount.setUsePercentage(usePercentage);
 	}
 
 	/**
-	* Sets the user ID of this commerce discount.
-	*
-	* @param userId the user ID of this commerce discount
-	*/
+	 * Sets the user ID of this commerce discount.
+	 *
+	 * @param userId the user ID of this commerce discount
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceDiscount.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce discount.
-	*
-	* @param userName the user name of this commerce discount
-	*/
+	 * Sets the user name of this commerce discount.
+	 *
+	 * @param userName the user name of this commerce discount
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceDiscount.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce discount.
-	*
-	* @param userUuid the user uuid of this commerce discount
-	*/
+	 * Sets the user uuid of this commerce discount.
+	 *
+	 * @param userUuid the user uuid of this commerce discount
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceDiscount.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this commerce discount.
-	*
-	* @param uuid the uuid of this commerce discount
-	*/
+	 * Sets the uuid of this commerce discount.
+	 *
+	 * @param uuid the uuid of this commerce discount
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_commerceDiscount.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceDiscount> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceDiscount>
+		toCacheModel() {
+
 		return _commerceDiscount.toCacheModel();
 	}
 
@@ -1121,7 +1126,8 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 
 	@Override
 	public CommerceDiscount toUnescapedModel() {
-		return new CommerceDiscountWrapper(_commerceDiscount.toUnescapedModel());
+		return new CommerceDiscountWrapper(
+			_commerceDiscount.toUnescapedModel());
 	}
 
 	@Override
@@ -1139,10 +1145,12 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 			return false;
 		}
 
-		CommerceDiscountWrapper commerceDiscountWrapper = (CommerceDiscountWrapper)obj;
+		CommerceDiscountWrapper commerceDiscountWrapper =
+			(CommerceDiscountWrapper)obj;
 
-		if (Objects.equals(_commerceDiscount,
-					commerceDiscountWrapper._commerceDiscount)) {
+		if (Objects.equals(
+				_commerceDiscount, commerceDiscountWrapper._commerceDiscount)) {
+
 			return true;
 		}
 
@@ -1175,4 +1183,5 @@ public class CommerceDiscountWrapper implements CommerceDiscount,
 	}
 
 	private final CommerceDiscount _commerceDiscount;
+
 }

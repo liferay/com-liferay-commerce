@@ -32,12 +32,13 @@ import com.liferay.commerce.product.service.CPDisplayLayoutLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CPDisplayLayoutBaseImpl extends CPDisplayLayoutModelImpl
-	implements CPDisplayLayout {
+public abstract class CPDisplayLayoutBaseImpl
+	extends CPDisplayLayoutModelImpl implements CPDisplayLayout {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a cp display layout model instance should use the {@link CPDisplayLayout} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a cp display layout model instance should use the <code>CPDisplayLayout</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CPDisplayLayoutBaseImpl extends CPDisplayLayoutModelImpl
 			CPDisplayLayoutLocalServiceUtil.updateCPDisplayLayout(this);
 		}
 	}
+
 }

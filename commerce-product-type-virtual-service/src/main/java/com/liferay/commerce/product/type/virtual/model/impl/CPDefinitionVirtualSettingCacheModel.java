@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.virtual.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPDefinitionVirtualSetting in entity cache.
  *
  * @author Marco Leo
- * @see CPDefinitionVirtualSetting
  * @generated
  */
 @ProviderType
-public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefinitionVirtualSetting>,
-	Externalizable {
+public class CPDefinitionVirtualSettingCacheModel
+	implements CacheModel<CPDefinitionVirtualSetting>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 			return false;
 		}
 
-		CPDefinitionVirtualSettingCacheModel cpDefinitionVirtualSettingCacheModel =
-			(CPDefinitionVirtualSettingCacheModel)obj;
+		CPDefinitionVirtualSettingCacheModel
+			cpDefinitionVirtualSettingCacheModel =
+				(CPDefinitionVirtualSettingCacheModel)obj;
 
-		if (CPDefinitionVirtualSettingId == cpDefinitionVirtualSettingCacheModel.CPDefinitionVirtualSettingId) {
+		if (CPDefinitionVirtualSettingId ==
+				cpDefinitionVirtualSettingCacheModel.
+					CPDefinitionVirtualSettingId) {
+
 			return true;
 		}
 
@@ -121,7 +124,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 
 	@Override
 	public CPDefinitionVirtualSetting toEntityModel() {
-		CPDefinitionVirtualSettingImpl cpDefinitionVirtualSettingImpl = new CPDefinitionVirtualSettingImpl();
+		CPDefinitionVirtualSettingImpl cpDefinitionVirtualSettingImpl =
+			new CPDefinitionVirtualSettingImpl();
 
 		if (uuid == null) {
 			cpDefinitionVirtualSettingImpl.setUuid("");
@@ -130,7 +134,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 			cpDefinitionVirtualSettingImpl.setUuid(uuid);
 		}
 
-		cpDefinitionVirtualSettingImpl.setCPDefinitionVirtualSettingId(CPDefinitionVirtualSettingId);
+		cpDefinitionVirtualSettingImpl.setCPDefinitionVirtualSettingId(
+			CPDefinitionVirtualSettingId);
 		cpDefinitionVirtualSettingImpl.setGroupId(groupId);
 		cpDefinitionVirtualSettingImpl.setCompanyId(companyId);
 		cpDefinitionVirtualSettingImpl.setUserId(userId);
@@ -153,8 +158,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 			cpDefinitionVirtualSettingImpl.setModifiedDate(null);
 		}
 		else {
-			cpDefinitionVirtualSettingImpl.setModifiedDate(new Date(
-					modifiedDate));
+			cpDefinitionVirtualSettingImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		cpDefinitionVirtualSettingImpl.setClassNameId(classNameId);
@@ -181,24 +186,28 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 			cpDefinitionVirtualSettingImpl.setSampleUrl(sampleUrl);
 		}
 
-		cpDefinitionVirtualSettingImpl.setTermsOfUseRequired(termsOfUseRequired);
+		cpDefinitionVirtualSettingImpl.setTermsOfUseRequired(
+			termsOfUseRequired);
 
 		if (termsOfUseContent == null) {
 			cpDefinitionVirtualSettingImpl.setTermsOfUseContent("");
 		}
 		else {
-			cpDefinitionVirtualSettingImpl.setTermsOfUseContent(termsOfUseContent);
+			cpDefinitionVirtualSettingImpl.setTermsOfUseContent(
+				termsOfUseContent);
 		}
 
-		cpDefinitionVirtualSettingImpl.setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
+		cpDefinitionVirtualSettingImpl.
+			setTermsOfUseJournalArticleResourcePrimKey(
+				termsOfUseJournalArticleResourcePrimKey);
 		cpDefinitionVirtualSettingImpl.setOverride(override);
 
 		if (lastPublishDate == Long.MIN_VALUE) {
 			cpDefinitionVirtualSettingImpl.setLastPublishDate(null);
 		}
 		else {
-			cpDefinitionVirtualSettingImpl.setLastPublishDate(new Date(
-					lastPublishDate));
+			cpDefinitionVirtualSettingImpl.setLastPublishDate(
+				new Date(lastPublishDate));
 		}
 
 		cpDefinitionVirtualSettingImpl.resetOriginalValues();
@@ -249,8 +258,7 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -344,4 +352,5 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 	public long termsOfUseJournalArticleResourcePrimKey;
 	public boolean override;
 	public long lastPublishDate;
+
 }

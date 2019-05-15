@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPOptionCategoryWrapper implements CPOptionCategory,
-	ModelWrapper<CPOptionCategory> {
+public class CPOptionCategoryWrapper
+	implements CPOptionCategory, ModelWrapper<CPOptionCategory> {
+
 	public CPOptionCategoryWrapper(CPOptionCategory cpOptionCategory) {
 		_cpOptionCategory = cpOptionCategory;
 	}
@@ -160,7 +159,8 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 
 	@Override
 	public Object clone() {
-		return new CPOptionCategoryWrapper((CPOptionCategory)_cpOptionCategory.clone());
+		return new CPOptionCategoryWrapper(
+			(CPOptionCategory)_cpOptionCategory.clone());
 	}
 
 	@Override
@@ -174,30 +174,30 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns the company ID of this cp option category.
-	*
-	* @return the company ID of this cp option category
-	*/
+	 * Returns the company ID of this cp option category.
+	 *
+	 * @return the company ID of this cp option category
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpOptionCategory.getCompanyId();
 	}
 
 	/**
-	* Returns the cp option category ID of this cp option category.
-	*
-	* @return the cp option category ID of this cp option category
-	*/
+	 * Returns the cp option category ID of this cp option category.
+	 *
+	 * @return the cp option category ID of this cp option category
+	 */
 	@Override
 	public long getCPOptionCategoryId() {
 		return _cpOptionCategory.getCPOptionCategoryId();
 	}
 
 	/**
-	* Returns the create date of this cp option category.
-	*
-	* @return the create date of this cp option category
-	*/
+	 * Returns the create date of this cp option category.
+	 *
+	 * @return the create date of this cp option category
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpOptionCategory.getCreateDate();
@@ -209,56 +209,56 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns the description of this cp option category.
-	*
-	* @return the description of this cp option category
-	*/
+	 * Returns the description of this cp option category.
+	 *
+	 * @return the description of this cp option category
+	 */
 	@Override
 	public String getDescription() {
 		return _cpOptionCategory.getDescription();
 	}
 
 	/**
-	* Returns the localized description of this cp option category in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized description of this cp option category
-	*/
+	 * Returns the localized description of this cp option category in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized description of this cp option category
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale) {
 		return _cpOptionCategory.getDescription(locale);
 	}
 
 	/**
-	* Returns the localized description of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this cp option category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized description of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this cp option category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getDescription(java.util.Locale locale, boolean useDefault) {
 		return _cpOptionCategory.getDescription(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized description of this cp option category in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized description of this cp option category
-	*/
+	 * Returns the localized description of this cp option category in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized description of this cp option category
+	 */
 	@Override
 	public String getDescription(String languageId) {
 		return _cpOptionCategory.getDescription(languageId);
 	}
 
 	/**
-	* Returns the localized description of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this cp option category
-	*/
+	 * Returns the localized description of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this cp option category
+	 */
 	@Override
 	public String getDescription(String languageId, boolean useDefault) {
 		return _cpOptionCategory.getDescription(languageId, useDefault);
@@ -275,10 +275,10 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns a map of the locales and localized descriptions of this cp option category.
-	*
-	* @return the locales and localized descriptions of this cp option category
-	*/
+	 * Returns a map of the locales and localized descriptions of this cp option category.
+	 *
+	 * @return the locales and localized descriptions of this cp option category
+	 */
 	@Override
 	public Map<java.util.Locale, String> getDescriptionMap() {
 		return _cpOptionCategory.getDescriptionMap();
@@ -290,50 +290,50 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns the group ID of this cp option category.
-	*
-	* @return the group ID of this cp option category
-	*/
+	 * Returns the group ID of this cp option category.
+	 *
+	 * @return the group ID of this cp option category
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpOptionCategory.getGroupId();
 	}
 
 	/**
-	* Returns the key of this cp option category.
-	*
-	* @return the key of this cp option category
-	*/
+	 * Returns the key of this cp option category.
+	 *
+	 * @return the key of this cp option category
+	 */
 	@Override
 	public String getKey() {
 		return _cpOptionCategory.getKey();
 	}
 
 	/**
-	* Returns the last publish date of this cp option category.
-	*
-	* @return the last publish date of this cp option category
-	*/
+	 * Returns the last publish date of this cp option category.
+	 *
+	 * @return the last publish date of this cp option category
+	 */
 	@Override
 	public Date getLastPublishDate() {
 		return _cpOptionCategory.getLastPublishDate();
 	}
 
 	/**
-	* Returns the modified date of this cp option category.
-	*
-	* @return the modified date of this cp option category
-	*/
+	 * Returns the modified date of this cp option category.
+	 *
+	 * @return the modified date of this cp option category
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpOptionCategory.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp option category.
-	*
-	* @return the primary key of this cp option category
-	*/
+	 * Returns the primary key of this cp option category.
+	 *
+	 * @return the primary key of this cp option category
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpOptionCategory.getPrimaryKey();
@@ -345,66 +345,66 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns the priority of this cp option category.
-	*
-	* @return the priority of this cp option category
-	*/
+	 * Returns the priority of this cp option category.
+	 *
+	 * @return the priority of this cp option category
+	 */
 	@Override
 	public double getPriority() {
 		return _cpOptionCategory.getPriority();
 	}
 
 	/**
-	* Returns the title of this cp option category.
-	*
-	* @return the title of this cp option category
-	*/
+	 * Returns the title of this cp option category.
+	 *
+	 * @return the title of this cp option category
+	 */
 	@Override
 	public String getTitle() {
 		return _cpOptionCategory.getTitle();
 	}
 
 	/**
-	* Returns the localized title of this cp option category in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized title of this cp option category
-	*/
+	 * Returns the localized title of this cp option category in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized title of this cp option category
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale) {
 		return _cpOptionCategory.getTitle(locale);
 	}
 
 	/**
-	* Returns the localized title of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this cp option category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized title of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this cp option category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getTitle(java.util.Locale locale, boolean useDefault) {
 		return _cpOptionCategory.getTitle(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized title of this cp option category in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized title of this cp option category
-	*/
+	 * Returns the localized title of this cp option category in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized title of this cp option category
+	 */
 	@Override
 	public String getTitle(String languageId) {
 		return _cpOptionCategory.getTitle(languageId);
 	}
 
 	/**
-	* Returns the localized title of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this cp option category
-	*/
+	 * Returns the localized title of this cp option category in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this cp option category
+	 */
 	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		return _cpOptionCategory.getTitle(languageId, useDefault);
@@ -421,50 +421,50 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Returns a map of the locales and localized titles of this cp option category.
-	*
-	* @return the locales and localized titles of this cp option category
-	*/
+	 * Returns a map of the locales and localized titles of this cp option category.
+	 *
+	 * @return the locales and localized titles of this cp option category
+	 */
 	@Override
 	public Map<java.util.Locale, String> getTitleMap() {
 		return _cpOptionCategory.getTitleMap();
 	}
 
 	/**
-	* Returns the user ID of this cp option category.
-	*
-	* @return the user ID of this cp option category
-	*/
+	 * Returns the user ID of this cp option category.
+	 *
+	 * @return the user ID of this cp option category
+	 */
 	@Override
 	public long getUserId() {
 		return _cpOptionCategory.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp option category.
-	*
-	* @return the user name of this cp option category
-	*/
+	 * Returns the user name of this cp option category.
+	 *
+	 * @return the user name of this cp option category
+	 */
 	@Override
 	public String getUserName() {
 		return _cpOptionCategory.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp option category.
-	*
-	* @return the user uuid of this cp option category
-	*/
+	 * Returns the user uuid of this cp option category.
+	 *
+	 * @return the user uuid of this cp option category
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpOptionCategory.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp option category.
-	*
-	* @return the uuid of this cp option category
-	*/
+	 * Returns the uuid of this cp option category.
+	 *
+	 * @return the uuid of this cp option category
+	 */
 	@Override
 	public String getUuid() {
 		return _cpOptionCategory.getUuid();
@@ -498,13 +498,15 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_cpOptionCategory.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_cpOptionCategory.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
@@ -514,66 +516,68 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the company ID of this cp option category.
-	*
-	* @param companyId the company ID of this cp option category
-	*/
+	 * Sets the company ID of this cp option category.
+	 *
+	 * @param companyId the company ID of this cp option category
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpOptionCategory.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp option category ID of this cp option category.
-	*
-	* @param CPOptionCategoryId the cp option category ID of this cp option category
-	*/
+	 * Sets the cp option category ID of this cp option category.
+	 *
+	 * @param CPOptionCategoryId the cp option category ID of this cp option category
+	 */
 	@Override
 	public void setCPOptionCategoryId(long CPOptionCategoryId) {
 		_cpOptionCategory.setCPOptionCategoryId(CPOptionCategoryId);
 	}
 
 	/**
-	* Sets the create date of this cp option category.
-	*
-	* @param createDate the create date of this cp option category
-	*/
+	 * Sets the create date of this cp option category.
+	 *
+	 * @param createDate the create date of this cp option category
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpOptionCategory.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this cp option category.
-	*
-	* @param description the description of this cp option category
-	*/
+	 * Sets the description of this cp option category.
+	 *
+	 * @param description the description of this cp option category
+	 */
 	@Override
 	public void setDescription(String description) {
 		_cpOptionCategory.setDescription(description);
 	}
 
 	/**
-	* Sets the localized description of this cp option category in the language.
-	*
-	* @param description the localized description of this cp option category
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized description of this cp option category in the language.
+	 *
+	 * @param description the localized description of this cp option category
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setDescription(String description, java.util.Locale locale) {
 		_cpOptionCategory.setDescription(description, locale);
 	}
 
 	/**
-	* Sets the localized description of this cp option category in the language, and sets the default locale.
-	*
-	* @param description the localized description of this cp option category
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized description of this cp option category in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this cp option category
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setDescription(String description, java.util.Locale locale,
+	public void setDescription(
+		String description, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
+
 		_cpOptionCategory.setDescription(description, locale, defaultLocale);
 	}
 
@@ -583,31 +587,35 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the localized descriptions of this cp option category from the map of locales and localized descriptions.
-	*
-	* @param descriptionMap the locales and localized descriptions of this cp option category
-	*/
+	 * Sets the localized descriptions of this cp option category from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this cp option category
+	 */
 	@Override
-	public void setDescriptionMap(Map<java.util.Locale, String> descriptionMap) {
+	public void setDescriptionMap(
+		Map<java.util.Locale, String> descriptionMap) {
+
 		_cpOptionCategory.setDescriptionMap(descriptionMap);
 	}
 
 	/**
-	* Sets the localized descriptions of this cp option category from the map of locales and localized descriptions, and sets the default locale.
-	*
-	* @param descriptionMap the locales and localized descriptions of this cp option category
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized descriptions of this cp option category from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this cp option category
+	 * @param defaultLocale the default locale
+	 */
 	@Override
 	public void setDescriptionMap(
 		Map<java.util.Locale, String> descriptionMap,
 		java.util.Locale defaultLocale) {
+
 		_cpOptionCategory.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpOptionCategory.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -622,40 +630,40 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the group ID of this cp option category.
-	*
-	* @param groupId the group ID of this cp option category
-	*/
+	 * Sets the group ID of this cp option category.
+	 *
+	 * @param groupId the group ID of this cp option category
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpOptionCategory.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the key of this cp option category.
-	*
-	* @param key the key of this cp option category
-	*/
+	 * Sets the key of this cp option category.
+	 *
+	 * @param key the key of this cp option category
+	 */
 	@Override
 	public void setKey(String key) {
 		_cpOptionCategory.setKey(key);
 	}
 
 	/**
-	* Sets the last publish date of this cp option category.
-	*
-	* @param lastPublishDate the last publish date of this cp option category
-	*/
+	 * Sets the last publish date of this cp option category.
+	 *
+	 * @param lastPublishDate the last publish date of this cp option category
+	 */
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_cpOptionCategory.setLastPublishDate(lastPublishDate);
 	}
 
 	/**
-	* Sets the modified date of this cp option category.
-	*
-	* @param modifiedDate the modified date of this cp option category
-	*/
+	 * Sets the modified date of this cp option category.
+	 *
+	 * @param modifiedDate the modified date of this cp option category
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpOptionCategory.setModifiedDate(modifiedDate);
@@ -667,10 +675,10 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the primary key of this cp option category.
-	*
-	* @param primaryKey the primary key of this cp option category
-	*/
+	 * Sets the primary key of this cp option category.
+	 *
+	 * @param primaryKey the primary key of this cp option category
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpOptionCategory.setPrimaryKey(primaryKey);
@@ -682,46 +690,47 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the priority of this cp option category.
-	*
-	* @param priority the priority of this cp option category
-	*/
+	 * Sets the priority of this cp option category.
+	 *
+	 * @param priority the priority of this cp option category
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_cpOptionCategory.setPriority(priority);
 	}
 
 	/**
-	* Sets the title of this cp option category.
-	*
-	* @param title the title of this cp option category
-	*/
+	 * Sets the title of this cp option category.
+	 *
+	 * @param title the title of this cp option category
+	 */
 	@Override
 	public void setTitle(String title) {
 		_cpOptionCategory.setTitle(title);
 	}
 
 	/**
-	* Sets the localized title of this cp option category in the language.
-	*
-	* @param title the localized title of this cp option category
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized title of this cp option category in the language.
+	 *
+	 * @param title the localized title of this cp option category
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setTitle(String title, java.util.Locale locale) {
 		_cpOptionCategory.setTitle(title, locale);
 	}
 
 	/**
-	* Sets the localized title of this cp option category in the language, and sets the default locale.
-	*
-	* @param title the localized title of this cp option category
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized title of this cp option category in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this cp option category
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitle(String title, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setTitle(
+		String title, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_cpOptionCategory.setTitle(title, locale, defaultLocale);
 	}
 
@@ -731,69 +740,73 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	/**
-	* Sets the localized titles of this cp option category from the map of locales and localized titles.
-	*
-	* @param titleMap the locales and localized titles of this cp option category
-	*/
+	 * Sets the localized titles of this cp option category from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this cp option category
+	 */
 	@Override
 	public void setTitleMap(Map<java.util.Locale, String> titleMap) {
 		_cpOptionCategory.setTitleMap(titleMap);
 	}
 
 	/**
-	* Sets the localized titles of this cp option category from the map of locales and localized titles, and sets the default locale.
-	*
-	* @param titleMap the locales and localized titles of this cp option category
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized titles of this cp option category from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this cp option category
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setTitleMap(Map<java.util.Locale, String> titleMap,
+	public void setTitleMap(
+		Map<java.util.Locale, String> titleMap,
 		java.util.Locale defaultLocale) {
+
 		_cpOptionCategory.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
-	* Sets the user ID of this cp option category.
-	*
-	* @param userId the user ID of this cp option category
-	*/
+	 * Sets the user ID of this cp option category.
+	 *
+	 * @param userId the user ID of this cp option category
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpOptionCategory.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp option category.
-	*
-	* @param userName the user name of this cp option category
-	*/
+	 * Sets the user name of this cp option category.
+	 *
+	 * @param userName the user name of this cp option category
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpOptionCategory.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp option category.
-	*
-	* @param userUuid the user uuid of this cp option category
-	*/
+	 * Sets the user uuid of this cp option category.
+	 *
+	 * @param userUuid the user uuid of this cp option category
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpOptionCategory.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp option category.
-	*
-	* @param uuid the uuid of this cp option category
-	*/
+	 * Sets the uuid of this cp option category.
+	 *
+	 * @param uuid the uuid of this cp option category
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpOptionCategory.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPOptionCategory> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPOptionCategory>
+		toCacheModel() {
+
 		return _cpOptionCategory.toCacheModel();
 	}
 
@@ -809,7 +822,8 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 
 	@Override
 	public CPOptionCategory toUnescapedModel() {
-		return new CPOptionCategoryWrapper(_cpOptionCategory.toUnescapedModel());
+		return new CPOptionCategoryWrapper(
+			_cpOptionCategory.toUnescapedModel());
 	}
 
 	@Override
@@ -827,10 +841,12 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 			return false;
 		}
 
-		CPOptionCategoryWrapper cpOptionCategoryWrapper = (CPOptionCategoryWrapper)obj;
+		CPOptionCategoryWrapper cpOptionCategoryWrapper =
+			(CPOptionCategoryWrapper)obj;
 
-		if (Objects.equals(_cpOptionCategory,
-					cpOptionCategoryWrapper._cpOptionCategory)) {
+		if (Objects.equals(
+				_cpOptionCategory, cpOptionCategoryWrapper._cpOptionCategory)) {
+
 			return true;
 		}
 
@@ -863,4 +879,5 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	}
 
 	private final CPOptionCategory _cpOptionCategory;
+
 }

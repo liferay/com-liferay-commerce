@@ -17,7 +17,6 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOptionCategory;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CPOptionCategory in entity cache.
  *
  * @author Marco Leo
- * @see CPOptionCategory
  * @generated
  */
 @ProviderType
-public class CPOptionCategoryCacheModel implements CacheModel<CPOptionCategory>,
-	Externalizable {
+public class CPOptionCategoryCacheModel
+	implements CacheModel<CPOptionCategory>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CPOptionCategoryCacheModel implements CacheModel<CPOptionCategory>,
 			return false;
 		}
 
-		CPOptionCategoryCacheModel cpOptionCategoryCacheModel = (CPOptionCategoryCacheModel)obj;
+		CPOptionCategoryCacheModel cpOptionCategoryCacheModel =
+			(CPOptionCategoryCacheModel)obj;
 
-		if (CPOptionCategoryId == cpOptionCategoryCacheModel.CPOptionCategoryId) {
+		if (CPOptionCategoryId ==
+				cpOptionCategoryCacheModel.CPOptionCategoryId) {
+
 			return true;
 		}
 
@@ -193,8 +195,7 @@ public class CPOptionCategoryCacheModel implements CacheModel<CPOptionCategory>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
 			objectOutput.writeUTF("");
 		}
@@ -259,4 +260,5 @@ public class CPOptionCategoryCacheModel implements CacheModel<CPOptionCategory>,
 	public double priority;
 	public String key;
 	public long lastPublishDate;
+
 }

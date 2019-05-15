@@ -18,109 +18,119 @@ import aQute.bnd.annotation.ProviderType;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for CommerceWishListItem. This utility wraps
- * {@link com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Andrea Di Giorgi
  * @see CommerceWishListItemService
- * @see com.liferay.commerce.wish.list.service.base.CommerceWishListItemServiceBaseImpl
- * @see com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl
  * @generated
  */
 @ProviderType
 public class CommerceWishListItemServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
+	 * @deprecated As of Mueller (7.2.x)
+	 */
 	@Deprecated
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
-		String json,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
+			addCommerceWishListItem(
+				long commerceWishListId, long cpDefinitionId, long cpInstanceId,
+				String json,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceWishListItem(commerceWishListId, cpDefinitionId,
-			cpInstanceId, json, serviceContext);
+
+		return getService().addCommerceWishListItem(
+			commerceWishListId, cpDefinitionId, cpInstanceId, json,
+			serviceContext);
 	}
 
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		long commerceWishListId, long cProductId, String cpInstanceUuid,
-		String json,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
+			addCommerceWishListItem(
+				long commerceWishListId, long cProductId, String cpInstanceUuid,
+				String json,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceWishListItem(commerceWishListId, cProductId,
-			cpInstanceUuid, json, serviceContext);
+
+		return getService().addCommerceWishListItem(
+			commerceWishListId, cProductId, cpInstanceUuid, json,
+			serviceContext);
 	}
 
 	public static void deleteCommerceWishListItem(long commerceWishListItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		getService().deleteCommerceWishListItem(commerceWishListItemId);
 	}
 
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItem getCommerceWishListItem(
-		long commerceWishListItemId)
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
+			getCommerceWishListItem(long commerceWishListItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceWishListItem(commerceWishListItemId);
 	}
 
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItem getCommerceWishListItem(
-		long commerceWishListId, String cpInstanceUuid, long cProductId)
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
+			getCommerceWishListItem(
+				long commerceWishListId, String cpInstanceUuid, long cProductId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceWishListItem(commerceWishListId, cpInstanceUuid,
-			cProductId);
+
+		return getService().getCommerceWishListItem(
+			commerceWishListId, cpInstanceUuid, cProductId);
 	}
 
 	public static int getCommerceWishListItemByContainsCPInstanceCount(
-		long commerceWishListId, String cpInstanceUuid)
+			long commerceWishListId, String cpInstanceUuid)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceWishListItemByContainsCPInstanceCount(commerceWishListId,
-			cpInstanceUuid);
+
+		return getService().getCommerceWishListItemByContainsCPInstanceCount(
+			commerceWishListId, cpInstanceUuid);
 	}
 
 	public static int getCommerceWishListItemByContainsCProductCount(
-		long commerceWishListId, long cProductId)
+			long commerceWishListId, long cProductId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceWishListItemByContainsCProductCount(commerceWishListId,
-			cProductId);
+
+		return getService().getCommerceWishListItemByContainsCProductCount(
+			commerceWishListId, cProductId);
 	}
 
-	public static java.util.List<com.liferay.commerce.wish.list.model.CommerceWishListItem> getCommerceWishListItems(
-		long commerceWishListId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.wish.list.model.CommerceWishListItem> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceWishListItems(commerceWishListId, start, end,
-			orderByComparator);
+	public static java.util.List
+		<com.liferay.commerce.wish.list.model.CommerceWishListItem>
+				getCommerceWishListItems(
+					long commerceWishListId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.wish.list.model.
+							CommerceWishListItem> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceWishListItems(
+			commerceWishListId, start, end, orderByComparator);
 	}
 
 	public static int getCommerceWishListItemsCount(long commerceWishListId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceWishListItemsCount(commerceWishListId);
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
@@ -129,17 +139,24 @@ public class CommerceWishListItemServiceUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceWishListItemService, CommerceWishListItemService> _serviceTracker;
+	private static ServiceTracker
+		<CommerceWishListItemService, CommerceWishListItemService>
+			_serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceWishListItemService.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceWishListItemService.class);
 
-		ServiceTracker<CommerceWishListItemService, CommerceWishListItemService> serviceTracker =
-			new ServiceTracker<CommerceWishListItemService, CommerceWishListItemService>(bundle.getBundleContext(),
-				CommerceWishListItemService.class, null);
+		ServiceTracker<CommerceWishListItemService, CommerceWishListItemService>
+			serviceTracker =
+				new ServiceTracker
+					<CommerceWishListItemService, CommerceWishListItemService>(
+						bundle.getBundleContext(),
+						CommerceWishListItemService.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

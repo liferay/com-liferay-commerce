@@ -26,16 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.user.segment.service.http.CommerceUserSegmentEntryServiceSoap}.
  *
  * @author Marco Leo
- * @see com.liferay.commerce.user.segment.service.http.CommerceUserSegmentEntryServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceUserSegmentEntrySoap implements Serializable {
+
 	public static CommerceUserSegmentEntrySoap toSoapModel(
 		CommerceUserSegmentEntry model) {
-		CommerceUserSegmentEntrySoap soapModel = new CommerceUserSegmentEntrySoap();
 
-		soapModel.setCommerceUserSegmentEntryId(model.getCommerceUserSegmentEntryId());
+		CommerceUserSegmentEntrySoap soapModel =
+			new CommerceUserSegmentEntrySoap();
+
+		soapModel.setCommerceUserSegmentEntryId(
+			model.getCommerceUserSegmentEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -53,7 +56,9 @@ public class CommerceUserSegmentEntrySoap implements Serializable {
 
 	public static CommerceUserSegmentEntrySoap[] toSoapModels(
 		CommerceUserSegmentEntry[] models) {
-		CommerceUserSegmentEntrySoap[] soapModels = new CommerceUserSegmentEntrySoap[models.length];
+
+		CommerceUserSegmentEntrySoap[] soapModels =
+			new CommerceUserSegmentEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -64,10 +69,13 @@ public class CommerceUserSegmentEntrySoap implements Serializable {
 
 	public static CommerceUserSegmentEntrySoap[][] toSoapModels(
 		CommerceUserSegmentEntry[][] models) {
+
 		CommerceUserSegmentEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceUserSegmentEntrySoap[models.length][models[0].length];
+			soapModels =
+				new CommerceUserSegmentEntrySoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceUserSegmentEntrySoap[0][0];
@@ -82,13 +90,16 @@ public class CommerceUserSegmentEntrySoap implements Serializable {
 
 	public static CommerceUserSegmentEntrySoap[] toSoapModels(
 		List<CommerceUserSegmentEntry> models) {
-		List<CommerceUserSegmentEntrySoap> soapModels = new ArrayList<CommerceUserSegmentEntrySoap>(models.size());
+
+		List<CommerceUserSegmentEntrySoap> soapModels =
+			new ArrayList<CommerceUserSegmentEntrySoap>(models.size());
 
 		for (CommerceUserSegmentEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceUserSegmentEntrySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceUserSegmentEntrySoap[soapModels.size()]);
 	}
 
 	public CommerceUserSegmentEntrySoap() {
@@ -218,4 +229,5 @@ public class CommerceUserSegmentEntrySoap implements Serializable {
 	private boolean _active;
 	private boolean _system;
 	private double _priority;
+
 }

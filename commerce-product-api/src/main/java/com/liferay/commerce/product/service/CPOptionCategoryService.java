@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPOptionCategory;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,26 +40,33 @@ import java.util.Map;
  *
  * @author Marco Leo
  * @see CPOptionCategoryServiceUtil
- * @see com.liferay.commerce.product.service.base.CPOptionCategoryServiceBaseImpl
- * @see com.liferay.commerce.product.service.impl.CPOptionCategoryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CPOptionCategory"}, service = CPOptionCategoryService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CPOptionCategory"
+	},
+	service = CPOptionCategoryService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CPOptionCategoryService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CPOptionCategoryServiceUtil} to access the cp option category remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPOptionCategoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CPOptionCategoryServiceUtil} to access the cp option category remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPOptionCategoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPOptionCategory addCPOptionCategory(Map<Locale, String> titleMap,
-		Map<Locale, String> descriptionMap, double priority, String key,
-		ServiceContext serviceContext) throws PortalException;
+	public CPOptionCategory addCPOptionCategory(
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			double priority, String key, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPOptionCategory(long cpOptionCategoryId)
 		throws PortalException;
@@ -70,32 +76,34 @@ public interface CPOptionCategoryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
-		int start, int end) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
-		int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator)
+	public List<CPOptionCategory> getCPOptionCategories(
+			long groupId, int start, int end)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCount(long groupId)
+	public List<CPOptionCategory> getCPOptionCategories(
+			long groupId, int start, int end,
+			OrderByComparator<CPOptionCategory> orderByComparator)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionCategoriesCount(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOptionCategory getCPOptionCategory(long cpOptionCategoryId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
-	public CPOptionCategory updateCPOptionCategory(long cpOptionCategoryId,
-		Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-		double priority, String key, ServiceContext serviceContext)
+	public CPOptionCategory updateCPOptionCategory(
+			long cpOptionCategoryId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, double priority, String key,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

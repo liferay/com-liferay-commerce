@@ -32,12 +32,13 @@ import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceAccountBaseImpl extends CommerceAccountModelImpl
-	implements CommerceAccount {
+public abstract class CommerceAccountBaseImpl
+	extends CommerceAccountModelImpl implements CommerceAccount {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce account model instance should use the {@link CommerceAccount} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce account model instance should use the <code>CommerceAccount</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceAccountBaseImpl extends CommerceAccountModelImpl
 			CommerceAccountLocalServiceUtil.updateCommerceAccount(this);
 		}
 	}
+
 }

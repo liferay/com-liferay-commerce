@@ -35,18 +35,22 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
 public abstract class CommerceVirtualOrderItemBaseImpl
 	extends CommerceVirtualOrderItemModelImpl
 	implements CommerceVirtualOrderItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce virtual order item model instance should use the {@link CommerceVirtualOrderItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce virtual order item model instance should use the <code>CommerceVirtualOrderItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceVirtualOrderItemLocalServiceUtil.addCommerceVirtualOrderItem(this);
+			CommerceVirtualOrderItemLocalServiceUtil.
+				addCommerceVirtualOrderItem(this);
 		}
 		else {
-			CommerceVirtualOrderItemLocalServiceUtil.updateCommerceVirtualOrderItem(this);
+			CommerceVirtualOrderItemLocalServiceUtil.
+				updateCommerceVirtualOrderItem(this);
 		}
 	}
+
 }

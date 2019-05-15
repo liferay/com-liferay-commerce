@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -39,53 +38,64 @@ import java.util.List;
  *
  * @author Marco Leo
  * @see CommerceAccountUserRelServiceUtil
- * @see com.liferay.commerce.account.service.base.CommerceAccountUserRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAccountUserRel"}, service = CommerceAccountUserRelService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceAccountUserRel"
+	},
+	service = CommerceAccountUserRelService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceAccountUserRelService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public void addCommerceAccountUserRels(long commerceAccountId,
-		long[] userIds, String[] emailAddresses, long[] roleIds,
-		ServiceContext serviceContext) throws PortalException;
+	public void addCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds, String[] emailAddresses,
+			long[] roleIds, ServiceContext serviceContext)
+		throws PortalException;
 
-	public void deleteCommerceAccountUserRel(long commerceAccountId, long userId)
+	public void deleteCommerceAccountUserRel(
+			long commerceAccountId, long userId)
 		throws PortalException;
 
 	public void deleteCommerceAccountUserRels(long commerceAccountId)
 		throws PortalException;
 
-	public void deleteCommerceAccountUserRels(long commerceAccountId,
-		long[] userIds) throws PortalException;
+	public void deleteCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccountUserRel getCommerceAccountUserRel(
-		CommerceAccountUserRelPK commerceAccountUserRelPK)
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
-		long commerceAccountId, int start, int end) throws PortalException;
+			long commerceAccountId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountUserRelsCount(long commerceAccountId)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

@@ -32,12 +32,13 @@ import com.liferay.commerce.service.CommerceCountryLocalServiceUtil;
  * @generated
  */
 @ProviderType
-public abstract class CommerceCountryBaseImpl extends CommerceCountryModelImpl
-	implements CommerceCountry {
+public abstract class CommerceCountryBaseImpl
+	extends CommerceCountryModelImpl implements CommerceCountry {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce country model instance should use the {@link CommerceCountry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce country model instance should use the <code>CommerceCountry</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +49,5 @@ public abstract class CommerceCountryBaseImpl extends CommerceCountryModelImpl
 			CommerceCountryLocalServiceUtil.updateCommerceCountry(this);
 		}
 	}
+
 }

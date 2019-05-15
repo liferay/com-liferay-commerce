@@ -25,20 +25,22 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPTaxCategoryModel
- * @see com.liferay.commerce.product.model.impl.CPTaxCategoryImpl
- * @see com.liferay.commerce.product.model.impl.CPTaxCategoryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPTaxCategoryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPTaxCategoryImpl"
+)
 @ProviderType
 public interface CPTaxCategory extends CPTaxCategoryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPTaxCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPTaxCategoryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPTaxCategory, Long> CP_TAX_CATEGORY_ID_ACCESSOR =
-		new Accessor<CPTaxCategory, Long>() {
+	public static final Accessor<CPTaxCategory, Long>
+		CP_TAX_CATEGORY_ID_ACCESSOR = new Accessor<CPTaxCategory, Long>() {
+
 			@Override
 			public Long get(CPTaxCategory cpTaxCategory) {
 				return cpTaxCategory.getCPTaxCategoryId();
@@ -53,5 +55,7 @@ public interface CPTaxCategory extends CPTaxCategoryModel, PersistedModel {
 			public Class<CPTaxCategory> getTypeClass() {
 				return CPTaxCategory.class;
 			}
+
 		};
+
 }

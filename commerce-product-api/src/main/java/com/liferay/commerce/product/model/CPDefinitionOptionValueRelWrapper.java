@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,9 +40,11 @@ import java.util.Objects;
 @ProviderType
 public class CPDefinitionOptionValueRelWrapper
 	implements CPDefinitionOptionValueRel,
-		ModelWrapper<CPDefinitionOptionValueRel> {
+			   ModelWrapper<CPDefinitionOptionValueRel> {
+
 	public CPDefinitionOptionValueRelWrapper(
 		CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
+
 		_cpDefinitionOptionValueRel = cpDefinitionOptionValueRel;
 	}
 
@@ -63,8 +63,8 @@ public class CPDefinitionOptionValueRelWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("CPDefinitionOptionValueRelId",
-			getCPDefinitionOptionValueRelId());
+		attributes.put(
+			"CPDefinitionOptionValueRelId", getCPDefinitionOptionValueRelId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -88,7 +88,7 @@ public class CPDefinitionOptionValueRelWrapper
 		}
 
 		Long CPDefinitionOptionValueRelId = (Long)attributes.get(
-				"CPDefinitionOptionValueRelId");
+			"CPDefinitionOptionValueRelId");
 
 		if (CPDefinitionOptionValueRelId != null) {
 			setCPDefinitionOptionValueRelId(CPDefinitionOptionValueRelId);
@@ -131,7 +131,7 @@ public class CPDefinitionOptionValueRelWrapper
 		}
 
 		Long CPDefinitionOptionRelId = (Long)attributes.get(
-				"CPDefinitionOptionRelId");
+			"CPDefinitionOptionRelId");
 
 		if (CPDefinitionOptionRelId != null) {
 			setCPDefinitionOptionRelId(CPDefinitionOptionRelId);
@@ -158,12 +158,16 @@ public class CPDefinitionOptionValueRelWrapper
 
 	@Override
 	public Object clone() {
-		return new CPDefinitionOptionValueRelWrapper((CPDefinitionOptionValueRel)_cpDefinitionOptionValueRel.clone());
+		return new CPDefinitionOptionValueRelWrapper(
+			(CPDefinitionOptionValueRel)_cpDefinitionOptionValueRel.clone());
 	}
 
 	@Override
-	public int compareTo(CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
-		return _cpDefinitionOptionValueRel.compareTo(cpDefinitionOptionValueRel);
+	public int compareTo(
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
+
+		return _cpDefinitionOptionValueRel.compareTo(
+			cpDefinitionOptionValueRel);
 	}
 
 	@Override
@@ -172,10 +176,10 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Returns the company ID of this cp definition option value rel.
-	*
-	* @return the company ID of this cp definition option value rel
-	*/
+	 * Returns the company ID of this cp definition option value rel.
+	 *
+	 * @return the company ID of this cp definition option value rel
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpDefinitionOptionValueRel.getCompanyId();
@@ -184,34 +188,35 @@ public class CPDefinitionOptionValueRelWrapper
 	@Override
 	public CPDefinitionOptionRel getCPDefinitionOptionRel()
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return _cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
 	}
 
 	/**
-	* Returns the cp definition option rel ID of this cp definition option value rel.
-	*
-	* @return the cp definition option rel ID of this cp definition option value rel
-	*/
+	 * Returns the cp definition option rel ID of this cp definition option value rel.
+	 *
+	 * @return the cp definition option rel ID of this cp definition option value rel
+	 */
 	@Override
 	public long getCPDefinitionOptionRelId() {
 		return _cpDefinitionOptionValueRel.getCPDefinitionOptionRelId();
 	}
 
 	/**
-	* Returns the cp definition option value rel ID of this cp definition option value rel.
-	*
-	* @return the cp definition option value rel ID of this cp definition option value rel
-	*/
+	 * Returns the cp definition option value rel ID of this cp definition option value rel.
+	 *
+	 * @return the cp definition option value rel ID of this cp definition option value rel
+	 */
 	@Override
 	public long getCPDefinitionOptionValueRelId() {
 		return _cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId();
 	}
 
 	/**
-	* Returns the create date of this cp definition option value rel.
-	*
-	* @return the create date of this cp definition option value rel
-	*/
+	 * Returns the create date of this cp definition option value rel.
+	 *
+	 * @return the create date of this cp definition option value rel
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpDefinitionOptionValueRel.getCreateDate();
@@ -228,86 +233,86 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Returns the group ID of this cp definition option value rel.
-	*
-	* @return the group ID of this cp definition option value rel
-	*/
+	 * Returns the group ID of this cp definition option value rel.
+	 *
+	 * @return the group ID of this cp definition option value rel
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpDefinitionOptionValueRel.getGroupId();
 	}
 
 	/**
-	* Returns the key of this cp definition option value rel.
-	*
-	* @return the key of this cp definition option value rel
-	*/
+	 * Returns the key of this cp definition option value rel.
+	 *
+	 * @return the key of this cp definition option value rel
+	 */
 	@Override
 	public String getKey() {
 		return _cpDefinitionOptionValueRel.getKey();
 	}
 
 	/**
-	* Returns the modified date of this cp definition option value rel.
-	*
-	* @return the modified date of this cp definition option value rel
-	*/
+	 * Returns the modified date of this cp definition option value rel.
+	 *
+	 * @return the modified date of this cp definition option value rel
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpDefinitionOptionValueRel.getModifiedDate();
 	}
 
 	/**
-	* Returns the name of this cp definition option value rel.
-	*
-	* @return the name of this cp definition option value rel
-	*/
+	 * Returns the name of this cp definition option value rel.
+	 *
+	 * @return the name of this cp definition option value rel
+	 */
 	@Override
 	public String getName() {
 		return _cpDefinitionOptionValueRel.getName();
 	}
 
 	/**
-	* Returns the localized name of this cp definition option value rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this cp definition option value rel
-	*/
+	 * Returns the localized name of this cp definition option value rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale of the language
+	 * @return the localized name of this cp definition option value rel
+	 */
 	@Override
 	public String getName(java.util.Locale locale) {
 		return _cpDefinitionOptionValueRel.getName(locale);
 	}
 
 	/**
-	* Returns the localized name of this cp definition option value rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this cp definition option value rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
+	 * Returns the localized name of this cp definition option value rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this cp definition option value rel. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
 	@Override
 	public String getName(java.util.Locale locale, boolean useDefault) {
 		return _cpDefinitionOptionValueRel.getName(locale, useDefault);
 	}
 
 	/**
-	* Returns the localized name of this cp definition option value rel in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this cp definition option value rel
-	*/
+	 * Returns the localized name of this cp definition option value rel in the language. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @return the localized name of this cp definition option value rel
+	 */
 	@Override
 	public String getName(String languageId) {
 		return _cpDefinitionOptionValueRel.getName(languageId);
 	}
 
 	/**
-	* Returns the localized name of this cp definition option value rel in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this cp definition option value rel
-	*/
+	 * Returns the localized name of this cp definition option value rel in the language, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the ID of the language
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this cp definition option value rel
+	 */
 	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return _cpDefinitionOptionValueRel.getName(languageId, useDefault);
@@ -324,20 +329,20 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Returns a map of the locales and localized names of this cp definition option value rel.
-	*
-	* @return the locales and localized names of this cp definition option value rel
-	*/
+	 * Returns a map of the locales and localized names of this cp definition option value rel.
+	 *
+	 * @return the locales and localized names of this cp definition option value rel
+	 */
 	@Override
 	public Map<java.util.Locale, String> getNameMap() {
 		return _cpDefinitionOptionValueRel.getNameMap();
 	}
 
 	/**
-	* Returns the primary key of this cp definition option value rel.
-	*
-	* @return the primary key of this cp definition option value rel
-	*/
+	 * Returns the primary key of this cp definition option value rel.
+	 *
+	 * @return the primary key of this cp definition option value rel
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpDefinitionOptionValueRel.getPrimaryKey();
@@ -349,50 +354,50 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Returns the priority of this cp definition option value rel.
-	*
-	* @return the priority of this cp definition option value rel
-	*/
+	 * Returns the priority of this cp definition option value rel.
+	 *
+	 * @return the priority of this cp definition option value rel
+	 */
 	@Override
 	public double getPriority() {
 		return _cpDefinitionOptionValueRel.getPriority();
 	}
 
 	/**
-	* Returns the user ID of this cp definition option value rel.
-	*
-	* @return the user ID of this cp definition option value rel
-	*/
+	 * Returns the user ID of this cp definition option value rel.
+	 *
+	 * @return the user ID of this cp definition option value rel
+	 */
 	@Override
 	public long getUserId() {
 		return _cpDefinitionOptionValueRel.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp definition option value rel.
-	*
-	* @return the user name of this cp definition option value rel
-	*/
+	 * Returns the user name of this cp definition option value rel.
+	 *
+	 * @return the user name of this cp definition option value rel
+	 */
 	@Override
 	public String getUserName() {
 		return _cpDefinitionOptionValueRel.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp definition option value rel.
-	*
-	* @return the user uuid of this cp definition option value rel
-	*/
+	 * Returns the user uuid of this cp definition option value rel.
+	 *
+	 * @return the user uuid of this cp definition option value rel
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpDefinitionOptionValueRel.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp definition option value rel.
-	*
-	* @return the uuid of this cp definition option value rel
-	*/
+	 * Returns the uuid of this cp definition option value rel.
+	 *
+	 * @return the uuid of this cp definition option value rel
+	 */
 	@Override
 	public String getUuid() {
 		return _cpDefinitionOptionValueRel.getUuid();
@@ -426,14 +431,17 @@ public class CPDefinitionOptionValueRelWrapper
 	@Override
 	public void prepareLocalizedFieldsForImport()
 		throws com.liferay.portal.kernel.exception.LocaleException {
+
 		_cpDefinitionOptionValueRel.prepareLocalizedFieldsForImport();
 	}
 
 	@Override
 	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
+			java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
-		_cpDefinitionOptionValueRel.prepareLocalizedFieldsForImport(defaultImportLocale);
+
+		_cpDefinitionOptionValueRel.prepareLocalizedFieldsForImport(
+			defaultImportLocale);
 	}
 
 	@Override
@@ -442,41 +450,44 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Sets the company ID of this cp definition option value rel.
-	*
-	* @param companyId the company ID of this cp definition option value rel
-	*/
+	 * Sets the company ID of this cp definition option value rel.
+	 *
+	 * @param companyId the company ID of this cp definition option value rel
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDefinitionOptionValueRel.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp definition option rel ID of this cp definition option value rel.
-	*
-	* @param CPDefinitionOptionRelId the cp definition option rel ID of this cp definition option value rel
-	*/
+	 * Sets the cp definition option rel ID of this cp definition option value rel.
+	 *
+	 * @param CPDefinitionOptionRelId the cp definition option rel ID of this cp definition option value rel
+	 */
 	@Override
 	public void setCPDefinitionOptionRelId(long CPDefinitionOptionRelId) {
-		_cpDefinitionOptionValueRel.setCPDefinitionOptionRelId(CPDefinitionOptionRelId);
+		_cpDefinitionOptionValueRel.setCPDefinitionOptionRelId(
+			CPDefinitionOptionRelId);
 	}
 
 	/**
-	* Sets the cp definition option value rel ID of this cp definition option value rel.
-	*
-	* @param CPDefinitionOptionValueRelId the cp definition option value rel ID of this cp definition option value rel
-	*/
+	 * Sets the cp definition option value rel ID of this cp definition option value rel.
+	 *
+	 * @param CPDefinitionOptionValueRelId the cp definition option value rel ID of this cp definition option value rel
+	 */
 	@Override
 	public void setCPDefinitionOptionValueRelId(
 		long CPDefinitionOptionValueRelId) {
-		_cpDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(CPDefinitionOptionValueRelId);
+
+		_cpDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(
+			CPDefinitionOptionValueRelId);
 	}
 
 	/**
-	* Sets the create date of this cp definition option value rel.
-	*
-	* @param createDate the create date of this cp definition option value rel
-	*/
+	 * Sets the create date of this cp definition option value rel.
+	 *
+	 * @param createDate the create date of this cp definition option value rel
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpDefinitionOptionValueRel.setCreateDate(createDate);
@@ -485,6 +496,7 @@ public class CPDefinitionOptionValueRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpDefinitionOptionValueRel.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -499,66 +511,67 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Sets the group ID of this cp definition option value rel.
-	*
-	* @param groupId the group ID of this cp definition option value rel
-	*/
+	 * Sets the group ID of this cp definition option value rel.
+	 *
+	 * @param groupId the group ID of this cp definition option value rel
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDefinitionOptionValueRel.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the key of this cp definition option value rel.
-	*
-	* @param key the key of this cp definition option value rel
-	*/
+	 * Sets the key of this cp definition option value rel.
+	 *
+	 * @param key the key of this cp definition option value rel
+	 */
 	@Override
 	public void setKey(String key) {
 		_cpDefinitionOptionValueRel.setKey(key);
 	}
 
 	/**
-	* Sets the modified date of this cp definition option value rel.
-	*
-	* @param modifiedDate the modified date of this cp definition option value rel
-	*/
+	 * Sets the modified date of this cp definition option value rel.
+	 *
+	 * @param modifiedDate the modified date of this cp definition option value rel
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpDefinitionOptionValueRel.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Sets the name of this cp definition option value rel.
-	*
-	* @param name the name of this cp definition option value rel
-	*/
+	 * Sets the name of this cp definition option value rel.
+	 *
+	 * @param name the name of this cp definition option value rel
+	 */
 	@Override
 	public void setName(String name) {
 		_cpDefinitionOptionValueRel.setName(name);
 	}
 
 	/**
-	* Sets the localized name of this cp definition option value rel in the language.
-	*
-	* @param name the localized name of this cp definition option value rel
-	* @param locale the locale of the language
-	*/
+	 * Sets the localized name of this cp definition option value rel in the language.
+	 *
+	 * @param name the localized name of this cp definition option value rel
+	 * @param locale the locale of the language
+	 */
 	@Override
 	public void setName(String name, java.util.Locale locale) {
 		_cpDefinitionOptionValueRel.setName(name, locale);
 	}
 
 	/**
-	* Sets the localized name of this cp definition option value rel in the language, and sets the default locale.
-	*
-	* @param name the localized name of this cp definition option value rel
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized name of this cp definition option value rel in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this cp definition option value rel
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
+	public void setName(
+		String name, java.util.Locale locale, java.util.Locale defaultLocale) {
+
 		_cpDefinitionOptionValueRel.setName(name, locale, defaultLocale);
 	}
 
@@ -568,24 +581,25 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Sets the localized names of this cp definition option value rel from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this cp definition option value rel
-	*/
+	 * Sets the localized names of this cp definition option value rel from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this cp definition option value rel
+	 */
 	@Override
 	public void setNameMap(Map<java.util.Locale, String> nameMap) {
 		_cpDefinitionOptionValueRel.setNameMap(nameMap);
 	}
 
 	/**
-	* Sets the localized names of this cp definition option value rel from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this cp definition option value rel
-	* @param defaultLocale the default locale
-	*/
+	 * Sets the localized names of this cp definition option value rel from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this cp definition option value rel
+	 * @param defaultLocale the default locale
+	 */
 	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
+	public void setNameMap(
+		Map<java.util.Locale, String> nameMap, java.util.Locale defaultLocale) {
+
 		_cpDefinitionOptionValueRel.setNameMap(nameMap, defaultLocale);
 	}
 
@@ -595,10 +609,10 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Sets the primary key of this cp definition option value rel.
-	*
-	* @param primaryKey the primary key of this cp definition option value rel
-	*/
+	 * Sets the primary key of this cp definition option value rel.
+	 *
+	 * @param primaryKey the primary key of this cp definition option value rel
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpDefinitionOptionValueRel.setPrimaryKey(primaryKey);
@@ -610,63 +624,66 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	/**
-	* Sets the priority of this cp definition option value rel.
-	*
-	* @param priority the priority of this cp definition option value rel
-	*/
+	 * Sets the priority of this cp definition option value rel.
+	 *
+	 * @param priority the priority of this cp definition option value rel
+	 */
 	@Override
 	public void setPriority(double priority) {
 		_cpDefinitionOptionValueRel.setPriority(priority);
 	}
 
 	/**
-	* Sets the user ID of this cp definition option value rel.
-	*
-	* @param userId the user ID of this cp definition option value rel
-	*/
+	 * Sets the user ID of this cp definition option value rel.
+	 *
+	 * @param userId the user ID of this cp definition option value rel
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpDefinitionOptionValueRel.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp definition option value rel.
-	*
-	* @param userName the user name of this cp definition option value rel
-	*/
+	 * Sets the user name of this cp definition option value rel.
+	 *
+	 * @param userName the user name of this cp definition option value rel
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpDefinitionOptionValueRel.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp definition option value rel.
-	*
-	* @param userUuid the user uuid of this cp definition option value rel
-	*/
+	 * Sets the user uuid of this cp definition option value rel.
+	 *
+	 * @param userUuid the user uuid of this cp definition option value rel
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpDefinitionOptionValueRel.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp definition option value rel.
-	*
-	* @param uuid the uuid of this cp definition option value rel
-	*/
+	 * Sets the uuid of this cp definition option value rel.
+	 *
+	 * @param uuid the uuid of this cp definition option value rel
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpDefinitionOptionValueRel.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDefinitionOptionValueRel> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel
+		<CPDefinitionOptionValueRel> toCacheModel() {
+
 		return _cpDefinitionOptionValueRel.toCacheModel();
 	}
 
 	@Override
 	public CPDefinitionOptionValueRel toEscapedModel() {
-		return new CPDefinitionOptionValueRelWrapper(_cpDefinitionOptionValueRel.toEscapedModel());
+		return new CPDefinitionOptionValueRelWrapper(
+			_cpDefinitionOptionValueRel.toEscapedModel());
 	}
 
 	@Override
@@ -676,7 +693,8 @@ public class CPDefinitionOptionValueRelWrapper
 
 	@Override
 	public CPDefinitionOptionValueRel toUnescapedModel() {
-		return new CPDefinitionOptionValueRelWrapper(_cpDefinitionOptionValueRel.toUnescapedModel());
+		return new CPDefinitionOptionValueRelWrapper(
+			_cpDefinitionOptionValueRel.toUnescapedModel());
 	}
 
 	@Override
@@ -694,10 +712,14 @@ public class CPDefinitionOptionValueRelWrapper
 			return false;
 		}
 
-		CPDefinitionOptionValueRelWrapper cpDefinitionOptionValueRelWrapper = (CPDefinitionOptionValueRelWrapper)obj;
+		CPDefinitionOptionValueRelWrapper cpDefinitionOptionValueRelWrapper =
+			(CPDefinitionOptionValueRelWrapper)obj;
 
-		if (Objects.equals(_cpDefinitionOptionValueRel,
-					cpDefinitionOptionValueRelWrapper._cpDefinitionOptionValueRel)) {
+		if (Objects.equals(
+				_cpDefinitionOptionValueRel,
+				cpDefinitionOptionValueRelWrapper.
+					_cpDefinitionOptionValueRel)) {
+
 			return true;
 		}
 
@@ -730,4 +752,5 @@ public class CPDefinitionOptionValueRelWrapper
 	}
 
 	private final CPDefinitionOptionValueRel _cpDefinitionOptionValueRel;
+
 }

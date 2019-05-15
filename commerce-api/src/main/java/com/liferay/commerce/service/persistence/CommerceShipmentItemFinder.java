@@ -22,6 +22,8 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceShipmentItemFinder {
-	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem> findByCommerceOrderItemId(
-		long commerceOrderItemId);
+
+	public java.util.List<com.liferay.commerce.model.CommerceShipmentItem>
+		findByCommerceOrderItemId(long commerceOrderItemId);
+
 }

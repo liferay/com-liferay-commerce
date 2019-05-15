@@ -17,9 +17,7 @@ package com.liferay.commerce.product.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.exportimport.kernel.lar.StagedModelType;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -40,8 +38,9 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CPDisplayLayoutWrapper implements CPDisplayLayout,
-	ModelWrapper<CPDisplayLayout> {
+public class CPDisplayLayoutWrapper
+	implements CPDisplayLayout, ModelWrapper<CPDisplayLayout> {
+
 	public CPDisplayLayoutWrapper(CPDisplayLayout cpDisplayLayout) {
 		_cpDisplayLayout = cpDisplayLayout;
 	}
@@ -146,7 +145,8 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 
 	@Override
 	public Object clone() {
-		return new CPDisplayLayoutWrapper((CPDisplayLayout)_cpDisplayLayout.clone());
+		return new CPDisplayLayoutWrapper(
+			(CPDisplayLayout)_cpDisplayLayout.clone());
 	}
 
 	@Override
@@ -155,60 +155,60 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Returns the fully qualified class name of this cp display layout.
-	*
-	* @return the fully qualified class name of this cp display layout
-	*/
+	 * Returns the fully qualified class name of this cp display layout.
+	 *
+	 * @return the fully qualified class name of this cp display layout
+	 */
 	@Override
 	public String getClassName() {
 		return _cpDisplayLayout.getClassName();
 	}
 
 	/**
-	* Returns the class name ID of this cp display layout.
-	*
-	* @return the class name ID of this cp display layout
-	*/
+	 * Returns the class name ID of this cp display layout.
+	 *
+	 * @return the class name ID of this cp display layout
+	 */
 	@Override
 	public long getClassNameId() {
 		return _cpDisplayLayout.getClassNameId();
 	}
 
 	/**
-	* Returns the class pk of this cp display layout.
-	*
-	* @return the class pk of this cp display layout
-	*/
+	 * Returns the class pk of this cp display layout.
+	 *
+	 * @return the class pk of this cp display layout
+	 */
 	@Override
 	public long getClassPK() {
 		return _cpDisplayLayout.getClassPK();
 	}
 
 	/**
-	* Returns the company ID of this cp display layout.
-	*
-	* @return the company ID of this cp display layout
-	*/
+	 * Returns the company ID of this cp display layout.
+	 *
+	 * @return the company ID of this cp display layout
+	 */
 	@Override
 	public long getCompanyId() {
 		return _cpDisplayLayout.getCompanyId();
 	}
 
 	/**
-	* Returns the cp display layout ID of this cp display layout.
-	*
-	* @return the cp display layout ID of this cp display layout
-	*/
+	 * Returns the cp display layout ID of this cp display layout.
+	 *
+	 * @return the cp display layout ID of this cp display layout
+	 */
 	@Override
 	public long getCPDisplayLayoutId() {
 		return _cpDisplayLayout.getCPDisplayLayoutId();
 	}
 
 	/**
-	* Returns the create date of this cp display layout.
-	*
-	* @return the create date of this cp display layout
-	*/
+	 * Returns the create date of this cp display layout.
+	 *
+	 * @return the create date of this cp display layout
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _cpDisplayLayout.getCreateDate();
@@ -220,40 +220,40 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Returns the group ID of this cp display layout.
-	*
-	* @return the group ID of this cp display layout
-	*/
+	 * Returns the group ID of this cp display layout.
+	 *
+	 * @return the group ID of this cp display layout
+	 */
 	@Override
 	public long getGroupId() {
 		return _cpDisplayLayout.getGroupId();
 	}
 
 	/**
-	* Returns the layout uuid of this cp display layout.
-	*
-	* @return the layout uuid of this cp display layout
-	*/
+	 * Returns the layout uuid of this cp display layout.
+	 *
+	 * @return the layout uuid of this cp display layout
+	 */
 	@Override
 	public String getLayoutUuid() {
 		return _cpDisplayLayout.getLayoutUuid();
 	}
 
 	/**
-	* Returns the modified date of this cp display layout.
-	*
-	* @return the modified date of this cp display layout
-	*/
+	 * Returns the modified date of this cp display layout.
+	 *
+	 * @return the modified date of this cp display layout
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _cpDisplayLayout.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this cp display layout.
-	*
-	* @return the primary key of this cp display layout
-	*/
+	 * Returns the primary key of this cp display layout.
+	 *
+	 * @return the primary key of this cp display layout
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _cpDisplayLayout.getPrimaryKey();
@@ -265,40 +265,40 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Returns the user ID of this cp display layout.
-	*
-	* @return the user ID of this cp display layout
-	*/
+	 * Returns the user ID of this cp display layout.
+	 *
+	 * @return the user ID of this cp display layout
+	 */
 	@Override
 	public long getUserId() {
 		return _cpDisplayLayout.getUserId();
 	}
 
 	/**
-	* Returns the user name of this cp display layout.
-	*
-	* @return the user name of this cp display layout
-	*/
+	 * Returns the user name of this cp display layout.
+	 *
+	 * @return the user name of this cp display layout
+	 */
 	@Override
 	public String getUserName() {
 		return _cpDisplayLayout.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this cp display layout.
-	*
-	* @return the user uuid of this cp display layout
-	*/
+	 * Returns the user uuid of this cp display layout.
+	 *
+	 * @return the user uuid of this cp display layout
+	 */
 	@Override
 	public String getUserUuid() {
 		return _cpDisplayLayout.getUserUuid();
 	}
 
 	/**
-	* Returns the uuid of this cp display layout.
-	*
-	* @return the uuid of this cp display layout
-	*/
+	 * Returns the uuid of this cp display layout.
+	 *
+	 * @return the uuid of this cp display layout
+	 */
 	@Override
 	public String getUuid() {
 		return _cpDisplayLayout.getUuid();
@@ -340,50 +340,50 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Sets the class name ID of this cp display layout.
-	*
-	* @param classNameId the class name ID of this cp display layout
-	*/
+	 * Sets the class name ID of this cp display layout.
+	 *
+	 * @param classNameId the class name ID of this cp display layout
+	 */
 	@Override
 	public void setClassNameId(long classNameId) {
 		_cpDisplayLayout.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the class pk of this cp display layout.
-	*
-	* @param classPK the class pk of this cp display layout
-	*/
+	 * Sets the class pk of this cp display layout.
+	 *
+	 * @param classPK the class pk of this cp display layout
+	 */
 	@Override
 	public void setClassPK(long classPK) {
 		_cpDisplayLayout.setClassPK(classPK);
 	}
 
 	/**
-	* Sets the company ID of this cp display layout.
-	*
-	* @param companyId the company ID of this cp display layout
-	*/
+	 * Sets the company ID of this cp display layout.
+	 *
+	 * @param companyId the company ID of this cp display layout
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDisplayLayout.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the cp display layout ID of this cp display layout.
-	*
-	* @param CPDisplayLayoutId the cp display layout ID of this cp display layout
-	*/
+	 * Sets the cp display layout ID of this cp display layout.
+	 *
+	 * @param CPDisplayLayoutId the cp display layout ID of this cp display layout
+	 */
 	@Override
 	public void setCPDisplayLayoutId(long CPDisplayLayoutId) {
 		_cpDisplayLayout.setCPDisplayLayoutId(CPDisplayLayoutId);
 	}
 
 	/**
-	* Sets the create date of this cp display layout.
-	*
-	* @param createDate the create date of this cp display layout
-	*/
+	 * Sets the create date of this cp display layout.
+	 *
+	 * @param createDate the create date of this cp display layout
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_cpDisplayLayout.setCreateDate(createDate);
@@ -392,6 +392,7 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_cpDisplayLayout.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -406,30 +407,30 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Sets the group ID of this cp display layout.
-	*
-	* @param groupId the group ID of this cp display layout
-	*/
+	 * Sets the group ID of this cp display layout.
+	 *
+	 * @param groupId the group ID of this cp display layout
+	 */
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDisplayLayout.setGroupId(groupId);
 	}
 
 	/**
-	* Sets the layout uuid of this cp display layout.
-	*
-	* @param layoutUuid the layout uuid of this cp display layout
-	*/
+	 * Sets the layout uuid of this cp display layout.
+	 *
+	 * @param layoutUuid the layout uuid of this cp display layout
+	 */
 	@Override
 	public void setLayoutUuid(String layoutUuid) {
 		_cpDisplayLayout.setLayoutUuid(layoutUuid);
 	}
 
 	/**
-	* Sets the modified date of this cp display layout.
-	*
-	* @param modifiedDate the modified date of this cp display layout
-	*/
+	 * Sets the modified date of this cp display layout.
+	 *
+	 * @param modifiedDate the modified date of this cp display layout
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_cpDisplayLayout.setModifiedDate(modifiedDate);
@@ -441,10 +442,10 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Sets the primary key of this cp display layout.
-	*
-	* @param primaryKey the primary key of this cp display layout
-	*/
+	 * Sets the primary key of this cp display layout.
+	 *
+	 * @param primaryKey the primary key of this cp display layout
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_cpDisplayLayout.setPrimaryKey(primaryKey);
@@ -456,47 +457,49 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	/**
-	* Sets the user ID of this cp display layout.
-	*
-	* @param userId the user ID of this cp display layout
-	*/
+	 * Sets the user ID of this cp display layout.
+	 *
+	 * @param userId the user ID of this cp display layout
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_cpDisplayLayout.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this cp display layout.
-	*
-	* @param userName the user name of this cp display layout
-	*/
+	 * Sets the user name of this cp display layout.
+	 *
+	 * @param userName the user name of this cp display layout
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_cpDisplayLayout.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this cp display layout.
-	*
-	* @param userUuid the user uuid of this cp display layout
-	*/
+	 * Sets the user uuid of this cp display layout.
+	 *
+	 * @param userUuid the user uuid of this cp display layout
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_cpDisplayLayout.setUserUuid(userUuid);
 	}
 
 	/**
-	* Sets the uuid of this cp display layout.
-	*
-	* @param uuid the uuid of this cp display layout
-	*/
+	 * Sets the uuid of this cp display layout.
+	 *
+	 * @param uuid the uuid of this cp display layout
+	 */
 	@Override
 	public void setUuid(String uuid) {
 		_cpDisplayLayout.setUuid(uuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CPDisplayLayout> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CPDisplayLayout>
+		toCacheModel() {
+
 		return _cpDisplayLayout.toCacheModel();
 	}
 
@@ -530,10 +533,12 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 			return false;
 		}
 
-		CPDisplayLayoutWrapper cpDisplayLayoutWrapper = (CPDisplayLayoutWrapper)obj;
+		CPDisplayLayoutWrapper cpDisplayLayoutWrapper =
+			(CPDisplayLayoutWrapper)obj;
 
-		if (Objects.equals(_cpDisplayLayout,
-					cpDisplayLayoutWrapper._cpDisplayLayout)) {
+		if (Objects.equals(
+				_cpDisplayLayout, cpDisplayLayoutWrapper._cpDisplayLayout)) {
+
 			return true;
 		}
 
@@ -566,4 +571,5 @@ public class CPDisplayLayoutWrapper implements CPDisplayLayout,
 	}
 
 	private final CPDisplayLayout _cpDisplayLayout;
+
 }

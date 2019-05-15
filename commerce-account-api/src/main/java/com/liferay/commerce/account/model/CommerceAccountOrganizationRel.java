@@ -25,57 +25,69 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CommerceAccountOrganizationRelModel
- * @see com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl
- * @see com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl"
+)
 @ProviderType
 public interface CommerceAccountOrganizationRel
 	extends CommerceAccountOrganizationRelModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceAccountOrganizationRel, Long> COMMERCE_ACCOUNT_ID_ACCESSOR =
-		new Accessor<CommerceAccountOrganizationRel, Long>() {
-			@Override
-			public Long get(
-				CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
-				return commerceAccountOrganizationRel.getCommerceAccountId();
-			}
+	public static final Accessor<CommerceAccountOrganizationRel, Long>
+		COMMERCE_ACCOUNT_ID_ACCESSOR =
+			new Accessor<CommerceAccountOrganizationRel, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceAccountOrganizationRel
+						commerceAccountOrganizationRel) {
 
-			@Override
-			public Class<CommerceAccountOrganizationRel> getTypeClass() {
-				return CommerceAccountOrganizationRel.class;
-			}
-		};
+					return commerceAccountOrganizationRel.
+						getCommerceAccountId();
+				}
 
-	public static final Accessor<CommerceAccountOrganizationRel, Long> ORGANIZATION_ID_ACCESSOR =
-		new Accessor<CommerceAccountOrganizationRel, Long>() {
-			@Override
-			public Long get(
-				CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
-				return commerceAccountOrganizationRel.getOrganizationId();
-			}
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Class<CommerceAccountOrganizationRel> getTypeClass() {
+					return CommerceAccountOrganizationRel.class;
+				}
 
-			@Override
-			public Class<CommerceAccountOrganizationRel> getTypeClass() {
-				return CommerceAccountOrganizationRel.class;
-			}
-		};
+			};
+	public static final Accessor<CommerceAccountOrganizationRel, Long>
+		ORGANIZATION_ID_ACCESSOR =
+			new Accessor<CommerceAccountOrganizationRel, Long>() {
+
+				@Override
+				public Long get(
+					CommerceAccountOrganizationRel
+						commerceAccountOrganizationRel) {
+
+					return commerceAccountOrganizationRel.getOrganizationId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceAccountOrganizationRel> getTypeClass() {
+					return CommerceAccountOrganizationRel.class;
+				}
+
+			};
 
 	public com.liferay.portal.kernel.model.Organization getOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

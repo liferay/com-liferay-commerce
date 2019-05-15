@@ -17,7 +17,6 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceAddress;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -41,28 +40,35 @@ import java.util.List;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAddressServiceUtil
- * @see com.liferay.commerce.service.base.CommerceAddressServiceBaseImpl
- * @see com.liferay.commerce.service.impl.CommerceAddressServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAddress"}, service = CommerceAddressService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceAddress"
+	},
+	service = CommerceAddressService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceAddressService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAddressServiceUtil} to access the commerce address remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceAddressServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAddressServiceUtil} to access the commerce address remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAddressServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceAddress addCommerceAddress(String className, long classPK,
-		String name, String description, String street1, String street2,
-		String street3, String city, String zip, long commerceRegionId,
-		long commerceCountryId, String phoneNumber, boolean defaultBilling,
-		boolean defaultShipping, ServiceContext serviceContext)
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceAddress(long commerceAddressId)
@@ -77,46 +83,50 @@ public interface CommerceAddressService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAddress> getCommerceAddresses(long groupId,
-		String className, long classPK) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAddress> getCommerceAddresses(long groupId,
-		String className, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public List<CommerceAddress> getCommerceAddresses(
+			long groupId, String className, long classPK)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAddress> getCommerceAddresses(String className,
-		long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator)
+	public List<CommerceAddress> getCommerceAddresses(
+			long groupId, String className, long classPK, int start, int end,
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceAddressesCount(long groupId, String className,
-		long classPK) throws PortalException;
+	public List<CommerceAddress> getCommerceAddresses(
+			String className, long classPK, int start, int end,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCount(
+			long groupId, String className, long classPK)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(String className, long classPK)
 		throws PortalException;
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
-		long companyId, long groupId, String className, long classPK,
-		String keywords, int start, int end, Sort sort)
+			long companyId, long groupId, String className, long classPK,
+			String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
-	public CommerceAddress updateCommerceAddress(long commerceAddressId,
-		String name, String description, String street1, String street2,
-		String street3, String city, String zip, long commerceRegionId,
-		long commerceCountryId, String phoneNumber, boolean defaultBilling,
-		boolean defaultShipping, ServiceContext serviceContext)
+	public CommerceAddress updateCommerceAddress(
+			long commerceAddressId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
+			ServiceContext serviceContext)
 		throws PortalException;
+
 }

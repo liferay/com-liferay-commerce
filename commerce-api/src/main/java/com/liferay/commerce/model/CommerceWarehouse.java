@@ -25,35 +25,40 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceWarehouseModel
- * @see com.liferay.commerce.model.impl.CommerceWarehouseImpl
- * @see com.liferay.commerce.model.impl.CommerceWarehouseModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.model.impl.CommerceWarehouseImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.model.impl.CommerceWarehouseImpl"
+)
 @ProviderType
-public interface CommerceWarehouse extends CommerceWarehouseModel, PersistedModel {
+public interface CommerceWarehouse
+	extends CommerceWarehouseModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.model.impl.CommerceWarehouseImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.model.impl.CommerceWarehouseImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceWarehouse, Long> COMMERCE_WAREHOUSE_ID_ACCESSOR =
-		new Accessor<CommerceWarehouse, Long>() {
-			@Override
-			public Long get(CommerceWarehouse commerceWarehouse) {
-				return commerceWarehouse.getCommerceWarehouseId();
-			}
+	public static final Accessor<CommerceWarehouse, Long>
+		COMMERCE_WAREHOUSE_ID_ACCESSOR =
+			new Accessor<CommerceWarehouse, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceWarehouse commerceWarehouse) {
+					return commerceWarehouse.getCommerceWarehouseId();
+				}
 
-			@Override
-			public Class<CommerceWarehouse> getTypeClass() {
-				return CommerceWarehouse.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceWarehouse> getTypeClass() {
+					return CommerceWarehouse.class;
+				}
+
+			};
 
 	public CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
@@ -64,4 +69,5 @@ public interface CommerceWarehouse extends CommerceWarehouseModel, PersistedMode
 	public java.util.List<CommerceWarehouseItem> getCommerceWarehouseItems();
 
 	public boolean isGeolocated();
+
 }

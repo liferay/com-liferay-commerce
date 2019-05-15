@@ -25,36 +25,41 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Marco Leo
  * @see CPFriendlyURLEntryModel
- * @see com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl
- * @see com.liferay.commerce.product.model.impl.CPFriendlyURLEntryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl"
+)
 @ProviderType
-public interface CPFriendlyURLEntry extends CPFriendlyURLEntryModel,
-	PersistedModel {
+public interface CPFriendlyURLEntry
+	extends CPFriendlyURLEntryModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CPFriendlyURLEntry, Long> CP_FRIENDLY_URL_ENTRY_ID_ACCESSOR =
-		new Accessor<CPFriendlyURLEntry, Long>() {
-			@Override
-			public Long get(CPFriendlyURLEntry cpFriendlyURLEntry) {
-				return cpFriendlyURLEntry.getCPFriendlyURLEntryId();
-			}
+	public static final Accessor<CPFriendlyURLEntry, Long>
+		CP_FRIENDLY_URL_ENTRY_ID_ACCESSOR =
+			new Accessor<CPFriendlyURLEntry, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CPFriendlyURLEntry cpFriendlyURLEntry) {
+					return cpFriendlyURLEntry.getCPFriendlyURLEntryId();
+				}
 
-			@Override
-			public Class<CPFriendlyURLEntry> getTypeClass() {
-				return CPFriendlyURLEntry.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CPFriendlyURLEntry> getTypeClass() {
+					return CPFriendlyURLEntry.class;
+				}
+
+			};
 
 	public java.util.Locale getLocale();
+
 }
