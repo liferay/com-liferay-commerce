@@ -128,7 +128,7 @@
 
 			&:hover::before {
 				align-items: center;
-				content: 'add more';
+				content: attr(data-add-more-label);
 				display: flex;
 				justify-content: center;
 			}
@@ -194,7 +194,7 @@
 
 				&:hover::before {
 					align-items: center;
-					content: 'add more';
+					content: attr(data-add-more-label);
 					display: flex;
 					justify-content: center;
 				}
