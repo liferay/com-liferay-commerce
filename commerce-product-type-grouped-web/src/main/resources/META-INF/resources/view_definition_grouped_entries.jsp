@@ -210,14 +210,7 @@ renderResponse.setTitle(cpDefinition.getName(themeDisplay.getLanguageId()));
 							var selectedItems = event.newVal;
 
 							if (selectedItems) {
-								A.Array.each(
-									selectedItems,
-									function(item, index, selectedItems) {
-										<portlet:namespace />addCPDefinitionIds.push(item.cpDefinitionId);
-									}
-								);
-
-								$('#<portlet:namespace />entryCPDefinitionIds').val(<portlet:namespace />addCPDefinitionIds.join(','));
+								$('#<portlet:namespace />entryCPDefinitionIds').val(selectedItems);
 
 								var addCPDefinitionGroupedEntryFm = $('#<portlet:namespace />addCPDefinitionGroupedEntryFm');
 

@@ -132,14 +132,7 @@ SearchContainer<CommerceDiscountRel> cpDefinitionCommerceDiscountRelSearchContai
 							var selectedItems = event.newVal;
 
 							if (selectedItems) {
-								A.Array.each(
-									selectedItems,
-									function(item, index, selectedItems) {
-										<portlet:namespace />addCPDefinitionIds.push(item.cpDefinitionId);
-									}
-								);
-
-								$('#<portlet:namespace />addClassPKs').val(<portlet:namespace />addCPDefinitionIds.join(','));
+								$('#<portlet:namespace />addClassPKs').val(selectedItems);
 
 								var addCommerceDiscountRelFm = $('#<portlet:namespace />addCommerceDiscountRelFm');
 

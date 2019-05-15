@@ -210,14 +210,7 @@ PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 								var selectedItems = event.newVal;
 
 								if (selectedItems) {
-									A.Array.each(
-										selectedItems,
-										function(item, index, selectedItems) {
-											<portlet:namespace />addCPDefinitionIds.push(item.cpDefinitionId);
-										}
-									);
-
-									$('#<portlet:namespace />cpDefinitionIds').val(<portlet:namespace />addCPDefinitionIds.join(','));
+									$('#<portlet:namespace />cpDefinitionIds').val(selectedItems);
 
 									var addCPDefinitionLinkFm = $('#<portlet:namespace />addCPDefinitionLinkFm');
 

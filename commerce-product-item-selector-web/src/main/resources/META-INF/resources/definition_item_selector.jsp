@@ -154,23 +154,10 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 	searchContainer.on(
 		'rowToggled',
 		function(event) {
-			var allSelectedElements = event.elements.allSelectedElements
-			var arr = [];
-
-			allSelectedElements.each(
-				function() {
-					var row = this.ancestor('tr');
-
-					var data = row.getDOM().dataset;
-
-					arr.push({cpDefinitionId : data.cpDefinitionId, name : data.name});
-				}
-			);
-
 			Liferay.Util.getOpener().Liferay.fire(
 				'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
 				{
-					data: arr
+					data: Liferay.Util.listCheckedExcept(cpDefinitionSelectorWrapper, '<portlet:namespace />allRowIds')
 				}
 			);
 		}
