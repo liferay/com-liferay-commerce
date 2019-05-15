@@ -269,6 +269,9 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		portletURL.setParameter(
 			"mvcRenderCommandName", "editProductDefinition");
 		portletURL.setParameter(
+			"commerceCatalogId",
+			ParamUtil.getString(actionRequest, "commerceCatalogId"));
+		portletURL.setParameter(
 			"cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 		portletURL.setParameter(
 			"screenNavigationCategoryKey", screenNavigationCategoryKey);

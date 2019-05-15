@@ -39,6 +39,7 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 <aui:form action="<%= editProductDefinitionActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (cpDefinition == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="commerceCatalogId" type="hidden" value='<%= ParamUtil.getString(request, "commerceCatalogId") %>' />
 	<aui:input name="cpDefinitionId" type="hidden" value="<%= String.valueOf(cpDefinitionId) %>" />
 	<aui:input name="productTypeName" type="hidden" value="<%= productTypeName %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />

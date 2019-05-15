@@ -31,6 +31,7 @@ PortletURL productOptionRelsURL = renderResponse.createRenderURL();
 productOptionRelsURL.setParameter("mvcRenderCommandName", "editProductDefinition");
 productOptionRelsURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 productOptionRelsURL.setParameter("screenNavigationCategoryKey", cpDefinitionOptionValueRelDisplayContext.getScreenNavigationCategoryKey());
+productOptionRelsURL.setParameter("commerceCatalogId", commerceCatalogId);
 %>
 
 <c:if test="<%= cpDefinitionOptionValueRelDisplayContext.hasViewPermission() %>">
@@ -136,6 +137,7 @@ productOptionRelsURL.setParameter("screenNavigationCategoryKey", cpDefinitionOpt
 
 								rowURL.setParameter("mvcRenderCommandName", "editProductDefinitionOptionValueRel");
 								rowURL.setParameter("cpDefinitionOptionValueRelId", String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 								%>
 
 								<liferay-ui:search-container-column-text

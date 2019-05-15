@@ -55,6 +55,7 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 							<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
 							<portlet:param name="backURL" value="<%= PortalUtil.getCurrentCompleteURL(request) %>" />
 							<portlet:param name="productTypeName" value="<%= curCPType.getName() %>" />
+							<portlet:param name="commerceCatalogId" value='<%= ParamUtil.getString(request, "commerceCatalogId") %>' />
 						</liferay-portlet:renderURL>
 
 						<liferay-frontend:add-menu-item

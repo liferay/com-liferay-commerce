@@ -58,6 +58,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 				<portlet:param name="mvcRenderCommandName" value="editCPAttachmentFileEntry" />
 				<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 				<portlet:param name="type" value="<%= String.valueOf(type) %>" />
+				<portlet:param name="commerceCatalogId" value="<%= commerceCatalogId %>" />
 			</liferay-portlet:renderURL>
 
 			<liferay-frontend:add-menu
@@ -149,6 +150,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinitionId));
 								rowURL.setParameter("cpAttachmentFileEntryId", String.valueOf(cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
 								rowURL.setParameter("type", String.valueOf(type));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 
 								FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 

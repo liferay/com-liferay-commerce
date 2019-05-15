@@ -14,10 +14,6 @@
  */
 --%>
 
-<%
-String commerceCatalogId = ParamUtil.getString(request, "commerceCatalogId");
-%>
-
 <liferay-portlet:renderURL portletName="<%= CPPortletKeys.CP_DEFINITIONS %>" varImpl="viewProductDefinitionsCatalogURL">
 	<portlet:param name="catalogNavigationItem" value="view-all-product-definitions" />
 	<portlet:param name="commerceCatalogId" value="<%= commerceCatalogId %>" />

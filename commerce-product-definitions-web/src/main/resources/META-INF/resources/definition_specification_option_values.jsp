@@ -136,6 +136,7 @@ PortletURL portletURL = cpDefinitionSpecificationOptionValueDisplayContext.getPo
 								rowURL.setParameter("mvcRenderCommandName", "editProductDefinitionSpecificationOptionValue");
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinitionSpecificationOptionValue.getCPDefinitionId()));
 								rowURL.setParameter("cpDefinitionSpecificationOptionValueId", String.valueOf(cpDefinitionSpecificationOptionValue.getCPDefinitionSpecificationOptionValueId()));
+								rowURL.setParameter("commerceCatalogId", commerceCatalogId);
 								%>
 
 								<liferay-ui:search-container-column-text

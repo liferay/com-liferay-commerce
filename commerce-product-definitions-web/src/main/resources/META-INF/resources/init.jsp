@@ -85,7 +85,9 @@ page import="com.liferay.commerce.product.model.CPOptionCategory" %><%@
 page import="com.liferay.commerce.product.model.CPSpecificationOption" %><%@
 page import="com.liferay.commerce.product.model.CPTaxCategory" %><%@
 page import="com.liferay.commerce.product.model.CProduct" %><%@
+page import="com.liferay.commerce.product.model.CommerceCatalog" %><%@
 page import="com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil" %><%@
+page import="com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil" %><%@
 page import="com.liferay.commerce.product.type.CPType" %><%@
 page import="com.liferay.commerce.product.util.CPNavigationItemRegistryUtil" %><%@
 page import="com.liferay.commerce.product.util.CPSubscriptionType" %><%@
@@ -100,6 +102,7 @@ page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.model.Layout" %><%@
 page import="com.liferay.portal.kernel.model.Portlet" %><%@
 page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
+page import="com.liferay.portal.kernel.portlet.PortletURLFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.repository.model.FileEntry" %><%@
 page import="com.liferay.portal.kernel.service.LayoutLocalServiceUtil" %><%@
 page import="com.liferay.portal.kernel.service.PortletLocalServiceUtil" %><%@
@@ -124,7 +127,8 @@ page import="java.util.List" %><%@
 page import="java.util.Map" %><%@
 page import="java.util.StringJoiner" %>
 
-<%@ page import="javax.portlet.PortletURL" %>
+<%@ page import="javax.portlet.PortletRequest" %><%@
+page import="javax.portlet.PortletURL" %>
 
 <liferay-frontend:defineObjects />
 
@@ -136,6 +140,19 @@ page import="java.util.StringJoiner" %>
 String lifecycle = (String)request.getAttribute(liferayPortletRequest.LIFECYCLE_PHASE);
 
 PortletURL catalogURLObj = PortalUtil.getControlPanelPortletURL(request, CPPortletKeys.CP_DEFINITIONS, lifecycle);
+
+CommerceCatalog commerceCatalog = CommerceCatalogLocalServiceUtil.getCommerceCatalog(ParamUtil.getLong(request, "commerceCatalogId"));
+
+String commerceCatalogId = String.valueOf(commerceCatalog.getCommerceCatalogId());
+
+PortletURL viewCatalogURL = PortletURLFactoryUtil.create(request, CPPortletKeys.COMMERCE_CATALOGS, PortletRequest.RENDER_PHASE);
+
+PortletURL editCatalogURL = viewCatalogURL;
+
+editCatalogURL.setParameter("commerceCatalogId", commerceCatalogId);
+editCatalogURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
+
+catalogURLObj.setParameter("commerceCatalogId", commerceCatalogId);
 
 String catalogURL = catalogURLObj.toString();
 
