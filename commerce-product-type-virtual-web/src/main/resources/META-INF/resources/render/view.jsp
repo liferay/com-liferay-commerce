@@ -186,8 +186,8 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 									%>
 
 										<tr>
-											<td><%= cpSpecificationOption.getTitle(languageId) %></td>
-											<td><%= cpDefinitionSpecificationOptionValue.getValue(languageId) %></td>
+											<td><%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %></td>
+											<td><%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %></td>
 										</tr>
 
 									<%

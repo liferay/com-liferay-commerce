@@ -196,8 +196,8 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 									%>
 
 										<tr>
-											<td><%= cpSpecificationOption.getTitle(locale) %></td>
-											<td><%= cpDefinitionSpecificationOptionValue.getValue(locale) %></td>
+											<td><%= HtmlUtil.escape(cpSpecificationOption.getTitle(locale)) %></td>
+											<td><%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(locale)) %></td>
 										</tr>
 
 									<%
@@ -226,8 +226,8 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 											%>
 
 												<tr>
-													<td><%= cpSpecificationOption.getTitle(locale) %></td>
-													<td><%= cpDefinitionSpecificationOptionValue.getValue(locale) %></td>
+													<td><%= HtmlUtil.escape(cpSpecificationOption.getTitle(locale)) %></td>
+													<td><%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(locale)) %></td>
 												</tr>
 
 											<%
