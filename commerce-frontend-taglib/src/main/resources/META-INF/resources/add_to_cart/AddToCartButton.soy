@@ -84,6 +84,10 @@
 				{sp}with-select
 			{/if}
 		{/if}
+
+		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
+			{sp}commerce-button--disabled
+		{/if}
 	{/let}
 
 	<div
@@ -91,7 +95,7 @@
 			data-onclick="{$_handleBtnClick}"
 			data-onfocus="{$_handleBtnFocus}"
 			data-onfocusin="{$_handleBtnFocusin}"
-			data-onfocusout="{$_handleBtnFocusout}"
+
 			data-add-more-label="{msg desc="Add more"}add-more{/msg}"
 			tabindex="0"
 	>
@@ -122,6 +126,7 @@
 				{param maxQuantity: $settings.maxQuantity /}
 				{param multipleQuantity: $settings.multipleQuantity /}
 				{param allowedQuantities: $settings.allowedQuantities /}
+				{param disabled: $disabled /}
 			{/call}
 
 			<div
@@ -175,6 +180,10 @@
 		{if $editMode == true}
 			{sp}add-to-cart-button--inline--edit
 		{/if}
+
+		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
+			{sp}commerce-button--disabled
+		{/if}
 	{/let}
 
 	<div class="add-to-cart-button--inline">
@@ -188,6 +197,7 @@
 			{param maxQuantity: $settings.maxQuantity /}
 			{param multipleQuantity: $settings.multipleQuantity /}
 			{param allowedQuantities: $settings.allowedQuantities /}
+			{param disabled: $disabled /}
 		{/call}
 
 		<div
@@ -197,6 +207,7 @@
 			data-onfocus="{$_handleBtnFocus}"
 			data-onfocusin="{$_handleBtnFocusin}"
 			data-onfocusout="{$_handleBtnFocusout}"
+			data-add-more-label="{msg desc="Add more"}add-more{/msg}"
 		>
 			{if $hasQuantityChanged == false }
 				{msg desc="Add to cart"}add-to-cart{/msg}

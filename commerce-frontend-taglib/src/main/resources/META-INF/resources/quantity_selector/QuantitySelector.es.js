@@ -148,6 +148,7 @@ class QuantitySelector extends Component {
 
 QuantitySelector.STATE = {
 	allowedQuantities: Config.array(Config.number()),
+	disabled: Config.bool().value(false),
 	inputError: Config.string(),
 	maxQuantity: Config.number().value(99999999),
 	minQuantity: Config.number().value(1),
