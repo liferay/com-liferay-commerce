@@ -3,8 +3,18 @@
 	display: inline-block;
 	line-height: 1.6;
 	position: relative;
+	z-index: 1;
 	color: $color-fg;
 	font-size: 14px;
+	opacity: 1;
+	transform: translateY(0);
+	transition: transform .1s ease-in;
+
+	&.is-hidden {
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(20%);
+	}
 
 	&__input-wrapper {
 		transition: background-color .1s ease-in, border-radius .2s ease-in;
