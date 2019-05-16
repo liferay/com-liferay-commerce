@@ -42,6 +42,11 @@
 			cursor: default !important;
 			min-width: 100px;
 
+			&:hover {
+				min-width: 100px !important;
+				transition: none !important;
+			}
+
 			&::before {
 				@include transformButton(
 					50%, 50%,
@@ -57,37 +62,41 @@
 				position: absolute;
 			}
 
-			&.with-select::before {
-				@include transformButton(
-												50%, 50%,
-												-22px, -35px,
-												70px, 44px,
-												3px solid $inputOutline,
-												rgba(255, 255, 255, 1)
-				);
-				animation: toSelect .3s ease-in 1 forwards;
-				border-radius: 8px;
-				content: '';
-				display: block;
-				position: absolute;
+			&.with-select {
+				&::before {
+					@include transformButton(
+						50%, 50%,
+						-22px, -35px,
+						70px, 44px,
+						3px solid $inputOutline,
+						rgba(255, 255, 255, 1)
+					);
+					animation: toSelect .3s ease-in 1 forwards;
+					border-radius: 8px;
+					content: '';
+					display: block;
+					position: absolute;
+				}
 			}
 		}
 
 		&__fwd {
+			position: absolute;
+			display: flex;
 			align-items: center;
+			justify-content: left;
+
 			animation: confirmButton 500ms ease 1 forwards;
 			animation-delay: 200ms;
+
 			color: $color-theme;
+
 			cursor: pointer;
-			display: flex;
 			font-size: 26px !important;
 			height: 40px;
-			justify-content: center;
-			line-height: 20px;
-			opacity: 0;
-			position: absolute;
-			right: -35px;
+			right: -40px;
 			width: 30px;
+			opacity: 0;
 
 			&:hover .arrow__line {
 				transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -101,6 +110,9 @@
 			}
 
 			& .arrow {
+				display: flex;
+				align-items: center;
+
 				&__line {
 					transform: scaleX(.70);
 					transform-origin: left center;
@@ -116,7 +128,7 @@
 			background-color: $color-mood-good !important;
 			padding: 0;
 			transition: all .1s ease;
-			transition-delay: 0ms;
+			transition-delay: 0ms !important;
 
 			&:hover {
 				.added-quantity {
@@ -134,7 +146,7 @@
 			}
 
 			&.quantity-changed {
-				transition-delay: 900ms;
+				transition-delay: 900ms !important;
 			}
 
 			&.quantity-changed::before {
@@ -161,13 +173,13 @@
 				width: 40px;
 
 				&:nth-child(1) {
-					transform: translate3d(-10px, 0, 0);
+					transform: translate3d(0px, 0, 0);
 					transform-origin: right center;
 					@include quantityButtonsAnimation('left');
 				}
 
 				&:nth-child(3) {
-					transform: translate3d(10px, 0, 0);
+					transform: translate3d(0px, 0, 0);
 					transform-origin: left center;
 					@include quantityButtonsAnimation('right');
 				}
@@ -221,6 +233,10 @@
 
 			&__btn {
 				font-size: 2em;
+			}
+
+			&--disabled {
+				opacity: .5;
 			}
 		}
 	}
