@@ -42,9 +42,9 @@ function showNotification(message, type) {
 function resetInputQuantity() {
 	setTimeout(
 		() => {
-		this.inputQuantity = (this.settings.allowedQuantities && this.settings.allowedQuantities.length) ?
-			this.settings.allowedQuantities[0] : this.settings.minQuantity;
-	}, 500);
+			this.inputQuantity = (this.settings.allowedQuantities && this.settings.allowedQuantities.length) ?
+				this.settings.allowedQuantities[0] : this.settings.minQuantity;
+		}, 500);
 }
 
 function doFocusOut() {
@@ -101,7 +101,8 @@ function doSubmit() {
 							showNotification(validatorError.message, 'danger');
 						}
 					);
-				} else {
+				}
+ 				else {
 					showNotification(jsonresponse.error, 'danger');
 				}
 			}
@@ -161,7 +162,8 @@ class AddToCartButton extends Component {
 			!!this.accountId
 		) {
 			this._enableEditMode();
-		} else if (!this.accountId) {
+		}
+		else if (!this.accountId) {
 			const message = Liferay.Language.get('no-account-selected');
 			const type = 'danger';
 
