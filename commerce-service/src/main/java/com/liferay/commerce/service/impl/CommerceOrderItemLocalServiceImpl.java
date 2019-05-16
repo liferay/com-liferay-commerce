@@ -473,13 +473,14 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderId, cpInstanceId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		if (!commerceOrderItems.isEmpty()) {
-			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
-
-			return commerceOrderItemLocalService.updateCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId(),
-				commerceOrderItem.getQuantity() + quantity,
-				commerceOrderItem.getJson(), commerceContext, serviceContext);
+		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			if (json.equals(commerceOrderItem.getJson())) {
+				return commerceOrderItemLocalService.updateCommerceOrderItem(
+					commerceOrderItem.getCommerceOrderItemId(),
+					commerceOrderItem.getQuantity() + quantity,
+					commerceOrderItem.getJson(), commerceContext,
+					serviceContext);
+			}
 		}
 
 		return addCommerceOrderItem(
