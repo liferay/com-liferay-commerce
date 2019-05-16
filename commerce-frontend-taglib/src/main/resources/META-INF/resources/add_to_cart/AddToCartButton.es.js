@@ -102,13 +102,14 @@ function doSubmit() {
 						}
 					);
 				}
- 				else {
+				else {
 					showNotification(jsonresponse.error, 'danger');
 				}
 			}
-		}).catch(
-			weShouldHandleErrors => {
-		});
+		}
+	).catch(
+		weShouldHandleErrors => {}
+	);
 }
 
 class AddToCartButton extends Component {
