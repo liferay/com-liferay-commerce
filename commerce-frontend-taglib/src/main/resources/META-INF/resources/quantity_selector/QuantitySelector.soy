@@ -2,6 +2,7 @@
 
 {template .render}
 	{@param quantity: int|null}
+	{@param? disabled: bool}
 	{@param? minQuantity: int}
 	{@param? maxQuantity: int}
 	{@param? allowedQuantities: list<number>}
@@ -28,13 +29,27 @@
 		{/if}
 	{/let}
 
-	<div class="commerce-quantity-selector">
+	{let $quantitySelectorClasses kind="text"}
+		commerce-quantity-selector
+
+		{if $disabled == true}
+			{sp}commerce-quantity-selector--disabled
+		{/if}
+	{/let}
+
+
+	<div class="{$quantitySelectorClasses}">
 		{if isNonnull($allowedQuantities)}
+			{let $selectAttributes kind="attributes"}
+				class="commerce-quantity-selector__select"
+				data-onchange="{$_handleSelectOption}"
+				{if $disabled == true}
+					disabled
+				{/if}
+			{/let}
+
 			<form data-onsubmit="{$_handleFormSubmit}">
-				<select
-					class="commerce-quantity-selector__select"
-					data-onchange="{$_handleSelectOption}"
-				>
+				<select	{$selectAttributes}>
 					{foreach $option in $allowedQuantities}
 						{let $optionAttributes kind="attributes"}
 							value="{$option}"
@@ -47,6 +62,27 @@
 				</select>
 			</form>
 		{else}
+			{let $inputAttributes kind="attributes"}
+				name="quantity"
+				type="number"
+				class="commerce-quantity-selector__input"
+				data-onkeyup="{$_handleInputKeyUp}"
+				data-onkeydown="{$_handleArrowKeys}"
+				value="{$quantity}"
+
+				{if isNonnull($minQuantity)}
+					{sp}min="{$minQuantity}"
+				{/if}
+
+				{if isNonnull($maxQuantity)}
+					{sp}max="{$maxQuantity}"
+				{/if}
+
+				{if $disabled == true}
+					{sp}disabled
+				{/if}
+			{/let}
+
 			<button
 				class="{$prevClass}"
 				data-onclick="{$_handlePrevQuantityButtonPressed}"
@@ -56,16 +92,7 @@
 			</button>
 
 			<form data-onsubmit="{$_handleFormSubmit}">
-				<input
-					name="quantity"
-					type="number"
-					class="commerce-quantity-selector__input"
-					{if isNonnull($minQuantity)}min="{$minQuantity}"{/if}
-					{if isNonnull($maxQuantity)}max="{$maxQuantity}"{/if}
-					data-onkeyup="{$_handleInputKeyUp}"
-					data-onkeydown="{$_handleArrowKeys}"
-					value="{$quantity}"
-				>
+				<input {$inputAttributes} />
 			</form>
 
 			<button
