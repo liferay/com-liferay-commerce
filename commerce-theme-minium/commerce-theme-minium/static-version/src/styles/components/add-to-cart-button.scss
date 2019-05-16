@@ -81,10 +81,10 @@
 		}
 
 		&__fwd {
-			position: absolute;
-			display: flex;
 			align-items: center;
+			display: flex;
 			justify-content: left;
+			position: absolute;
 
 			animation: confirmButton 500ms ease 1 forwards;
 			animation-delay: 200ms;
@@ -94,9 +94,9 @@
 			cursor: pointer;
 			font-size: 26px !important;
 			height: 40px;
+			opacity: 0;
 			right: -40px;
 			width: 30px;
-			opacity: 0;
 
 			&:hover .arrow__line {
 				transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
@@ -110,8 +110,8 @@
 			}
 
 			& .arrow {
-				display: flex;
 				align-items: center;
+				display: flex;
 
 				&__line {
 					transform: scaleX(.70);
