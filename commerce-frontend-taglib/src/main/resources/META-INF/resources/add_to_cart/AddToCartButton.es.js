@@ -5,229 +5,236 @@ import Soy, {Config} from 'metal-soy';
 import '../quantity_selector/QuantitySelector.es';
 
 const selectInput = (element) => {
-	const inputBox = element.querySelector('input');
-	const selectBox = element.querySelector('select');
+    const inputBox = element.querySelector('input');
+    const selectBox = element.querySelector('select');
 
-	if (inputBox) {
-		inputBox.focus();
-		inputBox.select();
-	}
-	else if (selectBox) {
-		selectBox.focus();
-	}
+    if (inputBox) {
+        inputBox.focus();
+        inputBox.select();
+    } else if (selectBox) {
+        selectBox.focus();
+    }
 };
 
 function showNotification(message, type) {
-	AUI().use(
-		'liferay-notification',
-		() => {
-			new Liferay.Notification(
-				{
-					closeable: true,
-					delay: {
-						hide: 5000,
-						show: 0
-					},
-					duration: 500,
-					message: message,
-					render: true,
-					title: '',
-					type: type
-				}
-			);
-		}
-	);
+    AUI().use(
+        'liferay-notification',
+        () => {
+            new Liferay.Notification(
+                {
+                    closeable: true,
+                    delay: {
+                        hide: 5000,
+                        show: 0
+                    },
+                    duration: 500,
+                    message: message,
+                    render: true,
+                    title: '',
+                    type: type
+                }
+            );
+        }
+    );
+}
+
+function resetInputQuantity() {
+    setTimeout(() => {
+        this.inputQuantity = (this.settings.allowedQuantities && this.settings.allowedQuantities.length) ?
+            this.settings.allowedQuantities[0] : this.settings.minQuantity;
+    }, 500);
 }
 
 function doFocusOut() {
-	const parentElement = this.element.parentElement.closest('[tabindex="0"]');
+    const parentElement = this.element.parentElement.closest('[tabindex="0"]');
 
-	if (parentElement) {
-		parentElement.focus();
-	}
+    if (parentElement) {
+        parentElement.focus();
+    }
 
-	this.editMode = false;
+    this.editMode = false;
 }
 
 function isInline(buttonVariant) {
-	return buttonVariant.className.includes('--inline');
+    return buttonVariant.className.includes('--inline');
 }
 
 function doSubmit() {
-	const formData = new FormData();
+    const formData = new FormData();
 
-	formData.append('commerceAccountId', this.accountId);
-	formData.append('groupId', themeDisplay.getScopeGroupId());
-	formData.append('productId', this.productId);
-	formData.append('languageId', themeDisplay.getLanguageId());
-	formData.append('quantity', this.quantity);
-	formData.append('options', this.options);
+    formData.append('commerceAccountId', this.accountId);
+    formData.append('groupId', themeDisplay.getScopeGroupId());
+    formData.append('productId', this.productId);
+    formData.append('languageId', themeDisplay.getLanguageId());
+    formData.append('quantity', this.quantity);
+    formData.append('options', this.options);
 
-	if (this.orderId) {
-		formData.append('orderId', this.orderId);
-	}
+    if (this.orderId) {
+        formData.append('orderId', this.orderId);
+    }
 
-	fetch(
-		this.cartAPI,
-		{
-			body: formData,
-			method: 'POST'
-		}
-	).then(
-		response => response.json()
-	).then(
-		jsonresponse => {
-			if (jsonresponse.success) {
-				Liferay.fire('updateCart', jsonresponse);
+    return fetch(
+        this.cartAPI,
+        {
+            body: formData,
+            method: 'POST'
+        }
+    ).then(
+        response => response.json()
+    ).then(
+        jsonresponse => {
+            if (jsonresponse.success) {
+                Liferay.fire('updateCart', jsonresponse);
 
-				this.initialQuantity = this.quantity;
-				this.emit('submitQuantity', this.productId, this.quantity);
+                this.initialQuantity = this.quantity;
+                this.hasQuantityChanged = true;
+                this.emit('submitQuantity', this.productId, this.quantity);
 
-			}
-			else if (jsonresponse.errorMessages) {
-				showNotification(jsonresponse.errorMessages[0], 'danger');
-			}
-			else {
-				const validatorErrors = jsonresponse.validatorErrors;
+            } else if (jsonresponse.errorMessages) {
+                showNotification(jsonresponse.errorMessages[0], 'danger');
+            } else {
+                const validatorErrors = jsonresponse.validatorErrors;
 
-				if (validatorErrors) {
-					validatorErrors.forEach(
-						validatorError => {
-							showNotification(validatorError.message, 'danger');
-						}
-					);
-				}
-				else {
-					showNotification(jsonresponse.error, 'danger');
-				}
-			}
-		}).catch(weShouldHandleErrors => {});
+                if (validatorErrors) {
+                    validatorErrors.forEach(
+                        validatorError => {
+                            showNotification(validatorError.message, 'danger');
+                        }
+                    );
+                } else {
+                    showNotification(jsonresponse.error, 'danger');
+                }
+            }
+        }).catch(weShouldHandleErrors => {
+    });
 }
 
 class AddToCartButton extends Component {
 
-	created() {
-		this.initialQuantity = this.quantity;
-		this.inputQuantity = this.settings.minQuantity;
+    created() {
+        this.initialQuantity = this.quantity;
+        resetInputQuantity.call(this);
+        this.hasQuantityChanged = false;
 
-		window.Liferay.on('accountSelected', this._handleAccountChange, this);
-	}
+        window.Liferay.on('accountSelected', this._handleAccountChange, this);
+    }
 
-	detached() {
-		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
-	}
+    detached() {
+        window.Liferay.detach('accountSelected', this._handleAccountChange, this);
+    }
 
-	willReceiveState(changes) {
-		if (changes.editMode) {
-			setTimeout(() => selectInput(this.element), 100);
-		}
-	}
+    willReceiveState(changes) {
+        if (changes.editMode) {
+            setTimeout(() => selectInput(this.element), 100);
+        }
+    }
 
-	_updateQuantity(quantity) {
-		this.inputQuantity = quantity;
-	}
+    _updateQuantity(quantity) {
+        this.inputQuantity = quantity;
+    }
 
-	_submitQuantity(quantity) {
-		this._updateQuantity(quantity);
-		this._handleSubmitClick();
-	}
+    _submitQuantity(quantity) {
+        this._updateQuantity(quantity);
+        this._handleSubmitClick();
+    }
 
-	_enableEditMode() {
-		this.editMode = true;
-	}
+    _enableEditMode() {
+        this.editMode = true;
+    }
 
-	_disableEditMode() {
-		this.editMode = false;
-		this.quantity = this.initialQuantity;
-	}
+    _disableEditMode() {
+        this.editMode = false;
+        this.quantity = this.initialQuantity;
+        this.hasQuantityChanged = false;
+        doFocusOut.call(this);
+    }
 
-	_handleBtnClick(e) {
-		if (
-			!this.editMode &&
-			this.element === e.target &&
-			!this.disabled &&
-			!!this.accountId
-		) {
-			this._enableEditMode();
-		}
-		else if (!this.accountId || this.disabled) {
-			const message = Liferay.Language.get('no-account-selected'),
-				type = 'danger';
+    _handleBtnClick(e) {
+        if (
+            !this.editMode &&
+            this.element === e.target &&
+            !this.disabled &&
+            !!this.accountId
+        ) {
+            this._enableEditMode();
+        } else if (!this.accountId) {
+            const message = Liferay.Language.get('no-account-selected'),
+                type = 'danger';
 
-			showNotification(message, type);
-		}
-	}
+            showNotification(message, type);
+        }
+    }
 
-	_handleBtnFocus(e) {
-		this._handleBtnClick(e);
-	}
+    _handleBtnFocus(e) {
+        this._handleBtnClick(e);
+    }
 
-	_handleAccountChange(e) {
-		this.accountId = e.accountId;
-	}
+    _handleAccountChange(e) {
+        this.accountId = e.accountId;
+    }
 
-	_handleBtnFocusin() {
-		clearTimeout(this.closingTimeout);
-	}
+    _handleBtnFocusin() {
+        clearTimeout(this.closingTimeout);
+    }
 
-	_handleBtnFocusout(e) {
-		this.closingTimeout = setTimeout(
-			() => this._disableEditMode(),
-			100
-		);
-	}
+    _handleBtnFocusout(e) {
+        this.closingTimeout = setTimeout(
+            () => this._disableEditMode(),
+            (this.hasQuantityChanged ? 1000 : 100)
+        );
+    }
 
-	_handleSubmitClick() {
-		this.quantity = this.inputQuantity;
-		this.inputQuantity = this.settings.minQuantity;
+    _handleSubmitClick() {
+        this.quantity = this.inputQuantity;
+        resetInputQuantity.call(this);
 
-		doSubmit.call(this);
-		doFocusOut.call(this);
-	}
+        doSubmit.call(this)
+            .then(() => doFocusOut.call(this));
+    }
 }
 
 Soy.register(AddToCartButton, template);
 
 AddToCartButton.STATE = {
-	accountId: Config.oneOfType(
-		[
-			Config.number(),
-			Config.string()
-		]
-	),
-	buttonVariant: Config.oneOf(
-		[
-			'compact',
-			'inline'
-		]
-	).value('inline'),
-	cartAPI: Config.string().required(),
-	disabled: Config.bool().value(false),
-	editMode: Config.bool().value(false),
-	hasQuantityChanged: Config.bool().value(false),
-	inputQuantity: Config.number(),
-	options: Config.string().value('[]'),
-	orderId: Config.oneOfType(
-		[
-			Config.number(),
-			Config.string()
-		]
-	),
-	productId: Config.oneOfType(
-		[
-			Config.number(),
-			Config.string()
-		]
-	).required(),
-	quantity: Config.number().value(0),
-	settings: Config.shapeOf(
-		{
-			allowedQuantity: Config.array(Config.number()),
-			maxQuantity: Config.number(),
-			minQuantity: Config.number(),
-			multipleQuantity: Config.number()
-		}
-	).value({})
+    accountId: Config.oneOfType(
+        [
+            Config.number(),
+            Config.string()
+        ]
+    ),
+    buttonVariant: Config.oneOf(
+        [
+            'compact',
+            'inline'
+        ]
+    ).value('inline'),
+    cartAPI: Config.string().required(),
+    disabled: Config.bool().value(false),
+    editMode: Config.bool().value(false),
+    hasQuantityChanged: Config.bool().value(false),
+    inputQuantity: Config.number(),
+    options: Config.string().value('[]'),
+    orderId: Config.oneOfType(
+        [
+            Config.number(),
+            Config.string()
+        ]
+    ),
+    productId: Config.oneOfType(
+        [
+            Config.number(),
+            Config.string()
+        ]
+    ).required(),
+    quantity: Config.number().value(0),
+    settings: Config.shapeOf(
+        {
+            allowedQuantity: Config.array(Config.number()),
+            maxQuantity: Config.number(),
+            minQuantity: Config.number(),
+            multipleQuantity: Config.number()
+        }
+    ).value({})
 };
 
 export {AddToCartButton};
