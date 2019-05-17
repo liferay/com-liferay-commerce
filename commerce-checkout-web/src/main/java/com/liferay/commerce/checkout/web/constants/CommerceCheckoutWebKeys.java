@@ -17,6 +17,7 @@ package com.liferay.commerce.checkout.web.constants;
 /**
  * @author Andrea Di Giorgi
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 public class CommerceCheckoutWebKeys {
 
@@ -24,6 +25,9 @@ public class CommerceCheckoutWebKeys {
 
 	public static final String COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT =
 		"COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT";
+
+	public static final String COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL =
+		"COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL";
 
 	public static final String COMMERCE_ORDER = "COMMERCE_ORDER";
 
