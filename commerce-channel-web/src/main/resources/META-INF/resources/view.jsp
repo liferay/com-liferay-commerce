@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String catalogNavigationItem = ParamUtil.getString(request, "catalogNavigationItem", "view-channel");
-
 CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 PortletURL portletURL = commerceChannelDisplayContext.getPortletURL();
