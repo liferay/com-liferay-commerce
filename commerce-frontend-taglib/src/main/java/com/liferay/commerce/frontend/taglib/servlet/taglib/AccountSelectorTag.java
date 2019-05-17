@@ -156,7 +156,7 @@ public class AccountSelectorTag extends ComponentRendererTag {
 		throws PortalException {
 
 		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
-			groupId, privateLayout, "/account-management");
+			groupId, privateLayout, "/accounts");
 
 		if (layout != null) {
 			return layout;

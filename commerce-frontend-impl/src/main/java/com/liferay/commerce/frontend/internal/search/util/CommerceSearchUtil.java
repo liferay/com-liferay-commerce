@@ -99,7 +99,7 @@ public class CommerceSearchUtil {
 		throws PortalException {
 
 		Layout layout = _layoutLocalService.fetchLayoutByFriendlyURL(
-			groupId, privateLayout, "/account-management");
+			groupId, privateLayout, "/accounts");
 
 		if (layout != null) {
 			return layout;
