@@ -126,13 +126,43 @@ public class ShippingMethodCommerceCheckoutStep
 					_commercePriceFormatter, _commerceShippingEngineRegistry,
 					_commerceShippingMethodLocalService, httpServletRequest);
 
-		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
-			shippingMethodCheckoutStepDisplayContext);
+		CommerceOrder commerceOrder =
+			shippingMethodCheckoutStepDisplayContext.getCommerceOrder();
 
-		_jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse,
-			"/checkout_step/shipping_method.jsp");
+		if (!commerceOrder.isOpen()) {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL,
+				_commerceCheckoutStepHelper.getOrderDetailURL(
+					httpServletRequest, commerceOrder));
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse, "/error.jsp");
+		}
+		else {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+				shippingMethodCheckoutStepDisplayContext);
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse,
+				"/checkout_step/shipping_method.jsp");
+		}
+	}
+
+	@Override
+	public boolean showControls(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (!commerceOrder.isOpen()) {
+			return false;
+		}
+
+		return super.showControls(httpServletRequest, httpServletResponse);
 	}
 
 	protected BigDecimal getShippingAmount(

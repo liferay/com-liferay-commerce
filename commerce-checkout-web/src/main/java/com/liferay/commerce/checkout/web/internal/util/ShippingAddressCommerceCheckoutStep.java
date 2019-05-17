@@ -71,8 +71,8 @@ public class ShippingAddressCommerceCheckoutStep
 		try {
 			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
 				new AddressCommerceCheckoutStepUtil(
-					commerceOrderService, commerceAddressService,
-					commerceOrderModelResourcePermission);
+					_commerceOrderService, _commerceAddressService,
+					_commerceOrderModelResourcePermission);
 
 			CommerceOrder commerceOrder =
 				addressCommerceCheckoutStepUtil.updateCommerceOrderAddress(
@@ -106,29 +106,66 @@ public class ShippingAddressCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
-			new ShippingAddressCheckoutStepDisplayContext(
-				commerceAddressService, httpServletRequest));
+		ShippingAddressCheckoutStepDisplayContext
+			shippingAddressCheckoutStepDisplayContext =
+				new ShippingAddressCheckoutStepDisplayContext(
+					_commerceAddressService, httpServletRequest);
 
-		jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse,
-			"/checkout_step/address.jsp");
+		CommerceOrder commerceOrder =
+			shippingAddressCheckoutStepDisplayContext.getCommerceOrder();
+
+		if (!commerceOrder.isOpen()) {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL,
+				_commerceCheckoutStepHelper.getOrderDetailURL(
+					httpServletRequest, commerceOrder));
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse, "/error.jsp");
+		}
+		else {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+				shippingAddressCheckoutStepDisplayContext);
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse,
+				"/checkout_step/address.jsp");
+		}
+	}
+
+	@Override
+	public boolean showControls(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (!commerceOrder.isOpen()) {
+			return false;
+		}
+
+		return super.showControls(httpServletRequest, httpServletResponse);
 	}
 
 	@Reference
-	protected CommerceAddressService commerceAddressService;
+	private CommerceAddressService _commerceAddressService;
+
+	@Reference
+	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
 	)
-	protected ModelResourcePermission<CommerceOrder>
-		commerceOrderModelResourcePermission;
+	private ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission;
 
 	@Reference
-	protected CommerceOrderService commerceOrderService;
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	protected JSPRenderer jspRenderer;
+	private JSPRenderer _jspRenderer;
 
 }

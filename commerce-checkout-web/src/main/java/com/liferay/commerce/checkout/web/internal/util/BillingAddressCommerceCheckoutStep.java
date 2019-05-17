@@ -114,14 +114,48 @@ public class BillingAddressCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
-			new BillingAddressCheckoutStepDisplayContext(
-				commerceAddressService, httpServletRequest));
+		BillingAddressCheckoutStepDisplayContext
+			billingAddressCheckoutStepDisplayContext =
+				new BillingAddressCheckoutStepDisplayContext(
+					commerceAddressService, httpServletRequest);
 
-		jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse,
-			"/checkout_step/address.jsp");
+		CommerceOrder commerceOrder =
+			billingAddressCheckoutStepDisplayContext.getCommerceOrder();
+
+		if (!commerceOrder.isOpen()) {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL,
+				_commerceCheckoutStepHelper.getOrderDetailURL(
+					httpServletRequest, commerceOrder));
+
+			jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse, "/error.jsp");
+		}
+		else {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+				billingAddressCheckoutStepDisplayContext);
+
+			jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse,
+				"/checkout_step/address.jsp");
+		}
+	}
+
+	@Override
+	public boolean showControls(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (!commerceOrder.isOpen()) {
+			return false;
+		}
+
+		return super.showControls(httpServletRequest, httpServletResponse);
 	}
 
 	@Reference
