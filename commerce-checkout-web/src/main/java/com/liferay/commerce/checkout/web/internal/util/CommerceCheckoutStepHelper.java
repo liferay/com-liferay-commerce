@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.price.CommerceOrderPrice;
@@ -26,12 +27,15 @@ import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.math.BigDecimal;
 
 import java.util.List;
 import java.util.Objects;
+
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,6 +48,21 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = CommerceCheckoutStepHelper.class)
 public class CommerceCheckoutStepHelper {
+
+	public String getOrderDetailURL(
+			HttpServletRequest httpServletRequest, CommerceOrder commerceOrder)
+		throws PortalException {
+
+		PortletURL portletURL =
+			_commerceOrderHttpHelper.getCommerceCartPortletURL(
+				httpServletRequest, commerceOrder);
+
+		if (portletURL == null) {
+			return StringPool.BLANK;
+		}
+
+		return portletURL.toString();
+	}
 
 	public boolean isActiveBillingAddressCommerceCheckoutStep(
 			HttpServletRequest httpServletRequest)
@@ -145,6 +164,9 @@ public class CommerceCheckoutStepHelper {
 
 		return false;
 	}
+
+	@Reference
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
 	@Reference
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
