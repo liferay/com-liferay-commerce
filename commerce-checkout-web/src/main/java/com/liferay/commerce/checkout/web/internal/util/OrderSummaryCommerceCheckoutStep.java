@@ -109,13 +109,27 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 					_commerceProductPriceCalculation, _cpInstanceHelper,
 					httpServletRequest);
 
-		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
-			orderSummaryCheckoutStepDisplayContext);
+		CommerceOrder commerceOrder =
+			orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
 
-		_jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse,
-			"/checkout_step/order_summary.jsp");
+		if (!commerceOrder.isOpen()) {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_ORDER_DETAIL_URL,
+				_commerceCheckoutStepHelper.getOrderDetailURL(
+					httpServletRequest, commerceOrder));
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse, "/error.jsp");
+		}
+		else {
+			httpServletRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+				orderSummaryCheckoutStepDisplayContext);
+
+			_jspRenderer.renderJSP(
+				httpServletRequest, httpServletResponse,
+				"/checkout_step/order_summary.jsp");
+		}
 	}
 
 	@Override
@@ -123,10 +137,15 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse) {
 
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (!commerceOrder.isOpen()) {
+			return false;
+		}
+
 		try {
-			CommerceOrder commerceOrder =
-				(CommerceOrder)httpServletRequest.getAttribute(
-					CommerceCheckoutWebKeys.COMMERCE_ORDER);
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)httpServletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
