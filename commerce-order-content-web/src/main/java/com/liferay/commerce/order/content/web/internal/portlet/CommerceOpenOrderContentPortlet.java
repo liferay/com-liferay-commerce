@@ -66,7 +66,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=true",
-		"javax.portlet.display-name=Pending Orders",
+		"javax.portlet.display-name=Open Carts",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/pending_orders/view.jsp",
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
