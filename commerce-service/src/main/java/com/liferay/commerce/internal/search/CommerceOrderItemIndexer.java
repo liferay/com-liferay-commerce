@@ -50,7 +50,15 @@ public class CommerceOrderItemIndexer extends BaseIndexer<CommerceOrderItem> {
 
 	public static final String FIELD_COMMERCE_ORDER_ID = "commerceOrderId";
 
+	public static final String FIELD_CP_DEFINITION_ID = "CPDefinitionId";
+
+	public static final String FIELD_FINAL_PRICE = "finalPrice";
+
+	public static final String FIELD_QUANTITY = "quantity";
+
 	public static final String FIELD_SKU = CPInstanceIndexer.FIELD_SKU;
+
+	public static final String FIELD_UNIT_PRICE = "unitPrice";
 
 	@Override
 	public String getClassName() {
@@ -103,6 +111,12 @@ public class CommerceOrderItemIndexer extends BaseIndexer<CommerceOrderItem> {
 		document.addKeyword(FIELD_SKU, commerceOrderItem.getSku());
 		document.addNumber(
 			FIELD_COMMERCE_ORDER_ID, commerceOrderItem.getCommerceOrderId());
+		document.addKeyword(
+			FIELD_CP_DEFINITION_ID, commerceOrderItem.getCPDefinitionId());
+		document.addNumber(
+			FIELD_FINAL_PRICE, commerceOrderItem.getFinalPrice());
+		document.addNumber(FIELD_QUANTITY, commerceOrderItem.getQuantity());
+		document.addNumber(FIELD_UNIT_PRICE, commerceOrderItem.getUnitPrice());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
