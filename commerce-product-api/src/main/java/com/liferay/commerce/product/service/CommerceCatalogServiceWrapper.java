@@ -33,6 +33,36 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 		_commerceCatalogService = commerceCatalogService;
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
+		java.util.Map<java.util.Locale, String> nameMap,
+		String catalogDefaultLanguageId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.addCommerceCatalog(nameMap,
+			catalogDefaultLanguageId, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog deleteCommerceCatalog(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.deleteCommerceCatalog(commerceCatalogId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
+		long commerceCatalogId) {
+		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.getCommerceCatalogGroup(commerceCatalogId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -41,6 +71,39 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceCatalogService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.searchCommerceCatalogs(companyId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.searchCommerceCatalogs(companyId,
+			keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceCatalogsCount(long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.searchCommerceCatalogsCount(companyId,
+			keywords);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
+		long commerceCatalogId, String catalogDefaultLanguageId,
+		java.util.Map<java.util.Locale, String> nameMap,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.updateCommerceCatalog(commerceCatalogId,
+			catalogDefaultLanguageId, nameMap, serviceContext);
 	}
 
 	@Override

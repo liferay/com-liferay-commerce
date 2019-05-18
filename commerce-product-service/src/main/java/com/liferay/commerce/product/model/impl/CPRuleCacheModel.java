@@ -64,7 +64,7 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{CPRuleId=");
 		sb.append(CPRuleId);
@@ -80,6 +80,10 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", active=");
@@ -123,6 +127,9 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 			cpRuleImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		cpRuleImpl.setClassNameId(classNameId);
+		cpRuleImpl.setClassPK(classPK);
+
 		if (name == null) {
 			cpRuleImpl.setName("");
 		}
@@ -163,6 +170,10 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+
+		classNameId = objectInput.readLong();
+
+		classPK = objectInput.readLong();
 		name = objectInput.readUTF();
 
 		active = objectInput.readBoolean();
@@ -190,6 +201,10 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+
+		objectOutput.writeLong(classNameId);
+
+		objectOutput.writeLong(classPK);
 
 		if (name == null) {
 			objectOutput.writeUTF("");
@@ -222,6 +237,8 @@ public class CPRuleCacheModel implements CacheModel<CPRule>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long classNameId;
+	public long classPK;
 	public String name;
 	public boolean active;
 	public String type;

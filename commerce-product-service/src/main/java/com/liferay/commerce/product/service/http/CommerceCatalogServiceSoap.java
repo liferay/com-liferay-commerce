@@ -16,9 +16,20 @@ package com.liferay.commerce.product.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CommerceCatalogServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
+
+import java.rmi.RemoteException;
+
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.product.service.CommerceCatalogServiceUtil} service utility. The
+ * {@link CommerceCatalogServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +64,141 @@ import aQute.bnd.annotation.ProviderType;
  * @author Marco Leo
  * @see CommerceCatalogServiceHttp
  * @see com.liferay.commerce.product.model.CommerceCatalogSoap
- * @see com.liferay.commerce.product.service.CommerceCatalogServiceUtil
+ * @see CommerceCatalogServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceCatalogServiceSoap {
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap addCommerceCatalog(
+		String[] nameMapLanguageIds, String[] nameMapValues,
+		String catalogDefaultLanguageId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.addCommerceCatalog(nameMap,
+					catalogDefaultLanguageId, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap deleteCommerceCatalog(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.deleteCommerceCatalog(commerceCatalogId);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap fetchCommerceCatalog(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.fetchCommerceCatalog(commerceCatalogId);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.model.Group returnValue = CommerceCatalogServiceUtil.getCommerceCatalogGroup(commerceCatalogId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] searchCommerceCatalogs(
+		long companyId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
+				CommerceCatalogServiceUtil.searchCommerceCatalogs(companyId);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] searchCommerceCatalogs(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
+				CommerceCatalogServiceUtil.searchCommerceCatalogs(companyId,
+					keywords, start, end, sort);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int searchCommerceCatalogsCount(long companyId,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceCatalogServiceUtil.searchCommerceCatalogsCount(companyId,
+					keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap updateCommerceCatalog(
+		long commerceCatalogId, String catalogDefaultLanguageId,
+		String[] nameMapLanguageIds, String[] nameMapValues,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.updateCommerceCatalog(commerceCatalogId,
+					catalogDefaultLanguageId, nameMap, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CommerceCatalogServiceSoap.class);
 }

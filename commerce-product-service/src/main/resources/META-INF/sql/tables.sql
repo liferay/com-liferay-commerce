@@ -296,6 +296,8 @@ create table CPRule (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	name VARCHAR(75) null,
 	active_ BOOLEAN,
 	type_ VARCHAR(75) null,
@@ -312,6 +314,18 @@ create table CPRuleAssetCategoryRel (
 	modifiedDate DATE null,
 	CPRuleId LONG,
 	assetCategoryId LONG
+);
+
+create table CPRuleChannelRel (
+	CPRuleChannelRelId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPRuleId LONG,
+	commerceChannelId LONG
 );
 
 create table CPRuleUserSegmentRel (
@@ -378,4 +392,17 @@ create table CommerceCatalog (
 	modifiedDate DATE null,
 	name STRING null,
 	catalogDefaultLanguageId VARCHAR(75) null
+);
+
+create table CommerceChannel (
+	commerceChannelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	filterType VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	typeSettings VARCHAR(75) null
 );

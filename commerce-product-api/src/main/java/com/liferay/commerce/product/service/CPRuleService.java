@@ -33,7 +33,10 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.io.Serializable;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides the remote service interface for CPRule. Methods of this
@@ -59,6 +62,10 @@ public interface CPRuleService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPRuleServiceUtil} to access the cp rule remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPRuleServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CPRule addCPRule(long classNameId, long classPK, String name,
+		boolean active, String type, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CPRule addCPRule(String name, boolean active, String type,
 		ServiceContext serviceContext) throws PortalException;
 
@@ -84,6 +91,11 @@ public interface CPRuleService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPRule> searchCPRules(long companyId,
+		long groupId, Map<String, Serializable> attributes, String keywords,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPRule> searchCPRules(long companyId,

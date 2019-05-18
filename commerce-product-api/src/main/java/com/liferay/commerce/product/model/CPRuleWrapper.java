@@ -64,6 +64,8 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 		attributes.put("name", getName());
 		attributes.put("active", isActive());
 		attributes.put("type", getType());
@@ -116,6 +118,18 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 			setModifiedDate(modifiedDate);
 		}
 
+		Long classNameId = (Long)attributes.get("classNameId");
+
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
+		}
+
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
@@ -159,6 +173,36 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public boolean getActive() {
 		return _cpRule.getActive();
+	}
+
+	/**
+	* Returns the fully qualified class name of this cp rule.
+	*
+	* @return the fully qualified class name of this cp rule
+	*/
+	@Override
+	public String getClassName() {
+		return _cpRule.getClassName();
+	}
+
+	/**
+	* Returns the class name ID of this cp rule.
+	*
+	* @return the class name ID of this cp rule
+	*/
+	@Override
+	public long getClassNameId() {
+		return _cpRule.getClassNameId();
+	}
+
+	/**
+	* Returns the class pk of this cp rule.
+	*
+	* @return the class pk of this cp rule
+	*/
+	@Override
+	public long getClassPK() {
+		return _cpRule.getClassPK();
 	}
 
 	/**
@@ -354,6 +398,31 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_cpRule.setCachedModel(cachedModel);
+	}
+
+	@Override
+	public void setClassName(String className) {
+		_cpRule.setClassName(className);
+	}
+
+	/**
+	* Sets the class name ID of this cp rule.
+	*
+	* @param classNameId the class name ID of this cp rule
+	*/
+	@Override
+	public void setClassNameId(long classNameId) {
+		_cpRule.setClassNameId(classNameId);
+	}
+
+	/**
+	* Sets the class pk of this cp rule.
+	*
+	* @param classPK the class pk of this cp rule
+	*/
+	@Override
+	public void setClassPK(long classPK) {
+		_cpRule.setClassPK(classPK);
 	}
 
 	/**

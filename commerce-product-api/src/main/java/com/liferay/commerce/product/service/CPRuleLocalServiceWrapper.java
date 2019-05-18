@@ -45,6 +45,17 @@ public class CPRuleLocalServiceWrapper implements CPRuleLocalService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPRule addCPRule(
+		long classNameId, long classPK, String name, boolean active,
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleLocalService.addCPRule(classNameId, classPK, name,
+			active, type, typeSettingsProperties, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPRule addCPRule(String name,
 		boolean active, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -60,6 +71,17 @@ public class CPRuleLocalServiceWrapper implements CPRuleLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpRuleLocalService.addCPRule(name, active, type,
 			typeSettingsProperties, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPRule addCPRule(
+		String className, long classPK, String name, boolean active,
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleLocalService.addCPRule(className, classPK, name, active,
+			type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
@@ -296,6 +318,17 @@ public class CPRuleLocalServiceWrapper implements CPRuleLocalService,
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpRuleLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPRule> searchCPRules(
+		long companyId, long groupId,
+		java.util.Map<String, java.io.Serializable> attributes,
+		String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleLocalService.searchCPRules(companyId, groupId,
+			attributes, keywords, start, end, sort);
 	}
 
 	@Override

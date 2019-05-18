@@ -267,6 +267,26 @@ public class CommerceCatalogLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceCatalogs(companyId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceCatalogs(companyId, keywords, start, end, sort);
+	}
+
+	public static int searchCommerceCatalogsCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceCatalogsCount(companyId, keywords);
+	}
+
 	/**
 	* Updates the commerce catalog in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
