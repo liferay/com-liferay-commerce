@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.account.internal.upgrade;
 
-import com.liferay.commerce.account.internal.upgrade.v1_1_0.CommerceAccountUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -36,7 +36,7 @@ public class CommerceAccountUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
-			new CommerceAccountUpgradeProcess());
+			new DummyUpgradeStep());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE ACCOUNT UPGRADE STEP REGISTRATOR FINISHED");
