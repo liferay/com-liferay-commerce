@@ -16,21 +16,14 @@ package com.liferay.commerce.order.content.web.internal.portlet;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext;
-import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
-import com.liferay.commerce.price.CommerceOrderPriceCalculation;
-import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -104,11 +97,8 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 			CommerceOrderContentDisplayContext
 				commerceOrderContentDisplayContext =
 					new CommerceOrderContentDisplayContext(
-						_commerceAddressService, _commerceOrderNoteService,
-						_commerceOrderPriceCalculation, _commerceOrderService,
-						_commercePaymentMethodGroupRelService,
-						_commerceShipmentItemService, httpServletRequest,
-						_modelResourcePermission, _portletResourcePermission);
+						_commerceOrderService, httpServletRequest,
+						_portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -125,28 +115,7 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 		CommerceOrderContentPortlet.class);
 
 	@Reference
-	private CommerceAddressService _commerceAddressService;
-
-	@Reference
-	private CommerceOrderNoteService _commerceOrderNoteService;
-
-	@Reference
-	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
-
-	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private CommercePaymentMethodGroupRelService
-		_commercePaymentMethodGroupRelService;
-
-	@Reference
-	private CommerceShipmentItemService _commerceShipmentItemService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
-	)
-	private ModelResourcePermission<CommerceOrder> _modelResourcePermission;
 
 	@Reference
 	private Portal _portal;
