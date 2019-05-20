@@ -17,12 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
+CommerceOrder commerceOrder = commerceOrderDetailHelper.getCommerceOrder(request);
 
-boolean manageNotesPermission = commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES);
-boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
+boolean manageNotesPermission = commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES, request);
+boolean manageRestrictedNotesPermission = commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES, request);
 %>
 
 <portlet:actionURL name="editCommerceOrderNote" var="editCommerceOrderNoteURL">
@@ -79,7 +79,7 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 		<%
 		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 
-		for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
+		for (CommerceOrderNote commerceOrderNote : commerceOrderDetailHelper.getCommerceOrderNotes(commerceOrder.getCommerceOrderId(), request)) {
 		%>
 
 			<article class="commerce-panel">

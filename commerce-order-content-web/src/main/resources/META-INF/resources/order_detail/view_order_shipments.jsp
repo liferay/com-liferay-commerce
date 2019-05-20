@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
 long commerceOrderItemId = ParamUtil.getLong(request, "commerceOrderItemId");
 
-List<CommerceShipmentItem> commerceShipmentItems = commerceOrderContentDisplayContext.getCommerceShipmentItems(commerceOrderItemId);
+List<CommerceShipmentItem> commerceShipmentItems = commerceOrderDetailHelper.getCommerceShipmentItems(commerceOrderItemId);
 %>
 
 <liferay-ui:search-container
@@ -45,7 +45,7 @@ List<CommerceShipmentItem> commerceShipmentItems = commerceOrderContentDisplayCo
 
 		<liferay-ui:search-container-column-text
 			name="status"
-			value="<%= commerceOrderContentDisplayContext.getCommerceShipmentStatusLabel(commerceShipment.getStatus()) %>"
+			value="<%= commerceOrderDetailHelper.getCommerceShipmentStatusLabel(commerceShipment.getStatus(), request) %>"
 		/>
 
 		<liferay-ui:search-container-column-text

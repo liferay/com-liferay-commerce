@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
+CommerceOrder commerceOrder = commerceOrderDetailHelper.getCommerceOrder(request);
 
 String taglibIconCssClass = StringPool.BLANK;
 
@@ -28,7 +28,7 @@ String taglibMessage = "notes";
 boolean showLabel = GetterUtil.getBoolean(request.getAttribute("order_notes.jsp-showLabel"));
 
 if (!showLabel) {
-	int commerceOrderNotesCount = commerceOrderContentDisplayContext.getCommerceOrderNotesCount(commerceOrder);
+	int commerceOrderNotesCount = commerceOrderDetailHelper.getCommerceOrderNotesCount(commerceOrder.getCommerceOrderId(), request);
 
 	if (commerceOrderNotesCount <= 0) {
 		taglibIconCssClass = "no-notes";

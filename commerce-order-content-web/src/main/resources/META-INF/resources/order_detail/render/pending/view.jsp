@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
+CommerceOrder commerceOrder = commerceOrderDetailHelper.getCommerceOrder(request);
 
 long billingCommerceAddressId = BeanParamUtil.getLong(commerceOrder, request, "billingAddressId");
 long shippingCommerceAddressId = BeanParamUtil.getLong(commerceOrder, request, "shippingAddressId");
@@ -27,7 +27,7 @@ long shippingCommerceAddressId = BeanParamUtil.getLong(commerceOrder, request, "
 CommerceAddress billingCommerceAddress = commerceOrder.getBillingAddress();
 CommerceAddress shippingCommerceAddress = commerceOrder.getShippingAddress();
 
-CommerceOrderPrice commerceOrderPrice = commerceOrderContentDisplayContext.getCommerceOrderPrice();
+CommerceOrderPrice commerceOrderPrice = commerceOrderDetailHelper.getCommerceOrderPrice(request);
 
 CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
 CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
@@ -39,22 +39,16 @@ CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 
 List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList<>();
 
-CommerceAccount commerceAccount = commerceOrderContentDisplayContext.getCommerceAccount();
+CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
-if (commerceOrder != null) {
-	commerceAccount = commerceOrder.getCommerceAccount();
-}
-
-List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.getCommerceAddresses(commerceAccount.getCommerceAccountId());
+List<CommerceAddress> commerceAddresses = commerceOrderDetailHelper.getCommerceAddresses(commerceAccount.getCommerceAccountId(), request);
 %>
 
-<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL">
-	<portlet:param name="mvcRenderCommandName" value="editCommerceOrder" />
-</portlet:actionURL>
+<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL" />
 
 <aui:form action="<%= editCommerceOrderActionURL %>" cssClass="order-details-container" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= commerceOrderDetailHelper.getOrderDetailURL(commerceOrder.getCommerceOrderId(), request) %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 
 	<liferay-ui:error exception="<%= CommerceOrderValidatorException.class %>">
@@ -105,7 +99,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
 							%>
 
-							<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
+							<liferay-util:include page="/pending_orders/order_notes.jsp" servletContext="<%= application %>" />
 						</dd>
 					</dl>
 				</div>
@@ -132,8 +126,8 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<dl class="commerce-list">
 						<dt><liferay-ui:message key="order-date" /></dt>
 						<dd>
-							<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
-							<%= commerceOrderContentDisplayContext.getCommerceOrderTime(commerceOrder) %>
+							<%= commerceOrderDetailHelper.getCommerceOrderDate(commerceOrder, request) %>
+							<%= commerceOrderDetailHelper.getCommerceOrderTime(commerceOrder, request) %>
 						</dd>
 					</dl>
 				</div>
@@ -150,7 +144,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<div class="col-md-6">
 							<dl class="commerce-list">
 								<c:choose>
-									<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+									<c:when test="<%= commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.UPDATE, request) %>">
 										<aui:input cssClass="commerce-input" inlineField="<%= true %>" label="" name="purchaseOrderNumber" wrappedField="<%= false %>" />
 									</c:when>
 									<c:otherwise>
@@ -173,7 +167,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<div class="row">
 						<div class="col-md-12">
 							<c:choose>
-								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+								<c:when test="<%= commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.UPDATE, request) %>">
 									<dl class="commerce-list">
 										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
 
@@ -210,7 +204,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<div class="row">
 						<div class="col-md-12">
 							<c:choose>
-								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+								<c:when test="<%= commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.UPDATE, request) %>">
 									<dl class="commerce-list">
 										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
 
@@ -256,7 +250,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					url='<%= "javascript:window.print();" %>'
 				/>
 
-				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.DELETE) %>">
+				<c:if test="<%= commerceOrderDetailHelper.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.DELETE, request) %>">
 					<portlet:actionURL name="editCommerceOrder" var="deleteURL">
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -291,7 +285,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"
 			pageNumber="1"
-			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+			portletURL="<%= currentURLObj %>"
 			tableName="commercePendingOrderItems"
 		/>
 	</div>
@@ -312,7 +306,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<dt><liferay-ui:message key="subtotal-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 
 					<dt><liferay-ui:message key="delivery" /></dt>
@@ -327,7 +321,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 
 					<dt><liferay-ui:message key="tax" /></dt>
@@ -342,7 +336,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(totalDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 				</dl>
 			</div>
@@ -359,7 +353,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-<%@ include file="/pending_orders/transition.jspf" %>
+<%@ include file="/order_detail/render/pending/transition.jspf" %>
 
 <aui:script use="aui-base">
 	var orderTransition = A.one('#<portlet:namespace />orderTransition');
