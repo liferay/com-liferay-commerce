@@ -59,9 +59,17 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 			"userId, userName, createDate, modifiedDate, name, ",
 			"catalogDefaultLanguageId) values (?, ?, ?, ?, ?, ?, ?, ?)");
 
+		String insertCommerceChannelSQL = StringBundler.concat(
+			"insert into CommerceChannel (commerceChannelId, companyId, ",
+			"userId, userName, createDate, modifiedDate, name, type_, ",
+			"typeSettings) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, insertCommerceCatalogSQL);
+			PreparedStatement ps2 =
+				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
+					connection, insertCommerceChannelSQL);
 			Statement s = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = s.executeQuery(
@@ -91,6 +99,18 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 				ps1.setString(8, defaultLanguageId);
 
 				ps1.executeUpdate();
+
+				ps2.setLong(1, increment());
+				ps2.setLong(2, companyId);
+				ps2.setLong(3, userId);
+				ps2.setString(4, userName);
+				ps2.setDate(5, now);
+				ps2.setDate(6, now);
+				ps2.setString(7, siteGroup.getName(defaultLanguageId));
+				ps2.setString(8, "site");
+				ps2.setString(9, "groupId=" + siteGroup.getGroupId());
+
+				ps2.executeUpdate();
 
 				Group catalogGroup = _groupLocalService.addGroup(
 					userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
@@ -130,6 +150,7 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 			}
 
 			ps1.executeBatch();
+			ps2.executeBatch();
 		}
 	}
 
