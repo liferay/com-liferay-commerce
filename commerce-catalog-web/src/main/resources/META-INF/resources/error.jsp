@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,18 +12,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
 
-package com.liferay.commerce.application.list.constants;
+<%@ include file="/init.jsp" %>
 
-/**
- * @author Marco Leo
- */
-public class CommercePanelCategoryKeys {
+<liferay-ui:error-header />
 
-	public static final String CONTROL_PANEL_COMMERCE =
-		"control_panel.commerce";
+<liferay-ui:error exception="<%= NoSuchCatalogException.class %>" message="that-catalog-could-not-be-found" />
 
-	public static final String SITE_ADMINISTRATION_COMMERCE =
-		"site_administration.commerce";
-
-}
+<liferay-ui:error-principal />
