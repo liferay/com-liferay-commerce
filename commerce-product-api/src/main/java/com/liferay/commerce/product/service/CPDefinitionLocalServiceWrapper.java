@@ -411,16 +411,14 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
-		long companyId, String externalReferenceCode)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long companyId, String externalReferenceCode) {
 		return _cpDefinitionLocalService.fetchCPDefinitionByCProductExternalReferenceCode(companyId,
 			externalReferenceCode);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByCProductId(
-		long cProductId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cProductId) {
 		return _cpDefinitionLocalService.fetchCPDefinitionByCProductId(cProductId);
 	}
 
