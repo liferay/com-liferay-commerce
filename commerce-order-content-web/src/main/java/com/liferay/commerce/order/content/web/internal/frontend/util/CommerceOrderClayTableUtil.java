@@ -17,7 +17,10 @@ package com.liferay.commerce.order.content.web.internal.frontend.util;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.order.content.web.internal.model.Order;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -45,28 +48,28 @@ import javax.portlet.PortletURL;
  */
 public class CommerceOrderClayTableUtil {
 
-	public static String getEditOrderURL(
-			long commerceOrderId, ThemeDisplay themeDisplay)
+	public static String getOrderDetailURL(
+			long commerceOrderId, CommerceOrderHelper commerceOrderHelper,
+			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+		String friendlyURL = commerceOrderHelper.getFriendlyURL(
+			commerceOrderId, themeDisplay);
 
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+		StringBundler sb = new StringBundler(5);
 
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
-		portletURL.setParameter(
-			"commerceOrderId", String.valueOf(commerceOrderId));
+		sb.append(friendlyURL);
+		sb.append(CharPool.QUESTION);
+		sb.append(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE);
+		sb.append("backURL=");
+		sb.append(themeDisplay.getURLCurrent());
 
-		portletURL.setParameter("backURL", themeDisplay.getURLCurrent());
-
-		return portletURL.toString();
+		return sb.toString();
 	}
 
 	public static List<Order> getOrders(
-			List<CommerceOrder> commerceOrders, ThemeDisplay themeDisplay,
-			boolean editable)
+			List<CommerceOrder> commerceOrders,
+			CommerceOrderHelper commerceOrderHelper, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -83,17 +86,6 @@ public class CommerceOrderClayTableUtil {
 			Format dateFormat = FastDateFormatFactoryUtil.getDate(
 				DateFormat.MEDIUM, themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
-
-			String url = null;
-
-			if (editable) {
-				url = getEditOrderURL(
-					commerceOrder.getCommerceOrderId(), themeDisplay);
-			}
-			else {
-				url = getOrderViewDetailURL(
-					commerceOrder.getCommerceOrderId(), themeDisplay);
-			}
 
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 				"content.Language", themeDisplay.getLocale(),
@@ -114,32 +106,13 @@ public class CommerceOrderClayTableUtil {
 					commerceOrder.getCommerceAccountName(),
 					dateFormat.format(commerceOrder.getCreateDate()),
 					commerceOrder.getUserName(), commerceOrderStatusLabel,
-					workflowStatusLabel, amount, url));
+					workflowStatusLabel, amount,
+					getOrderDetailURL(
+						commerceOrder.getCommerceOrderId(), commerceOrderHelper,
+						themeDisplay)));
 		}
 
 		return orders;
-	}
-
-	public static String getOrderViewDetailURL(
-			long commerceOrderId, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "viewCommerceOrderDetails");
-		portletURL.setParameter(
-			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		portletURL.setParameter(
-			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			themeDisplay.getURLCurrent());
-
-		return portletURL.toString();
 	}
 
 	public static String getViewShipmentURL(

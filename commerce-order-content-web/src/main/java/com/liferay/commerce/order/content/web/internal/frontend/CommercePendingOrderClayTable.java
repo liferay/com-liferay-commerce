@@ -24,6 +24,7 @@ import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.Order;
 import com.liferay.commerce.service.CommerceOrderService;
@@ -81,11 +82,12 @@ public class CommercePendingOrderClayTable
 				themeDisplay.getPermissionChecker(), order.getOrderId(),
 				ActionKeys.VIEW)) {
 
-			String editURL = CommerceOrderClayTableUtil.getEditOrderURL(
-				order.getOrderId(), themeDisplay);
+			String orderDetailURL =
+				CommerceOrderClayTableUtil.getOrderDetailURL(
+					order.getOrderId(), _commerceOrderHelper, themeDisplay);
 
 			ClayTableAction clayTableAction = new ClayTableAction(
-				editURL, StringPool.BLANK,
+				orderDetailURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableAction);
@@ -153,7 +155,7 @@ public class CommercePendingOrderClayTable
 				pagination.getEndPosition());
 
 		return CommerceOrderClayTableUtil.getOrders(
-			commerceOrders, themeDisplay, true);
+			commerceOrders, _commerceOrderHelper, themeDisplay);
 	}
 
 	@Override
@@ -163,6 +165,9 @@ public class CommercePendingOrderClayTable
 
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
+
+	@Reference
+	private CommerceOrderHelper _commerceOrderHelper;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;

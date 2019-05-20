@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.FilterFactory;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,13 +43,20 @@ public class OrderFilterFactoryImpl implements FilterFactory {
 	public Filter create(HttpServletRequest httpServletRequest) {
 		OrderFilterImpl orderFilter = new OrderFilterImpl();
 
-		long commerceOrderId = ParamUtil.getLong(
-			httpServletRequest, "commerceOrderId");
-
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "accountId");
 
 		orderFilter.setAccountId(commerceAccountId);
+
+		long commerceOrderId = 0L;
+
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_ORDER);
+
+		if (commerceOrder != null) {
+			commerceOrderId = commerceOrder.getCommerceOrderId();
+		}
 
 		orderFilter.setOrderId(commerceOrderId);
 
