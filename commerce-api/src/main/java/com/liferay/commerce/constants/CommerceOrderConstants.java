@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderConstants {
 
@@ -85,6 +86,8 @@ public class CommerceOrderConstants {
 	};
 
 	public static final String RESOURCE_NAME = "com.liferay.commerce.order";
+
+	public static final String SEPARATOR_ORDER_DETAIL_URL = "/order/";
 
 	public static final long TYPE_PK_APPROVAL = 0;
 
