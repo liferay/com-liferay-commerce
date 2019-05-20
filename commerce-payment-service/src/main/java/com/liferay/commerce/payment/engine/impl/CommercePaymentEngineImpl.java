@@ -33,6 +33,8 @@ import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -115,7 +117,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 				null, Collections.emptyList(), cancelRecurringPayment);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return _commercePaymentUtils.emptyResult(commerceOrderId);
@@ -609,6 +611,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		return commercePaymentMethods;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePaymentEngineImpl.class);
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
