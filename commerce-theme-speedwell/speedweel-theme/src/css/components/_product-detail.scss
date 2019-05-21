@@ -1,0 +1,24 @@
+.product-detail {
+  #compareCheckbox {
+    display: none;
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 30px;
+    margin: 20px 0;
+  }
+
+  .availability,
+  .availabilityEstimate,
+  .stockQuantity {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+  }
+
+  .stockQuantity {
+    display: none;
+  }
+}

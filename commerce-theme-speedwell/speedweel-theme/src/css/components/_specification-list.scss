@@ -1,0 +1,22 @@
+.specification-list {
+  font-size: 14px;
+  line-height: 18px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+
+  dt {
+    font-weight: bold;
+    padding: 20px;
+    margin: 0;
+  }
+
+  dd {
+    padding: 20px;
+    margin: 0;
+  }
+
+  dt:nth-of-type(even),
+  dd:nth-of-type(even) {
+    background: rgba(244, 244, 244, 0.5);
+  }
+}
