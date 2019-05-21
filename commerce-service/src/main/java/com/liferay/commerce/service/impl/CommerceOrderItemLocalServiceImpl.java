@@ -18,6 +18,7 @@ import com.liferay.commerce.configuration.CommerceOrderConfiguration;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.discount.CommerceDiscountValue;
+import com.liferay.commerce.exception.CommerceOrderItemRequestedDeliveryDateException;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.exception.GuestCartItemMaxAllowedException;
 import com.liferay.commerce.internal.search.CommerceOrderItemIndexer;
@@ -55,12 +56,14 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -430,6 +433,41 @@ public class CommerceOrderItemLocalServiceImpl
 
 		commerceOrderLocalService.recalculatePrice(
 			commerceOrderItem.getCommerceOrderId(), commerceContext);
+
+		return commerceOrderItem;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrderItem updateCommerceOrderItemInfo(
+			long commerceOrderItemId, String deliveryGroup,
+			long shippingAddressId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
+
+		Date requestedDeliveryDate = PortalUtil.getDate(
+			requestedDeliveryDateMonth, requestedDeliveryDateDay,
+			requestedDeliveryDateYear, requestedDeliveryDateHour,
+			requestedDeliveryDateMinute, user.getTimeZone(),
+			CommerceOrderItemRequestedDeliveryDateException.class);
+
+		if (requestedDeliveryDate.before(new Date())) {
+			throw new CommerceOrderItemRequestedDeliveryDateException();
+		}
+
+		commerceOrderItem.setDeliveryGroup(deliveryGroup);
+		commerceOrderItem.setShippingAddressId(shippingAddressId);
+		commerceOrderItem.setPrintedNote(printedNote);
+		commerceOrderItem.setRequestedDeliveryDate(requestedDeliveryDate);
+
+		commerceOrderItemPersistence.update(commerceOrderItem);
 
 		return commerceOrderItem;
 	}
