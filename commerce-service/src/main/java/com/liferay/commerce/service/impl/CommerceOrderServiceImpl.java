@@ -512,6 +512,24 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceOrder updateInfo(
+			long commerceOrderId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
+
+		return commerceOrderLocalService.updateInfo(
+			commerceOrderId, printedNote, requestedDeliveryDateMonth,
+			requestedDeliveryDateDay, requestedDeliveryDateYear,
+			requestedDeliveryDateHour, requestedDeliveryDateMinute,
+			serviceContext);
+	}
+
+	@Override
 	public CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws PortalException {
