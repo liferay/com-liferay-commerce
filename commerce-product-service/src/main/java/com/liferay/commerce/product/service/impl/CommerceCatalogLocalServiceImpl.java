@@ -112,7 +112,7 @@ public class CommerceCatalogLocalServiceImpl
 			serviceContext);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
