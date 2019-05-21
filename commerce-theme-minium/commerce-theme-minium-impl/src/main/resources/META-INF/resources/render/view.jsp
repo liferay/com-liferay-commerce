@@ -261,7 +261,6 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 						}
 						%>
 
-					</dl>
 
 					<%
 					for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
@@ -269,7 +268,7 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 					%>
 
 						<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
-							<dl class="autofit-float autofit-row autofit-row-center specification-list">
+						
 
 								<%
 								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
@@ -287,12 +286,13 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 								}
 								%>
 
-							</dl>
+
 						</c:if>
 
 					<%
 					}
 					%>
+					</dl>
 
 				</div>
 			</div>
