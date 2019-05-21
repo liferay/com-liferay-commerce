@@ -138,6 +138,8 @@
 		<field name="advanceStatus" type="String" />
 		<field name="paymentStatus" type="int" />
 		<field name="orderStatus" type="int" />
+		<field name="printedNote" type="String" />
+		<field name="requestedDeliveryDate" type="Date" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
@@ -170,6 +172,10 @@
 		<field name="discountPercentageLevel3" type="BigDecimal" />
 		<field name="discountPercentageLevel4" type="BigDecimal" />
 		<field name="subscription" type="boolean" />
+		<field name="deliveryGroup" type="String" />
+		<field name="shippingAddressId" type="long" />
+		<field name="printedNote" type="String" />
+		<field name="requestedDeliveryDate" type="Date" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderNote">
 		<field name="externalReferenceCode" type="String" />

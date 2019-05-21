@@ -161,6 +161,21 @@ public class CommerceOrderItemServiceUtil {
 			json, commerceContext, serviceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemInfo(
+		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
+		String printedNote, int requestedDeliveryDateMonth,
+		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
+		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceOrderItemInfo(commerceOrderItemId,
+			deliveryGroup, shippingAddressId, printedNote,
+			requestedDeliveryDateMonth, requestedDeliveryDateDay,
+			requestedDeliveryDateYear, requestedDeliveryDateHour,
+			requestedDeliveryDateMinute, serviceContext);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
 		long commerceOrderId, long cpInstanceId, int quantity,
 		int shippedQuantity, String json,

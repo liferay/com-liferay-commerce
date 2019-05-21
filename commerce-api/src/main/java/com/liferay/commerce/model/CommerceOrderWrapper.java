@@ -116,6 +116,8 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		attributes.put("advanceStatus", getAdvanceStatus());
 		attributes.put("paymentStatus", getPaymentStatus());
 		attributes.put("orderStatus", getOrderStatus());
+		attributes.put("printedNote", getPrintedNote());
+		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -397,6 +399,19 @@ public class CommerceOrderWrapper implements CommerceOrder,
 			setOrderStatus(orderStatus);
 		}
 
+		String printedNote = (String)attributes.get("printedNote");
+
+		if (printedNote != null) {
+			setPrintedNote(printedNote);
+		}
+
+		Date requestedDeliveryDate = (Date)attributes.get(
+				"requestedDeliveryDate");
+
+		if (requestedDeliveryDate != null) {
+			setRequestedDeliveryDate(requestedDeliveryDate);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -654,6 +669,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Returns the printed note of this commerce order.
+	*
+	* @return the printed note of this commerce order
+	*/
+	@Override
+	public String getPrintedNote() {
+		return _commerceOrder.getPrintedNote();
+	}
+
+	/**
 	* Returns the purchase order number of this commerce order.
 	*
 	* @return the purchase order number of this commerce order
@@ -661,6 +686,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public String getPurchaseOrderNumber() {
 		return _commerceOrder.getPurchaseOrderNumber();
+	}
+
+	/**
+	* Returns the requested delivery date of this commerce order.
+	*
+	* @return the requested delivery date of this commerce order
+	*/
+	@Override
+	public Date getRequestedDeliveryDate() {
+		return _commerceOrder.getRequestedDeliveryDate();
 	}
 
 	@Override
@@ -1342,6 +1377,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Sets the printed note of this commerce order.
+	*
+	* @param printedNote the printed note of this commerce order
+	*/
+	@Override
+	public void setPrintedNote(String printedNote) {
+		_commerceOrder.setPrintedNote(printedNote);
+	}
+
+	/**
 	* Sets the purchase order number of this commerce order.
 	*
 	* @param purchaseOrderNumber the purchase order number of this commerce order
@@ -1349,6 +1394,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
 		_commerceOrder.setPurchaseOrderNumber(purchaseOrderNumber);
+	}
+
+	/**
+	* Sets the requested delivery date of this commerce order.
+	*
+	* @param requestedDeliveryDate the requested delivery date of this commerce order
+	*/
+	@Override
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		_commerceOrder.setRequestedDeliveryDate(requestedDeliveryDate);
 	}
 
 	/**

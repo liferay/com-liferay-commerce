@@ -709,6 +709,35 @@ public interface CommerceOrderModel extends BaseModel<CommerceOrder>,
 	public void setOrderStatus(int orderStatus);
 
 	/**
+	 * Returns the printed note of this commerce order.
+	 *
+	 * @return the printed note of this commerce order
+	 */
+	@AutoEscape
+	public String getPrintedNote();
+
+	/**
+	 * Sets the printed note of this commerce order.
+	 *
+	 * @param printedNote the printed note of this commerce order
+	 */
+	public void setPrintedNote(String printedNote);
+
+	/**
+	 * Returns the requested delivery date of this commerce order.
+	 *
+	 * @return the requested delivery date of this commerce order
+	 */
+	public Date getRequestedDeliveryDate();
+
+	/**
+	 * Sets the requested delivery date of this commerce order.
+	 *
+	 * @param requestedDeliveryDate the requested delivery date of this commerce order
+	 */
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate);
+
+	/**
 	 * Returns the status of this commerce order.
 	 *
 	 * @return the status of this commerce order

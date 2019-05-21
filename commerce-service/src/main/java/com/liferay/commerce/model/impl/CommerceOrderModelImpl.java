@@ -119,6 +119,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 			{ "advanceStatus", Types.VARCHAR },
 			{ "paymentStatus", Types.INTEGER },
 			{ "orderStatus", Types.INTEGER },
+			{ "printedNote", Types.VARCHAR },
+			{ "requestedDeliveryDate", Types.TIMESTAMP },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
@@ -169,13 +171,15 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		TABLE_COLUMNS_MAP.put("advanceStatus", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("paymentStatus", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("orderStatus", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("printedNote", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("requestedDeliveryDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrder.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrder.createDate ASC";
@@ -257,6 +261,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		model.setAdvanceStatus(soapModel.getAdvanceStatus());
 		model.setPaymentStatus(soapModel.getPaymentStatus());
 		model.setOrderStatus(soapModel.getOrderStatus());
+		model.setPrintedNote(soapModel.getPrintedNote());
+		model.setRequestedDeliveryDate(soapModel.getRequestedDeliveryDate());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -379,6 +385,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		attributes.put("advanceStatus", getAdvanceStatus());
 		attributes.put("paymentStatus", getPaymentStatus());
 		attributes.put("orderStatus", getOrderStatus());
+		attributes.put("printedNote", getPrintedNote());
+		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -661,6 +669,19 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 		if (orderStatus != null) {
 			setOrderStatus(orderStatus);
+		}
+
+		String printedNote = (String)attributes.get("printedNote");
+
+		if (printedNote != null) {
+			setPrintedNote(printedNote);
+		}
+
+		Date requestedDeliveryDate = (Date)attributes.get(
+				"requestedDeliveryDate");
+
+		if (requestedDeliveryDate != null) {
+			setRequestedDeliveryDate(requestedDeliveryDate);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -1343,6 +1364,33 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@JSON
 	@Override
+	public String getPrintedNote() {
+		if (_printedNote == null) {
+			return "";
+		}
+		else {
+			return _printedNote;
+		}
+	}
+
+	@Override
+	public void setPrintedNote(String printedNote) {
+		_printedNote = printedNote;
+	}
+
+	@JSON
+	@Override
+	public Date getRequestedDeliveryDate() {
+		return _requestedDeliveryDate;
+	}
+
+	@Override
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		_requestedDeliveryDate = requestedDeliveryDate;
+	}
+
+	@JSON
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -1565,6 +1613,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		commerceOrderImpl.setAdvanceStatus(getAdvanceStatus());
 		commerceOrderImpl.setPaymentStatus(getPaymentStatus());
 		commerceOrderImpl.setOrderStatus(getOrderStatus());
+		commerceOrderImpl.setPrintedNote(getPrintedNote());
+		commerceOrderImpl.setRequestedDeliveryDate(getRequestedDeliveryDate());
 		commerceOrderImpl.setStatus(getStatus());
 		commerceOrderImpl.setStatusByUserId(getStatusByUserId());
 		commerceOrderImpl.setStatusByUserName(getStatusByUserName());
@@ -1835,6 +1885,23 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 		commerceOrderCacheModel.orderStatus = getOrderStatus();
 
+		commerceOrderCacheModel.printedNote = getPrintedNote();
+
+		String printedNote = commerceOrderCacheModel.printedNote;
+
+		if ((printedNote != null) && (printedNote.length() == 0)) {
+			commerceOrderCacheModel.printedNote = null;
+		}
+
+		Date requestedDeliveryDate = getRequestedDeliveryDate();
+
+		if (requestedDeliveryDate != null) {
+			commerceOrderCacheModel.requestedDeliveryDate = requestedDeliveryDate.getTime();
+		}
+		else {
+			commerceOrderCacheModel.requestedDeliveryDate = Long.MIN_VALUE;
+		}
+
 		commerceOrderCacheModel.status = getStatus();
 
 		commerceOrderCacheModel.statusByUserId = getStatusByUserId();
@@ -1861,7 +1928,7 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(93);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1947,6 +2014,10 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		sb.append(getPaymentStatus());
 		sb.append(", orderStatus=");
 		sb.append(getOrderStatus());
+		sb.append(", printedNote=");
+		sb.append(getPrintedNote());
+		sb.append(", requestedDeliveryDate=");
+		sb.append(getRequestedDeliveryDate());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -1962,7 +2033,7 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(142);
+		StringBundler sb = new StringBundler(148);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrder");
@@ -2137,6 +2208,14 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 		sb.append(getOrderStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>printedNote</column-name><column-value><![CDATA[");
+		sb.append(getPrintedNote());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>requestedDeliveryDate</column-name><column-value><![CDATA[");
+		sb.append(getRequestedDeliveryDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -2222,6 +2301,8 @@ public class CommerceOrderModelImpl extends BaseModelImpl<CommerceOrder>
 	private int _orderStatus;
 	private int _originalOrderStatus;
 	private boolean _setOriginalOrderStatus;
+	private String _printedNote;
+	private Date _requestedDeliveryDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

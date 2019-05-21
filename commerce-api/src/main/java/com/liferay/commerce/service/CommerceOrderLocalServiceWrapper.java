@@ -668,6 +668,20 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updateInfo(
+		long commerceOrderId, String printedNote,
+		int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+		int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+		int requestedDeliveryDateMinute,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.updateInfo(commerceOrderId,
+			printedNote, requestedDeliveryDateMonth, requestedDeliveryDateDay,
+			requestedDeliveryDateYear, requestedDeliveryDateHour,
+			requestedDeliveryDateMinute, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 		long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {

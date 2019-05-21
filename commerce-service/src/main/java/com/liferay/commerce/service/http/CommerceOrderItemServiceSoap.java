@@ -265,6 +265,29 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItemSoap updateCommerceOrderItemInfo(
+		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
+		String printedNote, int requestedDeliveryDateMonth,
+		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
+		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.updateCommerceOrderItemInfo(commerceOrderItemId,
+					deliveryGroup, shippingAddressId, printedNote,
+					requestedDeliveryDateMonth, requestedDeliveryDateDay,
+					requestedDeliveryDateYear, requestedDeliveryDateHour,
+					requestedDeliveryDateMinute, serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItemSoap upsertCommerceOrderItem(
 		long commerceOrderId, long cpInstanceId, int quantity,
 		int shippedQuantity, String json,

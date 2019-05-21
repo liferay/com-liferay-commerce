@@ -531,6 +531,64 @@ public interface CommerceOrderItemModel extends BaseModel<CommerceOrderItem>,
 	 */
 	public void setSubscription(boolean subscription);
 
+	/**
+	 * Returns the delivery group of this commerce order item.
+	 *
+	 * @return the delivery group of this commerce order item
+	 */
+	@AutoEscape
+	public String getDeliveryGroup();
+
+	/**
+	 * Sets the delivery group of this commerce order item.
+	 *
+	 * @param deliveryGroup the delivery group of this commerce order item
+	 */
+	public void setDeliveryGroup(String deliveryGroup);
+
+	/**
+	 * Returns the shipping address ID of this commerce order item.
+	 *
+	 * @return the shipping address ID of this commerce order item
+	 */
+	public long getShippingAddressId();
+
+	/**
+	 * Sets the shipping address ID of this commerce order item.
+	 *
+	 * @param shippingAddressId the shipping address ID of this commerce order item
+	 */
+	public void setShippingAddressId(long shippingAddressId);
+
+	/**
+	 * Returns the printed note of this commerce order item.
+	 *
+	 * @return the printed note of this commerce order item
+	 */
+	@AutoEscape
+	public String getPrintedNote();
+
+	/**
+	 * Sets the printed note of this commerce order item.
+	 *
+	 * @param printedNote the printed note of this commerce order item
+	 */
+	public void setPrintedNote(String printedNote);
+
+	/**
+	 * Returns the requested delivery date of this commerce order item.
+	 *
+	 * @return the requested delivery date of this commerce order item
+	 */
+	public Date getRequestedDeliveryDate();
+
+	/**
+	 * Sets the requested delivery date of this commerce order item.
+	 *
+	 * @param requestedDeliveryDate the requested delivery date of this commerce order item
+	 */
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate);
+
 	@Override
 	public boolean isNew();
 

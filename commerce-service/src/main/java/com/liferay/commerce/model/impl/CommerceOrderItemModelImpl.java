@@ -103,7 +103,11 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			{ "discountPercentageLevel2", Types.DECIMAL },
 			{ "discountPercentageLevel3", Types.DECIMAL },
 			{ "discountPercentageLevel4", Types.DECIMAL },
-			{ "subscription", Types.BOOLEAN }
+			{ "subscription", Types.BOOLEAN },
+			{ "deliveryGroup", Types.VARCHAR },
+			{ "shippingAddressId", Types.BIGINT },
+			{ "printedNote", Types.VARCHAR },
+			{ "requestedDeliveryDate", Types.TIMESTAMP }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -132,9 +136,13 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel3", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel4", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("subscription", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("deliveryGroup", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingAddressId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("printedNote", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("requestedDeliveryDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderItem.createDate ASC";
@@ -195,6 +203,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		model.setDiscountPercentageLevel3(soapModel.getDiscountPercentageLevel3());
 		model.setDiscountPercentageLevel4(soapModel.getDiscountPercentageLevel4());
 		model.setSubscription(soapModel.isSubscription());
+		model.setDeliveryGroup(soapModel.getDeliveryGroup());
+		model.setShippingAddressId(soapModel.getShippingAddressId());
+		model.setPrintedNote(soapModel.getPrintedNote());
+		model.setRequestedDeliveryDate(soapModel.getRequestedDeliveryDate());
 
 		return model;
 	}
@@ -284,6 +296,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		attributes.put("discountPercentageLevel3", getDiscountPercentageLevel3());
 		attributes.put("discountPercentageLevel4", getDiscountPercentageLevel4());
 		attributes.put("subscription", isSubscription());
+		attributes.put("deliveryGroup", getDeliveryGroup());
+		attributes.put("shippingAddressId", getShippingAddressId());
+		attributes.put("printedNote", getPrintedNote());
+		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -440,6 +456,31 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		if (subscription != null) {
 			setSubscription(subscription);
+		}
+
+		String deliveryGroup = (String)attributes.get("deliveryGroup");
+
+		if (deliveryGroup != null) {
+			setDeliveryGroup(deliveryGroup);
+		}
+
+		Long shippingAddressId = (Long)attributes.get("shippingAddressId");
+
+		if (shippingAddressId != null) {
+			setShippingAddressId(shippingAddressId);
+		}
+
+		String printedNote = (String)attributes.get("printedNote");
+
+		if (printedNote != null) {
+			setPrintedNote(printedNote);
+		}
+
+		Date requestedDeliveryDate = (Date)attributes.get(
+				"requestedDeliveryDate");
+
+		if (requestedDeliveryDate != null) {
+			setRequestedDeliveryDate(requestedDeliveryDate);
 		}
 	}
 
@@ -915,6 +956,60 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		return _originalSubscription;
 	}
 
+	@JSON
+	@Override
+	public String getDeliveryGroup() {
+		if (_deliveryGroup == null) {
+			return "";
+		}
+		else {
+			return _deliveryGroup;
+		}
+	}
+
+	@Override
+	public void setDeliveryGroup(String deliveryGroup) {
+		_deliveryGroup = deliveryGroup;
+	}
+
+	@JSON
+	@Override
+	public long getShippingAddressId() {
+		return _shippingAddressId;
+	}
+
+	@Override
+	public void setShippingAddressId(long shippingAddressId) {
+		_shippingAddressId = shippingAddressId;
+	}
+
+	@JSON
+	@Override
+	public String getPrintedNote() {
+		if (_printedNote == null) {
+			return "";
+		}
+		else {
+			return _printedNote;
+		}
+	}
+
+	@Override
+	public void setPrintedNote(String printedNote) {
+		_printedNote = printedNote;
+	}
+
+	@JSON
+	@Override
+	public Date getRequestedDeliveryDate() {
+		return _requestedDeliveryDate;
+	}
+
+	@Override
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		_requestedDeliveryDate = requestedDeliveryDate;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1031,6 +1126,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		commerceOrderItemImpl.setDiscountPercentageLevel3(getDiscountPercentageLevel3());
 		commerceOrderItemImpl.setDiscountPercentageLevel4(getDiscountPercentageLevel4());
 		commerceOrderItemImpl.setSubscription(isSubscription());
+		commerceOrderItemImpl.setDeliveryGroup(getDeliveryGroup());
+		commerceOrderItemImpl.setShippingAddressId(getShippingAddressId());
+		commerceOrderItemImpl.setPrintedNote(getPrintedNote());
+		commerceOrderItemImpl.setRequestedDeliveryDate(getRequestedDeliveryDate());
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -1216,12 +1315,39 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		commerceOrderItemCacheModel.subscription = isSubscription();
 
+		commerceOrderItemCacheModel.deliveryGroup = getDeliveryGroup();
+
+		String deliveryGroup = commerceOrderItemCacheModel.deliveryGroup;
+
+		if ((deliveryGroup != null) && (deliveryGroup.length() == 0)) {
+			commerceOrderItemCacheModel.deliveryGroup = null;
+		}
+
+		commerceOrderItemCacheModel.shippingAddressId = getShippingAddressId();
+
+		commerceOrderItemCacheModel.printedNote = getPrintedNote();
+
+		String printedNote = commerceOrderItemCacheModel.printedNote;
+
+		if ((printedNote != null) && (printedNote.length() == 0)) {
+			commerceOrderItemCacheModel.printedNote = null;
+		}
+
+		Date requestedDeliveryDate = getRequestedDeliveryDate();
+
+		if (requestedDeliveryDate != null) {
+			commerceOrderItemCacheModel.requestedDeliveryDate = requestedDeliveryDate.getTime();
+		}
+		else {
+			commerceOrderItemCacheModel.requestedDeliveryDate = Long.MIN_VALUE;
+		}
+
 		return commerceOrderItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -1271,6 +1397,14 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		sb.append(getDiscountPercentageLevel4());
 		sb.append(", subscription=");
 		sb.append(isSubscription());
+		sb.append(", deliveryGroup=");
+		sb.append(getDeliveryGroup());
+		sb.append(", shippingAddressId=");
+		sb.append(getShippingAddressId());
+		sb.append(", printedNote=");
+		sb.append(getPrintedNote());
+		sb.append(", requestedDeliveryDate=");
+		sb.append(getRequestedDeliveryDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -1278,7 +1412,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderItem");
@@ -1380,6 +1514,22 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			"<column><column-name>subscription</column-name><column-value><![CDATA[");
 		sb.append(isSubscription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>deliveryGroup</column-name><column-value><![CDATA[");
+		sb.append(getDeliveryGroup());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingAddressId</column-name><column-value><![CDATA[");
+		sb.append(getShippingAddressId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>printedNote</column-name><column-value><![CDATA[");
+		sb.append(getPrintedNote());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>requestedDeliveryDate</column-name><column-value><![CDATA[");
+		sb.append(getRequestedDeliveryDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1427,6 +1577,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	private boolean _subscription;
 	private boolean _originalSubscription;
 	private boolean _setOriginalSubscription;
+	private String _deliveryGroup;
+	private long _shippingAddressId;
+	private String _printedNote;
+	private Date _requestedDeliveryDate;
 	private long _columnBitmask;
 	private CommerceOrderItem _escapedModel;
 }

@@ -165,6 +165,21 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemInfo(
+		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
+		String printedNote, int requestedDeliveryDateMonth,
+		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
+		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItemService.updateCommerceOrderItemInfo(commerceOrderItemId,
+			deliveryGroup, shippingAddressId, printedNote,
+			requestedDeliveryDateMonth, requestedDeliveryDateDay,
+			requestedDeliveryDateYear, requestedDeliveryDateHour,
+			requestedDeliveryDateMinute, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
 		long commerceOrderId, long cpInstanceId, int quantity,
 		int shippedQuantity, String json,
