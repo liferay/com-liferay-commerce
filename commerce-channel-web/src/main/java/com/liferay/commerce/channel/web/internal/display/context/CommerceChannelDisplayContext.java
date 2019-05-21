@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.channel.web.internal.display.context;
 
-import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.channel.web.display.context.BaseCommerceChannelSearchContainerDisplayContext;
 import com.liferay.commerce.product.channel.CommerceChannelType;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alec Sloan
  */
 public class CommerceChannelDisplayContext
-	extends BaseCommerceCatalogSearchContainerDisplayContext<CommerceChannel> {
+	extends BaseCommerceChannelSearchContainerDisplayContext<CommerceChannel> {
 
 	public CommerceChannelDisplayContext(
 			CommerceChannelService commerceChannelService,
