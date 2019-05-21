@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
@@ -90,6 +91,10 @@ public class CommerceCatalogLocalServiceImpl
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
+		// Resources
+
+		resourceLocalService.addModelResources(commerceCatalog, serviceContext);
+
 		return commerceCatalog;
 	}
 
@@ -118,6 +123,13 @@ public class CommerceCatalogLocalServiceImpl
 		Group group = getCommerceCatalogGroup(commerceCatalogId);
 
 		groupLocalService.deleteGroup(group);
+
+		// Resources
+
+		CommerceCatalog commerceCatalog = getCommerceCatalog(commerceCatalogId);
+
+		resourceLocalService.deleteResource(
+			commerceCatalog, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Commerce catalog
 
