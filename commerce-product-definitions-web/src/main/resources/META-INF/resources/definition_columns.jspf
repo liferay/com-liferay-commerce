@@ -50,6 +50,12 @@
 	value="<%= cpDefinitionsDisplayContext.getSku(cpDefinition, locale) %>"
 />
 
+<liferay-ui:search-container-column-text
+		cssClass="table-cell-content"
+		name="catalog"
+		value=""
+/>
+
 <liferay-ui:search-container-column-date
 	name="modified-date"
 	property="modifiedDate"
