@@ -44,7 +44,7 @@ import java.net.URI;
 import java.net.URLEncoder;
 
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -75,8 +75,9 @@ public class CPAttachmentFileEntryCreator {
 		long classNameId = _portal.getClassNameId(classedModel.getModelClass());
 		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
 
-		Map<Locale, String> titleMap = Collections.singletonMap(
-			serviceContext.getLocale(), fileName);
+		Map<Locale, String> titleMap = new HashMap<>();
+
+		titleMap.put(serviceContext.getLocale(), fileName);
 
 		InputStream inputStream = null;
 
