@@ -22,6 +22,8 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
+
+long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 %>
 
 <liferay-ui:icon-menu
@@ -38,11 +40,26 @@ CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
 
 	<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalog.getCommerceCatalogId()) %>" />
+		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete
 		message="delete"
 		url="<%= deleteURL %>"
+	/>
+
+	<liferay-security:permissionsURL
+		modelResource="<%= CommerceCatalog.class.getName() %>"
+		modelResourceDescription="<%= commerceCatalog.getName(locale) %>"
+		resourcePrimKey="<%= String.valueOf(commerceCatalogId) %>"
+		var="permissionsCatalogURL"
+		windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+	/>
+
+	<liferay-ui:icon
+		message="permissions"
+		method="get"
+		url="<%= permissionsCatalogURL %>"
+		useDialog="<%= true %>"
 	/>
 </liferay-ui:icon-menu>
