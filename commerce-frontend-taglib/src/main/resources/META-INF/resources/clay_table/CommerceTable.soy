@@ -109,8 +109,15 @@
 		<div class="row">
 			{if $item.thumbnail}
 				<div class="col-auto">
-					<span class="image-name-cell__image-container">
-						<img class="image-name-cell__image" src={$item.thumbnail} alt={$value} />
+					<span class="sticker">
+						<span class="sticker-overlay">
+							<img 
+								alt="thumbnail" 
+								class="sticker-img" 
+								src={$item.thumbnail} 
+								alt={$value} 
+							/>
+						</span>
 					</span>
 				</div>
 			{/if}

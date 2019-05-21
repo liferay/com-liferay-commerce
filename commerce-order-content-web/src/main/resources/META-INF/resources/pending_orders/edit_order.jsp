@@ -68,9 +68,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
 		%>
-
 			<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
-
 		<%
 		}
 		%>
@@ -79,12 +77,46 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 	<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
 
-	<div class="commerce-panel">
-		<div class="commerce-panel__content">
-			<div class="align-items-center row">
-				<div class="col-md-3">
-					<div class="commerce-order-title">
-						<%= HtmlUtil.escape(commerceAccount.getName()) %>
+	<div class="panel panel-secondary order-panel">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col">
+					<div class="row">
+						<div class="col-auto">
+							<div class="row">
+								<div class="col-auto">
+									<span class="order-panel__order-name component-title">
+										<%= HtmlUtil.escape(commerceAccount.getName()) %>
+									</span>
+								</div>
+								<div class="col">
+									<span class="order-panel__account-id">
+										ID: <%= commerceAccount.getCommerceAccountId() %>
+									</span>
+								</div>
+							</div>
+							<div class="order-panel__date">
+								<%= HtmlUtil.escape(commerceAccount.getName()) %>
+							</div>
+						</div>
+						<div class="col-auto">
+							<div class="order-panel__state">
+								#<%= commerceOrder.getCommerceOrderId() %>
+							</div>
+
+							<div class="order-panel__state">
+								<span class="label label-warning">
+									<span class="label-item label-item-expand">
+										Pending
+									</span>
+								</span>
+							</div>
+						</div>
+						<div class="col">
+							<div class="order-panel__assignee">
+								Assigned to
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -111,247 +143,251 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 				</div>
 			</div>
 		</div>
-
-		<div class="commerce-panel__content">
-			<div class="align-items-center row">
-				<div class="col-md-3">
-					<dl class="commerce-list">
-						<dt><liferay-ui:message key="account-id" /></dt>
-						<dd><%= commerceAccount.getCommerceAccountId() %></dd>
-					</dl>
-				</div>
-
-				<div class="col-md-3">
-					<dl class="commerce-list">
-						<dt><liferay-ui:message key="order-id" /></dt>
-						<dd><%= commerceOrder.getCommerceOrderId() %></dd>
-					</dl>
-				</div>
-
-				<div class="col-md-3">
-					<dl class="commerce-list">
-						<dt><liferay-ui:message key="order-date" /></dt>
-						<dd>
-							<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
-							<%= commerceOrderContentDisplayContext.getCommerceOrderTime(commerceOrder) %>
-						</dd>
-					</dl>
-				</div>
-			</div>
-		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="commerce-panel">
-				<div class="commerce-panel__title"><liferay-ui:message key="purchase-order-number" /></div>
-				<div class="commerce-panel__content">
-					<div class="row">
-						<div class="col-md-6">
-							<dl class="commerce-list">
-								<c:choose>
-									<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-										<aui:input cssClass="commerce-input" inlineField="<%= true %>" label="" name="purchaseOrderNumber" wrappedField="<%= false %>" />
-									</c:when>
-									<c:otherwise>
-										<%= commerceOrder.getPurchaseOrderNumber() %>
-									</c:otherwise>
-								</c:choose>
-							</dl>
+	<div class="panel panel-secondary data-box-container">
+		<div class="panel-header">
+			<liferay-ui:message key="info" />
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-4">
+					<div class="panel panel-secondary data-box">
+						<div class="panel-body data-box__body">
+							<div class="row">
+								<div class="col">
+									<h5 class="data-box__title">
+										<liferay-ui:message key="billing-address" />
+									</h5>
+								</div>
+								<div class="col-auto">
+									<a class="data-box__action" href="#">
+										Add
+									</a>
+								</div>
+								<div class="col-12">
+									<div class="data-box__value data-box__value--disabled">
+										No billing address selected
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-secondary data-box">
+						<div class="panel-body data-box__body">
+							<div class="row">
+								<div class="col">
+									<h5 class="data-box__title">
+										<liferay-ui:message key="shipping-address" />
+									</h5>
+								</div>
+								<div class="col-auto">
+									<a class="data-box__action" href="#">
+										Edit
+									</a>
+								</div>
+								<div class="col-12">
+									<div class="data-box__value">
+										PO Box 467 New York NY 100002
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="panel panel-secondary data-box">
+						<div class="panel-body data-box__body">
+							<div class="row">
+								<div class="col">
+									<h5 class="data-box__title">
+										<liferay-ui:message key="purchase-order-number" />
+									</h5>
+								</div>
+								<div class="col-auto">
+									<a class="data-box__action" href="#">
+										Edit
+									</a>
+								</div>
+								<div class="col-12">
+									<div class="data-box__value">
+										#564897123
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-secondary data-box">
+						<div class="panel-body data-box__body">
+							<div class="row">
+								<div class="col">
+									<h5 class="data-box__title">
+										Request Delivery Date
+									</h5>
+								</div>
+								<div class="col-auto">
+									<a class="data-box__action" href="#">
+										Edit
+									</a>
+								</div>
+								<div class="col-12">
+									<div class="data-box__value">
+										Aug 24, 2019
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="panel panel-secondary data-box">
+						<div class="panel-body data-box__body">
+							<div class="row">
+								<div class="col">
+									<h5 class="data-box__title">
+										<liferay-ui:message key="notes" />
+									</h5>
+								</div>
+								<div class="col-auto">
+									<a class="data-box__action" href="#">
+										Edit
+									</a>
+								</div>
+								<div class="col-12">
+									<div class="data-box__value">
+										<%-- <liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" /> --%>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6">
-			<div class="commerce-panel">
-				<div class="commerce-panel__title"><liferay-ui:message key="billing-address" /></div>
-				<div class="commerce-panel__content">
-					<div class="row">
-						<div class="col-md-12">
-							<c:choose>
-								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-									<dl class="commerce-list">
-										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
-
-											<%
-											for (CommerceAddress commerceAddress : commerceAddresses) {
-											%>
-
-												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= billingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
-
-											<%
-											}
-											%>
-
-										</aui:select>
-									</dl>
-								</c:when>
-								<c:otherwise>
-									<c:if test="<%= billingCommerceAddress != null %>">
-										<%= billingCommerceAddress.getStreet1() %><br />
-										<%= billingCommerceAddress.getCity() + StringPool.SPACE + billingCommerceAddress.getZip() %>
-									</c:if>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<div class="commerce-panel">
-				<div class="commerce-panel__title"><liferay-ui:message key="shipping-address" /></div>
-				<div class="commerce-panel__content">
-					<div class="row">
-						<div class="col-md-12">
-							<c:choose>
-								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-									<dl class="commerce-list">
-										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
-
-											<%
-											for (CommerceAddress commerceAddress : commerceAddresses) {
-											%>
-
-												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= shippingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
-
-											<%
-											}
-											%>
-
-										</aui:select>
-									</dl>
-								</c:when>
-								<c:otherwise>
-									<c:if test="<%= shippingCommerceAddress != null %>">
-										<%= shippingCommerceAddress.getStreet1() %><br />
-										<%= shippingCommerceAddress.getCity() + StringPool.SPACE + shippingCommerceAddress.getZip() %>
-									</c:if>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="commerce-thumb-menu">
-		<div class="col-md-auto">
-			<liferay-ui:icon-menu
-				direction="right"
-				icon="<%= StringPool.BLANK %>"
-				markupView="lexicon"
-				message="<%= StringPool.BLANK %>"
-				showWhenSingleIcon="<%= true %>"
-				triggerCssClass="component-action"
-			>
-				<liferay-ui:icon
-					message="print"
-					url='<%= "javascript:window.print();" %>'
-				/>
-
-				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.DELETE) %>">
-					<portlet:actionURL name="editCommerceOrder" var="deleteURL">
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon-delete
-						message="delete"
-						url="<%= deleteURL %>"
-					/>
-				</c:if>
-			</liferay-ui:icon-menu>
-		</div>
-	</div>
-
-	<div class="commerce-cta is-visible">
-		<%-- <aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" /> --%>
-
-		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" type="submit" />
-
-		<liferay-commerce:order-transitions
-			commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-			cssClass="commerce-button commerce-button--big commerce-button--spaced"
-		/>
 	</div>
 </aui:form>
 
-<div class="row">
-	<div class="col-md-9">
-		<commerce-ui:table
-			dataProviderKey="commercePendingOrderItems"
-			itemPerPage="<%= 5 %>"
-			namespace="<%= renderResponse.getNamespace() %>"
-			pageNumber="1"
-			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-			tableName="commercePendingOrderItems"
-		/>
-	</div>
+<commerce-ui:table
+	dataProviderKey="commercePendingOrderItems"
+	itemPerPage="<%= 5 %>"
+	namespace="<%= renderResponse.getNamespace() %>"
+	pageNumber="1"
+	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+	tableName="commercePendingOrderItems"
+/>
 
-	<div class="col-md-3">
-		<div class="commerce-panel">
-			<div class="commerce-panel__content">
-				<dl class="commerce-list">
-					<dt><liferay-ui:message key="subtotal" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(subtotal.format(locale)) %></dd>
-
-					<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="subtotal-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-
-					<dt><liferay-ui:message key="delivery" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(shippingValue.format(locale)) %></dd>
-
-					<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="delivery-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-
-					<dt><liferay-ui:message key="tax" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(taxValue.format(locale)) %></dd>
-
-					<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
-						%>
-
-						<dt><liferay-ui:message key="delivery-discount" /></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %></dd>
-						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %></dd>
-					</c:if>
-				</dl>
+<div class="panel panel-secondary summary">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col text-right">
+				<div class="component-title summary__field-name">
+					<liferay-ui:message key="subtotal" />
+				</div>
 			</div>
+			<div class="col-2 text-right summary__value-container">
+				<div class="summary__value">
+					<%= HtmlUtil.escape(subtotal.format(locale)) %>
+				</div>
+			</div>
+		</div>
 
-			<div class="commerce-panel__content">
-				<dl class="commerce-list">
-					<dt><liferay-ui:message key="total" /></dt>
-					<dd class="text-right"><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
-				</dl>
+		<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
+			<% CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount(); %>
+			<div class="row">
+				<div class="col text-right">
+					<div class="component-title summary__field-name">
+						<liferay-ui:message key="subtotal-discount" />
+					</div>
+				</div>
+				<div class="col-2 text-right summary__value-container">
+					<div class="summary__value">
+						<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>
+					</div>
+					<div class="summary__value">
+						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+		<div class="row">
+			<div class="col text-right">
+				<div class="component-title summary__field-name">
+					<liferay-ui:message key="delivery" />
+				</div>
+			</div>
+			<div class="col-2 text-right summary__value-container">
+				<div class="summary__value">
+					<%= HtmlUtil.escape(shippingValue.format(locale)) %>
+				</div>
+			</div>
+		</div>
+
+		<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
+			<% CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount(); %>
+			<div class="row">
+				<div class="col text-right">
+					<div class="component-title summary__field-name">
+						<liferay-ui:message key="delivery-discount" />
+					</div>
+				</div>
+				<div class="col-2 text-right summary__value-container">
+					<div class="summary__value">
+						<%= HtmlUtil.escape(shippingValue.format(locale)) %>
+					</div>
+					<div class="summary__value">
+						<%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %>
+					</div>
+					<div class="summary__value">
+						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %>
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+		<div class="row">
+			<div class="col text-right">
+				<div class="component-title summary__field-name">
+					<liferay-ui:message key="tax" />
+				</div>
+			</div>
+			<div class="col-2 text-right summary__value-container">
+				<div class="summary__value">
+					<%= HtmlUtil.escape(taxValue.format(locale)) %>
+				</div>
+			</div>
+		</div>
+
+		<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
+			<% CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount(); %>
+			<div class="row">
+				<div class="col text-right">
+					<div class="component-title summary__field-name">
+						<liferay-ui:message key="delivery-discount" />
+					</div>
+				</div>
+				<div class="col-2 text-right summary__value-container">
+					<div class="summary__value">
+						<%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %>
+					</div>
+					<div class="summary__value">
+						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+		<div class="row">
+			<div class="col text-right">
+				<div class="component-title summary__field-name">
+					<liferay-ui:message key="total" />
+				</div>
+			</div>
+			<div class="col-2 text-right summary__value-container">
+				<div class="summary__value">
+					<%= HtmlUtil.escape(totalOrder.format(locale)) %>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,7 @@
 		}
 	}
 
+	.panel-header,
 	.panel-heading,
 	.panel-body {
 		background-color: white;
@@ -18,11 +19,16 @@
 		margin-top: $minium-big-gutter;
 	}
 
-	.panel-heading .panel-title {
-		@include minium-panel-title;
+	.panel-header,
+	.panel-heading {
+		margin-bottom: 5px;
 
-		.collapse-icon {
-			padding: 0;
+		.panel-title {
+			@include minium-panel-title;
+	
+			.collapse-icon {
+				padding: 0;
+			}
 		}
 	}
 
