@@ -161,11 +161,10 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 			return _commerceChannelService.addCommerceChannel(
 				name, filterType, type, typeSettingsProperties, serviceContext);
 		}
-		else {
-			return _commerceChannelService.updateCommerceChannel(
-				commerceChannelId, name, filterType, type,
-				typeSettingsProperties, serviceContext);
-		}
+
+		return _commerceChannelService.updateCommerceChannel(
+			commerceChannelId, name, filterType, type, typeSettingsProperties,
+			serviceContext);
 	}
 
 	@Reference

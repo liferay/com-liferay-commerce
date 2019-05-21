@@ -60,7 +60,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" name="name" required="true" value="<%= name %>" />
+				<aui:input autoFocus="<%= true %>" name="name" required="<%= true %>" value="<%= name %>" />
 
 				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
