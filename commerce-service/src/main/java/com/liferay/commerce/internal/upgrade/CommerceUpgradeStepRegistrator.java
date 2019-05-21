@@ -40,6 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
@@ -98,6 +99,13 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new com.liferay.commerce.internal.upgrade.v3_1_0.
 				CommerceOrderUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_3_1_0, _SCHEMA_VERSION_3_2_0,
+			new com.liferay.commerce.internal.upgrade.v3_2_0.
+				CommerceOrderItemUpgradeProcess(),
+			new com.liferay.commerce.internal.upgrade.v3_2_0.
+				CommerceOrderUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -118,6 +126,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	private static final String _SCHEMA_VERSION_3_0_0 = "3.0.0";
 
 	private static final String _SCHEMA_VERSION_3_1_0 = "3.1.0";
+
+	private static final String _SCHEMA_VERSION_3_2_0 = "3.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
