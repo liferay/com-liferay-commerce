@@ -51,9 +51,9 @@
 />
 
 <liferay-ui:search-container-column-text
-		cssClass="table-cell-content"
-		name="catalog"
-		value=""
+	cssClass="table-cell-content"
+	name="catalog"
+	value=""
 />
 
 <liferay-ui:search-container-column-date
