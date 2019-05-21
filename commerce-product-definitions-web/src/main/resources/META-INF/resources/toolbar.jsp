@@ -22,7 +22,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId", "cp
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<div class="definition-toolbar-managment-bar">
+<div class="definition-toolbar-management-bar">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="<%= searchContainerId %>"
