@@ -142,6 +142,8 @@
 		<property name="advanceStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="paymentStatus" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="orderStatus" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="printedNote" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="requestedDeliveryDate" type="org.hibernate.type.TimestampType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -174,6 +176,10 @@
 		<property name="discountPercentageLevel3" type="org.hibernate.type.BigDecimalType" />
 		<property name="discountPercentageLevel4" type="org.hibernate.type.BigDecimalType" />
 		<property name="subscription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="deliveryGroup" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shippingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="printedNote" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="requestedDeliveryDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceOrderNoteImpl" table="CommerceOrderNote">
 		<id name="commerceOrderNoteId" type="long">

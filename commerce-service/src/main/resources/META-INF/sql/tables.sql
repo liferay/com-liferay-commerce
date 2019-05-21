@@ -151,6 +151,8 @@ create table CommerceOrder (
 	advanceStatus VARCHAR(75) null,
 	paymentStatus INTEGER,
 	orderStatus INTEGER,
+	printedNote VARCHAR(75) null,
+	requestedDeliveryDate DATE null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -181,7 +183,11 @@ create table CommerceOrderItem (
 	discountPercentageLevel2 DECIMAL(30, 16) null,
 	discountPercentageLevel3 DECIMAL(30, 16) null,
 	discountPercentageLevel4 DECIMAL(30, 16) null,
-	subscription BOOLEAN
+	subscription BOOLEAN,
+	deliveryGroup VARCHAR(75) null,
+	shippingAddressId LONG,
+	printedNote VARCHAR(75) null,
+	requestedDeliveryDate DATE null
 );
 
 create table CommerceOrderNote (
