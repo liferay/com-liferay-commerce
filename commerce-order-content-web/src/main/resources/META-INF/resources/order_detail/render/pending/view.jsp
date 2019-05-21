@@ -82,6 +82,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderDetailHelper.getCommerceA
 					</div>
 				</div>
 
+				<div class="col-md-1">
+					<div class="commerce-list">
+						# <%= commerceOrder.getCommerceOrderId() %>
+					</div>
+				</div>
+
 				<div class="col-md-3">
 					<dl class="commerce-list">
 						<dt><liferay-ui:message key="total" /></dt>
@@ -89,7 +95,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderDetailHelper.getCommerceA
 					</dl>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-1">
 					<dl class="commerce-list">
 						<dt><liferay-ui:message key="notes" /></dt>
 						<dd>
@@ -99,7 +105,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderDetailHelper.getCommerceA
 							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
 							%>
 
-							<liferay-util:include page="/pending_orders/order_notes.jsp" servletContext="<%= application %>" />
+							<liferay-util:include page="/order_detail/render/pending/order_notes.jsp" servletContext="<%= application %>" />
 						</dd>
 					</dl>
 				</div>

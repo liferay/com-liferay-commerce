@@ -38,6 +38,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="deleteCommerceOrderIds" type="hidden" />
+
 			<aui:button cssClass="commerce-button commerce-button--big" type="submit" value="add-order" />
 		</aui:form>
 	</c:if>
