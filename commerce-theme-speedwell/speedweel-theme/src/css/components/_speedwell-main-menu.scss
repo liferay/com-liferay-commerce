@@ -1,0 +1,78 @@
+.speedwell-main-menu {
+  &__link-wrapper {
+    align-items: center;
+    background-color: #2A2A2A;
+    bottom: 0;
+    color: #fff;
+    display: flex;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    animation: main-menu-enter ease-out 200ms;
+    z-index: 200;
+
+    .commerce-topbar-button {
+      background: #2A2A2A;
+      color: #fff;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &:not(.is-open) &__link-wrapper {
+    display: none;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-right: 80px;
+
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #2A2A2A;
+      padding-right: 0;
+    }
+  }
+
+  .portlet-content-editable {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  &::before {
+    position: fixed;
+    content: '';
+    top: calc(56px + 80px);
+    background: rgba(42, 42, 42, 0.7);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all ease 200ms;
+  }
+
+  &:not(.is-open)::before {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes main-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-100%)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}

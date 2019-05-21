@@ -1,0 +1,42 @@
+/* These inject tags are used for dynamically creating imports for themelet styles, you can place them where ever you like in this file. */
+
+/* inject:imports */
+/* endinject */
+
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+
+$color-theme: #30CFA1;
+
+@import './components/commerce-button';
+@import './components/commerce-cart';
+@import './components/commerce-cart-item';
+@import './components/commerce-icon';
+@import './components/commerce-list';
+@import './components/commerce-panel';
+@import './components/commerce-quantity-selector';
+@import './components/commerce-search';
+@import './components/commerce-topbar-button';
+@import './components/main-link';
+@import './components/minium-card';
+@import './components/minium-product-gallery';
+@import './components/minium-product-header';
+@import './components/minium-product-tiles';
+@import './components/pagination-bar';
+@import './components/product-detail';
+@import './components/specification-list';
+@import './components/speedwell-account';
+@import './components/speedwell-cart';
+@import './components/speedwell-footer';
+@import './components/speedwell-frame';
+@import './components/speedwell-logo';
+@import './components/speedwell-main-menu';
+@import './components/speedwell-main-navigation';
+@import './components/speedwell-search';
+@import './components/speedwell-topbar';
+@import './portlet';
+@import './overrides';
+@import './test';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}

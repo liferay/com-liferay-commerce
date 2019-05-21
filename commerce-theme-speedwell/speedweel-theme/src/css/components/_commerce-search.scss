@@ -1,0 +1,28 @@
+.commerce-search {
+  align-items: center;
+  display: flex;
+
+  &__input {
+    width: 100%;
+  
+    input {
+      background: transparent;
+      color: currentColor;
+      border: 0;
+      width: 100%;
+  
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  // &__button.is-ninja {
+  &__button {
+    display: none;
+  }
+}
+
+#search-bar {
+  flex-grow: 1;
+}

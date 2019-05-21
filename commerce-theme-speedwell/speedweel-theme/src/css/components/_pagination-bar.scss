@@ -1,0 +1,62 @@
+.pagination-bar {
+  .dropdown-toggle {
+    border: 0;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color: #2A2A2A;
+  }
+
+  .pagination-results {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color: #2A2A2A;
+  }
+
+  .pagination {
+    li {
+      a {
+        background: transparent;
+        border: 0;
+        color: #2A2A2A;
+        font-size: 12px;
+        line-height: normal;
+        padding: 8px 12px;
+        margin: 0 4px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: white;
+          mix-blend-mode: difference;
+          transition: all ease 150ms;
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+
+        &:hover {
+          color: black;
+          background: white;
+      
+          &::before {
+            transform: scaleY(1);
+          }
+        }
+      }
+      
+      &:not(.active):not(:hover) a {
+        opacity: 0.5;
+      }
+
+      &.active a {
+        border-bottom: 2px solid currentColor;
+      }
+    }
+  }
+}
